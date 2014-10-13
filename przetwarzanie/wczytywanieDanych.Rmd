@@ -24,3 +24,11 @@ W formacie binarnym
 ```{r, echo=FALSE}
 load("/Users/pbiecek/GitHub/MOOC/dane/auta2012.rda")
 ```
+
+Z pakietów
+
+```{r, echo=FALSE}
+
+data(auta2014, package = "SmarterPoland")
+
+```
