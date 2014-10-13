@@ -6,10 +6,12 @@ output: html_document
 W formacie Excela
 
 ```{r}
-
+#
+# Uwaga! może długo trwać!
+# 
 library(xlsx)
 auta2012 <- read.xlsx("/Users/pbiecek/GitHub/MOOC/dane/auta2012.xls", sheetIndex = 1)
-
+head(auta2012)
 ```
 
 W formacie tekstowym
@@ -17,18 +19,19 @@ W formacie tekstowym
 ```{r, echo=FALSE}
 auta2012 <- read.table("/Users/pbiecek/GitHub/MOOC/dane/auta2012.csv",
                        sep=";", dec=",", header=TRUE)
+head(auta2012)
 ```
 
 W formacie binarnym
 
 ```{r, echo=FALSE}
 load("/Users/pbiecek/GitHub/MOOC/dane/auta2012.rda")
+auta2012
 ```
 
 Z pakietów
 
 ```{r, echo=FALSE}
-
 data(auta2012, package = "SmarterPoland")
-
+auta2012
 ```
