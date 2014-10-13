@@ -33,5 +33,6 @@ Z pakietów
 
 ```{r, echo=FALSE}
 data(auta2012, package = "SmarterPoland")
-auta2012
+head(auta2012)
+
 ```
