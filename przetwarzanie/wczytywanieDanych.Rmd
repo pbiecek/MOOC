@@ -29,6 +29,6 @@ Z pakietów
 
 ```{r, echo=FALSE}
 
-data(auta2014, package = "SmarterPoland")
+data(auta2012, package = "SmarterPoland")
 
 ```
