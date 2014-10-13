@@ -9,8 +9,8 @@ W formacie Excela
 #
 # Uwaga! może długo trwać!
 # 
-library(xlsx)
-auta2012 <- read.xlsx("/Users/pbiecek/GitHub/MOOC/dane/auta2012.xls", sheetIndex = 1)
+library(gdata)
+auta2012 <- read.xls("/Users/pbiecek/GitHub/MOOC/dane/auta2012.xls", sheet = 1)
 head(auta2012)
 ```
 
