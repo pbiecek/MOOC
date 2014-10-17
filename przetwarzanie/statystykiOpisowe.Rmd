@@ -1,0 +1,21 @@
+---
+title: "Statystki opisowe"
+output: html_document
+---
+
+# Dla różnych typów danych
+
+```{r, echo=FALSE}
+auta2012 <- read.table("/Users/pbiecek/GitHub/MOOC/dane/auta2012.csv",
+                       sep=";", dec=",", header=TRUE)
+auta2012 <- read.table("c:/Users/Karolina/Documents/GitHub/MOOC/dane/auta2012.csv",
+                       sep=";", dec=",", header=TRUE)
+head(auta2012)
+```
+
+W formacie binarnym
+
+```{r, echo=FALSE}
+load("/Users/pbiecek/GitHub/MOOC/dane/auta2012.rda")
+auta2012
+```
