@@ -59,26 +59,37 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <ul>
 <li><a href="#wczytanie-danych">Wczytanie danych</a></li>
 <li><a href="#cechy-ilosciowe">Cechy ilościowe</a><ul>
+<li><a href="#statystyki-opisowe">Statystyki opisowe</a><ul>
 <li><a href="#zadania">Zadania:</a></li>
 <li><a href="#odpowiedzi">Odpowiedzi:</a></li>
+</ul></li>
 <li><a href="#brakujace-dane">Brakujące dane</a><ul>
 <li><a href="#zadania-1">Zadania:</a></li>
 <li><a href="#odpowiedzi-1">Odpowiedzi:</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#cechy-jakosciowe">Cechy jakościowe</a></li>
+<li><a href="#cechy-jakosciowe">Cechy jakościowe</a><ul>
+<li><a href="#statystyki-opisowe-1">Statystyki opisowe</a><ul>
+<li><a href="#zadania-2">Zadania:</a></li>
+<li><a href="#odpowiedzi-2">Odpowiedzi:</a></li>
+</ul></li>
+<li><a href="#procenty">Procenty</a><ul>
+<li><a href="#zadania-3">Zadania:</a></li>
+<li><a href="#odpowiedzi-3">Odpowiedzi:</a></li>
+</ul></li>
+</ul></li>
 <li><a href="#cechy-napisowe">Cechy napisowe</a></li>
 <li><a href="#cechy-logiczne">Cechy logiczne</a></li>
 </ul>
 </div>
 
 <p>Czas na poznanie rodzajów danych, na jakie możemy się natknąć.</p>
-<p>W trakcie tych zajęć przedstawiemy cztery podstawowe typy danych, dane ilościowe, jakościowe, napisy i wartości logiczne. Słowo typ, ma w tym przypadku to samo znaczenie dco słowo rodzaj, ale jest częściej stosowane w analizie danych, dlatego będziemy poniżej mówić o czterech podstawowych typach.</p>
+<p>W trakcie tych zajęć przedstawimy cztery podstawowe typy danych, dane ilościowe, jakościowe, napisy i wartości logiczne. Słowo typ, ma w tym przypadku to samo znaczenie co słowo rodzaj, ale jest częściej stosowane w analizie danych, dlatego będziemy poniżej mówić o czterech podstawowych typach.</p>
 <p>Ale zanim dojdziemy do typów, wczytajmy dane</p>
 <div id="wczytanie-danych" class="section level1">
 <h1>Wczytanie danych</h1>
 <p>Na poprzednich zajęciach poznaliśmy kilka sposobów na wczytanie danych do R. Wczytajmy dane w formacie tekstowym używając funkcji <code>read.table()</code>.</p>
-<pre class="r"><code>auta2012 &lt;- read.table(&quot;http://biecek.pl/MOOC/dane/auta2012.csv&quot;,
+<pre class="r"><code>auta2012 = read.table(&quot;http://biecek.pl/MOOC/dane/auta2012.csv&quot;,
                        sep=&quot;;&quot;, dec=&quot;,&quot;, header=TRUE)
 head(auta2012)</code></pre>
 <pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW         Marka     Model
@@ -130,12 +141,14 @@ head(auta2012)</code></pre>
 ## 4 bezwypadkowy, garazowany
 ## 5             bezwypadkowy
 ## 6 bezwypadkowy, garazowany</code></pre>
-<p>Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedarzy auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.</p>
+<p>Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.</p>
 </div>
 <div id="cechy-ilosciowe" class="section level1">
 <h1>Cechy ilościowe</h1>
-<p>Przyjrzyjmy się takim cechom jak <em>Cena.w.PLN</em> lub <em>Przebieg.w.km</em>. Cechy te są opisane przez liczby oraz przedstawiają ilości. Pierwsza z nich przedstawia <em>ilość</em> pieniędzy, za którą sprzedawca chce sprzedać samochód, druga opisuje <em>ilość</em> kilometrów, którą przejełach wystawiony na aukcji samochów.</p>
-<p>Na zmiennych ilościowych wykonać możemy kilka operacji. Używając funkcji <code>mean()</code> możemy pomiczyć średnią cenę wystawionych aut.</p>
+<div id="statystyki-opisowe" class="section level2">
+<h2>Statystyki opisowe</h2>
+<p>Przyjrzyjmy się takim cechom jak <em>Cena.w.PLN</em> lub <em>Przebieg.w.km</em>. Cechy te są opisane przez liczby oraz przedstawiają ilości. Pierwsza z nich przedstawia <em>ilość</em> pieniędzy, za którą sprzedawca chce sprzedać samochód, druga opisuje <em>ilość</em> kilometrów, którą przejechał wystawiony na aukcji samochód.</p>
+<p>Na zmiennych ilościowych wykonać możemy kilka operacji. Używając funkcji <code>mean()</code> możemy policzyć średnią cenę wystawionych aut.</p>
 <pre class="r"><code>mean(auta2012$Cena.w.PLN)</code></pre>
 <pre><code>## [1] 35409</code></pre>
 <p>Używając funkcji <code>min()</code> i <code>max()</code> możemy wyznaczyć minimalną i maksymalną cenę w tym zbiorze danych.</p>
@@ -159,12 +172,13 @@ head(auta2012)</code></pre>
 <h3>Odpowiedzi:</h3>
 <ul>
 <li><code>Cena</code>, <code>Cena.w.PLN</code>, <code>KM</code>, <code>kW</code>, <code>Pojemnosc.skokowa</code>, <code>Przebieg.w.km</code>, <code>Rok.produkcji</code></li>
-<li>2004 rok, więc wiek 2012 - 2004 = 8</li>
+<li>2004 rok</li>
 </ul>
+</div>
 </div>
 <div id="brakujace-dane" class="section level2">
 <h2>Brakujące dane</h2>
-<p>Może się tak zdarzyć, że oferta sprzedaży nie zawiera wszystkich informacji o aucie. Np. brakuje inforamcji o przebiegu. Takie braki danych trzeba jakoś oznaczyć. Nie można w ich miejsce wstawić np. 0, ponieważ czymś innym jest przebieg równy 0 a czymś innym jest brak informacji o przebiegu.</p>
+<p>Może się tak zdarzyć, że oferta sprzedaży nie zawiera wszystkich informacji o aucie. Np. brakuje informacji o przebiegu. Takie braki danych trzeba jakoś oznaczyć. Nie można w ich miejsce wstawić np. 0, ponieważ czymś innym jest przebieg równy 0 a czymś innym jest brak informacji o przebiegu.</p>
 <p>Potrzebna jest więc jakaś specjalna wartość, która będzie oznaczała brakujące wartości. W programie R taką wartością jest <code>NA</code> (skrót od <em>non available</em>, czyli <em>niedostępne</em>).</p>
 <p>Jak zauważyć, że w danych występują wartości niedostępne? Ich liczba będzie wymieniona w wyniku funkcji <code>summary()</code>. Dla zmiennej <code>Przebieg.w.km</code> brakujących wartości jest 20 711.</p>
 <pre class="r"><code>summary(auta2012$Przebieg.w.km)</code></pre>
@@ -179,7 +193,7 @@ head(auta2012)</code></pre>
 <pre class="r"><code>max(auta2012$Przebieg.w.km)</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p>To logiczne. Jeżeli nie wszystkie wartości są znane, to nie można policzyć ani średniej ani minimum ani maksimum.</p>
-<p>Logiczne ale też mało praktyczne. Często chcielibyśmy policzyć średnią, medianę, minimum wartości które są znae.</p>
+<p>Logiczne ale też mało praktyczne. Często chcielibyśmy policzyć średnią, medianę, minimum tylko z tych wartości które są znane.</p>
 <p>Aby to zrobić w programie R, do funkcji należy dodać argument <code>na.rm=TRUE</code>, gdzie <code>na.rm</code> to skrót od <em>remove NA</em>, czyli usuń wartości brakujące.</p>
 <pre class="r"><code>mean(auta2012$Przebieg.w.km, na.rm=TRUE)</code></pre>
 <pre><code>## [1] 144732</code></pre>
@@ -197,7 +211,7 @@ head(auta2012)</code></pre>
 <div id="odpowiedzi-1" class="section level3">
 <h3>Odpowiedzi:</h3>
 <ul>
-<li>Dla zmiennej <code>Przebieg.w.km</code> jest 20 711 brakujących wartości. Ta zmienna jest najmniej kompletna.</li>
+<li>Dla zmiennej <code>Przebieg.w.km</code> jest 20712 20 711 brakujących wartości. Ta zmienna jest najmniej kompletna.</li>
 <li>115 cm3</li>
 </ul>
 </div>
@@ -205,6 +219,92 @@ head(auta2012)</code></pre>
 </div>
 <div id="cechy-jakosciowe" class="section level1">
 <h1>Cechy jakościowe</h1>
+<p>Przyjrzyjmy się teraz takim cechom jak <code>Waluta</code> lub <code>Marka</code>. Cechy te są opisane przez wartości z określonej listy możliwości. Dla cechy <code>Waluta</code> lista możliwości to CHF, CZK, EEK, EUR, GBP, HUF, PLN, USD. Takie cechy określa się cechami jakościowymi w odróżnieniu od cech ilościowych.</p>
+<div id="statystyki-opisowe-1" class="section level2">
+<h2>Statystyki opisowe</h2>
+<p>Dla cech jakościowych możemy wykonać kilka operacji. Jedną z nich jest wyświetlenie listy możliwych wartości. Taką listę nazywa się często słownikiem (spisem możliwych wartości).</p>
+<p>Listę możliwych wartości dla zmiennej jakościowej można wyznaczyć funkcją <code>levels()</code>.</p>
+<pre class="r"><code>levels(auta2012$Waluta)</code></pre>
+<pre><code>## [1] &quot;CHF&quot; &quot;CZK&quot; &quot;EEK&quot; &quot;EUR&quot; &quot;GBP&quot; &quot;HUF&quot; &quot;PLN&quot; &quot;USD&quot;</code></pre>
+<p>Zmienne jakościowe często opisuje się tablicą liczebności, a więc informacją ile razy wystąpiła każda z wartości ze słownika. Tablicę liczebności można wyznaczyć funkcją <code>table()</code> lub <code>summary()</code>.</p>
+<pre class="r"><code>table(auta2012$Waluta)</code></pre>
+<pre><code>## 
+##   CHF   CZK   EEK   EUR   GBP   HUF   PLN   USD 
+##     1 12053     1  2810     4   242 94008   444</code></pre>
+<pre class="r"><code>summary(auta2012$Waluta)</code></pre>
+<pre><code>##   CHF   CZK   EEK   EUR   GBP   HUF   PLN   USD 
+##     1 12053     1  2810     4   242 94008   444</code></pre>
+<div id="zadania-2" class="section level3">
+<h3>Zadania:</h3>
+<ul>
+<li>Ile zmiennych w zbiorze danych <code>auta2012</code> to zmienne jakościowe?</li>
+<li>Zmienna <code>Liczba.drzwi</code> przyjmuje wartości <code>2/3</code> i <code>4/5</code>. Zachowuje się ona jako zmienna jakościowa. Jednak można uznać, że liczba drzwi to cecha ilościowa, ponieważ opisuje <em>ilość</em> drzwi w samochodzie. Jak wyjaśnić tę dualność?</li>
+</ul>
+</div>
+<div id="odpowiedzi-2" class="section level3">
+<h3>Odpowiedzi:</h3>
+<ul>
+<li>Waluta, Brutto.netto, Marka, Model, Wersja, Liczba.drzwi, Rodzaj.paliwa, Kolor, Kraj.aktualnej.rejestracji, Kraj.pochodzenia, Pojazd.uszkodzony, Skrzynia.biegow, Status.pojazdu.sprowadzonego, Wyposazenie.dodatkowe, Informacje.dodatkowe</li>
+<li>Pewne zmienne, w zależności od kontekstu, mogą być traktowane i analizowane jak zmienne ilościowe lub zmienne jakościowe. Do nas należy wybór, która z tych opcji jest właściwsza.</li>
+</ul>
+</div>
+</div>
+<div id="procenty" class="section level2">
+<h2>Procenty</h2>
+<p>W pewnych sytuacjach, zamiast posługiwać się tablicą liczebności, wygodniej jest posługiwać się tabelą z procentami. Ale jak te procenty policzyć? Pokażemy to na przykładzie kilku funkcji.</p>
+<p>Funkcja <code>prop.table()</code> dzieli wartości tabeli liczebności przez sumę liczebności, a więc zamienia liczebności na frakcje. Przypiszmy wynik funkcji <code>table()</code> do jakiejś zmiennej, np. o nazwie <code>tabela</code> (nazwa może być dowolna, musimy jej jednak konsekwentnie używać w dalszych przykładach). Następnie tak otrzymaną tabelę liczebności zamieniamy na frakcje.</p>
+<p>W poniższym przykładzie, instrukcję przypisania wyniku obejmujemy napisami, po to by jej wynik był wyświetlony. Bez nawiasów wynik funkcji <code>table()</code> nie zostałby wyświetlony.</p>
+<pre class="r"><code>(tabela = table(auta2012$Waluta))</code></pre>
+<pre><code>## 
+##   CHF   CZK   EEK   EUR   GBP   HUF   PLN   USD 
+##     1 12053     1  2810     4   242 94008   444</code></pre>
+<pre class="r"><code>prop.table(tabela)</code></pre>
+<pre><code>## 
+##       CHF       CZK       EEK       EUR       GBP       HUF       PLN 
+## 9.127e-06 1.100e-01 9.127e-06 2.565e-02 3.651e-05 2.209e-03 8.580e-01 
+##       USD 
+## 4.052e-03</code></pre>
+<p>Zazwyczaj chcemy mieć wyznaczone procenty a nie frakcje. I to nie byle jakie procenty, ale procenty które są ładnie sformatowane, np. wyświetlone z dokładnością do jednego miejsca dziesiętnego po przecinku. Aby zamienić frakcje na procenty, wystarczy je przemnożyć przez 100, a aby wynik przedstawić z dokładnością do jednego miejsca po przecinku wykorzystamy funkcję <code>round()</code>.</p>
+<pre class="r"><code>(tabela = table(auta2012$Waluta))</code></pre>
+<pre><code>## 
+##   CHF   CZK   EEK   EUR   GBP   HUF   PLN   USD 
+##     1 12053     1  2810     4   242 94008   444</code></pre>
+<pre class="r"><code>(frakcje = prop.table(tabela))</code></pre>
+<pre><code>## 
+##       CHF       CZK       EEK       EUR       GBP       HUF       PLN 
+## 9.127e-06 1.100e-01 9.127e-06 2.565e-02 3.651e-05 2.209e-03 8.580e-01 
+##       USD 
+## 4.052e-03</code></pre>
+<pre class="r"><code>procenty = 100*frakcje
+round(procenty, digits = 1)</code></pre>
+<pre><code>## 
+##  CHF  CZK  EEK  EUR  GBP  HUF  PLN  USD 
+##  0.0 11.0  0.0  2.6  0.0  0.2 85.8  0.4</code></pre>
+<p>Ostatnim usprawnieniem tego procesu, które warto rozważyć to uporządkowanie wartości rosnąco lub malejąco. Mając wiele możliwości, w gąszczu liczb czasem trudno nawet dostrzec, która jest największa. Posortowawszy te liczby łatwiej dostrzec najmniejsze i największe. Do sortowania można wykorzystać funkcję <code>sort()</code>. Dodając argument <code>decreasing = TRUE</code> powodujemy, że wartości będą uporządkowane malejąco.</p>
+<pre class="r"><code>zaokragloneProcenty = round(procenty,1)
+sort(zaokragloneProcenty)</code></pre>
+<pre><code>## 
+##  CHF  EEK  GBP  HUF  USD  EUR  CZK  PLN 
+##  0.0  0.0  0.0  0.2  0.4  2.6 11.0 85.8</code></pre>
+<pre class="r"><code>sort(zaokragloneProcenty, decreasing = TRUE)</code></pre>
+<pre><code>## 
+##  PLN  CZK  EUR  USD  HUF  CHF  EEK  GBP 
+## 85.8 11.0  2.6  0.4  0.2  0.0  0.0  0.0</code></pre>
+<div id="zadania-3" class="section level3">
+<h3>Zadania:</h3>
+<ul>
+<li>Cecha <code>Marka</code> opisuje markę samochodu. Sprawdź, która marka jest najpopularniejsza.</li>
+<li>Cecha <code>Rodzaj.paliwa</code> opisuje rodzaj paliwa wykorzystywanego przez auto. Czy jest to benzyna, olej, gaz? Sprawdź jaki procent samochodów jest napędzana na benzynę.</li>
+</ul>
+</div>
+<div id="odpowiedzi-3" class="section level3">
+<h3>Odpowiedzi:</h3>
+<ul>
+<li>Volkswagen</li>
+<li>38.6882</li>
+</ul>
+</div>
+</div>
 </div>
 <div id="cechy-napisowe" class="section level1">
 <h1>Cechy napisowe</h1>
