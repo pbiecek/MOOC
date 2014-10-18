@@ -63,7 +63,7 @@ summary(auta2012$Cena.w.PLN)
 
 ### Odpowiedzi:
 + `Cena`, `Cena.w.PLN`, `KM`, `kW`, `Pojemnosc.skokowa`, `Przebieg.w.km`, `Rok.produkcji`
-+ 2004 rok, więc wiek 2012 - 2004 = 8
++ `r median(dane2012$Rok.produkcji, na.rm=TRUE)` rok
 
 ## Brakujące dane
 Może się tak zdarzyć, że oferta sprzedaży nie zawiera wszystkich informacji o aucie. Np. brakuje inforamcji o przebiegu. 
@@ -109,20 +109,48 @@ max(auta2012$Przebieg.w.km, na.rm=TRUE)
 + Jaka jest mediana/połówkowa wielkość silnika (`Pojemnosc.skokowa`)?
 
 ### Odpowiedzi:
-+ Dla zmiennej `Przebieg.w.km`  jest 20 711 brakujących wartości. Ta zmienna jest najmniej kompletna.
-+ 115 cm3
++ Dla zmiennej `Przebieg.w.km`  jest `r sum(is.na(dane2012$Przebieg.w.km))` 20 711 brakujących wartości. Ta zmienna jest najmniej kompletna.
++  `r median(dane2012$KM, na.rm=TRUE)` cm3
 
 # Cechy jakościowe
+Przyjrzyjmy się teraz takim cechom jak `Waluta` lub `Marka`. Cechy te są opisane przez wartości z określonej listy możliwości.
+Dla cechy `Waluta` lista możliwości to `r sort(levels(auta2012$Waluta))`.
+Takie cechy określa się cechami jakościowymi w odróżnieniu od cech ilościowych.
+
 ## Statystyki opisowe
+Dla cech jakościowych możemy wykonać kilka operacji.
+Jedną z nich jest wyświetlenie listy możliwych wartości. Taką listę nazywa się często słownikiem (spisem możliwych wartości).
+
+Listę możliwych wartości dla zmiennej jakościowej można wyznaczyć funkcją `levels()`.
 
 ```{r, warning=FALSE}
+levels(auta2012$Waluta)
 ```
+
+Zmienne jakościowe często opisuje się tablicą liczebności, a więc informacją ile razy wystąpiła każda z wartości ze słownika.
+Tablicę liczebności można wyznaczyć funkcją `table()` lub `summary()`.
+
+```{r, warning=FALSE}
+table(auta2012$Waluta)
+summary(auta2012$Waluta)
+```
+
+### Zadania:
++ Ile zmiennych w zbiorze danych `auta2012` to zmienne jakościowe? 
++ Zmienna `Liczba.drzwi` przyjmuje wartości `2/3` i `4/5`. Zachowuje się ona jako zmienna jakościowa. Jednak można uznać, że liczba drzwi to cecha ilościowa, ponieważ opisuje _ilość_ drzwi w samochodzie. Jak wyjaśnić tę dułalność?
+
+### Odpowiedzi:
++ `r names(which(sapply(auta2012, class) == "factor"))`
++ Pewne zmienne, w zależności od kontekstu, mogą być traktowane i analizowane jak zmienne ilościowe lub zmienne jakościowe. Do nas należy wybór, która z tych opcji jest właściwsza.
+
+##  
 
 ### Zadania:
 + 
 
 ### Odpowiedzi:
 + 
+
 
 # Cechy napisowe
 
