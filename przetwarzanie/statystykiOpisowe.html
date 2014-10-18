@@ -78,8 +78,17 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li><a href="#odpowiedzi-3">Odpowiedzi:</a></li>
 </ul></li>
 </ul></li>
+<li><a href="#cechy-logiczne">Cechy logiczne</a><ul>
+<li><a href="#statystyki-opisowe-2">Statystyki opisowe</a><ul>
+<li><a href="#zadania-4">Zadania:</a></li>
+<li><a href="#odpowiedzi-4">Odpowiedzi:</a></li>
+</ul></li>
+<li><a href="#logiczne-i-oraz-logiczne-lub">Logiczne ‘i’ oraz logiczne ‘lub’</a><ul>
+<li><a href="#zadania-5">Zadania:</a></li>
+<li><a href="#odpowiedzi-5">Odpowiedzi:</a></li>
+</ul></li>
+</ul></li>
 <li><a href="#cechy-napisowe">Cechy napisowe</a></li>
-<li><a href="#cechy-logiczne">Cechy logiczne</a></li>
 </ul>
 </div>
 
@@ -88,66 +97,35 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <p>Ale zanim dojdziemy do typów, wczytajmy dane</p>
 <div id="wczytanie-danych" class="section level1">
 <h1>Wczytanie danych</h1>
-<p>Na poprzednich zajęciach poznaliśmy kilka sposobów na wczytanie danych do R. Wczytajmy dane w formacie tekstowym używając funkcji <code>read.table()</code>.</p>
+<p>Na poprzednich zajęciach poznaliśmy kilka sposobów na wczytanie danych do R. Wczytajmy dane w formacie tekstowym używając funkcji <code>read.table()</code>. Następnie używając funkcji <code>head()</code> by wyświetlić pierwsze dwa wiersze.</p>
 <pre class="r"><code>auta2012 = read.table(&quot;http://biecek.pl/MOOC/dane/auta2012.csv&quot;,
                        sep=&quot;;&quot;, dec=&quot;,&quot;, header=TRUE)
-head(auta2012)</code></pre>
-<pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW         Marka     Model
-## 1 49900    PLN      49900       brutto 140 103           Kia    Carens
-## 2 88000    PLN      88000       brutto 156 115    Mitsubishi Outlander
-## 3 86000    PLN      86000       brutto 150 110     Chevrolet   Captiva
-## 4 25900    PLN      25900       brutto 163 120         Volvo       S80
-## 5 55900    PLN      55900        netto  NA  NA Mercedes-Benz  Sprinter
-## 6 45900    PLN      45900        netto 150 110 Mercedes-Benz     Viano
-##   Wersja Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km
-## 1                 4/5              1991         41000
-## 2                 4/5              2179         46500
-## 3                 4/5              1996          8000
-## 4                 4/5              2400        200000
-## 5                 4/5              2200        169400
-## 6                 4/5              2200        141100
-##            Rodzaj.paliwa Rok.produkcji            Kolor
-## 1 olej napedowy (diesel)          2008                 
-## 2 olej napedowy (diesel)          2008                 
-## 3 olej napedowy (diesel)          2009                 
-## 4 olej napedowy (diesel)          2003 srebrny-metallic
-## 5 olej napedowy (diesel)          2007            bialy
-## 6 olej napedowy (diesel)          2004 bordowy-metallic
-##   Kraj.aktualnej.rejestracji Kraj.pochodzenia Pojazd.uszkodzony
-## 1                     Polska                                   
-## 2                     Polska                                   
-## 3                     Polska                                   
-## 4                     Polska           Wlochy                  
-## 5                                                              
-## 6                                                              
-##   Skrzynia.biegow Status.pojazdu.sprowadzonego
-## 1        manualna                             
-## 2        manualna                             
-## 3        manualna                             
-## 4        manualna sprowadzony / zarejestrowany
-## 5        manualna                             
-## 6        manualna                             
-##                                                                                                                                                                                                                                             Wyposazenie.dodatkowe
-## 1                                                                                      ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
-## 2                                                              ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
-## 3                                                   ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
-## 4 ABS, hak, el. szyby, el. lusterka, klimatyzacja, alufelgi, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, welurowa tapicerka, tempomat, ESP, lwiatla przeciwmglowe, kierownica wielofunkcyjna
-## 5                                                                                                                                                                                                  ABS, ASR, centralny zamek, wspomaganie kierownicy, immobiliser
-## 6                                                                                                      ABS, el. szyby, el. lusterka, klimatyzacja, ASR, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, welurowa tapicerka
-##       Informacje.dodatkowe
-## 1      pierwszy wlasciciel
-## 2      pierwszy wlasciciel
-## 3      pierwszy wlasciciel
-## 4 bezwypadkowy, garazowany
-## 5             bezwypadkowy
-## 6 bezwypadkowy, garazowany</code></pre>
+head(auta2012, 2)</code></pre>
+<pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW      Marka     Model Wersja
+## 1 49900    PLN      49900       brutto 140 103        Kia    Carens       
+## 2 88000    PLN      88000       brutto 156 115 Mitsubishi Outlander       
+##   Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km          Rodzaj.paliwa
+## 1          4/5              1991         41000 olej napedowy (diesel)
+## 2          4/5              2179         46500 olej napedowy (diesel)
+##   Rok.produkcji Kolor Kraj.aktualnej.rejestracji Kraj.pochodzenia
+## 1          2008                           Polska                 
+## 2          2008                           Polska                 
+##   Pojazd.uszkodzony Skrzynia.biegow Status.pojazdu.sprowadzonego
+## 1                          manualna                             
+## 2                          manualna                             
+##                                                                                                                                                                                Wyposazenie.dodatkowe
+## 1                         ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
+## 2 ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
+##   Informacje.dodatkowe
+## 1  pierwszy wlasciciel
+## 2  pierwszy wlasciciel</code></pre>
 <p>Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.</p>
 </div>
 <div id="cechy-ilosciowe" class="section level1">
 <h1>Cechy ilościowe</h1>
+<p>Przyjrzyjmy się takim cechom jak <em>Cena.w.PLN</em> lub <em>Przebieg.w.km</em>. Cechy te są opisane przez liczby oraz przedstawiają ilości. Pierwsza z nich przedstawia <em>ilość</em> pieniędzy, za którą sprzedawca chce sprzedać samochód, druga opisuje <em>ilość</em> kilometrów, którą przejechał wystawiony na aukcji samochód.</p>
 <div id="statystyki-opisowe" class="section level2">
 <h2>Statystyki opisowe</h2>
-<p>Przyjrzyjmy się takim cechom jak <em>Cena.w.PLN</em> lub <em>Przebieg.w.km</em>. Cechy te są opisane przez liczby oraz przedstawiają ilości. Pierwsza z nich przedstawia <em>ilość</em> pieniędzy, za którą sprzedawca chce sprzedać samochód, druga opisuje <em>ilość</em> kilometrów, którą przejechał wystawiony na aukcji samochód.</p>
 <p>Na zmiennych ilościowych wykonać możemy kilka operacji. Używając funkcji <code>mean()</code> możemy policzyć średnią cenę wystawionych aut.</p>
 <pre class="r"><code>mean(auta2012$Cena.w.PLN)</code></pre>
 <pre><code>## [1] 35409</code></pre>
@@ -301,16 +279,71 @@ sort(zaokragloneProcenty)</code></pre>
 <h3>Odpowiedzi:</h3>
 <ul>
 <li>Volkswagen</li>
-<li>38.6882</li>
+<li>38.6882 %</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="cechy-logiczne" class="section level1">
+<h1>Cechy logiczne</h1>
+<p>Każdą zmienną można przedstawić jako zmienną jakościową lub ilościową. Ale w pewnych sytuacjach wygodnie jest wyróżnić bardziej szczegółową klasyfikację. Cechy logiczne, to takie cechy, które przyjmować mogą tylko trzy wartości, prawdę (oznaczany w R przez <code>TRUE</code>), fałsz (oznaczany w R przez <code>FALSE</code>) oraz brak informacji (oznaczany w R przez <code>NA</code>).</p>
+<p>Cechy logiczne mogą być traktowane jako cechy jakościowe o dwóch poziomach. Cechy takie można tworzyć używając tak zwanych warunków logicznych. Przykładem warunku logicznego są operatory <code>&gt;</code> (większy), <code>&gt;=</code> (większy równy), <code>==</code> (równy), <code>&lt;=</code> (mniejszy równy), <code>&lt;</code> (mniejszy).</p>
+<div id="statystyki-opisowe-2" class="section level2">
+<h2>Statystyki opisowe</h2>
+<p>Traktując zmienną logiczną jak dwuwartościową zmienną jakościową, możemy używać na niej np. funkcji do tabel liczebności.</p>
+<pre class="r"><code>pochodziZPolski = auta2012$Kraj.aktualnej.rejestracji == &quot;Polska&quot;
+table(pochodziZPolski)</code></pre>
+<pre><code>## pochodziZPolski
+## FALSE  TRUE 
+## 62810 46753</code></pre>
+<pre class="r"><code>starszyNiz5Lat = auta2012$Rok.produkcji &lt; 2007
+table(starszyNiz5Lat)</code></pre>
+<pre><code>## starszyNiz5Lat
+## FALSE  TRUE 
+## 35264 74298</code></pre>
+<div id="zadania-4" class="section level3">
+<h3>Zadania:</h3>
+<ul>
+<li>Sprawdź ile samochodów ma cenę ofertową poniżej 2 000 pln.</li>
+<li>Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3.</li>
+</ul>
+</div>
+<div id="odpowiedzi-4" class="section level3">
+<h3>Odpowiedzi:</h3>
+<ul>
+<li>2235</li>
+<li>0.7735</li>
+</ul>
+</div>
+</div>
+<div id="logiczne-i-oraz-logiczne-lub" class="section level2">
+<h2>Logiczne ‘i’ oraz logiczne ‘lub’</h2>
+<p>Cechy logiczne można przetwarzać używając również operatorów logicznych, w tym logicznego lub <code>|</code> oraz logicznego i <code>&amp;</code>.</p>
+<pre class="r"><code>pochodziZPolski = auta2012$Kraj.aktualnej.rejestracji == &quot;Polska&quot;
+starszyNiz5Lat = auta2012$Rok.produkcji &lt; 2007
+pochodziZPolskiIStarszyNiz5Lat = pochodziZPolski &amp; starszyNiz5Lat
+table(pochodziZPolskiIStarszyNiz5Lat)</code></pre>
+<pre><code>## pochodziZPolskiIStarszyNiz5Lat
+## FALSE  TRUE 
+## 74629 34934</code></pre>
+<div id="zadania-5" class="section level3">
+<h3>Zadania:</h3>
+<ul>
+<li>Sprawdź ile samochodów zarejestrowanych w Polsce ma cenę ofertową poniżej 2 000 pln.</li>
+<li>Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3 oraz jest napędzanych olejem napędowym.</li>
+</ul>
+</div>
+<div id="odpowiedzi-5" class="section level3">
+<h3>Odpowiedzi:</h3>
+<ul>
+<li>1031</li>
+<li>0.4886</li>
 </ul>
 </div>
 </div>
 </div>
 <div id="cechy-napisowe" class="section level1">
 <h1>Cechy napisowe</h1>
-</div>
-<div id="cechy-logiczne" class="section level1">
-<h1>Cechy logiczne</h1>
 </div>
 
 
