@@ -18,7 +18,8 @@ Na poprzednich zajęciach poznaliśmy kilka sposobów na wczytanie danych do R.
 Wczytajmy dane w formacie tekstowym używając funkcji `read.table()`.
 
 ```{r, warning=FALSE}
-auta2012 <- read.table("http://biecek.pl/MOOC/dane/auta2012.csv",
+library(dplyr)
+auta2012 = read.table("http://biecek.pl/MOOC/dane/auta2012.csv",
                        sep=";", dec=",", header=TRUE)
 head(auta2012)
 ```
@@ -143,21 +144,53 @@ summary(auta2012$Waluta)
 + `r names(which(sapply(auta2012, class) == "factor"))`
 + Pewne zmienne, w zależności od kontekstu, mogą być traktowane i analizowane jak zmienne ilościowe lub zmienne jakościowe. Do nas należy wybór, która z tych opcji jest właściwsza.
 
-##  
+## Procenty
+
+W pewnych sytuacjach, zamiast posługiwać się tablicą liczebności, wygodniej jest posługiwać się tabelą z procentami.
+Ale jak te procenty policzyć?
+Pokażemy to na przykładzie kilku funkcji. 
+
+Funkcja `prop.table()` dzieli wartości tabeli liczebności przez sumę liczbności, a więc zamienia liczebności na frakcje.
+Przypiszmy wynik funkcji `table()` do jakiejś zmiennej, np. o naziwe `tabela` (nazwa może być dowolna, musimy jej jednak konsekwentnie używać w dalszych przykładach).
+Następnie tak otrzymaną tabelę liczbności zamieniamy na frakcje.
+
+W poniższym przykłądzie, instrukcję przypisania wyniku obejmujemy napisami, po to by jej wynik był wyświetlony. Bez nawiasów wynik funkcji `table()` nie zostałby wyświetlony.
+
+```{r, warning=FALSE}
+(tabela = table(auta2012$Waluta))
+prop.table(tabela)
+```
+
+Zazwyczaj chcemy mieć wyznaczone procenty a nie frakcje. I to nie byle jakie procenty, ale procenty które są ładnie sformatowane, np. wyświetlone z dokładnością do jednego miejsca dzisiętnego po przecinku.
+Aby zamienić frakcje na procenty, wystarczy je przemnożyć przez 100, a aby wynik przedstawić z dokładnością do jednego miejsca po przecinku wykorzystamy funkcję `round()`.
+
+```{r, warning=FALSE}
+(tabela = table(auta2012$Waluta))
+(frakcje = prop.table(tabela))
+procenty = 100*frakcje
+round(procenty, digits = 1)
+```
+
+Ostanim usprawnieniem tego procesu, które warto rozważyć to uporządkowanie wartości rosnąco lub malejąco.
+Mając wiele możliwości, w gąszczu liczb czasem trudno nawet dostrzec, która jest największa. 
+Posortowawszy te liczby łatwiej dostrzec najmniejsze i największe.
+Do sortowania można wykorzystać funkcję `sort()`. Dodając argument `decreasing = TRUE` powodujemy, że wartości będą uporządkowane malejąco.
+
+```{r, warning=FALSE}
+zaokragloneProcenty = round(procenty,1)
+sort(zaokragloneProcenty)
+sort(zaokragloneProcenty, decreasing = TRUE)
+```
 
 ### Zadania:
-+ 
++ Cecha `Marka` opisuje markę samochodu. Sprawdź, która marka jest najpopularniejsza.
++ Cecha `Rodzaj.paliwa` opisuje rodzaj paliwa wykorzystywanego przez auto. Czy jest to benzyna, olej, gaz? Sprawdź jaki procent samochodów jest napędzana na benzynę.
 
 ### Odpowiedzi:
-+ 
-
++ `r names(which.max(table(auta2012$Marka)))`
++ `r 100*prop.table(table(auta2012$Rodzaj.paliwa))["benzyna"]`
 
 # Cechy napisowe
 
 # Cechy logiczne
 
-
-# TODO: 
-Czy przejść z wszystkimi przykłądami na dplyr?
-- za: będzie jednorodnie we wszystkich przykładach
-- przeciw: trzeba załadować bibliotekę dplyr, może lepiej wyjaśnić o co chodzi z bibliotekami gdzieś indziej
