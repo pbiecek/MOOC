@@ -3,41 +3,42 @@ title: "Jak wczytać dane do R?"
 output: html_document
 ---
 
-W formacie Excela
+Przedstawione poniżej dane można wczytać bezpośrednio z internetu.
+Można je też pobrać, dane są dostępne w różnych formatach pod następującymi linkami
++ http://biecek.pl/MOOC/dane/auta2012.csv
++ http://biecek.pl/MOOC/dane/auta2012.xls
++ http://biecek.pl/MOOC/dane/auta2012.rda
+
+
+Dane w formacie csv to dane tekstowe. Rozdzialene średnikami z przecinkiem jako kropką dzisiętną.
+Można je wczytać poleceniem `read.table()`.
+
+```{r, echo=FALSE}
+auta2012 = read.table("http://biecek.pl/MOOC/dane/auta2012.csv",
+                       sep=";", dec=",", header=TRUE)
+head(auta2012)
+```
+
+Dane w formacie xls to dane w formacie Excela. 
+Można je wczytać poleceniem `read.xls()`, ale wcześniej trzeba wczytać pakiet `gdata`.
+Jeżeli ten pakiet nei ejst dostępny, to należy go wcześniej zainstalować poleceniem `install.packages("gdata")`.
 
 ```{r}
 #
 # Uwaga! może długo trwać!
 # 
 library(gdata)
-auta2012 <- read.xls("/Users/pbiecek/GitHub/MOOC/dane/auta2012.xls", sheet = 1)
+auta2012 <- read.xls("http://biecek.pl/MOOC/dane/auta2012.xls", sheet = 1)
 head(auta2012)
 ```
 
-W formacie tekstowym
+Dane w formacie rda to dane binarne w natywnym formacie R. 
+Zajmują najmneij miejsca na dysku, ale można je otworzyć tylko w progrmaie R.
+Można je wczytać poleceniem `load()`.
 
 ```{r, echo=FALSE}
-auta2012 <- read.table("/Users/pbiecek/GitHub/MOOC/dane/auta2012.csv",
-                       sep=";", dec=",", header=TRUE)
+plik <- url("http://biecek.pl/MOOC/dane/auta2012.rda")
+load(plik)
 head(auta2012)
 ```
 
-W formacie binarnym
-
-```{r, echo=FALSE}
-load("/Users/pbiecek/GitHub/MOOC/dane/auta2012.rda")
-auta2012
-```
-
-Z pakietów
-
-```{r, echo=FALSE}
-data(auta2012, package = "SmarterPoland")
-head(auta2012)
-
-```
-
-
-TODO:
-1. opisać co to za zmienne
-2. usunąć wiersz z brakującą daną w Roku produkcji
