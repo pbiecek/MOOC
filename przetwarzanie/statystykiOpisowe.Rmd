@@ -5,17 +5,15 @@ output: html_document
 
 Czas na poznanie rodzajów danych, na jakie możemy się natknąć.
 
+W trakcie tych zajęć przedstawiemy cztery podstawowe typy danych, dane ilościowe, jakościowe, napisy i wartości logiczne.
+Słowo typ, ma w tym przypadku to samo znaczenie dco słowo rodzaj, ale jest częściej stosowane w analizie danych, dlatego będziemy poniżej mówić o czterech podstawowych typach.
+
+Ale zanim dojdziemy do typów, wczytajmy dane
+
 # Wczytanie danych
 
-
-
-```{r, echo=FALSE}
-auta2012 <- read.table("http://biecek.pl/MOOC/dane/auta2012.csv",
-                       sep=";", dec=",", header=TRUE)
-head(auta2012)
-```
-
-# Dane liczbowe
+Na poprzednich zajęciach poznaliśmy kilka sposobów na wczytanie danych do R. 
+Wczytajmy dane w formacie tekstowym używając funkcji read.table().
 
 ```{r, echo=FALSE}
 auta2012 <- read.table("http://biecek.pl/MOOC/dane/auta2012.csv",
@@ -23,8 +21,52 @@ auta2012 <- read.table("http://biecek.pl/MOOC/dane/auta2012.csv",
 head(auta2012)
 ```
 
-# Dane jakościowe
+Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedarzy auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.
 
-# Napisy
+# Cechy ilościowe
 
+Przyjrzyjmy się takim cechom jak _Cena.w.PLN_ lub _Przebieg.w.km_. Cechy te są opisane przez liczby oraz przedstawiają ilości. 
+Pierwsza z nich przedstawia _ilość_ pieniędzy, za którą sprzedawca chce sprzedać samochód, druga opisuje _ilość_ kilometrów, którą przejełach wystawiony na aukcji samochów. 
+
+Na zmiennych ilościowych wykonać możemy kilka operacji. 
+Używając funkcji mean() możemy pomiczyć średnią cenę wystawionych aut.
+
+```{r, echo=FALSE}
+mean(auta2012$Cena.w.PLN)
+```
+
+Używając funkcji min() i max() możemy wyznaczyć minimalną i maksymalną cenę w tym zbiorze danych.
+
+```{r, echo=FALSE}
+min(auta2012$Cena.w.PLN)
+max(auta2012$Cena.w.PLN)
+```
+
+Używając funkcji summary() możemy wyznaczyć sześć podstawowych charakterystyk, czyli: minimum, 1. kwartyl, medianę (2. kwwartyl), średnią, 3. kwartyl i maksimum.
+
+*Kwartyle dzielą wektor na cztery równoliczne części.*
+Jedna czwarta samochodów ma cenę niższą od 1. kwartyla.
+Jedna czwarta samochodów ma cenę wyższą od 1. kwartyla ale niższą od mediany (2. kwartyla).
+Jedna czwarta samochodów ma cenę wyższą od mediany (2. kwartyla) ale niższą od 2. kwartyla.
+Jedna czwarta samochodów ma cenę wyższą od 3. kwartyla.
+
+```{r, echo=FALSE}
+summary(auta2012$Cena.w.PLN)
+```
+
+Zadania:
+- W zbiorze danych _auta2012_ aż 7 cech to cechy ilościowe. Wymień które.
+- Jedną z cech ilościowych jest _Rok.produkcji_. Jaki jest medianowy/połówkowy rok produkcji oferowanych aut? Wszystkie te oferty były złożone w roku 2012, jaki był medianowy/połówkowy wiek oferowanego auta?
+
+Odpowiedzi:
+- Cena, Cena.w.PLN, KM, kW, Pojemnosc.skokowa, Przebieg.w.km, Rok.produkcji
+- 2004 rok, więc wiek 2012-2004 = 8
+
+
+
+# Cechy jakościowe
+
+# Cechy napisowe
+
+# Cechy logiczne
 
