@@ -63,62 +63,37 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 </ul>
 </div>
 
-<p>Przedstawione poniżej dane można wczytać bezpośrednio z Internetu. Można je też pobrać, dane są dostępne w różnych formatach pod następującymi linkami + <a href="http://biecek.pl/MOOC/dane/auta2012.csv">http://biecek.pl/MOOC/dane/auta2012.csv</a> + <a href="http://biecek.pl/MOOC/dane/auta2012.xls">http://biecek.pl/MOOC/dane/auta2012.xls</a> + <a href="http://biecek.pl/MOOC/dane/auta2012.rda">http://biecek.pl/MOOC/dane/auta2012.rda</a></p>
+<p>Przedstawione poniżej dane można wczytać bezpośrednio z Internetu. Można je też pobrać, dane są dostępne w różnych formatach pod następującymi linkami:</p>
+<ul>
+<li>dane tekstowe <a href="http://biecek.pl/MOOC/dane/auta2012.csv">http://biecek.pl/MOOC/dane/auta2012.csv</a></li>
+<li>dane Excelowe <a href="http://biecek.pl/MOOC/dane/auta2012.xls">http://biecek.pl/MOOC/dane/auta2012.xls</a></li>
+<li>dane binarne <a href="http://biecek.pl/MOOC/dane/auta2012.rda">http://biecek.pl/MOOC/dane/auta2012.rda</a></li>
+</ul>
 <p><em>Uwaga!</em> Wczytywane pliki mają po 70MB. Ich pobieranie może potrwać kilka minut, lub więcej jeżeli połączenie internetowe nie jest dobre lub wiele osób jednocześnie z niego korzysta.</p>
 <div id="dane-tekstowe-csv" class="section level2">
 <h2>Dane tekstowe csv</h2>
 <p>Dane w formacie csv to dane tekstowe. Rozdzielane średnikami z przecinkiem jako kropką dziesiętną. Można je wczytać poleceniem <code>read.table()</code>.</p>
-<pre><code>## Warning: EOF within quoted string
-## Warning: number of items read is not a multiple of the number of columns</code></pre>
-<pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW         Marka     Model
-## 1 49900    PLN      49900       brutto 140 103           Kia    Carens
-## 2 88000    PLN      88000       brutto 156 115    Mitsubishi Outlander
-## 3 86000    PLN      86000       brutto 150 110     Chevrolet   Captiva
-## 4 25900    PLN      25900       brutto 163 120         Volvo       S80
-## 5 55900    PLN      55900        netto  NA  NA Mercedes-Benz  Sprinter
-## 6 45900    PLN      45900        netto 150 110 Mercedes-Benz     Viano
-##   Wersja Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km
-## 1                 4/5              1991         41000
-## 2                 4/5              2179         46500
-## 3                 4/5              1996          8000
-## 4                 4/5              2400        200000
-## 5                 4/5              2200        169400
-## 6                 4/5              2200        141100
-##            Rodzaj.paliwa Rok.produkcji            Kolor
-## 1 olej napedowy (diesel)          2008                 
-## 2 olej napedowy (diesel)          2008                 
-## 3 olej napedowy (diesel)          2009                 
-## 4 olej napedowy (diesel)          2003 srebrny-metallic
-## 5 olej napedowy (diesel)          2007            bialy
-## 6 olej napedowy (diesel)          2004 bordowy-metallic
-##   Kraj.aktualnej.rejestracji Kraj.pochodzenia Pojazd.uszkodzony
-## 1                     Polska                                   
-## 2                     Polska                                   
-## 3                     Polska                                   
-## 4                     Polska           Wlochy                  
-## 5                                                              
-## 6                                                              
-##   Skrzynia.biegow Status.pojazdu.sprowadzonego
-## 1        manualna                             
-## 2        manualna                             
-## 3        manualna                             
-## 4        manualna sprowadzony / zarejestrowany
-## 5        manualna                             
-## 6        manualna                             
-##                                                                                                                                                                                                                                             Wyposazenie.dodatkowe
-## 1                                                                                      ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
-## 2                                                              ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
-## 3                                                   ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
-## 4 ABS, hak, el. szyby, el. lusterka, klimatyzacja, alufelgi, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, welurowa tapicerka, tempomat, ESP, lwiatla przeciwmglowe, kierownica wielofunkcyjna
-## 5                                                                                                                                                                                                  ABS, ASR, centralny zamek, wspomaganie kierownicy, immobiliser
-## 6                                                                                                      ABS, el. szyby, el. lusterka, klimatyzacja, ASR, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, welurowa tapicerka
-##       Informacje.dodatkowe
-## 1      pierwszy wlasciciel
-## 2      pierwszy wlasciciel
-## 3      pierwszy wlasciciel
-## 4 bezwypadkowy, garazowany
-## 5             bezwypadkowy
-## 6 bezwypadkowy, garazowany</code></pre>
+<pre class="r"><code>auta2012 = read.table(&quot;http://biecek.pl/MOOC/dane/auta2012.csv&quot;,
+                       sep=&quot;;&quot;, dec=&quot;,&quot;, header=TRUE)
+head(auta2012, 2)</code></pre>
+<pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW      Marka     Model Wersja
+## 1 49900    PLN      49900       brutto 140 103        Kia    Carens       
+## 2 88000    PLN      88000       brutto 156 115 Mitsubishi Outlander       
+##   Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km          Rodzaj.paliwa
+## 1          4/5              1991         41000 olej napedowy (diesel)
+## 2          4/5              2179         46500 olej napedowy (diesel)
+##   Rok.produkcji Kolor Kraj.aktualnej.rejestracji Kraj.pochodzenia
+## 1          2008                           Polska                 
+## 2          2008                           Polska                 
+##   Pojazd.uszkodzony Skrzynia.biegow Status.pojazdu.sprowadzonego
+## 1                          manualna                             
+## 2                          manualna                             
+##                                                                                                                                                                                Wyposazenie.dodatkowe
+## 1                         ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
+## 2 ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
+##   Informacje.dodatkowe
+## 1  pierwszy wlasciciel
+## 2  pierwszy wlasciciel</code></pre>
 </div>
 <div id="dane-excelowe-xls" class="section level2">
 <h2>Dane Excelowe xls</h2>
@@ -138,102 +113,47 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 ## 
 ##     object.size</code></pre>
 <pre class="r"><code>auta2012 &lt;- read.xls(&quot;http://biecek.pl/MOOC/dane/auta2012.xls&quot;, sheet = 1)
-head(auta2012)</code></pre>
-<pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW         Marka     Model
-## 1 49900    PLN      49900       brutto 140 103           Kia    Carens
-## 2 88000    PLN      88000       brutto 156 115    Mitsubishi Outlander
-## 3 86000    PLN      86000       brutto 150 110     Chevrolet   Captiva
-## 4 25900    PLN      25900       brutto 163 120         Volvo       S80
-## 5 55900    PLN      55900        netto  NA  NA Mercedes-Benz  Sprinter
-## 6 45900    PLN      45900        netto 150 110 Mercedes-Benz     Viano
-##   Wersja Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km
-## 1               4-May              1991         41000
-## 2               4-May              2179         46500
-## 3               4-May              1996          8000
-## 4               4-May              2400        200000
-## 5               4-May              2200        169400
-## 6               4-May              2200        141100
-##            Rodzaj.paliwa Rok.produkcji            Kolor
-## 1 olej napedowy (diesel)          2008                 
-## 2 olej napedowy (diesel)          2008                 
-## 3 olej napedowy (diesel)          2009                 
-## 4 olej napedowy (diesel)          2003 srebrny-metallic
-## 5 olej napedowy (diesel)          2007            bialy
-## 6 olej napedowy (diesel)          2004 bordowy-metallic
-##   Kraj.aktualnej.rejestracji Kraj.pochodzenia Pojazd.uszkodzony
-## 1                     Polska                                   
-## 2                     Polska                                   
-## 3                     Polska                                   
-## 4                     Polska           Wlochy                  
-## 5                                                              
-## 6                                                              
-##   Skrzynia.biegow Status.pojazdu.sprowadzonego
-## 1        manualna                             
-## 2        manualna                             
-## 3        manualna                             
-## 4        manualna sprowadzony / zarejestrowany
-## 5        manualna                             
-## 6        manualna                             
-##                                                                                                                                                                                                                                             Wyposazenie.dodatkowe
-## 1                                                                                      ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
-## 2                                                              ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
-## 3                                                   ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
-## 4 ABS, hak, el. szyby, el. lusterka, klimatyzacja, alufelgi, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, welurowa tapicerka, tempomat, ESP, lwiatla przeciwmglowe, kierownica wielofunkcyjna
-## 5                                                                                                                                                                                                  ABS, ASR, centralny zamek, wspomaganie kierownicy, immobiliser
-## 6                                                                                                      ABS, el. szyby, el. lusterka, klimatyzacja, ASR, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, welurowa tapicerka
-##       Informacje.dodatkowe
-## 1      pierwszy wlasciciel
-## 2      pierwszy wlasciciel
-## 3      pierwszy wlasciciel
-## 4 bezwypadkowy, garazowany
-## 5             bezwypadkowy
-## 6 bezwypadkowy, garazowany</code></pre>
+head(auta2012, 2)</code></pre>
+<pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW      Marka     Model Wersja
+## 1 49900    PLN      49900       brutto 140 103        Kia    Carens       
+## 2 88000    PLN      88000       brutto 156 115 Mitsubishi Outlander       
+##   Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km          Rodzaj.paliwa
+## 1        4-May              1991         41000 olej napedowy (diesel)
+## 2        4-May              2179         46500 olej napedowy (diesel)
+##   Rok.produkcji Kolor Kraj.aktualnej.rejestracji Kraj.pochodzenia
+## 1          2008                           Polska                 
+## 2          2008                           Polska                 
+##   Pojazd.uszkodzony Skrzynia.biegow Status.pojazdu.sprowadzonego
+## 1                          manualna                             
+## 2                          manualna                             
+##                                                                                                                                                                                Wyposazenie.dodatkowe
+## 1                         ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
+## 2 ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
+##   Informacje.dodatkowe
+## 1  pierwszy wlasciciel
+## 2  pierwszy wlasciciel</code></pre>
 </div>
 <div id="dane-binarne-rda" class="section level2">
 <h2>Dane binarne rda</h2>
 <p>Dane w formacie rda to dane binarne w natywnym formacie R. Zajmują najmniej miejsca na dysku, ale można je otworzyć tylko w programie R. Można je wczytać poleceniem <code>load()</code>.</p>
-<pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW         Marka     Model
-## 1 49900    PLN      49900       brutto 140 103           Kia    Carens
-## 2 88000    PLN      88000       brutto 156 115    Mitsubishi Outlander
-## 3 86000    PLN      86000       brutto 150 110     Chevrolet   Captiva
-## 4 25900    PLN      25900       brutto 163 120         Volvo       S80
-## 5 55900    PLN      55900        netto  NA  NA Mercedes-Benz  Sprinter
-## 6 45900    PLN      45900        netto 150 110 Mercedes-Benz     Viano
-##   Wersja Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km
-## 1                 4/5              1991         41000
-## 2                 4/5              2179         46500
-## 3                 4/5              1996          8000
-## 4                 4/5              2400        200000
-## 5                 4/5              2200        169400
-## 6                 4/5              2200        141100
-##            Rodzaj.paliwa Rok.produkcji            Kolor
-## 1 olej napedowy (diesel)          2008                 
-## 2 olej napedowy (diesel)          2008                 
-## 3 olej napedowy (diesel)          2009                 
-## 4 olej napedowy (diesel)          2003 srebrny-metallic
-## 5 olej napedowy (diesel)          2007            bialy
-## 6 olej napedowy (diesel)          2004 bordowy-metallic
-##   Kraj.aktualnej.rejestracji Kraj.pochodzenia Pojazd.uszkodzony
-## 1                     Polska                                   
-## 2                     Polska                                   
-## 3                     Polska                                   
-## 4                     Polska           Wlochy                  
-## 5                                                              
-## 6                                                              
-##   Skrzynia.biegow Status.pojazdu.sprowadzonego
-## 1        manualna                             
-## 2        manualna                             
-## 3        manualna                             
-## 4        manualna sprowadzony / zarejestrowany
-## 5        manualna                             
-## 6        manualna                             
-##                                                                                                                                                                                                                                             Wyposazenie.dodatkowe
-## 1                                                                                      ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
-## 2                                                              ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
-## 3                                                   ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
-## 4 ABS, hak, el. szyby, el. lusterka, klimatyzacja, alufelgi, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, welurowa tapicerka, tempomat, ESP, lwiatla przeciwmglowe, kierownica wielofunkcyjna
-## 5                                                                                                                                                                                                  ABS, ASR, centralny zamek, wspomaganie kierownicy, immobiliser
-## 6                                                                                                      ABS, el. szyby, el. lusterka, klimatyzacja, ASR, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, welurowa tapicerka</code></pre>
+<pre class="r"><code>plik &lt;- url(&quot;http://biecek.pl/MOOC/dane/auta2012.rda&quot;)
+load(plik)
+head(auta2012, 2)</code></pre>
+<pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW      Marka     Model Wersja
+## 1 49900    PLN      49900       brutto 140 103        Kia    Carens       
+## 2 88000    PLN      88000       brutto 156 115 Mitsubishi Outlander       
+##   Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km          Rodzaj.paliwa
+## 1          4/5              1991         41000 olej napedowy (diesel)
+## 2          4/5              2179         46500 olej napedowy (diesel)
+##   Rok.produkcji Kolor Kraj.aktualnej.rejestracji Kraj.pochodzenia
+## 1          2008                           Polska                 
+## 2          2008                           Polska                 
+##   Pojazd.uszkodzony Skrzynia.biegow Status.pojazdu.sprowadzonego
+## 1                          manualna                             
+## 2                          manualna                             
+##                                                                                                                                                                                Wyposazenie.dodatkowe
+## 1                         ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
+## 2 ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby</code></pre>
 </div>
 
 
