@@ -1,16 +1,21 @@
 ---
 title: "Jak wczytać dane do R?"
-output: html_document
+output:
+  html_document:
+    toc: yes
 ---
 
-Przedstawione poniżej dane można wczytać bezpośrednio z internetu.
+Przedstawione poniżej dane można wczytać bezpośrednio z Internetu.
 Można je też pobrać, dane są dostępne w różnych formatach pod następującymi linkami
 + http://biecek.pl/MOOC/dane/auta2012.csv
 + http://biecek.pl/MOOC/dane/auta2012.xls
 + http://biecek.pl/MOOC/dane/auta2012.rda
 
+*Uwaga!* Wczytywane pliki mają po 70MB. Ich pobieranie może potrwać kilka minut, lub więcej jeżeli połączenie internetowe nie jest dobre lub wiele osób jednocześnie z niego korzysta.
 
-Dane w formacie csv to dane tekstowe. Rozdzialene średnikami z przecinkiem jako kropką dzisiętną.
+## Dane tekstowe csv
+
+Dane w formacie csv to dane tekstowe. Rozdzielane średnikami z przecinkiem jako kropką dziesiętną.
 Można je wczytać poleceniem `read.table()`.
 
 ```{r, echo=FALSE}
@@ -19,21 +24,22 @@ auta2012 = read.table("http://biecek.pl/MOOC/dane/auta2012.csv",
 head(auta2012)
 ```
 
+## Dane Excelowe xls
+
 Dane w formacie xls to dane w formacie Excela. 
 Można je wczytać poleceniem `read.xls()`, ale wcześniej trzeba wczytać pakiet `gdata`.
-Jeżeli ten pakiet nei ejst dostępny, to należy go wcześniej zainstalować poleceniem `install.packages("gdata")`.
+Jeżeli ten pakiet nie jest dostępny, to należy go wcześniej zainstalować poleceniem `install.packages("gdata")`.
 
 ```{r}
-#
-# Uwaga! może długo trwać!
-# 
 library(gdata)
 auta2012 <- read.xls("http://biecek.pl/MOOC/dane/auta2012.xls", sheet = 1)
 head(auta2012)
 ```
 
+## Dane binarne rda
+
 Dane w formacie rda to dane binarne w natywnym formacie R. 
-Zajmują najmneij miejsca na dysku, ale można je otworzyć tylko w progrmaie R.
+Zajmują najmniej miejsca na dysku, ale można je otworzyć tylko w programie R.
 Można je wczytać poleceniem `load()`.
 
 ```{r, echo=FALSE}
@@ -41,4 +47,5 @@ plik <- url("http://biecek.pl/MOOC/dane/auta2012.rda")
 load(plik)
 head(auta2012)
 ```
+
 
