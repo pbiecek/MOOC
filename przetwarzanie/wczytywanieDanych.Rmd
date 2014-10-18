@@ -36,3 +36,8 @@ data(auta2012, package = "SmarterPoland")
 head(auta2012)
 
 ```
+
+
+TODO:
+1. opisać co to za zmienne
+2. usunąć wiersz z brakującą daną w Roku produkcji
