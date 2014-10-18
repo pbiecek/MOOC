@@ -156,3 +156,8 @@ summary(auta2012$Waluta)
 
 # Cechy logiczne
 
+
+# TODO: 
+Czy przejść z wszystkimi przykłądami na dplyr?
+- za: będzie jednorodnie we wszystkich przykładach
+- przeciw: trzeba załadować bibliotekę dplyr, może lepiej wyjaśnić o co chodzi z bibliotekami gdzieś indziej
