@@ -88,7 +88,12 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li><a href="#odpowiedzi-5">Odpowiedzi:</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#cechy-napisowe">Cechy napisowe</a></li>
+<li><a href="#cechy-napisowe">Cechy napisowe</a><ul>
+<li><a href="#statystyki-opisowe-3">Statystyki opisowe</a><ul>
+<li><a href="#zadania-6">Zadania:</a></li>
+<li><a href="#odpowiedzi-6">Odpowiedzi:</a></li>
+</ul></li>
+</ul></li>
 </ul>
 </div>
 
@@ -344,6 +349,41 @@ table(pochodziZPolskiIStarszyNiz5Lat)</code></pre>
 </div>
 <div id="cechy-napisowe" class="section level1">
 <h1>Cechy napisowe</h1>
+<p>Funkcja <code>read.table()</code> wczytując tekst zamienia go na zmienną jakościową. W pewnych sytuacjach chcemy jednak na napisach wykonywać specjalne operacje. Takie np. jak wyszukiwanie podciągu w tekście.</p>
+<p>Aby to zrobić, musimy w pierwszej kolejności zamienić zmienna jakościową na zmienną napisową. Konwersję cechy z cechy jakościowej na cechę napisową można wykonać funkcją <code>as.character()</code></p>
+<pre class="r"><code>auta2012$Wyposazenie.dodatkowe.napis = as.character(auta2012$Wyposazenie.dodatkowe)
+summary(auta2012$Wyposazenie.dodatkowe.napis)</code></pre>
+<pre><code>##    Length     Class      Mode 
+##    109563 character character</code></pre>
+<div id="statystyki-opisowe-3" class="section level2">
+<h2>Statystyki opisowe</h2>
+<p>Jedną z interesujących operacji na napisach, jest sprawdzenie, czy zawierają one określony podciąg znaków. Taki test można wykonać funkcją <code>grepl()</code>, która jako wynik zwraca wartość logiczną określającą czy napis zawiera określony wzorzec czy nie.</p>
+<pre class="r"><code>maKlimatyzacje = grepl(auta2012$Wyposazenie.dodatkowe.napis, pattern=&quot;klimatyzacja&quot;)
+table(maKlimatyzacje)</code></pre>
+<pre><code>## maKlimatyzacje
+## FALSE  TRUE 
+## 23534 86029</code></pre>
+<pre class="r"><code>auta2012$Informacje.dodatkowe.napis = as.character(auta2012$Informacje.dodatkowe)
+bezwypadkowy = grepl(auta2012$Informacje.dodatkowe.napis, pattern=&quot;bezwypadkowy&quot;)
+table(bezwypadkowy)</code></pre>
+<pre><code>## bezwypadkowy
+## FALSE  TRUE 
+## 53193 56370</code></pre>
+<div id="zadania-6" class="section level3">
+<h3>Zadania:</h3>
+<ul>
+<li>Sprawdź ile samochodów ma zainstalowany autoalarm</li>
+<li>Sprawdź ile samochodów ma lakier w metalicznym kolorze</li>
+</ul>
+</div>
+<div id="odpowiedzi-6" class="section level3">
+<h3>Odpowiedzi:</h3>
+<ul>
+<li>48092</li>
+<li>74512</li>
+</ul>
+</div>
+</div>
 </div>
 
 

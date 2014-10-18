@@ -256,7 +256,7 @@ Taki test można wykonać funkcją `grepl()`, która jako wynik zwraca wartość
 maKlimatyzacje = grepl(auta2012$Wyposazenie.dodatkowe.napis, pattern="klimatyzacja")
 table(maKlimatyzacje)
 
-auta2012$Informacje.dodatkowe.napis = as.character(Informacje.dodatkowe)
+auta2012$Informacje.dodatkowe.napis = as.character(auta2012$Informacje.dodatkowe)
 bezwypadkowy = grepl(auta2012$Informacje.dodatkowe.napis, pattern="bezwypadkowy")
 table(bezwypadkowy)
 ```
