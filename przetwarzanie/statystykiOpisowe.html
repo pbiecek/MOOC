@@ -55,15 +55,32 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <h1 class="title">Statystki opisowe</h1>
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#wczytanie-danych">Wczytanie danych</a></li>
+<li><a href="#cechy-ilosciowe">Cechy ilościowe</a><ul>
+<li><a href="#zadania">Zadania:</a></li>
+<li><a href="#odpowiedzi">Odpowiedzi:</a></li>
+<li><a href="#brakujace-dane">Brakujące dane</a><ul>
+<li><a href="#zadania-1">Zadania:</a></li>
+<li><a href="#odpowiedzi-1">Odpowiedzi:</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#cechy-jakosciowe">Cechy jakościowe</a></li>
+<li><a href="#cechy-napisowe">Cechy napisowe</a></li>
+<li><a href="#cechy-logiczne">Cechy logiczne</a></li>
+</ul>
+</div>
 
 <p>Czas na poznanie rodzajów danych, na jakie możemy się natknąć.</p>
 <p>W trakcie tych zajęć przedstawiemy cztery podstawowe typy danych, dane ilościowe, jakościowe, napisy i wartości logiczne. Słowo typ, ma w tym przypadku to samo znaczenie dco słowo rodzaj, ale jest częściej stosowane w analizie danych, dlatego będziemy poniżej mówić o czterech podstawowych typach.</p>
 <p>Ale zanim dojdziemy do typów, wczytajmy dane</p>
 <div id="wczytanie-danych" class="section level1">
 <h1>Wczytanie danych</h1>
-<p>Na poprzednich zajęciach poznaliśmy kilka sposobów na wczytanie danych do R. Wczytajmy dane w formacie tekstowym używając funkcji read.table().</p>
-<pre><code>## Warning: EOF within quoted string
-## Warning: number of items read is not a multiple of the number of columns</code></pre>
+<p>Na poprzednich zajęciach poznaliśmy kilka sposobów na wczytanie danych do R. Wczytajmy dane w formacie tekstowym używając funkcji <code>read.table()</code>.</p>
+<pre class="r"><code>auta2012 &lt;- read.table(&quot;http://biecek.pl/MOOC/dane/auta2012.csv&quot;,
+                       sep=&quot;;&quot;, dec=&quot;,&quot;, header=TRUE)
+head(auta2012)</code></pre>
 <pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW         Marka     Model
 ## 1 49900    PLN      49900       brutto 140 103           Kia    Carens
 ## 2 88000    PLN      88000       brutto 156 115    Mitsubishi Outlander
@@ -118,17 +135,73 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <div id="cechy-ilosciowe" class="section level1">
 <h1>Cechy ilościowe</h1>
 <p>Przyjrzyjmy się takim cechom jak <em>Cena.w.PLN</em> lub <em>Przebieg.w.km</em>. Cechy te są opisane przez liczby oraz przedstawiają ilości. Pierwsza z nich przedstawia <em>ilość</em> pieniędzy, za którą sprzedawca chce sprzedać samochód, druga opisuje <em>ilość</em> kilometrów, którą przejełach wystawiony na aukcji samochów.</p>
-<p>Na zmiennych ilościowych wykonać możemy kilka operacji. Używając funkcji mean() możemy pomiczyć średnią cenę wystawionych aut.</p>
+<p>Na zmiennych ilościowych wykonać możemy kilka operacji. Używając funkcji <code>mean()</code> możemy pomiczyć średnią cenę wystawionych aut.</p>
+<pre class="r"><code>mean(auta2012$Cena.w.PLN)</code></pre>
 <pre><code>## [1] 35409</code></pre>
-<p>Używając funkcji min() i max() możemy wyznaczyć minimalną i maksymalną cenę w tym zbiorze danych.</p>
+<p>Używając funkcji <code>min()</code> i <code>max()</code> możemy wyznaczyć minimalną i maksymalną cenę w tym zbiorze danych.</p>
+<pre class="r"><code>min(auta2012$Cena.w.PLN)</code></pre>
 <pre><code>## [1] 400</code></pre>
+<pre class="r"><code>max(auta2012$Cena.w.PLN)</code></pre>
 <pre><code>## [1] 2953960</code></pre>
-<p>Używając funkcji summary() możemy wyznaczyć sześć podstawowych charakterystyk, czyli: minimum, 1. kwartyl, medianę (2. kwwartyl), średnią, 3. kwartyl i maksimum.</p>
-<p><em>Kwartyle dzielą wektor na cztery równoliczne części.</em> Jedna czwarta samochodów ma cenę niższą od 1. kwartyla. Jedna czwarta samochodów ma cenę wyższą od 1. kwartyla ale niższą od mediany (2. kwartyla). Jedna czwarta samochodów ma cenę wyższą od mediany (2. kwartyla) ale niższą od 2. kwartyla. Jedna czwarta samochodów ma cenę wyższą od 3. kwartyla.</p>
+<p>Używając funkcji <code>summary()</code> możemy wyznaczyć sześć podstawowych charakterystyk, czyli: minimum, 1. kwartyl, medianę (2. kwwartyl), średnią, 3. kwartyl i maksimum.</p>
+<p><em>Kwartyle dzielą wektor na cztery równoliczne części.</em> + Jedna czwarta samochodów ma cenę niższą od 1. kwartyla. + Jedna czwarta samochodów ma cenę wyższą od 1. kwartyla ale niższą od mediany (2. kwartyla). + Jedna czwarta samochodów ma cenę wyższą od mediany (2. kwartyla) ale niższą od 2. kwartyla. + Jedna czwarta samochodów ma cenę wyższą od 3. kwartyla.</p>
+<pre class="r"><code>summary(auta2012$Cena.w.PLN)</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##     400   10900   19900   35400   37000 2950000</code></pre>
-<p>Zadania: - W zbiorze danych <em>auta2012</em> aż 7 cech to cechy ilościowe. Wymień które. - Jedną z cech ilościowych jest <em>Rok.produkcji</em>. Jaki jest medianowy/połówkowy rok produkcji oferowanych aut? Wszystkie te oferty były złożone w roku 2012, jaki był medianowy/połówkowy wiek oferowanego auta?</p>
-<p>Odpowiedzi: - Cena, Cena.w.PLN, KM, kW, Pojemnosc.skokowa, Przebieg.w.km, Rok.produkcji - 2004 rok, więc wiek 2012-2004 = 8</p>
+<div id="zadania" class="section level3">
+<h3>Zadania:</h3>
+<ul>
+<li>W zbiorze danych <em>auta2012</em> aż 7 cech to cechy ilościowe. Wymień które.</li>
+<li>Jedną z cech ilościowych jest <em>Rok.produkcji</em>. Jaki jest medianowy/połówkowy rok produkcji oferowanych aut? Wszystkie te oferty były złożone w roku 2012, jaki był medianowy/połówkowy wiek oferowanego auta?</li>
+</ul>
+</div>
+<div id="odpowiedzi" class="section level3">
+<h3>Odpowiedzi:</h3>
+<ul>
+<li><code>Cena</code>, <code>Cena.w.PLN</code>, <code>KM</code>, <code>kW</code>, <code>Pojemnosc.skokowa</code>, <code>Przebieg.w.km</code>, <code>Rok.produkcji</code></li>
+<li>2004 rok, więc wiek 2012 - 2004 = 8</li>
+</ul>
+</div>
+<div id="brakujace-dane" class="section level2">
+<h2>Brakujące dane</h2>
+<p>Może się tak zdarzyć, że oferta sprzedaży nie zawiera wszystkich informacji o aucie. Np. brakuje inforamcji o przebiegu. Takie braki danych trzeba jakoś oznaczyć. Nie można w ich miejsce wstawić np. 0, ponieważ czymś innym jest przebieg równy 0 a czymś innym jest brak informacji o przebiegu.</p>
+<p>Potrzebna jest więc jakaś specjalna wartość, która będzie oznaczała brakujące wartości. W programie R taką wartością jest <code>NA</code> (skrót od <em>non available</em>, czyli <em>niedostępne</em>).</p>
+<p>Jak zauważyć, że w danych występują wartości niedostępne? Ich liczba będzie wymieniona w wyniku funkcji <code>summary()</code>. Dla zmiennej <code>Przebieg.w.km</code> brakujących wartości jest 20 711.</p>
+<pre class="r"><code>summary(auta2012$Przebieg.w.km)</code></pre>
+<pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max.     NA's 
+## 1.00e+00 8.60e+04 1.40e+05 1.45e+05 1.80e+05 1.00e+09    20712</code></pre>
+<p>Jakie są konsekwencje występowania brakujących wartości? Część statystyk nie można policzyć. Przykładowo, średnia z 1 i 3 to 2. Ale ile wynosi średnia z 1 i <em>nie wiadomo</em>?</p>
+<p>Dlatego gdy liczmy średnie lub inne statystyki z takich wektorów to wynik jest wartością <code>NA</code>.</p>
+<pre class="r"><code>mean(auta2012$Przebieg.w.km)</code></pre>
+<pre><code>## [1] NA</code></pre>
+<pre class="r"><code>min(auta2012$Przebieg.w.km)</code></pre>
+<pre><code>## [1] NA</code></pre>
+<pre class="r"><code>max(auta2012$Przebieg.w.km)</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>To logiczne. Jeżeli nie wszystkie wartości są znane, to nie można policzyć ani średniej ani minimum ani maksimum.</p>
+<p>Logiczne ale też mało praktyczne. Często chcielibyśmy policzyć średnią, medianę, minimum wartości które są znae.</p>
+<p>Aby to zrobić w programie R, do funkcji należy dodać argument <code>na.rm=TRUE</code>, gdzie <code>na.rm</code> to skrót od <em>remove NA</em>, czyli usuń wartości brakujące.</p>
+<pre class="r"><code>mean(auta2012$Przebieg.w.km, na.rm=TRUE)</code></pre>
+<pre><code>## [1] 144732</code></pre>
+<pre class="r"><code>min(auta2012$Przebieg.w.km, na.rm=TRUE)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>max(auta2012$Przebieg.w.km, na.rm=TRUE)</code></pre>
+<pre><code>## [1] 1e+09</code></pre>
+<div id="zadania-1" class="section level3">
+<h3>Zadania:</h3>
+<ul>
+<li>Która cecha jest najmniej kompletna? Dla której cechy liczba brakujących wartości jest największa?</li>
+<li>Jaka jest mediana/połówkowa wielkość silnika (<code>Pojemnosc.skokowa</code>)?</li>
+</ul>
+</div>
+<div id="odpowiedzi-1" class="section level3">
+<h3>Odpowiedzi:</h3>
+<ul>
+<li>Dla zmiennej <code>Przebieg.w.km</code> jest 20 711 brakujących wartości. Ta zmienna jest najmniej kompletna.</li>
+<li>115 cm3</li>
+</ul>
+</div>
+</div>
 </div>
 <div id="cechy-jakosciowe" class="section level1">
 <h1>Cechy jakościowe</h1>
