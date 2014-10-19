@@ -50,3 +50,24 @@ head(auta2012, 2)
 ```
 
 
+## Mini i nano dane
+W miejscach z gorszym połączeniem internetowym mozna wykorzystać wersję mini i nano danych.
+
+Wersja mini zawieta 28,5 tysiąca obserwacji bez ostatnich dwóch kolumn (3,6 MB).
+
+```{r, warning=FALSE}
+library(dplyr)
+auta2012mini <- auta2012[,c(1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17,19)]
+auta2012mini <- auta2012mini %>% 
+                    filter(Marka %in% c("Renault", "Ford", "Opel"))
+
+# write.table(auta2012mini, file="auta2012mini.csv", dec=",", sep=";", row.names = FALSE)
+# save(auta2012mini, file="auta2012mini.rda")
+
+set.seed(1313)
+auta2012nano <- auta2012mini[sample(1:nrow(auta2012mini), 3000),]
+
+# write.table(auta2012nano, file="auta2012nano.csv", dec=",", sep=";", row.names = FALSE)
+# save(auta2012nano, file="auta2012nano.rda")
+
+```
