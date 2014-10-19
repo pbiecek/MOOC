@@ -14,6 +14,13 @@ Można je też pobrać, dane są dostępne w różnych formatach pod następują
 
 *Uwaga!* Wczytywane pliki mają po 70MB. Ich pobieranie może potrwać kilka minut, lub więcej jeżeli połączenie internetowe nie jest dobre lub wiele osób jednocześnie z niego korzysta.
 
+W przypadku problemów z dostępem do danych, można skorzystać z mniejszych danych odpowiednio w formacie mini (28.5 tys wierszy, bez ostatnich dwóch kolumn, 3.5 MB do pobrania) lub w formacie nano (3 tys wierszy, 350 kB do pobrania).
+
+* dane tekstowe http://biecek.pl/MOOC/dane/auta2012mini.csv http://biecek.pl/MOOC/dane/auta2012nano.csv
+* dane Excelowe http://biecek.pl/MOOC/dane/auta2012mini.xls http://biecek.pl/MOOC/dane/auta2012nano.xls
+* dane binarne http://biecek.pl/MOOC/dane/auta2012mini.rda http://biecek.pl/MOOC/dane/auta2012nano.rda
+
+
 ## Dane tekstowe csv
 
 Dane w formacie csv to dane tekstowe. Rozdzielane średnikami z przecinkiem jako kropką dziesiętną.
@@ -51,9 +58,7 @@ head(auta2012, 2)
 
 
 ## Mini i nano dane
-W miejscach z gorszym połączeniem internetowym mozna wykorzystać wersję mini i nano danych.
-
-Wersja mini zawieta 28,5 tysiąca obserwacji bez ostatnich dwóch kolumn (3,6 MB).
+Poniższe instrukcjie odtwarzają zbiór mini i nano.
 
 ```{r, warning=FALSE}
 library(dplyr)
