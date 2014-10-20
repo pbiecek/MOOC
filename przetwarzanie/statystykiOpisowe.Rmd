@@ -279,6 +279,44 @@ sort(zaokragloneProcenty, decreasing = TRUE)
 + `r names(which.max(table(auta2012$Marka)))`
 + `r 100*prop.table(table(auta2012$Rodzaj.paliwa))["benzyna"]` %
 
+## Graficzne statystyki opisowe
+
+Tabele liczebności są proste w interpretacji. Podobnie jednak jak w innych przypadkach, graficzne przedstawienie tych liczb pozwala na łatwiejsze dostrzeżenie zależności pomiędzy danymi. Koniec końców w tabeli liczb łatwo pomylić się nawet gdy chodzi o liczbę cyfr w licznie. Na wykresie takie różnice natychmiast rzucają się w oczy.
+
+Zazwyczaj tabele liczebności przedstawia się za pomocą wykresów słupkowych.
+Można je wykonać np. funkcją `table()`.
+
+```{r, warning=FALSE}
+(tabela = table(auta2012$Waluta))
+barplot(tabela)
+```
+
+Jeżeli chcemy, by słupki były przedstawiane poziomo, można dodać argument `horiz = TRUE`.
+
+```{r, warning=FALSE}
+barplot(tabela, horiz = TRUE)
+```
+
+Domyślnie wartości są uporządkowane alfabetycznie. Nie zawsze jednak taka kolejność ma sens.
+W tym przypadku rozsądniej jest posortować dane malejąco.
+
+```{r, warning=FALSE}
+(posortowanaTabela = sort(tabela))
+barplot(posortowanaTabela, horiz = TRUE)
+```
+
+### Zadania:
++ Przedstaw graficznie tabelę liczebności dla zmiennej `Kraj.pochodzenia`. Wypróbuj wykres pionowy i poziomy. Aby obrócić kierunek etykiet na osiach dodaj do funkcji `barplot()` argument `las=1`.
+
+### Odpowiedzi:
+```{r, warning=FALSE}
+posortowanaTabela = sort(table(auta2012$Kraj.pochodzenia))
+barplot(posortowanaTabela, horiz = TRUE, las=1)
+```
+
+
+
+
 # Cechy logiczne
 Każdą zmienną można przedstawić jako zmienną jakościową lub ilościową. Ale w pewnych sytuacjach wygodnie jest wyróżnić bardziej szczegółową klasyfikację.
 Cechy logiczne, to takie cechy, które przyjmować mogą tylko trzy wartości, prawdę (oznaczany w R przez `TRUE`), fałsz (oznaczany w R przez `FALSE`) oraz brak informacji (oznaczany w R przez `NA`).
