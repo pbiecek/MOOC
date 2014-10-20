@@ -315,7 +315,7 @@ posortowanaTabela = sort(table(auta2012$Kraj.pochodzenia))
 barplot(posortowanaTabela, horiz = TRUE, las=1)
 ```
 
-
+Podobnie graficznie można przedstawiać cechy logiczne i napisowe.
 
 
 # Cechy logiczne
