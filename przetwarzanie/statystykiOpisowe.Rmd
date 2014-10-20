@@ -293,23 +293,24 @@ barplot(tabela)
 
 Jeżeli chcemy, by słupki były przedstawiane poziomo, można dodać argument `horiz = TRUE`.
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, fig.height=8}
 barplot(tabela, horiz = TRUE)
 ```
 
 Domyślnie wartości są uporządkowane alfabetycznie. Nie zawsze jednak taka kolejność ma sens.
-W tym przypadku rozsądniej jest posortować dane malejąco.
+W tym przypadku rozsądniej jest posortować dane malejąco, co można wykonać z użyciem funkcji `sort()`.
+Argument `las=1` powoduje, że oś OY ma etykiety ustawione poziomo.
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, fig.height=8}
 (posortowanaTabela = sort(tabela))
-barplot(posortowanaTabela, horiz = TRUE)
+barplot(posortowanaTabela, horiz = TRUE, las=1)
 ```
 
 ### Zadania:
 + Przedstaw graficznie tabelę liczebności dla zmiennej `Kraj.pochodzenia`. Wypróbuj wykres pionowy i poziomy. Aby obrócić kierunek etykiet na osiach dodaj do funkcji `barplot()` argument `las=1`.
 
 ### Odpowiedzi:
-```{r, warning=FALSE}
+```{r, warning=FALSE, fig.height=8}
 posortowanaTabela = sort(table(auta2012$Kraj.pochodzenia))
 barplot(posortowanaTabela, horiz = TRUE, las=1)
 ```
