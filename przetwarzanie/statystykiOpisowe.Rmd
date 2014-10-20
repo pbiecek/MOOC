@@ -119,7 +119,7 @@ Prezentacja graficzna ma tę zaletę, że wyćwiczone oko potrafi szybko wiele d
 
 Opisując zmienną ilościową mamy do wyboru różne sposoby prezentacji, w zależności od tego ile informacji chcemy przedstawić.
 
-Przypuśćmy, że chcemy pokazać wyłącznie średnią. Jedną liczbę. Zrobmy to za pomocą wykresu słupkowego.
+Przypuśćmy, że chcemy pokazać wyłącznie średnią. Jedną liczbę. Zrobimy to za pomocą wykresu słupkowego.
 Wykres słupkowy można w programie R wyznaczyć funkcją `barplot()`.
 
 ```{r, warning=FALSE}
@@ -130,10 +130,10 @@ barplot(srednia)
 Jeden słupek wygląda dziwnie, mało czytelnie. To dlatego, że wykres przedstawia jedną liczbę, trudno więc do czegoś się na nim odnieść.
 
 Ciekawszy będzie wykres, przedstawiający więcej informacji. 
-Powyżej pokazaliśmy wynik funkcji `summary()`, prezentujących sześć charakterystycznych informacji o rozkłądzie (min, max, kwartyle i średnią).
+Powyżej pokazaliśmy wynik funkcji `summary()`, prezentujących sześć charakterystycznych informacji o rozkładzie (min, max, kwartyle i średnią).
 Pięć z nich, za wyjątkiem średniej, przedstawia wykres pudełko-wąsy, który w R można wykonać używając funkcji `boxplot()`.
 
-W poniższym przykładzie przedstawiamy te pięć liczb dla zmiennej `Przebieg.w.km`. Argument `horizontal=TRUE` powoduje, że wykres rysowany jest poziomo, argument `range = 0` powoduje, że nie są wyznaczane wartoścvi odstające (a nie mówiliśmy co to za wartości, więc ich nei wyznaczajmy, wrócimy do tego tematu później).
+W poniższym przykładzie przedstawiamy te pięć liczb dla zmiennej `Przebieg.w.km`. Argument `horizontal=TRUE` powoduje, że wykres rysowany jest poziomo, argument `range = 0` powoduje, że nie są wyznaczane wartości odstające (a nie mówiliśmy co to za wartości, więc ich nie wyznaczajmy, wrócimy do tego tematu później).
 
 ```{r, warning=FALSE}
 summary(auta2012$Przebieg.w.km)
@@ -142,7 +142,7 @@ boxplot(auta2012$Przebieg.w.km,
 ```
 
 Co za dziwny wykres. Zazwyczaj wykresy pudełkowe wyglądają inaczej.
-Co jest nie tak z tym? Spójrzmy na oś na wykresie, rozciąga się do 10^9 = 1 000 000 000 km. Najprawdopodobniej te duże wartości to błędu w danych. Mała jest szansa, że jakiekolwiek auto na świecie miało choćby zbliżony przebieg (gdyby jakieś auto jeździło non stop z prędkością 100 km na godiznę, to po 100 latach miałoby przebieg 8 000 000 km).
+Co jest nie tak z tym? Spójrzmy na oś na wykresie, rozciąga się do 10^9 = 1 000 000 000 km. Najprawdopodobniej te duże wartości to błędu w danych. Mała jest szansa, że jakiekolwiek auto na świecie miało choćby zbliżony przebieg (gdyby jakieś auto jeździło non stop z prędkością 100 km na godzinę, to po 100 latach miałoby przebieg 8 000 000 km).
 
 Dane bardzo często są zanieczyszczone a graficzne prezentacje pozwalają nam to łatwo zauważyć. 
 Tak jest i w tym przypadku.
@@ -164,11 +164,11 @@ boxplot(auta2012wybrane$Przebieg.w.km, horizontal=TRUE, range=0)
 ```
 
 Każdy z elementów tego wykresu (lewy wąs, lewa część pudełka, prawa część pudełka, prawy wąs) przedstawia 1/4 danych.
-Z wykresu tego możemy łatwo odczytac, że 3/4 danych dotyczy aut o przebiegu poniżej 200 tys km. Jedynie 1/4 danych ma wyższe wartości i dla tych aut rozpiętość jest bardzo duża.
+Z wykresu tego możemy łatwo odczytać, że 3/4 danych dotyczy aut o przebiegu poniżej 200 tys km. Jedynie 1/4 danych ma wyższe wartości i dla tych aut rozpiętość jest bardzo duża.
 
 Jeżeli chcemy zaprezentować bardziej szczegółowe dane o przebiegu, możemy wykorzystać histogram.
 Słowo histogram pochodzi z języka greckiego, pochodzi ze złożenia słów histos i gramma. 
-Pierwsze oznacza rzeczy stojace pionowo, drugie oznacza zapis. W sumie chodzi o przedstawienie danych z użyciem pionowych słupków.
+Pierwsze oznacza rzeczy stojące pionowo, drugie oznacza zapis. W sumie chodzi o przedstawienie danych z użyciem pionowych słupków.
 
 Aby wykonać w programie R histogram, można wykorzystać funkcję `hist()`. Pierwszy argument określa dane, które mają być pokazane,
 drugi argument określa na ile przedziałów ma być podzielony zakres zmienności. 
@@ -199,6 +199,7 @@ auta2012wybrane <- auta2012 %>%
 boxplot(auta2012wybrane$Cena.w.PLN, horizontal = TRUE, range = 0)
 hist(auta2012wybrane$Cena.w.PLN, 50, col="grey")
 ```
+
 
 
 # Cechy jakościowe
