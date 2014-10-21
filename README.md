@@ -4,7 +4,8 @@ Czarodzieje danych
 Materiały dla kursu MOOC 2014
 
 + Dane wokół nas, jak je czytać
-++ A
+	* Aaa
+  * Aaa
 
 + Eksploracja danych
 
