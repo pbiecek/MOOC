@@ -8,7 +8,7 @@ Materiały dla kursu MOOC 2014
   * Jak długo pożyjemy, czyli o dalszym trwaniu życia
   * Kto wygra wybory, czyli o sondażach poparcia
   * Duże liczby, jak je zapamiętać?
-  * Co Cię nei zabije? Statystyki zgnonów, basen czy broń.
+  * Co Cię nie zabije? Statystyki zgnonów, basen czy broń.
   * Siatki centylowe
   * Nie wszystko ma swoją przyczynę
   * Młodzie 2011
@@ -33,7 +33,7 @@ Materiały dla kursu MOOC 2014
   * Iluzje, percepcja obrazu i kolory [persspektywa, tithener, wzmocnienei oboczne, poggardoffa, plamka slepa, fiksacje sakkady, precyzja przedstawiania - kołowy, paskowy, punktowy]
   * Info-pomyłka
   * Warsztat [cecha ilorazowa / przedziałowa]
-  * Jak to zrobić - część 1
+  * Jak to zrobić - część 1 [materialy html](https://rawgit.com/pbiecek/MOOC/master/wizualizacja/ggplot1.html)
   * Jak to zrobić - część 2
   * Jak to ożywić
 

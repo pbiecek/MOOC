@@ -1,0 +1,291 @@
+---
+title: "Wizualizacja / wprowadzenie do ggplot2"
+output:
+  html_document:
+    toc: yes
+---
+
+# Wprowadzenie do pakietu ggplot2
+ 
+##Przygotowanie danych
+
+Zanim zaczniemy tworzyć pierwszy wykres, musimy przygotować dane do rysowania. 
+Dane można przygotować na wiele sposobów, najprostszym z nich jest użycie pakietu dplyr.
+
+```{r, warning=FALSE}
+auta2012 = read.table("http://biecek.pl/MOOC/dane/auta2012.csv",
+                       sep=";", dec=",", header=TRUE)
+head(auta2012, 2)
+```
+
+### Pierwszy wykres
+
+W pakiecie ggplot2 wykresy można tworzyć na dwa sposoby:
+ 
+- z użyciem funkcji qplot (q like quick), proste wykresy tworzy się prosto, ale bardziej trudniej,  
+- z użyciem funkcji ggplot(), z początku może nie jest zbyt intuicyjna, ale po pewnym czasie nasza intuicja się zmienia. 
+ 
+Nam zależy nam na profesjonalnej grafice, więc będziemy pracować z funkcją ggplot().
+
+Zaczniemy od wykresy punktowego.
+
+```{r fig.width=8, fig.height=5, warning=FALSE, message=FALSE}
+
+library(ggplot2)
+library(dplyr)
+wybraneAuta <- auta2012 %>% 
+          filter(Marka %in% c("Volkswagen", "Opel", "Audi", "Mercedes-Benz", "BMW"))
+
+avgs <- wybraneAuta %>% 
+          group_by(Marka, Rok.produkcji) %>%
+          summarise(cena = median(Cena.w.PLN, na.rm=TRUE),
+                    przebieg = median(Przebieg.w.km, na.rm=TRUE),
+                    liczba = n()) %>%
+          filter(liczba >= 10)
+avgs
+
+
+ggplot(avgs, aes(x=przebieg, y=cena)) +
+    geom_point()
+
+```
+
+Funkcja ggplot wymaga określenia dwóch argumentów: zbioru danych oraz zbioru mapowań (aesthetic mappings, funkcja aes()). Wybrawszy dane i mapowania można przejść do opisu geometrii.
+
+Grafika produkowana przez pakiet ggplot jest nazywana *'high quality elegant graphics'* (przynajmniej przez entuzjastów tego pakietu). Zobaczmy dlaczego. Porównajmy dwa wykres z dwóch bibliotek programu R, oba wykresy z domyślnymi ustawieniami.
+Oba wykresy rysujemy na obszarze 4x4 cale.
+
+```{r fig.width=4, fig.height=4, warning=FALSE, message=FALSE, fig.show='hold'}
+
+plot(avgs$przebieg, avgs$cena)          # base graphics
+ggplot(avgs, aes(x=przebieg, y=cena)) + # ggplot graphics
+    geom_point()
+
+```
+
+## Twoja kolej:
+Znajd przynajmniej trzy różnice pomiędzy tymi wykresami
+
+ - 
+
+ - 
+ 
+ -
+
+
+## Geometrie
+
+Myśląc o wykresie, w pierwszym kroku myślimy o jego geometrii.
+
+Pakiet ggplot pozwala na wybór spośród wielu geometrii.
+Ich lista jest dostępna na stronie http://docs.ggplot2.org/current/. 
+Na tych zajęciach będziemy pracować z kilkoma najpopularniejszymi,
+ale z pozostałych korzysta się w bardzo podobny sposób.
+
+### Dwie ciągłe zmienne
+
+Przyjrzyjmy się na początek trzem geometriom: geom_point(), geom_text(), geom_smooth().
+
+W dokumentacji dla każdej geometrii można zobaczyć jakie właściwości tej geometrii można określić.
+
+Dla geom_text trzy obowiązkowe to x, y i label.
+http://docs.ggplot2.org/current/geom_text.html.
+
+```{r fig.width=8, fig.height=5, warning=FALSE, message=FALSE}
+
+tylkoAudi <- avgs %>%
+  filter(Marka == "Audi")
+
+ggplot(tylkoAudi, aes(x=przebieg, y=cena)) +
+  geom_point()
+
+ggplot(tylkoAudi, aes(x=przebieg, y=Rok.produkcji, label=Rok.produkcji, size=liczba, colour=liczba)) +
+  geom_text()
+
+```
+
+A co z nieobowiązkowymi mapowaniami? 
+Też mogą być przydatne.
+
+```{r fig.width=8, fig.height=5, warning=FALSE, message=FALSE}
+
+ggplot(tylkoAudi, aes(x=przebieg, y=cena, label=Rok.produkcji)) +
+  geom_text(aes(size=liczba))
+
+
+ggplot(tylkoAudi, aes(x=przebieg, y=cena, label=Rok.produkcji)) +
+  geom_text(aes(size=liczba))
+
+ggplot(tylkoAudi, aes(x=przebieg, y=cena, label=Rok.produkcji, size=liczba)) +
+ geom_text(hjust=1, vjust=0) +
+  geom_point()
+
+ggplot(wybraneAuta, aes(x=Marka, y=Cena.w.PLN, label=Rok.produkcji)) +
+  geom_point()
+
+```
+
+
+W kolejnych krokach, można dopracowywać szczegóły, np. etykiety na osiach.
+
+```{r fig.width=8, fig.height=5, warning=FALSE, message=FALSE}
+library(scales)
+ggplot(tylkoAudi, aes(x=przebieg, y=cena, label=Rok.produkcji)) +
+  geom_text(aes(size=liczba)) +
+  scale_x_continuous(labels = comma) +
+  scale_y_continuous(labels = comma)
+
+```
+
+Uwaga, mapuje się tylko zmienne. Pojedyncze wartości / stałe określa się inaczej.
+
+```{r fig.width=8, fig.height=5, warning=FALSE, message=FALSE}
+
+ggplot(tylkoAudi, aes(x=przebieg, y=cena, label=Rok.produkcji)) +
+  geom_text(aes(size=5)) 
+
+ggplot(tylkoAudi, aes(x=przebieg, y=cena, label=Rok.produkcji)) +
+  geom_text(size=5) 
+
+```
+
+### geom_smooth()
+
+Pracując ze zmiennymi ciągłymi, szukając zależności typu regresyjnego, jedną z ciekawszych geometrii jest geom_smooth().
+
+```{r fig.width=8, fig.height=5, warning=FALSE, message=FALSE}
+
+ggplot(wybraneAuta, aes(x=Rok.produkcji, y=Cena.w.PLN)) +
+    geom_smooth() 
+
+ggplot(wybraneAuta, aes(x=Rok.produkcji, y=Cena.w.PLN)) +
+    geom_smooth()  + xlim(1980,2012) 
+
+```
+
+Usuniemy teraz przedział ufności dla średniej i dodajmy punkty do wykresu (kolejną geometrię).
+
+```{r fig.width=8, fig.height=5, warning=FALSE, message=FALSE}
+
+ggplot(wybraneAuta, aes(x=Rok.produkcji, y=Cena.w.PLN)) +
+  geom_point(alpha=0.5) +
+  geom_smooth(se = FALSE, size=5, colour="red")  + 
+  xlim(1980,2012) + ylim(0,200000)
+
+```
+
+Zauważmy, że geom_smooth() nie tylko wygładza. Można dodatkowymi parametrami określić jaki model regresyjny ma być przedstawiony na wykresie.
+
+```{r fig.width=8, fig.height=5, warning=FALSE, message=FALSE}
+
+ggplot(wybraneAuta, aes(x=Rok.produkcji, y=Cena.w.PLN)) + 
+    geom_point(alpha=0.4) +
+    geom_smooth(se = FALSE, size=2) +
+    geom_smooth(se = FALSE, size=2, method = "lm", colour="red") +
+    geom_smooth(se = FALSE, size=2, method = "lm", colour="green", formula = y ~ poly(x,2)) + 
+    geom_smooth(se = FALSE, size=2, method = "lm", colour="gold", formula = y ~ log(x)) + 
+  xlim(1980,2012) + ylim(0,200000)
+
+```
+Zmieniamy stopień wygładzenia.
+
+```{r fig.width=8, fig.height=5, warning=FALSE, message=FALSE}
+
+ggplot(wybraneAuta, aes(x=Rok.produkcji, y=Cena.w.PLN)) +
+    geom_point(alpha=0.4) +
+    geom_smooth(se = FALSE, size=2, colour="blue", span=0.9, method="loess") +
+    geom_smooth(se = FALSE, size=2, colour="red", span=0.1, method="loess") + 
+  xlim(1980,2012) + ylim(0,200000)
+
+```
+
+Składając różne mapowania i geometrie można uzyskać bardzo ciekawe rozwiązania
+
+```{r fig.width=8, fig.height=5, warning=FALSE, message=FALSE}
+
+ggplot(wybraneAuta, aes(x=Rok.produkcji, y=Cena.w.PLN, colour=Marka)) +
+    geom_point(alpha=0.4) +
+    geom_smooth(se = FALSE, size=2) + 
+  xlim(1980,2012) + ylim(0,200000)
+
+```
+
+### Dla zmiennych jakościowych
+
+Wykresy paskowe i ich odmiany są wygodne w przedstawianiu zmiennych jakościowych. Jako przykład wykorzystamy geom_bar().
+
+```{r fig.width=8, fig.height=5, warning=FALSE, message=FALSE}
+
+ggplot(wybraneAuta, aes(x=Rok.produkcji)) +
+  geom_bar() 
+
+# horizontal or vertical?
+ggplot(wybraneAuta, aes(x=Rok.produkcji)) +
+  geom_bar() +
+  coord_flip() 
+
+ggplot(wybraneAuta, aes(x=Marka)) +
+  geom_bar() 
+
+# horizontal or vertical?
+ggplot(wybraneAuta, aes(x=Marka)) +
+  geom_bar() +
+  coord_flip() 
+
+```
+
+Zobacz jakie parametry geometrii geom_bar() można modyfikować
+http://docs.ggplot2.org/current/geom_bar.html. 
+
+Jednym z takich parametrów jest 'position'.
+
+```{r fig.width=8, fig.height=5, warning=FALSE, message=FALSE}
+
+ggplot(wybraneAuta, aes(x=Marka, fill=Rodzaj.paliwa)) +
+    geom_bar() + coord_flip()
+
+# Position = dodge
+ggplot(wybraneAuta, aes(x=Marka, fill=Rodzaj.paliwa)) +
+    geom_bar(position="dodge") + coord_flip()
+
+# Position = fill
+ggplot(wybraneAuta, aes(x=Marka, fill=Rodzaj.paliwa)) +
+    geom_bar(position="fill") + coord_flip()
+
+# Procenty na osi OX
+ggplot(wybraneAuta, aes(x=Marka, fill=Rodzaj.paliwa)) +
+    geom_bar(position="fill") + coord_flip() + 
+    scale_y_continuous(label=percent)
+
+```
+
+### Inne geometrie
+
+Liczba geometrii dostępnych w pakiecie ggplot2 się zmienia. Czasem przybywają nowe, nadmiarowe geometrie mogą zostać zredukowane. W dodatkowych pakietach można również znaleźć nowe geometrie.
+
+Aby sprawdzić jaka jest aktualna lista geometrii najlepiej odwiedzić stronę 
+http://docs.ggplot2.org/current/.
+
+```{r fig.width=8, fig.height=5, warning=FALSE, message=FALSE}
+
+ggplot(wybraneAuta, aes(y=Przebieg.w.km, x=Rodzaj.paliwa)) +
+  geom_boxplot() + ylim(0,300000) 
+
+ggplot(wybraneAuta, aes(x=Przebieg.w.km, fill=Rodzaj.paliwa)) +
+  geom_density() + xlim(0,300000) 
+
+ggplot(wybraneAuta, aes(x=Przebieg.w.km, fill=Rodzaj.paliwa)) +
+  geom_density(alpha=0.5) + xlim(0,300000) 
+
+ggplot(wybraneAuta, aes(x=Przebieg.w.km, fill=Rodzaj.paliwa)) +
+  geom_histogram() + xlim(0,300000) 
+
+```
+
+## Inne źródła
+
+- bardzo dobra książka 'Cookbook for R', http://www.cookbook-r.com/Graphs/
+- dokumentacja pakietu ggplot2, http://docs.ggplot2.org/current/
+- webinaria 'The Grammar and Graphics of Data Science' http://pages.rstudio.net/Webniar-Series-Essential-Tools-for-R.html
+- Introduction to dplyr http://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html
+
