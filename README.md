@@ -9,6 +9,7 @@ Materiały dla kursu MOOC 2014
   * Kto wygra wybory, czyli o sondażach poparcia
   * Duże liczby, jak je zapamiętać?
   * Co Cię nei zabije? Statystyki zgnonów, basen czy broń.
+  * Siatki centylowe
   * Nie wszystko ma swoją przyczynę
   * Młodzie 2011
   * Emilka a Dorota
