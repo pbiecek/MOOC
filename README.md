@@ -20,7 +20,7 @@ Materiały dla kursu MOOC 2014
 
   * Cechy jakościowe
   * Cechy ilościowe
-  https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/statystykiOpisowe.html
+  https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyIlosciowe.html
   
   * Cechy logiczne
   * Cechy napisowe
