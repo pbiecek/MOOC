@@ -17,14 +17,12 @@ Materiały dla kursu MOOC 2014
   * Pracy interaktywna oraz knitr
   * Jak wczytać dane
   https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/wczytywanieDanych.html
-
   * Cechy jakościowe
   https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyJakosciowe.html
-
   * Cechy ilościowe
   https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyIlosciowe.html
-  
   * Cechy logiczne
+  https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyLogiczne.html
   * Cechy napisowe
   * Obróbka danych
 
