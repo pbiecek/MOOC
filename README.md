@@ -19,6 +19,8 @@ Materiały dla kursu MOOC 2014
   https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/wczytywanieDanych.html
 
   * Cechy jakościowe
+  https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyJakosciowe.html
+
   * Cechy ilościowe
   https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyIlosciowe.html
   

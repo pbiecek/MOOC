@@ -1,0 +1,137 @@
+---
+title: "Eksploracja / cechy jakościowe"
+output:
+  html_document:
+    toc: yes
+---
+
+W trakcie tych zajęć przedstawimy podstawowe operacje na danych jakościowych. 
+Ale zanim dojdziemy do tych operacji najpierw wczytajmy dane.
+
+# Wczytanie danych
+
+```{r, warning=FALSE}
+auta2012 = read.table("http://biecek.pl/MOOC/dane/auta2012.csv",
+                       sep=";", dec=",", header=TRUE)
+head(auta2012, 2)
+```
+
+Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.
+
+
+
+# Cechy jakościowe
+Przyjrzyjmy się teraz takim cechom jak `Waluta` lub `Marka`. Cechy te są opisane przez wartości z określonej listy możliwości.
+Dla cechy `Waluta` lista możliwości to `r sort(levels(auta2012$Waluta))`.
+Takie cechy określa się cechami jakościowymi w odróżnieniu od cech ilościowych.
+
+## Statystyki opisowe
+Dla cech jakościowych możemy wykonać kilka operacji.
+Jedną z nich jest wyświetlenie listy możliwych wartości. Taką listę nazywa się często słownikiem (spisem możliwych wartości).
+
+Listę możliwych wartości dla zmiennej jakościowej można wyznaczyć funkcją `levels()`.
+
+```{r, warning=FALSE}
+levels(auta2012$Waluta)
+```
+
+Zmienne jakościowe często opisuje się tablicą liczebności, a więc informacją ile razy wystąpiła każda z wartości ze słownika.
+Tablicę liczebności można wyznaczyć funkcją `table()` lub `summary()`.
+
+```{r, warning=FALSE}
+table(auta2012$Waluta)
+summary(auta2012$Waluta)
+```
+
+### Zadania:
++ Ile zmiennych w zbiorze danych `auta2012` to zmienne jakościowe? 
++ Zmienna `Liczba.drzwi` przyjmuje wartości `2/3` i `4/5`. Zachowuje się ona jako zmienna jakościowa. Jednak można uznać, że liczba drzwi to cecha ilościowa, ponieważ opisuje _ilość_ drzwi w samochodzie. Jak wyjaśnić tę dualność?
+
+### Odpowiedzi:
++ `r names(which(sapply(auta2012, class) == "factor"))`
++ Pewne zmienne, w zależności od kontekstu, mogą być traktowane i analizowane jak zmienne ilościowe lub zmienne jakościowe. Do nas należy wybór, która z tych opcji jest właściwsza.
+
+## Procenty
+
+W pewnych sytuacjach, zamiast posługiwać się tablicą liczebności, wygodniej jest posługiwać się tabelą z procentami.
+Ale jak te procenty policzyć?
+Pokażemy to na przykładzie kilku funkcji. 
+
+Funkcja `prop.table()` dzieli wartości tabeli liczebności przez sumę liczebności, a więc zamienia liczebności na frakcje.
+Przypiszmy wynik funkcji `table()` do jakiejś zmiennej, np. o nazwie `tabela` (nazwa może być dowolna, musimy jej jednak konsekwentnie używać w dalszych przykładach).
+Następnie tak otrzymaną tabelę liczebności zamieniamy na frakcje.
+
+W poniższym przykładzie, instrukcję przypisania wyniku obejmujemy napisami, po to by jej wynik był wyświetlony. Bez nawiasów wynik funkcji `table()` nie zostałby wyświetlony.
+
+```{r, warning=FALSE}
+(tabela = table(auta2012$Waluta))
+prop.table(tabela)
+```
+
+Zazwyczaj chcemy mieć wyznaczone procenty a nie frakcje. I to nie byle jakie procenty, ale procenty które są ładnie sformatowane, np. wyświetlone z dokładnością do jednego miejsca dziesiętnego po przecinku.
+Aby zamienić frakcje na procenty, wystarczy je przemnożyć przez 100, a aby wynik przedstawić z dokładnością do jednego miejsca po przecinku wykorzystamy funkcję `round()`.
+
+```{r, warning=FALSE}
+(tabela = table(auta2012$Waluta))
+(frakcje = prop.table(tabela))
+procenty = 100*frakcje
+round(procenty, digits = 1)
+```
+
+Ostatnim usprawnieniem tego procesu, które warto rozważyć to uporządkowanie wartości rosnąco lub malejąco.
+Mając wiele możliwości, w gąszczu liczb czasem trudno nawet dostrzec, która jest największa. 
+Posortowawszy te liczby łatwiej dostrzec najmniejsze i największe.
+Do sortowania można wykorzystać funkcję `sort()`. Dodając argument `decreasing = TRUE` powodujemy, że wartości będą uporządkowane malejąco.
+
+```{r, warning=FALSE}
+zaokragloneProcenty = round(procenty,1)
+sort(zaokragloneProcenty)
+sort(zaokragloneProcenty, decreasing = TRUE)
+```
+
+### Zadania:
++ Cecha `Marka` opisuje markę samochodu. Sprawdź, która marka jest najpopularniejsza.
++ Cecha `Rodzaj.paliwa` opisuje rodzaj paliwa wykorzystywanego przez auto. Czy jest to benzyna, olej, gaz? Sprawdź jaki procent samochodów jest napędzana na benzynę.
+
+### Odpowiedzi:
++ `r names(which.max(table(auta2012$Marka)))`
++ `r 100*prop.table(table(auta2012$Rodzaj.paliwa))["benzyna"]` %
+
+## Graficzne statystyki opisowe
+
+Tabele liczebności są proste w interpretacji. Podobnie jednak jak w innych przypadkach, graficzne przedstawienie tych liczb pozwala na łatwiejsze dostrzeżenie zależności pomiędzy danymi. Koniec końców w tabeli liczb łatwo pomylić się nawet gdy chodzi o liczbę cyfr w licznie. Na wykresie takie różnice natychmiast rzucają się w oczy.
+
+Zazwyczaj tabele liczebności przedstawia się za pomocą wykresów słupkowych.
+Można je wykonać np. funkcją `table()`.
+
+```{r, warning=FALSE}
+(tabela = table(auta2012$Waluta))
+barplot(tabela)
+```
+
+Jeżeli chcemy, by słupki były przedstawiane poziomo, można dodać argument `horiz = TRUE`.
+
+```{r, warning=FALSE, fig.height=8}
+barplot(tabela, horiz = TRUE)
+```
+
+Domyślnie wartości są uporządkowane alfabetycznie. Nie zawsze jednak taka kolejność ma sens.
+W tym przypadku rozsądniej jest posortować dane malejąco, co można wykonać z użyciem funkcji `sort()`.
+Argument `las=1` powoduje, że oś OY ma etykiety ustawione poziomo.
+
+```{r, warning=FALSE, fig.height=8}
+(posortowanaTabela = sort(tabela))
+barplot(posortowanaTabela, horiz = TRUE, las=1)
+```
+
+### Zadania:
++ Przedstaw graficznie tabelę liczebności dla zmiennej `Kraj.pochodzenia`. Wypróbuj wykres pionowy i poziomy. Aby obrócić kierunek etykiet na osiach dodaj do funkcji `barplot()` argument `las=1`.
+
+### Odpowiedzi:
+```{r, warning=FALSE, fig.height=8}
+posortowanaTabela = sort(table(auta2012$Kraj.pochodzenia))
+barplot(posortowanaTabela, horiz = TRUE, las=1)
+```
+
+Podobnie graficznie można przedstawiać cechy logiczne i napisowe.
+
