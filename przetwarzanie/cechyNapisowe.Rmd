@@ -1,0 +1,56 @@
+---
+title: "Eksploracja / cechy napisowe"
+output:
+  html_document:
+    toc: yes
+---
+
+W trakcie tych zajęć przedstawimy podstawowe operacje na danych napisowych. 
+Ale zanim dojdziemy do tych operacji najpierw wczytajmy dane.
+
+# Wczytanie danych
+
+```{r, warning=FALSE}
+auta2012 = read.table("http://biecek.pl/MOOC/dane/auta2012.csv",
+                       sep=";", dec=",", header=TRUE)
+head(auta2012, 2)
+```
+
+Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.
+
+
+
+
+# Cechy napisowe
+Funkcja `read.table()` wczytując tekst zamienia go na zmienną jakościową. W pewnych sytuacjach chcemy jednak na napisach wykonywać specjalne operacje. Takie np. jak wyszukiwanie podciągu w tekście. 
+
+Aby to zrobić, musimy w pierwszej kolejności zamienić zmienna jakościową na zmienną napisową. Konwersję cechy z cechy jakościowej na cechę napisową można wykonać funkcją `as.character()`
+
+```{r, warning=FALSE}
+auta2012$Wyposazenie.dodatkowe.napis = as.character(auta2012$Wyposazenie.dodatkowe)
+summary(auta2012$Wyposazenie.dodatkowe.napis)
+```
+
+## Statystyki opisowe
+
+Jedną z interesujących operacji na napisach, jest sprawdzenie, czy zawierają one określony podciąg znaków. 
+Taki test można wykonać funkcją `grepl()`, która jako wynik zwraca wartość logiczną określającą czy napis zawiera określony wzorzec czy nie.
+
+```{r, warning=FALSE}
+maKlimatyzacje = grepl(auta2012$Wyposazenie.dodatkowe.napis, pattern="klimatyzacja")
+table(maKlimatyzacje)
+
+auta2012$Informacje.dodatkowe.napis = as.character(auta2012$Informacje.dodatkowe)
+bezwypadkowy = grepl(auta2012$Informacje.dodatkowe.napis, pattern="bezwypadkowy")
+table(bezwypadkowy)
+```
+
+### Zadania:
++ Sprawdź ile samochodów ma zainstalowany autoalarm
++ Sprawdź ile samochodów ma lakier w metalicznym kolorze
+
+### Odpowiedzi:
++ `r sum(grepl(auta2012$Wyposazenie.dodatkowe.napis, pattern="autoalarm"))`
++ `r sum(grepl(as.character(auta2012$Kolor), pattern="metallic"))`
+
+

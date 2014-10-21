@@ -24,6 +24,7 @@ Materiały dla kursu MOOC 2014
   * Cechy logiczne
   https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyLogiczne.html
   * Cechy napisowe
+  https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyNapisowe.html
   * Obróbka danych
 
 
