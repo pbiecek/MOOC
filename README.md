@@ -9,3 +9,4 @@ https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/wczytywanieDanych.html
 + Jak wykonać podstawowe operacje i tekstowe statystyki opisowe
 https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/statystykiOpisowe.html
 
++ Czy to się zmieni?
