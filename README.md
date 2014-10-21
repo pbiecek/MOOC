@@ -16,15 +16,15 @@ Materiały dla kursu MOOC 2014
   * Jak zainstalować R i RStudio
   * Pracy interaktywna oraz knitr
   * Jak wczytać dane
-  https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/wczytywanieDanych.html
+https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/wczytywanieDanych.html
   * Cechy jakościowe
-  https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyJakosciowe.html
+https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyJakosciowe.html
   * Cechy ilościowe
-  https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyIlosciowe.html
+https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyIlosciowe.html
   * Cechy logiczne
-  https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyLogiczne.html
+https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyLogiczne.html
   * Cechy napisowe
-  https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyNapisowe.html
+https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyNapisowe.html
   * Obróbka danych
 
 
