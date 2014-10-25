@@ -33,23 +33,19 @@ Naszą przygodę z regresją liniową również rozpoczniemy od danych zebranych
 Zbiór danych nazywa się `galton`, zobaczmy kilka pierwszych obserwacji z tego zbioru.
 
 ```{r, warning=FALSE, width=8, height=8, message=FALSE}
-library(UsingR)      # w tym pakiecie znajduje się zbiór danych galton
-library(ggplot2)     # ten pakiet wykorzystamy do wizualizacji
-library(dplyr)       # ten pakiet wykorzystamy do przetwarzania danych
+library(SmarterPoland)      # w tym pakiecie znajduje się zbiór danych galton
 
 head(galton)
 ```
 
-TODO: może warto przeliczyć z cali na cm?
-
-W kolumnie `parent` przedstawiona jest średni ważony wzrost rodziców (średnia wzrostu
-ojca i 1,08 wzrostu matki), a w drugiej kolumnie wzrost dorosłego syna. Dane są w calach.
+W kolumnie `rodzic` przedstawiona jest średni ważony wzrost rodziców (średnia wzrostu
+ojca i 1,08 wzrostu matki), a w kolumnie `syn` wzrost dorosłego syna. Dane są w calach.
 
 Pytanie, które interesowało Galtona jak również interesuje nas, to czy jest zależność pomiędzy wzrostem rodziców a dziecka.
 Modelowanie zawsze rozpoczyna się od wykresu, zobaczmy jak ta zależność wygląda graficznie.
 
 ```{r, warning=FALSE, width=8, height=8}
-ggplot(galton, aes(x=parent, y=child)) + 
+ggplot(galton, aes(x=rodzic, y=syn)) + 
   geom_point() 
 ```
 
@@ -58,7 +54,7 @@ Rysując takie dane warto zaburzyć je małym zastrzykiem szumu.
 Zrobimy to argumentem `position = "jitter"`.
 
 ```{r, warning=FALSE, width=8, height=8}
-ggplot(galton, aes(x=parent, y=child)) + 
+ggplot(galton, aes(x=rodzic, y=syn)) + 
   geom_point(position = "jitter") 
 ```
 
@@ -69,15 +65,15 @@ Jedną z możliwości jest policzenie średniego wzrostu dziecka dla każdej gru
 
 ```{r, warning=FALSE, width=8, height=8}
 (srednie = galton %>%
-  group_by(parent) %>%
-  summarise(srednia = mean(child)))
+  group_by(rodzic) %>%
+  summarise(srednia = mean(syn)))
 
 #
 # poniższa funkcja dorysowuje średnie w grupach
-ggplot(galton, aes(x=parent, y=child)) + 
+ggplot(galton, aes(x=rodzic, y=syn)) + 
   geom_point(position = "jitter") +
-  geom_line(data=srednie, aes(x=parent, y=srednia), size=2, color = "blue") + 
-  geom_point(data=srednie, aes(x=parent, y=srednia), size=5, color = "blue") 
+  geom_line(data=srednie, aes(x=rodzic, y=srednia), size=2, color = "blue") + 
+  geom_point(data=srednie, aes(x=rodzic, y=srednia), size=5, color = "blue") 
 ```
 
 Pięknie, widzimy, że im wyżsi rodzice tym średnio wyższe dzieci. 
@@ -91,7 +87,7 @@ Co więcej średnie w grupach bardzo wysokich lub bardzo niskich rodziców wyzna
 ### Odpowiedzi:
 ```{r, warning=FALSE, width=8, height=8}
 srednie %>%
-  mutate(roznica = srednia - parent)
+  mutate(roznica = srednia - rodzic)
 ```
 
 
@@ -118,12 +114,12 @@ Dla modelu
 _średni.wzrost.dziecka = b0 + wzrost.rodziców * b1_
 
 lub używając nazw zmiennych z naszego zbioru danych
-_child = b0 + parent * b1_
+_syn = b0 + rodzic * b1_
 
 Funkcja estymująca parametry wygląda następująco.
 
 ```{r, warning=FALSE, width=8, height=8}
-lm(child~1 + parent, data=galton)
+lm(syn~1 + rodzic, data=galton)
 ```
 
 Funkcja `lm()` przyjmuje dwa argumenty, pierwszy to formuła opisująca przyjęty model, drugi argument wskazuje zbiór danych.
@@ -134,7 +130,7 @@ w którym należy wyznaczyć _b0_ i _b1_.
 Wynikiem funkcji `lm()` jest szczegółowy opis dopasowanego modelu, jeżeli interesują nas jedynie oceny  _b0_ i _b1_, możemy się odwołać do tych ocen przez właściwość `coef` wyniku.
 
 ```{r, warning=FALSE, width=8, height=8}
-lm(child~1 + parent, data=galton)$coef
+lm(syn~1 + rodzic, data=galton)$coef
 ```
 
 _średni.wzrost.dziecka = 23.9415 + wzrost.rodzica * 0.6462906_
@@ -142,7 +138,7 @@ _średni.wzrost.dziecka = 23.9415 + wzrost.rodzica * 0.6462906_
 W formule możemy pominąć człon `1+`, jest on domyślnie dodawany do formuły, dlatego taki sam wynik otrzymamy stosując następującą instrukcję.
 
 ```{r, warning=FALSE, width=8, height=8}
-lm(child~parent, data=galton)$coef
+lm(syn~rodzic, data=galton)$coef
 ```
 
 ### Zadania:
@@ -151,9 +147,9 @@ lm(child~parent, data=galton)$coef
 
 ### Odpowiedzi:
 ```{r, warning=FALSE, width=8, height=8}
-(wspolczynniki = lm(child~parent, data=galton)$coef)
+(wspolczynniki = lm(syn~rodzic, data=galton)$coef)
 srednie %>%
-  mutate(m.liniowy = wspolczynniki[1] + parent*wspolczynniki[2],
+  mutate(m.liniowy = wspolczynniki[1] + rodzic*wspolczynniki[2],
          roznica = srednia - m.liniowy)
 ```
 
@@ -178,16 +174,25 @@ Modele te zostały uporządkowane ze względu na liczbę nieznanych parametrów.
 + Poniższy wykres przedstawia wszystkie rozważane modele. Wskaż który kolor odpowiada któremu modelowi
 
 ```{r, warning=FALSE, width=8, height=8}
-ggplot(galton, aes(x=parent, y=child)) + 
+ggplot(galton, aes(x=rodzic, y=syn)) + 
   geom_point(position = "jitter")+
-  geom_line(data=srednie, aes(x=parent, y=srednia), size=2, color = "blue") + 
-  geom_point(data=srednie, aes(x=parent, y=srednia), size=5, color = "blue")  + 
+  geom_line(data=srednie, aes(x=rodzic, y=srednia), size=2, color = "blue") + 
+  geom_point(data=srednie, aes(x=rodzic, y=srednia), size=5, color = "blue")  + 
   geom_smooth(method="lm", se=FALSE, size=3, color="red") +
   geom_abline(size=2, color="gold3")+
-  geom_abline(size=2, slope=0, intercept=mean(galton$child))
+  geom_abline(size=2, slope=0, intercept=mean(galton$syn))
 ```
 
 ### Odpowiedzi:
 + Pierwszy to kolor złoty, drugi - czarny, trzeci - czerwony, czwarty - niebieski.
 
+
+## Projekt
+W pakiecie `SmarterPoland` udostępniony jest również zbiór danych `pearson` zebrany przez Pearsona. W tym zbiorze danych zebrane są wzrosty ojców i synów.
+
+Dla tego zbioru danych wyznacz model regresji liniowej oraz narysuj zbiór danych z zaznaczoną krzywą regresji liniowej.
+
+Czy parametry regresji liniowej w zbiorze pearsona (z wysokością ojca) różnią się od parametrów ze zbioru galtona (ze średnią wysokością rodziców)?
+
+Przygotuj dokument knitra z opisem zależności liniowej pomiędzy wzrostem syna a ojca.
 
