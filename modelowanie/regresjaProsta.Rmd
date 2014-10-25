@@ -5,147 +5,162 @@ output:
     toc: yes
 ---
 
-W trakcie tych zajęć przedstawimy podstawy regresji liniowej. 
-Ale zanim dojdziemy do tych operacji najpierw wczytajmy dane.
+## Kim był Francis Galton?
 
-!["Francis Galton 1850". Domena publiczna via Wikimedia Commons](Francis_Galton.jpg {width=300px})
+Podstawy matematyczne liniowych metod analizy danych powstały na przełomie XVIII i XIX
+wieku. Metody te były z początku wykorzystywane w nawigacji oraz astronomii.
 
+!["Francis Galton 1850". Domena publiczna via Wikimedia Commons](Francis_Galton.jpg)
 
-# Regresja liniowa - wprowadzenie
+Termin regresja został użyty po raz pierwszy przez Sir Francisa Galtona jeszcze
+w XIX wieku. Francis Galton był człowiekiem renesansu, zajmującym się zarówno
+antropologią, statystyką, jak i wieloma innymi naukami. W 1886 roku opublikował
+pracę ,,Regression towards mediocrity in hereditary stature'' w The Journal of
+the Anthropological Institute of Great Britain and Ireland, w której
+przedstawił wyniki badań nad dziedziczeniem wzrostu. Galton zauważył, że synowie
+bardzo wysokich ojców są średnio wyżsi niż synowie niższych ojców, ale ich
+średni wzrost jest niższy niż średni wzrost ojców. Podobnie wzrost synów niskich
+ojców jest bliższy średniej w populacji. To zjawisko nazwał ,,dążeniem do przeciętności''
+lub ,,tendencją do przeciętności'' (w języku angielskim ten współczynnik
+nazywa się ang. regression toward the mean). Galton zaproponował równanie
+opisujące zależność między wzrostem synów i ojców lub równoważnie opisujące
+regresję wzrostu z pokolenia na pokolenie w kierunku wartości przeciętnej (dziś
+nazwalibyśmy to równanie równaniem regresji). 
+
+## Czy wzrost rodziców się liczy?
+
+Naszą przygodę z regresją liniową również rozpoczniemy od danych zebranych przez Galtona.
+Zbiór danych nazywa się `galton`, zobaczmy kilka pierwszych obserwacji z tego zbioru.
+
+```{r, warning=FALSE, width=8, height=8, message=FALSE}
+library(UsingR)      # w tym pakiecie znajduje się zbiór danych galton
+library(ggplot2)     # ten pakiet wykorzystamy do wizualizacji
+library(dplyr)       # ten pakiet wykorzystamy do przetwarzania danych
+
+head(galton)
+```
+
+TODO: może warto przeliczyć z cali na cm?
+
+W kolumnie `parent` przedstawiona jest średni ważony wzrost rodziców (średnia wzrostu
+ojca i 1,08 wzrostu matki), a w drugiej kolumnie wzrost dorosłego syna. Dane są w calach.
+
+Pytanie, które interesowało Galtona jak również interesuje nas, to czy jest zależność pomiędzy wzrostem rodziców a dziecka.
+Modelowanie zawsze rozpoczyna się od wykresu, zobaczmy jak ta zależność wygląda graficznie.
 
 ```{r, warning=FALSE, width=8, height=8}
-library(psych)
-library(ggplot2)
-library(dplyr)
-head(galton)
-
 ggplot(galton, aes(x=parent, y=child)) + 
   geom_point() 
+```
 
+Ponieważ dane są zbierane z dokładnością do połowy cala, punkty dla różnych wierszy pokrywają się. 
+Rysując takie dane warto zaburzyć je małym zastrzykiem szumu.
+Zrobimy to argumentem `position = "jitter"`.
+
+```{r, warning=FALSE, width=8, height=8}
 ggplot(galton, aes(x=parent, y=child)) + 
   geom_point(position = "jitter") 
+```
 
+## Jaka to zależność?
 
-galton %>%
+Wygląda na to, że jakaś zależność występuje, ale jaka?
+Jedną z możliwości jest policzenie średniego wzrostu dziecka dla każdej grupy średneigo wzrostu rodziców.
+
+```{r, warning=FALSE, width=8, height=8}
+(srednie = galton %>%
   group_by(parent) %>%
-  summarise(mean(child))
+  summarise(srednia = mean(child)))
 
+#
+# poniższa funkcja dorysowuje średnie w grupach
 ggplot(galton, aes(x=parent, y=child)) + 
-  geom_point(position = "jitter") + 
-  geom_smooth(method="lm", se=FALSE, size=3) +
-  geom_abline(size=3)
-
-summary(lm(child~parent, galton))
-
-
+  geom_point(position = "jitter") +
+  geom_line(data=srednie, aes(x=parent, y=srednia), size=2, color = "blue") + 
+  geom_point(data=srednie, aes(x=parent, y=srednia), size=5, color = "blue") 
 ```
 
-# Wczytanie danych
+Pięknie, widzimy, że im wyżsi rodzice tym średnio wyższe dzieci. 
+Jednak posługiwanie się samymi średnimi jest dosyć niewygodne.
+Aby opisać tą zależność należy pamiętać średnią dla każdego wzrostu rodziców.
+Co więcej średnie w grupach bardzo wysokich lub bardzo niskich rodziców wyznaczane są na bazie tylko kilku obserwacji, a więc wyznaczane są niedokładnie.
 
-```{r, warning=FALSE}
-auta2012 = read.table("http://biecek.pl/MOOC/dane/auta2012.csv",
-                       sep=";", dec=",", header=TRUE)
-head(auta2012, 2)
+## Model liniowy
+
+Wygodniej by było opisać zależność pomiędzy wzrostem rodzica a średnim wzrostem dziecka za pomocą mniejszej liczby parametrów.
+
+Załóżmy, że można tę zależność opisać zależnością liniową, a więc zależnością
+
+_średni.wzrost.dziecka = b0 + wzrost.rodziców * b1_
+
+gdzie _b0_ i _b1_ to pewne nieznane wartości. 
+
+Metoda regresji liniowej pozwala wyznaczyć te nieznane wartości.
+Dokładny opis algorytmu wyznaczania tych wartości jest opisany w kolejnym punkcie,
+przyjrzyjmy się, jak można to zrobić w programie R.
+
+## Estymacja współczyników
+
+Proces wyznaczania nieznanych wartości w oparciu o model i dane nazywa się estymacją.
+W programie R, do estymacji można wykorzystać funkcję `lm()` (skrót od ang. linear model).
+
+Dla modelu 
+_średni.wzrost.dziecka = b0 + wzrost.rodziców * b1_
+
+lub używając nazw zmiennych z naszego zbioru danych
+_child = b0 + parent * b1_
+
+Funkcja estymująca parametry wygląda następująco.
+
+```{r, warning=FALSE, width=8, height=8}
+lm(child~1 + parent, data=galton)
 ```
 
-Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.
+Funkcja `lm()` przyjmuje dwa argumenty, pierwszy to formuła opisująca przyjęty model, drugi argument wskazuje zbiór danych.
 
+Formuła składa się z lewej strony i prawej, rozdzielonej znakiem `~`. Lewa strona opisuje zmienną, którą chcemy opisać, tzw. zmienną objaśnianą, a prawa strona składa się z zmiennych, które wykorzystujemy do opisania lewej strony, czyli zmiennych objaśniających. Zapis `1 + parent` oznacza, że średni wzrost dziecka chcemy opisać za pomocą wyrażenia _1 * b0 + parent * b1_,
+w którym należy wyznaczyć _b0_ i _b1_.
 
+Wynikiem funkcji `lm()` jest szczegółowy opis dopasowanego modelu, jeżeli interesują nas jedynie oceny  _b0_ i _b1_, możemy się odwołać do tych ocen przez właściwość `coef` wyniku.
 
-
-# Zależność liniowa
-
-
-Przyjrzymy się jak modelować zależność pomiędzy dwoma zmiennymi, przebiegiem samochodu oraz jego wiekiem.
-
-## Przebieg a wiek auta
-
-Przyjrzyjmy się zależności pomiędzy przebiegiem a rokiem produkcji
-
-### Czyszczenie danych
-
-Zanim rozpoczniemy jakiekolwiek modelowanie musimy wpierw przyjrzeć się danym.
-
-W modelowaniu obowiązuje żelazna zasada _śmieci na wejściu — śmieci na wyjściu_ (ang. garbage in, garbage out). 
-Bez względu na to jakie metody będziemy wykorzystywać, jeżeli w danych są błędy to nasze modelowanie prowadzić może do bezsensownych wniosków.
-
-```{r, warning=FALSE}
-library(ggplot2)
-ggplot(auta2012, aes(y=Przebieg.w.km, x = Rok.produkcji)) + 
-  geom_point()
+```{r, warning=FALSE, width=8, height=8}
+lm(child~1 + parent, data=galton)$coef
 ```
 
-Wszystkie oferty sprzedaży pochodzą z 2011 roku. Policzmy wiek auta, usuńmy auta o absurdalnym przebiedu ponad 1 milion kilometrów oraz usuńmy auta starsze niż 20 lat.
+_średni.wzrost.dziecka = 23.9415 + wzrost.rodzica * 0.6462906_
 
-```{r, warning=FALSE}
+W formule możemy pominąć człon `1+`, jest on domyślnie dodawany do formuły, dlatego taki sam wynik otrzymamy stosując następującą instrukcję.
 
-library(dplyr)
-auta2012wyczyszczone <- auta2012 %>%
-  mutate(Wiek = 2012 - Rok.produkcji) %>%
-  filter(Przebieg.w.km < 1000000,
-         Rok.produkcji > 1990,
-         Marka == "Volkswagen")
-
-ggplot(auta2012wyczyszczone, aes(y=Przebieg.w.km, x = Wiek)) + 
-  geom_smooth(size=2) + geom_smooth(method="lm", col="red", size=2) 
-
+```{r, warning=FALSE, width=8, height=8}
+lm(child~parent, data=galton)$coef
 ```
 
-Konkurencyjne modele
+## Jak wygląda ta zależność
 
-```{r, warning=FALSE}
+W powyższym toku rozumowania rozważaliśmy ilka alternatywnych modeli. Podsumujmy je tutaj. 
++ Model, w którym średni wzrost dziecka jest równy wzrostowi rodzica,
+_średni.wzrost.dziecka = wzrost.rodziców_
++ Model, w którym nie ma zależności pomiędzy wzrostem rodziców a dzieci, a więc, że dla każdego wzrostu rodziców, średni wzrost dzieci jest taki sam,
+_średni.wzrost.dziecka = b0_
++ Model, w którym wzrost dziecka jest liniowo zależny od wzrostu rodziców
+_średni.wzrost.dziecka = b0 + wzrost.rodziców * b1_
++ Model, w średni wzrost dziecka jest różny dla każdego wzrostu rodzica.
 
-summary(lm(Przebieg.w.km ~ Wiek - 1, data=auta2012wyczyszczone))
-summary(lm(Przebieg.w.km ~ Wiek, data=auta2012wyczyszczone))
-
-auta2012wyczyszczone <- auta2012wyczyszczone %>%
-  mutate(Wiekponizej5 = ifelse(Wiek < 5, Wiek, 5),
-         Wiekpowyzej5 = ifelse(Wiek >= 5, Wiek, 0))
-
-summary(lm(Przebieg.w.km ~ Wiekponizej5 + Wiekpowyzej5, data=auta2012wyczyszczone))
-M <- summary(lm(Przebieg.w.km ~ Wiekponizej5 + Wiekpowyzej5 - 1, data=auta2012wyczyszczone))
-
-pred <- data.frame(Wiek = c(0,5,20), Przebieg.w.km = c(0,5*M$coefficients[1,1],20*M$coefficients[2,1]+5*M$coefficients[1,1]))
-
-ggplot(auta2012wyczyszczone, aes(y=Przebieg.w.km, x = Wiek)) + 
-  geom_point() + 
-  geom_smooth(size=2) + geom_smooth(method="lm", col="red", size=2) +
-  geom_line(data= pred, aes(y=Przebieg.w.km, x = Wiek), size=2, col="green")
-
-```
-
-Model multiplikatywny
-
-```{r, warning=FALSE}
-
-volkswagen <- auta2012 %>%
-  mutate(Wiek = 2012 - Rok.produkcji) %>%
-  filter(Przebieg.w.km < 1000000,
-         Cena.w.PLN < 500000,
-         Rok.produkcji > 1990,
-         Marka == "Volkswagen")
-
-ggplot(volkswagen, aes(y=Cena.w.PLN, x = Wiek)) + 
-  geom_point() + 
-  geom_smooth(size=2) + geom_smooth(method="lm", col="red", size=2) +
-  scale_y_continuous(trans="log10") 
-
-ggplot(volkswagen, aes(y=Cena.w.PLN, x = Wiek)) + 
-  geom_point() + 
-  geom_smooth(size=2) + geom_smooth(method="lm", col="red", size=2) 
-
-
-volkswagen <- volkswagen %>%
-  mutate(logCena.w.PLN = log10(Cena.w.PLN)) 
-
-summary(lm(logCena.w.PLN ~ Wiek, data=volkswagen))
-
-```
-
+Modele te zostały uporządkowane ze względu na liczbę nienznaych parametrów. Pierwszy z powyższych modeli nie ma żadnego parametru, kolejny ma jeden parametr, kolejny dwa a ostatni 11 parametrów.
 
 ### Zadania:
-+ 
++ Poniższy wykres przedstawia wszystkie rozważane modele. Wskaż który kolor odpowiada któremu modelowi
+
+```{r, warning=FALSE, width=8, height=8}
+ggplot(galton, aes(x=parent, y=child)) + 
+  geom_point(position = "jitter")+
+  geom_line(data=srednie, aes(x=parent, y=srednia), size=2, color = "blue") + 
+  geom_point(data=srednie, aes(x=parent, y=srednia), size=5, color = "blue")  + 
+  geom_smooth(method="lm", se=FALSE, size=3, color="red") +
+  geom_abline(size=2, color="gold3")+
+  geom_abline(size=2, slope=0, intercept=mean(galton$child))
+```
 
 ### Odpowiedzi:
-+ 
++ Pierwszy to kolor złoty, drugi - czarny, trzeci - czerwony, czwarty - niebieski.
 
