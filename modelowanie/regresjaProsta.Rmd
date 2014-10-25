@@ -65,7 +65,7 @@ ggplot(galton, aes(x=parent, y=child)) +
 ## Jaka to zależność?
 
 Wygląda na to, że jakaś zależność występuje, ale jaka?
-Jedną z możliwości jest policzenie średniego wzrostu dziecka dla każdej grupy średneigo wzrostu rodziców.
+Jedną z możliwości jest policzenie średniego wzrostu dziecka dla każdej grupy średniego wzrostu rodziców.
 
 ```{r, warning=FALSE, width=8, height=8}
 (srednie = galton %>%
@@ -85,6 +85,16 @@ Jednak posługiwanie się samymi średnimi jest dosyć niewygodne.
 Aby opisać tą zależność należy pamiętać średnią dla każdego wzrostu rodziców.
 Co więcej średnie w grupach bardzo wysokich lub bardzo niskich rodziców wyznaczane są na bazie tylko kilku obserwacji, a więc wyznaczane są niedokładnie.
 
+### Zadania:
++ Dla każdego wzrostu rodzica wyznacz o ile średnio niższe są dzieci od rodziców
+
+### Odpowiedzi:
+```{r, warning=FALSE, width=8, height=8}
+srednie %>%
+  mutate(roznica = srednia - parent)
+```
+
+
 ## Model liniowy
 
 Wygodniej by było opisać zależność pomiędzy wzrostem rodzica a średnim wzrostem dziecka za pomocą mniejszej liczby parametrów.
@@ -99,7 +109,7 @@ Metoda regresji liniowej pozwala wyznaczyć te nieznane wartości.
 Dokładny opis algorytmu wyznaczania tych wartości jest opisany w kolejnym punkcie,
 przyjrzyjmy się, jak można to zrobić w programie R.
 
-## Estymacja współczyników
+## Estymacja współczynników
 
 Proces wyznaczania nieznanych wartości w oparciu o model i dane nazywa się estymacją.
 W programie R, do estymacji można wykorzystać funkcję `lm()` (skrót od ang. linear model).
@@ -135,18 +145,34 @@ W formule możemy pominąć człon `1+`, jest on domyślnie dodawany do formuły
 lm(child~parent, data=galton)$coef
 ```
 
+### Zadania:
++ Mając wyznaczone parametry _b0_ i _b1_ policz oceny średniego wzrostu dziecka dla każdego średniego wzrostu rodzica
++ Wyznacz różnice pomiędzy ocenami z modelu liniowego a średnimi liczonymi osobno dla każdej grupy rodziców
+
+### Odpowiedzi:
+```{r, warning=FALSE, width=8, height=8}
+(wspolczynniki = lm(child~parent, data=galton)$coef)
+srednie %>%
+  mutate(m.liniowy = wspolczynniki[1] + parent*wspolczynniki[2],
+         roznica = srednia - m.liniowy)
+```
+
 ## Jak wygląda ta zależność
 
-W powyższym toku rozumowania rozważaliśmy ilka alternatywnych modeli. Podsumujmy je tutaj. 
-+ Model, w którym średni wzrost dziecka jest równy wzrostowi rodzica,
-_średni.wzrost.dziecka = wzrost.rodziców_
-+ Model, w którym nie ma zależności pomiędzy wzrostem rodziców a dzieci, a więc, że dla każdego wzrostu rodziców, średni wzrost dzieci jest taki sam,
-_średni.wzrost.dziecka = b0_
-+ Model, w którym wzrost dziecka jest liniowo zależny od wzrostu rodziców
-_średni.wzrost.dziecka = b0 + wzrost.rodziców * b1_
-+ Model, w średni wzrost dziecka jest różny dla każdego wzrostu rodzica.
+W powyższym toku rozumowania rozważaliśmy kilka alternatywnych modeli. Podsumujmy je tutaj. 
 
-Modele te zostały uporządkowane ze względu na liczbę nienznaych parametrów. Pierwszy z powyższych modeli nie ma żadnego parametru, kolejny ma jeden parametr, kolejny dwa a ostatni 11 parametrów.
+1. Model, w którym średni wzrost dziecka jest równy wzrostowi rodzica,
+_średni.wzrost.dziecka = wzrost.rodziców_
+
+2. Model, w którym nie ma zależności pomiędzy wzrostem rodziców a dzieci, a więc, że dla każdego wzrostu rodziców, średni wzrost dzieci jest taki sam,
+_średni.wzrost.dziecka = b0_
+
+3. Model, w którym wzrost dziecka jest liniowo zależny od wzrostu rodziców
+_średni.wzrost.dziecka = b0 + wzrost.rodziców * b1_
+
+4. Model, w średni wzrost dziecka jest różny dla każdego wzrostu rodzica.
+
+Modele te zostały uporządkowane ze względu na liczbę nieznanych parametrów. Pierwszy z powyższych modeli nie ma żadnego parametru, kolejny ma jeden parametr, kolejny dwa a ostatni 11 parametrów.
 
 ### Zadania:
 + Poniższy wykres przedstawia wszystkie rozważane modele. Wskaż który kolor odpowiada któremu modelowi
@@ -163,4 +189,5 @@ ggplot(galton, aes(x=parent, y=child)) +
 
 ### Odpowiedzi:
 + Pierwszy to kolor złoty, drugi - czarny, trzeci - czerwony, czwarty - niebieski.
+
 
