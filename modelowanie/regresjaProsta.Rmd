@@ -1,0 +1,43 @@
+---
+title: "Modelowanie / regresja prosta"
+output:
+  html_document:
+    toc: yes
+---
+
+W trakcie tych zajęć przedstawimy podstawy regresji liniowej. 
+Ale zanim dojdziemy do tych operacji najpierw wczytajmy dane.
+
+# Wczytanie danych
+
+```{r, warning=FALSE}
+auta2012 = read.table("http://biecek.pl/MOOC/dane/auta2012.csv",
+                       sep=";", dec=",", header=TRUE)
+head(auta2012, 2)
+```
+
+Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.
+
+
+
+# Zależność liniowa
+
+Przyjrzymy się jak modelować zależność pomiędzy dwoma zmiennymi, przebiegiem samochodu oraz jego wiekiem.
+
+## Regresja prosta
+
+```{r, warning=FALSE}
+
+
+
+```
+
+
+
+
+### Zadania:
++ 
+
+### Odpowiedzi:
++ 
+
