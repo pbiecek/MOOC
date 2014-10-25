@@ -24,15 +24,90 @@ Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda 
 
 Przyjrzymy się jak modelować zależność pomiędzy dwoma zmiennymi, przebiegiem samochodu oraz jego wiekiem.
 
-## Regresja prosta
+## Przebieg a wiek auta
+
+Przyjrzyjmy się zależności pomiędzy przebiegiem a rokiem produkcji
+
+### Czyszczenie danych
+
+Zanim rozpoczniemy jakiekolwiek modelowanie musimy wpierw przyjrzeć się danym.
+
+W modelowaniu obowiązuje żelazna zasada _śmieci na wejściu — śmieci na wyjściu_ (ang. garbage in, garbage out). 
+Bez względu na to jakie metody będziemy wykorzystywać, jeżeli w danych są błędy to nasze modelowanie prowadzić może do bezsensownych wniosków.
 
 ```{r, warning=FALSE}
+library(ggplot2)
+ggplot(auta2012, aes(y=Przebieg.w.km, x = Rok.produkcji)) + 
+  geom_point()
+```
+
+Wszystkie oferty sprzedaży pochodzą z 2011 roku. Policzmy wiek auta, usuńmy auta o absurdalnym przebiedu ponad 1 milion kilometrów oraz usuńmy auta starsze niż 20 lat.
+
+```{r, warning=FALSE}
+
+library(dplyr)
+auta2012wyczyszczone <- auta2012 %>%
+  mutate(Wiek = 2012 - Rok.produkcji) %>%
+  filter(Przebieg.w.km < 1000000,
+         Rok.produkcji > 1990)
+
+ggplot(auta2012wyczyszczone, aes(y=Przebieg.w.km, x = Wiek)) + 
+  geom_smooth(size=2) + geom_smooth(method="lm", col="red", size=2) 
+
+```
+
+Konkurencyjne modele
+
+```{r, warning=FALSE}
+
+summary(lm(Przebieg.w.km ~ Wiek - 1, data=auta2012wyczyszczone))
+summary(lm(Przebieg.w.km ~ Wiek, data=auta2012wyczyszczone))
+
+auta2012wyczyszczone <- auta2012wyczyszczone %>%
+  mutate(Wiekponizej5 = ifelse(Wiek < 5, Wiek, 5),
+         Wiekpowyzej5 = ifelse(Wiek >= 5, Wiek, 0))
+
+summary(lm(Przebieg.w.km ~ Wiekponizej5 + Wiekpowyzej5, data=auta2012wyczyszczone))
+M <- summary(lm(Przebieg.w.km ~ Wiekponizej5 + Wiekpowyzej5 - 1, data=auta2012wyczyszczone))
+
+pred <- data.frame(Wiek = c(0,5,20), Przebieg.w.km = c(0,5*M$coefficients[1,1],20*M$coefficients[2,1]+5*M$coefficients[1,1]))
+
+ggplot(auta2012wyczyszczone, aes(y=Przebieg.w.km, x = Wiek)) + 
+  geom_point() + 
+  geom_smooth(size=2) + geom_smooth(method="lm", col="red", size=2) +
+  geom_line(data= pred, aes(y=Przebieg.w.km, x = Wiek), size=2, col="green")
+
+```
+
+Model multiplikatywny
+
+```{r, warning=FALSE}
+
+volkswagen <- auta2012 %>%
+  mutate(Wiek = 2012 - Rok.produkcji) %>%
+  filter(Przebieg.w.km < 1000000,
+         Cena.w.PLN < 500000,
+         Rok.produkcji > 1990,
+         Marka == "Volkswagen")
+
+ggplot(volkswagen, aes(y=Cena.w.PLN, x = Wiek)) + 
+  geom_point() + 
+  geom_smooth(size=2) + geom_smooth(method="lm", col="red", size=2) +
+  scale_y_continuous(trans="log10") 
+
+ggplot(volkswagen, aes(y=Cena.w.PLN, x = Wiek)) + 
+  geom_point() + 
+  geom_smooth(size=2) + geom_smooth(method="lm", col="red", size=2) 
+
+
+volkswagen <- volkswagen %>%
+  mutate(logCena.w.PLN = log10(Cena.w.PLN)) 
+
+summary(lm(logCena.w.PLN ~ Wiek, data=volkswagen))
 
 
 
 ```
-
-
 
 
 ### Zadania:
