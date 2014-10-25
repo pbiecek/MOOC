@@ -8,6 +8,38 @@ output:
 W trakcie tych zajęć przedstawimy podstawy regresji liniowej. 
 Ale zanim dojdziemy do tych operacji najpierw wczytajmy dane.
 
+!["Francis Galton 1850". Domena publiczna via Wikimedia Commons](Francis_Galton.jpg = 300x)
+
+
+# Regresja liniowa - wprowadzenie
+
+```{r, warning=FALSE, width=8, height=8}
+library(psych)
+library(ggplot2)
+library(dplyr)
+head(galton)
+
+ggplot(galton, aes(x=parent, y=child)) + 
+  geom_point() 
+
+ggplot(galton, aes(x=parent, y=child)) + 
+  geom_point(position = "jitter") 
+
+
+galton %>%
+  group_by(parent) %>%
+  summarise(mean(child))
+
+ggplot(galton, aes(x=parent, y=child)) + 
+  geom_point(position = "jitter") + 
+  geom_smooth(method="lm", se=FALSE, size=3) +
+  geom_abline(size=3)
+
+summary(lm(child~parent, galton))
+
+
+```
+
 # Wczytanie danych
 
 ```{r, warning=FALSE}
@@ -20,7 +52,9 @@ Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda 
 
 
 
+
 # Zależność liniowa
+
 
 Przyjrzymy się jak modelować zależność pomiędzy dwoma zmiennymi, przebiegiem samochodu oraz jego wiekiem.
 
