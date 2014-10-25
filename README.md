@@ -39,6 +39,8 @@ Materiały dla kursu MOOC 2014
 
 
 + Modelowanie danych
+  * Regresja liniowa  [materialy html](https://rawgit.com/pbiecek/MOOC/master/modelowanie/regresjaProsta.html)
+  * Estymacja  [materialy html](https://rawgit.com/pbiecek/MOOC/master/modelowanie/dopasowanieModelu.html)
   * Formuly
   * Regresja liniowa i wielomianowa [przedziały ufności]
   * Transformacje danych
