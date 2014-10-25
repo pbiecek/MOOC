@@ -49,7 +49,8 @@ library(dplyr)
 auta2012wyczyszczone <- auta2012 %>%
   mutate(Wiek = 2012 - Rok.produkcji) %>%
   filter(Przebieg.w.km < 1000000,
-         Rok.produkcji > 1990)
+         Rok.produkcji > 1990,
+         Marka == "Volkswagen")
 
 ggplot(auta2012wyczyszczone, aes(y=Przebieg.w.km, x = Wiek)) + 
   geom_smooth(size=2) + geom_smooth(method="lm", col="red", size=2) 
@@ -104,8 +105,6 @@ volkswagen <- volkswagen %>%
   mutate(logCena.w.PLN = log10(Cena.w.PLN)) 
 
 summary(lm(logCena.w.PLN ~ Wiek, data=volkswagen))
-
-
 
 ```
 
