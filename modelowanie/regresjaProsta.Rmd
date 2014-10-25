@@ -8,7 +8,7 @@ output:
 W trakcie tych zajęć przedstawimy podstawy regresji liniowej. 
 Ale zanim dojdziemy do tych operacji najpierw wczytajmy dane.
 
-!["Francis Galton 1850". Domena publiczna via Wikimedia Commons](Francis_Galton.jpg = 300x)
+!["Francis Galton 1850". Domena publiczna via Wikimedia Commons](Francis_Galton.jpg {width=300px})
 
 
 # Regresja liniowa - wprowadzenie
