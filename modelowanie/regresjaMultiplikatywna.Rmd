@@ -64,6 +64,26 @@ _Średnia cena = 67640.352 - 4236.639 * Wiek_
 
 Nieufność powinna w nas wzbudzić obserwacja, że podstawiając do tego wzoru za wiek 16 lub więcej lat, okaże się, że otrzymujemy oszacowanie średniej ceny ujemne. Jest to jeden z sygnałów, że coś jest nie tak z naszym modelem.
 
+### Zadania:
++ Czy Volkswagen jest wyjątkowy pod tym względem? Zobacz jak wygląda zależność pomiędzy ceną a wiekiem dla innych marek. Dziesięć najczęstszych marek w tym zbiorze danych to ```r paste(collapse=", ", names(head(rev(sort(table(auta2012$Marka))),10)))```
+
+### Odpowiedzi:
+```{r, warning=FALSE}
+toyota <- auta2012 %>%
+  filter(Marka == "Toyota") %>%
+  mutate(Wiek = 2012 - Rok.produkcji) %>%
+  filter(Wiek < 20)
+
+lm(Cena.w.PLN ~ Wiek, data=toyota)$coef
+
+ggplot(toyota, aes(y=Cena.w.PLN, x = Wiek)) + 
+  geom_point() + 
+  geom_smooth(method="lm", col="red", size=2) +
+  ylim(0,400000)
+```
+
+
+
 ## Jeżeli nie liniowa, to jaka?
 
 Gdy się zastanowić, łatwo dojść do wniosku, że auta tracą na wartości nawjięcej w pierwszych latach, gdy są najdroższe.
@@ -97,36 +117,67 @@ ggplot(volkswagen, aes(y=Cena.w.PLN, x = Wiek)) +
   geom_point() + 
   geom_smooth(size=2) + geom_smooth(method="lm", col="red", size=2) +
   scale_y_continuous(trans="log10")
+```
 
+Na rysunku ta zależność wygląda na liniową.
+
+Zobaczmy jak wykonać model liniowy z użyciem funkcji `lm()`.
+Wpierw musimy policzyć logarytm ceny.
+
+```{r, warning=FALSE}
 volkswagen <- volkswagen %>%
-  mutate(logCena.w.PLN = log(Cena.w.PLN, 10))
+  mutate(logCena.w.PLN = log10(Cena.w.PLN))
 
-lm(logCena.w.PLN ~ Wiek, data=volkswagen)$coef
+(wsp = lm(logCena.w.PLN ~ Wiek, data=volkswagen)$coef)
+```
 
+Jeżeli przejść teraz ze skali logarytmicznej (logarytm dziesiętny) na oryginalną skalę, 
+to okaże się, że średnia cena wyjściowa to `10^```r wsp[1]``` = ```r 10^wsp[1]````.
 
-ggplot(volkswagen, aes(y=Cena.w.PLN, x = Wiek)) + 
-  geom_point() + 
-  geom_smooth(size=2) + geom_smooth(method="lm", col="red", size=2) +
-  scale_y_continuous(trans="log10") 
-
-ggplot(volkswagen, aes(y=Cena.w.PLN, x = Wiek)) + 
-  geom_point() + 
-  geom_smooth(size=2) + geom_smooth(method="lm", col="red", size=2) 
+Drugi współczynnik wynosi ```r wsp[12```, co oznacza, że cena w kolejnym roku to ```r 10^wsp[2]``` ceny z poprzedniego roku, 
+czyli przecietnie, corocznie auto traci 15% swojej ceny.
 
 
-volkswagen <- volkswagen %>%
-  mutate(logCena.w.PLN = log10(Cena.w.PLN)) 
+### Zadania:
++ Wykonaj modelowanie z użyciem modelu multiplikatywnego dla innej marki. 
++ Jeżeli model multiplikatywny wygląda na uzasadniony, policz ile procent corocznie traci na cenie auto danej marki.
 
-summary(lm(logCena.w.PLN ~ Wiek, data=volkswagen))
-
+### Odpowiedzi:
+```{r, warning=FALSE, fig.width=4, fig.height=4}
+marki <- names(head(rev(sort(table(auta2012$Marka))),10))
+sapply(marki, function(marka) {
+  wybranamarka <- auta2012 %>%
+    filter(Marka == marka) %>%
+    mutate(Wiek = 2012 - Rok.produkcji) %>%
+    filter(Wiek < 20) %>%
+    mutate(logCena.w.PLN = log10(Cena.w.PLN))
+  
+  ggplot(wybranamarka, aes(y=Cena.w.PLN, x = Wiek)) + 
+    geom_point() + 
+    geom_smooth(method="lm", col="red", size=2) +
+    ylim(0,400000) + ggtitle(marka)
+  
+  wsp <- lm(logCena.w.PLN ~ Wiek, data=wybranamarka)$coef
+  procent <- 1- 10^(wsp[2])
+  round(100*procent,1)
+} )
 ```
 
 
 
 
-Przyjrzymy się jak modelować zależność pomiędzy dwoma zmiennymi, przebiegiem samochodu oraz jego wiekiem.
+
+
+
+
+
 
 ## Przebieg a wiek auta
+
+
+
+Przyjrzymy się jak modelować zależność pomiędzy dwoma zmiennymi, przebiegiem samochodu oraz jego wiekiem.
+
 
 Przyjrzyjmy się zależności pomiędzy przebiegiem a rokiem produkcji
 
