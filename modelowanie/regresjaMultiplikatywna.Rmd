@@ -152,10 +152,10 @@ sapply(marki, function(marka) {
     filter(Wiek < 20) %>%
     mutate(logCena.w.PLN = log10(Cena.w.PLN))
   
-  ggplot(wybranamarka, aes(y=Cena.w.PLN, x = Wiek)) + 
+  plot(ggplot(wybranamarka, aes(y=Cena.w.PLN, x = Wiek)) + 
     geom_point() + 
     geom_smooth(method="lm", col="red", size=2) +
-    ylim(0,400000) + ggtitle(marka)
+    ggtitle(marka) + scale_y_continuous(trans="log10"))
   
   wsp <- lm(logCena.w.PLN ~ Wiek, data=wybranamarka)$coef
   procent <- 1- 10^(wsp[2])
