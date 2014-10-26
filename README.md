@@ -1,4 +1,4 @@
-Czarodzieje danych
+﻿Czarodzieje danych
 ==================
 
 Materiały dla kursu MOOC 2014
@@ -41,12 +41,9 @@ Materiały dla kursu MOOC 2014
 + Modelowanie danych
   * Regresja liniowa  [materialy html](https://rawgit.com/pbiecek/MOOC/master/modelowanie/regresjaProsta.html)
   * Estymacja  [materialy html](https://rawgit.com/pbiecek/MOOC/master/modelowanie/dopasowanieModelu.html)
-  * Formuly
-  * Regresja liniowa i wielomianowa [przedziały ufności]
-  * Transformacje danych
+  * Regresja przedziałowo liniowa  [materialy html](https://rawgit.com/pbiecek/MOOC/master/modelowanie/regresjaMultiplikatywna.html)
   * Diagnostyka [Ascombe]
   * Analiza wariancji - jednokierunkowa, dwukierunkowa [przecięte / hierarchiczne]
   * Modele z wieloma zmiennymi
   * Jak wybierać modele [AIC, BIC]
-  * Drzewa regresyjne
 
