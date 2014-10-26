@@ -165,13 +165,13 @@ sapply(marki, function(marka) {
 
 
 
-## Zależność kawałkami prosta
+## Zależność kawałkami liniowa
 
 Są sytuacje, w których zależność pomiędzy dwiema zmiennymi można opisać nie tyle przez linię prosta co przez łamaną. 
 
 Za przykład takiej zależności posłuży nam zależność pomiędzy przebiegiem a wiekiem auta.
 
-### Czyszczenie danych
+## Czyszczenie danych
 
 Zanim rozpoczniemy jakiekolwiek modelowanie musimy wpierw przyjrzeć się danym.
 
@@ -233,6 +233,9 @@ Co w formule R można zapisać jako
 (M2 = lm(Przebieg.w.km ~ Wiek0 + Wiek5 - 1, data=volkswagen))
 ```
 
+Jak odczytać ten model?
+Dla aut o wieku poniżej 5 lat obserwuje się średnie zwiększanie przebiegu w tempie ```r format(round(M2$coef[1]))```km na rok, ale już dla aut starszych niż 5 lat obserwuje się wydłużanie średniego przebiegu w tempie ```r round(sum(M2$coef))```km na rok.
+
 Przedstawmy te modele graficznie.
 Wykorzystamy do tego funkcję predict, która wyznacza średni przebieg dla zadanego wieku.
 
@@ -250,8 +253,34 @@ ggplot(volkswagen, aes(y=Przebieg.w.km, x = Wiek)) +
 ```
 
 ### Zadania:
-+ 
++ Wykonaj modelowanie z użyciem łamanej regresji dla innych marek.
 
 ### Odpowiedzi:
-+ 
+```{r, warning=FALSE, fig.width=4, fig.height=4}
+marki <- names(head(rev(sort(table(auta2012$Marka))),10))
+invisible(sapply(marki, function(marka) {
+  wybranamarka <- auta2012 %>%
+    filter(Marka == marka) %>%
+    mutate(Wiek = 2012 - Rok.produkcji) %>%
+    filter(Wiek < 20,
+           Przebieg.w.km < 400000) %>%
+    mutate(Wiek0 = ifelse(Wiek >= 0, Wiek, 0),
+         Wiek5 = ifelse(Wiek >= 5, Wiek - 5, 0))
+  
+    M1 = lm(Przebieg.w.km ~ Wiek0 + Wiek5, data=wybranamarka)
+    M2 = lm(Przebieg.w.km ~ Wiek0 + Wiek5 - 1, data=wybranamarka)
+    
+    topred = data.frame(Wiek0 = c(0,5,20), Wiek5 = c(0, 0, 15))
+    topred$M1 = predict(M1, newdata = topred)
+    topred$M2 = predict(M2, newdata = topred)
+    
+    plot(ggplot(wybranamarka, aes(y=Przebieg.w.km, x = Wiek)) + 
+      geom_point() + 
+      geom_smooth(method="lm", col="red", size=2) +
+      geom_line(data= topred, aes(y=M1, x = Wiek0), size=2, col="green") + 
+      geom_line(data= topred, aes(y=M2, x = Wiek0), size=2, col="blue") +
+    ggtitle(marka))
+  
+} ))
+```
 
