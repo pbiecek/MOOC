@@ -17,7 +17,7 @@ W tej części będziemy bazować na przykładach dotyczących cen samochodów. 
 
 ## Wczytanie danych
 
-W naszym zbiorze dnaych znajdują się oferty sprzedaży bardzo różnych marek. 
+W naszym zbiorze danych znajdują się oferty sprzedaży bardzo różnych marek. 
 Analizowanie ich wszystkich w jednym worku nie ma sensu. 
 Dlatego dalsze analizy przeprowadzimy na podzbiorze danych dotyczącym marki Volkswagen.
 Dlaczego tej? Jest ona najpopularniejsza w zebranych ogłoszeniach.
@@ -31,13 +31,13 @@ head(volkswagen, 2)
 
 Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.
 
-## Jaka to zalezność?
+## Jaka to zależność?
 
 Zobaczmy jak wygląda zależność ceny of wieku volkswagena. 
 W naszym zbiorze danych nie ma zmiennej wiek, jest jedynie wiek produkcji.
-Wiedząc, żę te oferty były zbierane w styczniu 2012 roku łąto nam będzie wyznaczyć wiek auta.
-Zacznijmy więc od wyznaczenia zmeinnej wiek auta, a następnie usunięcia aut ponad 20 letnich 
-(mało ich jesti będą nam przeszkadzać w modelowaniu).
+Wiedząc, że te oferty były zbierane w styczniu 2012 roku łatwo nam będzie wyznaczyć wiek auta.
+Zacznijmy więc od wyznaczenia zmiennej wiek auta, a następnie usunięcia aut ponad 20 letnich 
+(mało ich jest i będą nam przeszkadzać w modelowaniu).
 
 ```{r, warning=FALSE}
 volkswagen <- volkswagen %>%
@@ -86,10 +86,10 @@ ggplot(toyota, aes(y=Cena.w.PLN, x = Wiek)) +
 
 ## Jeżeli nie liniowa, to jaka?
 
-Gdy się zastanowić, łatwo dojść do wniosku, że auta tracą na wartości nawjięcej w pierwszych latach, gdy są najdroższe.
-Starsze auta sa już tańsze i mniej tracą na wartości. Nie dotyczy to antyków, ale analizowane volkswageny nie są antykami (dlatego mamy tylko auta młodsze niż 20 lat).
+Gdy się zastanowić, łatwo dojść do wniosku, że auta tracą na wartości najwięcej w pierwszych latach, gdy są najdroższe.
+Starsze auta są już tańsze i mniej tracą na wartości. Nie dotyczy to antyków, ale analizowane volkswageny nie są antykami (dlatego mamy tylko auta młodsze niż 20 lat).
 
-Model, który możemy rozważyć, to modelw w którym co roku auta tracą pewien procent swojej ceny.
+Model, który możemy rozważyć, to model w którym co roku auta tracą pewien procent swojej ceny.
 Taką zależność można opisać jako
 
 _Cena.w.roku.i+1 = Cena.w.roku.i * (1-procent) = Cena.w.roku.i * wsp_
@@ -134,7 +134,7 @@ volkswagen <- volkswagen %>%
 Jeżeli przejść teraz ze skali logarytmicznej (logarytm dziesiętny) na oryginalną skalę, 
 to okaże się, że średnia cena wyjściowa to `10^```r wsp[1]``` = ```r 10^wsp[1]````.
 
-Drugi współczynnik wynosi ```r wsp[12```, co oznacza, że cena w kolejnym roku to ```r 10^wsp[2]``` ceny z poprzedniego roku, 
+Drugi współczynnik wynosi ```r wsp[2]```, co oznacza, że cena w kolejnym roku to ```r 10^wsp[2]``` ceny z poprzedniego roku, 
 czyli przecietnie, corocznie auto traci 15% swojej ceny.
 
 
@@ -162,6 +162,7 @@ sapply(marki, function(marka) {
   round(100*procent,1)
 } )
 ```
+
 
 
 
