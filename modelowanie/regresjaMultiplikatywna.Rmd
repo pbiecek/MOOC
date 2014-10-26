@@ -165,22 +165,11 @@ sapply(marki, function(marka) {
 
 
 
+## Zależność kawałkami prosta
 
+Są sytuacje, w których zależność pomiędzy dwiema zmiennymi można opisać nie tyle przez linię prosta co przez łamaną. 
 
-
-
-
-
-
-
-## Przebieg a wiek auta
-
-
-
-Przyjrzymy się jak modelować zależność pomiędzy dwoma zmiennymi, przebiegiem samochodu oraz jego wiekiem.
-
-
-Przyjrzyjmy się zależności pomiędzy przebiegiem a rokiem produkcji
+Za przykład takiej zależności posłuży nam zależność pomiędzy przebiegiem a wiekiem auta.
 
 ### Czyszczenie danych
 
@@ -190,50 +179,75 @@ W modelowaniu obowiązuje żelazna zasada _śmieci na wejściu — śmieci na wy
 Bez względu na to jakie metody będziemy wykorzystywać, jeżeli w danych są błędy to nasze modelowanie prowadzić może do bezsensownych wniosków.
 
 ```{r, warning=FALSE}
-library(ggplot2)
-ggplot(auta2012, aes(y=Przebieg.w.km, x = Rok.produkcji)) + 
+ggplot(volkswagen, aes(y=Przebieg.w.km, x = Wiek)) + 
   geom_point()
 ```
 
-Wszystkie oferty sprzedaży pochodzą z 2011 roku. Policzmy wiek auta, usuńmy auta o absurdalnym przebiedu ponad 1 milion kilometrów oraz usuńmy auta starsze niż 20 lat.
+Okazuje się, że są wśród naszych ofert auta o absurdalnym przebiegu ponad 15 milionów kilometrów. Usuńmy wszystkie, których przebieg przekracza czterysta tysięcy kilometrów.
 
 ```{r, warning=FALSE}
+volkswagen <- volkswagen %>%
+  filter(Przebieg.w.km < 400000)
 
-library(dplyr)
-auta2012wyczyszczone <- auta2012 %>%
-  mutate(Wiek = 2012 - Rok.produkcji) %>%
-  filter(Przebieg.w.km < 1000000,
-         Rok.produkcji > 1990,
-         Marka == "Volkswagen")
-
-ggplot(auta2012wyczyszczone, aes(y=Przebieg.w.km, x = Wiek)) + 
+ggplot(volkswagen, aes(y=Przebieg.w.km, x = Wiek)) + 
+  geom_point()+
   geom_smooth(size=2) + geom_smooth(method="lm", col="red", size=2) 
-
 ```
 
-Konkurencyjne modele
+Kolorem czerwonym zaznaczono krzywą liniowej zależności pomiędzy zmiennymi. Jak widać odstaje ona znacznie dla kilkuletnich aut.
+
+Niebieska linia, to linia wygładzonego trendu, lokalnie przybliżającego dane. Gdy się jej przyjrzeć, okazuje się, że ma ona bardzo ciekawe zachowanie. 
+
+Przez pierwsze pięć lat auta gwałtownie przybierają na liczniku, a po piątym roku to tempo znacząco spada.
+
+Czy volkswagenami starszymi niż 5 lat mniej się jeździ? Jest to jakieś wytłumaczenie, ale inne, badziej prawdopodobne, jest takie że starsze auta rzadziej są serwisowane, a przez to ich przebiegi często są wartościami deklarowanymi.
+
+W jaki sposób zamodelować taką łamaną krzywą?
+Potrzebujemy modelu, który będzie miał inną krzywą nachylenia w przedziale do 5 lat i ponad 5 lat.
+
+Można taki model zbudować w następujący sposób
+
+_Średni przebieg = b0 + b1 * wiek[0+] + b2 * wiek[5+]_
+
+gdzie _wiek[5+]_ to zmienna przyjmująca wartość _0_, jeżeli wiek jest mniejszy niż 5 oraz wartość _wiek-5_ gdy wiek jest większy niż 5.
+
+Stosując taką dodatkową zmienną, zależność pomiędzy wiekiem a przebiegiem będzie opisana przez współczynnik _b1_ gdy wiek jest w przedziale 0-5 lat oraz przez współczynnik _b1 + b2_ gdy wiek jest wyższy niż 5 lat.
 
 ```{r, warning=FALSE}
+volkswagen <- volkswagen %>%
+  mutate(Wiek0 = ifelse(Wiek >= 0, Wiek, 0),
+         Wiek5 = ifelse(Wiek >= 5, Wiek - 5, 0))
 
-summary(lm(Przebieg.w.km ~ Wiek - 1, data=auta2012wyczyszczone))
-summary(lm(Przebieg.w.km ~ Wiek, data=auta2012wyczyszczone))
-
-auta2012wyczyszczone <- auta2012wyczyszczone %>%
-  mutate(Wiekponizej5 = ifelse(Wiek < 5, Wiek, 5),
-         Wiekpowyzej5 = ifelse(Wiek >= 5, Wiek, 0))
-
-summary(lm(Przebieg.w.km ~ Wiekponizej5 + Wiekpowyzej5, data=auta2012wyczyszczone))
-M <- summary(lm(Przebieg.w.km ~ Wiekponizej5 + Wiekpowyzej5 - 1, data=auta2012wyczyszczone))
-
-pred <- data.frame(Wiek = c(0,5,20), Przebieg.w.km = c(0,5*M$coefficients[1,1],20*M$coefficients[2,1]+5*M$coefficients[1,1]))
-
-ggplot(auta2012wyczyszczone, aes(y=Przebieg.w.km, x = Wiek)) + 
-  geom_point() + 
-  geom_smooth(size=2) + geom_smooth(method="lm", col="red", size=2) +
-  geom_line(data= pred, aes(y=Przebieg.w.km, x = Wiek), size=2, col="green")
-
+(M1 = lm(Przebieg.w.km ~ Wiek0 + Wiek5, data=volkswagen))
 ```
 
+Zauważmy, że powyższy model szacuje przebieg dla nowych aut na _b0_.
+Bardziej naturalnym modelem jest taki, który dla nowych aut będzie 
+prognozował przebieg zero. Można to osiągnąć usuwając wyraz wolny.
+
+_Średni przebieg = b1 * wiek[0+] + b2 * wiek[5+]_
+
+Co w formule R można zapisać jako
+
+```{r, warning=FALSE}
+(M2 = lm(Przebieg.w.km ~ Wiek0 + Wiek5 - 1, data=volkswagen))
+```
+
+Przedstawmy te modele graficznie.
+Wykorzystamy do tego funkcję predict, która wyznacza średni przebieg dla zadanego wieku.
+
+```{r, warning=FALSE}
+topred = data.frame(Wiek0 = c(0,5,20), Wiek5 = c(0, 0, 15))
+topred$M1 = predict(M1, newdata = topred)
+topred$M2 = predict(M2, newdata = topred)
+
+ggplot(volkswagen, aes(y=Przebieg.w.km, x = Wiek)) + 
+  geom_point() + 
+  geom_smooth(method="lm", col="red", size=2) +
+  geom_line(data= topred, aes(y=M1, x = Wiek0), size=2, col="green") + 
+  geom_line(data= topred, aes(y=M2, x = Wiek0), size=2, col="blue")
+
+```
 
 ### Zadania:
 + 
