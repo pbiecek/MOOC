@@ -4,6 +4,10 @@
 Materiały dla kursu MOOC 2014
 
 + Dane wokół nas, jak je czytać
+  * [Diagnoza Społeczna] J Cz
+  * [Długość życia] GUS
+  * [Epidemiologia] PZH
+  * [Badania Edukacji] IBE
   * Ile oni zarabiają, czyli mediana vs. średnia
   * Jak długo pożyjemy, czyli o dalszym trwaniu życia
   * Kto wygra wybory, czyli o sondażach poparcia
