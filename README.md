@@ -1,9 +1,9 @@
-﻿Czarodzieje danych
-==================
+﻿Data Ninja
+==========
 
-Ścieżka Data Ninja wije się z opanowaniem czterech żywiołów,
-- zrozumienie problemu przez pryzmat mierzalnych cech,
-- poskRomienie naRzędzia pRzetwaRzania danych,
+Ścieżka Data Ninja wiąże się z opanowaniem czterech żywiołów,
+- opanowanie sztuki patrzenia na problem przez pryzmat mierzalnych cech,
+- opanowanie sztuki poskRomienia danych naRzędziem R,
 - opanowanie sztuki wizualizacji danych,
 - opanowanie sztuki modelowania danych.
 
