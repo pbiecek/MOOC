@@ -1,22 +1,24 @@
 ﻿Czarodzieje danych
 ==================
 
+Ścieżka Data Ninja wije się z opanowaniem czterech żywiołów,
+- zrozumienie problemu przez pryzmat mierzalnych cech,
+- poskRomienie naRzędzia pRzetwaRzania danych,
+- opanowanie sztuki wizualizacji danych,
+- opanowanie sztuki modelowania danych.
+
+
+
 Materiały dla kursu MOOC 2014
 
 + Dane wokół nas, jak je czytać
-  * [Diagnoza Społeczna] J Cz
+  * [Diagnoza Społeczna] J Cz - 15 listopad
   * [Długość życia] GUS
   * [Epidemiologia] PZH
   * [Badania Edukacji] IBE
+  * [Sondaże - może wyborcze] Nss
   * Ile oni zarabiają, czyli mediana vs. średnia
-  * Jak długo pożyjemy, czyli o dalszym trwaniu życia
-  * Kto wygra wybory, czyli o sondażach poparcia
-  * Duże liczby, jak je zapamiętać?
-  * Co Cię nie zabije? Statystyki zgnonów, basen czy broń.
   * Siatki centylowe
-  * Nie wszystko ma swoją przyczynę
-  * Młodzie 2011
-  * Emilka a Dorota
   * Kubek, murale, lego
   * Podstawówki
 
@@ -34,7 +36,7 @@ Materiały dla kursu MOOC 2014
 
 + Wizualizacja danych
   * Historia i współczesność [lektury obowiązkowe, bilans playfair, snow, nightingale, minard]
-  * Iluzje, percepcja obrazu i kolory [persspektywa, tithener, wzmocnienei oboczne, poggardoffa, plamka slepa, fiksacje sakkady, precyzja przedstawiania - kołowy, paskowy, punktowy]
+  * Iluzje, percepcja obrazu i kolory [persspektywa, tithener, wzmocnienie oboczne, poggardoffa, ślepa plamka, fiksacje sakkady, precyzja przedstawiania - kołowy, paskowy, punktowy]
   * Info-pomyłka
   * Warsztat [cecha ilorazowa / przedziałowa]
   * Jak to zrobić - część 1 [materialy html](https://rawgit.com/pbiecek/MOOC/master/wizualizacja/ggplot1.html)
