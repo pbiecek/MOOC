@@ -13,6 +13,7 @@ Materiały dla kursu MOOC 2014
 
 + Dane wokół nas, jak je czytać
   * [Diagnoza Społeczna] J Cz - 15 listopad
+  * [Ryzyko kedytowe] M Wi
   * [Długość życia] GUS
   * [Epidemiologia] PZH
   * [Badania Edukacji] IBE
