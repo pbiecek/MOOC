@@ -8,6 +8,8 @@
 - opanowanie sztuki modelowania danych.
 
 
+TODO: Wprowadzić peer-review w ocenianiu wizualizacji i być może modelowania.
+
 
 Materiały dla kursu MOOC 2014
 
