@@ -1,15 +1,5 @@
-﻿Data Ninja
-==========
-
-Ścieżka Data Ninja wiąże się z opanowaniem czterech żywiołów,
-- opanowanie sztuki patrzenia na problem przez pryzmat mierzalnych cech,
-- opanowanie sztuki poskRomienia danych naRzędziem R,
-- opanowanie sztuki wizualizacji danych,
-- opanowanie sztuki modelowania danych.
-
-
-TODO: Wprowadzić peer-review w ocenianiu wizualizacji i być może modelowania.
-
+﻿Bądź data smart! Od zera do bohatera w 60 godzin.
+=================================================
 
 Materiały dla kursu MOOC 2014
 
@@ -49,11 +39,15 @@ Materiały dla kursu MOOC 2014
 
 
 + Modelowanie danych
-  * Regresja liniowa  [materialy html](https://rawgit.com/pbiecek/MOOC/master/modelowanie/regresjaProsta.html)
-  * Estymacja  [materialy html](https://rawgit.com/pbiecek/MOOC/master/modelowanie/dopasowanieModelu.html)
-  * Regresja przedziałowo liniowa  [materialy html](https://rawgit.com/pbiecek/MOOC/master/modelowanie/regresjaMultiplikatywna.html)
+  * Regresja liniowa [intro](https://rawgit.com/pbiecek/MOOC/master/modelowanie/regresjaIntro.md) [materialy html](https://rawgit.com/pbiecek/MOOC/master/modelowanie/regresjaProsta.html) [materialy html](https://rawgit.com/pbiecek/MOOC/master/modelowanie/dopasowanieModelu.html)
+  * Regresja przedziałowo liniowa [intro](https://rawgit.com/pbiecek/MOOC/master/modelowanie/przedzialowaIntro.md)   [materialy html](https://rawgit.com/pbiecek/MOOC/master/modelowanie/regresjaMultiplikatywna.html)
   * Diagnostyka [Ascombe]
   * Analiza wariancji - jednokierunkowa, dwukierunkowa [przecięte / hierarchiczne]
   * Modele z wieloma zmiennymi
   * Jak wybierać modele [AIC, BIC]
+
+
+
+TODO: Wprowadzić peer-review w ocenianiu wizualizacji i być może modelowania.
+
 
