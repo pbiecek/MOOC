@@ -35,6 +35,7 @@ Materiały dla kursu MOOC 2014
   * Warsztat [cecha ilorazowa / przedziałowa]
   * Jak to zrobić - część 1 [materialy html](https://rawgit.com/pbiecek/MOOC/master/wizualizacja/ggplot1.html)
   * Jak to zrobić - część 2
+  * Jak to zrobić - poprawiamy wykres
   * Jak to ożywić
 
 
@@ -49,5 +50,8 @@ Materiały dla kursu MOOC 2014
 
 
 TODO: Wprowadzić peer-review w ocenianiu wizualizacji i być może modelowania.
+
+TODO: Do analizy wariancji wprowadzić inne dane i problem
+Rozpocząć od testów nieparametrycznych, ale przykład pokazać na klasycznej analizie post-hoc
 
 
