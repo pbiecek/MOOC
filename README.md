@@ -55,27 +55,3 @@ Materiały dla kursu MOOC 2014
 TODO: Wprowadzić peer-review w ocenianiu wizualizacji i być może modelowania.
 
 TODO: Do analizy wariancji wprowadzić analizę ceny w zaleznosci od koloru
-
-
-Lista funkcji do wprowadzenia:
-Eksploracja_R
-+ library
-+ install.packages
-Eksploracja_cechy
-+ mean
-+ quantile
-
-Eksploracja_dplyr_1
-+ %>%
-+ filter
-+ select
-+ arrange
-Eksploracja_dplyr_2
-+ group_by
-+ summarise
-+ mutate
-
-Modelowanie
-+ lm
-
-
