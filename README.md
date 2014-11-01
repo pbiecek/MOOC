@@ -18,14 +18,17 @@ Materiały dla kursu MOOC 2014
 
 
 + Eksploracja danych
-  * Jak zainstalować R, RStudio oraz dodatkowe pakiety  [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/introR.md)
+  * Wybieramy narzędzie [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/introR.md)
+  * Jak zainstalować R, RStudio oraz dodatkowe pakiety  
   * Pracy interaktywna, system pomocy oraz knitr
-  * Obróbka danych  [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/dplyrIntro.md)
+  * Wprowadzenie do obróbki danych [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/dplyrIntro.md)
   * Jak wczytać dane [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/wczytywanieDanych.html)
   * Cechy jakościowe [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyJakosciowe.html)
   * Cechy ilościowe [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyIlosciowe.html)
   * Cechy logiczne [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyLogiczne.html)
   * Cechy napisowe [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyNapisowe.html)
+  * Obróbka danych - agregaty
+  * Co dalej
 
 
 + Wizualizacja danych
@@ -36,7 +39,7 @@ Materiały dla kursu MOOC 2014
   * Jak to zrobić - część 1 [materialy html](https://rawgit.com/pbiecek/MOOC/master/wizualizacja/ggplot1.html)
   * Jak to zrobić - część 2
   * Jak to zrobić - poprawiamy wykres
-  * Jak to ożywić
+  * Jak to ożywić wykres
 
 
 + Modelowanie danych
@@ -51,7 +54,28 @@ Materiały dla kursu MOOC 2014
 
 TODO: Wprowadzić peer-review w ocenianiu wizualizacji i być może modelowania.
 
-TODO: Do analizy wariancji wprowadzić inne dane i problem
-Rozpocząć od testów nieparametrycznych, ale przykład pokazać na klasycznej analizie post-hoc
+TODO: Do analizy wariancji wprowadzić analizę ceny w zaleznosci od koloru
+
+
+Lista funkcji do wprowadzenia:
+Eksploracja_R
++ library
++ install.packages
+Eksploracja_cechy
++ mean
++ quantile
+
+Eksploracja_dplyr_1
++ %>%
++ filter
++ select
++ arrange
+Eksploracja_dplyr_2
++ group_by
++ summarise
++ mutate
+
+Modelowanie
++ lm
 
 
