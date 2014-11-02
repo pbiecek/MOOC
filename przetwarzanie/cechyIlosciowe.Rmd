@@ -18,6 +18,12 @@ Na poprzednich zajęciach poznaliśmy kilka sposobów na wczytanie danych do R.
 Wczytajmy dane w formacie tekstowym używając funkcji `read.table()`.
 Następnie używając funkcji `head()` by wyświetlić pierwsze dwa wiersze.
 
+
+TODO:
+wybrać np. 5-letnie volkswageny (a może po modelu?)
+i na nich zrobić analizę 
+
+
 ```{r, warning=FALSE}
 auta2012 = read.table("http://biecek.pl/MOOC/dane/auta2012.csv",
                        sep=";", dec=",", header=TRUE)
