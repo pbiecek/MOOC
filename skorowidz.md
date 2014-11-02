@@ -20,4 +20,3 @@ Eksploracja_dplyr_2
 Modelowanie
 + lm
 
-
