@@ -49,6 +49,7 @@ Materiały dla kursu MOOC 2014
   * Analiza wariancji - jednokierunkowa, dwukierunkowa [przecięte / hierarchiczne]
   * Modele z wieloma zmiennymi
   * Jak wybierać modele [AIC, BIC]
+  * Regresja logistyczna
 
 
 

@@ -11,3 +11,8 @@ Przyjrzymy się bardzo znanemy zbiorowi danych, który przedstawia zależność 
 Zaczniemy od przyjrzenia się temu, jak wygląda zależność,
 następnie odpowiemy na pytanie jaka część wzrostu jest odzedziczalna
 a na koniec spróbujemy oszacować jaki będzie wzrost moich dzieci.
+
+
+
+Kubeł zimnej wody
+http://joemonster.org/art/29868/Statystyczne_korelacje_na_ktore_nigdy_byscie_nie_wpadli
