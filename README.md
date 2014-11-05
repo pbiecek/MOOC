@@ -23,8 +23,8 @@ Materiały dla kursu MOOC 2014
   * Pracy interaktywna, system pomocy oraz knitr
   * Wprowadzenie do obróbki danych [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/dplyrIntro.md)
   * Jak wczytać dane [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/wczytywanieDanych.html)
-  * Cechy jakościowe [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyJakosciowe.html)
-  * Cechy ilościowe [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyIlosciowe.html)
+  * Cechy jakościowe [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyJakoscioweIntro.md) [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyJakosciowe.html)
+  * Cechy ilościowe [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyIloscioweIntro.md) [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyIlosciowe.html)
   * Cechy logiczne [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyLogiczne.html)
   * Cechy napisowe [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyNapisowe.html)
   * Obróbka danych - agregaty
