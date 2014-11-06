@@ -10,7 +10,7 @@ Stwierdził, że kupi samochód, który jest najczęstszy na rynku, dzięki temu
 
 Ok, pomóżmy mu!
 
-Wykorzystamy pobrany zbiór danych o ofertah sprzedaży samochodów, by zobaczyć jaka marka, jaki model i który rocznik jest najczęściej oferowany.
+Wykorzystamy zbiór danych o ofertach sprzedaży samochodów, by zobaczyć jaka marka, jaki model i który rocznik jest najczęściej oferowany.
 
 A przy okazji poznamy czery z pięciu najważniejszych funkcji do przetwarzania danych.
 
