@@ -5,8 +5,27 @@ output:
     toc: yes
 ---
 
-W trakcie tych zajęć przedstawimy podstawowe operacje na danych napisowych. 
-Ale zanim dojdziemy do tych operacji najpierw wczytajmy dane.
+Podstawowym kryterium, gdy myślimy o cenach używanych samochodów, jest rok produkcji i przebieg.
+
+A czy wyposażenie ma znaczenie?
+Sprawdźmy to!
+
+Nie zawsze jednak dane są przygotowane w postaci prostej do analiz.
+Wpierw musimy więc informacje o wyposażeniu 
+
+Jednak wpierw, aby analizować 
+
+
+
+
+Kupując nowy samochód często trzeba dopłacić jeżęli samochów ma być w kolorze innym niż biały, w kolorze metalic lub perłowy.
+
+Ale czy ceny samochodów używanych silnie różnią się w zależności od koloru?
+
+Sprawdźmy to!
+
+W naszych dancyh jest 
+
 
 # Wczytanie danych
 
