@@ -11,7 +11,7 @@ A czy wyposażenie ma znaczenie?
 Sprawdźmy to!
 
 Nie zawsze jednak dane są przygotowane w postaci prostej do analiz.
-Wpierw musimy więc informacje o wyposażeniu 
+Wpierw musimy więc informacje o wyposażeniu wyłuskać
 
 Jednak wpierw, aby analizować 
 
