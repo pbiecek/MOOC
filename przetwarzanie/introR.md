@@ -48,3 +48,41 @@ Jest bezpłatne do wszelki zastosowań.
 
 Wybieramy R
 
+
+
+
+
+
+
+
+
+Cytaty wiodące:
+
+R is really important to the point that it’s hard to overvalue it. It allows statisticians to do very intricate and complicated analyses without knowing the blood and guts of computing systems. Google research scientist, quoted in the New York Times
+
+The great beauty of R is that you can modify it to do all sorts of things, and you have a lot of prepackaged stuff that’s already available, so you’re standing on the shoulders of giants. Google chief economist, quoted in the New York Times
+
+Frank Harrell 
+one of the greatest advantages of R: getting your work done better and in less time.
+Frank Harrell
+Chairman, Biostatistics, Vanderbilt University
+
+
+“R has really become the second language for people coming out of grad school now, and there’s an amazing amount of code being written for it,” said Max Kuhn, associate director of nonclinical statistics at Pfizer.
+
+
+It’s a mature, widely used (around 1-2 million users) and well-supported free and open source software project; it’s committed to an annual schedule for major updates (it runs on GNU/linux, unix, MacOS and Windows)
+
+Excellent graphics capabilities (see also here)
+
+Vector arithmetic, plus many built-in basic & advanced statistical and numerical analysis tools
+
+Intelligent handling of missing data values (denoted by NA)
+
+Highly extensible, with over 4300 user-contributed packages available
+
+It’s easy to use and has excellent online help and associated documentation
+
+
+
+
