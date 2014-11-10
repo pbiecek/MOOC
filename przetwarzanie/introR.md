@@ -52,6 +52,16 @@ Wybieramy R
 
 
 
+- data handling
+- statistical / numerical analysis / modeling
+- data visualisation
+- reproducible research
+
+,,stworzony do eksploracji danych''
+,,pełna otwartość - wygodne w audytach ''
+,,duża baza uzytkowników i developerów''
+używany przez Googla, Facebooka, NY Times, New Scientist, 
+HPC
 
 
 
