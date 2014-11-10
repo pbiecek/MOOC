@@ -1,9 +1,12 @@
 ﻿Bądź data smart! Od zera do bohatera w 60 godzin.
 =================================================
 
+Alternatywne tytuły: Wprowadzenie do Data Science. 
+
 Materiały dla kursu MOOC 2014
 
-+ Dane wokół nas, jak je czytać
++ Dane wokół nas, jak je czytać [Nie bądź liczbowym analfabetą]
+  * Intro [intro](https://rawgit.com/pbiecek/MOOC/master/motywacja/intro.md)
   * [Diagnoza Społeczna] J Cz - 15 listopad
   * [Ryzyko kedytowe] M Wi
   * [Długość życia] GUS
