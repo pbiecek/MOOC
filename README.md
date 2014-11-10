@@ -6,7 +6,7 @@ Alternatywne tytuły: Wprowadzenie do Data Science.
 Materiały dla kursu MOOC 2014
 
 + Dane wokół nas, jak je czytać [Nie bądź liczbowym analfabetą]
-  * Intro [intro](https://rawgit.com/pbiecek/MOOC/master/motywacja/intro.md)
+  * Intro, [intro](https://rawgit.com/pbiecek/MOOC/master/motywacja/intro.md)
   * [Diagnoza Społeczna] J Cz - 15 listopad
   * [Ryzyko kedytowe] M Wi
   * [Długość życia] GUS
@@ -21,15 +21,15 @@ Materiały dla kursu MOOC 2014
 
 
 + Eksploracja danych
-  * Wybieramy narzędzie [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/introR.md)  [skorowidz](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/skorowidz.md)
-  * Jak zainstalować R, RStudio oraz dodatkowe pakiety  [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/instalacja.md) 
-  * Wprowadzenie do obróbki danych [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/dplyrIntro.md)
+  * Wybieramy narzędzie, [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/introR.md),  [skorowidz](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/skorowidz.md)
+  * Jak zainstalować R, RStudio oraz dodatkowe pakiety,  [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/instalacja.md) 
+  * Wprowadzenie do obróbki danych, [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/dplyrIntro.md)
   * Obróbka danych - agregaty
-  * Jak wczytać dane [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/wczytywanieDanych.html)
-  * Cechy jakościowe [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyJakoscioweIntro.md) [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyJakosciowe.html)
-  * Cechy ilościowe [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyIloscioweIntro.md) [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyIlosciowe.html)
-  * Cechy logiczne [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyLogiczne.html)
-  * Cechy napisowe [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyNapisowe.html)
+  * Jak wczytać dane, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/wczytywanieDanych.html)
+  * Cechy jakościowe, [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyJakoscioweIntro.md), [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyJakosciowe.html)
+  * Cechy ilościowe, [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyIloscioweIntro.md), [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyIlosciowe.html)
+  * Cechy logiczne, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyLogiczne.html)
+  * Cechy napisowe, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyNapisowe.html)
   * Pracy interaktywna, system pomocy oraz knitr
   * Co dalej
 
@@ -39,15 +39,15 @@ Materiały dla kursu MOOC 2014
   * Iluzje, percepcja obrazu i kolory [persspektywa, tithener, wzmocnienie oboczne, poggardoffa, ślepa plamka, fiksacje sakkady, precyzja przedstawiania - kołowy, paskowy, punktowy]
   * Info-pomyłka
   * Warsztat [cecha ilorazowa / przedziałowa]
-  * Jak to zrobić - część 1 [materialy html](https://rawgit.com/pbiecek/MOOC/master/wizualizacja/ggplot1.html)
+  * Jak to zrobić - część 1, [materialy html](https://rawgit.com/pbiecek/MOOC/master/wizualizacja/ggplot1.html)
   * Jak to zrobić - część 2
   * Jak to zrobić - poprawiamy wykres
   * Jak to ożywić wykres
 
 
 + Modelowanie danych
-  * Regresja liniowa [intro](https://rawgit.com/pbiecek/MOOC/master/modelowanie/regresjaIntro.md) [materialy html](https://rawgit.com/pbiecek/MOOC/master/modelowanie/regresjaProsta.html) [materialy html](https://rawgit.com/pbiecek/MOOC/master/modelowanie/dopasowanieModelu.html)
-  * Regresja przedziałowo liniowa [intro](https://rawgit.com/pbiecek/MOOC/master/modelowanie/przedzialowaIntro.md)   [materialy html](https://rawgit.com/pbiecek/MOOC/master/modelowanie/regresjaMultiplikatywna.html)
+  * Regresja liniowa, [intro](https://rawgit.com/pbiecek/MOOC/master/modelowanie/regresjaIntro.md), [materialy html](https://rawgit.com/pbiecek/MOOC/master/modelowanie/regresjaProsta.html), [materialy html](https://rawgit.com/pbiecek/MOOC/master/modelowanie/dopasowanieModelu.html)
+  * Regresja przedziałowo liniowa, [intro](https://rawgit.com/pbiecek/MOOC/master/modelowanie/przedzialowaIntro.md),   [materialy html](https://rawgit.com/pbiecek/MOOC/master/modelowanie/regresjaMultiplikatywna.html)
   * Diagnostyka [Ascombe]
   * Analiza wariancji - jednokierunkowa, dwukierunkowa [przecięte / hierarchiczne]
   * Modele z wieloma zmiennymi
