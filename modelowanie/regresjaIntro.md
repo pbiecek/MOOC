@@ -1,4 +1,4 @@
-Jak myślicie, czy wzrost jest odziedziczalny?
+Jak myślicie, czy wzrost jest odziedziczalny? **PCH: A nie dziedziczny? To częściej używana forma**
 Czy dzieci wysokich rodziców są wysokie?
 
 Pewnie tak, 

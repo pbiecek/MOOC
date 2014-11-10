@@ -16,6 +16,14 @@ auta2012 = read.table("http://biecek.pl/MOOC/dane/auta2012.csv",
 head(auta2012, 2)
 ```
 
+**PCH: Nadal będę się upierał, że wczytywanie 70MB przez sieć na początku 
+każdego rozdziału nie jest dobrym pomysłem. U mnie na przykład, przy przyzwoitym
+łączu, na dwie próby obie skończyły się wczytaniem tylko części danych i komentarzem
+(a nie błędem) mówiącym, że nie udało się wczytać całości pliku. Ramka istnieje, 
+ale zawiera część danych. Myślę, że nie unikniesz w rozdziale o wczytywaniu danych
+jakiegoś wprowadzenia na temat poruszania się po plikach lokalnych. A no i nie wspominam
+już o tym ile trwa 'kompilacja' ze źródeł rmd.**
+
 Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.
 
 
@@ -35,6 +43,20 @@ Listę możliwych wartości dla zmiennej jakościowej można wyznaczyć funkcją
 levels(auta2012$Waluta)
 ```
 
+**PCH: Ja wczytuję dane z auta2012.rda i mam nieco inny wynik, tzn. mam dodatkowy, 'pusty', level (cały blok
+poniżej):**
+```
+> levels(auta2012$Waluta)
+[1] ""    "CHF" "CZK" "EEK" "EUR" "GBP" "HUF" "PLN" "USD"
+> nrow(auta2012)
+[1] 210134
+> table(auta2012$Waluta)
+
+          CHF    CZK    EEK    EUR    GBP    HUF    PLN    USD 
+     0      5  19211      2   5480      5    630 184137    664 
+```
+**PCH: Czy to możliwe, że w csv i obiekcie w rda masz nieco inne dane?**  
+
 Zmienne jakościowe często opisuje się tablicą liczebności, a więc informacją ile razy wystąpiła każda z wartości ze słownika.
 Tablicę liczebności można wyznaczyć funkcją `table()` lub `summary()`.
 
@@ -49,7 +71,10 @@ summary(auta2012$Waluta)
 
 ### Odpowiedzi:
 + `r names(which(sapply(auta2012, class) == "factor"))`
-+ Pewne zmienne, w zależności od kontekstu, mogą być traktowane i analizowane jak zmienne ilościowe lub zmienne jakościowe. Do nas należy wybór, która z tych opcji jest właściwsza.
++ Pewne zmienne, w zależności od kontekstu, mogą być traktowane i analizowane jak zmienne ilościowe lub zmienne jakościowe. Do nas należy wybór, która z tych opcji jest właściwsza. **PCH: I tu dalej - o tym,
+że w naszym przykładzie 'Liczba.drzwi', mimo iż jest wyrażona liczbowo, jest 
+cechą jakościową, np. nie ma w tym kontekście sensu liczenie średniej liczby drzwi 
+dla wybranej marki samochodów.**
 
 ## Procenty
 
@@ -77,6 +102,8 @@ Aby zamienić frakcje na procenty, wystarczy je przemnożyć przez 100, a aby wy
 procenty = 100*frakcje
 round(procenty, digits = 1)
 ```
+**PCH: Tu moim zdaniem warto umieścić - na przykładzie mnożenia przez 100 - dygresję 
+na temat tego, jak działają operacje na wektorach w R**
 
 Ostatnim usprawnieniem tego procesu, które warto rozważyć to uporządkowanie wartości rosnąco lub malejąco.
 Mając wiele możliwości, w gąszczu liczb czasem trudno nawet dostrzec, która jest największa. 
@@ -89,6 +116,10 @@ sort(zaokragloneProcenty)
 sort(zaokragloneProcenty, decreasing = TRUE)
 ```
 
+**PCH: A tu kolejna dygresja, tym razem o indeksowaniu wektorów. A zatem pokazujemy
+funkcję `order()`, pokazujemy jej wynik, czyli kolejność i pokazujemy jak działa
+indeksowanie używając order + indeksowanie do zrobienia tego co sort**
+
 ### Zadania:
 + Cecha `Marka` opisuje markę samochodu. Sprawdź, która marka jest najpopularniejsza.
 + Cecha `Rodzaj.paliwa` opisuje rodzaj paliwa wykorzystywanego przez auto. Czy jest to benzyna, olej, gaz? Sprawdź jaki procent samochodów jest napędzana na benzynę.
@@ -97,12 +128,14 @@ sort(zaokragloneProcenty, decreasing = TRUE)
 + `r names(which.max(table(auta2012$Marka)))`
 + `r 100*prop.table(table(auta2012$Rodzaj.paliwa))["benzyna"]` %
 
+**PCH: A u mnie znowu inaczej: 38.8851875 %**
+
 ## Graficzne statystyki opisowe
 
-Tabele liczebności są proste w interpretacji. Podobnie jednak jak w innych przypadkach, graficzne przedstawienie tych liczb pozwala na łatwiejsze dostrzeżenie zależności pomiędzy danymi. Koniec końców w tabeli liczb łatwo pomylić się nawet gdy chodzi o liczbę cyfr w licznie. Na wykresie takie różnice natychmiast rzucają się w oczy.
+Tabele liczebności są proste w interpretacji. Podobnie jednak jak w innych przypadkach, graficzne przedstawienie tych liczb pozwala na łatwiejsze dostrzeżenie zależności pomiędzy danymi. Koniec końców w tabeli liczb łatwo pomylić się nawet gdy chodzi o liczbę cyfr w liczbie. Na wykresie takie różnice natychmiast rzucają się w oczy.
 
 Zazwyczaj tabele liczebności przedstawia się za pomocą wykresów słupkowych.
-Można je wykonać np. funkcją `table()`.
+Można je wykonać np. funkcją `table()`. **PCH: a nie np. funkcją `barplot()` ?**
 
 ```{r, warning=FALSE}
 (tabela = table(auta2012$Waluta))
@@ -134,4 +167,13 @@ barplot(posortowanaTabela, horiz = TRUE, las=1)
 ```
 
 Podobnie graficznie można przedstawiać cechy logiczne i napisowe.
+
+**PCH: TODO:
+* stringAsFactors i okolice - czasem (często?) tekst jest niepotrzebnie zamieniany
+na factor, a czasem zmienne jakościowe występuję pod postacią tekstu. Warto znać
+as.factor, as.character
+**
+
+
+
 

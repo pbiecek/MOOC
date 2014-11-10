@@ -52,9 +52,10 @@ min(auta2012$Cena.w.PLN)
 max(auta2012$Cena.w.PLN)
 ```
 
-Używając funkcji `summary()` możemy wyznaczyć sześć podstawowych charakterystyk, czyli: minimum, 1. kwartyl, medianę (2. kwwartyl), średnią, 3. kwartyl i maksimum.
+Używając funkcji `summary()` możemy wyznaczyć sześć podstawowych charakterystyk, czyli: minimum, 1. kwartyl, medianę (2. kwartyl), średnią, 3. kwartyl i maksimum.
 
-*Kwartyle dzielą wektor na cztery równoliczne części.*
+*Kwartyle dzielą wektor **PCH: nie strasz ludzi - nie mówiłeś wcześniej nic o wektorach ;)** na cztery równoliczne części.*
+
 + Jedna czwarta samochodów ma cenę niższą od 1. kwartyla.
 + Jedna czwarta samochodów ma cenę wyższą od 1. kwartyla ale niższą od mediany (2. kwartyla).
 + Jedna czwarta samochodów ma cenę wyższą od mediany (2. kwartyla) ale niższą od 2. kwartyla.
@@ -119,6 +120,10 @@ max(auta2012$Przebieg.w.km, na.rm=TRUE)
 + Dla zmiennej `Przebieg.w.km`  jest `r sum(is.na(auta2012$Przebieg.w.km))` 20 711 brakujących wartości. Ta zmienna jest najmniej kompletna.
 +  `r median(auta2012$KM, na.rm=TRUE)` cm3
 
+**PCH: ponawiam swoją uwagę na temat zbioru danych, na którym bazują te materiały. Moim zdaniem
+u Ciebe również nie zostały wczytane wszystkie wiersze z CSV'a - spróbuj sobie zrobić na 
+podstawie danych z RDA.**
+
 ## Graficzne statystyki opisowe
 Powyżej opisane statystyki liczbowe można przedstawić graficznie.
 Prezentacja graficzna ma tę zaletę, że wyćwiczone oko potrafi szybko wiele dowiedzieć się z danych. 
@@ -148,7 +153,7 @@ boxplot(auta2012$Przebieg.w.km,
 ```
 
 Co za dziwny wykres. Zazwyczaj wykresy pudełkowe wyglądają inaczej.
-Co jest nie tak z tym? Spójrzmy na oś na wykresie, rozciąga się do 10^9 = 1 000 000 000 km. Najprawdopodobniej te duże wartości to błędu w danych. Mała jest szansa, że jakiekolwiek auto na świecie miało choćby zbliżony przebieg (gdyby jakieś auto jeździło non stop z prędkością 100 km na godzinę, to po 100 latach miałoby przebieg 8 000 000 km).
+Co jest nie tak z tym? Spójrzmy na oś na wykresie, rozciąga się do 10^9 = 1 000 000 000 km. Najprawdopodobniej te duże wartości to wynik błędu w danych. Mała jest szansa, że jakiekolwiek auto na świecie miało choćby zbliżony przebieg (gdyby jakieś auto jeździło non stop z prędkością 100 km na godzinę, to po 100 latach miałoby przebieg 8 000 000 km).
 
 Dane bardzo często są zanieczyszczone a graficzne prezentacje pozwalają nam to łatwo zauważyć. 
 Tak jest i w tym przypadku.
@@ -173,8 +178,8 @@ Każdy z elementów tego wykresu (lewy wąs, lewa część pudełka, prawa czę�
 Z wykresu tego możemy łatwo odczytać, że 3/4 danych dotyczy aut o przebiegu poniżej 200 tys km. Jedynie 1/4 danych ma wyższe wartości i dla tych aut rozpiętość jest bardzo duża.
 
 Jeżeli chcemy zaprezentować bardziej szczegółowe dane o przebiegu, możemy wykorzystać histogram.
-Słowo histogram pochodzi z języka greckiego, pochodzi ze złożenia słów histos i gramma. 
-Pierwsze oznacza rzeczy stojące pionowo, drugie oznacza zapis. W sumie chodzi o przedstawienie danych z użyciem pionowych słupków.
+Słowo histogram pochodzi z języka greckiego, pochodzi ze złożenia słów histos i gramma.**
+Pierwsze oznacza rzeczy stojące pionowo, drugie oznacza zapis. W sumie chodzi o przedstawienie danych z użyciem pionowych słupków. **PCH: Ekstremalnie ważna informacja. Zabrakło wcześniej informacji co znaczy barplot i kilka innych nazw ;)
 
 Aby wykonać w programie R histogram, można wykorzystać funkcję `hist()`. Pierwszy argument określa dane, które mają być pokazane,
 drugi argument określa na ile przedziałów ma być podzielony zakres zmienności. 

@@ -3,6 +3,7 @@ title: "Modelowanie / regresja multiplikatywna"
 output:
   html_document:
     toc: yes
+    mathjax: "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
 ---
 
 # Regresja liniowa - kontynuacja
@@ -29,12 +30,53 @@ volkswagen <- auta2012 %>%
 head(volkswagen, 2)
 ```
 
+
+**PCH: Jeśli nie chcesz zrobić ludziom wody z mózgu, to musisz wytłumaczyć o co chodzi
+w tej różnicy ;) Chyba nie obejdzie się bez krótkiego wprowadzenia do dplyra:**
+
+```
+> head(auta2012,2)
+   Cena Waluta Cena.w.PLN Brutto.netto  KM  kW      Marka     Model Wersja Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km
+1 49900    PLN      49900       brutto 140 103        Kia    Carens                 4/5              1991         41000
+2 88000    PLN      88000       brutto 156 115 Mitsubishi Outlander                 4/5              2179         46500
+           Rodzaj.paliwa Rok.produkcji Kolor Kraj.aktualnej.rejestracji Kraj.pochodzenia Pojazd.uszkodzony Skrzynia.biegow
+1 olej napedowy (diesel)          2008                           Polska                                           manualna
+2 olej napedowy (diesel)          2008                           Polska                                           manualna
+  Status.pojazdu.sprowadzonego
+1                             
+2                             
+                                                                                                                                                                               Wyposazenie.dodatkowe
+1                         ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
+2 ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
+> library(dplyr)
+
+Dołączanie pakietu: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+> head(auta2012,2)
+Source: local data frame [2 x 21]
+
+   Cena Waluta Cena.w.PLN Brutto.netto  KM  kW      Marka     Model Wersja Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km
+1 49900    PLN      49900       brutto 140 103        Kia    Carens                 4/5              1991         41000
+2 88000    PLN      88000       brutto 156 115 Mitsubishi Outlander                 4/5              2179         46500
+Variables not shown: Rodzaj.paliwa (fctr), Rok.produkcji (dbl), Kolor (fctr), Kraj.aktualnej.rejestracji (fctr),
+  Kraj.pochodzenia (fctr), Pojazd.uszkodzony (fctr), Skrzynia.biegow (fctr), Status.pojazdu.sprowadzonego (fctr),
+  Wyposazenie.dodatkowe (fctr)
+```
+
 Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.
 
 ## Jaka to zależność?
 
-Zobaczmy jak wygląda zależność ceny of wieku volkswagena. 
-W naszym zbiorze danych nie ma zmiennej wiek, jest jedynie wiek produkcji.
+Zobaczmy jak wygląda zależność ceny od wieku volkswagena. 
+W naszym zbiorze danych nie ma zmiennej wiek, jest jedynie rok produkcji.
 Wiedząc, że te oferty były zbierane w styczniu 2012 roku łatwo nam będzie wyznaczyć wiek auta.
 Zacznijmy więc od wyznaczenia zmiennej wiek auta, a następnie usunięcia aut ponad 20 letnich 
 (mało ich jest i będą nam przeszkadzać w modelowaniu).
@@ -58,6 +100,8 @@ ggplot(volkswagen, aes(y=Cena.w.PLN, x = Wiek)) +
   geom_smooth(method="lm", col="red", size=2) +
   ylim(0,400000)
 ```
+
+**PCH: pojawia się znany wszystkim 'ylim' ;) **
 
 Gdyby bezrefleksyjnie przyjąć wyniki estymacji, okazałoby się, że zależność pomiędzy ceną a wiekiem opisana jest przez równanie
 _Średnia cena = 67640.352 - 4236.639 * Wiek_
@@ -96,9 +140,17 @@ _Cena.w.roku.i+1 = Cena.w.roku.i * (1-procent) = Cena.w.roku.i * wsp_
 
 i równoważnie 
 
-_Cena.w.roku.i = Cena.w.roku.0 * (1-procent)^i = Cena.w.roku.0 * wsp^i_
+$$latex
+Cena.w.roku.i = Cena.w.roku.0 * (1-procent)^i = Cena.w.roku.0 * wsp^i
+$$
 
-Takie zależności nazywamy multiplikatywnymi. Można je sprowadzić co zależności liniowych logarytmując obie strony.
+**PCH: Dopiero teraz to zauważyłem, ale wcześniej też było to nieco drażniące - 
+wzory trzeba pisać tak, żeby były wyświetlane w specjalny sposób, czyli
+np. składnią LaTeXową, jak przykład powyżej, który próbowałem zmienić, ale nie mogę
+uruchomić renderowania równań poprawnie. Jakiś pomysł?**
+
+
+Takie zależności nazywamy multiplikatywnymi. Można je sprowadzić do zależności liniowych logarytmując obie strony.
 (Tak, logarytmy się przydają).
 
 _log(Cena.w.roku.i) = log(Cena.w.roku.0) +  log(wsp) * i_
@@ -141,6 +193,13 @@ czyli przecietnie, corocznie auto traci 15% swojej ceny.
 ### Zadania:
 + Wykonaj modelowanie z użyciem modelu multiplikatywnego dla innej marki. 
 + Jeżeli model multiplikatywny wygląda na uzasadniony, policz ile procent corocznie traci na cenie auto danej marki.
+
+**PCH: Albo wprowadzasz pętle, albo ideą 'apply'. There is no other way, chociaż pobieżnie.
+To nie powinny być zadania, po których ludzie będą siedzieć 3 dni z tępym wzrokiem
+i zastanawiać się jak to zrobić, a potem jak podejrzą rozwiązanie i zobaczą,
+że używasz nieznanych im funkcji to zdobędą Twój adres i przyjadą Ci podziękować
+osobiście za stracone dni swojeo życia.**
+
 
 ### Odpowiedzi:
 ```{r, warning=FALSE, fig.width=4, fig.height=4}
@@ -194,7 +253,12 @@ ggplot(volkswagen, aes(y=Przebieg.w.km, x = Wiek)) +
   geom_smooth(size=2) + geom_smooth(method="lm", col="red", size=2) 
 ```
 
-Kolorem czerwonym zaznaczono krzywą liniowej zależności pomiędzy zmiennymi. Jak widać odstaje ona znacznie dla kilkuletnich aut.
+**PCH: Pamiętaj, że minęły 3 dni odkąd śmiałkowie zaczęli rozwiązywać poprzednie
+zadanie. Mogą nie mieć już w środowisku zmiennej 'volskwagen'. Może lepiej dodać
+to do filtrowania i zacząć od zbioru auta2012?**
+
+
+Kolorem czerwonym zaznaczono krzywą liniowej zależności pomiędzy zmiennymi. Jak widać odstaje ona znacznie dla kilkuletnich aut. **PCH: Od czego odstaje? Od niebieskiej?**
 
 Niebieska linia, to linia wygładzonego trendu, lokalnie przybliżającego dane. Gdy się jej przyjrzeć, okazuje się, że ma ona bardzo ciekawe zachowanie. 
 
@@ -237,7 +301,11 @@ Jak odczytać ten model?
 Dla aut o wieku poniżej 5 lat obserwuje się średnie zwiększanie przebiegu w tempie ```r format(round(M2$coef[1]))```km na rok, ale już dla aut starszych niż 5 lat obserwuje się wydłużanie średniego przebiegu w tempie ```r round(sum(M2$coef))```km na rok.
 
 Przedstawmy te modele graficznie.
-Wykorzystamy do tego funkcję predict, która wyznacza średni przebieg dla zadanego wieku.
+Wykorzystamy do tego funkcję predict, która wyznacza średni przebieg dla zadanego wieku. 
+**PCH: No przy okazji wyznacza, ale chyba warto było wcześniej przy prostej regresji
+powiedzieć coś więcej o modelu (na przykład co jest w obiekcie klasy 'lm'), 
+np. co się stanie jak zrobisz na nim plot, summary, ale również o predict**
+
 
 ```{r, warning=FALSE}
 topred = data.frame(Wiek0 = c(0,5,20), Wiek5 = c(0, 0, 15))

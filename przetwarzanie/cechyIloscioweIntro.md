@@ -7,7 +7,7 @@ Pomogliśmy mu sprawdzić, jaki model, jaka marka i jaki rocznik jest najpopular
 i dzięki temu już wie, że szuka 6 letniego Passata.
 
 Nie wie jeszcze ile taki samochod kosztuje.
-Mając ceny ofertowe me sprawdzić jaka jest rozpiętość ofertowa cen, dzięki czemu łątwiej będzie mu negocjować ewentualny zakup.
+Mając ceny ofertowe może sprawdzić jaka jest rozpiętość ofertowa cen, dzięki czemu łatwiej będzie mu negocjować ewentualny zakup.
 
 Pomóżmy mu sprawdzić, ile taki samochód kosztuje.
 

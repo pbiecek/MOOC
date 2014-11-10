@@ -13,6 +13,7 @@ Ale zanim dojdziemy do tych operacji najpierw wczytajmy dane.
 ```{r, warning=FALSE}
 auta2012 = read.table("http://biecek.pl/MOOC/dane/auta2012.csv",
                        sep=";", dec=",", header=TRUE)
+
 head(auta2012, 2)
 ```
 
@@ -40,6 +41,27 @@ starszyNiz5Lat = auta2012$Rok.produkcji < 2007
 table(starszyNiz5Lat)
 ```
 
+**PCH: Teraz już jestem pewny, że u Ciebie wczytywanie z CSV kończy się w tym samym miejscu.
+Najwyraźniej plik jest zepsuty lub istnieje jakieś ograniczenie na wczytywanie
+z sieci, nie wiem, ale ja mam tak, czyli tyle samo danych co Ty:**
+
+```
+> auta2012 = read.table("http://biecek.pl/MOOC/dane/auta2012.csv",
++                       sep=";", dec=",", header=TRUE)
+Komunikaty ostrzegawcze:
+1: In scan(file, what, nmax, sep, dec, quote, skip, nlines, na.strings,  :
+  Koniec pliku wewnątrz cudzysłowia
+2: In scan(file, what, nmax, sep, dec, quote, skip, nlines, na.strings,  :
+  ilość odczytanych pozycji nie jest wielokrotnością liczby kolumn
+> nrow(auta2012)
+[1] 109563
+
+Natomiast po ściągnięciu i wczytaniu z rda:
+> nrow(auta2012)
+[1] 210134
+```
+
+
 ### Zadania:
 + Sprawdź ile samochodów ma cenę ofertową poniżej 2 000 pln.
 + Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3.
@@ -58,6 +80,13 @@ starszyNiz5Lat = auta2012$Rok.produkcji < 2007
 pochodziZPolskiIStarszyNiz5Lat = pochodziZPolski & starszyNiz5Lat
 table(pochodziZPolskiIStarszyNiz5Lat)
 ```
+
+**PCH: Jak już mówiłem kiedyś, te nazwy zmiennych (oraz te w ramce auta2012)
+są może i jednoznaczne oraz wygodne, ale dla kogoś, kto zna już R i wie do czego
+używa się klawisza TAB na klawiaturze. Dla uczących się i nie wiedzących, że wielkość
+liter ma znaczenie, może to być gehenna. Chyba, że tutaj dać dygresję o nazwach 
+zmiennych w R i o tym, interpreter i RStudio znakomicie podpowiadają jeśli je
+zapytać TABem**
 
 ### Zadania:
 + Sprawdź ile samochodów zarejestrowanych w Polsce ma cenę ofertową poniżej 2 000 pln.

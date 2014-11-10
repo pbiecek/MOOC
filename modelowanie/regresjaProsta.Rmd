@@ -37,9 +37,14 @@ library(SmarterPoland)      # w tym pakiecie znajduje się zbiór danych galton
 
 head(galton)
 ```
+**PCH: Znajduje się, ale tylko w wersji bieżącej wersji na githubie. Tam jednak
+znajduje się też zbiór auto2012!**
 
 W kolumnie `rodzic` przedstawiona jest średni ważony wzrost rodziców (średnia wzrostu
 ojca i 1,08 wzrostu matki), a w kolumnie `syn` wzrost dorosłego syna. Dane są w calach.
+
+*PCH: Jak w calach, to chyba suma wzrostu obu rodziców i babci ;) Stawiałbym jednak na
+centrymetry**
 
 Pytanie, które interesowało Galtona jak również interesuje nas, to czy jest zależność pomiędzy wzrostem rodziców a dziecka.
 Modelowanie zawsze rozpoczyna się od wykresu, zobaczmy jak ta zależność wygląda graficznie.
@@ -48,6 +53,10 @@ Modelowanie zawsze rozpoczyna się od wykresu, zobaczmy jak ta zależność wygl
 ggplot(galton, aes(x=rodzic, y=syn)) + 
   geom_point() 
 ```
+
+**PCH: Panie, a co to ten ggplot? Może jakieś słowo wyjaśnienia? No bo jak na.rm znaczy 
+usuń NA, to ktoś jest gotowy pomyśleć, że `ggplot()` to funkcja do rysowania
+wykresów typu Galton-Galton ;)**
 
 Ponieważ dane są zbierane z dokładnością do połowy cala, punkty dla różnych wierszy pokrywają się. 
 Rysując takie dane warto zaburzyć je małym zastrzykiem szumu.
@@ -76,6 +85,19 @@ ggplot(galton, aes(x=rodzic, y=syn)) +
   geom_point(data=srednie, aes(x=rodzic, y=srednia), size=5, color = "blue") 
 ```
 
+**PCH: No dobra, powinienem był to napisać już wcześniej, ale i tak tego nie unikniemy.
+Moim zdaniem używanie `dplyr` jak gdyby to była najbardziej typowa konstrukcja w R
+nie pomoże osobom robiącym kurs. Zaczną zaraz - naśladując - używać tak wszystkich
+funkcji. Zwłaszcza, że najpierw pokazujesz jak używać mean, median, quantile,
+a potem sam napierasz dplyrem i to bez słowa komentarza. Czyli albo chociaż
+przedstawienie sensu i składni dplyra (jakby wszyscy pisali potoki w shellu :/),
+albo robimy to w 'czystym' R. Sprawa nr 2. Daruj ludziom na tym etapie wyświetlanie 
+za pomocą nawiasów. Pisz srednia = ..., a potem print(srednia). Liczba nawiasów
+powoduje, że kod bardziej przypomina już LISPa niż R ;). No i ten ggplot znowu 
+skomplikowany. Napisz co robisz w poszczególnych liniach - wtedy ludzie być może
+będą mogli próbować modyfikować te wykresy w ramach ćwiczeń.**
+
+
 Pięknie, widzimy, że im wyżsi rodzice tym średnio wyższe dzieci. 
 Jednak posługiwanie się samymi średnimi jest dosyć niewygodne.
 Aby opisać tą zależność należy pamiętać średnią dla każdego wzrostu rodziców.
@@ -90,6 +112,8 @@ srednie %>%
   mutate(roznica = srednia - rodzic)
 ```
 
+**PCH: Czy mi się wydaje, czy zakładasz, że osobom, którym tłumaczysz kilka 'zajęć' wcześniej
+co znaczy 'na.rm' będzie znane i naturalne w tej sytuacji użycie `dplyr::mutate`?**
 
 ## Model liniowy
 
@@ -118,9 +142,11 @@ _syn = b0 + rodzic * b1_
 
 Funkcja estymująca parametry wygląda następująco.
 
-```{r, warning=FALSE, width=8, height=8}
-lm(syn~1 + rodzic, data=galton)
+```{r, warning = FALSE, width = 8, height = 8}
+lm(syn ~ 1 + rodzic, data = galton)
 ```
+
+**PCH: po takim wstępie to ja bym raczej próbował `galton %>% lm(syn ~ 1 + rodzic)` :D**
 
 Funkcja `lm()` przyjmuje dwa argumenty, pierwszy to formuła opisująca przyjęty model, drugi argument wskazuje zbiór danych.
 
@@ -133,13 +159,35 @@ Wynikiem funkcji `lm()` jest szczegółowy opis dopasowanego modelu, jeżeli int
 lm(syn~1 + rodzic, data=galton)$coef
 ```
 
+**PCH: Ja bym ludziom darował właściwości, czy też atrybytu na tym etapie. Raczej
+poszedłbym w kierunku:**
+
+```
+> model <- lm(syn ~ 1 + rodzic, data = galton)
+> coef(model)
+(Intercept)      rodzic 
+  60.812990    0.646291 
+```
+
 _średni.wzrost.dziecka = 23.9415 + wzrost.rodzica * 0.6462906_
+
+**PCH: Skąd powyżej wartość 23.9415 ?**
 
 W formule możemy pominąć człon `1+`, jest on domyślnie dodawany do formuły, dlatego taki sam wynik otrzymamy stosując następującą instrukcję.
 
 ```{r, warning=FALSE, width=8, height=8}
 lm(syn~rodzic, data=galton)$coef
 ```
+
+**PCH: Jak wyżej, tzn.:**
+
+```
+> model <- lm(syn ~ rodzic, data = galton)
+> coef(model)
+(Intercept)      rodzic 
+  60.812990    0.646291 
+```
+
 
 ### Zadania:
 + Mając wyznaczone parametry _b0_ i _b1_ policz oceny średniego wzrostu dziecka dla każdego średniego wzrostu rodzica
@@ -152,6 +200,9 @@ srednie %>%
   mutate(m.liniowy = wspolczynniki[1] + rodzic*wspolczynniki[2],
          roznica = srednia - m.liniowy)
 ```
+
+**PCH: Zaraz, zaraz. Jeszcze nie było ani słowa o indeksowaniu, no to skąd 
+wspolczynniki[1]!? Ani słowa również o mutate!!!**
 
 ## Jak wygląda ta zależność
 
@@ -167,6 +218,8 @@ _średni.wzrost.dziecka = b0_
 _średni.wzrost.dziecka = b0 + wzrost.rodziców * b1_
 
 4. Model, w średni wzrost dziecka jest różny dla każdego wzrostu rodzica.
+
+**PCH: Ja nie zauważyłem rozważań nad wszystkimi? Tylko 3 i 4, chyba że coś pomyliłem?**
 
 Modele te zostały uporządkowane ze względu na liczbę nieznanych parametrów. Pierwszy z powyższych modeli nie ma żadnego parametru, kolejny ma jeden parametr, kolejny dwa a ostatni 11 parametrów.
 
@@ -196,3 +249,8 @@ Czy parametry regresji liniowej w zbiorze pearsona (z wysokością ojca) różni
 
 Przygotuj dokument knitra z opisem zależności liniowej pomiędzy wzrostem syna a ojca.
 
+**PCH: knitra? Już? A może najpierw indeksowanie, czy coś w tym stylu? Może łatwiej
+byłoby ludziom, gdyby im zasugerować RStudio? A czy to nie są przypadkiem
+te same biedne istoty, którym nie chcesz utrudniać życia tłumacząc jak załadować 
+dane z pliku na dysku lokalnym i wolisz już kazać ściągać im 70MB za każdym razem,
+bo tak będzie łatwiej?**

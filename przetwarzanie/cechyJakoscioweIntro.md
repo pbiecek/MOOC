@@ -12,8 +12,10 @@ Ok, pomóżmy mu!
 
 Wykorzystamy zbiór danych o ofertach sprzedaży samochodów, by zobaczyć jaka marka, jaki model i który rocznik jest najczęściej oferowany.
 
-A przy okazji poznamy czery z pięciu najważniejszych funkcji do przetwarzania danych.
+A przy okazji poznamy cztery z pięciu najważniejszych funkcji do przetwarzania danych.
 
+*** PCH: rozumiem, że to nie jest skończone? Bo nie widzę jakie cztery najważniejsze 
+funkcje są tu użyte...***
 
 ```{r, warning=FALSE}
 library(SmarterPoland)
