@@ -56,6 +56,7 @@ Materiały dla kursu MOOC 2014
   * Regresja logistyczna
 
 
+TODO: Regresję logistyczną zrobić na Diagnozie Sopłecznej
 
 TODO: Wprowadzić peer-review w ocenianiu wizualizacji i być może modelowania.
 
