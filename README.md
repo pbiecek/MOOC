@@ -23,6 +23,7 @@ Materiały dla kursu MOOC 2014
 + Eksploracja danych
   * Wybieramy narzędzie, [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/introR.md),  [skorowidz](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/skorowidz.md)
   * Jak zainstalować R, RStudio oraz dodatkowe pakiety,  [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/instalacja.md) 
+  * Wprowadzenie do RStudio i systemu pomocy, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/wprowadzenieDoRStudio.md), [video](https://github.com/pbiecek/MOOC/blob/master/przetwarzanie/MOOC_Przetwarzanie_01.mp4?raw=true), 
   * Wprowadzenie do obróbki danych, [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/dplyrIntro.md)
   * Obróbka danych - agregaty
   * Jak wczytać dane, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/wczytywanieDanych.html)
