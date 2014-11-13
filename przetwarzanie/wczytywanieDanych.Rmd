@@ -5,11 +5,15 @@ output:
     toc: yes
 ---
 
-TODO: jak wczytać dane z internetu, np. z Banku Danych Lokalnych / Eurostatu
+TODO: Jak wczytać dane z internetu, np. z Banku Danych Lokalnych / Eurostatu [DBL - bezrobocie]
 
+TODO: Jak wczytać dane z istniejcych pakietów R []
 
-R Data Import/Export
-http://cran.r-project.org/doc/manuals/r-release/R-data.pdf
+TODO: Jak wczytać dane w postaci binarnej
+
+TODO: Jak wczytać dane w postaci tekstowej 
+
+TODO: Jak wczytać dane w postaci Excela
 
 
 
@@ -85,3 +89,10 @@ auta2012nano <- auta2012mini[sample(1:nrow(auta2012mini), 3000),]
 # save(auta2012nano, file="auta2012nano.rda")
 
 ```
+
+
+# Więcej informacji 
+
+Więcej informacji o tym jak wczytywać i zapisywać dane z i do baz danych lub plików w egzotycznych formatach znaleźć można w dokumencie *R Data Import/Export*
+http://cran.r-project.org/doc/manuals/r-release/R-data.pdf
+https://github.com/pbiecek/MOOC/blob/master/materialyZewnetrzne/R-data.pdf?raw=true
