@@ -5,7 +5,76 @@ output:
     toc: yes
 ---
 
-TODO: Jak wczytać dane z internetu, np. z Banku Danych Lokalnych / Eurostatu [DBL - bezrobocie]
+
+
+
+## Pobieranie danych z inernetu na przykładzie Banku Danych Lokalnych
+
+### Intro
+Czy zastanawialiście się, jak wygląda poziom bezrobocia w różnych grupach wykształcenia? I jak zmieniał się on w ostatnich latach?
+
+W najbliższym odcinku zastanowimy się, skąd wziąć dane o bezrobociu oraz zobaczymy, jak się ono zmieniało w ostatnich latach.
+
+### Część właściwa
+
+Coraz popularniejszym źródłem danych stają się usługi internetowe pozwalające na pobieranie wycinków danych z większych repozytoriów danych bez konieczności pobierania całego repozytorium.
+
+Przykładem takiego źródła danych jest Bank Danych Lokalnych GUS. Przechowuje on wiele danych na różnych poziomach agregacji. Najczęściej jesteśmy zainteresowany tylko małym wycinkiem całości, którą GUS udostępnia.
+Zamiast więc pobierać całe repozytorium, możemy pobrać wybrany raport z całego repozytorium.
+
+Komunikacja z takimi repozytoriami odbywa się zazwyczaj za pomocą tzw. API (Application Programming Interface), czyli protokołu udostępniania danych. 
+
+Poniżej pokażemy przykład pobierania danych bazując na API do Banku Danych Lokalnych. Różne repozytoria wymagają innych funkcji by z nich skorzytać (np. dane z eurostatu są dostępne w pakiecie `eurostat`). Uniwersalny jest za to sposób wydobywania danych.
+
+Przypuśćmy, że interesuje nas bezrobocie w kraju. Zazwyczaj API udostępniają funkcję, pozwalającą odszukac konkretny raport w gąszczu wszystkich przechowywanych raportów.
+
+W tym przypadku, dostęp do API Banku Danych Lokalnych jest możliwy za pośrednictwem pakietu SmarterPoland, który zawiera fucnkję `getBDLtree()` pobierającą nazwy i opisy raportów z repozytorium. 
+
+```{r, warning=FALSE}
+library(SmarterPoland)
+library(dplyr)
+library(ggplot2)
+
+listaTematow <- getBDLtree()
+nrow(listaTematow)
+```
+
+W sumie mamy 1337 raportów. W kolumnie `subgroup` pobranej ramki znajduje się szczegółowy opis czego dany raport dotyczy. Odfiltrujmy wszystkie raporty, które w opisie zawierają frazę `bezroboci`.
+
+
+```{r, warning=FALSE}
+listaTematow %>%
+  filter(grepl(subgroup, pattern="bezroboci"))
+```
+
+Przypyśćmy, że z tej listy interesuje nas raport 'Stopa bezrobocia wg poziomu wykształcenia'. Jest to raport o ID (numerze identyfikacyjnym) 41319, co można odczytać z ostatniej kolumny.
+(Nazwę tej serii danych można też odczytać przez stronę GUS http://stat.gov.pl/bdl/)
+
+Używając funkcji `getBDLseries()` możemy pobrać serie danych wskazując interesujący nas identyfikator.
+
+```{r, warning=FALSE}
+seria <- getBDLseries("41319")
+head(seria)
+```
+
+W ten sposób odczytaliśmy dane z zewnętrzengo źródła danych do programu R.
+Narysujmy je graficznie, aby zobaczyć co się dzieje z bezrobociem.
+Tajemnicą poliszynela jest, że kolumna `value` jest napisem a nie liczbą, więc przed rysowaniem, musimy ją zamienić na liczbę, używając funkcji as.numeric.
+
+Funkcją ggplot rysujemy wykres, z procentem bezrobocia dla różnych grup wyksztalcenia.
+
+```{r, warning=FALSE}
+seria$value <- as.numeric(seria$value)
+ggplot(seria, aes(x=year, y=value, color=dimension)) +
+  geom_line() + 
+  geom_point() + ylab("Procent bezrobotnych") + xlab("Rok")
+```
+
+### Zadanie:
+Sprawdź jaki ID ma raport o tytule 'Stopa bezrobocia wg wieku produkcyjnego i płci'.
+Następnie pobierz dane z tego raportu i narysuj je na wykresie.
+
+
 
 TODO: Jak wczytać dane z istniejcych pakietów R []
 
