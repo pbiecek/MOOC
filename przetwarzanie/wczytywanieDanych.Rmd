@@ -5,10 +5,102 @@ output:
     toc: yes
 ---
 
+## Wczytywanie danych z zewnętrznych plików
+
+### Intro
+Najczęściej dane, na których chcemy pracować są w pliku Excela [xls lub xlsx], w pliku tekstowym [w formacie csv, tzw. comma-separated values] lub są zapisane w postaci binarnej R.
+Zobaczmy jak wczytać dane z każdego z tych formatów.
+
+
+### Część właściwa
+Przedstawione poniżej dane można wczytać bezpośrednio z Internetu.
+Można je też pobrać, dane są dostępne w różnych formatach pod następującymi linkami:
+
+* dane Excelowe http://biecek.pl/MOOC/dane/auta2012mini.xls
+* dane tekstowe http://biecek.pl/MOOC/dane/auta2012mini.csv
+* dane binarne http://biecek.pl/MOOC/dane/auta2012mini.rda
+
+*Uwaga!* Wczytywane pliki mają do 3.5 MB. Ich pobieranie może potrwać kilka minut, lub więcej jeżeli połączenie internetowe nie jest dobre lub wiele osób jednocześnie z niego korzysta.
+
+W przypadku problemów z dostępem do danych, można skorzystać z mniejszych danych odpowiednio w formacie nano (3 tys wierszy, 350 kB do pobrania).
+
+* dane tekstowe http://biecek.pl/MOOC/dane/auta2012nano.csv
+* dane Excelowe http://biecek.pl/MOOC/dane/auta2012nano.xls
+* dane binarne http://biecek.pl/MOOC/dane/auta2012nano.rda
+
+
+## Dane tekstowe csv
+
+Dane w formacie csv to dane tekstowe. Rozdzielane średnikami z przecinkiem jako kropką dziesiętną.
+Można je wczytać poleceniem `read.table()`.
+
+```{r, warning=FALSE}
+auta2012mini = read.table("http://biecek.pl/MOOC/dane/auta2012mini.csv",
+                       sep=";", dec=",", header=TRUE)
+head(auta2012mini, 2)
+```
+
+## Dane Excelowe xls
+
+Dane w formacie xls to dane w formacie Excela. 
+Można je wczytać poleceniem `read.xls()`, ale wcześniej trzeba wczytać pakiet `gdata`.
+Jeżeli ten pakiet nie jest dostępny, to należy go wcześniej zainstalować poleceniem `install.packages("gdata")`.
+
+```{r, warning=FALSE}
+library(gdata)
+auta2012mini <- read.xls("http://biecek.pl/MOOC/dane/auta2012mini.xls", sheet = 1)
+head(auta2012mini, 2)
+```
+
+## Dane binarne rda
+
+Dane w formacie rda to dane binarne w natywnym formacie R. 
+Zajmują najmniej miejsca na dysku, ale można je otworzyć tylko w programie R.
+Można je wczytać poleceniem `load()`.
+
+```{r, warning=FALSE}
+plik <- url("http://biecek.pl/MOOC/dane/auta2012mini.rda")
+load(plik)
+head(auta2012mini, 2)
+```
 
 
 
-## Pobieranie danych z inernetu na przykładzie Banku Danych Lokalnych
+
+
+## Wczytywanie danych z pakietów R
+
+### Intro
+Przygotowując ten kurs miałem taki problem. 
+Jak w najprostszy sposób udostępnić uczestnikom tego kursu kilka zbiorów danych?
+Rozważając różne opcje, stwierdziłem że najłatwiejsza to z użyciem papkietu z danymi.
+
+### Część właściwa
+Pakiety to zbiory funkcji oraz zbiorów danych.
+Są takie pakiety, w których są tylko funkcje, takie które mają wyłącznie zbiory danych i zawierające i funkcje i dane.
+
+Aby sprawdzić jakie zbiory danych są dostępne w określonym pakiecie, można wykorzystać funkcję `data()` z argumentem `package`. 
+Zobaczmy na przykład jakie zbiory danych udostępnione są w pakiecie `SmarterPoland`.
+
+```{r, warning=FALSE}
+data(package="SmarterPoland")
+```
+
+Jednym ze zbiorów danych w tym pakiecie jest zbiór `auta2012`.
+Aby z niego korzystać wystarczy załadować zbiór danych `SmarterPoland` i wszystkie zbiory danych są dostępne.
+Zademonstrujmy to wyświetlając pierwsze trzy wiersze.
+
+```{r, warning=FALSE}
+library("SmarterPoland")
+head(auta2012, 3)
+```
+
+
+
+
+
+
+## Pobieranie danych z internetu na przykładzie Banku Danych Lokalnych
 
 ### Intro
 Czy zastanawialiście się, jak wygląda poziom bezrobocia w różnych grupach wykształcenia? I jak zmieniał się on w ostatnich latach?
@@ -31,7 +123,6 @@ Przypuśćmy, że interesuje nas bezrobocie w kraju. Zazwyczaj API udostępniaj�
 W tym przypadku, dostęp do API Banku Danych Lokalnych jest możliwy za pośrednictwem pakietu SmarterPoland, który zawiera fucnkję `getBDLtree()` pobierającą nazwy i opisy raportów z repozytorium. 
 
 ```{r, warning=FALSE}
-library(SmarterPoland)
 library(dplyr)
 library(ggplot2)
 
@@ -76,88 +167,7 @@ Następnie pobierz dane z tego raportu i narysuj je na wykresie.
 
 
 
-TODO: Jak wczytać dane z istniejcych pakietów R []
 
-TODO: Jak wczytać dane w postaci binarnej
-
-TODO: Jak wczytać dane w postaci tekstowej 
-
-TODO: Jak wczytać dane w postaci Excela
-
-
-
-
-Przedstawione poniżej dane można wczytać bezpośrednio z Internetu.
-Można je też pobrać, dane są dostępne w różnych formatach pod następującymi linkami:
-
-* dane tekstowe http://biecek.pl/MOOC/dane/auta2012.csv
-* dane Excelowe http://biecek.pl/MOOC/dane/auta2012.xls
-* dane binarne http://biecek.pl/MOOC/dane/auta2012.rda
-
-*Uwaga!* Wczytywane pliki mają po 70MB. Ich pobieranie może potrwać kilka minut, lub więcej jeżeli połączenie internetowe nie jest dobre lub wiele osób jednocześnie z niego korzysta.
-
-W przypadku problemów z dostępem do danych, można skorzystać z mniejszych danych odpowiednio w formacie mini (28.5 tys wierszy, bez ostatnich dwóch kolumn, 3.5 MB do pobrania) lub w formacie nano (3 tys wierszy, 350 kB do pobrania).
-
-* dane tekstowe http://biecek.pl/MOOC/dane/auta2012mini.csv http://biecek.pl/MOOC/dane/auta2012nano.csv
-* dane Excelowe http://biecek.pl/MOOC/dane/auta2012mini.xls http://biecek.pl/MOOC/dane/auta2012nano.xls
-* dane binarne http://biecek.pl/MOOC/dane/auta2012mini.rda http://biecek.pl/MOOC/dane/auta2012nano.rda
-
-
-## Dane tekstowe csv
-
-Dane w formacie csv to dane tekstowe. Rozdzielane średnikami z przecinkiem jako kropką dziesiętną.
-Można je wczytać poleceniem `read.table()`.
-
-```{r, warning=FALSE}
-auta2012 = read.table("http://biecek.pl/MOOC/dane/auta2012.csv",
-                       sep=";", dec=",", header=TRUE)
-head(auta2012, 2)
-```
-
-## Dane Excelowe xls
-
-Dane w formacie xls to dane w formacie Excela. 
-Można je wczytać poleceniem `read.xls()`, ale wcześniej trzeba wczytać pakiet `gdata`.
-Jeżeli ten pakiet nie jest dostępny, to należy go wcześniej zainstalować poleceniem `install.packages("gdata")`.
-
-```{r, warning=FALSE}
-library(gdata)
-auta2012 <- read.xls("http://biecek.pl/MOOC/dane/auta2012.xls", sheet = 1)
-head(auta2012, 2)
-```
-
-## Dane binarne rda
-
-Dane w formacie rda to dane binarne w natywnym formacie R. 
-Zajmują najmniej miejsca na dysku, ale można je otworzyć tylko w programie R.
-Można je wczytać poleceniem `load()`.
-
-```{r, warning=FALSE}
-plik <- url("http://biecek.pl/MOOC/dane/auta2012.rda")
-load(plik)
-head(auta2012, 2)
-```
-
-
-## Mini i nano dane
-Poniższe instrukcjie odtwarzają zbiór mini i nano.
-
-```{r, warning=FALSE}
-library(dplyr)
-auta2012mini <- auta2012[,c(1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17,19)]
-auta2012mini <- auta2012mini %>% 
-                    filter(Marka %in% c("Renault", "Ford", "Opel"))
-
-# write.table(auta2012mini, file="auta2012mini.csv", dec=",", sep=";", row.names = FALSE)
-# save(auta2012mini, file="auta2012mini.rda")
-
-set.seed(1313)
-auta2012nano <- auta2012mini[sample(1:nrow(auta2012mini), 3000),]
-
-# write.table(auta2012nano, file="auta2012nano.csv", dec=",", sep=";", row.names = FALSE)
-# save(auta2012nano, file="auta2012nano.rda")
-
-```
 
 
 # Więcej informacji 
