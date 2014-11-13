@@ -5,6 +5,15 @@ output:
     toc: yes
 ---
 
+TODO: jak wczytać dane z internetu, np. z Banku Danych Lokalnych / Eurostatu
+
+
+R Data Import/Export
+http://cran.r-project.org/doc/manuals/r-release/R-data.pdf
+
+
+
+
 Przedstawione poniżej dane można wczytać bezpośrednio z Internetu.
 Można je też pobrać, dane są dostępne w różnych formatach pod następującymi linkami:
 
