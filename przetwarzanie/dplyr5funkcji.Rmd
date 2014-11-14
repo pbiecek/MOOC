@@ -1,0 +1,100 @@
+---
+title: "Eksploracja / dplyr"
+output:
+  html_document:
+    toc: yes
+---
+
+Przygotowując dane do analiz musimy wykonać dwa ważne kroki
+* określić w jakim formacie i jakie dane potrzebujemy
+* określić w jaki sposób dane przetworzyć do tego formatu.
+
+Oba kroki są ważne!
+Dplyr pozwala na wykonanie większości pracy polegającej na przygotowaniu danych za pomocą pięciu mechanizmów, które można ze sboą składać.
+Poznamy te pięć klocków poniżej i zobaczymy jak je łączyć ze sobą
+
+Dplyr nie jest jedynym pakietem, wspierającym analizy danych. Ale jest bardzo bardzo szybki i jest kompleksowym rozwiązaniem. Dlatego nauczymy się go używać.
+
+# Wczytanie danych
+
+Każdy wiersz zbioru danych `auta2012` opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.
+
+```{r, warning=FALSE}
+library(SmarterPoland)
+head(auta2012)
+```
+
+## Ramki i tabele danych
+
+Dane surowe mogą mieć różną postać. Mogą to być korpusy tekstów, nagrań audio lub video.
+Jednak w analizie danych często sprawodza się dane do postaci tabelarycznej, ponieważ większość funkcji oczekuje takiego formatu danych.
+
+Podstawowym typem danych, przechowujących dane w postaci tabelarycznej jest typ `data.frame`. Dane mają postać tabeli w której w każdej kolumnie są wartości tego samego typu (np. liczby, napisy, wartości logiczne).
+
+Odwołując się do elementów tabeli korzysta się ze składni `tabela[ktore_wiersze, ktore_kolmny]`.
+
+Przykładowo, wybrane 3 wiersza z naszej tabeli liczb wyglądałoby tak
+
+```{r, warning=FALSE}
+auta2012[3,]
+```
+
+A wiersze od 3 do 5?
+
+```{r, warning=FALSE}
+auta2012[3:5,]
+```
+
+Podobnie możemy odwoływać się do kolumn i obu wymiarów jednocześnie.
+
+```{r, warning=FALSE}
+auta2012[3:5, 2:4]
+```
+
+
+## Filtrowanie danych
+filter() (and slice())
+```{r, warning=FALSE}
+filter(auta2012,
+       Marka == "Audi",
+       KM > 200)
+```
+
+## Sortowanie danych
+arrange()
+```{r, warning=FALSE}
+```
+
+## Przetwarzanie potokowe, `%>%`
+```{r, warning=FALSE}
+```
+
+## select() (and rename()) [contains, starts_with, ends_with, matches]?
+```{r, warning=FALSE}
+```
+## mutate() (and transmute())
+```{r, warning=FALSE}
+```
+
+
+## group_by()
+## summarise()
+## n()
+## first() last()
+## summarise()
+
+
+
+
+
+
+
+### Zadania:
++ Sprawdź ile samochodów ma zainstalowany autoalarm **PCH: (oznaczony jako 'autoalarm')**
++ Sprawdź ile samochodów ma lakier w metalicznym kolorze **PCH: (oznaczony jako 'metallic')**
+
+### Odpowiedzi:
++ `r sum(grepl(auta2012$Wyposazenie.dodatkowe.napis, pattern="autoalarm"))`
++ `r sum(grepl(as.character(auta2012$Kolor), pattern="metallic"))`
+
+
