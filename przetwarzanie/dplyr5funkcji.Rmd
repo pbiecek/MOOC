@@ -51,6 +51,12 @@ Podobnie możemy odwoływać się do kolumn i obu wymiarów jednocześnie.
 auta2012[3:5, 2:4]
 ```
 
+### Zadania:
+[TODO:]
+do tych ćwiczeń inny zbiór danych,
+mniejszy o kilku kolumnach i kilkunastu wierszach
+może coś ściągnięte z GUS ? 
+
 
 ## Filtrowanie danych
 Używając funkcji filter() można przefiltrować dane, zostawiając tylko te, któ®e spełniają określony warunek (jeden lub kilka).
