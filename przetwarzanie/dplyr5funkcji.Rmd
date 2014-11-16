@@ -406,5 +406,7 @@ auta2012 %>%
 # Challange
 To zadanie wykonaj samodzielnie. Będzie ono oceniane oraz wyślemy Ci uwagi co do napisanego kodu.
 
+Wybierz jendą markę i model samochodu. Sprawdź jaka jest cena w zależności od rocznika i w zależności tego, czy auto jest białego koloru.
 
+W salonach białe samochody są czasem tańsze, zobacz czy ta różnica jest widoczna w autach używanych.
 
