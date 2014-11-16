@@ -403,7 +403,7 @@ auta2012 %>%
 * Wybierz tylko Peugeoty 206 i policz średnią cenę w zależności od roku produkcji. Posortuj te grupy po roku produkcji.
 
 
-# Challange
+# Challenge
 To zadanie wykonaj samodzielnie. Będzie ono oceniane oraz wyślemy Ci uwagi co do napisanego kodu.
 
 Wybierz jendą markę i model samochodu. Sprawdź jaka jest cena w zależności od rocznika i w zależności tego, czy auto jest białego koloru.
