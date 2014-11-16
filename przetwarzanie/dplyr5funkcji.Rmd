@@ -214,9 +214,44 @@ Będziemy z operatora `%>%` często korzystać przy wstępnym przetwarzaniu dany
 * Użyj operatora `%>%` by ze zbioru danych `auta2012` wybrać 5 Viklswagenów o największych silnikach.
 
 
-## select() (and rename()) [contains, starts_with, ends_with, matches]?
+## Wybór zmiennych
+Duże zbiory danych potrafią mieć tysiące zmiennych. Często jednak pracujemy tylko na kilku z nich, a pozostałe głównie nam przeszkadzają.
+
+Funkcja `select()` pozwala w prosty sposób wybrać kilka potrzebnych zmiennych z dużego zbioru danych. Pierwszym argumentem jest ramka danych, a kolejne to zmienne, które chcemy pozostawić. 
+
+Zmienne, które chcemy pozostawić można wskazywać na kilka sposobów. Przećwiczmy je na zbiorze `auta2012`. W tym zbiorze dostępne są następujące dane.
 ```{r, warning=FALSE}
+colnames(auta2012)
 ```
+
+Przypuśćmy, że chcemy wybrać tylko Cenę, Markę, Model, Wersję i Przebieg.w.km. Wystarczy te zmienne wymienić jako argumenty funkcji select.
+```{r, warning=FALSE}
+auta2012 %>%
+  select(Cena.w.PLN, Marka, Model, Wersja, Przebieg.w.km)
+```
+
+Jeżeli chcemy usunąć kilka kolumn, można co tego wykorzystać operator -. 
+A robi się to tak.
+Usuwamy 9 wskazanych kolumn.
+```{r, warning=FALSE}
+auta2012 %>%
+  select(-Cena, -Waluta, -Brutto.netto, 
+         -Kraj.aktualnej.rejestracji, -Kraj.pochodzenia,
+         -Pojazd.uszkodzony, -Skrzynia.biegow,
+         -Status.pojazdu.sprowadzonego, -Wyposazenie.dodatkowe)
+```
+
+Można również wybierać kolumny, których nazwy pasują do pewnego wzorca.
+Przykład poniżej wybiera wszystkie nazwy kolumn, które w nazwie mają wzorzec `aj`.
+```{r, warning=FALSE}
+auta2012 %>%
+  select(matches("aj"))
+```
+
+### Zadania:
+* Wybierz tylko samochody marki Volvo, posortuj je po pojemności skokowej, a następnie wyświetl tylko trzy kolumny: Markę, Cenę.w.PLN i Kolor.
+
+
 
 ## mutate() (and transmute())
 ```{r, warning=FALSE}

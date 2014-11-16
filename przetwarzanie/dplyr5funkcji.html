@@ -57,23 +57,27 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <div id="TOC">
 <ul>
 <li><a href="#wczytanie-danych">Wczytanie danych</a><ul>
-<li><a href="#ramki-i-tabele-danych">Ramki i tabele danych</a></li>
-<li><a href="#filtrowanie-danych">Filtrowanie danych</a><ul>
+<li><a href="#ramki-i-tabele-danych">Ramki i tabele danych</a><ul>
 <li><a href="#zadania">Zadania:</a></li>
 </ul></li>
-<li><a href="#sortowanie-danych">Sortowanie danych</a><ul>
+<li><a href="#filtrowanie-danych">Filtrowanie danych</a><ul>
 <li><a href="#zadania-1">Zadania:</a></li>
 </ul></li>
-<li><a href="#przetwarzanie-potokowe">Przetwarzanie potokowe, <code>%&gt;%</code></a><ul>
+<li><a href="#sortowanie-danych">Sortowanie danych</a><ul>
 <li><a href="#zadania-2">Zadania:</a></li>
 </ul></li>
-<li><a href="#select-and-rename-contains-starts_with-ends_with-matches">select() (and rename()) [contains, starts_with, ends_with, matches]?</a></li>
+<li><a href="#przetwarzanie-potokowe">Przetwarzanie potokowe, <code>%&gt;%</code></a><ul>
+<li><a href="#zadania-3">Zadania:</a></li>
+</ul></li>
+<li><a href="#wybor-zmiennych">Wybór zmiennych</a><ul>
+<li><a href="#zadania-4">Zadania:</a></li>
+</ul></li>
 <li><a href="#mutate-and-transmute">mutate() (and transmute())</a></li>
 <li><a href="#group_by">group_by()</a></li>
 <li><a href="#summarise">summarise()</a></li>
 <li><a href="#n">n()</a></li>
 <li><a href="#first-last">first() last()</a><ul>
-<li><a href="#zadania-3">Zadania:</a></li>
+<li><a href="#zadania-5">Zadania:</a></li>
 <li><a href="#odpowiedzi">Odpowiedzi:</a></li>
 </ul></li>
 </ul></li>
@@ -139,6 +143,10 @@ head(auta2012)</code></pre>
 ## 1    PLN      86000       brutto
 ## 2    PLN      25900       brutto
 ## 3    PLN      55900        netto</code></pre>
+<div id="zadania" class="section level3">
+<h3>Zadania:</h3>
+<p>[TODO:] do tych ćwiczeń inny zbiór danych, mniejszy o kilku kolumnach i kilkunastu wierszach może coś ściągnięte z GUS ?</p>
+</div>
 </div>
 <div id="filtrowanie-danych" class="section level2">
 <h2>Filtrowanie danych</h2>
@@ -152,7 +160,7 @@ head(auta2012)</code></pre>
   filter(auta2012,
        Marka == &quot;Porsche&quot;,
        KM &gt; 300)</code></pre>
-<div id="zadania" class="section level3">
+<div id="zadania-1" class="section level3">
 <h3>Zadania:</h3>
 <ul>
 <li>Ze zbioru danych <code>auta2012</code> pozostaw tylko samochody o wieku do pięciu lat (czyli o roku produkcji &gt; 2007). Nazwij ten wynikowy zbiór danych <code>mlodeAuta</code></li>
@@ -240,7 +248,7 @@ head(auta2012)</code></pre>
 ##   (fctr), Kraj.aktualnej.rejestracji (fctr), Kraj.pochodzenia (fctr),
 ##   Pojazd.uszkodzony (fctr), Skrzynia.biegow (fctr),
 ##   Status.pojazdu.sprowadzonego (fctr), Wyposazenie.dodatkowe (fctr)</code></pre>
-<div id="zadania-1" class="section level3">
+<div id="zadania-2" class="section level3">
 <h3>Zadania:</h3>
 <ul>
 <li>Posortuj auta wzdłuż wielkości silnika (liczby koni mechanicznych, kolumna KM lub pojemności skokowej, kolumna Pojemnosc.skokowa). Które marki mają najwięszke silniki?</li>
@@ -285,7 +293,7 @@ tylkoMalyPrzebieg &lt;- filter(tylkoGolfIV,
   filter(Przebieg.w.km &lt; 50000)</code></pre>
 <p>Ten framgnet kodu można czytać w następujący sposób. Weź zbiór danych <code>auta2012</code>, następnie zasosuj funkcję <code>filter</code> pozostawiając tylko auta <code>Marka == &quot;Volkswagen&quot;</code>, następnie posortuj auta malejąco wzdłuż zmiennej <code>Cena.w.PLN</code>, następnie zastosuj funkcję <code>filter</code> pozostawiając tylko auta o modelu Golf w wersji IV, następnie zastosuj funkcję <code>filter</code> pozostawiając tylko auta o przebiegu poniżej 50 tys km.</p>
 <p>Znacznie czytelniejszy zapis. Będziemy z operatora <code>%&gt;%</code> często korzystać przy wstępnym przetwarzaniu danych.</p>
-<div id="zadania-2" class="section level3">
+<div id="zadania-3" class="section level3">
 <h3>Zadania:</h3>
 <ul>
 <li>Użyj operatora <code>%&gt;%</code> by ze zbioru danych <code>auta2012</code> wybrać tylko 10 najtańszych aut marki Rolls-Royce.</li>
@@ -293,8 +301,85 @@ tylkoMalyPrzebieg &lt;- filter(tylkoGolfIV,
 </ul>
 </div>
 </div>
-<div id="select-and-rename-contains-starts_with-ends_with-matches" class="section level2">
-<h2>select() (and rename()) [contains, starts_with, ends_with, matches]?</h2>
+<div id="wybor-zmiennych" class="section level2">
+<h2>Wybór zmiennych</h2>
+<p>Duże zbiory danych potrafią mieć tysiące zmiennych. Często jednak pracujemy tylko na kilku z nich, a pozostałe głównie nam przeszkadzają.</p>
+<p>Funkcja <code>select()</code> pozwala w prosty sposób wybrać kilka potrzebnych zmiennych z dużego zbioru danych. Pierwszym argumentem jest ramka danych, a kolejne to zmienne, które chcemy pozostawić.</p>
+<p>Zmienne, które chcemy pozostawić można wskazywać na kilka sposobów. Przećwiczmy je na zbiorze <code>auta2012</code>. W tym zbiorze dostępne są następujące dane.</p>
+<pre class="r"><code>colnames(auta2012)</code></pre>
+<pre><code>##  [1] &quot;Cena&quot;                         &quot;Waluta&quot;                      
+##  [3] &quot;Cena.w.PLN&quot;                   &quot;Brutto.netto&quot;                
+##  [5] &quot;KM&quot;                           &quot;kW&quot;                          
+##  [7] &quot;Marka&quot;                        &quot;Model&quot;                       
+##  [9] &quot;Wersja&quot;                       &quot;Liczba.drzwi&quot;                
+## [11] &quot;Pojemnosc.skokowa&quot;            &quot;Przebieg.w.km&quot;               
+## [13] &quot;Rodzaj.paliwa&quot;                &quot;Rok.produkcji&quot;               
+## [15] &quot;Kolor&quot;                        &quot;Kraj.aktualnej.rejestracji&quot;  
+## [17] &quot;Kraj.pochodzenia&quot;             &quot;Pojazd.uszkodzony&quot;           
+## [19] &quot;Skrzynia.biegow&quot;              &quot;Status.pojazdu.sprowadzonego&quot;
+## [21] &quot;Wyposazenie.dodatkowe&quot;</code></pre>
+<p>Przypuśćmy, że chcemy wybrać tylko Cenę, Markę, Model, Wersję i Przebieg.w.km. Wystarczy te zmienne wymienić jako argumenty funkcji select.</p>
+<pre class="r"><code>auta2012 %&gt;%
+  select(Cena.w.PLN, Marka, Model, Wersja, Przebieg.w.km)</code></pre>
+<pre><code>## Source: local data frame [210,134 x 5]
+## 
+##    Cena.w.PLN         Marka     Model Wersja Przebieg.w.km
+## 1       49900           Kia    Carens                41000
+## 2       88000    Mitsubishi Outlander                46500
+## 3       86000     Chevrolet   Captiva                 8000
+## 4       25900         Volvo       S80               200000
+## 5       55900 Mercedes-Benz  Sprinter               169400
+## 6       45900 Mercedes-Benz     Viano               141100
+## 7       39900       Renault    Trafic               205300
+## 8       38900          Ford     Focus    Mk2         93700
+## 9       24900          Ford    Fusion                91120
+## 10      79900    Volkswagen  Multivan               157400
+## ..        ...           ...       ...    ...           ...</code></pre>
+<p>Jeżeli chcemy usunąć kilka kolumn, można co tego wykorzystać operator -. A robi się to tak. Usuwamy 9 wskazanych kolumn.</p>
+<pre class="r"><code>auta2012 %&gt;%
+  select(-Cena, -Waluta, -Brutto.netto, 
+         -Kraj.aktualnej.rejestracji, -Kraj.pochodzenia,
+         -Pojazd.uszkodzony, -Skrzynia.biegow,
+         -Status.pojazdu.sprowadzonego, -Wyposazenie.dodatkowe)</code></pre>
+<pre><code>## Source: local data frame [210,134 x 12]
+## 
+##    Cena.w.PLN  KM  kW         Marka     Model Wersja Liczba.drzwi
+## 1       49900 140 103           Kia    Carens                 4/5
+## 2       88000 156 115    Mitsubishi Outlander                 4/5
+## 3       86000 150 110     Chevrolet   Captiva                 4/5
+## 4       25900 163 120         Volvo       S80                 4/5
+## 5       55900  NA  NA Mercedes-Benz  Sprinter                 4/5
+## 6       45900 150 110 Mercedes-Benz     Viano                 4/5
+## 7       39900 115  85       Renault    Trafic                 4/5
+## 8       38900 115  85          Ford     Focus    Mk2          4/5
+## 9       24900  68  50          Ford    Fusion                 4/5
+## 10      79900 175 129    Volkswagen  Multivan                 4/5
+## ..        ... ... ...           ...       ...    ...          ...
+## Variables not shown: Pojemnosc.skokowa (dbl), Przebieg.w.km (dbl),
+##   Rodzaj.paliwa (fctr), Rok.produkcji (dbl), Kolor (fctr)</code></pre>
+<p>Można również wybierać kolumny, których nazwy pasują do pewnego wzorca. Przykład poniżej wybiera wszystkie nazwy kolumn, które w nazwie mają wzorzec <code>aj</code>.</p>
+<pre class="r"><code>auta2012 %&gt;%
+  select(matches(&quot;aj&quot;))</code></pre>
+<pre><code>## Source: local data frame [210,134 x 3]
+## 
+##             Rodzaj.paliwa Kraj.aktualnej.rejestracji Kraj.pochodzenia
+## 1  olej napedowy (diesel)                     Polska                 
+## 2  olej napedowy (diesel)                     Polska                 
+## 3  olej napedowy (diesel)                     Polska                 
+## 4  olej napedowy (diesel)                     Polska           Wlochy
+## 5  olej napedowy (diesel)                                            
+## 6  olej napedowy (diesel)                                            
+## 7  olej napedowy (diesel)                     Polska           Polska
+## 8  olej napedowy (diesel)                     Polska           Polska
+## 9  olej napedowy (diesel)                     Polska           Polska
+## 10 olej napedowy (diesel)                     Polska           Polska
+## ..                    ...                        ...              ...</code></pre>
+<div id="zadania-4" class="section level3">
+<h3>Zadania:</h3>
+<ul>
+<li>Wybierz tylko samochody marki Volvo, posortuj je po pojemności skokowej, a następnie wyświetl tylko trzy kolumny: Markę, Cenę.w.PLN i Kolor.</li>
+</ul>
+</div>
 </div>
 <div id="mutate-and-transmute" class="section level2">
 <h2>mutate() (and transmute())</h2>
@@ -310,7 +395,7 @@ tylkoMalyPrzebieg &lt;- filter(tylkoGolfIV,
 </div>
 <div id="first-last" class="section level2">
 <h2>first() last()</h2>
-<div id="zadania-3" class="section level3">
+<div id="zadania-5" class="section level3">
 <h3>Zadania:</h3>
 <ul>
 <li>Sprawdź ile samochodów ma zainstalowany autoalarm <strong>PCH: (oznaczony jako ‘autoalarm’)</strong></li>
