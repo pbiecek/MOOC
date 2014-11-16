@@ -78,14 +78,11 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li><a href="#agregaty">Agregaty</a><ul>
 <li><a href="#zadania-6">Zadania</a></li>
 </ul></li>
-<li><a href="#group_by">group_by()</a><ul>
+<li><a href="#grupowanie">Grupowanie</a><ul>
 <li><a href="#zadania-7">Zadania</a></li>
 </ul></li>
-<li><a href="#n">n()</a><ul>
-<li><a href="#zadania-8">Zadania</a></li>
-</ul></li>
 <li><a href="#challange">Challange</a><ul>
-<li><a href="#zadania-9">Zadania</a></li>
+<li><a href="#zadania-8">Zadania</a></li>
 <li><a href="#odpowiedzi">Odpowiedzi:</a></li>
 </ul></li>
 </ul>
@@ -485,23 +482,229 @@ autaZWiekiemIBrutto %&gt;%
 </ul>
 </div>
 </div>
-<div id="group_by" class="section level1">
-<h1>group_by()</h1>
-<pre class="r"><code>autaGrupy &lt;- auta2012 %&gt;%
-  group_by(Marka)</code></pre>
+<div id="grupowanie" class="section level1">
+<h1>Grupowanie</h1>
+<p>Jedną z bardziej użytecznych funkcji jest możliwość liczenia agregatów w grupach. Aby określić jedną lub kilka zmiennych grupujących można wykorzystać funkcję <code>group_by()</code>.</p>
+<p>W poniższym przykładzie liczymy agregaty osobno dla każdej grupy określonej przez <code>Rodzaj.paliwa</code>.</p>
+<pre class="r"><code>auta2012 %&gt;%
+  group_by(Rodzaj.paliwa) %&gt;%
+  summarise(medianaCeny = median(Cena.w.PLN, na.rm=TRUE),
+            medianaPrzebieg = median(Przebieg.w.km, na.rm=TRUE),
+            liczba = n())</code></pre>
+<pre><code>## Source: local data frame [10 x 4]
+## 
+##             Rodzaj.paliwa medianaCeny medianaPrzebieg liczba
+## 1                            11802.95          118000   2390
+## 2                 benzyna    14900.00          119000  81711
+## 3             benzyna+CNG    16237.39          150500     79
+## 4             benzyna+LPG     9700.00          174000  10684
+## 5                  etanol    17225.52          114045     28
+## 6                 hybryda    89900.00           38700    183
+## 7                    inne     8850.00          124000     44
+## 8       naped elektryczny    19600.00          140000     55
+## 9  olej napedowy (diesel)    23900.00          150000 114959
+## 10                  wodor     1499.00            3000      1</code></pre>
+<p>Na agregatach możemy pracować tak jak na zwykłych ramkach danych. Możemy przekazać je dalej do funkcji które sortują, wybierają lub zmieniają zmienne.</p>
+<p>W poniższym przykładzie sortujemy agregaty po średniej cenie.</p>
+<pre class="r"><code>auta2012 %&gt;%
+  group_by(Rodzaj.paliwa) %&gt;%
+  summarise(medianaCeny = median(Cena.w.PLN, na.rm=TRUE),
+            medianaPrzebieg = median(Przebieg.w.km, na.rm=TRUE),
+            liczba = n()) %&gt;%
+  arrange(medianaCeny)</code></pre>
+<pre><code>## Source: local data frame [10 x 4]
+## 
+##             Rodzaj.paliwa medianaCeny medianaPrzebieg liczba
+## 1                   wodor     1499.00            3000      1
+## 2                    inne     8850.00          124000     44
+## 3             benzyna+LPG     9700.00          174000  10684
+## 4                            11802.95          118000   2390
+## 5                 benzyna    14900.00          119000  81711
+## 6             benzyna+CNG    16237.39          150500     79
+## 7                  etanol    17225.52          114045     28
+## 8       naped elektryczny    19600.00          140000     55
+## 9  olej napedowy (diesel)    23900.00          150000 114959
+## 10                hybryda    89900.00           38700    183</code></pre>
+<p>Grupować można po kilku zmiennych, w tym przypadku agregaty liczone są w każdym podzbiorze zmiennych.</p>
+<p>Prześledźmy teraz większy przykład przetwarzania skłądającego się z kilku kroków. Będziemy chcieli zobaczyć średnie ceny i przebiegi różnych pięcioletnich modeli Volkswagena w zależności od rodzaju paliwa.</p>
+<p>Zaczniemy od wybrania tylko pięcioletnich Volkswagenów.</p>
+<pre class="r"><code>auta2012 %&gt;%
+  filter(Rok.produkcji == 2007, Marka == &quot;Volkswagen&quot;)</code></pre>
+<pre><code>## Source: local data frame [1,694 x 21]
+## 
+##     Cena Waluta Cena.w.PLN Brutto.netto  KM  kW      Marka    Model Wersja
+## 1  79900    PLN      79900        netto 175 129 Volkswagen Multivan       
+## 2  36500    PLN      36500        netto 140 103 Volkswagen   Passat     B6
+## 3  39999    PLN      39999        netto 105  77 Volkswagen   Passat     B6
+## 4  40649    PLN      40649        netto 140 103 Volkswagen   Passat     B6
+## 5  44900    PLN      44900       brutto 105  77 Volkswagen   Passat     B6
+## 6  42900    PLN      42900        netto 170 125 Volkswagen   Passat     B6
+## 7  49900    PLN      49900       brutto 140 103 Volkswagen   Passat     B6
+## 8  29900    PLN      29900       brutto 140 103 Volkswagen   Passat     B6
+## 9  36400    PLN      36400       brutto 140 103 Volkswagen   Touran       
+## 10 43900    PLN      43900       brutto 140 103 Volkswagen   Passat     B6
+## ..   ...    ...        ...          ... ... ...        ...      ...    ...
+## Variables not shown: Liczba.drzwi (fctr), Pojemnosc.skokowa (dbl),
+##   Przebieg.w.km (dbl), Rodzaj.paliwa (fctr), Rok.produkcji (dbl), Kolor
+##   (fctr), Kraj.aktualnej.rejestracji (fctr), Kraj.pochodzenia (fctr),
+##   Pojazd.uszkodzony (fctr), Skrzynia.biegow (fctr),
+##   Status.pojazdu.sprowadzonego (fctr), Wyposazenie.dodatkowe (fctr)</code></pre>
+<p>Następnie do potoku dodamy informację, że chcemy grupować po modelach i po rodzajach paliwa. Dla każdej grupy chcemy wyznaczyć średnią cenę, średni przebieg i liczbę samochodów w takiej grupie.</p>
+<pre class="r"><code>auta2012 %&gt;%
+  filter(Rok.produkcji == 2007, Marka == &quot;Volkswagen&quot;) %&gt;%
+  group_by(Model, Rodzaj.paliwa) %&gt;%
+  summarise(sredniaCena = mean(Cena.w.PLN, na.rm=TRUE),
+            sredniPrzebieg = mean(Przebieg.w.km, na.rm=TRUE),
+            liczba = n())</code></pre>
+<pre><code>## Source: local data frame [46 x 5]
+## Groups: Model
+## 
+##          Model          Rodzaj.paliwa sredniaCena sredniPrzebieg liczba
+## 1       Beetle                benzyna    39000.00       30000.00      1
+## 2        Caddy                           27900.00      186452.00      1
+## 3        Caddy                benzyna    27900.00      170000.00      2
+## 4        Caddy olej napedowy (diesel)    29813.10      125031.11     49
+## 5    Caravelle                           82000.00        3200.00      1
+## 6    Caravelle olej napedowy (diesel)    65458.56      151922.22      9
+## 7          Eos                benzyna    52281.67       53083.33      6
+## 8          Eos olej napedowy (diesel)    54343.11       80714.29      7
+## 9          Fox                           15700.00       73000.00      1
+## 10         Fox                benzyna    15593.26       80038.45     11
+## 11         Fox olej napedowy (diesel)    16608.70      135005.14      7
+## 12        Golf                           39999.00       64000.00      1
+## 13        Golf                benzyna    35712.02       74654.65     37
+## 14        Golf            benzyna+LPG    32925.00       78249.75      4
+## 15        Golf olej napedowy (diesel)    33630.78      141550.09    244
+## 16   Golf Plus                           32000.00       96000.00      1
+## 17   Golf Plus                benzyna    29210.81       79839.92     12
+## 18   Golf Plus olej napedowy (diesel)    35879.23      122054.61     57
+## 19        inny olej napedowy (diesel)    37221.15      129546.75      6
+## 20       Jetta                           30798.00      173300.00      1
+## 21       Jetta                benzyna    35366.38       70360.15     13
+## 22       Jetta            benzyna+LPG    39800.00       82500.00      1
+## 23       Jetta olej napedowy (diesel)    36740.23      135148.20     56
+## 24    Multivan olej napedowy (diesel)    96501.81      122252.35     21
+## 25  New Beetle                benzyna    40087.16       46256.11      9
+## 26      Passat                           36000.00      123000.00      1
+## 27      Passat                benzyna    43658.03      109720.88     38
+## 28      Passat            benzyna+LPG    58000.00       53000.00      1
+## 29      Passat olej napedowy (diesel)    41539.08      145810.58    585
+## 30     Phaeton                benzyna    84000.00      210000.00      1
+## 31     Phaeton olej napedowy (diesel)    96888.98      102669.57      7
+## 32        Polo                           27900.00       70000.00      1
+## 33        Polo                benzyna    23339.83       53174.49     51
+## 34        Polo olej napedowy (diesel)    23782.99      100681.19    105
+## 35      Sharan                           38700.00      197000.00      1
+## 36      Sharan                benzyna    30815.79      157796.50      2
+## 37      Sharan olej napedowy (diesel)    44329.92      160596.29     46
+## 38      Tiguan olej napedowy (diesel)    54850.21      111833.33      5
+## 39     Touareg                benzyna    98650.00       52000.00      4
+## 40     Touareg olej napedowy (diesel)   106323.00      132024.76     50
+## 41      Touran                benzyna    50512.30       68590.67      3
+## 42      Touran            benzyna+CNG    32349.75      183750.00      4
+## 43      Touran            benzyna+LPG    34048.90      109000.00      1
+## 44      Touran olej napedowy (diesel)    41105.38      154653.30    200
+## 45 Transporter                           97200.00      204357.00      2
+## 46 Transporter olej napedowy (diesel)    52449.70      169995.65     28</code></pre>
+<p>Kolejność wierszy jest przypadkowa co utrudnia jakiekolwiek porównania. Posortujmy więc te wyniki po zmiennej Model i zmiennej sredniaCena, którą przed chwilą wyznaczyliśmy.</p>
+<p>Dzięki temu auta będą posortowane po modelu a w ramach tego samego modelu po średniej cenie.</p>
+<pre class="r"><code>auta2012 %&gt;%
+  filter(Rok.produkcji == 2007, Marka == &quot;Volkswagen&quot;) %&gt;%
+  group_by(Model, Rodzaj.paliwa) %&gt;%
+  summarise(sredniaCena = mean(Cena.w.PLN, na.rm=TRUE),
+            sredniPrzebieg = mean(Przebieg.w.km, na.rm=TRUE),
+            liczba = n()) %&gt;%
+  arrange(Model, sredniaCena) </code></pre>
+<pre><code>## Source: local data frame [46 x 5]
+## Groups: Model
+## 
+##          Model          Rodzaj.paliwa sredniaCena sredniPrzebieg liczba
+## 1       Beetle                benzyna    39000.00       30000.00      1
+## 2        Caddy                           27900.00      186452.00      1
+## 3        Caddy                benzyna    27900.00      170000.00      2
+## 4        Caddy olej napedowy (diesel)    29813.10      125031.11     49
+## 5    Caravelle olej napedowy (diesel)    65458.56      151922.22      9
+## 6    Caravelle                           82000.00        3200.00      1
+## 7          Eos                benzyna    52281.67       53083.33      6
+## 8          Eos olej napedowy (diesel)    54343.11       80714.29      7
+## 9          Fox                benzyna    15593.26       80038.45     11
+## 10         Fox                           15700.00       73000.00      1
+## 11         Fox olej napedowy (diesel)    16608.70      135005.14      7
+## 12        Golf            benzyna+LPG    32925.00       78249.75      4
+## 13        Golf olej napedowy (diesel)    33630.78      141550.09    244
+## 14        Golf                benzyna    35712.02       74654.65     37
+## 15        Golf                           39999.00       64000.00      1
+## 16   Golf Plus                benzyna    29210.81       79839.92     12
+## 17   Golf Plus                           32000.00       96000.00      1
+## 18   Golf Plus olej napedowy (diesel)    35879.23      122054.61     57
+## 19        inny olej napedowy (diesel)    37221.15      129546.75      6
+## 20       Jetta                           30798.00      173300.00      1
+## 21       Jetta                benzyna    35366.38       70360.15     13
+## 22       Jetta olej napedowy (diesel)    36740.23      135148.20     56
+## 23       Jetta            benzyna+LPG    39800.00       82500.00      1
+## 24    Multivan olej napedowy (diesel)    96501.81      122252.35     21
+## 25  New Beetle                benzyna    40087.16       46256.11      9
+## 26      Passat                           36000.00      123000.00      1
+## 27      Passat olej napedowy (diesel)    41539.08      145810.58    585
+## 28      Passat                benzyna    43658.03      109720.88     38
+## 29      Passat            benzyna+LPG    58000.00       53000.00      1
+## 30     Phaeton                benzyna    84000.00      210000.00      1
+## 31     Phaeton olej napedowy (diesel)    96888.98      102669.57      7
+## 32        Polo                benzyna    23339.83       53174.49     51
+## 33        Polo olej napedowy (diesel)    23782.99      100681.19    105
+## 34        Polo                           27900.00       70000.00      1
+## 35      Sharan                benzyna    30815.79      157796.50      2
+## 36      Sharan                           38700.00      197000.00      1
+## 37      Sharan olej napedowy (diesel)    44329.92      160596.29     46
+## 38      Tiguan olej napedowy (diesel)    54850.21      111833.33      5
+## 39     Touareg                benzyna    98650.00       52000.00      4
+## 40     Touareg olej napedowy (diesel)   106323.00      132024.76     50
+## 41      Touran            benzyna+CNG    32349.75      183750.00      4
+## 42      Touran            benzyna+LPG    34048.90      109000.00      1
+## 43      Touran olej napedowy (diesel)    41105.38      154653.30    200
+## 44      Touran                benzyna    50512.30       68590.67      3
+## 45 Transporter olej napedowy (diesel)    52449.70      169995.65     28
+## 46 Transporter                           97200.00      204357.00      2</code></pre>
+<p>Niektóre średnie są dosyć przypadkowe, ponieważ w grupie było tylko jedno / dwa auta. Usuńmy grupy, w których było mniej niż 10 samochodów, dzięki temu te średnie będą bardziej wiarygodne.</p>
+<pre class="r"><code>auta2012 %&gt;%
+  filter(Rok.produkcji == 2007, Marka == &quot;Volkswagen&quot;) %&gt;%
+  group_by(Model, Rodzaj.paliwa) %&gt;%
+  summarise(sredniaCena = mean(Cena.w.PLN, na.rm=TRUE),
+            sredniPrzebieg = mean(Przebieg.w.km, na.rm=TRUE),
+            liczba = n()) %&gt;%
+  arrange(Model, sredniaCena) %&gt;%
+  filter(liczba &gt; 10)</code></pre>
+<pre><code>## Source: local data frame [17 x 5]
+## Groups: Model
+## 
+##          Model          Rodzaj.paliwa sredniaCena sredniPrzebieg liczba
+## 1        Caddy olej napedowy (diesel)    29813.10      125031.11     49
+## 2          Fox                benzyna    15593.26       80038.45     11
+## 3         Golf olej napedowy (diesel)    33630.78      141550.09    244
+## 4         Golf                benzyna    35712.02       74654.65     37
+## 5    Golf Plus                benzyna    29210.81       79839.92     12
+## 6    Golf Plus olej napedowy (diesel)    35879.23      122054.61     57
+## 7        Jetta                benzyna    35366.38       70360.15     13
+## 8        Jetta olej napedowy (diesel)    36740.23      135148.20     56
+## 9     Multivan olej napedowy (diesel)    96501.81      122252.35     21
+## 10      Passat olej napedowy (diesel)    41539.08      145810.58    585
+## 11      Passat                benzyna    43658.03      109720.88     38
+## 12        Polo                benzyna    23339.83       53174.49     51
+## 13        Polo olej napedowy (diesel)    23782.99      100681.19    105
+## 14      Sharan olej napedowy (diesel)    44329.92      160596.29     46
+## 15     Touareg olej napedowy (diesel)   106323.00      132024.76     50
+## 16      Touran olej napedowy (diesel)    41105.38      154653.30    200
+## 17 Transporter olej napedowy (diesel)    52449.70      169995.65     28</code></pre>
 <div id="zadania-7" class="section level2">
 <h2>Zadania</h2>
-</div>
-</div>
-<div id="n" class="section level1">
-<h1>n()</h1>
-<div id="zadania-8" class="section level2">
-<h2>Zadania</h2>
+<ul>
+<li></li>
+</ul>
 </div>
 </div>
 <div id="challange" class="section level1">
 <h1>Challange</h1>
-<div id="zadania-9" class="section level2">
+<div id="zadania-8" class="section level2">
 <h2>Zadania</h2>
 <ul>
 <li>Sprawdź ile samochodów ma zainstalowany autoalarm <strong>PCH: (oznaczony jako ‘autoalarm’)</strong></li>
