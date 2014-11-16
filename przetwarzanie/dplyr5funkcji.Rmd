@@ -33,7 +33,7 @@ Podstawowym typem danych, przechowujących dane w postaci tabelarycznej jest typ
 
 Odwołując się do elementów tabeli korzysta się ze składni `tabela[ktore_wiersze, ktore_kolmny]`.
 
-Przykładowo, wybrane 3 wiersza z naszej tabeli liczb wyglądałoby tak
+Przykładowo, wybranie 3 wiersza z naszej tabeli liczb wyglądałoby tak
 
 ```{r, warning=FALSE}
 auta2012[3,]
@@ -53,17 +53,32 @@ auta2012[3:5, 2:4]
 
 
 ## Filtrowanie danych
-filter() (and slice())
+Używając funkcji filter() można przefiltrować dane, zostawiając tylko te, któ®e spełniają określony warunek (jeden lub kilka).
+Pierwszym argumentem tej funkcji jest ramka danych,
+kolejne argumenty, a może być ich jeden lub więcej) to warunki logiczne, które muszę być spełnione aby dany wiersz trafił do wyniki.
+
+Jeżeli chcemy pozostawić tlyko samochody marki Audi, możemy uzyć warunku `Marka == 'Audi'`.
+
 ```{r, warning=FALSE}
-filter(auta2012,
+tylkoAudi <-
+  filter(auta2012,
+       Marka == "Audi")
+```
+
+Memy określać jednocześnie więcej warunków.
+Na przykłąd tylko samochody Audi o silnikach o liczbie koni mechanicnzych przekraczających 200 możemy odfiltrować w następujący sposób.
+
+```{r, warning=FALSE}
+tylkoAudiZDużymSilnikiem <-
+  filter(auta2012,
        Marka == "Audi",
        KM > 200)
 ```
 
-
 ### Zadania:
-+ Pozostaw tylko samochody do pięciu lat
-+ Wyberz Fiaty 500
++ Ze zbioru danych `auta2012` pozostaw tylko samochody o wieku do pięciu lat (czyli o roku produkcji > 2007). Nazwij ten wynikowy zbiór danych `mlodeAuta`
++ Z przed chwilą stworzonego zbioru danych `mlodeAuta` wybierz tylko Fiaty 500. Ile jest takich aut? 
+(wymiary ramki danych możesz sprawdzić funkcją dim())
 
 
 ## Sortowanie danych
