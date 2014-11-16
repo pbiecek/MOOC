@@ -57,7 +57,7 @@ Używając funkcji filter() można przefiltrować dane, zostawiając tylko te, k
 Pierwszym argumentem tej funkcji jest ramka danych,
 kolejne argumenty, a może być ich jeden lub więcej) to warunki logiczne, które muszę być spełnione aby dany wiersz trafił do wyniki.
 
-Jeżeli chcemy pozostawić tlyko samochody marki Porsche, możemy uzyć warunku `Marka == 'Porsche'`.
+Jeżeli chcemy pozostawić tylko samochody marki Porsche, możemy uzyć warunku `Marka == 'Porsche'`.
 
 ```{r, warning=FALSE}
 tylkoPorsche <-
