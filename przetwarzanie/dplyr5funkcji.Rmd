@@ -57,22 +57,22 @@ Używając funkcji filter() można przefiltrować dane, zostawiając tylko te, k
 Pierwszym argumentem tej funkcji jest ramka danych,
 kolejne argumenty, a może być ich jeden lub więcej) to warunki logiczne, które muszę być spełnione aby dany wiersz trafił do wyniki.
 
-Jeżeli chcemy pozostawić tlyko samochody marki Audi, możemy uzyć warunku `Marka == 'Audi'`.
+Jeżeli chcemy pozostawić tlyko samochody marki Porsche, możemy uzyć warunku `Marka == 'Porsche'`.
 
 ```{r, warning=FALSE}
-tylkoAudi <-
+tylkoPorsche <-
   filter(auta2012,
-       Marka == "Audi")
+       Marka == "Porsche")
 ```
 
 Memy określać jednocześnie więcej warunków.
-Na przykłąd tylko samochody Audi o silnikach o liczbie koni mechanicnzych przekraczających 200 możemy odfiltrować w następujący sposób.
+Na przykłąd tylko samochody Audi o silnikach o liczbie koni mechanicnzych przekraczających 300 możemy odfiltrować w następujący sposób.
 
 ```{r, warning=FALSE}
-tylkoAudiZDużymSilnikiem <-
+tylkoPorscheZDużymSilnikiem <-
   filter(auta2012,
-       Marka == "Audi",
-       KM > 200)
+       Marka == "Porsche",
+       KM > 300)
 ```
 
 ### Zadania:
@@ -82,9 +82,54 @@ tylkoAudiZDużymSilnikiem <-
 
 
 ## Sortowanie danych
-arrange()
+Bardzo często w zbiorze danych jesteśmy zainteresowani znalezieniem tych wierszy, któych warotści są największe lub najmniejsze. 
+
+Również by sprawdzić, czy dane przyjmują sensowe wartości, często sprawdzamy ekstraema, największe i najmenijsze przypadku, by ocenić czy one przyjmują rozsądne wartości.
+
+Do sortowania, bardzo przydatna jest funkcja `arrange()`, która jako pierwszy argument przyjmuje ramkę danych a jako kolejne argumenty przyjmuje zmienne, wzdłuż których dane są sortowane.
+
+Posortujmy dane wzdłuż ceny w polskich złotych.
+
 ```{r, warning=FALSE}
+posortowanePorsche <-
+  arrange(tylkoPorscheZDużymSilnikiem, 
+        Cena.w.PLN)
 ```
+
+Aby zobaczyć jakie wiersza są pierwsze a jakie są ostatnie w tym zbiorze danych, możemy użyć funkcji `head()` i `tail()`. Domyślnie wybiranych jest pierwszych lub ostatnich 6 wierszy. Ale ustawiając drugi argument można wyświetlać więcej lub mniej wierszy.
+
+```{r, warning=FALSE}
+head(posortowanePorsche)
+
+tail(posortowanePorsche)
+```
+
+Jeżeli wskażemy więcej niż jedną zmienną do sortowania, to w pierwszym kroku sortowanie odbędzie się wzdłuż pierwszej zmiennej, a w przypadku remisu (takich samych wartości) w drugim kropku wzdłuż drugiej zmiennej.
+
+W poniższym przypadku w pierwszym kroku sortujemy po Modelu auta, gdy samochody mają ten sam model to ich kolwjność jest określona przez drugą zmienną, czyli w tym przypadku cenie.
+
+Model jest nazwą i w tym przypadku jest sortowany w kolejności alfabetycznej.
+
+```{r, warning=FALSE}
+head(
+   arrange(tylkoPorscheZDużymSilnikiem, 
+        Model, Cena.w.PLN)
+  ) 
+```
+
+Domyślnie dane sortowane są rosnąco. Jeżeli chcemy zrminić kolejnośc sortowania i sortować malejąco, to należy daną zmienną opakować funkcją `desc()` jak na poniższym przykładzie.
+
+```{r, warning=FALSE}
+head(
+   arrange(tylkoPorscheZDużymSilnikiem, 
+        Model, desc(Cena.w.PLN))
+  ) 
+```
+
+### Zadania:
+* Posortuj auta wzdłuż wielkości silnika (liczby koni mechanicznych, kolumna KM lub pojemności skokowej, kolumna Pojemnosc.skokowa). Które marki mają najwięszke silniki?
+* Wybierz tylko auta marki 'Rolls-Royce' i posortuj je po cenie.
+
 
 ## Przetwarzanie potokowe, `%>%`
 ```{r, warning=FALSE}
