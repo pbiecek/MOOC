@@ -19,7 +19,7 @@ Dplyr nie jest jedynym pakietem, wspierającym analizy danych. Ale jest bardzo b
 
 Każdy wiersz zbioru danych `auta2012` opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, message=FALSE}
 library(SmarterPoland)
 head(auta2012)
 ```
@@ -174,7 +174,7 @@ W tym rozwiązaniu nie są tworzone zbędna nazwy zmiennych, ale sam zapis jest 
 Nawet stosując wcięcia trudno nam zauważyć, które argumenty są do której funkcji.
 Taki blok może się jeszcze bardziej rozrastać i tym trudniej będzie zrozumieć co się w tym kodzie dzieje.
 
-Rozwiązaniem tego problemu jest stosowanie specjalnego operatora do przetwarzania potokowaegp `%>%`. Ten operator pochodzi z pakietu `magritr` i jest dostępny po włączeniu pakietu `dplyr`.
+Rozwiązaniem tego problemu jest stosowanie specjalnego operatora do przetwarzania potokowaegp `%>%`. Ten operator pochodzi z pakietu `magrittr`  (to be pronounced with a sophisticated french accent)  i jest dostępny po włączeniu pakietu `dplyr`.
 
 Jak działa ten operator?
 Przekazuje lewą stronę operatora jako pierwszy argument prawej strony tego operatora
@@ -182,7 +182,7 @@ Przekazuje lewą stronę operatora jako pierwszy argument prawej strony tego ope
 jest równoważne
 ` f(a, b) `
 
-Ta prosta sztuczna pozwala znacząco skrócić zapis i uczynić go znacznie czytelniejszym.
+Ta prosta sztuczka pozwala znacząco skrócić zapis i uczynić go znacznie czytelniejszym.
 
 ```{r, warning=FALSE}
 tylkoMalyPrzebieg <- 
@@ -211,6 +211,7 @@ Będziemy z operatora `%>%` często korzystać przy wstępnym przetwarzaniu dany
 ## select() (and rename()) [contains, starts_with, ends_with, matches]?
 ```{r, warning=FALSE}
 ```
+
 ## mutate() (and transmute())
 ```{r, warning=FALSE}
 ```
@@ -220,7 +221,6 @@ Będziemy z operatora `%>%` często korzystać przy wstępnym przetwarzaniu dany
 ## summarise()
 ## n()
 ## first() last()
-## summarise()
 
 
 
