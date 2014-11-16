@@ -399,20 +399,12 @@ auta2012 %>%
 ```
 
 ## Zadania
-* 
+* Wybierz pięcioletnie Golfy i sprawdź czy średnia cena zależy od kraju aktualnej rejestracji. W tym celu pogrupuj po zmiennej Kraj.aktualnej.rejestracji i w każdej grupie policz średnią.
+* Wybierz tylko Peugeoty 206 i policz średnią cenę w zależności od roku produkcji. Posortuj te grupy po roku produkcji.
 
 
 # Challange
+To zadanie wykonaj samodzielnie. Będzie ono oceniane oraz wyślemy Ci uwagi co do napisanego kodu.
 
-
-
-
-## Zadania
-+ Sprawdź ile samochodów ma zainstalowany autoalarm **PCH: (oznaczony jako 'autoalarm')**
-+ Sprawdź ile samochodów ma lakier w metalicznym kolorze **PCH: (oznaczony jako 'metallic')**
-
-## Odpowiedzi:
-+ `r sum(grepl(auta2012$Wyposazenie.dodatkowe.napis, pattern="autoalarm"))`
-+ `r sum(grepl(as.character(auta2012$Kolor), pattern="metallic"))`
 
 
