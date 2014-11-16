@@ -251,12 +251,43 @@ auta2012 %>%
 ### Zadania:
 * Wybierz tylko samochody marki Volvo, posortuj je po pojemności skokowej, a następnie wyświetl tylko trzy kolumny: Markę, Cenę.w.PLN i Kolor.
 
+## Wyliczanie nowych zmiennych
+Nie zawsze w zbiorze danych są dokładnie te zmienne, których potrzebujemy.
+Czasem musimy je policzyć, służy do tego funkcja o wdzięcznej nazwie `mutate()`.
 
-
-## mutate() (and transmute())
+Policzmy najpierw wiek auta. Dane były zbierane w roku 2012, więc wiek auta to różnica pomiędzy rokiem produkcji, rokiem 2012 plus 1.
 ```{r, warning=FALSE}
+autaZWiekiem <- auta2012 %>%
+  mutate(Wiek.auta = 2013 - Rok.produkcji)
+autaZWiekiem %>% 
+  select(Wiek.auta, Rok.produkcji)
 ```
 
+Drugą użyteczną zmienną to cena brutto. Teraz część aut ma cenę brutto a część netto. To utrudnia porównania. Przeliczmy wszystkie ceny na brutto dodając 23\% tam gdzie podana jest cena netto.
+
+```{r, warning=FALSE}
+autaZCenaBrutto <- auta2012 %>%
+  mutate(Cena.brutto = Cena.w.PLN * ifelse(Brutto.netto == "brutto", 1, 1.23))
+autaZCenaBrutto %>% 
+  select(Cena.brutto, Brutto.netto, Cena.w.PLN)
+```
+
+Funkcja `ifelse()` jako wynik zwraca drugi lub trzegi argument w zależności od tego czy pierwszy argument jest prawdziwy czy nie.
+
+W jednym wykonaniu funkcji `mutate()` można podać kilka transformacji.
+
+```{r, warning=FALSE}
+autaZWiekiemIBrutto <- auta2012 %>%
+  mutate(Wiek.auta = 2013 - Rok.produkcji,
+         Cena.brutto = Cena.w.PLN * ifelse(Brutto.netto == "brutto", 1, 1.23))
+
+autaZWiekiemIBrutto %>% 
+  select(Cena.brutto, Brutto.netto, Cena.w.PLN, Wiek.auta, Rok.produkcji)
+```
+
+### Zadania:
+* Policz średni przebieg na rok, dzieląc przebieg przez wieka auta.
+* Poza koniem mechanicznym inną ciekawą jednostką mocy jest koń parowy (jednostka HP). Jeden koń mechanicnzy to 0.9863 konia parowego. Utwórz nową zmienną, która przedstawi moc aut w koniach parowych (btw: Wikipedia zna jeszcze kilka innych ciekawych jednostek mocy).
 
 ## group_by()
 ## summarise()

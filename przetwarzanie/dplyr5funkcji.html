@@ -72,12 +72,14 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li><a href="#wybor-zmiennych">Wybór zmiennych</a><ul>
 <li><a href="#zadania-4">Zadania:</a></li>
 </ul></li>
-<li><a href="#mutate-and-transmute">mutate() (and transmute())</a></li>
+<li><a href="#wyliczanie-nowych-zmiennych">Wyliczanie nowych zmiennych</a><ul>
+<li><a href="#zadania-5">Zadania:</a></li>
+</ul></li>
 <li><a href="#group_by">group_by()</a></li>
 <li><a href="#summarise">summarise()</a></li>
 <li><a href="#n">n()</a></li>
 <li><a href="#first-last">first() last()</a><ul>
-<li><a href="#zadania-5">Zadania:</a></li>
+<li><a href="#zadania-6">Zadania:</a></li>
 <li><a href="#odpowiedzi">Odpowiedzi:</a></li>
 </ul></li>
 </ul></li>
@@ -381,8 +383,76 @@ tylkoMalyPrzebieg &lt;- filter(tylkoGolfIV,
 </ul>
 </div>
 </div>
-<div id="mutate-and-transmute" class="section level2">
-<h2>mutate() (and transmute())</h2>
+<div id="wyliczanie-nowych-zmiennych" class="section level2">
+<h2>Wyliczanie nowych zmiennych</h2>
+<p>Nie zawsze w zbiorze danych są dokładnie te zmienne, których potrzebujemy. Czasem musimy je policzyć, służy do tego funkcja o wdzięcznej nazwie <code>mutate()</code>.</p>
+<p>Policzmy najpierw wiek auta. Dane były zbierane w roku 2012, więc wiek auta to różnica pomiędzy rokiem produkcji, rokiem 2012 plus 1.</p>
+<pre class="r"><code>autaZWiekiem &lt;- auta2012 %&gt;%
+  mutate(Wiek.auta = 2013 - Rok.produkcji)
+autaZWiekiem %&gt;% 
+  select(Wiek.auta, Rok.produkcji)</code></pre>
+<pre><code>## Source: local data frame [210,134 x 2]
+## 
+##    Wiek.auta Rok.produkcji
+## 1          5          2008
+## 2          5          2008
+## 3          4          2009
+## 4         10          2003
+## 5          6          2007
+## 6          9          2004
+## 7          7          2006
+## 8          5          2008
+## 9          7          2006
+## 10         6          2007
+## ..       ...           ...</code></pre>
+<p>Drugą użyteczną zmienną to cena brutto. Teraz część aut ma cenę brutto a część netto. To utrudnia porównania. Przeliczmy wszystkie ceny na brutto dodając 23% tam gdzie podana jest cena netto.</p>
+<pre class="r"><code>autaZCenaBrutto &lt;- auta2012 %&gt;%
+  mutate(Cena.brutto = Cena.w.PLN * ifelse(Brutto.netto == &quot;brutto&quot;, 1, 1.23))
+autaZCenaBrutto %&gt;% 
+  select(Cena.brutto, Brutto.netto, Cena.w.PLN)</code></pre>
+<pre><code>## Source: local data frame [210,134 x 3]
+## 
+##    Cena.brutto Brutto.netto Cena.w.PLN
+## 1        49900       brutto      49900
+## 2        88000       brutto      88000
+## 3        86000       brutto      86000
+## 4        25900       brutto      25900
+## 5        68757        netto      55900
+## 6        56457        netto      45900
+## 7        39900       brutto      39900
+## 8        38900       brutto      38900
+## 9        24900       brutto      24900
+## 10       98277        netto      79900
+## ..         ...          ...        ...</code></pre>
+<p>Funkcja <code>ifelse()</code> jako wynik zwraca drugi lub trzegi argument w zależności od tego czy pierwszy argument jest prawdziwy czy nie.</p>
+<p>W jednym wykonaniu funkcji <code>mutate()</code> można podać kilka transformacji.</p>
+<pre class="r"><code>autaZWiekiemIBrutto &lt;- auta2012 %&gt;%
+  mutate(Wiek.auta = 2013 - Rok.produkcji,
+         Cena.brutto = Cena.w.PLN * ifelse(Brutto.netto == &quot;brutto&quot;, 1, 1.23))
+
+autaZWiekiemIBrutto %&gt;% 
+  select(Cena.brutto, Brutto.netto, Cena.w.PLN, Wiek.auta, Rok.produkcji)</code></pre>
+<pre><code>## Source: local data frame [210,134 x 5]
+## 
+##    Cena.brutto Brutto.netto Cena.w.PLN Wiek.auta Rok.produkcji
+## 1        49900       brutto      49900         5          2008
+## 2        88000       brutto      88000         5          2008
+## 3        86000       brutto      86000         4          2009
+## 4        25900       brutto      25900        10          2003
+## 5        68757        netto      55900         6          2007
+## 6        56457        netto      45900         9          2004
+## 7        39900       brutto      39900         7          2006
+## 8        38900       brutto      38900         5          2008
+## 9        24900       brutto      24900         7          2006
+## 10       98277        netto      79900         6          2007
+## ..         ...          ...        ...       ...           ...</code></pre>
+<div id="zadania-5" class="section level3">
+<h3>Zadania:</h3>
+<ul>
+<li>Policz średni przebieg na rok, dzieląc przebieg przez wieka auta.</li>
+<li>Poza koniem mechanicznym inną ciekawą jednostką mocy jest koń parowy (jednostka HP). Jeden koń mechanicnzy to 0.9863 konia parowego. Utwórz nową zmienną, która przedstawi moc aut w koniach parowych (btw: Wikipedia zna jeszcze kilka innych ciekawych jednostek mocy).</li>
+</ul>
+</div>
 </div>
 <div id="group_by" class="section level2">
 <h2>group_by()</h2>
@@ -395,7 +465,7 @@ tylkoMalyPrzebieg &lt;- filter(tylkoGolfIV,
 </div>
 <div id="first-last" class="section level2">
 <h2>first() last()</h2>
-<div id="zadania-5" class="section level3">
+<div id="zadania-6" class="section level3">
 <h3>Zadania:</h3>
 <ul>
 <li>Sprawdź ile samochodów ma zainstalowany autoalarm <strong>PCH: (oznaczony jako ‘autoalarm’)</strong></li>
