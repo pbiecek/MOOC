@@ -132,8 +132,81 @@ head(
 
 
 ## Przetwarzanie potokowe, `%>%`
+Analiza danych przez większość czasu polega na przetwarzaniu danych w tą i zpowrotem.
+
+Zobaczmy taką serię operacji, która zaczyna się od wszystkich samochodów,
+odfiltrowuje się tylko Volkswageny, sortuje po cenie, pozostawia tylko Golfy IV oraz samochody o przebiegu poniżej 50000 km.
+
 ```{r, warning=FALSE}
+tylkoVolkswagen <- filter(auta2012, 
+                          Marka == "Volkswagen")
+posortowaneVolkswagen <- arrange(tylkoVolkswagen, 
+                                 Cena.w.PLN)
+tylkoGolfIV <- filter(posortowaneVolkswagen, 
+                      Model == "Golf", Wersja == "IV")
+tylkoMalyPrzebieg <- filter(tylkoGolfIV, 
+                            Przebieg.w.km < 50000)
 ```
+
+Ta sekwencja operacji tworzy cztery pomocnicze zbiory danych: 
+tylkoVolkswagen, posortowaneVolkswagen, tylkoGolfIV, tylkoMalyPrzebieg.
+Ale one zaśmiecają jedynie przestrzeń nazw.
+
+Te operacje można złożyć w jeną wileką cebulkę, 
+przekazując wyniki jednej funkcji bezpośrednio do kolejnej. 
+Taka wielka cebulka wyglądałaby następująco.
+
+```{r, warning=FALSE}
+tylkoMalyPrzebieg <- 
+  filter(
+    filter(
+      arrange(
+        filter(
+          auta2012, 
+          Marka == "Volkswagen"), 
+        Cena.w.PLN), 
+      Model == "Golf", Wersja == "IV"), 
+    Przebieg.w.km < 50000)
+```
+
+W tym rozwiązaniu nie są tworzone zbędna nazwy zmiennych, ale sam zapis jest bardzo nieczytelny.
+
+Nawet stosując wcięcia trudno nam zauważyć, które argumenty są do której funkcji.
+Taki blok może się jeszcze bardziej rozrastać i tym trudniej będzie zrozumieć co się w tym kodzie dzieje.
+
+Rozwiązaniem tego problemu jest stosowanie specjalnego operatora do przetwarzania potokowaegp `%>%`. Ten operator pochodzi z pakietu `magritr` i jest dostępny po włączeniu pakietu `dplyr`.
+
+Jak działa ten operator?
+Przekazuje lewą stronę operatora jako pierwszy argument prawej strony tego operatora
+` a %>% f(b) `
+jest równoważne
+` f(a, b) `
+
+Ta prosta sztuczna pozwala znacząco skrócić zapis i uczynić go znacznie czytelniejszym.
+
+```{r, warning=FALSE}
+tylkoMalyPrzebieg <- 
+  auta2012 %>%
+  filter(Marka == "Volkswagen") %>%
+  arrange(Cena.w.PLN) %>%
+  filter(Model == "Golf", Wersja == "IV") %>%
+  filter(Przebieg.w.km < 50000)
+```
+
+Ten framgnet kodu można czytać w następujący sposób.
+Weź zbiór danych `auta2012`, 
+następnie zasosuj funkcję `filter` pozostawiając tylko auta `Marka == "Volkswagen"`,
+następnie posortuj auta malejąco wzdłuż zmiennej `Cena.w.PLN`,
+następnie zastosuj funkcję `filter` pozostawiając tylko auta o modelu Golf w wersji IV,
+następnie zastosuj funkcję `filter` pozostawiając tylko auta o przebiegu poniżej 50 tys km.
+
+Znacznie czytelniejszy zapis. 
+Będziemy z operatora `%>%` często korzystać przy wstępnym przetwarzaniu danych.
+
+### Zadania:
+* Użyj operatora `%>%` by ze zbioru danych `auta2012` wybrać tylko 10 najtańszych aut marki Rolls-Royce.
+* Użyj operatora `%>%` by ze zbioru danych `auta2012` wybrać 5 Viklswagenów o największych silnikach.
+
 
 ## select() (and rename()) [contains, starts_with, ends_with, matches]?
 ```{r, warning=FALSE}
