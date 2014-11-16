@@ -1,0 +1,79 @@
+---
+title: "Praca z programem R / Co dalej?"
+output:
+  html_document:
+    toc: yes
+---
+
+## Książki
+
+### W języku polskim
+
+Coraz więcej książek, podręczników i artykułów jest poświęconych programowi R.
+
+W pierwszej kolejności chciałbym polecić pozycję, którą sam przygotowałem będąc doktorantem, co jakiś czas uaktualniam, do dziś doczekała się ona trzeciego rozszerzonego wydania. 
+Można z jej pomocą poznać podstawy języka R jak również bardziej zaawansowane mechanizmy takie jak pakiet *knitr* do automatycznego tworzenia raportów, funkcje do analizy danych, prezentowania danych, optymalizacji, przetwarzania wieloskalowego oraz wiele innych tematów (omówionych jest ponad 500 funkcji dostępnych w R). Połowa tej książki dostępna jest pezpłątnie na poniższej stornie.
+
+> *Przewodnik po pakiecie R* *Przemysław Biecek*   
+> http://biecek.pl/R/
+
+Ale w języku polskim jest wiele książek, pisanych przez autorów kładących nacisk na sam język, na zastosowania w biologii, ekonomii czy innych dziedzinach.
+
+> Pełna lista polskich książek jest rozwijana na stronie wikipedii   
+> http://pl.wikipedia.org/wiki/R_(j%C4%99zyk_programowania)#Polskie_ksi.C4.85.C5.BCki_o_R
+
+### W języku angielskim 
+W języku angielskim zatrzęsienie dobrych i słabych pozycji
+
+Dla osób zainteresowanych głębiej językiem szcezgólnie polecam otwartą książkę   
+
+> *Advanced R* *Hadley Wickham*   
+> http://adv-r.had.co.nz/   
+
+Lista ponad 150 innych książek o R znajduje się na stronie   
+
+> http://www.r-project.org/doc/bib/R-books.html
+
+W języku angielskim są również dostępne kursy online dotyczące R na takich serwisach jak   
+
+> https://www.coursera.org/ czy https://www.edx.org/
+
+## Blogi
+
+### W języku polskim
+W języku polskim o R można poczytać na stronach 
+
+> http://smarterpoland.pl/index.php/category/r/  
+> http://thinking-in-r.blogspot.com/  
+
+### W języku angielskim
+Agregator wielu ciekawych blogów poświęconych R znajduje się na stronie  
+
+> http://www.r-bloggers.com/
+
+## Spotkania użytkowników R
+
+### W Polsce 
+
+SER - Warszawa  
+
+> http://smarterpoland.pl/SER
+
+PAZUR - Poznań  
+
+> http://estymator.ue.poznan.pl/pazur/
+
+eRka - Kraków  
+
+> http://www.erkakrakow.pl/
+
+WZUR - Wrocław (już od jakiegoś czasu wstrzymany, ale kto wie)  
+
+> http://www.biecek.pl/WZUR/
+
+### Na świecie
+
+Lista wielu grup użytkowników R na całym świecie:   
+
+> http://blog.revolutionanalytics.com/local-r-groups.html
+
