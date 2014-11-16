@@ -24,7 +24,7 @@ library(SmarterPoland)
 head(auta2012)
 ```
 
-## Ramki i tabele danych
+# Ramki i tabele danych
 
 Dane surowe mogą mieć różną postać. Mogą to być korpusy tekstów, nagrań audio lub video.
 Jednak w analizie danych często sprawodza się dane do postaci tabelarycznej, ponieważ większość funkcji oczekuje takiego formatu danych.
@@ -51,14 +51,14 @@ Podobnie możemy odwoływać się do kolumn i obu wymiarów jednocześnie.
 auta2012[3:5, 2:4]
 ```
 
-### Zadania:
+## Zadania
 [TODO:]
 do tych ćwiczeń inny zbiór danych,
 mniejszy o kilku kolumnach i kilkunastu wierszach
 może coś ściągnięte z GUS ? 
 
 
-## Filtrowanie danych
+# Filtrowanie danych
 Używając funkcji filter() można przefiltrować dane, zostawiając tylko te, któ®e spełniają określony warunek (jeden lub kilka).
 Pierwszym argumentem tej funkcji jest ramka danych,
 kolejne argumenty, a może być ich jeden lub więcej) to warunki logiczne, które muszę być spełnione aby dany wiersz trafił do wyniki.
@@ -81,13 +81,13 @@ tylkoPorscheZDużymSilnikiem <-
        KM > 300)
 ```
 
-### Zadania:
+## Zadania
 + Ze zbioru danych `auta2012` pozostaw tylko samochody o wieku do pięciu lat (czyli o roku produkcji > 2007). Nazwij ten wynikowy zbiór danych `mlodeAuta`
 + Z przed chwilą stworzonego zbioru danych `mlodeAuta` wybierz tylko Fiaty 500. Ile jest takich aut? 
 (wymiary ramki danych możesz sprawdzić funkcją dim())
 
 
-## Sortowanie danych
+# Sortowanie danych
 Bardzo często w zbiorze danych jesteśmy zainteresowani znalezieniem tych wierszy, któych warotści są największe lub najmniejsze. 
 
 Również by sprawdzić, czy dane przyjmują sensowe wartości, często sprawdzamy ekstraema, największe i najmenijsze przypadku, by ocenić czy one przyjmują rozsądne wartości.
@@ -132,12 +132,12 @@ head(
   ) 
 ```
 
-### Zadania:
+## Zadania
 * Posortuj auta wzdłuż wielkości silnika (liczby koni mechanicznych, kolumna KM lub pojemności skokowej, kolumna Pojemnosc.skokowa). Które marki mają najwięszke silniki?
 * Wybierz tylko auta marki 'Rolls-Royce' i posortuj je po cenie.
 
 
-## Przetwarzanie potokowe, `%>%`
+# Przetwarzanie potokowe
 Analiza danych przez większość czasu polega na przetwarzaniu danych w tą i zpowrotem.
 
 Zobaczmy taką serię operacji, która zaczyna się od wszystkich samochodów,
@@ -209,12 +209,12 @@ następnie zastosuj funkcję `filter` pozostawiając tylko auta o przebiegu poni
 Znacznie czytelniejszy zapis. 
 Będziemy z operatora `%>%` często korzystać przy wstępnym przetwarzaniu danych.
 
-### Zadania:
+## Zadania
 * Użyj operatora `%>%` by ze zbioru danych `auta2012` wybrać tylko 10 najtańszych aut marki Rolls-Royce.
 * Użyj operatora `%>%` by ze zbioru danych `auta2012` wybrać 5 Viklswagenów o największych silnikach.
 
 
-## Wybór zmiennych
+# Wybór zmiennych
 Duże zbiory danych potrafią mieć tysiące zmiennych. Często jednak pracujemy tylko na kilku z nich, a pozostałe głównie nam przeszkadzają.
 
 Funkcja `select()` pozwala w prosty sposób wybrać kilka potrzebnych zmiennych z dużego zbioru danych. Pierwszym argumentem jest ramka danych, a kolejne to zmienne, które chcemy pozostawić. 
@@ -248,10 +248,10 @@ auta2012 %>%
   select(matches("aj"))
 ```
 
-### Zadania:
+## Zadania
 * Wybierz tylko samochody marki Volvo, posortuj je po pojemności skokowej, a następnie wyświetl tylko trzy kolumny: Markę, Cenę.w.PLN i Kolor.
 
-## Wyliczanie nowych zmiennych
+# Wyliczanie nowych zmiennych
 Nie zawsze w zbiorze danych są dokładnie te zmienne, których potrzebujemy.
 Czasem musimy je policzyć, służy do tego funkcja o wdzięcznej nazwie `mutate()`.
 
@@ -285,26 +285,62 @@ autaZWiekiemIBrutto %>%
   select(Cena.brutto, Brutto.netto, Cena.w.PLN, Wiek.auta, Rok.produkcji)
 ```
 
-### Zadania:
+## Zadania
 * Policz średni przebieg na rok, dzieląc przebieg przez wieka auta.
 * Poza koniem mechanicznym inną ciekawą jednostką mocy jest koń parowy (jednostka HP). Jeden koń mechanicnzy to 0.9863 konia parowego. Utwórz nową zmienną, która przedstawi moc aut w koniach parowych (btw: Wikipedia zna jeszcze kilka innych ciekawych jednostek mocy).
 
-## group_by()
-## summarise()
-## n()
-## first() last()
+# Agregaty
+Zbiór danych `ceny2012` zawiera szczegółowe informacje o parametrach każdej oferty sprzedaży. Często z takich zbiorów danych interesują nas pewne statystyki agregujące informacje ze zbioru danych. 
+
+Przykładem może być średnia cena, zmienność, czyli odchylenie standardowe ceny,
+połówkowy przebieg czy liczba obserwacji. 
+
+Takie agregaty możemy wyznaczyć funkcją `summarise()`.
+Jako pierwszy argument podajemy zbiór danych a jako kolejne wskazujemy statystyki / agregaty, które chcemy wyznaczyć z tego zbioru danych. 
+
+```{r, warning=FALSE}
+auta2012 %>%
+  summarise(sredniaCena = mean(Cena.w.PLN),
+            sdCena = sqrt(var(Cena.w.PLN)),
+            medianaPrzebiegu = median(Przebieg.w.km, na.rm=TRUE),
+            liczba = n())
+```
+
+Funkcja `mean()` wyznacza średnią, funkcja `var()` wyznacza wariancję a pierwiasterk z waiancji jest odchyleniem standardowym, funkcja `median()` wyznacza liczbę obserwacji w grupie.
+
+Nie wszystkie wartości są podane dla wszystkich zmiennych. Jeżeli jakaś wartość nei zostałą podana, to w zbiorze danych jest ona zakodowana jako NA - (ang. Not Available) brakująca wartość.
+
+Jeżeli w zmiennej są wartości brakujące, to argument `na.rm=TRUE` oznacza, że wynik ma być wyznaczony po usunięciu wartości brakujących.
+
+## Zadania
+* Policz sumaryczny przebieg wszystkich samochodów
+* Wybierz tylko samochody marki 'Rolls-Royce' i policz ich średni przebieg oraz średnią cenę.
+
+
+# group_by()
+
+```{r, warning=FALSE}
+autaGrupy <- auta2012 %>%
+  group_by(Marka)
+```
+
+## Zadania
+
+# n()
+
+## Zadania
+
+
+# Challange
 
 
 
 
-
-
-
-### Zadania:
+## Zadania
 + Sprawdź ile samochodów ma zainstalowany autoalarm **PCH: (oznaczony jako 'autoalarm')**
 + Sprawdź ile samochodów ma lakier w metalicznym kolorze **PCH: (oznaczony jako 'metallic')**
 
-### Odpowiedzi:
+## Odpowiedzi:
 + `r sum(grepl(auta2012$Wyposazenie.dodatkowe.napis, pattern="autoalarm"))`
 + `r sum(grepl(as.character(auta2012$Kolor), pattern="metallic"))`
 

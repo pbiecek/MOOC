@@ -56,32 +56,37 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 <div id="TOC">
 <ul>
-<li><a href="#wczytanie-danych">Wczytanie danych</a><ul>
+<li><a href="#wczytanie-danych">Wczytanie danych</a></li>
 <li><a href="#ramki-i-tabele-danych">Ramki i tabele danych</a><ul>
-<li><a href="#zadania">Zadania:</a></li>
+<li><a href="#zadania">Zadania</a></li>
 </ul></li>
 <li><a href="#filtrowanie-danych">Filtrowanie danych</a><ul>
-<li><a href="#zadania-1">Zadania:</a></li>
+<li><a href="#zadania-1">Zadania</a></li>
 </ul></li>
 <li><a href="#sortowanie-danych">Sortowanie danych</a><ul>
-<li><a href="#zadania-2">Zadania:</a></li>
+<li><a href="#zadania-2">Zadania</a></li>
 </ul></li>
-<li><a href="#przetwarzanie-potokowe">Przetwarzanie potokowe, <code>%&gt;%</code></a><ul>
-<li><a href="#zadania-3">Zadania:</a></li>
+<li><a href="#przetwarzanie-potokowe">Przetwarzanie potokowe</a><ul>
+<li><a href="#zadania-3">Zadania</a></li>
 </ul></li>
 <li><a href="#wybor-zmiennych">Wybór zmiennych</a><ul>
-<li><a href="#zadania-4">Zadania:</a></li>
+<li><a href="#zadania-4">Zadania</a></li>
 </ul></li>
 <li><a href="#wyliczanie-nowych-zmiennych">Wyliczanie nowych zmiennych</a><ul>
-<li><a href="#zadania-5">Zadania:</a></li>
+<li><a href="#zadania-5">Zadania</a></li>
 </ul></li>
-<li><a href="#group_by">group_by()</a></li>
-<li><a href="#summarise">summarise()</a></li>
-<li><a href="#n">n()</a></li>
-<li><a href="#first-last">first() last()</a><ul>
-<li><a href="#zadania-6">Zadania:</a></li>
+<li><a href="#agregaty">Agregaty</a><ul>
+<li><a href="#zadania-6">Zadania</a></li>
+</ul></li>
+<li><a href="#group_by">group_by()</a><ul>
+<li><a href="#zadania-7">Zadania</a></li>
+</ul></li>
+<li><a href="#n">n()</a><ul>
+<li><a href="#zadania-8">Zadania</a></li>
+</ul></li>
+<li><a href="#challange">Challange</a><ul>
+<li><a href="#zadania-9">Zadania</a></li>
 <li><a href="#odpowiedzi">Odpowiedzi:</a></li>
-</ul></li>
 </ul></li>
 </ul>
 </div>
@@ -108,8 +113,9 @@ head(auta2012)</code></pre>
 ##   Kolor (fctr), Kraj.aktualnej.rejestracji (fctr), Kraj.pochodzenia
 ##   (fctr), Pojazd.uszkodzony (fctr), Skrzynia.biegow (fctr),
 ##   Status.pojazdu.sprowadzonego (fctr), Wyposazenie.dodatkowe (fctr)</code></pre>
-<div id="ramki-i-tabele-danych" class="section level2">
-<h2>Ramki i tabele danych</h2>
+</div>
+<div id="ramki-i-tabele-danych" class="section level1">
+<h1>Ramki i tabele danych</h1>
 <p>Dane surowe mogą mieć różną postać. Mogą to być korpusy tekstów, nagrań audio lub video. Jednak w analizie danych często sprawodza się dane do postaci tabelarycznej, ponieważ większość funkcji oczekuje takiego formatu danych.</p>
 <p>Podstawowym typem danych, przechowujących dane w postaci tabelarycznej jest typ <code>data.frame</code>. Dane mają postać tabeli w której w każdej kolumnie są wartości tego samego typu (np. liczby, napisy, wartości logiczne).</p>
 <p>Odwołując się do elementów tabeli korzysta się ze składni <code>tabela[ktore_wiersze, ktore_kolmny]</code>.</p>
@@ -145,13 +151,13 @@ head(auta2012)</code></pre>
 ## 1    PLN      86000       brutto
 ## 2    PLN      25900       brutto
 ## 3    PLN      55900        netto</code></pre>
-<div id="zadania" class="section level3">
-<h3>Zadania:</h3>
+<div id="zadania" class="section level2">
+<h2>Zadania</h2>
 <p>[TODO:] do tych ćwiczeń inny zbiór danych, mniejszy o kilku kolumnach i kilkunastu wierszach może coś ściągnięte z GUS ?</p>
 </div>
 </div>
-<div id="filtrowanie-danych" class="section level2">
-<h2>Filtrowanie danych</h2>
+<div id="filtrowanie-danych" class="section level1">
+<h1>Filtrowanie danych</h1>
 <p>Używając funkcji filter() można przefiltrować dane, zostawiając tylko te, któ®e spełniają określony warunek (jeden lub kilka). Pierwszym argumentem tej funkcji jest ramka danych, kolejne argumenty, a może być ich jeden lub więcej) to warunki logiczne, które muszę być spełnione aby dany wiersz trafił do wyniki.</p>
 <p>Jeżeli chcemy pozostawić tylko samochody marki Porsche, możemy uzyć warunku <code>Marka == 'Porsche'</code>.</p>
 <pre class="r"><code>tylkoPorsche &lt;-
@@ -162,16 +168,16 @@ head(auta2012)</code></pre>
   filter(auta2012,
        Marka == &quot;Porsche&quot;,
        KM &gt; 300)</code></pre>
-<div id="zadania-1" class="section level3">
-<h3>Zadania:</h3>
+<div id="zadania-1" class="section level2">
+<h2>Zadania</h2>
 <ul>
 <li>Ze zbioru danych <code>auta2012</code> pozostaw tylko samochody o wieku do pięciu lat (czyli o roku produkcji &gt; 2007). Nazwij ten wynikowy zbiór danych <code>mlodeAuta</code></li>
 <li>Z przed chwilą stworzonego zbioru danych <code>mlodeAuta</code> wybierz tylko Fiaty 500. Ile jest takich aut? (wymiary ramki danych możesz sprawdzić funkcją dim())</li>
 </ul>
 </div>
 </div>
-<div id="sortowanie-danych" class="section level2">
-<h2>Sortowanie danych</h2>
+<div id="sortowanie-danych" class="section level1">
+<h1>Sortowanie danych</h1>
 <p>Bardzo często w zbiorze danych jesteśmy zainteresowani znalezieniem tych wierszy, któych warotści są największe lub najmniejsze.</p>
 <p>Również by sprawdzić, czy dane przyjmują sensowe wartości, często sprawdzamy ekstraema, największe i najmenijsze przypadku, by ocenić czy one przyjmują rozsądne wartości.</p>
 <p>Do sortowania, bardzo przydatna jest funkcja <code>arrange()</code>, która jako pierwszy argument przyjmuje ramkę danych a jako kolejne argumenty przyjmuje zmienne, wzdłuż których dane są sortowane.</p>
@@ -250,16 +256,16 @@ head(auta2012)</code></pre>
 ##   (fctr), Kraj.aktualnej.rejestracji (fctr), Kraj.pochodzenia (fctr),
 ##   Pojazd.uszkodzony (fctr), Skrzynia.biegow (fctr),
 ##   Status.pojazdu.sprowadzonego (fctr), Wyposazenie.dodatkowe (fctr)</code></pre>
-<div id="zadania-2" class="section level3">
-<h3>Zadania:</h3>
+<div id="zadania-2" class="section level2">
+<h2>Zadania</h2>
 <ul>
 <li>Posortuj auta wzdłuż wielkości silnika (liczby koni mechanicznych, kolumna KM lub pojemności skokowej, kolumna Pojemnosc.skokowa). Które marki mają najwięszke silniki?</li>
 <li>Wybierz tylko auta marki ‘Rolls-Royce’ i posortuj je po cenie.</li>
 </ul>
 </div>
 </div>
-<div id="przetwarzanie-potokowe" class="section level2">
-<h2>Przetwarzanie potokowe, <code>%&gt;%</code></h2>
+<div id="przetwarzanie-potokowe" class="section level1">
+<h1>Przetwarzanie potokowe</h1>
 <p>Analiza danych przez większość czasu polega na przetwarzaniu danych w tą i zpowrotem.</p>
 <p>Zobaczmy taką serię operacji, która zaczyna się od wszystkich samochodów, odfiltrowuje się tylko Volkswageny, sortuje po cenie, pozostawia tylko Golfy IV oraz samochody o przebiegu poniżej 50000 km.</p>
 <pre class="r"><code>tylkoVolkswagen &lt;- filter(auta2012, 
@@ -295,16 +301,16 @@ tylkoMalyPrzebieg &lt;- filter(tylkoGolfIV,
   filter(Przebieg.w.km &lt; 50000)</code></pre>
 <p>Ten framgnet kodu można czytać w następujący sposób. Weź zbiór danych <code>auta2012</code>, następnie zasosuj funkcję <code>filter</code> pozostawiając tylko auta <code>Marka == &quot;Volkswagen&quot;</code>, następnie posortuj auta malejąco wzdłuż zmiennej <code>Cena.w.PLN</code>, następnie zastosuj funkcję <code>filter</code> pozostawiając tylko auta o modelu Golf w wersji IV, następnie zastosuj funkcję <code>filter</code> pozostawiając tylko auta o przebiegu poniżej 50 tys km.</p>
 <p>Znacznie czytelniejszy zapis. Będziemy z operatora <code>%&gt;%</code> często korzystać przy wstępnym przetwarzaniu danych.</p>
-<div id="zadania-3" class="section level3">
-<h3>Zadania:</h3>
+<div id="zadania-3" class="section level2">
+<h2>Zadania</h2>
 <ul>
 <li>Użyj operatora <code>%&gt;%</code> by ze zbioru danych <code>auta2012</code> wybrać tylko 10 najtańszych aut marki Rolls-Royce.</li>
 <li>Użyj operatora <code>%&gt;%</code> by ze zbioru danych <code>auta2012</code> wybrać 5 Viklswagenów o największych silnikach.</li>
 </ul>
 </div>
 </div>
-<div id="wybor-zmiennych" class="section level2">
-<h2>Wybór zmiennych</h2>
+<div id="wybor-zmiennych" class="section level1">
+<h1>Wybór zmiennych</h1>
 <p>Duże zbiory danych potrafią mieć tysiące zmiennych. Często jednak pracujemy tylko na kilku z nich, a pozostałe głównie nam przeszkadzają.</p>
 <p>Funkcja <code>select()</code> pozwala w prosty sposób wybrać kilka potrzebnych zmiennych z dużego zbioru danych. Pierwszym argumentem jest ramka danych, a kolejne to zmienne, które chcemy pozostawić.</p>
 <p>Zmienne, które chcemy pozostawić można wskazywać na kilka sposobów. Przećwiczmy je na zbiorze <code>auta2012</code>. W tym zbiorze dostępne są następujące dane.</p>
@@ -376,15 +382,15 @@ tylkoMalyPrzebieg &lt;- filter(tylkoGolfIV,
 ## 9  olej napedowy (diesel)                     Polska           Polska
 ## 10 olej napedowy (diesel)                     Polska           Polska
 ## ..                    ...                        ...              ...</code></pre>
-<div id="zadania-4" class="section level3">
-<h3>Zadania:</h3>
+<div id="zadania-4" class="section level2">
+<h2>Zadania</h2>
 <ul>
 <li>Wybierz tylko samochody marki Volvo, posortuj je po pojemności skokowej, a następnie wyświetl tylko trzy kolumny: Markę, Cenę.w.PLN i Kolor.</li>
 </ul>
 </div>
 </div>
-<div id="wyliczanie-nowych-zmiennych" class="section level2">
-<h2>Wyliczanie nowych zmiennych</h2>
+<div id="wyliczanie-nowych-zmiennych" class="section level1">
+<h1>Wyliczanie nowych zmiennych</h1>
 <p>Nie zawsze w zbiorze danych są dokładnie te zmienne, których potrzebujemy. Czasem musimy je policzyć, służy do tego funkcja o wdzięcznej nazwie <code>mutate()</code>.</p>
 <p>Policzmy najpierw wiek auta. Dane były zbierane w roku 2012, więc wiek auta to różnica pomiędzy rokiem produkcji, rokiem 2012 plus 1.</p>
 <pre class="r"><code>autaZWiekiem &lt;- auta2012 %&gt;%
@@ -446,39 +452,68 @@ autaZWiekiemIBrutto %&gt;%
 ## 9        24900       brutto      24900         7          2006
 ## 10       98277        netto      79900         6          2007
 ## ..         ...          ...        ...       ...           ...</code></pre>
-<div id="zadania-5" class="section level3">
-<h3>Zadania:</h3>
+<div id="zadania-5" class="section level2">
+<h2>Zadania</h2>
 <ul>
 <li>Policz średni przebieg na rok, dzieląc przebieg przez wieka auta.</li>
 <li>Poza koniem mechanicznym inną ciekawą jednostką mocy jest koń parowy (jednostka HP). Jeden koń mechanicnzy to 0.9863 konia parowego. Utwórz nową zmienną, która przedstawi moc aut w koniach parowych (btw: Wikipedia zna jeszcze kilka innych ciekawych jednostek mocy).</li>
 </ul>
 </div>
 </div>
-<div id="group_by" class="section level2">
-<h2>group_by()</h2>
+<div id="agregaty" class="section level1">
+<h1>Agregaty</h1>
+<p>Zbiór danych <code>ceny2012</code> zawiera szczegółowe informacje o parametrach każdej oferty sprzedaży. Często z takich zbiorów danych interesują nas pewne statystyki agregujące informacje ze zbioru danych.</p>
+<p>Przykładem może być średnia cena, zmienność, czyli odchylenie standardowe ceny, połówkowy przebieg czy liczba obserwacji.</p>
+<p>Takie agregaty możemy wyznaczyć funkcją <code>summarise()</code>. Jako pierwszy argument podajemy zbiór danych a jako kolejne wskazujemy statystyki / agregaty, które chcemy wyznaczyć z tego zbioru danych.</p>
+<pre class="r"><code>auta2012 %&gt;%
+  summarise(sredniaCena = mean(Cena.w.PLN),
+            sdCena = sqrt(var(Cena.w.PLN)),
+            medianaPrzebiegu = median(Przebieg.w.km, na.rm=TRUE),
+            liczba = n())</code></pre>
+<pre><code>## Source: local data frame [1 x 4]
+## 
+##   sredniaCena   sdCena medianaPrzebiegu liczba
+## 1    35790.16 70475.26           140000 210134</code></pre>
+<p>Funkcja <code>mean()</code> wyznacza średnią, funkcja <code>var()</code> wyznacza wariancję a pierwiasterk z waiancji jest odchyleniem standardowym, funkcja <code>median()</code> wyznacza liczbę obserwacji w grupie.</p>
+<p>Nie wszystkie wartości są podane dla wszystkich zmiennych. Jeżeli jakaś wartość nei zostałą podana, to w zbiorze danych jest ona zakodowana jako NA - (ang. Not Available) brakująca wartość.</p>
+<p>Jeżeli w zmiennej są wartości brakujące, to argument <code>na.rm=TRUE</code> oznacza, że wynik ma być wyznaczony po usunięciu wartości brakujących.</p>
+<div id="zadania-6" class="section level2">
+<h2>Zadania</h2>
+<ul>
+<li>Policz sumaryczny przebieg wszystkich samochodów</li>
+<li>Wybierz tylko samochody marki ‘Rolls-Royce’ i policz ich średni przebieg oraz średnią cenę.</li>
+</ul>
 </div>
-<div id="summarise" class="section level2">
-<h2>summarise()</h2>
 </div>
-<div id="n" class="section level2">
-<h2>n()</h2>
+<div id="group_by" class="section level1">
+<h1>group_by()</h1>
+<pre class="r"><code>autaGrupy &lt;- auta2012 %&gt;%
+  group_by(Marka)</code></pre>
+<div id="zadania-7" class="section level2">
+<h2>Zadania</h2>
 </div>
-<div id="first-last" class="section level2">
-<h2>first() last()</h2>
-<div id="zadania-6" class="section level3">
-<h3>Zadania:</h3>
+</div>
+<div id="n" class="section level1">
+<h1>n()</h1>
+<div id="zadania-8" class="section level2">
+<h2>Zadania</h2>
+</div>
+</div>
+<div id="challange" class="section level1">
+<h1>Challange</h1>
+<div id="zadania-9" class="section level2">
+<h2>Zadania</h2>
 <ul>
 <li>Sprawdź ile samochodów ma zainstalowany autoalarm <strong>PCH: (oznaczony jako ‘autoalarm’)</strong></li>
 <li>Sprawdź ile samochodów ma lakier w metalicznym kolorze <strong>PCH: (oznaczony jako ‘metallic’)</strong></li>
 </ul>
 </div>
-<div id="odpowiedzi" class="section level3">
-<h3>Odpowiedzi:</h3>
+<div id="odpowiedzi" class="section level2">
+<h2>Odpowiedzi:</h2>
 <ul>
 <li>0</li>
 <li>142110</li>
 </ul>
-</div>
 </div>
 </div>
 
