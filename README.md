@@ -14,10 +14,7 @@ Materiały dla kursu MOOC 2014
   * [Badania Edukacji] IBE
   * [Policy q] M Jak 27 listopad
   * [Sondaże - może wyborcze] Nss
-  * Ile oni zarabiają, czyli mediana vs. średnia
   * Siatki centylowe
-  * Kubek, murale, lego
-  * Podstawówki
 
 
 + Eksploracja danych
