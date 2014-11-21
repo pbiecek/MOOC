@@ -56,3 +56,5 @@ TODO: Regresję logistyczną zrobić na Diagnozie Sopłecznej
 TODO: Wprowadzić peer-review w ocenianiu wizualizacji i być może modelowania.
 
 TODO: Do analizy wariancji wprowadzić analizę ceny w zaleznosci od koloru
+
+TODO: promocja? tok fm? 
