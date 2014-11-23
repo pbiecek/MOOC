@@ -6,8 +6,31 @@ output:
 ---
 
 # Wprowadzenie do pakietu ggplot2
- 
-##Przygotowanie danych
+
+## Wykres paskowy
+
+
+## Wykres punktowy
+
+
+## Wykres z etykietami
+
+
+## Wykres trendu
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Przygotowanie danych
 
 Zanim zaczniemy tworzyć pierwszy wykres, musimy przygotować dane do rysowania. 
 Dane można przygotować na wiele sposobów, najprostszym z nich jest użycie pakietu dplyr.

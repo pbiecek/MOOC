@@ -36,9 +36,9 @@ Materiały dla kursu MOOC 2014
   * Info-pomyłka
   * Warsztat [cecha ilorazowa / przedziałowa]
   * Jak to zrobić - część 1, [materialy html](https://rawgit.com/pbiecek/MOOC/master/wizualizacja/ggplot1.html)
-  * Jak to zrobić - część 2
-  * Jak to zrobić - poprawiamy wykres
-  * Jak to ożywić wykres
+  * Jak to zrobić - część 2,  [materialy html](https://rawgit.com/pbiecek/MOOC/master/wizualizacja/ggplot2.html)
+  * Jak to zrobić - poprawiamy wykres,  [materialy html](https://rawgit.com/pbiecek/MOOC/master/wizualizacja/ggplot3.html)
+  * Co dalej, [materialy html](https://rawgit.com/pbiecek/MOOC/master/wizualizacja/coDalej.html)
 
 
 + Modelowanie danych
