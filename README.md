@@ -50,6 +50,8 @@ Materiały dla kursu MOOC 2014
   * Jak wybierać modele [AIC, BIC]
   * Regresja logistyczna
 
+TODO: Czyszczenie danych i wlasne funkcje
+      ew pisanie petli i ifow
 
 TODO: Regresję logistyczną zrobić na Diagnozie Sopłecznej
 
