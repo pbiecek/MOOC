@@ -7,10 +7,53 @@ output:
 
 # Wprowadzenie do pakietu ggplot2
 
+Osobno opisać surowe
+[point / text, line]
+
+a osobno liczace statystyki
+[bar, boxplot, hist, density]
+
 ## Wykres paskowy
 
+```{r}
+library(ggplot2)
+library(dplyr)
+volkswagen <- auta2012 %>% 
+          filter(Marka == "Volkswagen")
+
+ggplot(volkswagen, aes(x=Rok.produkcji)) +
+  geom_bar()
+
+ggplot(volkswagen, aes(x=Model)) +
+  geom_bar()
+
+ggplot(volkswagen, aes(x=Kolor)) +
+  geom_bar() + coord_flip()
+```
 
 ## Wykres punktowy
+
+```{r}
+ggplot(volkswagen, aes(x=Rok.produkcji, y=Cena.w.PLN)) +
+  geom_point()
+
+summary(tmp <- getEurostatRCV("tsdtr210"))
+
+autobus <- cast(tmp, geo ~ time, mean, subset = vehicle == "BUS_TOT")
+head(autobus[, c(1, 13:22)], 3)
+##   geo 2001  2002  2003  2004  2005  2006  2007  2008  2009  2010 
+## 1  AT  10.9  10.9  10.9  11.0  10.5  10.4  10.8  10.2  10.5  10.6
+## 2  BE  10.7  11.4  12.5  12.7  13.0  13.2  14.3  14.4  13.3  13.6
+## 3  BG  32.6  34.7  30.2  25.0  24.3  22.7  21.8  20.8  16.8  17.0
+samochod <- cast(tmp, geo ~ time, mean, subset = vehicle == "CAR")
+pociag   <- cast(tmp, geo ~ time, mean, subset = vehicle == "TRN")
+# wybierz dane z roku 2010 dla każdego z typów transportu
+razem    <- cbind(autobus[, "2010 "], samochod[, "2010 "], pociag[, "2010 "])
+# dodajemy nazwy państw
+rownames(razem) <- levels(autobus[, 1])
+razem <- na.omit(razem)
+
+```
 
 
 ## Wykres z etykietami
@@ -29,28 +72,6 @@ output:
 
 
 
-
-## Przygotowanie danych
-
-Zanim zaczniemy tworzyć pierwszy wykres, musimy przygotować dane do rysowania. 
-Dane można przygotować na wiele sposobów, najprostszym z nich jest użycie pakietu dplyr.
-
-```{r, warning=FALSE}
-auta2012 = read.table("http://biecek.pl/MOOC/dane/auta2012.csv",
-                       sep=";", dec=",", header=TRUE)
-head(auta2012, 2)
-```
-
-### Pierwszy wykres
-
-W pakiecie ggplot2 wykresy można tworzyć na dwa sposoby:
- 
-- z użyciem funkcji qplot (q like quick), proste wykresy tworzy się prosto, ale bardziej trudniej,  
-- z użyciem funkcji ggplot(), z początku może nie jest zbyt intuicyjna, ale po pewnym czasie nasza intuicja się zmienia. 
- 
-Nam zależy nam na profesjonalnej grafice, więc będziemy pracować z funkcją ggplot().
-
-Zaczniemy od wykresy punktowego.
 
 ```{r fig.width=8, fig.height=5, warning=FALSE, message=FALSE}
 
