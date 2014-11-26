@@ -1,9 +1,10 @@
-﻿Bądź data smart! Od zera do bohatera w 60 godzin.
-=================================================
+﻿
+pogRomcy danych
+===============
+Bądź data smart! Od zera do bohatera w 60 godzin
+------------------------------------------------
 
-Alternatywne tytuły: Wprowadzenie do Data Science. 
-
-Materiały dla kursu MOOC 2014
+Materiały dla kursu MOOC 2015
 
 + Dane wokół nas, jak je czytać [Nie bądź liczbowym analfabetą]
   * Intro, [intro](https://rawgit.com/pbiecek/MOOC/master/motywacja/intro.md)
