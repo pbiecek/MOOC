@@ -1,10 +1,12 @@
 ﻿
 pogRomcy danych
 ===============
-Bądź data smart! Od zera do bohatera w 60 godzin
-------------------------------------------------
+Od zera do bohatera w 60 godzin
+-------------------------------
 
 Materiały dla kursu MOOC 2015
+
+część 1: Data smart
 
 + Dane wokół nas, jak je czytać [Nie bądź liczbowym analfabetą]
   * Intro, [intro](https://rawgit.com/pbiecek/MOOC/master/motywacja/intro.md)
@@ -30,6 +32,7 @@ Materiały dla kursu MOOC 2015
   * Cechy napisowe, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyNapisowe.html)
   * Co dalej, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/coDalej.html)
 
+część 2: Data science
 
 + Wizualizacja danych
   * Historia i współczesność [lektury obowiązkowe, bilans playfair, snow, nightingale, minard]
