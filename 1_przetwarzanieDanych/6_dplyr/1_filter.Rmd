@@ -1,0 +1,60 @@
+---
+title: "Filtrowanie danych [dplyr / select]"
+output:
+  slidy_presentation:
+    highlight: default
+    css: style.css
+    font_adjustment: 0
+    footer: "poskRamiacze danych / przetwarzanie / dplyr"
+---
+
+## O czym to będzie
+
+W tym odcinku nauczymy się
+
+- Jak ze zbioru danych wybierać tylko interesujące nas wiersze
+
+
+## Zbiór danych
+
+W tym odcinku będziemy pracować na zbiorze danych dużych kotów
+
+```{r, message=FALSE}
+library(SmarterPoland)
+koty
+```
+
+
+## Filtrowanie danych
+
+Używając funkcji **filter()** można przefiltrować dane, zostawiając tylko te, które spełniają określony warunek (jeden lub kilka).
+Pierwszym argumentem tej funkcji jest ramka danych,
+kolejne argumenty, a może być ich jeden lub więcej) to warunki logiczne, które muszę być spełnione aby dany wiersz trafił do wyniki.
+
+## Filtrowanie danych
+
+Jeżeli chcemy pozostawić tylko samochody marki Porsche, możemy użyć warunku `Marka == 'Porsche'`.
+
+```{r, warning=FALSE}
+filter(auta2012,
+       Marka == "Porsche")
+```
+
+## Dwa warunki
+
+Możemy określać jednocześnie więcej warunków.
+Na przykład tylko samochody Audi o silnikach o liczbie koni mechanicznych przekraczających 300 możemy odfiltrować w następujący sposób.
+
+```{r, warning=FALSE}
+filter(auta2012,
+       Marka == "Porsche",
+       KM > 300)
+```
+
+## Zadania
+
++ Ze zbioru danych `auta2012` pozostaw tylko samochody o wieku do pięciu lat (czyli o roku produkcji > 2007). Nazwij ten wynikowy zbiór danych `mlodeAuta`
++ Z przed chwilą stworzonego zbioru danych `mlodeAuta` wybierz tylko Fiaty 500. Ile jest takich aut? 
+(wymiary ramki danych możesz sprawdzić funkcją **dim()**)
+
+
