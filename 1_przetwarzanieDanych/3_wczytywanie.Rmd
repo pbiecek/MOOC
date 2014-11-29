@@ -96,11 +96,23 @@ Wynikiem funkcji `read.table()` jest tabelaryczny zbiór danych, który w R nazy
 Aby na nim pracować, musimy wynik funkcji `read_table()` zapamiętać w zmiennej. Na przykład w zmiennej o nazwie `duze_koty`.
 
 ```{r, message=FALSE}
-duze_koty <- read.table("http://biecek.pl/MOOC/dane/koty.csv", 
+koty <- read.table("http://biecek.pl/MOOC/dane/koty.csv", 
                         sep=";", dec=",", header=TRUE)
 # po wpisaniu nazwy zmiennej jako wynik wyświetlona zostanie jej wartość
-duze_koty
+koty
 ```
+
+
+
+---
+
+# Dane tabelaryczne w plikach tekstowych
+
+W programie R Studio w prawym górnym oknie, zatytułowanym *Environment* wyświetlane są wszystkie dostępne dane. Po poprawnym wczytaniu danych, powinniśmy je widzieć właśnie w tym oknie
+
+Dwukrotne kliknięcie na wskazaną zmienną powoduje otwarcie okna prezentującego zawartość zmiennej. W ten sposób możemy szybko podejrzeć co wczytało się do zmiennej `koty`.
+
+![Zbiór danych o kotach](koty.png)
 
 ---
 # Dane tabelaryczne w plikach tekstowych
@@ -174,12 +186,13 @@ Pakiety to zbiory funkcji oraz zbiorów danych. Można takie pakiety wygodnie pr
 
 Aby sprawdzić jakie zbiory danych są dostępne w określonym pakiecie, można wykorzystać funkcję `data()` z argumentem `package`. 
 
-Zobaczmy na przykład jakie zbiory danych udostępnione są w pakiecie `SmarterPoland`.
+Zobaczmy jakie zbiory danych udostępnione są w pakiecie `SmarterPoland`.
 
 ```{r, warning=FALSE, message=FALSE}
 data(package="SmarterPoland")
 ```
 
+![Lista dostępnych zbiorów danych](datasets_list.png)
 ---
 
 # Wczytywanie danych z pakietów R
