@@ -1,0 +1,243 @@
+---
+title: "Jak wczytać dane do programu R"
+author: "poskRamiacze danych"
+date: "sezon 2 / odcinek 2"
+output:
+  slidy_presentation:
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "poskRamiacze danych / przetwarzanie / czytanie danych"
+---
+# O czym jest ten odcinek
+
+Zanim rozpoczniemy analizę danych, musimy najpierw dane wczytać do programu R.
+
+Dane mogą być przechowywane  w najróżniejszych formatach, takich jak baza danych, plik tekstowy, plik Excela lub innego programu do analiz danych (SAS, SPSS, itp). 
+
+W tym odcinku nauczymy się
+
+- Jak wczytywać dane tabelaryczne z plików tekstowych
+- Jak wczytywać dane tabelaryczne  z plików Excela [xls lub xlsx]
+- Jak wczytywać dane z pakietów R
+- Gdzie szukać informacji o tym jak wczytać dane z innych źródeł.
+
+---
+
+# Dane tabelaryczne w plikach tekstowych
+
+Jednym z częstszych formatów wymiany danych są pliki tekstowe.
+
+Nazwa 'plik tekstowy' bierze się stąd, że treść tego pliku możemy otworzyć w standardowym edytorze takim jak Notepad/Notatnik w Windowsie lub vim w Linuxie.
+
+Przyjrzymy się tabeli liczb z pliku
+http://biecek.pl/MOOC/dane/koty.csv
+
+Zawartość tego pliku wygląda tak
+
+```{}
+gatunek;waga.od[kg];waga.do[kg];max.dlugosc[m];predkosc[kph];habitat
+Tygrys;75;320;2,9;55;Azja
+Lew;100;220;2;80;Afryka
+Jaguar;35;110;1,7;90;Ameryka
+Puma;30;85;1,7;70;Ameryka
+Leopard;25;75;1,4;90;Azja
+Gepard;21;65;1,4;110;Afryka
+Irbis;20;55;1,3;65;Azja
+```
+---
+
+# Dane tabelaryczne w plikach tekstowych
+
+W jaki sposób dane tabelaryczne sapisane są w tym pliku?
+
+```{}
+gatunek;waga.od[kg];waga.do[kg];max.dlugosc[m];predkosc[kph];habitat
+Tygrys;75;320;2,9;55;Azja
+Lew;100;220;2;80;Afryka
+Jaguar;35;110;1,7;90;Ameryka
+Puma;30;85;1,7;70;Ameryka
+Leopard;25;75;1,4;90;Azja
+Gepard;21;65;1,4;110;Afryka
+Irbis;20;55;1,3;65;Azja
+```
+
+Zauważmy, że:
+
+- kolumny liczb są rozdzielane średnikiem `;`
+- pierwszy wiersz to nagłówek, zawiera nazwy kolumn
+- w pliku występują liczby niecałkowite, kropką dziesiętną jest przecinek `,`
+
+
+---
+
+# Dane tabelaryczne w plikach tekstowych
+
+Do wczytywania danych z pliku tekstowego służy funkcja `read.table()`. 
+Ponieważ dane mogą być zapisane z użyciem różnych formatów, argumenty tej funkcji określają format danych do wczytania.
+W przypadku rozważanego pliku musimy określić następujące argumenty:
+
+- `file` - ścieżka do pliku z danymi może być też adres URL (jeżeli wskażemy jako pierwszy argument, możemy pominąć jego nazwę)
+- `sep` - znak rozdzielający kolumny. W naszym przypadku `sep=";"`
+- `dec` - kropka dziesiętna, zazwyczaj `.` lub `,`. W naszym przypadku `dec=","`
+- `header` - flaga określająca, czy pierwszy wiersz należy traktować jako nagłówek. W naszym przypadku `header=TRUE`.
+
+```{r, message=FALSE}
+read.table("http://biecek.pl/MOOC/dane/koty.csv", 
+          sep=";", dec=",", header=TRUE)
+```
+
+---
+
+# Dane tabelaryczne w plikach tekstowych
+
+Wynikiem funkcji `read.table()` jest tabelaryczny zbiór danych, który w R nazywa się _ramką danych_.
+
+Aby na nim pracować, musimy wynik funkcji `read_table()` zapamiętać w zmiennej. Na przykład w zmiennej o nazwie `duze_koty`.
+
+```{r, message=FALSE}
+duze_koty <- read.table("http://biecek.pl/MOOC/dane/koty.csv", 
+                        sep=";", dec=",", header=TRUE)
+# po wpisaniu nazwy zmiennej jako wynik wyświetlona zostanie jej wartość
+duze_koty
+```
+
+---
+# Dane tabelaryczne w plikach tekstowych
+
+Instrukcją `?read.table` możemy otworzyć plik pomocy dla funkcji `read.table`. 
+Znajdziemy w niej wiele innych argumentów, pomocnych, gdy trzeba wczytać bardziej złożone dane.
+
+Wybrane przydatne argumenty funkcji `read.table()`
+
+- `skip` - ile pierwszych linii należy pominąć, domyślnie 0
+- `nrows` - ile maksymalnie linii należy wczytać, domyślnie -1, czyli bez limitu
+- `comment.char` - jaki znak oznacza komentarz, domyślnie `#`, znaki występujące po nim do końca linii są ignorowane. 
+- `na.strings` - jaki napis oznacza brakujące wartości. Domyślnie jest to `"NA"`.
+- `row.names` - wektor określający nazwy wierszy lub liczba wskazująca kolumnę w której znajdują się nazwy wierszy.
+- `stringsAsFactors` - domyślnie `TRUE` a więc napisy wczytywane jako zmienne jakościowe, typu `factor`. 
+
+---
+
+# Dane w formacie programu Excel
+
+Innym popularnym formatem przechowywania danych są pliki w formacie Excela [rozszerzenia xls lub xlsx]. 
+
+W R dostępnych jest kilka pakietów pozwalających na odczytywanie danych w formacie Excela. Najpopularnijesze pakiety to `gdata`, `xlsReadWrite`, `XLConnect`, `xlsx`. Różnią się one zewnętrznymi bibliotekami, które wykorzystują, przez co z niektórych może być łatwiej skorzystać pod Windowsem z innych pod Linuxem. 
+
+W tym odcinku wykorzystamy funkcję `read.xls()` z pakietu `gdata`. Wymaga ona zainstalowanego programu `perl`. Pakiet `gdata` nie jest instalowany z podstawową dystrybucją R, dlatego przed pierwszym użyciem należy go zainstalować poleceniem `install.packages("gdata")`.
+
+Dane, które chcemy wczytać, w Excelu wyglądają następująco.
+
+![Dane Excelowe](excel.png)
+
+---
+
+# Dane w formacie programu Excel
+
+Funkcja `read.xls()` oczekuje dwóch argumentów: ścieżki do pliku i argumentu `sheet`, którym wskazuje, którą zakładkę z pliku Excela należy odczytać.
+
+```{r, warning=FALSE, message=FALSE}
+library(gdata)
+read.xls("http://biecek.pl/MOOC/dane/koty.xls", sheet = 1)
+```
+
+![Dane Excelowe](excel.png)
+
+---
+
+# Dane binarne programu R
+
+Natywnym formatem dla programu R są pliki binarne o rozszerzeniu `rda` lub `Rdata`. 
+
+Dane w tym formacie są skompresowane, przez co zajmują mniej miejsca na dysku niż w pliku tekstowym lub formacie Excela. Wadą jest to, że można je otworzyć tylko w programie R.
+
+Dane w tym formacie, do programu R można je wczytać poleceniem `load()`. Pierwszym argumentem tej funkcji jest ścieżka do pliku z danymi. Jeżeli chcemy dane odczytać z internetu, należy dodatkowo użyć funkcji `url()`. 
+
+*Uwaga!* W przeciwieństwie do wcześniej poznanych funkcji, funkcja `load()` nie zwraca zbioru danych jako wynik, ale ładuje zbiór danych bezpośrednio do przestrzeni nazw (dane zapisane są wraz z nazwą zmiennej).
+
+```{r, warning=FALSE, message=FALSE}
+load(url("http://biecek.pl/MOOC/dane/koty.rda"))
+koty
+```
+
+---
+
+# Wczytywanie danych z pakietów R
+
+Przygotowując ten kurs miałem taki problem. 
+
+Jak w najprostszy sposób udostępnić uczestnikom tego kursu kilka zbiorów danych?
+Rozważając różne opcje, stwierdziłem że najłatwiejsza to z odpostępnienie danych z użyciem pakietu dla programu R.
+
+Pakiety to zbiory funkcji oraz zbiorów danych. Można takie pakiety wygodnie przygotowywać oraz udostępniać innym osobom. Są pakiety, zawierające tylko funkcje, wyłącznie zbiory danych lub obie te rzeczy.
+
+Aby sprawdzić jakie zbiory danych są dostępne w określonym pakiecie, można wykorzystać funkcję `data()` z argumentem `package`. 
+
+Zobaczmy na przykład jakie zbiory danych udostępnione są w pakiecie `SmarterPoland`.
+
+```{r, warning=FALSE, message=FALSE}
+data(package="SmarterPoland")
+```
+
+---
+
+# Wczytywanie danych z pakietów R
+
+Jednym ze zbiorów danych udostępnionych w tym pakiecie jest zbiór danych `koty`.
+
+Po wczytaniu pakietu, ten zbiór danych jest dostępny bez potrzeby stosowania dodatkowych instrukcji.
+
+```{r, warning=FALSE, message=FALSE}
+library(SmarterPoland)
+koty
+```
+
+---
+
+# Zapisywanie danych
+
+Dane, które są dostępne w programie R, można zapisać do pliku tekstowego, pliku excelowego lub binarnego funkcjami:
+
+- do pliku tekstowego funkcją `write.table()`. Formatowanie określa się w ten sam sposób co w funkcji `read.table()`.
+
+- do pliku w formacie Excela funkcją `write.xls()`. Funkcja ta jest dostępna w większosci pakietów, zawierających funkcję `read.xls()`, np. w pakiecie `xlsx`.
+
+- do pliku w formacie natywnym R, dane można zapisać funkcją `save()`. Funkcja ta zabisuje jeden lub więcej zmiennych o dowolnych formatach. Nie tylko tabelarycznych.
+
+---
+
+# Zadanie
+
+W kolejnych odcinkach będziemy korzystać ze zbioru danych o cenach aut. 
+Ten zbiór danych można pobrać ze strony kursu w różnych formatach pod następującymi linkami:
+
+- dane Excelowe, http://biecek.pl/MOOC/dane/auta2012mini.xls
+
+- dane tekstowe, http://biecek.pl/MOOC/dane/auta2012mini.csv
+
+- dane binarne, http://biecek.pl/MOOC/dane/auta2012mini.rda
+
+- w pakiecie `SmarterPoland` w zmiennej `auta2012`.
+
+*Zadanie na ćwiczenia:* 
+
+Wczytać do programu R dane korzystając z każdego z tych formatów.
+
+*Uwaga!* Wskazane pliki mają do 3.5 MB wielkości. Ich pobieranie może trochę potrwać jeżeli połączenie internetowe nie jest dobre lub wiele osób jednocześnie z niego korzysta.
+
+---
+
+# Więcej informacji 
+
+Gdzie szukać dalej
+
+- Więcej informacji o tym jak wczytywać dane z innych formatów oraz baz danych znaleźć można w rozdziale 2.2 książki *,,Przewodnik po pakiecie R''*. Rozdział ten jest dostępny bezpłatnie pod adresem http://biecek.pl/R.
+
+- Bardziej szczegółowe informacje o tym jak wczytywać i zapisywać dane z i do baz danych lub plików w egzotycznych formatach znaleźć można w dokumencie *,,R Data Import/Export''*
+http://cran.r-project.org/doc/manuals/r-release/R-data.pdf
+https://github.com/pbiecek/MOOC/blob/master/materialyZewnetrzne/R-data.pdf?raw=true
+
+- Interesujące zestawienie narzędzi do odczytywania danych ze stron interentowych znaleźć można na stronach z materiałami dydaktycznymi Gastona Sancheza
+http://gastonsanchez.com/teaching/
+
