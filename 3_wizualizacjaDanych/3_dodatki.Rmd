@@ -15,13 +15,13 @@ output:
 Funkcje z pakietu ggplot2 wyglądają dobrze przy domyślnych ustawieniach.
 Ale tworząc bardziej złożoną grafikę, często pojawia się potrzeba zmiany jakiegoś detalu.
 
-W tym odcinku nauczymy się
+W tym odcinku nauczymy się:
 
-- Dodać annotacje do wykresu
-- Jak zmieniać mapowania kształtu
-- Jak zmieniać mapowania kolorów
-- Jak modyfikować legendę
-- Jak zmieniać motywy graficzne wykresu
+- Jak dodać annotacje do wykresu?
+- Jak zmieniać mapowania kształtu?
+- Jak zmieniać mapowania kolorów?
+- Jak modyfikować legendę?
+- Jak zmieniać motywy graficzne wykresu?
 
 ---
 # Annotacje
