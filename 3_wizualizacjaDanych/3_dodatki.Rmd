@@ -1,0 +1,49 @@
+---
+title: "Pakiet ggplot2 - poziom zaawansowany"
+author: "poskRamiacze danych"
+date: "sezon 3 / odcinek 3"
+output:
+  slidy_presentation:
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "poskRamiacze danych / wizualizacja / zaawansowane"
+
+---
+# O czym jest ten odcinek
+
+Funkcje z pakietu ggplot2 wyglądają dobrze przy domyślnych ustawieniach.
+Ale tworząc bardziej złożoną grafikę, często pojawia się potrzeba zmiany jakiegoś detalu.
+
+W tym odcinku nauczymy się
+
+- Dodać annotacje do wykresu
+- Jak zmieniać mapowania kształtu
+- Jak zmieniać mapowania kolorów
+- Jak modyfikować legendę
+- Jak zmieniać motywy graficzne wykresu
+
+---
+# Annotacje
+
+---
+# Mapowanie kształtu
+
+---
+# Mapowanie koloru
+
+---
+# Legenda
+
+---
+# Motywy graficzne
+
+---
+# Co dalej
+
+- Więcej informacji o tym jak budować wykresy w pakiecie ggplot2 znaleźć można w rozdziale 4 książki *,,Przewodnik po pakiecie R''*. Więcej informacji o tej książce http://www.biecek.pl/R/
+
+- Wiele przydatnych wskazówek można również znaleźć w internetowej książce *,,Cookbook for R''* http://www.cookbook-r.com/Graphs/
+
+- Bardzo rozbudowana dokumentacja dla pakietu ggplot2 dostępna jest na stronie *,,ggplot2''* http://docs.ggplot2.org/current/index.html
+
