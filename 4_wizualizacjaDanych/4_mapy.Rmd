@@ -1,0 +1,138 @@
+---
+title: "Wizualizacja danych"
+output:
+  slidy_presentation:
+    highlight: default
+    css: style.css
+    font_adjustment: 0
+    footer: "poskRamiacze danych / wizualizacja / mapy"
+---
+
+## O czym to będzie
+
+W tym odcinku nauczymy się
+
+- Jak wczytywać dane o mapach
+- Jak przedstawiać na mapach informacje
+
+
+## Zbiór danych
+
+W tym odcinku będziemy pracować na zbiorze danych dużych kotów
+
+```{r, message=FALSE}
+library(maptools)
+library(ggplot2)
+library(SmarterPoland)
+load("mandatySejmik2014.rda")
+mandatySejmik2014
+
+#mandatySejmik2014 <- merge(mandatySejmik2014, df, by.x="Województwo",by.y="voj")
+
+shp1 <- readShapePoly("POL_adm1.shp") 
+
+shp1@data
+
+# ksztalt konkturu
+str(shp1@polygons[[1]])
+
+# srodek konturu
+shp1@polygons[[1]]@labpt
+
+#
+# wyciagamy srodki kazdego z wojewodztw
+wsp <- sapply(shp1@polygons,   function(x) x@labpt)
+
+#
+# fortify zmienia format danych na ggplot2 spójny
+shp1f <- fortify(shp1, region = "VARNAME_1")
+
+#
+# mapka w ggplot
+ggplot() +
+  geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="black", size=0.25)
+
+#
+# wojewodztwa wypelnione kolorem
+# [losowym]
+  ggplot() +
+    geom_map(data=mandatySejmik2014, aes(map_id=Wojewodztwo, fill=ProcentWaznychGlosow), map=shp1f) +
+  geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="black", size=0.25)
+  
+#
+# jak określić projekcje
+ggplot() +
+  geom_map(data=df, aes(map_id=voj, fill=val), map=shp1f) +
+  geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="black", size=0.25) +
+  coord_map(projection="mercator")
+
+#
+# to szare tło wcale nie jest potrzebne
+ggplot() +
+  geom_map(data=df, aes(map_id=voj, fill=val), map=shp1f) +
+  geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="black", size=0.25) +
+  coord_map(projection="mercator") +
+  theme_bw() +
+  theme(axis.ticks = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.grid.major=element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        panel.border = element_blank())
+
+#
+# to szare tło wcale nie jest potrzebne
+ggplot() +
+  geom_map(data=df, aes(map_id=voj, fill=val), map=shp1f) +
+  geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="white", size=1) +
+  coord_map(projection="mercator") +
+  theme_bw() +
+  scale_fill_gradient(low = "grey90", high = "black") +
+  theme(axis.ticks = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.grid.major=element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        panel.border = element_blank())
+
+#
+# A może wielkością punktu?
+ggplot() +
+  geom_point(data=df, aes(x=long, y=lat, size=val)) +
+  geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="black", size=0.25) +
+  coord_map(projection="mercator") +
+  theme_bw() +
+  scale_size_continuous(range=c(1,20)) +
+  theme(axis.ticks = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.grid.major=element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        panel.border = element_blank())
+
+#
+# A może długością paska
+ggplot() +
+  geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="grey", size=0.25) +
+  geom_rect(data=df, aes(xmin=long-0.2, xmax=long+0.2, ymin=lat-0.2, ymax=lat + val), fill="black", color="black") +
+  geom_rect(data=df, aes(xmin=long+0.4, xmax=long+0.2, ymin=lat-0.2, ymax=lat + val/2), fill="red4", color="black") +
+  coord_map(projection="mercator") +
+  theme_bw() +
+  scale_size_continuous(range=c(1,20)) +
+  theme(axis.ticks = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.grid.major=element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        panel.border = element_blank())
+
+
+```
