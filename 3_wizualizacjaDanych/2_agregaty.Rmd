@@ -1,0 +1,46 @@
+---
+title: "Wykresy, które podsumowują dane"
+author: "poskRamiacze danych"
+date: "sezon 3 / odcinek 2"
+output:
+  slidy_presentation:
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "poskRamiacze danych / wizualizacja / agregaty danych"
+
+---
+# O czym jest ten odcinek
+
+Gdy dane są duże, zawierają wiele obserwacji, zamiast przedstawiać każdy punkt osobno warto przedstawić pewne charakterystyki danych.
+Im częściej pracujemy z danymi, w których liczba punktów przekracza kilkanaście obserwacji, 
+tym częściej będziemy używać tego typu wykresów.
+
+W tym odcinku nauczymy się
+
+- Jak tworzyć wykresy słupkowe, przedstawiające liczebności obserwacji
+- Jak tworzyć wykresy trendu, przedstawiające wygładzone średnie
+- Jak tworzyć wykresy ramka wąsy, przedstawiające pięć liczb Tukeya
+- Jak tworzyć histogram
+
+---
+# Wykresy słupkowe
+
+---
+# Wykresy trendu
+
+---
+# Wykresy ramka - wąsy
+
+---
+# Histogram
+
+---
+# Gdzie szukać dalej
+
+- Więcej informacji o tym jak budować wykresy w pakiecie ggplot2 znaleźć można w rozdziale 4 książki *,,Przewodnik po pakiecie R''*. Więcej informacji o tej książce http://www.biecek.pl/R/
+
+- Wiele przydatnych wskazówek można również znaleźć w internetowej książce *,,Cookbook for R''* http://www.cookbook-r.com/Graphs/
+
+- Bardzo rozbudowana dokumentacja dla pakietu ggplot2 dostępna jest na stronie *,,ggplot2''* http://docs.ggplot2.org/current/index.html
+
