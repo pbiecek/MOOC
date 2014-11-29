@@ -112,7 +112,7 @@ W programie R Studio w prawym górnym oknie, zatytułowanym *Environment* wyświ
 
 Dwukrotne kliknięcie na wskazaną zmienną powoduje otwarcie okna prezentującego zawartość zmiennej. W ten sposób możemy szybko podejrzeć co wczytało się do zmiennej `koty`.
 
-![Zbiór danych o kotach](koty.png)
+![Zbiór danych o kotach](figs/koty.png)
 
 ---
 # Dane tabelaryczne w plikach tekstowych
@@ -141,7 +141,7 @@ W tym odcinku wykorzystamy funkcję `read.xls()` z pakietu `gdata`. Wymaga ona z
 
 Dane, które chcemy wczytać, w Excelu wyglądają następująco.
 
-![Dane Excelowe](excel.png)
+![Dane Excelowe](figs/excel.png)
 
 ---
 
@@ -154,7 +154,7 @@ library(gdata)
 read.xls("http://biecek.pl/MOOC/dane/koty.xls", sheet = 1)
 ```
 
-![Dane Excelowe](excel.png)
+![Dane Excelowe](figs/excel.png)
 
 ---
 
@@ -192,7 +192,7 @@ Zobaczmy jakie zbiory danych udostępnione są w pakiecie `SmarterPoland`.
 data(package="SmarterPoland")
 ```
 
-![Lista dostępnych zbiorów danych](datasets_list.png)
+![Lista dostępnych zbiorów danych](figs/datasets_list.png)
 ---
 
 # Wczytywanie danych z pakietów R
