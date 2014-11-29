@@ -1,0 +1,54 @@
+---
+title: "Jak zrobić wykres w ggplot2"
+author: "poskRamiacze danych"
+date: "sezon 3 / odcinek 1"
+output:
+  slidy_presentation:
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "poskRamiacze danych / wizualizacja / pierwszy wykres"
+
+---
+# O czym jest ten odcinek
+
+Przetwarzanie danych wykonuje się po to by można je było analizować. Analizuje się dane po to by je zrozumieć. Rozumiejąc dane można je pokazać.
+
+W tym odcinku nauczymy się
+
+- Na czym polega gramatyka grafiki
+- Jak tworzyć wykresy punktowe
+- Jak działa mechanizm mapowania zmiennej na cechę wykresu
+- Jak tworzyć wykresy z etykietami
+- Jak dodawać kolejne warstwy do wykresu
+
+---
+# Dlaczego ggplot2 a nie inny pakiet graficzny?
+
+---
+# Jak zrobić wykres punktowy
+
+---
+# Czym są mapowania - kształt punktu
+
+---
+# Czym są mapowania - wielkość punktu
+
+---
+# Czym są mapowania - kolor punktu
+
+---
+# Geometria text
+
+---
+# Jak składać geometrie
+
+---
+# Gdzie szukać dalej
+
+- Więcej informacji o tym jak budować wykresy w pakiecie ggplot2 znaleźć można w rozdziale 4 książki *,,Przewodnik po pakiecie R''*. Więcej informacji o tej książce http://www.biecek.pl/R/
+
+- Wiele przydatnych wskazówek można również znaleźć w internetowej książce *,,Cookbook for R''* http://www.cookbook-r.com/Graphs/
+
+- Bardzo rozbudowana dokumentacja dla pakietu ggplot2 dostępna jest na stronie *,,ggplot2''* http://docs.ggplot2.org/current/index.html
+
