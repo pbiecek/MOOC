@@ -28,6 +28,11 @@ W tym odcinku nauczymy się
 ---
 # Jak zrobić wykres punktowy
 
+```{r}
+skiJumps2013
+
+```
+
 ---
 # Czym są mapowania - kształt punktu
 
@@ -41,9 +46,15 @@ W tym odcinku nauczymy się
 # Geometria text
 
 ```{r}
-setwd("~/GitHub/MOOC/dane/")
-WIG20 <- read.xls("PL9999999995.xls", 1)
-save(WIG, file="WIG20.rda")
+load("WIG.rda")
+WIG[,1] <- as.Date(WIG[,1])
+ggplot(WIG, aes(x=Data, y=Kurs.zamkniecia)) + 
+  geom_line()
+ggplot(WIG, aes(x=Data, ymin=0, ymax=Kurs.zamkniecia)) + 
+  geom_ribbon()
+ggplot(WIG, aes(x=Data, ymin=Kurs.minimalny, y=Kurs.zamkniecia, ymax=Kurs.maksymalny)) + 
+  geom_ribbon() +
+  geom_line(color="red")
 ```
 
 ---
