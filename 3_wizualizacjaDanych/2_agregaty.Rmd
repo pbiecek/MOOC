@@ -25,6 +25,46 @@ W tym odcinku nauczymy się
 
 ---
 # Wykresy słupkowe
+```{r}
+
+diagnoza <- osoby[!is.na(osoby$WAGA_2013_OSOBY), c("IMIE_2011",
+          "WAGA_2013_OSOBY",
+          "lata_nauki_2013",
+          "WIEK2013",
+          "PLEC",
+          "województwo",
+          "EDUK4_2013",
+          "status9_2013",
+          "GP3",
+          "GP29",
+          "GP54_01",
+          "GP54_02",
+          "GP54_03",
+          "GP54_04",
+          "GP54_05",
+          "GP54_06",
+          "GP54_07",
+          "GP54_08",
+          "GP54_09",
+          "GP54_10",
+          "GP54_11",
+          "GP54_12",
+          "GP54_13",
+          "GP54_14",
+          "GP54_15",
+          "GP54_16",
+          "GP54_17",
+          "GP54_18",
+          "GP54_19",
+          "GP54_20",
+          "GP54_21",
+          "GP54_22",
+          "GP60","GP61",
+          "GP64",
+          "GP113")]
+#save(diagnoza, file="diagnoza.rda")
+
+```
 
 ---
 # Wykresy trendu
