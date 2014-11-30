@@ -29,9 +29,19 @@ W tym odcinku nauczymy się
 # Jak zrobić wykres punktowy
 
 ```{r}
+load("koty_ptaki.rda")
 
+ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
+  geom_point()
 
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, color=druzyna)) +
+  geom_point(size=5) 
 
+ggplot(koty_ptaki, aes(x= waga, y=predkosc, label=gatunek)) +
+  geom_text()
+
+ggplot(koty_ptaki, aes(x= waga, y=predkosc, label=gatunek, color=druzyna)) +
+  geom_text()
 
 library(SmarterPoland)
 library(ggplot2)
