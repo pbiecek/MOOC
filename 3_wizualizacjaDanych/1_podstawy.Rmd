@@ -29,7 +29,14 @@ W tym odcinku nauczymy się
 # Jak zrobić wykres punktowy
 
 ```{r}
-skiJumps2013
+
+
+
+
+library(SmarterPoland)
+library(ggplot2)
+
+head(skiJumps2013)
 
 ```
 
