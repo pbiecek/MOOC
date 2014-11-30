@@ -25,53 +25,75 @@ W tym odcinku nauczymy się
 ---
 # Dlaczego ggplot2 a nie inny pakiet graficzny?
 
+```{r}
+library(SmarterPoland)
+library(ggplot2)
+
+plot(koty_ptaki$waga, koty_ptaki$predkosc)
+
+ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
+  geom_point()
+```
+
 ---
 # Jak zrobić wykres punktowy
 
 ```{r}
-load("koty_ptaki.rda")
-
 ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
   geom_point()
-
-ggplot(koty_ptaki, aes(x=waga, y=predkosc, color=druzyna)) +
-  geom_point(size=5) 
-
-ggplot(koty_ptaki, aes(x= waga, y=predkosc, label=gatunek)) +
-  geom_text()
-
-ggplot(koty_ptaki, aes(x= waga, y=predkosc, label=gatunek, color=druzyna)) +
-  geom_text()
-
-library(SmarterPoland)
-library(ggplot2)
-
-head(skiJumps2013)
-
 ```
 
 ---
 # Czym są mapowania - kształt punktu
 
+```{r}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
+  geom_point(size=5) 
+```
 ---
 # Czym są mapowania - wielkość punktu
 
+```{r}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc)) +
+  geom_point() 
+```
+
 ---
 # Czym są mapowania - kolor punktu
+
+```{r}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, color=druzyna)) +
+  geom_point(size=5) 
+
+```
 
 ---
 # Geometria text
 
 ```{r}
-load("WIG.rda")
+ggplot(koty_ptaki, aes(x= waga, y=predkosc, label=gatunek)) +
+  geom_text()
+
+ggplot(koty_ptaki, aes(x= waga, y=predkosc, label=gatunek, color=druzyna)) +
+  geom_text()
+```
+
+---
+# Geometria line
+
+```{r}
+load("../dane/WIG.rda")
 WIG[,1] <- as.Date(WIG[,1])
 ggplot(WIG, aes(x=Data, y=Kurs.zamkniecia)) + 
   geom_line()
+```
+
+---
+# Geometria ribbon
+
+```{r}
 ggplot(WIG, aes(x=Data, ymin=0, ymax=Kurs.zamkniecia)) + 
   geom_ribbon()
-ggplot(WIG, aes(x=Data, ymin=Kurs.minimalny, y=Kurs.zamkniecia, ymax=Kurs.maksymalny)) + 
-  geom_ribbon() +
-  geom_line(color="red")
 ```
 
 ---
