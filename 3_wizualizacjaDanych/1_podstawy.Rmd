@@ -40,6 +40,12 @@ W tym odcinku nauczymy się
 ---
 # Geometria text
 
+```{r}
+setwd("~/GitHub/MOOC/dane/")
+WIG20 <- read.xls("PL9999999995.xls", 1)
+save(WIG, file="WIG20.rda")
+```
+
 ---
 # Jak składać geometrie
 
