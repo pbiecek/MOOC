@@ -1,7 +1,7 @@
 ---
 title: "Jak wczytać dane do programu R"
 author: "poskRamiacze danych"
-date: "sezon 2 / odcinek 2"
+date: "sezon 2 / odcinek 2 <br><br><br><br>Naciśniej `A` by zamienić slajdy na ciągły tekst. <br> Naciśniej `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     highlight: default
@@ -49,7 +49,7 @@ Irbis;20;55;1,3;65;Azja
 
 # Dane tabelaryczne w plikach tekstowych
 
-W jaki sposób dane tabelaryczne sapisane są w tym pliku?
+W jaki sposób dane tabelaryczne zapisane są w tym pliku?
 
 ```{}
 gatunek;waga.od[kg];waga.do[kg];max.dlugosc[m];predkosc[kph];habitat
@@ -93,7 +93,7 @@ read.table("http://biecek.pl/MOOC/dane/koty.csv",
 
 Wynikiem funkcji `read.table()` jest tabelaryczny zbiór danych, który w R nazywa się _ramką danych_.
 
-Aby na nim pracować, musimy wynik funkcji `read_table()` zapamiętać w zmiennej. Na przykład w zmiennej o nazwie `duze_koty`.
+Aby na nim pracować, musimy wynik funkcji `read.table()` zapamiętać w zmiennej. Na przykład w zmiennej o nazwie `koty`.
 
 ```{r, message=FALSE}
 koty <- read.table("http://biecek.pl/MOOC/dane/koty.csv", 
@@ -111,6 +111,8 @@ koty
 W programie R Studio w prawym górnym oknie, zatytułowanym *Environment* wyświetlane są wszystkie dostępne dane. Po poprawnym wczytaniu danych, powinniśmy je widzieć właśnie w tym oknie
 
 Dwukrotne kliknięcie na wskazaną zmienną powoduje otwarcie okna prezentującego zawartość zmiennej. W ten sposób możemy szybko podejrzeć co wczytało się do zmiennej `koty`.
+
+Z przyczyn wydajnościowych wyświetlanych jest tylko pierwsze 1000 wierszy i kilkaset kolumn. Tak więc dla dużych zbiorów danych wyświetlony będzie tylko fragment całęgo zbioru.
 
 ![Zbiór danych o kotach](figs/koty.png)
 
@@ -155,6 +157,23 @@ read.xls("http://biecek.pl/MOOC/dane/koty.xls", sheet = 1)
 ```
 
 ![Dane Excelowe](figs/excel.png)
+---
+
+# Dane w formacie programu Excel
+
+Dlaczego dostępnych jest tak wiele pakietów do wczytywania danych z Excela do R?
+Otóż, żadne z rozwiązań je jest lepsze od wszystkich pozostałych. Jedne są szybsze, inne lepiej radzą sobie z dużymi danymi. 
+
+Zebranie silnych i słabych stron poszczególnych pakietów znajduje się na stronie http://www.thertrader.com/2014/02/11/a-million-ways-to-connect-r-and-excel/. Wybrane silne i słabe strony pakietów, to
+
+- `XLConnect` ma dużo możliwości, szczególnie dotyczących konwersji typów, ale jest wolniejszy niż inne rozwiązania i wymagający jeżeli chodzi o RAM, przez co może nie poradzić sobie z dużymi zbiorami danych.
+
+- `gdata` ma kilka użytecznych funkcji, pozwalających na nawigacji po skoroszytach, np. 
+`sheetCount()` i `sheetNames()`
+
+- Wczytując dane z plików, które zostały stworzone na innym systemie operacyjnym lub w innej lokalizacji, trzeba liczyć się z różnicami dotyczącymi kodowania polskich znaków lub np. kropek dziesiętnych w liczbach rzeczywistych. Jeżeli ten problem może nas dotyczyć, to warto zapoznać się z kartą ,,Dobrych Praktyk'' dostępnych na stronie 
+http://withr.me/blog/2013/11/15/configure-character-encoding-for-r-under-linux-and-windows/
+
 
 ---
 
@@ -180,7 +199,7 @@ koty
 Przygotowując ten kurs miałem taki problem. 
 
 Jak w najprostszy sposób udostępnić uczestnikom tego kursu kilka zbiorów danych?
-Rozważając różne opcje, stwierdziłem że najłatwiejsza to z odpostępnienie danych z użyciem pakietu dla programu R.
+Rozważając różne opcje, stwierdziłem że najłatwiejsza to z udpostępnienie danych z użyciem pakietu dla programu R.
 
 Pakiety to zbiory funkcji oraz zbiorów danych. Można takie pakiety wygodnie przygotowywać oraz udostępniać innym osobom. Są pakiety, zawierające tylko funkcje, wyłącznie zbiory danych lub obie te rzeczy.
 
@@ -250,6 +269,9 @@ Gdzie szukać dalej
 - Bardziej szczegółowe informacje o tym jak wczytywać i zapisywać dane z i do baz danych lub plików w egzotycznych formatach znaleźć można w dokumencie *,,R Data Import/Export''*
 http://cran.r-project.org/doc/manuals/r-release/R-data.pdf
 https://github.com/pbiecek/MOOC/blob/master/materialyZewnetrzne/R-data.pdf?raw=true
+
+- O ile *,,R Data Import/Export''* jest opisem ,,teoretyznym'' to bardzo ciekawe zebranie przypadków użycia funkcji do wczytywania danych z różnych formatów jest zebrane w wiki-książce *,,R programming''* dostępnej pod adresem 
+http://en.wikibooks.org/wiki/R_Programming/Importing_and_exporting_data
 
 - Interesujące zestawienie narzędzi do odczytywania danych ze stron interentowych znaleźć można na stronach z materiałami dydaktycznymi Gastona Sancheza
 http://gastonsanchez.com/teaching/

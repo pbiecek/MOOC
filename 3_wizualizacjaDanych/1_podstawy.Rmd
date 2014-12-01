@@ -14,7 +14,7 @@ output:
 
 Przetwarzanie danych wykonuje się po to by można je było analizować. Analizuje się dane po to by je zrozumieć. Rozumiejąc dane można je pokazać.
 
-W tym odcinku nauczymy się
+W tym odcinku dowiemy się
 
 - Na czym polega gramatyka grafiki
 - Jak tworzyć wykresy punktowe
