@@ -15,7 +15,7 @@ Zanim rozpoczniemy analizę danych, musimy najpierw dane wczytać do programu R.
 
 Dane mogą być przechowywane  w najróżniejszych formatach, takich jak baza danych, plik tekstowy, plik Excela lub innego programu do analiz danych (SAS, SPSS, itp). 
 
-W tym odcinku nauczymy się
+W tym odcinku dowiemy się
 
 - Jak wczytywać dane tabelaryczne z plików tekstowych
 - Jak wczytywać dane tabelaryczne  z plików Excela [xls lub xlsx]

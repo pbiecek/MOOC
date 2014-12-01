@@ -1,7 +1,7 @@
 ---
 title: "Jak zrobić wykres w ggplot2"
 author: "poskRamiacze danych"
-date: "sezon 3 / odcinek 1"
+date: "sezon 3 / odcinek 1 <br><br><br><br>Naciśniej `A` by zamienić slajdy na ciągły tekst. <br> Naciśniej `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     highlight: default
@@ -12,45 +12,131 @@ output:
 ---
 # O czym jest ten odcinek
 
-Przetwarzanie danych wykonuje się po to by można je było analizować. Analizuje się dane po to by je zrozumieć. Rozumiejąc dane można je pokazać.
+Przetwarzanie danych wykonuje się po to by przygotować się do analizy. Analizę danych przeprowadza się po to  by te dane zrozumieć. Zrozumiawszy dane, zależności pomiędzy zmiennymi i charakterystyki zmiennych, można istotne cecy danych pokazać.
 
 W tym odcinku dowiemy się
 
-- Na czym polega gramatyka grafiki
-- Jak tworzyć wykresy punktowe
-- Jak działa mechanizm mapowania zmiennej na cechę wykresu
-- Jak tworzyć wykresy z etykietami
-- Jak dodawać kolejne warstwy do wykresu
+- Dlaczego warto uczyć się pakietu `ggplot2`?
+- Jak tworzyć wykresy punktowe?
+- Jak działa mechanizm mapowania zmiennych?
+- Jak tworzyć wykresy z etykietami?
+- Jak dodawać kolejne warstwy do wykresu?
 
 ---
 # Dlaczego ggplot2 a nie inny pakiet graficzny?
 
-```{r}
+Coraz więcej osób dostrzega potencjał wizualizacji danych zarówno w zastosowaniach biznesowych, w nauce, mediach czy życiu codziennym.
+Z tego powodu powstaje coraz więcej rozwiązań, programów i pakietów, pozwalających na prezentację danych.
+
+My skupimy się na jednym, na pakiecie `ggplot2`. Dlaczego? Jest ku temu kilka powodów.
+
+- Zaawansowana analiza danych bardzo często ma miejsce w programie R. Wykorzystanie tego samego programu do analiz i do wizualizacji, ma tę zaletę, że nie musimy danych konwertować do nowego formatu, nie musimy poznawać dwóch języków opisu wizualizacji, możemy pracować w jednym spójnym środowisku. Z pakietów programu R, to właśnie `ggplot2` jest najbardziej dojrzałym rozwiązaniem.
+- Pakiet `ggplot2` pozwala na tworzenie grafiki *publicaition ready*, czyli wystarczająco dobrej by pokazać ją innym osobom bez dodatkowych zabiegów upiększających. 
+- Pakiet `ggplot2` wymusza myślenie o wykresach danych w kategorii zmiennych, które chcemy przedstawić a nie w kategorii szablunu, który chcemy wypełnić. Krzywa uczenia jest bardziej stroma, niż w przypadku ,,klikadeł'', ale z czasem nasze możliwości niepomiernie rosną. 
+
+
+---
+
+# Dlaczego ggplot2 a nie inny pakiet graficzny?
+
+Wykrozystując zbiór danych `koty_ptaki` przedstawmy zależność wagi od prędkości dla wybranych gatunków. Wykorzystamy w tym celu dwa pakiety graficzne dostępne w programie R, pakiet `graphics` z funkcją `plot()` oraz pakiet `ggplot2`  z funkcją `ggplot()`. 
+
+Poniższe instrukcje tworzą wykres z domyślnymi ustawieniami.
+
+```{r,  message=FALSE, eval=FALSE}
+library(SmarterPoland)  # dane koty_ptaki
+library(ggplot2)        # wykresy
+
+plot(koty_ptaki$waga, koty_ptaki$predkosc)
+ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
+  geom_point()
+```
+
+---
+
+# Dlaczego ggplot2 a nie inny pakiet graficzny?
+
+Przyjrzymy się wynikowym wykresom oraz postarajmy się znaleźć jak najwięcej różnic.
+
+```{r, fig.height=5, fig.width=5, message=FALSE, echo=FALSE}
+
 library(SmarterPoland)
 library(ggplot2)
 
 plot(koty_ptaki$waga, koty_ptaki$predkosc)
-
 ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
   geom_point()
 ```
 
+
 ---
+
+# Dlaczego ggplot2 a nie inny pakiet graficzny?
+
+Oczywiście te wykresy różnią się wieloma elementami. 
+Różnice, które uznałem za najistotniejsze to:
+
+- Na prawym wykresie widoczne są pionowe i poziome linie pomocnicze, ułatwiają one dokładniejsze odczytanie współrzędnych punktów niż w przypadku prawego wykresu.
+- Linie pomoniczne są białe na szarym tle, przez co nie dominują wykresu i są delikatnie przesunięte na drugi plan.
+- Oba wykresy wypełniają obszar 10 x 10 cm, ale lewy wykres ma duże marginesy, przez co mniej miejsca pozostaje na prezentacje danych. Prawy wykres ma małe marginesy, przez co jest więcej miejsca na zaprezentowanie danych.
+- Etykiety na osiach na prawym wykresie są poziome, nie trzeba obracać głowy by je odczytać.
+- Etykiety na prawym wykresie są pomniejszone i wyszarzone, przesunięte na drugi plan. Wciąż są widoczne ale mniej dominują wykres, pozwalając przesunąć dane na pierwszy plan.
+- Nazwy na osiach są krótsze i czytelneijsze, nie ma członu `koty_ptaki$`, który nie jest potrzebny.
+- Punkty zaznaczone są kropkami a nie pustymi okręgami, dzięki czemu zajmują mniej miejsca, więcej ich się zmieści na wykresie i łatwiej odczytać współrzędne punktu.
+
+Używając pakietu `ggplot2` otrzymujemy przy fabrycznych ustawieniach czytelny wykres. Jeżęli chcemy go zmienić, możemy zmienić każdy jego element. Ale jeżeli nie chcemy, możemy skupić się na danych a nie upiększaniu wykresu.
+
+
+---
+
 # Jak zrobić wykres punktowy
 
-```{r}
+Przyjrzyjmy się instrukcji, która tworzy wykres punktowy.
+
+```{r, fig.height=4, fig.width=4}
+head(koty_ptaki, 3)
 ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
   geom_point()
 ```
 
 ---
+
+# Jak zrobić wykres punktowy
+
+```{r, eval=FALSE}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
+  geom_point()
+```
+
+Trzy elementy są kluczowe w tej instrukcji.
+
+- Funkcja `ggplot()` jest główną funkcją tworzącą trzon wykresu. Zazwyczaj przyjmuje ona dwa argumenty. Pierwszy to zbiór danych (w tym przypadku `koty_ptaki`). Drugi to opis, które zmienne i w jaki sposób mają być przedstawione na wykresie, tak zwany opis mapowań.
+- Mapowania opisuje funkcja `aes()`. Argumenty tej funkcji to pary `cecha wykresu=zmienna`. Każda z tych par opisuje w jaki sposób określona zmienne ma być przedstawiona. W powyższym przypadku opis ten oznacza, że zmienna `waga` ma być przedstawiona przez współrzędne `x` a zmienna `predkosc` ma być przedstawiona przez zmienną `y`.
+- Trzon wykresu rozbudowuje się dodając, z użyciem operatora `+`, kolejne funkcje. W tym przypadku funkcja `geom_poit()` dodaje do wykresu warstwę przedstawiającą dane za pomocą punktów. Funkcje, o nazwach rozpoczynających się od `geom_` nazywamy geometriami, określają one w jaki sposób dane są prezentowane. Czy jako punkty, linie, obszary czy jeszcze inaczej. W tym sezonie poznamy kilka geometrii, zbiór wszystkich dostępnych geometrii znaleźć można na stronie http://docs.ggplot2.org.
+
+---
+
 # Czym są mapowania - kształt punktu
 
-```{r}
+Jak dotąd, nie widać jeszcez jak potężnym mechanizmem są mapowania. Zademonstrujmy to w kolejnym przykładzie, gdzie na wykresie przedstawimy również zmienną `druzyna`. Różne wartości tej zmiennej przedstawimy za pomocą róznych kształtów punktów, a więc cechy `shape`.
+
+```{r, fig.height=4, fig.width=4}
+head(koty_ptaki, 3)
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   geom_point(size=5) 
 ```
+
 ---
+
+# Czym są mapowania - kształt punktu
+
+```{r, eval=FALSE}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
+  geom_point(size=5) 
+```
+
+---
+
 # Czym są mapowania - wielkość punktu
 
 ```{r}
@@ -92,8 +178,8 @@ ggplot(WIG, aes(x=Data, y=Kurs.zamkniecia)) +
 # Geometria ribbon
 
 ```{r}
-ggplot(WIG, aes(x=Data, ymin=0, ymax=Kurs.zamkniecia)) + 
-  geom_ribbon()
+#ggplot(WIG, aes(x=Data, ymin=0, ymax=Kurs.zamkniecia)) + 
+#  geom_ribbon()
 ```
 
 ---
