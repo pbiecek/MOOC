@@ -202,10 +202,37 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, color=druzyna,
 
 # Geometria text
 
-```{r}
+Zobaczmy, jak skorzystać z innych geometrii. Za przykłąd posłuży nam geometria do umieszczania napisów na wykresie, czyli `geom_text()`. Szczegółowy opis tej geometrii, wraz z przykładami użycia, znajduje się na stronie http://docs.ggplot2.org/current/geom_text.html. W sekcji `Aesthetics` znaleźć można listę cech tej geometri, które można zmienić. Trzy obowiązkowe cechy to `x`, `y` i `label`. 
+
+Tak wygląda przykładowe wywołanie.
+
+
+```{r, fig.height=4, fig.width=5, echo=FALSE}
 ggplot(koty_ptaki, aes(x= waga, y=predkosc, label=gatunek)) +
   geom_text()
+```
 
+---
+
+# Geometria text
+
+Zauważmy, że niektóre napisy wychodzą poza wykres. Nie wygląda to najlepiej. MOżna ten problem naprawić na dwa sposoby. Jeden to rozszerzenie osi OX, drugi to pozycjonowanie napisów względem uch lewego brzegu a nie środka.
+
+Spróbujmy tego drugiego rozwiąznaia. Śledząc opis geometrii `geom_text()` można zauważyć, że za pozycjonwanie odpowiadają cechy `hjust` i `vjust`.
+
+
+```{r, fig.height=4, fig.width=5, echo=FALSE}
+ggplot(koty_ptaki, aes(x= waga, y=predkosc, label=gatunek)) +
+  geom_text(hjust=0)
+```
+
+---
+
+# Geometria text
+
+
+
+```{r, fig.height=4, fig.width=5, echo=FALSE}
 ggplot(koty_ptaki, aes(x= waga, y=predkosc, label=gatunek, color=druzyna)) +
   geom_text()
 ```
