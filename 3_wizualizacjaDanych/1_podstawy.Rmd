@@ -17,15 +17,18 @@ Przetwarzanie danych wykonuje się po to by przygotować się do analizy. Analiz
 
 W tym odcinku dowiemy się
 
-- Dlaczego warto uczyć się pakietu `ggplot2`?
+- Dlaczego warto poznać pakiet `ggplot2`?
 - Jak tworzyć wykresy punktowe?
 - Jak działa mechanizm mapowania zmiennych?
 - Jak tworzyć wykresy z etykietami?
 - Jak dodawać kolejne warstwy do wykresu?
+- Jak tworzyć wykresy liniowe?
+
+W tym odcinku będziemy pracować z dwoma zmiorami danych: `koty_ptaki` oraz `WIG`.
 
 ---
 
-# Dlaczego ggplot2 a nie inny pakiet graficzny?
+# Dlaczego warto poznać pakiet `ggplot2`?
 
 Coraz więcej osób dostrzega potencjał wizualizacji danych zarówno w zastosowaniach biznesowych, w nauce, mediach czy życiu codziennym.
 Z tego powodu powstaje coraz więcej rozwiązań, programów i pakietów, pozwalających na prezentację danych.
@@ -39,7 +42,7 @@ My skupimy się na jednym, na pakiecie `ggplot2`. Dlaczego? Jest ku temu kilka p
 
 ---
 
-# Dlaczego ggplot2 a nie inny pakiet graficzny?
+# Dlaczego `ggplot2` a nie standardowe pakiety R?
 
 Wykorzystując zbiór danych `koty_ptaki` przedstawmy zależność wagi od prędkości dla wybranych gatunków. Wykorzystamy w tym celu dwa pakiety graficzne dostępne w programie R, pakiet `graphics` z funkcją `plot()` oraz pakiet `ggplot2`  z funkcją `ggplot()`. 
 
@@ -56,7 +59,7 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
 
 ---
 
-# Dlaczego ggplot2 a nie inny pakiet graficzny?
+# Co różni te dwa wykresy?
 
 Przyjrzymy się wynikowym wykresom oraz postarajmy się znaleźć jak najwięcej różnic.
 
@@ -73,7 +76,7 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
 
 ---
 
-# Dlaczego ggplot2 a nie inny pakiet graficzny?
+# Co różni te dwa wykresy?
 
 Oczywiście te wykresy różnią się wieloma elementami. 
 Różnice, które uznałem za najistotniejsze to:
@@ -91,7 +94,7 @@ Używając pakietu `ggplot2` otrzymujemy przy fabrycznych ustawieniach czytelny 
 
 ---
 
-# Jak zrobić wykres punktowy
+# Jak zrobić wykres punktowy?
 
 Przyjrzyjmy się instrukcji, która tworzy wykres punktowy.
 
@@ -103,7 +106,7 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
 
 ---
 
-# Jak zrobić wykres punktowy
+# Elementy wykresu punktowego
 
 ```{r, eval=FALSE}
 ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
@@ -118,7 +121,7 @@ Trzy elementy są kluczowe w tej instrukcji.
 
 ---
 
-# Czym są mapowania - kształt punktu
+# Dodajemy mapowania - kształt punktu - `shape`
 
 Jak dotąd, nie widać jeszcze jak potężnym mechanizmem są mapowania. Zademonstrujmy to w kolejnym przykładzie, gdzie na wykresie przedstawimy również zmienną `druzyna`. Różne wartości tej zmiennej przedstawimy za pomocą różnych kształtów punktów, a więc cechy `shape`.
 
@@ -130,7 +133,7 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
 
 ---
 
-# Czym są mapowania - kształt punktu
+# Jak budować wykresy z `ggplot2`?
 
 ```{r, eval=FALSE}
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
@@ -147,7 +150,7 @@ Kolejny krok to wybór cech geometrii, które mają przedstawić wybrane zmienne
 
 ---
 
-# Czym są mapowania - wielkość punktu
+# Dodajemy mapowania - wielkość punktu - `size`
 
 Jeżeli efekt nam się nie podoba, możemy wykorzystać inną cechą. Na przykład wielkość punktu, czyli cechę `size`.
 
@@ -158,7 +161,7 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=druzyna)) +
 
 ---
 
-# Czym są mapowania - kolor punktu
+# Dodajemy mapowania - kolor punktu - `color`
 
 Jeżeli wynik jest wciąż niezadawalający, możemy próbować zmieniać kolejne cechy, na przykład koloru `color`.
 
@@ -170,9 +173,9 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, color=druzyna)) +
 
 ---
 
-# Kilka mapowań tej samej zmiennej
+# Wiele mapowań dla tej samej zmiennej
 
-Zależność cecha geometrii -- zmienna to zależność jeden do wielu. Oznacza to, że w opisie mapowań jedna cecha może być powiązana z tylko jedną zmienną. Ale jedna zmienna, może być powiązana z kilkoma cechami. 
+Zależność *cecha geometrii -- zmienna* to zależność jeden do wielu. Oznacza to, że w opisie mapowań jedna cecha może być powiązana z tylko jedną zmienną. Ale jedna zmienna, może być powiązana z kilkoma cechami. 
 
 Na poniższym przykładzie jedna zmienna jest reprezentowana przez zarówno kolor, kształt jak i wielkość punktu.
 
@@ -184,7 +187,7 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, color=druzyna,
 
 ---
 
-# Wybór mapowania
+# Na jaką cechę mapować?
 
 Zmieniając argumenty funkcji `aes()`, możemy wybierać sposób reprezentacji określonych zmiennych. Z czterech, które rozważaliśmy, które jest najlepsze?
 
@@ -202,7 +205,7 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, color=druzyna,
 
 ---
 
-# Geometria text
+# Geometria `geom_text()` - etykiety tekstowe na wykresie
 
 Zobaczmy, jak skorzystać z innych geometrii. Za przykład posłuży nam geometria do umieszczania napisów na wykresie, czyli `geom_text()`. Szczegółowy opis tej geometrii, wraz z przykładami użycia, znajduje się na stronie http://docs.ggplot2.org/current/geom_text.html. W sekcji `Aesthetics` znaleźć można listę cech tej geometrii, które można zmienić. Trzy obowiązkowe cechy to `x`, `y` i `label`. 
 
@@ -216,7 +219,7 @@ ggplot(koty_ptaki, aes(x= waga, y=predkosc, label=gatunek)) +
 
 ---
 
-# Geometria text
+# Geometria `geom_text()` - pozycjonowanie napisu
 
 Zauważmy, że niektóre napisy wychodzą poza wykres. Nie wygląda to najlepiej. Można ten problem naprawić na dwa sposoby. Jeden to rozszerzenie osi OX, drugi to pozycjonowanie napisów względem uch lewego brzegu a nie środka.
 
@@ -231,7 +234,7 @@ ggplot(koty_ptaki, aes(x= waga, y=predkosc, label=gatunek)) +
 
 ---
 
-# Dodawanie kolejnych geometrii
+# Składanie dwóch geometrii
 
 Jedną z ciekawszych cech pakietu `ggplot2` jest to, że możemy dodawać kolejne warstwy z danymi dodając kolejne geometrie. Dzięki temu, można osiągnąć bardzo ciekawe efekty.
 
@@ -268,7 +271,7 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, label=gatunek)) +
 
 ---
 
-# Geometria line
+# Geometria `geom_line()` - wykres liniowy
 
 Każdą geometrię używa się podobnie prosto. Przykładowo, geometria `geom_line()` służy do rysowania linii, aby ją wykorzystać na wykresie, wystarczy ją dodać do wykresu. 
 
@@ -282,7 +285,7 @@ ggplot(WIG, aes(x=Data, y=Kurs.zamkniecia)) +
 
 ---
 
-# Geometria ribbon
+# Geometria `geom_ribbon()` - wykres wstęga
 
 Ostatnim przykładem w tym odcinku będzie geometria `geom_ribbon()` do rysowania wstęg. Wstęgi są opisane przez cechy `ymin` i `ymax`. Możemy na te cechy zamapować zmienną lub stała. W poniższym przykładzie rysujemy wstęgę rozpinającą się od zera do wartości indeksu WIG.
 
@@ -293,7 +296,7 @@ ggplot(WIG, aes(x=Data, ymin=0, ymax=Kurs.zamkniecia)) +
 
 ---
 
-# Gdzie szukać dalej
+# Gdzie szukać dalszych informacji
 
 Opanowaliśmy podstawy tworzenia wykresów z użyciem pakietu `ggplot2`. W kolejnych odcinkach przedstawimy więcej informacji, ale można ich też poszukać w poniższych źródłach.
 
