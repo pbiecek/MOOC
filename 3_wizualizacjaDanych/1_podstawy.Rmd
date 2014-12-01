@@ -44,8 +44,8 @@ Wykrozystując zbiór danych `koty_ptaki` przedstawmy zależność wagi od pręd
 Poniższe instrukcje tworzą wykres z domyślnymi ustawieniami.
 
 ```{r,  message=FALSE, eval=FALSE}
-library(SmarterPoland)  # dane koty_ptaki
-library(ggplot2)        # wykresy
+library(SmarterPoland)  # w tym pakiecie są dane koty_ptaki
+library(ggplot2)        # ten pakiet pozwala na tworzenie wykresów 
 
 plot(koty_ptaki$waga, koty_ptaki$predkosc)
 ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
@@ -120,7 +120,7 @@ Trzy elementy są kluczowe w tej instrukcji.
 
 Jak dotąd, nie widać jeszcez jak potężnym mechanizmem są mapowania. Zademonstrujmy to w kolejnym przykładzie, gdzie na wykresie przedstawimy również zmienną `druzyna`. Różne wartości tej zmiennej przedstawimy za pomocą róznych kształtów punktów, a więc cechy `shape`.
 
-```{r, fig.height=4, fig.width=4}
+```{r, fig.height=4, fig.width=5}
 head(koty_ptaki, 3)
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   geom_point(size=5) 
@@ -135,25 +135,71 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   geom_point(size=5) 
 ```
 
+Przeanalizujemy jak wygląda sposób myślenia przy tworzeniu wykresu.
+
+W pierwszym kroku wybieray zmienne, które chcemy przedstawić na wykresie. W naszym przypadku te zmienne to `predkosc`, `waga` oraz `druzyna`.
+
+W następnym kroku wybieramy geometrię, która przedstawi wybrane dane. Kierujemy się tutaj rodzajem zmiennych. Przedstawiając zależność pomiędzy dwoma ilościowymi zmiennymi, naturalnym wyborem jest geometria punktowa. Zmienną jakościową potraktujemy jako zmienną grupującą.
+
+Kolejny krok to wybór cech geometrii, które mają przedstawić wybrane zmienne. W naszym przypadku zmienne `predkosc` i `waga` przedstawimy przez współrzędne punktu. Zmienną punkt przedstawimy przez kształt punktu.
+
 ---
 
 # Czym są mapowania - wielkość punktu
 
-```{r}
-ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc)) +
+Jeżeli efekt nam się nie podoba, możemy wykorzystać inną cechą. Na przykład wielkość punktu, czyli cechę `size`.
+
+```{r, fig.height=4, fig.width=5}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=druzyna)) +
   geom_point() 
 ```
 
 ---
+
 # Czym są mapowania - kolor punktu
 
-```{r}
+Jeżeli wynik jest wciąż niezadawalający, możemy kosztyać z kolejnych cech, na przykład koloru `color`.
+
+```{r, fig.height=4, fig.width=5}
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, color=druzyna)) +
   geom_point(size=5) 
 
 ```
 
 ---
+
+# Kilka mapowań tej samej zmiennej
+
+Zależnośc cecha geometrii -- zmienna to zależność jeden do wielu. Oznacza to, że w opisie mapowań jedna cecha może być powiązana z tylko jedną zmienną. Ale jedna zmienna, może być powiązana z kilkoma cechami. 
+
+Na poniższym przykładzie jedna zmienna jest reprezentowana przez zarówno kolor, kształt jak i wielkość punktu.
+
+```{r, fig.height=4, fig.width=5}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, color=druzyna, 
+                       shape=druzyna, size=druzyna)) +
+  geom_point() 
+```
+
+---
+
+# Wybór mapowania
+
+Zmieniając argumenty funkcji `aes()`, możemy wybierać sposób reprezetnacji określonych zmiennych. Z czterech, które rozważaliśmy, które jest najlepsze?
+
+```{r, fig.height=4, fig.width=5, echo=FALSE}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
+  geom_point(size=5) 
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=druzyna)) +
+  geom_point() 
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, color=druzyna)) +
+  geom_point(size=5) 
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, color=druzyna, 
+                       shape=druzyna, size=druzyna)) +
+  geom_point() 
+```
+
+---
+
 # Geometria text
 
 ```{r}
