@@ -21,27 +21,82 @@ W tym odcinku dowiemy się
 - Jak tworzyć histogram, przedstawiający rozkład wartości?
 - Jak tworzyć wykresy słupkowe, przedstawiające liczebności obserwacji?
 
+W tym odcinku będziemy pracować ze zbiorem danych `auta2012`.
+
 ---
 
-# Wykresy trendu
+# Geometria `geom_smooth()` - wykresy trendu 
+
+Gdy chcemy przedstawić zależność, pomiędzy parą zmiennych, często wykorzystywaną jest geometria punktowa `geom_point()`. Jednak, gdy punktów jest wiele, taka prezentacja może być  mało czytelna. W takich przypadkach warto rozważyć geometrię `geom_smooth()` prezentującą wygładzoną lokalną średnią.
+
+Przedstawimy tę geometrię na przykładzie ceny i roku produkcji samochodu, a dokładniej modelu Volkswagen Passat.
 
 ```{r, fig.height=4, fig.width=5}
+passaty <- auta2012 %>%
+              filter(Model = 'Volkswagen', Marka = 'Passat')
 
+ggplot(passaty, aes(x = Cena.w.PLN, y=Rok.produkcji)) + 
+  geom_point()
 
+ggplot(passaty, aes(x = Cena.w.PLN, y=Rok.produkcji)) + 
+  geom_smooth()
+
+ggplot(passaty, aes(x = Cena.w.PLN, y=Rok.produkcji)) + 
+  geom_smooth(se=FALSE)
+
+ggplot(passaty, aes(x = Cena.w.PLN, y=Rok.produkcji)) + 
+  geom_point() + geom_smooth(se=FALSE)
+
+ggplot(passaty, aes(x = Cena.w.PLN, y=Rok.produkcji)) + 
+  geom_point() + geom_smooth(se=FALSE, size=5)
+
+ggplot(passaty, aes(x = Cena.w.PLN, y=Rok.produkcji)) + 
+  geom_point() + 
+  geom_smooth(se=FALSE, size=5) +
+  geom_smooth(method="lm", se=FALSE, size=5, color="red")
 
 ```
 
 ---
 
-# Wykresy ramka - wąsy
+# Geometria `geom_boxplot()` - wykresy ramka - wąsy
+
+Wybierzmy pięcioletnie modele Volkswagena i porównajmy marki
+
+```{r, fig.height=4, fig.width=5}
+
+volkswageny <- auta2012 %>%
+              filter(Marka = 'Volkswagen', Rok.produkcji=2007)
+
+ggplot(volkswageny, aes(x=Model, y = Cena.w.PLN)) + 
+  geom_point()
+
+ggplot(volkswageny, aes(x=Model, y = Cena.w.PLN)) + 
+  geom_boxplot()
+
+ggplot(volkswageny, aes(x=Model, y = Cena.w.PLN)) + 
+  geom_boxplot(fill="black")
+
+ggplot(volkswageny, aes(x=Model, y = Cena.w.PLN, fill=Model)) + 
+  geom_boxplot()
+
+```
 
 ---
 
-# Histogram
+# Geometria `geom_hist()` - histogram
+
+```{r, fig.height=4, fig.width=5}
+
+```
 
 ---
 
-# Wykresy słupkowe
+# Geometria `geom_bar()` - wykresy słupkowe
+
+```{r, fig.height=4, fig.width=5}
+
+```
 
 
 ---
