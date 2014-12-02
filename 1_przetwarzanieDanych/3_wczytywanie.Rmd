@@ -1,7 +1,7 @@
 ---
 title: "Jak wczytać dane do programu R"
 author: "poskRamiacze danych"
-date: "sezon 2 / odcinek 2 <br><br><br><br>Naciśniej `A` by zamienić slajdy na ciągły tekst. <br> Naciśniej `T` by wyświetlić spis treści."
+date: "sezon 2 / odcinek 2 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     highlight: default

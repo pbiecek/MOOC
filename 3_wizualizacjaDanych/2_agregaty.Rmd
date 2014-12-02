@@ -1,7 +1,7 @@
 ---
 title: "Wykresy, które podsumowują dane"
 author: "poskRamiacze danych"
-date: "sezon 3 / odcinek 2"
+date: "sezon 3 / odcinek 2 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     highlight: default
@@ -10,22 +10,57 @@ output:
     footer: "poskRamiacze danych / wizualizacja / agregaty danych"
 
 ---
-# O czym jest ten odcinek
+# O czym jest ten odcinek?
 
-Gdy dane są duże, zawierają wiele obserwacji, zamiast przedstawiać każdy punkt osobno warto przedstawić pewne charakterystyki danych.
-Im częściej pracujemy z danymi, w których liczba punktów przekracza kilkanaście obserwacji, 
-tym częściej będziemy używać tego typu wykresów.
+Gdy dane są duże i zawierają wiele obserwacji niesposób przedstawiać każdy punkt osobno. Może ich być zbyt wiele przez co wykres zamieni się w wielką plątaninę punktów i krzywych. W takim przypadku często lepszym rozwiązaniu jest przedstawienie podsumowania danych.
 
-W tym odcinku nauczymy się
+W tym odcinku dowiemy się
 
-- Jak tworzyć wykresy słupkowe, przedstawiające liczebności obserwacji
-- Jak tworzyć wykresy trendu, przedstawiające wygładzone średnie
-- Jak tworzyć wykresy ramka wąsy, przedstawiające pięć liczb Tukeya
-- Jak tworzyć histogram
+- Jak tworzyć wykresy trendu, przedstawiające wygładzone średnie?
+- Jak tworzyć wykresy ramka wąsy / pudełkowe, przedstawiające pięć liczb Tukeya?
+- Jak tworzyć histogram, przedstawiający rozkład wartości?
+- Jak tworzyć wykresy słupkowe, przedstawiające liczebności obserwacji?
 
 ---
+
+# Wykresy trendu
+
+```{r, fig.height=4, fig.width=5}
+
+
+
+```
+
+---
+
+# Wykresy ramka - wąsy
+
+---
+
+# Histogram
+
+---
+
 # Wykresy słupkowe
-```{r}
+
+
+---
+
+# Gdzie szukać dalej
+
+- Więcej informacji o tym jak budować wykresy w pakiecie ggplot2 znaleźć można w rozdziale 4 książki *,,Przewodnik po pakiecie R''*. Więcej informacji o tej książce http://www.biecek.pl/R/
+
+- Wiele przydatnych wskazówek można również znaleźć w internetowej książce *,,Cookbook for R''* http://www.cookbook-r.com/Graphs/
+
+- Bardzo rozbudowana dokumentacja dla pakietu ggplot2 dostępna jest na stronie *,,ggplot2''* http://docs.ggplot2.org/current/index.html
+
+
+
+
+
+
+
+```{r, echo=FALSE}
 library(SmarterPoland)
 # diagnoza <- osoby[!is.na(osoby$WAGA_2013_OSOBY), c("IMIE_2011",
 #           "WAGA_2013_OSOBY",
@@ -93,22 +128,4 @@ ggplot(diagnoza, aes(x=GP113, y=GP64)) +
 quantile(diagnoza$GP64, seq(0,1,0.01), na.rm = TRUE)
 
 ```
-
----
-# Wykresy trendu
-
----
-# Wykresy ramka - wąsy
-
----
-# Histogram
-
----
-# Gdzie szukać dalej
-
-- Więcej informacji o tym jak budować wykresy w pakiecie ggplot2 znaleźć można w rozdziale 4 książki *,,Przewodnik po pakiecie R''*. Więcej informacji o tej książce http://www.biecek.pl/R/
-
-- Wiele przydatnych wskazówek można również znaleźć w internetowej książce *,,Cookbook for R''* http://www.cookbook-r.com/Graphs/
-
-- Bardzo rozbudowana dokumentacja dla pakietu ggplot2 dostępna jest na stronie *,,ggplot2''* http://docs.ggplot2.org/current/index.html
 
