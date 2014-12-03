@@ -36,26 +36,68 @@ library(SmarterPoland)
 skody <- auta2012 %>%
               filter(Marka == 'Skoda', Model == 'Octavia')
 
+```
+
+---
+
+# Geometria `geom_smooth()` - wykresy trendu 
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Rok.produkcji, y = Cena.w.PLN)) + 
   geom_point()
+```
 
+---
+
+# Geometria `geom_smooth()` - wykresy trendu 
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Rok.produkcji, y = Cena.w.PLN)) + 
   geom_smooth()
+```
 
+---
+
+# Geometria `geom_smooth()` - wykresy trendu 
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Rok.produkcji, y = Cena.w.PLN)) + 
   geom_smooth(se=FALSE)
+```
 
+---
+
+# Geometria `geom_smooth()` - wykresy trendu 
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Rok.produkcji, y = Cena.w.PLN)) + 
   geom_point() + geom_smooth(se=FALSE)
+```
 
+---
+
+# Geometria `geom_smooth()` - wykresy trendu 
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Rok.produkcji, y = Cena.w.PLN)) + 
   geom_point() + geom_smooth(se=FALSE, size=5)
+```
 
+---
+
+# Geometria `geom_smooth()` - wykresy trendu 
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Rok.produkcji, y = Cena.w.PLN)) + 
   geom_point() + geom_smooth(se=FALSE, size=5) + 
   coord_trans(y = "log10")
+```
 
+---
 
+# Geometria `geom_smooth()` - wykresy trendu 
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Rok.produkcji, y = Cena.w.PLN)) + 
   geom_point() + 
   geom_smooth(se=FALSE, size=5) +
@@ -76,18 +118,42 @@ skody <- auta2012 %>%
 
 ggplot(skody, aes(x=Model, y = Cena.w.PLN)) + 
   geom_point()
+```
 
+---
+
+# Geometria `geom_boxplot()` - wykresy ramka - wąsy
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Model, y = Cena.w.PLN)) + 
   geom_boxplot()
+```
 
+---
+
+# Geometria `geom_boxplot()` - wykresy ramka - wąsy
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
 skody$Model <- reorder(skody$Model, skody$Cena.w.PLN, mean)
 
 ggplot(skody, aes(x=Model, y = Cena.w.PLN)) + 
   geom_boxplot()
+```
 
+---
+
+# Geometria `geom_boxplot()` - wykresy ramka - wąsy
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Model, y = Cena.w.PLN)) + 
   geom_boxplot(fill="black")
+```
 
+---
+
+# Geometria `geom_boxplot()` - wykresy ramka - wąsy
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Model, y = Cena.w.PLN, fill=Model)) + 
   geom_boxplot()
 
@@ -98,13 +164,17 @@ ggplot(skody, aes(x=Model, y = Cena.w.PLN, fill=Model)) +
 # Geometria `geom_hist()` - histogram
 
 ```{r, fig.height=4, fig.width=5}
-
 ggplot(skody, aes(x=Cena.w.PLN)) + 
   geom_histogram()
+```
 
+---
+
+# Geometria `geom_hist()` - histogram
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Cena.w.PLN, fill=Model)) + 
   geom_histogram()
-
 ```
 
 ---
@@ -112,21 +182,30 @@ ggplot(skody, aes(x=Cena.w.PLN, fill=Model)) +
 # Geometria `geom_bar()` - wykresy słupkowe
 
 ```{r, fig.height=4, fig.width=5}
-
 ggplot(skody, aes(x=Model)) + 
   geom_histogram()
+```
 
+---
+
+# Geometria `geom_bar()` - wykresy słupkowe
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Model, fill=Rodzaj.paliwa)) + 
   geom_bar()
+```
 
+---
+
+# Geometria `geom_bar()` - wykresy słupkowe
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
 skody %>% 
   group_by(Model, Rodzaj.paliwa) %>%
   summarise(liczba = n())
 
 ggplot(skody, aes(x=Model, fill=Rodzaj.paliwa)) + 
   geom_bar(position="fill")
-
-
 ```
 
 
