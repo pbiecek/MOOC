@@ -4,11 +4,14 @@ author: "poskRamiacze danych"
 date: "sezon 2 / odcinek 2 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
+    includes:
+      in_header: ../tracking.html
     highlight: default
     css: ../style.css
     font_adjustment: 0
     footer: "poskRamiacze danych / przetwarzanie / czytanie danych"
 ---
+
 # O czym jest ten odcinek
 
 Zanim rozpoczniemy analizę danych, musimy najpierw dane wczytać do programu R.
