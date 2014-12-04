@@ -20,7 +20,7 @@ Ale tworząc bardziej złożoną grafikę, często pojawia się potrzeba zmiany 
 
 W tym odcinku nauczymy się:
 
-- Jak dodać annotacje do wykresu?
+- Jak dodać adnotacje do wykresu?
 - Jak zmieniać mapowania kształtu?
 - Jak zmieniać mapowania kolorów?
 - Jak modyfikować legendę?
@@ -28,7 +28,7 @@ W tym odcinku nauczymy się:
 
 ---
 
-# Annotacje
+# Adnotacje
 
 Bardzo ważnym, a często niedocenianym elementem wykresu, są tytuły i opisy.
 
@@ -36,9 +36,9 @@ Dlaczego ważnym? Ponieważ bez tytułów i opisów czytelnik może nie mieć po
 
 Dlaczego niedocenianym? Ponieważ twórca wykresu zazwyczaj wie co wykres przedstawia i niekoniecznie ma ochotę i czas by dbać o czytelnika.
 
-Będziemy tworzyć bardzo dobre wykresy, poniewaz na naszych wykresach wszystko będzie jasne i opisane.
-Przyjrzyjmy się wykresowi z pierwszego odcinka i zastnaówmy się któ®e elementy warto dodatkowo opisać?
-Poświęć kilka minut by znaleźć przynajmniej pięć elmentów, które warto lepiej opisać na wym wykresie.
+Będziemy tworzyć bardzo dobre wykresy, ponieważ na naszych wykresach wszystko będzie jasne i opisane.
+Przyjrzyjmy się wykresowi z pierwszego odcinka i zastanówmy się które elementy warto dodatkowo opisać?
+Poświęć kilka minut by znaleźć przynajmniej pięć elementów, które warto lepiej opisać na tym wykresie.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 library(SmarterPoland)
@@ -48,29 +48,29 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
 
 ---
 
-# Annotacje
+# Adnotacje
 
 Czy to było trudne zadanie? 
 
-Mogło tak być, ponieważ widzieliśmy ten wykres juz wiele razy i wiemy co on przedstawia. Jeżeli jednak udało Ci się znaleźć elementy, warto dodakotwego opsiu to świetnie, jesteś na dobrej ścieżce.
+Mogło tak być, ponieważ widzieliśmy ten wykres już wiele razy i wiemy co on przedstawia. Jeżeli jednak udało Ci się znaleźć elementy, warto dodatkowego opisu to świetnie, jesteś na dobrej ścieżce.
 
 Oto co ja znalazłem
 
 - W opisach osi brakuje jednostek. Jest informacja 'waga' ale w jakich to jednostkach? Kilogramach, funtach? 
 - Podobny problem dotyczy prędkości, czy to kilometry na godzinę czy mile?
-- Opis legendy 'druzyna' możę i jest zabawny ale niewiele mówi. Jaka drużyna? Dla kogoś, kto nie wie o wyścigach gatunków ten napis nic nie powie.
+- Opis legendy 'druzyna' może i jest zabawny ale niewiele mówi. Jaka drużyna? Dla kogoś, kto nie wie o wyścigach gatunków ten napis nic nie powie.
 - Ale o co chodzi z tym wykresem? Gdzie jest tytuł? Co on w ogóle przedstawia?
 - Jakie gatunki reprezentują najbardziej skrajne punkty? Który kot i który ptak jest najszybszy?
 
-Zobaczmy jak przygotować wykres z odpowiednimi anotacjami
+Zobaczmy jak przygotować wykres z odpowiednimi adnotacjami
 
 ---
 
-# Annotacje
+# Adnotacje
 
-W poniższym kodzie do wykresu dodajemy cztery linijki, każda zmieniająca okreśłony aspekt wykresu. Funkcja `ggtitle()` dodaje tytuł do wykresu a funkcją `theme()` zmieniamy wielkość tytułu wykresu, większy będzie wyraźniejszy. Funkcjami `xlab()` i `ylab()` dodajemy opsiy dla osi. Aaby zmienić tytuł legendy należy określić argument `name` (nazwa) dla funkcji opisującej mapowanie na rozmiar (`scale_shape_discrete()`), a funkcją `theme()` przesuwamy tę legendę na górę wykresu. Funkcją `geom_text()` dodajemy etykiety dla wybranych punktów na wykresie.
+W poniższym kodzie do wykresu dodajemy cztery linijki, każda zmieniająca określony aspekt wykresu. Funkcja `ggtitle()` dodaje tytuł do wykresu a funkcją `theme()` zmieniamy wielkość tytułu wykresu, większy będzie wyraźniejszy. Funkcjami `xlab()` i `ylab()` dodajemy opisy dla osi. Aby zmienić tytuł legendy należy określić argument `name` (nazwa) dla funkcji opisującej mapowanie na rozmiar (`scale_shape_discrete()`), a funkcją `theme()` przesuwamy tę legendę na górę wykresu. Funkcją `geom_text()` dodajemy etykiety dla wybranych punktów na wykresie.
 
-```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+```{r, fig.height=5, fig.width=5, message=FALSE, warning=FALSE}
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   geom_point(size=5) + 
   ggtitle("Lżejszym łatwiej szybko biegać!") + theme(plot.title = element_text(size=20)) + 
@@ -101,7 +101,7 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna, color=druzyna)) +
 
 # Mapowania
 
-Zobaczmy jak wygląda kontrolowanie mapowaniami zmiennych ciągłych. Tym razem na kolor i wielkość punktu zamapujemy ciągłą zmienną `zywotnosc`. Jeżeli nie podoba nam się domyślny dobór kolorów, to funkcją `scale_color_gradient()` możemy określić pomiędzy jakimi wartościami `low=` i `high=` ma rozpinać się skala kolorów. Dla wielkości puntku określamy jaki przedział żywotności ma być prezentowany `limits=` oraz na jakiej wielkości punkty ten przedział ma być przedstawiony `range=`.
+Zobaczmy jak wygląda kontrolowanie mapowaniami zmiennych ciągłych. Tym razem na kolor i wielkość punktu zamapujemy ciągłą zmienną `zywotnosc`. Jeżeli nie podoba nam się domyślny dobór kolorów, to funkcją `scale_color_gradient()` możemy określić pomiędzy jakimi wartościami `low=` i `high=` ma rozpinać się skala kolorów. Dla wielkości punktu określamy jaki przedział żywotności ma być prezentowany `limits=` oraz na jakiej wielkości punkty ten przedział ma być przedstawiony `range=`.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
@@ -135,7 +135,7 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
 
 # Motywy graficzne
 
-Do tego miejsca mogło nam trochę obrzygnąć szare tło na wykresach. Okazuje się, że w prosty sposób mozna zmienić wygląd wykresu, używając motywów, czyli kompletów ustawień graficznych. Wiele takich motywów dostępnych jest w pakiecie `ggthemes`. Aby zmienić wygląd wykresu wystarczy dodać funkcję z motywem. Nazwy tych funkcji rozpoczynają się od `theme_`. Poniżej przykłąd dla czterech motywów graficznych.
+Do tego miejsca mogło nam trochę obrzydnąć szare tło na wykresach. Okazuje się, że w prosty sposób można zmienić wygląd wykresu, używając motywów, czyli kompletów ustawień graficznych. Wiele takich motywów dostępnych jest w pakiecie `ggthemes`. Aby zmienić wygląd wykresu wystarczy dodać funkcję z motywem. Nazwy tych funkcji rozpoczynają się od `theme_`. Poniżej przykład dla czterech motywów graficznych.
 
 ```{r, fig.height=4, fig.width=5, eval=FALSE}
 library(ggthemes)
@@ -165,4 +165,5 @@ pl + theme_economist() + ggtitle("theme_economist")
 - Wiele przydatnych wskazówek można również znaleźć w internetowej książce *,,Cookbook for R''* http://www.cookbook-r.com/Graphs/
 
 - Bardzo rozbudowana dokumentacja dla pakietu ggplot2 dostępna jest na stronie *,,ggplot2''* http://docs.ggplot2.org/current/index.html
+
 
