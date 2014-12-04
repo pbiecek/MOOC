@@ -330,4 +330,6 @@ skody %>%
 
 - Bardzo rozbudowana dokumentacja dla pakietu ggplot2 dostępna jest na stronie *,,ggplot2''* http://docs.ggplot2.org/current/index.html
 
-
+- Wiele ciekawych przykładów z użyciem *ggplot2* można znaleźć na stronach
+http://www.ats.ucla.edu/stat/r/faq/ oraz
+http://zevross.com/blog/category/r/
