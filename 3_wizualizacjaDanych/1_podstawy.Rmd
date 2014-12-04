@@ -308,6 +308,5 @@ Opanowaliśmy podstawy tworzenia wykresów z użyciem pakietu `ggplot2`. W kolej
 
 - Bardzo rozbudowana dokumentacja dla pakietu ggplot2 dostępna jest na stronie *,,ggplot2''* http://docs.ggplot2.org/current/index.html
 
-- i to
 
 
