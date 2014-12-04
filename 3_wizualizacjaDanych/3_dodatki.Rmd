@@ -1,15 +1,18 @@
 ---
 title: "Pakiet ggplot2 - poziom zaawansowany"
 author: "poskRamiacze danych"
-date: "sezon 3 / odcinek 3"
+date: "sezon 3 / odcinek 3 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
+    includes:
+      in_header: ../tracking.html
     highlight: default
     css: ../style.css
     font_adjustment: 0
     footer: "poskRamiacze danych / wizualizacja / zaawansowane"
 
 ---
+
 # O czym jest ten odcinek
 
 Funkcje z pakietu ggplot2 wyglądają dobrze przy domyślnych ustawieniach.
@@ -24,21 +27,137 @@ W tym odcinku nauczymy się:
 - Jak zmieniać motywy graficzne wykresu?
 
 ---
+
 # Annotacje
 
----
-# Mapowanie kształtu
+Bardzo ważnym, a często niedocenianym elementem wykresu, są tytuły i opisy.
+
+Dlaczego ważnym? Ponieważ bez tytułów i opisów czytelnik może nie mieć pojęcia co wykres przedstawia. Jeżeli czytelnik nie wie co wykres przedstawia to taki wykres jest bezużyteczny.
+
+Dlaczego niedocenianym? Ponieważ twórca wykresu zazwyczaj wie co wykres przedstawia i niekoniecznie ma ochotę i czas by dbać o czytelnika.
+
+Będziemy tworzyć bardzo dobre wykresy, poniewaz na naszych wykresach wszystko będzie jasne i opisane.
+Przyjrzyjmy się wykresowi z pierwszego odcinka i zastnaówmy się któ®e elementy warto dodatkowo opisać?
+Poświęć kilka minut by znaleźć przynajmniej pięć elmentów, które warto lepiej opisać na wym wykresie.
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+library(SmarterPoland)
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
+  geom_point(size=5) 
+```
 
 ---
-# Mapowanie koloru
+
+# Annotacje
+
+Czy to było trudne zadanie? 
+
+Mogło tak być, ponieważ widzieliśmy ten wykres juz wiele razy i wiemy co on przedstawia. Jeżeli jednak udało Ci się znaleźć elementy, warto dodakotwego opsiu to świetnie, jesteś na dobrej ścieżce.
+
+Oto co ja znalazłem
+
+- W opisach osi brakuje jednostek. Jest informacja 'waga' ale w jakich to jednostkach? Kilogramach, funtach? 
+- Podobny problem dotyczy prędkości, czy to kilometry na godzinę czy mile?
+- Opis legendy 'druzyna' możę i jest zabawny ale niewiele mówi. Jaka drużyna? Dla kogoś, kto nie wie o wyścigach gatunków ten napis nic nie powie.
+- Ale o co chodzi z tym wykresem? Gdzie jest tytuł? Co on w ogóle przedstawia?
+- Jakie gatunki reprezentują najbardziej skrajne punkty? Który kot i który ptak jest najszybszy?
+
+Zobaczmy jak przygotować wykres z odpowiednimi anotacjami
 
 ---
+
+# Annotacje
+
+W poniższym kodzie do wykresu dodajemy cztery linijki, każda zmieniająca okreśłony aspekt wykresu. Funkcja `ggtitle()` dodaje tytuł do wykresu a funkcją `theme()` zmieniamy wielkość tytułu wykresu, większy będzie wyraźniejszy. Funkcjami `xlab()` i `ylab()` dodajemy opsiy dla osi. Aaby zmienić tytuł legendy należy określić argument `name` (nazwa) dla funkcji opisującej mapowanie na rozmiar (`scale_shape_discrete()`), a funkcją `theme()` przesuwamy tę legendę na górę wykresu. Funkcją `geom_text()` dodajemy etykiety dla wybranych punktów na wykresie.
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
+  geom_point(size=5) + 
+  ggtitle("Lżejszym łatwiej szybko biegać!") + theme(plot.title = element_text(size=20)) + 
+  xlab("Waga [kg]") + ylab("Prędkość [km/h]") + 
+  scale_shape_discrete(name="Koty czy Ptaki?") + theme(legend.position="top") + 
+  geom_text(data=koty_ptaki[c(6,8),], aes(label=gatunek), hjust=-0.2)
+```
+
+---
+
+# Mapowania
+
+Jedną z zalet pakietu `ggplot2` jest to, że wystarczy że wskażemy jakie zmienne mają być przedstawione na wykresie, oraz jakie cechy wykresu mają te zmienne opisać. R automatycznie dobiera sposób prezentacji uwzględniając typ zmiennej, czy przyjmuje ona kilka wartości czy wiele, czy jest zmienną ilościową czy jakościową itp. 
+
+Czasem jednak, chcielibyśmy zmienić sposób reprezentacji zmiennych. Możemy to zrobić korzystając z funkcji `scale_xxx_yyy()` gdzie `xxx` opisuje cechę na której mapujemy a `yyy` opisuje sposób reprezentacji. Przykładowo, funkcja `scale_shape_manual()` pozwala na zarządzanie mapowaniem zmiennej na kształty. Argument `values=` pozwala na wskazanie jakimi wartościami mają być przedstawione poszczególne grupy, argument `breaks=` pozwala wskazać kolejność poziomów w legendzie. W podobny sposób `scale_color_manual()` pozwala na podanie kolorów, jakie mają kodować zmienne.
+Dla mapowania na cechy `x` i `y` wykresy interesującym parametrem jest `expand=`, który pozwala na określenie jak duże mają być marginesy na osi. 
+
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna, color=druzyna)) +
+  geom_point(size=5) +
+  scale_shape_manual(values=c("K", "P"), breaks=c("Ptak", "Kot")) +
+  scale_color_manual(values=c("blue3", "red3"), breaks=c("Ptak", "Kot")) +
+  scale_y_continuous(limits=c(0,200), expand=c(0,0)) 
+```
+
+---
+
+# Mapowania
+
+Zobaczmy jak wygląda kontrolowanie mapowaniami zmiennych ciągłych. Tym razem na kolor i wielkość punktu zamapujemy ciągłą zmienną `zywotnosc`. Jeżeli nie podoba nam się domyślny dobór kolorów, to funkcją `scale_color_gradient()` możemy określić pomiędzy jakimi wartościami `low=` i `high=` ma rozpinać się skala kolorów. Dla wielkości puntku określamy jaki przedział żywotności ma być prezentowany `limits=` oraz na jakiej wielkości punkty ten przedział ma być przedstawiony `range=`.
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
+  geom_point() +
+  scale_size_continuous(range=c(5,15), limits=c(10,50)) +
+  scale_color_gradient(low="gold", high="red4")
+```
+
+
+---
+
 # Legenda
 
----
-# Motywy graficzne
+Pakiet `ggplot2` automatycznie tworzy i rysuje legendę. W wielu przypadkach to domyślne zachowanie jest wystarczające, ale czasem chcemy umieścić tę legendę w innym miejscu, inaczej ją zatytułować czy pokolorować.
+
+Oczywiście to wszystko możemy zrobić, ustawiając poszczególne argumenty motywu (funkcją `theme()`) lub funkcji mapujących.
+
+W poniższym przykładzie funkcja `theme()` służy do określenia koloru tłą i obramowania w legendzie, wielkość tytułu legendy oraz jej pozycję. Funkcja `scale_shape_manual()` określa elementy mapowania, tytuł legendy i nazwę kluczy na legendzie.
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
+  geom_point(size=5) +
+  scale_shape_manual(values=c("K", "P"), labels=c("Duże Koty", "Wściekłe Ptaki"), name="Jakie \n to \n zwierze?") +
+  theme(legend.background = element_rect(color="red", fill="grey95"), 
+        legend.title = element_text(size=15), 
+        legend.position=c(0.8,0.8))
+
+```
 
 ---
+
+# Motywy graficzne
+
+Do tego miejsca mogło nam trochę obrzygnąć szare tło na wykresach. Okazuje się, że w prosty sposób mozna zmienić wygląd wykresu, używając motywów, czyli kompletów ustawień graficznych. Wiele takich motywów dostępnych jest w pakiecie `ggthemes`. Aby zmienić wygląd wykresu wystarczy dodać funkcję z motywem. Nazwy tych funkcji rozpoczynają się od `theme_`. Poniżej przykłąd dla czterech motywów graficznych.
+
+```{r, fig.height=4, fig.width=5, eval=FALSE}
+library(ggthemes)
+pl <- ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
+  geom_point(size=5) 
+pl + theme_bw()
+pl + theme_excel()
+pl + theme_minimal()
+pl + theme_economist()
+```
+```{r, fig.height=4, fig.width=5, echo=FALSE, message=FALSE, warning=FALSE}
+library(ggthemes)
+pl <- ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
+  geom_point(size=5) 
+pl + theme_bw() + ggtitle("theme_bw")
+pl + theme_excel() + ggtitle("theme_excel")
+pl + theme_minimal() + ggtitle("theme_minimal")
+pl + theme_economist() + ggtitle("theme_economist")
+```
+
+---
+
 # Co dalej
 
 - Więcej informacji o tym jak budować wykresy w pakiecie ggplot2 znaleźć można w rozdziale 4 książki *,,Przewodnik po pakiecie R''*. Więcej informacji o tej książce http://www.biecek.pl/R/
