@@ -204,6 +204,9 @@ ggplot(skody, aes(x=Model, y = Cena.w.PLN)) +
   geom_boxplot()
 ```
 
+Np. przy bpxplocie warto wspomnieć o wyciąganiu obliczeń - piątka Tukeya:
+D <- ggplot_build(boxplot)$data
+
 ---
 
 # Geometria `geom_boxplot()` - wykresy ramka - wąsy
