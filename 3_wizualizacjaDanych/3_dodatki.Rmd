@@ -119,7 +119,7 @@ Pakiet `ggplot2` automatycznie tworzy i rysuje legendę. W wielu przypadkach to 
 
 Oczywiście to wszystko możemy zrobić, ustawiając poszczególne argumenty motywu (funkcją `theme()`) lub funkcji mapujących.
 
-W poniższym przykładzie funkcja `theme()` służy do określenia koloru tłą i obramowania w legendzie, wielkość tytułu legendy oraz jej pozycję. Funkcja `scale_shape_manual()` określa elementy mapowania, tytuł legendy i nazwę kluczy na legendzie.
+W poniższym przykładzie funkcja `theme()` służy do określenia koloru tła i obramowania w legendzie, wielkość tytułu legendy oraz jej pozycję. Funkcja `scale_shape_manual()` określa elementy mapowania, tytuł legendy i nazwę kluczy na legendzie.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
