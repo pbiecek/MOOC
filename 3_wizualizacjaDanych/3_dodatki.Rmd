@@ -138,6 +138,8 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
 
 ```
 
+wyjaśnić co oznaczają liczby w legend.position
+
 ---
 
 # Motywy graficzne
