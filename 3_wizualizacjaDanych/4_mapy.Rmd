@@ -22,7 +22,7 @@ W tym odcinku nauczymy się
 
 ## Zbiór danych
 
-W tym odcinku będziemy pracować na zbiorze danych dużych kotów
+W tym odcinku będziemy pracować na zbiorze danych o wynikach wyborów do sejmików
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 library(SmarterPoland)
