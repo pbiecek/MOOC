@@ -115,6 +115,8 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
   scale_color_gradient(low="gold", high="red4")
 ```
 
+ustalić taką samą kolejność liczb w legendzie:
+np. od 10 do 50 lub od 50 do 10
 
 ---
 
