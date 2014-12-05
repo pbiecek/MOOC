@@ -156,6 +156,13 @@ pl + theme_minimal() + ggtitle("theme_minimal")
 pl + theme_economist() + ggtitle("theme_economist")
 ```
 
+warto pokazać opcję: theme_bw()+theme(plot.background = element_rect(fill = "gray80"))
+
+na koniec pokazać przykłady - nawek jako "ciekawostki":
+pakiet - `tikzDevice` - wykresy jak w Latex-u
+pakiet `xkcd` oraz `extrafont`
+http://davetang.org/muse/2013/05/21/creating-plots-using-the-xkcd-package-in-r/
+
 ---
 
 # Co dalej
