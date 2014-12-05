@@ -1,9 +1,13 @@
 ---
-title: "Wizualizacja danych"
+title: "Pakiet ggplot2 - mapy"
+author: "poskRamiacze danych"
+date: "sezon 3 / odcinek 4 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
+    includes:
+      in_header: ../tracking.html
     highlight: default
-    css: style.css
+    css: ../style.css
     font_adjustment: 0
     footer: "poskRamiacze danych / wizualizacja / mapy"
 ---
@@ -20,60 +24,83 @@ W tym odcinku nauczymy się
 
 W tym odcinku będziemy pracować na zbiorze danych dużych kotów
 
-```{r, message=FALSE}
-library(maptools)
-library(ggplot2)
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 library(SmarterPoland)
-load("mandatySejmik2014.rda")
-mandatySejmik2014
+library(ggplot2)
+head(mandatySejmik2014)
 
-#mandatySejmik2014 <- merge(mandatySejmik2014, df, by.x="Województwo",by.y="voj")
+```
 
-shp1 <- readShapePoly("POL_adm1.shp") 
+---
 
-shp1@data
+# Adnotacje
 
-# ksztalt konkturu
-str(shp1@polygons[[1]])
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+library(maptools)
+library(rgdal)
+library(gpclib)
+gpclibPermit()
+shp1 <- readShapePoly("../dane/POL_adm/POL_adm1.shp") 
 
-# srodek konturu
-shp1@polygons[[1]]@labpt
+head(shp1@data)
 
-#
-# wyciagamy srodki kazdego z wojewodztw
-wsp <- sapply(shp1@polygons,   function(x) x@labpt)
+```
 
+---
+
+# Adnotacje
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 #
 # fortify zmienia format danych na ggplot2 spójny
+shp1@data$VARNAME_1 <- as.character(shp1@data$VARNAME_1)
+shp1@data$VARNAME_1[4] <- "Lodzkie"
 shp1f <- fortify(shp1, region = "VARNAME_1")
 
 #
 # mapka w ggplot
 ggplot() +
   geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="black", size=0.25)
+```
 
+---
+
+# Adnotacje
+
+```{r, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
 #
 # wojewodztwa wypelnione kolorem
-# [losowym]
   ggplot() +
     geom_map(data=mandatySejmik2014, aes(map_id=Wojewodztwo, fill=ProcentWaznychGlosow), map=shp1f) +
   geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="black", size=0.25)
-  
+```
+
+---
+
+# Adnotacje
+
+```{r, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
 #
 # jak określić projekcje
 ggplot() +
-  geom_map(data=df, aes(map_id=voj, fill=val), map=shp1f) +
-  geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="black", size=0.25) +
-  coord_map(projection="mercator")
+    geom_map(data=mandatySejmik2014, aes(map_id=Wojewodztwo, fill=ProcentWaznychGlosow), map=shp1f) +
+    geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="black", size=0.25) +
+    coord_map(projection="mercator")
+```
 
+---
+
+# Adnotacje
+
+```{r, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
 #
 # to szare tło wcale nie jest potrzebne
 ggplot() +
-  geom_map(data=df, aes(map_id=voj, fill=val), map=shp1f) +
-  geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="black", size=0.25) +
-  coord_map(projection="mercator") +
-  theme_bw() +
-  theme(axis.ticks = element_blank(),
+    geom_map(data=mandatySejmik2014, aes(map_id=Wojewodztwo, fill=ProcentWaznychGlosow), map=shp1f) +
+    geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="black", size=0.25) +
+    coord_map(projection="mercator") +
+    theme_bw() +
+    theme(axis.ticks = element_blank(),
         axis.text.x = element_blank(),
         axis.text.y = element_blank(),
         panel.grid.minor=element_blank(),
@@ -81,11 +108,17 @@ ggplot() +
         axis.title.x = element_blank(),
         axis.title.y = element_blank(),
         panel.border = element_blank())
+```
 
+---
+
+# Adnotacje
+
+```{r, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
 #
 # to szare tło wcale nie jest potrzebne
 ggplot() +
-  geom_map(data=df, aes(map_id=voj, fill=val), map=shp1f) +
+    geom_map(data=mandatySejmik2014, aes(map_id=Wojewodztwo, fill=ProcentWaznychGlosow), map=shp1f) +
   geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="white", size=1) +
   coord_map(projection="mercator") +
   theme_bw() +
@@ -98,11 +131,17 @@ ggplot() +
         axis.title.x = element_blank(),
         axis.title.y = element_blank(),
         panel.border = element_blank())
+```
 
+---
+
+# Adnotacje
+
+```{r, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
 #
 # A może wielkością punktu?
 ggplot() +
-  geom_point(data=df, aes(x=long, y=lat, size=val)) +
+  geom_point(data=mandatySejmik2014, aes(x=long, y=lat, size=ProcentWaznychGlosow)) +
   geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="black", size=0.25) +
   coord_map(projection="mercator") +
   theme_bw() +
@@ -115,13 +154,25 @@ ggplot() +
         axis.title.x = element_blank(),
         axis.title.y = element_blank(),
         panel.border = element_blank())
+```
 
+---
+
+# Adnotacje
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 #
 # A może długością paska
 ggplot() +
   geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="grey", size=0.25) +
-  geom_rect(data=df, aes(xmin=long-0.2, xmax=long+0.2, ymin=lat-0.2, ymax=lat + val), fill="black", color="black") +
-  geom_rect(data=df, aes(xmin=long+0.4, xmax=long+0.2, ymin=lat-0.2, ymax=lat + val/2), fill="red4", color="black") +
+  geom_rect(data=mandatySejmik2014, aes(xmin=long-0.3, xmax=long-0.1, 
+                                        ymin=lat, ymax=lat + PO/15), fill="orange3", color="white") +
+  geom_rect(data=mandatySejmik2014, aes(xmin=long-0.1, xmax=long+0.1, 
+                                        ymin=lat, ymax=lat + PiS/15), fill="blue3", color="white") +
+  geom_rect(data=mandatySejmik2014, aes(xmin=long+0.1, xmax=long+0.3, 
+                                        ymin=lat, ymax=lat + PSL/15), fill="green3", color="white") +
+  geom_rect(data=mandatySejmik2014, aes(xmin=long+0.5, xmax=long+0.3, 
+                                        ymin=lat, ymax=lat + SLD/15), fill="red", color="white") +
   coord_map(projection="mercator") +
   theme_bw() +
   scale_size_continuous(range=c(1,20)) +
@@ -133,6 +184,15 @@ ggplot() +
         axis.title.x = element_blank(),
         axis.title.y = element_blank(),
         panel.border = element_blank())
-
-
 ```
+
+---
+
+# Co dalej
+
+- Więcej informacji o tym jak budować wykresy w pakiecie ggplot2 znaleźć można w rozdziale 4 książki *,,Przewodnik po pakiecie R''*. Więcej informacji o tej książce http://www.biecek.pl/R/
+
+- Wiele przydatnych wskazówek można również znaleźć w internetowej książce *,,Cookbook for R''* http://www.cookbook-r.com/Graphs/
+
+- Bardzo rozbudowana dokumentacja dla pakietu ggplot2 dostępna jest na stronie *,,ggplot2''* http://docs.ggplot2.org/current/index.html
+
