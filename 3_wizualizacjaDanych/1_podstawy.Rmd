@@ -223,7 +223,7 @@ ggplot(koty_ptaki, aes(x= waga, y=predkosc, label=gatunek)) +
 
 # Geometria `geom_text()` - pozycjonowanie napisu
 
-Zauważmy, że niektóre napisy wychodzą poza wykres. Nie wygląda to najlepiej. Można ten problem naprawić na dwa sposoby. Jeden to rozszerzenie osi OX, drugi to pozycjonowanie napisów względem uch lewego brzegu a nie środka.
+Zauważmy, że niektóre napisy wychodzą poza wykres. Nie wygląda to najlepiej. Można ten problem naprawić na dwa sposoby. Jeden to rozszerzenie osi OX, drugi to pozycjonowanie napisów względem lewego brzegu a nie środka.
 
 Spróbujmy tego drugiego rozwiązania. Śledząc opis geometrii `geom_text()` można zauważyć, że za pozycjonowanie odpowiadają cechy `hjust` (w poziomie) i `vjust` (w pionie).
 
