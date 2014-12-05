@@ -172,6 +172,9 @@ pakiet - `tikzDevice` - wykresy jak w Latex-u
 pakiet `xkcd` oraz `extrafont`
 http://davetang.org/muse/2013/05/21/creating-plots-using-the-xkcd-package-in-r/
 
+powiedzieć o różnych możliwościach rozmieszczeniach wykresów
+grid::pushViewport
+
 ---
 
 # Co dalej
