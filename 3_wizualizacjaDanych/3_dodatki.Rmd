@@ -92,15 +92,10 @@ Dla mapowania na cechy `x` i `y` wykresy interesującym parametrem jest `expand=
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna, color=druzyna)) +
   geom_point(size=5) +
-  scale_shape_manual(values=c("K", "P"), breaks=c("Ptak", "Kot")) +
-  scale_color_manual(values=c("blue3", "red3"), breaks=c("Ptak", "Kot")) +
+  scale_shape_manual(values=c("K", "P"), breaks=c("Kot", "Ptak")) +
+  scale_color_manual(values=c("blue3", "red3"), breaks=c("Kot", "Ptak")) +
   scale_y_continuous(limits=c(0,200), expand=c(0,0)) 
 ```
-
-
-values=c("K", "P"), breaks=c("Ptak", "Kot")
-kod sugeruje że K odnosi się do "Ptak"
-"blue3" odnosi się do "Ptak"
 
 ---
 
@@ -114,9 +109,6 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
   scale_size_continuous(range=c(5,15), limits=c(10,50)) +
   scale_color_gradient(low="gold", high="red4")
 ```
-
-ustalić taką samą kolejność liczb w legendzie:
-np. od 10 do 50 lub od 50 do 10
 
 ---
 
@@ -136,6 +128,29 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
         legend.title = element_text(size=15), 
         legend.position=c(0.8,0.8)) # 0.8, 0.8 to współrzędne gdzie ma pojawić się legenda
 
+```
+
+---
+
+# Wiele wykresów w jednym oknie
+
+W programie R wszystko jest obiektem. Oznacza to, że również wynik funkcji `ggplot()` jest obiektem, który można przypisać do zmiennej i później wielokrotnie wykorzystać. Zilustrujmy to przykładem. Poniższa instrukcja przypisze definicje wykresy do zmiennej `pl_waga`. Żaden wykres nie będzie narysowany chyba, że wyświetlimy zawartość zmiennej `pl_waga`.
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+pl_waga <- ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
+                geom_point(size=5)
+```
+
+Aby wyświetlić wykres `pl_waga` można wykorzystać funkcję `print()`. Jednym z argumentów tej funkcji jest `vp=` pozwalający określić w którym miejscu wykres ma być rysowany. Domyślnie zarysowany jest cały obszar o współrzędnych [0-1], ale możemy zażyczyć sobie by wykres rysowany był w mniejszym obszarze. Jest to bardzo wygodne, jeżeli chcemy zmieścić kilka wykresów obok siebie. Poniższy przykłąd rysuje ten sam wykres trzykrotnie, za każdym razem w innym miejscu i z innym tytułem.
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+library(grid)
+print(pl_waga + ggtitle("Wykres 1"), 
+      vp=viewport(x=0.25, y = 0.75, width=0.5, height=0.5))
+print(pl_waga + ggtitle("Wykres 2"), 
+      vp=viewport(x=0.25, y = 0.25, width=0.5, height=0.5))
+print(pl_waga + ggtitle("Wykres 3"), 
+      vp=viewport(x=0.75, y = 0.5, width=0.5, height=1))
 ```
 
 ---
