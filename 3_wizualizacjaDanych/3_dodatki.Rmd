@@ -134,11 +134,9 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   scale_shape_manual(values=c("K", "P"), labels=c("Duże Koty", "Wściekłe Ptaki"), name="Jakie \n to \n zwierze?") +
   theme(legend.background = element_rect(color="red", fill="grey95"), 
         legend.title = element_text(size=15), 
-        legend.position=c(0.8,0.8))
+        legend.position=c(0.8,0.8)) # 0.8, 0.8 to współrzędne gdzie ma pojawić się legenda
 
 ```
-
-wyjaśnić co oznaczają liczby w legend.position
 
 ---
 
@@ -165,15 +163,27 @@ pl + theme_minimal() + ggtitle("theme_minimal")
 pl + theme_economist() + ggtitle("theme_economist")
 ```
 
-warto pokazać opcję: theme_bw()+theme(plot.background = element_rect(fill = "gray80"))
+---
 
-na koniec pokazać przykłady - nawek jako "ciekawostki":
-pakiet - `tikzDevice` - wykresy jak w Latex-u
-pakiet `xkcd` oraz `extrafont`
-http://davetang.org/muse/2013/05/21/creating-plots-using-the-xkcd-package-in-r/
+# Ciekawostki
 
-powiedzieć o różnych możliwościach rozmieszczeniach wykresów
-grid::pushViewport
+Elastyczność ggplot2 jest olbrzymia. Możliwe jest tworzenie wykresów w stylu popularnych komiksów z serii XKCD http://xkcd.com/
+
+```{r, fig.height=4, fig.width=5, echo=FALSE, message=FALSE, warning=FALSE}
+library(xkcd)
+ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
+  geom_point(size=5) + xkcdaxis(c(0,300),c(50,200))
+
+```
+
+Bazując na motywie `theme_bw()` można uzyskać inwersję domyślnych wykresów z pakietu `ggplot2`
+
+```{r, fig.height=4, fig.width=5, echo=FALSE, message=FALSE, warning=FALSE}
+pl + theme_bw()+theme(plot.background = element_rect(fill = "gray80"))
+```
+
+
+
 
 ---
 
