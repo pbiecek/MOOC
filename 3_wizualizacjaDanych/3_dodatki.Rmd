@@ -97,6 +97,11 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna, color=druzyna)) +
   scale_y_continuous(limits=c(0,200), expand=c(0,0)) 
 ```
 
+
+values=c("K", "P"), breaks=c("Ptak", "Kot")
+kod sugeruje że K odnosi się do "Ptak"
+"blue3" odnosi się do "Ptak"
+
 ---
 
 # Mapowania
