@@ -26,7 +26,7 @@ W tym odcinku dowiemy się
 - Jak dodawać kolejne warstwy do wykresu?
 - Jak tworzyć wykresy liniowe?
 
-W tym odcinku będziemy pracować z dwoma zmiorami danych: `koty_ptaki` oraz `WIG`.
+W tym odcinku będziemy pracować z dwoma zbiorami danych: `koty_ptaki` oraz `WIG`.
 
 ---
 
