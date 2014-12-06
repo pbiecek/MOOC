@@ -30,6 +30,8 @@ część 1: Data smart
   * Cechy ilościowe, [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyIloscioweIntro.md), [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyIlosciowe.html)
   * Cechy logiczne, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyLogiczne.html)
   * Cechy napisowe, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyNapisowe.html)
+  * Pętla for / sapply
+  * Instrukcja if
   * Co dalej, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/coDalej.html)
 
 część 2: Data science
@@ -45,7 +47,9 @@ część 2: Data science
 
 
 + Modelowanie danych
+  * test dla dwóch grup - wilcoxon
   * 2x2  - moze chi^2
+  * px2  - chi^2
   * Regresja liniowa, [intro](https://rawgit.com/pbiecek/MOOC/master/modelowanie/regresjaIntro.md), [materialy html](https://rawgit.com/pbiecek/MOOC/master/modelowanie/regresjaProsta.html), [materialy html](https://rawgit.com/pbiecek/MOOC/master/modelowanie/dopasowanieModelu.html)
   * Regresja przedziałowo liniowa, [intro](https://rawgit.com/pbiecek/MOOC/master/modelowanie/przedzialowaIntro.md),   [materialy html](https://rawgit.com/pbiecek/MOOC/master/modelowanie/regresjaMultiplikatywna.html)
   * Diagnostyka [Ascombe]
@@ -53,8 +57,5 @@ część 2: Data science
   * Modele z wieloma zmiennymi
   * Jak wybierać modele [AIC, BIC]
   * Regresja logistyczna
-
-TODO: Czyszczenie danych i wlasne funkcje
-      ew pisanie petli i ifow
 
 TODO: Wprowadzić peer-review w ocenianiu wizualizacji i być może modelowania.
