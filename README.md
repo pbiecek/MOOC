@@ -35,14 +35,13 @@ część 1: Data smart
 część 2: Data science
 
 + Wizualizacja danych
-  * Historia i współczesność [lektury obowiązkowe, bilans playfair, snow, nightingale, minard]
-  * Iluzje, percepcja obrazu i kolory [persspektywa, tithener, wzmocnienie oboczne, poggardoffa, ślepa plamka, fiksacje sakkady, precyzja przedstawiania - kołowy, paskowy, punktowy]
+  * Historia i współczesność 
+  * Iluzje, percepcja obrazu i kolory
   * Info-pomyłka
-  * Warsztat [cecha ilorazowa / przedziałowa]
-  * Jak to zrobić - część 1, [materialy html](https://rawgit.com/pbiecek/MOOC/master/wizualizacja/ggplot1.html)
-  * Jak to zrobić - część 2,  [materialy html](https://rawgit.com/pbiecek/MOOC/master/wizualizacja/ggplot2.html)
-  * Jak to zrobić - poprawiamy wykres,  [materialy html](https://rawgit.com/pbiecek/MOOC/master/wizualizacja/ggplot3.html)
-  * Co dalej, [materialy html](https://rawgit.com/pbiecek/MOOC/master/wizualizacja/coDalej.html)
+  * Jak zrobić wykres, [materialy html](https://rawgit.com/pbiecek/MOOC/master/3_wizualizacjaDanych/1_podstawy.html)
+  * Wykresy agregaty,  [materialy html](https://rawgit.com/pbiecek/MOOC/master/3_wizualizacjaDanych/2_agregaty.html)
+  * Dodatki do wykresów,  [materialy html](https://rawgit.com/pbiecek/MOOC/master/3_wizualizacjaDanych/3_dodatki.html)
+  * Jak zrobić mapę, [materialy html](https://rawgit.com/pbiecek/MOOC/master/3_wizualizacjaDanych/4_mapy.html)
 
 
 + Modelowanie danych
