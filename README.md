@@ -1,6 +1,6 @@
 ﻿
-poskRamiacze danych
-===================
+pogRomcy danych
+===============
 Od zera do bohatera w 60 godzin
 -------------------------------
 
@@ -57,10 +57,4 @@ część 2: Data science
 TODO: Czyszczenie danych i wlasne funkcje
       ew pisanie petli i ifow
 
-TODO: Regresję logistyczną zrobić na Diagnozie Sopłecznej
-
 TODO: Wprowadzić peer-review w ocenianiu wizualizacji i być może modelowania.
-
-TODO: Do analizy wariancji wprowadzić analizę ceny w zaleznosci od koloru
-
-TODO: promocja? tok fm? 
