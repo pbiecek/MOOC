@@ -93,7 +93,7 @@ ggplot() +
 
 # Rysowanie mapy
 
-Mapy można rysować w różnych projekcjach. Aby je wybrać wystarczy dodać wywołanie funkcji `coord_map()`. Poniżej dwa przykładowe projekcie. Listę projekcji z opisem właściwości znaleźć można pod adresem http://en.wikipedia.org/wiki/List_of_map_projections
+Mapy można rysować w różnych projekcjach. Aby je wybrać wystarczy dodać wywołanie funkcji `coord_map()`. Poniżej dwa przykładowe projekcje. Listę projekcji z opisem właściwości znaleźć można pod adresem http://en.wikipedia.org/wiki/List_of_map_projections
 
 ```{r, fig.height=4, fig.width=7, message=FALSE, warning=FALSE, eval=FALSE}
 mapka <- ggplot() +
