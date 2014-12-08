@@ -26,7 +26,10 @@ W tym odcinku dowiemy się
 
 ---
 
-# Dane tabelaryczne w plikach tekstowych
+# Ptaki vs koty
+
+Do pracy nad wybieraniem wierszy i kolumn wykorzystamy niewielki zbiór danych o kotach i ptakach.
+Siedem kolumn i trzynaście wierszy to dobry zbiór do ćwiczeń.
 
 ```{r, message=FALSE, warning=FALSE}
 library(SmarterPoland)
@@ -35,20 +38,53 @@ koty_ptaki
 
 ---
 
+# Wybieranie wierszy z ramki danych
+
+Aby odwoływać się do wierszy lub kolumn ramki danych można wyokrzystać operator `[,]`. 
+Przed przecinkiem należy wpisać indeksy wierszy.
+
+Przykładowo, odwołanie się do trzeciego wiersza
+
 ```{r, message=FALSE, warning=FALSE}
 koty_ptaki[3,]
-koty_ptaki[8:10,]
-koty_ptaki[c(3,8:10),]
+```
 
+Aby odwołać się do kilku koljnych wierszy można wykorzystać sekwencję zbudowaną z operatorem `:`.
+Wiersze od 8 do 10 można wyłuskać następująco
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[8:10,]
+```
+
+Funkcja `c()` skleja wartości i sekwencje  wwektor, który można następnie wykorzystać w indeksowaniu wierszy.
+Poniższa instrukcja wyłuskuje wiersze 3, 8, 9 i 10.
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[c(3,8:10),]
+```
+
+Funkcjami `head()` i `tail()` wyłuskuje pierwsze lub ostatnie 6 wierszy ze zbioru danych.
+
+```{r, message=FALSE, warning=FALSE}
 head(koty_ptaki)
 tail(koty_ptaki)
 ```
 
 ---
 
+# Wybieranie kolumn z ramki danych
+
+
+
 ```{r, message=FALSE, warning=FALSE}
 koty_ptaki[,2]
+```
+
+```{r, message=FALSE, warning=FALSE}
 koty_ptaki$waga
+```
+
+```{r, message=FALSE, warning=FALSE}
 koty_ptaki[,2, drop=FALSE]
 ```
 
