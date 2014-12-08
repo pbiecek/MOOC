@@ -1,0 +1,95 @@
+---
+title: "Indeksowanie ramek danych"
+author: "pogRomcy danych"
+date: "sezon 2 / odcinek 4 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / przetwarzanie / indeksowanie"
+---
+
+# O czym jest ten odcinek
+
+Dane z którymi będziemy pracować mają najczęściej format tabeli. 
+Jedną z podstawowych operacji na tabelach jest wybieranie podzbioru wierszy lub kolumn.
+
+W tym odcinku dowiemy się
+
+- Jak wybierać wiersze z ramki danych
+- Jak wybierać kolumny z ramki danych
+- Jak wybierać wiersze i kolumny
+- Jak indeksować wiersze i kolumny używając nazw lub wartości logicznych
+
+---
+
+# Dane tabelaryczne w plikach tekstowych
+
+```{r, message=FALSE, warning=FALSE}
+library(SmarterPoland)
+koty_ptaki
+```
+
+---
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[3,]
+koty_ptaki[8:10,]
+koty_ptaki[c(3,8:10),]
+
+head(koty_ptaki)
+tail(koty_ptaki)
+```
+
+---
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[,2]
+koty_ptaki$waga
+koty_ptaki[,2, drop=FALSE]
+```
+
+---
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[,3:4]
+koty_ptaki[,c(2,3:4)]
+```
+
+---
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[c(3,8:10),c(2,3:4)]
+```
+
+---
+
+```{r, message=FALSE, warning=FALSE}
+rownames(koty_ptaki) <- koty_ptaki[,1]
+head(koty_ptaki, 3)
+```
+
+---
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[c("Lew", "Leopard", "Jerzyk", "Strus"),
+           c("waga", "dlugosc", "predkosc")]
+```
+
+---
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki$predkosc > 100
+grepl(colnames(koty_ptaki), pattern = "a")
+
+koty_ptaki[koty_ptaki$predkosc > 100,
+           grepl(colnames(koty_ptaki), pattern = "a")]
+```
+
+---
+
+# Zadania
+
