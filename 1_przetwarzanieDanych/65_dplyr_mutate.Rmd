@@ -1,0 +1,95 @@
+---
+title: "Wyznaczanie nowych zmiennych danych [dplyr / mutate]"
+author: "pogRomcy danych"
+date: "sezon 1 / odcinek 6 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / przetwarzanie / dplyr"
+
+---
+
+# O czym jest ten odcinek
+
+W tym odcinku nauczymy się
+
+- Jak ze zbioru danych wybierać tylko interesujące nas wiersze
+
+Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to `koty_ptaki` a drugi, znacznie większy to `auta2012`.
+
+---
+
+# Wyliczanie nowych zmiennych
+Nie zawsze w zbiorze danych są dokładnie te zmienne, których potrzebujemy.
+Czasem musimy je policzyć, służy do tego funkcja o wdzięcznej nazwie `mutate()`.
+
+Przeliczmy prędkość z kilometrów na godzinę na mile na godzine, oraz taką jednostkę jak liczba swoich długości na sekundę.
+
+```{r, message=FALSE, warning=FALSE}
+library(SmarterPoland)
+koty_ptaki %>%
+  mutate(predkosc.mph = round(predkosc / 0.621371),
+         dlugosci.na.sek = round(predkosc / 3.6 / dlugosc,1))
+```
+
+---
+
+# Zadanie
+
+* Z fizyki wiemy, że pęd to prędkość razy masa. Policz maksymalne pędy dla każdego gatunku oraz uporządkuj wierszy w kolejności od tych zdolnych do uzyskiwania najwyższego pędu.
+
+---
+
+# Wyliczanie nowych zmiennych
+
+Policzmy najpierw wiek auta. Dane były zbierane w roku 2012, więc wiek auta to różnica pomiędzy rokiem produkcji, rokiem 2012 plus 1.
+```{r, warning=FALSE}
+autaZWiekiem <- auta2012 %>%
+  mutate(Wiek.auta = 2013 - Rok.produkcji)
+autaZWiekiem %>% 
+  select(Wiek.auta, Rok.produkcji) %>%
+  head()
+```
+
+---
+
+# Wyliczanie nowych zmiennych
+
+Drugą użyteczną zmienną to cena brutto. Teraz część aut ma cenę brutto a część netto. To utrudnia porównania. Przeliczmy wszystkie ceny na brutto dodając 23\% tam gdzie podana jest cena netto.
+
+```{r, warning=FALSE}
+autaZCenaBrutto <- auta2012 %>%
+  mutate(Cena.brutto = Cena.w.PLN * ifelse(Brutto.netto == "brutto", 1, 1.23))
+autaZCenaBrutto %>% 
+  select(Cena.brutto, Brutto.netto, Cena.w.PLN) %>%
+  head()
+```
+
+Funkcja `ifelse()` jako wynik zwraca drugi lub trzegi argument w zależności od tego czy pierwszy argument jest prawdziwy czy nie.
+
+---
+
+# Wyliczanie nowych zmiennych
+
+W jednym wykonaniu funkcji `mutate()` można podać kilka transformacji.
+
+```{r, warning=FALSE}
+autaZWiekiemIBrutto <- auta2012 %>%
+  mutate(Wiek.auta = 2013 - Rok.produkcji,
+         Cena.brutto = Cena.w.PLN * ifelse(Brutto.netto == "brutto", 1, 1.23))
+
+autaZWiekiemIBrutto %>% 
+  select(Cena.brutto, Brutto.netto, Cena.w.PLN, Wiek.auta, Rok.produkcji) %>%
+  head()
+```
+
+---
+
+# Zadania
+* Policz średni przebieg na rok, dzieląc przebieg przez wieka auta.
+* Poza koniem mechanicznym inną ciekawą jednostką mocy jest koń parowy (jednostka HP). Jeden koń mechanicnzy to 0.9863 konia parowego. Utwórz nową zmienną, która przedstawi moc aut w koniach parowych (btw: Wikipedia zna jeszcze kilka innych ciekawych jednostek mocy).
+

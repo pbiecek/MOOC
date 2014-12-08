@@ -1,0 +1,70 @@
+---
+title: "Agregaty danych [dplyr / summarise]"
+author: "pogRomcy danych"
+date: "sezon 1 / odcinek 6 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / przetwarzanie / dplyr"
+
+---
+
+# O czym jest ten odcinek
+
+W tym odcinku nauczymy się
+
+- Jak ze zbioru danych wybierać tylko interesujące nas wiersze
+
+Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to `koty_ptaki` a drugi, znacznie większy to `auta2012`.
+
+---
+
+# Agregaty
+
+Funkcją `sumamrise()` możemy wyznaczyć wektor podsumowań zbiorru danych.
+
+```{r, message=FALSE, warning=FALSE}
+library(SmarterPoland)
+koty_ptaki %>%
+  summarise(najszybszy = max(predkosc),
+            najwolniejszy = min(predkosc),
+            najcięższy = max(waga),
+            najkrócej.żyjacy = min(zywotnosc))
+```
+
+---
+
+# Agregaty
+Zbiór danych `ceny2012` zawiera szczegółowe informacje o parametrach każdej oferty sprzedaży. Często z takich zbiorów danych interesują nas pewne statystyki agregujące informacje ze zbioru danych. 
+
+Przykładem może być średnia cena, zmienność, czyli odchylenie standardowe ceny,
+połówkowy przebieg czy liczba obserwacji. 
+
+Takie agregaty możemy wyznaczyć funkcją `summarise()`.
+Jako pierwszy argument podajemy zbiór danych a jako kolejne wskazujemy statystyki / agregaty, które chcemy wyznaczyć z tego zbioru danych. 
+
+```{r, warning=FALSE}
+auta2012 %>%
+  summarise(sredniaCena = mean(Cena.w.PLN),
+            sdCena = sqrt(var(Cena.w.PLN)),
+            medianaPrzebiegu = median(Przebieg.w.km, na.rm=TRUE),
+            liczba = n())
+```
+
+Funkcja `mean()` wyznacza średnią, funkcja `var()` wyznacza wariancję a pierwiasterk z waiancji jest odchyleniem standardowym, funkcja `median()` wyznacza liczbę obserwacji w grupie.
+
+Nie wszystkie wartości są podane dla wszystkich zmiennych. Jeżeli jakaś wartość nei zostałą podana, to w zbiorze danych jest ona zakodowana jako NA - (ang. Not Available) brakująca wartość.
+
+Jeżeli w zmiennej są wartości brakujące, to argument `na.rm=TRUE` oznacza, że wynik ma być wyznaczony po usunięciu wartości brakujących.
+
+---
+
+# Zadania
+
+* Policz sumaryczny przebieg wszystkich samochodów
+* Wybierz tylko samochody marki 'Rolls-Royce' i policz ich średni przebieg oraz średnią cenę.
+
