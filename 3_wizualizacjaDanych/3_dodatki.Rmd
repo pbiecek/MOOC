@@ -153,6 +153,20 @@ print(pl_waga + ggtitle("Wykres 3"),
       vp=viewport(x=0.75, y = 0.5, width=0.5, height=1))
 ```
 
+[TODO] wyjasnic jakie znaczenie maja parametry x=0.25, y=0.75 ...
+moze bardziej intuicyjnym rozwiazaniem byloby:
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+# siatka:
+pushViewport(vieport(layout = grid.layout(2,2)))
+# wklejanie wykresow do wybranych cel:
+print(pl_waga + ggtitle("Wykres 1"),
+      vp= viewport(layout.pos.row=1, layout.pos.col=1))
+print(pl_waga + ggtitle("Wykres 2"),
+      vp= viewport(layout.pos.row=2, layout.pos.col=1))
+print(pl_waga + ggtitle("Wykres 3"),
+      vp= viewport(layout.pos.row=1:2, layout.pos.col=2))
+```
+
 ---
 
 # Motywy graficzne
