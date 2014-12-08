@@ -40,7 +40,7 @@ koty_ptaki
 
 # Wybieranie wierszy z ramki danych
 
-Aby odwoływać się do wierszy lub kolumn ramki danych można wyokrzystać operator `[,]`. 
+Aby odwoływać się do wierszy lub kolumn ramki danych można wykorzystać operator `[,]`. 
 Przed przecinkiem należy wpisać indeksy wierszy.
 
 Przykładowo, odwołanie się do trzeciego wiersza
@@ -49,14 +49,14 @@ Przykładowo, odwołanie się do trzeciego wiersza
 koty_ptaki[3,]
 ```
 
-Aby odwołać się do kilku koljnych wierszy można wykorzystać sekwencję zbudowaną z operatorem `:`.
+Aby odwołać się do kilku kolejnych wierszy można wykorzystać sekwencję zbudowaną z operatorem `:`.
 Wiersze od 8 do 10 można wyłuskać następująco
 
 ```{r, message=FALSE, warning=FALSE}
 koty_ptaki[8:10,]
 ```
 
-Funkcja `c()` skleja wartości i sekwencje  wwektor, który można następnie wykorzystać w indeksowaniu wierszy.
+Funkcja `c()` skleja wartości i sekwencje  wektor, który można następnie wykorzystać w indeksowaniu wierszy.
 Poniższa instrukcja wyłuskuje wiersze 3, 8, 9 i 10.
 
 ```{r, message=FALSE, warning=FALSE}
@@ -74,15 +74,14 @@ tail(koty_ptaki)
 
 # Wybieranie kolumn z ramki danych
 
-
+Podobnie jak wiersze, można indeksować kolumny. Aby wyłuskać drugą kolumnę można wskazać jej numer po przecinku.
 
 ```{r, message=FALSE, warning=FALSE}
 koty_ptaki[,2]
 ```
 
-```{r, message=FALSE, warning=FALSE}
-koty_ptaki$waga
-```
+Wybranie jednej kolumny powoduje, że jako wynik otrzymujemy nie ramkę danych ale wektor.
+Aby temu zapobiec i jako wynik wciąż mieć ramkę danych, należy dodać do indeksowania argument `drop=FALSE`.
 
 ```{r, message=FALSE, warning=FALSE}
 koty_ptaki[,2, drop=FALSE]
@@ -90,12 +89,19 @@ koty_ptaki[,2, drop=FALSE]
 
 ---
 
+# Wybieranie kolumn z ramki danych
+
+Aby wybrać więcej kolumn można wykorzystać funkcję `c()`, tak jak w przypadku indeksowania wierszy.
+
 ```{r, message=FALSE, warning=FALSE}
-koty_ptaki[,3:4]
 koty_ptaki[,c(2,3:4)]
 ```
 
 ---
+
+# Wybieranie podramki z ramki danych
+
+Możemy jednocześnie odwoływać się do wierszy i kolumn w ramce danych, wybierając jej podramkę.
 
 ```{r, message=FALSE, warning=FALSE}
 koty_ptaki[c(3,8:10),c(2,3:4)]
@@ -103,19 +109,33 @@ koty_ptaki[c(3,8:10),c(2,3:4)]
 
 ---
 
+# Wybieranie podramki z ramki danych nazwami
+
+Dodajmy nazwy wierszy dla naszej ramki.
+
 ```{r, message=FALSE, warning=FALSE}
 rownames(koty_ptaki) <- koty_ptaki[,1]
 head(koty_ptaki, 3)
 ```
 
----
+Tak wiersze jak i kolumny można wskazywać nie tylko indeksami liczbowymi, ale również wskazując nazwy wierszy i/lub kolumn.
 
 ```{r, message=FALSE, warning=FALSE}
 koty_ptaki[c("Lew", "Leopard", "Jerzyk", "Strus"),
            c("waga", "dlugosc", "predkosc")]
 ```
 
+Do wskazanej kolumny można odwoływać się przez jej nazwę również używając operatora `$`.
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki$waga
+```
+
 ---
+
+# Wybieranie podramki z ramki danych nazwami
+
+Do indeksowania macierzy można wykorzystywać też wektory wartości logicznych TRUE/FALSE. W tym przypadku wybrane będą tylko te wiersze / kolumny, którym odpowiada wartość TRUE.
 
 ```{r, message=FALSE, warning=FALSE}
 koty_ptaki$predkosc > 100
@@ -127,5 +147,20 @@ koty_ptaki[koty_ptaki$predkosc > 100,
 
 ---
 
+# Wybieranie elementów wektora
+
+Używając operatora `[]` można również odwoływać się do elementów wektora. Ponieważ wektor ma tylko jeden wymiar, nie trzeba rozdzielać współrzędnych przecinkiem.
+Kilka przykładów indeksowania elementów w wektorze `LETTERS`.
+
+```{r, message=FALSE, warning=FALSE}
+LETTERS
+LETTERS[5]
+LETTERS[13:15]
+LETTERS[c(5,13:15)]
+```
+
+---
+
 # Zadania
+
 
