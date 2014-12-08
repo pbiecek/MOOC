@@ -7,7 +7,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
   <meta name="copyright" content="pogRomcy danych / wizualizacja / zaawansowane" /> 
-  <title>Filtrowanie danych [dplyr / select]</title>
+  <title>Sortowanie danych [dplyr / sort]</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -44,7 +44,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </head>
 <body>
 <div class="slide titlepage">
-  <h1 class="title">Filtrowanie danych [dplyr / select]</h1>
+  <h1 class="title">Sortowanie danych [dplyr / sort]</h1>
   <p class="author">
 pogRomcy danych
   </p>
@@ -79,189 +79,282 @@ koty_ptaki</code></pre>
 ## 12 Sokol norweski   2.00     0.7      100   Polnoc        20    Ptak
 ## 13       Albatros   4.00     0.8      120 Poludnie        50    Ptak</code></pre>
 </div>
-<div class="slide section level1">
-
-<h2 id="filtrowanie-danych">Filtrowanie danych</h2>
-<p>Używając funkcji <strong>filter()</strong> można przefiltrować dane, zostawiając tylko te, które spełniają określony warunek (jeden lub kilka). Pierwszym argumentem tej funkcji jest ramka danych, kolejne argumenty, a może być ich jeden lub więcej) to warunki logiczne, które muszę być spełnione aby dany wiersz trafił do wyniki.</p>
-<p>Przykładowo, aby zobaczyć, które zwierzaki przekraczają prędkość 100 km na godzinę możemy wykonać następującą instrukcję.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(koty_ptaki,
-       predkosc &gt;<span class="st"> </span><span class="dv">100</span>)</code></pre>
-<pre><code>##          gatunek  waga dlugosc predkosc  habitat zywotnosc druzyna
-## 1         Gepard 60.00     1.4      115   Afryka        12     Kot
-## 2         Jerzyk  0.05     0.2      170 Euroazja        20    Ptak
-## 3  Orzel przedni  5.00     0.9      160   Polnoc        20    Ptak
-## 4 Sokol wedrowny  0.70     0.5      110   Polnoc        15    Ptak
-## 5       Albatros  4.00     0.8      120 Poludnie        50    Ptak</code></pre>
+<div id="sortowanie-danych" class="slide section level1">
+<h1>Sortowanie danych</h1>
+<p>Bardzo często w zbiorze danych jesteśmy zainteresowani znalezieniem tych wierszy, któych warotści są największe lub najmniejsze.</p>
+<p>Również by sprawdzić, czy dane przyjmują sensowe wartości, często sprawdzamy ekstraema, największe i najmenijsze przypadku, by ocenić czy one przyjmują rozsądne wartości.</p>
+<p>Do sortowania, bardzo przydatna jest funkcja <code>arrange()</code>, która jako pierwszy argument przyjmuje ramkę danych a jako kolejne argumenty przyjmuje zmienne, wzdłuż których dane są sortowane.</p>
+<p>Przykładowo aby posortować w kolejności rosnącej ze względu na prędkość można użyć następującej składni.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(koty_ptaki, 
+        predkosc)</code></pre>
+<pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
+## 1          Tygrys 300.00     2.5       60     Azja        25     Kot
+## 2           Irbis  50.00     1.3       65     Azja        18     Kot
+## 3            Puma  80.00     1.7       70  Ameryka        13     Kot
+## 4           Strus 150.00     2.5       70   Afryka        45    Ptak
+## 5             Lew 200.00     2.0       80   Afryka        29     Kot
+## 6         Leopard  70.00     1.4       85     Azja        21     Kot
+## 7          Jaguar 100.00     1.7       90  Ameryka        15     Kot
+## 8  Sokol norweski   2.00     0.7      100   Polnoc        20    Ptak
+## 9  Sokol wedrowny   0.70     0.5      110   Polnoc        15    Ptak
+## 10         Gepard  60.00     1.4      115   Afryka        12     Kot
+## 11       Albatros   4.00     0.8      120 Poludnie        50    Ptak
+## 12  Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak
+## 13         Jerzyk   0.05     0.2      170 Euroazja        20    Ptak</code></pre>
+</div>
+<div id="sortowanie-danych-1" class="slide section level1">
+<h1>Sortowanie danych</h1>
+<p>Aby posortować w koljności malejącej można albo zmienną, po której ma nastąpić sortowanie opatrzeć funkcją <code>desc()</code> lub dla zmiennych liczbowych dodać znak <code>-</code> przed zmienną.</p>
+<p>Obie poniższe instrukcje mają taki sam efekt.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(koty_ptaki, 
+        <span class="kw">desc</span>(predkosc))</code></pre>
+<pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
+## 1          Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
+## 2   Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak
+## 3        Albatros   4.00     0.8      120 Poludnie        50    Ptak
+## 4          Gepard  60.00     1.4      115   Afryka        12     Kot
+## 5  Sokol wedrowny   0.70     0.5      110   Polnoc        15    Ptak
+## 6  Sokol norweski   2.00     0.7      100   Polnoc        20    Ptak
+## 7          Jaguar 100.00     1.7       90  Ameryka        15     Kot
+## 8         Leopard  70.00     1.4       85     Azja        21     Kot
+## 9             Lew 200.00     2.0       80   Afryka        29     Kot
+## 10           Puma  80.00     1.7       70  Ameryka        13     Kot
+## 11          Strus 150.00     2.5       70   Afryka        45    Ptak
+## 12          Irbis  50.00     1.3       65     Azja        18     Kot
+## 13         Tygrys 300.00     2.5       60     Azja        25     Kot</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(koty_ptaki, 
+        -predkosc)</code></pre>
+<pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
+## 1          Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
+## 2   Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak
+## 3        Albatros   4.00     0.8      120 Poludnie        50    Ptak
+## 4          Gepard  60.00     1.4      115   Afryka        12     Kot
+## 5  Sokol wedrowny   0.70     0.5      110   Polnoc        15    Ptak
+## 6  Sokol norweski   2.00     0.7      100   Polnoc        20    Ptak
+## 7          Jaguar 100.00     1.7       90  Ameryka        15     Kot
+## 8         Leopard  70.00     1.4       85     Azja        21     Kot
+## 9             Lew 200.00     2.0       80   Afryka        29     Kot
+## 10           Puma  80.00     1.7       70  Ameryka        13     Kot
+## 11          Strus 150.00     2.5       70   Afryka        45    Ptak
+## 12          Irbis  50.00     1.3       65     Azja        18     Kot
+## 13         Tygrys 300.00     2.5       60     Azja        25     Kot</code></pre>
+</div>
+<div id="sortowanie-po-dwoch-zmiennych" class="slide section level1">
+<h1>Sortowanie po dwóch zmiennych</h1>
+<p>Jeżeli dla zmiennej, wzdłuż której sortujemy, mogą wystąpić remisy, te same wartości, wtedy interesującą opcją jest wskazanie drugorzędnego kryterium sortowania.</p>
+<p>Przykładowo, aby posortować wzdłuż prędkości osobno dla kotów osobno dla ptaków, możemy wskazać drużynę jako główne kryterium sortowania a prędkość jako kryterium drugorzędne.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(koty_ptaki, 
+        druzyna,
+        predkosc)</code></pre>
+<pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
+## 1          Tygrys 300.00     2.5       60     Azja        25     Kot
+## 2           Irbis  50.00     1.3       65     Azja        18     Kot
+## 3            Puma  80.00     1.7       70  Ameryka        13     Kot
+## 4             Lew 200.00     2.0       80   Afryka        29     Kot
+## 5         Leopard  70.00     1.4       85     Azja        21     Kot
+## 6          Jaguar 100.00     1.7       90  Ameryka        15     Kot
+## 7          Gepard  60.00     1.4      115   Afryka        12     Kot
+## 8           Strus 150.00     2.5       70   Afryka        45    Ptak
+## 9  Sokol norweski   2.00     0.7      100   Polnoc        20    Ptak
+## 10 Sokol wedrowny   0.70     0.5      110   Polnoc        15    Ptak
+## 11       Albatros   4.00     0.8      120 Poludnie        50    Ptak
+## 12  Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak
+## 13         Jerzyk   0.05     0.2      170 Euroazja        20    Ptak</code></pre>
 </div>
 <div class="slide section level1">
 
-<h2 id="dwa-lub-wiecej-warunkow">Dwa lub więcej warunków</h2>
-<p>Możemy określać jednocześnie więcej warunków dla filtrowania. Każdy kolejny warunek można podać jako kolejny argument funkcji filter.</p>
-<p>Poniższy przykład wybiera ze zbioru danych tylko ptaki, które przekraczają prędkość 100 km na godzinę i występują na półkuli północnej.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(koty_ptaki,
-       predkosc &gt;<span class="st"> </span><span class="dv">100</span>,
-       druzyna ==<span class="st"> &quot;Ptak&quot;</span>,
-       habitat %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Polnoc&quot;</span>, <span class="st">&quot;Euroazja&quot;</span>)
-       )</code></pre>
-<pre><code>##          gatunek waga dlugosc predkosc  habitat zywotnosc druzyna
-## 1         Jerzyk 0.05     0.2      170 Euroazja        20    Ptak
-## 2  Orzel przedni 5.00     0.9      160   Polnoc        20    Ptak
-## 3 Sokol wedrowny 0.70     0.5      110   Polnoc        15    Ptak</code></pre>
-</div>
-<div id="auta" class="slide section level1">
-<h1>Auta</h1>
-<p>Operacje filtrowania przećwiczymy też na znacznie większym zbiorze danych, który juz nie sposób w całości wyświetlić na ekranie. Mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(auta2012)</code></pre>
-<pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW         Marka     Model
-## 1 49900    PLN      49900       brutto 140 103           Kia    Carens
-## 2 88000    PLN      88000       brutto 156 115    Mitsubishi Outlander
-## 3 86000    PLN      86000       brutto 150 110     Chevrolet   Captiva
-## 4 25900    PLN      25900       brutto 163 120         Volvo       S80
-## 5 55900    PLN      55900        netto  NA  NA Mercedes-Benz  Sprinter
-## 6 45900    PLN      45900        netto 150 110 Mercedes-Benz     Viano
-##   Wersja Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km
-## 1                 4/5              1991         41000
-## 2                 4/5              2179         46500
-## 3                 4/5              1996          8000
-## 4                 4/5              2400        200000
-## 5                 4/5              2200        169400
-## 6                 4/5              2200        141100
-##            Rodzaj.paliwa Rok.produkcji            Kolor
-## 1 olej napedowy (diesel)          2008                 
-## 2 olej napedowy (diesel)          2008                 
-## 3 olej napedowy (diesel)          2009                 
-## 4 olej napedowy (diesel)          2003 srebrny-metallic
-## 5 olej napedowy (diesel)          2007            bialy
-## 6 olej napedowy (diesel)          2004 bordowy-metallic
-##   Kraj.aktualnej.rejestracji Kraj.pochodzenia Pojazd.uszkodzony
-## 1                     Polska                                   
-## 2                     Polska                                   
-## 3                     Polska                                   
-## 4                     Polska           Wlochy                  
-## 5                                                              
-## 6                                                              
-##   Skrzynia.biegow Status.pojazdu.sprowadzonego
-## 1        manualna                             
-## 2        manualna                             
-## 3        manualna                             
-## 4        manualna sprowadzony / zarejestrowany
-## 5        manualna                             
-## 6        manualna                             
-##                                                                                                                                                                                                                                             Wyposazenie.dodatkowe
-## 1                                                                                      ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
-## 2                                                              ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
-## 3                                                   ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
-## 4 ABS, hak, el. szyby, el. lusterka, klimatyzacja, alufelgi, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, welurowa tapicerka, tempomat, ESP, lwiatla przeciwmglowe, kierownica wielofunkcyjna
-## 5                                                                                                                                                                                                  ABS, ASR, centralny zamek, wspomaganie kierownicy, immobiliser
-## 6                                                                                                      ABS, el. szyby, el. lusterka, klimatyzacja, ASR, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, welurowa tapicerka</code></pre>
-</div>
-<div class="slide section level1">
-
-<h2 id="filtrowanie-danych-1">Filtrowanie danych</h2>
-<p>Jeżeli chcemy pozostawić tylko samochody marki Porsche, możemy użyć warunku <code>Marka == 'Porsche'</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">tmp &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012,
-        Marka ==<span class="st"> &quot;Porsche&quot;</span>)
-<span class="kw">head</span>(tmp)</code></pre>
-<pre><code>##     Cena Waluta Cena.w.PLN Brutto.netto  KM  kW   Marka         Model
-## 1 244900    PLN     244900        netto 388 285 Porsche           911
-## 2 229000    PLN     229000       brutto 355 261 Porsche           911
-## 3 133990    PLN     133990        netto 295 217 Porsche       Boxster
-## 4 154900    PLN     154900       brutto 295 217 Porsche       Boxster
-## 5 162520    PLN     162520        netto 500 368 Porsche Cayenne Turbo
-## 6 162520    PLN     162520        netto 500 368 Porsche       Cayenne
-##   Wersja Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km Rodzaj.paliwa
-## 1                 2/3              5461         32350       benzyna
-## 2                 2/3              3824         63000       benzyna
-## 3                 2/3              3387         52849       benzyna
-## 4                 2/3              3387         52849       benzyna
-## 5                 4/5              4806         57000       benzyna
-## 6                 4/5              4511         62000       benzyna
-##   Rok.produkcji            Kolor Kraj.aktualnej.rejestracji
-## 1          2008 srebrny-metallic                     Polska
-## 2          2007  czarny-metallic                     Polska
-## 3          2007  czarny-metallic                     Polska
-## 4          2007  czarny-metallic                     Polska
-## 5          2007  czarny-metallic                     Polska
-## 6          2007  czarny-metallic                     Polska
-##   Kraj.pochodzenia Pojazd.uszkodzony Skrzynia.biegow
-## 1           Polska                      automatyczna
-## 2           Polska                          manualna
-## 3           Polska                      automatyczna
-## 4           Polska                      automatyczna
-## 5           Polska                      automatyczna
-## 6           Polska                      automatyczna
-##   Status.pojazdu.sprowadzonego
-## 1                             
-## 2                             
-## 3                             
-## 4                             
-## 5                             
-## 6                             
-##                                                                                                                                                                                                                                                                                                                                                                          Wyposazenie.dodatkowe
-## 1                           ABS, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, szyberdach, ASR, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, lwiatla przeciwmglowe, kierownica wielofunkcyjna, czujnik parkowania, reg. wysokole podwozia
-## 2                                                                                                     ABS, 4x4, hak, el. szyby, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, ESP, czujnik parkowania
-## 3                                                                                                                                                                                                             ABS, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, szyberdach, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, immobiliser, ksenony, czujnik parkowania
-## 4                                                                                                                                          ABS, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, podgrzewane fotele, czujnik deszczu, lwiatla przeciwmglowe
-## 5                                               ABS, 4x4, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, lwiatla przeciwmglowe, kierownica wielofunkcyjna, czujnik parkowania
-## 6 ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, ESP, EDS, lwiatla przeciwmglowe, kierownica wielofunkcyjna, niezalezne ogrzewanie, czujnik parkowania, reg. wysokole podwozia</code></pre>
-</div>
-<div class="slide section level1">
-
-<h2 id="dwa-warunki">Dwa warunki</h2>
-<p>Możemy określać jednocześnie więcej warunków. Na przykład tylko samochody Audi o silnikach o liczbie koni mechanicznych przekraczających 300 możemy odfiltrować w następujący sposób.</p>
+<p>Posortujmy dane wzdłuż ceny w polskich złotych.</p>
 <pre class="sourceCode r"><code class="sourceCode r">tylkoPorscheZDużymSilnikiem &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012,
          Marka ==<span class="st"> &quot;Porsche&quot;</span>,
          KM &gt;<span class="st"> </span><span class="dv">300</span>)
-<span class="kw">head</span>(tylkoPorscheZDużymSilnikiem)</code></pre>
-<pre><code>##     Cena Waluta Cena.w.PLN Brutto.netto  KM  kW   Marka         Model
-## 1 244900    PLN     244900        netto 388 285 Porsche           911
-## 2 229000    PLN     229000       brutto 355 261 Porsche           911
-## 3 162520    PLN     162520        netto 500 368 Porsche Cayenne Turbo
-## 4 162520    PLN     162520        netto 500 368 Porsche       Cayenne
-## 5  69900    PLN      69900       brutto 340 250 Porsche       Cayenne
-## 6 359000    PLN     359000       brutto 400 294 Porsche      Panamera
-##   Wersja Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km Rodzaj.paliwa
-## 1                 2/3              5461         32350       benzyna
-## 2                 2/3              3824         63000       benzyna
-## 3                 4/5              4806         57000       benzyna
-## 4                 4/5              4511         62000       benzyna
-## 5                 4/5              4511         94000       benzyna
-## 6                 4/5              4800         29000       benzyna
-##   Rok.produkcji            Kolor Kraj.aktualnej.rejestracji
-## 1          2008 srebrny-metallic                     Polska
-## 2          2007  czarny-metallic                     Polska
-## 3          2007  czarny-metallic                     Polska
-## 4          2007  czarny-metallic                     Polska
-## 5          2004   szary-metallic                     Polska
-## 6          2010  bezowy-metallic                     Polska
-##    Kraj.pochodzenia Pojazd.uszkodzony Skrzynia.biegow
-## 1            Polska                      automatyczna
-## 2            Polska                          manualna
-## 3            Polska                      automatyczna
-## 4            Polska                      automatyczna
-## 5 Stany Zjednoczone                      automatyczna
-## 6                                        automatyczna
-##   Status.pojazdu.sprowadzonego
-## 1                             
-## 2                             
-## 3                             
-## 4                             
-## 5                             
-## 6                             
-##                                                                                                                                                                                                                                                                                                                                                                                                                                       Wyposazenie.dodatkowe
-## 1                                                                                        ABS, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, szyberdach, ASR, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, lwiatla przeciwmglowe, kierownica wielofunkcyjna, czujnik parkowania, reg. wysokole podwozia
-## 2                                                                                                                                                                  ABS, 4x4, hak, el. szyby, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, ESP, czujnik parkowania
-## 3                                                                                                            ABS, 4x4, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, lwiatla przeciwmglowe, kierownica wielofunkcyjna, czujnik parkowania
-## 4                                                              ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, ESP, EDS, lwiatla przeciwmglowe, kierownica wielofunkcyjna, niezalezne ogrzewanie, czujnik parkowania, reg. wysokole podwozia
-## 5 ABS, 4x4, hak, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, szyberdach, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, instalacja gazowa, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, ESP, lwiatla przeciwmglowe, kierownica wielofunkcyjna, czujnik parkowania, reg. wysokole podwozia, bagaznik na dach, przyciemniane szyby, pod. przednia szyba
-## 6                   ABS, 4x4, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, szyberdach, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, ESP, EDS, lwiatla przeciwmglowe, kierownica wielofunkcyjna, czujnik parkowania, reg. wysokole podwozia, przyciemniane szyby, blokada dyferencjalu</code></pre>
+
+posortowanePorsche &lt;-
+<span class="st">  </span><span class="kw">arrange</span>(tylkoPorscheZDużymSilnikiem, 
+        Cena.w.PLN)</code></pre>
 </div>
 <div class="slide section level1">
 
-<h2 id="zadania">Zadania</h2>
+<p>Aby zobaczyć jakie wiersza są pierwsze a jakie są ostatnie w tym zbiorze danych, możemy użyć funkcji <code>head()</code> i <code>tail()</code>. Domyślnie wybiranych jest pierwszych lub ostatnich 6 wierszy. Ale ustawiając drugi argument można wyświetlać więcej lub mniej wierszy.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(posortowanePorsche)</code></pre>
+<pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW   Marka         Model
+## 1  1184    PLN       1184       brutto 350 257 Porsche       Cayenne
+## 2  1325    PLN       1325       brutto 340 250 Porsche       Cayenne
+## 3  2000    PLN       2000       brutto 500 368 Porsche           911
+## 4  4500    PLN       4500       brutto 450 331 Porsche Cayenne Turbo
+## 5  9100    PLN       9100       brutto 521 383 Porsche Cayenne Turbo
+## 6 10999    PLN      10999        netto 500 368 Porsche Cayenne Turbo
+##   Wersja Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km Rodzaj.paliwa
+## 1                 4/5              4500            NA       benzyna
+## 2                                  4500            NA   benzyna+LPG
+## 3                 2/3              3800            NA       benzyna
+## 4                 4/5              4511            NA       benzyna
+## 5                 4/5              4511         80000       benzyna
+## 6                                  4511            NA       benzyna
+##   Rok.produkcji            Kolor Kraj.aktualnej.rejestracji
+## 1          2004 srebrny-metallic                     Polska
+## 2          2003 srebrny-metallic                     Polska
+## 3          2010                                            
+## 4          2005                                            
+## 5          2006  czarny-metallic                     Polska
+## 6          2007  czarny-metallic                           
+##   Kraj.pochodzenia Pojazd.uszkodzony Skrzynia.biegow
+## 1                                       automatyczna
+## 2                                                   
+## 3                                           manualna
+## 4                                Tak    automatyczna
+## 5                                Tak    automatyczna
+## 6                                       automatyczna
+##             Status.pojazdu.sprowadzonego
+## 1                                       
+## 2 przygotowany do rejestracji / oplacony
+## 3                                       
+## 4                                       
+## 5                                       
+## 6                                       
+##                                                                                                                                                                                                                                                                                                                                                                                                                                                             Wyposazenie.dodatkowe
+## 1                                                                                ABS, 4x4, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, szyberdach, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, blokada skrzyni biegAlw, ksenony, tempomat, czujnik deszczu, ESP, EDS, lwiatla przeciwmglowe, kierownica wielofunkcyjna, przyciemniane szyby, blokada dyferencjalu
+## 2                                                               ABS, 4x4, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, instalacja gazowa, komputer, blokada skrzyni biegAlw, ksenony, czujnik deszczu, ESP, EDS, lwiatla przeciwmglowe, kierownica wielofunkcyjna, czujnik parkowania, przyciemniane szyby, blokada dyferencjalu
+## 3                                                                                                                                                                                                                                 ABS, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, czujnik deszczu, ESP, EDS
+## 4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+## 5 ABS, 4x4, hak, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, szyberdach, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, ESP, lwiatla przeciwmglowe, kierownica wielofunkcyjna, niezalezne ogrzewanie, czujnik parkowania, reg. wysokole podwozia, bagaznik na dach, przyciemniane szyby, pod. przednia szyba
+## 6</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(posortowanePorsche)</code></pre>
+<pre><code>##        Cena Waluta Cena.w.PLN Brutto.netto  KM  kW   Marka         Model
+## 522  999999    PLN     999999       brutto 500 368 Porsche Cayenne Turbo
+## 523  249797    EUR    1103303       brutto 550 405 Porsche      Panamera
+## 524  250335    EUR    1105680       brutto 550 405 Porsche      Panamera
+## 525  325000    USD    1110655       brutto 612 450 Porsche    Carrera GT
+## 526 1123466    PLN    1123466       brutto 550 405 Porsche      Panamera
+## 527 1140674    PLN    1140674       brutto 550 405 Porsche      Panamera
+##     Wersja Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km Rodzaj.paliwa
+## 522                 4/5              4806          6000       benzyna
+## 523                 2/3              4806            NA       benzyna
+## 524                 2/3              4806            NA       benzyna
+## 525                 4/5              5733         11700       benzyna
+## 526                 4/5              4806            NA       benzyna
+## 527                 4/5              4806            NA       benzyna
+##     Rok.produkcji            Kolor Kraj.aktualnej.rejestracji
+## 522          2011           czarny                           
+## 523          2011          brezowy                           
+## 524          2011           czarny                           
+## 525          2005 srebrny-metallic                           
+## 526          2011  czarny-metallic                           
+## 527          2011  czarny-metallic                           
+##     Kraj.pochodzenia Pojazd.uszkodzony Skrzynia.biegow
+## 522                                       automatyczna
+## 523                                       automatyczna
+## 524                                       automatyczna
+## 525                                           manualna
+## 526           Polska                      automatyczna
+## 527           Polska                      automatyczna
+##     Status.pojazdu.sprowadzonego
+## 522                             
+## 523                             
+## 524                             
+## 525                             
+## 526                             
+## 527                             
+##                                                                                                                                                                                                                                                                                                                                                         Wyposazenie.dodatkowe
+## 522                                                                                                                                                                                                                                                                                                                                                                          
+## 523 ABS, 4x4, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, ESP, kierownica wielofunkcyjna, czujnik parkowania, reg. wysokole podwozia, przyciemniane szyby
+## 524 ABS, 4x4, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, ESP, kierownica wielofunkcyjna, czujnik parkowania, reg. wysokole podwozia, przyciemniane szyby
+## 525                                 ABS, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, ESP, EDS, lwiatla przeciwmglowe, kierownica wielofunkcyjna, reg. wysokole podwozia, przyciemniane szyby
+## 526                                                                                                                                                                                   ABS, el. szyby, el. lusterka, klimatyzacja, alufelgi, system nawigacji, szyberdach, ASR, centralny zamek, autoalarm, poduszka powietrzna, wspomaganie kierownicy, immobiliser, komputer
+## 527                                                                                                                                                                                   ABS, el. szyby, el. lusterka, klimatyzacja, alufelgi, system nawigacji, szyberdach, ASR, centralny zamek, autoalarm, poduszka powietrzna, wspomaganie kierownicy, immobiliser, komputer</code></pre>
+</div>
+<div class="slide section level1">
+
+<p>Jeżeli wskażemy więcej niż jedną zmienną do sortowania, to w pierwszym kroku sortowanie odbędzie się wzdłuż pierwszej zmiennej, a w przypadku remisu (takich samych wartości) w drugim kropku wzdłuż drugiej zmiennej.</p>
+<p>W poniższym przypadku w pierwszym kroku sortujemy po Modelu auta, gdy samochody mają ten sam model to ich kolwjność jest określona przez drugą zmienną, czyli w tym przypadku cenie.</p>
+<p>Model jest nazwą i w tym przypadku jest sortowany w kolejności alfabetycznej.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(
+   <span class="kw">arrange</span>(tylkoPorscheZDużymSilnikiem, 
+        Model, Cena.w.PLN)
+  ) </code></pre>
+<pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW   Marka Model Wersja
+## 1  2000    PLN    2000.00       brutto 500 368 Porsche   911       
+## 2 13501    EUR   59631.22       brutto 305 224 Porsche   911       
+## 3 60000    PLN   60000.00       brutto 325 239 Porsche   911       
+## 4 66900    PLN   66900.00       brutto 320 235 Porsche   911       
+## 5 71900    PLN   71900.00       brutto 320 235 Porsche   911       
+## 6 16500    EUR   72877.20       brutto 530 390 Porsche   911       
+##   Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km Rodzaj.paliwa Rok.produkcji
+## 1          2/3              3800            NA       benzyna          2010
+## 2          2/3              3400         90000       benzyna          1999
+## 3          2/3              3596        108500       benzyna          2006
+## 4          2/3              3596         65113       benzyna          2002
+## 5          2/3              3596         91452       benzyna          2003
+## 6          2/3              3600            NA       benzyna          2010
+##              Kolor Kraj.aktualnej.rejestracji Kraj.pochodzenia
+## 1                                                             
+## 2 srebrny-metallic                                            
+## 3                                                             
+## 4          srebrny                                            
+## 5          bordowy                                            
+## 6                                                             
+##   Pojazd.uszkodzony Skrzynia.biegow           Status.pojazdu.sprowadzonego
+## 1                          manualna                                       
+## 2                      automatyczna                                       
+## 3                      automatyczna                                       
+## 4               Tak        manualna przygotowany do rejestracji / oplacony
+## 5               Tak        manualna przygotowany do rejestracji / oplacony
+## 6               Tak        manualna                                       
+##                                                                                                                                                                                                                                                                                                                                Wyposazenie.dodatkowe
+## 1                                                                                                    ABS, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, czujnik deszczu, ESP, EDS
+## 2                                                                                                                                                                                                                             el. szyby, el. lusterka, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy
+## 3                                                                                                            ABS, el. szyby, el. lusterka, klimatyzacja, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, podgrzewane fotele, ESP, lwiatla przeciwmglowe
+## 4                                                                                                                                                          ABS, 4x4, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer
+## 5                                                                                        ABS, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, szyberdach, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik parkowania
+## 6 ABS, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, ESP, lwiatla przeciwmglowe, kierownica wielofunkcyjna, czujnik parkowania, pod. przednia szyba</code></pre>
+</div>
+<div class="slide section level1">
+
+<p>Domyślnie dane sortowane są rosnąco. Jeżeli chcemy zrminić kolejnośc sortowania i sortować malejąco, to należy daną zmienną opakować funkcją <code>desc()</code> jak na poniższym przykładzie.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(
+   <span class="kw">arrange</span>(tylkoPorscheZDużymSilnikiem, 
+        Model, <span class="kw">desc</span>(Cena.w.PLN))
+  ) </code></pre>
+<pre><code>##      Cena Waluta Cena.w.PLN Brutto.netto  KM  kW   Marka Model Wersja
+## 1 4488380    CZK   767961.8        netto 700 515 Porsche   911       
+## 2 4221810    CZK   722351.7        netto 700 515 Porsche   911       
+## 3  660000    PLN   660000.0       brutto 530 390 Porsche   911       
+## 4  606432    PLN   606432.0       brutto 385 283 Porsche   911       
+## 5  604000    PLN   604000.0       brutto 385 283 Porsche   911       
+## 6  599000    PLN   599000.0        netto 530 390 Porsche   911       
+##   Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km Rodzaj.paliwa Rok.produkcji
+## 1                           3600         13900       benzyna          2008
+## 2                           3600         25500       benzyna          2007
+## 3          2/3              3801         12000       benzyna          2010
+## 4          2/3              3801            NA       benzyna          2011
+## 5          2/3              3801            NA       benzyna          2011
+## 6          2/3              3800          9172       benzyna          2011
+##              Kolor Kraj.aktualnej.rejestracji Kraj.pochodzenia
+## 1 srebrny-metallic                                      Niemcy
+## 2  czarny-metallic                                      Niemcy
+## 3            bialy                                      Polska
+## 4            bialy                                            
+## 5   bialy-metallic                                            
+## 6  czarny-metallic                                            
+##   Pojazd.uszkodzony Skrzynia.biegow Status.pojazdu.sprowadzonego
+## 1                                                               
+## 2                                                               
+## 3                      automatyczna                             
+## 4                      automatyczna                             
+## 5                      automatyczna                             
+## 6                      automatyczna                             
+##                                                                                                                                                                                                                                                                                                  Wyposazenie.dodatkowe
+## 1                                                                                                                                                                                                                                                                                                                     
+## 2                                                                                                                                                                                                                                                                                                                     
+## 3                                                                                                                                                       ABS, el. szyby, el. lusterka, klimatyzacja, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, wspomaganie kierownicy, komputer
+## 4                                                                                                                              ABS, el. szyby, el. lusterka, klimatyzacja, alufelgi, system nawigacji, szyberdach, ASR, centralny zamek, autoalarm, poduszka powietrzna, wspomaganie kierownicy, immobiliser, komputer
+## 5                                                                                                                                          ABS, el. szyby, el. lusterka, klimatyzacja, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, wspomaganie kierownicy, immobiliser, komputer
+## 6 ABS, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, ESP, EDS, kierownica wielofunkcyjna, blokada dyferencjalu</code></pre>
+</div>
+<div id="zadania" class="slide section level1">
+<h1>Zadania</h1>
 <ul>
-<li>Ze zbioru danych <code>auta2012</code> pozostaw tylko samochody o wieku do pięciu lat (czyli o roku produkcji &gt; 2007). Nazwij ten wynikowy zbiór danych <code>mlodeAuta</code></li>
-<li>Z przed chwilą stworzonego zbioru danych <code>mlodeAuta</code> wybierz tylko Fiaty 500. Ile jest takich aut? (wymiary ramki danych możesz sprawdzić funkcją <strong>dim()</strong>)</li>
+<li>Posortuj auta wzdłuż wielkości silnika (liczby koni mechanicznych, kolumna KM lub pojemności skokowej, kolumna Pojemnosc.skokowa). Które marki mają najwięszke silniki?</li>
+<li>Wybierz tylko auta marki ‘Rolls-Royce’ i posortuj je po cenie.</li>
 </ul>
 </div>
 

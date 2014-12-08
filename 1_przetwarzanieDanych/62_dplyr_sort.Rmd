@@ -82,6 +82,10 @@ arrange(koty_ptaki,
 Posortujmy dane wzdłuż ceny w polskich złotych.
 
 ```{r, warning=FALSE}
+tylkoPorscheZDużymSilnikiem <- filter(auta2012,
+         Marka == "Porsche",
+         KM > 300)
+
 posortowanePorsche <-
   arrange(tylkoPorscheZDużymSilnikiem, 
         Cena.w.PLN)

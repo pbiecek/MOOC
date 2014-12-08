@@ -95,10 +95,10 @@ Możemy określać jednocześnie więcej warunków.
 Na przykład tylko samochody Audi o silnikach o liczbie koni mechanicznych przekraczających 300 możemy odfiltrować w następujący sposób.
 
 ```{r, warning=FALSE}
-tmp <- filter(auta2012,
+tylkoPorscheZDużymSilnikiem <- filter(auta2012,
          Marka == "Porsche",
          KM > 300)
-head(tmp)
+head(tylkoPorscheZDużymSilnikiem)
 ```
 
 ---
