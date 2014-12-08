@@ -24,8 +24,11 @@ część 1: Data smart
   * Wybieramy narzędzie, [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/introR.md),  [skorowidz](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/skorowidz.md)
   * Jak zainstalować R, RStudio oraz dodatkowe pakiety,  [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/instalacja.Rmd) 
   * Wprowadzenie do RStudio i systemu pomocy, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/wprowadzenieDoRStudio.md), [video](https://github.com/pbiecek/MOOC/blob/master/przetwarzanie/MOOC_Przetwarzanie_01.mp4?raw=true), 
-  * Jak wczytać dane, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/wczytywanieDanych.html)
+  * Jak wczytać dane, [materialy html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/3_wczytywanie.html#(1))
   * Wprowadzenie do obróbki danych, [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/dplyrIntro.md), [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/dplyr5funkcji.html)
+
+
+  
   * Cechy jakościowe, [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyJakoscioweIntro.md), [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyJakosciowe.html)
   * Cechy ilościowe, [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyIloscioweIntro.md), [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyIlosciowe.html)
   * Cechy logiczne, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyLogiczne.html)

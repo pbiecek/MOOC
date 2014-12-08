@@ -1,0 +1,112 @@
+---
+title: "Cechy ilościowe"
+author: "pogRomcy danych"
+date: "sezon 1 / odcinek 5 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / przetwarzanie / zmienne ilosciowe"
+
+---
+
+# O czym jest ten odcinek
+
+W tym odcinku nauczymy się
+
+- Jak ze zbioru danych wybierać tylko interesujące nas wiersze
+
+Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to `koty_ptaki` a drugi, znacznie większy to `auta2012`.
+
+---
+
+
+Podstawowym kryterium, gdy myślimy o cenach używanych samochodów, jest rok produkcji i przebieg.
+
+A czy wyposażenie ma znaczenie?
+Sprawdźmy to!
+
+Nie zawsze jednak dane są przygotowane w postaci prostej do analiz.
+Wpierw musimy więc informacje o wyposażeniu wyłuskać
+
+Jednak wpierw, aby analizować 
+
+**PCH: Rozumiem, że to powyżej to zamysł do Intro. Nie komentuję zatem**
+
+
+Kupując nowy samochód często trzeba dopłacić jeżęli samochów ma być w kolorze innym niż biały, w kolorze metalic lub perłowy.
+
+Ale czy ceny samochodów używanych silnie różnią się w zależności od koloru?
+
+Sprawdźmy to!
+
+W naszych dancyh jest 
+
+---
+
+# Wczytanie danych
+
+```{r, warning=FALSE, message=FALSE}
+library(SmarterPoland)
+head(auta2012, 2)
+```
+
+Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.
+
+---
+
+# Cechy napisowe
+Funkcja `read.table()` wczytując tekst zamienia go na zmienną jakościową. W pewnych sytuacjach chcemy jednak na napisach wykonywać specjalne operacje. Takie np. jak wyszukiwanie podciągu w tekście. 
+**PCH: funkcja `read.table()` raczej robi to co zostanie jej przekazane z
+`default.stringsAsFactors()`.**
+
+Aby to zrobić, musimy w pierwszej kolejności zamienić zmienna jakościową na zmienną napisową. Konwersję cechy z cechy jakościowej na cechę napisową można wykonać funkcją `as.character()`
+
+```{r, warning=FALSE}
+auta2012$Wyposazenie.dodatkowe.napis = as.character(auta2012$Wyposazenie.dodatkowe)
+summary(auta2012$Wyposazenie.dodatkowe.napis)
+```
+
+**PCH: I odwrotnie - `as.factor()`**
+
+---
+
+# Statystyki opisowe
+
+Jedną z interesujących operacji na napisach, jest sprawdzenie, czy zawierają one określony podciąg znaków. 
+Taki test można wykonać funkcją `grepl()`, która jako wynik zwraca wartość logiczną określającą czy napis zawiera określony wzorzec czy nie.
+
+```{r, warning=FALSE}
+maKlimatyzacje = grepl(auta2012$Wyposazenie.dodatkowe.napis, pattern="klimatyzacja")
+table(maKlimatyzacje)
+
+auta2012$Wyposazenie.dodatkowe.napis = as.character(auta2012$Wyposazenie.dodatkowe)
+bezwypadkowy = grepl(auta2012$Wyposazenie.dodatkowe.napis, pattern="bezwypadkowy")
+table(bezwypadkowy)
+```
+
+**PCH: Albo używasz nazw parametrów, albo nie. Ludzie tu się dopiero uczą! Nie 
+wiedzą czy trzeba podawać nazwy jak 'pattern' czy też nie! A zatem, jest to doskonałe
+miejsce na dygresję i wprowadzenie na temat wywoływania funkcji, parametrów, itd.
+W szczególności, że w przykładzie z `grepl()` parametr 'pattern' jest pierwszy,
+a 'x' (u Ciebie pierwszy i bez nazwy) jest drugi.**
+
+**PCH: Przed zadaniem drugim powinna się znaleźć informacja, że grepl przy domyślnych
+ustawieniach robi 'partial matching'. Raz że to przydatna informacja, dwa że
+oszczędzi ludziom 'ręcznego' wpisywania wszystkich kolorow jak 'zielony-metallic'
+i dodawania wyników na kartce ')**
+
+---
+
+# Zadania:
++ Sprawdź ile samochodów ma zainstalowany autoalarm **PCH: (oznaczony jako 'autoalarm')**
++ Sprawdź ile samochodów ma lakier w metalicznym kolorze **PCH: (oznaczony jako 'metallic')**
+
+# Odpowiedzi:
++ `r sum(grepl(auta2012$Wyposazenie.dodatkowe.napis, pattern="autoalarm"))`
++ `r sum(grepl(as.character(auta2012$Kolor), pattern="metallic"))`
+
+

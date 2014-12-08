@@ -1,0 +1,122 @@
+---
+title: "Cechy logiczne"
+author: "pogRomcy danych"
+date: "sezon 1 / odcinek 5 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / przetwarzanie / zmienne logiczne"
+
+---
+
+# O czym jest ten odcinek
+
+W tym odcinku nauczymy się
+
+- Jak ze zbioru danych wybierać tylko interesujące nas wiersze
+
+Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to `koty_ptaki` a drugi, znacznie większy to `auta2012`.
+
+
+W trakcie tych zajęć przedstawimy podstawowe operacje na danych logicznych. 
+Ale zanim dojdziemy do tych operacji najpierw wczytajmy dane.
+
+---
+
+# Wczytanie danych
+
+```{r, warning=FALSE, message=FALSE}
+library(SmarterPoland)
+head(auta2012, 2)
+```
+
+Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.
+
+---
+
+# Cechy logiczne
+Każdą zmienną można przedstawić jako zmienną jakościową lub ilościową. Ale w pewnych sytuacjach wygodnie jest wyróżnić bardziej szczegółową klasyfikację.
+Cechy logiczne, to takie cechy, które przyjmować mogą tylko trzy wartości, prawdę (oznaczany w R przez `TRUE`), fałsz (oznaczany w R przez `FALSE`) oraz brak informacji (oznaczany w R przez `NA`).
+
+Cechy logiczne mogą być traktowane jako cechy jakościowe o dwóch poziomach. 
+Cechy takie można tworzyć używając tak zwanych warunków logicznych. Przykładem warunku logicznego są operatory `>` (większy), `>=` (większy równy), `==` (równy), `<=` (mniejszy równy), `<` (mniejszy). 
+
+## Statystyki opisowe
+
+Traktując zmienną logiczną jak dwuwartościową zmienną jakościową, możemy używać na niej np. funkcji do tabel liczebności.
+
+```{r, warning=FALSE}
+pochodziZPolski = auta2012$Kraj.aktualnej.rejestracji == "Polska"
+table(pochodziZPolski)
+
+starszyNiz5Lat = auta2012$Rok.produkcji < 2007
+table(starszyNiz5Lat)
+```
+
+---
+
+**PCH: Teraz już jestem pewny, że u Ciebie wczytywanie z CSV kończy się w tym samym miejscu.
+Najwyraźniej plik jest zepsuty lub istnieje jakieś ograniczenie na wczytywanie
+z sieci, nie wiem, ale ja mam tak, czyli tyle samo danych co Ty:**
+
+```
+> auta2012 = read.table("http://biecek.pl/MOOC/dane/auta2012.csv",
++                       sep=";", dec=",", header=TRUE)
+Komunikaty ostrzegawcze:
+1: In scan(file, what, nmax, sep, dec, quote, skip, nlines, na.strings,  :
+  Koniec pliku wewnątrz cudzysłowia
+2: In scan(file, what, nmax, sep, dec, quote, skip, nlines, na.strings,  :
+  ilość odczytanych pozycji nie jest wielokrotnością liczby kolumn
+> nrow(auta2012)
+[1] 109563
+
+Natomiast po ściągnięciu i wczytaniu z rda:
+> nrow(auta2012)
+[1] 210134
+```
+---
+
+# Zadania:
++ Sprawdź ile samochodów ma cenę ofertową poniżej 2 000 pln.
++ Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3.
+
+# Odpowiedzi:
++ `r sum(auta2012$Cena.w.PLN < 2000, na.rm=TRUE)`
++ `r mean(auta2012$Pojemnosc.skokowa > 1500, na.rm=TRUE)`
+
+---
+
+# Logiczne 'i' oraz logiczne 'lub'
+
+Cechy logiczne można przetwarzać używając również operatorów logicznych, w tym logicznego lub `|` oraz logicznego i `&`.
+
+```{r, warning=FALSE}
+pochodziZPolski = auta2012$Kraj.aktualnej.rejestracji == "Polska"
+starszyNiz5Lat = auta2012$Rok.produkcji < 2007
+pochodziZPolskiIStarszyNiz5Lat = pochodziZPolski & starszyNiz5Lat
+table(pochodziZPolskiIStarszyNiz5Lat)
+```
+
+**PCH: Jak już mówiłem kiedyś, te nazwy zmiennych (oraz te w ramce auta2012)
+są może i jednoznaczne oraz wygodne, ale dla kogoś, kto zna już R i wie do czego
+używa się klawisza TAB na klawiaturze. Dla uczących się i nie wiedzących, że wielkość
+liter ma znaczenie, może to być gehenna. Chyba, że tutaj dać dygresję o nazwach 
+zmiennych w R i o tym, interpreter i RStudio znakomicie podpowiadają jeśli je
+zapytać TABem**
+
+---
+
+# Zadania:
++ Sprawdź ile samochodów zarejestrowanych w Polsce ma cenę ofertową poniżej 2 000 pln.
++ Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3 oraz jest napędzanych olejem napędowym.
+
+# Odpowiedzi:
++ `r sum(auta2012$Cena.w.PLN < 2000 & auta2012$Kraj.aktualnej.rejestracji == "Polska", na.rm=TRUE)`
++ `r mean(auta2012$Pojemnosc.skokowa > 1500 & auta2012$Rodzaj.paliwa == 'olej napedowy (diesel)', na.rm=TRUE)`
+
+
+
