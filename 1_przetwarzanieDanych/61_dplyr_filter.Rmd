@@ -1,0 +1,112 @@
+---
+title: "Filtrowanie danych [dplyr / select]"
+author: "pogRomcy danych"
+date: "sezon 1 / odcinek 6 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / wizualizacja / zaawansowane"
+
+---
+
+# O czym jest ten odcinek
+
+W tym odcinku nauczymy się
+
+- Jak ze zbioru danych wybierać tylko interesujące nas wiersze
+
+Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to `koty_ptaki` a drugi, znacznie większy to `auta2012`.
+
+---
+
+## Ptaki vs. koty
+
+W tym odcinku będziemy pracować na zbiorze danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem `SmarterPoland`. Jest on na tyle mały, że wynik operacji będzie można przedstawić na ekranie.
+
+```{r, message=FALSE}
+library(SmarterPoland)
+koty_ptaki
+```
+
+---
+
+## Filtrowanie danych
+
+Używając funkcji **filter()** można przefiltrować dane, zostawiając tylko te, które spełniają określony warunek (jeden lub kilka).
+Pierwszym argumentem tej funkcji jest ramka danych,
+kolejne argumenty, a może być ich jeden lub więcej) to warunki logiczne, które muszę być spełnione aby dany wiersz trafił do wyniki.
+
+Przykładowo, aby zobaczyć, które zwierzaki przekraczają prędkość 100 km na godzinę możemy wykonać następującą instrukcję.
+
+```{r, message=FALSE}
+filter(koty_ptaki,
+       predkosc > 100)
+```
+
+---
+
+## Dwa lub więcej warunków
+
+Możemy określać jednocześnie więcej warunków dla filtrowania.
+Każdy kolejny warunek można podać jako kolejny argument funkcji filter.
+
+Poniższy przykład wybiera ze zbioru danych tylko ptaki, które przekraczają prędkość 100 km na godzinę i występują na półkuli północnej.
+
+```{r, warning=FALSE}
+filter(koty_ptaki,
+       predkosc > 100,
+       druzyna == "Ptak",
+       habitat %in% c("Polnoc", "Euroazja")
+       )
+```
+
+
+---
+
+# Auta
+
+Operacje filtrowania przećwiczymy też na znacznie większym zbiorze danych, który juz nie sposób w całości wyświetlić na ekranie. Mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.
+
+```{r, message=FALSE}
+head(auta2012)
+```
+
+---
+
+## Filtrowanie danych
+
+Jeżeli chcemy pozostawić tylko samochody marki Porsche, możemy użyć warunku `Marka == 'Porsche'`.
+
+```{r, warning=FALSE}
+tmp <- filter(auta2012,
+        Marka == "Porsche")
+head(tmp)
+```
+
+---
+
+## Dwa warunki
+
+Możemy określać jednocześnie więcej warunków.
+Na przykład tylko samochody Audi o silnikach o liczbie koni mechanicznych przekraczających 300 możemy odfiltrować w następujący sposób.
+
+```{r, warning=FALSE}
+tmp <- filter(auta2012,
+         Marka == "Porsche",
+         KM > 300)
+head(tmp)
+```
+
+---
+
+## Zadania
+
++ Ze zbioru danych `auta2012` pozostaw tylko samochody o wieku do pięciu lat (czyli o roku produkcji > 2007). Nazwij ten wynikowy zbiór danych `mlodeAuta`
++ Z przed chwilą stworzonego zbioru danych `mlodeAuta` wybierz tylko Fiaty 500. Ile jest takich aut? 
+(wymiary ramki danych możesz sprawdzić funkcją **dim()**)
+
+

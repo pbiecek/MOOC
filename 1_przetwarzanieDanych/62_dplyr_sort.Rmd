@@ -1,0 +1,131 @@
+---
+title: "Sortowanie danych [dplyr / sort]"
+author: "pogRomcy danych"
+date: "sezon 1 / odcinek 6 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / wizualizacja / zaawansowane"
+
+---
+
+# O czym jest ten odcinek
+
+W tym odcinku nauczymy się
+
+- Jak ze zbioru danych wybierać tylko interesujące nas wiersze
+
+Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to `koty_ptaki` a drugi, znacznie większy to `auta2012`.
+
+---
+
+## Ptaki vs. koty
+
+W tym odcinku będziemy pracować na zbiorze danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem `SmarterPoland`. Jest on na tyle mały, że wynik operacji będzie można przedstawić na ekranie.
+
+```{r, message=FALSE}
+library(SmarterPoland)
+koty_ptaki
+```
+
+---
+
+# Sortowanie danych
+Bardzo często w zbiorze danych jesteśmy zainteresowani znalezieniem tych wierszy, któych warotści są największe lub najmniejsze. 
+
+Również by sprawdzić, czy dane przyjmują sensowe wartości, często sprawdzamy ekstraema, największe i najmenijsze przypadku, by ocenić czy one przyjmują rozsądne wartości.
+
+Do sortowania, bardzo przydatna jest funkcja `arrange()`, która jako pierwszy argument przyjmuje ramkę danych a jako kolejne argumenty przyjmuje zmienne, wzdłuż których dane są sortowane.
+
+Przykładowo aby posortować w kolejności rosnącej ze względu na prędkość można użyć następującej składni.
+
+```{r, warning=FALSE}
+arrange(koty_ptaki, 
+        predkosc)
+```
+
+---
+
+# Sortowanie danych
+
+Aby posortować w koljności malejącej można albo zmienną, po której ma nastąpić sortowanie opatrzeć funkcją `desc()` lub dla zmiennych liczbowych dodać znak `-` przed zmienną.
+
+Obie poniższe instrukcje mają taki sam efekt.
+
+```{r, warning=FALSE}
+arrange(koty_ptaki, 
+        desc(predkosc))
+arrange(koty_ptaki, 
+        -predkosc)
+```
+
+---
+
+# Sortowanie po dwóch zmiennych
+
+Jeżeli dla zmiennej, wzdłuż której sortujemy, mogą wystąpić remisy, te same wartości, wtedy interesującą opcją jest wskazanie drugorzędnego kryterium sortowania.
+
+Przykładowo, aby posortować wzdłuż prędkości osobno dla kotów osobno dla ptaków, możemy wskazać drużynę jako główne kryterium sortowania a prędkość jako kryterium drugorzędne.
+
+```{r, warning=FALSE}
+arrange(koty_ptaki, 
+        druzyna,
+        predkosc)
+```
+
+---
+
+Posortujmy dane wzdłuż ceny w polskich złotych.
+
+```{r, warning=FALSE}
+posortowanePorsche <-
+  arrange(tylkoPorscheZDużymSilnikiem, 
+        Cena.w.PLN)
+```
+
+---
+
+Aby zobaczyć jakie wiersza są pierwsze a jakie są ostatnie w tym zbiorze danych, możemy użyć funkcji `head()` i `tail()`. Domyślnie wybiranych jest pierwszych lub ostatnich 6 wierszy. Ale ustawiając drugi argument można wyświetlać więcej lub mniej wierszy.
+
+```{r, warning=FALSE}
+head(posortowanePorsche)
+
+tail(posortowanePorsche)
+```
+
+---
+
+Jeżeli wskażemy więcej niż jedną zmienną do sortowania, to w pierwszym kroku sortowanie odbędzie się wzdłuż pierwszej zmiennej, a w przypadku remisu (takich samych wartości) w drugim kropku wzdłuż drugiej zmiennej.
+
+W poniższym przypadku w pierwszym kroku sortujemy po Modelu auta, gdy samochody mają ten sam model to ich kolwjność jest określona przez drugą zmienną, czyli w tym przypadku cenie.
+
+Model jest nazwą i w tym przypadku jest sortowany w kolejności alfabetycznej.
+
+```{r, warning=FALSE}
+head(
+   arrange(tylkoPorscheZDużymSilnikiem, 
+        Model, Cena.w.PLN)
+  ) 
+```
+
+---
+
+Domyślnie dane sortowane są rosnąco. Jeżeli chcemy zrminić kolejnośc sortowania i sortować malejąco, to należy daną zmienną opakować funkcją `desc()` jak na poniższym przykładzie.
+
+```{r, warning=FALSE}
+head(
+   arrange(tylkoPorscheZDużymSilnikiem, 
+        Model, desc(Cena.w.PLN))
+  ) 
+```
+
+---
+
+# Zadania
+* Posortuj auta wzdłuż wielkości silnika (liczby koni mechanicznych, kolumna KM lub pojemności skokowej, kolumna Pojemnosc.skokowa). Które marki mają najwięszke silniki?
+* Wybierz tylko auta marki 'Rolls-Royce' i posortuj je po cenie.
+
