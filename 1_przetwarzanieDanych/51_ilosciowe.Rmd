@@ -81,6 +81,9 @@ Używając funkcji `summary()` możemy wyznaczyć sześć podstawowych charakter
 ```{r, warning=FALSE}
 summary(auta2012$Cena.w.PLN)
 ```
+[TODO] pod wynikiem funkcji summary dodac interpretacje otrzymanych kwartyli:
+Q1 = 25% samoch ma cene nizsza niz 10900,
+Q2 = 50% samoch ....
 
 ---
 
