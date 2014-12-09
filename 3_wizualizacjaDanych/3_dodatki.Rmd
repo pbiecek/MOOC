@@ -141,7 +141,7 @@ pl_waga <- ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
                 geom_point(size=5)
 ```
 
-Aby wyświetlić wykres `pl_waga` można wykorzystać funkcję `print()`. Jednym z argumentów tej funkcji jest `vp=` pozwalający określić w którym miejscu wykres ma być rysowany. Domyślnie zarysowany jest cały obszar o współrzędnych [0-1], ale możemy zażyczyć sobie by wykres rysowany był w mniejszym obszarze. Jest to bardzo wygodne, jeżeli chcemy zmieścić kilka wykresów obok siebie. Poniższy przykłąd rysuje ten sam wykres trzykrotnie, za każdym razem w innym miejscu i z innym tytułem.
+Aby wyświetlić wykres `pl_waga` można wykorzystać funkcję `print()`. Jednym z argumentów tej funkcji jest `vp=` pozwalający określić w którym miejscu wykres ma być rysowany. Domyślnie zarysowany jest cały obszar o współrzędnych [0-1], ale możemy zażyczyć sobie by wykres rysowany był w mniejszym obszarze. Jest to bardzo wygodne, jeżeli chcemy zmieścić kilka wykresów obok siebie. Poniższy przykład rysuje ten sam wykres trzykrotnie, za każdym razem w innym miejscu i z innym tytułem.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 library(grid)
