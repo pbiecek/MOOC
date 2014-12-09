@@ -240,6 +240,12 @@ Dane, które są dostępne w programie R, można zapisać do pliku tekstowego, p
 
 - do pliku w formacie natywnym R, dane można zapisać funkcją `save()`. Funkcja ta zabisuje jeden lub więcej zmiennych o dowolnych formatach. Nie tylko tabelarycznych.
 
+[TODO] funkcja gdata::read.xls (chyba) nie zapisuje do formatu Excela,
+to dobrym uzupelnieniem tego pakietu jest
+WriteXLS::WriteXLS (wyk. tez Perla) zapisuje do Excela.
+Poniewaz wykorzystujesz pakiet gdata warto o tym napisac.
+Jest tez dataframe2xls::write.xls (wyk Pythona)
+
 ---
 
 # Zadanie
