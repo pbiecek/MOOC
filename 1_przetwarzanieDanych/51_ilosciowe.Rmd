@@ -66,6 +66,7 @@ min(auta2012$Cena.w.PLN)
 max(auta2012$Cena.w.PLN)
 ```
 
+[TODO] może warto dodac funkcje: range(auta2012$Cena.w.PLN) - wartosci ekstremalne
 ---
 
 Używając funkcji `summary()` możemy wyznaczyć sześć podstawowych charakterystyk, czyli: minimum, 1. kwartyl, medianę (2. kwartyl), średnią, 3. kwartyl i maksimum.
