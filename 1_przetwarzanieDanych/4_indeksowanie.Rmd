@@ -118,6 +118,9 @@ rownames(koty_ptaki) <- koty_ptaki[,1]
 head(koty_ptaki, 3)
 ```
 
+[TODO] warto pokazac jak pozbyc sie nazw wierszy
+rownames(koty_ptaki) <- NULL
+
 Tak wiersze jak i kolumny można wskazywać nie tylko indeksami liczbowymi, ale również wskazując nazwy wierszy i/lub kolumn.
 
 ```{r, message=FALSE, warning=FALSE}
