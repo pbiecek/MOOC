@@ -31,8 +31,8 @@ część 1: Data smart
   * Cechy ilościowe, [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyIloscioweIntro.md), [materialy html](https://rawgit.com/pbiecek/MOOC/master/https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/52_jakosciowe.html)
   * Cechy logiczne, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/53_logiczne.html)
   * Cechy napisowe, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/54_napisowe.html)
-  * Pętla for / sapply
   * Instrukcja if
+  * Pętla for / sapply
   * Funkcje
   * Co dalej, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/coDalej.html)
 
