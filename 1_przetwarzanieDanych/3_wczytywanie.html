@@ -214,6 +214,26 @@ koty</code></pre>
 ## Gepard           21          65           110  Afryka
 ## Irbis            20          55            65    Azja</code></pre>
 </div>
+<div id="wczytywanie-danych-poprzez-web-api" class="slide section level1">
+<h1>Wczytywanie danych poprzez web API</h1>
+<p>Pewne dane dostępne są poprzez API (application programming interface). Oznacza to, że nie możemy pobrać wszystkich danych z bazy danych, ale możemy tą bazę odpytywać o określone informacje.</p>
+<p>Przykładem niech będzie baza Eurostat, do której można sięgać używając funkcji getEurostatRCV() z pakietu SmarterPoland. W bazie Eurostat tabela ‘tsdtr210’ zawiera dane o ilości pasażero-kilometrów dla różnych krajów i środków transportu. <a href="http://ec.europa.eu/eurostat/tgm/table.do?tab=table&amp;init=1&amp;language=en&amp;pcode=tsdtr210&amp;plugin=1">http://ec.europa.eu/eurostat/tgm/table.do?tab=table&amp;init=1&amp;language=en&amp;pcode=tsdtr210&amp;plugin=1</a> Pobierzmy te dane używając API udostępnionego przez pakiet SmarterPoland.</p>
+<pre class="sourceCode r"><code class="sourceCode r">tsdtr210 &lt;-<span class="st"> </span><span class="kw">getEurostatRCV</span>(<span class="st">&quot;tsdtr210&quot;</span>)
+<span class="kw">head</span>(tsdtr210, <span class="dv">3</span>)</code></pre>
+<pre><code>##   vehicle geo  time value
+## 1 BUS_TOT  AT 1990     NA
+## 2 BUS_TOT  BE 1990     NA
+## 3 BUS_TOT  BG 1990     NA</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(tsdtr210)</code></pre>
+<pre><code>##     vehicle         geo            time          value      
+##  BUS_TOT:805   AT     :  69   1990   : 105   Min.   : 0.70  
+##  CAR    :805   BE     :  69   1991   : 105   1st Qu.: 7.00  
+##  TRN    :805   BG     :  69   1992   : 105   Median :13.20  
+##                CH     :  69   1993   : 105   Mean   :34.15  
+##                CY     :  69   1994   : 105   3rd Qu.:77.60  
+##                CZ     :  69   1995   : 105   Max.   :92.00  
+##                (Other):2001   (Other):1785   NA's   :424</code></pre>
+</div>
 <div id="zapisywanie-danych" class="slide section level1">
 <h1>Zapisywanie danych</h1>
 <p>Dane, które są dostępne w programie R, można zapisać do pliku tekstowego, pliku excelowego lub binarnego funkcjami:</p>
@@ -222,6 +242,7 @@ koty</code></pre>
 <li><p>do pliku w formacie Excela funkcją <code>write.xls()</code>. Funkcja ta jest dostępna w większosci pakietów, zawierających funkcję <code>read.xls()</code>, np. w pakiecie <code>xlsx</code>.</p></li>
 <li><p>do pliku w formacie natywnym R, dane można zapisać funkcją <code>save()</code>. Funkcja ta zabisuje jeden lub więcej zmiennych o dowolnych formatach. Nie tylko tabelarycznych.</p></li>
 </ul>
+<p>[TODO] funkcja gdata::read.xls (chyba) nie zapisuje do formatu Excela, to dobrym uzupelnieniem tego pakietu jest WriteXLS::WriteXLS (wyk. tez Perla) zapisuje do Excela. Poniewaz wykorzystujesz pakiet gdata warto o tym napisac. Jest tez dataframe2xls::write.xls (wyk Pythona)</p>
 </div>
 <div id="zadanie" class="slide section level1">
 <h1>Zadanie</h1>

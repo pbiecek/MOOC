@@ -232,25 +232,18 @@ koty
 
 # Wczytywanie danych poprzez web API
 
-.
+
+Pewne dane dostępne są poprzez API (application programming interface).
+Oznacza to, że nie możemy pobrać wszystkich danych z bazy danych, ale możemy tą bazę odpytywać o określone informacje.
+
+Przykładem niech będzie baza Eurostat, do której można sięgać używając funkcji getEurostatRCV() z pakietu SmarterPoland. W bazie Eurostat tabela ‘tsdtr210’ zawiera dane o ilości pasażero-kilometrów dla różnych krajów i środków transportu. 
+http://ec.europa.eu/eurostat/tgm/table.do?tab=table&init=1&language=en&pcode=tsdtr210&plugin=1
+Pobierzmy te dane używając API udostępnionego przez pakiet SmarterPoland.
 
 ```{r, warning=FALSE, message=FALSE}
-summary(tmp <- getEurostatRCV("tsdtr210"))
-
-autobus <- cast(tmp, geo ~ time, mean, subset = vehicle == "BUS_TOT")
-head(autobus[, c(1, 13:22)], 3)
-##   geo 2001  2002  2003  2004  2005  2006  2007  2008  2009  2010 
-## 1  AT  10.9  10.9  10.9  11.0  10.5  10.4  10.8  10.2  10.5  10.6
-## 2  BE  10.7  11.4  12.5  12.7  13.0  13.2  14.3  14.4  13.3  13.6
-## 3  BG  32.6  34.7  30.2  25.0  24.3  22.7  21.8  20.8  16.8  17.0
-samochod <- cast(tmp, geo ~ time, mean, subset = vehicle == "CAR")
-pociag   <- cast(tmp, geo ~ time, mean, subset = vehicle == "TRN")
-# wybierz dane z roku 2010 dla każdego z typów transportu
-razem    <- cbind(autobus[, "2010 "], samochod[, "2010 "], pociag[, "2010 "])
-# dodajemy nazwy państw
-rownames(razem) <- levels(autobus[, 1])
-razem <- na.omit(razem)
-
+tsdtr210 <- getEurostatRCV("tsdtr210")
+head(tsdtr210, 3)
+summary(tsdtr210)
 ```
 
 ---
