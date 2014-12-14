@@ -1,0 +1,95 @@
+---
+title: "Zmiana formatu danych [tidyr]"
+author: "pogRomcy danych"
+date: "sezon 1 / odcinek 7 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / przetwarzanie / tidyr"
+
+---
+
+# O czym jest ten odcinek
+
+W tym odcinku nauczymy się
+
+- Jak przejść z wąskiej postaci na szeroką
+- Jak przejść z szerokiej postaci do wąskiej
+
+Do ilustracji wykorzystamy zbiór danych pobranych z eurostatu.
+
+---
+
+# Dane do ćwiczeń
+
+Pakiet `tidyr` zawiera kilka użytecznych funkcji do zmiany kształtu danych. 
+Do ilustracji tych funkcji wykorzystamy zbiór danych z eurostatu o popularności transpostu w różnych krajach.
+
+Do pobrania tych danych użyjemy funkcji `getEurostatRCV()`, która zwraca dane w tak zwanej wąskiej postaci.
+
+```{r, warning=FALSE, message=FALSE}
+library(SmarterPoland)
+tsdtr210 <- getEurostatRCV("tsdtr210")
+head(tsdtr210)
+```
+
+---
+
+# Z postaci wąskiej do szerokiej
+
+Aby przejść z postaci wąskiej do postaci szerokie, można użyć funkcji `spread()`.
+
+Jej pierwszym argumentem jest ramka z danymi, a kolejne dwie zmienne określają kolumnę w której przechowywane są klucze i wartości. Następnie ramka danych jest konwertowana w ten sposób, że wartości drugiej kolumny wejściowego zbioru danych stają się nazwami kolumn wyjściowego zbioru danych.
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyr)
+szeroka <- 
+  tsdtr210 %>%
+    spread(time, value)
+
+# wyświetlmy wiersze dla Polski
+szeroka %>%
+  filter(geo == "PL")
+```
+
+---
+
+# Z szerokiej do wąskiej
+
+Odwrotną operację, przejście z postaci szerokiej do wąskiej, można wykonać operacją `gather()`.
+
+Pierwszym argumentem jest zbiór danych (poniżej przekazany za pomocą operatora `%>%`), kolejne dwa określają nazwy nowych kolumn w których zapisane będą klucze i wartości. Trzeci argument to opis kolumn, które mają być zamienione na postać wąską.
+
+
+```{r, warning=FALSE, message=FALSE}
+szeroka %>% 
+  gather(rok, wartosc, -geo, -vehicle) %>%
+  head()
+```
+
+---
+
+# Sklejanie i rozcinanie kolumn.
+
+Zdarza się, że wartości z kilku kolumn chcemy połączyć w jedną kolumnę, sklejając je ze sobą.
+Można tę operację łatwo wykonać funkcją `unite()`.
+
+```{r, warning=FALSE, message=FALSE}
+szeroka %>%
+  unite(połącz, vehicle : geo, sep=".") %>%
+  head(3)
+```
+
+Operację odwrotną można wykonać funkcją `separate()`
+
+---
+
+# Zadania
+* W bazie danych eurostatu `prc_ppp` zebrane są informacje o średniej mocy nabywczej.
+Odczytaj te dane a następnie zamień z postaci wąskiej do szerokiej.
+
+

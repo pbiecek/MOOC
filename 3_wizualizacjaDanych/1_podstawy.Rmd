@@ -85,6 +85,7 @@ Różnice, które uznałem za najistotniejsze to:
 
 - Na prawym wykresie widoczne są pionowe i poziome linie pomocnicze, ułatwiają one dokładniejsze odczytanie współrzędnych punktów niż w przypadku lewego wykresu.
 - Linie pomocnicze są białe na szarym tle, przez co nie dominują wykresu i są delikatnie przesunięte na drugi plan.
+- Jeżeli wykres umieszczamy na białej stronie internetowej to szare tło umożliwia szybką lokalizację wykresu.
 - Oba wykresy wypełniają obszar 10 x 10 cm, ale lewy wykres ma duże marginesy, przez co mniej miejsca pozostaje na prezentacje danych. Prawy wykres ma małe marginesy, przez co jest więcej miejsca na zaprezentowanie danych.
 - Etykiety na osiach na prawym wykresie są poziome, nie trzeba obracać głowy by je odczytać.
 - Etykiety na prawym wykresie są pomniejszone i wyszarzane, przesunięte na drugi plan. Wciąż są widoczne ale mniej dominują wykres, pozwalając przesunąć dane na pierwszy plan.
