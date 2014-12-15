@@ -11,13 +11,12 @@ część 1: Data smart
 + Dane wokół nas, jak je czytać [Nie bądź liczbowym analfabetą]
   * Intro, [intro](https://rawgit.com/pbiecek/MOOC/master/motywacja/intro.md)
   * [Diagnoza Społeczna] J Cz - 15 listopad
-  * [Ryzyko kedytowe] M Wi
-  * [Długość życia] GUS
   * [Epidemiologia] PZH
+  * [Text mining] P
   * [Badania Edukacji] IBE
-  * [Policy q] M Jak 27 listopad
   * [Sondaże - może wyborcze] Nss
-  * Siatki centylowe
+  * [Robotyka] BM
+  * [Bio info] ??
 
 
 + Eksploracja danych
