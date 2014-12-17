@@ -10,12 +10,12 @@ część 1: Data smart
 
 + Dane wokół nas, jak je czytać [Nie bądź liczbowym analfabetą]
   * Intro, [intro](https://rawgit.com/pbiecek/MOOC/master/motywacja/intro.md)
-  * [Diagnoza Społeczna] J Cz - 15 listopad
-  * [Epidemiologia] PZH
-  * [Text mining] P
-  * [Badania Edukacji] IBE
+  * Piotr Przybyła IPI PAN, Inżynieria lingwistyczna 
   * [Sondaże - może wyborcze] Nss
   * [Robotyka] BM
+  * [Diagnoza Społeczna] J Cz - 15 listopad
+  * [Epidemiologia] PZH
+  * [Badania Edukacji] IBE
   * [Bio info] ??
 
 
