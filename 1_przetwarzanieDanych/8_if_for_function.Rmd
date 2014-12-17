@@ -1,0 +1,152 @@
+---
+title: "Pętle"
+author: "pogRomcy danych"
+date: "sezon 1 / odcinek 8 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / przetwarzanie / pętle"
+
+---
+
+# O czym jest ten odcinek
+
+W tym odcinku nauczymy się
+
+- Jak korzystać z pętli
+- Jak korzystać z instrukcji warunkowych
+- Jak korzystać z funkcji
+
+Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to `koty_ptaki` a drugi, znacznie większy to `auta2012`.
+
+---
+
+# Pętle
+
+Przewaga komputerów nad ludźmi polega na tym, że określone rzeczy mogą szybko powtarzać.
+
+Jeżeli raz opiszemy pewną operację, to większość języków programowania pozwala na łatwe zwielokrotnianie tej operacji. Instrukcje pozwalające na takie powtarzanie w kółko pewnych operacji nazywa się pętlami.
+
+Zacznijmy od instrukcji, która wyświetli na ekranie wylosowaną liczbę.
+
+W języku R jest wiele rodzajów pętli, ale najczęściej stosowana jest pętla `for`. Przedstawmy jej działanie na przykładzie losowania liczby z przedziału 0-100.
+
+```{r, message=FALSE, warning=FALSE}
+cat("Wylosowałem:", runif(n = 1, min=0, max=100), "\n")
+```
+
+Funkcja `cat()` wypisuje swoje argumenty na ekranie, a funkcja `runif()` losuje `n` liczb z rozkładu jednostajnego na odcinku `min:max`.
+
+---
+
+# Pętle
+
+Sposób użycia pętli `for` jest następujący. 
+
+```{r, eval=FALSE}
+for (zmienna in wektor) wyrażenie
+```
+
+W wyniku działania tej pętli `wyrażenie` będzie wykonane dla każdej wartości z `wektor`. Co więcej, aktualny krok pętli jest określony przez zmienną `zmienna` i można z tej wartości korzystać wewnątrz `wyrażenie`.
+
+Zobaczmy jak to działa na przykładzie.
+Wylosujemy 10 liczb. Za każdym razem wypisując informację o wylosowanej liczbie na ekranie.
+
+```{r, message=FALSE, warning=FALSE}
+for (i in 1:10) {
+  cat("Losowanie", i," Wylosowałem:", runif(n = 1, min=0, max=100), "\n")
+}
+```
+
+---
+
+# Pętle
+
+Liczba powtórzeń pętli nie musi być z góry określona, może zależeć od np. liczby wierszy w ramce danych. 
+Typowe zastosowania pętli to wykonanie pewnej operacji dla każdego wiersza lub każdej kolumny. 
+
+Dla każdej kolumny (a na początek dla kolumny o indeksie `i=1`) będziemy chcieli wyświetlić informację do jakiej wagi dochodzą przedstawiciele danego gatunku.
+
+```{r, message=FALSE, warning=FALSE}
+library(SmarterPoland)
+# Zamiana zmiennej factor na zmienną napisową, po to by była dobrze wyświetlana
+koty_ptaki$gatunek <- as.character(koty_ptaki$gatunek)
+
+i = 1
+cat(koty_ptaki[i,"gatunek"], "może ważyć do", koty_ptaki[i,"waga"], "kg\n")
+```
+
+---
+
+# Pętle
+
+Powtórzmy tę operację dla każdego wiersza. Liczbę wierszy w ramce danych można odczytać poleceniem `nrow()` (od *number of rows*).
+
+```{r, message=FALSE, warning=FALSE}
+for (i in 1:nrow(koty_ptaki)) {
+  cat(koty_ptaki[i,"gatunek"], "może ważyć do", koty_ptaki[i,"waga"], "kg\n")
+}
+```
+
+---
+
+# Wektoryzacja
+
+Wiele pętli można uprościć do jednego wyrażenia, korzystając z mechanizmu wektoryzacji, a więc operowania w naturalny sposób na wektorach.
+
+Przykładowo, podobny efekt do opisanego powyżej możemy uzyskać poleceniem.
+
+```{r, message=FALSE, warning=FALSE}
+cat(paste(koty_ptaki[,"gatunek"], "może ważyć do", koty_ptaki[,"waga"], "kg\n"))
+```
+
+
+---
+
+# Pętla w pętli
+
+Pętle można zanurzać w innych pętlach. 
+
+Przedstawimy tę możliwość na przykładzie tekstowego przedstawiania informacji o prędkości.
+
+Każde 5 km/h przedstawmy za pomocą kropki na ekranie. Pierwszy wiersz opisuje prędkość Sokoła norweskiego. odczytajmy ją, policzmy ile kropek jest potrzebnych by ją przedstawić i narysujmy te kropki używając instrukcji `cat()`.
+
+```{r, message=FALSE, warning=FALSE}
+i <- 1
+n_kropek <- koty_ptaki[i,"predkosc"] / 5
+for (i in 1:n_kropek) {
+  cat(".")
+}
+```
+
+---
+
+# Pętla w pętli
+
+Powtórzmy powyższa pętle przedstawiającą prędkość pierwszego organizmu dla każdego wiersza osobno.
+
+```{r, message=FALSE, warning=FALSE}
+# Dla każdego wiersza w tabeli `koty_ptaki`
+for (i in 1:nrow(koty_ptaki)) {
+  n_kropek <- koty_ptaki[i,"predkosc"] / 5
+  # rysowanie kropek
+  for (j in 1:n_kropek) {
+    cat(".")
+  }
+  # nazwa gatunku
+  cat(" ", koty_ptaki[i,"gatunek"], "\n")
+}
+```
+
+---
+
+# Zadania
+
+* Napisz pętlę, która dla każdego wiersza z tabeli `koty_ptaki` wypisze żywotność określonego gatunku.
+* Napisz pętlę, która przedstawi żywotność za pomocą wykresu, na którym każdy rok przedstawiony jest jako jeden `#`.
+* Napisz pętlę, która narysuje wykres z żywotnością, ale z nazwami gatunku po lewej stronie. Co więcej, przed każdą nazwą gatunku należy dodać tyle znaków spacja, aby nazwy były wyrównane do prawej strony. Długość napisu, mierzoną w liczbie znaków można odczytać funkcją `nchar()`.
+
