@@ -1,0 +1,98 @@
+---
+title: "Instrukcje warunkowe"
+author: "pogRomcy danych"
+date: "sezon 1 / odcinek 8 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / przetwarzanie / instrukcje warunkowe"
+
+---
+
+# O czym jest ten odcinek
+
+W tym odcinku nauczymy się
+
+- Jak korzystać z instrukcji warunkowych
+
+Do ilustracji wykorzystamy zbiór danych to `koty_ptaki`.
+
+---
+
+# Instrukcje warunkowe
+
+Przygotowując algorytm przetwarzania danych, często potrzebujemy rozważyć różne możliwe sytuacje.
+Aby zapisać warianty wykonywania w zależności od stanu określonych zmiennych, można wykorzystać instrukcje warunkowe.
+
+Najczęściej wykorzystywaną instrukcją warunkową jest `if else`, która w języku R występuje w trzech postaciach.
+
+Jeżeli `warunek` występujący po bloku `if` jest prawdziwy, wykonana będzie instrukcja `wyrażenie1`, w przeciwnym przypadku `wyrażenie2` (o ile jest wskazane).
+
+```{r, eval=FALSE}
+if (warunek) 
+  wyrażenie1
+
+if (warunek) 
+  wyrażenie1  else wyrażenie2
+
+ifelse (warunek_dla_wektora, wyrażenie1, wyrażenie2) 
+```
+
+---
+
+# Instrukcje warunkowe
+
+Przykładowe wywołanie każdego z wariantów instrukcji `if`
+
+```{r, message=FALSE, warning=FALSE}
+library(SmarterPoland)
+i <- 1
+
+if (koty_ptaki[i,"druzyna"] == "Kot") {
+  cat(koty_ptaki[i,"gatunek"], "to wielki kot.")
+}
+
+if (koty_ptaki[i,"druzyna"] == "Kot") {
+  cat(koty_ptaki[i,"gatunek"], "to wielki kot.")
+} else {
+  cat(koty_ptaki[i,"gatunek"], "to ptak.")
+}
+
+ifelse(koty_ptaki[,"druzyna"] == "Kot",
+  "Kolejny wielki kot",
+  "Kolejny szybki ptak")
+```
+
+---
+
+# Pętle i instrukcje warunkowe
+
+Instrukcje warunkowe są często wykorzystywane wewnątrz pętli. W sytuacji gdy chcemy powtórzyć pewną czynność kilkukrotnie, ale dana czynność może mieć kilka wariantów.
+
+Zilustrujemy tą sytuację w poniższym przykładzie,
+w zależności czy określony gatunek jest kotem czy ptakiem wyświetlimy inną formułkę.
+
+
+```{r, message=FALSE, warning=FALSE}
+
+for (i in 1:nrow(koty_ptaki)) {
+  if (koty_ptaki[i,"druzyna"] == "Kot") {
+    cat(koty_ptaki[i,"gatunek"], "to wielki i szybki kot.\n")
+  } else {
+    cat(koty_ptaki[i,"gatunek"], "to ptak.\n")
+  }
+}
+```
+
+---
+
+# Zadania
+
+* Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze `lekkie`, a dla cięższych niż 1 kg `ciężkie`.
+* Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze `lekkie`, cięższych niż 100kg wypisze `ciężkie` a w przedziale 1-100kg wypisze `średnie`. Taki efekt można uzyskać stosując dwie instrukcje `if()` lub korzystając z funkcji `switch()`.
+
+
