@@ -20,7 +20,13 @@ W tym odcinku nauczymy się
 - Jak tworzyć własne funkcje
 - Jak wywoływać funkcje z funkcji
 
-Do ilustracji wykorzystamy zbiór danych to `koty_ptaki`.
+Do ilustracji wykorzystamy zbiór danych to `koty_ptaki` z pakietu `SmarterPoland`.
+
+```{r, message=FALSE, warning=FALSE}
+library(SmarterPoland)
+koty_ptaki$gatunek <- as.character(koty_ptaki$gatunek)
+head(koty_ptaki, 3)
+```
 
 ---
 
