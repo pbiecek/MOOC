@@ -32,7 +32,6 @@ część 1: Data smart
   * Cechy logiczne, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/53_logiczne.html)
   * Cechy napisowe, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/54_napisowe.html)
   * Instrukcja if, pętla for, [pętle](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/8_petle.html), [instrukcje warunkowe](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/81_instrukcje_warunkowe.html), [funkcje](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/82_funkcje.html)
-  * Funkcje
   * Co dalej, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/coDalej.html)
 
 część 2: Data science
