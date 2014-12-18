@@ -6,8 +6,8 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / przetwarzanie / instrukcje warunkowe" /> 
-  <title>Instrukcje warunkowe</title>
+  <meta name="copyright" content="pogRomcy danych / przetwarzanie / pętle" /> 
+  <title>Pętle</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -44,7 +44,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </head>
 <body>
 <div class="slide titlepage">
-  <h1 class="title">Instrukcje warunkowe</h1>
+  <h1 class="title">Pętle</h1>
   <p class="author">
 pogRomcy danych
   </p>
@@ -54,83 +54,137 @@ pogRomcy danych
 <h1>O czym jest ten odcinek</h1>
 <p>W tym odcinku nauczymy się</p>
 <ul>
-<li>Jak korzystać z instrukcji warunkowych</li>
-<li>Jak korzystać z instrukcji warunkowych w tętli</li>
+<li>Jak korzystać z pętli <code>for()</code></li>
+<li>Jak i po co tworzyć pętle w pętli</li>
 </ul>
 <p>Do ilustracji wykorzystamy zbiór danych to <code>koty_ptaki</code>.</p>
 </div>
-<div id="instrukcje-warunkowe" class="slide section level1">
-<h1>Instrukcje warunkowe</h1>
-<p>Przygotowując algorytm przetwarzania danych, często potrzebujemy rozważyć różne możliwe sytuacje. Aby zapisać warianty wykonywania w zależności od stanu określonych zmiennych, można wykorzystać instrukcje warunkowe.</p>
-<p>Najczęściej wykorzystywaną instrukcją warunkową jest <code>if else</code>, która w języku R występuje w trzech postaciach.</p>
-<p>Jeżeli <code>warunek</code> występujący po bloku <code>if</code> jest prawdziwy, wykonana będzie instrukcja <code>wyrażenie1</code>, w przeciwnym przypadku <code>wyrażenie2</code> (o ile jest wskazane).</p>
-<pre class="sourceCode r"><code class="sourceCode r">if (warunek) 
-  wyrażenie1
-
-if (warunek) 
-  wyrażenie1  else wyrażenie2
-
-<span class="kw">ifelse</span> (warunek_dla_wektora, wyrażenie1, wyrażenie2) </code></pre>
+<div id="petle" class="slide section level1">
+<h1>Pętle</h1>
+<p>Przewaga komputerów nad ludźmi polega na tym, że określone rzeczy mogą szybko powtarzać.</p>
+<p>Jeżeli raz opiszemy pewną operację, to większość języków programowania pozwala na łatwe zwielokrotnianie tej operacji. Instrukcje pozwalające na takie powtarzanie w kółko pewnych operacji nazywa się pętlami.</p>
+<p>Zacznijmy od instrukcji, która wyświetli na ekranie wylosowaną liczbę.</p>
+<p>W języku R jest wiele rodzajów pętli, ale najczęściej stosowana jest pętla <code>for</code>. Przedstawmy jej działanie na przykładzie losowania liczby z przedziału 0-100.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;Wylosowałem:&quot;</span>, <span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">min=</span><span class="dv">0</span>, <span class="dt">max=</span><span class="dv">100</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
+<pre><code>## Wylosowałem: 84.05935</code></pre>
+<p>Funkcja <code>cat()</code> wypisuje swoje argumenty na ekranie, a funkcja <code>runif()</code> losuje <code>n</code> liczb z rozkładu jednostajnego na odcinku <code>min:max</code>.</p>
 </div>
-<div id="instrukcje-warunkowe-1" class="slide section level1">
-<h1>Instrukcje warunkowe</h1>
-<p>Przykładowe wywołanie każdego z wariantów instrukcji <code>if</code></p>
+<div id="petle-1" class="slide section level1">
+<h1>Pętle</h1>
+<p>Sposób użycia pętli <code>for</code> jest następujący.</p>
+<pre class="sourceCode r"><code class="sourceCode r">for (zmienna in wektor) wyrażenie</code></pre>
+<p>W wyniku działania tej pętli <code>wyrażenie</code> będzie wykonane dla każdej wartości z <code>wektor</code>. Co więcej, aktualny krok pętli jest określony przez zmienną <code>zmienna</code> i można z tej wartości korzystać wewnątrz <code>wyrażenie</code>.</p>
+<p>Zobaczmy jak to działa na przykładzie. Wylosujemy 10 liczb. Za każdym razem wypisując informację o wylosowanej liczbie na ekranie.</p>
+<pre class="sourceCode r"><code class="sourceCode r">for (i in <span class="dv">1</span>:<span class="dv">10</span>) {
+  <span class="kw">cat</span>(<span class="st">&quot;Losowanie&quot;</span>, i,<span class="st">&quot; Wylosowałem:&quot;</span>, <span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">min=</span><span class="dv">0</span>, <span class="dt">max=</span><span class="dv">100</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+}</code></pre>
+<pre><code>## Losowanie 1  Wylosowałem: 19.37462 
+## Losowanie 2  Wylosowałem: 38.3434 
+## Losowanie 3  Wylosowałem: 98.61626 
+## Losowanie 4  Wylosowałem: 15.85259 
+## Losowanie 5  Wylosowałem: 7.905538 
+## Losowanie 6  Wylosowałem: 32.93082 
+## Losowanie 7  Wylosowałem: 23.81059 
+## Losowanie 8  Wylosowałem: 89.24445 
+## Losowanie 9  Wylosowałem: 56.20051 
+## Losowanie 10  Wylosowałem: 57.2129</code></pre>
+</div>
+<div id="petle-2" class="slide section level1">
+<h1>Pętle</h1>
+<p>Liczba powtórzeń pętli nie musi być z góry określona, może zależeć od np. liczby wierszy w ramce danych. Typowe zastosowania pętli to wykonanie pewnej operacji dla każdego wiersza lub każdej kolumny.</p>
+<p>Dla każdej kolumny (a na początek dla kolumny o indeksie <code>i=1</code>) będziemy chcieli wyświetlić informację do jakiej wagi dochodzą przedstawiciele danego gatunku.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
-i &lt;-<span class="st"> </span><span class="dv">1</span></code></pre>
-<p>Wyłącznie blok <code>if</code>, jeżeli <code>warunek</code> jest fałszywy nic się wyświetli na ekranie.</p>
-<pre class="sourceCode r"><code class="sourceCode r">if (koty_ptaki[i,<span class="st">&quot;druzyna&quot;</span>] ==<span class="st"> &quot;Kot&quot;</span>) {
-  <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to wielki kot.&quot;</span>)
-}</code></pre>
-<pre><code>## 13 to wielki kot.</code></pre>
-<p>Blok <code>if-else</code>. Jeżeli <code>warunek</code> jest fałszywy wyświetli się wynik części <code>else</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">if (koty_ptaki[i,<span class="st">&quot;druzyna&quot;</span>] ==<span class="st"> &quot;Kot&quot;</span>) {
-  <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to wielki kot.&quot;</span>)
-} else {
-  <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to ptak.&quot;</span>)
-}</code></pre>
-<pre><code>## 13 to wielki kot.</code></pre>
-<p>Blok <code>if-else</code> dla wektorów. Wynikiem jest również wektor.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ifelse</span>(koty_ptaki[,<span class="st">&quot;druzyna&quot;</span>] ==<span class="st"> &quot;Kot&quot;</span>,
-  <span class="st">&quot;Kolejny wielki kot&quot;</span>,
-  <span class="st">&quot;Kolejny szybki ptak&quot;</span>)</code></pre>
-<pre><code>##  [1] &quot;Kolejny wielki kot&quot;  &quot;Kolejny wielki kot&quot;  &quot;Kolejny wielki kot&quot; 
-##  [4] &quot;Kolejny wielki kot&quot;  &quot;Kolejny wielki kot&quot;  &quot;Kolejny wielki kot&quot; 
-##  [7] &quot;Kolejny wielki kot&quot;  &quot;Kolejny szybki ptak&quot; &quot;Kolejny szybki ptak&quot;
-## [10] &quot;Kolejny szybki ptak&quot; &quot;Kolejny szybki ptak&quot; &quot;Kolejny szybki ptak&quot;
-## [13] &quot;Kolejny szybki ptak&quot;</code></pre>
-</div>
-<div id="petle-i-instrukcje-warunkowe" class="slide section level1">
-<h1>Pętle i instrukcje warunkowe</h1>
-<p>Instrukcje warunkowe są często wykorzystywane wewnątrz pętli. W sytuacji gdy chcemy powtórzyć pewną czynność kilkukrotnie, ale dana czynność może mieć kilka wariantów.</p>
-<p>Zilustrujemy tą sytuację w poniższym przykładzie, w zależności czy określony gatunek jest kotem czy ptakiem wyświetlimy inną formułkę.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[,<span class="st">&quot;gatunek&quot;</span>] &lt;-<span class="st"> </span><span class="kw">as.character</span>(koty_ptaki[,<span class="st">&quot;gatunek&quot;</span>])
+<span class="co"># Zamiana zmiennej factor na zmienną napisową, po to by była dobrze wyświetlana</span>
+koty_ptaki$gatunek &lt;-<span class="st"> </span><span class="kw">as.character</span>(koty_ptaki$gatunek)
 
-for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
-  if (koty_ptaki[i,<span class="st">&quot;druzyna&quot;</span>] ==<span class="st"> &quot;Kot&quot;</span>) {
-    <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to wielki i szybki kot.</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  } else {
-    <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to ptak.</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  }
+i =<span class="st"> </span><span class="dv">1</span>
+<span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;może ważyć do&quot;</span>, koty_ptaki[i,<span class="st">&quot;waga&quot;</span>], <span class="st">&quot;kg</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
+<pre><code>## Tygrys może ważyć do 300 kg</code></pre>
+</div>
+<div id="petle-3" class="slide section level1">
+<h1>Pętle</h1>
+<p>Powtórzmy tę operację dla każdego wiersza. Liczbę wierszy w ramce danych można odczytać poleceniem <code>nrow()</code> (od <em>number of rows</em>).</p>
+<pre class="sourceCode r"><code class="sourceCode r">for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
+  <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;może ważyć do&quot;</span>, koty_ptaki[i,<span class="st">&quot;waga&quot;</span>], <span class="st">&quot;kg</span><span class="ch">\n</span><span class="st">&quot;</span>)
 }</code></pre>
-<pre><code>## Tygrys to wielki i szybki kot.
-## Lew to wielki i szybki kot.
-## Jaguar to wielki i szybki kot.
-## Puma to wielki i szybki kot.
-## Leopard to wielki i szybki kot.
-## Gepard to wielki i szybki kot.
-## Irbis to wielki i szybki kot.
-## Jerzyk to ptak.
-## Strus to ptak.
-## Orzel przedni to ptak.
-## Sokol wedrowny to ptak.
-## Sokol norweski to ptak.
-## Albatros to ptak.</code></pre>
+<pre><code>## Tygrys może ważyć do 300 kg
+## Lew może ważyć do 200 kg
+## Jaguar może ważyć do 100 kg
+## Puma może ważyć do 80 kg
+## Leopard może ważyć do 70 kg
+## Gepard może ważyć do 60 kg
+## Irbis może ważyć do 50 kg
+## Jerzyk może ważyć do 0.05 kg
+## Strus może ważyć do 150 kg
+## Orzel przedni może ważyć do 5 kg
+## Sokol wedrowny może ważyć do 0.7 kg
+## Sokol norweski może ważyć do 2 kg
+## Albatros może ważyć do 4 kg</code></pre>
+</div>
+<div id="wektoryzacja" class="slide section level1">
+<h1>Wektoryzacja</h1>
+<p>Wiele pętli można uprościć do jednego wyrażenia, korzystając z mechanizmu wektoryzacji, a więc operowania w naturalny sposób na wektorach.</p>
+<p>Przykładowo, podobny efekt do opisanego powyżej możemy uzyskać poleceniem.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="kw">paste</span>(koty_ptaki[,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;może ważyć do&quot;</span>, koty_ptaki[,<span class="st">&quot;waga&quot;</span>], <span class="st">&quot;kg</span><span class="ch">\n</span><span class="st">&quot;</span>))</code></pre>
+<pre><code>## Tygrys może ważyć do 300 kg
+##  Lew może ważyć do 200 kg
+##  Jaguar może ważyć do 100 kg
+##  Puma może ważyć do 80 kg
+##  Leopard może ważyć do 70 kg
+##  Gepard może ważyć do 60 kg
+##  Irbis może ważyć do 50 kg
+##  Jerzyk może ważyć do 0.05 kg
+##  Strus może ważyć do 150 kg
+##  Orzel przedni może ważyć do 5 kg
+##  Sokol wedrowny może ważyć do 0.7 kg
+##  Sokol norweski może ważyć do 2 kg
+##  Albatros może ważyć do 4 kg</code></pre>
+</div>
+<div id="petla-w-petli" class="slide section level1">
+<h1>Pętla w pętli</h1>
+<p>Pętle można zanurzać w innych pętlach.</p>
+<p>Przedstawimy tę możliwość na przykładzie tekstowego przedstawiania informacji o prędkości.</p>
+<p>Każde 5 km/h przedstawmy za pomocą kropki na ekranie. Pierwszy wiersz opisuje prędkość Sokoła norweskiego. odczytajmy ją, policzmy ile kropek jest potrzebnych by ją przedstawić i narysujmy te kropki używając instrukcji <code>cat()</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">i &lt;-<span class="st"> </span><span class="dv">1</span>
+n_kropek &lt;-<span class="st"> </span>koty_ptaki[i,<span class="st">&quot;predkosc&quot;</span>] /<span class="st"> </span><span class="dv">5</span>
+for (i in <span class="dv">1</span>:n_kropek) {
+  <span class="kw">cat</span>(<span class="st">&quot;.&quot;</span>)
+}</code></pre>
+<pre><code>## ............</code></pre>
+</div>
+<div id="petla-w-petli-1" class="slide section level1">
+<h1>Pętla w pętli</h1>
+<p>Powtórzmy powyższa pętle przedstawiającą prędkość pierwszego organizmu dla każdego wiersza osobno.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Dla każdego wiersza w tabeli `koty_ptaki`</span>
+for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
+  n_kropek &lt;-<span class="st"> </span>koty_ptaki[i,<span class="st">&quot;predkosc&quot;</span>] /<span class="st"> </span><span class="dv">5</span>
+  <span class="co"># rysowanie kropek</span>
+  for (j in <span class="dv">1</span>:n_kropek) {
+    <span class="kw">cat</span>(<span class="st">&quot;.&quot;</span>)
+  }
+  <span class="co"># nazwa gatunku</span>
+  <span class="kw">cat</span>(<span class="st">&quot; &quot;</span>, koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+}</code></pre>
+<pre><code>## ............  Tygrys 
+## ................  Lew 
+## ..................  Jaguar 
+## ..............  Puma 
+## .................  Leopard 
+## .......................  Gepard 
+## .............  Irbis 
+## ..................................  Jerzyk 
+## ..............  Strus 
+## ................................  Orzel przedni 
+## ......................  Sokol wedrowny 
+## ....................  Sokol norweski 
+## ........................  Albatros</code></pre>
 </div>
 <div id="zadania" class="slide section level1">
 <h1>Zadania</h1>
 <ul>
-<li>Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze <code>lekkie</code>, a dla cięższych niż 1 kg <code>ciężkie</code>.</li>
-<li>Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze <code>lekkie</code>, cięższych niż 100kg wypisze <code>ciężkie</code> a w przedziale 1-100kg wypisze <code>średnie</code>. Taki efekt można uzyskać stosując dwie instrukcje <code>if()</code> lub korzystając z funkcji <code>switch()</code>.</li>
+<li>Napisz pętlę, która dla każdego wiersza z tabeli <code>koty_ptaki</code> wypisze żywotność określonego gatunku.</li>
+<li>Napisz pętlę, która przedstawi żywotność za pomocą wykresu, na którym każdy rok przedstawiony jest jako jeden <code>#</code>.</li>
+<li>Napisz pętlę, która narysuje wykres z żywotnością, ale z nazwami gatunku po lewej stronie. Co więcej, przed każdą nazwą gatunku należy dodać tyle znaków spacja, aby nazwy były wyrównane do prawej strony. Długość napisu, mierzoną w liczbie znaków można odczytać funkcją <code>nchar()</code>.</li>
 </ul>
 </div>
 

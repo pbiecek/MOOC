@@ -18,6 +18,7 @@ output:
 W tym odcinku nauczymy się
 
 - Jak korzystać z instrukcji warunkowych
+- Jak korzystać z instrukcji warunkowych w tętli
 
 Do ilustracji wykorzystamy zbiór danych to `koty_ptaki`.
 

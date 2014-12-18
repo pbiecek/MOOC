@@ -17,11 +17,10 @@ output:
 
 W tym odcinku nauczymy się
 
-- Jak korzystać z pętli
-- Jak korzystać z instrukcji warunkowych
-- Jak korzystać z funkcji
+- Jak korzystać z pętli `for()`
+- Jak i po co tworzyć pętle w pętli
 
-Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to `koty_ptaki` a drugi, znacznie większy to `auta2012`.
+Do ilustracji wykorzystamy zbiór danych to `koty_ptaki`.
 
 ---
 
