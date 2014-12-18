@@ -1,0 +1,201 @@
+---
+title: "Funkcje"
+author: "pogRomcy danych"
+date: "sezon 1 / odcinek 8 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / przetwarzanie / funkcje"
+
+---
+
+# O czym jest ten odcinek
+
+W tym odcinku nauczymy się
+
+- Jak tworzyć własne funkcje
+- Jak wywoływać funkcje z funkcji
+
+Do ilustracji wykorzystamy zbiór danych to `koty_ptaki`.
+
+---
+
+# Funkcje
+
+Jest wiele powodów, dla których warto korzystać z funkcji. Trzy najistotniejsze to.
+
+* Funkcje pozwalają skrócić wielkość programu, ponieważ mniej będzie powtarzających się podobnych bloków. 
+
+* Funkcje pozwalają na logiczny podział programu, na fragmenty, które łatwiej opisać i udokumentować. Dzięki temu łatwiej zrozumieć co się dzieje w programie, gdy można poznawać poszczególne fragmenty niezależnie.
+
+* Funkcje pozwalają na łatwe, ponowne użycie poprzednio opracowanych fragmentów kodu. Dzięki temu, możemy wykorzystywać rozwiązania, które już raz zbudowaliśmy i szybciej tworzyć kolejne. Możemy wykorzystywać rozwiązania / funkcje innych osób i dzielić się z nimi własnymi funkcjami.
+
+---
+
+# Funkcje
+
+Przywołajmy kod programu, który rysował prędkość zwierząt za pomocą liczby kropek.
+
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
+# Dla każdego wiersza w tabeli `koty_ptaki`
+for (i in 1:nrow(koty_ptaki)) {
+  n_kropek <- koty_ptaki[i,"predkosc"] / 5
+  # rysowanie kropek
+  for (j in 1:n_kropek) {
+    cat(".")
+  }
+  # nazwa gatunku
+  cat(" ", koty_ptaki[i,"gatunek"], "\n")
+}
+```
+
+---
+
+# Funkcje
+
+Do tworzenia funkcji służy słowo `function` o składni.
+
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
+function(argumenty_rozdzielone_przecinkiem) 
+  wyrażenie
+```
+
+gdzie `argumenty_rozdzielone_przecinkiem` to lista rozdzielonych przecinkiem argumentów (może być też pusta lub jednoelementowa), a `wyrażenie` to instrukcje, które mają być wykonane po uruchomieniu funkcji.
+
+Wynikiem takiej instrukcji jest funkcja, którą zazwyczaj przypisuje się do zmiennej, by móc jej później używać.
+
+---
+
+# Funkcje
+
+Dla naszego przykładu z rysowaniem kropek stworzymy funkcję, którą przypiszemy do zmiennej `rysuj_kropki`. Funkcja przyjmować będzie jeden argument `n_kropek` i narysuje na ekranie tyle kropek ile jej każemy.
+
+```{r, message=FALSE, warning=FALSE}
+rysuj_kropki <- function(n_kropek) {
+  for (j in 1:n_kropek) {
+    cat(".")
+  }
+}
+```
+
+Przykładowe wywołanie, rysujące 20 kropek.
+
+```{r, message=FALSE, warning=FALSE}
+rysuj_kropki(n_kropek = 20)
+```
+
+Jeżeli podajemy argumenty zgodnie z domyślną kolejnością, to nie musimy wskazywać ich nazw.
+
+```{r, message=FALSE, warning=FALSE}
+rysuj_kropki(20)
+```
+
+---
+
+# Funkcje - argumenty domyślne
+
+Jeżeli funkcja jest często wywoływana z tą samą wartością parametrów, to aby oszczędzić sobie pisania, warto wskazać tę wartość jako wartość domyślną. W liście argumentów wpisujemy wartość domyślną po znaku `=`.
+
+```{r, message=FALSE, warning=FALSE}
+rysuj_kropki <- function(n_kropek = 20) {
+  for (j in 1:n_kropek) {
+    cat(".")
+  }
+}
+```
+
+Dzięki temu, jeżeli nie podamy wartości argumentu, to zostanie on zastąpiony domyślną wartością. Bardzo wygodne w sytuacji gdy funkcja ma wiele argumentów.
+
+```{r, message=FALSE, warning=FALSE}
+rysuj_kropki() 
+```
+
+---
+
+# Funkcje - obsługa różnych scenariuszy
+
+Chcielibyśmy, by funkcje działały tak jak to zaplanowaliśmy. Rzeczywistość jest jednak taka, że funkcje często zawierają błędy lub sytuacje, o których nie pomyśleliśmy. 
+
+Przykładowo, uruchamiając funkcję `rysuj_kropki()` z argumentem 0 spodziewalibyśmy się 0 kropek, a tym czasem...
+
+```{r, message=FALSE, warning=FALSE}
+rysuj_kropki(0) 
+```
+
+Jest tak dlatego, że w pętli `1:n_kropek` wektor `1:0` jest w rzeczywistości dwuelementowy.
+
+```{r, message=FALSE, warning=FALSE}
+0:1
+```
+
+Jak temu zaradzić?
+
+---
+
+# Funkcje - obsługa różnych scenariuszy
+
+Ten problem można obsłużyć na kilka sposobów, przedstawimy taki, który wymaga użycia instrukcji `if()`. Sprawdzimy, czy `n_kropek` jest równe zero (nic nie rysuj), czy jest większe (rysuj kropki).
+
+```{r, message=FALSE, warning=FALSE}
+rysuj_kropki <- function(n_kropek = 20) {
+  if (n_kropek > 0) {
+    for (j in 1:n_kropek) {
+      cat(".")
+    }
+  }
+}
+rysuj_kropki(0)
+```
+
+---
+
+# Funkcje - więcej argumentów
+
+Funkcje mogą mieć więcej argumentów i każdy z nich może mieć lub nie mieć wartość domyślną. Jeżeli wywołując funkcję podajemy argumenty w kolejności innej niż domyślna musimy podać nazwę argumentu, który określamy.
+
+Aby to zilustrować dodajmy argument opisujący znak, który ma być rysowany. Aby ten znak wskazać musimy podać nazwę argumentu w wywołaniu `rysuj_kropki(znak="#")`.
+
+```{r, message=FALSE, warning=FALSE}
+rysuj_kropki <- function(n_kropek = 20, znak = ".") {
+  if (n_kropek > 0) {
+    for (j in 1:n_kropek) {
+      cat(znak)
+    }
+  }
+}
+rysuj_kropki(znak="#")
+```
+
+---
+
+# Funkcje - funkcja w funkcji
+
+Tworząc nowe funkcje możemy używać w nich te wcześniej zdefiniowane.
+
+Zbudujmy funkcję rysującą wykres kropkowy dla wektora wartości i napisów.
+
+```{r, message=FALSE, warning=FALSE}
+rysuj_wykres_kropkiowy<- function(nazwy, wartosci) {
+  for (i in 1:length(nazwy)) {
+    rysuj_kropki(wartosci[i])
+    cat(" ", nazwy[i],"\n")
+  }
+}
+rysuj_wykres_kropkiowy(koty_ptaki$gatunek, koty_ptaki$predkosc/5)
+```
+
+Warto utrzymywać każdą z funkcji o niewielkiej długości, by łatwo było odgadnąć co ta funkcja robi.
+
+---
+
+# Zadania
+
+* Napisz funkcję, która otrzymuje argument liczbowy a następnie wypisuje wartości od argumentu do jeden.
+* Napisz funkcję, która jako argument przyjmuje liczbę i wypisuje jej rzymską reprezentację.
+
+
+
