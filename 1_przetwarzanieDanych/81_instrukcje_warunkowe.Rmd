@@ -51,17 +51,29 @@ Przykładowe wywołanie każdego z wariantów instrukcji `if`
 ```{r, message=FALSE, warning=FALSE}
 library(SmarterPoland)
 i <- 1
+```
 
+Wyłącznie blok `if`, jeżeli `warunek` jest fałszywy nic się wyświetli na ekranie.
+
+```{r, message=FALSE, warning=FALSE}
 if (koty_ptaki[i,"druzyna"] == "Kot") {
   cat(koty_ptaki[i,"gatunek"], "to wielki kot.")
 }
+```
 
+Blok `if-else`. Jeżeli `warunek` jest fałszywy wyświetli się wynik części `else`.
+
+```{r, message=FALSE, warning=FALSE}
 if (koty_ptaki[i,"druzyna"] == "Kot") {
   cat(koty_ptaki[i,"gatunek"], "to wielki kot.")
 } else {
   cat(koty_ptaki[i,"gatunek"], "to ptak.")
 }
+```
 
+Blok `if-else` dla wektorów. Wynikiem jest również wektor.
+
+```{r, message=FALSE, warning=FALSE}
 ifelse(koty_ptaki[,"druzyna"] == "Kot",
   "Kolejny wielki kot",
   "Kolejny szybki ptak")
@@ -78,6 +90,7 @@ w zależności czy określony gatunek jest kotem czy ptakiem wyświetlimy inną 
 
 
 ```{r, message=FALSE, warning=FALSE}
+koty_ptaki[,"gatunek"] <- as.character(koty_ptaki[,"gatunek"])
 
 for (i in 1:nrow(koty_ptaki)) {
   if (koty_ptaki[i,"druzyna"] == "Kot") {
