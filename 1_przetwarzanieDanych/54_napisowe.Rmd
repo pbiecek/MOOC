@@ -76,6 +76,34 @@ summary(auta2012$Wyposazenie.dodatkowe.napis)
 
 # Statystyki opisowe
 
+Męskie imiona kończące się na 'a'
+
+```{r, warning=FALSE}
+imiona_warszawa %>%
+  mutate(imie = as.character(imie)) %>%
+  filter(plec == "M", substr(imie, nchar(imie), nchar(imie)) == "a") %>%
+  group_by(imie) %>%
+  summarise(liczba = sum(liczba))
+
+```
+
+Źeńskie imiona nie kończące się na 'a'
+
+```{r, warning=FALSE}
+imiona_warszawa %>%
+  mutate(imie = as.character(imie)) %>%
+  filter(plec == "K", substr(imie, nchar(imie), nchar(imie)) != "a") %>%
+  group_by(imie) %>%
+  summarise(liczba = sum(liczba)) %>%
+  group_by() %>%
+  arrange(desc(liczba))
+
+```
+
+---
+
+# Statystyki opisowe
+
 Jedną z interesujących operacji na napisach, jest sprawdzenie, czy zawierają one określony podciąg znaków. 
 Taki test można wykonać funkcją `grepl()`, która jako wynik zwraca wartość logiczną określającą czy napis zawiera określony wzorzec czy nie.
 
