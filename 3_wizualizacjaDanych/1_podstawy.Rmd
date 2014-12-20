@@ -1,6 +1,6 @@
 ---
 title: "Jak zrobić wykres w ggplot2"
-author: "poskRamiacze danych"
+author: "pogRomcy danych"
 date: "sezon 3 / odcinek 4 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst <br> Naciśnij `T` by wyświetlić spis treści"
 output:
   slidy_presentation:
@@ -9,7 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "poskRamiacze danych / wizualizacja / wstęp do ggplot2"
+    footer: "pogRomcy danych / wizualizacja / wstęp do ggplot2"
 
 ---
 
