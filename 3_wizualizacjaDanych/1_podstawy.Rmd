@@ -1,7 +1,7 @@
 ---
 title: "Jak zrobić wykres w ggplot2"
 author: "poskRamiacze danych"
-date: "sezon 3 / odcinek 1 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 3 / odcinek 4 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst <br> Naciśnij `T` by wyświetlić spis treści"
 output:
   slidy_presentation:
     includes:
@@ -9,26 +9,38 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "poskRamiacze danych / wizualizacja / pierwszy wykres"
+    footer: "poskRamiacze danych / wizualizacja / wstęp do ggplot2"
 
 ---
 
 # O czym jest ten odcinek
 
-Przetwarzanie danych wykonuje się po to by przygotować się do analizy. Analizę danych przeprowadza się po to  by te dane zrozumieć. Zrozumiawszy dane, zależności pomiędzy zmiennymi i charakterystyki zmiennych, można istotne cechy danych pokazać.
+Dane są czymś abstrakcyjnym i często trudno zrozumieć zależności pomiędzy różnymi zmiennymi.
 
-W tym odcinku dowiemy się
+Ale znacznie łatwiej dostrzec lub zrozumieć te zależności, jeżeli tylko poprawnie się je przedstawi graficznie.
 
-- Dlaczego warto poznać pakiet `ggplot2`?
-- Jak tworzyć wykresy punktowe?
-- Jak działa mechanizm mapowania zmiennych?
-- Jak tworzyć wykresy z etykietami?
-- Jak dodawać kolejne warstwy do wykresu?
-- Jak tworzyć wykresy liniowe?
+Cały sezon 3 poświęcony jest wizualizacji danych, ale w tym odcinku poznamy pakiet graficzny `ggplot2`, pozwalający na tworzenie dobrze wyglądających i czytelnych wykresów.
+
+W tym odcinku dowiemy się:
+
+- W programie R wykresy można tworzyć z użyciem najróżniejszych pakietów. Dowiemy się, dlaczego w pierwszej kolejności warto poznać i dlaczego warto używać pakietu `ggplot2`?
+- Jednym z najpopularniejszych sposobów przedstawiania danych są wykresy punktowe. Pokażemy jak tworzyć takie wykresy.
+- Jednym z kluczowych pomysłów w pakiecie `ggplot2` są mapowania zmiennych na właściwości wykresu, dokładnie omówimy na czym polega ten pomysł.
+- Poznamy kolejne rodzaje wykresów, takie jak wykres z etykietami lub wykres liniowy.
+- Pokażemy też jak składać różne warstwy wykresu?
 
 W tym odcinku będziemy pracować z dwoma zbiorami danych: `koty_ptaki` oraz `WIG`.
 
+```{r,  message=FALSE}
+library(SmarterPoland)
+
+head(koty_ptaki)
+
+head(WIG)
+```
+
 ---
+
 
 # Dlaczego warto poznać pakiet `ggplot2`?
 
@@ -51,7 +63,6 @@ Wykorzystując zbiór danych `koty_ptaki` przedstawmy zależność wagi od pręd
 Poniższe instrukcje tworzą wykres z domyślnymi ustawieniami.
 
 ```{r,  message=FALSE, eval=FALSE}
-library(SmarterPoland)  # w tym pakiecie są dane koty_ptaki
 library(ggplot2)        # ten pakiet pozwala na tworzenie wykresów 
 
 plot(koty_ptaki$waga, koty_ptaki$predkosc)

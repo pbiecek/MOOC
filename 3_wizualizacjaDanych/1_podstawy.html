@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="poskRamiacze danych" />
-  <meta name="copyright" content="poskRamiacze danych / wizualizacja / pierwszy wykres" /> 
+  <meta name="copyright" content="poskRamiacze danych / wizualizacja / wstęp do ggplot2" /> 
   <title>Jak zrobić wykres w ggplot2</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
@@ -48,21 +48,47 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 poskRamiacze danych
   </p>
-  <p class="date">sezon 3 / odcinek 1 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 3 / odcinek 4 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst <br> Naciśnij <code>T</code> by wyświetlić spis treści</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
-<p>Przetwarzanie danych wykonuje się po to by przygotować się do analizy. Analizę danych przeprowadza się po to by te dane zrozumieć. Zrozumiawszy dane, zależności pomiędzy zmiennymi i charakterystyki zmiennych, można istotne cechy danych pokazać.</p>
-<p>W tym odcinku dowiemy się</p>
+<p>Dane są czymś abstrakcyjnym i często trudno zrozumieć zależności pomiędzy różnymi zmiennymi.</p>
+<p>Ale znacznie łatwiej dostrzec lub zrozumieć te zależności, jeżeli tylko poprawnie się je przedstawi graficznie.</p>
+<p>Cały sezon 3 poświęcony jest wizualizacji danych, ale w tym odcinku poznamy pakiet graficzny <code>ggplot2</code>, pozwalający na tworzenie dobrze wyglądających i czytelnych wykresów.</p>
+<p>W tym odcinku dowiemy się:</p>
 <ul>
-<li>Dlaczego warto poznać pakiet <code>ggplot2</code>?</li>
-<li>Jak tworzyć wykresy punktowe?</li>
-<li>Jak działa mechanizm mapowania zmiennych?</li>
-<li>Jak tworzyć wykresy z etykietami?</li>
-<li>Jak dodawać kolejne warstwy do wykresu?</li>
-<li>Jak tworzyć wykresy liniowe?</li>
+<li>W programie R wykresy można tworzyć z użyciem najróżniejszych pakietów. Dowiemy się, dlaczego w pierwszej kolejności warto poznać i dlaczego warto używać pakietu <code>ggplot2</code>?</li>
+<li>Jednym z najpopularniejszych sposobów przedstawiania danych są wykresy punktowe. Pokażemy jak tworzyć takie wykresy.</li>
+<li>Jednym z kluczowych pomysłów w pakiecie <code>ggplot2</code> są mapowania zmiennych na właściwości wykresu, dokładnie omówimy na czym polega ten pomysł.</li>
+<li>Poznamy kolejne rodzaje wykresów, takie jak wykres z etykietami lub wykres liniowy.</li>
+<li>Pokażemy też jak składać różne warstwy wykresu?</li>
 </ul>
-<p>W tym odcinku będziemy pracować z dwoma zmiorami danych: <code>koty_ptaki</code> oraz <code>WIG</code>.</p>
+<p>W tym odcinku będziemy pracować z dwoma zbiorami danych: <code>koty_ptaki</code> oraz <code>WIG</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+
+<span class="kw">head</span>(koty_ptaki)</code></pre>
+<pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
+## 1  Tygrys  300     2.5       60    Azja        25     Kot
+## 2     Lew  200     2.0       80  Afryka        29     Kot
+## 3  Jaguar  100     1.7       90 Ameryka        15     Kot
+## 4    Puma   80     1.7       70 Ameryka        13     Kot
+## 5 Leopard   70     1.4       85    Azja        21     Kot
+## 6  Gepard   60     1.4      115  Afryka        12     Kot</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(WIG)</code></pre>
+<pre><code>##         Data Nazwa Kurs.otwarcia Kurs.maksymalny Kurs.minimalny
+## 1 2013-12-02   WIG      54627.26        54790.24       53934.52
+## 2 2013-12-03   WIG      54025.72        54025.72       53249.68
+## 3 2013-12-04   WIG      53222.49        53285.49       52535.56
+## 4 2013-12-05   WIG      52837.25        52900.48       52574.80
+## 5 2013-12-06   WIG      52837.58        52898.67       52513.14
+## 6 2013-12-09   WIG      53113.49        53186.73       52881.29
+##   Kurs.zamkniecia Zmiana Wartosc.obrotu.w.tys..zl
+## 1        53934.52  -1.41                 640784.2
+## 2        53276.83  -1.22                 914147.6
+## 3        52867.03  -0.77                 968047.2
+## 4        52597.13  -0.51                 808039.1
+## 5        52727.52   0.25                1012871.6
+## 6        52881.29   0.29                 599884.1</code></pre>
 </div>
 <div id="dlaczego-warto-poznac-pakiet-ggplot2" class="slide section level1">
 <h1>Dlaczego warto poznać pakiet <code>ggplot2</code>?</h1>
@@ -78,8 +104,7 @@ poskRamiacze danych
 <h1>Dlaczego <code>ggplot2</code> a nie standardowe pakiety R?</h1>
 <p>Wykorzystując zbiór danych <code>koty_ptaki</code> przedstawmy zależność wagi od prędkości dla wybranych gatunków. Wykorzystamy w tym celu dwa pakiety graficzne dostępne w programie R, pakiet <code>graphics</code> z funkcją <code>plot()</code> oraz pakiet <code>ggplot2</code> z funkcją <code>ggplot()</code>.</p>
 <p>Poniższe instrukcje tworzą wykres z domyślnymi ustawieniami.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)  <span class="co"># w tym pakiecie są dane koty_ptaki</span>
-<span class="kw">library</span>(ggplot2)        <span class="co"># ten pakiet pozwala na tworzenie wykresów </span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)        <span class="co"># ten pakiet pozwala na tworzenie wykresów </span>
 
 <span class="kw">plot</span>(koty_ptaki$waga, koty_ptaki$predkosc)
 <span class="kw">ggplot</span>(koty_ptaki, <span class="kw">aes</span>(<span class="dt">x=</span>waga, <span class="dt">y=</span>predkosc)) +
@@ -94,8 +119,9 @@ poskRamiacze danych
 <h1>Co różni te dwa wykresy?</h1>
 <p>Oczywiście te wykresy różnią się wieloma elementami. Różnice, które uznałem za najistotniejsze to:</p>
 <ul>
-<li>Na prawym wykresie widoczne są pionowe i poziome linie pomocnicze, ułatwiają one dokładniejsze odczytanie współrzędnych punktów niż w przypadku prawego wykresu.</li>
+<li>Na prawym wykresie widoczne są pionowe i poziome linie pomocnicze, ułatwiają one dokładniejsze odczytanie współrzędnych punktów niż w przypadku lewego wykresu.</li>
 <li>Linie pomocnicze są białe na szarym tle, przez co nie dominują wykresu i są delikatnie przesunięte na drugi plan.</li>
+<li>Jeżeli wykres umieszczamy na białej stronie internetowej to szare tło umożliwia szybką lokalizację wykresu.</li>
 <li>Oba wykresy wypełniają obszar 10 x 10 cm, ale lewy wykres ma duże marginesy, przez co mniej miejsca pozostaje na prezentacje danych. Prawy wykres ma małe marginesy, przez co jest więcej miejsca na zaprezentowanie danych.</li>
 <li>Etykiety na osiach na prawym wykresie są poziome, nie trzeba obracać głowy by je odczytać.</li>
 <li>Etykiety na prawym wykresie są pomniejszone i wyszarzane, przesunięte na drugi plan. Wciąż są widoczne ale mniej dominują wykres, pozwalając przesunąć dane na pierwszy plan.</li>
@@ -122,7 +148,7 @@ poskRamiacze danych
 <span class="st">  </span><span class="kw">geom_point</span>()</code></pre>
 <p>Trzy elementy są kluczowe w tej instrukcji.</p>
 <ul>
-<li>Funkcja <code>ggplot()</code> jest główną funkcją tworzącą trzon wykresu. Zazwyczaj przyjmuje ona dwa argumenty. Pierwszy to zbiór danych (w tym przypadku <code>koty_ptaki</code>). Drugi to opis, które zmienne i w jaki sposób mają być przedstawione na wykresie, tak zwany opis mapowań.</li>
+<li>Funkcja <code>ggplot()</code> jest główną funkcją tworzącą trzon wykresu. Zazwyczaj przyjmuje ona dwa argumenty. Pierwszy to zbiór danych (w tym przypadku <code>koty_ptaki</code>). Drugi to opis, które zmienne i w jaki sposób mają być przedstawione na wykresie, tak zwany opis mapowań. (BŁĄD STYLISTYCZNY W ZDANIU)</li>
 <li>Mapowania opisuje funkcja <code>aes()</code>. Argumenty tej funkcji to pary <code>cecha wykresu=zmienna</code>. Każda z tych par opisuje w jaki sposób określona zmienne ma być przedstawiona. W powyższym przypadku opis ten oznacza, że zmienna <code>waga</code> ma być przedstawiona przez współrzędne <code>x</code> a zmienna <code>predkosc</code> ma być przedstawiona przez zmienną <code>y</code>.</li>
 <li>Trzon wykresu rozbudowuje się dodając, z użyciem operatora <code>+</code>, kolejne funkcje. W tym przypadku funkcja <code>geom_point()</code> dodaje do wykresu warstwę przedstawiającą dane za pomocą punktów. Funkcje, o nazwach rozpoczynających się od <code>geom_</code> nazywamy geometriami, określają one w jaki sposób dane są prezentowane. Czy jako punkty, linie, obszary czy jeszcze inaczej. W tym sezonie poznamy kilka geometrii, zbiór wszystkich dostępnych geometrii znaleźć można na stronie <a href="http://docs.ggplot2.org">http://docs.ggplot2.org</a>.</li>
 </ul>
@@ -184,7 +210,7 @@ poskRamiacze danych
 </div>
 <div id="geometria-geom_text---pozycjonowanie-napisu" class="slide section level1">
 <h1>Geometria <code>geom_text()</code> - pozycjonowanie napisu</h1>
-<p>Zauważmy, że niektóre napisy wychodzą poza wykres. Nie wygląda to najlepiej. Można ten problem naprawić na dwa sposoby. Jeden to rozszerzenie osi OX, drugi to pozycjonowanie napisów względem uch lewego brzegu a nie środka.</p>
+<p>Zauważmy, że niektóre napisy wychodzą poza wykres. Nie wygląda to najlepiej. Można ten problem naprawić na dwa sposoby. Jeden to rozszerzenie osi OX, drugi to pozycjonowanie napisów względem lewego brzegu a nie środka.</p>
 <p>Spróbujmy tego drugiego rozwiązania. Śledząc opis geometrii <code>geom_text()</code> można zauważyć, że za pozycjonowanie odpowiadają cechy <code>hjust</code> (w poziomie) i <code>vjust</code> (w pionie).</p>
 <p>Zauważmy, że argument <code>hjust</code> definiujemy wewnątrz <code>geom_text()</code> poza blokiem <code>aes()</code>, nie mapuje on zmiennej na cechy wykresu ale przypisuje cesze stałą wartość (w tym przypadku <code>0</code>). Aby na wykresie zmieściła się też etykieta <code>Tygrys</code> zmieniamy funkcją <code>xlim()</code> zakres prezentowany na osi OX.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(koty_ptaki, <span class="kw">aes</span>(<span class="dt">x=</span> waga, <span class="dt">y=</span>predkosc, <span class="dt">label=</span>gatunek)) +
