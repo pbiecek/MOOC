@@ -14,9 +14,9 @@ część 1: Data smart
   * [Sondaże - może wyborcze] Nss
   * [Robotyka] BM
   * [Diagnoza Społeczna] J Cz - 15 listopad
-  * [Epidemiologia] PZH
   * [Badania Edukacji] IBE
   * [Bio info] ??
+  * [Lista zbiorów danych](https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html
 
 
 + Eksploracja danych
