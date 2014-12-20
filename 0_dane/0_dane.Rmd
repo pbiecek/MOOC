@@ -1,0 +1,95 @@
+---
+title: "Zbiory danych"
+author: "pogRomcy danych"
+date: "sezon 1 / odcinek 1 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst <br> Naciśnij `T` by wyświetlić spis treści"
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / zbiory danych"
+
+---
+
+# O czym jest ten odcinek
+
+Podczas tego kursu pracować będziemy z różnymi zbiorami danych.
+
+W tym odcinku te dane przedstawimy.
+
+Wszystkie używane zbiory danych są dostępne w pakiecie `SmarterPoland`.
+
+```{r,  message=FALSE}
+library(SmarterPoland)
+```
+
+---
+
+# Najszybsze koty i ptaki na świecie
+
+```{r,  message=FALSE}
+head(koty_ptaki)
+```
+
+---
+
+# Indeks WIG z Giełdy Papierów Wartościowych
+
+```{r,  message=FALSE}
+head(WIG)
+```
+
+---
+
+# Ceny ofertowa używanych aut w roku 2012
+
+```{r,  message=FALSE}
+head(auta2012)
+```
+
+---
+
+# Diagnoza społeczna
+
+```{r,  message=FALSE}
+diagnozaDict
+head(diagnoza)
+```
+
+---
+
+# Wzrost rodziców i dzieci
+
+```{r,  message=FALSE}
+head(galton)
+head(pearson)
+```
+
+
+---
+
+# Imiona noworodków w Warszawie
+
+```{r,  message=FALSE}
+head(imiona_warszawa)
+```
+
+---
+
+# Wyniki wyborów samorządowych w 2014
+
+```{r,  message=FALSE}
+head(mandatySejmik2014)
+```
+
+
+---
+
+# Wyniki skoków narciarskich
+
+```{r,  message=FALSE}
+head(skiJumps2013)
+```
+
