@@ -19,7 +19,7 @@ Podczas tego kursu pracować będziemy z różnymi zbiorami danych.
 
 W tym odcinku te dane przedstawimy.
 
-Wszystkie używane zbiory danych są dostępne w pakiecie `SmarterPoland`.
+Wszystkie używane w tym kursie zbiory danych są dostępne w pakiecie `SmarterPoland`.
 
 ```{r,  message=FALSE}
 library(SmarterPoland)
@@ -29,48 +29,19 @@ library(SmarterPoland)
 
 # Najszybsze koty i ptaki na świecie
 
+Zbiór danych `koty_ptaki` zestawia dla 13 gatunków maksymalną wagę w kilogramach, maksymalną długość ciała w metrach, maksymalną prędkość (dla ptaków w locie pionowym, nie w nurkowaniu) w kilometrach na godzinę, obszar zamieszkiwania oraz żywotność w latach. Ostatnia kolumna określa czy gatunek jest dużym kotem czy ptakiem. Wybrane gatunki to najszybsi przedstawiciele kotów czy ptaków.
+
 ```{r,  message=FALSE}
 head(koty_ptaki)
 ```
 
 ---
 
-# Indeks WIG z Giełdy Papierów Wartościowych
-
-```{r,  message=FALSE}
-head(WIG)
-```
-
----
-
-# Ceny ofertowa używanych aut w roku 2012
-
-```{r,  message=FALSE}
-head(auta2012)
-```
-
----
-
-# Diagnoza społeczna
-
-```{r,  message=FALSE}
-diagnozaDict
-head(diagnoza)
-```
-
----
-
-# Wzrost rodziców i dzieci
-
-```{r,  message=FALSE}
-head(galton)
-head(pearson)
-```
-
-
----
-
 # Imiona noworodków w Warszawie
+
+Ze strony http://gorny.edu.pl/imiona/index.php pobrano statystyki nadawania imion noworodkom w Warszawie w latach 2004-2014. 
+
+Dla każdego imienia, dla każdego roku i miesiąca opisano liczbę wystąpień dnaego imienia u noworodków.
 
 ```{r,  message=FALSE}
 head(imiona_warszawa)
@@ -87,9 +58,43 @@ head(mandatySejmik2014)
 
 ---
 
+# Ceny ofertowa używanych aut w roku 2012
+
+```{r,  message=FALSE}
+head(auta2012)
+```
+
+---
+
+# Indeks WIG z Giełdy Papierów Wartościowych
+
+```{r,  message=FALSE}
+head(WIG)
+```
+
+---
+
+# Wzrost rodziców i dzieci
+
+```{r,  message=FALSE}
+head(galton)
+head(pearson)
+```
+
+---
+
 # Wyniki skoków narciarskich
 
 ```{r,  message=FALSE}
 head(skiJumps2013)
+```
+
+---
+
+# Diagnoza społeczna
+
+```{r,  message=FALSE}
+diagnozaDict
+head(diagnoza)
 ```
 
