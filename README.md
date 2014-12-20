@@ -16,7 +16,7 @@ część 1: Data smart
   * [Diagnoza Społeczna] J Cz - 15 listopad
   * [Badania Edukacji] IBE
   * [Bio info] ??
-  * [Lista zbiorów danych](https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html
+  * [Lista zbiorów danych](https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html)
 
 
 + Eksploracja danych
