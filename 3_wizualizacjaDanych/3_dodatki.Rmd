@@ -1,6 +1,6 @@
 ---
 title: "Pakiet ggplot2 - poziom zaawansowany"
-author: "poskRamiacze danych"
+author: "pogRomcy danych"
 date: "sezon 3 / odcinek 3 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
@@ -212,6 +212,32 @@ pl + theme_bw()+theme(plot.background = element_rect(fill = "gray80"))
 ```
 
 
+
+---
+
+# Co dalej
+
+Do’s and Don’ts 
+http://stat545-ubc.github.io/block015_graph-dos-donts.html
+
+No no’s
+Do: make the data stand out
+Do: spare your reader from mental gymnastics
+Do: use position along a common scale
+Do: take control of aspect ratio
+Do: think about including zero
+Do: choose the scale with intention
+Do: connect the dots with care
+Do: convey groups clearly
+
+
+Ten Simple Rules for Better Figures
+
+http://www.ploscompbiol.org/article/info:doi/10.1371/journal.pcbi.1003833
+
+Twenty rules for good graphics
+
+http://robjhyndman.com/hyndsight/graphics/
 
 
 ---

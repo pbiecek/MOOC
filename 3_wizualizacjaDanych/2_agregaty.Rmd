@@ -1,6 +1,6 @@
 ---
 title: "Wykresy, które podsumowują dane"
-author: "poskRamiacze danych"
+author: "pogRomcy danych"
 date: "sezon 3 / odcinek 2 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
