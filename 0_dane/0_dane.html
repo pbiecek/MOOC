@@ -54,11 +54,20 @@ pogRomcy danych
 <h1>O czym jest ten odcinek</h1>
 <p>Podczas tego kursu pracować będziemy z różnymi zbiorami danych.</p>
 <p>W tym odcinku te dane przedstawimy.</p>
-<p>Wszystkie używane zbiory danych są dostępne w pakiecie <code>SmarterPoland</code>.</p>
+<p>Wszystkie używane w tym kursie zbiory danych są dostępne w pakiecie <code>SmarterPoland</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)</code></pre>
 </div>
 <div id="najszybsze-koty-i-ptaki-na-swiecie" class="slide section level1">
 <h1>Najszybsze koty i ptaki na świecie</h1>
+<p>Zbiór danych <code>koty_ptaki</code> zestawia charakterystyki dla 13 gatunków. Wybrane gatunki to najszybsi przedstawiciele kotów czy ptaków.</p>
+<p>Każdy wiersz przedstawia:</p>
+<ul>
+<li>nazwę gatunku,</li>
+<li>maksymalną osobniczą wagę w kilogramach i maksymalną długość ciała w metrach,</li>
+<li>maksymalną prędkość (dla ptaków w locie pionowym, nie w nurkowaniu) w kilometrach na godzinę,</li>
+<li>obszar zamieszkania oraz żywotność w latach.</li>
+<li>Ostatnia kolumna określa czy gatunek jest dużym kotem czy ptakiem.</li>
+</ul>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(koty_ptaki)</code></pre>
 <pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
 ## 1  Tygrys  300     2.5       60    Azja        25     Kot
@@ -68,26 +77,49 @@ pogRomcy danych
 ## 5 Leopard   70     1.4       85    Azja        21     Kot
 ## 6  Gepard   60     1.4      115  Afryka        12     Kot</code></pre>
 </div>
-<div id="indeks-wig-z-giedy-papierow-wartosciowych" class="slide section level1">
-<h1>Indeks WIG z Giełdy Papierów Wartościowych</h1>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(WIG)</code></pre>
-<pre><code>##         Data Nazwa Kurs.otwarcia Kurs.maksymalny Kurs.minimalny
-## 1 2013-12-02   WIG      54627.26        54790.24       53934.52
-## 2 2013-12-03   WIG      54025.72        54025.72       53249.68
-## 3 2013-12-04   WIG      53222.49        53285.49       52535.56
-## 4 2013-12-05   WIG      52837.25        52900.48       52574.80
-## 5 2013-12-06   WIG      52837.58        52898.67       52513.14
-## 6 2013-12-09   WIG      53113.49        53186.73       52881.29
-##   Kurs.zamkniecia Zmiana Wartosc.obrotu.w.tys..zl
-## 1        53934.52  -1.41                 640784.2
-## 2        53276.83  -1.22                 914147.6
-## 3        52867.03  -0.77                 968047.2
-## 4        52597.13  -0.51                 808039.1
-## 5        52727.52   0.25                1012871.6
-## 6        52881.29   0.29                 599884.1</code></pre>
+<div id="imiona-noworodkow-w-warszawie" class="slide section level1">
+<h1>Imiona noworodków w Warszawie</h1>
+<p>Ze strony <a href="http://gorny.edu.pl/imiona/index.php">http://gorny.edu.pl/imiona/index.php</a> pobrano statystyki nadawania imion noworodkom w Warszawie w latach 2004-2014.</p>
+<p>Dla każdego imienia, dla każdego roku i miesiąca opisano liczbę wystąpień danego imienia u noworodków.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(imiona_warszawa)</code></pre>
+<pre><code>##    imie plec  rok miesiac liczba
+## 1 Aaron    M 2004       7      0
+## 2 Aaron    M 2004       8      0
+## 3 Aaron    M 2004       9      0
+## 4 Aaron    M 2004      10      0
+## 5 Aaron    M 2004      11      0
+## 6 Aaron    M 2004      12      0</code></pre>
+</div>
+<div id="wyniki-wyborow-samorzadowych-w-2014" class="slide section level1">
+<h1>Wyniki wyborów samorządowych w 2014</h1>
+<p>Ze stron Państwowej Komisji Wyborczej pobrano informacje o liczbie wygranych mandatów w sejmikach w wyborach samorządowych 2014.</p>
+<p>Kolejne kolumny opisują:</p>
+<ul>
+<li>Nazwa województwa,</li>
+<li>Liczba zdobytych mandatów przez PSL, PiS, PO, SLD i inne partie,</li>
+<li>Jaki procent z uprawnionych do głosowania stanowi procent ważnych głosów,</li>
+<li>Długość i szerokość geograficzna środka geograficznego województwa.</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(mandatySejmik2014)</code></pre>
+<pre><code>##          Wojewodztwo PSL PiS PO SLD Inne ProcentWaznychGlosow     long
+## 1       Dolnoslaskie   5   9 16   2    4             36.83847 16.38088
+## 2 Kujawsko-Pomorskie  10   7 14   2    0             36.60884 18.50218
+## 3            Lodzkie  10  12 10   1    0             40.13651 19.40827
+## 4          Lubelskie  12  13  7   1    0             41.98316 22.90889
+## 5           Lubuskie   8   5 10   5    2             36.75825 15.34234
+## 6        Malopolskie   8  17 14   0    0             40.56634 20.30085
+##        lat
+## 1 51.07988
+## 2 53.02223
+## 3 51.55958
+## 4 51.24725
+## 5 52.20549
+## 6 49.84203</code></pre>
 </div>
 <div id="ceny-ofertowa-uzywanych-aut-w-roku-2012" class="slide section level1">
 <h1>Ceny ofertowa używanych aut w roku 2012</h1>
+<p>Z serwisu <code>otomoto.pl</code> pobrano dane dla przeszło 207 tysięcy ogłoszeń sprzedaży auta.</p>
+<p>Każda oferta opisana jest przez 21 zmiennych, w tym rok produkcji, model, marka, wersja, wyposażenie, kraj pochodzenia i oczywiście cena.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(auta2012)</code></pre>
 <pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW         Marka     Model
 ## 1 49900    PLN      49900       brutto 140 103           Kia    Carens
@@ -132,83 +164,97 @@ pogRomcy danych
 ## 5                                                                                                                                                                                                  ABS, ASR, centralny zamek, wspomaganie kierownicy, immobiliser
 ## 6                                                                                                      ABS, el. szyby, el. lusterka, klimatyzacja, ASR, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, welurowa tapicerka</code></pre>
 </div>
+<div id="indeks-wig-z-giedy-papierow-wartosciowych" class="slide section level1">
+<h1>Indeks WIG z Giełdy Papierów Wartościowych</h1>
+<p>Ze strony Giełdy Papierów Wartościowych pobrano dzienne notowania dla indeksu WIG z okresu grudzień 2013 - listopad 2014.</p>
+<p>W kolejnych kolumnach przedstawione jest:</p>
+<ul>
+<li>Data, której dotyczą notowania,</li>
+<li>Kurs otwarcia, zamknięcia, kurs minimalny i maksymalny,</li>
+<li>Zmiana kursy oraz wartość obrotów w tysiącach złotych.</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(WIG)</code></pre>
+<pre><code>##         Data Nazwa Kurs.otwarcia Kurs.maksymalny Kurs.minimalny
+## 1 2013-12-02   WIG      54627.26        54790.24       53934.52
+## 2 2013-12-03   WIG      54025.72        54025.72       53249.68
+## 3 2013-12-04   WIG      53222.49        53285.49       52535.56
+## 4 2013-12-05   WIG      52837.25        52900.48       52574.80
+## 5 2013-12-06   WIG      52837.58        52898.67       52513.14
+## 6 2013-12-09   WIG      53113.49        53186.73       52881.29
+##   Kurs.zamkniecia Zmiana Wartosc.obrotu.w.tys..zl
+## 1        53934.52  -1.41                 640784.2
+## 2        53276.83  -1.22                 914147.6
+## 3        52867.03  -0.77                 968047.2
+## 4        52597.13  -0.51                 808039.1
+## 5        52727.52   0.25                1012871.6
+## 6        52881.29   0.29                 599884.1</code></pre>
+</div>
+<div id="wzrost-rodzicow-i-dzieci" class="slide section level1">
+<h1>Wzrost rodziców i dzieci</h1>
+<p>Zbiory danych zebrane przez Galtona i Pearsona by badać zależność pomiędzy wzrostem syna a ojca (<code>pearson</code>) oraz ważonej średniej z wzrostu rodziców (<code>galton</code>).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(galton)</code></pre>
+<pre><code>##     syn rodzic
+## 1 156.7  179.1
+## 2 156.7  174.0
+## 3 156.7  166.4
+## 4 156.7  163.8
+## 5 156.7  162.6
+## 6 158.0  171.4</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(pearson)</code></pre>
+<pre><code>##     syn ojciec
+## 1 151.8  165.2
+## 2 160.6  160.7
+## 3 160.9  165.0
+## 4 159.5  167.0
+## 5 163.3  155.3
+## 6 163.2  160.1</code></pre>
+</div>
+<div id="wyniki-skokow-narciarskich" class="slide section level1">
+<h1>Wyniki skoków narciarskich</h1>
+<p>Wyniki skoków narciarskich z sezonu 2013/2014. Zbiór danych został przygotowany na potrzebę konkursu na wizualizacje danych podczas konferencji <a href="http://estymator.ue.poznan.pl/pazur/">PAZUR</a>.</p>
+<p>Znaczenie poszczególnych kolumn jest opisane w zbiorze danych <code>skiJumps2013labels</code>.</p>
+<p>W zbiorze danych są informacje o:</p>
+<ul>
+<li>konkursach: miejscowość, kraj, parametry skoczni,</li>
+<li>skoczkach: imię, nazwisko, narodowość, data urodzin,</li>
+<li>skokach (obu skoków, jeżeli skoczek skakał dwa razy): prędkość, odległość, punkty do klasyfikacji.</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(skiJumps2013)</code></pre>
+<pre><code>##   jumperSurname jumperName compName compCountry   compDate compKPoint
+## 1        AHONEN      JANNE  Kuusamo     Finland 2013-10-29        120
+## 2        AMMANN      SIMON  Kuusamo     Finland 2013-10-29        120
+## 3        AMMANN      SIMON  Kuusamo     Finland 2013-10-29        120
+## 4     ASIKAINEN      LAURI  Kuusamo     Finland 2013-10-29        120
+## 5        BIEGUN  KRZYSZTOF  Kuusamo     Finland 2013-10-29        120
+## 6        BIEGUN  KRZYSZTOF  Kuusamo     Finland 2013-10-29        120
+##   jumpSeries jumperCountry jumpSpeed jumpDistance jumpPoints
+## 1          1           FIN      90.8        114.5       50.1
+## 2          1           SUI      90.3        128.0       74.4
+## 3          2           SUI      90.6        129.5       77.1
+## 4          1           FIN      90.1        112.5       46.5
+## 5          2           POL      90.1        125.0       69.0
+## 6          1           POL      90.1        128.0       74.4
+##   jumpTotalPoints compTotalPoints classPoints classPrize jumperDateOfBirth
+## 1           114.8           114.8          NA         NA        1977-05-11
+## 2           122.6           122.6          NA         NA        1981-06-25
+## 3           128.3           250.9          15       1450        1981-06-25
+## 4           104.9           104.9          NA         NA        1989-05-28
+## 5           119.2           242.3          13       1300        1994-05-21
+## 6           123.1           123.1          NA         NA        1994-05-21</code></pre>
+</div>
 <div id="diagnoza-spoeczna" class="slide section level1">
 <h1>Diagnoza społeczna</h1>
-<pre class="sourceCode r"><code class="sourceCode r">diagnozaDict</code></pre>
-<pre><code>##                            name
-## IMIE_2011             IMIE_2011
-## WAGA_2013_OSOBY WAGA_2013_OSOBY
-## lata_nauki_2013 lata_nauki_2013
-## WIEK2013               WIEK2013
-## PLEC                       PLEC
-## województwo         województwo
-## EDUK4_2013           EDUK4_2013
-## status9_2013       status9_2013
-## GP3                         GP3
-## GP29                       GP29
-## GP54_01                 GP54_01
-## GP54_02                 GP54_02
-## GP54_03                 GP54_03
-## GP54_04                 GP54_04
-## GP54_05                 GP54_05
-## GP54_06                 GP54_06
-## GP54_07                 GP54_07
-## GP54_08                 GP54_08
-## GP54_09                 GP54_09
-## GP54_10                 GP54_10
-## GP54_11                 GP54_11
-## GP54_12                 GP54_12
-## GP54_13                 GP54_13
-## GP54_14                 GP54_14
-## GP54_15                 GP54_15
-## GP54_16                 GP54_16
-## GP54_17                 GP54_17
-## GP54_18                 GP54_18
-## GP54_19                 GP54_19
-## GP54_20                 GP54_20
-## GP54_21                 GP54_21
-## GP54_22                 GP54_22
-## GP60                       GP60
-## GP61                       GP61
-## GP64                       GP64
-## GP113                     GP113
-##                                                                  description
-## IMIE_2011                    IMIĘ CZŁONKA Z POMIARÓW 2003, 2005, 2007 I 2009
-## WAGA_2013_OSOBY                       Waga dla członków gospodarstwa z  2013
-## lata_nauki_2013                                      Liczba lat nauki w 2013
-## WIEK2013                                                                    
-## PLEC                                                                    Płeć
-## województwo                                                      województwo
-## EDUK4_2013                             Poziom wykształcenia:4 kategorie 2013
-## status9_2013                                  status społeczno-zawodowy 2013
-## GP3                         p3 Jak ocenia Pan swoje cale dotychczasowe zycie
-## GP29                             p29 Co jest wedlug Pana wazniejsze w zyciu?
-## GP54_01                                             podziwiam ludzi bogatych
-## GP54_02                                                        życie ma sens
-## GP54_03                                                    dużo przyjemności
-## GP54_04                                                      posiadanie dóbr
-## GP54_05                                                        lubię kupować
-## GP54_06                                                       radość zakupów
-## GP54_07                                              rodzice w domach opieki
-## GP54_08                                                       ludzie pomocni
-## GP54_09                                                      homoseksualiści
-## GP54_10                                 prawdziwy patriota dobrze o Polakach
-## GP54_11                                      dzieci powinny pomagać rodzicom
-## GP54_12                               zbyt duża rola osób obcego pochodzenia
-## GP54_13                                     jedni są więcej warci od drugich
-## GP54_14                                                    atrakcyjny wygląd
-## GP54_15                                         docenianie dóbr materialnych
-## GP54_16                                              równe traktowanie ludzi
-## GP54_17                                          niektóre grupy bez szacunku
-## GP54_18                                                    wyrównane dochody
-## GP54_19                                               karać fizycznie dzieci
-## GP54_20                                           każdy kowalem swojego losu
-## GP54_21                                          szacunek dla osób starszych
-## GP54_22                                ojcowie powinni się opiekować dziećmi
-## GP60                                  p60 Jaki jest Pana wzrost? centymetrow
-## GP61                                     p61 Jaka jest Pana waga? kilogramow
-## GP64            p64 Pana wlasny (osobisty) dochod miesieczny netto (na reke)
-## GP113                     p113 Ile przecietnie godzin w tygodniu Pan pracuje</code></pre>
+<p>Pdzbiór danych z badania Diagnoza Społeczna. Pełny zbiór danych jest dostępny pod adresem <code>http://diagnoza.com</code> oraz w pakiecie <code>pbiecek/Diagnoza</code> na GitHubie.</p>
+<p>Wybrane zmienne opisują imiona, wagi dotyczące sposobu losowania, liczbę lat nauki, płeć, wykształcenie, wzrost, waga, dochody oraz odpowiedzi na wybrane pytania dotyczące światopoglądu.</p>
+<p>Zbiór danych <code>diagnozaDict</code> opisuje nazwy kolumn ze zbioru danych <code>diagnoza</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(diagnozaDict[,<span class="dv">2</span>,<span class="dt">drop=</span><span class="ot">FALSE</span>])</code></pre>
+<pre><code>##                                                     description
+## IMIE_2011       IMIĘ CZŁONKA Z POMIARÓW 2003, 2005, 2007 I 2009
+## WAGA_2013_OSOBY          Waga dla członków gospodarstwa z  2013
+## lata_nauki_2013                         Liczba lat nauki w 2013
+## WIEK2013                                                       
+## PLEC                                                       Płeć
+## województwo                                         województwo</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(diagnoza)</code></pre>
 <pre><code>##                                                                                                                                                                                        IMIE_2011
 ## 1  WERONIKA                                                                                                                                                                                     
@@ -273,79 +319,6 @@ pogRomcy danych
 ## 4               TAK RACZEJ TAK ZDECYDOWANIE TAK  173   70  950    NA
 ## 16 ZDECYDOWANIE TAK RACZEJ NIE ANI TAK, ANI NIE  158   66 2700    NA
 ## 57              NIE        TAK              NIE  173   78 2500    40</code></pre>
-</div>
-<div id="wzrost-rodzicow-i-dzieci" class="slide section level1">
-<h1>Wzrost rodziców i dzieci</h1>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(galton)</code></pre>
-<pre><code>##     syn rodzic
-## 1 156.7  179.1
-## 2 156.7  174.0
-## 3 156.7  166.4
-## 4 156.7  163.8
-## 5 156.7  162.6
-## 6 158.0  171.4</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(pearson)</code></pre>
-<pre><code>##     ojciec      syn
-## 1 165.2232 151.8368
-## 2 160.6574 160.5637
-## 3 164.9865 160.8897
-## 4 167.0113 159.4926
-## 5 155.2886 163.2741
-## 6 160.0773 163.1752</code></pre>
-</div>
-<div id="imiona-noworodkow-w-warszawie" class="slide section level1">
-<h1>Imiona noworodków w Warszawie</h1>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(imiona_warszawa)</code></pre>
-<pre><code>##    imie plec  rok miesiac liczba
-## 1 Aaron    M 2004       7      0
-## 2 Aaron    M 2004       8      0
-## 3 Aaron    M 2004       9      0
-## 4 Aaron    M 2004      10      0
-## 5 Aaron    M 2004      11      0
-## 6 Aaron    M 2004      12      0</code></pre>
-</div>
-<div id="wyniki-wyborow-samorzadowych-w-2014" class="slide section level1">
-<h1>Wyniki wyborów samorządowych w 2014</h1>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(mandatySejmik2014)</code></pre>
-<pre><code>##          Wojewodztwo PSL PiS PO SLD Inne ProcentWaznychGlosow     long
-## 1       Dolnoslaskie   5   9 16   2    4             36.83847 16.38088
-## 2 Kujawsko-Pomorskie  10   7 14   2    0             36.60884 18.50218
-## 3            Lodzkie  10  12 10   1    0             40.13651 19.40827
-## 4          Lubelskie  12  13  7   1    0             41.98316 22.90889
-## 5           Lubuskie   8   5 10   5    2             36.75825 15.34234
-## 6        Malopolskie   8  17 14   0    0             40.56634 20.30085
-##        lat
-## 1 51.07988
-## 2 53.02223
-## 3 51.55958
-## 4 51.24725
-## 5 52.20549
-## 6 49.84203</code></pre>
-</div>
-<div id="wyniki-skokow-narciarskich" class="slide section level1">
-<h1>Wyniki skoków narciarskich</h1>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(skiJumps2013)</code></pre>
-<pre><code>##   jumperSurname jumperName compName compCountry   compDate compKPoint
-## 1        AHONEN      JANNE  Kuusamo     Finland 2013-10-29        120
-## 2        AMMANN      SIMON  Kuusamo     Finland 2013-10-29        120
-## 3        AMMANN      SIMON  Kuusamo     Finland 2013-10-29        120
-## 4     ASIKAINEN      LAURI  Kuusamo     Finland 2013-10-29        120
-## 5        BIEGUN  KRZYSZTOF  Kuusamo     Finland 2013-10-29        120
-## 6        BIEGUN  KRZYSZTOF  Kuusamo     Finland 2013-10-29        120
-##   jumpSeries jumperCountry jumpSpeed jumpDistance jumpPoints
-## 1          1           FIN      90.8        114.5       50.1
-## 2          1           SUI      90.3        128.0       74.4
-## 3          2           SUI      90.6        129.5       77.1
-## 4          1           FIN      90.1        112.5       46.5
-## 5          2           POL      90.1        125.0       69.0
-## 6          1           POL      90.1        128.0       74.4
-##   jumpTotalPoints compTotalPoints classPoints classPrize jumperDateOfBirth
-## 1           114.8           114.8          NA         NA        1977-05-11
-## 2           122.6           122.6          NA         NA        1981-06-25
-## 3           128.3           250.9          15       1450        1981-06-25
-## 4           104.9           104.9          NA         NA        1989-05-28
-## 5           119.2           242.3          13       1300        1994-05-21
-## 6           123.1           123.1          NA         NA        1994-05-21</code></pre>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

@@ -29,7 +29,18 @@ library(SmarterPoland)
 
 # Najszybsze koty i ptaki na świecie
 
-Zbiór danych `koty_ptaki` zestawia dla 13 gatunków maksymalną wagę w kilogramach, maksymalną długość ciała w metrach, maksymalną prędkość (dla ptaków w locie pionowym, nie w nurkowaniu) w kilometrach na godzinę, obszar zamieszkiwania oraz żywotność w latach. Ostatnia kolumna określa czy gatunek jest dużym kotem czy ptakiem. Wybrane gatunki to najszybsi przedstawiciele kotów czy ptaków.
+Zbiór danych `koty_ptaki` zestawia charakterystyki dla 13 gatunków.
+Wybrane gatunki to najszybsi przedstawiciele kotów czy ptaków.
+
+Każdy wiersz przedstawia:
+
+* nazwę gatunku,
+* maksymalną osobniczą wagę w kilogramach i maksymalną długość ciała w metrach, 
+* maksymalną prędkość (dla ptaków w locie pionowym, nie w nurkowaniu) w kilometrach na godzinę, 
+* obszar zamieszkania oraz żywotność w latach. 
+* Ostatnia kolumna określa czy gatunek jest dużym kotem czy ptakiem. 
+
+
 
 ```{r,  message=FALSE}
 head(koty_ptaki)
@@ -41,7 +52,7 @@ head(koty_ptaki)
 
 Ze strony http://gorny.edu.pl/imiona/index.php pobrano statystyki nadawania imion noworodkom w Warszawie w latach 2004-2014. 
 
-Dla każdego imienia, dla każdego roku i miesiąca opisano liczbę wystąpień dnaego imienia u noworodków.
+Dla każdego imienia, dla każdego roku i miesiąca opisano liczbę wystąpień danego imienia u noworodków.
 
 ```{r,  message=FALSE}
 head(imiona_warszawa)
@@ -51,14 +62,26 @@ head(imiona_warszawa)
 
 # Wyniki wyborów samorządowych w 2014
 
+Ze stron Państwowej Komisji Wyborczej pobrano informacje o liczbie wygranych mandatów w sejmikach w wyborach samorządowych 2014. 
+
+Kolejne kolumny opisują:
+
+* Nazwa województwa, 
+* Liczba zdobytych mandatów przez PSL, PiS, PO, SLD i inne partie,
+* Jaki procent z uprawnionych do głosowania stanowi procent ważnych głosów,
+* Długość i szerokość geograficzna środka geograficznego województwa.
+
 ```{r,  message=FALSE}
 head(mandatySejmik2014)
 ```
 
-
 ---
 
 # Ceny ofertowa używanych aut w roku 2012
+
+Z serwisu `otomoto.pl` pobrano dane dla przeszło 207 tysięcy ogłoszeń sprzedaży auta. 
+
+Każda oferta opisana jest przez 21 zmiennych, w tym rok produkcji, model, marka, wersja, wyposażenie, kraj pochodzenia i oczywiście cena.
 
 ```{r,  message=FALSE}
 head(auta2012)
@@ -68,6 +91,14 @@ head(auta2012)
 
 # Indeks WIG z Giełdy Papierów Wartościowych
 
+Ze strony Giełdy Papierów Wartościowych pobrano dzienne notowania dla indeksu WIG z okresu grudzień 2013 - listopad 2014.
+
+W kolejnych kolumnach przedstawione jest:
+
+* Data, której dotyczą notowania,
+* Kurs otwarcia, zamknięcia, kurs minimalny i maksymalny,
+* Zmiana kursy oraz wartość obrotów w tysiącach złotych.
+
 ```{r,  message=FALSE}
 head(WIG)
 ```
@@ -75,6 +106,8 @@ head(WIG)
 ---
 
 # Wzrost rodziców i dzieci
+
+Zbiory danych zebrane przez Galtona i Pearsona by badać zależność pomiędzy wzrostem syna a ojca (`pearson`) oraz ważonej średniej z wzrostu rodziców (`galton`).
 
 ```{r,  message=FALSE}
 head(galton)
@@ -85,6 +118,16 @@ head(pearson)
 
 # Wyniki skoków narciarskich
 
+Wyniki skoków narciarskich z sezonu 2013/2014. Zbiór danych został przygotowany na potrzebę konkursu na wizualizacje danych podczas konferencji [PAZUR](http://estymator.ue.poznan.pl/pazur/).
+
+Znaczenie poszczególnych kolumn jest opisane w zbiorze danych `skiJumps2013labels`.
+
+W zbiorze danych są informacje o:
+
+* konkursach: miejscowość, kraj, parametry skoczni,
+* skoczkach: imię, nazwisko, narodowość, data urodzin,
+* skokach (obu skoków, jeżeli skoczek skakał dwa razy): prędkość, odległość, punkty do klasyfikacji.
+
 ```{r,  message=FALSE}
 head(skiJumps2013)
 ```
@@ -93,8 +136,15 @@ head(skiJumps2013)
 
 # Diagnoza społeczna
 
+Pdzbiór danych z badania Diagnoza Społeczna. Pełny zbiór danych jest dostępny pod adresem `http://diagnoza.com` oraz w pakiecie `pbiecek/Diagnoza` na GitHubie.
+
+Wybrane zmienne opisują imiona, wagi dotyczące sposobu losowania, liczbę lat nauki, płeć, wykształcenie, wzrost, waga, dochody oraz odpowiedzi na wybrane pytania dotyczące światopoglądu.
+
+Zbiór danych `diagnozaDict` opisuje nazwy kolumn ze zbioru danych `diagnoza`.
+
 ```{r,  message=FALSE}
-diagnozaDict
+head(diagnozaDict[,2,drop=FALSE])
 head(diagnoza)
 ```
+
 
