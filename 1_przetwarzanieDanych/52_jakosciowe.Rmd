@@ -211,4 +211,21 @@ na factor, a czasem zmienne jakościowe występuję pod postacią tekstu. Warto 
 as.factor, as.character
 **
 
+[*] jak zbudować samemu tabelę kontyngencji (array i dim, dimnames),
+[*] jak przekształcić data.frame (tzw. dane surowe) do tabeli kontyngencji np. xtable i odwrotnie,
+[*] jak przekształcić data.frame do tabeli zliczeniowej tzn. as.data.frame(xtabs(~zm1+zm2)) i odwrotnie.
+
+[*] base::replace
+[*] car::recode
+
+!!!
+operowaniu na datach:
+[*] as.Date
+
+[*] wyciąganie nazw: dni, miesięcy,...
+- można zbudować np. zbiór danych o procesorach - mooc obliczeniowa procesorów:
+http://pl.wikipedia.org/wiki/Mikroprocesory_Intel
+np.Westmere (microarchitecture):
+http://en.wikipedia.org/wiki/Westmere_%28microarchitecture%29
+
 
