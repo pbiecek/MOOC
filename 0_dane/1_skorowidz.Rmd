@@ -1,0 +1,65 @@
+---
+title: "Skorowidz"
+author: "pogRomcy danych"
+date: "sezon 1 / odcinek 2 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst <br> Naciśnij `T` by wyświetlić spis treści"
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / skorowidz"
+
+---
+
+# Zbiory danych
+
+* koty_ptaki
+* imiona_warszawa
+* mandatySejmik2014
+* auta2012
+* WIG
+* galton
+* pearson
+* skiJumps2013
+* diagnoza, diagnozaDict
+
+---
+
+# Funkcje
+
+* filter, sort, potoki, select, mutate, summarise, group_by
+* if
+* for
+* function
+* lm
+* wilcox.test
+* cor
+* read.table
+* read.xls
+* load
+* data
+* library
+* getEurostatRCV
+* summary
+* spread
+* gather
+* head
+* unite
+* min, max, mean
+* barplot
+* boxplot
+* ggplot
+* hist
+
+---
+
+# Pakiety
+
+* SmarterPoland 
+* dplyr
+* tidyr
+* ggplot2
+* ggthemes
+* ggscales
