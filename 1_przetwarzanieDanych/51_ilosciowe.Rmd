@@ -9,7 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / przetwarzanie / zmienne ilosciowe"
+    footer: "pogRomcy danych / przetwarzanie / zmienne ilościowe"
 
 ---
 
@@ -17,23 +17,31 @@ output:
 
 W tym odcinku nauczymy się
 
-- Jak ze zbioru danych wybierać tylko interesujące nas wiersze
+- Jakie zmienne / wartości / cechy określa się terminem cechy ilościowe?
+- Jakie podstawowe operacje można wykonywać na cechach ilościowych?
+- Jak podsumowywać / opisywać cechy ilościowe?
 
-Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to `koty_ptaki` a drugi, znacznie większy to `auta2012`.
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, znacznie większy, to `auta2012`.
 
 ---
+
+# Co to znaczy: cecha jakościowa
 
 Czas na poznanie rodzajów danych, na jakie możemy się natknąć.
 
 W trakcie tych zajęć przedstawimy cztery podstawowe typy danych, dane ilościowe, jakościowe, napisy i wartości logiczne.
 Słowo typ, ma w tym przypadku to samo znaczenie co słowo rodzaj, ale jest częściej stosowane w analizie danych, dlatego będziemy poniżej mówić o czterech podstawowych typach.
 
-Ale zanim dojdziemy do typów, wczytajmy dane
+Ale zanim dojdziemy do typów, wczytajmy dane.
+
+---
 
 # Wczytanie danych
 
-Na poprzednich zajęciach poznaliśmy kilka sposobów na wczytanie danych do R. 
-Wczytajmy dane w formacie tekstowym używając funkcji `read.table()`.
+W poprzednim odcinku poznaliśmy kilka sposobów na wczytanie danych do R. 
+
+Dane na których będziemy tutaj pracować, zostały włączone do pakietu `SmarterPoland` by ułatwić dostęp do nich. Aby je wczytać, wystarczy włączyć pakiet.
+
 Następnie używając funkcji `head()` by wyświetlić pierwsze dwa wiersze.
 
 
@@ -46,11 +54,13 @@ Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda 
 
 ---
 
-# Cechy ilościowe
-Przyjrzyjmy się takim cechom jak _Cena.w.PLN_ lub _Przebieg.w.km_. Cechy te są opisane przez liczby oraz przedstawiają ilości. 
-Pierwsza z nich przedstawia _ilość_ pieniędzy, za którą sprzedawca chce sprzedać samochód, druga opisuje _ilość_ kilometrów, którą przejechał wystawiony na aukcji samochód. 
+# Statystyki opisowe
 
-## Statystyki opisowe
+Przyjrzyjmy się takim cechom jak _Cena.w.PLN_ lub _Przebieg.w.km_. 
+
+Cechy te są opisane przez liczby oraz przedstawiają ilości. 
+
+Pierwsza z nich przedstawia _ilość_ pieniędzy, za którą sprzedawca chce sprzedać samochód, druga opisuje _ilość_ kilometrów, którą przejechał wystawiony na aukcji samochód. 
 
 Na zmiennych ilościowych wykonać możemy kilka operacji. 
 Używając funkcji `mean()` możemy policzyć średnią cenę wystawionych aut.
@@ -59,6 +69,10 @@ Używając funkcji `mean()` możemy policzyć średnią cenę wystawionych aut.
 mean(auta2012$Cena.w.PLN)
 ```
 
+---
+
+# Statystyki opisowe
+
 Używając funkcji `min()` i `max()` możemy wyznaczyć minimalną i maksymalną cenę w tym zbiorze danych.
 
 ```{r, warning=FALSE}
@@ -66,38 +80,57 @@ min(auta2012$Cena.w.PLN)
 max(auta2012$Cena.w.PLN)
 ```
 
-[TODO] może warto dodac funkcje: range(auta2012$Cena.w.PLN) - wartosci ekstremalne
+Obie te wartości, minimum i maksimum, jako dwuelementowy wektor zwraca funkcja `range()`.
+
+```{r, warning=FALSE}
+range(auta2012$Cena.w.PLN)
+```
+
 ---
+
+# Statystyki opisowe
 
 Używając funkcji `summary()` możemy wyznaczyć sześć podstawowych charakterystyk, czyli: minimum, 1. kwartyl, medianę (2. kwartyl), średnią, 3. kwartyl i maksimum.
 
-*Kwartyle dzielą wektor **PCH: nie strasz ludzi - nie mówiłeś wcześniej nic o wektorach ;)** na cztery równoliczne części.*
+Pięć z tych charakterystyk, tj. minimum, 1., 2., 3. kwartyl i maksimum to tak zwana piątka Tukeya, a więc pięć liczb, które dzielą wartości na cztery równoliczne przedziały.
 
 + Jedna czwarta samochodów ma cenę niższą od 1. kwartyla.
 + Jedna czwarta samochodów ma cenę wyższą od 1. kwartyla ale niższą od mediany (2. kwartyla).
 + Jedna czwarta samochodów ma cenę wyższą od mediany (2. kwartyla) ale niższą od 2. kwartyla.
 + Jedna czwarta samochodów ma cenę wyższą od 3. kwartyla.
 
+---
+
+# Statystyki opisowe
+
+Przyjrzyjmy się tym charakterystykom na przykładzie cen aut 
+
 ```{r, warning=FALSE}
 summary(auta2012$Cena.w.PLN)
 ```
-[TODO] pod wynikiem funkcji summary dodac interpretacje otrzymanych kwartyli:
-Q1 = 25% samoch ma cene nizsza niz 10900,
-Q2 = 50% samoch ....
+
++ Jedna czwarta ogłoszeń oferuje samochód w cenie niższej niż `r summary(auta2012$Cena.w.PLN)[2]`.
++ Połowa ogłoszeń oferuje samochód w cenie niższej niż `r summary(auta2012$Cena.w.PLN)[3]`.
++ Trzy czwarte ogłoszeń oferuje samochód w cenie niższej niż `r summary(auta2012$Cena.w.PLN)[5]`.
++ Maksymalna cena ofertowa to `r summary(auta2012$Cena.w.PLN)[6]`.
++ Co ciekawe, średnia cena jest znacznie wyższa od ceny środkowej, dzieje się tak dlatego, że większość aut oferowanych jest w niższych cenach, ale niewielka część bardzo drogich aut znacznie podnosi wartość średniej, w tym przypadku do `r summary(auta2012$Cena.w.PLN)[4]`.
 
 ---
 
 # Zadania:
+
 + W zbiorze danych _auta2012_ aż 7 cech to cechy ilościowe. Wymień które.
 + Jedną z cech ilościowych jest _Rok.produkcji_. Jaki jest medianowy/połówkowy rok produkcji oferowanych aut? Wszystkie te oferty były złożone w roku 2012, jaki był medianowy/połówkowy wiek oferowanego auta?
 
 # Odpowiedzi:
+
 + `Cena`, `Cena.w.PLN`, `KM`, `kW`, `Pojemnosc.skokowa`, `Przebieg.w.km`, `Rok.produkcji`
 + `r median(auta2012$Rok.produkcji, na.rm=TRUE)` rok
 
 ---
 
-# Brakujące dane
+# Brakujące wartości
+
 Może się tak zdarzyć, że oferta sprzedaży nie zawiera wszystkich informacji o aucie. Np. brakuje informacji o przebiegu. 
 Takie braki danych trzeba jakoś oznaczyć. Nie można w ich miejsce wstawić np. 0, ponieważ czymś innym jest przebieg równy 0 a czymś innym jest brak informacji o przebiegu.
 
@@ -111,6 +144,8 @@ summary(auta2012$Przebieg.w.km)
 ```
 
 ---
+
+# Brakujące wartości
 
 Jakie są konsekwencje występowania brakujących wartości?
 Część statystyk nie można policzyć.
@@ -128,6 +163,8 @@ max(auta2012$Przebieg.w.km)
 To logiczne. Jeżeli nie wszystkie wartości są znane, to nie można policzyć ani średniej ani minimum ani maksimum.
 
 ---
+
+# Brakujące wartości
 
 Logiczne ale też mało praktyczne. 
 Często chcielibyśmy policzyć średnią, medianę, minimum tylko z tych wartości które są znane.
@@ -150,13 +187,10 @@ max(auta2012$Przebieg.w.km, na.rm=TRUE)
 + Dla zmiennej `Przebieg.w.km`  jest `r sum(is.na(auta2012$Przebieg.w.km))` 20 711 brakujących wartości. Ta zmienna jest najmniej kompletna.
 +  `r median(auta2012$KM, na.rm=TRUE)` cm3
 
-**PCH: ponawiam swoją uwagę na temat zbioru danych, na którym bazują te materiały. Moim zdaniem
-u Ciebe również nie zostały wczytane wszystkie wiersze z CSV'a - spróbuj sobie zrobić na 
-podstawie danych z RDA.**
-
 ---
 
 # Graficzne statystyki opisowe
+
 Powyżej opisane statystyki liczbowe można przedstawić graficznie.
 Prezentacja graficzna ma tę zaletę, że wyćwiczone oko potrafi szybko wiele dowiedzieć się z danych. 
 
@@ -169,6 +203,10 @@ Wykres słupkowy można w programie R wyznaczyć funkcją `barplot()`.
 (srednia = mean(auta2012$Przebieg.w.km, na.rm=TRUE))
 barplot(srednia)
 ```
+
+---
+
+# Graficzne statystyki opisowe
 
 Jeden słupek wygląda dziwnie, mało czytelnie. To dlatego, że wykres przedstawia jedną liczbę, trudno więc do czegoś się na nim odnieść.
 
@@ -185,6 +223,8 @@ boxplot(auta2012$Przebieg.w.km,
 ```
 
 ---
+
+# Graficzne statystyki opisowe
 
 Co za dziwny wykres. Zazwyczaj wykresy pudełkowe wyglądają inaczej.
 Co jest nie tak z tym? Spójrzmy na oś na wykresie, rozciąga się do 10^9 = 1 000 000 000 km. Najprawdopodobniej te duże wartości to wynik błędu w danych. Mała jest szansa, że jakiekolwiek auto na świecie miało choćby zbliżony przebieg (gdyby jakieś auto jeździło non stop z prędkością 100 km na godzinę, to po 100 latach miałoby przebieg 8 000 000 km).
@@ -210,12 +250,12 @@ boxplot(auta2012wybrane$Przebieg.w.km, horizontal=TRUE, range=0)
 
 ---
 
+# Graficzne statystyki opisowe
+
 Każdy z elementów tego wykresu (lewy wąs, lewa część pudełka, prawa część pudełka, prawy wąs) przedstawia 1/4 danych.
 Z wykresu tego możemy łatwo odczytać, że 3/4 danych dotyczy aut o przebiegu poniżej 200 tys km. Jedynie 1/4 danych ma wyższe wartości i dla tych aut rozpiętość jest bardzo duża.
 
 Jeżeli chcemy zaprezentować bardziej szczegółowe dane o przebiegu, możemy wykorzystać histogram.
-Słowo histogram pochodzi z języka greckiego, pochodzi ze złożenia słów histos i gramma.**
-Pierwsze oznacza rzeczy stojące pionowo, drugie oznacza zapis. W sumie chodzi o przedstawienie danych z użyciem pionowych słupków. **PCH: Ekstremalnie ważna informacja. Zabrakło wcześniej informacji co znaczy barplot i kilka innych nazw ;)
 
 Aby wykonać w programie R histogram, można wykorzystać funkcję `hist()`. Pierwszy argument określa dane, które mają być pokazane,
 drugi argument określa na ile przedziałów ma być podzielony zakres zmienności. 
@@ -226,6 +266,8 @@ hist(auta2012wybrane$Przebieg.w.km, 60, col="grey")
 ```
 
 ---
+
+# Graficzne statystyki opisowe
 
 Histogram przedstawia znacznie więcej informacji niż wykres pudełko-wąsy. Im wyższy słupek, tym więcej było aut, o przebiegu w określonym przedziale.
 Dwie najwyższe wyspy to ta w pobliżu 0 oraz ta w pobliży 180 tys km. 
@@ -250,5 +292,6 @@ auta2012wybrane <- auta2012 %>%
 boxplot(auta2012wybrane$Cena.w.PLN, horizontal = TRUE, range = 0)
 hist(auta2012wybrane$Cena.w.PLN, 50, col="grey")
 ```
+
 
 
