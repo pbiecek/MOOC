@@ -17,7 +17,7 @@ część 1: Data smart
   * [Badania Edukacji] IBE
   * [Bio info] ??
   * [Lista zbiorów danych](https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html)
-  * [Skorowidz](https://rawgit.com/pbiecek/MOOC/master/0_dane/1_skorowidz.html
+  * [Skorowidz](https://rawgit.com/pbiecek/MOOC/master/0_dane/1_skorowidz.html)
 
 
 + Eksploracja danych
