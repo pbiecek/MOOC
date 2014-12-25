@@ -17,7 +17,10 @@ output:
 
 W tym odcinku nauczymy się
 
-- Jak ze zbioru danych wybierać tylko interesujące nas wiersze
+- Jakie zmienne / wartości / cechy określa się terminem cechy jakościowe?
+- Jakie podstawowe operacje można wykonywać na cechach jakościowe?
+- Jak podsumowywać / opisywać cechy jakościowe?
+
 
 Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to `koty_ptaki` a drugi, znacznie większy to `auta2012`.
 
@@ -29,21 +32,12 @@ Ale zanim dojdziemy do tych operacji najpierw wczytajmy dane.
 
 # Wczytanie danych
 
+Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.
+
 ```{r, warning=FALSE, message=FALSE}
 library(SmarterPoland)
 head(auta2012, 2)
 ```
-
-**PCH: Nadal będę się upierał, że wczytywanie 70MB przez sieć na początku 
-każdego rozdziału nie jest dobrym pomysłem. U mnie na przykład, przy przyzwoitym
-łączu, na dwie próby obie skończyły się wczytaniem tylko części danych i komentarzem
-(a nie błędem) mówiącym, że nie udało się wczytać całości pliku. Ramka istnieje, 
-ale zawiera część danych. Myślę, że nie unikniesz w rozdziale o wczytywaniu danych
-jakiegoś wprowadzenia na temat poruszania się po plikach lokalnych. A no i nie wspominam
-już o tym ile trwa 'kompilacja' ze źródeł rmd.**
-
-Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.
-
 
 ---
 
@@ -62,22 +56,6 @@ Listę możliwych wartości dla zmiennej jakościowej można wyznaczyć funkcją
 levels(auta2012$Waluta)
 ```
 
----
-
-**PCH: Ja wczytuję dane z auta2012.rda i mam nieco inny wynik, tzn. mam dodatkowy, 'pusty', level (cały blok
-poniżej):**
-```
-> levels(auta2012$Waluta)
-[1] ""    "CHF" "CZK" "EEK" "EUR" "GBP" "HUF" "PLN" "USD"
-> nrow(auta2012)
-[1] 210134
-> table(auta2012$Waluta)
-
-          CHF    CZK    EEK    EUR    GBP    HUF    PLN    USD 
-     0      5  19211      2   5480      5    630 184137    664 
-```
-**PCH: Czy to możliwe, że w csv i obiekcie w rda masz nieco inne dane?**  
-
 Zmienne jakościowe często opisuje się tablicą liczebności, a więc informacją ile razy wystąpiła każda z wartości ze słownika.
 Tablicę liczebności można wyznaczyć funkcją `table()` lub `summary()`.
 
@@ -94,10 +72,12 @@ summary(auta2012$Waluta)
 
 # Odpowiedzi:
 + `r names(which(sapply(auta2012, class) == "factor"))`
-+ Pewne zmienne, w zależności od kontekstu, mogą być traktowane i analizowane jak zmienne ilościowe lub zmienne jakościowe. Do nas należy wybór, która z tych opcji jest właściwsza. **PCH: I tu dalej - o tym,
-że w naszym przykładzie 'Liczba.drzwi', mimo iż jest wyrażona liczbowo, jest 
-cechą jakościową, np. nie ma w tym kontekście sensu liczenie średniej liczby drzwi 
-dla wybranej marki samochodów.**
++ Pewne zmienne, w zależności od kontekstu, mogą być traktowane i analizowane jak zmienne ilościowe lub zmienne jakościowe. Do nas należy wybór, która z tych opcji jest właściwsza.
+
+Przykładowo, w typowych analizach takich danych nie ma sensu liczenia sumy lub średniej liczby drzwi. Co by bowiem by znaczyło, że auta wystawione do sprzedaży w styczniu miały średnio 3.8 drzwi? Dla zwykłego odbiory taka średnia nie ma sensu, niewiele bowiem mówi o zmiennej.
+Nie ma specjalnie sensu stwierdzenie, że samochody marki Porsche mają średnio o 0.5 mniej drzwi niż samochody marki Toyota.
+
+Ale już, gdybyśmy byli warsztatem malarskim, który ma pomalować te wszystkie drzwi, i w cenniku ma cenę od elementu, dla takiego warsztatu suma drzwi może mieć sens. W takim przypadku sensownie byłoby potraktowanie tej zmiennej jako zmiennej ilościowej i zsumowanie liczby drzwi.
 
 ---
 
@@ -129,8 +109,8 @@ Aby zamienić frakcje na procenty, wystarczy je przemnożyć przez 100, a aby wy
 procenty = 100*frakcje
 round(procenty, digits = 1)
 ```
-**PCH: Tu moim zdaniem warto umieścić - na przykładzie mnożenia przez 100 - dygresję 
-na temat tego, jak działają operacje na wektorach w R**
+
+Zwróćmy przy okazji uwagę na pewien, często pomijany aspekt. Wszystkie przedstawione powyżej operacje działają i na pojedynczych wartościach (nazywanych skalarami) jak i na wektorach. Przykładowo operacja `100*frakcje` wymnaża liczbę `100` z każdym elementem wektora `frakcje` i wynikiem tej operacji jest wektor. Nie w każdym języku programowania można mieć takie mieszane operacje mnożenia wektorów i skalarów.
 
 ---
 
@@ -145,9 +125,29 @@ sort(zaokragloneProcenty)
 sort(zaokragloneProcenty, decreasing = TRUE)
 ```
 
-**PCH: A tu kolejna dygresja, tym razem o indeksowaniu wektorów. A zatem pokazujemy
-funkcję `order()`, pokazujemy jej wynik, czyli kolejność i pokazujemy jak działa
-indeksowanie używając order + indeksowanie do zrobienia tego co sort**
+Wartości można posortować też na kilka innych sposobów. 
+Bardziej zaawansowanym, ale pozwalającym na omówienie bardziej zaawansowanych przykładów indeksowania jest funkcja `order()`.
+
+Wynikiem funkcji `order()` są indeksy elementów w wektorze które tworzą ciąg rosnący. 
+
+```{r, warning=FALSE}
+order(zaokragloneProcenty)
+```
+
+Jeżeli wektor `zaokragloneProcenty` będziemy czytać w kolejności, pierwszy element, trzeci, piąty, szósty, ósmy, czwarty, drugi i siódmy, to otrzymamy posortowany ciąg.
+
+Możemy więc wynik tej funkcji wykorzystać do indeksowania oryginalnego zbioru danych, i w ten sposób posortować cały wektor.
+
+```{r, warning=FALSE}
+kolejnoscPosortowanych <- order(zaokragloneProcenty)
+zaokragloneProcenty[kolejnoscPosortowanych]
+```
+
+A jak sprawdzić, na których pozycjach występują trzy najmniejsze wartości?
+
+```{r, warning=FALSE}
+kolejnoscPosortowanych[1:3]
+```
 
 ---
 
@@ -159,8 +159,6 @@ indeksowanie używając order + indeksowanie do zrobienia tego co sort**
 + `r names(which.max(table(auta2012$Marka)))`
 + `r 100*prop.table(table(auta2012$Rodzaj.paliwa))["benzyna"]` %
 
-**PCH: A u mnie znowu inaczej: 38.8851875 %**
-
 ---
 
 # Graficzne statystyki opisowe
@@ -168,7 +166,7 @@ indeksowanie używając order + indeksowanie do zrobienia tego co sort**
 Tabele liczebności są proste w interpretacji. Podobnie jednak jak w innych przypadkach, graficzne przedstawienie tych liczb pozwala na łatwiejsze dostrzeżenie zależności pomiędzy danymi. Koniec końców w tabeli liczb łatwo pomylić się nawet gdy chodzi o liczbę cyfr w liczbie. Na wykresie takie różnice natychmiast rzucają się w oczy.
 
 Zazwyczaj tabele liczebności przedstawia się za pomocą wykresów słupkowych.
-Można je wykonać np. funkcją `table()`. **PCH: a nie np. funkcją `barplot()` ?**
+Wykresy słupkowe można wykonać np. funkcją `barplot()`.
 
 ```{r, warning=FALSE}
 (tabela = table(auta2012$Waluta))
@@ -205,27 +203,121 @@ barplot(posortowanaTabela, horiz = TRUE, las=1)
 
 Podobnie graficznie można przedstawiać cechy logiczne i napisowe.
 
-**PCH: TODO:
-* stringAsFactors i okolice - czasem (często?) tekst jest niepotrzebnie zamieniany
-na factor, a czasem zmienne jakościowe występuję pod postacią tekstu. Warto znać
-as.factor, as.character
-**
+---
 
-[*] jak zbudować samemu tabelę kontyngencji (array i dim, dimnames),
-[*] jak przekształcić data.frame (tzw. dane surowe) do tabeli kontyngencji np. xtable i odwrotnie,
-[*] jak przekształcić data.frame do tabeli zliczeniowej tzn. as.data.frame(xtabs(~zm1+zm2)) i odwrotnie.
+# Napisy czy czynniki?
 
-[*] base::replace
-[*] car::recode
+Z wyglądu cechy jakościowe (czynniki) przypominają cechy napisowe. 
+Jednak pod spodem, ich reprezentacja jest zupełnie inna.
+Czynniki nie są pamiętane jako napisy, ale jako para - wektor liczb i słownik, określający, który napis odpowiada, której liczbie.
 
-!!!
-operowaniu na datach:
-[*] as.Date
+Gdy dane są wczytywane z pliku w którym są napisy, dane te mogą być wczytane zarówno jako zmienne napisowe jak i jako czynnikowe. Domyślnie napisy są wczytywane jako czynniki, można to zobaczyć analizując wynik funkcji `str()`. 
 
-[*] wyciąganie nazw: dni, miesięcy,...
-- można zbudować np. zbiór danych o procesorach - mooc obliczeniowa procesorów:
-http://pl.wikipedia.org/wiki/Mikroprocesory_Intel
-np.Westmere (microarchitecture):
-http://en.wikipedia.org/wiki/Westmere_%28microarchitecture%29
+W poniższym przykładzie, takie zmienne jak `gatunek` i `habitat` są wczytywane jako zmienna klasy `factor`. Efektem ubocznym jest sposób wyświetlania wyników np. przez zmienną `cat()`. Dla zmiennej czynnikowej, ta funkcja na ekranie wypisze liczby a nie wartości napisowe. 
+
+```{r, warning=FALSE, fig.height=8}
+koty_ptaki <- read.table("http://biecek.pl/MOOC/dane/koty.csv", 
+          sep=";", dec=",", header=TRUE)
+str(koty_ptaki)
+cat(koty_ptaki$gatunek)
+```
+
+Funkcja `read.table()` ma argument `stringsAsFactors` określający w jaki sposób wczytywać kolumny z napisami. Ustawiwszy argument `stringsAsFactors=FALSE` wymuszamy wczytywanie danych jako zmienne napisowe. Zajmie to trochę więcej pamięci, ale samo wczytywanie będzie trochę szybsze.
+
+Zauważmy jak teraz wygląda wynik funkcji `str()` i `cat()`.
+
+```{r, warning=FALSE, fig.height=8}
+koty_ptaki <- read.table("http://biecek.pl/MOOC/dane/koty.csv", 
+          sep=";", dec=",", header=TRUE, stringsAsFactors=FALSE)
+str(koty_ptaki)
+cat(koty_ptaki$gatunek)
+```
+
+---
+
+# Napisy czy czynniki?
+
+Zmienne czynnikowe można konwertować na napisy funkcją `as.character()`.
+
+Napisy można konwertować na zmienne czynnikowe funkcją `as.factor()`
+
+```{r, warning=FALSE, fig.height=8}
+czynniki <- as.factor(koty_ptaki$gatunek)
+str(czynniki)
+napisy <- as.character(czynniki)
+str(napisy)
+```
+
+---
+
+# Tablice częstości
+
+Tablice częstości dla więcej niż jednej cechy wygodnie jest tworzyć funkcją `xtabs()`.
+Pierwszym argumentem jest formuła o składni `~ zmienna_1 + .. + zmienna_n`, t.j. rozpoczynająca się tyldą a następnie ze zmiennymi porozdzielanymi znakiem plusa, drugim argumentem jest ramka danych, która powinna zawierać zmienne wymienione w formule. 
+
+Wynikiem jest tablica kontyngencji o tylu wymiarach, ile zmiennych występuje w formule.
+
+```{r, warning=FALSE, fig.height=8}
+xtabs(~Kraj.pochodzenia+Waluta, auta2012) %>%
+  head()
+```
+
+---
+
+# Tablice częstości
+
+Tablice częstości nie są ramkami danych, choć gdy w grę wchodzi jedna lub dwie zmienne, to wyglądają jak ramki. Muszą być czymś innym, ponieważ muszą też obsługiwać sytuacje, gdy tablica kontyngencji dotyczy trzech lub większej liczby zmiennych a wynikowa macierz kontyngencji ma więcej wymiarów niż dwa. 
+
+Gdy przekształci się wynik funkcji `xtabs()` do ramki danych, otrzyma się tak zwaną reprezentację rzadką macierzy kontyngencji, w której pierwsze kolumny opisują wszystkie kombinacje czynników zmiennych a ostania kolumna opisuje liczebność występowania poszczególnej kombinacji czynników.
+
+```{r, warning=FALSE, fig.height=8}
+xt <- xtabs(~Kraj.pochodzenia+Waluta, auta2012)
+as.data.frame(xt) %>%
+  head()
+```
+
+---
+
+# Kolejność czynników
+
+Domyślna kolejność czynników, to kolejność leksykograficzna. 
+Tworząc wykresy, zazwyczaj wartości prezentowane są zgodnie z kolejnością opisaną przez atrybut `levels`.
+
+```{r, warning=FALSE, fig.height=8}
+levels(auta2012$Rodzaj.paliwa)
+boxplot(Rok.produkcji ~ Rodzaj.paliwa, auta2012, las=2)
+```
+
+Tę kolejność można jednak zmienić. 
+Jednym ze sposobów określania kolejności czynników jest argument `levels` w funkcji `factor()`. Czynniki będą mieć kolejność zgodną z tam przedstawioną.
+
+```{r, warning=FALSE, fig.height=8}
+levels(auta2012$Skrzynia.biegow)
+auta2012$Skrzynia.biegow <- factor(auta2012$Skrzynia.biegow, levels=c("manualna","", "automatyczna"))
+```
+
+Jeżeli chcemy ,,posortować'' poziomy zgodnie z pewną cechą ilościową, to wygodne będzie użycie funkcji `reorder()`. Jako argumenty pobiera ona wektor ze zmienną czynnikową, wektor z dowolną zmienną i funkcję. Dla każdej grupy określonej przez zmienną czynnikową, wartości wskazanych przez drugi argument, wyznaczana jest wartość funkcji - trzeciego argumentu. Następnie czynniki są porządkowane zgodnie z kolejnością wyników trzeciej funkcji.
+
+W przykładzie poniżej, rodzaje paliwa są porządkowane zgodnie ze średnim rokiem produkcji aut o określonym rodzaju paliwa.
+
+```{r, warning=FALSE, fig.height=8}
+auta2012$Rodzaj.paliwa.posortowany <- reorder(auta2012$Rodzaj.paliwa, auta2012$Rok.produkcji, mean)
+
+boxplot(Rok.produkcji ~ Rodzaj.paliwa.posortowany, auta2012, las=2)
+```
+
+---
+
+# Nazwy czynników
+
+Nazwy czynników można też zmieniać.
+Najprościej można to zrobić używając funkcji `levels<-()`.
+
+```{r, warning=FALSE, fig.height=8}
+levels(auta2012$Rodzaj.paliwa)
+
+levels(auta2012$Rodzaj.paliwa) <- c("", "B", "B+C", "B+L", "E", "H", "I", "L", "D", "W")
+table(auta2012$Rodzaj.paliwa)
+```
 
 
