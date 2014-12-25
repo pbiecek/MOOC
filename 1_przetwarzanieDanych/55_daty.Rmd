@@ -1,0 +1,41 @@
+---
+title: "Daty"
+author: "pogRomcy danych"
+date: "sezon 1 / odcinek 5 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / przetwarzanie / daty"
+
+---
+
+# O czym jest ten odcinek
+
+W tym odcinku nauczymy się
+
+- Jakie podstawowe operacje można wykonywać na datach?
+- Jak podsumowywać / opisywać daty?
+
+
+Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to `koty_ptaki` a drugi, znacznie większy to `auta2012`.
+
+
+W trakcie tych zajęć przedstawimy podstawowe operacje na danych jakościowych. 
+Ale zanim dojdziemy do tych operacji najpierw wczytajmy dane.
+
+---
+
+operowaniu na datach:
+[*] as.Date
+
+[*] wyciąganie nazw: dni, miesięcy,...
+- można zbudować np. zbiór danych o procesorach - mooc obliczeniowa procesorów:
+http://pl.wikipedia.org/wiki/Mikroprocesory_Intel
+np.Westmere (microarchitecture):
+http://en.wikipedia.org/wiki/Westmere_%28microarchitecture%29
+
+
