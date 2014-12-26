@@ -25,6 +25,11 @@ Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zb
 
 ---
 
+# Intro
+
+Kupując nowy samochód często trzeba dopłacić jeżeli samochód ma być w kolorze innym niż biały, w kolorze metalik lub perłowy.
+
+Ale czy ceny samochodów używanych silnie różnią się w zależności od koloru?
 
 Podstawowym kryterium, gdy myślimy o cenach używanych samochodów, jest rok produkcji i przebieg.
 
@@ -32,20 +37,7 @@ A czy wyposażenie ma znaczenie?
 Sprawdźmy to!
 
 Nie zawsze jednak dane są przygotowane w postaci prostej do analiz.
-Wpierw musimy więc informacje o wyposażeniu wyłuskać
-
-Jednak wpierw, aby analizować 
-
-**PCH: Rozumiem, że to powyżej to zamysł do Intro. Nie komentuję zatem**
-
-
-Kupując nowy samochód często trzeba dopłacić jeżęli samochów ma być w kolorze innym niż biały, w kolorze metalic lub perłowy.
-
-Ale czy ceny samochodów używanych silnie różnią się w zależności od koloru?
-
-Sprawdźmy to!
-
-W naszych dancyh jest 
+Wpierw musimy więc informacje o wyposażeniu wyłuskać.
 
 ---
 
@@ -89,7 +81,7 @@ imiona_warszawa %>%
 
 ```
 
-Źeńskie imiona nie kończące się na 'a'
+Żeńskie imiona nie kończące się na 'a'
 
 ```{r, warning=FALSE}
 imiona_warszawa %>%
@@ -126,7 +118,7 @@ a 'x' (u Ciebie pierwszy i bez nazwy) jest drugi.**
 
 **PCH: Przed zadaniem drugim powinna się znaleźć informacja, że grepl przy domyślnych
 ustawieniach robi 'partial matching'. Raz że to przydatna informacja, dwa że
-oszczędzi ludziom 'ręcznego' wpisywania wszystkich kolorow jak 'zielony-metallic'
+oszczędzi ludziom 'ręcznego' wpisywania wszystkich kolorów jak 'zielony-metallic'
 i dodawania wyników na kartce ')**
 
 ---
@@ -138,5 +130,6 @@ i dodawania wyników na kartce ')**
 # Odpowiedzi:
 + `r sum(grepl(auta2012$Wyposazenie.dodatkowe.napis, pattern="autoalarm"))`
 + `r sum(grepl(as.character(auta2012$Kolor), pattern="metallic"))`
+
 
 
