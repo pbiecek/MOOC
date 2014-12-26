@@ -17,13 +17,11 @@ output:
 
 W tym odcinku nauczymy się
 
-- Jak ze zbioru danych wybierać tylko interesujące nas wiersze
+- Jakie zmienne / wartości / cechy określa się terminem cechy logiczne?
+- Jakie podstawowe operacje można logiczne na cechach logiczne?
+- Jak podsumowywać / opisywać cechy ilościowe?
 
-Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to `koty_ptaki` a drugi, znacznie większy to `auta2012`.
-
-
-W trakcie tych zajęć przedstawimy podstawowe operacje na danych logicznych. 
-Ale zanim dojdziemy do tych operacji najpierw wczytajmy dane.
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, znacznie większy, to `auta2012`.
 
 ---
 
@@ -31,6 +29,7 @@ Ale zanim dojdziemy do tych operacji najpierw wczytajmy dane.
 
 ```{r, warning=FALSE, message=FALSE}
 library(SmarterPoland)
+head(koty_ptaki, 2)
 head(auta2012, 2)
 ```
 
@@ -57,27 +56,6 @@ starszyNiz5Lat = auta2012$Rok.produkcji < 2007
 table(starszyNiz5Lat)
 ```
 
----
-
-**PCH: Teraz już jestem pewny, że u Ciebie wczytywanie z CSV kończy się w tym samym miejscu.
-Najwyraźniej plik jest zepsuty lub istnieje jakieś ograniczenie na wczytywanie
-z sieci, nie wiem, ale ja mam tak, czyli tyle samo danych co Ty:**
-
-```
-> auta2012 = read.table("http://biecek.pl/MOOC/dane/auta2012.csv",
-+                       sep=";", dec=",", header=TRUE)
-Komunikaty ostrzegawcze:
-1: In scan(file, what, nmax, sep, dec, quote, skip, nlines, na.strings,  :
-  Koniec pliku wewnątrz cudzysłowia
-2: In scan(file, what, nmax, sep, dec, quote, skip, nlines, na.strings,  :
-  ilość odczytanych pozycji nie jest wielokrotnością liczby kolumn
-> nrow(auta2012)
-[1] 109563
-
-Natomiast po ściągnięciu i wczytaniu z rda:
-> nrow(auta2012)
-[1] 210134
-```
 ---
 
 # Zadania:
