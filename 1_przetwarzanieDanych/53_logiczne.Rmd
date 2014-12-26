@@ -33,20 +33,71 @@ head(koty_ptaki, 2)
 head(auta2012, 2)
 ```
 
-Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.
+Dla zbioru danych `koty_ptaki` każdy wiersz opisuje charakterystyki jednego gatunku.
+
+Dla zbioru danych `auta2012` każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.
 
 ---
 
 # Cechy logiczne
+
 Każdą zmienną można przedstawić jako zmienną jakościową lub ilościową. Ale w pewnych sytuacjach wygodnie jest wyróżnić bardziej szczegółową klasyfikację.
 Cechy logiczne, to takie cechy, które przyjmować mogą tylko trzy wartości, prawdę (oznaczany w R przez `TRUE`), fałsz (oznaczany w R przez `FALSE`) oraz brak informacji (oznaczany w R przez `NA`).
 
 Cechy logiczne mogą być traktowane jako cechy jakościowe o dwóch poziomach. 
 Cechy takie można tworzyć używając tak zwanych warunków logicznych. Przykładem warunku logicznego są operatory `>` (większy), `>=` (większy równy), `==` (równy), `<=` (mniejszy równy), `<` (mniejszy). 
 
+---
+
+## Logika trójwartościowa
+
+```{r, warning=FALSE}
+liczby_1_5 = 1:5
+outer(liczby_1_5, liczby_1_5, "<=")
+```
+
+Cechy logiczne w R przyjmowac mogą jedną z trzech wartości, `TRUE` (logiczna prawda), `FALSE` (logiczny fałsz) i `NA` (wartość nieustalona). 
+
+Zamiast pełnych nazw `TRUE` i `FALSE` można również korzystać ze skrótów `T` i `F`.
+
+Wyrażenia logiczne najczęściej składa się połączywszy operatorai logicznymi `|` (logiczne lub) i `&` (logiczne i).
+
+```{r, warning=FALSE}
+TRUE | FALSE
+(4 > 2) | ("A" == "a")
+```
+
+Jaki jest wynik logicznego lub pomiędzy wartością TRUE (prawda) i NA (brak informacji)?
+
+Tablibczę logicznego dodawania i mnożenia podsumowuje poniższa instrukcja.
+
+```{r, warning=FALSE}
+TRUE_FALSE_NA = c(TRUE, FALSE, NA)
+tabliczka_dodawania <- outer(TRUE_FALSE_NA, TRUE_FALSE_NA, "|")
+rownames(tabliczka_dodawania) <- TRUE_FALSE_NA
+colnames(tabliczka_dodawania) <- TRUE_FALSE_NA
+tabliczka_dodawania
+
+tabliczka_mnozenia <- outer(TRUE_FALSE_NA, TRUE_FALSE_NA, "&")
+rownames(tabliczka_mnozenia) <- TRUE_FALSE_NA
+colnames(tabliczka_mnozenia) <- TRUE_FALSE_NA
+tabliczka_mnozenia
+```
+
+---
+
 ## Statystyki opisowe
 
 Traktując zmienną logiczną jak dwuwartościową zmienną jakościową, możemy używać na niej np. funkcji do tabel liczebności.
+
+Zbudujmy zmienną `czy_to_kot`, wektor o wartościach logicznych `TRUE` i `FALSE`, następnie rpzedstawmy jej podsumowanie.
+
+```{r, warning=FALSE}
+czy_to_kot = koty_ptaki$druzyna == "Kot"
+table(czy_to_kot)
+```
+
+I przykład dla danych o samochodach
 
 ```{r, warning=FALSE}
 pochodziZPolski = auta2012$Kraj.aktualnej.rejestracji == "Polska"
