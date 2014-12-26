@@ -56,11 +56,11 @@ liczby_1_5 = 1:5
 outer(liczby_1_5, liczby_1_5, "<=")
 ```
 
-Cechy logiczne w R przyjmowac mogą jedną z trzech wartości, `TRUE` (logiczna prawda), `FALSE` (logiczny fałsz) i `NA` (wartość nieustalona). 
+Cechy logiczne w R przyjmować mogą jedną z trzech wartości, `TRUE` (logiczna prawda), `FALSE` (logiczny fałsz) i `NA` (wartość nieustalona). 
 
 Zamiast pełnych nazw `TRUE` i `FALSE` można również korzystać ze skrótów `T` i `F`.
 
-Wyrażenia logiczne najczęściej składa się połączywszy operatorai logicznymi `|` (logiczne lub) i `&` (logiczne i).
+Wyrażenia logiczne najczęściej składa się połączywszy operatorami logicznymi `|` (logiczne lub) i `&` (logiczne i).
 
 ```{r, warning=FALSE}
 TRUE | FALSE
@@ -69,7 +69,7 @@ TRUE | FALSE
 
 Jaki jest wynik logicznego lub pomiędzy wartością TRUE (prawda) i NA (brak informacji)?
 
-Tablibczę logicznego dodawania i mnożenia podsumowuje poniższa instrukcja.
+Tabliczkę logicznego dodawania i mnożenia podsumowuje poniższa instrukcja.
 
 ```{r, warning=FALSE}
 TRUE_FALSE_NA = c(TRUE, FALSE, NA)
@@ -90,7 +90,7 @@ tabliczka_mnozenia
 
 Traktując zmienną logiczną jak dwuwartościową zmienną jakościową, możemy używać na niej np. funkcji do tabel liczebności.
 
-Zbudujmy zmienną `czy_to_kot`, wektor o wartościach logicznych `TRUE` i `FALSE`, następnie rpzedstawmy jej podsumowanie.
+Zbudujmy zmienną `czy_to_kot`, wektor o wartościach logicznych `TRUE` i `FALSE`, następnie przedstawmy jej podsumowanie.
 
 ```{r, warning=FALSE}
 czy_to_kot = koty_ptaki$druzyna == "Kot"
@@ -123,19 +123,17 @@ table(starszyNiz5Lat)
 
 Cechy logiczne można przetwarzać używając również operatorów logicznych, w tym logicznego lub `|` oraz logicznego i `&`.
 
+Nazwy zmiennych i funkcji potrafią być długie, a R jest wrażliwy na wielkość liter i nie wybaczy nawet małych różnic.
+Przepisywanie nazw często kończy się literówkami, które z kolei prowadzą do trudnych w odnalezieniu błędów.
+W programie RStudio po wpisaniu kilku pierwszych liter nazwy funkcji, nazwy zmiennej lub nazwy kolumny w ramce danych klawiszem TAB włącza się uzupełnianie nazwy. W zależności od kontekstu wyświetlana jest lista nazw pasujących do pierwszych wprowadzonych znaków.
+
+
 ```{r, warning=FALSE}
 pochodziZPolski = auta2012$Kraj.aktualnej.rejestracji == "Polska"
 starszyNiz5Lat = auta2012$Rok.produkcji < 2007
 pochodziZPolskiIStarszyNiz5Lat = pochodziZPolski & starszyNiz5Lat
 table(pochodziZPolskiIStarszyNiz5Lat)
 ```
-
-**PCH: Jak już mówiłem kiedyś, te nazwy zmiennych (oraz te w ramce auta2012)
-są może i jednoznaczne oraz wygodne, ale dla kogoś, kto zna już R i wie do czego
-używa się klawisza TAB na klawiaturze. Dla uczących się i nie wiedzących, że wielkość
-liter ma znaczenie, może to być gehenna. Chyba, że tutaj dać dygresję o nazwach 
-zmiennych w R i o tym, interpreter i RStudio znakomicie podpowiadają jeśli je
-zapytać TABem**
 
 ---
 
@@ -146,6 +144,7 @@ zapytać TABem**
 # Odpowiedzi:
 + `r sum(auta2012$Cena.w.PLN < 2000 & auta2012$Kraj.aktualnej.rejestracji == "Polska", na.rm=TRUE)`
 + `r mean(auta2012$Pojemnosc.skokowa > 1500 & auta2012$Rodzaj.paliwa == 'olej napedowy (diesel)', na.rm=TRUE)`
+
 
 
 
