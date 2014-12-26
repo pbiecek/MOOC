@@ -6,8 +6,8 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / przetwarzanie / zmienne ilosciowe" /> 
-  <title>Cechy ilościowe</title>
+  <meta name="copyright" content="pogRomcy danych / przetwarzanie / zmienne napisowe" /> 
+  <title>Cechy napisowe</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -44,7 +44,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </head>
 <body>
 <div class="slide titlepage">
-  <h1 class="title">Cechy ilościowe</h1>
+  <h1 class="title">Cechy napisowe</h1>
   <p class="author">
 pogRomcy danych
   </p>
@@ -54,21 +54,19 @@ pogRomcy danych
 <h1>O czym jest ten odcinek</h1>
 <p>W tym odcinku nauczymy się</p>
 <ul>
-<li>Jak ze zbioru danych wybierać tylko interesujące nas wiersze</li>
+<li>Jakie zmienne / wartości / cechy określa się terminem cechy napisowe?</li>
+<li>Jakie podstawowe operacje można wykonywać na cechach napisowe?</li>
+<li>Jak podsumowywać / opisywać cechy napisowe?</li>
 </ul>
-<p>Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to <code>koty_ptaki</code> a drugi, znacznie większy to <code>auta2012</code>.</p>
+<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>.</p>
 </div>
-<div class="slide section level1">
-
+<div id="intro" class="slide section level1">
+<h1>Intro</h1>
+<p>Kupując nowy samochód często trzeba dopłacić jeżeli samochód ma być w kolorze innym niż biały, w kolorze metalik lub perłowy.</p>
+<p>Ale czy ceny samochodów używanych silnie różnią się w zależności od koloru?</p>
 <p>Podstawowym kryterium, gdy myślimy o cenach używanych samochodów, jest rok produkcji i przebieg.</p>
 <p>A czy wyposażenie ma znaczenie? Sprawdźmy to!</p>
-<p>Nie zawsze jednak dane są przygotowane w postaci prostej do analiz. Wpierw musimy więc informacje o wyposażeniu wyłuskać</p>
-<p>Jednak wpierw, aby analizować</p>
-<p><strong>PCH: Rozumiem, że to powyżej to zamysł do Intro. Nie komentuję zatem</strong></p>
-<p>Kupując nowy samochód często trzeba dopłacić jeżęli samochów ma być w kolorze innym niż biały, w kolorze metalic lub perłowy.</p>
-<p>Ale czy ceny samochodów używanych silnie różnią się w zależności od koloru?</p>
-<p>Sprawdźmy to!</p>
-<p>W naszych dancyh jest</p>
+<p>Nie zawsze jednak dane są przygotowane w postaci prostej do analiz. Wpierw musimy więc informacje o wyposażeniu wyłuskać.</p>
 </div>
 <div id="wczytanie-danych" class="slide section level1">
 <h1>Wczytanie danych</h1>
@@ -103,6 +101,42 @@ pogRomcy danych
 </div>
 <div id="statystyki-opisowe" class="slide section level1">
 <h1>Statystyki opisowe</h1>
+<p>Męskie imiona kończące się na ‘a’</p>
+<pre class="sourceCode r"><code class="sourceCode r">imiona_warszawa %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">imie =</span> <span class="kw">as.character</span>(imie)) %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(plec ==<span class="st"> &quot;M&quot;</span>, <span class="kw">substr</span>(imie, <span class="kw">nchar</span>(imie), <span class="kw">nchar</span>(imie)) ==<span class="st"> &quot;a&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(imie) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">liczba =</span> <span class="kw">sum</span>(liczba))</code></pre>
+<pre><code>## Source: local data frame [2 x 2]
+## 
+##     imie liczba
+## 1  Kosma     27
+## 2 Nikita      4</code></pre>
+<p>Żeńskie imiona nie kończące się na ‘a’</p>
+<pre class="sourceCode r"><code class="sourceCode r">imiona_warszawa %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">imie =</span> <span class="kw">as.character</span>(imie)) %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(plec ==<span class="st"> &quot;K&quot;</span>, <span class="kw">substr</span>(imie, <span class="kw">nchar</span>(imie), <span class="kw">nchar</span>(imie)) !=<span class="st"> &quot;a&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(imie) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">liczba =</span> <span class="kw">sum</span>(liczba)) %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>() %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(liczba))</code></pre>
+<pre><code>## Source: local data frame [23 x 2]
+## 
+##       imie liczba
+## 1   Nicole     47
+## 2      Nel     26
+## 3    Noemi     15
+## 4     Inez     12
+## 5    Nikol     12
+## 6    Nelly      8
+## 7  Abigail      5
+## 8   Carmen      5
+## 9    Karin      4
+## 10  Miriam      4
+## ..     ...    ...</code></pre>
+</div>
+<div id="statystyki-opisowe-1" class="slide section level1">
+<h1>Statystyki opisowe</h1>
 <p>Jedną z interesujących operacji na napisach, jest sprawdzenie, czy zawierają one określony podciąg znaków. Taki test można wykonać funkcją <code>grepl()</code>, która jako wynik zwraca wartość logiczną określającą czy napis zawiera określony wzorzec czy nie.</p>
 <pre class="sourceCode r"><code class="sourceCode r">maKlimatyzacje =<span class="st"> </span><span class="kw">grepl</span>(auta2012$Wyposazenie.dodatkowe.napis, <span class="dt">pattern=</span><span class="st">&quot;klimatyzacja&quot;</span>)
 <span class="kw">table</span>(maKlimatyzacje)</code></pre>
@@ -116,13 +150,13 @@ bezwypadkowy =<span class="st"> </span><span class="kw">grepl</span>(auta2012$Wy
 ##  FALSE 
 ## 207602</code></pre>
 <p><strong>PCH: Albo używasz nazw parametrów, albo nie. Ludzie tu się dopiero uczą! Nie wiedzą czy trzeba podawać nazwy jak ‘pattern’ czy też nie! A zatem, jest to doskonałe miejsce na dygresję i wprowadzenie na temat wywoływania funkcji, parametrów, itd. W szczególności, że w przykładzie z <code>grepl()</code> parametr ‘pattern’ jest pierwszy, a ‘x’ (u Ciebie pierwszy i bez nazwy) jest drugi.</strong></p>
-<p><strong>PCH: Przed zadaniem drugim powinna się znaleźć informacja, że grepl przy domyślnych ustawieniach robi ‘partial matching’. Raz że to przydatna informacja, dwa że oszczędzi ludziom ‘ręcznego’ wpisywania wszystkich kolorow jak ‘zielony-metallic’ i dodawania wyników na kartce ’)</strong></p>
+<p><strong>PCH: Przed zadaniem drugim powinna się znaleźć informacja, że grepl przy domyślnych ustawieniach robi ‘partial matching’. Raz że to przydatna informacja, dwa że oszczędzi ludziom ‘ręcznego’ wpisywania wszystkich kolorów jak ‘zielony-metallic’ i dodawania wyników na kartce ’)</strong></p>
 </div>
 <div id="zadania" class="slide section level1">
 <h1>Zadania:</h1>
 <ul>
-<li>Sprawdź ile samochodów ma zainstalowany autoalarm <strong>PCH: (oznaczony jako ‘autoalarm’)</strong></li>
-<li>Sprawdź ile samochodów ma lakier w metalicznym kolorze <strong>PCH: (oznaczony jako ‘metallic’)</strong></li>
+<li>Sprawdź ile samochodów ma zainstalowany autoalarm (oznaczony jako ‘autoalarm’)</li>
+<li>Sprawdź ile samochodów ma lakier w metalicznym kolorze (oznaczony jako ‘metallic’)</li>
 </ul>
 </div>
 <div id="odpowiedzi" class="slide section level1">
