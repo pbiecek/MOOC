@@ -91,13 +91,31 @@ pogRomcy danych
 </div>
 <div id="cechy-napisowe" class="slide section level1">
 <h1>Cechy napisowe</h1>
-<p>Funkcja <code>read.table()</code> wczytując tekst zamienia go na zmienną jakościową. W pewnych sytuacjach chcemy jednak na napisach wykonywać specjalne operacje. Takie np. jak wyszukiwanie podciągu w tekście. <strong>PCH: funkcja <code>read.table()</code> raczej robi to co zostanie jej przekazane z <code>default.stringsAsFactors()</code>.</strong></p>
+<p>Funkcja <code>read.table()</code> wczytując tekst, domyślnie zamienia go na zmienną jakościową. To domyślne zachowanie można zmienić, ustawiając argument <code>stringsAsFactors=FALSE</code>, ale często konwersja na zmienną jakościową pozwala na przechowywanie danych w mneijszej ilości pamięci.</p>
+<p>W pewnych sytuacjach, chcemy przetwarzać dane jak napisy, po to by na tych napisach wykonywać określone operacje na napisach. Takie np. jak wyszukiwanie podciągu w tekście.</p>
 <p>Aby to zrobić, musimy w pierwszej kolejności zamienić zmienna jakościową na zmienną napisową. Konwersję cechy z cechy jakościowej na cechę napisową można wykonać funkcją <code>as.character()</code></p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012$Wyposazenie.dodatkowe.napis =<span class="st"> </span><span class="kw">as.character</span>(auta2012$Wyposazenie.dodatkowe)
 <span class="kw">summary</span>(auta2012$Wyposazenie.dodatkowe.napis)</code></pre>
 <pre><code>##    Length     Class      Mode 
 ##    207602 character character</code></pre>
-<p><strong>PCH: I odwrotnie - <code>as.factor()</code></strong></p>
+</div>
+<div class="slide section level1">
+
+<p>O ile funkcja <code>as.character()</code> przekształca wartości na napisy, to funkcja <code>as.factor()</code> przekształca wartości na cechy jakościowe. Podobnie funkcja <code>as.numeric()</code> przekształca wartości na liczby.</p>
+<p>Należy być jednak ostrożnym przy tych konwersjach, przekształcając wartości jakościowe na liczby domyślnie R zamienia kolejne poziomy na kolejne liczby naturalne.</p>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2&quot;</span>, <span class="st">&quot;4&quot;</span>, <span class="st">&quot;5.5&quot;</span>)
+(fx &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x))</code></pre>
+<pre><code>## [1] 2   4   5.5
+## Levels: 2 4 5.5</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># liczby zgodnie z oczekiwniami </span>
+<span class="kw">as.numeric</span>(x)</code></pre>
+<pre><code>## [1] 2.0 4.0 5.5</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># uwaga! R nie wie że to są napisy, a zmienną jakościową zamienia na kolejne liczby całkowite</span>
+<span class="kw">as.numeric</span>(fx)</code></pre>
+<pre><code>## [1] 1 2 3</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># zmienne jakościowe na liczby należałoby tak przekształcić</span>
+<span class="kw">as.numeric</span>(<span class="kw">as.character</span>(fx))</code></pre>
+<pre><code>## [1] 2.0 4.0 5.5</code></pre>
 </div>
 <div id="statystyki-opisowe" class="slide section level1">
 <h1>Statystyki opisowe</h1>
