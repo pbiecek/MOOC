@@ -53,9 +53,10 @@ Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda 
 ---
 
 # Cechy napisowe
-Funkcja `read.table()` wczytując tekst zamienia go na zmienną jakościową. W pewnych sytuacjach chcemy jednak na napisach wykonywać specjalne operacje. Takie np. jak wyszukiwanie podciągu w tekście. 
-**PCH: funkcja `read.table()` raczej robi to co zostanie jej przekazane z
-`default.stringsAsFactors()`.**
+Funkcja `read.table()` wczytując tekst, domyślnie zamienia go na zmienną jakościową. 
+To domyślne zachowanie można zmienić, ustawiając argument `stringsAsFactors=FALSE`, ale często konwersja na zmienną jakościową pozwala na przechowywanie danych w mneijszej ilości pamięci.
+
+W pewnych sytuacjach, chcemy przetwarzać dane jak napisy, po to by na tych napisach wykonywać określone operacje na napisach. Takie np. jak wyszukiwanie podciągu w tekście. 
 
 Aby to zrobić, musimy w pierwszej kolejności zamienić zmienna jakościową na zmienną napisową. Konwersję cechy z cechy jakościowej na cechę napisową można wykonać funkcją `as.character()`
 
@@ -64,7 +65,23 @@ auta2012$Wyposazenie.dodatkowe.napis = as.character(auta2012$Wyposazenie.dodatko
 summary(auta2012$Wyposazenie.dodatkowe.napis)
 ```
 
-**PCH: I odwrotnie - `as.factor()`**
+---
+
+O ile funkcja `as.character()` przekształca wartości na napisy, to funkcja `as.factor()` przekształca wartości na cechy jakościowe. Podobnie funkcja `as.numeric()` przekształca wartości na liczby. 
+
+Należy być jednak ostrożnym przy tych konwersjach, przekształcając wartości jakościowe na liczby domyślnie R zamienia kolejne poziomy na kolejne liczby naturalne.
+
+```{r, warning=FALSE}
+x <- c("2", "4", "5.5")
+(fx <- as.factor(x))
+# liczby zgodnie z oczekiwniami 
+as.numeric(x)
+# uwaga! R nie wie że to są napisy, a zmienną jakościową zamienia na kolejne liczby całkowite
+as.numeric(fx)
+# zmienne jakościowe na liczby należałoby tak przekształcić
+as.numeric(as.character(fx))
+```
+
 
 ---
 
