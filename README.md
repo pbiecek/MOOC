@@ -61,3 +61,7 @@ część 2: Data science
   * Regresja logistyczna
 
 TODO: Wprowadzić peer-review w ocenianiu wizualizacji i być może modelowania.
+
+TODO: 20 pytań w challenges z automatyczną weryfikacją poprawności
+
+TODO: ranking zespołów automatycznie generowany
