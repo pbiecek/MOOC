@@ -49,10 +49,10 @@ część 1: Data smart
   * Prezentacje, raporty i powtarzalne obliczenia
     + odcinek 25: Tworzenie raportu w knirt z RStudio, [html TODO]
   * Studium przypadku
-    + odcinek 26: Zakup samochodu wspierany danymi [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanie/77_przypadekUzycia.Rmd),
+    + odcinek 26: Zakup samochodu wspierany danymi [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/77_przypadekUzycia.Rmd),
   * Co dalej? 
-    + odcinek 27: Co dalej? [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanie/99_coDalej.html)
-    + odcinek 28: W opracowaniu materiałów udział wzięli [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanie/00_credits.Rmd)
+    + odcinek 27: Co dalej? [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/99_coDalej.html)
+    + odcinek 28: W opracowaniu materiałów udział wzięli [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/00_credits.Rmd)
   * Challange [20 zadań]
 
 + Dane wokół nas,
