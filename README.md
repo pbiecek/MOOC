@@ -36,8 +36,18 @@ część 1: Data smart
     + odcinek 13: Cechy logiczne, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/53_logiczne.html)
     + odcinek 14: Cechy napisowe, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/54_napisowe.html)
     + odcinek 15: Daty, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/55_daty.html)
-
   * Przetwarzanie potokowe danych
+    + odcinek 16: Wprowadzenie do obróbki danych, [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/dplyrIntro.md), 
+    + odcinek 17: Filtrowanie wierszy [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/61_dplyr_filter.html), 
+    + odcinek 18: Sortowanie wierszy [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/62_dplyr_sort.html, 
+    + odcinek 19: Przetwarzanie potokowe [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/63_dplyr_potok.html), 
+    + odcinek 20: Filtrowanie kolumn [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/64_dplyr_select.html), 
+    + odcinek 21: Tworzenie nowych cech [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/65_dplyr_mutate.html), 
+    + odcinek 22: Agregowanie danych [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/66_dplyr_summarise.html), 
+    + odcinek 23: Przetwarzanie danych w grupach [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/67_dplyr_groupby.html)
+    + odcinek 24: Reprezentacja wąska i szeroka danych, [html](https://rawgit.com/pbiecek/MOOC/https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/7_tidyr.html)
+  
+
   * Prezentacje, raporty i powtarzalne obliczenia
   * Studium przypadku
   [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyJakoscioweIntro.md),
@@ -46,8 +56,6 @@ część 1: Data smart
   * Challange [20 zadań]
 
 
-  * Wprowadzenie do obróbki danych, [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/dplyrIntro.md), [filter](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/61_dplyr_filter.html#(1)), [sort](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/62_dplyr_sort.html#(1)), [potoki](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/63_dplyr_potok.html#(1)), [select](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/64_dplyr_select.html#(1)), [mutate](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/65_dplyr_mutate.html#(1)), [summarise](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/66_dplyr_summarise.html#(1)), [group_by](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/67_dplyr_groupby.html#(1))
-  * Tidyr, [materialy html](https://rawgit.com/pbiecek/MOOC/https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/7_tidyr.html)
   * Co dalej, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/coDalej.html)
 
 
