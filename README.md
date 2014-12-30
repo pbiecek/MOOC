@@ -6,26 +6,29 @@ Od zera do bohatera w 60 godzin
 
 Materiały dla kursu MOOC 2015
 
+część wspólna
+
++ [Lista zbiorów danych](https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html)
++ [Lista funkcji i pakietów](https://rawgit.com/pbiecek/MOOC/master/0_dane/1_skorowidz.html)
++ [Zadania i odpowiedzi]
+
+
 część 1: Data smart
-
-+ Dane wokół nas, jak je czytać [Nie bądź liczbowym analfabetą]
-  * Intro, [intro](https://rawgit.com/pbiecek/MOOC/master/motywacja/intro.md)
-  * Piotr Przybyła IPI PAN, Inżynieria lingwistyczna 
-  * [Sondaże - może wyborcze] Nss
-  * [Robotyka] BM
-  * [Diagnoza Społeczna] J Cz
-  * [Badania Edukacji] IBE
-  * [Lista zbiorów danych](https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html)
-  * [Skorowidz](https://rawgit.com/pbiecek/MOOC/master/0_dane/1_skorowidz.html)
-
 
 + Eksploracja danych z programem R [sezon 1]
   * [intro z opisem kursu, wideo, TODO, PBi]
   * Wprowadzenie do R i RStudio
-    + odcinek 1: Dlaczego R? [wideo, TODO, PBi], [html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/introR.md),
+    + odcinek 1: Dlaczego R? [video, TODO, PBi], [html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/introR.md),
     + odcinek 2: Jak zainstalować R, RStudio oraz dodatkowe pakiety? [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/1_instalacja.Rmd) 
-    + odcinek 3: Wprowadzenie do RStudio i systemu pomocy, [materialy html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/2_wprowadzenieDoRStudio.html), [video](https://github.com/pbiecek/MOOC/blob/master/1_przetwarzanieDanych/2_MOOC_Przetwarzanie_01.mp4?raw=true), 
-
+    + odcinek 3: Wprowadzenie do RStudio i systemu pomocy, [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/2_wprowadzenieDoRStudio.html), [video](https://github.com/pbiecek/MOOC/blob/master/1_przetwarzanieDanych/2_MOOC_Przetwarzanie_01.mp4?raw=true), 
+    + odcinek 4: Interaktywna praca z R [html, TODO, PBi], [video, TODO, PBi]
+  * Odczytywanie, zapisywanie i indeksowanie danych
+  * Instrukcje sterujące, pętle, warunki i funkcje
+  * Podstawowe typy danych i ich statystyki opisowe
+  * Przetwarzanie potokowe danych
+  * Prezentacje, raporty i powtarzalne obliczenia
+  * Co dalej?
+  * Challange [20 zadań]
 
   * Jak wczytać dane, [materialy html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/3_wczytywanie.html#(1))
   * Operacje na data.frame - indeksowanie wierszy i kolumn, [materialy html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/4_indeksowanie.html)
@@ -39,7 +42,18 @@ część 1: Data smart
   * Instrukcja if, pętla for, [pętle](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/8_petle.html), [instrukcje warunkowe](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/81_instrukcje_warunkowe.html), [funkcje](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/82_funkcje.html)
   * Co dalej, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/coDalej.html)
 
-część 2: Data science
+
++ Dane wokół nas,
+  * Intro [intro, wideo, TODO](https://rawgit.com/pbiecek/MOOC/master/motywacja/intro.md)
+  * Piotr Przybyła IPI PAN, Inżynieria lingwistyczna 
+  * [Sondaże - może wyborcze] Nss
+  * [Robotyka] BM
+  * [Diagnoza Społeczna] J Cz
+  * [Badania Edukacji] IBE
+
+
+
+część 2: Data master
 
 + Wizualizacja danych
   * Historia i współczesność 
