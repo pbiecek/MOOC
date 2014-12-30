@@ -20,7 +20,10 @@ część 1: Data smart
   * [Skorowidz](https://rawgit.com/pbiecek/MOOC/master/0_dane/1_skorowidz.html)
 
 
-+ Eksploracja danych
++ Eksploracja danych z programem R [sezon 1]
+  * [intro z opisem kursu]
+
+
   * Wybieramy narzędzie, [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/introR.md),  [skorowidz](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/skorowidz.md)
   * Jak zainstalować R, RStudio oraz dodatkowe pakiety,  [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/instalacja.Rmd) 
   * Wprowadzenie do RStudio i systemu pomocy, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/wprowadzenieDoRStudio.md), [video](https://github.com/pbiecek/MOOC/blob/master/przetwarzanie/MOOC_Przetwarzanie_01.mp4?raw=true), 
