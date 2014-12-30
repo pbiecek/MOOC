@@ -24,10 +24,9 @@ część 1: Data smart
   * Wprowadzenie do R i RStudio
     + odcinek 1: Dlaczego R? [wideo, TODO, PBi], [html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/introR.md),
     + odcinek 2: Jak zainstalować R, RStudio oraz dodatkowe pakiety? [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/1_instalacja.Rmd) 
+    + odcinek 3: Wprowadzenie do RStudio i systemu pomocy, [materialy html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/2_wprowadzenieDoRStudio.html), [video](https://github.com/pbiecek/MOOC/blob/master/1_przetwarzanieDanych/2_MOOC_Przetwarzanie_01.mp4?raw=true), 
 
 
-  * 
-  * Wprowadzenie do RStudio i systemu pomocy, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/wprowadzenieDoRStudio.md), [video](https://github.com/pbiecek/MOOC/blob/master/przetwarzanie/MOOC_Przetwarzanie_01.mp4?raw=true), 
   * Jak wczytać dane, [materialy html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/3_wczytywanie.html#(1))
   * Operacje na data.frame - indeksowanie wierszy i kolumn, [materialy html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/4_indeksowanie.html)
   * Wprowadzenie do obróbki danych, [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/dplyrIntro.md), [filter](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/61_dplyr_filter.html#(1)), [sort](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/62_dplyr_sort.html#(1)), [potoki](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/63_dplyr_potok.html#(1)), [select](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/64_dplyr_select.html#(1)), [mutate](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/65_dplyr_mutate.html#(1)), [summarise](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/66_dplyr_summarise.html#(1)), [group_by](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/67_dplyr_groupby.html#(1))
