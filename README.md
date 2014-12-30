@@ -27,6 +27,10 @@ część 1: Data smart
     + odcinek 6: Jak zapisać dane z R, [html]
     + odcinek 7: Indeksowanie wektorów i ramek danych, [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/4_indeksowanie.html)
   * Instrukcje sterujące, pętle, warunki i funkcje
+    + odcinek 8: Pętle [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/8_petle.html), 
+    + odcinek 9: Instrukcje warunkowe [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/81_instrukcje_warunkowe.html), 
+    + odcinek 10: Funkcje [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/82_funkcje.html)
+
   * Podstawowe typy danych i ich statystyki opisowe
   * Przetwarzanie potokowe danych
   * Prezentacje, raporty i powtarzalne obliczenia
@@ -41,7 +45,6 @@ część 1: Data smart
   * Cechy logiczne, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/53_logiczne.html)
   * Cechy napisowe, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/54_napisowe.html)
   * Daty, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/55_daty.html)
-  * Instrukcja if, pętla for, [pętle](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/8_petle.html), [instrukcje warunkowe](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/81_instrukcje_warunkowe.html), [funkcje](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/82_funkcje.html)
   * Co dalej, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/coDalej.html)
 
 
