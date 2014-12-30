@@ -23,6 +23,9 @@ część 1: Data smart
     + odcinek 3: Wprowadzenie do RStudio i systemu pomocy, [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/2_wprowadzenieDoRStudio.html), [video](https://github.com/pbiecek/MOOC/blob/master/1_przetwarzanieDanych/2_MOOC_Przetwarzanie_01.mp4?raw=true), 
     + odcinek 4: Interaktywna praca z R [html, TODO, PBi], [video, TODO, PBi]
   * Odczytywanie, zapisywanie i indeksowanie danych
+    + odcinek 5: Jak wczytać dane do R, [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/3_wczytywanie.html)
+    + odcinek 6: Jak zapisać dane z R, [html]
+    + odcinek 7: Indeksowanie wektorów i ramek danych, [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/4_indeksowanie.html)
   * Instrukcje sterujące, pętle, warunki i funkcje
   * Podstawowe typy danych i ich statystyki opisowe
   * Przetwarzanie potokowe danych
@@ -30,8 +33,7 @@ część 1: Data smart
   * Co dalej?
   * Challange [20 zadań]
 
-  * Jak wczytać dane, [materialy html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/3_wczytywanie.html#(1))
-  * Operacje na data.frame - indeksowanie wierszy i kolumn, [materialy html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/4_indeksowanie.html)
+
   * Wprowadzenie do obróbki danych, [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/dplyrIntro.md), [filter](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/61_dplyr_filter.html#(1)), [sort](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/62_dplyr_sort.html#(1)), [potoki](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/63_dplyr_potok.html#(1)), [select](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/64_dplyr_select.html#(1)), [mutate](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/65_dplyr_mutate.html#(1)), [summarise](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/66_dplyr_summarise.html#(1)), [group_by](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/67_dplyr_groupby.html#(1))
   * Tidyr, [materialy html](https://rawgit.com/pbiecek/MOOC/https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/7_tidyr.html)
   * Cechy jakościowe, [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/cechyJakoscioweIntro.md), [materialy html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/51_ilosciowe.html)
