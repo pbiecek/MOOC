@@ -21,12 +21,12 @@ część 1: Data smart
 
 + Eksploracja danych z programem R [sezon 1]
   * [intro z opisem kursu, wideo, TODO, PBi]
-  * odcinek 1: [dlaczego R, wideo, TODO, PBi], [dlaczego R, html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/introR.md),
-    + podpunkt
-    + podpunkt
+  * Wprowadzenie do R i RStudio
+    + odcinek 1: Dlaczego R? [wideo, TODO, PBi], [html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/introR.md),
+    + odcinek 2: Jak zainstalować R, RStudio oraz dodatkowe pakiety? [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/1_instalacja.Rmd) 
 
 
-  * Jak zainstalować R, RStudio oraz dodatkowe pakiety,  [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/instalacja.Rmd) 
+  * 
   * Wprowadzenie do RStudio i systemu pomocy, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/wprowadzenieDoRStudio.md), [video](https://github.com/pbiecek/MOOC/blob/master/przetwarzanie/MOOC_Przetwarzanie_01.mp4?raw=true), 
   * Jak wczytać dane, [materialy html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/3_wczytywanie.html#(1))
   * Operacje na data.frame - indeksowanie wierszy i kolumn, [materialy html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/4_indeksowanie.html)
