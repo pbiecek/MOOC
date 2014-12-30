@@ -13,18 +13,19 @@ część 1: Data smart
   * Piotr Przybyła IPI PAN, Inżynieria lingwistyczna 
   * [Sondaże - może wyborcze] Nss
   * [Robotyka] BM
-  * [Diagnoza Społeczna] J Cz - 15 listopad
+  * [Diagnoza Społeczna] J Cz
   * [Badania Edukacji] IBE
-  * [Bio info] ??
   * [Lista zbiorów danych](https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html)
   * [Skorowidz](https://rawgit.com/pbiecek/MOOC/master/0_dane/1_skorowidz.html)
 
 
 + Eksploracja danych z programem R [sezon 1]
-  * [intro z opisem kursu]
+  * [intro z opisem kursu, wideo, TODO, PBi]
+  * odcinek 1: [dlaczego R, wideo, TODO, PBi], [dlaczego R, html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/introR.md),
+    + podpunkt
+    + podpunkt
 
 
-  * Wybieramy narzędzie, [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/introR.md),  [skorowidz](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/skorowidz.md)
   * Jak zainstalować R, RStudio oraz dodatkowe pakiety,  [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/instalacja.Rmd) 
   * Wprowadzenie do RStudio i systemu pomocy, [materialy html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/wprowadzenieDoRStudio.md), [video](https://github.com/pbiecek/MOOC/blob/master/przetwarzanie/MOOC_Przetwarzanie_01.mp4?raw=true), 
   * Jak wczytać dane, [materialy html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/3_wczytywanie.html#(1))
