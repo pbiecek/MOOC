@@ -74,14 +74,32 @@ Zauważmy, że:
 
 # Dane tabelaryczne w plikach tekstowych
 
-Do wczytywania danych z pliku tekstowego służy funkcja `read.table()`. 
-Ponieważ dane mogą być zapisane z użyciem różnych formatów, argumenty tej funkcji określają format danych do wczytania.
-W przypadku rozważanego pliku musimy określić następujące argumenty:
+Do wczytywania danych z pliku tekstowego służy funkcja `read.table()`, której wybrane agrumenty przedstawia poniższa deklaracja (jest ich więcej, ale część pominiemy by nie zaciemniać obrazu)
+
+```{}
+read.table(file, header = FALSE, sep = "", dec = ".",  nrows = -1,
+           skip = 0, comment.char = "#",
+           stringsAsFactors = default.stringsAsFactors(), ...)
+```
+
+Ponieważ dane mogą być zapisane z użyciem różnych formatów, argumenty tej funkcji określają format danych do wczytania. Znaczenie kolejnych argumentów to
 
 - `file` - ścieżka do pliku z danymi może być też adres URL (jeżeli wskażemy jako pierwszy argument, możemy pominąć jego nazwę)
+- `header` - flaga określająca, czy pierwszy wiersz należy traktować jako nagłówek. W naszym przypadku `header=TRUE`.
 - `sep` - znak rozdzielający kolumny. W naszym przypadku `sep=";"`
 - `dec` - kropka dziesiętna, zazwyczaj `.` lub `,`. W naszym przypadku `dec=","`
-- `header` - flaga określająca, czy pierwszy wiersz należy traktować jako nagłówek. W naszym przypadku `header=TRUE`.
+- `nrows` - maksymalna liczba wierszy do wczytania, domyślnie -1, czyli wczytaj wszystkie wiersze 
+- `skip` - liczba pierwszych wierszy do pominięcia przy wczytywaniu danych, domyślnie 0, czyli nie pomijaj żadnego wiersza,
+- `comment.char` - znak komentarza, jeżeli w danych wystąpi ten znak to treść od tego znaku do końca lini będzie zignorowana
+- `stringsAsFactors` - czy napisy powinny być domyślnie przekształcone w zmienne jakościowe. Domyślnie `TRUE`, o konsekwencjach tego przekształcenia napiszemy w odcinku 11 *Cechy jakościowe*.
+
+---
+
+# Dane tabelaryczne w plikach tekstowych
+
+Funkcja `read.table()` ma wiele argumentów, ale nei musimy ich wszystkich określać. Wystarczy wskazać nazwę pliku oraz te argumenty, które powinny mieć inne wartości niż domyślne. 
+
+W przypadku rozważanego pliku musimy określić następujące argumenty:
 
 ```{r, message=FALSE}
 read.table("http://biecek.pl/MOOC/dane/koty_ptaki.csv", 
