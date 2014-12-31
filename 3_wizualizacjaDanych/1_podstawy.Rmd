@@ -120,6 +120,23 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
 
 ---
 
+# Kiedy należy używać wykresu punktowego?
+
+Wykres punktowy stosuje się najczęściej w sytuacjach
+
+Dla pewnego zbioru obiektów mamy dwie zmienne ilościowe (np. dla państw to może być PKB i średnia długość życia, dla osób to może być wzrost i waga, dla samochodów to może być przegieg i cena).
+
+1. Nie wiemy czy i jakiej zalezności się spodziewać (czy i jak długość życia jest związana z PKB).
+2. Wiemy, że dwie zmienne są zależne i chcemy przedstawić tę zależność (chcemy pokazać jak cena auta zmienia się z jego przebiegiem).
+3. Wiemy, że w jednej zmiennej występują nietypowe obserwacje (np. bardzo duże) i chcemy zobaczyć jakim wartościom stowarzyszonej zmiennej one odpowiadają (np. czy osoby o bardzo wysokiej wadze to osoby bardzo wysokie czy nie).
+
+Na wykresie punktowym można również zaznaczyć grupy, pozwala to dodatkowo na porównanie grup pod względem przedstawianych zmiennych. Taki wykre spunktowy z grupami warto stosować gdy
+
+1. Nie wiemy czy grupy różnią się pod kątem danej pary zmiennych i chcemy to sprawdzić (np. czy auta 3 drzwiowe różnią się od 5 drzwiowych jeżeli chodzi o cenę i przebieg),
+2. Wiemy, że grupy się różnią i chcemy pokazać w jaki sposób (np aby pokzać że kobiety są średnio niższe i znacznie lżejsze niż mężczyźni),
+
+---
+
 # Elementy wykresu punktowego
 
 ```{r, eval=FALSE}
