@@ -287,6 +287,24 @@ ggplot(koty_ptaki, aes(x= waga, y=predkosc, label=gatunek)) +
 
 ---
 
+# Kiedy stosować etykiety na wykresie?
+
+Wykres z etykietami stosować można w podobnych sytuacjach co wykres punktowy.
+Również w tym przypadku przedstawiamy zależność pomiędzy dwoma zmiennymi ilościowymi.
+
+Stosowanie etykiet na wykresie ma wady i zalety. Do głównych zalet zaliczyć można:
+
+1. Nazwy obiektów pozwalają zorientować się czemu odpowiada dany punkt. Jest to przydatne, jeżęli wykres wykorzytujemy do identyfikacji *ciekawych* obserwacji, np. najbardziej odstających, najbardziej charakterystycznych.
+2. Nazwy mna skracać do kilku pierwszych liter, przez co nie zajmują dużo miejsca.
+3. Jeżeli wykres przedstawia tylko kilka obserwacji, to nazwy lepiej *wypełniają* wykres, nie pozostawiając dużych pustych przestrzeni.
+
+A główne wady to:
+
+1. Jeżeli obiektów jest dużo, to nazwy na siebie nachodzą, przez co mogą stać się nieczytelne.
+2. Jeżeli nazwy są długi to może nie być oczywiste, gdzie jest punkt który przedstawia współrzędne na wykresie i czy to jest środek napisu czy któ®yś róg napisu.
+
+---
+
 # Globalne mapowania
 
 Zauważmy, że mapowania określone przez funkcję `aes()` wewnątrz funkcji `ggplot()` dotyczą wszystkich warstw.
