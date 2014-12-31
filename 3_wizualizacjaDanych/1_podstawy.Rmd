@@ -61,6 +61,7 @@ My skupimy się na jednym, na pakiecie `ggplot2`. Dlaczego? Jest ku temu kilka p
 Wykorzystując zbiór danych `koty_ptaki` przedstawmy zależność wagi od prędkości dla wybranych gatunków. Wykorzystamy w tym celu dwa pakiety graficzne dostępne w programie R, pakiet `graphics` z funkcją `plot()` oraz pakiet `ggplot2`  z funkcją `ggplot()`. 
 
 Poniższe instrukcje tworzą wykres z domyślnymi ustawieniami.
+To, w jaki sposób tworzą one wykres yjaśnimi na kolejnym slajdzie o tytule *Elementy wykresu punktowego*, w tym miejscu, przyjrzyjmy się wyłącznie wynikom, które obie instrukcje produkują.
 
 ```{r,  message=FALSE, eval=FALSE}
 library(ggplot2)        # ten pakiet pozwala na tworzenie wykresów 
@@ -112,18 +113,6 @@ Używając pakietu `ggplot2` otrzymujemy przy fabrycznych ustawieniach czytelny 
 
 ---
 
-# Jak zrobić wykres punktowy?
-
-Przyjrzyjmy się instrukcji, która tworzy wykres punktowy.
-
-```{r, fig.height=4, fig.width=4}
-head(koty_ptaki, 3)
-ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
-  geom_point()
-```
-
----
-
 # Kiedy należy używać wykresu punktowego?
 
 Wykres punktowy stosuje się najczęściej w sytuacjach
@@ -141,6 +130,18 @@ Na wykresie punktowym można również zaznaczyć grupy, pozwala to dodatkowo na
 
 ---
 
+# Jak zrobić wykres punktowy?
+
+Przyjrzyjmy się instrukcji, która tworzy wykres punktowy.
+
+```{r, fig.height=4, fig.width=4}
+head(koty_ptaki, 3)
+ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
+  geom_point()
+```
+
+---
+
 # Elementy wykresu punktowego
 
 ```{r, eval=FALSE}
@@ -150,7 +151,7 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
 
 Trzy elementy są kluczowe w tej instrukcji.
 
-- Funkcja `ggplot()` jest główną funkcją tworzącą trzon wykresu. Zazwyczaj przyjmuje ona dwa argumenty. Pierwszy to zbiór danych (w tym przypadku `koty_ptaki`). Drugi to opis, które zmienne i w jaki sposób mają być przedstawione na wykresie, tak zwany opis mapowań. (BŁĄD STYLISTYCZNY W ZDANIU)
+- Funkcja `ggplot()` tworzy trzon wykresu. Opisuje ona jakie zmienne będą przedstawione na wykresie, ale nie określa w jaki sposób. Zazwyczaj przyjmuje ona dwa argumenty. Pierwszy to zbiór danych (w tym przypadku `koty_ptaki`). Drugi argument to lista par, określająca które zmienne i w jaki sposób mają być przedstawione na wykresie. Te pary określa się zazwyczaj nazwą ,,mapowania'', określają one które zmienne mają być przedstawione za pomocą jakich cech wykresu. 
 - Mapowania opisuje funkcja `aes()`. Argumenty tej funkcji to pary `cecha wykresu=zmienna`. Każda z tych par opisuje w jaki sposób określona zmienne ma być przedstawiona. W powyższym przypadku opis ten oznacza, że zmienna `waga` ma być przedstawiona przez współrzędne `x` a zmienna `predkosc` ma być przedstawiona przez zmienną `y`.
 - Trzon wykresu rozbudowuje się dodając, z użyciem operatora `+`, kolejne funkcje. W tym przypadku funkcja `geom_point()` dodaje do wykresu warstwę przedstawiającą dane za pomocą punktów. Funkcje, o nazwach rozpoczynających się od `geom_` nazywamy geometriami, określają one w jaki sposób dane są prezentowane. Czy jako punkty, linie, obszary czy jeszcze inaczej. W tym sezonie poznamy kilka geometrii, zbiór wszystkich dostępnych geometrii znaleźć można na stronie http://docs.ggplot2.org.
 
