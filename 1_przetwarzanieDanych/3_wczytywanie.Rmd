@@ -69,6 +69,21 @@ Zauważmy, że:
 - kolejne wiersze to dane w postaci kolumn liczb, które są rozdzielane średnikiem `;`
 - w pliku występują liczby niecałkowite, kropką dziesiętną jest przecinek `,`
 
+---
+
+# Wczytywanie danych do R
+
+Instrukcja wczytująca dane do R składa się zazwyczaj z trzech członów.
+
+Ostatnim (po prawej stronie na poniższym schemacie) jest funkcja, która odczytuje dane, przetwarza i zamienia na postać zrozumiałą dla progrmau R.
+
+Aby móc na tych danych operować, należy nadać im jakąś nazwę (lewy człon na poniższym schemacie). Tę nazwę określa się zazwyczaj terminem *zmienna*.
+
+Operacje przypisania wartości odczytanych przez funkcję do zmiennej, można wykonać operatorem `<-` lub `=`.
+
+![Zbiór danych o kotach](figs/wczytywanie.png)
+
+Więcej informacji o tym jak przypisywać wartości do zmiennych przedstawionych jest w odcinku 4 *Interaktywna praca z R*.
 
 ---
 
@@ -127,11 +142,11 @@ koty
 
 W programie R Studio w prawym górnym oknie, zatytułowanym *Environment* wyświetlane są wszystkie dostępne dane. Po poprawnym wczytaniu danych, powinniśmy je widzieć właśnie w tym oknie
 
-Dwukrotne kliknięcie na wskazaną zmienną powoduje otwarcie okna prezentującego zawartość zmiennej. W ten sposób możemy szybko podejrzeć co wczytało się do zmiennej `koty`.
+Dwukrotne kliknięcie na wskazaną zmienną powoduje otwarcie okna prezentującego zawartość zmiennej. W ten sposób możemy szybko podejrzeć co wczytało się do zmiennej `koty_ptaki`.
 
 Z przyczyn wydajnościowych wyświetlanych jest tylko pierwsze 1000 wierszy i kilkaset kolumn. Tak więc dla dużych zbiorów danych wyświetlony będzie tylko fragment całęgo zbioru.
 
-![Zbiór danych o kotach](figs/koty.png)
+![Zbiór danych o kotach](figs/koty2.png)
 
 ---
 # Dane tabelaryczne w plikach tekstowych
@@ -227,6 +242,8 @@ Zobaczmy jakie zbiory danych udostępnione są w pakiecie `SmarterPoland`.
 ```{r, warning=FALSE, message=FALSE}
 data(package="SmarterPoland")
 ```
+
+*Uwaga!* Pakiet `SmarterPoland` nie jest dostępny w podstawowej dystrybucji programu R i trzeba go wcześniej zainstalować poleceniem `install.packages()`. Szczegółowa instrukajc, jak to zrobić jest przedstawiona w odcinku 2 *Jak zainstalować R, RStudio oraz dodatkowe pakiety?*.
 
 ![Lista dostępnych zbiorów danych](figs/datasets_list.png)
 ---
