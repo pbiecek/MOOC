@@ -14,9 +14,9 @@ output:
 
 # O czym jest ten odcinek
 
-R jest świetnym narzędziem do przetwarzania danych. Mając już dane przetworzone pojawia się potrzeba by wyniki gdzieś zapisać.
+Program R jest świetnym narzędziem do przetwarzania danych. Mając już dane przetworzone pojawia się potrzeba by wyniki gdzieś zapisać.
 
-Podobnie jak wczytywaliśmy dane z formatów tekstowych, binarnych lub plików Excela, równiez możemy zapisywać dane do różnych formatów.
+Podobnie jak wczytywaliśmy dane z formatów tekstowych, binarnych lub plików Excela, również możemy zapisywać dane do różnych formatów.
 
 W tym odcinku dowiemy się
 
@@ -45,7 +45,7 @@ Najczęściej wykorzystywane argumenty to
 - `file` - określa nazwę pliku tekstowego, do którego dane będą zapisane,
 - `append` - domyślna wartość `FALSE` oznacza, że plik o nazwie `file` istnieje wcześniej to zostanie on skasowany. Jeżeli ustawić `append=TRUE` to nowe dane będą dopisane do końca poprzedniego pliku.
 - `sep` - określa znak, który jest separatorem kolejnych wartości,
-- `dec` - określa znak, który jest kropką dzisiętną, zazwyczaj `.` lub `,`
+- `dec` - określa znak, który jest kropką dziesiętną, zazwyczaj `.` lub `,`
 - `row.names` - określa czy do pliku tekstowego mają być zapisywane nazwy wierszy, domyślnie `TRUE`
 - `col.names`  - określa czy do pliku tekstowego mają być zapisywane nazwy kolumn, domyślnie `TRUE`
 
@@ -53,15 +53,15 @@ Najczęściej wykorzystywane argumenty to
 
 # Zapisywanie danych tabelarycznych do plików w formacie Excela
 
-Dane, które są dostępne w programie R, można zapisać pliku excelowego funkcją `write.xls()`. Funkcja ta jest dostępna w większosci pakietów, zawierających funkcję `read.xls()`, np. w pakiecie `xlsx` (korzysta z biblioteki Java) oraz `dataframe2xls` (korzysta z zewnętrznych bibliotek Pythona).
+Dane, które są dostępne w programie R, można zapisać pliku excelowego funkcją `write.xls()`. Funkcja ta jest dostępna w większości pakietów, zawierających funkcję `read.xls()`, np. w pakiecie `xlsx` (korzysta z biblioteki Java) oraz `dataframe2xls` (korzysta z zewnętrznych bibliotek Pythona).
 
-Do zapisu do formatu Excela można też wykorzystać fucnkję `WriteXLS()` z pakietu `WriteXLS` (korzysta z zewnętrznych bibliotek Perla).
+Do zapisu do formatu Excela można też wykorzystać funkcję `WriteXLS()` z pakietu `WriteXLS` (korzysta z zewnętrznych bibliotek Perla).
 
 Podstawowa funkcjonalność tych funkcji jest taka sama, pozwalają one na stworzenie nowego pliku oraz zapisania do niego tabeli.
 
-Funkcje te różnią się dodatkowymi funkcjami. Niektóre potrafią zapisaywać do plików Excelowych, które mają wiele zakładek. Inne potrafią zapisywać do pliku excela z dodanym formatowaniem, takim jak okreśłone kolory, wielkość pisma, krój czcionki, obrysowania tabeli.
+Funkcje te różnią się dodatkowymi funkcjami. Niektóre potrafią zapisywać do plików Excelowych, które mają wiele zakładek. Inne potrafią zapisywać do pliku Excela z dodanym formatowaniem, takim jak określone kolory, wielkość pisma, krój czcionki, obrysowania tabeli.
 
-Najczęściej korzystam z pakietu `xlsx`, ponieważ pozwala on na zapis danych do wielu zakłądek z zadanym formatowaniem. 
+Najczęściej korzystam z pakietu `xlsx`, ponieważ pozwala on na zapis danych do wielu zakładek z zadanym formatowaniem. 
 
 ---
 
@@ -96,9 +96,10 @@ Gdzie szukać dalej
 http://cran.r-project.org/doc/manuals/r-release/R-data.pdf
 https://github.com/pbiecek/MOOC/blob/master/materialyZewnetrzne/R-data.pdf?raw=true
 
-- O ile *,,R Data Import/Export''* jest opisem ,,teoretyznym'' to bardzo ciekawe zebranie przypadków użycia funkcji do wczytywania danych z różnych formatów jest zebrane w wiki-książce *,,R programming''* dostępnej pod adresem 
+- O ile *,,R Data Import/Export''* jest opisem ,,teoretycznym'' to bardzo ciekawe zebranie przypadków użycia funkcji do wczytywania danych z różnych formatów jest zebrane w wiki-książce *,,R programming''* dostępnej pod adresem 
 http://en.wikibooks.org/wiki/R_Programming/Importing_and_exporting_data
 
 - Interesujące zestawienie narzędzi do odczytywania danych ze stron interentowych znaleźć można na stronach z materiałami dydaktycznymi Gastona Sancheza
 http://gastonsanchez.com/teaching/
+
 
