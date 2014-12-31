@@ -343,6 +343,25 @@ ggplot(WIG, aes(x=Data, y=Kurs.zamkniecia)) +
 
 ---
 
+# Kiedy stosować linie na wykresie?
+
+Z punktu widzenia danych, to równie dobrze możemy te same dane przedstawić używając punktów jak i używając linii.
+
+Jest jednak duża różnica w sposobie w jaki będziemy takie wykresy postrzegać.
+
+Puntky nie mają kierunku, więc chmara punktów na wykresie pozoli ocenić czy te punktu ukłądają się wzdłuż jakiejś krzywej (jest zależność pomiędzy zmiennymi), czy tworzą kilka grup (są skupiska), czy występują wartości odstające.
+
+Linie na wykresie mają kierunek, patrząc na linie nasze oko ocenia ich względne długości oraz względne kierunki, szacunjąc kąty pomiędzy liniami. Nie jesteśmy w stanie odróżnić małych różnic w kątach, próg rozróżnialności to około 4 stopni ale jesteśmy w stanie rozróżnić duże zmiany.
+
+Z tego powodu, wykresów liniowych najlepiej używać gdy
+
+1. Chcemy przedstawić trend, jak pewna wartość zmienia się w czasie, standardowo na osi poziomej przedstawia się czas a na osi pionowej wartość.
+2. Chcemy przedstawić tempo zmiany trendu, czy tempo wzrostu rośnie czy maleje (czy kąty są coraz większe czy nie)
+3. Chcemy pokazać zmienność pomiędzy sąsiednimi pomiarami. Ponieważ są siednie pomiary połączone są linią, będzie widać czy ta linia gwałtownie czy spokojnie zmienia kierunki.
+
+
+---
+
 # Geometria `geom_ribbon()` - wykres wstęga
 
 Ostatnim przykładem w tym odcinku będzie geometria `geom_ribbon()` do rysowania wstęg. Wstęgi są opisane przez cechy `ymin` i `ymax`. Możemy na te cechy zamapować zmienną lub stała. W poniższym przykładzie rysujemy wstęgę rozpinającą się od zera do wartości indeksu WIG.
