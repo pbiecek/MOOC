@@ -1,0 +1,67 @@
+---
+title: "Jak zapisać dane z programu R"
+author: "pogRomcy danych"
+date: "sezon 1 / odcinek 6 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / eksploracja danych / zapisywanie danych z R"
+---
+
+# O czym jest ten odcinek
+
+R jest świetnym narzędziem do przetwarzania danych. Mając już dane przetworzone pojawia się potrzeba by wyniki gdzieś zapisać.
+
+Podobnie jak wczytywaliśmy dane z formatów tekstowych, binarnych lub plików Excela, równiez możemy zapisywać dane do różnych formatów.
+
+W tym odcinku dowiemy się
+
+- Jak zapisać dane tabelaryczne do plików tekstowych?
+- Jak zapisać dane tabelaryczne do plików Excela [xls lub xlsx]?
+- Jak zapisać dane w postaci binarnej?
+- Gdzie szukać informacji o tym jak wczytać dane z innych źródeł?
+
+---
+
+# Zapisywanie danych
+
+Dane, które są dostępne w programie R, można zapisać do pliku tekstowego, pliku excelowego lub binarnego funkcjami:
+
+- do pliku tekstowego funkcją `write.table()`. Formatowanie określa się w ten sam sposób co w funkcji `read.table()`.
+
+- do pliku w formacie Excela funkcją `write.xls()`. Funkcja ta jest dostępna w większosci pakietów, zawierających funkcję `read.xls()`, np. w pakiecie `xlsx`.
+
+- do pliku w formacie natywnym R, dane można zapisać funkcją `save()`. Funkcja ta zabisuje jeden lub więcej zmiennych o dowolnych formatach. Nie tylko tabelarycznych.
+
+[TODO] funkcja gdata::read.xls (chyba) nie zapisuje do formatu Excela,
+to dobrym uzupelnieniem tego pakietu jest
+WriteXLS::WriteXLS (wyk. tez Perla) zapisuje do Excela.
+Poniewaz wykorzystujesz pakiet gdata warto o tym napisac.
+Jest tez dataframe2xls::write.xls (wyk Pythona)
+
+---
+
+# Zadanie
+
+---
+
+# Więcej informacji 
+
+Gdzie szukać dalej
+
+- Więcej informacji o tym jak wczytywać dane z innych formatów oraz baz danych znaleźć można w rozdziale 2.2 książki *,,Przewodnik po pakiecie R''*. Rozdział ten jest dostępny bezpłatnie pod adresem http://biecek.pl/R.
+
+- Bardziej szczegółowe informacje o tym jak wczytywać i zapisywać dane z i do baz danych lub plików w egzotycznych formatach znaleźć można w dokumencie *,,R Data Import/Export''*
+http://cran.r-project.org/doc/manuals/r-release/R-data.pdf
+https://github.com/pbiecek/MOOC/blob/master/materialyZewnetrzne/R-data.pdf?raw=true
+
+- O ile *,,R Data Import/Export''* jest opisem ,,teoretyznym'' to bardzo ciekawe zebranie przypadków użycia funkcji do wczytywania danych z różnych formatów jest zebrane w wiki-książce *,,R programming''* dostępnej pod adresem 
+http://en.wikibooks.org/wiki/R_Programming/Importing_and_exporting_data
+
+- Interesujące zestawienie narzędzi do odczytywania danych ze stron interentowych znaleźć można na stronach z materiałami dydaktycznymi Gastona Sancheza
+http://gastonsanchez.com/teaching/
+

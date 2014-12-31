@@ -1,7 +1,7 @@
 ---
 title: "Jak wczytać dane do programu R"
-author: "poskRamiacze danych"
-date: "sezon 2 / odcinek 2 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+author: "pogRomcy danych"
+date: "sezon 1 / odcinek 5 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -9,7 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "poskRamiacze danych / przetwarzanie / czytanie danych"
+    footer: "pogRomcy danych / eksploracja danych / wczytywanie danych do R"
 ---
 
 # O czym jest ten odcinek
@@ -20,10 +20,9 @@ Dane mogą być przechowywane  w najróżniejszych formatach, takich jak baza da
 
 W tym odcinku dowiemy się
 
-- Jak wczytywać dane tabelaryczne z plików tekstowych
-- Jak wczytywać dane tabelaryczne  z plików Excela [xls lub xlsx]
-- Jak wczytywać dane z pakietów R
-- Gdzie szukać informacji o tym jak wczytać dane z innych źródeł.
+- Jak wczytywać dane tabelaryczne z plików tekstowych?
+- Jak wczytywać dane tabelaryczne  z plików Excela [xls lub xlsx]?
+- Jak wczytywać dane z pakietów R?
 
 ---
 
@@ -31,22 +30,28 @@ W tym odcinku dowiemy się
 
 Jednym z częstszych formatów wymiany danych są pliki tekstowe.
 
-Nazwa 'plik tekstowy' bierze się stąd, że treść tego pliku możemy otworzyć w standardowym edytorze takim jak Notepad/Notatnik w Windowsie lub vim w Linuxie.
+Nazwa 'plik tekstowy' bierze się stąd, że treść tego pliku możemy otworzyć w standardowym edytorze takim jak Notepad/Notatnik w Windowsie lub vim w Linuxie/OSX. Pliki tekstowe można również otwierać z użyciem programu RStudio. Jeżeli często pracujemy z dużymi lub wieloma plikami tekstowymi to warto wyposażyć się w dobre narzędzie do pracy z nimi, np. edytor [Sublime Text](http://www.sublimetext.com/3).
 
 Przyjrzymy się tabeli liczb z pliku
-http://biecek.pl/MOOC/dane/koty.csv
+http://biecek.pl/MOOC/dane/koty_ptaki.csv
 
 Zawartość tego pliku wygląda tak
 
 ```{}
-gatunek;waga.od[kg];waga.do[kg];max.dlugosc[m];predkosc[kph];habitat
-Tygrys;75;320;2,9;55;Azja
-Lew;100;220;2;80;Afryka
-Jaguar;35;110;1,7;90;Ameryka
-Puma;30;85;1,7;70;Ameryka
-Leopard;25;75;1,4;90;Azja
-Gepard;21;65;1,4;110;Afryka
-Irbis;20;55;1,3;65;Azja
+gatunek;waga;dlugosc;predkosc;habitat;zywotnosc;druzyna
+Tygrys;300;2,5;60;Azja;25;Kot
+Lew;200;2;80;Afryka;29;Kot
+Jaguar;100;1,7;90;Ameryka;15;Kot
+Puma;80;1,7;70;Ameryka;13;Kot
+Leopard;70;1,4;85;Azja;21;Kot
+Gepard;60;1,4;115;Afryka;12;Kot
+Irbis;50;1,3;65;Azja;18;Kot
+Jerzyk;0,05;0,2;170;Euroazja;20;Ptak
+Strus;150;2,5;70;Afryka;45;Ptak
+Orzel przedni;5;0,9;160;Polnoc;20;Ptak
+Sokol wedrowny;0,7;0,5;110;Polnoc;15;Ptak
+Sokol norweski;2;0,7;100;Polnoc;20;Ptak
+Albatros;4;0,8;120;Poludnie;50;Ptak
 ```
 ---
 
@@ -54,21 +59,14 @@ Irbis;20;55;1,3;65;Azja
 
 W jaki sposób dane tabelaryczne zapisane są w tym pliku?
 
-```{}
-gatunek;waga.od[kg];waga.do[kg];max.dlugosc[m];predkosc[kph];habitat
-Tygrys;75;320;2,9;55;Azja
-Lew;100;220;2;80;Afryka
-Jaguar;35;110;1,7;90;Ameryka
-Puma;30;85;1,7;70;Ameryka
-Leopard;25;75;1,4;90;Azja
-Gepard;21;65;1,4;110;Afryka
-Irbis;20;55;1,3;65;Azja
-```
+Wyrównując wartości, zauważymy, że logiczna struktura tego pliku to tabela wartości rozdzialna średnikami.
+
+![Zbiór danych o kotach](figs/koty_ptaki_ramka2.png)
 
 Zauważmy, że:
 
-- kolumny liczb są rozdzielane średnikiem `;`
-- pierwszy wiersz to nagłówek, zawiera nazwy kolumn
+- pierwszy wiersz to nagłówek, zawiera nazwy kolumn rozdzielane średnikiem (gatunek;waga;dlugosc;predkosc;habitat;zywotnosc;druzyna)
+- kolejne wiersze to dane w postaci kolumn liczb, które są rozdzielane średnikiem `;`
 - w pliku występują liczby niecałkowite, kropką dziesiętną jest przecinek `,`
 
 
@@ -86,7 +84,7 @@ W przypadku rozważanego pliku musimy określić następujące argumenty:
 - `header` - flaga określająca, czy pierwszy wiersz należy traktować jako nagłówek. W naszym przypadku `header=TRUE`.
 
 ```{r, message=FALSE}
-read.table("http://biecek.pl/MOOC/dane/koty.csv", 
+read.table("http://biecek.pl/MOOC/dane/koty_ptaki.csv", 
           sep=";", dec=",", header=TRUE)
 ```
 
@@ -99,13 +97,11 @@ Wynikiem funkcji `read.table()` jest tabelaryczny zbiór danych, który w R nazy
 Aby na nim pracować, musimy wynik funkcji `read.table()` zapamiętać w zmiennej. Na przykład w zmiennej o nazwie `koty`.
 
 ```{r, message=FALSE}
-koty <- read.table("http://biecek.pl/MOOC/dane/koty.csv", 
+koty <- read.table("http://biecek.pl/MOOC/dane/koty_ptaki.csv", 
                         sep=";", dec=",", header=TRUE)
 # po wpisaniu nazwy zmiennej jako wynik wyświetlona zostanie jej wartość
 koty
 ```
-
-
 
 ---
 
@@ -156,7 +152,7 @@ Funkcja `read.xls()` oczekuje dwóch argumentów: ścieżki do pliku i argumentu
 
 ```{r, warning=FALSE, message=FALSE}
 library(gdata)
-read.xls("http://biecek.pl/MOOC/dane/koty.xls", sheet = 1)
+read.xls("http://biecek.pl/MOOC/dane/koty_ptaki.xls", sheet = 1)
 ```
 
 ![Dane Excelowe](figs/excel.png)
@@ -191,8 +187,8 @@ Dane w tym formacie, do programu R można je wczytać poleceniem `load()`. Pierw
 *Uwaga!* W przeciwieństwie do wcześniej poznanych funkcji, funkcja `load()` nie zwraca zbioru danych jako wynik, ale ładuje zbiór danych bezpośrednio do przestrzeni nazw (dane zapisane są wraz z nazwą zmiennej).
 
 ```{r, warning=FALSE, message=FALSE}
-load(url("http://biecek.pl/MOOC/dane/koty.rda"))
-koty
+load(url("http://biecek.pl/MOOC/dane/koty_ptaki.rda"))
+koty_ptaki
 ```
 
 ---
@@ -225,7 +221,7 @@ Po wczytaniu pakietu, ten zbiór danych jest dostępny bez potrzeby stosowania d
 
 ```{r, warning=FALSE, message=FALSE}
 library(SmarterPoland)
-koty
+koty_ptaki
 ```
 
 ---
@@ -248,24 +244,6 @@ summary(tsdtr210)
 
 ---
 
-# Zapisywanie danych
-
-Dane, które są dostępne w programie R, można zapisać do pliku tekstowego, pliku excelowego lub binarnego funkcjami:
-
-- do pliku tekstowego funkcją `write.table()`. Formatowanie określa się w ten sam sposób co w funkcji `read.table()`.
-
-- do pliku w formacie Excela funkcją `write.xls()`. Funkcja ta jest dostępna w większosci pakietów, zawierających funkcję `read.xls()`, np. w pakiecie `xlsx`.
-
-- do pliku w formacie natywnym R, dane można zapisać funkcją `save()`. Funkcja ta zabisuje jeden lub więcej zmiennych o dowolnych formatach. Nie tylko tabelarycznych.
-
-[TODO] funkcja gdata::read.xls (chyba) nie zapisuje do formatu Excela,
-to dobrym uzupelnieniem tego pakietu jest
-WriteXLS::WriteXLS (wyk. tez Perla) zapisuje do Excela.
-Poniewaz wykorzystujesz pakiet gdata warto o tym napisac.
-Jest tez dataframe2xls::write.xls (wyk Pythona)
-
----
-
 # Zadanie
 
 W kolejnych odcinkach będziemy korzystać ze zbioru danych o cenach aut. 
@@ -284,22 +262,4 @@ Ten zbiór danych można pobrać ze strony kursu w różnych formatach pod nast�
 Wczytać do programu R dane korzystając z każdego z tych formatów.
 
 *Uwaga!* Wskazane pliki mają do 3.5 MB wielkości. Ich pobieranie może trochę potrwać jeżeli połączenie internetowe nie jest dobre lub wiele osób jednocześnie z niego korzysta.
-
----
-
-# Więcej informacji 
-
-Gdzie szukać dalej
-
-- Więcej informacji o tym jak wczytywać dane z innych formatów oraz baz danych znaleźć można w rozdziale 2.2 książki *,,Przewodnik po pakiecie R''*. Rozdział ten jest dostępny bezpłatnie pod adresem http://biecek.pl/R.
-
-- Bardziej szczegółowe informacje o tym jak wczytywać i zapisywać dane z i do baz danych lub plików w egzotycznych formatach znaleźć można w dokumencie *,,R Data Import/Export''*
-http://cran.r-project.org/doc/manuals/r-release/R-data.pdf
-https://github.com/pbiecek/MOOC/blob/master/materialyZewnetrzne/R-data.pdf?raw=true
-
-- O ile *,,R Data Import/Export''* jest opisem ,,teoretyznym'' to bardzo ciekawe zebranie przypadków użycia funkcji do wczytywania danych z różnych formatów jest zebrane w wiki-książce *,,R programming''* dostępnej pod adresem 
-http://en.wikibooks.org/wiki/R_Programming/Importing_and_exporting_data
-
-- Interesujące zestawienie narzędzi do odczytywania danych ze stron interentowych znaleźć można na stronach z materiałami dydaktycznymi Gastona Sancheza
-http://gastonsanchez.com/teaching/
 

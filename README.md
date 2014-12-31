@@ -24,7 +24,7 @@ część 1: Data smart
     + odcinek 4: Interaktywna praca z R [html, TODO, PBi], [video, TODO, PBi]
   * Odczytywanie, zapisywanie i indeksowanie danych
     + odcinek 5: Jak wczytać dane do R, [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/3_wczytywanie.html)
-    + odcinek 6: Jak zapisać dane z R, [html]
+    + odcinek 6: Jak zapisać dane z R, [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/32_zapisywanie.html)
     + odcinek 7: Indeksowanie wektorów i ramek danych, [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/4_indeksowanie.html)
   * Instrukcje sterujące, pętle, warunki i funkcje
     + odcinek 8: Pętle [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/8_petle.html), 
