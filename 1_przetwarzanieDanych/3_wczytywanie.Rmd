@@ -279,6 +279,39 @@ summary(tsdtr210)
 
 ---
 
+# Podsumowanie instrukcji R
+
+W tym odcinku omawialiśmy funkcje służące do wczytywania danych z różnych formatów, tekstowych, Excelowych, binarnych. Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.
+
+```{r, eval=FALSE}
+# wczytywanie danych z plików tekstowych i przypisaie tej wartości do zmiennej `koty_ptaki`
+koty_ptaki <- read.table("http://biecek.pl/MOOC/dane/koty_ptaki.csv", 
+                        sep=";", dec=",", header=TRUE)
+# wyświetlanie wartości zmiennej
+koty_ptaki
+
+# wczytywanie danych w formacie Excela za pomocą funkcji `read.xls()` z pakietu `gdata`
+library(gdata)
+koty_ptaki_excel <- read.xls("http://biecek.pl/MOOC/dane/koty_ptaki.xls", sheet = 1)
+
+# wczytywanie danych w formacie binarnym za pomocą funkcji load()
+load(url("http://biecek.pl/MOOC/dane/koty_ptaki.rda"))
+
+# wyświetlenie zbiorów danych dostępnych w pakiecie `SmarterPoland`
+data(package="SmarterPoland")
+
+# wczytanie danych koty_ptaki z pakietu `SmarterPoland`
+library(SmarterPoland)
+koty_ptaki
+
+# wczytanie danych z Eurostatu o wykorzystaniu różnych środków transportu w róąnych krajach
+tsdtr210 <- getEurostatRCV("tsdtr210")
+head(tsdtr210, 3)
+summary(tsdtr210)
+```
+
+---
+
 # Zadanie
 
 W kolejnych odcinkach będziemy korzystać ze zbioru danych o cenach aut. 
@@ -292,9 +325,9 @@ Ten zbiór danych można pobrać ze strony kursu w różnych formatach pod nast�
 
 - w pakiecie `SmarterPoland` w zmiennej `auta2012`.
 
-*Zadanie na ćwiczenia:* 
+*Zadanie:* 
 
-Wczytać do programu R dane korzystając z każdego z tych formatów.
+Wczytać do programu R dane wykorzystując każdy z tych formatów.
 
 *Uwaga!* Wskazane pliki mają do 3.5 MB wielkości. Ich pobieranie może trochę potrwać jeżeli połączenie internetowe nie jest dobre lub wiele osób jednocześnie z niego korzysta.
 
