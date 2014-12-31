@@ -74,7 +74,11 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
 
 # Co różni te dwa wykresy?
 
-Przyjrzymy się wynikowym wykresom oraz postarajmy się znaleźć jak najwięcej różnic.
+Dla wybranych gatunków, na wykresie punktowym przedstawiamy zależność pomiędzy wagą a prędkością osobników tego gatunku. Lżejsze gatunki to głównie ptaki, które są też szybsze niż duże koty, więc przedstawiany wykres pokazuje, że im cięższy osobnik, tym niższa jego prędkość maksymalna.
+
+Pomimo jednak tego, że zależność przedstawiona na obu wykresach jest ta sama, ponieważ przedstawiają one te same dane, to jednak wykresy te wyglądają różnie.
+
+Przyjrzymy się wynikowym wykresom oraz postarajmy się znaleźć jak najwięcej różnic i zastanówmy się, który sposób prezentacji jest lepszy.
 
 ```{r, fig.height=5, fig.width=5, message=FALSE, echo=FALSE}
 
