@@ -31,7 +31,7 @@ W tym odcinku dowiemy się:
 
 W tym odcinku będziemy pracować z dwoma zbiorami danych: `koty_ptaki` oraz `WIG`.
 
-Aby odtworzyć przykłądy z tego odcinka potrzebny jest pakiet `SmarterPoland`. Informacja o tym jak go zainstawlować jest umieszczona w odcinku drugim *Jak zainstalować R, RStudio oraz dodatkowe pakiety?*.
+Aby odtworzyć przykłady z tego odcinka potrzebny jest pakiet `SmarterPoland`. Informacja o tym jak go zainstalować jest umieszczona w odcinku drugim *Jak zainstalować R, RStudio oraz dodatkowe pakiety?*.
 
 ```{r,  message=FALSE}
 library(SmarterPoland)
@@ -52,7 +52,7 @@ Z tego powodu powstaje coraz więcej rozwiązań, programów i pakietów, pozwal
 My skupimy się na jednym, na pakiecie `ggplot2`. Dlaczego? Jest ku temu kilka powodów.
 
 - Zaawansowana analiza danych bardzo często ma miejsce w programie R. Wykorzystanie tego samego programu do analiz i do wizualizacji, ma tę zaletę, że nie musimy danych konwertować do nowego formatu, nie musimy poznawać dwóch języków opisu wizualizacji, możemy pracować w jednym spójnym środowisku. Z pakietów programu R, to właśnie `ggplot2` jest najbardziej dojrzałym rozwiązaniem.
-- Pakiet `ggplot2` pozwala na tworzenie grafiki *publicaition ready*, czyli wystarczająco dobrej by pokazać ją innym osobom bez dodatkowych zabiegów upiększających. 
+- Pakiet `ggplot2` pozwala na tworzenie grafiki *publication ready*, czyli wystarczająco dobrej by pokazać ją innym osobom bez dodatkowych zabiegów upiększających. 
 - Pakiet `ggplot2` wymusza myślenie o wykresach danych w kategorii zmiennych, które chcemy przedstawić a nie w kategorii szablonu, który chcemy wypełnić. Krzywa uczenia jest bardziej stroma, niż w przypadku ,,klikadeł'', ale z czasem nasze możliwości niepomiernie rosną. 
 
 
@@ -63,7 +63,7 @@ My skupimy się na jednym, na pakiecie `ggplot2`. Dlaczego? Jest ku temu kilka p
 Wykorzystując zbiór danych `koty_ptaki` przedstawmy zależność wagi od prędkości dla wybranych gatunków. Wykorzystamy w tym celu dwa pakiety graficzne dostępne w programie R, pakiet `graphics` z funkcją `plot()` oraz pakiet `ggplot2`  z funkcją `ggplot()`. 
 
 Poniższe instrukcje tworzą wykres z domyślnymi ustawieniami.
-To, w jaki sposób tworzą one wykres yjaśnimi na kolejnym slajdzie o tytule *Elementy wykresu punktowego*, w tym miejscu, przyjrzyjmy się wyłącznie wynikom, które obie instrukcje produkują.
+To, w jaki sposób tworzą one wykres wyjaśnimy na kolejnym slajdzie o tytule *Elementy wykresu punktowego*, w tym miejscu, przyjrzyjmy się wyłącznie wynikom, które obie instrukcje produkują.
 
 ```{r,  message=FALSE, eval=FALSE}
 library(ggplot2)        # ten pakiet pozwala na tworzenie wykresów 
@@ -119,16 +119,16 @@ Używając pakietu `ggplot2` otrzymujemy przy fabrycznych ustawieniach czytelny 
 
 Wykres punktowy stosuje się najczęściej w sytuacjach
 
-Dla pewnego zbioru obiektów mamy dwie zmienne ilościowe (np. dla państw to może być PKB i średnia długość życia, dla osób to może być wzrost i waga, dla samochodów to może być przegieg i cena).
+Dla pewnego zbioru obiektów mamy dwie zmienne ilościowe (np. dla państw to może być PKB i średnia długość życia, dla osób to może być wzrost i waga, dla samochodów to może być przebieg i cena).
 
-1. Nie wiemy czy i jakiej zalezności się spodziewać (czy i jak długość życia jest związana z PKB).
+1. Nie wiemy czy i jakiej zależności się spodziewać (czy i jak długość życia jest związana z PKB).
 2. Wiemy, że dwie zmienne są zależne i chcemy przedstawić tę zależność (chcemy pokazać jak cena auta zmienia się z jego przebiegiem).
 3. Wiemy, że w jednej zmiennej występują nietypowe obserwacje (np. bardzo duże) i chcemy zobaczyć jakim wartościom stowarzyszonej zmiennej one odpowiadają (np. czy osoby o bardzo wysokiej wadze to osoby bardzo wysokie czy nie).
 
-Na wykresie punktowym można również zaznaczyć grupy, pozwala to dodatkowo na porównanie grup pod względem przedstawianych zmiennych. Taki wykre spunktowy z grupami warto stosować gdy
+Na wykresie punktowym można również zaznaczyć grupy, pozwala to dodatkowo na porównanie grup pod względem przedstawianych zmiennych. Taki wykres punktowy z grupami warto stosować gdy
 
 1. Nie wiemy czy grupy różnią się pod kątem danej pary zmiennych i chcemy to sprawdzić (np. czy auta 3 drzwiowe różnią się od 5 drzwiowych jeżeli chodzi o cenę i przebieg),
-2. Wiemy, że grupy się różnią i chcemy pokazać w jaki sposób (np aby pokzać że kobiety są średnio niższe i znacznie lżejsze niż mężczyźni),
+2. Wiemy, że grupy się różnią i chcemy pokazać w jaki sposób (np. aby pokazać, że kobiety są średnio niższe i znacznie lżejsze niż mężczyźni),
 
 ---
 
@@ -163,7 +163,7 @@ Trzy elementy są kluczowe w tej instrukcji.
 
 Jak dotąd, nie widać jeszcze jak potężnym mechanizmem są mapowania. Zademonstrujmy to w kolejnym przykładzie, gdzie na wykresie przedstawimy również zmienną `druzyna`. Różne wartości tej zmiennej przedstawimy za pomocą różnych kształtów punktów, a więc cechy `shape`.
 
-Zauważmy, że zmienne `waga`, `predkosc` i `druzyna` to kolumny występujące w zbiorze danych `koty_ptaki`. Zaś `x`, `y` i `shape` to cechy wykresu punktowego. Funkcja `aes()` wskazuje, które cechy wykresu przedstawiją które zmienne.
+Zauważmy, że zmienne `waga`, `predkosc` i `druzyna` to kolumny występujące w zbiorze danych `koty_ptaki`. Zaś `x`, `y` i `shape` to cechy wykresu punktowego. Funkcja `aes()` wskazuje, które cechy wykresu przedstawiają które zmienne.
 
 ```{r, fig.height=4, fig.width=5}
 head(koty_ptaki, 3)
@@ -294,14 +294,14 @@ Również w tym przypadku przedstawiamy zależność pomiędzy dwoma zmiennymi i
 
 Stosowanie etykiet na wykresie ma wady i zalety. Do głównych zalet zaliczyć można:
 
-1. Nazwy obiektów pozwalają zorientować się czemu odpowiada dany punkt. Jest to przydatne, jeżęli wykres wykorzytujemy do identyfikacji *ciekawych* obserwacji, np. najbardziej odstających, najbardziej charakterystycznych.
-2. Nazwy mna skracać do kilku pierwszych liter, przez co nie zajmują dużo miejsca.
+1. Nazwy obiektów pozwalają zorientować się czemu odpowiada dany punkt. Jest to przydatne, jeżeli wykres wykorzystujemy do identyfikacji *ciekawych* obserwacji, np. najbardziej odstających, najbardziej charakterystycznych.
+2. Nazwy można skracać do kilku pierwszych liter, przez co nie zajmują dużo miejsca.
 3. Jeżeli wykres przedstawia tylko kilka obserwacji, to nazwy lepiej *wypełniają* wykres, nie pozostawiając dużych pustych przestrzeni.
 
 A główne wady to:
 
 1. Jeżeli obiektów jest dużo, to nazwy na siebie nachodzą, przez co mogą stać się nieczytelne.
-2. Jeżeli nazwy są długi to może nie być oczywiste, gdzie jest punkt który przedstawia współrzędne na wykresie i czy to jest środek napisu czy któ®yś róg napisu.
+2. Jeżeli nazwy są długi to może nie być oczywiste, gdzie jest punkt który przedstawia współrzędne na wykresie i czy to jest środek napisu czy któryś róg napisu.
 
 ---
 
@@ -349,15 +349,15 @@ Z punktu widzenia danych, to równie dobrze możemy te same dane przedstawić u�
 
 Jest jednak duża różnica w sposobie w jaki będziemy takie wykresy postrzegać.
 
-Puntky nie mają kierunku, więc chmara punktów na wykresie pozoli ocenić czy te punktu ukłądają się wzdłuż jakiejś krzywej (jest zależność pomiędzy zmiennymi), czy tworzą kilka grup (są skupiska), czy występują wartości odstające.
+Punkty nie mają kierunku, więc chmara punktów na wykresie pozwoli ocenić czy te punktu układają się wzdłuż jakiejś krzywej (jest zależność pomiędzy zmiennymi), czy tworzą kilka grup (są skupiska), czy występują wartości odstające.
 
-Linie na wykresie mają kierunek, patrząc na linie nasze oko ocenia ich względne długości oraz względne kierunki, szacunjąc kąty pomiędzy liniami. Nie jesteśmy w stanie odróżnić małych różnic w kątach, próg rozróżnialności to około 4 stopni ale jesteśmy w stanie rozróżnić duże zmiany.
+Linie na wykresie mają kierunek, patrząc na linie nasze oko ocenia ich względne długości oraz względne kierunki, szacując kąty pomiędzy liniami. Nie jesteśmy w stanie odróżnić małych różnic w kątach, próg rozróżnialności to około 4 stopni ale jesteśmy w stanie rozróżnić duże zmiany.
 
 Z tego powodu, wykresów liniowych najlepiej używać gdy
 
 1. Chcemy przedstawić trend, jak pewna wartość zmienia się w czasie, standardowo na osi poziomej przedstawia się czas a na osi pionowej wartość.
 2. Chcemy przedstawić tempo zmiany trendu, czy tempo wzrostu rośnie czy maleje (czy kąty są coraz większe czy nie)
-3. Chcemy pokazać zmienność pomiędzy sąsiednimi pomiarami. Ponieważ są siednie pomiary połączone są linią, będzie widać czy ta linia gwałtownie czy spokojnie zmienia kierunki.
+3. Chcemy pokazać zmienność pomiędzy sąsiednimi pomiarami. Ponieważ sąsiednie pomiary połączone są linią, będzie widać czy ta linia gwałtownie czy spokojnie zmienia kierunki.
 
 
 ---
@@ -382,6 +382,7 @@ Opanowaliśmy podstawy tworzenia wykresów z użyciem pakietu `ggplot2`. W kolej
 - Wiele przydatnych wskazówek można również znaleźć w internetowej książce *,,Cookbook for R''* http://www.cookbook-r.com/Graphs/
 
 - Bardzo rozbudowana dokumentacja dla pakietu ggplot2 dostępna jest na stronie *,,ggplot2''* http://docs.ggplot2.org/current/index.html
+
 
 
 
