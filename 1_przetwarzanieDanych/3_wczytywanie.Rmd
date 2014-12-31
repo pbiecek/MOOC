@@ -243,7 +243,7 @@ Zobaczmy jakie zbiory danych udostępnione są w pakiecie `SmarterPoland`.
 data(package="SmarterPoland")
 ```
 
-*Uwaga!* Pakiet `SmarterPoland` nie jest dostępny w podstawowej dystrybucji programu R i trzeba go wcześniej zainstalować poleceniem `install.packages()`. Szczegółowa instrukajc, jak to zrobić jest przedstawiona w odcinku 2 *Jak zainstalować R, RStudio oraz dodatkowe pakiety?*.
+*Uwaga!* Pakiet `SmarterPoland` nie jest dostępny w podstawowej dystrybucji programu R i trzeba go wcześniej zainstalować poleceniem `install.packages()`. Szczegółowa instrukcja, jak to zrobić jest przedstawiona w odcinku 2 *Jak zainstalować R, RStudio oraz dodatkowe pakiety?*.
 
 ![Lista dostępnych zbiorów danych](figs/datasets_list.png)
 ---

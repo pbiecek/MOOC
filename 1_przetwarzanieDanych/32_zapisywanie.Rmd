@@ -51,6 +51,21 @@ Najczęściej wykorzystywane argumenty to
 
 ---
 
+# Zapisywanie danych do pliku csv
+
+Pliki csv są również poprawnie odczytywane przez program Excel, przez co jest to popularne medium wymiany danych tabelarycznych. Poniższa instrukcja tworzy nowe dane o nazwie `dwie_kolumny` oraz zapisuje je do pliku `wazne_dane.csv` stosując jako separator kolumn średnik a jako kropkę dziesiętną znak `.`.
+
+```{r, eval=FALSE}
+# tworzymy nowy zbiór danych
+dwie_kolumny <- data.frame(litery  = c("A", "B", "C"),
+                           liczby  = c(1,2,3))
+
+write.table(dwie_kolumny, file="wazne_dane.csv", 
+            sep = ";", dec = ".")
+```
+
+---
+
 # Zapisywanie danych tabelarycznych do plików w formacie Excela
 
 Dane, które są dostępne w programie R, można zapisać pliku excelowego funkcją `write.xls()`. Funkcja ta jest dostępna w większości pakietów, zawierających funkcję `read.xls()`, np. w pakiecie `xlsx` (korzysta z biblioteki Java) oraz `dataframe2xls` (korzysta z zewnętrznych bibliotek Pythona).
