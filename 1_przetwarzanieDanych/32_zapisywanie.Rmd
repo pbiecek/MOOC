@@ -27,25 +27,62 @@ W tym odcinku dowiemy się
 
 ---
 
-# Zapisywanie danych
+# Zapisywanie danych tabelarycznych do plików tekstowych
+
+Dane, które są dostępne w programie R, można zapisać do pliku tekstowego, funkcją `write.table()`. Formatowanie określa się w ten sam sposób co w funkcji `read.table()`.
+
+Deklaracja funkcji `write.table()` jest następująca
+
+```{}
+write.table(x, file = "", append = FALSE, quote = TRUE, sep = " ",
+            eol = "\n", na = "NA", dec = ".", row.names = TRUE,
+            col.names = TRUE, qmethod = c("escape", "double"),
+            fileEncoding = "")
+```
+
+Najczęściej wykorzystywane argumenty to 
+- `x` - określa jaka tabela ma być zaisana do pliku tekstowego,
+- `file` - określa nazwę pliku tekstowego, do którego dane będą zapisane,
+- `append` - domyślna wartość `FALSE` oznacza, że plik o nazwie `file` istnieje wcześniej to zostanie on skasowany. Jeżeli ustawić `append=TRUE` to nowe dane będą dopisane do końca poprzedniego pliku.
+- `sep` - określa znak, który jest separatorem kolejnych wartości,
+- `dec` - określa znak, który jest kropką dzisiętną, zazwyczaj `.` lub `,`
+- `row.names` - określa czy do pliku tekstowego mają być zapisywane nazwy wierszy, domyślnie `TRUE`
+- `col.names`  - określa czy do pliku tekstowego mają być zapisywane nazwy kolumn, domyślnie `TRUE`
+
+---
+
+# Zapisywanie danych tabelarycznych do plików w formacie Excela
+
+Dane, które są dostępne w programie R, można zapisać pliku excelowego funkcją `write.xls()`. Funkcja ta jest dostępna w większosci pakietów, zawierających funkcję `read.xls()`, np. w pakiecie `xlsx` (korzysta z biblioteki Java) oraz `dataframe2xls` (korzysta z zewnętrznych bibliotek Pythona).
+
+Do zapisu do formatu Excela można też wykorzystać fucnkję `WriteXLS()` z pakietu `WriteXLS` (korzysta z zewnętrznych bibliotek Perla).
+
+Podstawowa funkcjonalność tych funkcji jest taka sama, pozwalają one na stworzenie nowego pliku oraz zapisania do niego tabeli.
+
+Funkcje te różnią się dodatkowymi funkcjami. Niektóre potrafią zapisaywać do plików Excelowych, które mają wiele zakładek. Inne potrafią zapisywać do pliku excela z dodanym formatowaniem, takim jak okreśłone kolory, wielkość pisma, krój czcionki, obrysowania tabeli.
+
+Najczęściej korzystam z pakietu `xlsx`, ponieważ pozwala on na zapis danych do wielu zakłądek z zadanym formatowaniem. 
+
+---
+
+# Zapisywanie danych do plików binarnych
 
 Dane, które są dostępne w programie R, można zapisać do pliku tekstowego, pliku excelowego lub binarnego funkcjami:
 
-- do pliku tekstowego funkcją `write.table()`. Formatowanie określa się w ten sam sposób co w funkcji `read.table()`.
+Do pliku w formacie natywnym R, dane można zapisać funkcją `save()`. Funkcja ta zapisuje jeden lub więcej zmiennych o dowolnych formatach. Nie tylko tabelarycznych. 
 
-- do pliku w formacie Excela funkcją `write.xls()`. Funkcja ta jest dostępna w większosci pakietów, zawierających funkcję `read.xls()`, np. w pakiecie `xlsx`.
+Wadą tego rozwiązania jest to, że format ten nie jest odczytywany rzez inne pakiety statystyczne. 
 
-- do pliku w formacie natywnym R, dane można zapisać funkcją `save()`. Funkcja ta zabisuje jeden lub więcej zmiennych o dowolnych formatach. Nie tylko tabelarycznych.
+Jeżeli jednak pracujemy głównie z programem R i chcemy w przyszłości te dane odczytywać tylko z programu R, to jest to najwygodniejsza opcja.
 
-[TODO] funkcja gdata::read.xls (chyba) nie zapisuje do formatu Excela,
-to dobrym uzupelnieniem tego pakietu jest
-WriteXLS::WriteXLS (wyk. tez Perla) zapisuje do Excela.
-Poniewaz wykorzystujesz pakiet gdata warto o tym napisac.
-Jest tez dataframe2xls::write.xls (wyk Pythona)
 
 ---
 
 # Zadanie
+
+- Zapisz zbiór danych `koty_ptaki` do pliku tekstowego, w którym dane są rozdzielane przecinkiem a kropką dziesiętną jest `.`
+- Zapisz zbiór danych `koty_ptaki` do formatu pliku Excela. Sprawdź czy dane poprawnie się zapisały.
+- Zapisz zbiór danych `koty_ptaki` do pliku binarnego. Odczytaj go następnie funkcją `load()` i sprawdź czy dane poprawnie zostały zapisane.
 
 ---
 
