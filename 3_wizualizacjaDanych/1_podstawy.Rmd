@@ -31,6 +31,8 @@ W tym odcinku dowiemy się:
 
 W tym odcinku będziemy pracować z dwoma zbiorami danych: `koty_ptaki` oraz `WIG`.
 
+Aby odtworzyć przykłądy z tego odcinka potrzebny jest pakiet `SmarterPoland`. Informacja o tym jak go zainstawlować jest umieszczona w odcinku drugim *Jak zainstalować R, RStudio oraz dodatkowe pakiety?*.
+
 ```{r,  message=FALSE}
 library(SmarterPoland)
 
@@ -160,6 +162,8 @@ Trzy elementy są kluczowe w tej instrukcji.
 # Dodajemy mapowania - kształt punktu - `shape`
 
 Jak dotąd, nie widać jeszcze jak potężnym mechanizmem są mapowania. Zademonstrujmy to w kolejnym przykładzie, gdzie na wykresie przedstawimy również zmienną `druzyna`. Różne wartości tej zmiennej przedstawimy za pomocą różnych kształtów punktów, a więc cechy `shape`.
+
+Zauważmy, że zmienne `waga`, `predkosc` i `druzyna` to kolumny występujące w zbiorze danych `koty_ptaki`. Zaś `x`, `y` i `shape` to cechy wykresu punktowego. Funkcja `aes()` wskazuje, które cechy wykresu przedstawiją które zmienne.
 
 ```{r, fig.height=4, fig.width=5}
 head(koty_ptaki, 3)
