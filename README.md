@@ -53,7 +53,7 @@ część 1: Data smart
   * Co dalej? 
     + odcinek 27: Co dalej? [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/99_coDalej.html)
     + odcinek 28: W opracowaniu materiałów udział wzięli [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/00_credits.Rmd)
-  * Challange [20 zadań]
+  * Challange [20 zadań] [przyklad z RStudio](http://shiny.rstudio.com/tutorial/quiz/)
 
 + Dane wokół nas,
   * Intro [intro, wideo, TODO](https://rawgit.com/pbiecek/MOOC/master/motywacja/intro.md)
