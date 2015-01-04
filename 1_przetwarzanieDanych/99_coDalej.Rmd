@@ -38,6 +38,22 @@ W języku angielskim są również dostępne kursy online dotyczące R na takich
 
 > https://www.coursera.org/ czy https://www.edx.org/
 
+## Dla uzytkowników Excela
+
+Użytkownikom Execela, którzy chcieliby przejść płynnie z Excela do R polecam świetną książkę,
+dostępną w całości online pracowaną przez Johna Taverasa ,,R for Excel Users''.
+
+Książce przyświeca miłę dla oka motto ,,Excel analysts who know R can do more with data''.
+
+http://www.rforexcelusers.com/book/preface/
+
+
+Oraz blog prowadzony przez Marco Ghislanzoni na którym dostępnych jest wiele materiałów video porównujących jak pewne ,,Excelowe'' rzeczy można zrobić w R.
+
+http://marcoghislanzoni.com/blog/
+
+
+
 ## Blogi
 
 ### W języku polskim
