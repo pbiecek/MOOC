@@ -1,0 +1,52 @@
+---
+title: "Zadania i odpowiedzi"
+author: "pogRomcy danych"
+date: "sezon 0 / odcinek 0 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / eksploracja danych / zadania i odpowiedzi"
+---
+
+# Zadanie, sezon 1, odcinek 5
+
+W kolejnych odcinkach będziemy korzystać ze zbioru danych o cenach aut. 
+Ten zbiór danych można pobrać ze strony kursu w różnych formatach pod następującymi linkami:
+
+- dane Excelowe, http://biecek.pl/MOOC/dane/auta2012mini.xls
+
+- dane tekstowe, http://biecek.pl/MOOC/dane/auta2012mini.csv
+
+- dane binarne, http://biecek.pl/MOOC/dane/auta2012mini.rda
+
+- w pakiecie `SmarterPoland` w zmiennej `auta2012`.
+
+*Zadanie:* 
+
+Wczytać do programu R dane wykorzystując każdy z tych formatów.
+
+*Uwaga!* Wskazane pliki mają do 3.5 MB wielkości. Ich pobieranie może trochę potrwać jeżeli połączenie internetowe nie jest dobre lub wiele osób jednocześnie z niego korzysta.
+
+---
+
+# Odpowiedzi, sezon 1, odcinek 5
+
+```{r}
+# plik tekstowy
+auta2012 <- read.table(file = "http://biecek.pl/MOOC/dane/auta2012mini.csv", 
+          sep=";", dec=",", header=TRUE)
+
+# plik Excela
+library(gdata)
+auta2012 <- read.xls("http://biecek.pl/MOOC/dane/auta2012mini.xls", sheet=1)
+
+# plik rda
+# nie trzeba przypisywać do zmiennej
+load(url("http://biecek.pl/MOOC/dane/auta2012mini.rda"))
+
+```
+

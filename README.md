@@ -10,7 +10,7 @@ część wspólna
 
 + [Lista zbiorów danych](https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html)
 + [Lista funkcji i pakietów](https://rawgit.com/pbiecek/MOOC/master/0_dane/1_skorowidz.html)
-+ [Zadania i odpowiedzi]
++ [Zadania i odpowiedzi](https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html)
 
 
 część 1: Data smart
