@@ -98,8 +98,32 @@ auta2012 &lt;-<span class="st"> </span><span class="kw">read.xls</span>(<span cl
 <span class="kw">save</span>(koty_ptaki, <span class="dt">file=</span><span class="st">&quot;koty_ptaki.rda&quot;</span>)
 <span class="kw">load</span>(<span class="st">&quot;koty_ptaki.rda&quot;</span>)</code></pre>
 </div>
-<div class="slide section level1">
-
+<div id="zadania-sezon-1-odcinek-7" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 7</h1>
+<ul>
+<li><p>Zbuduj sekwencję dziesięciu kolejnych małych liter alfabetu łacińskiego.</p></li>
+<li><p>Zbuduj sekwencję dziesięciu kolejnych liczb nieparzystych zaczynając od <code>3</code>.</p></li>
+<li><p>Z wektora <code>LETTERS</code> wybierz litery na pozycjach 5, 10, 15, 20 i 25.</p></li>
+<li><p>Wypisz wartości wektora <code>LETTERS</code> od końca.</p></li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-7" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 7</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># kolejne litery</span>
+<span class="kw">c</span>(<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span>, <span class="st">'e'</span>, <span class="st">'f'</span>, <span class="st">'g'</span>, <span class="st">'h'</span>, <span class="st">'i'</span>, <span class="st">'j'</span>)</code></pre>
+<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">letters[<span class="dv">1</span>:<span class="dv">10</span>]</code></pre>
+<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># nieparzyste od 3</span>
+<span class="kw">seq</span>(<span class="dv">3</span>, <span class="dv">21</span>, <span class="dv">2</span>)</code></pre>
+<pre><code>##  [1]  3  5  7  9 11 13 15 17 19 21</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># wybrane z LETTERS</span>
+LETTERS[<span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>)]</code></pre>
+<pre><code>## [1] &quot;E&quot; &quot;J&quot; &quot;O&quot; &quot;T&quot; &quot;Y&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># od końca wektor LETTERS</span>
+LETTERS[<span class="dv">26</span>:<span class="dv">1</span>]</code></pre>
+<pre><code>##  [1] &quot;Z&quot; &quot;Y&quot; &quot;X&quot; &quot;W&quot; &quot;V&quot; &quot;U&quot; &quot;T&quot; &quot;S&quot; &quot;R&quot; &quot;Q&quot; &quot;P&quot; &quot;O&quot; &quot;N&quot; &quot;M&quot; &quot;L&quot; &quot;K&quot; &quot;J&quot;
+## [18] &quot;I&quot; &quot;H&quot; &quot;G&quot; &quot;F&quot; &quot;E&quot; &quot;D&quot; &quot;C&quot; &quot;B&quot; &quot;A&quot;</code></pre>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

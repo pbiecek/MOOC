@@ -77,3 +77,34 @@ load("koty_ptaki.rda")
 
 ---
 
+# Zadania, sezon 1, odcinek 7
+
+- Zbuduj sekwencję dziesięciu kolejnych małych liter alfabetu łacińskiego.
+
+- Zbuduj sekwencję dziesięciu kolejnych liczb nieparzystych zaczynając od `3`.
+
+- Z wektora `LETTERS` wybierz litery na pozycjach 5, 10, 15, 20 i 25.
+
+- Wypisz wartości wektora `LETTERS` od końca.
+
+---
+
+# Odpowiedzi, sezon 1, odcinek 7
+
+```{r}
+# kolejne litery
+c('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j')
+letters[1:10]
+
+# nieparzyste od 3
+seq(3, 21, 2)
+
+# wybrane z LETTERS
+LETTERS[c(5, 10, 15, 20, 25)]
+
+# od końca wektor LETTERS
+LETTERS[26:1]
+```
+
+
+
