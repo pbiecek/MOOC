@@ -210,6 +210,58 @@ koty</code></pre>
 <li><p><code>gdata</code> ma kilka użytecznych funkcji, pozwalających na nawigacji po skoroszytach, np. <code>sheetCount()</code> i <code>sheetNames()</code></p></li>
 <li><p>Wczytując dane z plików, które zostały stworzone na innym systemie operacyjnym lub w innej lokalizacji, trzeba liczyć się z różnicami dotyczącymi kodowania polskich znaków lub np. kropek dziesiętnych w liczbach rzeczywistych. Jeżeli ten problem może nas dotyczyć, to warto zapoznać się z kartą ,,Dobrych Praktyk’’ dostępnych na stronie <a href="http://withr.me/blog/2013/11/15/configure-character-encoding-for-r-under-linux-and-windows/">http://withr.me/blog/2013/11/15/configure-character-encoding-for-r-under-linux-and-windows/</a></p></li>
 </ul>
+<p>Zestawienie najpopularniejszych pakietów wczytujących danych z Excela prezentuje poniższa tabela.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">pakiet</th>
+<th align="left">funkcja_odczyt</th>
+<th align="left">funkcja_zapis</th>
+<th align="left">formaty</th>
+<th align="left">funkcjonalność</th>
+<th align="left">szybkość</th>
+<th align="left">jezyk</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">openxlsx</td>
+<td align="left">read.xlsx()</td>
+<td align="left">write.xlsx()</td>
+<td align="left">.xlsx</td>
+<td align="left">średnia</td>
+<td align="left">duża</td>
+<td align="left">Rcpp</td>
+</tr>
+<tr class="even">
+<td align="left">gdata</td>
+<td align="left">read.xls()</td>
+<td align="left">–</td>
+<td align="left">.xlsx, .xls</td>
+<td align="left">mała</td>
+<td align="left">średnia</td>
+<td align="left">Perl</td>
+</tr>
+<tr class="odd">
+<td align="left">WriteXLS</td>
+<td align="left">–</td>
+<td align="left">WriteXLS()</td>
+<td align="left">.xlsx, .xls</td>
+<td align="left">mała</td>
+<td align="left">średnia</td>
+<td align="left">Perl</td>
+</tr>
+<tr class="even">
+<td align="left">XLConnect</td>
+<td align="left">readWorksheet()</td>
+<td align="left">writeWorksheet()</td>
+<td align="left">.xlsx, .xls</td>
+<td align="left">duża</td>
+<td align="left">mała</td>
+<td align="left">Java</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="dane-binarne-programu-r" class="slide section level1">
 <h1>Dane binarne programu R</h1>
@@ -272,10 +324,10 @@ koty_ptaki</code></pre>
 <p>Przykładem niech będzie baza Eurostat, do której można sięgać używając funkcji getEurostatRCV() z pakietu SmarterPoland. W bazie Eurostat tabela ‘tsdtr210’ zawiera dane o ilości pasażero-kilometrów dla różnych krajów i środków transportu. <a href="http://ec.europa.eu/eurostat/tgm/table.do?tab=table&amp;init=1&amp;language=en&amp;pcode=tsdtr210&amp;plugin=1">http://ec.europa.eu/eurostat/tgm/table.do?tab=table&amp;init=1&amp;language=en&amp;pcode=tsdtr210&amp;plugin=1</a> Pobierzmy te dane używając API udostępnionego przez pakiet SmarterPoland.</p>
 <pre class="sourceCode r"><code class="sourceCode r">tsdtr210 &lt;-<span class="st"> </span><span class="kw">getEurostatRCV</span>(<span class="st">&quot;tsdtr210&quot;</span>)
 <span class="kw">head</span>(tsdtr210, <span class="dv">3</span>)</code></pre>
-<pre><code>##   vehicle geo time value
-## 1 BUS_TOT  AT 1990    NA
-## 2 BUS_TOT  BE 1990    NA
-## 3 BUS_TOT  BG 1990    NA</code></pre>
+<pre><code>##                 vehicle geo time value
+## BUS_TOT_AT_1990 BUS_TOT  AT 1990    NA
+## BUS_TOT_BE_1990 BUS_TOT  BE 1990    NA
+## BUS_TOT_BG_1990 BUS_TOT  BG 1990    NA</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(tsdtr210)</code></pre>
 <pre><code>##     vehicle         geo            time          value      
 ##  BUS_TOT:805   AT     :  69   1990   : 105   Min.   : 0.70  
