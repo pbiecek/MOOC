@@ -101,7 +101,7 @@ LETTERS[1]
 LETTERS[5]
 # ostatni element wektora
 LETTERS[26]
-# zamiast podawać wartość 26 można wstawić funkcję, któ®a jako wynik zwróci długość wektora
+# zamiast podawać wartość 26 można wstawić funkcję, która jako wynik zwróci długość wektora
 LETTERS[length(LETTERS)]
 ```
 
@@ -117,17 +117,60 @@ Przykładowo, aby wybrać pierwszy, piąty i ostatni element z wektora LETTERS m
 LETTERS[c(1,5,26)]
 ```
 
-Równowaznie można najpierw stworzyć wektor indeksów a następniw wykorzystać go do indeksowania wektora.
+Równoważnie można najpierw stworzyć wektor indeksów a następnie wykorzystać go do indeksowania wektora `LETTERS`.
 
 ```{r, message=FALSE, warning=FALSE}
-indeksy <- c(1,5,26)
+indeksy <- c(1, 5, 26)
 LETTERS[indeksy]
 ```
 
+Aby wybrać więcej elementów z wektora wygodnie jest wykorzystać sekwecje.
 
+```{r, message=FALSE, warning=FALSE}
+# dziesięć pierwszych liter
+LETTERS[1:10]
+# pięć pierwszych i pięć ostatnich
+LETTERS[c(1:5, 21:26)]
+# co druga litera, indeksujemy sekwencją od 1 do 26 z krokiem co 2
+coDruga <- LETTERS[seq(from = 1, to = 26, by = 2)]
+coDruga
+```
 
+---
 
+# Indeksowanie wektora
 
+Sekwencje wartości nie muszą być rosnące. Można je wykorzystać np. do tego by odwrócić kolejność elementów w wektorze.
+
+```{r, message=FALSE, warning=FALSE}
+10:1
+LETTERS[10:1]
+```
+
+Elementy wektora można również indeksować warunkiem logicznym. 
+
+W poniższym przykładzie instrukacja `LETTERS > "K"` tworzy wektor wartości logicznych weryfikujących czy koljna litera jest większa czy mniejsza od `K` (w porządku leksykograficznym),
+
+Taki wektor wartości logicznych można wykorzystać do indeksowania wektora `LETTERS`.
+
+```{r, message=FALSE, warning=FALSE}
+LETTERS > "K"
+# tylko litery spełniające określony warunek
+# w tym przypadku litery występujące po literze 'K'
+LETTERS[LETTERS > "K"]
+```
+
+---
+
+# Zadania
+
+- Zbuduj sekwencję dziesięciu koljnym małych liter alfabetu łacińskiego.
+
+- Zbuduj sekwencję dziesięciu kolejnych liczb nieparzystych zaczynając od 3.
+
+- Z wektora `LETTERS` wybierz litery na pozycjach 5, 10, 15, 20 i 25.
+
+- Wypisz wartości wektora `LETTERS` od końca.
 
 ---
 
@@ -253,19 +296,6 @@ koty_ptaki[koty_ptaki$predkosc > 100,
            grepl(colnames(koty_ptaki), pattern = "a")]
 ```
 
----
-
-# Wybieranie elementów wektora
-
-Używając operatora `[]` można również odwoływać się do elementów wektora. Ponieważ wektor ma tylko jeden wymiar, nie trzeba rozdzielać współrzędnych przecinkiem.
-Kilka przykładów indeksowania elementów w wektorze `LETTERS`.
-
-```{r, message=FALSE, warning=FALSE}
-LETTERS
-LETTERS[5]
-LETTERS[13:15]
-LETTERS[c(5,13:15)]
-```
 
 ---
 

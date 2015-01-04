@@ -112,7 +112,7 @@ LETTERS[<span class="dv">5</span>]</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ostatni element wektora</span>
 LETTERS[<span class="dv">26</span>]</code></pre>
 <pre><code>## [1] &quot;Z&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># zamiast podawać wartość 26 można wstawić funkcję, któ®a jako wynik zwróci długość wektora</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># zamiast podawać wartość 26 można wstawić funkcję, która jako wynik zwróci długość wektora</span>
 LETTERS[<span class="kw">length</span>(LETTERS)]</code></pre>
 <pre><code>## [1] &quot;Z&quot;</code></pre>
 </div>
@@ -122,10 +122,49 @@ LETTERS[<span class="kw">length</span>(LETTERS)]</code></pre>
 <p>Przykładowo, aby wybrać pierwszy, piąty i ostatni element z wektora LETTERS musimy wpierw skonstruować wektor z tymi trzema indeksami.</p>
 <pre class="sourceCode r"><code class="sourceCode r">LETTERS[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">26</span>)]</code></pre>
 <pre><code>## [1] &quot;A&quot; &quot;E&quot; &quot;Z&quot;</code></pre>
-<p>Równowaznie można najpierw stworzyć wektor indeksów a następniw wykorzystać go do indeksowania wektora.</p>
-<pre class="sourceCode r"><code class="sourceCode r">indeksy &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">26</span>)
+<p>Równoważnie można najpierw stworzyć wektor indeksów a następnie wykorzystać go do indeksowania wektora <code>LETTERS</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">indeksy &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">26</span>)
 LETTERS[indeksy]</code></pre>
 <pre><code>## [1] &quot;A&quot; &quot;E&quot; &quot;Z&quot;</code></pre>
+<p>Aby wybrać więcej elementów z wektora wygodnie jest wykorzystać sekwecje.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># dziesięć pierwszych liter</span>
+LETTERS[<span class="dv">1</span>:<span class="dv">10</span>]</code></pre>
+<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pięć pierwszych i pięć ostatnich</span>
+LETTERS[<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">5</span>, <span class="dv">21</span>:<span class="dv">26</span>)]</code></pre>
+<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># co druga litera, indeksujemy sekwencją od 1 do 26 z krokiem co 2</span>
+coDruga &lt;-<span class="st"> </span>LETTERS[<span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="dv">26</span>, <span class="dt">by =</span> <span class="dv">2</span>)]
+coDruga</code></pre>
+<pre><code>##  [1] &quot;A&quot; &quot;C&quot; &quot;E&quot; &quot;G&quot; &quot;I&quot; &quot;K&quot; &quot;M&quot; &quot;O&quot; &quot;Q&quot; &quot;S&quot; &quot;U&quot; &quot;W&quot; &quot;Y&quot;</code></pre>
+</div>
+<div id="indeksowanie-wektora-2" class="slide section level1">
+<h1>Indeksowanie wektora</h1>
+<p>Sekwencje wartości nie muszą być rosnące. Można je wykorzystać np. do tego by odwrócić kolejność elementów w wektorze.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">10</span>:<span class="dv">1</span></code></pre>
+<pre><code>##  [1] 10  9  8  7  6  5  4  3  2  1</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">LETTERS[<span class="dv">10</span>:<span class="dv">1</span>]</code></pre>
+<pre><code>##  [1] &quot;J&quot; &quot;I&quot; &quot;H&quot; &quot;G&quot; &quot;F&quot; &quot;E&quot; &quot;D&quot; &quot;C&quot; &quot;B&quot; &quot;A&quot;</code></pre>
+<p>Elementy wektora można również indeksować warunkiem logicznym.</p>
+<p>W poniższym przykładzie instrukacja <code>LETTERS &gt; &quot;K&quot;</code> tworzy wektor wartości logicznych weryfikujących czy koljna litera jest większa czy mniejsza od <code>K</code> (w porządku leksykograficznym),</p>
+<p>Taki wektor wartości logicznych można wykorzystać do indeksowania wektora <code>LETTERS</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">LETTERS &gt;<span class="st"> &quot;K&quot;</span></code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [12]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [23]  TRUE  TRUE  TRUE  TRUE</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tylko litery spełniające określony warunek</span>
+<span class="co"># w tym przypadku litery występujące po literze 'K'</span>
+LETTERS[LETTERS &gt;<span class="st"> &quot;K&quot;</span>]</code></pre>
+<pre><code>##  [1] &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot; &quot;R&quot; &quot;S&quot; &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
+</div>
+<div id="zadania" class="slide section level1">
+<h1>Zadania</h1>
+<ul>
+<li><p>Zbuduj sekwencję dziesięciu koljnym małych liter alfabetu łacińskiego.</p></li>
+<li><p>Zbuduj sekwencję dziesięciu kolejnych liczb nieparzystych zaczynając od <code>3</code>.</p></li>
+<li><p>Z wektora <code>LETTERS</code> wybierz litery na pozycjach 5, 10, 15, 20 i 25.</p></li>
+<li><p>Wypisz wartości wektora <code>LETTERS</code> od końca.</p></li>
+</ul>
 </div>
 <div id="ptaki-vs-koty" class="slide section level1">
 <h1>Ptaki vs koty</h1>
@@ -277,20 +316,7 @@ koty_ptaki</code></pre>
 ## Sokol wedrowny Sokol wedrowny  0.70   Polnoc    Ptak
 ## Albatros             Albatros  4.00 Poludnie    Ptak</code></pre>
 </div>
-<div id="wybieranie-elementow-wektora" class="slide section level1">
-<h1>Wybieranie elementów wektora</h1>
-<p>Używając operatora <code>[]</code> można również odwoływać się do elementów wektora. Ponieważ wektor ma tylko jeden wymiar, nie trzeba rozdzielać współrzędnych przecinkiem. Kilka przykładów indeksowania elementów w wektorze <code>LETTERS</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">LETTERS</code></pre>
-<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot;
-## [18] &quot;R&quot; &quot;S&quot; &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">LETTERS[<span class="dv">5</span>]</code></pre>
-<pre><code>## [1] &quot;E&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">LETTERS[<span class="dv">13</span>:<span class="dv">15</span>]</code></pre>
-<pre><code>## [1] &quot;M&quot; &quot;N&quot; &quot;O&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">LETTERS[<span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">13</span>:<span class="dv">15</span>)]</code></pre>
-<pre><code>## [1] &quot;E&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot;</code></pre>
-</div>
-<div id="zadania" class="slide section level1">
+<div id="zadania-1" class="slide section level1">
 <h1>Zadania</h1>
 </div>
 
