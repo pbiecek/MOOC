@@ -6,8 +6,8 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / przetwarzanie / indeksowanie" /> 
-  <title>Indeksowanie ramek danych</title>
+  <meta name="copyright" content="pogRomcy danych / eksploracja danych / indeksowanie" /> 
+  <title>Indeksowanie ramek danych i wektorów</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -44,22 +44,88 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </head>
 <body>
 <div class="slide titlepage">
-  <h1 class="title">Indeksowanie ramek danych</h1>
+  <h1 class="title">Indeksowanie ramek danych i wektorów</h1>
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 2 / odcinek 4 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 7 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
-<p>Dane z którymi będziemy pracować mają najczęściej format tabeli. Jedną z podstawowych operacji na tabelach jest wybieranie podzbioru wierszy lub kolumn.</p>
+<p>Dane z którymi będziemy pracować mają najczęściej format tabeli lub wektora. Jedną z podstawowych operacji na tabelach oraz wektorach jest wybieranie podzbioru wierszy, kolumn lub wartości.</p>
 <p>W tym odcinku dowiemy się</p>
 <ul>
+<li>Jak tworzyć wektory</li>
+<li>Jak indeksować wartości z wektora</li>
 <li>Jak wybierać wiersze z ramki danych</li>
 <li>Jak wybierać kolumny z ramki danych</li>
 <li>Jak wybierać wiersze i kolumny</li>
 <li>Jak indeksować wiersze i kolumny używając nazw lub wartości logicznych</li>
 </ul>
+</div>
+<div id="wektory" class="slide section level1">
+<h1>Wektory</h1>
+<p>Jednym z podstawowych rodzajów danych w programie R są wektory.</p>
+<p>Wektory mogą zawierać liczby, napisy, wartości logiczne lub inne typy. Zacznijmy od wektorów wartości liczbowych.</p>
+<p>W programie R nawet jedna wartość jest wektorem, tyle że małym, jednoelementowym.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">4</span></code></pre>
+<pre><code>## [1] 4</code></pre>
+<p>Dłuższe wektory można tworzyć np funkcją <code>c()</code>, która pozwala na sklejenie kilku wartości w jeden wektor.</p>
+<p>Przykładowa instrukcja tworząca wektor o trzech elementach.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</code></pre>
+<pre><code>## [1] 3 4 5</code></pre>
+<p>W programowaniu i analizie danych bardzo często wykorzystuje sie wektory kolejnych wartości liczbowych. Takie wektory mają nawet specjalną nazwę <em>sekwencje</em>.</p>
+<p>Sekwencje kolejnych liczb można stworzyć operatorem <code>:</code>. Jeżeli chcemy zbudować sekwencję liczb równie odległych od siebie, ale z krokiem innym niż 1, to wygodnie jest wykorzystać funkcję <code>seq()</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span>:<span class="dv">7</span></code></pre>
+<pre><code>## [1] 2 3 4 5 6 7</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">3</span>, <span class="dt">to =</span> <span class="dv">15</span>, <span class="dt">by =</span> <span class="dv">2</span>)</code></pre>
+<pre><code>## [1]  3  5  7  9 11 13 15</code></pre>
+</div>
+<div id="wektory-1" class="slide section level1">
+<h1>Wektory</h1>
+<p>Używając funkcji <code>c()</code> można tworzyć wektory wartości logicznych (z dwoma możliwymi stanami PRAWDA/FAŁSZ oznaczanymi <code>TRUE</code>/<code>FALSE</code>), wektory napisów oraz innego rodzaju wartości.</p>
+<p>Aby wykorzystać wektor później, trzeba go przypisać do zmiennej. Można to zrobić używając operatora <code>-&gt;</code> lub <code>=</code>. Jeżeli chcemy wyświetlić zawartość zmiennej to wystarczy wpisać ją do konsili i nacisnąć ENTER.</p>
+<pre class="sourceCode r"><code class="sourceCode r">co_drugi &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)
+co_drugi</code></pre>
+<pre><code>## [1]  TRUE FALSE  TRUE FALSE  TRUE FALSE</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">literki &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;alfa&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;delta&quot;</span>)
+literki</code></pre>
+<pre><code>## [1] &quot;alfa&quot;  &quot;beta&quot;  &quot;gamma&quot; &quot;delta&quot;</code></pre>
+<p>W dalszym ciągu tego odcinka wykorzystamy wektor kolejnych liter w języku angielskim zapisany w zmiennej <code>LETTERS</code>. Użyjemy tego wektora do ćwiczeń w indeksowaniu.</p>
+<pre class="sourceCode r"><code class="sourceCode r">LETTERS</code></pre>
+<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot;
+## [18] &quot;R&quot; &quot;S&quot; &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
+</div>
+<div id="indeksowanie-wektora" class="slide section level1">
+<h1>Indeksowanie wektora</h1>
+<p>Indeksowanie oznacza wybieranie określonych wartości. Wartości wybieramy wskazując ich indeksy. Brzmi jak masło maślane?</p>
+<p>Wektor to ciąg elementów. Pierwszy z tych elementów ma indeks 1, kolejny 2, kolejny 3 i tak aż do ostatniego elementu. Indeks ostatniego elementu to jednocześnie długość wektora. Można ją sprawdzić funkcją <code>length()</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(LETTERS)</code></pre>
+<pre><code>## [1] 26</code></pre>
+<p>Aby odwołać się do określonych indeksów wektora należy użyć operatora <code>[]</code>. Wewnątrz nawiasów kwadratowych podaje się indeks elementu, do którego chcemy się odwołać.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pierwszy element wektora</span>
+LETTERS[<span class="dv">1</span>]</code></pre>
+<pre><code>## [1] &quot;A&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># piąty</span>
+LETTERS[<span class="dv">5</span>]</code></pre>
+<pre><code>## [1] &quot;E&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ostatni element wektora</span>
+LETTERS[<span class="dv">26</span>]</code></pre>
+<pre><code>## [1] &quot;Z&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># zamiast podawać wartość 26 można wstawić funkcję, któ®a jako wynik zwróci długość wektora</span>
+LETTERS[<span class="kw">length</span>(LETTERS)]</code></pre>
+<pre><code>## [1] &quot;Z&quot;</code></pre>
+</div>
+<div id="indeksowanie-wektora-1" class="slide section level1">
+<h1>Indeksowanie wektora</h1>
+<p>Odwołując się do wektorów, możemy podać indeks więcej niż jednej wartości. Zasada jest jednak taka, że indeksy muszą być wektorem. Do tego przyda nam się już poznana funkcja <code>c()</code>.</p>
+<p>Przykładowo, aby wybrać pierwszy, piąty i ostatni element z wektora LETTERS musimy wpierw skonstruować wektor z tymi trzema indeksami.</p>
+<pre class="sourceCode r"><code class="sourceCode r">LETTERS[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">26</span>)]</code></pre>
+<pre><code>## [1] &quot;A&quot; &quot;E&quot; &quot;Z&quot;</code></pre>
+<p>Równowaznie można najpierw stworzyć wektor indeksów a następniw wykorzystać go do indeksowania wektora.</p>
+<pre class="sourceCode r"><code class="sourceCode r">indeksy &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">26</span>)
+LETTERS[indeksy]</code></pre>
+<pre><code>## [1] &quot;A&quot; &quot;E&quot; &quot;Z&quot;</code></pre>
 </div>
 <div id="ptaki-vs-koty" class="slide section level1">
 <h1>Ptaki vs koty</h1>
@@ -180,6 +246,7 @@ koty_ptaki</code></pre>
 ## Tygrys  Tygrys  300     2.5       60    Azja        25     Kot
 ## Lew        Lew  200     2.0       80  Afryka        29     Kot
 ## Jaguar  Jaguar  100     1.7       90 Ameryka        15     Kot</code></pre>
+<p>[TODO] warto pokazac jak pozbyc sie nazw wierszy rownames(koty_ptaki) &lt;- NULL</p>
 <p>Tak wiersze jak i kolumny można wskazywać nie tylko indeksami liczbowymi, ale również wskazując nazwy wierszy i/lub kolumn.</p>
 <pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="kw">c</span>(<span class="st">&quot;Lew&quot;</span>, <span class="st">&quot;Leopard&quot;</span>, <span class="st">&quot;Jerzyk&quot;</span>, <span class="st">&quot;Strus&quot;</span>),
            <span class="kw">c</span>(<span class="st">&quot;waga&quot;</span>, <span class="st">&quot;dlugosc&quot;</span>, <span class="st">&quot;predkosc&quot;</span>)]</code></pre>

@@ -1,7 +1,7 @@
 ---
-title: "Indeksowanie ramek danych"
+title: "Indeksowanie ramek danych i wektorów"
 author: "pogRomcy danych"
-date: "sezon 2 / odcinek 4 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 1 / odcinek 7 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -9,20 +9,125 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / przetwarzanie / indeksowanie"
+    footer: "pogRomcy danych / eksploracja danych / indeksowanie"
 ---
 
 # O czym jest ten odcinek
 
-Dane z którymi będziemy pracować mają najczęściej format tabeli. 
-Jedną z podstawowych operacji na tabelach jest wybieranie podzbioru wierszy lub kolumn.
+Dane z którymi będziemy pracować mają najczęściej format tabeli lub wektora. 
+Jedną z podstawowych operacji na tabelach oraz wektorach jest wybieranie podzbioru wierszy, kolumn lub wartości.
 
 W tym odcinku dowiemy się
 
+- Jak tworzyć wektory
+- Jak indeksować wartości z wektora
 - Jak wybierać wiersze z ramki danych
 - Jak wybierać kolumny z ramki danych
 - Jak wybierać wiersze i kolumny
 - Jak indeksować wiersze i kolumny używając nazw lub wartości logicznych
+
+---
+
+# Wektory
+
+Jednym z podstawowych rodzajów danych w programie R są wektory. 
+
+Wektory mogą zawierać liczby, napisy, wartości logiczne lub inne typy. Zacznijmy od wektorów wartości liczbowych.
+
+W programie R nawet jedna wartość jest wektorem, tyle że małym, jednoelementowym.
+
+```{r}
+4
+```
+
+Dłuższe wektory można tworzyć np funkcją `c()`, która pozwala na sklejenie kilku wartości w jeden wektor. 
+
+Przykładowa instrukcja tworząca wektor o trzech elementach.
+
+```{r}
+c(3, 4, 5)
+```
+
+W programowaniu i analizie danych bardzo często wykorzystuje sie wektory kolejnych wartości liczbowych. Takie wektory mają nawet specjalną nazwę *sekwencje*.
+
+Sekwencje kolejnych liczb można stworzyć operatorem `:`. Jeżeli chcemy zbudować sekwencję liczb równie odległych od siebie, ale z krokiem innym niż 1, to wygodnie jest wykorzystać funkcję `seq()`.
+
+```{r}
+2:7
+seq(from = 3, to = 15, by = 2)
+```
+
+---
+
+# Wektory
+
+Używając funkcji `c()` można tworzyć wektory wartości logicznych (z dwoma możliwymi stanami PRAWDA/FAŁSZ oznaczanymi `TRUE`/`FALSE`), wektory napisów oraz innego rodzaju wartości.
+
+Aby wykorzystać wektor później, trzeba go przypisać do zmiennej. Można to zrobić używając operatora `->` lub `=`.
+Jeżeli chcemy wyświetlić zawartość zmiennej to wystarczy wpisać ją do konsili i nacisnąć ENTER.
+
+```{r, message=FALSE, warning=FALSE}
+co_drugi <- c(TRUE, FALSE, TRUE, FALSE, TRUE, FALSE)
+co_drugi
+
+literki <- c("alfa", "beta", "gamma", "delta")
+literki
+```
+
+W dalszym ciągu tego odcinka wykorzystamy wektor kolejnych liter w języku angielskim zapisany w zmiennej `LETTERS`. Użyjemy tego wektora do ćwiczeń w indeksowaniu.
+
+```{r, message=FALSE, warning=FALSE}
+LETTERS
+```
+
+---
+
+# Indeksowanie wektora
+
+Indeksowanie oznacza wybieranie określonych wartości. Wartości wybieramy wskazując ich indeksy. Brzmi jak masło maślane? 
+
+Wektor to ciąg elementów. Pierwszy z tych elementów ma indeks 1, kolejny 2, kolejny 3 i tak aż do ostatniego elementu. Indeks ostatniego elementu to jednocześnie długość wektora. Można ją sprawdzić funkcją `length()`.
+
+```{r, message=FALSE, warning=FALSE}
+length(LETTERS)
+```
+
+Aby odwołać się do określonych indeksów wektora należy użyć operatora `[]`. Wewnątrz nawiasów kwadratowych podaje się indeks elementu, do którego chcemy się odwołać.
+
+```{r, message=FALSE, warning=FALSE}
+# pierwszy element wektora
+LETTERS[1]
+# piąty
+LETTERS[5]
+# ostatni element wektora
+LETTERS[26]
+# zamiast podawać wartość 26 można wstawić funkcję, któ®a jako wynik zwróci długość wektora
+LETTERS[length(LETTERS)]
+```
+
+---
+
+# Indeksowanie wektora
+
+Odwołując się do wektorów, możemy podać indeks więcej niż jednej wartości. Zasada jest jednak taka, że indeksy muszą być wektorem. Do tego przyda nam się już poznana funkcja `c()`.
+
+Przykładowo, aby wybrać pierwszy, piąty i ostatni element z wektora LETTERS musimy wpierw skonstruować wektor z tymi trzema indeksami.
+
+```{r, message=FALSE, warning=FALSE}
+LETTERS[c(1,5,26)]
+```
+
+Równowaznie można najpierw stworzyć wektor indeksów a następniw wykorzystać go do indeksowania wektora.
+
+```{r, message=FALSE, warning=FALSE}
+indeksy <- c(1,5,26)
+LETTERS[indeksy]
+```
+
+
+
+
+
 
 ---
 
