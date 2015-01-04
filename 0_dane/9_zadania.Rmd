@@ -35,7 +35,7 @@ Wczytać do programu R dane wykorzystując każdy z tych formatów.
 
 # Odpowiedzi, sezon 1, odcinek 5
 
-```{r}
+```{r, eval=FALSE}
 # plik tekstowy
 auta2012 <- read.table(file = "http://biecek.pl/MOOC/dane/auta2012mini.csv", 
           sep=";", dec=",", header=TRUE)
@@ -49,4 +49,31 @@ auta2012 <- read.xls("http://biecek.pl/MOOC/dane/auta2012mini.xls", sheet=1)
 load(url("http://biecek.pl/MOOC/dane/auta2012mini.rda"))
 
 ```
+
+---
+
+# Zadanie, sezon 1, odcinek 6
+
+- Zapisz zbiór danych `koty_ptaki` do pliku tekstowego, w którym dane są rozdzielane przecinkiem a kropką dziesiętną jest `.`
+- Zapisz zbiór danych `koty_ptaki` do formatu pliku Excela. Sprawdź czy dane poprawnie się zapisały.
+- Zapisz zbiór danych `koty_ptaki` do pliku binarnego. Odczytaj go następnie funkcją `load()` i sprawdź czy dane poprawnie zostały zapisane.
+
+---
+
+# Odpowiedzi, sezon 1, odcinek 6
+
+```{r, eval=FALSE}
+# plik tekstowy
+write.table(koty_ptaki, file = "dane_o_kotach.csv", sep=",", dec=".")
+
+# plik Excela
+library(xlsx)
+write.xls(koty_ptaki, file = "koty_ptaki.xlsx", sheetName="Zakladka 1")
+
+# dane binarne
+save(koty_ptaki, file="koty_ptaki.rda")
+load("koty_ptaki.rda")
+```
+
+---
 

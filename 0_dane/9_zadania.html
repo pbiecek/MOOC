@@ -70,25 +70,36 @@ auta2012 &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span 
           <span class="dt">sep=</span><span class="st">&quot;;&quot;</span>, <span class="dt">dec=</span><span class="st">&quot;,&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>)
 
 <span class="co"># plik Excela</span>
-<span class="kw">library</span>(gdata)</code></pre>
-<pre><code>## gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
-## 
-## gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
-## 
-## Attaching package: 'gdata'
-## 
-## The following object is masked from 'package:stats':
-## 
-##     nobs
-## 
-## The following object is masked from 'package:utils':
-## 
-##     object.size</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">auta2012 &lt;-<span class="st"> </span><span class="kw">read.xls</span>(<span class="st">&quot;http://biecek.pl/MOOC/dane/auta2012mini.xls&quot;</span>, <span class="dt">sheet=</span><span class="dv">1</span>)
+<span class="kw">library</span>(gdata)
+auta2012 &lt;-<span class="st"> </span><span class="kw">read.xls</span>(<span class="st">&quot;http://biecek.pl/MOOC/dane/auta2012mini.xls&quot;</span>, <span class="dt">sheet=</span><span class="dv">1</span>)
 
 <span class="co"># plik rda</span>
 <span class="co"># nie trzeba przypisywać do zmiennej</span>
 <span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;http://biecek.pl/MOOC/dane/auta2012mini.rda&quot;</span>))</code></pre>
+</div>
+<div id="zadanie-sezon-1-odcinek-6" class="slide section level1">
+<h1>Zadanie, sezon 1, odcinek 6</h1>
+<ul>
+<li>Zapisz zbiór danych <code>koty_ptaki</code> do pliku tekstowego, w którym dane są rozdzielane przecinkiem a kropką dziesiętną jest <code>.</code></li>
+<li>Zapisz zbiór danych <code>koty_ptaki</code> do formatu pliku Excela. Sprawdź czy dane poprawnie się zapisały.</li>
+<li>Zapisz zbiór danych <code>koty_ptaki</code> do pliku binarnego. Odczytaj go następnie funkcją <code>load()</code> i sprawdź czy dane poprawnie zostały zapisane.</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-6" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 6</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plik tekstowy</span>
+<span class="kw">write.table</span>(koty_ptaki, <span class="dt">file =</span> <span class="st">&quot;dane_o_kotach.csv&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>, <span class="dt">dec=</span><span class="st">&quot;.&quot;</span>)
+
+<span class="co"># plik Excela</span>
+<span class="kw">library</span>(xlsx)
+<span class="kw">write.xls</span>(koty_ptaki, <span class="dt">file =</span> <span class="st">&quot;koty_ptaki.xlsx&quot;</span>, <span class="dt">sheetName=</span><span class="st">&quot;Zakladka 1&quot;</span>)
+
+<span class="co"># dane binarne</span>
+<span class="kw">save</span>(koty_ptaki, <span class="dt">file=</span><span class="st">&quot;koty_ptaki.rda&quot;</span>)
+<span class="kw">load</span>(<span class="st">&quot;koty_ptaki.rda&quot;</span>)</code></pre>
+</div>
+<div class="slide section level1">
+
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
