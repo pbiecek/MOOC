@@ -161,14 +161,16 @@ LETTERS[LETTERS &gt;<span class="st"> &quot;K&quot;</span>]</code></pre>
 <h1>Zadania</h1>
 <ul>
 <li><p>Zbuduj sekwencję dziesięciu koljnym małych liter alfabetu łacińskiego.</p></li>
-<li><p>Zbuduj sekwencję dziesięciu kolejnych liczb nieparzystych zaczynając od <code>3</code>.</p></li>
+<li><p>Zbuduj sekwencję dziesięciu kolejnych liczb nieparzystych zaczynając od 3.</p></li>
 <li><p>Z wektora <code>LETTERS</code> wybierz litery na pozycjach 5, 10, 15, 20 i 25.</p></li>
 <li><p>Wypisz wartości wektora <code>LETTERS</code> od końca.</p></li>
 </ul>
 </div>
 <div id="ptaki-vs-koty" class="slide section level1">
 <h1>Ptaki vs koty</h1>
-<p>Do pracy nad wybieraniem wierszy i kolumn wykorzystamy niewielki zbiór danych o kotach i ptakach. Siedem kolumn i trzynaście wierszy to dobry zbiór do ćwiczeń.</p>
+<p>Do pracy nad wybieraniem wierszy i kolumn wykorzystamy niewielki zbiór danych o kotach i ptakach.</p>
+<p>Ten zbiór danych jest dostępny w pakiecie <code>SmarterPoland</code>, wystarczy więc załadować ten pakiet. Inne sposoby na wczytanie tego zbioru danych były przedstawione w odcinku 5.</p>
+<p>Siedem kolumn i trzynaście wierszy to dobry zbiór do ćwiczeń.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
 koty_ptaki</code></pre>
 <pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
@@ -186,27 +188,48 @@ koty_ptaki</code></pre>
 ## 12 Sokol norweski   2.00     0.7      100   Polnoc        20    Ptak
 ## 13       Albatros   4.00     0.8      120 Poludnie        50    Ptak</code></pre>
 </div>
-<div id="wybieranie-wierszy-z-ramki-danych" class="slide section level1">
-<h1>Wybieranie wierszy z ramki danych</h1>
-<p>Aby odwoływać się do wierszy lub kolumn ramki danych można wykorzystać operator <code>[,]</code>. Przed przecinkiem należy wpisać indeksy wierszy.</p>
-<p>Przykładowo, odwołanie się do trzeciego wiersza</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="dv">3</span>,]</code></pre>
+<div id="indeksowanie-wierszy-w-ramce-danych" class="slide section level1">
+<h1>Indeksowanie wierszy w ramce danych</h1>
+<p>Zasadnicza różnica pomiędzy wektorem a ramką danych jest taka, że wektor jest jednowymiarowy. Wartości są ustawione w ciągu. W ramce danych wartości są ułożone w dwa wymiary, wiersze i kolumny. Indeksując wartości w ramce danych podaje się wektor indeksów dla wierszy i wektor wartości dla kolumn.</p>
+<p>Aby odwoływać się do wierszy lub kolumn ramki danych można wykorzystać operator <code>[,]</code>. Obowiązkowym elementem jest przecinek. Przed przecinkiem należy wpisać indeksy wierszy, po przecinku indeksy kolumn. Jeżeli przed przecinkiem lub po przecinki nie będzie żadnych wartości to wybrane będą wszystkie elementy wwierszu / kolumnie.</p>
+<p>Przykładowo, odwołanie się do trzeciego wiersza z ramki danych</p>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="dv">3</span>, ]</code></pre>
 <pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
 ## 3  Jaguar  100     1.7       90 Ameryka        15     Kot</code></pre>
-<p>Aby odwołać się do kilku kolejnych wierszy można wykorzystać sekwencję zbudowaną z operatorem <code>:</code>. Wiersze od 8 do 10 można wyłuskać następująco</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="dv">8</span>:<span class="dv">10</span>,]</code></pre>
+<p>Liczbę wierszy można sprawdzić funkcją <code>nrow()</code>, przydatne, jeżęli np. chcemy wyświetlić ostatni wiersz.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(koty_ptaki)</code></pre>
+<pre><code>## [1] 13</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="dv">13</span>, ]</code></pre>
+<pre><code>##     gatunek waga dlugosc predkosc  habitat zywotnosc druzyna
+## 13 Albatros    4     0.8      120 Poludnie        50    Ptak</code></pre>
+</div>
+<div id="indeksowanie-wierszy-w-ramce-danych-1" class="slide section level1">
+<h1>Indeksowanie wierszy w ramce danych</h1>
+<p>Jeżeli chcemy wybrać więcej niż jeden wiersz należy, podobnie jak dla wektorów, podać kilka indeksów przed przecinkiem.</p>
+<p>Aby odwołać się do kilku kolejnych wierszy można wykorzystać sekwencję zbudowaną z operatorem <code>:</code>.</p>
+<p>Przykłądowo, wiersze od 8 do 10 z ramki danych <code>koty_ptaki</code> można wyłuskać następująco.</p>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="dv">8</span>:<span class="dv">10</span>, ]</code></pre>
 <pre><code>##          gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
 ## 8         Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
 ## 9          Strus 150.00     2.5       70   Afryka        45    Ptak
 ## 10 Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak</code></pre>
-<p>Funkcja <code>c()</code> skleja wartości i sekwencje wektor, który można następnie wykorzystać w indeksowaniu wierszy. Poniższa instrukcja wyłuskuje wiersze 3, 8, 9 i 10.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">8</span>:<span class="dv">10</span>),]</code></pre>
+<p>Funkcja <code>c()</code> skleja wartości i sekwencje wektor, który można następnie wykorzystać w indeksowaniu wierszy.</p>
+<p>Poniższa instrukcja wyłuskuje wiersze 3, 8, 9 i 10.</p>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>), ]</code></pre>
 <pre><code>##          gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
 ## 3         Jaguar 100.00     1.7       90  Ameryka        15     Kot
 ## 8         Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
 ## 9          Strus 150.00     2.5       70   Afryka        45    Ptak
 ## 10 Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak</code></pre>
-<p>Funkcjami <code>head()</code> i <code>tail()</code> wyłuskuje pierwsze lub ostatnie 6 wierszy ze zbioru danych.</p>
+<p>Lub równoważnie</p>
+<pre class="sourceCode r"><code class="sourceCode r">indeksy &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>)
+koty_ptaki[indeksy, ]</code></pre>
+<pre><code>##          gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
+## 3         Jaguar 100.00     1.7       90  Ameryka        15     Kot
+## 8         Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
+## 9          Strus 150.00     2.5       70   Afryka        45    Ptak
+## 10 Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak</code></pre>
+<p>Funkcjami <code>head()</code> i <code>tail()</code> wyłuskuje się pierwsze lub ostatnie 6 wierszy ze zbioru danych. Do obu funkcji można podać drugi argument, określający ile pierwszych / ostatnich wierszy chcemy odczytać, domyślnie jest to 6 wierszy.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(koty_ptaki)</code></pre>
 <pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
 ## 1  Tygrys  300     2.5       60    Azja        25     Kot
@@ -224,13 +247,47 @@ koty_ptaki</code></pre>
 ## 12 Sokol norweski   2.00     0.7      100   Polnoc        20    Ptak
 ## 13       Albatros   4.00     0.8      120 Poludnie        50    Ptak</code></pre>
 </div>
-<div id="wybieranie-kolumn-z-ramki-danych" class="slide section level1">
-<h1>Wybieranie kolumn z ramki danych</h1>
-<p>Podobnie jak wiersze, można indeksować kolumny. Aby wyłuskać drugą kolumnę można wskazać jej numer po przecinku.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[,<span class="dv">2</span>]</code></pre>
+<div id="indeksowanie-wierszy-w-ramce-danych-2" class="slide section level1">
+<h1>Indeksowanie wierszy w ramce danych</h1>
+<p>Jako indeksy można również wykorzystać wektor wartości logicznych.</p>
+<p>Wybiegając trochę w przyszłość, użyjemy kolumny <code>predkosc</code> aby wybrać z ramki danych tylko te wiersze, dla których prędkość jest wyższa niż 100.</p>
+<pre class="sourceCode r"><code class="sourceCode r">najszybsze &lt;-<span class="st"> </span>koty_ptaki$predkosc &gt;<span class="st"> </span><span class="dv">100</span>
+najszybsze</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE
+## [12] FALSE  TRUE</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[najszybsze, ]</code></pre>
+<pre><code>##           gatunek  waga dlugosc predkosc  habitat zywotnosc druzyna
+## 6          Gepard 60.00     1.4      115   Afryka        12     Kot
+## 8          Jerzyk  0.05     0.2      170 Euroazja        20    Ptak
+## 10  Orzel przedni  5.00     0.9      160   Polnoc        20    Ptak
+## 11 Sokol wedrowny  0.70     0.5      110   Polnoc        15    Ptak
+## 13       Albatros  4.00     0.8      120 Poludnie        50    Ptak</code></pre>
+</div>
+<div id="indeksowanie-wierszy-w-ramce-danych-3" class="slide section level1">
+<h1>Indeksowanie wierszy w ramce danych</h1>
+<p>Indeksując wiersze lub kolumny można też wykorzystywać ujemne indeksy. Oznaczają one, wszystkie wartości poza wskazanymi.</p>
+<p>Przykładowo, wszystkie wiersze poza 1, 3, 8, 9 i 10 można uzyskać poleceniem.</p>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[ -<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>), ]</code></pre>
+<pre><code>##           gatunek  waga dlugosc predkosc  habitat zywotnosc druzyna
+## 2             Lew 200.0     2.0       80   Afryka        29     Kot
+## 4            Puma  80.0     1.7       70  Ameryka        13     Kot
+## 5         Leopard  70.0     1.4       85     Azja        21     Kot
+## 6          Gepard  60.0     1.4      115   Afryka        12     Kot
+## 7           Irbis  50.0     1.3       65     Azja        18     Kot
+## 11 Sokol wedrowny   0.7     0.5      110   Polnoc        15    Ptak
+## 12 Sokol norweski   2.0     0.7      100   Polnoc        20    Ptak
+## 13       Albatros   4.0     0.8      120 Poludnie        50    Ptak</code></pre>
+<p>Nie można mieszać jednocześnie wartości dodanich i ujemny.</p>
+</div>
+<div id="indeksowanie-kolumn-w-ramce-danych" class="slide section level1">
+<h1>Indeksowanie kolumn w ramce danych</h1>
+<p>Podobnie jak wiersze, można indeksować również kolumny.</p>
+<p>Aby wyłuskać drugą kolumnę można wskazać jej numer po przecinku.</p>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[, <span class="dv">2</span>]</code></pre>
 <pre><code>##  [1] 300.00 200.00 100.00  80.00  70.00  60.00  50.00   0.05 150.00   5.00
 ## [11]   0.70   2.00   4.00</code></pre>
-<p>Wybranie jednej kolumny powoduje, że jako wynik otrzymujemy nie ramkę danych ale wektor. Aby temu zapobiec i jako wynik wciąż mieć ramkę danych, należy dodać do indeksowania argument <code>drop=FALSE</code>.</p>
+<p>Wybranie jednej kolumny powoduje, że jako wynik otrzymujemy nie ramkę danych ale wektor. Łatwo to poznać po sposobie wyświetlania danych.</p>
+<p>Aby zapobiec takiej konwersji na wektor i jako wynik wciąż mieć ramkę danych, należy dodać do operatora indeksowania argument <code>drop=FALSE</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[,<span class="dv">2</span>, drop=<span class="ot">FALSE</span>]</code></pre>
 <pre><code>##      waga
 ## 1  300.00
@@ -246,47 +303,75 @@ koty_ptaki</code></pre>
 ## 11   0.70
 ## 12   2.00
 ## 13   4.00</code></pre>
+<p><em>Uwaga</em> Ten dziwny zapis jest konsekwencją tego, że operator <code>[,]</code> jest w gruncie rzeczy funkcją. Więcej o zaawansowanych elementach języka dowiemy się w kolejnych odcinkach.</p>
 </div>
-<div id="wybieranie-kolumn-z-ramki-danych-1" class="slide section level1">
-<h1>Wybieranie kolumn z ramki danych</h1>
-<p>Aby wybrać więcej kolumn można wykorzystać funkcję <code>c()</code>, tak jak w przypadku indeksowania wierszy.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[,<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>:<span class="dv">4</span>)]</code></pre>
-<pre><code>##      waga dlugosc predkosc
-## 1  300.00     2.5       60
-## 2  200.00     2.0       80
-## 3  100.00     1.7       90
-## 4   80.00     1.7       70
-## 5   70.00     1.4       85
-## 6   60.00     1.4      115
-## 7   50.00     1.3       65
-## 8    0.05     0.2      170
-## 9  150.00     2.5       70
-## 10   5.00     0.9      160
-## 11   0.70     0.5      110
-## 12   2.00     0.7      100
-## 13   4.00     0.8      120</code></pre>
+<div id="indeksowanie-kolumn-w-ramce-danych-1" class="slide section level1">
+<h1>Indeksowanie kolumn w ramce danych</h1>
+<p>W ramce danych kolumny możemy indeksować nie tylko numerami ale również nazwami (kolumny są nazywane).</p>
+<p>Nazwy kolumn z ramki danych można odczytać funkcją <code>colnames()</code>. Wynikiem tej funkcji jest wektor z nazwami.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(koty_ptaki)</code></pre>
+<pre><code>## [1] &quot;gatunek&quot;   &quot;waga&quot;      &quot;dlugosc&quot;   &quot;predkosc&quot;  &quot;habitat&quot;   &quot;zywotnosc&quot;
+## [7] &quot;druzyna&quot;</code></pre>
+<p>Aby wyłuskać z ramki danych kolumnę o nazwie <code>waga</code> możemy użyć tej nazwy jako indeksu.</p>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[, <span class="st">&quot;waga&quot;</span>]</code></pre>
+<pre><code>##  [1] 300.00 200.00 100.00  80.00  70.00  60.00  50.00   0.05 150.00   5.00
+## [11]   0.70   2.00   4.00</code></pre>
+<p>Ponieważ operacja odwołania się do jednej kolumny w danych jest dosyć częsta, można ją wykonać na kilka innych sposobów. Najpopularniejszym jest użycie operatora <code>$</code>.</p>
+<p>Z jego pomocą do kolumny <code>waga</code> możemy odpowłać się w ten sposób.</p>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki$waga</code></pre>
+<pre><code>##  [1] 300.00 200.00 100.00  80.00  70.00  60.00  50.00   0.05 150.00   5.00
+## [11]   0.70   2.00   4.00</code></pre>
+</div>
+<div id="indeksowanie-kolumn-w-ramce-danych-2" class="slide section level1">
+<h1>Indeksowanie kolumn w ramce danych</h1>
+<p>Aby wybrać więcej niż jedna kolumnę, podobnie jak w przypadku wierszy i wektorów można wykorzystać funkcję <code>c()</code>.</p>
+<p>Przykładowo, jeżeli chcemy wybrać drugą, czwartą, piątą i szóstą kolumnę możemy użyć instrukcji.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># równoważnie moglibyśmy napisać </span>
+<span class="co"># koty_ptaki[, c(&quot;waga&quot;, &quot;predkosc&quot;, &quot;habitat&quot;, &quot;zywotnosc&quot;)]</span>
+koty_ptaki[, <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>:<span class="dv">6</span>)]</code></pre>
+<pre><code>##      waga predkosc  habitat zywotnosc
+## 1  300.00       60     Azja        25
+## 2  200.00       80   Afryka        29
+## 3  100.00       90  Ameryka        15
+## 4   80.00       70  Ameryka        13
+## 5   70.00       85     Azja        21
+## 6   60.00      115   Afryka        12
+## 7   50.00       65     Azja        18
+## 8    0.05      170 Euroazja        20
+## 9  150.00       70   Afryka        45
+## 10   5.00      160   Polnoc        20
+## 11   0.70      110   Polnoc        15
+## 12   2.00      100   Polnoc        20
+## 13   4.00      120 Poludnie        50</code></pre>
 </div>
 <div id="wybieranie-podramki-z-ramki-danych" class="slide section level1">
 <h1>Wybieranie podramki z ramki danych</h1>
 <p>Możemy jednocześnie odwoływać się do wierszy i kolumn w ramce danych, wybierając jej podramkę.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">8</span>:<span class="dv">10</span>),<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>:<span class="dv">4</span>)]</code></pre>
-<pre><code>##      waga dlugosc predkosc
-## 3  100.00     1.7       90
-## 8    0.05     0.2      170
-## 9  150.00     2.5       70
-## 10   5.00     0.9      160</code></pre>
+<p>Przykładowo, wybór czterech wierszy i czterech kolumn może wyglądać tak.</p>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">8</span>:<span class="dv">10</span>), <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>:<span class="dv">6</span>)]</code></pre>
+<pre><code>##      waga predkosc  habitat zywotnosc
+## 3  100.00       90  Ameryka        15
+## 8    0.05      170 Euroazja        20
+## 9  150.00       70   Afryka        45
+## 10   5.00      160   Polnoc        20</code></pre>
+<p>Wybór czterech wierszy i jednej kolumny.</p>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">8</span>:<span class="dv">10</span>), <span class="dv">2</span>]</code></pre>
+<pre><code>## [1] 100.00   0.05 150.00   5.00</code></pre>
+<p>Jeden wiersz i cztery kolumny.</p>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="dv">3</span>, <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>:<span class="dv">6</span>)]</code></pre>
+<pre><code>##   waga predkosc habitat zywotnosc
+## 3  100       90 Ameryka        15</code></pre>
 </div>
 <div id="wybieranie-podramki-z-ramki-danych-nazwami" class="slide section level1">
 <h1>Wybieranie podramki z ramki danych nazwami</h1>
-<p>Dodajmy nazwy wierszy dla naszej ramki.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(koty_ptaki) &lt;-<span class="st"> </span>koty_ptaki[,<span class="dv">1</span>]
-<span class="kw">head</span>(koty_ptaki, <span class="dv">3</span>)</code></pre>
-<pre><code>##        gatunek waga dlugosc predkosc habitat zywotnosc druzyna
-## Tygrys  Tygrys  300     2.5       60    Azja        25     Kot
-## Lew        Lew  200     2.0       80  Afryka        29     Kot
-## Jaguar  Jaguar  100     1.7       90 Ameryka        15     Kot</code></pre>
-<p>[TODO] warto pokazac jak pozbyc sie nazw wierszy rownames(koty_ptaki) &lt;- NULL</p>
-<p>Tak wiersze jak i kolumny można wskazywać nie tylko indeksami liczbowymi, ale również wskazując nazwy wierszy i/lub kolumn.</p>
+<p>Pokazaliśmy wcześniej, jak można odwoływać się do kolumn poprzez ich nazwy.</p>
+<p>Podobnie można zrobić z wierszami. Funkcja <code>rownames()</code> pokazuje jak nazywają się wiersze w ramce danych.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(koty_ptaki)</code></pre>
+<pre><code>##  [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;12&quot; &quot;13&quot;</code></pre>
+<p>Te nazwy niewiele mówią, używanie ich do indeksowania nie miałoby sensu. Zmieńmy więc nazwy wierszy na takie jak w kolumnie <code>gatunek</code></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(koty_ptaki) &lt;-<span class="st"> </span>koty_ptaki$gatunek</code></pre>
+<p>Teraz możemy odwoływać się do wierszy poprzez nazwy tych wierszy.</p>
+<p>Poniższy przykład wybiera wiersze dla czterech wskazanych gatunków oraz trzy wybrane kolumny. Jeżeli wiersze mają sensowne, to bardzo ułątwiają odwoływanie się do wierszy.</p>
 <pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="kw">c</span>(<span class="st">&quot;Lew&quot;</span>, <span class="st">&quot;Leopard&quot;</span>, <span class="st">&quot;Jerzyk&quot;</span>, <span class="st">&quot;Strus&quot;</span>),
            <span class="kw">c</span>(<span class="st">&quot;waga&quot;</span>, <span class="st">&quot;dlugosc&quot;</span>, <span class="st">&quot;predkosc&quot;</span>)]</code></pre>
 <pre><code>##           waga dlugosc predkosc
@@ -294,30 +379,115 @@ koty_ptaki</code></pre>
 ## Leopard  70.00     1.4       85
 ## Jerzyk    0.05     0.2      170
 ## Strus   150.00     2.5       70</code></pre>
-<p>Do wskazanej kolumny można odwoływać się przez jej nazwę również używając operatora <code>$</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki$waga</code></pre>
-<pre><code>##  [1] 300.00 200.00 100.00  80.00  70.00  60.00  50.00   0.05 150.00   5.00
-## [11]   0.70   2.00   4.00</code></pre>
+<p><em>Uwaga</em> Gdybyśmy chcieli pozbyć się nazw wierszy, można to zrobić instrukcją</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(koty_ptaki) &lt;-<span class="st"> </span><span class="ot">NULL</span></code></pre>
 </div>
-<div id="wybieranie-podramki-z-ramki-danych-nazwami-1" class="slide section level1">
-<h1>Wybieranie podramki z ramki danych nazwami</h1>
-<p>Do indeksowania macierzy można wykorzystywać też wektory wartości logicznych TRUE/FALSE. W tym przypadku wybrane będą tylko te wiersze / kolumny, którym odpowiada wartość TRUE.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki$predkosc &gt;<span class="st"> </span><span class="dv">100</span></code></pre>
-<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE
-## [12] FALSE  TRUE</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grepl</span>(<span class="kw">colnames</span>(koty_ptaki), <span class="dt">pattern =</span> <span class="st">&quot;a&quot;</span>)</code></pre>
-<pre><code>## [1]  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[koty_ptaki$predkosc &gt;<span class="st"> </span><span class="dv">100</span>,
-           <span class="kw">grepl</span>(<span class="kw">colnames</span>(koty_ptaki), <span class="dt">pattern =</span> <span class="st">&quot;a&quot;</span>)]</code></pre>
-<pre><code>##                       gatunek  waga  habitat druzyna
-## Gepard                 Gepard 60.00   Afryka     Kot
-## Jerzyk                 Jerzyk  0.05 Euroazja    Ptak
-## Orzel przedni   Orzel przedni  5.00   Polnoc    Ptak
-## Sokol wedrowny Sokol wedrowny  0.70   Polnoc    Ptak
-## Albatros             Albatros  4.00 Poludnie    Ptak</code></pre>
+<div id="podsumowanie-instrukcji-r" class="slide section level1">
+<h1>Podsumowanie instrukcji R</h1>
+<p>W tym odcinku omawialiśmy funkcje służące do tworzenia wektorów, sekwencji oraz indeksowania wektorów.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tworzenie wektorów liczb i sekwencji</span>
+<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)
+<span class="dv">2</span>:<span class="dv">7</span>
+<span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">3</span>, <span class="dt">to =</span> <span class="dv">15</span>, <span class="dt">by =</span> <span class="dv">2</span>)
+
+<span class="co"># wektory wartości logicznych i napisowych</span>
+co_drugi &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)
+co_drugi
+
+literki &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;alfa&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;delta&quot;</span>)
+literki
+
+<span class="co"># wyznaczanie długości wektora LETTERS</span>
+<span class="kw">length</span>(LETTERS)
+
+<span class="co"># indeksowanie pojedynczego elementu wektora, pierwszy element</span>
+LETTERS[<span class="dv">1</span>]
+<span class="co"># zamiast podawać wartość 26 można wstawić funkcję, która jako wynik zwróci długość wektora</span>
+LETTERS[<span class="kw">length</span>(LETTERS)]
+
+<span class="co"># indeksowanie kilku elementów wektora</span>
+LETTERS[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">26</span>)]
+<span class="co"># z uzyciem zmiennej pomocniczej</span>
+indeksy &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">26</span>)
+LETTERS[indeksy]
+
+<span class="co"># dziesięć pierwszych liter od J do A</span>
+LETTERS[<span class="dv">10</span>:<span class="dv">1</span>]
+<span class="co"># pięć pierwszych i pięć ostatnich</span>
+LETTERS[<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">5</span>, <span class="dv">21</span>:<span class="dv">26</span>)]
+<span class="co"># co druga litera, indeksujemy sekwencją od 1 do 26 z krokiem co 2</span>
+LETTERS[<span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="dv">26</span>, <span class="dt">by =</span> <span class="dv">2</span>)]
+
+<span class="co"># używanie wartości logicznych do indeksowania wektora tylko litery występujące po literze 'K'</span>
+LETTERS[LETTERS &gt;<span class="st"> &quot;K&quot;</span>]</code></pre>
+</div>
+<div id="podsumowanie-instrukcji-r-1" class="slide section level1">
+<h1>Podsumowanie instrukcji R</h1>
+<p>W tym odcinku omawialiśmy funkcje służące do indeksowania wierszy w ramkach danych.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># indeksowanie pojedynczego wiersza</span>
+koty_ptaki[<span class="dv">3</span>, ]
+
+<span class="co"># liczba wierszy</span>
+<span class="kw">nrow</span>(koty_ptaki)
+
+<span class="co"># indeksowanie kilku wierszy </span>
+koty_ptaki[<span class="dv">8</span>:<span class="dv">10</span>, ]
+koty_ptaki[<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>), ]
+<span class="co"># z użyciem zmiennej pomocniczej</span>
+indeksy &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>)
+koty_ptaki[indeksy, ]
+
+<span class="co"># pierwsze 6 wierszy i ostatnie 6 wierszy</span>
+<span class="kw">head</span>(koty_ptaki)
+<span class="kw">tail</span>(koty_ptaki)
+
+<span class="co"># indeksowanie wierszy warunkiem logicznym</span>
+najszybsze &lt;-<span class="st"> </span>koty_ptaki$predkosc &gt;<span class="st"> </span><span class="dv">100</span>
+koty_ptaki[najszybsze, ]
+
+<span class="co"># używanie ujemnych indeksów by pominąc wiersze</span>
+koty_ptaki[ -<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>), ]</code></pre>
+</div>
+<div id="podsumowanie-instrukcji-r-2" class="slide section level1">
+<h1>Podsumowanie instrukcji R</h1>
+<p>W tym odcinku omawialiśmy funkcje służące do indeksowania kolumn oraz jednocześnie wierszy i kolumn.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># indeksowanie kolumn, tylko druga kolumna, wynikiem jest wektor</span>
+koty_ptaki[, <span class="dv">2</span>]
+<span class="co"># drop=FALSE powodoje, że wynikiem jest ramka danych</span>
+koty_ptaki[,<span class="dv">2</span>, drop=<span class="ot">FALSE</span>]
+
+<span class="co"># nazwy kolumn</span>
+<span class="kw">colnames</span>(koty_ptaki)
+
+<span class="co"># indeksowanie jednej kolumny z użyciem nazwy</span>
+koty_ptaki[, <span class="st">&quot;waga&quot;</span>]
+koty_ptaki$waga
+
+<span class="co"># indeksowanie kilku kolumn </span>
+<span class="co"># koty_ptaki[, c(&quot;waga&quot;, &quot;predkosc&quot;, &quot;habitat&quot;, &quot;zywotnosc&quot;)]</span>
+koty_ptaki[, <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>:<span class="dv">6</span>)]
+
+<span class="co"># jednoczesne indeksowanie wierszy i kolumn</span>
+koty_ptaki[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">8</span>:<span class="dv">10</span>), <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>:<span class="dv">6</span>)]
+
+<span class="co"># wektor nazw wierszy</span>
+<span class="kw">rownames</span>(koty_ptaki)
+<span class="co"># przypisanie nowych nazw dla wierszy</span>
+<span class="kw">rownames</span>(koty_ptaki) &lt;-<span class="st"> </span>koty_ptaki$gatunek
+
+<span class="co"># odwoływanie się przez nazwy wierszy i kolumn</span>
+koty_ptaki[<span class="kw">c</span>(<span class="st">&quot;Lew&quot;</span>, <span class="st">&quot;Leopard&quot;</span>, <span class="st">&quot;Jerzyk&quot;</span>, <span class="st">&quot;Strus&quot;</span>),
+           <span class="kw">c</span>(<span class="st">&quot;waga&quot;</span>, <span class="st">&quot;dlugosc&quot;</span>, <span class="st">&quot;predkosc&quot;</span>)]</code></pre>
 </div>
 <div id="zadania-1" class="slide section level1">
 <h1>Zadania</h1>
+<ul>
+<li><p>Wybierz z ramki danych <code>koty_ptaki</code> wszystkie wiersze poza ,,Sokołami’’ (wiersz 11 i 12)</p></li>
+<li><p>Wybierz z ramki danych <code>koty_ptaki</code> tylko koty (pierwsze siedem wierszy)</p></li>
+<li><p>Wybierz z ramki danych <code>koty_ptaki</code> tylko kolumnę z wagą i prędkością</p></li>
+<li><p>Wybierz z ramki danych <code>koty_ptaki</code> wszystkie kolumny poza ostatnią</p></li>
+<li><p>Wybierz z ramki wiersze dla których waga jest mniejsza niż 100 oraz cztery pierwsze kolumny.</p></li>
+</ul>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

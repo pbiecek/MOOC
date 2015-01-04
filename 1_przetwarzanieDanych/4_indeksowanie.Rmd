@@ -177,6 +177,9 @@ LETTERS[LETTERS > "K"]
 # Ptaki vs koty
 
 Do pracy nad wybieraniem wierszy i kolumn wykorzystamy niewielki zbiór danych o kotach i ptakach.
+
+Ten zbiór danych jest dostępny w pakiecie `SmarterPoland`, wystarczy więc załadować ten pakiet. Inne sposoby na wczytanie tego zbioru danych były przedstawione w odcinku 5. 
+
 Siedem kolumn i trzynaście wierszy to dobry zbiór do ćwiczeń.
 
 ```{r, message=FALSE, warning=FALSE}
@@ -186,32 +189,55 @@ koty_ptaki
 
 ---
 
-# Wybieranie wierszy z ramki danych
+# Indeksowanie wierszy w ramce danych
 
-Aby odwoływać się do wierszy lub kolumn ramki danych można wykorzystać operator `[,]`. 
-Przed przecinkiem należy wpisać indeksy wierszy.
+Zasadnicza różnica pomiędzy wektorem a ramką danych jest taka, że wektor jest jednowymiarowy. Wartości są ustawione w ciągu. W ramce danych wartości są ułożone w dwa wymiary, wiersze i kolumny. Indeksując wartości w ramce danych podaje się wektor indeksów dla wierszy i wektor wartości dla kolumn.
 
-Przykładowo, odwołanie się do trzeciego wiersza
+Aby odwoływać się do wierszy lub kolumn ramki danych można wykorzystać operator `[,]`. Obowiązkowym elementem jest przecinek. Przed przecinkiem należy wpisać indeksy wierszy, po przecinku indeksy kolumn. Jeżeli przed przecinkiem lub po przecinki nie będzie żadnych wartości to wybrane będą wszystkie elementy wwierszu / kolumnie.
+
+Przykładowo, odwołanie się do trzeciego wiersza z ramki danych
 
 ```{r, message=FALSE, warning=FALSE}
-koty_ptaki[3,]
+koty_ptaki[3, ]
 ```
 
-Aby odwołać się do kilku kolejnych wierszy można wykorzystać sekwencję zbudowaną z operatorem `:`.
-Wiersze od 8 do 10 można wyłuskać następująco
+Liczbę wierszy można sprawdzić funkcją `nrow()`, przydatne, jeżęli np. chcemy wyświetlić ostatni wiersz.
 
 ```{r, message=FALSE, warning=FALSE}
-koty_ptaki[8:10,]
+nrow(koty_ptaki)
+koty_ptaki[13, ]
+```
+
+---
+
+# Indeksowanie wierszy w ramce danych
+
+Jeżeli chcemy wybrać więcej niż jeden wiersz należy, podobnie jak dla wektorów, podać kilka indeksów przed przecinkiem.
+
+Aby odwołać się do kilku kolejnych wierszy można wykorzystać sekwencję zbudowaną z operatorem `:`.
+
+Przykłądowo, wiersze od 8 do 10 z ramki danych `koty_ptaki` można wyłuskać następująco.
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[8:10, ]
 ```
 
 Funkcja `c()` skleja wartości i sekwencje  wektor, który można następnie wykorzystać w indeksowaniu wierszy.
+
 Poniższa instrukcja wyłuskuje wiersze 3, 8, 9 i 10.
 
 ```{r, message=FALSE, warning=FALSE}
-koty_ptaki[c(3,8:10),]
+koty_ptaki[c(3, 8:10), ]
 ```
 
-Funkcjami `head()` i `tail()` wyłuskuje pierwsze lub ostatnie 6 wierszy ze zbioru danych.
+Lub równoważnie
+
+```{r, message=FALSE, warning=FALSE}
+indeksy <- c(3, 8:10)
+koty_ptaki[indeksy, ]
+```
+
+Funkcjami `head()` i `tail()` wyłuskuje się pierwsze lub ostatnie 6 wierszy ze zbioru danych. Do obu funkcji można podać drugi argument, określający ile pierwszych / ostatnich wierszy chcemy odczytać, domyślnie jest to 6 wierszy.
 
 ```{r, message=FALSE, warning=FALSE}
 head(koty_ptaki)
@@ -220,29 +246,95 @@ tail(koty_ptaki)
 
 ---
 
-# Wybieranie kolumn z ramki danych
+# Indeksowanie wierszy w ramce danych
 
-Podobnie jak wiersze, można indeksować kolumny. Aby wyłuskać drugą kolumnę można wskazać jej numer po przecinku.
+Jako indeksy można również wykorzystać wektor wartości logicznych. 
+
+Wybiegając trochę w przyszłość, użyjemy kolumny `predkosc` aby wybrać z ramki danych tylko te wiersze, dla których 
+prędkość jest wyższa niż 100.
 
 ```{r, message=FALSE, warning=FALSE}
-koty_ptaki[,2]
+najszybsze <- koty_ptaki$predkosc > 100
+najszybsze
+
+koty_ptaki[najszybsze, ]
+```
+
+---
+
+# Indeksowanie wierszy w ramce danych
+
+Indeksując wiersze lub kolumny można też wykorzystywać ujemne indeksy. Oznaczają one, wszystkie wartości poza wskazanymi.
+
+Przykładowo, wszystkie wiersze poza 1, 3, 8, 9 i 10 można uzyskać poleceniem.
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[ - c(1, 3, 8:10), ]
+```
+
+Nie można mieszać jednocześnie wartości dodanich i ujemny.
+
+---
+
+# Indeksowanie kolumn w ramce danych
+
+Podobnie jak wiersze, można indeksować również kolumny. 
+
+Aby wyłuskać drugą kolumnę można wskazać jej numer po przecinku.
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[, 2]
 ```
 
 Wybranie jednej kolumny powoduje, że jako wynik otrzymujemy nie ramkę danych ale wektor.
-Aby temu zapobiec i jako wynik wciąż mieć ramkę danych, należy dodać do indeksowania argument `drop=FALSE`.
+Łatwo to poznać po sposobie wyświetlania danych.
+
+Aby zapobiec takiej konwersji na wektor i jako wynik wciąż mieć ramkę danych, należy dodać do operatora indeksowania argument `drop=FALSE`. 
 
 ```{r, message=FALSE, warning=FALSE}
 koty_ptaki[,2, drop=FALSE]
 ```
 
+*Uwaga* Ten dziwny zapis jest konsekwencją tego, że operator `[,]` jest w gruncie rzeczy funkcją. Więcej o zaawansowanych elementach języka dowiemy się w kolejnych odcinkach.
+
 ---
 
-# Wybieranie kolumn z ramki danych
+# Indeksowanie kolumn w ramce danych
 
-Aby wybrać więcej kolumn można wykorzystać funkcję `c()`, tak jak w przypadku indeksowania wierszy.
+W ramce danych kolumny możemy indeksować nie tylko numerami ale również nazwami (kolumny są nazywane).
+
+Nazwy kolumn z ramki danych można odczytać funkcją `colnames()`. Wynikiem tej funkcji jest wektor z nazwami.
 
 ```{r, message=FALSE, warning=FALSE}
-koty_ptaki[,c(2,3:4)]
+colnames(koty_ptaki)
+```
+
+Aby wyłuskać z ramki danych kolumnę o nazwie `waga` możemy użyć tej nazwy jako indeksu.
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[, "waga"]
+```
+
+Ponieważ operacja odwołania się do jednej kolumny w danych jest dosyć częsta, można ją wykonać na kilka innych sposobów. Najpopularniejszym jest użycie operatora `$`. 
+
+Z jego pomocą do kolumny `waga` możemy odpowłać się w ten sposób.
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki$waga
+```
+
+---
+
+# Indeksowanie kolumn w ramce danych
+
+Aby wybrać więcej niż jedna kolumnę, podobnie jak w przypadku wierszy i wektorów można wykorzystać funkcję `c()`.
+
+Przykładowo, jeżeli chcemy wybrać drugą, czwartą, piątą i szóstą kolumnę możemy użyć instrukcji.
+
+```{r, message=FALSE, warning=FALSE}
+# równoważnie moglibyśmy napisać 
+# koty_ptaki[, c("waga", "predkosc", "habitat", "zywotnosc")]
+koty_ptaki[, c(2,4:6)]
 ```
 
 ---
@@ -251,54 +343,180 @@ koty_ptaki[,c(2,3:4)]
 
 Możemy jednocześnie odwoływać się do wierszy i kolumn w ramce danych, wybierając jej podramkę.
 
+Przykładowo, wybór czterech wierszy i czterech kolumn może wyglądać tak.
+
 ```{r, message=FALSE, warning=FALSE}
-koty_ptaki[c(3,8:10),c(2,3:4)]
+koty_ptaki[c(3,8:10), c(2,4:6)]
+```
+
+Wybór czterech wierszy i jednej kolumny.
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[c(3,8:10), 2]
+```
+
+Jeden wiersz i cztery kolumny.
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[3, c(2,4:6)]
 ```
 
 ---
 
 # Wybieranie podramki z ramki danych nazwami
 
-Dodajmy nazwy wierszy dla naszej ramki.
+Pokazaliśmy wcześniej, jak można odwoływać się do kolumn poprzez ich nazwy. 
+
+Podobnie można zrobić z wierszami. Funkcja `rownames()` pokazuje jak nazywają się wiersze w ramce danych.
 
 ```{r, message=FALSE, warning=FALSE}
-rownames(koty_ptaki) <- koty_ptaki[,1]
-head(koty_ptaki, 3)
+rownames(koty_ptaki)
 ```
 
-[TODO] warto pokazac jak pozbyc sie nazw wierszy
-rownames(koty_ptaki) <- NULL
+Te nazwy niewiele mówią, używanie ich do indeksowania nie miałoby sensu. Zmieńmy więc nazwy wierszy na takie jak w kolumnie `gatunek`
 
-Tak wiersze jak i kolumny można wskazywać nie tylko indeksami liczbowymi, ale również wskazując nazwy wierszy i/lub kolumn.
+```{r, message=FALSE, warning=FALSE}
+rownames(koty_ptaki) <- koty_ptaki$gatunek
+```
+
+Teraz możemy odwoływać się do wierszy poprzez nazwy tych wierszy.
+
+Poniższy przykład wybiera wiersze dla czterech wskazanych gatunków oraz trzy wybrane kolumny. Jeżeli wiersze mają sensowne, to bardzo ułątwiają odwoływanie się do wierszy.
 
 ```{r, message=FALSE, warning=FALSE}
 koty_ptaki[c("Lew", "Leopard", "Jerzyk", "Strus"),
            c("waga", "dlugosc", "predkosc")]
 ```
 
-Do wskazanej kolumny można odwoływać się przez jej nazwę również używając operatora `$`.
-
-```{r, message=FALSE, warning=FALSE}
-koty_ptaki$waga
+*Uwaga* Gdybyśmy chcieli pozbyć się nazw wierszy, można to zrobić instrukcją
+```{r, eval=FALSE}
+rownames(koty_ptaki) <- NULL
 ```
 
 ---
 
-# Wybieranie podramki z ramki danych nazwami
+# Podsumowanie instrukcji R
 
-Do indeksowania macierzy można wykorzystywać też wektory wartości logicznych TRUE/FALSE. W tym przypadku wybrane będą tylko te wiersze / kolumny, którym odpowiada wartość TRUE.
+W tym odcinku omawialiśmy funkcje służące do tworzenia wektorów, sekwencji oraz indeksowania wektorów.
 
-```{r, message=FALSE, warning=FALSE}
-koty_ptaki$predkosc > 100
-grepl(colnames(koty_ptaki), pattern = "a")
+```{r, eval=FALSE}
+# tworzenie wektorów liczb i sekwencji
+c(3, 4, 5)
+2:7
+seq(from = 3, to = 15, by = 2)
 
-koty_ptaki[koty_ptaki$predkosc > 100,
-           grepl(colnames(koty_ptaki), pattern = "a")]
+# wektory wartości logicznych i napisowych
+co_drugi <- c(TRUE, FALSE, TRUE, FALSE, TRUE, FALSE)
+co_drugi
+
+literki <- c("alfa", "beta", "gamma", "delta")
+literki
+
+# wyznaczanie długości wektora LETTERS
+length(LETTERS)
+
+# indeksowanie pojedynczego elementu wektora, pierwszy element
+LETTERS[1]
+# zamiast podawać wartość 26 można wstawić funkcję, która jako wynik zwróci długość wektora
+LETTERS[length(LETTERS)]
+
+# indeksowanie kilku elementów wektora
+LETTERS[c(1,5,26)]
+# z uzyciem zmiennej pomocniczej
+indeksy <- c(1, 5, 26)
+LETTERS[indeksy]
+
+# dziesięć pierwszych liter od J do A
+LETTERS[10:1]
+# pięć pierwszych i pięć ostatnich
+LETTERS[c(1:5, 21:26)]
+# co druga litera, indeksujemy sekwencją od 1 do 26 z krokiem co 2
+LETTERS[seq(from = 1, to = 26, by = 2)]
+
+# używanie wartości logicznych do indeksowania wektora tylko litery występujące po literze 'K'
+LETTERS[LETTERS > "K"]
 ```
 
+---
+
+# Podsumowanie instrukcji R
+
+W tym odcinku omawialiśmy funkcje służące do indeksowania wierszy w ramkach danych.
+
+```{r, eval=FALSE}
+
+# indeksowanie pojedynczego wiersza
+koty_ptaki[3, ]
+
+# liczba wierszy
+nrow(koty_ptaki)
+
+# indeksowanie kilku wierszy 
+koty_ptaki[8:10, ]
+koty_ptaki[c(3, 8:10), ]
+# z użyciem zmiennej pomocniczej
+indeksy <- c(3, 8:10)
+koty_ptaki[indeksy, ]
+
+# pierwsze 6 wierszy i ostatnie 6 wierszy
+head(koty_ptaki)
+tail(koty_ptaki)
+
+# indeksowanie wierszy warunkiem logicznym
+najszybsze <- koty_ptaki$predkosc > 100
+koty_ptaki[najszybsze, ]
+
+# używanie ujemnych indeksów by pominąc wiersze
+koty_ptaki[ -c(1, 3, 8:10), ]
+```
+
+---
+
+# Podsumowanie instrukcji R
+
+W tym odcinku omawialiśmy funkcje służące do indeksowania kolumn oraz jednocześnie wierszy i kolumn.
+
+```{r, eval=FALSE}
+# indeksowanie kolumn, tylko druga kolumna, wynikiem jest wektor
+koty_ptaki[, 2]
+# drop=FALSE powodoje, że wynikiem jest ramka danych
+koty_ptaki[,2, drop=FALSE]
+
+# nazwy kolumn
+colnames(koty_ptaki)
+
+# indeksowanie jednej kolumny z użyciem nazwy
+koty_ptaki[, "waga"]
+koty_ptaki$waga
+
+# indeksowanie kilku kolumn 
+# koty_ptaki[, c("waga", "predkosc", "habitat", "zywotnosc")]
+koty_ptaki[, c(2,4:6)]
+
+# jednoczesne indeksowanie wierszy i kolumn
+koty_ptaki[c(3,8:10), c(2,4:6)]
+
+# wektor nazw wierszy
+rownames(koty_ptaki)
+# przypisanie nowych nazw dla wierszy
+rownames(koty_ptaki) <- koty_ptaki$gatunek
+
+# odwoływanie się przez nazwy wierszy i kolumn
+koty_ptaki[c("Lew", "Leopard", "Jerzyk", "Strus"),
+           c("waga", "dlugosc", "predkosc")]
+```
 
 ---
 
 # Zadania
 
+- Wybierz z ramki danych `koty_ptaki` wszystkie wiersze poza ,,Sokołami'' (wiersz 11 i 12)
+
+- Wybierz z ramki danych `koty_ptaki` tylko koty (pierwsze siedem wierszy)
+
+- Wybierz z ramki danych `koty_ptaki` tylko kolumnę z wagą i prędkością
+
+- Wybierz z ramki danych `koty_ptaki` wszystkie kolumny poza ostatnią
+
+- Wybierz z ramki wiersze dla których waga jest mniejsza niż 100 oraz cztery pierwsze kolumny.
 
