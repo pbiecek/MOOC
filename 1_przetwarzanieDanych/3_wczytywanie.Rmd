@@ -14,15 +14,16 @@ output:
 
 # O czym jest ten odcinek
 
-Zanim rozpoczniemy analizę danych, musimy najpierw dane wczytać do programu R.
+Zanim rozpoczniemy analizę danych, musimy najpierw wczytać dane do programu R.
 
-Dane mogą być przechowywane  w najróżniejszych formatach, takich jak baza danych, plik tekstowy, plik Excela lub innego programu do analiz danych (SAS, SPSS, itp). 
+Dane mogą być przechowywane  w najróżniejszych formatach, takich jak baza danych, plik tekstowy, plik w formacie programu Excel (nowszym .xslx lub starszym .xls) lub plik w formacie innego programu do analiz danych (SAS, SPSS, itp). 
 
-W tym odcinku dowiemy się
+W tym odcinku dowiemy się:
 
 - Jak wczytywać dane tabelaryczne z plików tekstowych?
-- Jak wczytywać dane tabelaryczne  z plików Excela [xls lub xlsx]?
+- Jak wczytywać dane tabelaryczne z plików Excela [xls lub xlsx]?
 - Jak wczytywać dane z pakietów R?
+- Gdzie szukać informacji o tym jak wczytać dane z innych formatów / programów?
 
 ---
 
@@ -32,7 +33,7 @@ Jednym z częstszych formatów wymiany danych są pliki tekstowe.
 
 Nazwa 'plik tekstowy' bierze się stąd, że treść tego pliku możemy otworzyć w standardowym edytorze takim jak Notepad/Notatnik w Windowsie lub vim w Linuxie/OSX. Pliki tekstowe można również otwierać z użyciem programu RStudio. Jeżeli często pracujemy z dużymi lub wieloma plikami tekstowymi to warto wyposażyć się w dobre narzędzie do pracy z nimi, np. edytor [Sublime Text](http://www.sublimetext.com/3).
 
-Przyjrzymy się tabeli liczb z pliku
+Przyjrzymy się tabeli z danymi zapisanymi w pliku
 http://biecek.pl/MOOC/dane/koty_ptaki.csv
 
 Zawartość tego pliku wygląda tak
@@ -75,11 +76,13 @@ Zauważmy, że:
 
 Instrukcja wczytująca dane do R składa się zazwyczaj z trzech członów.
 
-Ostatnim (po prawej stronie na poniższym schemacie) jest funkcja, która odczytuje dane, przetwarza i zamienia na postać zrozumiałą dla progrmau R.
+Ostatnim (po prawej stronie na poniższym schemacie) jest funkcja, która odczytuje dane, przetwarza i zamienia na postać zrozumiałą dla progrmau R (na poniższym schemacie ta funkcja to `read.table()`).
 
 Aby móc na tych danych operować, należy nadać im jakąś nazwę (lewy człon na poniższym schemacie). Tę nazwę określa się zazwyczaj terminem *zmienna*.
 
 Operacje przypisania wartości odczytanych przez funkcję do zmiennej, można wykonać operatorem `<-` lub `=`.
+
+W programie R, jeżeli wynik jakiejś funkcji nie jest przypisany do zmiennej to jest on wyświetlany na ekranie. Jeżeli jednak chcemy ten wynik wykorzystać w przyszłości, to należy go przypsać do zmiennej.
 
 ![Zbiór danych o kotach](figs/wczytywanie.png)
 
@@ -89,7 +92,22 @@ Więcej informacji o tym jak przypisywać wartości do zmiennych przedstawionych
 
 # Dane tabelaryczne w plikach tekstowych
 
-Do wczytywania danych z pliku tekstowego służy funkcja `read.table()`, której wybrane agrumenty przedstawia poniższa deklaracja (jest ich więcej, ale część pominiemy by nie zaciemniać obrazu)
+Zajmijmy się na razie prawą stroną przedstawionego schematu, a więc funkcją wczytującą dane.
+
+Funkcja `read.table()` ma wiele argumentów (patrz kolejny slajd), ale nie musimy ich wszystkich określać. Wystarczy wskazać nazwę pliku oraz te argumenty, które powinny mieć inne wartości niż domyślne. 
+
+W przypadku rozważanego pliku musimy określić argumenty `file = "http://biecek.pl/MOOC/dane/koty_ptaki.csv"` (ścieżka do pliku tekstowego, w tym przypadku czytamy dane bezpośrednio z internetowego adresu), `sep=";"` (separatorem będzie średnik), `dec=","` (kropką dziesiętną jest przecinek), `header=TRUE` (pierwszy wiersz ma nagłówek). Ponieważ wynik tej funkcji nie jest do niczego przypisany, dlatego wczytany zbiór danych jest wyświetlany na ekranie.
+
+```{r, message=FALSE}
+read.table(file = "http://biecek.pl/MOOC/dane/koty_ptaki.csv", 
+          sep=";", dec=",", header=TRUE)
+```
+
+---
+
+# Dane tabelaryczne w plikach tekstowych
+
+Do wczytywania danych z pliku tekstowego posłużyć może funkcja `read.table()`. Ponieważ pliki tekstowe mogą mieć bardzo różną postać funkcja ta ma wiele argumentów. Wybrane agrumenty przedstawia poniższa deklaracja (jest ich więcej, ale część pominiemy by nie zaciemniać obrazu)
 
 ```{}
 read.table(file, header = FALSE, sep = "", dec = ".",  nrows = -1,
@@ -99,27 +117,14 @@ read.table(file, header = FALSE, sep = "", dec = ".",  nrows = -1,
 
 Ponieważ dane mogą być zapisane z użyciem różnych formatów, argumenty tej funkcji określają format danych do wczytania. Znaczenie kolejnych argumentów to
 
-- `file` - ścieżka do pliku z danymi może być też adres URL (jeżeli wskażemy jako pierwszy argument, możemy pominąć jego nazwę)
+- `file` - ścieżka do pliku z danymi może być też adres URL. Jeżeli wartości argumentów podajemy w ich domyślnej kolejności, to możemy pominąć nazwę arguumentów. Dlatego w kolejnych przykładach nie bedziemy podawać nazwy tego argumentu
 - `header` - flaga określająca, czy pierwszy wiersz należy traktować jako nagłówek. W naszym przypadku `header=TRUE`.
-- `sep` - znak rozdzielający kolumny. W naszym przypadku `sep=";"`
-- `dec` - kropka dziesiętna, zazwyczaj `.` lub `,`. W naszym przypadku `dec=","`
-- `nrows` - maksymalna liczba wierszy do wczytania, domyślnie -1, czyli wczytaj wszystkie wiersze 
-- `skip` - liczba pierwszych wierszy do pominięcia przy wczytywaniu danych, domyślnie 0, czyli nie pomijaj żadnego wiersza,
-- `comment.char` - znak komentarza, jeżeli w danych wystąpi ten znak to treść od tego znaku do końca lini będzie zignorowana
+- `sep` - znak rozdzielający kolumny. W naszym przypadku `sep=";"`, ale popularnym separatorem jest znak tabulacji, przecinek lub spacja
+- `dec` - kropka dziesiętna, zazwyczaj jest to `.` lub `,`. W naszym przypadku `dec=","`
+- `nrows` - maksymalna liczba wierszy do wczytania. Domyślnie ten argument przyjmuje wartość `-1`, czyli wczytaj wszystkie wiersze 
+- `skip` - liczba pierwszych wierszy do pominięcia przy wczytywaniu danych, domyślnie 0, czyli nie pomijaj żadnego wiersza
+- `comment.char` - znak komentarza. Jeżeli w danych wystąpi ten znak to treść od tego znaku do końca lini będzie zignorowana
 - `stringsAsFactors` - czy napisy powinny być domyślnie przekształcone w zmienne jakościowe. Domyślnie `TRUE`, o konsekwencjach tego przekształcenia napiszemy w odcinku 11 *Cechy jakościowe*.
-
----
-
-# Dane tabelaryczne w plikach tekstowych
-
-Funkcja `read.table()` ma wiele argumentów, ale nei musimy ich wszystkich określać. Wystarczy wskazać nazwę pliku oraz te argumenty, które powinny mieć inne wartości niż domyślne. 
-
-W przypadku rozważanego pliku musimy określić następujące argumenty:
-
-```{r, message=FALSE}
-read.table("http://biecek.pl/MOOC/dane/koty_ptaki.csv", 
-          sep=";", dec=",", header=TRUE)
-```
 
 ---
 
@@ -127,13 +132,13 @@ read.table("http://biecek.pl/MOOC/dane/koty_ptaki.csv",
 
 Wynikiem funkcji `read.table()` jest tabelaryczny zbiór danych, który w R nazywa się _ramką danych_.
 
-Aby na nim pracować, musimy wynik funkcji `read.table()` zapamiętać w zmiennej. Na przykład w zmiennej o nazwie `koty`.
+Aby na nim pracować, musimy wynik funkcji `read.table()` zapamiętać w zmiennej. Na przykład w zmiennej o nazwie `koty_ptaki`.
 
 ```{r, message=FALSE}
-koty <- read.table("http://biecek.pl/MOOC/dane/koty_ptaki.csv", 
+koty_ptaki <- read.table("http://biecek.pl/MOOC/dane/koty_ptaki.csv", 
                         sep=";", dec=",", header=TRUE)
-# po wpisaniu nazwy zmiennej jako wynik wyświetlona zostanie jej wartość
-koty
+# po wpisaniu nazwy zmiennej, jako wynik wyświetlona zostanie jej wartość
+koty_ptaki
 ```
 
 ---
@@ -144,7 +149,7 @@ W programie R Studio w prawym górnym oknie, zatytułowanym *Environment* wyświ
 
 Dwukrotne kliknięcie na wskazaną zmienną powoduje otwarcie okna prezentującego zawartość zmiennej. W ten sposób możemy szybko podejrzeć co wczytało się do zmiennej `koty_ptaki`.
 
-Z przyczyn wydajnościowych wyświetlanych jest tylko pierwsze 1000 wierszy i kilkaset kolumn. Tak więc dla dużych zbiorów danych wyświetlony będzie tylko fragment całęgo zbioru.
+Z przyczyn wydajnościowych wyświetlanych jest tylko pierwsze 1000 wierszy i kilkaset kolumn. Tak więc dla dużych zbiorów danych wyświetlony będzie tylko fragment całego zbioru.
 
 ![Zbiór danych o kotach](figs/koty2.png)
 
@@ -169,11 +174,11 @@ Wybrane przydatne argumenty funkcji `read.table()`
 
 Innym popularnym formatem przechowywania danych są pliki w formacie Excela [rozszerzenia xls lub xlsx]. 
 
-W R dostępnych jest kilka pakietów pozwalających na odczytywanie danych w formacie Excela. Najpopularnijesze pakiety to `gdata`, `xlsReadWrite`, `XLConnect`, `xlsx`. Różnią się one zewnętrznymi bibliotekami, które wykorzystują, przez co z niektórych może być łatwiej skorzystać pod Windowsem z innych pod Linuxem. 
+W programie R dostępnych jest kilka pakietów pozwalających na odczytywanie danych w formacie Excela. Najpopularnijesze pakiety to `gdata`, `xlsReadWrite`, `XLConnect`, `xlsx`. Różnią się one zewnętrznymi bibliotekami, które wykorzystują, przez co z niektórych może być łatwiej skorzystać pod Windowsem z innych pod Linuxem. 
 
 W tym odcinku wykorzystamy funkcję `read.xls()` z pakietu `gdata`. Wymaga ona zainstalowanego programu `perl`. Pakiet `gdata` nie jest instalowany z podstawową dystrybucją R, dlatego przed pierwszym użyciem należy go zainstalować poleceniem `install.packages("gdata")`.
 
-Dane, które chcemy wczytać, w Excelu wyglądają następująco.
+Dane, które chcemy wczytać, w Excelu są dostępne pod adrese http://biecek.pl/MOOC/dane/koty_ptaki.xls i wyglądają następująco.
 
 ![Dane Excelowe](figs/excel.png)
 
@@ -220,13 +225,13 @@ XLConnect     | readWorksheet() | writeWorksheet() | .xlsx, .xls | duża  | mał
 
 # Dane binarne programu R
 
-Natywnym formatem dla programu R są pliki binarne o rozszerzeniu `rda` lub `Rdata`. 
+Natywnym formatem dla programu R są pliki binarne o rozszerzeniu `rda` lub `RData`. 
 
 Dane w tym formacie są skompresowane, przez co zajmują mniej miejsca na dysku niż w pliku tekstowym lub formacie Excela. Wadą jest to, że można je otworzyć tylko w programie R.
 
 Dane w tym formacie, do programu R można je wczytać poleceniem `load()`. Pierwszym argumentem tej funkcji jest ścieżka do pliku z danymi. Jeżeli chcemy dane odczytać z internetu, należy dodatkowo użyć funkcji `url()`. 
 
-*Uwaga!* W przeciwieństwie do wcześniej poznanych funkcji, funkcja `load()` nie zwraca zbioru danych jako wynik, ale ładuje zbiór danych bezpośrednio do przestrzeni nazw (dane zapisane są wraz z nazwą zmiennej).
+*Uwaga!* W przeciwieństwie do wcześniej poznanych funkcji, funkcja `load()` nie zwraca zbioru danych jako wynik, ale ładuje zbiór danych bezpośrednio do przestrzeni nazw (dane zapisane są wraz z nazwą zmiennej). Dlatego w poniższym przykładzie nie ma instrukcji przypisania do zmiennej `koty_ptaki`. Nazwa tej zmiennej jest pamiętana wewnątrz pliku `rda`.
 
 ```{r, warning=FALSE, message=FALSE}
 load(url("http://biecek.pl/MOOC/dane/koty_ptaki.rda"))
@@ -259,9 +264,9 @@ data(package="SmarterPoland")
 
 # Wczytywanie danych z pakietów R
 
-Jednym ze zbiorów danych udostępnionych w tym pakiecie jest zbiór danych `koty`.
+Jednym ze zbiorów danych udostępnionych w tym pakiecie jest zbiór danych `koty_ptaki`.
 
-Po wczytaniu pakietu, ten zbiór danych jest dostępny bez potrzeby stosowania dodatkowych instrukcji.
+Po wczytaniu pakietu, ten zbiór danych jest dostępny bez potrzeby stosowania dodatkowych instrukcji. Można go wyświetlić na ekranie wpisując do konsoli jego nazwę.
 
 ```{r, warning=FALSE, message=FALSE}
 library(SmarterPoland)
@@ -273,12 +278,15 @@ koty_ptaki
 # Wczytywanie danych poprzez web API
 
 
-Pewne dane dostępne są poprzez API (application programming interface).
+Pewne dane dostępne są przez serwisy z danymi poprzez API (ang. Application Programming Interface).
 Oznacza to, że nie możemy pobrać wszystkich danych z bazy danych, ale możemy tą bazę odpytywać o określone informacje.
 
-Przykładem niech będzie baza Eurostat, do której można sięgać używając funkcji getEurostatRCV() z pakietu SmarterPoland. W bazie Eurostat tabela ‘tsdtr210’ zawiera dane o ilości pasażero-kilometrów dla różnych krajów i środków transportu. 
+W ten sposób można dostać się do danych takich gigantów jak WorldBank, Eurostat czy osatnio GUS.
+
+Przykładem niech będzie baza Eurostat, do której można sięgać używając funkcji `getEurostatRCV()` z pakietu `SmarterPoland`. W bazie Eurostat tabela `tsdtr210` zawiera dane o ilości pasażero-kilometrów dla różnych krajów i środków transportu. Ta tabela jest dostępna w pliku 
 http://ec.europa.eu/eurostat/tgm/table.do?tab=table&init=1&language=en&pcode=tsdtr210&plugin=1
-Pobierzmy te dane używając API udostępnionego przez pakiet SmarterPoland.
+
+Używając API udostępnionego przez pakiet `SmarterPoland` pokażmy jak pobierać te dane bezpośrednio do R.
 
 ```{r, warning=FALSE, message=FALSE}
 tsdtr210 <- getEurostatRCV("tsdtr210")
@@ -313,7 +321,7 @@ data(package="SmarterPoland")
 library(SmarterPoland)
 koty_ptaki
 
-# wczytanie danych z Eurostatu o wykorzystaniu różnych środków transportu w róąnych krajach
+# wczytanie danych z Eurostatu o wykorzystaniu różnych środków transportu w różnych krajach
 tsdtr210 <- getEurostatRCV("tsdtr210")
 head(tsdtr210, 3)
 summary(tsdtr210)
