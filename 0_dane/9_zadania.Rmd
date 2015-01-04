@@ -106,5 +106,43 @@ LETTERS[c(5, 10, 15, 20, 25)]
 LETTERS[26:1]
 ```
 
+---
+
+# Zadania, sezon 1, odcinek 7
+
+- Wybierz z ramki danych `koty_ptaki` wszystkie wiersze poza ,,Sokołami'' (wiersz 11 i 12)
+
+- Wybierz z ramki danych `koty_ptaki` tylko koty (pierwsze siedem wierszy)
+
+- Wybierz z ramki danych `koty_ptaki` tylko kolumnę z wagą i prędkością
+
+- Wybierz z ramki danych `koty_ptaki` wszystkie kolumny poza ostatnią
+
+- Wybierz z ramki wiersze dla których waga jest mniejsza niż 100 oraz cztery pierwsze kolumny.
+
+---
+
+# Odpowiedzi, sezon 1, odcinek 7
+
+```{r, eval=FALSE}
+# poza sokołami
+koty_ptaki[- (11:12), ]
+koty_ptaki[c(1:10, 13), ]
+
+# tylko koty
+koty_ptaki[1:7, ]
+koty_ptaki[koty_ptaki$druzyna == "Kot", ]
+
+# tylko dwie kolumny
+koty_ptaki[, c("waga", "predkosc")]
+koty_ptaki[, c(2, 4)]
+
+# poza ostatnią
+koty_ptaki[, 1:6]
+koty_ptaki[, -7]
+
+# lekkie 
+koty_ptaki[koty_ptaki$waga < 100, 1:4]
+```
 
 

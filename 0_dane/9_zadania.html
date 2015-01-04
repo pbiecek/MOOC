@@ -125,6 +125,37 @@ LETTERS[<span class="dv">26</span>:<span class="dv">1</span>]</code></pre>
 <pre><code>##  [1] &quot;Z&quot; &quot;Y&quot; &quot;X&quot; &quot;W&quot; &quot;V&quot; &quot;U&quot; &quot;T&quot; &quot;S&quot; &quot;R&quot; &quot;Q&quot; &quot;P&quot; &quot;O&quot; &quot;N&quot; &quot;M&quot; &quot;L&quot; &quot;K&quot; &quot;J&quot;
 ## [18] &quot;I&quot; &quot;H&quot; &quot;G&quot; &quot;F&quot; &quot;E&quot; &quot;D&quot; &quot;C&quot; &quot;B&quot; &quot;A&quot;</code></pre>
 </div>
+<div id="zadania-sezon-1-odcinek-7-1" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 7</h1>
+<ul>
+<li><p>Wybierz z ramki danych <code>koty_ptaki</code> wszystkie wiersze poza ,,Sokołami’’ (wiersz 11 i 12)</p></li>
+<li><p>Wybierz z ramki danych <code>koty_ptaki</code> tylko koty (pierwsze siedem wierszy)</p></li>
+<li><p>Wybierz z ramki danych <code>koty_ptaki</code> tylko kolumnę z wagą i prędkością</p></li>
+<li><p>Wybierz z ramki danych <code>koty_ptaki</code> wszystkie kolumny poza ostatnią</p></li>
+<li><p>Wybierz z ramki wiersze dla których waga jest mniejsza niż 100 oraz cztery pierwsze kolumny.</p></li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-7-1" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 7</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># poza sokołami</span>
+koty_ptaki[-<span class="st"> </span>(<span class="dv">11</span>:<span class="dv">12</span>), ]
+koty_ptaki[<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">10</span>, <span class="dv">13</span>), ]
+
+<span class="co"># tylko koty</span>
+koty_ptaki[<span class="dv">1</span>:<span class="dv">7</span>, ]
+koty_ptaki[koty_ptaki$druzyna ==<span class="st"> &quot;Kot&quot;</span>, ]
+
+<span class="co"># tylko dwie kolumny</span>
+koty_ptaki[, <span class="kw">c</span>(<span class="st">&quot;waga&quot;</span>, <span class="st">&quot;predkosc&quot;</span>)]
+koty_ptaki[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)]
+
+<span class="co"># poza ostatnią</span>
+koty_ptaki[, <span class="dv">1</span>:<span class="dv">6</span>]
+koty_ptaki[, -<span class="dv">7</span>]
+
+<span class="co"># lekkie </span>
+koty_ptaki[koty_ptaki$waga &lt;<span class="st"> </span><span class="dv">100</span>, <span class="dv">1</span>:<span class="dv">4</span>]</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>
