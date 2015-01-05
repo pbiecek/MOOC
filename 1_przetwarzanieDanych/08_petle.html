@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / przetwarzanie / pętle" /> 
+  <meta name="copyright" content="pogRomcy danych / programowanie / pętle" /> 
   <title>Pętle</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
@@ -52,56 +52,138 @@ pogRomcy danych
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
+<p>Silną stroną komputerów jest to, że mogą bardzo szybko powtarzać określone operacje. Nie są zbyt inteligentne (póki co) ale są bardzo szybie i idealne do powtarzania, powtarzania, powtarzania, powtarzania.</p>
+<p>Analizując dane bardzo często znajdziemy się w sytuacji, gdy określoną czynność będziemy chcieli powtórzyć. Wykonać ją dla każdej zmiennej, dla każdego analizowanego dnia, dla każdego analizowanego zbioru danych.</p>
+<p>Narzędziem, pozwalającym na powtarzanie w kółko (w pętli) określonych operacji są pętle.</p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
-<li>Jak korzystać z pętli <code>for()</code></li>
-<li>Jak i po co tworzyć pętle w pętli</li>
+<li>Jak i po co tworzyć pętle?</li>
+<li>Jak korzystać z pętli <code>for()</code>?</li>
+<li>Jak korzystać z pętli <code>sapply()</code>?</li>
+<li>Jak korzystać z pętli <code>apply()</code>?</li>
+<li>Jak i po co tworzyć pętle w pętli?</li>
 </ul>
-<p>Do ilustracji wykorzystamy zbiór danych to <code>koty_ptaki</code>.</p>
+<p>Do ilustracji wykorzystamy zbiór danych to <code>koty_ptaki</code> dostępny w pakiecie <code>SmarterPoland</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+<span class="kw">head</span>(koty_ptaki, <span class="dv">3</span>)</code></pre>
+<pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
+## 1  Tygrys  300     2.5       60    Azja        25     Kot
+## 2     Lew  200     2.0       80  Afryka        29     Kot
+## 3  Jaguar  100     1.7       90 Ameryka        15     Kot</code></pre>
 </div>
 <div id="petle" class="slide section level1">
 <h1>Pętle</h1>
-<p>Przewaga komputerów nad ludźmi polega na tym, że określone rzeczy mogą szybko powtarzać.</p>
-<p>Jeżeli raz opiszemy pewną operację, to większość języków programowania pozwala na łatwe zwielokrotnianie tej operacji. Instrukcje pozwalające na takie powtarzanie w kółko pewnych operacji nazywa się pętlami.</p>
-<p>Zacznijmy od instrukcji, która wyświetli na ekranie wylosowaną liczbę.</p>
-<p>W języku R jest wiele rodzajów pętli, ale najczęściej stosowana jest pętla <code>for</code>. Przedstawmy jej działanie na przykładzie losowania liczby z przedziału 0-100.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;Wylosowałem:&quot;</span>, <span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">min=</span><span class="dv">0</span>, <span class="dt">max=</span><span class="dv">100</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
-<pre><code>## Wylosowałem: 84.05935</code></pre>
-<p>Funkcja <code>cat()</code> wypisuje swoje argumenty na ekranie, a funkcja <code>runif()</code> losuje <code>n</code> liczb z rozkładu jednostajnego na odcinku <code>min:max</code>.</p>
+<p>Pętle mogą być wykorzystywane aby powtórzyć jakąś operację określoną liczbę razy.</p>
+<p>Zacznijmy od przykładu, w którym określoną liczbę razy wyświetlimy pewien napis na ekranie. W języku R jest kilka rodzajów pętli, które można do tego celu wykorzystać, ale najczęściej stosowana jest pętla <code>for</code> i to ją przedstawimy w pierwszej kolejności.</p>
+<pre class="sourceCode r"><code class="sourceCode r">odliczajDo &lt;-<span class="st"> </span><span class="dv">5</span>
+
+for (i in <span class="dv">1</span>:odliczajDo) {
+  <span class="kw">cat</span>(<span class="st">&quot;Wartość zmiennej i: &quot;</span>, i, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+}</code></pre>
+<pre><code>## Wartość zmiennej i:  1 
+## Wartość zmiennej i:  2 
+## Wartość zmiennej i:  3 
+## Wartość zmiennej i:  4 
+## Wartość zmiennej i:  5</code></pre>
+<p>Ten sam efekt otrzymalibyśmy wpisując pięciokrotnie instrukcję <code>cat()</code> (która wyświetla swoje argumenty na ekranie).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;Wartość zmiennej i: 5</span><span class="ch">\n</span><span class="st">&quot;</span>)
+<span class="kw">cat</span>(<span class="st">&quot;Wartość zmiennej i: 4</span><span class="ch">\n</span><span class="st">&quot;</span>)
+<span class="kw">cat</span>(<span class="st">&quot;Wartość zmiennej i: 3</span><span class="ch">\n</span><span class="st">&quot;</span>)
+<span class="kw">cat</span>(<span class="st">&quot;Wartość zmiennej i: 2</span><span class="ch">\n</span><span class="st">&quot;</span>)
+<span class="kw">cat</span>(<span class="st">&quot;Wartość zmiennej i: 1</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
+<p>Co jednak, gdybyśmy chcieli powtórzyć ją 10 000 razy? Z pewnoscią nikt z nas nie chciałby wpisywać przez kilka dni tych instrukcji, tym bardziej, że ten sam efekt możnaby osiągnąć prostą pętlą.</p>
 </div>
 <div id="petle-1" class="slide section level1">
 <h1>Pętle</h1>
-<p>Sposób użycia pętli <code>for</code> jest następujący.</p>
-<pre class="sourceCode r"><code class="sourceCode r">for (zmienna in wektor) wyrażenie</code></pre>
-<p>W wyniku działania tej pętli <code>wyrażenie</code> będzie wykonane dla każdej wartości z <code>wektor</code>. Co więcej, aktualny krok pętli jest określony przez zmienną <code>zmienna</code> i można z tej wartości korzystać wewnątrz <code>wyrażenie</code>.</p>
-<p>Zobaczmy jak to działa na przykładzie. Wylosujemy 10 liczb. Za każdym razem wypisując informację o wylosowanej liczbie na ekranie.</p>
-<pre class="sourceCode r"><code class="sourceCode r">for (i in <span class="dv">1</span>:<span class="dv">10</span>) {
-  <span class="kw">cat</span>(<span class="st">&quot;Losowanie&quot;</span>, i,<span class="st">&quot; Wylosowałem:&quot;</span>, <span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">min=</span><span class="dv">0</span>, <span class="dt">max=</span><span class="dv">100</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+<p>Sposób użycia (tak zwana <em>składnia</em>) pętli <code>for</code> jest następujący.</p>
+<pre class="sourceCode r"><code class="sourceCode r">for (A in B) C</code></pre>
+<p>W wyniku działania tej pętli wyrażenie <code>C</code> będzie wykonane dla każdej wartości z wektora <code>B</code>. Co więcej, aktualny krok pętli jest określony przez zmienną <code>A</code> i można z tej wartości korzystać wewnątrz wyrażenia <code>C</code>.</p>
+<p>W przykładzie z poprzedniego slajdu wyrażnie <code>cat(&quot;Wartość zmiennej i: &quot;, i, &quot;\n&quot;)</code> jest wykonywane dla każdego elementu wektora <code>1:odliczajDo</code>. W kazdym kroku pętli zmienna <code>i</code> przyjmuje kolejną wartość z wektora <code>1:odliczajDo</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">for (i in <span class="dv">1</span>:odliczajDo) {
+  <span class="kw">cat</span>(<span class="st">&quot;Wartość zmiennej i: &quot;</span>, i, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
 }</code></pre>
-<pre><code>## Losowanie 1  Wylosowałem: 19.37462 
-## Losowanie 2  Wylosowałem: 38.3434 
-## Losowanie 3  Wylosowałem: 98.61626 
-## Losowanie 4  Wylosowałem: 15.85259 
-## Losowanie 5  Wylosowałem: 7.905538 
-## Losowanie 6  Wylosowałem: 32.93082 
-## Losowanie 7  Wylosowałem: 23.81059 
-## Losowanie 8  Wylosowałem: 89.24445 
-## Losowanie 9  Wylosowałem: 56.20051 
-## Losowanie 10  Wylosowałem: 57.2129</code></pre>
 </div>
 <div id="petle-2" class="slide section level1">
 <h1>Pętle</h1>
-<p>Liczba powtórzeń pętli nie musi być z góry określona, może zależeć od np. liczby wierszy w ramce danych. Typowe zastosowania pętli to wykonanie pewnej operacji dla każdego wiersza lub każdej kolumny.</p>
+<p>W poprzednim przykładzie łątwo było przewidzieć wynik całej pętli. Wyświetlała ona pięć kolejnych liczb od 1 do 5.</p>
+<p>Pokażemy teraz bardziej złożony przykład, który symuluje tak zwany proces szkodowy. Załóżmy, że mamy flotę samochodów w której w ciągu roku zdarzyć się może X stłuczek (X będziemy losować). Naprawa każdej stłuczki kosztować będzie od 0 do 10 000 PLN.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># losujemy liczbę stłuczek</span>
+liczbaStłuczek &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">1</span>, <span class="dt">max =</span> <span class="dv">10</span>))
+liczbaStłuczek</code></pre>
+<pre><code>## [1] 7</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># dla każdej losujemy wartość szkody</span>
+for (i in <span class="dv">1</span>:liczbaStłuczek) {
+  <span class="kw">cat</span>(<span class="st">&quot;Stłuczka &quot;</span>, i,<span class="st">&quot; a jej koszt naprawy to&quot;</span>, <span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">min=</span><span class="dv">0</span>, <span class="dt">max=</span><span class="dv">10000</span>), <span class="st">&quot;PLN</span><span class="ch">\n</span><span class="st">&quot;</span>)
+}</code></pre>
+<pre><code>## Stłuczka  1  a jej koszt naprawy to 3246.41 PLN
+## Stłuczka  2  a jej koszt naprawy to 8561.425 PLN
+## Stłuczka  3  a jej koszt naprawy to 7411.898 PLN
+## Stłuczka  4  a jej koszt naprawy to 1084.597 PLN
+## Stłuczka  5  a jej koszt naprawy to 2330.56 PLN
+## Stłuczka  6  a jej koszt naprawy to 1027.736 PLN
+## Stłuczka  7  a jej koszt naprawy to 7207.464 PLN</code></pre>
+<p>W tym przykładzie, funkcja <code>runif()</code> służy do losowania <code>n</code> liczb z przedziału od <code>min</code> do <code>max</code>. W pierwszej linii wykorzystujemy ją do wylosowania liczby stłuczek z przedziału 1 do 10. Funkcja <code>round()</code> służy do zaokrąglania wyniki do liczby całkowitej.</p>
+<p>W każdym kroku pętli losowana jest kolejna wartość, oraz wypisywana jest na ekranie. Choć ta pętla wygląda na prostą i niewinną, podobny sposób losowania wielkości szkody jest w rzeczywistości wykorzystywany do zarządzania niepewnością dotyczące tego jak duże szkody z tytułu stłuczek lub innych losowych wypadków mogą wystąpić w firmach.</p>
+</div>
+<div id="petle-3" class="slide section level1">
+<h1>Pętle</h1>
+<p>Jak widzieliśmy w poprzednim przypadku, liczba powtórzeń pętli nie musi być z góry określona, może zależeć od np. liczby wierszy lub liczbie kolumn w ramce danych.</p>
+<p>W poniższym przykładzie dla każdej kolumny z ramki danych <code>koty_ptaki</code> wyświetlamy listę różnych wartości, które występują w tej kolumnie. Na kolejnym skadzie wyjaśnimy krok po kroku co się dzieje w tej funkcji.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># wektor z nazwami kolumn</span>
+kolumny &lt;-<span class="st"> </span><span class="kw">colnames</span>(koty_ptaki)
+kolumny</code></pre>
+<pre><code>## [1] &quot;gatunek&quot;   &quot;waga&quot;      &quot;dlugosc&quot;   &quot;predkosc&quot;  &quot;habitat&quot;   &quot;zywotnosc&quot;
+## [7] &quot;druzyna&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pętla, która dla każdej kolumny wyświetla różne wartości występujące w tej kolumnie</span>
+for (i in kolumny) {
+  wartosciWKolumnie &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">as.character</span>(koty_ptaki[,i]))
+  <span class="kw">cat</span>(<span class="st">&quot;Kolumna&quot;</span>, i, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  <span class="kw">cat</span>(<span class="st">&quot;   &quot;</span>, <span class="kw">length</span>(wartosciWKolumnie), <span class="st">&quot;różnych wartości:&quot;</span>, wartosciWKolumnie, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+}</code></pre>
+<pre><code>## Kolumna gatunek 
+##     13 różnych wartości: Tygrys Lew Jaguar Puma Leopard Gepard Irbis Jerzyk Strus Orzel przedni Sokol wedrowny Sokol norweski Albatros 
+## Kolumna waga 
+##     13 różnych wartości: 300 200 100 80 70 60 50 0.05 150 5 0.7 2 4 
+## Kolumna dlugosc 
+##     10 różnych wartości: 2.5 2 1.7 1.4 1.3 0.2 0.9 0.5 0.7 0.8 
+## Kolumna predkosc 
+##     12 różnych wartości: 60 80 90 70 85 115 65 170 160 110 100 120 
+## Kolumna habitat 
+##     6 różnych wartości: Azja Afryka Ameryka Euroazja Polnoc Poludnie 
+## Kolumna zywotnosc 
+##     10 różnych wartości: 25 29 15 13 21 12 18 20 45 50 
+## Kolumna druzyna 
+##     2 różnych wartości: Kot Ptak</code></pre>
+</div>
+<div id="petle-4" class="slide section level1">
+<h1>Pętle</h1>
+<p>Przyjrzyjmy się pętli z poprzedniego slajdu linia po linii.</p>
+<p>Pierwsza instrukcja wykorzystuje funkcje <code>colnames()</code> do wyznaczenia nazw kolumn. Te nazwy zostaną przypisane do wektora <code>kolumny</code>, który nastepnie zostanie wyświetlony.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># wektor z nazwami kolumn</span>
+kolumny &lt;-<span class="st"> </span><span class="kw">colnames</span>(koty_ptaki)
+kolumny</code></pre>
+<p>Instrukcja <code>for()</code> rozpoczyna pętle. Tym razem zmienna <code>i</code> będzie przebiegała po nazwach kolumn. Dla każdej nazwy kolumny wykona się ciało pętli.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pętla, która dla każdej kolumny wyświetla różne wartości występujące w tej kolumnie</span>
+for (i in kolumny) {</code></pre>
+<p>Wewnątrz pętli wyznaczany jest wektor różnych wartości. Jest to wykonywane w jednej linii, choć potrzebne do tego jest kilka instrukcji. Punktem wyjściowym jest wektor <code>koty_ptaki[,i]</code>. Używając funkcji <code>as.character()</code> wartości te (dla niektórych kolumn liczby dla innych napisy) są przekształcane na napisy. Następnie funkcja <code>unique()</code> usuwa powtarzające się elementy.</p>
+<pre class="sourceCode r"><code class="sourceCode r">  wartosciWKolumnie &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">as.character</span>(koty_ptaki[,i]))</code></pre>
+<p>Dwie kolejne instrukcje <code>cat()</code> wyświetlają na ekranie w pierwszej linii nazwę kolumny a w drugiej linii liczbę różnych wartości (długość wektora <code>wartosciWKolumnie</code> wyznaczana jest funkcją <code>length()</code>) oraz wszystkie różne wartości.</p>
+<pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">cat</span>(<span class="st">&quot;Kolumna&quot;</span>, i, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  <span class="kw">cat</span>(<span class="st">&quot;   &quot;</span>, <span class="kw">length</span>(wartosciWKolumnie), <span class="st">&quot;różnych wartości:&quot;</span>, wartosciWKolumnie, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+<span class="er">}</span></code></pre>
+</div>
+<div id="petle-5" class="slide section level1">
+<h1>Pętle</h1>
+<p>Typowe zastosowania pętli to wykonanie pewnej operacji dla każdego wiersza lub każdej kolumny.</p>
 <p>Dla każdej kolumny (a na początek dla kolumny o indeksie <code>i=1</code>) będziemy chcieli wyświetlić informację do jakiej wagi dochodzą przedstawiciele danego gatunku.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
-<span class="co"># Zamiana zmiennej factor na zmienną napisową, po to by była dobrze wyświetlana</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Zamiana zmiennej factor na zmienną napisową, po to by była dobrze wyświetlana</span>
 koty_ptaki$gatunek &lt;-<span class="st"> </span><span class="kw">as.character</span>(koty_ptaki$gatunek)
 
 i =<span class="st"> </span><span class="dv">1</span>
 <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;może ważyć do&quot;</span>, koty_ptaki[i,<span class="st">&quot;waga&quot;</span>], <span class="st">&quot;kg</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
 <pre><code>## Tygrys może ważyć do 300 kg</code></pre>
 </div>
-<div id="petle-3" class="slide section level1">
+<div id="petle-6" class="slide section level1">
 <h1>Pętle</h1>
 <p>Powtórzmy tę operację dla każdego wiersza. Liczbę wierszy w ramce danych można odczytać poleceniem <code>nrow()</code> (od <em>number of rows</em>).</p>
 <pre class="sourceCode r"><code class="sourceCode r">for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
@@ -178,6 +260,11 @@ for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
 ## ......................  Sokol wedrowny 
 ## ....................  Sokol norweski 
 ## ........................  Albatros</code></pre>
+</div>
+<div id="podsumowanie-instrukcji-r" class="slide section level1">
+<h1>Podsumowanie instrukcji R</h1>
+<p>W tym odcinku omawialiśmy</p>
+<p>Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.</p>
 </div>
 <div id="zadania" class="slide section level1">
 <h1>Zadania</h1>
