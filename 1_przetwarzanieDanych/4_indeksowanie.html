@@ -70,11 +70,11 @@ pogRomcy danych
 <p>W programie R nawet jedna wartość jest wektorem, tyle że małym, jednoelementowym.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">4</span></code></pre>
 <pre><code>## [1] 4</code></pre>
-<p>Dłuższe wektory można tworzyć np funkcją <code>c()</code>, która pozwala na sklejenie kilku wartości w jeden wektor.</p>
+<p>Dłuższe wektory można tworzyć np. funkcją <code>c()</code>, która pozwala na sklejenie kilku wartości w jeden wektor.</p>
 <p>Przykładowa instrukcja tworząca wektor o trzech elementach.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</code></pre>
 <pre><code>## [1] 3 4 5</code></pre>
-<p>W programowaniu i analizie danych bardzo często wykorzystuje sie wektory kolejnych wartości liczbowych. Takie wektory mają nawet specjalną nazwę <em>sekwencje</em>.</p>
+<p>W programowaniu i analizie danych bardzo często wykorzystuje się wektory kolejnych wartości liczbowych. Takie wektory mają nawet specjalną nazwę <em>sekwencje</em>.</p>
 <p>Sekwencje kolejnych liczb można stworzyć operatorem <code>:</code>. Jeżeli chcemy zbudować sekwencję liczb równie odległych od siebie, ale z krokiem innym niż 1, to wygodnie jest wykorzystać funkcję <code>seq()</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span>:<span class="dv">7</span></code></pre>
 <pre><code>## [1] 2 3 4 5 6 7</code></pre>
@@ -84,7 +84,7 @@ pogRomcy danych
 <div id="wektory-1" class="slide section level1">
 <h1>Wektory</h1>
 <p>Używając funkcji <code>c()</code> można tworzyć wektory wartości logicznych (z dwoma możliwymi stanami PRAWDA/FAŁSZ oznaczanymi <code>TRUE</code>/<code>FALSE</code>), wektory napisów oraz innego rodzaju wartości.</p>
-<p>Aby wykorzystać wektor później, trzeba go przypisać do zmiennej. Można to zrobić używając operatora <code>-&gt;</code> lub <code>=</code>. Jeżeli chcemy wyświetlić zawartość zmiennej to wystarczy wpisać ją do konsili i nacisnąć ENTER.</p>
+<p>Aby wykorzystać wektor później, trzeba go przypisać do zmiennej. Można to zrobić używając operatora <code>-&gt;</code> lub <code>=</code>. Jeżeli chcemy wyświetlić zawartość zmiennej to wystarczy wpisać ją do konsoli i nacisnąć ENTER.</p>
 <pre class="sourceCode r"><code class="sourceCode r">co_drugi &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)
 co_drugi</code></pre>
 <pre><code>## [1]  TRUE FALSE  TRUE FALSE  TRUE FALSE</code></pre>
@@ -126,7 +126,7 @@ LETTERS[<span class="kw">length</span>(LETTERS)]</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">indeksy &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">26</span>)
 LETTERS[indeksy]</code></pre>
 <pre><code>## [1] &quot;A&quot; &quot;E&quot; &quot;Z&quot;</code></pre>
-<p>Aby wybrać więcej elementów z wektora wygodnie jest wykorzystać sekwecje.</p>
+<p>Aby wybrać więcej elementów z wektora wygodnie jest wykorzystać sekwencje.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># dziesięć pierwszych liter</span>
 LETTERS[<span class="dv">1</span>:<span class="dv">10</span>]</code></pre>
 <pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot;</code></pre>
@@ -146,7 +146,7 @@ coDruga</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">LETTERS[<span class="dv">10</span>:<span class="dv">1</span>]</code></pre>
 <pre><code>##  [1] &quot;J&quot; &quot;I&quot; &quot;H&quot; &quot;G&quot; &quot;F&quot; &quot;E&quot; &quot;D&quot; &quot;C&quot; &quot;B&quot; &quot;A&quot;</code></pre>
 <p>Elementy wektora można również indeksować warunkiem logicznym.</p>
-<p>W poniższym przykładzie instrukacja <code>LETTERS &gt; &quot;K&quot;</code> tworzy wektor wartości logicznych weryfikujących czy koljna litera jest większa czy mniejsza od <code>K</code> (w porządku leksykograficznym),</p>
+<p>W poniższym przykładzie instrukcja <code>LETTERS &gt; &quot;K&quot;</code> tworzy wektor wartości logicznych weryfikujących czy kolejna litera jest większa czy mniejsza od <code>K</code> (w porządku leksykograficznym),</p>
 <p>Taki wektor wartości logicznych można wykorzystać do indeksowania wektora <code>LETTERS</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">LETTERS &gt;<span class="st"> &quot;K&quot;</span></code></pre>
 <pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
@@ -160,7 +160,7 @@ LETTERS[LETTERS &gt;<span class="st"> &quot;K&quot;</span>]</code></pre>
 <div id="zadania" class="slide section level1">
 <h1>Zadania</h1>
 <ul>
-<li><p>Zbuduj sekwencję dziesięciu koljnym małych liter alfabetu łacińskiego.</p></li>
+<li><p>Zbuduj sekwencję dziesięciu kolejnych małych liter alfabetu łacińskiego.</p></li>
 <li><p>Zbuduj sekwencję dziesięciu kolejnych liczb nieparzystych zaczynając od 3.</p></li>
 <li><p>Z wektora <code>LETTERS</code> wybierz litery na pozycjach 5, 10, 15, 20 i 25.</p></li>
 <li><p>Wypisz wartości wektora <code>LETTERS</code> od końca.</p></li>
@@ -191,12 +191,12 @@ koty_ptaki</code></pre>
 <div id="indeksowanie-wierszy-w-ramce-danych" class="slide section level1">
 <h1>Indeksowanie wierszy w ramce danych</h1>
 <p>Zasadnicza różnica pomiędzy wektorem a ramką danych jest taka, że wektor jest jednowymiarowy. Wartości są ustawione w ciągu. W ramce danych wartości są ułożone w dwa wymiary, wiersze i kolumny. Indeksując wartości w ramce danych podaje się wektor indeksów dla wierszy i wektor wartości dla kolumn.</p>
-<p>Aby odwoływać się do wierszy lub kolumn ramki danych można wykorzystać operator <code>[,]</code>. Obowiązkowym elementem jest przecinek. Przed przecinkiem należy wpisać indeksy wierszy, po przecinku indeksy kolumn. Jeżeli przed przecinkiem lub po przecinki nie będzie żadnych wartości to wybrane będą wszystkie elementy wwierszu / kolumnie.</p>
+<p>Aby odwoływać się do wierszy lub kolumn ramki danych można wykorzystać operator <code>[,]</code>. Obowiązkowym elementem jest przecinek. Przed przecinkiem należy wpisać indeksy wierszy, po przecinku indeksy kolumn. Jeżeli przed przecinkiem lub po przecinki nie będzie żadnych wartości to wybrane będą wszystkie elementy w wierszu / kolumnie.</p>
 <p>Przykładowo, odwołanie się do trzeciego wiersza z ramki danych</p>
 <pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="dv">3</span>, ]</code></pre>
 <pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
 ## 3  Jaguar  100     1.7       90 Ameryka        15     Kot</code></pre>
-<p>Liczbę wierszy można sprawdzić funkcją <code>nrow()</code>, przydatne, jeżęli np. chcemy wyświetlić ostatni wiersz.</p>
+<p>Liczbę wierszy można sprawdzić funkcją <code>nrow()</code>, przydatne, jeżeli np. chcemy wyświetlić ostatni wiersz.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(koty_ptaki)</code></pre>
 <pre><code>## [1] 13</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="dv">13</span>, ]</code></pre>
@@ -207,7 +207,7 @@ koty_ptaki</code></pre>
 <h1>Indeksowanie wierszy w ramce danych</h1>
 <p>Jeżeli chcemy wybrać więcej niż jeden wiersz należy, podobnie jak dla wektorów, podać kilka indeksów przed przecinkiem.</p>
 <p>Aby odwołać się do kilku kolejnych wierszy można wykorzystać sekwencję zbudowaną z operatorem <code>:</code>.</p>
-<p>Przykłądowo, wiersze od 8 do 10 z ramki danych <code>koty_ptaki</code> można wyłuskać następująco.</p>
+<p>Przykładowo, wiersze od 8 do 10 z ramki danych <code>koty_ptaki</code> można wyłuskać następująco.</p>
 <pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="dv">8</span>:<span class="dv">10</span>, ]</code></pre>
 <pre><code>##          gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
 ## 8         Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
@@ -277,7 +277,7 @@ najszybsze</code></pre>
 ## 11 Sokol wedrowny   0.7     0.5      110   Polnoc        15    Ptak
 ## 12 Sokol norweski   2.0     0.7      100   Polnoc        20    Ptak
 ## 13       Albatros   4.0     0.8      120 Poludnie        50    Ptak</code></pre>
-<p>Nie można mieszać jednocześnie wartości dodanich i ujemny.</p>
+<p>Nie można mieszać jednocześnie wartości dodatnich i ujemnych.</p>
 </div>
 <div id="indeksowanie-kolumn-w-ramce-danych" class="slide section level1">
 <h1>Indeksowanie kolumn w ramce danych</h1>
@@ -317,7 +317,7 @@ najszybsze</code></pre>
 <pre><code>##  [1] 300.00 200.00 100.00  80.00  70.00  60.00  50.00   0.05 150.00   5.00
 ## [11]   0.70   2.00   4.00</code></pre>
 <p>Ponieważ operacja odwołania się do jednej kolumny w danych jest dosyć częsta, można ją wykonać na kilka innych sposobów. Najpopularniejszym jest użycie operatora <code>$</code>.</p>
-<p>Z jego pomocą do kolumny <code>waga</code> możemy odpowłać się w ten sposób.</p>
+<p>Z jego pomocą do kolumny <code>waga</code> możemy odwołać się w ten sposób.</p>
 <pre class="sourceCode r"><code class="sourceCode r">koty_ptaki$waga</code></pre>
 <pre><code>##  [1] 300.00 200.00 100.00  80.00  70.00  60.00  50.00   0.05 150.00   5.00
 ## [11]   0.70   2.00   4.00</code></pre>
@@ -371,7 +371,7 @@ koty_ptaki[, <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv
 <p>Te nazwy niewiele mówią, używanie ich do indeksowania nie miałoby sensu. Zmieńmy więc nazwy wierszy na takie jak w kolumnie <code>gatunek</code></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(koty_ptaki) &lt;-<span class="st"> </span>koty_ptaki$gatunek</code></pre>
 <p>Teraz możemy odwoływać się do wierszy poprzez nazwy tych wierszy.</p>
-<p>Poniższy przykład wybiera wiersze dla czterech wskazanych gatunków oraz trzy wybrane kolumny. Jeżeli wiersze mają sensowne, to bardzo ułątwiają odwoływanie się do wierszy.</p>
+<p>Poniższy przykład wybiera wiersze dla czterech wskazanych gatunków oraz trzy wybrane kolumny. Jeżeli wiersze mają sensowne, to bardzo ułatwiają odwoływanie się do wierszy.</p>
 <pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="kw">c</span>(<span class="st">&quot;Lew&quot;</span>, <span class="st">&quot;Leopard&quot;</span>, <span class="st">&quot;Jerzyk&quot;</span>, <span class="st">&quot;Strus&quot;</span>),
            <span class="kw">c</span>(<span class="st">&quot;waga&quot;</span>, <span class="st">&quot;dlugosc&quot;</span>, <span class="st">&quot;predkosc&quot;</span>)]</code></pre>
 <pre><code>##           waga dlugosc predkosc
@@ -407,7 +407,7 @@ LETTERS[<span class="kw">length</span>(LETTERS)]
 
 <span class="co"># indeksowanie kilku elementów wektora</span>
 LETTERS[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">26</span>)]
-<span class="co"># z uzyciem zmiennej pomocniczej</span>
+<span class="co"># z użyciem zmiennej pomocniczej</span>
 indeksy &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">26</span>)
 LETTERS[indeksy]
 
@@ -445,7 +445,7 @@ koty_ptaki[indeksy, ]
 najszybsze &lt;-<span class="st"> </span>koty_ptaki$predkosc &gt;<span class="st"> </span><span class="dv">100</span>
 koty_ptaki[najszybsze, ]
 
-<span class="co"># używanie ujemnych indeksów by pominąc wiersze</span>
+<span class="co"># używanie ujemnych indeksów by pominąć wiersze</span>
 koty_ptaki[ -<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>), ]</code></pre>
 </div>
 <div id="podsumowanie-instrukcji-r-2" class="slide section level1">
@@ -453,7 +453,7 @@ koty_ptaki[ -<span class="kw">c</span>(<span class="dv">1</span>, <span class="d
 <p>W tym odcinku omawialiśmy funkcje służące do indeksowania kolumn oraz jednocześnie wierszy i kolumn.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># indeksowanie kolumn, tylko druga kolumna, wynikiem jest wektor</span>
 koty_ptaki[, <span class="dv">2</span>]
-<span class="co"># drop=FALSE powodoje, że wynikiem jest ramka danych</span>
+<span class="co"># drop=FALSE powoduje, że wynikiem jest ramka danych</span>
 koty_ptaki[,<span class="dv">2</span>, drop=<span class="ot">FALSE</span>]
 
 <span class="co"># nazwy kolumn</span>

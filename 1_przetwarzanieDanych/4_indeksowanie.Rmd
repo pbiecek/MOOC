@@ -40,7 +40,7 @@ W programie R nawet jedna wartość jest wektorem, tyle że małym, jednoelement
 4
 ```
 
-Dłuższe wektory można tworzyć np funkcją `c()`, która pozwala na sklejenie kilku wartości w jeden wektor. 
+Dłuższe wektory można tworzyć np. funkcją `c()`, która pozwala na sklejenie kilku wartości w jeden wektor. 
 
 Przykładowa instrukcja tworząca wektor o trzech elementach.
 
@@ -48,7 +48,7 @@ Przykładowa instrukcja tworząca wektor o trzech elementach.
 c(3, 4, 5)
 ```
 
-W programowaniu i analizie danych bardzo często wykorzystuje sie wektory kolejnych wartości liczbowych. Takie wektory mają nawet specjalną nazwę *sekwencje*.
+W programowaniu i analizie danych bardzo często wykorzystuje się wektory kolejnych wartości liczbowych. Takie wektory mają nawet specjalną nazwę *sekwencje*.
 
 Sekwencje kolejnych liczb można stworzyć operatorem `:`. Jeżeli chcemy zbudować sekwencję liczb równie odległych od siebie, ale z krokiem innym niż 1, to wygodnie jest wykorzystać funkcję `seq()`.
 
@@ -64,7 +64,7 @@ seq(from = 3, to = 15, by = 2)
 Używając funkcji `c()` można tworzyć wektory wartości logicznych (z dwoma możliwymi stanami PRAWDA/FAŁSZ oznaczanymi `TRUE`/`FALSE`), wektory napisów oraz innego rodzaju wartości.
 
 Aby wykorzystać wektor później, trzeba go przypisać do zmiennej. Można to zrobić używając operatora `->` lub `=`.
-Jeżeli chcemy wyświetlić zawartość zmiennej to wystarczy wpisać ją do konsili i nacisnąć ENTER.
+Jeżeli chcemy wyświetlić zawartość zmiennej to wystarczy wpisać ją do konsoli i nacisnąć ENTER.
 
 ```{r, message=FALSE, warning=FALSE}
 co_drugi <- c(TRUE, FALSE, TRUE, FALSE, TRUE, FALSE)
@@ -124,7 +124,7 @@ indeksy <- c(1, 5, 26)
 LETTERS[indeksy]
 ```
 
-Aby wybrać więcej elementów z wektora wygodnie jest wykorzystać sekwecje.
+Aby wybrać więcej elementów z wektora wygodnie jest wykorzystać sekwencje.
 
 ```{r, message=FALSE, warning=FALSE}
 # dziesięć pierwszych liter
@@ -149,7 +149,7 @@ LETTERS[10:1]
 
 Elementy wektora można również indeksować warunkiem logicznym. 
 
-W poniższym przykładzie instrukacja `LETTERS > "K"` tworzy wektor wartości logicznych weryfikujących czy koljna litera jest większa czy mniejsza od `K` (w porządku leksykograficznym),
+W poniższym przykładzie instrukcja `LETTERS > "K"` tworzy wektor wartości logicznych weryfikujących czy kolejna litera jest większa czy mniejsza od `K` (w porządku leksykograficznym),
 
 Taki wektor wartości logicznych można wykorzystać do indeksowania wektora `LETTERS`.
 
@@ -164,7 +164,7 @@ LETTERS[LETTERS > "K"]
 
 # Zadania
 
-- Zbuduj sekwencję dziesięciu koljnym małych liter alfabetu łacińskiego.
+- Zbuduj sekwencję dziesięciu kolejnych małych liter alfabetu łacińskiego.
 
 - Zbuduj sekwencję dziesięciu kolejnych liczb nieparzystych zaczynając od 3.
 
@@ -193,7 +193,7 @@ koty_ptaki
 
 Zasadnicza różnica pomiędzy wektorem a ramką danych jest taka, że wektor jest jednowymiarowy. Wartości są ustawione w ciągu. W ramce danych wartości są ułożone w dwa wymiary, wiersze i kolumny. Indeksując wartości w ramce danych podaje się wektor indeksów dla wierszy i wektor wartości dla kolumn.
 
-Aby odwoływać się do wierszy lub kolumn ramki danych można wykorzystać operator `[,]`. Obowiązkowym elementem jest przecinek. Przed przecinkiem należy wpisać indeksy wierszy, po przecinku indeksy kolumn. Jeżeli przed przecinkiem lub po przecinki nie będzie żadnych wartości to wybrane będą wszystkie elementy wwierszu / kolumnie.
+Aby odwoływać się do wierszy lub kolumn ramki danych można wykorzystać operator `[,]`. Obowiązkowym elementem jest przecinek. Przed przecinkiem należy wpisać indeksy wierszy, po przecinku indeksy kolumn. Jeżeli przed przecinkiem lub po przecinki nie będzie żadnych wartości to wybrane będą wszystkie elementy w wierszu / kolumnie.
 
 Przykładowo, odwołanie się do trzeciego wiersza z ramki danych
 
@@ -201,7 +201,7 @@ Przykładowo, odwołanie się do trzeciego wiersza z ramki danych
 koty_ptaki[3, ]
 ```
 
-Liczbę wierszy można sprawdzić funkcją `nrow()`, przydatne, jeżęli np. chcemy wyświetlić ostatni wiersz.
+Liczbę wierszy można sprawdzić funkcją `nrow()`, przydatne, jeżeli np. chcemy wyświetlić ostatni wiersz.
 
 ```{r, message=FALSE, warning=FALSE}
 nrow(koty_ptaki)
@@ -216,7 +216,7 @@ Jeżeli chcemy wybrać więcej niż jeden wiersz należy, podobnie jak dla wekto
 
 Aby odwołać się do kilku kolejnych wierszy można wykorzystać sekwencję zbudowaną z operatorem `:`.
 
-Przykłądowo, wiersze od 8 do 10 z ramki danych `koty_ptaki` można wyłuskać następująco.
+Przykładowo, wiersze od 8 do 10 z ramki danych `koty_ptaki` można wyłuskać następująco.
 
 ```{r, message=FALSE, warning=FALSE}
 koty_ptaki[8:10, ]
@@ -272,7 +272,7 @@ Przykładowo, wszystkie wiersze poza 1, 3, 8, 9 i 10 można uzyskać poleceniem.
 koty_ptaki[ - c(1, 3, 8:10), ]
 ```
 
-Nie można mieszać jednocześnie wartości dodanich i ujemny.
+Nie można mieszać jednocześnie wartości dodatnich i ujemnych.
 
 ---
 
@@ -317,7 +317,7 @@ koty_ptaki[, "waga"]
 
 Ponieważ operacja odwołania się do jednej kolumny w danych jest dosyć częsta, można ją wykonać na kilka innych sposobów. Najpopularniejszym jest użycie operatora `$`. 
 
-Z jego pomocą do kolumny `waga` możemy odpowłać się w ten sposób.
+Z jego pomocą do kolumny `waga` możemy odwołać się w ten sposób.
 
 ```{r, message=FALSE, warning=FALSE}
 koty_ptaki$waga
@@ -381,7 +381,7 @@ rownames(koty_ptaki) <- koty_ptaki$gatunek
 
 Teraz możemy odwoływać się do wierszy poprzez nazwy tych wierszy.
 
-Poniższy przykład wybiera wiersze dla czterech wskazanych gatunków oraz trzy wybrane kolumny. Jeżeli wiersze mają sensowne, to bardzo ułątwiają odwoływanie się do wierszy.
+Poniższy przykład wybiera wiersze dla czterech wskazanych gatunków oraz trzy wybrane kolumny. Jeżeli wiersze mają sensowne, to bardzo ułatwiają odwoływanie się do wierszy.
 
 ```{r, message=FALSE, warning=FALSE}
 koty_ptaki[c("Lew", "Leopard", "Jerzyk", "Strus"),
@@ -422,7 +422,7 @@ LETTERS[length(LETTERS)]
 
 # indeksowanie kilku elementów wektora
 LETTERS[c(1,5,26)]
-# z uzyciem zmiennej pomocniczej
+# z użyciem zmiennej pomocniczej
 indeksy <- c(1, 5, 26)
 LETTERS[indeksy]
 
@@ -466,7 +466,7 @@ tail(koty_ptaki)
 najszybsze <- koty_ptaki$predkosc > 100
 koty_ptaki[najszybsze, ]
 
-# używanie ujemnych indeksów by pominąc wiersze
+# używanie ujemnych indeksów by pominąć wiersze
 koty_ptaki[ -c(1, 3, 8:10), ]
 ```
 
@@ -479,7 +479,7 @@ W tym odcinku omawialiśmy funkcje służące do indeksowania kolumn oraz jednoc
 ```{r, eval=FALSE}
 # indeksowanie kolumn, tylko druga kolumna, wynikiem jest wektor
 koty_ptaki[, 2]
-# drop=FALSE powodoje, że wynikiem jest ramka danych
+# drop=FALSE powoduje, że wynikiem jest ramka danych
 koty_ptaki[,2, drop=FALSE]
 
 # nazwy kolumn
@@ -519,4 +519,5 @@ koty_ptaki[c("Lew", "Leopard", "Jerzyk", "Strus"),
 - Wybierz z ramki danych `koty_ptaki` wszystkie kolumny poza ostatnią
 
 - Wybierz z ramki wiersze dla których waga jest mniejsza niż 100 oraz cztery pierwsze kolumny.
+
 
