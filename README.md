@@ -27,9 +27,9 @@ część 1: Data smart
     + odcinek 6: Jak zapisać dane z R, [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/06_zapisywanie.html), v1 ready
     + odcinek 7: Indeksowanie wektorów i ramek danych, [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/07_indeksowanie.html), v1 ready
   * Instrukcje sterujące, pętle, warunki i funkcje
-    + odcinek 8: Pętle [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/08_petle.html), 
-    + odcinek 9: Instrukcje warunkowe [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/09_instrukcje_warunkowe.html), 
-    + odcinek 10: Funkcje [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/10_funkcje.html)
+    + odcinek 8: Pętle [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/08_petle.html), v1 ready 
+    + odcinek 9: Instrukcje warunkowe [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/09_instrukcje_warunkowe.html), v1 ready 
+    + odcinek 10: Funkcje [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/10_funkcje.html), v1 ready
   * Podstawowe typy danych i ich statystyki opisowe
     + odcinek 11: Cechy jakościowe, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/51_ilosciowe.html)
     + odcinek 12: Cechy ilościowe, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/52_jakosciowe.html)
@@ -88,8 +88,6 @@ część 2: Data master
   * Jak wybierać modele [AIC, BIC]
   * Regresja logistyczna
 
-TODO: Wprowadzić peer-review w ocenianiu wizualizacji i być może modelowania.
+TODO: Wprowadzić peer-review w ocenianiu wizualizacji i być może modelowania ???
 
 TODO: 20 pytań w challenges z automatyczną weryfikacją poprawności
-
-TODO: ranking zespołów automatycznie generowany
