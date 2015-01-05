@@ -52,7 +52,7 @@ pogRomcy danych
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
-<p>Mnogość dostępnych algorytmów do analizy danych stawia nas często przed wyborami. Czy użyć metody A czy metody B, każda jest lepsza w innej sytuacji. Najlepszym rozwiązaniem jest często warunkowe użycie jednej lub drugiej metody w zależności od tego jak wyglądaną nasze dane.</p>
+<p>Mnogość dostępnych algorytmów do analizy danych stawia nas często przed koniecznością wyboru. Czy użyć metody A czy metody B, każda jest lepsza w innej sytuacji. Najlepszym rozwiązaniem jest często warunkowe użycie jednej lub drugiej metody w zależności od tego jak wyglądaną nasze dane.</p>
 <p>Do warunkowego wykonania jednej lub drugiej grupy instrukcji służą instrukcje warunkowe.</p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
@@ -69,9 +69,25 @@ pogRomcy danych
 </div>
 <div id="instrukcje-warunkowe" class="slide section level1">
 <h1>Instrukcje warunkowe</h1>
+<p>Przygotowując program, często jesteśmy w sytuacji w której dalsza akcja zależy od pewnej wartości, dla nas nieznane lub potencjalnie zmieniającej się.</p>
+<p>Przykładowo, jeżeli losujemy liczbę losową z przedziału 0-1 i w zależności co się wylosowało chcemy napisać <code>Orzeł</code> lub <code>Reszka</code>, możemy nie wiedzieć jaka wartość się wylosuje.</p>
+<p>Używając instrukcji warunkowych możęmy opisać alternatywne scenariusze, które będą wykonane w zależności od określonego warunku.</p>
+<p>Poniższy kod wypisze na ekranie napis <code>Orzeł</code> jeżeli wylosuje się liczba mniejsza od 0.5 oraz napis <code>Reszka</code> jeżeli wysoluje się liczba większa równa 0.5.</p>
+<pre class="sourceCode r"><code class="sourceCode r">liczbaLosowa &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">1</span>)
+
+if (liczbaLosowa &lt;<span class="st"> </span><span class="fl">0.5</span>) {
+  <span class="kw">cat</span>(<span class="st">&quot;Orzeł&quot;</span>)
+} else {
+  <span class="kw">cat</span>(<span class="st">&quot;Reszka&quot;</span>)
+}</code></pre>
+<pre><code>## Reszka</code></pre>
+</div>
+<div id="instrukcje-warunkowe-1" class="slide section level1">
+<h1>Instrukcje warunkowe</h1>
 <p>Przygotowując algorytm przetwarzania danych, często potrzebujemy rozważyć różne możliwe sytuacje. Aby zapisać warianty wykonywania w zależności od stanu określonych zmiennych, można wykorzystać instrukcje warunkowe.</p>
-<p>Najczęściej wykorzystywaną instrukcją warunkową jest <code>if else</code>, która w języku R występuje w trzech postaciach.</p>
+<p>Najczęściej wykorzystywaną instrukcją warunkową jest <code>if else</code>, która w języku R występuje w trzech odmianach.</p>
 <p>Jeżeli <code>warunek</code> występujący po bloku <code>if</code> jest prawdziwy, wykonana będzie instrukcja <code>wyrażenie1</code>, w przeciwnym przypadku <code>wyrażenie2</code> (o ile jest wskazane).</p>
+<p>Trzecia wymieniona poniżej odmiana to instrukcja <code>ifelse()</code>, która może operować nie tylko na jednej wartości logicznej TRUE/FALSE ale na całym wektorze wartości logicznych.</p>
 <pre class="sourceCode r"><code class="sourceCode r">if (warunek) 
   wyrażenie1
 
@@ -79,24 +95,46 @@ if (warunek)
   wyrażenie1  else wyrażenie2
 
 <span class="kw">ifelse</span> (warunek_dla_wektora, wyrażenie1, wyrażenie2) </code></pre>
-</div>
-<div id="instrukcje-warunkowe-1" class="slide section level1">
-<h1>Instrukcje warunkowe</h1>
-<p>Przykładowe wywołanie każdego z wariantów instrukcji <code>if</code></p>
-<pre class="sourceCode r"><code class="sourceCode r">i &lt;-<span class="st"> </span><span class="dv">1</span></code></pre>
-<p>Wyłącznie blok <code>if</code>, jeżeli <code>warunek</code> jest fałszywy nic się wyświetli na ekranie.</p>
-<pre class="sourceCode r"><code class="sourceCode r">if (koty_ptaki[i,<span class="st">&quot;druzyna&quot;</span>] ==<span class="st"> &quot;Kot&quot;</span>) {
-  <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to wielki kot.&quot;</span>)
+<p>Jeżeli wyrażenie obejmuje więcej niż jedną instrukcje, należy je otoczyć blokiem <code>{}</code>.</p>
+<p>Nawet gdy wyrażenie jest jedną instrukcją, to dodawanie nawiasów klamrowych <code>{}</code> jest popularną praktyką, powoduje, że kod jest czytelniejszy.</p>
+<pre class="sourceCode r"><code class="sourceCode r">if (warunek) {
+  wyrażenie1
+}
+
+if (warunek) {
+  wyrażenie1
+} else {
+  wyrażenie2 
 }</code></pre>
-<pre><code>## 13 to wielki kot.</code></pre>
-<p>Blok <code>if-else</code>. Jeżeli <code>warunek</code> jest fałszywy wyświetli się wynik części <code>else</code>.</p>
+</div>
+<div id="instrukcje-warunkowe-2" class="slide section level1">
+<h1>Instrukcje warunkowe</h1>
+<p>Na przykładzie pierwszego wiersza z tabeli danych <code>koty_ptaki</code> zademonstrujemy jak działają kolejne odmiany instrukcji warunkowej. Kolumnę <code>gatunek</code> musimy zamienić na kolumnę napisów, inaczej nazwy gatunków będą się źle wyświetlały. Będziemy pracować na pierwszym wierszu, ale indeks tego wiersza zapiszemy w zeminnej <code>i</code>. Dzięki temu, łatwiej nam będzie później wykorzystać ten kod w pętli.</p>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki$gatunek &lt;-<span class="st"> </span><span class="kw">as.character</span>(koty_ptaki$gatunek)
+i &lt;-<span class="st"> </span><span class="dv">9</span>
+koty_ptaki[i,]</code></pre>
+<pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
+## 9   Strus  150     2.5       70  Afryka        45    Ptak</code></pre>
+<p>Jeżeli użyjemy wyłącznie bloku <code>if</code>, to w sytuacji gdy <code>warunek</code> jest fałszywy nic się wyświetli na ekranie.</p>
 <pre class="sourceCode r"><code class="sourceCode r">if (koty_ptaki[i,<span class="st">&quot;druzyna&quot;</span>] ==<span class="st"> &quot;Kot&quot;</span>) {
-  <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to wielki kot.&quot;</span>)
+  <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to duży kot.&quot;</span>)
+}</code></pre>
+<p>Jeżeli użyjemy instrukcji <code>if-else</code>, to gdy <code>warunek</code> okaże się być fałszywy wyświetli się wynik części <code>else</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">if (koty_ptaki[i,<span class="st">&quot;druzyna&quot;</span>] ==<span class="st"> &quot;Kot&quot;</span>) {
+  <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to duży kot.&quot;</span>)
 } else {
   <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to ptak.&quot;</span>)
 }</code></pre>
-<pre><code>## 13 to wielki kot.</code></pre>
-<p>Blok <code>if-else</code> dla wektorów. Wynikiem jest również wektor.</p>
+<pre><code>## Strus to ptak.</code></pre>
+</div>
+<div id="instrukcje-warunkowe-3" class="slide section level1">
+<h1>Instrukcje warunkowe</h1>
+<p>Jeżęli pracujemy na wektorach, wygodnym rozwiązaniem jest skorzystaniem z instrukcji wektorowej <code>ifelse()</code>.</p>
+<p>Jej pierwszym argumentem może być wektor. Przykłądowo instrukcja <code>koty_ptaki[,&quot;druzyna&quot;] == &quot;Kot&quot;</code> tworzy wektor wartości logicznych.</p>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[,<span class="st">&quot;druzyna&quot;</span>] ==<span class="st"> &quot;Kot&quot;</span></code></pre>
+<pre><code>##  [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE
+## [12] FALSE FALSE</code></pre>
+<p>Wykorzystamy ją w instrukcji <code>ifelse()</code> i jako wynik otrzymamy wektor napisów o wartościach <code>&quot;Kolejny wielki kot&quot;</code> tam gdzie występowała wartość TRUE i wartościach <code>&quot;Kolejny szybki ptak&quot;</code> tam gdzie występowała wartość FALSE.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ifelse</span>(koty_ptaki[,<span class="st">&quot;druzyna&quot;</span>] ==<span class="st"> &quot;Kot&quot;</span>,
   <span class="st">&quot;Kolejny wielki kot&quot;</span>,
   <span class="st">&quot;Kolejny szybki ptak&quot;</span>)</code></pre>
@@ -108,11 +146,12 @@ if (warunek)
 </div>
 <div id="petle-i-instrukcje-warunkowe" class="slide section level1">
 <h1>Pętle i instrukcje warunkowe</h1>
-<p>Instrukcje warunkowe są często wykorzystywane wewnątrz pętli. W sytuacji gdy chcemy powtórzyć pewną czynność kilkukrotnie, ale dana czynność może mieć kilka wariantów.</p>
-<p>Zilustrujemy tą sytuację w poniższym przykładzie, w zależności czy określony gatunek jest kotem czy ptakiem wyświetlimy inną formułkę.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[,<span class="st">&quot;gatunek&quot;</span>] &lt;-<span class="st"> </span><span class="kw">as.character</span>(koty_ptaki[,<span class="st">&quot;gatunek&quot;</span>])
-
+<p>Instrukcje warunkowe są często wykorzystywane wewnątrz pętli. W sytuacji gdy chcemy powtórzyć pewną operację kilkukrotnie, ale przebieg danej operacji może mieć kilka wariantów / scenariuszy.</p>
+<p>Zilustrujemy tą sytuację w poniższym przykładzie.</p>
+<p>W zależności od tego czy określony gatunek jest kotem czy ptakiem wyświetlimy inną formułę.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pętla wykona się dla każdego wiersza</span>
 for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
+  <span class="co"># wewnątrz pętli wykonanie zalęży od warunku i instrukcji if</span>
   if (koty_ptaki[i,<span class="st">&quot;druzyna&quot;</span>] ==<span class="st"> &quot;Kot&quot;</span>) {
     <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to wielki i szybki kot.</span><span class="ch">\n</span><span class="st">&quot;</span>)
   } else {
@@ -133,11 +172,99 @@ for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
 ## Sokol norweski to ptak.
 ## Albatros to ptak.</code></pre>
 </div>
+<div id="petle-i-instrukcje-warunkowe-1" class="slide section level1">
+<h1>Pętle i instrukcje warunkowe</h1>
+<p>Innym częstym zastosowaniem instrukcji warunkowych jest zmiana wartości zmiennej na inną wartość w zależności od tego jaki wystapił warunek.</p>
+<p>W przykładzie poniżej w pętli wykonujemy instrukcję warunkową która w jednej sytuacji zmienia wartość zmiennej <code>liczbaKotów</code> a w innej zmiennej <code>liczbaPtaków</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># inicjujemy zmienne</span>
+liczbaKotów  &lt;-<span class="st"> </span><span class="dv">0</span>
+liczbaPtaków &lt;-<span class="st"> </span><span class="dv">0</span>
+<span class="co"># w pętli będziemy zmieniać wartość zmiennych w zależności od tego </span>
+<span class="co"># czy kolejny wiersz opisuje koty czy ptaki</span>
+for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
+  if (koty_ptaki[i,<span class="st">&quot;druzyna&quot;</span>] ==<span class="st"> &quot;Kot&quot;</span>) {
+    liczbaKotów  &lt;-<span class="st"> </span>liczbaKotów +<span class="st"> </span><span class="dv">1</span>
+  } else {
+    liczbaPtaków &lt;-<span class="st"> </span>liczbaPtaków +<span class="st"> </span><span class="dv">1</span>
+  }
+}
+<span class="co"># zliczamy ile było kotów i ptaków</span>
+liczbaKotów</code></pre>
+<pre><code>## [1] 7</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">liczbaPtaków</code></pre>
+<pre><code>## [1] 6</code></pre>
+</div>
+<div id="podsumowanie-instrukcji-r" class="slide section level1">
+<h1>Podsumowanie instrukcji R</h1>
+<p>W tym odcinku omawialiśmy instrukcje warunkowe.</p>
+<p>Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Instrukcja warunkowa, której wykonanie zależy od wylosowanej wartości</span>
+liczbaLosowa &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">1</span>)
+if (liczbaLosowa &lt;<span class="st"> </span><span class="fl">0.5</span>) {
+  <span class="kw">cat</span>(<span class="st">&quot;Orzeł&quot;</span>)
+} else {
+  <span class="kw">cat</span>(<span class="st">&quot;Reszka&quot;</span>)
+}
+
+<span class="co"># Instrukcja warunkowa z samym blokiem if</span>
+i &lt;-<span class="st"> </span><span class="dv">9</span>
+if (koty_ptaki[i,<span class="st">&quot;druzyna&quot;</span>] ==<span class="st"> &quot;Kot&quot;</span>) {
+  <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to duży kot.&quot;</span>)
+}
+
+<span class="co"># Instrukcja warunkowa z blokiem if-else</span>
+if (koty_ptaki[i,<span class="st">&quot;druzyna&quot;</span>] ==<span class="st"> &quot;Kot&quot;</span>) {
+  <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to duży kot.&quot;</span>)
+} else {
+  <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to ptak.&quot;</span>)
+}
+
+<span class="co"># Warunki logiczne można wykonywać na wektorach wartości</span>
+koty_ptaki[,<span class="st">&quot;druzyna&quot;</span>] ==<span class="st"> &quot;Kot&quot;</span>
+
+<span class="co"># Instrukcja warunkowa ifelse() działa też na wektora</span>
+<span class="kw">ifelse</span>(koty_ptaki[,<span class="st">&quot;druzyna&quot;</span>] ==<span class="st"> &quot;Kot&quot;</span>,
+  <span class="st">&quot;Kolejny wielki kot&quot;</span>,
+  <span class="st">&quot;Kolejny szybki ptak&quot;</span>)</code></pre>
+</div>
+<div id="podsumowanie-instrukcji-r-1" class="slide section level1">
+<h1>Podsumowanie instrukcji R</h1>
+<p>W tym odcinku omawialiśmy instrukcje warunkowe.</p>
+<p>Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># W pętlach, gdy dla róznych wierszy należy wykonać inne operacje wygodnie jest korzystać </span>
+<span class="co"># z instrukcji warukowych</span>
+for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
+  <span class="co"># wewnątrz pętli wykonanie zalęży od warunku i instrukcji if</span>
+  if (koty_ptaki[i,<span class="st">&quot;druzyna&quot;</span>] ==<span class="st"> &quot;Kot&quot;</span>) {
+    <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to wielki i szybki kot.</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  } else {
+    <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to ptak.</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+}
+
+<span class="co"># W instrukcjach warunkowych nie tylko możemy wyświetlać rózne napisy,</span>
+<span class="co">#    ale również zmieniać wartości zmiennych.</span>
+<span class="co"># W poniższym przykładzie w zależności od tego jaki wiersz jest odczytywamy </span>
+<span class="co">#    inaczej zmieniamy wartości liczników</span>
+liczbaKotów  &lt;-<span class="st"> </span><span class="dv">0</span>
+liczbaPtaków &lt;-<span class="st"> </span><span class="dv">0</span>
+for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
+  if (koty_ptaki[i,<span class="st">&quot;druzyna&quot;</span>] ==<span class="st"> &quot;Kot&quot;</span>) {
+    liczbaKotów  &lt;-<span class="st"> </span>liczbaKotów +<span class="st"> </span><span class="dv">1</span>
+  } else {
+    liczbaPtaków &lt;-<span class="st"> </span>liczbaPtaków +<span class="st"> </span><span class="dv">1</span>
+  }
+}
+<span class="co"># zliczamy ile było kotów i ptaków</span>
+liczbaKotów 
+liczbaPtaków</code></pre>
+</div>
 <div id="zadania" class="slide section level1">
 <h1>Zadania</h1>
 <ul>
 <li>Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze <code>lekkie</code>, a dla cięższych niż 1 kg <code>ciężkie</code>.</li>
 <li>Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze <code>lekkie</code>, cięższych niż 100kg wypisze <code>ciężkie</code> a w przedziale 1-100kg wypisze <code>średnie</code>. Taki efekt można uzyskać stosując dwie instrukcje <code>if()</code> lub korzystając z funkcji <code>switch()</code>.</li>
+<li>Napisz pętlę i instrukcję warunkową sumującą łączną masę wszystkich ptaków i osobno kotów.</li>
 </ul>
 </div>
 
