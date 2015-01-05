@@ -203,6 +203,18 @@ Warto utrzymywać każdą z funkcji o niewielkiej długości, by łatwo było od
 
 ---
 
+# Podsumowanie instrukcji R
+
+W tym odcinku omawialiśmy 
+
+
+Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.
+
+```{r, eval=FALSE}
+```
+
+---
+
 # Zadania
 
 * Napisz funkcję, która otrzymuje argument liczbowy a następnie wypisuje wartości od argumentu do jeden.

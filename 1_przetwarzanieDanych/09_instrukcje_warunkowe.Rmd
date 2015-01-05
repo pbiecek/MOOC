@@ -112,6 +112,18 @@ for (i in 1:nrow(koty_ptaki)) {
 
 ---
 
+# Podsumowanie instrukcji R
+
+W tym odcinku omawialiśmy 
+
+
+Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.
+
+```{r, eval=FALSE}
+```
+
+---
+
 # Zadania
 
 * Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze `lekkie`, a dla cięższych niż 1 kg `ciężkie`.

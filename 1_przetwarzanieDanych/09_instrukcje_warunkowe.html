@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / przetwarzanie / instrukcje warunkowe" /> 
+  <meta name="copyright" content="pogRomcy danych / programowanie / instrukcje warunkowe" /> 
   <title>Instrukcje warunkowe</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
@@ -48,16 +48,24 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 8 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 9 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
+<p>Mnogość dostępnych algorytmów do analizy danych stawia nas często przed wyborami. Czy użyć metody A czy metody B, każda jest lepsza w innej sytuacji. Najlepszym rozwiązaniem jest często warunkowe użycie jednej lub drugiej metody w zależności od tego jak wyglądaną nasze dane.</p>
+<p>Do warunkowego wykonania jednej lub drugiej grupy instrukcji służą instrukcje warunkowe.</p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
-<li>Jak korzystać z instrukcji warunkowych</li>
-<li>Jak korzystać z instrukcji warunkowych w tętli</li>
+<li>Jak korzystać z instrukcji warunkowych?</li>
+<li>Jak korzystać z instrukcji warunkowych w pętli?</li>
 </ul>
-<p>Do ilustracji wykorzystamy zbiór danych to <code>koty_ptaki</code>.</p>
+<p>Do ilustracji wykorzystamy zbiór danych to <code>koty_ptaki</code> dostępny w pakiecie <code>SmarterPoland</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+<span class="kw">head</span>(koty_ptaki, <span class="dv">3</span>)</code></pre>
+<pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
+## 1  Tygrys  300     2.5       60    Azja        25     Kot
+## 2     Lew  200     2.0       80  Afryka        29     Kot
+## 3  Jaguar  100     1.7       90 Ameryka        15     Kot</code></pre>
 </div>
 <div id="instrukcje-warunkowe" class="slide section level1">
 <h1>Instrukcje warunkowe</h1>
@@ -75,8 +83,7 @@ if (warunek)
 <div id="instrukcje-warunkowe-1" class="slide section level1">
 <h1>Instrukcje warunkowe</h1>
 <p>Przykładowe wywołanie każdego z wariantów instrukcji <code>if</code></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
-i &lt;-<span class="st"> </span><span class="dv">1</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">i &lt;-<span class="st"> </span><span class="dv">1</span></code></pre>
 <p>Wyłącznie blok <code>if</code>, jeżeli <code>warunek</code> jest fałszywy nic się wyświetli na ekranie.</p>
 <pre class="sourceCode r"><code class="sourceCode r">if (koty_ptaki[i,<span class="st">&quot;druzyna&quot;</span>] ==<span class="st"> &quot;Kot&quot;</span>) {
   <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to wielki kot.&quot;</span>)
