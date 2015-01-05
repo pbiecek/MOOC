@@ -15,7 +15,7 @@ output:
 
 # O czym jest ten odcinek
 
-Jedną z naważniejszych cech języków programowania jest możliwość wykorzystywania rozwiązań, które my lub ktoś inny zbudował w przeszłości. Jest to możliwe dzięki jeżeli takie dobre rozwiązania zamienimy w funkcje, czyli bloki kodu które łatwo ponownie wykorzystać.
+Jedną z ważniejszych cech języków programowania jest możliwość wykorzystywania rozwiązań, które my lub ktoś inny zbudował w przeszłości. Jest to możliwe dzięki jeżeli takie dobre rozwiązania zamienimy w funkcje, czyli bloki kodu które łatwo ponownie wykorzystać.
 
 W tym odcinku nauczymy się
 
@@ -68,7 +68,7 @@ for (i in 1:nrow(koty_ptaki)) {
 
 # Funkcje
 
-Do tworzenia funkcji służy słowo `function`. Dla każdej funkcji należy określić listę jej argumentów oraz tak zwan e ciało funkcji, czyli listę instrukcji, która funkcja wykonuje.
+Do tworzenia funkcji służy słowo `function`. Dla każdej funkcji należy określić listę jej argumentów oraz tak zwane ciało funkcji, czyli listę instrukcji, która funkcja wykonuje.
 
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
 function(argumenty_rozdzielone_przecinkiem) {
@@ -92,7 +92,7 @@ Warto jednak pamiętać, że nazwa funkcji nie jest obowiązkowa i jak się oka�
 
 # Funkcje z argumentami
 
-Dla naszego przykładu z rysowaniem kropek stworzymy funkcję, którą przypiszemy do zmiennej `rysuj_kropki`. Funkcja przyjmować będzie jeden argument `n_kropek` i narysuje na ekranie dokłądnie tyle kropek ile jej każemy.
+Dla naszego przykładu z rysowaniem kropek stworzymy funkcję, którą przypiszemy do zmiennej `rysuj_kropki`. Funkcja przyjmować będzie jeden argument `n_kropek` i narysuje na ekranie dokładnie tyle kropek ile jej każemy.
 
 Do rysowania kropek wykorzystamy pętlę `for`.
 
@@ -281,7 +281,7 @@ W funkcji z poprzedniego slajdu założyliśmy, że oba wektory są równej dłu
 A co jeżeli nie są?
 Może użytkownik nie wie, że powinny być.
 
-Takie założenia warto sprawdzać, np. używając instrukcji `if()`. Jeżeli założenie jest ważne i bez jego spełnienia nie można kontynuować działąnai funkcji, to możemy przerwać działanie funkcji i zwrócić błąd poleceniem `stop()`.
+Takie założenia warto sprawdzać, np. używając instrukcji `if()`. Jeżeli założenie jest ważne i bez jego spełnienia nie można kontynuować działania funkcji, to możemy przerwać działanie funkcji i zwrócić błąd poleceniem `stop()`.
 
 
 ```{r, message=FALSE, warning=FALSE}
@@ -291,7 +291,7 @@ rysuj_wykres_kropkowy <- function(nazwy, wartosci) {
     # funkcja stop() przerywa działanie funkcji
     stop("Argumenty mają różną długość! ", length(nazwy), " oraz ", length(wartosci))
   }
-  # jeżeli wszystkie warunki są spełnione to można kontynuowac wykonanie funkcji
+  # jeżeli wszystkie warunki są spełnione to można kontynuować wykonanie funkcji
   for (i in seq_along(nazwy)) {
     rysuj_kropki(wartosci[i])
     cat(" ", nazwy[i],"\n")
@@ -358,7 +358,7 @@ suma_n_liczb_losowych <- function(n = 10) {
 }
 ```
 
-Wywołajmy tę funkcję. Jeżeli jej wynik nie zostnie przypisany do żadnej zmiennej to zostanie wyświelony na ekranie. 
+Wywołajmy tę funkcję. Jeżeli jej wynik nie zostanie przypisany do żadnej zmiennej to zostanie wyświetlony na ekranie. 
 
 ```{r, message=FALSE, warning=FALSE}
 suma_n_liczb_losowych(10) 
@@ -462,7 +462,7 @@ rysuj_wykres_kropkowy <- function(nazwy, wartosci, ...) {
   }
 }
 
-# Przykładowe wywołanie, ostatni argument zostanie przekazny dalej
+# Przykładowe wywołanie, ostatni argument zostanie przekazany dalej
 rysuj_wykres_kropkowy(nazwy = LETTERS[1:5], wartosci = 1:5, znak = "X")
 
 # Funkcja która zwraca wynik liczbowy
@@ -473,7 +473,7 @@ suma_n_liczb_losowych <- function(n = 10) {
   sum(runif(n))
 }
 
-# Dwa przykłądowe wywołania, zwracają wynik różnym scenariuszem, poprzez ostatnią wartość
+# Dwa przykładowe wywołania, zwracają wynik różnym scenariuszem, poprzez ostatnią wartość
 suma_n_liczb_losowych(10) 
 # poprzez wywołanie funkcji return()
 suma_n_liczb_losowych(-1) 
@@ -485,5 +485,5 @@ suma_n_liczb_losowych(-1)
 
 * Napisz funkcję, która otrzymuje argument liczbowy a następnie wypisuje na ekran wartości od argumentu do jeden.
 * Napisz funkcję, przyjmuje argument liczbowy `n` a następnie rysuje kwadrat o boku `n` wypełniony znakami `X`.
-* Napisz funkcję, przyjmuje argument liczbowy `n` a następnie rysuje kwadrat o boku `n` ze znakami `X`na brzegu i pusty w środku.
+* Napisz funkcję, przyjmuje argument liczbowy `n` a następnie rysuje kwadrat o boku `n` ze znakami `X` na brzegu i pusty w środku.
 
