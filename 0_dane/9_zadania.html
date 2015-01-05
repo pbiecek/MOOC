@@ -194,6 +194,49 @@ for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
   <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
 }</code></pre>
 </div>
+<div id="zadania-sezon-1-odcinek-9" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 9</h1>
+<ul>
+<li>Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze <code>lekkie</code>, a dla cięższych niż 1 kg <code>ciężkie</code>.</li>
+<li>Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze <code>lekkie</code>, cięższych niż 100kg wypisze <code>ciężkie</code> a w przedziale 1-100kg wypisze <code>średnie</code>. Taki efekt można uzyskać stosując dwie instrukcje <code>if()</code> lub korzystając z funkcji <code>switch()</code>.</li>
+<li>Napisz pętlę i instrukcję warunkową sumującą łączną masę wszystkich ptaków i osobno kotów.</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-9" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 9</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Lekkie / ciężkie</span>
+for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
+  if (koty_ptaki[i,<span class="st">&quot;waga&quot;</span>] &lt;<span class="st"> </span><span class="dv">100</span>) {
+    <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to lekkie zwierze.</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  } else {
+    <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to ciężkie zwierze.</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+}
+
+<span class="co"># Lekkie / średnie / ciężkie</span>
+for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
+  if (koty_ptaki[i,<span class="st">&quot;waga&quot;</span>] &lt;<span class="st"> </span><span class="dv">1</span>) {
+    <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to lekkie zwierze.</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  } else {
+    if (koty_ptaki[i,<span class="st">&quot;waga&quot;</span>] &lt;<span class="st"> </span><span class="dv">100</span>) {
+      <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to średnie zwierze.</span><span class="ch">\n</span><span class="st">&quot;</span>)
+    } else {
+      <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to ciężkie zwierze.</span><span class="ch">\n</span><span class="st">&quot;</span>)
+    }
+  }
+}
+
+<span class="co"># Ważymy koty i ptaki</span>
+wagaKoty &lt;-<span class="st"> </span><span class="dv">0</span>
+wagaPtaki &lt;-<span class="st"> </span><span class="dv">0</span>
+for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
+  if (koty_ptaki[i,<span class="st">&quot;druzyna&quot;</span>] ==<span class="st"> &quot;Kot&quot;</span>) {
+    wagaKoty &lt;-<span class="st"> </span>wagaKoty +<span class="st"> </span>koty_ptaki[i,<span class="st">&quot;waga&quot;</span>]
+  } else {
+    wagaPtaki &lt;-<span class="st"> </span>wagaPtaki +<span class="st"> </span>koty_ptaki[i,<span class="st">&quot;waga&quot;</span>]
+  }
+}</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>

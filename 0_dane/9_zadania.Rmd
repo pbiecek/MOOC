@@ -188,4 +188,51 @@ for (i in 1:nrow(koty_ptaki)) {
 
 ```
 
+---
+
+# Zadania, sezon 1, odcinek 9
+
+* Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze `lekkie`, a dla cięższych niż 1 kg `ciężkie`.
+* Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze `lekkie`, cięższych niż 100kg wypisze `ciężkie` a w przedziale 1-100kg wypisze `średnie`. Taki efekt można uzyskać stosując dwie instrukcje `if()` lub korzystając z funkcji `switch()`.
+* Napisz pętlę i instrukcję warunkową sumującą łączną masę wszystkich ptaków i osobno kotów.
+
+---
+
+# Odpowiedzi, sezon 1, odcinek 9
+
+```{r, eval=FALSE}
+# Lekkie / ciężkie
+for (i in 1:nrow(koty_ptaki)) {
+  if (koty_ptaki[i,"waga"] < 100) {
+    cat(koty_ptaki[i,"gatunek"], "to lekkie zwierze.\n")
+  } else {
+    cat(koty_ptaki[i,"gatunek"], "to ciężkie zwierze.\n")
+  }
+}
+
+# Lekkie / średnie / ciężkie
+for (i in 1:nrow(koty_ptaki)) {
+  if (koty_ptaki[i,"waga"] < 1) {
+    cat(koty_ptaki[i,"gatunek"], "to lekkie zwierze.\n")
+  } else {
+    if (koty_ptaki[i,"waga"] < 100) {
+      cat(koty_ptaki[i,"gatunek"], "to średnie zwierze.\n")
+    } else {
+      cat(koty_ptaki[i,"gatunek"], "to ciężkie zwierze.\n")
+    }
+  }
+}
+
+# Ważymy koty i ptaki
+wagaKoty <- 0
+wagaPtaki <- 0
+for (i in 1:nrow(koty_ptaki)) {
+  if (koty_ptaki[i,"druzyna"] == "Kot") {
+    wagaKoty <- wagaKoty + koty_ptaki[i,"waga"]
+  } else {
+    wagaPtaki <- wagaPtaki + koty_ptaki[i,"waga"]
+  }
+}
+```
+
 
