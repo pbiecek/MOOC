@@ -15,7 +15,7 @@ output:
 
 # O czym jest ten odcinek
 
-Mnogość dostępnych algorytmów do analizy danych stawia nas często przed koniecznością wyboru. Czy użyć metody A czy metody B, każda jest lepsza w innej sytuacji. Najlepszym rozwiązaniem jest często warunkowe użycie jednej lub drugiej metody w zależności od tego jak wyglądaną nasze dane.
+Mnogość dostępnych algorytmów do analizy danych stawia nas często przed koniecznością wyboru. Czy użyć metody A czy metody B, każda jest lepsza w innej sytuacji. Najlepszym rozwiązaniem jest często warunkowe użycie jednej lub drugiej metody w zależności od tego jak wyglądają nasze dane.
 
 Do warunkowego wykonania jednej lub drugiej grupy instrukcji służą instrukcje warunkowe.
 
@@ -39,9 +39,9 @@ Przygotowując program, często jesteśmy w sytuacji w której dalsza akcja zale
 
 Przykładowo, jeżeli losujemy liczbę losową z przedziału 0-1 i w zależności co się wylosowało chcemy napisać `Orzeł` lub `Reszka`, możemy nie wiedzieć jaka wartość się wylosuje.
 
-Używając instrukcji warunkowych możęmy opisać alternatywne scenariusze, które będą wykonane w zależności od określonego warunku.
+Używając instrukcji warunkowych możemy opisać alternatywne scenariusze, które będą wykonane w zależności od określonego warunku.
 
-Poniższy kod wypisze na ekranie napis `Orzeł` jeżeli wylosuje się liczba mniejsza od 0.5 oraz napis `Reszka` jeżeli wysoluje się liczba większa równa 0.5.
+Poniższy kod wypisze na ekranie napis `Orzeł` jeżeli wylosuje się liczba mniejsza od 0.5 oraz napis `Reszka` jeżeli wylosuje się liczba większa równa 0.5.
 
 ```{r}
 liczbaLosowa <- runif(n = 1)
@@ -97,7 +97,7 @@ if (warunek) {
 
 # Instrukcje warunkowe
 
-Na przykładzie pierwszego wiersza z tabeli danych `koty_ptaki` zademonstrujemy jak działają kolejne odmiany instrukcji warunkowej. Kolumnę `gatunek` musimy zamienić na kolumnę napisów, inaczej nazwy gatunków będą się źle wyświetlały. Będziemy pracować na pierwszym wierszu, ale indeks tego wiersza zapiszemy w zeminnej `i`. Dzięki temu, łatwiej nam będzie później wykorzystać ten kod w pętli.
+Na przykładzie pierwszego wiersza z tabeli danych `koty_ptaki` zademonstrujemy jak działają kolejne odmiany instrukcji warunkowej. Kolumnę `gatunek` musimy zamienić na kolumnę napisów, inaczej nazwy gatunków będą się źle wyświetlały. Będziemy pracować na pierwszym wierszu, ale indeks tego wiersza zapiszemy w zmiennej `i`. Dzięki temu, łatwiej nam będzie później wykorzystać ten kod w pętli.
 
 ```{r, message=FALSE, warning=FALSE}
 koty_ptaki$gatunek <- as.character(koty_ptaki$gatunek)
@@ -128,9 +128,9 @@ if (koty_ptaki[i,"druzyna"] == "Kot") {
 
 # Instrukcje warunkowe
 
-Jeżęli pracujemy na wektorach, wygodnym rozwiązaniem jest skorzystaniem z instrukcji wektorowej `ifelse()`.
+Jeżeli pracujemy na wektorach, wygodnym rozwiązaniem jest skorzystaniem z instrukcji wektorowej `ifelse()`.
 
-Jej pierwszym argumentem może być wektor. Przykłądowo instrukcja `koty_ptaki[,"druzyna"] == "Kot"` tworzy wektor wartości logicznych.
+Jej pierwszym argumentem może być wektor. Przykładowo instrukcja `koty_ptaki[,"druzyna"] == "Kot"` tworzy wektor wartości logicznych.
 
 ```{r, message=FALSE, warning=FALSE}
 koty_ptaki[,"druzyna"] == "Kot"
@@ -158,7 +158,7 @@ W zależności od tego czy określony gatunek jest kotem czy ptakiem wyświetlim
 ```{r, message=FALSE, warning=FALSE}
 # pętla wykona się dla każdego wiersza
 for (i in 1:nrow(koty_ptaki)) {
-  # wewnątrz pętli wykonanie zalęży od warunku i instrukcji if
+  # wewnątrz pętli wykonanie zależy od warunku i instrukcji if
   if (koty_ptaki[i,"druzyna"] == "Kot") {
     cat(koty_ptaki[i,"gatunek"], "to wielki i szybki kot.\n")
   } else {
@@ -171,7 +171,7 @@ for (i in 1:nrow(koty_ptaki)) {
 
 # Pętle i instrukcje warunkowe
 
-Innym częstym zastosowaniem instrukcji warunkowych jest zmiana wartości zmiennej na inną wartość w zależności od tego jaki wystapił warunek.
+Innym częstym zastosowaniem instrukcji warunkowych jest zmiana wartości zmiennej na inną wartość w zależności od tego jaki wystąpił warunek.
 
 W przykładzie poniżej w pętli wykonujemy instrukcję warunkową która w jednej sytuacji zmienia wartość zmiennej `liczbaKotów` a w innej zmiennej `liczbaPtaków`.
 
@@ -241,10 +241,10 @@ W tym odcinku omawialiśmy instrukcje warunkowe.
 Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.
 
 ```{r, eval=FALSE}
-# W pętlach, gdy dla róznych wierszy należy wykonać inne operacje wygodnie jest korzystać 
-# z instrukcji warukowych
+# W pętlach, gdy dla różnych wierszy należy wykonać inne operacje wygodnie jest korzystać 
+# z instrukcji warunkowych
 for (i in 1:nrow(koty_ptaki)) {
-  # wewnątrz pętli wykonanie zalęży od warunku i instrukcji if
+  # wewnątrz pętli wykonanie zależy od warunku i instrukcji if
   if (koty_ptaki[i,"druzyna"] == "Kot") {
     cat(koty_ptaki[i,"gatunek"], "to wielki i szybki kot.\n")
   } else {
@@ -252,9 +252,9 @@ for (i in 1:nrow(koty_ptaki)) {
   }
 }
 
-# W instrukcjach warunkowych nie tylko możemy wyświetlać rózne napisy,
+# W instrukcjach warunkowych nie tylko możemy wyświetlać różne napisy,
 #    ale również zmieniać wartości zmiennych.
-# W poniższym przykładzie w zależności od tego jaki wiersz jest odczytywamy 
+# W poniższym przykładzie w zależności od tego jaki wiersz jest odczytywany 
 #    inaczej zmieniamy wartości liczników
 liczbaKotów  <- 0
 liczbaPtaków <- 0
