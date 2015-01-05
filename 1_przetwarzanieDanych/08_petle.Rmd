@@ -62,7 +62,7 @@ cat("Wartość zmiennej i: 2\n")
 cat("Wartość zmiennej i: 1\n")
 ```
 
-Co jednak, gdybyśmy chcieli powtórzyć ją 10 000 razy? Z pewnoscią nikt z nas nie chciałby wpisywać przez kilka dni tych instrukcji, tym bardziej, że ten sam efekt możnaby osiągnąć prostą pętlą.
+Co jednak, gdybyśmy chcieli powtórzyć ją 10 000 razy? Z pewnością nikt z nas nie chciałby wpisywać przez kilka dni tych instrukcji, tym bardziej, że ten sam efekt można by osiągnąć prostą pętlą.
 
 ---
 
@@ -76,7 +76,7 @@ for (A in B) C
 
 W wyniku działania tej pętli wyrażenie `C` będzie wykonane dla każdej wartości z wektora `B`. Co więcej, aktualny krok pętli jest określony przez zmienną `A` i można z tej wartości korzystać wewnątrz wyrażenia `C`.
 
-W przykładzie z poprzedniego slajdu wyrażnie `cat("Wartość zmiennej i: ", i, "\n")` jest wykonywane dla każdego elementu wektora `1:odliczajDo`. W kazdym kroku pętli zmienna `i` przyjmuje kolejną wartość z wektora `1:odliczajDo`.
+W przykładzie z poprzedniego slajdu wyrażenie `cat("Wartość zmiennej i: ", i, "\n")` jest wykonywane dla każdego elementu wektora `1:odliczajDo`. W każdym kroku pętli zmienna `i` przyjmuje kolejną wartość z wektora `1:odliczajDo`.
 
 ```{r, eval=FALSE}
 for (i in 1:odliczajDo) {
@@ -88,7 +88,7 @@ for (i in 1:odliczajDo) {
 
 # Pętle
 
-W poprzednim przykładzie łątwo było przewidzieć wynik całej pętli. Wyświetlała ona pięć kolejnych liczb od 1 do 5. 
+W poprzednim przykładzie łatwo było przewidzieć wynik całej pętli. Wyświetlała ona pięć kolejnych liczb od 1 do 5. 
 
 Pokażemy teraz bardziej złożony przykład, który symuluje tak zwany proces szkodowy. Załóżmy, że mamy flotę samochodów w której w ciągu roku zdarzyć się może X stłuczek (X będziemy losować). Naprawa każdej stłuczki kosztować będzie od 0 do 10 000 PLN. 
 
@@ -112,7 +112,7 @@ Choć ta pętla wygląda na prostą i niewinną, podobny sposób losowania wielk
 
 Jak widzieliśmy w poprzednim przypadku, liczba powtórzeń pętli nie musi być z góry określona, może zależeć od np. liczby wierszy lub liczbie kolumn w ramce danych. 
 
-W poniższym przykładzie dla każdej kolumny z ramki danych `koty_ptaki` wyświetlamy listę różnych wartości, które występują w tej kolumnie. Na kolejnym skadzie wyjaśnimy krok po kroku co się dzieje w tej funkcji.
+W poniższym przykładzie dla każdej kolumny z ramki danych `koty_ptaki` wyświetlamy listę różnych wartości, które występują w tej kolumnie. Na kolejnym składzie wyjaśnimy krok po kroku co się dzieje w tej funkcji.
 
 ```{r, message=FALSE, warning=FALSE}
 # wektor z nazwami kolumn
@@ -133,7 +133,7 @@ for (i in kolumny) {
 
 Przyjrzyjmy się pętli z poprzedniego slajdu linia po linii.
 
-Pierwsza instrukcja wykorzystuje funkcje `colnames()` do wyznaczenia nazw kolumn. Te nazwy zostaną przypisane do wektora `kolumny`, który nastepnie zostanie wyświetlony.
+Pierwsza instrukcja wykorzystuje funkcje `colnames()` do wyznaczenia nazw kolumn. Te nazwy zostaną przypisane do wektora `kolumny`, który następnie zostanie wyświetlony.
 
 ```{r, eval=FALSE}
 # wektor z nazwami kolumn
@@ -193,24 +193,24 @@ for (i in 1:nrow(koty_ptaki)) {
 
 # Wektoryzacja
 
-Bardzo często pętli można unknąć, ponieważ program R w naturalny sposób pracuje na wektorach.
+Bardzo często pętli można uniknąć, ponieważ program R w naturalny sposób pracuje na wektorach.
 
-Przykładowo, efekt identyczny do pętli z porzedniego slajdu można uzyskać pracując bezpośrednio na wektorach kolumnowych. Zarówno `koty_ptaki[,"gatunek"]` jak i `koty_ptaki[,"waga"]` to wektory, funkcja `paste()` połączy je w wektor napisów a funkcja `cat()` wypisze wszystkie elementy tego wektora.
+Przykładowo, efekt identyczny do pętli z poprzedniego slajdu można uzyskać pracując bezpośrednio na wektorach kolumnowych. Zarówno `koty_ptaki[,"gatunek"]` jak i `koty_ptaki[,"waga"]` to wektory, funkcja `paste()` połączy je w wektor napisów a funkcja `cat()` wypisze wszystkie elementy tego wektora.
 
 ```{r, message=FALSE, warning=FALSE}
 cat(paste(koty_ptaki[,"gatunek"], "może ważyć do", koty_ptaki[,"waga"], "kg\n"))
 ```
 
-W języku R, jak i w każdym dojrzałym jezyku programowania, ten sam efekt można uzyskać na wiele sposobów. 
+W języku R, jak i w każdym dojrzałym języku programowania, ten sam efekt można uzyskać na wiele sposobów. 
 
 
 ---
 
 # Pętla w pętli
 
-Pętle można zanurzać w innych pętlach. Na pierwszy rzut oka, możę wyglądać to dziwnie, ale jest to dosyć popualrna praktyka.
+Pętle można zanurzać w innych pętlach. Na pierwszy rzut oka, może wyglądać to dziwnie, ale jest to dosyć popularna praktyka.
 
-Przypuśćmy, że chcemy policzyć coś, np korelację, podobieństwo lub różnice dla każdej pary kolumn. Jak to zrobić? Najłatwiej użyć dwóch pętli jednej w drugiej.
+Przypuśćmy, że chcemy policzyć coś, np. korelację, podobieństwo lub różnice dla każdej pary kolumn. Jak to zrobić? Najłatwiej użyć dwóch pętli jednej w drugiej.
 
 ```{r, eval=FALSE}
 for (i in colnames(koty_ptaki)) {
@@ -287,19 +287,26 @@ for (i in 1:liczbaStłuczek) {
 
 # pętla wypisująca liczbę różnych wartości i listująca te wartości dla każdej kolumny
 kolumny <- colnames(koty_ptaki)
-# pętla, która dla każdej kolumny wyświetla różne wartości występujące w tej kolumnie
 for (i in kolumny) {
   wartosciWKolumnie <- unique(as.character(koty_ptaki[,i]))
   cat("Kolumna", i, "\n")
   cat("   ", length(wartosciWKolumnie), "różnych wartości:", wartosciWKolumnie, "\n")
 }
+```
 
+---
+
+# Podsumowanie instrukcji R
+
+Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.
+
+```{r, eval=FALSE}
 # pętla wypisująca dla każdego wiersza ciężar zwierzaka
 for (i in 1:nrow(koty_ptaki)) {
   cat(koty_ptaki[i,"gatunek"], "może ważyć do", koty_ptaki[i,"waga"], "kg\n")
 }
 
-# Używając operacji na wektorach czasem można uniknąć pisania pętli
+# używając operacji na wektorach czasem można uniknąć pisania pętli
 cat(paste(koty_ptaki[,"gatunek"], "może ważyć do", koty_ptaki[,"waga"], "kg\n"))
 
 # pętla w pętli pozwala na wykonanie pewnej isntrukcji dla każdej pary kolumn
@@ -309,7 +316,7 @@ for (i in colnames(koty_ptaki)) {
   }
 }
 
-# używając pętli w pętli możemy twż stworzyć tekstową wizualizację danych
+# używając pętli w pętli możemy też stworzyć tekstową wizualizację danych
 for (i in 1:nrow(koty_ptaki)) {
   n_kropek <- koty_ptaki[i,"predkosc"] / 5
   # rysowanie kropek
@@ -328,4 +335,5 @@ for (i in 1:nrow(koty_ptaki)) {
 * Napisz pętlę, która dla każdego wiersza z tabeli `koty_ptaki` wypisze żywotność określonego gatunku.
 * Napisz pętlę, która przedstawi żywotność za pomocą wykresu, na którym każdy rok przedstawiony jest jako jeden `#`.
 * Napisz pętlę, która narysuje wykres z żywotnością, ale z nazwami gatunku po lewej stronie. Co więcej, przed każdą nazwą gatunku należy dodać tyle znaków spacja, aby nazwy były wyrównane do prawej strony. Długość napisu, mierzoną w liczbie znaków można odczytać funkcją `nchar()`.
+
 
