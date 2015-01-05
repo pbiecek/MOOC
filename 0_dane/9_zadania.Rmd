@@ -235,4 +235,50 @@ for (i in 1:nrow(koty_ptaki)) {
 }
 ```
 
+---
 
+# Zadania, sezon 1, odcinek 10
+
+* Napisz funkcję, która otrzymuje argument liczbowy a następnie wypisuje na ekran wartości od argumentu do jeden.
+* Napisz funkcję, przyjmuje argument liczbowy `n` a następnie rysuje kwadrat o boku `n` wypełniony znakami `X`.
+* Napisz funkcję, przyjmuje argument liczbowy `n` a następnie rysuje kwadrat o boku `n` ze znakami `X` na brzegu i pusty w środku.
+
+---
+
+# Odpowiedzi, sezon 1, odcinek 10
+
+```{r, eval=FALSE}
+# odliczanie do 1
+odliczaj <- function(od = 10) {
+  for (i in od:1) {
+    cat(i, "\n")
+  }
+}
+odliczaj(5)
+
+# rysuj kwadrat
+kwadrat <- function(n = 5, znak="X") {
+  for (i in 1:n) {
+    for (j in 1:n) {
+      cat(znak)
+    }
+    cat("\n")
+  }
+}
+kwadrat()
+
+# rysuj pusty kwadrat
+pustyKwadrat <- function(n = 5, znak="X") {
+  for (i in 1:n) {
+    for (j in 1:n) {
+      if (i == 1 | j == 1 | i == n | j == n) {
+        cat(znak)
+      } else {
+        cat (" ")
+      }
+    }
+    cat("\n")
+  }
+}
+pustyKwadrat()
+```

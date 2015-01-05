@@ -237,6 +237,50 @@ for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
   }
 }</code></pre>
 </div>
+<div id="zadania-sezon-1-odcinek-10" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 10</h1>
+<ul>
+<li>Napisz funkcję, która otrzymuje argument liczbowy a następnie wypisuje na ekran wartości od argumentu do jeden.</li>
+<li>Napisz funkcję, przyjmuje argument liczbowy <code>n</code> a następnie rysuje kwadrat o boku <code>n</code> wypełniony znakami <code>X</code>.</li>
+<li>Napisz funkcję, przyjmuje argument liczbowy <code>n</code> a następnie rysuje kwadrat o boku <code>n</code> ze znakami <code>X</code> na brzegu i pusty w środku.</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-10" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 10</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># odliczanie do 1</span>
+odliczaj &lt;-<span class="st"> </span>function(<span class="dt">od =</span> <span class="dv">10</span>) {
+  for (i in od:<span class="dv">1</span>) {
+    <span class="kw">cat</span>(i, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+}
+<span class="kw">odliczaj</span>(<span class="dv">5</span>)
+
+<span class="co"># rysuj kwadrat</span>
+kwadrat &lt;-<span class="st"> </span>function(<span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">znak=</span><span class="st">&quot;X&quot;</span>) {
+  for (i in <span class="dv">1</span>:n) {
+    for (j in <span class="dv">1</span>:n) {
+      <span class="kw">cat</span>(znak)
+    }
+    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+}
+<span class="kw">kwadrat</span>()
+
+<span class="co"># rysuj pusty kwadrat</span>
+pustyKwadrat &lt;-<span class="st"> </span>function(<span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">znak=</span><span class="st">&quot;X&quot;</span>) {
+  for (i in <span class="dv">1</span>:n) {
+    for (j in <span class="dv">1</span>:n) {
+      if (i ==<span class="st"> </span><span class="dv">1</span> |<span class="st"> </span>j ==<span class="st"> </span><span class="dv">1</span> |<span class="st"> </span>i ==<span class="st"> </span>n |<span class="st"> </span>j ==<span class="st"> </span>n) {
+        <span class="kw">cat</span>(znak)
+      } else {
+        <span class="kw">cat</span> (<span class="st">&quot; &quot;</span>)
+      }
+    }
+    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+}
+<span class="kw">pustyKwadrat</span>()</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>
