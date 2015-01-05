@@ -145,4 +145,47 @@ koty_ptaki[, -7]
 koty_ptaki[koty_ptaki$waga < 100, 1:4]
 ```
 
+---
+
+# Zadania, sezon 1, odcinek 8
+
+* Napisz pętlę, która dla każdego wiersza z tabeli `koty_ptaki` wypisze żywotność określonego gatunku.
+* Napisz pętlę, która przedstawi żywotność za pomocą wykresu, na którym każdy rok przedstawiony jest jako jeden `#`.
+* Napisz pętlę, która narysuje wykres z żywotnością, ale z nazwami gatunku po lewej stronie. Co więcej, przed każdą nazwą gatunku należy dodać tyle znaków spacja, aby nazwy były wyrównane do prawej strony. Długość napisu, mierzoną w liczbie znaków można odczytać funkcją `nchar()`.
+
+---
+
+# Odpowiedzi, sezon 1, odcinek 8
+
+```{r, eval=FALSE}
+# Pętla z żywotnością
+for (i in 1:nrow(koty_ptaki)) {
+  cat("Osobniki gatunku:", koty_ptaki[i,"gatunek"], "żyją do", 
+      koty_ptaki[i,"zywotnosc"], "lat\n")
+}
+
+# Żywotność za pomocą wykresu
+for (i in 1:nrow(koty_ptaki)) {
+  n_kropek <- koty_ptaki[i,"zywotnosc"] 
+  for (j in 1:n_kropek)
+    cat("#")
+  cat(" ", koty_ptaki[i,"gatunek"], "\n")
+}
+
+# Nazwa gatunku po lewej stronie
+for (i in 1:nrow(koty_ptaki)) {
+  # uzupełniamy spacje
+  n_spacji <- 15 - nchar(as.character(koty_ptaki[i,"gatunek"])) 
+  for (j in 1:n_spacji)
+    cat(" ")
+  cat( koty_ptaki[i,"gatunek"], " ")
+  # wykres rysuje żytowność za pomocą #
+  n_kropek <- koty_ptaki[i,"zywotnosc"] 
+  for (j in 1:n_kropek)
+    cat("#")
+  cat("\n")
+}
+
+```
+
 

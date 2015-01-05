@@ -156,6 +156,44 @@ koty_ptaki[, -<span class="dv">7</span>]
 <span class="co"># lekkie </span>
 koty_ptaki[koty_ptaki$waga &lt;<span class="st"> </span><span class="dv">100</span>, <span class="dv">1</span>:<span class="dv">4</span>]</code></pre>
 </div>
+<div id="zadania-sezon-1-odcinek-8" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 8</h1>
+<ul>
+<li>Napisz pętlę, która dla każdego wiersza z tabeli <code>koty_ptaki</code> wypisze żywotność określonego gatunku.</li>
+<li>Napisz pętlę, która przedstawi żywotność za pomocą wykresu, na którym każdy rok przedstawiony jest jako jeden <code>#</code>.</li>
+<li>Napisz pętlę, która narysuje wykres z żywotnością, ale z nazwami gatunku po lewej stronie. Co więcej, przed każdą nazwą gatunku należy dodać tyle znaków spacja, aby nazwy były wyrównane do prawej strony. Długość napisu, mierzoną w liczbie znaków można odczytać funkcją <code>nchar()</code>.</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-8" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 8</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Pętla z żywotnością</span>
+for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
+  <span class="kw">cat</span>(<span class="st">&quot;Osobniki gatunku:&quot;</span>, koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;żyją do&quot;</span>, 
+      koty_ptaki[i,<span class="st">&quot;zywotnosc&quot;</span>], <span class="st">&quot;lat</span><span class="ch">\n</span><span class="st">&quot;</span>)
+}
+
+<span class="co"># Żywotność za pomocą wykresu</span>
+for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
+  n_kropek &lt;-<span class="st"> </span>koty_ptaki[i,<span class="st">&quot;zywotnosc&quot;</span>] 
+  for (j in <span class="dv">1</span>:n_kropek)
+    <span class="kw">cat</span>(<span class="st">&quot;#&quot;</span>)
+  <span class="kw">cat</span>(<span class="st">&quot; &quot;</span>, koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+}
+
+<span class="co"># Nazwa gatunku po lewej stronie</span>
+for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
+  <span class="co"># uzupełniamy spacje</span>
+  n_spacji &lt;-<span class="st"> </span><span class="dv">15</span> -<span class="st"> </span><span class="kw">nchar</span>(<span class="kw">as.character</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>])) 
+  for (j in <span class="dv">1</span>:n_spacji)
+    <span class="kw">cat</span>(<span class="st">&quot; &quot;</span>)
+  <span class="kw">cat</span>( koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot; &quot;</span>)
+  <span class="co"># wykres rysuje żytowność za pomocą #</span>
+  n_kropek &lt;-<span class="st"> </span>koty_ptaki[i,<span class="st">&quot;zywotnosc&quot;</span>] 
+  for (j in <span class="dv">1</span>:n_kropek)
+    <span class="kw">cat</span>(<span class="st">&quot;#&quot;</span>)
+  <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+}</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>
