@@ -23,13 +23,13 @@ część 1: Data smart
     + odcinek 3: Wprowadzenie do RStudio i systemu pomocy, [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/2_wprowadzenieDoRStudio.html), [video](https://github.com/pbiecek/MOOC/blob/master/1_przetwarzanieDanych/2_MOOC_Przetwarzanie_01.mp4?raw=true), 
     + odcinek 4: Interaktywna praca z R [html, TODO, PBi], [video, TODO, PBi]
   * Odczytywanie, zapisywanie i indeksowanie danych
-    + odcinek 5: Jak wczytać dane do R, [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/3_wczytywanie.html)
-    + odcinek 6: Jak zapisać dane z R, [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/32_zapisywanie.html)
-    + odcinek 7: Indeksowanie wektorów i ramek danych, [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/4_indeksowanie.html)
+    + odcinek 5: Jak wczytać dane do R, [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/05_wczytywanie.html), v1 ready
+    + odcinek 6: Jak zapisać dane z R, [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/06_zapisywanie.html), v1 ready
+    + odcinek 7: Indeksowanie wektorów i ramek danych, [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/07_indeksowanie.html), v1 ready
   * Instrukcje sterujące, pętle, warunki i funkcje
-    + odcinek 8: Pętle [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/8_petle.html), 
-    + odcinek 9: Instrukcje warunkowe [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/81_instrukcje_warunkowe.html), 
-    + odcinek 10: Funkcje [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/82_funkcje.html)
+    + odcinek 8: Pętle [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/08_petle.html), 
+    + odcinek 9: Instrukcje warunkowe [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/09_instrukcje_warunkowe.html), 
+    + odcinek 10: Funkcje [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/10_funkcje.html)
   * Podstawowe typy danych i ich statystyki opisowe
     + odcinek 11: Cechy jakościowe, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/51_ilosciowe.html)
     + odcinek 12: Cechy ilościowe, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/52_jakosciowe.html)
