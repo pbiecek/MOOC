@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / przetwarzanie / funkcje" /> 
+  <meta name="copyright" content="pogRomcy danych / programowanie / funkcje" /> 
   <title>Funkcje</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
@@ -48,18 +48,19 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 8 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 10 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
+<p>Jedną z naważniejszych cech języków programowania jest możliwość wykorzystywania rozwiązań, które my lub ktoś inny zbudował w przeszłości. Jest to możliwe dzięki jeżeli takie dobre rozwiązania zamienimy w funkcje, czyli bloki kodu które łatwo ponownie wykorzystać.</p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
-<li>Jak tworzyć własne funkcje</li>
-<li>Jak wywoływać funkcje z funkcji</li>
+<li>Jak wywoływać funkcje?</li>
+<li>Jak tworzyć własne funkcje?</li>
+<li>Jak wywoływać funkcje z funkcji?</li>
 </ul>
-<p>Do ilustracji wykorzystamy zbiór danych to <code>koty_ptaki</code> z pakietu <code>SmarterPoland</code>.</p>
+<p>Do ilustracji wykorzystamy zbiór danych to <code>koty_ptaki</code> dostępny w pakiecie <code>SmarterPoland</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
-koty_ptaki$gatunek &lt;-<span class="st"> </span><span class="kw">as.character</span>(koty_ptaki$gatunek)
 <span class="kw">head</span>(koty_ptaki, <span class="dv">3</span>)</code></pre>
 <pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
 ## 1  Tygrys  300     2.5       60    Azja        25     Kot
@@ -70,108 +71,26 @@ koty_ptaki$gatunek &lt;-<span class="st"> </span><span class="kw">as.character</
 <h1>Funkcje</h1>
 <p>Jest wiele powodów, dla których warto korzystać z funkcji. Trzy najistotniejsze to.</p>
 <ul>
-<li><p>Funkcje pozwalają skrócić wielkość programu, ponieważ mniej będzie powtarzających się podobnych bloków.</p></li>
-<li><p>Funkcje pozwalają na logiczny podział programu, na fragmenty, które łatwiej opisać i udokumentować. Dzięki temu łatwiej zrozumieć co się dzieje w programie, gdy można poznawać poszczególne fragmenty niezależnie.</p></li>
 <li><p>Funkcje pozwalają na łatwe, ponowne użycie poprzednio opracowanych fragmentów kodu. Dzięki temu, możemy wykorzystywać rozwiązania, które już raz zbudowaliśmy i szybciej tworzyć kolejne. Możemy wykorzystywać rozwiązania / funkcje innych osób i dzielić się z nimi własnymi funkcjami.</p></li>
+<li><p>Funkcje pozwalają na logiczny podział programu, na fragmenty, które łatwiej opisać i udokumentować. Dzięki temu łatwiej zrozumieć co się dzieje w programie, gdy można poznawać poszczególne fragmenty niezależnie.</p></li>
+<li><p>Funkcje pozwalają skrócić długość programu. Podobne bloki kodu można zastąpić wywołaniem funkcji, przez co będzie mniej powtarzających się podobnych bloków. A im krótszy program tył łatwiej go napisać, łatwiej go zrozumieć i łatwiej znaleźć błąd.</p></li>
 </ul>
 </div>
 <div id="funkcje-1" class="slide section level1">
 <h1>Funkcje</h1>
-<p>Przywołajmy kod programu, który rysował prędkość zwierząt za pomocą liczby kropek.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Dla każdego wiersza w tabeli `koty_ptaki`</span>
+<p>Przywołajmy kod programu z odcinka 8, który rysował prędkość zwierząt za pomocą liczby kropek.</p>
+<p>Gdybyśmy chcieli ponownie wykorzystać ten sposób prezentacji danych, musielibyśmy przepisać ten kod na nowo. W tym odcinku zobaczymy jak zamienić użyteczny fragment kodu w jedną lub więcej funkcji, tak by łatwiej można było go używać.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># zamieniamy na zmienną napisową, by była dobrze wyświetlana</span>
+koty_ptaki$gatunek &lt;-<span class="st"> </span><span class="kw">as.character</span>(koty_ptaki$gatunek)
+
+<span class="co"># Dla każdego wiersza w tabeli `koty_ptaki` wyświetlamy prędkość liczbą kropek</span>
 for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
   n_kropek &lt;-<span class="st"> </span>koty_ptaki[i,<span class="st">&quot;predkosc&quot;</span>] /<span class="st"> </span><span class="dv">5</span>
-  <span class="co"># rysowanie kropek</span>
   for (j in <span class="dv">1</span>:n_kropek) {
     <span class="kw">cat</span>(<span class="st">&quot;.&quot;</span>)
   }
-  <span class="co"># nazwa gatunku</span>
   <span class="kw">cat</span>(<span class="st">&quot; &quot;</span>, koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
 }</code></pre>
-</div>
-<div id="funkcje-2" class="slide section level1">
-<h1>Funkcje</h1>
-<p>Do tworzenia funkcji służy słowo <code>function</code> o składni.</p>
-<pre class="sourceCode r"><code class="sourceCode r">function(argumenty_rozdzielone_przecinkiem) 
-  wyrażenie</code></pre>
-<p>gdzie <code>argumenty_rozdzielone_przecinkiem</code> to lista rozdzielonych przecinkiem argumentów (może być też pusta lub jednoelementowa), a <code>wyrażenie</code> to instrukcje, które mają być wykonane po uruchomieniu funkcji.</p>
-<p>Wynikiem takiej instrukcji jest funkcja, którą zazwyczaj przypisuje się do zmiennej, by móc jej później używać.</p>
-</div>
-<div id="funkcje-3" class="slide section level1">
-<h1>Funkcje</h1>
-<p>Dla naszego przykładu z rysowaniem kropek stworzymy funkcję, którą przypiszemy do zmiennej <code>rysuj_kropki</code>. Funkcja przyjmować będzie jeden argument <code>n_kropek</code> i narysuje na ekranie tyle kropek ile jej każemy.</p>
-<pre class="sourceCode r"><code class="sourceCode r">rysuj_kropki &lt;-<span class="st"> </span>function(n_kropek) {
-  for (j in <span class="dv">1</span>:n_kropek) {
-    <span class="kw">cat</span>(<span class="st">&quot;.&quot;</span>)
-  }
-}</code></pre>
-<p>Przykładowe wywołanie, rysujące 20 kropek.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rysuj_kropki</span>(<span class="dt">n_kropek =</span> <span class="dv">20</span>)</code></pre>
-<pre><code>## ....................</code></pre>
-<p>Jeżeli podajemy argumenty zgodnie z domyślną kolejnością, to nie musimy wskazywać ich nazw.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rysuj_kropki</span>(<span class="dv">20</span>)</code></pre>
-<pre><code>## ....................</code></pre>
-</div>
-<div id="funkcje---argumenty-domyslne" class="slide section level1">
-<h1>Funkcje - argumenty domyślne</h1>
-<p>Jeżeli funkcja jest często wywoływana z tą samą wartością parametrów, to aby oszczędzić sobie pisania, warto wskazać tę wartość jako wartość domyślną. W liście argumentów wpisujemy wartość domyślną po znaku <code>=</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">rysuj_kropki &lt;-<span class="st"> </span>function(<span class="dt">n_kropek =</span> <span class="dv">20</span>) {
-  for (j in <span class="dv">1</span>:n_kropek) {
-    <span class="kw">cat</span>(<span class="st">&quot;.&quot;</span>)
-  }
-}</code></pre>
-<p>Dzięki temu, jeżeli nie podamy wartości argumentu, to zostanie on zastąpiony domyślną wartością. Bardzo wygodne w sytuacji gdy funkcja ma wiele argumentów.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rysuj_kropki</span>() </code></pre>
-<pre><code>## ....................</code></pre>
-</div>
-<div id="funkcje---obsuga-roznych-scenariuszy" class="slide section level1">
-<h1>Funkcje - obsługa różnych scenariuszy</h1>
-<p>Chcielibyśmy, by funkcje działały tak jak to zaplanowaliśmy. Rzeczywistość jest jednak taka, że funkcje często zawierają błędy lub sytuacje, o których nie pomyśleliśmy.</p>
-<p>Przykładowo, uruchamiając funkcję <code>rysuj_kropki()</code> z argumentem 0 spodziewalibyśmy się 0 kropek, a tym czasem…</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rysuj_kropki</span>(<span class="dv">0</span>) </code></pre>
-<pre><code>## ..</code></pre>
-<p>Jest tak dlatego, że w pętli <code>1:n_kropek</code> wektor <code>1:0</code> jest w rzeczywistości dwuelementowy.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">0</span>:<span class="dv">1</span></code></pre>
-<pre><code>## [1] 0 1</code></pre>
-<p>Jak temu zaradzić?</p>
-</div>
-<div id="funkcje---obsuga-roznych-scenariuszy-1" class="slide section level1">
-<h1>Funkcje - obsługa różnych scenariuszy</h1>
-<p>Ten problem można obsłużyć na kilka sposobów, przedstawimy taki, który wymaga użycia instrukcji <code>if()</code>. Sprawdzimy, czy <code>n_kropek</code> jest równe zero (nic nie rysuj), czy jest większe (rysuj kropki).</p>
-<pre class="sourceCode r"><code class="sourceCode r">rysuj_kropki &lt;-<span class="st"> </span>function(<span class="dt">n_kropek =</span> <span class="dv">20</span>) {
-  if (n_kropek &gt;<span class="st"> </span><span class="dv">0</span>) {
-    for (j in <span class="dv">1</span>:n_kropek) {
-      <span class="kw">cat</span>(<span class="st">&quot;.&quot;</span>)
-    }
-  }
-}
-<span class="kw">rysuj_kropki</span>(<span class="dv">0</span>)</code></pre>
-</div>
-<div id="funkcje---wiecej-argumentow" class="slide section level1">
-<h1>Funkcje - więcej argumentów</h1>
-<p>Funkcje mogą mieć więcej argumentów i każdy z nich może mieć lub nie mieć wartość domyślną. Jeżeli wywołując funkcję podajemy argumenty w kolejności innej niż domyślna musimy podać nazwę argumentu, który określamy.</p>
-<p>Aby to zilustrować dodajmy argument opisujący znak, który ma być rysowany. Aby ten znak wskazać musimy podać nazwę argumentu w wywołaniu <code>rysuj_kropki(znak=&quot;#&quot;)</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">rysuj_kropki &lt;-<span class="st"> </span>function(<span class="dt">n_kropek =</span> <span class="dv">20</span>, <span class="dt">znak =</span> <span class="st">&quot;.&quot;</span>) {
-  if (n_kropek &gt;<span class="st"> </span><span class="dv">0</span>) {
-    for (j in <span class="dv">1</span>:n_kropek) {
-      <span class="kw">cat</span>(znak)
-    }
-  }
-}
-<span class="kw">rysuj_kropki</span>(<span class="dt">znak=</span><span class="st">&quot;#&quot;</span>)</code></pre>
-<pre><code>## ####################</code></pre>
-</div>
-<div id="funkcje---funkcja-w-funkcji" class="slide section level1">
-<h1>Funkcje - funkcja w funkcji</h1>
-<p>Tworząc nowe funkcje możemy używać w nich te wcześniej zdefiniowane.</p>
-<p>Zbudujmy funkcję rysującą wykres kropkowy dla wektora wartości i napisów.</p>
-<pre class="sourceCode r"><code class="sourceCode r">rysuj_wykres_kropkiowy&lt;-<span class="st"> </span>function(nazwy, wartosci) {
-  for (i in <span class="dv">1</span>:<span class="kw">length</span>(nazwy)) {
-    <span class="kw">rysuj_kropki</span>(wartosci[i])
-    <span class="kw">cat</span>(<span class="st">&quot; &quot;</span>, nazwy[i],<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  }
-}
-<span class="kw">rysuj_wykres_kropkiowy</span>(koty_ptaki$gatunek, koty_ptaki$predkosc/<span class="dv">5</span>)</code></pre>
 <pre><code>## ............  Tygrys 
 ## ................  Lew 
 ## ..................  Jaguar 
@@ -185,7 +104,193 @@ for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
 ## ......................  Sokol wedrowny 
 ## ....................  Sokol norweski 
 ## ........................  Albatros</code></pre>
-<p>Warto utrzymywać każdą z funkcji o niewielkiej długości, by łatwo było odgadnąć co ta funkcja robi.</p>
+</div>
+<div id="funkcje-2" class="slide section level1">
+<h1>Funkcje</h1>
+<p>Do tworzenia funkcji służy słowo <code>function</code>. Dla każdej funkcji należy określić listę jej argumentów oraz tak zwan e ciało funkcji, czyli listę instrukcji, która funkcja wykonuje.</p>
+<pre class="sourceCode r"><code class="sourceCode r">function(argumenty_rozdzielone_przecinkiem) {
+  wyrażenie
+}</code></pre>
+<p>gdzie <code>argumenty_rozdzielone_przecinkiem</code> to lista rozdzielonych przecinkiem argumentów (może być też pusta lub jednoelementowa), a <code>wyrażenie</code> to instrukcje, które mają być wykonane po wywołaniu funkcji.</p>
+<p>Wynikiem powyższej instrukcji jest funkcja, którą należy przypisać do do zmiennej, by móc jej później używać. Dlatego najczęstsze deklaracje mają również przypisanie funkcji do zmiennej, tak jak w deklaracji poniżej.</p>
+<pre class="sourceCode r"><code class="sourceCode r">nazwa_funkcji &lt;-<span class="st"> </span>function(argumenty_rozdzielone_przecinkiem) {
+  wyrażenie
+}</code></pre>
+<p>Warto jednak pamiętać, że nazwa funkcji nie jest obowiązkowa i jak się okaże często będziemy używać funkcje anonimowe, czyli bez nazwy.</p>
+</div>
+<div id="funkcje-z-argumentami" class="slide section level1">
+<h1>Funkcje z argumentami</h1>
+<p>Dla naszego przykładu z rysowaniem kropek stworzymy funkcję, którą przypiszemy do zmiennej <code>rysuj_kropki</code>. Funkcja przyjmować będzie jeden argument <code>n_kropek</code> i narysuje na ekranie dokłądnie tyle kropek ile jej każemy.</p>
+<p>Do rysowania kropek wykorzystamy pętlę <code>for</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">rysuj_kropki &lt;-<span class="st"> </span>function(n_kropek) {
+  <span class="co"># w pętli rysujemy n_kropek</span>
+  for (j in <span class="dv">1</span>:n_kropek) {
+    <span class="kw">cat</span>(<span class="st">&quot;.&quot;</span>)
+  }
+}</code></pre>
+<p>Przykładowe wywołanie tej funkcji, rysujące 20 kropek, wygląda następująco.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rysuj_kropki</span>(<span class="dt">n_kropek =</span> <span class="dv">20</span>)</code></pre>
+<pre><code>## ....................</code></pre>
+<p>Jeżeli podajemy argumenty zgodnie z domyślną kolejnością, to nie musimy wskazywać ich nazw. Dotyczy to zarówno funkcji, które sami tworzymy, jak i <em>fabrycznych</em> funkcji.</p>
+<p>W poniższym przykładzie podajemy wartość dla argumentu i ponieważ nie ma nazwy argumentu wartość ta przypisana będzie do pierwszego (w tym przypadku jedynego) argumentu.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rysuj_kropki</span>(<span class="dv">20</span>)</code></pre>
+<pre><code>## ....................</code></pre>
+</div>
+<div id="funkcje---argumenty-domyslne" class="slide section level1">
+<h1>Funkcje - argumenty domyślne</h1>
+<p>Jeżeli funkcja jest często wywoływana z tą samą wartością parametru, to aby oszczędzić sobie pisania, warto wskazać tę wartość jako wartość domyślną.</p>
+<p>Deklarując funkcję, w liście argumentów wpisujemy wartość domyślną po znaku <code>=</code>. Poniższy przykład tworzy nową funkcję (nadpisując przy okazji poprzednią deklarację) z domyślną wartością parametru <code>n_kropek</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">rysuj_kropki &lt;-<span class="st"> </span>function(<span class="dt">n_kropek =</span> <span class="dv">20</span>) {
+  for (j in <span class="dv">1</span>:n_kropek) {
+    <span class="kw">cat</span>(<span class="st">&quot;.&quot;</span>)
+  }
+}</code></pre>
+<p>Dzięki wartościom domyślnym, jeżeli nie podamy wartości argumentu, to zostanie on zastąpiony domyślną wartością. Bardzo wygodne w sytuacji gdy funkcja ma wiele argumentów.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rysuj_kropki</span>() </code></pre>
+<pre><code>## ....................</code></pre>
+<p>Jeżeli podana zostanie wartość argumentu, to nadpisze ona domyślną deklaracje.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rysuj_kropki</span>(<span class="dv">35</span>) </code></pre>
+<pre><code>## ...................................</code></pre>
+</div>
+<div id="funkcje---obsuga-roznych-scenariuszy" class="slide section level1">
+<h1>Funkcje - obsługa różnych scenariuszy</h1>
+<p>Chcielibyśmy, by funkcje działały tak jak to zaplanowaliśmy. Rzeczywistość jest jednak taka, że funkcje często zawierają błędy lub sytuacje, o których nie pomyśleliśmy.</p>
+<p>Przykładowo, uruchamiając funkcję <code>rysuj_kropki()</code> z argumentem 0 spodziewalibyśmy się 0 kropek, a tym czasem…</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rysuj_kropki</span>(<span class="dv">0</span>) </code></pre>
+<pre><code>## ..</code></pre>
+<p>Dlaczego tak jest?</p>
+<p>.</p>
+<p>Otóż dlatego, że w pętli <code>1:n_kropek</code>, która znajduje się w deklaracji funkcji wektor <code>1:0</code> jest w rzeczywistości dwuelementowy.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">0</span>:<span class="dv">1</span></code></pre>
+<pre><code>## [1] 0 1</code></pre>
+<p>Jeżeli więc chcemy by dla <code>n_kropek = 0</code> funkcja działa poprawnie musimy inaczej obsłużyć tę sytuację.</p>
+<p>Jak zaradzić temu problemowi?</p>
+</div>
+<div id="funkcje---obsuga-roznych-scenariuszy-1" class="slide section level1">
+<h1>Funkcje - obsługa różnych scenariuszy</h1>
+<p>Ten problem można obsłużyć na kilka sposobów, przedstawimy taki, który wymaga użycia instrukcji <code>if()</code>.</p>
+<p>Sprawdzimy, czy <code>n_kropek</code> jest równe lub mniejsze niż zero (jeżeli tak to nic nie rysuj), czy jest większe (rysuj kropki).</p>
+<pre class="sourceCode r"><code class="sourceCode r">rysuj_kropki &lt;-<span class="st"> </span>function(<span class="dt">n_kropek =</span> <span class="dv">20</span>) {
+  <span class="co"># czy liczba kropek do wyświetlenia jest większa niż zero?</span>
+  if (n_kropek &gt;<span class="st"> </span><span class="dv">0</span>) {
+    for (j in <span class="dv">1</span>:n_kropek) {
+      <span class="kw">cat</span>(<span class="st">&quot;.&quot;</span>)
+    }
+  } 
+}</code></pre>
+<p>Działa dla argumentu równego 0.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rysuj_kropki</span>(<span class="dv">0</span>)</code></pre>
+<p>Działa dla domyślnych argumentów.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rysuj_kropki</span>()</code></pre>
+<pre><code>## ....................</code></pre>
+<p>Działa dla innych wartości.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rysuj_kropki</span>(<span class="dv">30</span>)</code></pre>
+<pre><code>## ..............................</code></pre>
+</div>
+<div id="funkcje---wiecej-argumentow" class="slide section level1">
+<h1>Funkcje - więcej argumentów</h1>
+<p>Funkcje mogą mieć więcej argumentów i każdy z nich może mieć lub nie mieć wartość domyślną.</p>
+<p>Jeżeli wywołując funkcję podajemy argumenty w kolejności innej niż domyślna musimy podać nazwę argumentu, który określamy.</p>
+<p>Aby to zilustrować dodajmy argument opisujący znak, który ma być rysowany.</p>
+<pre class="sourceCode r"><code class="sourceCode r">rysuj_kropki &lt;-<span class="st"> </span>function(<span class="dt">n_kropek =</span> <span class="dv">20</span>, <span class="dt">znak =</span> <span class="st">&quot;.&quot;</span>) {
+  if (n_kropek &gt;<span class="st"> </span><span class="dv">0</span>) {
+    for (j in <span class="dv">1</span>:n_kropek) {
+      <span class="kw">cat</span>(znak)
+    }
+  }
+}</code></pre>
+<p>I seria wywołań. Określamy drugi argument, pierwszy pozostaje domyślny, musimy wskazać nazwę.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rysuj_kropki</span>(<span class="dt">znak=</span><span class="st">&quot;X&quot;</span>)</code></pre>
+<pre><code>## XXXXXXXXXXXXXXXXXXXX</code></pre>
+<p>Określamy pierwszy argument, drugi pozostanie domyślny, nie musimy podawać nazwy.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rysuj_kropki</span>(<span class="dv">35</span>)</code></pre>
+<pre><code>## ...................................</code></pre>
+<p>Możemy argumenty podawać w dowolnej kolejności, ale musimy podawać je z nazwami.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rysuj_kropki</span>(<span class="dt">znak=</span><span class="st">&quot;X&quot;</span>, <span class="dt">n_kropek =</span> <span class="dv">30</span>)</code></pre>
+<pre><code>## XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</code></pre>
+</div>
+<div id="funkcje---funkcja-w-funkcji" class="slide section level1">
+<h1>Funkcje - funkcja w funkcji</h1>
+<p>Tworząc nowe funkcje możemy używać w nich innych funkcji, też tych które wcześniej zdefiniowaliśmy.</p>
+<p>Przykładowo poniżej zbudujmy funkcję rysującą wykres kropkowy dla wektora napisów i wektora wartości.</p>
+<pre class="sourceCode r"><code class="sourceCode r">rysuj_wykres_kropkowy&lt;-<span class="st"> </span>function(nazwy, wartosci) {
+  <span class="co"># zakładamy, że oba wektory sa tej samej długości</span>
+  <span class="co"># funkcja seq_along(nazwy) tworzy sekwencję od 1 do długości wektora nazwy</span>
+  for (i in <span class="kw">seq_along</span>(nazwy)) {
+    <span class="kw">rysuj_kropki</span>(wartosci[i])
+    <span class="kw">cat</span>(<span class="st">&quot; &quot;</span>, nazwy[i],<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+}</code></pre>
+<p>I przykładowe wywołanie.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rysuj_wykres_kropkowy</span>(koty_ptaki$gatunek, koty_ptaki$predkosc/<span class="dv">5</span>)</code></pre>
+<pre><code>## ............  Tygrys 
+## ................  Lew 
+## ..................  Jaguar 
+## ..............  Puma 
+## .................  Leopard 
+## .......................  Gepard 
+## .............  Irbis 
+## ..................................  Jerzyk 
+## ..............  Strus 
+## ................................  Orzel przedni 
+## ......................  Sokol wedrowny 
+## ....................  Sokol norweski 
+## ........................  Albatros</code></pre>
+<p>Warto utrzymywać każdą z funkcji o niewielkiej długości, by łatwo było opisać i zapamiętać co ta funkcja robi. Z tego też powodu warto funkcje dobrze nazywać i dokumentować.</p>
+</div>
+<div id="funkcje-zgaszajace-bedy" class="slide section level1">
+<h1>Funkcje zgłaszające błędy</h1>
+<p>W funkcji z poprzedniego slajdu założyliśmy, że oba wektory są równej długości.</p>
+<p>A co jeżeli nie są? Może użytkownik nie wie, że powinny być.</p>
+<p>Takie założenia warto sprawdzać, np. używając instrukcji <code>if()</code>. Jeżeli założenie jest ważne i bez jego spełnienia nie można kontynuować działąnai funkcji, to możemy przerwać działanie funkcji i zwrócić błąd poleceniem <code>stop()</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">rysuj_wykres_kropkowy &lt;-<span class="st"> </span>function(nazwy, wartosci) {
+  <span class="co"># czy oba argumenty mają równą długość?</span>
+  if (<span class="kw">length</span>(nazwy) !=<span class="st"> </span><span class="kw">length</span>(wartosci)) {
+    <span class="co"># funkcja stop() przerywa działanie funkcji</span>
+    <span class="kw">stop</span>(<span class="st">&quot;Argumenty mają różną długość! &quot;</span>, <span class="kw">length</span>(nazwy), <span class="st">&quot; oraz &quot;</span>, <span class="kw">length</span>(wartosci))
+  }
+  <span class="co"># jeżeli wszystkie warunki są spełnione to można kontynuowac wykonanie funkcji</span>
+  for (i in <span class="kw">seq_along</span>(nazwy)) {
+    <span class="kw">rysuj_kropki</span>(wartosci[i])
+    <span class="kw">cat</span>(<span class="st">&quot; &quot;</span>, nazwy[i],<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+}</code></pre>
+<p>Co się stanie, jeżeli wywołamy tę funkcję z niepoprawnymi argumentami.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rysuj_wykres_kropkowy</span>(koty_ptaki$gatunek, <span class="dv">5</span>)</code></pre>
+<pre><code>Error in rysuj_wykres_kropkowy(koty_ptaki$gatunek, 5) : 
+  Argumenty mają różną długość! 13 oraz 1</code></pre>
+</div>
+<div id="parametry-przekazywane-dalej" class="slide section level1">
+<h1>Parametry przekazywane dalej</h1>
+<p>W liście argumentów funkcji dozwolony jest też specjalny argument <code>...</code>. Używając go można przekazać wszystkie pozostałe argumenty dalej, do funkcji wewnętrznych.</p>
+<p>W przykładzie poniżej operator <code>...</code> pojawia się w dwóch miejscach, w liście argumentów funkcji <code>rysuj_wykres_kropkowy()</code> i w liście argumentów funkcji <code>rysuj_kropki()</code>. Wszystkie argumenty dla funkcji <code>rysuj_wykres_kropkowy()</code>, których nazwa jest różna od <code>nazwy</code> i <code>wartosci</code> będą przekazane dalej do funkcji <code>rysuj_kropki()</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">rysuj_wykres_kropkowy &lt;-<span class="st"> </span>function(nazwy, wartosci, ...) {
+  for (i in <span class="kw">seq_along</span>(nazwy)) {
+    <span class="kw">rysuj_kropki</span>(wartosci[i], ...)
+    <span class="kw">cat</span>(<span class="st">&quot; &quot;</span>, nazwy[i],<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+}</code></pre>
+<p>Zilustrujmy to na przykładzie. Wywołujemy <code>rysuj_wykres_kropkowy()</code> z trzema argumentami, trzeci, czyli <code>znak = &quot;X&quot;</code> zostanie przekazany do <code>rysuj_kropki()</code> dzięki czemu na wykresie pojawią się znaki <code>X</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rysuj_wykres_kropkowy</span>(<span class="dt">nazwy =</span> LETTERS[<span class="dv">1</span>:<span class="dv">5</span>], <span class="dt">wartosci =</span> <span class="dv">1</span>:<span class="dv">5</span>, <span class="dt">znak =</span> <span class="st">&quot;X&quot;</span>)</code></pre>
+<pre><code>## X  A 
+## XX  B 
+## XXX  C 
+## XXXX  D 
+## XXXXX  E</code></pre>
+</div>
+<div id="funkcje-zwracajace-wartosci" class="slide section level1">
+<h1>Funkcje zwracające wartości</h1>
+<p>Funkcje zawdzięczają swoją nazwę temu, że zwracają wartości.</p>
+<p>Ale te funkcje, które powyżej stworzyliśmy wypisywały wyniki na ekranie.</p>
+<p>Domyślnie wynikiem funkcji jest wynik ostatniego wyrażenia w funkcji. Innym sposobem na wskazanie wyniku jest użycie funkcji <code>return()</code>, która przerywa działanie funkcji i jako wynik zwraca wartość argumentu funkcji return.</p>
+<p>Domyślnie z</p>
+<p>Tworząc nowe funkcje możemy używać w nich innych funkcji, też tych które wcześniej zdefiniowaliśmy.</p>
+<p>Przykładowo poniżej zbudujmy funkcję rysującą wykres kropkowy dla wektora napisów i wektora wartości.</p>
+</div>
+<div id="podsumowanie-instrukcji-r" class="slide section level1">
+<h1>Podsumowanie instrukcji R</h1>
+<p>W tym odcinku omawialiśmy</p>
+<p>Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.</p>
 </div>
 <div id="zadania" class="slide section level1">
 <h1>Zadania</h1>
