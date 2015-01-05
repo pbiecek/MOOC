@@ -345,30 +345,145 @@ Ale te funkcje, które powyżej stworzyliśmy wypisywały wyniki na ekranie.
 
 Domyślnie wynikiem funkcji jest wynik ostatniego wyrażenia w funkcji. Innym sposobem na wskazanie wyniku jest użycie funkcji `return()`, która przerywa działanie funkcji i jako wynik zwraca wartość argumentu funkcji `return()`.
 
+Zilustrujmy to na poniższym przykładzie. Funkcja `suma_n_liczb_losowych()` losuje `n` losowych liczb i jako wynik zwraca ich sumę. 
+
+Jeżęli jednak jako argument podana jest wartość mniejsza niż 1, to działanie funkcji jest przerywane i jako wynik zwracana jest wartość 0.
 
 ```{r, message=FALSE, warning=FALSE}
-
+suma_n_liczb_losowych <- function(n = 10) {
+  if (n < 1) {
+    return(0)
+  } 
+  sum(runif(n))
+}
 ```
 
+Wywołajmy tę funkcję. Jeżeli jej wynik nie zostnie przypisany do żadnej zmiennej to zostanie wyświelony na ekranie. 
+
+```{r, message=FALSE, warning=FALSE}
+suma_n_liczb_losowych(10) 
+```
+
+I wynik, gdy argument jest mniejszy niż 1.
+
+```{r, message=FALSE, warning=FALSE}
+suma_n_liczb_losowych(-1) 
+```
 
 ---
 
 # Podsumowanie instrukcji R
 
-W tym odcinku omawialiśmy 
-
+W tym odcinku omawialiśmy funkcje, z argumentami, bez argumentów, z wynikami i bez wyników.
 
 Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.
 
 ```{r, eval=FALSE}
+# Tworzymy funkcję wyświetlającą n_kropek kropek
+rysuj_kropki <- function(n_kropek) {
+  for (j in 1:n_kropek) {
+    cat(".")
+  }
+}
+
+# Funkcje można wywołać podając nazwę argumentu lub nie
+rysuj_kropki(n_kropek = 20)
+rysuj_kropki(20)
+
+# Tworzymy funkcję z domyślną wartością argumentu n_kropek
+rysuj_kropki <- function(n_kropek = 20) {
+  for (j in 1:n_kropek) {
+    cat(".")
+  }
+}
+
+# Dodajemy obsługę argumentów mniejszych niż 1. Wystarczy instrukcja if()
+rysuj_kropki <- function(n_kropek = 20) {
+  if (n_kropek > 0) {
+    for (j in 1:n_kropek) {
+      cat(".")
+    }
+  } 
+}
+```
+
+---
+
+# Podsumowanie instrukcji R
+
+Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.
+
+```{r, eval=FALSE}
+# Dodajemy drugi argument, określający jakie znaki mają być rysowane. Domyślnie kropki
+rysuj_kropki <- function(n_kropek = 20, znak = ".") {
+  if (n_kropek > 0) {
+    for (j in 1:n_kropek) {
+      cat(znak)
+    }
+  }
+}
+
+# Możemy podawać argumenty w dowolnej kolejności o ile podamy ich nazwy
+rysuj_kropki(znak="X", n_kropek = 30)
+
+# Wewnątrz jednej funkcji wywołujemy inną
+rysuj_wykres_kropkowy<- function(nazwy, wartosci) {
+  for (i in seq_along(nazwy)) {
+    rysuj_kropki(wartosci[i])
+    cat(" ", nazwy[i],"\n")
+  }
+}
+
+# W przypadku gdy argumenty są złe, zatrzymujemy wykonanie funkcją stop()
+rysuj_wykres_kropkowy <- function(nazwy, wartosci) {
+  # czy oba argumenty mają równą długość?
+  if (length(nazwy) != length(wartosci)) {
+    stop("Argumenty mają różną długość! ", length(nazwy), " oraz ", length(wartosci))
+  }
+  for (i in seq_along(nazwy)) {
+    rysuj_kropki(wartosci[i])
+    cat(" ", nazwy[i],"\n")
+  }
+}
+```
+
+---
+
+# Podsumowanie instrukcji R
+
+Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.
+
+```{r, eval=FALSE}
+# Argumenty możemy przekazywać dalej używając ...
+rysuj_wykres_kropkowy <- function(nazwy, wartosci, ...) {
+  for (i in seq_along(nazwy)) {
+    rysuj_kropki(wartosci[i], ...)
+    cat(" ", nazwy[i],"\n")
+  }
+}
+
+# Przykładowe wywołanie, ostatni argument zostanie przekazny dalej
+rysuj_wykres_kropkowy(nazwy = LETTERS[1:5], wartosci = 1:5, znak = "X")
+
+# Funkcja która zwraca wynik liczbowy
+suma_n_liczb_losowych <- function(n = 10) {
+  if (n < 1) {
+    return(0)
+  } 
+  sum(runif(n))
+}
+
+# Dwa przykłądowe wywołania, zwracają wynik różnym scenariuszem, poprzez ostatnią wartość
+suma_n_liczb_losowych(10) 
+# poprzez wywołanie funkcji return()
+suma_n_liczb_losowych(-1) 
 ```
 
 ---
 
 # Zadania
 
-* Napisz funkcję, która otrzymuje argument liczbowy a następnie wypisuje wartości od argumentu do jeden.
-* Napisz funkcję, która jako argument przyjmuje liczbę i wypisuje jej rzymską reprezentację.
-
-
+* Napisz funkcję, która otrzymuje argument liczbowy a następnie wypisuje na ekran wartości od argumentu do jeden.
+* Napisz funkcję, przyjmuje argument liczbowy `n` a następnie rysuje kwadrat o boku `n` wypełniony znakami `X`.
+* Napisz funkcję, przyjmuje argument liczbowy `n` a następnie rysuje kwadrat o boku `n` ze znakami `X`na brzegu i pusty w środku.
 

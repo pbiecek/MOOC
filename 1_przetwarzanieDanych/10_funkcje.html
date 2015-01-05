@@ -263,7 +263,8 @@ for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
 <div id="parametry-przekazywane-dalej" class="slide section level1">
 <h1>Parametry przekazywane dalej</h1>
 <p>W liście argumentów funkcji dozwolony jest też specjalny argument <code>...</code>. Używając go można przekazać wszystkie pozostałe argumenty dalej, do funkcji wewnętrznych.</p>
-<p>W przykładzie poniżej operator <code>...</code> pojawia się w dwóch miejscach, w liście argumentów funkcji <code>rysuj_wykres_kropkowy()</code> i w liście argumentów funkcji <code>rysuj_kropki()</code>. Wszystkie argumenty dla funkcji <code>rysuj_wykres_kropkowy()</code>, których nazwa jest różna od <code>nazwy</code> i <code>wartosci</code> będą przekazane dalej do funkcji <code>rysuj_kropki()</code>.</p>
+<p>W przykładzie poniżej operator <code>...</code> pojawia się w dwóch miejscach, w liście argumentów funkcji <code>rysuj_wykres_kropkowy()</code> i w liście argumentów funkcji <code>rysuj_kropki()</code>.</p>
+<p>Wszystkie argumenty dla funkcji <code>rysuj_wykres_kropkowy()</code>, których nazwa jest różna od <code>nazwy</code> i <code>wartosci</code> będą przekazane dalej do funkcji <code>rysuj_kropki()</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">rysuj_wykres_kropkowy &lt;-<span class="st"> </span>function(nazwy, wartosci, ...) {
   for (i in <span class="kw">seq_along</span>(nazwy)) {
     <span class="kw">rysuj_kropki</span>(wartosci[i], ...)
@@ -282,21 +283,121 @@ for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
 <h1>Funkcje zwracające wartości</h1>
 <p>Funkcje zawdzięczają swoją nazwę temu, że zwracają wartości.</p>
 <p>Ale te funkcje, które powyżej stworzyliśmy wypisywały wyniki na ekranie.</p>
-<p>Domyślnie wynikiem funkcji jest wynik ostatniego wyrażenia w funkcji. Innym sposobem na wskazanie wyniku jest użycie funkcji <code>return()</code>, która przerywa działanie funkcji i jako wynik zwraca wartość argumentu funkcji return.</p>
-<p>Domyślnie z</p>
-<p>Tworząc nowe funkcje możemy używać w nich innych funkcji, też tych które wcześniej zdefiniowaliśmy.</p>
-<p>Przykładowo poniżej zbudujmy funkcję rysującą wykres kropkowy dla wektora napisów i wektora wartości.</p>
+<p>Domyślnie wynikiem funkcji jest wynik ostatniego wyrażenia w funkcji. Innym sposobem na wskazanie wyniku jest użycie funkcji <code>return()</code>, która przerywa działanie funkcji i jako wynik zwraca wartość argumentu funkcji <code>return()</code>.</p>
+<p>Zilustrujmy to na poniższym przykładzie. Funkcja <code>suma_n_liczb_losowych()</code> losuje <code>n</code> losowych liczb i jako wynik zwraca ich sumę.</p>
+<p>Jeżęli jednak jako argument podana jest wartość mniejsza niż 1, to działanie funkcji jest przerywane i jako wynik zwracana jest wartość 0.</p>
+<pre class="sourceCode r"><code class="sourceCode r">suma_n_liczb_losowych &lt;-<span class="st"> </span>function(<span class="dt">n =</span> <span class="dv">10</span>) {
+  if (n &lt;<span class="st"> </span><span class="dv">1</span>) {
+    <span class="kw">return</span>(<span class="dv">0</span>)
+  } 
+  <span class="kw">sum</span>(<span class="kw">runif</span>(n))
+}</code></pre>
+<p>Wywołajmy tę funkcję. Jeżeli jej wynik nie zostnie przypisany do żadnej zmiennej to zostanie wyświelony na ekranie.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suma_n_liczb_losowych</span>(<span class="dv">10</span>) </code></pre>
+<pre><code>## [1] 6.906406</code></pre>
+<p>I wynik, gdy argument jest mniejszy niż 1.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suma_n_liczb_losowych</span>(-<span class="dv">1</span>) </code></pre>
+<pre><code>## [1] 0</code></pre>
 </div>
 <div id="podsumowanie-instrukcji-r" class="slide section level1">
 <h1>Podsumowanie instrukcji R</h1>
-<p>W tym odcinku omawialiśmy</p>
+<p>W tym odcinku omawialiśmy funkcje, z argumentami, bez argumentów, z wynikami i bez wyników.</p>
 <p>Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Tworzymy funkcję wyświetlającą n_kropek kropek</span>
+rysuj_kropki &lt;-<span class="st"> </span>function(n_kropek) {
+  for (j in <span class="dv">1</span>:n_kropek) {
+    <span class="kw">cat</span>(<span class="st">&quot;.&quot;</span>)
+  }
+}
+
+<span class="co"># Funkcje można wywołać podając nazwę argumentu lub nie</span>
+<span class="kw">rysuj_kropki</span>(<span class="dt">n_kropek =</span> <span class="dv">20</span>)
+<span class="kw">rysuj_kropki</span>(<span class="dv">20</span>)
+
+<span class="co"># Tworzymy funkcję z domyślną wartością argumentu n_kropek</span>
+rysuj_kropki &lt;-<span class="st"> </span>function(<span class="dt">n_kropek =</span> <span class="dv">20</span>) {
+  for (j in <span class="dv">1</span>:n_kropek) {
+    <span class="kw">cat</span>(<span class="st">&quot;.&quot;</span>)
+  }
+}
+
+<span class="co"># Dodajemy obsługę argumentów mniejszych niż 1. Wystarczy instrukcja if()</span>
+rysuj_kropki &lt;-<span class="st"> </span>function(<span class="dt">n_kropek =</span> <span class="dv">20</span>) {
+  if (n_kropek &gt;<span class="st"> </span><span class="dv">0</span>) {
+    for (j in <span class="dv">1</span>:n_kropek) {
+      <span class="kw">cat</span>(<span class="st">&quot;.&quot;</span>)
+    }
+  } 
+}</code></pre>
+</div>
+<div id="podsumowanie-instrukcji-r-1" class="slide section level1">
+<h1>Podsumowanie instrukcji R</h1>
+<p>Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Dodajemy drugi argument, określający jakie znaki mają być rysowane. Domyślnie kropki</span>
+rysuj_kropki &lt;-<span class="st"> </span>function(<span class="dt">n_kropek =</span> <span class="dv">20</span>, <span class="dt">znak =</span> <span class="st">&quot;.&quot;</span>) {
+  if (n_kropek &gt;<span class="st"> </span><span class="dv">0</span>) {
+    for (j in <span class="dv">1</span>:n_kropek) {
+      <span class="kw">cat</span>(znak)
+    }
+  }
+}
+
+<span class="co"># Możemy podawać argumenty w dowolnej kolejności o ile podamy ich nazwy</span>
+<span class="kw">rysuj_kropki</span>(<span class="dt">znak=</span><span class="st">&quot;X&quot;</span>, <span class="dt">n_kropek =</span> <span class="dv">30</span>)
+
+<span class="co"># Wewnątrz jednej funkcji wywołujemy inną</span>
+rysuj_wykres_kropkowy&lt;-<span class="st"> </span>function(nazwy, wartosci) {
+  for (i in <span class="kw">seq_along</span>(nazwy)) {
+    <span class="kw">rysuj_kropki</span>(wartosci[i])
+    <span class="kw">cat</span>(<span class="st">&quot; &quot;</span>, nazwy[i],<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+}
+
+<span class="co"># W przypadku gdy argumenty są złe, zatrzymujemy wykonanie funkcją stop()</span>
+rysuj_wykres_kropkowy &lt;-<span class="st"> </span>function(nazwy, wartosci) {
+  <span class="co"># czy oba argumenty mają równą długość?</span>
+  if (<span class="kw">length</span>(nazwy) !=<span class="st"> </span><span class="kw">length</span>(wartosci)) {
+    <span class="kw">stop</span>(<span class="st">&quot;Argumenty mają różną długość! &quot;</span>, <span class="kw">length</span>(nazwy), <span class="st">&quot; oraz &quot;</span>, <span class="kw">length</span>(wartosci))
+  }
+  for (i in <span class="kw">seq_along</span>(nazwy)) {
+    <span class="kw">rysuj_kropki</span>(wartosci[i])
+    <span class="kw">cat</span>(<span class="st">&quot; &quot;</span>, nazwy[i],<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+}</code></pre>
+</div>
+<div id="podsumowanie-instrukcji-r-2" class="slide section level1">
+<h1>Podsumowanie instrukcji R</h1>
+<p>Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Argumenty możemy przekazywać dalej używając ...</span>
+rysuj_wykres_kropkowy &lt;-<span class="st"> </span>function(nazwy, wartosci, ...) {
+  for (i in <span class="kw">seq_along</span>(nazwy)) {
+    <span class="kw">rysuj_kropki</span>(wartosci[i], ...)
+    <span class="kw">cat</span>(<span class="st">&quot; &quot;</span>, nazwy[i],<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+}
+
+<span class="co"># Przykładowe wywołanie, ostatni argument zostanie przekazny dalej</span>
+<span class="kw">rysuj_wykres_kropkowy</span>(<span class="dt">nazwy =</span> LETTERS[<span class="dv">1</span>:<span class="dv">5</span>], <span class="dt">wartosci =</span> <span class="dv">1</span>:<span class="dv">5</span>, <span class="dt">znak =</span> <span class="st">&quot;X&quot;</span>)
+
+<span class="co"># Funkcja która zwraca wynik liczbowy</span>
+suma_n_liczb_losowych &lt;-<span class="st"> </span>function(<span class="dt">n =</span> <span class="dv">10</span>) {
+  if (n &lt;<span class="st"> </span><span class="dv">1</span>) {
+    <span class="kw">return</span>(<span class="dv">0</span>)
+  } 
+  <span class="kw">sum</span>(<span class="kw">runif</span>(n))
+}
+
+<span class="co"># Dwa przykłądowe wywołania, zwracają wynik różnym scenariuszem, poprzez ostatnią wartość</span>
+<span class="kw">suma_n_liczb_losowych</span>(<span class="dv">10</span>) 
+<span class="co"># poprzez wywołanie funkcji return()</span>
+<span class="kw">suma_n_liczb_losowych</span>(-<span class="dv">1</span>) </code></pre>
 </div>
 <div id="zadania" class="slide section level1">
 <h1>Zadania</h1>
 <ul>
-<li>Napisz funkcję, która otrzymuje argument liczbowy a następnie wypisuje wartości od argumentu do jeden.</li>
-<li>Napisz funkcję, która jako argument przyjmuje liczbę i wypisuje jej rzymską reprezentację.</li>
+<li>Napisz funkcję, która otrzymuje argument liczbowy a następnie wypisuje na ekran wartości od argumentu do jeden.</li>
+<li>Napisz funkcję, przyjmuje argument liczbowy <code>n</code> a następnie rysuje kwadrat o boku <code>n</code> wypełniony znakami <code>X</code>.</li>
+<li>Napisz funkcję, przyjmuje argument liczbowy <code>n</code> a następnie rysuje kwadrat o boku <code>n</code> ze znakami <code>X</code>na brzegu i pusty w środku.</li>
 </ul>
 </div>
 
