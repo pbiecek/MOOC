@@ -9,18 +9,33 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / przetwarzanie / pętle"
+    footer: "pogRomcy danych / programowanie / pętle"
 
 ---
 
 # O czym jest ten odcinek
 
+Silną stroną komputerów jest to, że mogą bardzo szybko powtarzać określone operacje.
+Nie są zbyt inteligentne (póki co) ale są bardzo szybie i idealne do powtarzania, powtarzania, powtarzania, powtarzania.
+
+Analizując dane bardzo często znajdziemy się w sytuacji, gdy określoną czynność będziemy chcieli powtórzyć. Wykonać ją dla każdej zmiennej, dla każdego analizowanego dnia, dla każdego analizowanego zbioru danych.
+
+Narzędziem, pozwalającym na powtarzanie w kółko (w pętli) określonych operacji są pętle.
+
 W tym odcinku nauczymy się
 
-- Jak korzystać z pętli `for()`
-- Jak i po co tworzyć pętle w pętli
+- Jak i po co tworzyć pętle?
+- Jak korzystać z pętli `for()`?
+- Jak korzystać z pętli `sapply()`?
+- Jak korzystać z pętli `apply()`?
+- Jak i po co tworzyć pętle w pętli?
 
-Do ilustracji wykorzystamy zbiór danych to `koty_ptaki`.
+Do ilustracji wykorzystamy zbiór danych to `koty_ptaki` dostępny w pakiecie `SmarterPoland`.
+
+```{r, message=FALSE, warning=FALSE}
+library(SmarterPoland)
+head(koty_ptaki, 3)
+```
 
 ---
 
@@ -71,7 +86,6 @@ Typowe zastosowania pętli to wykonanie pewnej operacji dla każdego wiersza lub
 Dla każdej kolumny (a na początek dla kolumny o indeksie `i=1`) będziemy chcieli wyświetlić informację do jakiej wagi dochodzą przedstawiciele danego gatunku.
 
 ```{r, message=FALSE, warning=FALSE}
-library(SmarterPoland)
 # Zamiana zmiennej factor na zmienną napisową, po to by była dobrze wyświetlana
 koty_ptaki$gatunek <- as.character(koty_ptaki$gatunek)
 

@@ -1,7 +1,7 @@
 ---
 title: "Instrukcje warunkowe"
 author: "pogRomcy danych"
-date: "sezon 1 / odcinek 8 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 1 / odcinek 9 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -9,18 +9,27 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / przetwarzanie / instrukcje warunkowe"
+    footer: "pogRomcy danych / programowanie / instrukcje warunkowe"
 
 ---
 
 # O czym jest ten odcinek
 
+Mnogość dostępnych algorytmów do analizy danych stawia nas często przed wyborami. Czy użyć metody A czy metody B, każda jest lepsza w innej sytuacji. Najlepszym rozwiązaniem jest często warunkowe użycie jednej lub drugiej metody w zależności od tego jak wyglądaną nasze dane.
+
+Do warunkowego wykonania jednej lub drugiej grupy instrukcji służą instrukcje warunkowe.
+
 W tym odcinku nauczymy się
 
-- Jak korzystać z instrukcji warunkowych
-- Jak korzystać z instrukcji warunkowych w tętli
+- Jak korzystać z instrukcji warunkowych?
+- Jak korzystać z instrukcji warunkowych w pętli?
 
-Do ilustracji wykorzystamy zbiór danych to `koty_ptaki`.
+Do ilustracji wykorzystamy zbiór danych to `koty_ptaki` dostępny w pakiecie `SmarterPoland`.
+
+```{r, message=FALSE, warning=FALSE}
+library(SmarterPoland)
+head(koty_ptaki, 3)
+```
 
 ---
 
@@ -50,7 +59,6 @@ ifelse (warunek_dla_wektora, wyrażenie1, wyrażenie2)
 Przykładowe wywołanie każdego z wariantów instrukcji `if`
 
 ```{r, message=FALSE, warning=FALSE}
-library(SmarterPoland)
 i <- 1
 ```
 

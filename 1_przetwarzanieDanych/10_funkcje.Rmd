@@ -1,7 +1,7 @@
 ---
 title: "Funkcje"
 author: "pogRomcy danych"
-date: "sezon 1 / odcinek 8 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 1 / odcinek 10 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -9,22 +9,24 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / przetwarzanie / funkcje"
+    footer: "pogRomcy danych / programowanie / funkcje"
 
 ---
 
 # O czym jest ten odcinek
 
+Jednym z naważniejszych cech języków programowania jest możliwość wykorzystywania rozwiązań, które my lub ktoś inny zbudował w przeszłości. Jest to możliwe dzięki jeżeli takie dobre rozwiązania zamienimy w funkcje, czyli bloki kodu które łatwo ponownie wykorzystać.
+
 W tym odcinku nauczymy się
 
-- Jak tworzyć własne funkcje
-- Jak wywoływać funkcje z funkcji
+- Jak wywoływać funkcje?
+- Jak tworzyć własne funkcje?
+- Jak wywoływać funkcje z funkcji?
 
-Do ilustracji wykorzystamy zbiór danych to `koty_ptaki` z pakietu `SmarterPoland`.
+Do ilustracji wykorzystamy zbiór danych to `koty_ptaki` dostępny w pakiecie `SmarterPoland`.
 
 ```{r, message=FALSE, warning=FALSE}
 library(SmarterPoland)
-koty_ptaki$gatunek <- as.character(koty_ptaki$gatunek)
 head(koty_ptaki, 3)
 ```
 
@@ -34,11 +36,11 @@ head(koty_ptaki, 3)
 
 Jest wiele powodów, dla których warto korzystać z funkcji. Trzy najistotniejsze to.
 
-* Funkcje pozwalają skrócić wielkość programu, ponieważ mniej będzie powtarzających się podobnych bloków. 
+* Funkcje pozwalają na łatwe, ponowne użycie poprzednio opracowanych fragmentów kodu. Dzięki temu, możemy wykorzystywać rozwiązania, które już raz zbudowaliśmy i szybciej tworzyć kolejne. Możemy wykorzystywać rozwiązania / funkcje innych osób i dzielić się z nimi własnymi funkcjami.
 
 * Funkcje pozwalają na logiczny podział programu, na fragmenty, które łatwiej opisać i udokumentować. Dzięki temu łatwiej zrozumieć co się dzieje w programie, gdy można poznawać poszczególne fragmenty niezależnie.
 
-* Funkcje pozwalają na łatwe, ponowne użycie poprzednio opracowanych fragmentów kodu. Dzięki temu, możemy wykorzystywać rozwiązania, które już raz zbudowaliśmy i szybciej tworzyć kolejne. Możemy wykorzystywać rozwiązania / funkcje innych osób i dzielić się z nimi własnymi funkcjami.
+* Funkcje pozwalają skrócić długość programu. Podobne bloki kodu można zastąpić wywołaniem funkcji, przez co będzie mniej powtarzających się podobnych bloków. A im krótszy program tył łatwiej go napisać, łatwiej go zrozumieć i łatwiej znaleźć błąd.
 
 ---
 
@@ -47,6 +49,9 @@ Jest wiele powodów, dla których warto korzystać z funkcji. Trzy najistotniejs
 Przywołajmy kod programu, który rysował prędkość zwierząt za pomocą liczby kropek.
 
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
+# zamieniamy na zmienną napisową, by była dobrze wyświetlana
+koty_ptaki$gatunek <- as.character(koty_ptaki$gatunek)
+
 # Dla każdego wiersza w tabeli `koty_ptaki`
 for (i in 1:nrow(koty_ptaki)) {
   n_kropek <- koty_ptaki[i,"predkosc"] / 5
