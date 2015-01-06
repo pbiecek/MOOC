@@ -102,6 +102,8 @@ install.packages("SmarterPoland")
 
 Pobierze i zainstaluje ono z Internetu wszelkie niezbędne pakiety i zbiory danych z których będziemy korzystać w tym kursie.
 
+![Pakiety](figs/install_packages.png)
+
 ---
 
 # Gotowi do pracy
