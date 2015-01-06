@@ -1,7 +1,7 @@
 ---
-title: "Jak wczytać dane do programu R"
+title: "Interaktywna praca z R"
 author: "pogRomcy danych"
-date: "sezon 1 / odcinek 5 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 1 / odcinek 4 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
