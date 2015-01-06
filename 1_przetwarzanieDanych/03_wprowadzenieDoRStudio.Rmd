@@ -1,7 +1,7 @@
 ---
-title: "Jak wczytać dane do programu R"
+title: "Wprowadzenie do R i RStudio"
 author: "pogRomcy danych"
-date: "sezon 1 / odcinek 5 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 1 / odcinek 3 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -14,24 +14,38 @@ output:
 
 # O czym jest ten odcinek
 
+Najtrudniejsze są początki. Aby dojść do miejsca w którym nasza praca stanie się przyjemnością i będzie efektywna, musimy nauczyć się nowego języka. A nauka, czy to języka, czy czegokolwiek innego, to seria prób, czasem niepowodzeń, kolejnych prób i tak nieustannie.
 
+Prawdziwa nauka rozpocznie się z odcinkiem 4, a więc kolejnym. Ale zanim będziemy gotowi rozpocząć naukę musimy oswoić się z narzędziem z którym przyjdzie nam pracować.
 
+W tym odcinku nauczymy się
 
+* W jaki sposób wprowadzać instrukcje do programu R
+* W jaki sposób definiować nowe zmienne w programie R
+* Jak szukać pomocy dla funkcji
+
+Do tego odcinka jest dołączony film wideo, ilustrujący wszystkie przedstawiane operacje.
+
+Pracując ze slajdami, możemy w każdej chwili nacisnąć przycisk `T`, rozwinie on spis treści, dzieki czemu łątwo nam będzie przejść do porządanego slajdu.
+
+Pracując ze slajdami możemy w każdej chwili nacisnąć przycisk `A` aby zamienić slajdy na ciągły dokument.
 
 ---
 
 # Jak pracować z RStudio
+
 Zacznijmy naszą przygodę od krótkiego omówienia programu RStudio, 
 będziemy z nim pracować przez większość czasu, warto go bliżej poznać.
 
-Po zainstalowaniu przy pierwszym otwarciu program R będzie wyglądał w ten sposób.
+Po zainstalowaniu przy pierwszym otwarciu program R będzie wyglądał w poniżej przedstawiony sposób.
+
 Po lewej stronie jest interaktywna konsola, po prawej stronie są panele pomocnicze, 
 które omówimy za kilka minut.
 
-Konsolę otwiera zbiór informacji o wersji zainstalowanego programu R,
-oraz z znak zachęty `>`.
+Konsolę otwiera zbiór informacji o wersji zainstalowanego programu R, oraz znak zachęty `>`.
 Ten znak, oznacza, że program R jest gotowy do dalszej pracy i możemy wpisywać mu polecenia.
 
+![Program RStudio](figs/RStudio3.png)
 
 # Interaktywna praca z konsolą 
 
@@ -46,7 +60,11 @@ Przećwiczmy to na kilku prostych operacjach arytmetycznych.
 2^10
 ```
 
-# Zmienne
+Na slajdach wyniki instrukcji wprowadzonych do programy R przedstawimy poprzedziwszy je znakami `##`. Poniżej znajduje się zdjęcie pokazujące jak wygląda konsola.
+
+![Program RStudio](figs/RStudio6.png)
+
+# Zmienne i ich wartości w pamięci programu RStudio
 
 Wyniki operacji możemy przypisać do zmiennych. 
 Dzięki temu, zamiast wyświetlać się na ekranie, zostaną one zapamiętane w pamięci programu R,
@@ -60,14 +78,11 @@ zmienna  =  2^10
 zmienna2 <- 2^10 
 ```
 
-
-# Zmienne i ich wartości w pamięci programu RStudio
-
 Zauważmy, że w oknie po prawej górnej stronie wyświetliły się nowo zdefiniowane zmienne oraz ich wartości.
 
 W każdej chwili możemy sprawdzić, jakie zmienne program R aktualnie pamięta, oraz jakie są wartości tych zmiennych.
 
-
+![Zmienne](figs/RStudio4.png)
 
 
 # Funkcje
@@ -131,6 +146,11 @@ Mamy już sekwencje liczb. Zróbmy z nią coś ciekawego.
 
 Funkcją `exp()` policzmy eksponentę z sekwencji, a następnie narysujmy i sekwencję i jej eksponentę funkcją `plot()`.
 
+Poniższy wykres, to bardzo ważny wykres, ponieważ przedstawia bardzo ważną informację dotyczącą uczenie się.
+Pierwsze godziny poznawania R poświęcimy na zbudowanie bazy funkcji R. 
+Będzie to okres pierwszych frustracji, gdy efekty będą relatywnie małe a wysiłek z naszej strony będzie duży.
+Ale po kilku pierwszych godzinach, jeżeli tylko wytrwamy, okaże się, że nasze możliwości rosną wykładniczo.
+
 ```{r, warning=FALSE}
 poziom <- exp(sekwencja)
 
@@ -138,10 +158,15 @@ plot(x = sekwencja, y = poziom,
      xlab="czas spędzony z R", ylab="poziom Data Science w krwii")
 ```
 
-To bardzo ważny wykres, ponieważ przedstawia bardzo ważną informację dotyczącą uczenie się.
+# Zadanie
 
-Pierwsze godziny poznawania R poświęcimy na zbudowanie bazy funkcji R. 
-Będzie to okres pierwszych frustracji, gdy efekty będą relatywnie małe a wysiłek z naszej strony będzie duży.
+Pod koniec większości odcinków przygotowaliśmy kilka zadań do wykonania.
 
-Ale po kilku pierwszych godzinach, jeżeli tylko wytrwamy, okaże się, że nasze możliwości rosną wykładniczo.
+Pierwsze zadania są proste, kolejne coraz trudniejsze. Warto zmierzyć się z nimi, jedynym sposobem by nauczyć się języka programowani jest ćwiczenie, ćwiczenie i jeszcez raz ćwiczenie.
+
+Odpowiedzi do zadań umieszczone są na stronei kursu, można je w każdej chwili sprawdzić.
+
+Zadanie do tego odcinak polega na uruchomieniu wszystkich przedstawionych instrukcji w programie RStudio i sprawdzeniu czy otrzymuje się te same wyniki.
+
+
 
