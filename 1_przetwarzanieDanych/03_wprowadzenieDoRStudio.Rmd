@@ -26,7 +26,7 @@ W tym odcinku nauczymy się
 
 Do tego odcinka jest dołączony film wideo, ilustrujący wszystkie przedstawiane operacje.
 
-Pracując ze slajdami, możemy w każdej chwili nacisnąć przycisk `T`, rozwinie on spis treści, dzieki czemu łątwo nam będzie przejść do porządanego slajdu.
+Pracując ze slajdami, możemy w każdej chwili nacisnąć przycisk `T`, rozwinie on spis treści, dzięki czemu łatwo nam będzie przejść do pożądanego slajdu.
 
 Pracując ze slajdami możemy w każdej chwili nacisnąć przycisk `A` aby zamienić slajdy na ciągły dokument.
 
@@ -162,11 +162,10 @@ plot(x = sekwencja, y = poziom,
 
 Pod koniec większości odcinków przygotowaliśmy kilka zadań do wykonania.
 
-Pierwsze zadania są proste, kolejne coraz trudniejsze. Warto zmierzyć się z nimi, jedynym sposobem by nauczyć się języka programowani jest ćwiczenie, ćwiczenie i jeszcez raz ćwiczenie.
+Pierwsze zadania są proste, kolejne coraz trudniejsze. Warto zmierzyć się z nimi, jedynym sposobem by nauczyć się języka programowani jest ćwiczenie, ćwiczenie i jeszcze raz ćwiczenie.
 
-Odpowiedzi do zadań umieszczone są na stronei kursu, można je w każdej chwili sprawdzić.
+Odpowiedzi do zadań umieszczone są na stronie kursu, można je w każdej chwili sprawdzić.
 
 Zadanie do tego odcinak polega na uruchomieniu wszystkich przedstawionych instrukcji w programie RStudio i sprawdzeniu czy otrzymuje się te same wyniki.
-
 
 
