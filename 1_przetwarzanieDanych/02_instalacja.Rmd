@@ -14,7 +14,7 @@ output:
 
 # O czym jest ten odcinek
 
-Aby wygodnie pracować z programem R potrzebujemy zainstalować silnik obliczeniowy R, wygodny edytor dzięki któremu praca z R będzie bardziej wygodna, taki jak RStudio, oraz dodatkowe biblioteki z danymi i funkcjami. Wszystkie te elementy można pobrać z internetu bezpłatnie.
+Aby wygodnie pracować z programem R potrzebujemy zainstalować silnik obliczeniowy R, wygodny edytor dzięki któremu praca z R będzie bardziej wygodna, taki jak RStudio, oraz dodatkowe biblioteki z danymi i funkcjami. Wszystkie te elementy można pobrać z Internetu bezpłatnie.
 
 W tym odcinku pokażemy:
 
@@ -49,7 +49,7 @@ Nie potrzebujemy specjalnych uprawnień administracyjnych aby zainstalować prog
 
 Program R jest całkowicie bezpłatny do wszelkich zastosowań, edukacyjnych, przemysłowych, biznesowych, komercyjnych i hobbystycznych. Program R jest dostępny na licencji GPL 2.
 
-Co roku oddawana jest do użycia nowa wersja R, tak więc w trakcie kursu może się okazać, że wersja 3.2 stanie się oficjalną (teraz jest tzw. wersją deweloperską). Zdecydowana większość funkcji działą identycznie pomiędzy wersjami, więc nie musimy obawiać się, że coś nie działa, jeżeli zainstalowaną mamy starszą wersję R. Wersja 3.1.2 lub nowsza wystarczy aby zrealizować ten kurs.
+Co roku oddawana jest do użycia nowa wersja R, tak więc w trakcie kursu może się okazać, że wersja 3.2 stanie się oficjalną (teraz jest tzw. wersją deweloperską). Zdecydowana większość funkcji działa identycznie pomiędzy wersjami, więc nie musimy obawiać się, że coś nie działa, jeżeli zainstalowaną mamy starszą wersję R. Wersja 3.1.2 lub nowsza wystarczy aby zrealizować ten kurs.
 
 Praca z programem R jest interaktywna, co oznacza, że wpisując polecenia do konsoli R otrzymujemy natychmiast wyniki wykonanych poleceń.
 
@@ -75,7 +75,7 @@ Instalacja sprawdza się do klikania *dalej, dalej*. Po zainstalowaniu należy u
 * Przy domyślnych ustawieniach, w programie RStudio wyświetlane są cztery panele. Lewy górny róg to miejsce w którym pisze się instrukcje. Ten instrukcje można zaznaczyć i wysłać do wykonania poleceniem CTRL+Enter. 
 * Lewy dolny panel to konsola programu R, tutaj wyświetlane są instrukcje wprowadzone do R oraz ich wyniki.
 * Prawy dolny panel przedstawia wykresy wyprodukowane przez instrukcje w R. W tym panelu jest też wyświetlana pomoc dla funkcji.
-* Prawy górny panel pokazuje jakie obiekty znajdują się obecnie w pamięci R, oraz jak są one duże.  Klikając na wybrane obiekty możemy podejrzeć ich zawartość. Każdy wiersz to obiekt. Ale po pierwszym uruchomieniu to okno będzie puste, nic jeszcez nie wczytaliśmy do pamięci.
+* Prawy górny panel pokazuje jakie obiekty znajdują się obecnie w pamięci R, oraz jak są one duże.  Klikając na wybrane obiekty możemy podejrzeć ich zawartość. Każdy wiersz to obiekt. Ale po pierwszym uruchomieniu to okno będzie puste, nic jeszcze nie wczytaliśmy do pamięci.
 
 
 ![RStudio](figs/RStudio.png)
@@ -117,4 +117,5 @@ demo(graphics)
 ```
 
 i nacisnąć ENTER. Funkcja `demo()` wyświetla pokazowe wykresy programu R. Aby przejść do kolejnego należy w konsoli nacisnąć przycisk ENTER. Aby przerwać działanie funkcji `demo()` należy nacisnąć przycisk ESC.
+
 
