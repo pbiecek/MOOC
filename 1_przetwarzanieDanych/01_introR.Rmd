@@ -14,10 +14,34 @@ output:
 
 # O czym jest ten odcinek
 
+Interesuje Cię gRomienie danych?
+
+Być może jesteś zaawansowanym w boju badaczem danych z doskonałą znajmomością SPSS / SAS / Statistica czy Stata.
+
+Być może jesteś analitykiem biznesowym z niezłą znajomością Excela lub Tableau.
+
+Być może Twóje dotychczasowe doświadczenia to programowanie w językach takich jak Python, Java czy C++.
+
+Być może masz za sobą pierwsze przymiarki do R czy to na zajęciach czy w ramach dokształcania się.
+
+A może jeszcze nie trafiłeś na rynek pracy i z czysto poznawczej ciekawości zajrzałeś na stronę tego kursu.
+
+Tak czy inaczej aby analizować dane potrzebujesz dobrego narzędzia i umiejętności pracy z danymi. 
+Ten odcinek ma na celu zachęcenie Cię do dokładniejszego poznania języka R.
+
+Pokażemy dlaczego warto poznać R, co można w tym języku zrobić oraz powiemy jak sie tego języka nauczyć. 
+Powiemy też jakie umiejętności są potrzebne by efektywnie pracować z danymi w tym czy innym narzędziu oraz powiemy jak te umiejętności nabyć.
+
+---
+
+# Dlaczego R?
 
 
+R is a programming language designed for statistical computing and visualization. For many years, R has been a language of choice for academic researchers, but in recent years, it has grown in popularity in business. It can now be found across industries (financial services, technology, retail, etc.) and job functions (marketing, operations, finance, etc.).
 
+While Excel can continue being your bread-and-butter, knowing R and applying it at the right times can make you a more productive and effective analyst. So do not think of R as a substitute for Excel, but instead as a parter in crime who can do a lot more stuff when things get complicated.
 
+According to Google Trends, interest in R has more than doubled, while interest in both SAS and SPSS has been cut in half over the past ten years. This could mean more jobs and opportunities for those who know R.
 
 
 
