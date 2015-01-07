@@ -1,3 +1,29 @@
+---
+title: "Dlaczego R?"
+author: "pogRomcy danych"
+date: "sezon 1 / odcinek 1 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / pierwsze kroki / dlaczego R"
+---
+
+# O czym jest ten odcinek
+
+
+
+
+
+
+
+
+
+
+
 W jaki sposób analizuje się dane?
 Kiedyś analiza wykonywana była ołówkiem na papierze.
 Spisywało się kolumnę liczb, dodawało, dzieliło, mnożyło.

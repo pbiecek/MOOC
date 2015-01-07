@@ -39,3 +39,7 @@ np.Westmere (microarchitecture):
 http://en.wikipedia.org/wiki/Westmere_%28microarchitecture%29
 
 
+Lubridate
+
+http://www.jstatsoft.org/v40/i03/paper
+

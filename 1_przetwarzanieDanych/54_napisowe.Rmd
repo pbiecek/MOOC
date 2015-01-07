@@ -149,5 +149,10 @@ i dodawania wyników na kartce ')**
 + `r sum(grepl(as.character(auta2012$Kolor), pattern="metallic"))`
 
 
+Manual do operacji na napisach
+
+http://gastonsanchez.com/Handling_and_Processing_Strings_in_R.pdf
+
+
 
   
