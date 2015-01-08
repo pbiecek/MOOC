@@ -250,4 +250,5 @@ http://robjhyndman.com/hyndsight/graphics/
 
 - Bardzo rozbudowana dokumentacja dla pakietu ggplot2 dostępna jest na stronie *,,ggplot2''* http://docs.ggplot2.org/current/index.html
 
-
+- Effective tables and graphs in official statistics, Government Statistical Service (London)
+https://gss.civilservice.gov.uk/wp-content/uploads/2014/12/Effective-graphs-and-tables-in-official-statistics-version-1.pdf
