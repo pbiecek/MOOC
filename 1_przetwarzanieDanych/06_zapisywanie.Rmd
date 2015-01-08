@@ -195,3 +195,7 @@ http://en.wikibooks.org/wiki/R_Programming/Importing_and_exporting_data
 - Interesujące zestawienie narzędzi do odczytywania danych ze stron interentowych znaleźć można na stronach z materiałami dydaktycznymi Gastona Sancheza
 http://gastonsanchez.com/teaching/
 
+*Dla entuzjastów Excela* 
+
+- Funkcje R można również uruchamiać wewnątrz programu Excel, należy w tym celu zainstalować dodatek RExcel(http://www.statconn.com/products.html). Na tych filmach można zobaczyć jak pracuje się z tym dodatkiem i jak go zainstalować https://www.youtube.com/watch?v=rigtfeeqnNs, https://www.youtube.com/watch?v=YH94AH6PVss, https://www.youtube.com/watch?v=wqgO9rrmQVY
+
