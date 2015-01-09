@@ -275,7 +275,9 @@ liczbaPtaków
 # Zadania
 
 * Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze `lekkie`, a dla cięższych niż 1 kg `ciężkie`.
+
 * Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze `lekkie`, cięższych niż 100kg wypisze `ciężkie` a w przedziale 1-100kg wypisze `średnie`. Taki efekt można uzyskać stosując dwie instrukcje `if()` lub korzystając z funkcji `switch()`.
+
 * Napisz pętlę i instrukcję warunkową sumującą łączną masę wszystkich ptaków i osobno kotów.
 
-
+Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html

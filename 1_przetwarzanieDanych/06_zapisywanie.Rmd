@@ -172,8 +172,12 @@ save(dwie_kolumny, file="/Users/pbiecek/Documents/wazne_dane.rda")
 # Zadanie
 
 - Zapisz zbiór danych `koty_ptaki` do pliku tekstowego, w którym dane są rozdzielane przecinkiem a kropką dziesiętną jest `.`
+
 - Zapisz zbiór danych `koty_ptaki` do formatu pliku Excela. Sprawdź czy dane poprawnie się zapisały.
+
 - Zapisz zbiór danych `koty_ptaki` do pliku binarnego. Odczytaj go następnie funkcją `load()` i sprawdź czy dane poprawnie zostały zapisane.
+
+Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
 
 ---
 

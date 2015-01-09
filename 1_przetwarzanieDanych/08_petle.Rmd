@@ -333,7 +333,10 @@ for (i in 1:nrow(koty_ptaki)) {
 # Zadania
 
 * Napisz pętlę, która dla każdego wiersza z tabeli `koty_ptaki` wypisze żywotność określonego gatunku.
+
 * Napisz pętlę, która przedstawi żywotność za pomocą wykresu, na którym każdy rok przedstawiony jest jako jeden `#`.
+
 * Napisz pętlę, która narysuje wykres z żywotnością, ale z nazwami gatunku po lewej stronie. Co więcej, przed każdą nazwą gatunku należy dodać tyle znaków spacja, aby nazwy były wyrównane do prawej strony. Długość napisu, mierzoną w liczbie znaków można odczytać funkcją `nchar()`.
 
+Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
 
