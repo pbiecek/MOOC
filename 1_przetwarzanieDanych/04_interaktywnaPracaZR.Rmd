@@ -15,3 +15,7 @@ output:
 # O czym jest ten odcinek
 
 
+TODO:
+
+tu wstawić wszystko, czego nie ma w innych odcinkach a warto aby początkujący użytkownik wiedział
+
