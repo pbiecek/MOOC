@@ -31,13 +31,13 @@ część 1: Data smart
     + odcinek 9: Instrukcje warunkowe [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/09_instrukcje_warunkowe.html), v1 ready 
     + odcinek 10: Funkcje [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/10_funkcje.html), v1 ready
   * Podstawowe typy danych i ich statystyki opisowe
-    + odcinek 11: Cechy jakościowe, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/51_ilosciowe.html)
-    + odcinek 12: Cechy ilościowe, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/52_jakosciowe.html)
-    + odcinek 13: Cechy logiczne, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/53_logiczne.html)
-    + odcinek 14: Cechy napisowe, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/54_napisowe.html)
-    + odcinek 15: Daty, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/55_daty.html)
+    + odcinek 11: Cechy jakościowe, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/11_ilosciowe.html)
+    + odcinek 12: Cechy ilościowe, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/12_jakosciowe.html)
+    + odcinek 13: Cechy logiczne, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/13_logiczne.html)
+    + odcinek 14: Cechy napisowe, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/14_napisowe.html)
+    + odcinek 15: Daty, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/15_daty.html)
   * Przetwarzanie potokowe danych
-    + odcinek 16: Wprowadzenie do obróbki danych, [intro](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie/dplyrIntro.md), 
+    + odcinek 16: Czyszczenie i wprowadzenie do obróbki danych, [intro](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanie/16_dplyrIntro.Rmd), 
     + odcinek 17: Filtrowanie wierszy [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/61_dplyr_filter.html), 
     + odcinek 18: Sortowanie wierszy [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/62_dplyr_sort.html), 
     + odcinek 19: Przetwarzanie potokowe [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/63_dplyr_potok.html), 

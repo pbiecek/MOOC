@@ -6,8 +6,8 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / eksploracja danych / zapisywanie danych z R" /> 
-  <title>Jak zapisać dane z programu R</title>
+  <meta name="copyright" content="pogRomcy danych / przetwarzanie / czyszczenie i obróbka" /> 
+  <title>Czyszczenie i wprowadzenie do obróbki danych</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -44,151 +44,96 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </head>
 <body>
 <div class="slide titlepage">
-  <h1 class="title">Jak zapisać dane z programu R</h1>
+  <h1 class="title">Czyszczenie i wprowadzenie do obróbki danych</h1>
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 6 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 16 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
-<p>Program R jest świetnym narzędziem do przetwarzania danych. Mając już dane przetworzone pojawia się potrzeba by wyniki gdzieś zapisać.</p>
-<p>Podobnie jak wczytywaliśmy dane z formatów tekstowych, binarnych lub plików Excela, również możemy zapisywać dane do różnych formatów.</p>
-<p>W tym odcinku dowiemy się</p>
-<ul>
-<li>Jak zapisać dane tabelaryczne do plików tekstowych?</li>
-<li>Jak zapisać dane tabelaryczne do plików Excela (.xls lub .xlsx)?</li>
-<li>Jak zapisać dane w formacie binarnym programu R?</li>
-<li>Gdzie szukać informacji o tym jak zapisać dane do innych formatów?</li>
-</ul>
+<p>W tym odcinku nauczymy się</p>
 </div>
-<div id="zapisywanie-danych-do-pliku-csv" class="slide section level1">
-<h1>Zapisywanie danych do pliku csv</h1>
-<p>Zacznijmy od przykładu, w którym stworzymy sztuczny zbiór danych o trzech wierszach i dwóch kolumnach, nazwiemy go <code>dwie_kolumny</code> a następnie zapiszmy do pliku tekstowego o rozszerzeniu <code>csv</code>.</p>
-<p>Pliki <code>csv</code> są plikami tekstowymi, ale również są poprawnie odczytywane przez program Excel, przez co jest to popularne medium wymiany danych tabelarycznych.</p>
-<p>Aby zapisać dane do pliku możemy użyć funkcję <code>write.table()</code>. Poniższe instrukcje tworzą nowe dane oraz zapisują je do pliku <code>wazne_dane.csv</code> (w aktualnym katalogu) stosując jako separator kolumn średnik a jako kropkę dziesiętną znak <code>.</code>. To, jaki katalog jest aktualnym katalogiem roboczym, można sprawdzić funckją <code>getwd()</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tworzymy nowy zbiór danych</span>
-dwie_kolumny &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">litery  =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>),
-                           <span class="dt">liczby  =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))
-dwie_kolumny
-<span class="co">#   litery liczby</span>
-<span class="co"># 1      A      1</span>
-<span class="co"># 2      B      2</span>
-<span class="co"># 3      C      3</span>
+<div class="slide section level1">
 
-<span class="kw">write.table</span>(dwie_kolumny, <span class="dt">file=</span><span class="st">&quot;wazne_dane.csv&quot;</span>, 
-            <span class="dt">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="dt">dec =</span> <span class="st">&quot;.&quot;</span>)
-
-<span class="co"># w którym katalogu się zapisało?</span>
-<span class="kw">getwd</span>()
-<span class="co"># /Users/pbiecek/Documents</span>
-
-<span class="co"># Równoważnie</span>
-<span class="kw">write.table</span>(dwie_kolumny, <span class="dt">file=</span><span class="st">&quot;/Users/pbiecek/Documents/wazne_dane.csv&quot;</span>, 
-            <span class="dt">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="dt">dec =</span> <span class="st">&quot;.&quot;</span>)</code></pre>
+<p>Pracując z danymi często wyróżnia się dwa stany, dane surowe i dane przetworzone.</p>
+<p>Dane surowe pobieramy ze źródła danych, zakładając że na podstawie tych danych możemy odpowiedzieć, na interesujące nas pytania. Przykładowo, szczegółowe informacje o wszystkich ofertach sprzedaży aut, to przykład danych surowych, ponieważ pobierany te dane dokładnie w tej postaci.</p>
+<p>Pytania, które nas interesują dotyczą często podzbiory całych danych, i to podzbioru, na którym wykonywane są jakieś transformacje. Takie przekształcone dane nazywamy danymi przetworzonymi.</p>
+<p>Przetwarzanie może być bardzo różne, mając zbiór wypowiedzi, możemy liczyć częstość wystąpień poszczególnych słów, możemy z liczb wyciągać ostatnie cyfry, czy z dat dni tygodnia.</p>
+<p>Dzisiaj poznamy fantastyczne narzędzie, bardzo pomagające w przetwarzaniu danych. To narzędzie to biblioteka dplyr</p>
 </div>
-<div id="zapisywanie-danych-tabelarycznych-do-plikow-tekstowych" class="slide section level1">
-<h1>Zapisywanie danych tabelarycznych do plików tekstowych</h1>
-<p>Dane, które są dostępne w programie R, można zapisać do pliku tekstowego, funkcją <code>write.table()</code>. Można też funkcjami <code>write.csv()</code> lub <code>write.csv2()</code>, ale różnią się one wyłącznie domyślnymi wartościami parametrów.</p>
-<p>Formatowanie (co jest separatorem kolumn, co jest kropką dziesiętną) określa się w ten sam sposób co w funkcji <code>read.table()</code>.</p>
-<p>Formalna deklaracja funkcji <code>write.table()</code> jest następująca (pamiętajmy, że większość parametrów jest domyślna i zazwyczaj wystarczy zmienić tylko kilka).</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.table</span>(x, <span class="dt">file =</span> <span class="st">&quot;&quot;</span>, <span class="dt">append =</span> <span class="ot">FALSE</span>, <span class="dt">quote =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>,
-            <span class="dt">eol =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">na =</span> <span class="st">&quot;NA&quot;</span>, <span class="dt">dec =</span> <span class="st">&quot;.&quot;</span>, <span class="dt">row.names =</span> <span class="ot">TRUE</span>,
-            <span class="dt">col.names =</span> <span class="ot">TRUE</span>, <span class="dt">qmethod =</span> <span class="kw">c</span>(<span class="st">&quot;escape&quot;</span>, <span class="st">&quot;double&quot;</span>),
-            <span class="dt">fileEncoding =</span> <span class="st">&quot;&quot;</span>)</code></pre>
-<p>Najczęściej wykorzystywane argumenty to</p>
-<ul>
-<li><code>x</code> - określa jaka tabela/które dane mają być zapisane do pliku tekstowego,</li>
-<li><code>file</code> - określa nazwę pliku tekstowego, do którego dane będą zapisane,</li>
-<li><code>append</code> - domyślna wartość <code>FALSE</code> oznacza, że plik o nazwie <code>file</code> istnieje wcześniej to zostanie on skasowany. Jeżeli ustawić <code>append=TRUE</code> to nowe dane będą dopisane do końca poprzedniego pliku.</li>
-<li><code>sep</code> - określa znak, który jest separatorem kolejnych wartości,</li>
-<li><code>dec</code> - określa znak, który jest kropką dziesiętną, zazwyczaj <code>.</code> lub <code>,</code>,</li>
-<li><code>row.names</code> - określa czy do pliku tekstowego mają być zapisywane nazwy wierszy, domyślnie <code>TRUE</code>,</li>
-<li><code>col.names</code> - określa czy do pliku tekstowego mają być zapisywane nazwy kolumn, domyślnie <code>TRUE</code>.</li>
-</ul>
-</div>
-<div id="zapisywanie-danych-tabelarycznych-do-plikow-w-formacie-excela" class="slide section level1">
-<h1>Zapisywanie danych tabelarycznych do plików w formacie Excela</h1>
-<p>Dane, które są dostępne w programie R, można zapisać też do pliku Excela funkcją <code>write.xls()</code>.</p>
-<p>Funkcja ta jest dostępna w większości pakietów, zawierających funkcję <code>read.xls()</code>, np. w pakiecie <code>xlsx</code> (korzysta z biblioteki Java) oraz <code>dataframe2xls</code> (korzysta z zewnętrznych bibliotek Pythona).</p>
-<p>Do zapisu do formatu Excela można też wykorzystać funkcję <code>WriteXLS()</code> z pakietu <code>WriteXLS</code> (korzysta z zewnętrznych bibliotek Perla).</p>
-<p>Podstawowa funkcjonalność tych funkcji jest taka sama, pozwalają one na stworzenie nowego pliku oraz zapisania do niego tabeli.</p>
-<p>Pakiety te różnią się dodatkowymi możliwościami. Niektóre potrafią zapisywać do plików Excelowych, które mają wiele zakładek. Inne potrafią zapisywać do pliku Excela z dodanym formatowaniem, takim jak określone kolory, wielkość pisma, krój czcionki, obrysowania tabeli.</p>
-<p>Najczęściej korzystam z pakietu <code>xlsx</code>, ponieważ pozwala on na zapis danych do wielu zakładek z zadanym formatowaniem.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(xlsx)
-<span class="kw">write.xslx</span>(dwie_kolumny, <span class="dt">file=</span><span class="st">&quot;/Users/pbiecek/Documents/wazne_dane.csv&quot;</span>, 
-            <span class="dt">sheetName=</span><span class="st">&quot;Zakladka Wazne Dane&quot;</span>)</code></pre>
-</div>
-<div id="zapisywanie-danych-do-plikow-binarnych" class="slide section level1">
-<h1>Zapisywanie danych do plików binarnych</h1>
-<p>Do pliku w formacie natywnym R, dane można zapisać funkcją <code>save()</code>. Funkcja ta zapisuje jeden lub więcej obiektów o dowolnych atrukturach. Nie tylko tabelarycznych, ale też będzie działała dla wektorów czy bardziej złożónych struktur.</p>
-<p>Wadą tego rozwiązania jest to, że format ten nie jest odczytywany rzez inne pakiety statystyczne.</p>
-<p>Jeżeli jednak pracujemy głównie z programem R i chcemy w przyszłości te dane odczytywać tylko z programu R, to jest to najwygodniejsza opcja, produkująca najmniejsze pliki, które łatwo i szybko można ponownie wczytać poleceniem <code>load()</code>.</p>
-<p>Przykład użycia funkcji <code>save()</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># do katalogu roboczego</span>
-<span class="kw">save</span>(dwie_kolumny, <span class="dt">file=</span><span class="st">&quot;wazne_dane.rda&quot;</span>)
+<div class="slide section level1">
 
-<span class="co"># podając pełną nazwę ścieżki</span>
-<span class="kw">save</span>(dwie_kolumny, <span class="dt">file=</span><span class="st">&quot;/Users/pbiecek/Documents/wazne_dane.rda&quot;</span>)</code></pre>
-</div>
-<div id="podsumowanie-instrukcji-r" class="slide section level1">
-<h1>Podsumowanie instrukcji R</h1>
-<p>W tym odcinku omawialiśmy funkcje służące do zapisywania danych do różnych formatów, tekstowych, Excelowych, binarnych. Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tworzymy nowy zbiór danych</span>
-dwie_kolumny &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">litery  =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>),
-                           <span class="dt">liczby  =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))
-dwie_kolumny
-<span class="co">#   litery liczby</span>
-<span class="co"># 1      A      1</span>
-<span class="co"># 2      B      2</span>
-<span class="co"># 3      C      3</span>
-
-<span class="co"># zapisujemy do pliku tekstowego w lokalnym katalogu</span>
-<span class="kw">write.table</span>(dwie_kolumny, <span class="dt">file=</span><span class="st">&quot;wazne_dane.csv&quot;</span>, 
-            <span class="dt">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="dt">dec =</span> <span class="st">&quot;.&quot;</span>)
-<span class="co"># który katalog jest lokalny/roboczy</span>
-<span class="kw">getwd</span>()
-<span class="co"># /Users/pbiecek/Documents</span>
-
-<span class="co"># Równoważnie możemy użyć ścieżki bezwzględnej</span>
-<span class="kw">write.table</span>(dwie_kolumny, <span class="dt">file=</span><span class="st">&quot;/Users/pbiecek/Documents/wazne_dane.csv&quot;</span>, 
-            <span class="dt">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="dt">dec =</span> <span class="st">&quot;.&quot;</span>)
-
-<span class="co"># zapisujemy dane do formatu Excela</span>
-<span class="kw">library</span>(xlsx)
-<span class="kw">write.xslx</span>(dwie_kolumny, <span class="dt">file=</span><span class="st">&quot;/Users/pbiecek/Documents/wazne_dane.csv&quot;</span>, 
-            <span class="dt">sheetName=</span><span class="st">&quot;Zakladka Wazne Dane&quot;</span>)
-
-<span class="co"># zapisujemy dane do formatu binarnego</span>
-<span class="co"># do katalogu roboczego</span>
-<span class="kw">save</span>(dwie_kolumny, <span class="dt">file=</span><span class="st">&quot;wazne_dane.rda&quot;</span>)
-
-<span class="co"># podając pełną nazwę ścieżki</span>
-<span class="kw">save</span>(dwie_kolumny, <span class="dt">file=</span><span class="st">&quot;/Users/pbiecek/Documents/wazne_dane.rda&quot;</span>)</code></pre>
-</div>
-<div id="zadanie" class="slide section level1">
-<h1>Zadanie</h1>
-<ul>
-<li><p>Zapisz zbiór danych <code>koty_ptaki</code> do pliku tekstowego, w którym dane są rozdzielane przecinkiem a kropką dziesiętną jest <code>.</code></p></li>
-<li><p>Zapisz zbiór danych <code>koty_ptaki</code> do formatu pliku Excela. Sprawdź czy dane poprawnie się zapisały.</p></li>
-<li><p>Zapisz zbiór danych <code>koty_ptaki</code> do pliku binarnego. Odczytaj go następnie funkcją <code>load()</code> i sprawdź czy dane poprawnie zostały zapisane.</p></li>
-</ul>
-<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
-</div>
-<div id="wiecej-informacji" class="slide section level1">
-<h1>Więcej informacji</h1>
-<p>Gdzie szukać dalszych informacji o zapisie i odczycie danych w innych formatach?</p>
-<p>Do R można wczytać i z R można zapisać dane w foramcie programu SAS, SPSS, Statistica, Stata i wielu innych</p>
-<ul>
-<li><p>Więcej informacji o tym jak wczytywać dane z innych formatów oraz baz danych znaleźć można w rozdziale 2.2 książki <em>,,Przewodnik po pakiecie R’’</em>. Rozdział ten jest dostępny bezpłatnie pod adresem <a href="http://biecek.pl/R">http://biecek.pl/R</a>.</p></li>
-<li><p>Bardziej szczegółowe informacje o tym jak wczytywać i zapisywać dane z i do baz danych lub plików w egzotycznych formatach znaleźć można w dokumencie <em>,,R Data Import/Export’’</em> <a href="http://cran.r-project.org/doc/manuals/r-release/R-data.pdf">http://cran.r-project.org/doc/manuals/r-release/R-data.pdf</a> <a href="https://github.com/pbiecek/MOOC/blob/master/materialyZewnetrzne/R-data.pdf?raw=true">https://github.com/pbiecek/MOOC/blob/master/materialyZewnetrzne/R-data.pdf?raw=true</a></p></li>
-<li><p>O ile <em>,,R Data Import/Export’‘* jest opisem ,,teoretycznym’’ to bardzo ciekawe zebranie przypadków użycia funkcji do wczytywania danych z różnych formatów jest zebrane w wiki-książce </em>,,R programming’’* dostępnej pod adresem <a href="http://en.wikibooks.org/wiki/R_Programming/Importing_and_exporting_data">http://en.wikibooks.org/wiki/R_Programming/Importing_and_exporting_data</a></p></li>
-<li><p>Interesujące zestawienie narzędzi do odczytywania danych ze stron interentowych znaleźć można na stronach z materiałami dydaktycznymi Gastona Sancheza <a href="http://gastonsanchez.com/teaching/">http://gastonsanchez.com/teaching/</a></p></li>
-</ul>
-<p><em>Dla entuzjastów Excela</em></p>
-<ul>
-<li>Funkcje R można również uruchamiać wewnątrz programu Excel, należy w tym celu zainstalować dodatek RExcel(<a href="http://www.statconn.com/products.html">http://www.statconn.com/products.html</a>). Na tych filmach można zobaczyć jak pracuje się z tym dodatkiem i jak go zainstalować <a href="https://www.youtube.com/watch?v=rigtfeeqnNs">https://www.youtube.com/watch?v=rigtfeeqnNs</a>, <a href="https://www.youtube.com/watch?v=YH94AH6PVss">https://www.youtube.com/watch?v=YH94AH6PVss</a>, <a href="https://www.youtube.com/watch?v=wqgO9rrmQVY">https://www.youtube.com/watch?v=wqgO9rrmQVY</a></li>
-</ul>
+<p>Od Krzyśka o czyszczeniu danych</p>
+<h3 id="dane">Dane</h3>
+<p>Przykładowe dane:</p>
+<pre class="sourceCode r"><code class="sourceCode r">D &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">imie=</span> <span class="kw">c</span>(<span class="st">&quot;Maja&quot;</span>,<span class="st">&quot;Anna&quot;</span>,<span class="st">&quot;Zosia&quot;</span>,<span class="st">&quot;Joanna&quot;</span>),
+  gęstość=<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;0.4&quot;</span>,<span class="st">&quot;0,2&quot;</span>,<span class="st">&quot;0,05&quot;</span>,<span class="st">&quot;0,35&quot;</span>)
+  )
+D &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">sapply</span>(D,as.character), <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</code></pre>
+<p>Po wczytaniu danych otrzymamy tabelę:</p>
+<pre class="sourceCode r"><code class="sourceCode r">D</code></pre>
+<pre><code>##     imie gęstość
+## 1   Maja     0.4
+## 2   Anna     0,2
+## 3  Zosia    0,05
+## 4 Joanna    0,35</code></pre>
+<p>Klasy poszczególnych zmiennych w tabeli D:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>(D,class)</code></pre>
+<pre><code>##        imie     gęstość 
+## &quot;character&quot; &quot;character&quot;</code></pre>
+<p>Błędy w danych które chcemy naprawić:</p>
+<ol style="list-style-type: decimal">
+<li>Zamień nazwę kolumny: gęstość na częstość,</li>
+<li>Zamień wpisy “Zosia” na “Zofia”,</li>
+<li>Zamień przecinek na kropkę dziesiętną.</li>
+</ol>
+<h3 id="naprawa-nazwy-kolumny---gestosc">Naprawa nazwy kolumny - gęstość</h3>
+<p>Numer kolumny o błędnej nazwie “gęstość”:</p>
+<pre class="sourceCode r"><code class="sourceCode r">nr.kol &lt;-<span class="st"> </span><span class="kw">which</span>(<span class="kw">colnames</span>(D)==<span class="st">&quot;gęstość&quot;</span>)
+nr.kol</code></pre>
+<pre><code>## [1] 2</code></pre>
+<p>Zamiana nazwy kolumny:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(D)[nr.kol] &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;częstość&quot;</span>)
+D</code></pre>
+<pre><code>##     imie częstość
+## 1   Maja      0.4
+## 2   Anna      0,2
+## 3  Zosia     0,05
+## 4 Joanna     0,35</code></pre>
+<h3 id="naprawa-bednych-wpisow---zosia">Naprawa błędnych wpisów - Zosia</h3>
+<pre class="sourceCode r"><code class="sourceCode r">D$imie[D$imie==<span class="st">&quot;Zosia&quot;</span>] &lt;-<span class="st"> &quot;Zofia&quot;</span>
+D</code></pre>
+<pre><code>##     imie częstość
+## 1   Maja      0.4
+## 2   Anna      0,2
+## 3  Zofia     0,05
+## 4 Joanna     0,35</code></pre>
+<h3 id="naprawa-bednych-wpisow---liczb">Naprawa błędnych wpisów - liczb</h3>
+<p>Ponieważ takich pomyłek/liczb może być więcej można zastosować funkcję: sub:</p>
+<pre class="sourceCode r"><code class="sourceCode r">D$częstość &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&quot;,&quot;</span>, <span class="st">&quot;.&quot;</span>, D$częstość, <span class="dt">fixed =</span> <span class="ot">TRUE</span>)
+D</code></pre>
+<pre><code>##     imie częstość
+## 1   Maja      0.4
+## 2   Anna      0.2
+## 3  Zofia     0.05
+## 4 Joanna     0.35</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>(D,class)</code></pre>
+<pre><code>##        imie    częstość 
+## &quot;character&quot; &quot;character&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">D$imie &lt;-<span class="st"> </span><span class="kw">as.factor</span>(D$imie)
+D$częstość &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(D$częstość)
+<span class="kw">sapply</span>(D,class)</code></pre>
+<pre><code>##      imie  częstość 
+##  &quot;factor&quot; &quot;numeric&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">D</code></pre>
+<pre><code>##     imie częstość
+## 1   Maja     0.40
+## 2   Anna     0.20
+## 3  Zofia     0.05
+## 4 Joanna     0.35</code></pre>
+<p>Do rozwiązywania powyższych problemów bardzo pomocne mogą okazać się funkcje: base::replace oraz car::recode.</p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
