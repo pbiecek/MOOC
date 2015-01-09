@@ -14,7 +14,7 @@ output:
 
 # O czym jest ten odcinek
 
-Interesuje Cię gRomienie danych?
+Jest wiele powodów, dla których warto poznać język R do analizy danych.
 
 Być może jesteś zaawansowanym w boju badaczem danych z doskonałą znajmomością SPSS / SAS / Statistica czy Stata.
 
@@ -36,10 +36,26 @@ Powiemy też jakie umiejętności są potrzebne by efektywnie pracować z danymi
 
 # Dlaczego R?
 
+*R jest dojrzałym językiem programowania zaprojektowanym z myślą o analizie danych oraz wizualizacji danych dostępnym bezpłatnie na otwartej licencji GPL.*
 
+Przyjrzyjmy się temu zdaniu dokładniej.
+
+*R jest językiem programowania.* Oznacza to, że nie jest ograniczony do kilku algorytmów, które przewidzieli twórcy, ale każdy może napisać w nim własny algorytm Co więcej wiele osób korzysta z tej opcji i tworzy nowe algorytmy które inni użytkownicy R mogą wykorzystywać. Dzięki temu liczba algorytmów i funkcji dostępnych w R bardzo szybko sie zwiększa.
+
+*Jest dojrzałym jezykiem.* Jest rozwijany od ponad 21 lat, co oznacza, dzięki cezmu zdążył nabrać masy krytycznej. Pewne usterki projektowe wczesnych wersji R (ograniczenie do 4GB RAM) zostały dostrzerzone i wyeliminowane. Dziś jest to narzędzie rozwijane i przez dużą grupę statystyków i inżynierów oprogramowania, co jest gwarancją stabilnego rozwoju.
+
+*Zaprojektowanym z myślą o analizie danych.* Dojrzałych języków programowania jest wiele, ale niewiele z nich nadaje się do interaktywnej pracy z danymi. W języku R połączono wybrane cechy języków funkcyjnych oraz obiektowych, nacisk położono na pracę interaktywną z danymi. Dodatkowe biblioteki wspierają łatwe tworzenie raportów z wynikami. Dzięki tym cechom R jest stworzony do analizy danych.
+
+*Wizualizacji danych.* W języku R można wykonać grafiki statystyczne o publikacyjnej jakości. Oznacza to, że bez dodatkowych narzędzi można stworzyć profesjonalny wykres. Co więcej, jest wiele pakietów, dzięki czemy tworzenie takich wykresów jest proste. Omówiy je w drugim sezonie tego kursu.
+
+*Dostępny bezpłatnie na otwartej licencji GPL.* Program R jest dostępny bezpłatnie do każdych zastosowań. Czy to na uczelni, czy w działalności komercyjnej, możemy go wykorzystywać bez żadnych opłat. Co więcej, jest otwarty na otwartej licencji, co oznacza, że każdy ma dostęp do źródeł, każdy element można zobaczyć jak funkcjonuje, można sprawdzić czy nei zawiera błędów i ewentualnie usprawnić. 
+
+---
+
+# Dlaczego R?
+
+Dzięki tym cec
 R is a programming language designed for statistical computing and visualization. For many years, R has been a language of choice for academic researchers, but in recent years, it has grown in popularity in business. It can now be found across industries (financial services, technology, retail, etc.) and job functions (marketing, operations, finance, etc.).
-
-While Excel can continue being your bread-and-butter, knowing R and applying it at the right times can make you a more productive and effective analyst. So do not think of R as a substitute for Excel, but instead as a parter in crime who can do a lot more stuff when things get complicated.
 
 According to Google Trends, interest in R has more than doubled, while interest in both SAS and SPSS has been cut in half over the past ten years. This could mean more jobs and opportunities for those who know R.
 
