@@ -48,32 +48,30 @@ Przyjrzyjmy się temu zdaniu dokładniej.
 
 *Wizualizacji danych.* W języku R można wykonać grafiki statystyczne o publikacyjnej jakości. Oznacza to, że bez dodatkowych narzędzi można stworzyć profesjonalny wykres. Co więcej, jest wiele pakietów, dzięki czemy tworzenie takich wykresów jest proste. Omówiy je w drugim sezonie tego kursu.
 
-*Dostępny bezpłatnie na otwartej licencji GPL.* Program R jest dostępny bezpłatnie do każdych zastosowań. Czy to na uczelni, czy w działalności komercyjnej, możemy go wykorzystywać bez żadnych opłat. Co więcej, jest otwarty na otwartej licencji, co oznacza, że każdy ma dostęp do źródeł, każdy element można zobaczyć jak funkcjonuje, można sprawdzić czy nei zawiera błędów i ewentualnie usprawnić. 
+*Dostępny bezpłatnie na otwartej licencji GPL.* Program R jest dostępny bezpłatnie do każdych zastosowań. Czy to na uczelni, czy w działalności komercyjnej, możemy go wykorzystywać bez żadnych opłat. Co więcej, jest otwarty na otwartej licencji, co oznacza, że każdy ma dostęp do źródeł, każdy element można zobaczyć jak funkcjonuje, można sprawdzić czy nie zawiera błędów i ewentualnie usprawnić. 
 
 ---
 
 # Dlaczego R?
 
-Dzięki tym cec
-R is a programming language designed for statistical computing and visualization. For many years, R has been a language of choice for academic researchers, but in recent years, it has grown in popularity in business. It can now be found across industries (financial services, technology, retail, etc.) and job functions (marketing, operations, finance, etc.).
+Początkowo R zyskał popularność na uczelniach. Był i jest wykorzystywany do nauczania analizy danych jak i do prowadzenia badań naukowych. Można śmiało powiedzieć, że obecnie R jest głównym narzędziem uzywanym w dydaktyce na dobrych uczelniach. Zdominował prowadzenie badań naukowych w wielu dziedzinach, takich jak bioinformatyka czy genetyka. Jest bardzo popularny w zastosowaniach medycznych, finansowych i wielu innych.
 
-According to Google Trends, interest in R has more than doubled, while interest in both SAS and SPSS has been cut in half over the past ten years. This could mean more jobs and opportunities for those who know R.
+Od kilkunastu lat rośnie popolarność R w przemyśle. Zarówno dlatego że jest to bezpłątne narzędzie, również dlatego, że jest w nim dostępnych bardzo wiele funkcji ale również dlatego, że coraz więcej analityków zostało wykształconych na programie R oraz ten proram zna. Rośnie liczba ofert pracy dla osób znających program R.
+
+---
+
+# Dlaczego R?
+
+Zgodnie z wynikami Google Trends, zainteresownie R rośnie (wzrosło dwukrotnie w czasie ostatnich dziesięciu lat), podczas gdy zainteresowanie innymi pakietami do analizy danych, takimi jak SPSS, SAS czy Stata maleje. 
+
+![Google trends](figs/googleTrends.png)
+
+---
+
+# Czy warto uczyć się programować, czy nie wystarczy klikać?
 
 
 
-
-
-
-W jaki sposób analizuje się dane?
-Kiedyś analiza wykonywana była ołówkiem na papierze.
-Spisywało się kolumnę liczb, dodawało, dzieliło, mnożyło.
-
-Teraz do analizy danych wykorzystywane są komputery.
-Dostępnych jest bardzo wiele programów pozwalających na analizę danych,
-Różnią się one ceną, łatwością użycia, automatyzacją pracy.
-
-Wybierzemy jedno narzędzie, najlepsze do naszych celów.
-Szukając najlepszego narzędzia, zastanówmy się nad kilkoma kwestiami.
 
 
 Czy potrafisz podac argument za każdym z tych wyborów?
