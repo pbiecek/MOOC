@@ -1,0 +1,39 @@
+---
+title: "Modelowanie i statystyka"
+author: "pogRomcy danych"
+date: "sezon 3 / odcinek 1 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst <br> Naciśnij `T` by wyświetlić spis treści"
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / modelowanie / wstęp do modelowania"
+
+---
+
+# O czym jest ten odcinek
+
+
+KTR:
+
+http://yatani.jp/teaching/doku.php?id=hcistats:start
+
+
+
+Wydaje mi się, że w części: Modelowanie danych
+można podkreślać/wykazywać związki pomiędzy testami.
+Przykładowo:
+[*] mocny testem McNemary a mocny test dwumianowy,
+[*] test McNemary a test proporcji chi-kwadrat,
+[*] test chi-kwadrat/LR a model logitowy/Poissona,
+
+Takie przedstawianie różnych rozwiązań bardzo mi się podoba.
+I jest chyba rzadkością. A szkoda.
+Z reguły prezentowane testy są przedstawiane jako odrębne "byty" bez wykazywania ciekawych związków.
+Taka forma przedstawiania testów bardzo by się wyróżniała z pośród innych materiałów.
+Może będzie ciekawsza dla kursantów ?
+
+
+
