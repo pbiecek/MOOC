@@ -94,7 +94,9 @@ Moje przekonanie, że R jest doskonałym narzędziem do analizy danych utrzymuje
 
 Dlatego warto przyjrzeć się temu co o R mówią analitycy z firm, szpitali czy uczelni. 
 
-Kilka takich cytatów umieszczam poniżej.
+Bardzo ciekawe zestawienie R z innymi pakietami do analizy danych (SAS/SPSS/Stata/Statistica) znajduje się pod tym adresem http://www.burns-stat.com/pages/Tutor/R_relative_statpack.pdf.
+
+Kilka cytatów anlityków pracujących na codzień z danymi, którzy docenili R, umieszczam poniżej.
 
 *One of the greatest advantages of R: getting your work done better and in less time.*
 
