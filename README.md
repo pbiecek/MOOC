@@ -31,8 +31,8 @@ część 1: Data smart
     + odcinek 9: Instrukcje warunkowe [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/09_instrukcje_warunkowe.html), v1 ready 
     + odcinek 10: Funkcje [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/10_funkcje.html), v1 ready
   * Podstawowe typy danych i ich statystyki opisowe
-    + odcinek 11: Cechy jakościowe, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/11_ilosciowe.html)
-    + odcinek 12: Cechy ilościowe, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/12_jakosciowe.html)
+    + odcinek 11: Cechy ilościowe, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/11_ilosciowe.html)
+    + odcinek 12: Cechy jakościowe, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/12_jakosciowe.html)
     + odcinek 13: Cechy logiczne, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/13_logiczne.html)
     + odcinek 14: Cechy napisowe, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/14_napisowe.html)
     + odcinek 15: Daty, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/15_daty.html)
