@@ -101,22 +101,27 @@ Które z tych zmiennych to zmienne ilościowe?
 
 # Statystyki opisowe
 
-Przyjrzyjmy się takim cechom jak _Cena.w.PLN_ lub _Przebieg.w.km_. 
-
-Cechy te są opisane przez liczby oraz przedstawiają ilości. 
+Przyjrzyjmy się takim cechom jak _Cena.w.PLN_ lub _Przebieg.w.km_.  Cechy te są opisane przez liczby oraz przedstawiają ilości. 
 
 Pierwsza z nich przedstawia _ilość_ pieniędzy, za którą sprzedawca chce sprzedać samochód, druga opisuje _ilość_ kilometrów, którą przejechał wystawiony na aukcji samochód. 
 
 Na zmiennych ilościowych wykonać możemy kilka operacji. 
-Używając funkcji `mean()` możemy policzyć średnią cenę wystawionych aut.
+Używając funkcji `mean()` możemy policzyć średnią cenę wystawionych aut a funkcją `median()` policzymy medianę, podobnie jak dla poprzedniego zbioru danych.
 
 ```{r, warning=FALSE}
 mean(auta2012$Cena.w.PLN)
+median(auta2012$Cena.w.PLN)
 ```
+
+Średnia cena aut to ponad 35 tysięcy, ale ponad połowa aut jest tańsza niż 20 tysięcy.
+
+Jak to możliwe? Widoczne jest kilka bardzo drogich aut, które przesuwają średnią do góry.
 
 ---
 
 # Statystyki opisowe
+
+Wczytując dane ze zbioru, którego sami nie tworzyliśmy, często chcemy zobaczyć skrajne wartości dla poszcezgólnych zmiennych. Skrajne czyli najwiękesze i najmniejsze.
 
 Używając funkcji `min()` i `max()` możemy wyznaczyć minimalną i maksymalną cenę w tym zbiorze danych.
 
@@ -124,6 +129,10 @@ Używając funkcji `min()` i `max()` możemy wyznaczyć minimalną i maksymalną
 min(auta2012$Cena.w.PLN)
 max(auta2012$Cena.w.PLN)
 ```
+
+Najniższa cena to 400 złotych, w to jestem w stanie uwierzyć tym bardziej, że część tych cen dotyczy aut uszkodzonych.
+
+Ale najwyższa to 11 milionów 111 tysięcy 111. Być może ktoś wpisał taką cenę, ale to chyba bardziej żart niż rzeczywista wartość auta.
 
 Obie te wartości, minimum i maksimum, jako dwuelementowy wektor zwraca funkcja `range()`.
 

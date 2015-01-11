@@ -87,25 +87,75 @@ pogRomcy danych
 </div>
 <div id="statystyki-opisowe" class="slide section level1">
 <h1>Statystyki opisowe</h1>
-<p>Przyjrzyjmy się takim cechom jak <em>Cena.w.PLN</em> lub <em>Przebieg.w.km</em>.</p>
-<p>Cechy te są opisane przez liczby oraz przedstawiają ilości.</p>
-<p>Pierwsza z nich przedstawia <em>ilość</em> pieniędzy, za którą sprzedawca chce sprzedać samochód, druga opisuje <em>ilość</em> kilometrów, którą przejechał wystawiony na aukcji samochód.</p>
-<p>Na zmiennych ilościowych wykonać możemy kilka operacji. Używając funkcji <code>mean()</code> możemy policzyć średnią cenę wystawionych aut.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(auta2012$Cena.w.PLN)</code></pre>
-<pre><code>## [1] 35755.11</code></pre>
+<p>Zbiór danych <code>koty_ptaki</code> składa się z 13 wierszy, więc każda zmienna ilościowa to 13 liczb.</p>
+<p>Aby coś powiedzieć o każdej ze zmiennych wygodnie jest skarakteryzować je jedną lub kilkoma charakterystykami, takimi jak średnia czy mediana (mediana to wartość która pojawi się w środku gdyby te 13 liczb posortować).</p>
+<p>Jak sprawdzić ile wynosi średnia lub mediana dla wagi? Aby policzyć średnią możemy wykrozystać funkcję <code>mean()</code> a aby wykorzystac medianę, funkcję <code>median()</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(koty_ptaki$waga)</code></pre>
+<pre><code>## [1] 78.59615</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">median</span>(koty_ptaki$waga)</code></pre>
+<pre><code>## [1] 60</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sort</span>(koty_ptaki$waga)</code></pre>
+<pre><code>##  [1]   0.05   0.70   2.00   4.00   5.00  50.00  60.00  70.00  80.00 100.00
+## [11] 150.00 200.00 300.00</code></pre>
+<p>W ostatnim wierszu wyświetliliśmy wszystkie wagi po ich posortowaniu. Funkcja <code>sort()</code> domyślnie sortuje liczby rosnąco, możemy przy okazji sprawdzić, że rzeczywiście, środkową wartością jest 60.</p>
+<p>Przy okazji warto zauważyć że średnia i mediana znacznie się różnią, o prawie 20 kilogramów. Jest to wynikiem tego, że najmneijsze i największe wartości różnią się od siebie o ponad dwa rzędy wielkości, w takich sytuacjach średnia często jest odległa od mediany.</p>
+</div>
+<div id="wczytanie-danych-1" class="slide section level1">
+<h1>Wczytanie danych</h1>
+<p>Zbiór danych <code>koty_ptaki</code> skłąda się z 13 wierszy. Można cały ten zbiór danych wyświetlić na ekranie. Nie zawsze potrzebujemy więc specjalnych statystyk opisowaych by zrozumieć co się dzieje w takich małych zbiorach danych.</p>
+<p>Dlatego, dalsze ćwiczenia ze zmiennymi ilosciowymi przeprowadzimy na znaczeni większym zbiorze danych z ponad 200 tysiącami wartości, o nazwie <code>auta2012</code>, który znajduje się również w pakiecie <code>SmarterPoland</code>.</p>
+<p>Opis tego zbioru danych znaleźć można w odcinku <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html">https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
+<p>Wczytajmy ten zbiór danych i przyjrzyjmy się trzem pierwszym wierszom.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+<span class="kw">head</span>(auta2012, <span class="dv">3</span>)</code></pre>
+<pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW      Marka     Model Wersja
+## 1 49900    PLN      49900       brutto 140 103        Kia    Carens       
+## 2 88000    PLN      88000       brutto 156 115 Mitsubishi Outlander       
+## 3 86000    PLN      86000       brutto 150 110  Chevrolet   Captiva       
+##   Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km          Rodzaj.paliwa
+## 1          4/5              1991         41000 olej napedowy (diesel)
+## 2          4/5              2179         46500 olej napedowy (diesel)
+## 3          4/5              1996          8000 olej napedowy (diesel)
+##   Rok.produkcji Kolor Kraj.aktualnej.rejestracji Kraj.pochodzenia
+## 1          2008                           Polska                 
+## 2          2008                           Polska                 
+## 3          2009                           Polska                 
+##   Pojazd.uszkodzony Skrzynia.biegow Status.pojazdu.sprowadzonego
+## 1                          manualna                             
+## 2                          manualna                             
+## 3                          manualna                             
+##                                                                                                                                                                                           Wyposazenie.dodatkowe
+## 1                                    ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
+## 2            ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
+## 3 ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby</code></pre>
+<p>Które z tych zmiennych to zmienne ilościowe?</p>
 </div>
 <div id="statystyki-opisowe-1" class="slide section level1">
 <h1>Statystyki opisowe</h1>
+<p>Przyjrzyjmy się takim cechom jak <em>Cena.w.PLN</em> lub <em>Przebieg.w.km</em>. Cechy te są opisane przez liczby oraz przedstawiają ilości.</p>
+<p>Pierwsza z nich przedstawia <em>ilość</em> pieniędzy, za którą sprzedawca chce sprzedać samochód, druga opisuje <em>ilość</em> kilometrów, którą przejechał wystawiony na aukcji samochód.</p>
+<p>Na zmiennych ilościowych wykonać możemy kilka operacji. Używając funkcji <code>mean()</code> możemy policzyć średnią cenę wystawionych aut a funkcją <code>median()</code> policzymy medianę, podobnie jak dla poprzedniego zbioru danych.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(auta2012$Cena.w.PLN)</code></pre>
+<pre><code>## [1] 35755.11</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">median</span>(auta2012$Cena.w.PLN)</code></pre>
+<pre><code>## [1] 19900</code></pre>
+<p>Średnia cena aut to ponad 35 tysięcy, ale ponad połowa aut jest tańsza niż 20 tysięcy.</p>
+<p>Jak to możliwe? Widoczne jest kilka bardzo drogich aut, które przesuwają średnią do góry.</p>
+</div>
+<div id="statystyki-opisowe-2" class="slide section level1">
+<h1>Statystyki opisowe</h1>
+<p>Wczytując dane ze zbioru, którego sami nie tworzyliśmy, często chcemy zobaczyć skrajne wartości dla poszcezgólnych zmiennych. Skrajne czyli najwiękesze i najmniejsze.</p>
 <p>Używając funkcji <code>min()</code> i <code>max()</code> możemy wyznaczyć minimalną i maksymalną cenę w tym zbiorze danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">min</span>(auta2012$Cena.w.PLN)</code></pre>
 <pre><code>## [1] 400</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(auta2012$Cena.w.PLN)</code></pre>
 <pre><code>## [1] 11111111</code></pre>
+<p>Najniższa cena to 400 złotych, w to jestem w stanie uwierzyć tym bardziej, że część tych cen dotyczy aut uszkodzonych. Ale najwyższ to 11 milionów 111 tysięcy 111. Być może ktoś wpisał taką cenę, ale to chyba bardziej żart niż rzeczywista wartość auta.</p>
 <p>Obie te wartości, minimum i maksimum, jako dwuelementowy wektor zwraca funkcja <code>range()</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">range</span>(auta2012$Cena.w.PLN)</code></pre>
 <pre><code>## [1]      400 11111111</code></pre>
 </div>
-<div id="statystyki-opisowe-2" class="slide section level1">
+<div id="statystyki-opisowe-3" class="slide section level1">
 <h1>Statystyki opisowe</h1>
 <p>Używając funkcji <code>summary()</code> możemy wyznaczyć sześć podstawowych charakterystyk, czyli: minimum, 1. kwartyl, medianę (2. kwartyl), średnią, 3. kwartyl i maksimum.</p>
 <p>Pięć z tych charakterystyk, tj. minimum, 1., 2., 3. kwartyl i maksimum to tak zwana piątka Tukeya, a więc pięć liczb, które dzielą wartości na cztery równoliczne przedziały.</p>
@@ -116,7 +166,7 @@ pogRomcy danych
 <li>Jedna czwarta samochodów ma cenę wyższą od 3. kwartyla.</li>
 </ul>
 </div>
-<div id="statystyki-opisowe-3" class="slide section level1">
+<div id="statystyki-opisowe-4" class="slide section level1">
 <h1>Statystyki opisowe</h1>
 <p>Przyjrzyjmy się tym charakterystykom na przykładzie cen aut</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(auta2012$Cena.w.PLN)</code></pre>
