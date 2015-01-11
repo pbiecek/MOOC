@@ -295,6 +295,12 @@ pustyKwadrat()
 
 + Jaka jest mediana/połówkowa wielkość silnika (`Pojemnosc.skokowa`)?
 
++ Przedstaw graficznie za pomocą wykresu pudełko-wąsy oraz histogramu rozkład cechy `Cena.w.PLN`. 
+
++ Zwróć uwagę, że pojedyncze auta o bardzo wysokich cenach, powodują że wykres jest mało czytelny. Oczyść te dane, pozostawiają tylko auta o cenie poniżej 100 tys pln. Następnie przedstaw rozkład cen aut w segmencie aut do 100 tys pln.
+
++ Aut w jakiej cenie jest najwięcej wśród zebranych ogłoszeń?
+
 
 ---
 
@@ -312,5 +318,12 @@ pustyKwadrat()
 # mediana koni mechanicznych
 median(auta2012$KM, na.rm=TRUE)
 
+# Usuńmy skrajne obserwacje i narysujmy rozkłąd ceny aut wykresem pudełkowym
+auta2012wybrane <- auta2012[auta2012$Cena.w.PLN < 100000, ] 
+boxplot(auta2012wybrane$Cena.w.PLN, horizontal = TRUE, range = 0)
+
+# lub histogramem
+hist(auta2012wybrane$Cena.w.PLN, 50, col="grey")
+```
 
 ```
