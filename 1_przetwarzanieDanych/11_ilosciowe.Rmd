@@ -153,33 +153,53 @@ Pięć z tych charakterystyk, tj. minimum, 1., 2., 3. kwartyl i maksimum to tak 
 + Jedna czwarta samochodów ma cenę wyższą od mediany (2. kwartyla) ale niższą od 2. kwartyla.
 + Jedna czwarta samochodów ma cenę wyższą od 3. kwartyla.
 
----
-
-# Statystyki opisowe
-
-Przyjrzyjmy się tym charakterystykom na przykładzie cen aut 
+Opis cechy ilościowej za pomocą tych sześciu liczb bardzo wiele o danej cesze mówi. Przyjrzyjmy się tym charakterystykom na przykładzie cen aut 
 
 ```{r, warning=FALSE}
 summary(auta2012$Cena.w.PLN)
 ```
 
-+ Jedna czwarta ogłoszeń oferuje samochód w cenie niższej niż `r summary(auta2012$Cena.w.PLN)[2]`.
-+ Połowa ogłoszeń oferuje samochód w cenie niższej niż `r summary(auta2012$Cena.w.PLN)[3]`.
-+ Trzy czwarte ogłoszeń oferuje samochód w cenie niższej niż `r summary(auta2012$Cena.w.PLN)[5]`.
-+ Maksymalna cena ofertowa to `r summary(auta2012$Cena.w.PLN)[6]`.
-+ Co ciekawe, średnia cena jest znacznie wyższa od ceny środkowej, dzieje się tak dlatego, że większość aut oferowanych jest w niższych cenach, ale niewielka część bardzo drogich aut znacznie podnosi wartość średniej, w tym przypadku do `r summary(auta2012$Cena.w.PLN)[4]`.
++ Minimalna oferta jest na 400 pln.
++ Jedna czwarta ogłoszeń oferuje samochód w cenie niższej niż 10 900 (a ponieważ wszystkich aut jest ponad 200 tysiecy więc szybko możemy policzyć, że ponad 50 tysięcy ofert znajduje się w tym przedziale).
++ Połowa ogłoszeń oferuje samochód w cenie niższej niż 19 900.
++ Trzy czwarte ogłoszeń oferuje samochód w cenie niższej niż 37 470, tym samym jedna czwarta ofert jest na kwotę wyższa.
++ Maksymalna cena ofertowa to wspomniane ponad 11 milionów.
++ Również i w tym przykładzie, średnia cena (35 760) jest znacznie, prawie dwukrotnie, wyższa od ceny środkowej. Dzieje się tak dlatego, że większość aut oferowanych jest w niższych cenach, ale niewielka część bardzo drogich aut znacznie podnosi wartość średniej. Jest to jeden z argumentów przeciwko używaniu średniej, która jest podatna na skrajne obserwacje.
 
 ---
 
-# Zadania:
+# Statystyki opisowe
+
+Dotąd omówiliśmy statystyki opisowe dla jednej zmiennej. Czasem interesuje nas zależnośc dwóch zmiennych.
+
+Najbardziej typową staystyką opisową dla pary zmiennych ilościowych jest korelacja. Można ją wyznaczyć, używając funkcji `cor()`. Przykładowo, zobaczmy czy jest zależność pomiędzy rokiem produkcji a ceną.
+
+```{r}
+cor(auta2012$Rok.produkcji, auta2012$Cena.w.PLN)
+```
+
+Zależność jest dodatnia, a więc im rok produkcji wyższy (=auto jest młodsze) tym jest droższe. Korelacja przyjmuje wartości od -1 do 1. Wartość 0.34 to przeciętna korelacja, pewnie część z nas mogłaby się spodziewac wyższej. Ale tak się składa, że mamy tutaj wymieszane różne marki i modele. Funkcja `cor()` domyślnie liczy korelację Pearsona, ale może też liczyć inne korelacje, np. Spearmana. Co to dokłądnie znaczy i jak z niej korzystać, to omówimy w sezonie 3.
+
+Inną przydatną funkcją, jest możłiwość sprawdzenia, ile wierszy, ile aut, ma określoną cechę większą lub mneijszą od jakiejś wartości. 
+
+Przykładowo ile jest ofert sprzedaży aut tańszych niż 5 tysięcy? Lub ile jest ofert sprzedaży aut droższych niż milion?
+
+```{r}
+sum(auta2012$Cena.w.PLN < 5000)
+sum(auta2012$Cena.w.PLN > 1000000)
+```
+
+Każda oferta, która spełnia warunek w nawiasie liczy się jako 1, a która nie spełnia jako 0. Suma tych wartości to suma aut spełniających dany warunek. 
+
+Więcej o tym dlaczego i jak działą to sumowanie omó∑imy w odcinku 13 o cechach logicznych.
+
+---
+
+# Zadania
 
 + W zbiorze danych _auta2012_ aż 7 cech to cechy ilościowe. Wymień które.
+
 + Jedną z cech ilościowych jest _Rok.produkcji_. Jaki jest medianowy/połówkowy rok produkcji oferowanych aut? Wszystkie te oferty były złożone w roku 2012, jaki był medianowy/połówkowy wiek oferowanego auta?
-
-# Odpowiedzi:
-
-+ `Cena`, `Cena.w.PLN`, `KM`, `kW`, `Pojemnosc.skokowa`, `Przebieg.w.km`, `Rok.produkcji`
-+ `r median(auta2012$Rok.produkcji, na.rm=TRUE)` rok
 
 ---
 
@@ -191,7 +211,9 @@ Takie braki danych trzeba jakoś oznaczyć. Nie można w ich miejsce wstawić np
 Potrzebna jest więc jakaś specjalna wartość, która będzie oznaczała brakujące wartości. W programie R taką wartością jest `NA` (skrót od _non available_, czyli _niedostępne_).
 
 Jak zauważyć, że w danych występują wartości niedostępne? 
-Ich liczba będzie wymieniona w wyniku funkcji `summary()`. Dla zmiennej `Przebieg.w.km` brakujących wartości jest 20 711.
+Ich liczba będzie wymieniona w wyniku funkcji `summary()`. Dla zmiennej `Przebieg.w.km` brakujących wartości jest prawie 40 tysięcy. Czyli dla znacznej części aut nie podano informacji o ich przebiegu.
+
+Pozostałe charakterystyki, takie jak minimum, maksimum i mediana są liczone oczywiście na pozostałych 160 tysiącach aut, dla któ®ych przebieg został podany.
 
 ```{r, warning=FALSE}
 summary(auta2012$Przebieg.w.km)
@@ -202,11 +224,12 @@ summary(auta2012$Przebieg.w.km)
 # Brakujące wartości
 
 Jakie są konsekwencje występowania brakujących wartości?
-Część statystyk nie można policzyć.
-Przykładowo, średnia z 1 i 3 to 2.
-Ale ile wynosi średnia z 1 i _nie wiadomo_? 
 
-Dlatego gdy liczmy średnie lub inne statystyki z takich wektorów to wynik jest wartością `NA`.
+Najpoważniejszą jest taka, że części statystyk nie można policzyć.
+
+Przykładowo, średnia z 1 i 3 to 2. Ale ile wynosi średnia z 1 i _nie wiadomo_? 
+
+Dlatego gdy liczmy średnie lub inne statystyki z wektorów, któ®e zawierają wartości nieokreślone to wynik też jest wartością nieokreśloną `NA`.
 
 ```{r, warning=FALSE}
 mean(auta2012$Przebieg.w.km)
@@ -215,10 +238,6 @@ max(auta2012$Przebieg.w.km)
 ```
 
 To logiczne. Jeżeli nie wszystkie wartości są znane, to nie można policzyć ani średniej ani minimum ani maksimum.
-
----
-
-# Brakujące wartości
 
 Logiczne ale też mało praktyczne. 
 Często chcielibyśmy policzyć średnią, medianę, minimum tylko z tych wartości które są znane.
@@ -234,12 +253,10 @@ max(auta2012$Przebieg.w.km, na.rm=TRUE)
 ---
 
 # Zadania:
-+ Która cecha jest najmniej kompletna? Dla której cechy liczba brakujących wartości jest największa?
-+ Jaka jest mediana/połówkowa wielkość silnika (`Pojemnosc.skokowa`)?
 
-# Odpowiedzi:
-+ Dla zmiennej `Przebieg.w.km`  jest `r sum(is.na(auta2012$Przebieg.w.km))` 20 711 brakujących wartości. Ta zmienna jest najmniej kompletna.
-+  `r median(auta2012$KM, na.rm=TRUE)` cm3
++ Która cecha jest najmniej kompletna? Dla której cechy liczba brakujących wartości jest największa?
+
++ Jaka jest mediana/połówkowa wielkość silnika (`Pojemnosc.skokowa`)?
 
 ---
 

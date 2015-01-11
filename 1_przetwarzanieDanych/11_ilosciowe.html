@@ -150,7 +150,8 @@ pogRomcy danych
 <pre><code>## [1] 400</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(auta2012$Cena.w.PLN)</code></pre>
 <pre><code>## [1] 11111111</code></pre>
-<p>Najniższa cena to 400 złotych, w to jestem w stanie uwierzyć tym bardziej, że część tych cen dotyczy aut uszkodzonych. Ale najwyższ to 11 milionów 111 tysięcy 111. Być może ktoś wpisał taką cenę, ale to chyba bardziej żart niż rzeczywista wartość auta.</p>
+<p>Najniższa cena to 400 złotych, w to jestem w stanie uwierzyć tym bardziej, że część tych cen dotyczy aut uszkodzonych.</p>
+<p>Ale najwyższa to 11 milionów 111 tysięcy 111. Być może ktoś wpisał taką cenę, ale to chyba bardziej żart niż rzeczywista wartość auta.</p>
 <p>Obie te wartości, minimum i maksimum, jako dwuelementowy wektor zwraca funkcja <code>range()</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">range</span>(auta2012$Cena.w.PLN)</code></pre>
 <pre><code>## [1]      400 11111111</code></pre>
@@ -165,48 +166,42 @@ pogRomcy danych
 <li>Jedna czwarta samochodów ma cenę wyższą od mediany (2. kwartyla) ale niższą od 2. kwartyla.</li>
 <li>Jedna czwarta samochodów ma cenę wyższą od 3. kwartyla.</li>
 </ul>
-</div>
-<div id="statystyki-opisowe-4" class="slide section level1">
-<h1>Statystyki opisowe</h1>
-<p>Przyjrzyjmy się tym charakterystykom na przykładzie cen aut</p>
+<p>Opis cechy ilościowej za pomocą tych sześciu liczb bardzo wiele o danej cesze mówi. Przyjrzyjmy się tym charakterystykom na przykładzie cen aut</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(auta2012$Cena.w.PLN)</code></pre>
 <pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
 ##      400    10900    19900    35760    37470 11110000</code></pre>
 <ul>
-<li>Jedna czwarta ogłoszeń oferuje samochód w cenie niższej niż 1.0910^{4}.</li>
-<li>Połowa ogłoszeń oferuje samochód w cenie niższej niż 1.9910^{4}.</li>
-<li>Trzy czwarte ogłoszeń oferuje samochód w cenie niższej niż 3.74710^{4}.</li>
-<li>Maksymalna cena ofertowa to 1.11110^{7}.</li>
-<li>Co ciekawe, średnia cena jest znacznie wyższa od ceny środkowej, dzieje się tak dlatego, że większość aut oferowanych jest w niższych cenach, ale niewielka część bardzo drogich aut znacznie podnosi wartość średniej, w tym przypadku do 3.57610^{4}.</li>
+<li>Minimalna oferta jest na 400 pln.</li>
+<li>Jedna czwarta ogłoszeń oferuje samochód w cenie niższej niż 10 900 (a ponieważ wszystkich aut jest ponad 200 tysiecy więc szybko możemy policzyć, że ponad 50 tysięcy ofert znajduje się w tym przedziale).</li>
+<li>Połowa ogłoszeń oferuje samochód w cenie niższej niż 19 900.</li>
+<li>Trzy czwarte ogłoszeń oferuje samochód w cenie niższej niż 37 470, tym samym jedna czwarta ofert jest na kwotę wyższa.</li>
+<li>Maksymalna cena ofertowa to wspomniane ponad 11 milionów.</li>
+<li>Również i w tym przykładzie, średnia cena (35 760) jest znacznie, prawie dwukrotnie, wyższa od ceny środkowej. Dzieje się tak dlatego, że większość aut oferowanych jest w niższych cenach, ale niewielka część bardzo drogich aut znacznie podnosi wartość średniej. Jest to jeden z argumentów przeciwko używaniu średniej, która jest podatna na skrajne obserwacje.</li>
 </ul>
 </div>
 <div id="zadania" class="slide section level1">
-<h1>Zadania:</h1>
+<h1>Zadania</h1>
 <ul>
-<li>W zbiorze danych <em>auta2012</em> aż 7 cech to cechy ilościowe. Wymień które.</li>
-<li>Jedną z cech ilościowych jest <em>Rok.produkcji</em>. Jaki jest medianowy/połówkowy rok produkcji oferowanych aut? Wszystkie te oferty były złożone w roku 2012, jaki był medianowy/połówkowy wiek oferowanego auta?</li>
-</ul>
-</div>
-<div id="odpowiedzi" class="slide section level1">
-<h1>Odpowiedzi:</h1>
-<ul>
-<li><code>Cena</code>, <code>Cena.w.PLN</code>, <code>KM</code>, <code>kW</code>, <code>Pojemnosc.skokowa</code>, <code>Przebieg.w.km</code>, <code>Rok.produkcji</code></li>
-<li>2004 rok</li>
+<li><p>W zbiorze danych <em>auta2012</em> aż 7 cech to cechy ilościowe. Wymień które.</p></li>
+<li><p>Jedną z cech ilościowych jest <em>Rok.produkcji</em>. Jaki jest medianowy/połówkowy rok produkcji oferowanych aut? Wszystkie te oferty były złożone w roku 2012, jaki był medianowy/połówkowy wiek oferowanego auta?</p></li>
 </ul>
 </div>
 <div id="brakujace-wartosci" class="slide section level1">
 <h1>Brakujące wartości</h1>
 <p>Może się tak zdarzyć, że oferta sprzedaży nie zawiera wszystkich informacji o aucie. Np. brakuje informacji o przebiegu. Takie braki danych trzeba jakoś oznaczyć. Nie można w ich miejsce wstawić np. 0, ponieważ czymś innym jest przebieg równy 0 a czymś innym jest brak informacji o przebiegu.</p>
 <p>Potrzebna jest więc jakaś specjalna wartość, która będzie oznaczała brakujące wartości. W programie R taką wartością jest <code>NA</code> (skrót od <em>non available</em>, czyli <em>niedostępne</em>).</p>
-<p>Jak zauważyć, że w danych występują wartości niedostępne? Ich liczba będzie wymieniona w wyniku funkcji <code>summary()</code>. Dla zmiennej <code>Przebieg.w.km</code> brakujących wartości jest 20 711.</p>
+<p>Jak zauważyć, że w danych występują wartości niedostępne? Ich liczba będzie wymieniona w wyniku funkcji <code>summary()</code>. Dla zmiennej <code>Przebieg.w.km</code> brakujących wartości jest prawie 40 tysięcy. Czyli dla znacznej części aut nie podano informacji o ich przebiegu.</p>
+<p>Pozostałe charakterystyki, takie jak minimum, maksimum i mediana są liczone oczywiście na pozostałych 160 tysiącach aut, dla któ®ych przebieg został podany.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(auta2012$Przebieg.w.km)</code></pre>
 <pre><code>##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max.      NA's 
 ## 1.000e+00 8.500e+04 1.400e+05 1.472e+05 1.800e+05 1.000e+09     39559</code></pre>
 </div>
 <div id="brakujace-wartosci-1" class="slide section level1">
 <h1>Brakujące wartości</h1>
-<p>Jakie są konsekwencje występowania brakujących wartości? Część statystyk nie można policzyć. Przykładowo, średnia z 1 i 3 to 2. Ale ile wynosi średnia z 1 i <em>nie wiadomo</em>?</p>
-<p>Dlatego gdy liczmy średnie lub inne statystyki z takich wektorów to wynik jest wartością <code>NA</code>.</p>
+<p>Jakie są konsekwencje występowania brakujących wartości?</p>
+<p>Najpoważniejszą jest taka, że części statystyk nie można policzyć.</p>
+<p>Przykładowo, średnia z 1 i 3 to 2. Ale ile wynosi średnia z 1 i <em>nie wiadomo</em>?</p>
+<p>Dlatego gdy liczmy średnie lub inne statystyki z wektorów, któ®e zawierają wartości nieokreślone to wynik też jest wartością nieokreśloną <code>NA</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(auta2012$Przebieg.w.km)</code></pre>
 <pre><code>## [1] NA</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">min</span>(auta2012$Przebieg.w.km)</code></pre>
@@ -214,9 +209,6 @@ pogRomcy danych
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(auta2012$Przebieg.w.km)</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p>To logiczne. Jeżeli nie wszystkie wartości są znane, to nie można policzyć ani średniej ani minimum ani maksimum.</p>
-</div>
-<div id="brakujace-wartosci-2" class="slide section level1">
-<h1>Brakujące wartości</h1>
 <p>Logiczne ale też mało praktyczne. Często chcielibyśmy policzyć średnią, medianę, minimum tylko z tych wartości które są znane.</p>
 <p>Aby to zrobić w programie R, do funkcji należy dodać argument <code>na.rm=TRUE</code>, gdzie <code>na.rm</code> to skrót od <em>remove NA</em>, czyli usuń wartości brakujące.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(auta2012$Przebieg.w.km, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre>
@@ -229,15 +221,8 @@ pogRomcy danych
 <div id="zadania-1" class="slide section level1">
 <h1>Zadania:</h1>
 <ul>
-<li>Która cecha jest najmniej kompletna? Dla której cechy liczba brakujących wartości jest największa?</li>
-<li>Jaka jest mediana/połówkowa wielkość silnika (<code>Pojemnosc.skokowa</code>)?</li>
-</ul>
-</div>
-<div id="odpowiedzi-1" class="slide section level1">
-<h1>Odpowiedzi:</h1>
-<ul>
-<li>Dla zmiennej <code>Przebieg.w.km</code> jest 39559 20 711 brakujących wartości. Ta zmienna jest najmniej kompletna.</li>
-<li>115 cm3</li>
+<li><p>Która cecha jest najmniej kompletna? Dla której cechy liczba brakujących wartości jest największa?</p></li>
+<li><p>Jaka jest mediana/połówkowa wielkość silnika (<code>Pojemnosc.skokowa</code>)?</p></li>
 </ul>
 </div>
 <div id="graficzne-statystyki-opisowe" class="slide section level1">
@@ -308,7 +293,7 @@ pogRomcy danych
 <li>Aut w jakiej cenie jest najwięcej wśród zebranych ogłoszeń?</li>
 </ul>
 </div>
-<div id="odpowiedzi-2" class="slide section level1">
+<div id="odpowiedzi" class="slide section level1">
 <h1>Odpowiedzi:</h1>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 auta2012wybrane &lt;-<span class="st"> </span>auta2012 %&gt;%<span class="st"> </span>

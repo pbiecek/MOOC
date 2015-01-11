@@ -39,6 +39,9 @@ Dla zbioru danych `auta2012` każdy wiersz tego zbioru danych opisuje jedną ofe
 
 ---
 
+
++ Dodać funkcję is.na() i sum(is.na()), wszystkie is.... są świetnym przykładem na TRUE / FALSE
+
 # Cechy logiczne
 
 Każdą zmienną można przedstawić jako zmienną jakościową lub ilościową. Ale w pewnych sytuacjach wygodnie jest wyróżnić bardziej szczegółową klasyfikację.
