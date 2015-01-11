@@ -281,6 +281,21 @@ pustyKwadrat &lt;-<span class="st"> </span>function(<span class="dt">n =</span> 
 }
 <span class="kw">pustyKwadrat</span>()</code></pre>
 </div>
+<div id="zadania-sezon-1-odcinek-11" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 11</h1>
+<ul>
+<li><p>W zbiorze danych <em>auta2012</em> aż 7 cech to cechy ilościowe. Wymień które.</p></li>
+<li><p>Jedną z cech ilościowych jest <em>Rok.produkcji</em>. Wszystkie te oferty były złożone w roku 2012, jaki był medianowy/połówkowy wiek oferowanego auta?</p></li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-11" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 11</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Zmienne ilościowe</span>
+<span class="co"># `Cena`, `Cena.w.PLN`, `KM`, `kW`, `Pojemnosc.skokowa`, `Przebieg.w.km`, `Rok.produkcji`</span>
+
+<span class="co"># medianowy wiek to 2012 - mediana roku produkcji</span>
+<span class="dv">2012</span> -<span class="st"> </span><span class="kw">median</span>(auta2012$Rok.produkcji)</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>

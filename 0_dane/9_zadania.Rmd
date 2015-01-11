@@ -282,3 +282,24 @@ pustyKwadrat <- function(n = 5, znak="X") {
 }
 pustyKwadrat()
 ```
+
+---
+
+# Zadania, sezon 1, odcinek 11
+
++ W zbiorze danych _auta2012_ aż 7 cech to cechy ilościowe. Wymień które.
+
++ Jedną z cech ilościowych jest _Rok.produkcji_. Wszystkie te oferty były złożone w roku 2012, jaki był medianowy/połówkowy wiek oferowanego auta?
+
+---
+
+# Odpowiedzi, sezon 1, odcinek 11
+
+```{r, eval=FALSE}
+# Zmienne ilościowe
+# `Cena`, `Cena.w.PLN`, `KM`, `kW`, `Pojemnosc.skokowa`, `Przebieg.w.km`, `Rok.produkcji`
+
+# medianowy wiek to 2012 - mediana roku produkcji
+2012 - median(auta2012$Rok.produkcji)
+
+```
