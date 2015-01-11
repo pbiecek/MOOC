@@ -291,6 +291,11 @@ pustyKwadrat()
 
 + Jedną z cech ilościowych jest _Rok.produkcji_. Wszystkie te oferty były złożone w roku 2012, jaki był medianowy/połówkowy wiek oferowanego auta?
 
++ Która cecha jest najmniej kompletna? Dla której cechy liczba brakujących wartości jest największa?
+
++ Jaka jest mediana/połówkowa wielkość silnika (`Pojemnosc.skokowa`)?
+
+
 ---
 
 # Odpowiedzi, sezon 1, odcinek 11
@@ -301,5 +306,11 @@ pustyKwadrat()
 
 # medianowy wiek to 2012 - mediana roku produkcji
 2012 - median(auta2012$Rok.produkcji)
+
+# Dla zmiennej `Przebieg.w.km`  jest 39 559 brakujących wartości. Ta zmienna jest najmniej kompletna.
+
+# mediana koni mechanicznych
+median(auta2012$KM, na.rm=TRUE)
+
 
 ```
