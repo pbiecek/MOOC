@@ -1,7 +1,7 @@
 ---
 title: "Cechy ilościowe"
 author: "pogRomcy danych"
-date: "sezon 1 / odcinek 11 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 1 / odcinek 11 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -201,6 +201,8 @@ Więcej o tym dlaczego i jak działą to sumowanie omó∑imy w odcinku 13 o cec
 
 + Jedną z cech ilościowych jest _Rok.produkcji_. Jaki jest medianowy/połówkowy rok produkcji oferowanych aut? Wszystkie te oferty były złożone w roku 2012, jaki był medianowy/połówkowy wiek oferowanego auta?
 
+Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+
 ---
 
 # Brakujące wartości
@@ -213,7 +215,7 @@ Potrzebna jest więc jakaś specjalna wartość, która będzie oznaczała braku
 Jak zauważyć, że w danych występują wartości niedostępne? 
 Ich liczba będzie wymieniona w wyniku funkcji `summary()`. Dla zmiennej `Przebieg.w.km` brakujących wartości jest prawie 40 tysięcy. Czyli dla znacznej części aut nie podano informacji o ich przebiegu.
 
-Pozostałe charakterystyki, takie jak minimum, maksimum i mediana są liczone oczywiście na pozostałych 160 tysiącach aut, dla któ®ych przebieg został podany.
+Pozostałe charakterystyki, takie jak minimum, maksimum i mediana są liczone oczywiście na pozostałych 160 tysiącach aut, dla których przebieg został podany.
 
 ```{r, warning=FALSE}
 summary(auta2012$Przebieg.w.km)
@@ -258,9 +260,11 @@ max(auta2012$Przebieg.w.km, na.rm=TRUE)
 
 + Jaka jest mediana/połówkowa wielkość silnika (`Pojemnosc.skokowa`)?
 
+Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+
 ---
 
-# Graficzne statystyki opisowe
+# Graficzne statystyki opisowe - wykres słupkowy
 
 Powyżej opisane statystyki liczbowe można przedstawić graficznie.
 Prezentacja graficzna ma tę zaletę, że wyćwiczone oko potrafi szybko wiele dowiedzieć się z danych. 
@@ -270,24 +274,45 @@ Opisując zmienną ilościową mamy do wyboru różne sposoby prezentacji, w zal
 Przypuśćmy, że chcemy pokazać wyłącznie średnią. Jedną liczbę. Zrobimy to za pomocą wykresu słupkowego.
 Wykres słupkowy można w programie R wyznaczyć funkcją `barplot()`.
 
+*Zauważmy, że jeżeli wynik przypisania obejmiemy w nawiaty, to wyświetli się on na ekranie*
+
 ```{r, warning=FALSE}
-(srednia = mean(auta2012$Przebieg.w.km, na.rm=TRUE))
+(srednia <- mean(auta2012$Przebieg.w.km, na.rm=TRUE))
 barplot(srednia)
 ```
 
 ---
 
-# Graficzne statystyki opisowe
+# Graficzne statystyki opisowe - wykres słupkowy
+
+Zobaczmy jak wyglądają średnie ceny w grupach. Przykładowo w zależności od rodzaju paliwa. 
+
+Do liczenia średniej w grupach wykorzystamy funkcję `tapply()`, jako pierwszy argument przyjmuje cechę ilośćiową, jako drugi inforamcje o grupach a jako trzeci nazwę zmiennej, która ma w każdej grupie być wykonana (i następnie dodatkowe argumenty). 
+
+Wynikiem będzie wektor ze średnimi. Możemy teraz użyć funkcji `barplot()`, argument `las=2` powoduje, że etykiety na osi OX pojawią się w pionie, co ułatwi ich odczytnaie.
+
+Więcej informacji o tym jazk zrobić dobrze wyglądajacy wykres słupkowy przedstawimy w sezonie 2.
+
+```{r}
+(srednie <- tapply(auta2012$Przebieg.w.km,
+                   auta2012$Rodzaj.paliwa,
+                   mean, na.rm=TRUE))
+barplot(srednie, las=2)
+```
+
+---
+
+# Graficzne statystyki opisowe - wykres pudełkowy
 
 Jeden słupek wygląda dziwnie, mało czytelnie. To dlatego, że wykres przedstawia jedną liczbę, trudno więc do czegoś się na nim odnieść.
 
 Ciekawszy będzie wykres, przedstawiający więcej informacji. 
-Powyżej pokazaliśmy wynik funkcji `summary()`, prezentujących sześć charakterystycznych informacji o rozkładzie (min, max, kwartyle i średnią).
+W statystykach opisowych pokazaliśmy funkcją `summary()`, prezentującą sześć charakterystycznych informacji o rozkładzie (min, max, kwartyle i średnią).
 Pięć z nich, za wyjątkiem średniej, przedstawia wykres pudełko-wąsy, który w R można wykonać używając funkcji `boxplot()`.
 
 W poniższym przykładzie przedstawiamy te pięć liczb dla zmiennej `Przebieg.w.km`. Argument `horizontal=TRUE` powoduje, że wykres rysowany jest poziomo, argument `range = 0` powoduje, że nie są wyznaczane wartości odstające (a nie mówiliśmy co to za wartości, więc ich nie wyznaczajmy, wrócimy do tego tematu później).
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, fig.height=4}
 summary(auta2012$Przebieg.w.km)
 boxplot(auta2012$Przebieg.w.km, 
         horizontal=TRUE, range = 0)
@@ -295,74 +320,92 @@ boxplot(auta2012$Przebieg.w.km,
 
 ---
 
-# Graficzne statystyki opisowe
+# Graficzne statystyki opisowe - wykres pudełkowy
 
-Co za dziwny wykres. Zazwyczaj wykresy pudełkowe wyglądają inaczej.
-Co jest nie tak z tym? Spójrzmy na oś na wykresie, rozciąga się do 10^9 = 1 000 000 000 km. Najprawdopodobniej te duże wartości to wynik błędu w danych. Mała jest szansa, że jakiekolwiek auto na świecie miało choćby zbliżony przebieg (gdyby jakieś auto jeździło non stop z prędkością 100 km na godzinę, to po 100 latach miałoby przebieg 8 000 000 km).
+Co za dziwny wykres. Co jest nie tak? Spójrzmy na oś na wykresie, rozciąga się do 10^9 = 1 000 000 000 km. Patrząc na wynik funkcji `summary()` widzimy że faktycznie, któryś wiersz zawiera tak wyżą wartość.
+Najprawdopodobniej te duże wartości to wynik błędu w danych. Mała jest szansa, że jakiekolwiek auto na świecie miało choćby zbliżony przebieg (gdyby jakieś auto jeździło non stop z prędkością 100 km na godzinę, to po 100 latach miałoby przebieg 8 000 000 km).
 
 Dane bardzo często są zanieczyszczone a graficzne prezentacje pozwalają nam to łatwo zauważyć. 
+
 Tak jest i w tym przypadku.
 Oczyśćmy te dane, usuwając wszystkie wiersze, dla których cecha `Przebieg.w.km` przyjmuje wartości powyżej 1 000 000 km.
-Takie czyszczenie możemy przeprowadzić używając funkcji `filter()` z pakietu `dplyr`.
+Użyjemy warunku logicznego, aby indeksować tylko te wiersze o sensownym przebiegu. Więcej o tym jak działa to indeksowanie znaleźć można w odcinku 7.
 
-```{r, warning=FALSE}
-library(dplyr)
-auta2012wybrane <- auta2012 %>% 
-  filter(Przebieg.w.km < 1000000)
-
+```{r, warning=FALSE, fig.height=4}
+auta2012wybrane <- auta2012[auta2012$Przebieg.w.km < 1000000, ] 
 summary(auta2012wybrane$Przebieg.w.km)
-```
-
-Teraz możemy narysować wykres pudełko-wąsy dla oczyszczonych danych.
-
-```{r, warning=FALSE}
 boxplot(auta2012wybrane$Przebieg.w.km, horizontal=TRUE, range=0)
 ```
 
 ---
 
-# Graficzne statystyki opisowe
+# Graficzne statystyki opisowe - histogram
 
 Każdy z elementów tego wykresu (lewy wąs, lewa część pudełka, prawa część pudełka, prawy wąs) przedstawia 1/4 danych.
 Z wykresu tego możemy łatwo odczytać, że 3/4 danych dotyczy aut o przebiegu poniżej 200 tys km. Jedynie 1/4 danych ma wyższe wartości i dla tych aut rozpiętość jest bardzo duża.
 
 Jeżeli chcemy zaprezentować bardziej szczegółowe dane o przebiegu, możemy wykorzystać histogram.
+Histogram przedstawia liczbę obserwacji o określonych przedziałach wartości. Domyślnie przedziały są równoszerokie a ich liczbę wybiera algorytm uwzględnaijący zmienność cechy (zazwyczaj jest to od 6 do 10 przedziałów).
 
-Aby wykonać w programie R histogram, można wykorzystać funkcję `hist()`. Pierwszy argument określa dane, które mają być pokazane,
-drugi argument określa na ile przedziałów ma być podzielony zakres zmienności. 
-Histogram przedstawia liczbę samochodów, których przebieg jest w zakresie opisanym przez określone pudełko.
+Aby wykonać w programie R histogram, można wykorzystać funkcję `hist()`. Pierwszy argument określa dane, które mają być pokazane. Na poniższym przykłądzie słupki zamalowano na szaro by były bardziej widoczne. 
 
 ```{r, warning=FALSE}
-hist(auta2012wybrane$Przebieg.w.km, 60, col="grey")
+hist(auta2012wybrane$Przebieg.w.km, col="grey")
 ```
 
 ---
 
-# Graficzne statystyki opisowe
+# Graficzne statystyki opisowe - histogram
 
-Histogram przedstawia znacznie więcej informacji niż wykres pudełko-wąsy. Im wyższy słupek, tym więcej było aut, o przebiegu w określonym przedziale.
-Dwie najwyższe wyspy to ta w pobliżu 0 oraz ta w pobliży 180 tys km. 
+Argumentem `breaks` można określić liczbę przedziałów lub nawet granice przedziałów. Jeżęli mamy dużo obserwacji to często można więcej odczytać mając dużą liczbę przedziałów. W każdym przedziale histogram przedstawia liczbę obserwacji, im wyższy słupek, tym więcej było aut, o określonym przebiegu.
+
+Na poniższym wykresie zauważyć można dwa ,,pagórki''. Jeden pobliżu 0 oraz drugi w pobliżu 180 tys km. 
 Oznacza to, że w zbiorze danych jest jedna duża grupa aut o bardzo małym przebiegu, aut o przebiegu w okolicy 50 tys km jest mniej, aut o przebiegu w okolicy 150 tys km jest bardzo dużo a aut o przebiegu ponad 300 tys km jest już bardzo mało, pojedyncze sztuki.
 
 Jak widzimy zmienną ilościowa możemy opisać z różnym poziomem szczegółowości. Im większa szczegółowość tym więcej elementów na wykresie. 
 Im więcej elementów tym więcej możemy odczytać ale jest to też trudniejsze.
 
+```{r, warning=FALSE}
+hist(auta2012wybrane$Przebieg.w.km, breaks = 100, col="grey")
+```
+
+---
+
+# Graficzne statystyki opisowe - wykres punktowy
+
+A czy można przedstawić dwie zmienne ilośćiowe i ich wspólną relację?
+
+Do tego służy zazwyczaj wykres punktowy. Funkcja `plot()` jeżeli otrzyma jako pierwsze dwa argumenty cechy ilośćiowe to narysuje taki wykres. Dodatkowe argumenty, takie jak `xlab` i `ylab` pozwalają na określenie nazw osi OX i OY.
+
+Poniższy przykłąd pokazuje zależność pomiędzy wagą a prędkością gatunkwo ze zbioru `koty_ptaki`. Jak widać duża masa nie sprzyja wielkim prędkościom.
+
+```{r, warning=FALSE}
+plot(koty_ptaki$waga, koty_ptaki$predkosc, ylab="Predkość", xlab="Waga")
+```
+
+---
+
+# Graficzne statystyki opisowe - wykres punktowy
+
+Użyjmy funkcji `plot()` dla danych o autach, np. by pokazać zależność pomiędzy przebiegiem a ceną.
+Okazuje się jednak, że ponieważ ofert sprzedaży aut jest bardzo wiele, lepiej nie rysować każdej oferty dużym kołem, ale pojedynczym punktem Można to osiągnąć dodając argument `pch="."`. Ponieważ i przebiek i cena auta zawierają pojedyncze bardzo duże wartości zamiast pokazywać je w standardowej skali, znacznie lepiej przedstawić je w skali logarytmicznej. To można osiągnąć dodając do wykresu argument `log="xy"`. Wartość `"xy"` oznacza, że obie osie należy zlogarytmować. 
+
+Więcej inforamcji o wykresach rozrzutu i innych sposobach przedstawienia cechy ilościowej przedstawione jest w sezonie 3.
+
+```{r, warning=FALSE}
+plot(auta2012wybrane$Przebieg.w.km, auta2012wybrane$Cena.w.PLN, log="xy", pch=".")
+```
+
 ---
 
 # Zadania:
 + Przedstaw graficznie za pomocą wykresu pudełko-wąsy oraz histogramu rozkład cechy `Cena.w.PLN`. 
+
 + Zwróć uwagę, że pojedyncze auta o bardzo wysokich cenach, powodują że wykres jest mało czytelny. Oczyść te dane, pozostawiają tylko auta o cenie poniżej 100 tys pln. Następnie przedstaw rozkład cen aut w segmencie aut do 100 tys pln.
+
 + Aut w jakiej cenie jest najwięcej wśród zebranych ogłoszeń?
 
-# Odpowiedzi:
-```{r, warning=FALSE}
-library(dplyr)
-auta2012wybrane <- auta2012 %>% 
-  filter(Cena.w.PLN < 100000)
-
-boxplot(auta2012wybrane$Cena.w.PLN, horizontal = TRUE, range = 0)
-hist(auta2012wybrane$Cena.w.PLN, 50, col="grey")
-```
+Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
 
 
 
