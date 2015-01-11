@@ -1,7 +1,7 @@
 ---
 title: "Cechy ilościowe"
 author: "pogRomcy danych"
-date: "sezon 1 / odcinek 5 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 1 / odcinek 11 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -15,42 +15,87 @@ output:
 
 # O czym jest ten odcinek
 
+Analizując dane spotkamy się z różnymi rodzajami zmiennych. W klasycznej statystyce najbardziej popoplarne są zmienne ilościowe, którym poświęcony jest ten odcinek.
+
 W tym odcinku nauczymy się
 
-- Jakie zmienne / wartości / cechy określa się terminem cechy ilościowe?
+- Jakie zmienne / cechy określa się terminem *cechy ilościowe*?
 - Jakie podstawowe operacje można wykonywać na cechach ilościowych?
 - Jak podsumowywać / opisywać cechy ilościowe?
 
-Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, znacznie większy, to `auta2012`.
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
 
 ---
 
-# Co to znaczy: cecha jakościowa
+# Co to znaczy: cecha ilościowa
 
-Czas na poznanie rodzajów danych, na jakie możemy się natknąć.
+Najbliższe cztery odcinki przedstawią cztery podstawowe typy danych: ilościowe, jakościowe, napisy i wartości logiczne, nie wyczerpują one jeszcez listy wszystkich możliwych typów, można by wyróżnić jeszcez daty, dane cenzorowane oraz inne bardziej specjalistyczne typy, ale te cztery występują w 90% analiz więc na nich się skupimy.
 
-W trakcie tych zajęć przedstawimy cztery podstawowe typy danych, dane ilościowe, jakościowe, napisy i wartości logiczne.
-Słowo typ, ma w tym przypadku to samo znaczenie co słowo rodzaj, ale jest częściej stosowane w analizie danych, dlatego będziemy poniżej mówić o czterech podstawowych typach.
+Słowo typ, ma w tym przypadku to samo znaczenie co słowo rodzaj, możemy więc mówić o typach danych jak i o rodzajach danych. W analizie danych częściej stosowane jest słowo typ, więc będziemy się nim posługować.
 
-Ale zanim dojdziemy do typów, wczytajmy dane.
+Cechy ilościowe to takie, które opisują ilości. Przykładowo wysokość, długość, wagę, prędkość, powierzchnię, wiek itp.
+Często stosuje się też określenie cechy liczbowe ponieważ są wyrażane liczbami. Jednak nie zawsze to co jest opisane liczbą jest cechą ilościową. Przykładowo PESEL lub kod pocztowy opisać można liczbą ale nie reprezentują one ilości czy wielkości.
+
+Cechy ilościowe mogą być fizyczne (masa, długość, prędkość) lub nie (iloraz inteligencji, wielkość długu publicznego, poziom zgadzania się z pogladami jakiejś partii). 
+
+Mogą przyjmować bardzo wiele różnych wartości (np. wwzrost w milimetrach) lub tylko kilka (np. liczba rąk).
+
+Ponieważ jednak są opisane liczbami, można na nich wykonywac kilka wspólnych operacji. Przyjrzyjmy się im.
 
 ---
 
 # Wczytanie danych
 
-W poprzednim odcinku poznaliśmy kilka sposobów na wczytanie danych do R. 
+Dane od których rozpoczniemy przykłady to `koty_ptaku` z pakietu `SmarterPoland`. Aby te dane wczytać, wystarczy włączyć pakiet, instrukcja jak to zrobić znajduje się w odcinku 2.
 
-Dane na których będziemy tutaj pracować, zostały włączone do pakietu `SmarterPoland` by ułatwić dostęp do nich. Aby je wczytać, wystarczy włączyć pakiet.
-
-Następnie używając funkcji `head()` by wyświetlić pierwsze dwa wiersze.
-
+Włączmy pakiet i użyjmy funkcji `head()` by wyświetlić pierwsze sześć wierszy. Które z tych zmiennych to zmienne ilościowe?
 
 ```{r, warning=FALSE, message=FALSE}
 library(SmarterPoland)
-head(auta2012, 2)
+head(koty_ptaki)
 ```
 
-Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.
+Każdy wiersz opisuje jeden gatunek. Zmienne ilościowe opisane są liczbami, w tym przypadku nie ma niespodzianek, zmiennymi ilościowymi są: waga, długość, prędkość i zywotność.
+
+---
+
+# Statystyki opisowe
+
+Zbiór danych `koty_ptaki` składa się z 13 wierszy, więc każda zmienna ilościowa to 13 liczb. 
+
+Aby coś powiedzieć o każdej ze zmiennych wygodnie jest skarakteryzować je jedną lub kilkoma charakterystykami, takimi jak średnia czy mediana (mediana to wartość która pojawi się w środku gdyby te 13 liczb posortować).
+
+Jak sprawdzić ile wynosi średnia lub mediana dla wagi? 
+Aby policzyć średnią możemy wykrozystać funkcję `mean()` a aby wykorzystac medianę, funkcję `median()`.
+
+```{r}
+mean(koty_ptaki$waga)
+median(koty_ptaki$waga)
+sort(koty_ptaki$waga)
+```
+
+W ostatnim wierszu wyświetliliśmy wszystkie wagi po ich posortowaniu. Funkcja `sort()` domyślnie sortuje liczby rosnąco, możemy przy okazji sprawdzić, że rzeczywiście, środkową wartością jest 60.
+
+Przy okazji warto zauważyć że średnia i mediana znacznie się różnią, o prawie 20 kilogramów. Jest to wynikiem tego, że najmneijsze i największe wartości różnią się od siebie o ponad dwa rzędy wielkości, w takich sytuacjach średnia często jest odległa od mediany.
+
+---
+
+# Wczytanie danych
+
+Zbiór danych `koty_ptaki` skłąda się z 13 wierszy. Można cały ten zbiór danych wyświetlić na ekranie. Nie zawsze potrzebujemy więc specjalnych statystyk opisowaych by zrozumieć co się dzieje w takich małych zbiorach danych.
+
+Dlatego, dalsze ćwiczenia ze zmiennymi ilosciowymi przeprowadzimy na znaczeni większym zbiorze danych z ponad 200 tysiącami wartości, o nazwie `auta2012`, który znajduje się również w pakiecie `SmarterPoland`.
+
+Opis tego zbioru danych znaleźć można w odcinku https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html
+
+Wczytajmy ten zbiór danych i przyjrzyjmy się trzem pierwszym wierszom. 
+
+```{r, warning=FALSE, message=FALSE}
+library(SmarterPoland)
+head(auta2012, 3)
+```
+
+Które z tych zmiennych to zmienne ilościowe?
 
 ---
 

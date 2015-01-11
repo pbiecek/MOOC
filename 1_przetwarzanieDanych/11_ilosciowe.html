@@ -48,47 +48,42 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 5 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 11 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
+<p>Analizując dane spotkamy się z różnymi rodzajami zmiennych. W klasycznej statystyce najbardziej popoplarne są zmienne ilościowe, którym poświęcony jest ten odcinek.</p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
-<li>Jakie zmienne / wartości / cechy określa się terminem cechy ilościowe?</li>
+<li>Jakie zmienne / cechy określa się terminem <em>cechy ilościowe</em>?</li>
 <li>Jakie podstawowe operacje można wykonywać na cechach ilościowych?</li>
 <li>Jak podsumowywać / opisywać cechy ilościowe?</li>
 </ul>
-<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>.</p>
+<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>SmarterPoland</code>.</p>
 </div>
-<div id="co-to-znaczy-cecha-jakosciowa" class="slide section level1">
-<h1>Co to znaczy: cecha jakościowa</h1>
-<p>Czas na poznanie rodzajów danych, na jakie możemy się natknąć.</p>
-<p>W trakcie tych zajęć przedstawimy cztery podstawowe typy danych, dane ilościowe, jakościowe, napisy i wartości logiczne. Słowo typ, ma w tym przypadku to samo znaczenie co słowo rodzaj, ale jest częściej stosowane w analizie danych, dlatego będziemy poniżej mówić o czterech podstawowych typach.</p>
-<p>Ale zanim dojdziemy do typów, wczytajmy dane.</p>
+<div id="co-to-znaczy-cecha-ilosciowa" class="slide section level1">
+<h1>Co to znaczy: cecha ilościowa</h1>
+<p>Najbliższe cztery odcinki przedstawią cztery podstawowe typy danych: ilościowe, jakościowe, napisy i wartości logiczne, nie wyczerpują one jeszcez listy wszystkich możliwych typów, można by wyróżnić jeszcez daty, dane cenzorowane oraz inne bardziej specjalistyczne typy, ale te cztery występują w 90% analiz więc na nich się skupimy.</p>
+<p>Słowo typ, ma w tym przypadku to samo znaczenie co słowo rodzaj, możemy więc mówić o typach danych jak i o rodzajach danych. W analizie danych częściej stosowane jest słowo typ, więc będziemy się nim posługować.</p>
+<p>Cechy ilościowe to takie, które opisują ilości. Przykładowo wysokość, długość, wagę, prędkość, powierzchnię, wiek itp. Często stosuje się też określenie cechy liczbowe ponieważ są wyrażane liczbami. Jednak nie zawsze to co jest opisane liczbą jest cechą ilościową. Przykładowo PESEL lub kod pocztowy opisać można liczbą ale nie reprezentują one ilości czy wielkości.</p>
+<p>Cechy ilościowe mogą być fizyczne (masa, długość, prędkość) lub nie (iloraz inteligencji, wielkość długu publicznego, poziom zgadzania się z pogladami jakiejś partii).</p>
+<p>Mogą przyjmować bardzo wiele różnych wartości (np. wwzrost w milimetrach) lub tylko kilka (np. liczba rąk).</p>
+<p>Ponieważ jednak są opisane liczbami, można na nich wykonywac kilka wspólnych operacji. Przyjrzyjmy się im.</p>
 </div>
 <div id="wczytanie-danych" class="slide section level1">
 <h1>Wczytanie danych</h1>
-<p>W poprzednim odcinku poznaliśmy kilka sposobów na wczytanie danych do R.</p>
-<p>Dane na których będziemy tutaj pracować, zostały włączone do pakietu <code>SmarterPoland</code> by ułatwić dostęp do nich. Aby je wczytać, wystarczy włączyć pakiet.</p>
-<p>Następnie używając funkcji <code>head()</code> by wyświetlić pierwsze dwa wiersze.</p>
+<p>Dane od których rozpoczniemy przykłady to <code>koty_ptaku</code> z pakietu <code>SmarterPoland</code>. Aby te dane wczytać, wystarczy włączyć pakiet, instrukcja jak to zrobić znajduje się w odcinku 2.</p>
+<p>Włączmy pakiet i użyjmy funkcji <code>head()</code> by wyświetlić pierwsze sześć wierszy. Które z tych zmiennych to zmienne ilościowe?</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
-<span class="kw">head</span>(auta2012, <span class="dv">2</span>)</code></pre>
-<pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW      Marka     Model Wersja
-## 1 49900    PLN      49900       brutto 140 103        Kia    Carens       
-## 2 88000    PLN      88000       brutto 156 115 Mitsubishi Outlander       
-##   Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km          Rodzaj.paliwa
-## 1          4/5              1991         41000 olej napedowy (diesel)
-## 2          4/5              2179         46500 olej napedowy (diesel)
-##   Rok.produkcji Kolor Kraj.aktualnej.rejestracji Kraj.pochodzenia
-## 1          2008                           Polska                 
-## 2          2008                           Polska                 
-##   Pojazd.uszkodzony Skrzynia.biegow Status.pojazdu.sprowadzonego
-## 1                          manualna                             
-## 2                          manualna                             
-##                                                                                                                                                                                Wyposazenie.dodatkowe
-## 1                         ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
-## 2 ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby</code></pre>
-<p>Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.</p>
+<span class="kw">head</span>(koty_ptaki)</code></pre>
+<pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
+## 1  Tygrys  300     2.5       60    Azja        25     Kot
+## 2     Lew  200     2.0       80  Afryka        29     Kot
+## 3  Jaguar  100     1.7       90 Ameryka        15     Kot
+## 4    Puma   80     1.7       70 Ameryka        13     Kot
+## 5 Leopard   70     1.4       85    Azja        21     Kot
+## 6  Gepard   60     1.4      115  Afryka        12     Kot</code></pre>
+<p>Każdy wiersz opisuje jeden gatunek. Zmienne ilościowe opisane są liczbami, w tym przypadku nie ma niespodzianek, zmiennymi ilościowymi są: waga, długość, prędkość i zywotność.</p>
 </div>
 <div id="statystyki-opisowe" class="slide section level1">
 <h1>Statystyki opisowe</h1>
@@ -221,8 +216,18 @@ pogRomcy danych
 <h1>Graficzne statystyki opisowe</h1>
 <p>Co za dziwny wykres. Zazwyczaj wykresy pudełkowe wyglądają inaczej. Co jest nie tak z tym? Spójrzmy na oś na wykresie, rozciąga się do 10^9 = 1 000 000 000 km. Najprawdopodobniej te duże wartości to wynik błędu w danych. Mała jest szansa, że jakiekolwiek auto na świecie miało choćby zbliżony przebieg (gdyby jakieś auto jeździło non stop z prędkością 100 km na godzinę, to po 100 latach miałoby przebieg 8 000 000 km).</p>
 <p>Dane bardzo często są zanieczyszczone a graficzne prezentacje pozwalają nam to łatwo zauważyć. Tak jest i w tym przypadku. Oczyśćmy te dane, usuwając wszystkie wiersze, dla których cecha <code>Przebieg.w.km</code> przyjmuje wartości powyżej 1 000 000 km. Takie czyszczenie możemy przeprowadzić używając funkcji <code>filter()</code> z pakietu <code>dplyr</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-auta2012wybrane &lt;-<span class="st"> </span>auta2012 %&gt;%<span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: 'dplyr'
+## 
+## The following object is masked from 'package:stats':
+## 
+##     filter
+## 
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">auta2012wybrane &lt;-<span class="st"> </span>auta2012 %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(Przebieg.w.km &lt;<span class="st"> </span><span class="dv">1000000</span>)
 
 <span class="kw">summary</span>(auta2012wybrane$Przebieg.w.km)</code></pre>
