@@ -64,14 +64,14 @@ pogRomcy danych
 <div id="co-to-znaczy-cecha-logiczna" class="slide section level1">
 <h1>Co to znaczy: cecha logiczna</h1>
 <p>Cechy logiczne to takie, które opisują jedną z dwóch wartości logicznych prawda/fałsz. Przykładowo: czy wzrost jest większy niż 150cm, czy pada deszcz, czy pacjent przeżył 5 lat po operacji itp.</p>
-<p>Zmienne logiczne często powstają w wyniku przetwarzania zmiennych ilościowych lub jakościowych. Mając wykształcenie opisane przez trzy poziomy, można skonstruowac sztuczną cechę: czy ma wykształcenei wyższe. A mając wzrost opisacny jako cecha ilościowa można skonstruować cechę logiczną, czy jest wyższy niż 150 cm.</p>
-<p>Zmienne logiczne można traktować jak zmienne jakościowe, przymują bowiem wartości z dwuelementowego słownika. Podobnie jak dla wartości jakościowych tak i dla wartości logicznych można wyznaczać tablicę liczebności.</p>
+<p>Zmienne logiczne często powstają w wyniku przetwarzania zmiennych ilościowych lub jakościowych. Mając wykształcenie opisane przez trzy poziomy, można skonstruować sztuczną cechę: czy ma wykształcenie wyższe. A mając wzrost opisany jako cecha ilościowa można skonstruować cechę logiczną, czy jest wyższy niż 1500 cm3.</p>
+<p>Zmienne logiczne można traktować jak zmienne jakościowe, przyjmują bowiem wartości z dwuelementowego słownika. Podobnie jak dla wartości jakościowych tak i dla wartości logicznych można wyznaczać tablicę liczebności.</p>
 <p>Dla zmiennych logicznych dostępnych jest kilka dodatkowych operacji logicznych, których nie można wykonać na typowych zmiennych jakościowych.</p>
 </div>
 <div id="logika-trojwartosciowa" class="slide section level1">
 <h1>Logika trójwartościowa</h1>
-<p>Napisaliśmy wcześniej, że wartości logiczne przyjmują wartości <code>TRUE</code> (logiczna prawda) lub <code>FALSE</code> (logiczny fałsz). Jednak równocześnie każdy rodzaj zmiennych w programie R może również przyjmowąć wartości nieustaloną <code>NA</code>. Więc w gruncie rzeczy wartości logiczne operują w logice trójwartościowej.</p>
-<p>Tworząc wartości logiczne często wykorzystuje się operatory logiczne <code>&gt;</code> (większy), <code>&gt;=</code> (większy równy), <code>==</code> (równy), <code>&lt;=</code> (mniejszy równy), <code>&lt;</code> (mniejszy). Gdy porównuje się takim operaotrem wartość nieustaloną <code>NA</code> to wynik równiez jest wartością nieustaloną.</p>
+<p>Napisaliśmy wcześniej, że wartości logiczne przyjmują wartości <code>TRUE</code> (logiczna prawda) lub <code>FALSE</code> (logiczny fałsz). Jednak równocześnie każdy rodzaj zmiennych w programie R może również przyjmować wartości nieustaloną <code>NA</code>. Więc w gruncie rzeczy wartości logiczne operują w logice trójwartościowej.</p>
+<p>Tworząc wartości logiczne często wykorzystuje się operatory logiczne <code>&gt;</code> (większy), <code>&gt;=</code> (większy równy), <code>==</code> (równy), <code>&lt;=</code> (mniejszy równy), <code>&lt;</code> (mniejszy). Gdy porównuje się takim operatorem wartość nieustaloną <code>NA</code> to wynik również jest wartością nieustaloną.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">3</span>,<span class="dv">8</span>, <span class="ot">NA</span>) &lt;=<span class="st"> </span><span class="dv">4</span></code></pre>
 <pre><code>## [1]  TRUE FALSE FALSE  TRUE FALSE    NA</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="st">&quot;Ala&quot;</span>, <span class="st">&quot;Ola&quot;</span>, <span class="st">&quot;Ula&quot;</span>, <span class="ot">NA</span>, <span class="st">&quot;Ela&quot;</span>, <span class="st">&quot;Ola&quot;</span>) ==<span class="st"> &quot;Ola&quot;</span></code></pre>
@@ -79,7 +79,7 @@ pogRomcy danych
 <p>Tworząc wektory wartości logicznych zamiast pełnych nazw <code>TRUE</code> i <code>FALSE</code> można również korzystać ze skrótów <code>T</code> i <code>F</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(T, F, <span class="ot">NA</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</code></pre>
 <pre><code>## [1]  TRUE FALSE    NA  TRUE FALSE</code></pre>
-<p>Specjalnymi operatorami dla wartości logicznych są <code>|</code> (logiczne lub) oraz <code>&amp;</code> (logiczne i). Pierwszy z nich zwraca jako wynik wartość <code>TRUE</code> jeżeli którykolwiek argument jest prawdziwy. Drugi zwraca jako wynik wartość <code>TRUE</code> jeżeli ona argumenty sa prawdziwe.</p>
+<p>Specjalnymi operatorami dla wartości logicznych są <code>|</code> (logiczne lub) oraz <code>&amp;</code> (logiczne i). Pierwszy z nich zwraca jako wynik wartość <code>TRUE</code> jeżeli którykolwiek argument jest prawdziwy. Drugi zwraca jako wynik wartość <code>TRUE</code> jeżeli ona argumenty są prawdziwe.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="ot">TRUE</span> |<span class="st"> </span><span class="ot">FALSE</span></code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">(<span class="dv">4</span> &gt;<span class="st"> </span><span class="dv">2</span>) |<span class="st"> </span>(<span class="st">&quot;A&quot;</span> ==<span class="st"> &quot;a&quot;</span>)</code></pre>
@@ -90,7 +90,7 @@ pogRomcy danych
 <p>Przydatną do przedstawienia możliwych wyników operatora <code>|</code> jest tabliczka logicznego dodawania. Aby ją przedstawić zdefiniujmy wektor zawierający każdą z trzech możliwych wartości logicznych.</p>
 <pre class="sourceCode r"><code class="sourceCode r">(TRUE_FALSE_NA &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">NA</span>))</code></pre>
 <pre><code>## [1]  TRUE FALSE    NA</code></pre>
-<p>Funkcja <code>outer()</code> jako argumenty przyjmuje dwa wektory a następnie dla każdej pary wartości z pierwszego i drugiego wektora stosuje funkcję, która jest trzecim argumentem. Koljne dwie linie dodają nazwy wierszy i kolumn, tak by na koniec wypordukować łądnie wuglądającą tabliczkę logicznego dodawania. Jeżeli którykolwiek z argumentów ma wartość logicznej prawdy to wynikiem <code>lub</code> jest logiczna prawda.</p>
+<p>Funkcja <code>outer()</code> jako argumenty przyjmuje dwa wektory a następnie dla każdej pary wartości z pierwszego i drugiego wektora stosuje funkcję, która jest trzecim argumentem. Kolejne dwie linie dodają nazwy wierszy i kolumn, tak by na koniec wyprodukować ładnie wyglądającą tabliczkę logicznego dodawania. Jeżeli którykolwiek z argumentów ma wartość logicznej prawdy to wynikiem <code>lub</code> jest logiczna prawda.</p>
 <pre class="sourceCode r"><code class="sourceCode r">tabliczka_dodawania &lt;-<span class="st"> </span><span class="kw">outer</span>(TRUE_FALSE_NA, TRUE_FALSE_NA, <span class="st">&quot;|&quot;</span>)
 <span class="kw">rownames</span>(tabliczka_dodawania) &lt;-<span class="st"> </span>TRUE_FALSE_NA
 <span class="kw">colnames</span>(tabliczka_dodawania) &lt;-<span class="st"> </span>TRUE_FALSE_NA
@@ -123,39 +123,13 @@ tabliczka_mnozenia</code></pre>
 ## 5 Leopard   70     1.4       85    Azja        21     Kot
 ## 6  Gepard   60     1.4      115  Afryka        12     Kot</code></pre>
 </div>
-<div id="wczytanie-danych-1" class="slide section level1">
-<h1>Wczytanie danych</h1>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
-<span class="kw">head</span>(koty_ptaki, <span class="dv">2</span>)</code></pre>
-<pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
-## 1  Tygrys  300     2.5       60    Azja        25     Kot
-## 2     Lew  200     2.0       80  Afryka        29     Kot</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(auta2012, <span class="dv">2</span>)</code></pre>
-<pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW      Marka     Model Wersja
-## 1 49900    PLN      49900       brutto 140 103        Kia    Carens       
-## 2 88000    PLN      88000       brutto 156 115 Mitsubishi Outlander       
-##   Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km          Rodzaj.paliwa
-## 1          4/5              1991         41000 olej napedowy (diesel)
-## 2          4/5              2179         46500 olej napedowy (diesel)
-##   Rok.produkcji Kolor Kraj.aktualnej.rejestracji Kraj.pochodzenia
-## 1          2008                           Polska                 
-## 2          2008                           Polska                 
-##   Pojazd.uszkodzony Skrzynia.biegow Status.pojazdu.sprowadzonego
-## 1                          manualna                             
-## 2                          manualna                             
-##                                                                                                                                                                                Wyposazenie.dodatkowe
-## 1                         ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
-## 2 ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby</code></pre>
-<p>Dla zbioru danych <code>koty_ptaki</code> każdy wiersz opisuje charakterystyki jednego gatunku.</p>
-<p>Dla zbioru danych <code>auta2012</code> każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.</p>
-</div>
 <div id="statystyki-opisowe" class="slide section level1">
 <h1>Statystyki opisowe</h1>
 <p>Na bazie zmiennej <code>druzyna</code> zbudujmy zmienną logiczną <code>czy_to_kot</code>, a na bazie zmiennej <code>waga</code> zbudujemy zmienną logiczną <code>czy_jest_ciezki</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">czy_to_kot &lt;-<span class="st"> </span>koty_ptaki$druzyna ==<span class="st"> &quot;Kot&quot;</span>
 czy_jest_ciezki &lt;-<span class="st"> </span>koty_ptaki$waga &gt;=<span class="st"> </span><span class="dv">10</span></code></pre>
 <p>Traktując zmienną logiczną jak dwuwartościową zmienną jakościową, możemy używać na niej np. funkcji do tabel liczebności, zarówno jednowymiarowych jak i dwuwymiarowych.</p>
-<p>Patrząc na wyniki dla tabli liczebności dla dwóch zmiennych jest tylko jeden zwierzak w tym zbiorze danych, który jest cięższy niż 10kg ale nie jest kotem.</p>
+<p>Patrząc na wyniki dla tabeli liczebności dla dwóch zmiennych jest tylko jeden zwierzak w tym zbiorze danych, który jest cięższy niż 10kg ale nie jest kotem.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(czy_to_kot)</code></pre>
 <pre><code>## czy_to_kot
 ## FALSE  TRUE 
@@ -179,7 +153,7 @@ czy_jest_ciezki &lt;-<span class="st"> </span>koty_ptaki$waga &gt;=<span class="
 <pre class="sourceCode r"><code class="sourceCode r">!czy_to_kot</code></pre>
 <pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE
 ## [12]  TRUE  TRUE</code></pre>
-<p>W operacjach arytmetycznych wartości logiczne TRUE sa przekształcane na 1 a wartości FALSE na 0. Dzięki czemu, jeżeli chcemy policzyć ile wartości ma wartość TRUE to wystarczy wartość wektora zsumować. Poniższy przykłąd pokazuje ile jest kotów i nie kotów w zbiorze danych.</p>
+<p>W operacjach arytmetycznych wartości logiczne TRUE są przekształcane na 1 a wartości FALSE na 0. Dzięki czemu, jeżeli chcemy policzyć ile wartości ma wartość TRUE to wystarczy wartość wektora zsumować. Poniższy przykład pokazuje ile jest kotów i nie kotów w zbiorze danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(czy_to_kot)</code></pre>
 <pre><code>## [1] 7</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(!czy_to_kot)</code></pre>
@@ -190,7 +164,7 @@ czy_jest_ciezki &lt;-<span class="st"> </span>koty_ptaki$waga &gt;=<span class="
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(czy_to_kot *<span class="st"> </span>koty_ptaki$waga)</code></pre>
 <pre><code>## [1] 860</code></pre>
 </div>
-<div id="wczytanie-danych-2" class="slide section level1">
+<div id="wczytanie-danych-1" class="slide section level1">
 <h1>Wczytanie danych</h1>
 <p>Zbiór danych <code>koty_ptaki</code> składa się z 13 wierszy. Można cały ten zbiór danych wyświetlić na ekranie. Nie zawsze potrzebujemy więc specjalnych statystyk opisowych by zrozumieć co się dzieje w takich małych zbiorach danych.</p>
 <p>Dlatego, dalsze ćwiczenia ze zmiennymi ilościowymi przeprowadzimy na znaczeni większym zbiorze danych z ponad 200 tysiącami wartości, o nazwie <code>auta2012</code>, który znajduje się również w pakiecie <code>SmarterPoland</code>.</p>
@@ -250,16 +224,16 @@ czy_jest_ciezki &lt;-<span class="st"> </span>koty_ptaki$waga &gt;=<span class="
 </ul>
 <p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
 </div>
-<div id="statystyki-opisowe-2" class="slide section level1">
-<h1>Statystyki opisowe</h1>
-<p>Porównując wartości należy uważać na wartości nieokreślone, które niezawsze zachowują się zgodnie z naszą intuicją, ale zawsze logicznie.</p>
-<p>Przykładowo, operator <code>!=</code> testuje czy wartości są różne (to negacja operatora <code>==</code>). Jak sprawdzić czy wartości w wektorze są różne od wartości brakującej <code>NA</code>? Zacznijmy od przykłądu jak tego nie robić.</p>
+<div id="testy-dla-typow-i-wartosci" class="slide section level1">
+<h1>Testy dla typów i wartości</h1>
+<p>Porównując wartości należy uważać na wartości nieokreślone, które nie zawsze zachowują się zgodnie z naszą intuicją, ale zawsze logicznie.</p>
+<p>Przykładowo, operator <code>!=</code> testuje czy wartości są różne (to negacja operatora <code>==</code>). Jak sprawdzić czy wartości w wektorze są różne od wartości brakującej <code>NA</code>? Zacznijmy od przykładu jak tego nie robić.</p>
 <pre class="sourceCode r"><code class="sourceCode r">czyOkreslonyPrzebieg &lt;-<span class="st"> </span>auta2012$Przebieg.w.km !=<span class="st"> </span><span class="ot">NA</span>
 <span class="kw">head</span>(auta2012$Przebieg.w.km)</code></pre>
 <pre><code>## [1]  41000  46500   8000 200000 169400 141100</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(czyOkreslonyPrzebieg)</code></pre>
 <pre><code>## [1] NA NA NA NA NA NA</code></pre>
-<p>Wynikiem porównania <code>!= NA</code> jest wektor wartości <code>NA</code>. Jest tak ponieważ jeżeli prawa część porównania jest nieznana to też niewiadomo czy wartość 41000 jest od niej różna czy nie.</p>
+<p>Wynikiem porównania <code>!= NA</code> jest wektor wartości <code>NA</code>. Jest tak ponieważ jeżeli prawa część porównania jest nieznana to też nie wiadomo czy wartość 41000 jest od niej różna czy nie.</p>
 <p>Aby sprawdzić, czy dana wartość jest wartością brakującą możemy wykorzystać funkcję <code>is.na()</code>. Jako wynik zwraca TRUE jeżeli testowana wartość to NA i FALSE w przeciwnym przypadku.</p>
 <p>Możemy użyć tej funkcji by policzyć procent wartości nie brakujących.</p>
 <pre class="sourceCode r"><code class="sourceCode r">czyOkreslonyPrzebieg &lt;-<span class="st"> </span>!<span class="kw">is.na</span>(auta2012$Przebieg.w.km)
