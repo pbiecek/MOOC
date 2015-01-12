@@ -243,75 +243,81 @@ Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOO
 
 # Graficzne statystyki opisowe
 
-Tabele liczebności są proste w interpretacji. Podobnie jednak jak w innych przypadkach, graficzne przedstawienie tych liczb pozwala na łatwiejsze dostrzeżenie zależności pomiędzy danymi. Koniec końców w tabeli liczb łatwo pomylić się nawet gdy chodzi o liczbę cyfr w liczbie. Na wykresie takie różnice natychmiast rzucają się w oczy.
+Tabele liczebności są proste w interpretacji. Podobnie jednak jak w innych przypadkach, graficzne przedstawienie tych liczb pozwala na łatwiejsze dostrzeżenie co się dzieje z danymi. Koniec końców w tabeli liczb łatwo pomylić się nawet gdy chodzi o liczbę cyfr w liczbie. Na wykresie takie wartości natychmiast rzucają się w oczy.
 
 Zazwyczaj tabele liczebności przedstawia się za pomocą wykresów słupkowych.
 Wykresy słupkowe można wykonać np. funkcją `barplot()`.
 
-```{r, warning=FALSE}
-(tabela = table(auta2012$Waluta))
-barplot(tabela)
-```
-
-Jeżeli chcemy, by słupki były przedstawiane poziomo, można dodać argument `horiz = TRUE`.
-
-```{r, warning=FALSE, fig.height=8}
-barplot(tabela, horiz = TRUE)
+```{r, warning=FALSE, fig.width=5, fig.height=5}
+(waluty <- table(auta2012$Waluta))
+barplot(waluty)
 ```
 
 ---
 
+# Graficzne statystyki opisowe
+
+Jeżeli chcemy, by słupki były przedstawiane poziomo, do funckji `barplot()` można dodać argument `horiz = TRUE`.
+
 Domyślnie wartości są uporządkowane alfabetycznie. Nie zawsze jednak taka kolejność ma sens.
 W tym przypadku rozsądniej jest posortować dane malejąco, co można wykonać z użyciem funkcji `sort()`.
+
 Argument `las=1` powoduje, że oś OY ma etykiety ustawione poziomo.
 
-```{r, warning=FALSE, fig.height=8}
-(posortowanaTabela = sort(tabela))
-barplot(posortowanaTabela, horiz = TRUE, las=1)
+```{r, warning=FALSE, fig.width=5, fig.height=5}
+posortowaneWaluty <- sort(waluty)
+barplot(posortowaneWaluty, horiz = TRUE, las=1)
 ```
 
 ---
 
 # Zadania:
-+ Przedstaw graficznie tabelę liczebności dla zmiennej `Kraj.pochodzenia`. Wypróbuj wykres pionowy i poziomy. Aby obrócić kierunek etykiet na osiach dodaj do funkcji `barplot()` argument `las=1`.
 
-# Odpowiedzi:
-```{r, warning=FALSE, fig.height=8}
-posortowanaTabela = sort(table(auta2012$Kraj.pochodzenia))
-barplot(posortowanaTabela, horiz = TRUE, las=1)
-```
++ Przedstaw graficznie tabelę liczebności dla zmiennej `Kraj.pochodzenia`. 
 
-Podobnie graficznie można przedstawiać cechy logiczne i napisowe.
+Wypróbuj wykres pionowy i poziomy. 
+
+Aby obrócić kierunek etykiet na osiach dodaj do funkcji `barplot()` argument `las=1`.
+
+Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
 
 ---
 
 # Napisy czy czynniki?
 
-Z wyglądu cechy jakościowe (czynniki) przypominają cechy napisowe. 
+Z wyglądu, cechy jakościowe (czynniki) przypominają cechy napisowe. 
 Jednak pod spodem, ich reprezentacja jest zupełnie inna.
-Czynniki nie są pamiętane jako napisy, ale jako para - wektor liczb i słownik, określający, który napis odpowiada, której liczbie.
+Czynniki nie są pamiętane jako napisy, ale jako para - wektor liczb i słownik, określający, który napis odpowiada, której liczbie. Dzięki temu można zaoszczędzić pamięć przy przechowywaniu dużych zbiorów danych. 
 
-Gdy dane są wczytywane z pliku w którym są napisy, dane te mogą być wczytane zarówno jako zmienne napisowe jak i jako czynnikowe. Domyślnie napisy są wczytywane jako czynniki, można to zobaczyć analizując wynik funkcji `str()`. 
+Na napisach zazwyczaj wykonuje się inne operacje niż na zmiennych jakościowych, może się więc tak zdarzyć, że celowo chcemy jakieś dane odczytać jako napisy. Ale ddy dane są wczytywane z pliku tekstowego w którym są napisy, domyślnie napisy są wczytywane jako czynniki. 
 
 W poniższym przykładzie, takie zmienne jak `gatunek` i `habitat` są wczytywane jako zmienna klasy `factor`. Efektem ubocznym jest sposób wyświetlania wyników np. przez zmienną `cat()`. Dla zmiennej czynnikowej, ta funkcja na ekranie wypisze liczby a nie wartości napisowe. 
 
 ```{r, warning=FALSE, fig.height=8}
-koty_ptaki <- read.table("http://biecek.pl/MOOC/dane/koty.csv", 
+koty_ptaki <- read.table("http://biecek.pl/MOOC/dane/koty_ptaki.csv", 
           sep=";", dec=",", header=TRUE)
 str(koty_ptaki)
+class(koty_ptaki$gatunek)
 cat(koty_ptaki$gatunek)
 ```
 
-Funkcja `read.table()` ma argument `stringsAsFactors` określający w jaki sposób wczytywać kolumny z napisami. Ustawiwszy argument `stringsAsFactors=FALSE` wymuszamy wczytywanie danych jako zmienne napisowe. Zajmie to trochę więcej pamięci, ale samo wczytywanie będzie trochę szybsze.
+---
+
+# Napisy czy czynniki?
+
+Funkcja `read.table()` posiada argument `stringsAsFactors` określający w jaki sposób wczytywać kolumny z napisami. Ustawiwszy argument `stringsAsFactors=FALSE` wymuszamy wczytywanie danych jako zmienne napisowe. Zajmie to trochę więcej pamięci, ale samo wczytywanie będzie trochę szybsze. 
 
 Zauważmy jak teraz wygląda wynik funkcji `str()` i `cat()`.
 
 ```{r, warning=FALSE, fig.height=8}
-koty_ptaki <- read.table("http://biecek.pl/MOOC/dane/koty.csv", 
+koty_ptaki <- read.table("http://biecek.pl/MOOC/dane/koty_ptaki.csv", 
           sep=";", dec=",", header=TRUE, stringsAsFactors=FALSE)
 str(koty_ptaki)
+class(koty_ptaki$gatunek)
 cat(koty_ptaki$gatunek)
 ```
+
+Tym razem kolumna `gatunek` została wczytana jako wetkor napisów. 
 
 ---
 
@@ -319,7 +325,9 @@ cat(koty_ptaki$gatunek)
 
 Zmienne czynnikowe można konwertować na napisy funkcją `as.character()`.
 
-Napisy można konwertować na zmienne czynnikowe funkcją `as.factor()`
+Napisy można konwertować na zmienne czynnikowe funkcją `as.factor()`. 
+
+Przedstawmy działanie obu funkcji na przykładzie.
 
 ```{r, warning=FALSE, fig.height=8}
 czynniki <- as.factor(koty_ptaki$gatunek)
@@ -327,54 +335,99 @@ str(czynniki)
 napisy <- as.character(czynniki)
 str(napisy)
 ```
-
 ---
 
 # Tablice częstości
 
-Tablice częstości dla więcej niż jednej cechy wygodnie jest tworzyć funkcją `xtabs()`.
-Pierwszym argumentem jest formuła o składni `~ zmienna_1 + .. + zmienna_n`, t.j. rozpoczynająca się tyldą a następnie ze zmiennymi porozdzielanymi znakiem plusa, drugim argumentem jest ramka danych, która powinna zawierać zmienne wymienione w formule. 
+A co gdybyśmy chcieli przedstawić zależność pomiędzy dwoma zmiennymi jakościowymi? Można to zrobić używając funkcji `table()` (należy kolejne zmienne podawać jako kolrjne argumenty) ale można też użyć funkcją `xtabs()`, która jest trochę wygodniejsza w pracy.
+
+Pierwszym argumentem tej funkcji jest formuła o składni `~ zmienna_1 + .. + zmienna_n`, t.j. rozpoczynająca się tyldą a następnie ze zmiennymi porozdzielanymi znakiem plusa. Drugim argumentem jest ramka danych, która powinna zawierać zmienne wymienione w formule. 
 
 Wynikiem jest tablica kontyngencji o tylu wymiarach, ile zmiennych występuje w formule.
 
+Przykładowo, zestawiając ze sobą kraj pochodzenia oraz walutę w ogłoszeniu, otrzymujemy tablicę częstości o wymiarach 32 wiersze i 8 kolumn. Pierwszy wiersz tej tabeli odpowiada pusterj wartości kraju pochodzenia, stąd brak nazwy w pierwszym wierszu.
+
 ```{r, warning=FALSE, fig.height=8}
-tabela <- xtabs(~Kraj.pochodzenia+Waluta, auta2012)
-head(tabela)
+(krajWaluta <- xtabs( ~ Kraj.pochodzenia + Waluta, auta2012))
 ```
 
 ---
 
 # Tablice częstości
 
-Tablice częstości nie są ramkami danych, choć gdy w grę wchodzi jedna lub dwie zmienne, to wyglądają jak ramki. Muszą być czymś innym, ponieważ muszą też obsługiwać sytuacje, gdy tablica kontyngencji dotyczy trzech lub większej liczby zmiennych a wynikowa macierz kontyngencji ma więcej wymiarów niż dwa. 
+Tablice częstości nie są ramkami danych. 
 
-Gdy przekształci się wynik funkcji `xtabs()` do ramki danych, otrzyma się tak zwaną reprezentację rzadką macierzy kontyngencji, w której pierwsze kolumny opisują wszystkie kombinacje czynników zmiennych a ostania kolumna opisuje liczebność występowania poszczególnej kombinacji czynników.
+Gdy w grę wchodzą dwie zmienne, to wyglądają jak ramki danych, mają wiersze i kolumny. Muszą być jednak czymś innym, ponieważ w sytuacji, gdy tablica kontyngencji dotyczy trzech lub większej liczby zmiennych to wynikowa macierz kontyngencji ma więcej wymiarów niż dwa. 
+
+Funkcją `as.data.frame` można przekształcić wielowymairowe tabele do ramki danych. Otrzyma się w tym przypadku tak zwaną reprezentację rzadką macierzy kontyngencji, w której pierwsze kolumny opisują wszystkie kombinacje czynników zmiennych a ostania kolumna opisuje liczebność występowania poszczególnej kombinacji czynników.
 
 ```{r, warning=FALSE, fig.height=8}
 xt <- xtabs(~Kraj.pochodzenia+Waluta, auta2012)
 xt <- as.data.frame(xt)
-head(xt)
+xt[xt$Freq > 0, ]
 ```
 
 ---
 
-# Kolejność czynników
+# Przekształcanie zmiennych ilościowych w jakościowe
+
+Opisując dane ilościowe, często można ułątwić ich zrozumienie, jeżeli zmienne ilościowe podzieli się na przedziały. Takie przedziały są już zmienną jakościową.
+
+Zmienną jakościową z ilościowej można stworzyć używając funkcji `cut()`, która za prierwszy argument przyjmuje zmienną ilościową a za drugi przyjmuje liczbę przedziałów do zbudowania lub punkty odcięcia dla tych przedziałów.
+
+W przedziale poniżęj przekształcimy zmienną `waga` ze zbioru `koty_ptaki` na cztery przedziały, 0-1, 1-10, 10-100 i 100-1000. Tak stworzoną zmienną dodamy do zbioru `koty_ptaki` pod nazwą `wagaKategoria`.
+
+```{r, warning=FALSE, fig.height=8}
+koty_ptaki$waga
+koty_ptaki$wagaKategoria <- cut(koty_ptaki$waga, c(0,1,10,100,1000))
+table(koty_ptaki$wagaKategoria)
+```
+---
+
+# Tablice częstości
+
+Wykorzystajmy tą nowo utworzoną zmienną do przedstawienia graficznych statystyk dla pary zmiennych jakościowych.
+
+Zestawimy wagę ze zmienną drużyna. A następnie tę dwuwymiarową tabelę przekażemy do funkcji `mosaicplot()`. 
+
+Rysuje ona tak zwany wykres mozaikowy przedstawiający jednocześnie wiele zależności. W pierwszym kroku szerokość kolumn odpowiada proporcjom wartości Kot i Ptak w zbiorze danych (jest ich prawie po równo, dlatego obie kolumny mają dosyć podobną szeorkość). Następnie wysokość wierszy odpowiada względnemu udziałowi poszcezgólnych wartości w określonej kolumnie. W kolumnie Kot dominuje przedział dla wagi 10-100, a w kolumnie Ptak dominuj eprzedział 1-10 oznaczony kolorem niebieskim. 
+
+Jest to sposób na przedstawienie rozkładów warunkowych. Bardzo użyteczne, jednak wymagające pewnej wprawy w czytaniu. Więcej o wykresach mozaikowych i innych metodach przedstawiania dwóch zmiennych jakościowych znaleźć można w sezonie 3.
+
+```{r, warning=FALSE, fig.height=5, fig.height=5}
+(druzynaWaga <- xtabs(~druzyna + wagaKategoria, koty_ptaki))
+
+mosaicplot(druzynaWaga, las=2, col=c("green", "blue", "grey", "black"))
+```
+
+---
+
+# Kolejność i nazwy czynników
 
 Domyślna kolejność czynników, to kolejność leksykograficzna. 
 Tworząc wykresy, zazwyczaj wartości prezentowane są zgodnie z kolejnością opisaną przez atrybut `levels`.
 
-```{r, warning=FALSE, fig.height=8}
+```{r, warning=FALSE, fig.height=5, fig.width=5}
 levels(auta2012$Rodzaj.paliwa)
 boxplot(Rok.produkcji ~ Rodzaj.paliwa, auta2012, las=2)
 ```
 
-Tę kolejność można jednak zmienić. 
-Jednym ze sposobów określania kolejności czynników jest argument `levels` w funkcji `factor()`. Czynniki będą mieć kolejność zgodną z tam przedstawioną.
+---
+
+# Kolejność i nazwy czynników
+
+Domyślną kolejność można  zmienić. 
+
+Jednym ze sposobów określania kolejności czynników jest argument `levels` w funkcji `factor()`. Czynniki będą mieć kolejność zgodną z tam wskazaną.
 
 ```{r, warning=FALSE, fig.height=8}
 levels(auta2012$Skrzynia.biegow)
 auta2012$Skrzynia.biegow <- factor(auta2012$Skrzynia.biegow, levels=c("manualna","", "automatyczna"))
 ```
+
+---
+
+# Kolejność i nazwy czynników
 
 Jeżeli chcemy ,,posortować'' poziomy zgodnie z pewną cechą ilościową, to wygodne będzie użycie funkcji `reorder()`. Jako argumenty pobiera ona wektor ze zmienną czynnikową, wektor z dowolną zmienną i funkcję. Dla każdej grupy określonej przez zmienną czynnikową, wartości wskazanych przez drugi argument, wyznaczana jest wartość funkcji - trzeciego argumentu. Następnie czynniki są porządkowane zgodnie z kolejnością wyników trzeciej funkcji.
 
@@ -388,10 +441,11 @@ boxplot(Rok.produkcji ~ Rodzaj.paliwa.posortowany, auta2012, las=2)
 
 ---
 
-# Nazwy czynników
+# Kolejność i nazwy czynników
 
-Nazwy czynników można też zmieniać.
-Najprościej można to zrobić używając funkcji `levels<-()`.
+Nazwy czynników można też dowolnie zmieniać.
+
+Najprościej można to zrobić używając funkcji `levels<-()` tak jak na poniższym przykładzie.
 
 ```{r, warning=FALSE, fig.height=8}
 levels(auta2012$Rodzaj.paliwa)
@@ -399,5 +453,3 @@ levels(auta2012$Rodzaj.paliwa)
 levels(auta2012$Rodzaj.paliwa) <- c("", "B", "B+C", "B+L", "E", "H", "I", "L", "D", "W")
 table(auta2012$Rodzaj.paliwa)
 ```
-
-+ Mozaiki

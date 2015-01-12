@@ -318,6 +318,9 @@ auta2012wybrane &lt;-<span class="st"> </span>auta2012[auta2012$Cena.w.PLN &lt;<
 <ul>
 <li><p>Ile zmiennych w zbiorze danych <code>auta2012</code> to zmienne jakościowe?</p></li>
 <li><p>Zmienna <code>Liczba.drzwi</code> przyjmuje wartości <code>2/3</code> i <code>4/5</code>. Zachowuje się ona jako zmienna jakościowa. Jednak można uznać, że liczba drzwi to cecha ilościowa, ponieważ opisuje <em>ilość</em> drzwi w samochodzie. Jak wyjaśnić tę dualność?</p></li>
+<li><p>Cecha <code>Marka</code> opisuje markę samochodu. Sprawdź, która marka jest najpopularniejsza.</p></li>
+<li><p>Cecha <code>Rodzaj.paliwa</code> opisuje rodzaj paliwa wykorzystywanego przez auto. Czy jest to benzyna, olej, gaz? Sprawdź jaki procent samochodów jest napędzana na benzynę.</p></li>
+<li><p>Przedstaw graficznie tabelę liczebności dla zmiennej <code>Kraj.pochodzenia</code>. Wypróbuj wykres pionowy i poziomy. Aby obrócić kierunek etykiet na osiach dodaj do funkcji <code>barplot()</code> argument <code>las=1</code>.</p></li>
 </ul>
 </div>
 <div id="odpowiedzi-sezon-1-odcinek-12" class="slide section level1">
@@ -331,6 +334,15 @@ auta2012wybrane &lt;-<span class="st"> </span>auta2012[auta2012$Cena.w.PLN &lt;<
 <p>Pewne zmienne, w zależności od kontekstu, mogą być traktowane i analizowane jak zmienne ilościowe lub zmienne jakościowe. Do nas należy wybór, która z tych opcji jest właściwsza.</p>
 <p>Przykładowo, w typowych analizach takich danych nie ma sensu liczenia sumy lub średniej liczby drzwi. Co by bowiem by znaczyło, że auta wystawione do sprzedaży w styczniu miały średnio 3.8 drzwi? Dla zwykłego odbiory taka średnia nie ma sensu, niewiele bowiem mówi o zmiennej. Nie ma specjalnie sensu stwierdzenie, że samochody marki Porsche mają średnio o 0.5 mniej drzwi niż samochody marki Toyota.</p>
 <p>Ale już, gdybyśmy byli warsztatem malarskim, który ma pomalować te wszystkie drzwi, i w cenniku ma cenę od elementu, dla takiego warsztatu suma drzwi może mieć sens. W takim przypadku sensownie byłoby potraktowanie tej zmiennej jako zmiennej ilościowej i zsumowanie liczby drzwi.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Nazwa najpopularniejszej marki</span>
+<span class="kw">names</span>(<span class="kw">which.max</span>(<span class="kw">table</span>(auta2012$Marka)))
+
+<span class="co"># Jaki procent aut jeździ na benzynie?</span>
+<span class="dv">100</span>*<span class="kw">prop.table</span>(<span class="kw">table</span>(auta2012$Rodzaj.paliwa))[<span class="st">&quot;benzyna&quot;</span>]
+
+<span class="co"># Kraj pochodzenia aut</span>
+posortowanaTabela &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">table</span>(auta2012$Kraj.pochodzenia))
+<span class="kw">barplot</span>(posortowanaTabela, <span class="dt">horiz =</span> <span class="ot">TRUE</span>, <span class="dt">las=</span><span class="dv">1</span>)</code></pre>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

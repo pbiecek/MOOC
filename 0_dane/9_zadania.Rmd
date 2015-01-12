@@ -339,6 +339,9 @@ hist(auta2012wybrane$Cena.w.PLN, 50, col="grey")
 
 + Cecha `Rodzaj.paliwa` opisuje rodzaj paliwa wykorzystywanego przez auto. Czy jest to benzyna, olej, gaz? Sprawdź jaki procent samochodów jest napędzana na benzynę.
 
++ Przedstaw graficznie tabelę liczebności dla zmiennej `Kraj.pochodzenia`. Wypróbuj wykres pionowy i poziomy. Aby obrócić kierunek etykiet na osiach dodaj do funkcji `barplot()` argument `las=1`.
+
+
 
 ---
 
@@ -366,4 +369,8 @@ names(which.max(table(auta2012$Marka)))
 
 # Jaki procent aut jeździ na benzynie?
 100*prop.table(table(auta2012$Rodzaj.paliwa))["benzyna"]
+
+# Kraj pochodzenia aut
+posortowanaTabela <- sort(table(auta2012$Kraj.pochodzenia))
+barplot(posortowanaTabela, horiz = TRUE, las=1)
 ```
