@@ -1,7 +1,7 @@
 ---
 title: "Zadania i odpowiedzi"
 author: "pogRomcy danych"
-date: "sezon 0 / odcinek 0 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 0 / odcinek 0 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -335,6 +335,10 @@ hist(auta2012wybrane$Cena.w.PLN, 50, col="grey")
 
 + Zmienna `Liczba.drzwi` przyjmuje wartości `2/3` i `4/5`. Zachowuje się ona jako zmienna jakościowa. Jednak można uznać, że liczba drzwi to cecha ilościowa, ponieważ opisuje _ilość_ drzwi w samochodzie. Jak wyjaśnić tę dualność?
 
++ Cecha `Marka` opisuje markę samochodu. Sprawdź, która marka jest najpopularniejsza.
+
++ Cecha `Rodzaj.paliwa` opisuje rodzaj paliwa wykorzystywanego przez auto. Czy jest to benzyna, olej, gaz? Sprawdź jaki procent samochodów jest napędzana na benzynę.
+
 
 ---
 
@@ -356,3 +360,10 @@ Nie ma specjalnie sensu stwierdzenie, że samochody marki Porsche mają średnio
 
 Ale już, gdybyśmy byli warsztatem malarskim, który ma pomalować te wszystkie drzwi, i w cenniku ma cenę od elementu, dla takiego warsztatu suma drzwi może mieć sens. W takim przypadku sensownie byłoby potraktowanie tej zmiennej jako zmiennej ilościowej i zsumowanie liczby drzwi.
 
+```{r, eval=FALSE}
+# Nazwa najpopularniejszej marki
+names(which.max(table(auta2012$Marka)))
+
+# Jaki procent aut jeździ na benzynie?
+100*prop.table(table(auta2012$Rodzaj.paliwa))["benzyna"]
+```
