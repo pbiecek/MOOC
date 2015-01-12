@@ -390,3 +390,23 @@ auta2012$Przebieg.w.kmKat <- cut(auta2012$Przebieg.w.km, c(0-1000, 10000, 100000
 mosaicplot(przebiegRok, las=2, color=TRUE)
 
 ```
+
+---
+
+# Zadania, sezon 1, odcinek 13
+
++ Sprawdź ile samochodów ma cenę ofertową poniżej 2 000 pln.
+
++ Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3.
+
+---
+
+# Odpowiedzi, sezon 1, odcinek 13
+
+```{r, eval=FALSE}
+# Liczba ofert poniżej 2 000
+sum(auta2012$Cena.w.PLN < 2000, na.rm=TRUE)
+
+# Procent aut o silnikach >= 1500cm3
+100*mean(auta2012$Pojemnosc.skokowa >= 1500, na.rm=TRUE)
+```

@@ -357,6 +357,21 @@ auta2012$Przebieg.w.kmKat &lt;-<span class="st"> </span><span class="kw">cut</sp
 <span class="co"># wykres tablicy liczebności</span>
 <span class="kw">mosaicplot</span>(przebiegRok, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">color=</span><span class="ot">TRUE</span>)</code></pre>
 </div>
+<div id="zadania-sezon-1-odcinek-13" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 13</h1>
+<ul>
+<li><p>Sprawdź ile samochodów ma cenę ofertową poniżej 2 000 pln.</p></li>
+<li><p>Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3.</p></li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-13" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 13</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Liczba ofert poniżej 2 000</span>
+<span class="kw">sum</span>(auta2012$Cena.w.PLN &lt;<span class="st"> </span><span class="dv">2000</span>, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
+
+<span class="co"># Procent aut o silnikach &gt;= 1500cm3</span>
+<span class="dv">100</span>*<span class="kw">mean</span>(auta2012$Pojemnosc.skokowa &gt;=<span class="st"> </span><span class="dv">1500</span>, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>
