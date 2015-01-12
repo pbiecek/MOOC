@@ -293,7 +293,7 @@ Na napisach zazwyczaj wykonuje się inne operacje niż na zmiennych jakościowyc
 
 W poniższym przykładzie, takie zmienne jak `gatunek` i `habitat` są wczytywane jako zmienna klasy `factor`. Efektem ubocznym jest sposób wyświetlania wyników np. przez zmienną `cat()`. Dla zmiennej czynnikowej, ta funkcja na ekranie wypisze liczby a nie wartości napisowe. 
 
-```{r, warning=FALSE, fig.height=8}
+```{r, warning=FALSE, fig.height=5, fig.width=5}
 koty_ptaki <- read.table("http://biecek.pl/MOOC/dane/koty_ptaki.csv", 
           sep=";", dec=",", header=TRUE)
 str(koty_ptaki)
@@ -309,7 +309,7 @@ Funkcja `read.table()` posiada argument `stringsAsFactors` określający w jaki 
 
 Zauważmy jak teraz wygląda wynik funkcji `str()` i `cat()`.
 
-```{r, warning=FALSE, fig.height=8}
+```{r, warning=FALSE, fig.height=5, fig.width=5}
 koty_ptaki <- read.table("http://biecek.pl/MOOC/dane/koty_ptaki.csv", 
           sep=";", dec=",", header=TRUE, stringsAsFactors=FALSE)
 str(koty_ptaki)
@@ -329,7 +329,7 @@ Napisy można konwertować na zmienne czynnikowe funkcją `as.factor()`.
 
 Przedstawmy działanie obu funkcji na przykładzie.
 
-```{r, warning=FALSE, fig.height=8}
+```{r, warning=FALSE, fig.height=5, fig.width=5}
 czynniki <- as.factor(koty_ptaki$gatunek)
 str(czynniki)
 napisy <- as.character(czynniki)
@@ -347,7 +347,7 @@ Wynikiem jest tablica kontyngencji o tylu wymiarach, ile zmiennych występuje w 
 
 Przykładowo, zestawiając ze sobą kraj pochodzenia oraz walutę w ogłoszeniu, otrzymujemy tablicę częstości o wymiarach 32 wiersze i 8 kolumn. Pierwszy wiersz tej tabeli odpowiada pusterj wartości kraju pochodzenia, stąd brak nazwy w pierwszym wierszu.
 
-```{r, warning=FALSE, fig.height=8}
+```{r, warning=FALSE, fig.height=5, fig.width=5}
 (krajWaluta <- xtabs( ~ Kraj.pochodzenia + Waluta, auta2012))
 ```
 
@@ -361,7 +361,7 @@ Gdy w grę wchodzą dwie zmienne, to wyglądają jak ramki danych, mają wiersze
 
 Funkcją `as.data.frame` można przekształcić wielowymairowe tabele do ramki danych. Otrzyma się w tym przypadku tak zwaną reprezentację rzadką macierzy kontyngencji, w której pierwsze kolumny opisują wszystkie kombinacje czynników zmiennych a ostania kolumna opisuje liczebność występowania poszczególnej kombinacji czynników.
 
-```{r, warning=FALSE, fig.height=8}
+```{r, warning=FALSE, fig.height=5, fig.width=5}
 xt <- xtabs(~Kraj.pochodzenia+Waluta, auta2012)
 xt <- as.data.frame(xt)
 xt[xt$Freq > 0, ]
@@ -377,7 +377,7 @@ Zmienną jakościową z ilościowej można stworzyć używając funkcji `cut()`,
 
 W przedziale poniżęj przekształcimy zmienną `waga` ze zbioru `koty_ptaki` na cztery przedziały, 0-1, 1-10, 10-100 i 100-1000. Tak stworzoną zmienną dodamy do zbioru `koty_ptaki` pod nazwą `wagaKategoria`.
 
-```{r, warning=FALSE, fig.height=8}
+```{r, warning=FALSE, fig.height=5, fig.width=5}
 koty_ptaki$waga
 koty_ptaki$wagaKategoria <- cut(koty_ptaki$waga, c(0,1,10,100,1000))
 table(koty_ptaki$wagaKategoria)
@@ -394,7 +394,7 @@ Rysuje ona tak zwany wykres mozaikowy przedstawiający jednocześnie wiele zale�
 
 Jest to sposób na przedstawienie rozkładów warunkowych. Bardzo użyteczne, jednak wymagające pewnej wprawy w czytaniu. Więcej o wykresach mozaikowych i innych metodach przedstawiania dwóch zmiennych jakościowych znaleźć można w sezonie 3.
 
-```{r, warning=FALSE, fig.height=5, fig.height=5}
+```{r, warning=FALSE, fig.height=5, fig.width=5}
 (druzynaWaga <- xtabs(~druzyna + wagaKategoria, koty_ptaki))
 
 mosaicplot(druzynaWaga, las=2, col=c("green", "blue", "grey", "black"))
@@ -420,9 +420,11 @@ Domyślną kolejność można  zmienić.
 
 Jednym ze sposobów określania kolejności czynników jest argument `levels` w funkcji `factor()`. Czynniki będą mieć kolejność zgodną z tam wskazaną.
 
-```{r, warning=FALSE, fig.height=8}
+```{r, warning=FALSE, fig.height=5, fig.width=5}
 levels(auta2012$Skrzynia.biegow)
-auta2012$Skrzynia.biegow <- factor(auta2012$Skrzynia.biegow, levels=c("manualna","", "automatyczna"))
+auta2012$Skrzynia.biegow <- factor(auta2012$Skrzynia.biegow, 
+                                levels=c("manualna","", "automatyczna"))
+levels(auta2012$Skrzynia.biegow)
 ```
 
 ---
@@ -431,10 +433,12 @@ auta2012$Skrzynia.biegow <- factor(auta2012$Skrzynia.biegow, levels=c("manualna"
 
 Jeżeli chcemy ,,posortować'' poziomy zgodnie z pewną cechą ilościową, to wygodne będzie użycie funkcji `reorder()`. Jako argumenty pobiera ona wektor ze zmienną czynnikową, wektor z dowolną zmienną i funkcję. Dla każdej grupy określonej przez zmienną czynnikową, wartości wskazanych przez drugi argument, wyznaczana jest wartość funkcji - trzeciego argumentu. Następnie czynniki są porządkowane zgodnie z kolejnością wyników trzeciej funkcji.
 
-W przykładzie poniżej, rodzaje paliwa są porządkowane zgodnie ze średnim rokiem produkcji aut o określonym rodzaju paliwa.
+W przykładzie poniżej, rodzaje paliwa są porządkowane zgodnie ze średnim rokiem produkcji aut o określonym rodzaju paliwa. Tak jak się można spodziewać, bardziej ,,nowoczesne'' paliwa są w autach młodszych. 
 
-```{r, warning=FALSE, fig.height=8}
-auta2012$Rodzaj.paliwa.posortowany <- reorder(auta2012$Rodzaj.paliwa, auta2012$Rok.produkcji, mean)
+```{r, warning=FALSE, fig.height=5, fig.width=5}
+auta2012$Rodzaj.paliwa.posortowany <- reorder(auta2012$Rodzaj.paliwa, 
+                                              auta2012$Rok.produkcji, 
+                                              mean)
 
 boxplot(Rok.produkcji ~ Rodzaj.paliwa.posortowany, auta2012, las=2)
 ```
@@ -447,7 +451,7 @@ Nazwy czynników można też dowolnie zmieniać.
 
 Najprościej można to zrobić używając funkcji `levels<-()` tak jak na poniższym przykładzie.
 
-```{r, warning=FALSE, fig.height=8}
+```{r, warning=FALSE, fig.height=5, fig.width=5}
 levels(auta2012$Rodzaj.paliwa)
 
 levels(auta2012$Rodzaj.paliwa) <- c("", "B", "B+C", "B+L", "E", "H", "I", "L", "D", "W")
