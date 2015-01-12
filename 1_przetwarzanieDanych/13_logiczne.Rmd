@@ -233,41 +233,60 @@ prop.table(table(starszyNiz5Lat)) * 100
 
 + Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3.
 
-# Odpowiedzi:
-+ `r sum(auta2012$Cena.w.PLN < 2000, na.rm=TRUE)`
-+ `r mean(auta2012$Pojemnosc.skokowa > 1500, na.rm=TRUE)`
+Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
 
 ---
 
-+ Dodać funkcję is.na() i sum(is.na()), wszystkie is.... są świetnym przykładem na TRUE / FALSE
+# Statystyki opisowe
 
+Porównując wartości należy uważać na wartości nieokreślone, które niezawsze zachowują się zgodnie z naszą intuicją, ale zawsze logicznie.
+
+Przykładowo, operator `!=` testuje czy wartości są różne (to negacja operatora `==`). Jak sprawdzić czy wartości w wektorze są różne od wartości brakującej `NA`? Zacznijmy od przykłądu jak tego nie robić.
+
+```{r}
+czyOkreslonyPrzebieg <- auta2012$Przebieg.w.km != NA
+head(auta2012$Przebieg.w.km)
+head(czyOkreslonyPrzebieg)
+```
+
+Wynikiem porównania `!= NA` jest wektor wartości `NA`. Jest tak ponieważ jeżeli prawa część porównania jest nieznana to też niewiadomo czy wartość 41000 jest od niej różna czy nie.
+
+Aby sprawdzić, czy dana wartość jest wartością brakującą możemy wykorzystać funkcję `is.na()`. Jako wynik zwraca TRUE jeżeli testowana wartość to NA i FALSE w przeciwnym przypadku.
+
+Możemy użyć tej funkcji by policzyć procent wartości nie brakujących.
+
+```{r}
+czyOkreslonyPrzebieg <- !is.na(auta2012$Przebieg.w.km)
+head(czyOkreslonyPrzebieg)
+# procent
+mean(czyOkreslonyPrzebieg) * 100
+```
+
+Funkcji do testowania jest więcej, zaczynają one swoje nazwy od `is.`, wystarczy więc wpisać te trzy znaki do konsoli i nacisnąć znak TAB by zobaczyć ich listę. Część z nich sprawdza czy zmienna jest określonego typu, np. `is.factor()`, `is.numeric()`, część sprawdza czy zmienna ma określone wartości np. `is.na()` czy `is.nan()`.
+
+---
 
 # Logiczne 'i' oraz logiczne 'lub'
 
-Cechy logiczne można przetwarzać używając również operatorów logicznych, w tym logicznego lub `|` oraz logicznego i `&`.
-
-Nazwy zmiennych i funkcji potrafią być długie, a R jest wrażliwy na wielkość liter i nie wybaczy nawet małych różnic.
-Przepisywanie nazw często kończy się literówkami, które z kolei prowadzą do trudnych w odnalezieniu błędów.
-W programie RStudio po wpisaniu kilku pierwszych liter nazwy funkcji, nazwy zmiennej lub nazwy kolumny w ramce danych klawiszem TAB włącza się uzupełnianie nazwy. W zależności od kontekstu wyświetlana jest lista nazw pasujących do pierwszych wprowadzonych znaków.
 
 
 ```{r, warning=FALSE}
-pochodziZPolski = auta2012$Kraj.aktualnej.rejestracji == "Polska"
-starszyNiz5Lat = auta2012$Rok.produkcji < 2007
-pochodziZPolskiIStarszyNiz5Lat = pochodziZPolski & starszyNiz5Lat
+pochodziZPolski <- auta2012$Kraj.aktualnej.rejestracji == "Polska"
+starszyNiz5Lat  <- auta2012$Rok.produkcji < 2007
+pochodziZPolskiIStarszyNiz5Lat   <- pochodziZPolski & starszyNiz5Lat
+pochodziZPolskiLubStarszyNiz5Lat <- pochodziZPolski | starszyNiz5Lat
+table(pochodziZPolski, starszyNiz5Lat)
 table(pochodziZPolskiIStarszyNiz5Lat)
+table(pochodziZPolskiLubStarszyNiz5Lat)
 ```
 
 ---
 
 # Zadania:
+
 + Sprawdź ile samochodów zarejestrowanych w Polsce ma cenę ofertową poniżej 2 000 pln.
+
 + Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3 oraz jest napędzanych olejem napędowym.
 
-# Odpowiedzi:
-+ `r sum(auta2012$Cena.w.PLN < 2000 & auta2012$Kraj.aktualnej.rejestracji == "Polska", na.rm=TRUE)`
-+ `r mean(auta2012$Pojemnosc.skokowa > 1500 & auta2012$Rodzaj.paliwa == 'olej napedowy (diesel)', na.rm=TRUE)`
-
-
-
+Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
 

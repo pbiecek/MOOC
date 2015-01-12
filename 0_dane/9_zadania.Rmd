@@ -399,6 +399,10 @@ mosaicplot(przebiegRok, las=2, color=TRUE)
 
 + Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3.
 
++ Sprawdź ile samochodów zarejestrowanych w Polsce ma cenę ofertową poniżej 2 000 pln.
+
++ Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3 oraz jest napędzanych olejem napędowym.
+
 ---
 
 # Odpowiedzi, sezon 1, odcinek 13
@@ -409,4 +413,12 @@ sum(auta2012$Cena.w.PLN < 2000, na.rm=TRUE)
 
 # Procent aut o silnikach >= 1500cm3
 100*mean(auta2012$Pojemnosc.skokowa >= 1500, na.rm=TRUE)
+
+# Zarejestrowany w Polsce i poniżej 2k
+taniZPolski <- auta2012$Cena.w.PLN < 2000 & auta2012$Kraj.aktualnej.rejestracji == "Polska"
+sum(taniZPolski, na.rm=TRUE)
+
+# Diesel z silnikiem >1500
+duzyDiesel <- auta2012$Pojemnosc.skokowa > 1500 & auta2012$Rodzaj.paliwa == 'olej napedowy (diesel)'
+mean(duzyDiesel, na.rm=TRUE)
 ```

@@ -362,6 +362,8 @@ auta2012$Przebieg.w.kmKat &lt;-<span class="st"> </span><span class="kw">cut</sp
 <ul>
 <li><p>Sprawdź ile samochodów ma cenę ofertową poniżej 2 000 pln.</p></li>
 <li><p>Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3.</p></li>
+<li><p>Sprawdź ile samochodów zarejestrowanych w Polsce ma cenę ofertową poniżej 2 000 pln.</p></li>
+<li><p>Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3 oraz jest napędzanych olejem napędowym.</p></li>
 </ul>
 </div>
 <div id="odpowiedzi-sezon-1-odcinek-13" class="slide section level1">
@@ -370,7 +372,15 @@ auta2012$Przebieg.w.kmKat &lt;-<span class="st"> </span><span class="kw">cut</sp
 <span class="kw">sum</span>(auta2012$Cena.w.PLN &lt;<span class="st"> </span><span class="dv">2000</span>, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
 
 <span class="co"># Procent aut o silnikach &gt;= 1500cm3</span>
-<span class="dv">100</span>*<span class="kw">mean</span>(auta2012$Pojemnosc.skokowa &gt;=<span class="st"> </span><span class="dv">1500</span>, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre>
+<span class="dv">100</span>*<span class="kw">mean</span>(auta2012$Pojemnosc.skokowa &gt;=<span class="st"> </span><span class="dv">1500</span>, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
+
+<span class="co"># Zarejestrowany w Polsce i poniżej 2k</span>
+taniZPolski &lt;-<span class="st"> </span>auta2012$Cena.w.PLN &lt;<span class="st"> </span><span class="dv">2000</span> &amp;<span class="st"> </span>auta2012$Kraj.aktualnej.rejestracji ==<span class="st"> &quot;Polska&quot;</span>
+<span class="kw">sum</span>(taniZPolski, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
+
+<span class="co"># Diesel z silnikiem &gt;1500</span>
+duzyDiesel &lt;-<span class="st"> </span>auta2012$Pojemnosc.skokowa &gt;<span class="st"> </span><span class="dv">1500</span> &amp;<span class="st"> </span>auta2012$Rodzaj.paliwa ==<span class="st"> 'olej napedowy (diesel)'</span>
+<span class="kw">mean</span>(duzyDiesel, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
