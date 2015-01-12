@@ -237,7 +237,7 @@ Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOO
 
 ---
 
-# Statystyki opisowe
+# Testy dla typów i wartości
 
 Porównując wartości należy uważać na wartości nieokreślone, które niezawsze zachowują się zgodnie z naszą intuicją, ale zawsze logicznie.
 
@@ -268,15 +268,23 @@ Funkcji do testowania jest więcej, zaczynają one swoje nazwy od `is.`, wystarc
 
 # Logiczne 'i' oraz logiczne 'lub'
 
-
+Ponieważ operatory logicznego `lub` oraz `i` są często wykorzystywane poćwiczmy je jeszcze na zbiorze danych o samochodach. Zdefiniujmy dwa wektory wartości logicznych, weryfikujących czy samochód jest aktualnie zarejestrowany w Polsce oraz czy jest starszy niż pięć lat, a więc wyprodukowany przed rokiem 2007.
 
 ```{r, warning=FALSE}
 pochodziZPolski <- auta2012$Kraj.aktualnej.rejestracji == "Polska"
 starszyNiz5Lat  <- auta2012$Rok.produkcji < 2007
+```
+
+Teraz policzymy logiczną sumę oraz iloczyn obu wektorów. Następnie użyjemy funkcji table aby przedstawić wyniki.
+
+```{r, warning=FALSE}
 pochodziZPolskiIStarszyNiz5Lat   <- pochodziZPolski & starszyNiz5Lat
 pochodziZPolskiLubStarszyNiz5Lat <- pochodziZPolski | starszyNiz5Lat
+# Tabela obu zmiennych
 table(pochodziZPolski, starszyNiz5Lat)
+# logiczne i
 table(pochodziZPolskiIStarszyNiz5Lat)
+# logiczne lub
 table(pochodziZPolskiLubStarszyNiz5Lat)
 ```
 

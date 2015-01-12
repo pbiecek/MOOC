@@ -112,7 +112,7 @@ tabliczka_mnozenia</code></pre>
 <div id="wczytanie-danych" class="slide section level1">
 <h1>Wczytanie danych</h1>
 <p>Dane od których rozpoczniemy przykłady to <code>koty_ptaki</code> z pakietu <code>SmarterPoland</code>. Aby te dane wczytać, wystarczy włączyć pakiet, instrukcja jak to zrobić znajduje się w odcinku 2.</p>
-<p>Włączmy pakiet i użyjmy funkcji <code>head()</code> by wyświetlić pierwsze sześć wierszy. Które z tych zmiennych to zmienne ilościowe?</p>
+<p>Włączmy pakiet i użyjmy funkcji <code>head()</code> by wyświetlić pierwsze sześć wierszy.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
 <span class="kw">head</span>(koty_ptaki)</code></pre>
 <pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
@@ -122,17 +122,6 @@ tabliczka_mnozenia</code></pre>
 ## 4    Puma   80     1.7       70 Ameryka        13     Kot
 ## 5 Leopard   70     1.4       85    Azja        21     Kot
 ## 6  Gepard   60     1.4      115  Afryka        12     Kot</code></pre>
-<p>Każdy wiersz opisuje jeden gatunek. Zmienne ilościowe opisane są liczbami, w tym przypadku nie ma niespodzianek, zmiennymi ilościowymi są: waga, długość, prędkość i żywotność.</p>
-</div>
-<div id="o-czym-jest-ten-odcinek-1" class="slide section level1">
-<h1>O czym jest ten odcinek</h1>
-<p>W tym odcinku nauczymy się</p>
-<ul>
-<li>Jakie zmienne / wartości / cechy określa się terminem cechy logiczne?</li>
-<li>Jakie podstawowe operacje można logiczne na cechach logiczne?</li>
-<li>Jak podsumowywać / opisywać cechy ilościowe?</li>
-</ul>
-<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>.</p>
 </div>
 <div id="wczytanie-danych-1" class="slide section level1">
 <h1>Wczytanie danych</h1>
@@ -160,73 +149,159 @@ tabliczka_mnozenia</code></pre>
 <p>Dla zbioru danych <code>koty_ptaki</code> każdy wiersz opisuje charakterystyki jednego gatunku.</p>
 <p>Dla zbioru danych <code>auta2012</code> każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.</p>
 </div>
-<div class="slide section level1">
-
-<ul>
-<li>Dodać funkcję is.na() i sum(is.na()), wszystkie is…. są świetnym przykładem na TRUE / FALSE</li>
-</ul>
-</div>
-<div class="slide section level1">
-
-<h2 id="statystyki-opisowe">Statystyki opisowe</h2>
-<p>Traktując zmienną logiczną jak dwuwartościową zmienną jakościową, możemy używać na niej np. funkcji do tabel liczebności.</p>
-<p>Zbudujmy zmienną <code>czy_to_kot</code>, wektor o wartościach logicznych <code>TRUE</code> i <code>FALSE</code>, następnie przedstawmy jej podsumowanie.</p>
-<pre class="sourceCode r"><code class="sourceCode r">czy_to_kot =<span class="st"> </span>koty_ptaki$druzyna ==<span class="st"> &quot;Kot&quot;</span>
-<span class="kw">table</span>(czy_to_kot)</code></pre>
+<div id="statystyki-opisowe" class="slide section level1">
+<h1>Statystyki opisowe</h1>
+<p>Na bazie zmiennej <code>druzyna</code> zbudujmy zmienną logiczną <code>czy_to_kot</code>, a na bazie zmiennej <code>waga</code> zbudujemy zmienną logiczną <code>czy_jest_ciezki</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">czy_to_kot &lt;-<span class="st"> </span>koty_ptaki$druzyna ==<span class="st"> &quot;Kot&quot;</span>
+czy_jest_ciezki &lt;-<span class="st"> </span>koty_ptaki$waga &gt;=<span class="st"> </span><span class="dv">10</span></code></pre>
+<p>Traktując zmienną logiczną jak dwuwartościową zmienną jakościową, możemy używać na niej np. funkcji do tabel liczebności, zarówno jednowymiarowych jak i dwuwymiarowych.</p>
+<p>Patrząc na wyniki dla tabli liczebności dla dwóch zmiennych jest tylko jeden zwierzak w tym zbiorze danych, który jest cięższy niż 10kg ale nie jest kotem.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(czy_to_kot)</code></pre>
 <pre><code>## czy_to_kot
 ## FALSE  TRUE 
 ##     6     7</code></pre>
-<p>I przykład dla danych o samochodach</p>
-<pre class="sourceCode r"><code class="sourceCode r">pochodziZPolski =<span class="st"> </span>auta2012$Kraj.aktualnej.rejestracji ==<span class="st"> &quot;Polska&quot;</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(czy_jest_ciezki)</code></pre>
+<pre><code>## czy_jest_ciezki
+## FALSE  TRUE 
+##     5     8</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(czy_to_kot, czy_jest_ciezki)</code></pre>
+<pre><code>##           czy_jest_ciezki
+## czy_to_kot FALSE TRUE
+##      FALSE     5    1
+##      TRUE      0    7</code></pre>
+</div>
+<div id="operator-negacji" class="slide section level1">
+<h1>Operator negacji</h1>
+<p>Innym przydatnym operatorem jest logiczna negacja <code>!</code>. Zamienia ona wartość logicznej prawdy na fałsz i odwrotnie.</p>
+<pre class="sourceCode r"><code class="sourceCode r">czy_to_kot</code></pre>
+<pre><code>##  [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE
+## [12] FALSE FALSE</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">!czy_to_kot</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE
+## [12]  TRUE  TRUE</code></pre>
+<p>W operacjach arytmetycznych wartości logiczne TRUE sa przekształcane na 1 a wartości FALSE na 0. Dzięki czemu, jeżeli chcemy policzyć ile wartości ma wartość TRUE to wystarczy wartość wektora zsumować. Poniższy przykłąd pokazuje ile jest kotów i nie kotów w zbiorze danych.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(czy_to_kot)</code></pre>
+<pre><code>## [1] 7</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(!czy_to_kot)</code></pre>
+<pre><code>## [1] 6</code></pre>
+<p>Taki wektor wartości logicznych można mnożyć z wektorem wartości liczbowych. Poniższa instrukcja używa takiej operacji do policzenia sumy wagi wszystkich kotów w zbiorze danych. Mnożenie przez wektor wartości logicznych powoduje wyzerowanie określonych wartości.</p>
+<pre class="sourceCode r"><code class="sourceCode r">czy_to_kot *<span class="st"> </span>koty_ptaki$waga</code></pre>
+<pre><code>##  [1] 300 200 100  80  70  60  50   0   0   0   0   0   0</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(czy_to_kot *<span class="st"> </span>koty_ptaki$waga)</code></pre>
+<pre><code>## [1] 860</code></pre>
+</div>
+<div id="wczytanie-danych-2" class="slide section level1">
+<h1>Wczytanie danych</h1>
+<p>Zbiór danych <code>koty_ptaki</code> składa się z 13 wierszy. Można cały ten zbiór danych wyświetlić na ekranie. Nie zawsze potrzebujemy więc specjalnych statystyk opisowych by zrozumieć co się dzieje w takich małych zbiorach danych.</p>
+<p>Dlatego, dalsze ćwiczenia ze zmiennymi ilościowymi przeprowadzimy na znaczeni większym zbiorze danych z ponad 200 tysiącami wartości, o nazwie <code>auta2012</code>, który znajduje się również w pakiecie <code>SmarterPoland</code>.</p>
+<p>Opis tego zbioru danych znaleźć można w odcinku <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html">https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
+<p>Wczytajmy ten zbiór danych i przyjrzyjmy się trzem pierwszym wierszom.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+<span class="kw">head</span>(auta2012, <span class="dv">3</span>)</code></pre>
+<pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW      Marka     Model Wersja
+## 1 49900    PLN      49900       brutto 140 103        Kia    Carens       
+## 2 88000    PLN      88000       brutto 156 115 Mitsubishi Outlander       
+## 3 86000    PLN      86000       brutto 150 110  Chevrolet   Captiva       
+##   Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km          Rodzaj.paliwa
+## 1          4/5              1991         41000 olej napedowy (diesel)
+## 2          4/5              2179         46500 olej napedowy (diesel)
+## 3          4/5              1996          8000 olej napedowy (diesel)
+##   Rok.produkcji Kolor Kraj.aktualnej.rejestracji Kraj.pochodzenia
+## 1          2008                           Polska                 
+## 2          2008                           Polska                 
+## 3          2009                           Polska                 
+##   Pojazd.uszkodzony Skrzynia.biegow Status.pojazdu.sprowadzonego
+## 1                          manualna                             
+## 2                          manualna                             
+## 3                          manualna                             
+##                                                                                                                                                                                           Wyposazenie.dodatkowe
+## 1                                    ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
+## 2            ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
+## 3 ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby</code></pre>
+</div>
+<div id="statystyki-opisowe-1" class="slide section level1">
+<h1>Statystyki opisowe</h1>
+<p>Wykorzystajmy wartości logiczne oraz funkcję <code>table()</code> by sprawdzić ile aut w naszych danych jest zarejestrowanych w Polsce oraz ile z nich zostało wyprodukowanych przed 2007 rokiem. Tak jak w przypadku zmiennych jakościowych możemy wykorzystać funkcję <code>prop.table()</code> do wyznaczenia frakcji / procentów.</p>
+<p>Co może być zaskakujące, mniej niż połowa ofert ma zadeklarowany kraj aktualnej rejestracji jako Polska.</p>
+<pre class="sourceCode r"><code class="sourceCode r">pochodziZPolski &lt;-<span class="st"> </span>auta2012$Kraj.aktualnej.rejestracji ==<span class="st"> &quot;Polska&quot;</span>
 <span class="kw">table</span>(pochodziZPolski)</code></pre>
 <pre><code>## pochodziZPolski
 ##  FALSE   TRUE 
 ## 116592  91010</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">starszyNiz5Lat =<span class="st"> </span>auta2012$Rok.produkcji &lt;<span class="st"> </span><span class="dv">2007</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prop.table</span>(<span class="kw">table</span>(pochodziZPolski)) *<span class="st"> </span><span class="dv">100</span></code></pre>
+<pre><code>## pochodziZPolski
+##    FALSE     TRUE 
+## 56.16131 43.83869</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">starszyNiz5Lat &lt;-<span class="st"> </span>auta2012$Rok.produkcji &lt;<span class="st"> </span><span class="dv">2007</span>
 <span class="kw">table</span>(starszyNiz5Lat)</code></pre>
 <pre><code>## starszyNiz5Lat
 ##  FALSE   TRUE 
 ##  66703 140899</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prop.table</span>(<span class="kw">table</span>(starszyNiz5Lat)) *<span class="st"> </span><span class="dv">100</span></code></pre>
+<pre><code>## starszyNiz5Lat
+##    FALSE     TRUE 
+## 32.13023 67.86977</code></pre>
 </div>
 <div id="zadania" class="slide section level1">
 <h1>Zadania:</h1>
 <ul>
-<li>Sprawdź ile samochodów ma cenę ofertową poniżej 2 000 pln.</li>
-<li>Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3.</li>
+<li><p>Sprawdź ile samochodów ma cenę ofertową poniżej 2 000 pln.</p></li>
+<li><p>Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3.</p></li>
 </ul>
+<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
 </div>
-<div id="odpowiedzi" class="slide section level1">
-<h1>Odpowiedzi:</h1>
-<ul>
-<li>4041</li>
-<li>0.7712635</li>
-</ul>
+<div id="statystyki-opisowe-2" class="slide section level1">
+<h1>Statystyki opisowe</h1>
+<p>Porównując wartości należy uważać na wartości nieokreślone, które niezawsze zachowują się zgodnie z naszą intuicją, ale zawsze logicznie.</p>
+<p>Przykładowo, operator <code>!=</code> testuje czy wartości są różne (to negacja operatora <code>==</code>). Jak sprawdzić czy wartości w wektorze są różne od wartości brakującej <code>NA</code>? Zacznijmy od przykłądu jak tego nie robić.</p>
+<pre class="sourceCode r"><code class="sourceCode r">czyOkreslonyPrzebieg &lt;-<span class="st"> </span>auta2012$Przebieg.w.km !=<span class="st"> </span><span class="ot">NA</span>
+<span class="kw">head</span>(auta2012$Przebieg.w.km)</code></pre>
+<pre><code>## [1]  41000  46500   8000 200000 169400 141100</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(czyOkreslonyPrzebieg)</code></pre>
+<pre><code>## [1] NA NA NA NA NA NA</code></pre>
+<p>Wynikiem porównania <code>!= NA</code> jest wektor wartości <code>NA</code>. Jest tak ponieważ jeżeli prawa część porównania jest nieznana to też niewiadomo czy wartość 41000 jest od niej różna czy nie.</p>
+<p>Aby sprawdzić, czy dana wartość jest wartością brakującą możemy wykorzystać funkcję <code>is.na()</code>. Jako wynik zwraca TRUE jeżeli testowana wartość to NA i FALSE w przeciwnym przypadku.</p>
+<p>Możemy użyć tej funkcji by policzyć procent wartości nie brakujących.</p>
+<pre class="sourceCode r"><code class="sourceCode r">czyOkreslonyPrzebieg &lt;-<span class="st"> </span>!<span class="kw">is.na</span>(auta2012$Przebieg.w.km)
+<span class="kw">head</span>(czyOkreslonyPrzebieg)</code></pre>
+<pre><code>## [1] TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># procent</span>
+<span class="kw">mean</span>(czyOkreslonyPrzebieg) *<span class="st"> </span><span class="dv">100</span></code></pre>
+<pre><code>## [1] 80.94479</code></pre>
+<p>Funkcji do testowania jest więcej, zaczynają one swoje nazwy od <code>is.</code>, wystarczy więc wpisać te trzy znaki do konsoli i nacisnąć znak TAB by zobaczyć ich listę. Część z nich sprawdza czy zmienna jest określonego typu, np. <code>is.factor()</code>, <code>is.numeric()</code>, część sprawdza czy zmienna ma określone wartości np. <code>is.na()</code> czy <code>is.nan()</code>.</p>
 </div>
 <div id="logiczne-i-oraz-logiczne-lub" class="slide section level1">
 <h1>Logiczne ‘i’ oraz logiczne ‘lub’</h1>
-<p>Cechy logiczne można przetwarzać używając również operatorów logicznych, w tym logicznego lub <code>|</code> oraz logicznego i <code>&amp;</code>.</p>
-<p>Nazwy zmiennych i funkcji potrafią być długie, a R jest wrażliwy na wielkość liter i nie wybaczy nawet małych różnic. Przepisywanie nazw często kończy się literówkami, które z kolei prowadzą do trudnych w odnalezieniu błędów. W programie RStudio po wpisaniu kilku pierwszych liter nazwy funkcji, nazwy zmiennej lub nazwy kolumny w ramce danych klawiszem TAB włącza się uzupełnianie nazwy. W zależności od kontekstu wyświetlana jest lista nazw pasujących do pierwszych wprowadzonych znaków.</p>
-<pre class="sourceCode r"><code class="sourceCode r">pochodziZPolski =<span class="st"> </span>auta2012$Kraj.aktualnej.rejestracji ==<span class="st"> &quot;Polska&quot;</span>
-starszyNiz5Lat =<span class="st"> </span>auta2012$Rok.produkcji &lt;<span class="st"> </span><span class="dv">2007</span>
-pochodziZPolskiIStarszyNiz5Lat =<span class="st"> </span>pochodziZPolski &amp;<span class="st"> </span>starszyNiz5Lat
+<p>Ponieważ operatory logicznego <code>lub</code> oraz <code>i</code> są często wykorzystywane poćwiczmy je jeszcze na zbiorze danych o samochodach. Zdefiniujmy dwa wektory wartości logicznych, weryfikujących czy samochód jest aktualnie zarejestrowany w Polsce oraz czy jest starszy niż pięć lat, a więc wyprodukowany przed rokiem 2007.</p>
+<pre class="sourceCode r"><code class="sourceCode r">pochodziZPolski &lt;-<span class="st"> </span>auta2012$Kraj.aktualnej.rejestracji ==<span class="st"> &quot;Polska&quot;</span>
+starszyNiz5Lat  &lt;-<span class="st"> </span>auta2012$Rok.produkcji &lt;<span class="st"> </span><span class="dv">2007</span></code></pre>
+<p>Teraz policzymy logiczną sumę oraz iloczyn obu wektorów. Następnie użyjemy funkcji table aby przedstawić wyniki.</p>
+<pre class="sourceCode r"><code class="sourceCode r">pochodziZPolskiIStarszyNiz5Lat   &lt;-<span class="st"> </span>pochodziZPolski &amp;<span class="st"> </span>starszyNiz5Lat
+pochodziZPolskiLubStarszyNiz5Lat &lt;-<span class="st"> </span>pochodziZPolski |<span class="st"> </span>starszyNiz5Lat
+<span class="co"># Tabela obu zmiennych</span>
+<span class="kw">table</span>(pochodziZPolski, starszyNiz5Lat)</code></pre>
+<pre><code>##                starszyNiz5Lat
+## pochodziZPolski FALSE  TRUE
+##           FALSE 44025 72567
+##           TRUE  22678 68332</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># logiczne i</span>
 <span class="kw">table</span>(pochodziZPolskiIStarszyNiz5Lat)</code></pre>
 <pre><code>## pochodziZPolskiIStarszyNiz5Lat
 ##  FALSE   TRUE 
 ## 139270  68332</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># logiczne lub</span>
+<span class="kw">table</span>(pochodziZPolskiLubStarszyNiz5Lat)</code></pre>
+<pre><code>## pochodziZPolskiLubStarszyNiz5Lat
+##  FALSE   TRUE 
+##  44025 163577</code></pre>
 </div>
 <div id="zadania-1" class="slide section level1">
 <h1>Zadania:</h1>
 <ul>
-<li>Sprawdź ile samochodów zarejestrowanych w Polsce ma cenę ofertową poniżej 2 000 pln.</li>
-<li>Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3 oraz jest napędzanych olejem napędowym.</li>
+<li><p>Sprawdź ile samochodów zarejestrowanych w Polsce ma cenę ofertową poniżej 2 000 pln.</p></li>
+<li><p>Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3 oraz jest napędzanych olejem napędowym.</p></li>
 </ul>
-</div>
-<div id="odpowiedzi-1" class="slide section level1">
-<h1>Odpowiedzi:</h1>
-<ul>
-<li>2018</li>
-<li>0.489553</li>
-</ul>
+<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
