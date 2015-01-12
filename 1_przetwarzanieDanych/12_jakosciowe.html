@@ -64,8 +64,8 @@ pogRomcy danych
 <div id="co-to-znaczy-cecha-jakosciowa" class="slide section level1">
 <h1>Co to znaczy: cecha jakościowa</h1>
 <p>Cechy jakościowe to takie, które opisują przynależność do grup. Z tego powodu, często stosuje się też nazwę <em>zmienna grupująca</em>. A ponieważ w programie R taką zmienną oznacza się terminem <code>factor</code>, to w języku polskim spotyka się kalkę <em>zmienna faktor</em>. Inną stosowaną, często przez programistów, nazwą jest <em>zmienna czynnikowa</em>.</p>
-<p>Określając zmienną jakościową warto wskazać o jakich grupach mówimy, przykłądami zmiennych jakościowych jest np. wykształcenie (grupy: podstawowe, średnie, wyższe), płeć (grupy: kobieta, męższczyzna), kraj zamieszkania (grupy: Polska, …).</p>
-<p>Zmienna jakościowa może być opisana liczbami, jeżeli jednak te liczby nie oznaczają ilosći to taka zmienna będzie zmienną jakościową. Przykładowo pierwsze dwie cyfry kodu ZIP mogą być zmienną jakościową, ocenę szkolną można traktować jako zmienną jakościową (można też jako ilościową zależnie od kontekstu), podobnie liczba drzwi samochodu, jeżeli chcemy jej użyć do pogrupowania samochodów na 3 i 5 drzwiowe, potraktujemy tę liczbę jako cechę jakościową.</p>
+<p>Określając zmienną jakościową warto wskazać o jakich grupach mówimy, przykładami zmiennych jakościowych jest np. wykształcenie (grupy: podstawowe, średnie, wyższe), płeć (grupy: kobieta, mężczyzna), kraj zamieszkania (grupy: Polska, …).</p>
+<p>Zmienna jakościowa może być opisana liczbami, jeżeli jednak te liczby nie oznaczają ilości to taka zmienna będzie zmienną jakościową. Przykładowo pierwsze dwie cyfry kodu ZIP mogą być zmienną jakościową, ocenę szkolną można traktować jako zmienną jakościową (można też jako ilościową zależnie od kontekstu), podobnie liczba drzwi samochodu, jeżeli chcemy jej użyć do pogrupowania samochodów na 3 i 5 drzwiowe, potraktujemy tę liczbę jako cechę jakościową.</p>
 <p>Jakkolwiek zmienne jakościowe mogą bardzo różnić się liczbą grup oraz rodzajem grup, można na nich wykonywać kilka wspólnych operacji. Przyjrzyjmy się im.</p>
 </div>
 <div id="wczytanie-danych" class="slide section level1">
@@ -81,7 +81,7 @@ pogRomcy danych
 ## 4    Puma   80     1.7       70 Ameryka        13     Kot
 ## 5 Leopard   70     1.4       85    Azja        21     Kot
 ## 6  Gepard   60     1.4      115  Afryka        12     Kot</code></pre>
-<p>Każdy wiersz opisuje jeden gatunek. Zmienne jakośćiowe to w poniższym przypadku wszystkie te, które nei są liczbowymi, a więc gatunek, habitat i drużyna.</p>
+<p>Każdy wiersz opisuje jeden gatunek. Zmienne jakościowe to w poniższym przypadku wszystkie te, które nie są liczbowymi, a więc gatunek, habitat i drużyna.</p>
 </div>
 <div id="cechy-jakosciowe" class="slide section level1">
 <h1>Cechy jakościowe</h1>
@@ -96,8 +96,8 @@ pogRomcy danych
 <pre><code>##  [1] Kot  Kot  Kot  Kot  Kot  Kot  Kot  Ptak Ptak Ptak Ptak Ptak Ptak
 ## Levels: Kot Ptak</code></pre>
 <p>Gdy te zmienne są wyświetlane, poza wartościami dodatkowo wyświetlany jest zbiór wszystkich możliwych wartości. Ten zbiór nazywa się najczęściej poziomami zmiennej jakościowej lub słownikiem zmiennej.</p>
-<p>Dwie podstawowe operacje na zmiennych jakościowych to odczytywanie poziomów zmiennej, co można zrobić funkcją <code>levels()</code> oraz wyznaczanie liczebności poszcezgólnych poziomów, co można wykonać funkcją <code>table()</code>.</p>
-<p>To czy dana zmienna jest zmienną jakościową czy ilośćiową można sprawdzić używając funkcji <code>class()</code>. Jeżeli wynikiem jest napis <code>factor</code> to mamy do czynienia ze zmienną jakosciową. Jeżeli wnikiem jest <code>integer</code> lub <code>numeric</code> to mamy do czynienia ze zmienną ilościową.</p>
+<p>Dwie podstawowe operacje na zmiennych jakościowych to odczytywanie poziomów zmiennej, co można zrobić funkcją <code>levels()</code> oraz wyznaczanie liczebności poszczególnych poziomów, co można wykonać funkcją <code>table()</code>.</p>
+<p>To czy dana zmienna jest zmienną jakościową czy ilościową można sprawdzić używając funkcji <code>class()</code>. Jeżeli wynikiem jest napis <code>factor</code> to mamy do czynienia ze zmienną jakościową. Jeżeli wynikiem jest <code>integer</code> lub <code>numeric</code> to mamy do czynienia ze zmienną ilościową.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(koty_ptaki$druzyna)</code></pre>
 <pre><code>## [1] &quot;factor&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(koty_ptaki$predkosc)</code></pre>
@@ -273,7 +273,7 @@ zaokragloneProcenty[kolejnoscPosortowanych]</code></pre>
 </div>
 <div id="graficzne-statystyki-opisowe-1" class="slide section level1">
 <h1>Graficzne statystyki opisowe</h1>
-<p>Jeżeli chcemy, by słupki były przedstawiane poziomo, do funckji <code>barplot()</code> można dodać argument <code>horiz = TRUE</code>.</p>
+<p>Jeżeli chcemy, by słupki były przedstawiane poziomo, do funkcji <code>barplot()</code> można dodać argument <code>horiz = TRUE</code>.</p>
 <p>Domyślnie wartości są uporządkowane alfabetycznie. Nie zawsze jednak taka kolejność ma sens. W tym przypadku rozsądniej jest posortować dane malejąco, co można wykonać z użyciem funkcji <code>sort()</code>.</p>
 <p>Argument <code>las=1</code> powoduje, że oś OY ma etykiety ustawione poziomo.</p>
 <pre class="sourceCode r"><code class="sourceCode r">posortowaneWaluty &lt;-<span class="st"> </span><span class="kw">sort</span>(waluty)
@@ -292,7 +292,7 @@ zaokragloneProcenty[kolejnoscPosortowanych]</code></pre>
 <div id="napisy-czy-czynniki" class="slide section level1">
 <h1>Napisy czy czynniki?</h1>
 <p>Z wyglądu, cechy jakościowe (czynniki) przypominają cechy napisowe. Jednak pod spodem, ich reprezentacja jest zupełnie inna. Czynniki nie są pamiętane jako napisy, ale jako para - wektor liczb i słownik, określający, który napis odpowiada, której liczbie. Dzięki temu można zaoszczędzić pamięć przy przechowywaniu dużych zbiorów danych.</p>
-<p>Na napisach zazwyczaj wykonuje się inne operacje niż na zmiennych jakościowych, może się więc tak zdarzyć, że celowo chcemy jakieś dane odczytać jako napisy. Ale ddy dane są wczytywane z pliku tekstowego w którym są napisy, domyślnie napisy są wczytywane jako czynniki.</p>
+<p>Na napisach zazwyczaj wykonuje się inne operacje niż na zmiennych jakościowych, może się więc tak zdarzyć, że celowo chcemy jakieś dane odczytać jako napisy. Ale gdy dane są wczytywane z pliku tekstowego w którym są napisy, domyślnie napisy są wczytywane jako czynniki.</p>
 <p>W poniższym przykładzie, takie zmienne jak <code>gatunek</code> i <code>habitat</code> są wczytywane jako zmienna klasy <code>factor</code>. Efektem ubocznym jest sposób wyświetlania wyników np. przez zmienną <code>cat()</code>. Dla zmiennej czynnikowej, ta funkcja na ekranie wypisze liczby a nie wartości napisowe.</p>
 <pre class="sourceCode r"><code class="sourceCode r">koty_ptaki &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;http://biecek.pl/MOOC/dane/koty_ptaki.csv&quot;</span>, 
           <span class="dt">sep=</span><span class="st">&quot;;&quot;</span>, <span class="dt">dec=</span><span class="st">&quot;,&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>)
@@ -329,7 +329,7 @@ zaokragloneProcenty[kolejnoscPosortowanych]</code></pre>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(koty_ptaki$gatunek)</code></pre>
 <pre><code>## Tygrys Lew Jaguar Puma Leopard Gepard Irbis Jerzyk Strus Orzel przedni Sokol wedrowny Sokol norweski Albatros</code></pre>
-<p>Tym razem kolumna <code>gatunek</code> została wczytana jako wetkor napisów.</p>
+<p>Tym razem kolumna <code>gatunek</code> została wczytana jako wektor napisów.</p>
 </div>
 <div id="napisy-czy-czynniki-2" class="slide section level1">
 <h1>Napisy czy czynniki?</h1>
@@ -345,10 +345,10 @@ zaokragloneProcenty[kolejnoscPosortowanych]</code></pre>
 </div>
 <div id="tablice-czestosci" class="slide section level1">
 <h1>Tablice częstości</h1>
-<p>A co gdybyśmy chcieli przedstawić zależność pomiędzy dwoma zmiennymi jakościowymi? Można to zrobić używając funkcji <code>table()</code> (należy kolejne zmienne podawać jako kolrjne argumenty) ale można też użyć funkcją <code>xtabs()</code>, która jest trochę wygodniejsza w pracy.</p>
+<p>A co gdybyśmy chcieli przedstawić zależność pomiędzy dwoma zmiennymi jakościowymi? Można to zrobić używając funkcji <code>table()</code> (należy kolejne zmienne podawać jako kolejne argumenty) ale można też użyć funkcją <code>xtabs()</code>, która jest trochę wygodniejsza w pracy.</p>
 <p>Pierwszym argumentem tej funkcji jest formuła o składni <code>~ zmienna_1 + .. + zmienna_n</code>, t.j. rozpoczynająca się tyldą a następnie ze zmiennymi porozdzielanymi znakiem plusa. Drugim argumentem jest ramka danych, która powinna zawierać zmienne wymienione w formule.</p>
 <p>Wynikiem jest tablica kontyngencji o tylu wymiarach, ile zmiennych występuje w formule.</p>
-<p>Przykładowo, zestawiając ze sobą kraj pochodzenia oraz walutę w ogłoszeniu, otrzymujemy tablicę częstości o wymiarach 32 wiersze i 8 kolumn. Pierwszy wiersz tej tabeli odpowiada pusterj wartości kraju pochodzenia, stąd brak nazwy w pierwszym wierszu.</p>
+<p>Przykładowo, zestawiając ze sobą kraj pochodzenia oraz walutę w ogłoszeniu, otrzymujemy tablicę częstości o wymiarach 32 wiersze i 8 kolumn. Pierwszy wiersz tej tabeli odpowiada pustej wartości kraju pochodzenia, stąd brak nazwy w pierwszym wierszu.</p>
 <pre class="sourceCode r"><code class="sourceCode r">(krajWaluta &lt;-<span class="st"> </span><span class="kw">xtabs</span>( ~<span class="st"> </span>Kraj.pochodzenia +<span class="st"> </span>Waluta, auta2012))</code></pre>
 <pre><code>##                    Waluta
 ## Kraj.pochodzenia      CHF   CZK   EEK   EUR   GBP   HUF   PLN   USD
@@ -389,7 +389,7 @@ zaokragloneProcenty[kolejnoscPosortowanych]</code></pre>
 <h1>Tablice częstości</h1>
 <p>Tablice częstości nie są ramkami danych.</p>
 <p>Gdy w grę wchodzą dwie zmienne, to wyglądają jak ramki danych, mają wiersze i kolumny. Muszą być jednak czymś innym, ponieważ w sytuacji, gdy tablica kontyngencji dotyczy trzech lub większej liczby zmiennych to wynikowa macierz kontyngencji ma więcej wymiarów niż dwa.</p>
-<p>Funkcją <code>as.data.frame</code> można przekształcić wielowymairowe tabele do ramki danych. Otrzyma się w tym przypadku tak zwaną reprezentację rzadką macierzy kontyngencji, w której pierwsze kolumny opisują wszystkie kombinacje czynników zmiennych a ostania kolumna opisuje liczebność występowania poszczególnej kombinacji czynników.</p>
+<p>Funkcją <code>as.data.frame</code> można przekształcić wielowymiarowe tabele do ramki danych. Otrzyma się w tym przypadku tak zwaną reprezentację rzadką macierzy kontyngencji, w której pierwsze kolumny opisują wszystkie kombinacje czynników zmiennych a ostania kolumna opisuje liczebność występowania poszczególnej kombinacji czynników.</p>
 <pre class="sourceCode r"><code class="sourceCode r">xt &lt;-<span class="st"> </span><span class="kw">xtabs</span>(~Kraj.pochodzenia+Waluta, auta2012)
 xt &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(xt)
 xt[xt$Freq &gt;<span class="st"> </span><span class="dv">0</span>, ]</code></pre>
@@ -483,9 +483,9 @@ xt[xt$Freq &gt;<span class="st"> </span><span class="dv">0</span>, ]</code></pre
 </div>
 <div id="przeksztacanie-zmiennych-ilosciowych-w-jakosciowe" class="slide section level1">
 <h1>Przekształcanie zmiennych ilościowych w jakościowe</h1>
-<p>Opisując dane ilościowe, często można ułątwić ich zrozumienie, jeżeli zmienne ilościowe podzieli się na przedziały. Takie przedziały są już zmienną jakościową.</p>
-<p>Zmienną jakościową z ilościowej można stworzyć używając funkcji <code>cut()</code>, która za prierwszy argument przyjmuje zmienną ilościową a za drugi przyjmuje liczbę przedziałów do zbudowania lub punkty odcięcia dla tych przedziałów.</p>
-<p>W przedziale poniżęj przekształcimy zmienną <code>waga</code> ze zbioru <code>koty_ptaki</code> na cztery przedziały, 0-1, 1-10, 10-100 i 100-1000. Tak stworzoną zmienną dodamy do zbioru <code>koty_ptaki</code> pod nazwą <code>wagaKategoria</code>.</p>
+<p>Opisując dane ilościowe, często można ułatwić ich zrozumienie, jeżeli zmienne ilościowe podzieli się na przedziały. Takie przedziały są już zmienną jakościową.</p>
+<p>Zmienną jakościową z ilościowej można stworzyć używając funkcji <code>cut()</code>, która za pierwszy argument przyjmuje zmienną ilościową a za drugi przyjmuje liczbę przedziałów do zbudowania lub punkty odcięcia dla tych przedziałów.</p>
+<p>W przedziale poniżej przekształcimy zmienną <code>waga</code> ze zbioru <code>koty_ptaki</code> na cztery przedziały, 0-1, 1-10, 10-100 i 100-1000. Tak stworzoną zmienną dodamy do zbioru <code>koty_ptaki</code> pod nazwą <code>wagaKategoria</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">koty_ptaki$waga</code></pre>
 <pre><code>##  [1] 300.00 200.00 100.00  80.00  70.00  60.00  50.00   0.05 150.00   5.00
 ## [11]   0.70   2.00   4.00</code></pre>
@@ -499,7 +499,7 @@ xt[xt$Freq &gt;<span class="st"> </span><span class="dv">0</span>, ]</code></pre
 <h1>Tablice częstości</h1>
 <p>Wykorzystajmy tą nowo utworzoną zmienną do przedstawienia graficznych statystyk dla pary zmiennych jakościowych.</p>
 <p>Zestawimy wagę ze zmienną drużyna. A następnie tę dwuwymiarową tabelę przekażemy do funkcji <code>mosaicplot()</code>.</p>
-<p>Rysuje ona tak zwany wykres mozaikowy przedstawiający jednocześnie wiele zależności. W pierwszym kroku szerokość kolumn odpowiada proporcjom wartości Kot i Ptak w zbiorze danych (jest ich prawie po równo, dlatego obie kolumny mają dosyć podobną szeorkość). Następnie wysokość wierszy odpowiada względnemu udziałowi poszcezgólnych wartości w określonej kolumnie. W kolumnie Kot dominuje przedział dla wagi 10-100, a w kolumnie Ptak dominuj eprzedział 1-10 oznaczony kolorem niebieskim.</p>
+<p>Rysuje ona tak zwany wykres mozaikowy przedstawiający jednocześnie wiele zależności. W pierwszym kroku szerokość kolumn odpowiada proporcjom wartości Kot i Ptak w zbiorze danych (jest ich prawie po równo, dlatego obie kolumny mają dosyć podobną szerokość). Następnie wysokość wierszy odpowiada względnemu udziałowi poszczególnych wartości w określonej kolumnie. W kolumnie Kot dominuje przedział dla wagi 10-100, a w kolumnie Ptak dominuje przedział 1-10 oznaczony kolorem niebieskim.</p>
 <p>Jest to sposób na przedstawienie rozkładów warunkowych. Bardzo użyteczne, jednak wymagające pewnej wprawy w czytaniu. Więcej o wykresach mozaikowych i innych metodach przedstawiania dwóch zmiennych jakościowych znaleźć można w sezonie 3.</p>
 <pre class="sourceCode r"><code class="sourceCode r">(druzynaWaga &lt;-<span class="st"> </span><span class="kw">xtabs</span>(~druzyna +<span class="st"> </span>wagaKategoria, koty_ptaki))</code></pre>
 <pre><code>##        wagaKategoria
@@ -535,7 +535,7 @@ xt[xt$Freq &gt;<span class="st"> </span><span class="dv">0</span>, ]</code></pre
 <div id="kolejnosc-i-nazwy-czynnikow-2" class="slide section level1">
 <h1>Kolejność i nazwy czynników</h1>
 <p>Jeżeli chcemy ,,posortować’’ poziomy zgodnie z pewną cechą ilościową, to wygodne będzie użycie funkcji <code>reorder()</code>. Jako argumenty pobiera ona wektor ze zmienną czynnikową, wektor z dowolną zmienną i funkcję. Dla każdej grupy określonej przez zmienną czynnikową, wartości wskazanych przez drugi argument, wyznaczana jest wartość funkcji - trzeciego argumentu. Następnie czynniki są porządkowane zgodnie z kolejnością wyników trzeciej funkcji.</p>
-<p>W przykładzie poniżej, rodzaje paliwa są porządkowane zgodnie ze średnim rokiem produkcji aut o określonym rodzaju paliwa.</p>
+<p>W przykładzie poniżej, rodzaje paliwa są porządkowane zgodnie ze średnim rokiem produkcji aut o określonym rodzaju paliwa. Tak jak się można spodziewać, bardziej ,,nowoczesne’’ paliwa są w autach młodszych.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012$Rodzaj.paliwa.posortowany &lt;-<span class="st"> </span><span class="kw">reorder</span>(auta2012$Rodzaj.paliwa, 
                                               auta2012$Rok.produkcji, 
                                               mean)
@@ -563,7 +563,7 @@ xt[xt$Freq &gt;<span class="st"> </span><span class="dv">0</span>, ]</code></pre
 <h1>Zadania:</h1>
 <ul>
 <li><p>W zbiorze danych <code>auta2012</code> podziel zmienne <em>Rok.produkcji</em> na przedziały 1900-1990, 1991-1995, 1996-2000, 2001-2005, 2006-2010, 2011-2012 a zmienną <em>Przebieg.w.km</em> na przedziały 0-1000, 1001-10 000, 10 001-100 000, 100 001 - 1000 000, 1000 000 - 10 000 000.</p></li>
-<li><p>Wyznacz tabelę liczebności dla tych dwóch nowych zmienych.</p></li>
+<li><p>Wyznacz tabelę liczebności dla tych dwóch nowych zmiennych.</p></li>
 <li><p>Przedstaw tę tabelę graficznie.</p></li>
 </ul>
 <p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>

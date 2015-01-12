@@ -29,9 +29,9 @@ Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zb
 
 Cechy jakościowe to takie, które opisują przynależność do grup. Z tego powodu, często stosuje się też nazwę *zmienna grupująca*. A ponieważ w programie R taką zmienną oznacza się terminem `factor`, to w języku polskim spotyka się kalkę *zmienna faktor*. Inną stosowaną, często przez programistów, nazwą jest *zmienna czynnikowa*.
 
-Określając zmienną jakościową warto wskazać o jakich grupach mówimy, przykłądami zmiennych jakościowych jest np. wykształcenie (grupy: podstawowe, średnie, wyższe), płeć (grupy: kobieta, męższczyzna), kraj zamieszkania (grupy: Polska, ...).
+Określając zmienną jakościową warto wskazać o jakich grupach mówimy, przykładami zmiennych jakościowych jest np. wykształcenie (grupy: podstawowe, średnie, wyższe), płeć (grupy: kobieta, mężczyzna), kraj zamieszkania (grupy: Polska, ...).
 
-Zmienna jakościowa może być opisana liczbami, jeżeli jednak te liczby nie oznaczają ilosći to taka zmienna będzie zmienną jakościową. Przykładowo pierwsze dwie cyfry kodu ZIP mogą być zmienną jakościową, ocenę szkolną można traktować jako zmienną jakościową (można też jako ilościową zależnie od kontekstu), podobnie liczba drzwi samochodu, jeżeli chcemy jej użyć do pogrupowania samochodów na 3 i 5 drzwiowe, potraktujemy tę liczbę jako cechę jakościową.
+Zmienna jakościowa może być opisana liczbami, jeżeli jednak te liczby nie oznaczają ilości to taka zmienna będzie zmienną jakościową. Przykładowo pierwsze dwie cyfry kodu ZIP mogą być zmienną jakościową, ocenę szkolną można traktować jako zmienną jakościową (można też jako ilościową zależnie od kontekstu), podobnie liczba drzwi samochodu, jeżeli chcemy jej użyć do pogrupowania samochodów na 3 i 5 drzwiowe, potraktujemy tę liczbę jako cechę jakościową.
 
 Jakkolwiek zmienne jakościowe mogą bardzo różnić się liczbą grup oraz rodzajem grup, można na nich wykonywać kilka wspólnych operacji. Przyjrzyjmy się im.
 
@@ -48,7 +48,7 @@ library(SmarterPoland)
 head(koty_ptaki)
 ```
 
-Każdy wiersz opisuje jeden gatunek. Zmienne jakośćiowe to w poniższym przypadku wszystkie te, które nei są liczbowymi, a więc gatunek, habitat i drużyna.
+Każdy wiersz opisuje jeden gatunek. Zmienne jakościowe to w poniższym przypadku wszystkie te, które nie są liczbowymi, a więc gatunek, habitat i drużyna.
 
 ---
 
@@ -64,9 +64,9 @@ koty_ptaki$druzyna
 Gdy te zmienne są wyświetlane, poza wartościami dodatkowo wyświetlany jest zbiór wszystkich możliwych wartości.
 Ten zbiór nazywa się najczęściej poziomami zmiennej jakościowej lub słownikiem zmiennej.
 
-Dwie podstawowe operacje na zmiennych jakościowych to odczytywanie poziomów zmiennej, co można zrobić funkcją `levels()` oraz wyznaczanie liczebności poszcezgólnych poziomów, co można wykonać funkcją `table()`.
+Dwie podstawowe operacje na zmiennych jakościowych to odczytywanie poziomów zmiennej, co można zrobić funkcją `levels()` oraz wyznaczanie liczebności poszczególnych poziomów, co można wykonać funkcją `table()`.
 
-To czy dana zmienna jest zmienną jakościową czy ilośćiową można sprawdzić używając funkcji `class()`. Jeżeli wynikiem jest napis `factor` to mamy do czynienia ze zmienną jakosciową. Jeżeli wnikiem jest `integer` lub `numeric` to mamy do czynienia ze zmienną ilościową.
+To czy dana zmienna jest zmienną jakościową czy ilościową można sprawdzić używając funkcji `class()`. Jeżeli wynikiem jest napis `factor` to mamy do czynienia ze zmienną jakościową. Jeżeli wynikiem jest `integer` lub `numeric` to mamy do czynienia ze zmienną ilościową.
 
 ```{r}
 class(koty_ptaki$druzyna)
@@ -257,7 +257,7 @@ barplot(waluty)
 
 # Graficzne statystyki opisowe
 
-Jeżeli chcemy, by słupki były przedstawiane poziomo, do funckji `barplot()` można dodać argument `horiz = TRUE`.
+Jeżeli chcemy, by słupki były przedstawiane poziomo, do funkcji `barplot()` można dodać argument `horiz = TRUE`.
 
 Domyślnie wartości są uporządkowane alfabetycznie. Nie zawsze jednak taka kolejność ma sens.
 W tym przypadku rozsądniej jest posortować dane malejąco, co można wykonać z użyciem funkcji `sort()`.
@@ -289,7 +289,7 @@ Z wyglądu, cechy jakościowe (czynniki) przypominają cechy napisowe.
 Jednak pod spodem, ich reprezentacja jest zupełnie inna.
 Czynniki nie są pamiętane jako napisy, ale jako para - wektor liczb i słownik, określający, który napis odpowiada, której liczbie. Dzięki temu można zaoszczędzić pamięć przy przechowywaniu dużych zbiorów danych. 
 
-Na napisach zazwyczaj wykonuje się inne operacje niż na zmiennych jakościowych, może się więc tak zdarzyć, że celowo chcemy jakieś dane odczytać jako napisy. Ale ddy dane są wczytywane z pliku tekstowego w którym są napisy, domyślnie napisy są wczytywane jako czynniki. 
+Na napisach zazwyczaj wykonuje się inne operacje niż na zmiennych jakościowych, może się więc tak zdarzyć, że celowo chcemy jakieś dane odczytać jako napisy. Ale gdy dane są wczytywane z pliku tekstowego w którym są napisy, domyślnie napisy są wczytywane jako czynniki. 
 
 W poniższym przykładzie, takie zmienne jak `gatunek` i `habitat` są wczytywane jako zmienna klasy `factor`. Efektem ubocznym jest sposób wyświetlania wyników np. przez zmienną `cat()`. Dla zmiennej czynnikowej, ta funkcja na ekranie wypisze liczby a nie wartości napisowe. 
 
@@ -317,7 +317,7 @@ class(koty_ptaki$gatunek)
 cat(koty_ptaki$gatunek)
 ```
 
-Tym razem kolumna `gatunek` została wczytana jako wetkor napisów. 
+Tym razem kolumna `gatunek` została wczytana jako wektor napisów. 
 
 ---
 
@@ -339,13 +339,13 @@ str(napisy)
 
 # Tablice częstości
 
-A co gdybyśmy chcieli przedstawić zależność pomiędzy dwoma zmiennymi jakościowymi? Można to zrobić używając funkcji `table()` (należy kolejne zmienne podawać jako kolrjne argumenty) ale można też użyć funkcją `xtabs()`, która jest trochę wygodniejsza w pracy.
+A co gdybyśmy chcieli przedstawić zależność pomiędzy dwoma zmiennymi jakościowymi? Można to zrobić używając funkcji `table()` (należy kolejne zmienne podawać jako kolejne argumenty) ale można też użyć funkcją `xtabs()`, która jest trochę wygodniejsza w pracy.
 
 Pierwszym argumentem tej funkcji jest formuła o składni `~ zmienna_1 + .. + zmienna_n`, t.j. rozpoczynająca się tyldą a następnie ze zmiennymi porozdzielanymi znakiem plusa. Drugim argumentem jest ramka danych, która powinna zawierać zmienne wymienione w formule. 
 
 Wynikiem jest tablica kontyngencji o tylu wymiarach, ile zmiennych występuje w formule.
 
-Przykładowo, zestawiając ze sobą kraj pochodzenia oraz walutę w ogłoszeniu, otrzymujemy tablicę częstości o wymiarach 32 wiersze i 8 kolumn. Pierwszy wiersz tej tabeli odpowiada pusterj wartości kraju pochodzenia, stąd brak nazwy w pierwszym wierszu.
+Przykładowo, zestawiając ze sobą kraj pochodzenia oraz walutę w ogłoszeniu, otrzymujemy tablicę częstości o wymiarach 32 wiersze i 8 kolumn. Pierwszy wiersz tej tabeli odpowiada pustej wartości kraju pochodzenia, stąd brak nazwy w pierwszym wierszu.
 
 ```{r, warning=FALSE, fig.height=5, fig.width=5}
 (krajWaluta <- xtabs( ~ Kraj.pochodzenia + Waluta, auta2012))
@@ -359,7 +359,7 @@ Tablice częstości nie są ramkami danych.
 
 Gdy w grę wchodzą dwie zmienne, to wyglądają jak ramki danych, mają wiersze i kolumny. Muszą być jednak czymś innym, ponieważ w sytuacji, gdy tablica kontyngencji dotyczy trzech lub większej liczby zmiennych to wynikowa macierz kontyngencji ma więcej wymiarów niż dwa. 
 
-Funkcją `as.data.frame` można przekształcić wielowymairowe tabele do ramki danych. Otrzyma się w tym przypadku tak zwaną reprezentację rzadką macierzy kontyngencji, w której pierwsze kolumny opisują wszystkie kombinacje czynników zmiennych a ostania kolumna opisuje liczebność występowania poszczególnej kombinacji czynników.
+Funkcją `as.data.frame` można przekształcić wielowymiarowe tabele do ramki danych. Otrzyma się w tym przypadku tak zwaną reprezentację rzadką macierzy kontyngencji, w której pierwsze kolumny opisują wszystkie kombinacje czynników zmiennych a ostania kolumna opisuje liczebność występowania poszczególnej kombinacji czynników.
 
 ```{r, warning=FALSE, fig.height=5, fig.width=5}
 xt <- xtabs(~Kraj.pochodzenia+Waluta, auta2012)
@@ -371,11 +371,11 @@ xt[xt$Freq > 0, ]
 
 # Przekształcanie zmiennych ilościowych w jakościowe
 
-Opisując dane ilościowe, często można ułątwić ich zrozumienie, jeżeli zmienne ilościowe podzieli się na przedziały. Takie przedziały są już zmienną jakościową.
+Opisując dane ilościowe, często można ułatwić ich zrozumienie, jeżeli zmienne ilościowe podzieli się na przedziały. Takie przedziały są już zmienną jakościową.
 
-Zmienną jakościową z ilościowej można stworzyć używając funkcji `cut()`, która za prierwszy argument przyjmuje zmienną ilościową a za drugi przyjmuje liczbę przedziałów do zbudowania lub punkty odcięcia dla tych przedziałów.
+Zmienną jakościową z ilościowej można stworzyć używając funkcji `cut()`, która za pierwszy argument przyjmuje zmienną ilościową a za drugi przyjmuje liczbę przedziałów do zbudowania lub punkty odcięcia dla tych przedziałów.
 
-W przedziale poniżęj przekształcimy zmienną `waga` ze zbioru `koty_ptaki` na cztery przedziały, 0-1, 1-10, 10-100 i 100-1000. Tak stworzoną zmienną dodamy do zbioru `koty_ptaki` pod nazwą `wagaKategoria`.
+W przedziale poniżej przekształcimy zmienną `waga` ze zbioru `koty_ptaki` na cztery przedziały, 0-1, 1-10, 10-100 i 100-1000. Tak stworzoną zmienną dodamy do zbioru `koty_ptaki` pod nazwą `wagaKategoria`.
 
 ```{r, warning=FALSE, fig.height=5, fig.width=5}
 koty_ptaki$waga
@@ -390,7 +390,7 @@ Wykorzystajmy tą nowo utworzoną zmienną do przedstawienia graficznych statyst
 
 Zestawimy wagę ze zmienną drużyna. A następnie tę dwuwymiarową tabelę przekażemy do funkcji `mosaicplot()`. 
 
-Rysuje ona tak zwany wykres mozaikowy przedstawiający jednocześnie wiele zależności. W pierwszym kroku szerokość kolumn odpowiada proporcjom wartości Kot i Ptak w zbiorze danych (jest ich prawie po równo, dlatego obie kolumny mają dosyć podobną szeorkość). Następnie wysokość wierszy odpowiada względnemu udziałowi poszcezgólnych wartości w określonej kolumnie. W kolumnie Kot dominuje przedział dla wagi 10-100, a w kolumnie Ptak dominuj eprzedział 1-10 oznaczony kolorem niebieskim. 
+Rysuje ona tak zwany wykres mozaikowy przedstawiający jednocześnie wiele zależności. W pierwszym kroku szerokość kolumn odpowiada proporcjom wartości Kot i Ptak w zbiorze danych (jest ich prawie po równo, dlatego obie kolumny mają dosyć podobną szerokość). Następnie wysokość wierszy odpowiada względnemu udziałowi poszczególnych wartości w określonej kolumnie. W kolumnie Kot dominuje przedział dla wagi 10-100, a w kolumnie Ptak dominuje przedział 1-10 oznaczony kolorem niebieskim. 
 
 Jest to sposób na przedstawienie rozkładów warunkowych. Bardzo użyteczne, jednak wymagające pewnej wprawy w czytaniu. Więcej o wykresach mozaikowych i innych metodach przedstawiania dwóch zmiennych jakościowych znaleźć można w sezonie 3.
 
@@ -465,8 +465,9 @@ table(auta2012$Rodzaj.paliwa)
 
 + W zbiorze danych `auta2012` podziel zmienne *Rok.produkcji* na przedziały 1900-1990, 1991-1995, 1996-2000, 2001-2005, 2006-2010, 2011-2012 a zmienną *Przebieg.w.km* na przedziały 0-1000, 1001-10 000, 10 001-100 000, 100 001 - 1000 000, 1000 000 - 10 000 000.
 
-+ Wyznacz tabelę liczebności dla tych dwóch nowych zmienych.
++ Wyznacz tabelę liczebności dla tych dwóch nowych zmiennych.
 
 + Przedstaw tę tabelę graficznie.
 
 Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+
