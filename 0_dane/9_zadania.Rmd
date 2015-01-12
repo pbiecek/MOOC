@@ -326,4 +326,33 @@ boxplot(auta2012wybrane$Cena.w.PLN, horizontal = TRUE, range = 0)
 hist(auta2012wybrane$Cena.w.PLN, 50, col="grey")
 ```
 
+
+---
+
+# Zadania, sezon 1, odcinek 12
+
++ Ile zmiennych w zbiorze danych `auta2012` to zmienne jakościowe? 
+
++ Zmienna `Liczba.drzwi` przyjmuje wartości `2/3` i `4/5`. Zachowuje się ona jako zmienna jakościowa. Jednak można uznać, że liczba drzwi to cecha ilościowa, ponieważ opisuje _ilość_ drzwi w samochodzie. Jak wyjaśnić tę dualność?
+
+
+---
+
+# Odpowiedzi, sezon 1, odcinek 12
+
+```{r, eval=FALSE}
+names(which(sapply(auta2012, class) == "factor"))
+##  [1] "Waluta"                       "Brutto.netto"                 "Marka"                       
+##  [4] "Model"                        "Wersja"                       "Liczba.drzwi"                
+##  [7] "Rodzaj.paliwa"                "Kolor"                        "Kraj.aktualnej.rejestracji"  
+## [10] "Kraj.pochodzenia"             "Pojazd.uszkodzony"            "Skrzynia.biegow"             
+## [13] "Status.pojazdu.sprowadzonego" "Wyposazenie.dodatkowe"      
 ```
+
+Pewne zmienne, w zależności od kontekstu, mogą być traktowane i analizowane jak zmienne ilościowe lub zmienne jakościowe. Do nas należy wybór, która z tych opcji jest właściwsza.
+
+Przykładowo, w typowych analizach takich danych nie ma sensu liczenia sumy lub średniej liczby drzwi. Co by bowiem by znaczyło, że auta wystawione do sprzedaży w styczniu miały średnio 3.8 drzwi? Dla zwykłego odbiory taka średnia nie ma sensu, niewiele bowiem mówi o zmiennej.
+Nie ma specjalnie sensu stwierdzenie, że samochody marki Porsche mają średnio o 0.5 mniej drzwi niż samochody marki Toyota.
+
+Ale już, gdybyśmy byli warsztatem malarskim, który ma pomalować te wszystkie drzwi, i w cenniku ma cenę od elementu, dla takiego warsztatu suma drzwi może mieć sens. W takim przypadku sensownie byłoby potraktowanie tej zmiennej jako zmiennej ilościowej i zsumowanie liczby drzwi.
+

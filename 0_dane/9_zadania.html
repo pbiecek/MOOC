@@ -312,7 +312,25 @@ auta2012wybrane &lt;-<span class="st"> </span>auta2012[auta2012$Cena.w.PLN &lt;<
 
 <span class="co"># lub histogramem</span>
 <span class="kw">hist</span>(auta2012wybrane$Cena.w.PLN, <span class="dv">50</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>)</code></pre>
-<p>```</p>
+</div>
+<div id="zadania-sezon-1-odcinek-12" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 12</h1>
+<ul>
+<li><p>Ile zmiennych w zbiorze danych <code>auta2012</code> to zmienne jakościowe?</p></li>
+<li><p>Zmienna <code>Liczba.drzwi</code> przyjmuje wartości <code>2/3</code> i <code>4/5</code>. Zachowuje się ona jako zmienna jakościowa. Jednak można uznać, że liczba drzwi to cecha ilościowa, ponieważ opisuje <em>ilość</em> drzwi w samochodzie. Jak wyjaśnić tę dualność?</p></li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-12" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 12</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(<span class="kw">which</span>(<span class="kw">sapply</span>(auta2012, class) ==<span class="st"> &quot;factor&quot;</span>))
+##  [1] &quot;Waluta&quot;                       &quot;Brutto.netto&quot;                 &quot;Marka&quot;                       
+##  [4] &quot;Model&quot;                        &quot;Wersja&quot;                       &quot;Liczba.drzwi&quot;                
+##  [7] &quot;Rodzaj.paliwa&quot;                &quot;Kolor&quot;                        &quot;Kraj.aktualnej.rejestracji&quot;  
+## [10] &quot;Kraj.pochodzenia&quot;             &quot;Pojazd.uszkodzony&quot;            &quot;Skrzynia.biegow&quot;             
+## [13] &quot;Status.pojazdu.sprowadzonego&quot; &quot;Wyposazenie.dodatkowe&quot;      </code></pre>
+<p>Pewne zmienne, w zależności od kontekstu, mogą być traktowane i analizowane jak zmienne ilościowe lub zmienne jakościowe. Do nas należy wybór, która z tych opcji jest właściwsza.</p>
+<p>Przykładowo, w typowych analizach takich danych nie ma sensu liczenia sumy lub średniej liczby drzwi. Co by bowiem by znaczyło, że auta wystawione do sprzedaży w styczniu miały średnio 3.8 drzwi? Dla zwykłego odbiory taka średnia nie ma sensu, niewiele bowiem mówi o zmiennej. Nie ma specjalnie sensu stwierdzenie, że samochody marki Porsche mają średnio o 0.5 mniej drzwi niż samochody marki Toyota.</p>
+<p>Ale już, gdybyśmy byli warsztatem malarskim, który ma pomalować te wszystkie drzwi, i w cenniku ma cenę od elementu, dla takiego warsztatu suma drzwi może mieć sens. W takim przypadku sensownie byłoby potraktowanie tej zmiennej jako zmiennej ilościowej i zsumowanie liczby drzwi.</p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
