@@ -128,6 +128,9 @@ koty_ptaki$habitat_napis</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># równoważnie</span>
 <span class="kw">grep</span>(koty_ptaki$habitat_napis, <span class="dt">pattern=</span><span class="st">&quot;A&quot;</span>)</code></pre>
 <pre><code>## [1] 1 2 3 4 5 6 7 9</code></pre>
+</div>
+<div id="wyszukiwanie-napisu-1" class="slide section level1">
+<h1>Wyszukiwanie napisu</h1>
 <p>Jeżeli zamiast indeksów, chcemy otrzymać wartości, ktróe zostały dopasowane, wtedy powinniśmy ustawić argument <code>value</code> na wartość TRUE.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grep</span>(<span class="st">&quot;A&quot;</span>, koty_ptaki$habitat_napis, <span class="dt">value =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>## [1] &quot;Azja&quot;    &quot;Afryka&quot;  &quot;Ameryka&quot; &quot;Ameryka&quot; &quot;Azja&quot;    &quot;Afryka&quot;  &quot;Azja&quot;   

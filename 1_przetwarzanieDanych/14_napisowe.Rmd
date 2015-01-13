@@ -101,11 +101,16 @@ which(koty_ptaki$habitat_napis %in% c("Azja", "Afryka"))
 Często jednak, zamiast wymieniać wszystkie wartości, które chcemy wyszukać, wygodniejsze jest opisanie tych wartości przez pewien wzorzec. Do takiego wyszukiwania służy funkcja `grep()`. Testuje ona w którym z napisów wystepuje określony ciąg znaków, a jako wynik zwraca numery napisów z tym ciągiem.
 
 Przykładowo, sprawdźmy które wiersze w kolumnie `habitat_napis` posiadają w nazwie znak `A`. Pierwszym argumentem funkcji `grep()` jest wzorzec, drugim wektor napisów. Możęmy te argumenty podać w innej kolejności, ale wtedy zmuszenie jesteśmy do podawania ich nazwy.
+
 ```{r, warning=FALSE, message=FALSE}
 grep("A", koty_ptaki$habitat_napis)
 # równoważnie
 grep(koty_ptaki$habitat_napis, pattern="A")
 ```
+
+---
+
+# Wyszukiwanie napisu
 
 Jeżeli zamiast indeksów, chcemy otrzymać wartości, ktróe zostały dopasowane, wtedy powinniśmy ustawić argument `value` na wartość TRUE.
  
