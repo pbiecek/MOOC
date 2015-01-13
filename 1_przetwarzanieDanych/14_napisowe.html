@@ -52,23 +52,125 @@ pogRomcy danych
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
+<p>Analizując dane spotkamy się z różnymi rodzajami zmiennych. Bardzo często są to napisy lub zmienne, które chcemy do napisów przekształcić (np. data, którą można przekształcić do napisy by wyłuskać roki miesiąc).</p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
-<li>Jakie zmienne / wartości / cechy określa się terminem cechy napisowe?</li>
-<li>Jakie podstawowe operacje można wykonywać na cechach napisowe?</li>
-<li>Jak podsumowywać / opisywać cechy napisowe?</li>
+<li>Jak przekształcać zmienne na i z napisów?</li>
+<li>Jakie podstawowe operacje można wykonywać na napisach?</li>
+<li>Jak podsumowywać / opisywać napisy?</li>
 </ul>
-<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>.</p>
+<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>SmarterPoland</code>.</p>
 </div>
-<div id="intro" class="slide section level1">
-<h1>Intro</h1>
-<p>Kupując nowy samochód często trzeba dopłacić jeżeli samochód ma być w kolorze innym niż biały, w kolorze metalik lub perłowy.</p>
-<p>Ale czy ceny samochodów używanych silnie różnią się w zależności od koloru?</p>
-<p>Podstawowym kryterium, gdy myślimy o cenach używanych samochodów, jest rok produkcji i przebieg.</p>
-<p>A czy wyposażenie ma znaczenie? Sprawdźmy to!</p>
-<p>Nie zawsze jednak dane są przygotowane w postaci prostej do analiz. Wpierw musimy więc informacje o wyposażeniu wyłuskać.</p>
+<div id="co-to-znaczy-napisy" class="slide section level1">
+<h1>Co to znaczy: napisy</h1>
+<p>Osoby mające doświadceznie w pracy z takimi językami jak C++ czy Java są przyzwyczajone do rozdizały typów na znaki, napisy (łańcuchy znaków) i wektory napisów. W programie R nie ma tego podziału, są tylko wektory napisów.</p>
+<p>Wektor może być jednoelementowy i długość tego jednego elementu może wynosić jeden, ale wciąż to wektor napisów. Takie wektory oznaczane są klasą <code>character</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(<span class="st">&quot;A&quot;</span>)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>Napisy spotkać można w różnych kontekstach. Najbardziej naturalnym jest taki, że w zbiorze danych były zebrae wypowiedzi. Np. pobierając dane z Twittera, jedną ze zmiennych opisujących pojedyńcze ćwierknięcie jest treść tweetu czyli napis o długości do 140 znaków.</p>
+<p>Napisy pojawiają się też, gdy wczytywane są dane ilościowe lub jakościowe, ale z jakiegoś powodu w procesie wczytywania dane te wczytały się jako napisy (np. przez źle określone formatowanie). W takim przypadku, często napisy przekształcamy na porządany typ, np. ilościowy, jakościowy, datę itp.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(<span class="st">&quot;2012&quot;</span>)     <span class="co"># konwersja na liczbę</span></code></pre>
+<pre><code>## [1] 2012</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>)) <span class="co"># konwersja na zmienną jakościową</span></code></pre>
+<pre><code>## [1] A B A A
+## Levels: A B</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.Date</span>(<span class="st">&quot;2012-01-01&quot;</span>)  <span class="co"># konwersja na datę</span></code></pre>
+<pre><code>## [1] &quot;2012-01-01&quot;</code></pre>
 </div>
 <div id="wczytanie-danych" class="slide section level1">
+<h1>Wczytanie danych</h1>
+<p>Dane od których rozpoczniemy przykłady to <code>koty_ptaki</code> z pakietu <code>SmarterPoland</code>. Aby te dane wczytać, wystarczy włączyć pakiet, instrukcja jak to zrobić znajduje się w odcinku 2.</p>
+<p>Włączmy pakiet i użyjmy funkcji <code>head()</code> by wyświetlić pierwsze sześć wierszy.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+<span class="kw">head</span>(koty_ptaki)</code></pre>
+<pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
+## 1  Tygrys  300     2.5       60    Azja        25     Kot
+## 2     Lew  200     2.0       80  Afryka        29     Kot
+## 3  Jaguar  100     1.7       90 Ameryka        15     Kot
+## 4    Puma   80     1.7       70 Ameryka        13     Kot
+## 5 Leopard   70     1.4       85    Azja        21     Kot
+## 6  Gepard   60     1.4      115  Afryka        12     Kot</code></pre>
+<p>Każdy wiersz opisuje jeden gatunek. Jak wiemy z poprzedniego odcinka, zmienna gatunek, habitat i drużyna to zmienne jakościowe. Przekształcimy je na napisy aby zademonstrować podstawowe operacje na napisach.</p>
+</div>
+<div id="konwersja-na-napis" class="slide section level1">
+<h1>Konwersja na napis</h1>
+<p>Wybierzmy kolumnę <code>habitat</code>. W zbiorze danych <code>koty_ptaki</code> jest to zmienna jakościowa. Użyjemy funkcji <code>as.character()</code> by ją przekształcić na napis. Otrzymane napisy zapiszemy w kolumnie <code>habitat_napis</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki$habitat</code></pre>
+<pre><code>##  [1] Azja     Afryka   Ameryka  Ameryka  Azja     Afryka   Azja    
+##  [8] Euroazja Afryka   Polnoc   Polnoc   Polnoc   Poludnie
+## Levels: Afryka Ameryka Azja Euroazja Polnoc Poludnie</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki$habitat_napis &lt;-<span class="st"> </span><span class="kw">as.character</span>(koty_ptaki$habitat)
+koty_ptaki$habitat_napis</code></pre>
+<pre><code>##  [1] &quot;Azja&quot;     &quot;Afryka&quot;   &quot;Ameryka&quot;  &quot;Ameryka&quot;  &quot;Azja&quot;     &quot;Afryka&quot;  
+##  [7] &quot;Azja&quot;     &quot;Euroazja&quot; &quot;Afryka&quot;   &quot;Polnoc&quot;   &quot;Polnoc&quot;   &quot;Polnoc&quot;  
+## [13] &quot;Poludnie&quot;</code></pre>
+<p>Funkcja <code>length()</code> dla każdego wektora sprawdza jego długość. Funkcja <code>nchar()</code> dla napisu sprawdza liczbę znaków w napisie.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># liczba napisów</span>
+<span class="kw">length</span>(koty_ptaki$habitat_napis)</code></pre>
+<pre><code>## [1] 13</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># długość każdego napisu</span>
+<span class="kw">nchar</span>(koty_ptaki$habitat_napis)</code></pre>
+<pre><code>##  [1] 4 6 7 7 4 6 4 8 6 6 6 6 8</code></pre>
+</div>
+<div id="wyszukiwanie-napisu" class="slide section level1">
+<h1>Wyszukiwanie napisu</h1>
+<p>Częstą operacją na napisach jest wyszukanie tych, które pasują do wzorca. Jeżeli chodzi nam o zgodność co do znaku, to wygodne będzie użycie funkcji <code>which()</code>. Jako wynik zwraca indeksy dla których określony warunek jest prawdziwy.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># które wartości wektora habitat_napis to 'Azja'</span>
+<span class="kw">which</span>(koty_ptaki$habitat_napis ==<span class="st"> &quot;Azja&quot;</span>)</code></pre>
+<pre><code>## [1] 1 5 7</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># które wartości wektora habitat_napis to 'Azja' lub `Afryka`</span>
+<span class="kw">which</span>(koty_ptaki$habitat_napis %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Azja&quot;</span>, <span class="st">&quot;Afryka&quot;</span>))</code></pre>
+<pre><code>## [1] 1 2 5 6 7 9</code></pre>
+<p>Często jednak, zamiast wymieniać wszystkie wartości, które chcemy wyszukać, wygodniejsze jest opisanie tych wartości przez pewien wzorzec. Do takiego wyszukiwania służy funkcja <code>grep()</code>. Testuje ona w którym z napisów wystepuje określony ciąg znaków, a jako wynik zwraca numery napisów z tym ciągiem.</p>
+<p>Przykładowo, sprawdźmy które wiersze w kolumnie <code>habitat_napis</code> posiadają w nazwie znak <code>A</code>. Pierwszym argumentem funkcji <code>grep()</code> jest wzorzec, drugim wektor napisów. Możęmy te argumenty podać w innej kolejności, ale wtedy zmuszenie jesteśmy do podawania ich nazwy.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grep</span>(<span class="st">&quot;A&quot;</span>, koty_ptaki$habitat_napis)</code></pre>
+<pre><code>## [1] 1 2 3 4 5 6 7 9</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># równoważnie</span>
+<span class="kw">grep</span>(koty_ptaki$habitat_napis, <span class="dt">pattern=</span><span class="st">&quot;A&quot;</span>)</code></pre>
+<pre><code>## [1] 1 2 3 4 5 6 7 9</code></pre>
+<p>Jeżeli zamiast indeksów, chcemy otrzymać wartości, ktróe zostały dopasowane, wtedy powinniśmy ustawić argument <code>value</code> na wartość TRUE.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grep</span>(<span class="st">&quot;A&quot;</span>, koty_ptaki$habitat_napis, <span class="dt">value =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## [1] &quot;Azja&quot;    &quot;Afryka&quot;  &quot;Ameryka&quot; &quot;Ameryka&quot; &quot;Azja&quot;    &quot;Afryka&quot;  &quot;Azja&quot;   
+## [8] &quot;Afryka&quot;</code></pre>
+<p>Innym przydatnym argumentem funkcji <code>grep()</code> jest możliwość określenia, że wyszukiwanie ma być wykonane z pominięciem informacji o wielkości znaków. Służy do tego argument <code>ignore.case=TRUE</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grep</span>(<span class="st">&quot;A&quot;</span>, koty_ptaki$habitat_napis, <span class="dt">ignore.case =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## [1] 1 2 3 4 5 6 7 8 9</code></pre>
+<p>Określając wzorzec możemy wykorzystać wyrażenia regularne. Pozwalają one opisac pewną prawidłowość, którą chcemy wyszukać dane. Wyrażenia regularne są często stosowane aby sprawdzić czy napis jest na przykład mailem, numerem telefonu lub kodem pocztowym.</p>
+<p>Więcej o wyrażeniach regularnych można przeczytac choćby na wikipedii <a href="http://pl.wikipedia.org/wiki/Wyra%C5%BCenie_regularne#Wyra.C5.BCenia_regularne_w_praktyce">http://pl.wikipedia.org/wiki/Wyra%C5%BCenie_regularne#Wyra.C5.BCenia_regularne_w_praktyce</a>.</p>
+<p>Poniższe wyrażenie, sprawdza czy początek napisu to litera A lub E.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grep</span>(<span class="st">&quot;^[AE]&quot;</span>, koty_ptaki$habitat_napis)</code></pre>
+<pre><code>## [1] 1 2 3 4 5 6 7 8 9</code></pre>
+</div>
+<div id="elementy-napisu" class="slide section level1">
+<h1>Elementy napisu</h1>
+<p>Kolejną przydatną funkcją, do operowania na napisach jest <code>substr()</code>. Pozwala ona z napisu wyciąć fragment o określonej pozycji, drugim i trzecim argumentem są indeksy początku i końca napisu, który chcemy wyciąć.</p>
+<p>Przykładowo, w ten sposób możemy z dat wycinać informację o latach lub miesiącach.</p>
+<pre class="sourceCode r"><code class="sourceCode r">daty &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2014-01-01&quot;</span>, <span class="st">&quot;2015-03-15&quot;</span>, <span class="st">&quot;2010-12-01&quot;</span>)
+<span class="kw">substr</span>(daty, <span class="dv">1</span>, <span class="dv">4</span>)</code></pre>
+<pre><code>## [1] &quot;2014&quot; &quot;2015&quot; &quot;2010&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">substr</span>(daty, <span class="dv">6</span>, <span class="dv">7</span>)</code></pre>
+<pre><code>## [1] &quot;01&quot; &quot;03&quot; &quot;12&quot;</code></pre>
+<p>Innym sposobem wyłuskiwania elemtnu napisu jest podanie wzorca który rozdziela istotne elementy napisu, np. słowa. W poniższym przykładzie dwa zdania są rozbijane na wyrazy (a dokładniej rozbijane na fragmenty rozdzielane spacją). Wynikiem jest dwuelementowa lista wektorów. Wybieramy pierwszy wektor i odczytujemy z niego drugie słowo.</p>
+<pre class="sourceCode r"><code class="sourceCode r">zdanie &lt;-<span class="st"> </span><span class="kw">c</span>( <span class="st">&quot;W szczebrzeszynie chrząszcz brzmi w trzcinie&quot;</span>, <span class="st">&quot;Ząb zupa zębowa dąb zupa dębowa&quot;</span>)
+(podzielony &lt;-<span class="st"> </span><span class="kw">strsplit</span>(zdanie, <span class="st">&quot; &quot;</span>))</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;W&quot;               &quot;szczebrzeszynie&quot; &quot;chrząszcz&quot;       &quot;brzmi&quot;          
+## [5] &quot;w&quot;               &quot;trzcinie&quot;       
+## 
+## [[2]]
+## [1] &quot;Ząb&quot;    &quot;zupa&quot;   &quot;zębowa&quot; &quot;dąb&quot;    &quot;zupa&quot;   &quot;dębowa&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">slowa1 &lt;-<span class="st"> </span>podzielony[[<span class="dv">1</span>]]
+slowa1[<span class="dv">2</span>]</code></pre>
+<pre><code>## [1] &quot;szczebrzeszynie&quot;</code></pre>
+</div>
+<div id="zadanie" class="slide section level1">
+<h1>Zadanie</h1>
+<ul>
+<li><p>Wyznacz ndeksy wierszy w zbiorze danych <code>koty_ptaki</code>, w których <code>gatunek</code> zawiera dużą lub małą literę <code>S</code>.</p></li>
+<li><p>Wyznacz wszystkie wiersze, w których opisano jakiś gatunek sokoła.</p></li>
+</ul>
+</div>
+<div id="wczytanie-danych-1" class="slide section level1">
 <h1>Wczytanie danych</h1>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
 <span class="kw">head</span>(auta2012, <span class="dv">2</span>)</code></pre>
@@ -194,6 +296,7 @@ bezwypadkowy =<span class="st"> </span><span class="kw">grepl</span>(auta2012$Wy
 <li>91453</li>
 <li>141400</li>
 </ul>
+<p>stringi Marek Gągolewski <a href="http://smarterpoland.pl/SER/#SERII">http://smarterpoland.pl/SER/#SERII</a></p>
 <p>Manual do operacji na napisach</p>
 <p><a href="http://gastonsanchez.com/Handling_and_Processing_Strings_in_R.pdf">http://gastonsanchez.com/Handling_and_Processing_Strings_in_R.pdf</a></p>
 </div>

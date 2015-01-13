@@ -66,9 +66,99 @@ Każdy wiersz opisuje jeden gatunek. Jak wiemy z poprzedniego odcinka, zmienna g
 
 ---
 
+# Konwersja na napis
 
+Wybierzmy kolumnę `habitat`. W zbiorze danych `koty_ptaki` jest to zmienna jakościowa. Użyjemy funkcji `as.character()` by ją przekształcić na napis. Otrzymane napisy zapiszemy w kolumnie `habitat_napis`.
 
+```{r, warning=FALSE, message=FALSE}
+koty_ptaki$habitat
+koty_ptaki$habitat_napis <- as.character(koty_ptaki$habitat)
+koty_ptaki$habitat_napis
+```
 
+Funkcja `length()` dla każdego wektora sprawdza jego długość. Funkcja `nchar()` dla napisu sprawdza liczbę znaków w napisie.
+
+```{r, warning=FALSE, message=FALSE}
+# liczba napisów
+length(koty_ptaki$habitat_napis)
+# długość każdego napisu
+nchar(koty_ptaki$habitat_napis)
+```
+
+---
+
+# Wyszukiwanie napisu
+
+Częstą operacją na napisach jest wyszukanie tych, które pasują do wzorca. Jeżeli chodzi nam o zgodność co do znaku, to wygodne będzie użycie funkcji `which()`. Jako wynik zwraca indeksy dla których określony warunek jest prawdziwy.
+
+```{r, warning=FALSE, message=FALSE}
+# które wartości wektora habitat_napis to 'Azja'
+which(koty_ptaki$habitat_napis == "Azja")
+# które wartości wektora habitat_napis to 'Azja' lub `Afryka`
+which(koty_ptaki$habitat_napis %in% c("Azja", "Afryka"))
+```
+
+Często jednak, zamiast wymieniać wszystkie wartości, które chcemy wyszukać, wygodniejsze jest opisanie tych wartości przez pewien wzorzec. Do takiego wyszukiwania służy funkcja `grep()`. Testuje ona w którym z napisów wystepuje określony ciąg znaków, a jako wynik zwraca numery napisów z tym ciągiem.
+
+Przykładowo, sprawdźmy które wiersze w kolumnie `habitat_napis` posiadają w nazwie znak `A`. Pierwszym argumentem funkcji `grep()` jest wzorzec, drugim wektor napisów. Możęmy te argumenty podać w innej kolejności, ale wtedy zmuszenie jesteśmy do podawania ich nazwy.
+```{r, warning=FALSE, message=FALSE}
+grep("A", koty_ptaki$habitat_napis)
+# równoważnie
+grep(koty_ptaki$habitat_napis, pattern="A")
+```
+
+Jeżeli zamiast indeksów, chcemy otrzymać wartości, ktróe zostały dopasowane, wtedy powinniśmy ustawić argument `value` na wartość TRUE.
+ 
+```{r, warning=FALSE, message=FALSE}
+grep("A", koty_ptaki$habitat_napis, value = TRUE)
+```
+
+Innym przydatnym argumentem funkcji `grep()` jest możliwość określenia, że wyszukiwanie ma być wykonane z pominięciem informacji o wielkości znaków. Służy do tego argument `ignore.case=TRUE`.
+
+```{r, warning=FALSE, message=FALSE}
+grep("A", koty_ptaki$habitat_napis, ignore.case = TRUE)
+```
+
+Określając wzorzec możemy wykorzystać wyrażenia regularne. Pozwalają one opisac pewną prawidłowość, którą chcemy wyszukać dane. Wyrażenia regularne są często stosowane aby sprawdzić czy napis jest na przykład mailem, numerem telefonu lub kodem pocztowym.
+
+Więcej o wyrażeniach regularnych można przeczytac choćby na wikipedii http://pl.wikipedia.org/wiki/Wyra%C5%BCenie_regularne#Wyra.C5.BCenia_regularne_w_praktyce.
+
+Poniższe wyrażenie, sprawdza czy początek napisu to litera A lub E.
+
+```{r, warning=FALSE, message=FALSE}
+grep("^[AE]", koty_ptaki$habitat_napis)
+```
+
+---
+
+# Elementy napisu
+
+Kolejną przydatną funkcją, do operowania na napisach jest `substr()`. Pozwala ona z napisu wyciąć fragment o określonej pozycji, drugim i trzecim argumentem są indeksy początku i końca napisu, który chcemy wyciąć. 
+
+Przykładowo, w ten sposób możemy z dat wycinać informację o latach lub miesiącach. 
+
+```{r, warning=FALSE, message=FALSE}
+daty <- c("2014-01-01", "2015-03-15", "2010-12-01")
+substr(daty, 1, 4)
+substr(daty, 6, 7)
+```
+
+Innym sposobem wyłuskiwania elemtnu napisu jest podanie wzorca który rozdziela istotne elementy napisu, np. słowa. W poniższym przykładzie dwa zdania są rozbijane na wyrazy (a dokładniej rozbijane na fragmenty rozdzielane spacją). Wynikiem jest dwuelementowa lista wektorów. Wybieramy pierwszy wektor i odczytujemy z niego drugie słowo.
+
+```{r, warning=FALSE, message=FALSE}
+zdanie <- c( "W szczebrzeszynie chrząszcz brzmi w trzcinie", "Ząb zupa zębowa dąb zupa dębowa")
+(podzielony <- strsplit(zdanie, " "))
+slowa1 <- podzielony[[1]]
+slowa1[2]
+```
+
+---
+
+# Zadanie
+
++ Wyznacz ndeksy wierszy w zbiorze danych `koty_ptaki`, w których `gatunek` zawiera dużą lub małą literę `S`.
+
++ Wyznacz wszystkie wiersze, w których opisano jakiś gatunek sokoła.
 
 
 ---
