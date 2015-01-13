@@ -48,7 +48,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 5 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 14 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
@@ -120,6 +120,17 @@ pogRomcy danych
 <div id="statystyki-opisowe" class="slide section level1">
 <h1>Statystyki opisowe</h1>
 <p>Męskie imiona kończące się na ‘a’</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: 'dplyr'
+## 
+## The following object is masked from 'package:stats':
+## 
+##     filter
+## 
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">imiona_warszawa %&gt;%
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">imie =</span> <span class="kw">as.character</span>(imie)) %&gt;%
 <span class="st">  </span><span class="kw">filter</span>(plec ==<span class="st"> &quot;M&quot;</span>, <span class="kw">substr</span>(imie, <span class="kw">nchar</span>(imie), <span class="kw">nchar</span>(imie)) ==<span class="st"> &quot;a&quot;</span>) %&gt;%
@@ -183,6 +194,8 @@ bezwypadkowy =<span class="st"> </span><span class="kw">grepl</span>(auta2012$Wy
 <li>91453</li>
 <li>141400</li>
 </ul>
+<p>Manual do operacji na napisach</p>
+<p><a href="http://gastonsanchez.com/Handling_and_Processing_Strings_in_R.pdf">http://gastonsanchez.com/Handling_and_Processing_Strings_in_R.pdf</a></p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

@@ -13,31 +13,63 @@ output:
 
 ---
 
+
 # O czym jest ten odcinek
+
+Analizując dane spotkamy się z różnymi rodzajami zmiennych. 
+Bardzo często są to napisy lub zmienne, które chcemy do napisów przekształcić (np. data, którą można przekształcić do napisy by wyłuskać roki miesiąc).
 
 W tym odcinku nauczymy się
 
-- Jakie zmienne / wartości / cechy określa się terminem cechy napisowe?
-- Jakie podstawowe operacje można wykonywać na cechach napisowe?
-- Jak podsumowywać / opisywać cechy napisowe?
+- Jak przekształcać zmienne na i z napisów?
+- Jakie podstawowe operacje można wykonywać na napisach?
+- Jak podsumowywać / opisywać napisy?
 
-Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, znacznie większy, to `auta2012`.
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
 
 ---
 
-# Intro
+# Co to znaczy: napisy
 
-Kupując nowy samochód często trzeba dopłacić jeżeli samochód ma być w kolorze innym niż biały, w kolorze metalik lub perłowy.
+Osoby mające doświadceznie w pracy z takimi językami jak C++ czy Java są przyzwyczajone do rozdizały typów na znaki, napisy (łańcuchy znaków) i wektory napisów. W programie R nie ma tego podziału, są tylko wektory napisów. 
 
-Ale czy ceny samochodów używanych silnie różnią się w zależności od koloru?
+Wektor może być jednoelementowy i długość tego jednego elementu może wynosić jeden, ale wciąż to wektor napisów. Takie wektory oznaczane są klasą `character`.
 
-Podstawowym kryterium, gdy myślimy o cenach używanych samochodów, jest rok produkcji i przebieg.
+```{r}
+class("A")
+```
 
-A czy wyposażenie ma znaczenie?
-Sprawdźmy to!
+Napisy spotkać można w różnych kontekstach. Najbardziej naturalnym jest taki, że w zbiorze danych były zebrae wypowiedzi. Np. pobierając dane z Twittera, jedną ze zmiennych opisujących pojedyńcze ćwierknięcie jest treść tweetu czyli napis o długości do 140 znaków.
 
-Nie zawsze jednak dane są przygotowane w postaci prostej do analiz.
-Wpierw musimy więc informacje o wyposażeniu wyłuskać.
+Napisy pojawiają się też, gdy wczytywane są dane ilościowe lub jakościowe, ale z jakiegoś powodu w procesie wczytywania dane te wczytały się jako napisy (np. przez źle określone formatowanie). W takim przypadku, często napisy przekształcamy na porządany typ, np. ilościowy, jakościowy, datę itp.
+
+```{r}
+as.numeric("2012")     # konwersja na liczbę
+as.factor(c("A", "B", "A", "A")) # konwersja na zmienną jakościową
+as.Date("2012-01-01")  # konwersja na datę
+```
+
+---
+
+# Wczytanie danych
+
+Dane od których rozpoczniemy przykłady to `koty_ptaki` z pakietu `SmarterPoland`. Aby te dane wczytać, wystarczy włączyć pakiet, instrukcja jak to zrobić znajduje się w odcinku 2.
+
+Włączmy pakiet i użyjmy funkcji `head()` by wyświetlić pierwsze sześć wierszy.
+
+```{r, warning=FALSE, message=FALSE}
+library(SmarterPoland)
+head(koty_ptaki)
+```
+
+Każdy wiersz opisuje jeden gatunek. Jak wiemy z poprzedniego odcinka, zmienna gatunek, habitat i drużyna to zmienne jakościowe. Przekształcimy je na napisy aby zademonstrować podstawowe operacje na napisach.
+
+---
+
+
+
+
+
 
 ---
 
@@ -90,6 +122,7 @@ as.numeric(as.character(fx))
 Męskie imiona kończące się na 'a'
 
 ```{r, warning=FALSE}
+library(dplyr)
 imiona_warszawa %>%
   mutate(imie = as.character(imie)) %>%
   filter(plec == "M", substr(imie, nchar(imie), nchar(imie)) == "a") %>%
@@ -148,6 +181,10 @@ i dodawania wyników na kartce ')**
 + `r sum(grepl(auta2012$Wyposazenie.dodatkowe.napis, pattern="autoalarm"))`
 + `r sum(grepl(as.character(auta2012$Kolor), pattern="metallic"))`
 
+
+stringi
+Marek Gągolewski
+http://smarterpoland.pl/SER/#SERII
 
 Manual do operacji na napisach
 
