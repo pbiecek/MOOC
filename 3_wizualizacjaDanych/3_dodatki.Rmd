@@ -252,3 +252,16 @@ http://robjhyndman.com/hyndsight/graphics/
 
 - Effective tables and graphs in official statistics, Government Statistical Service (London)
 https://gss.civilservice.gov.uk/wp-content/uploads/2014/12/Effective-graphs-and-tables-in-official-statistics-version-1.pdf
+
+
+
+
+INNE:
+
+
+easyGgplot2 - nakłądki na pakiet ggplot2
+http://www.sthda.com/english/wiki/easyggplot2
+
+edytowalne wykresy dla ggplota [do excela lub worda]
+http://www.sthda.com/english/wiki/create-an-editable-graph-from-r-software
+
