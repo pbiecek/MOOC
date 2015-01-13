@@ -18,6 +18,9 @@ Sciagawka z zabawy danymi w dplyr
 
 http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf
 
+wiecej sciagawek
+
+http://www.rstudio.com/resources/cheatsheets/
 
 
 # O czym jest ten odcinek
