@@ -15,7 +15,7 @@ output:
 
 # O czym jest ten odcinek
 
-Analizując dane spotkamy się z różnymi rodzajami zmiennych. W klasycznej statystyce najbardziej popoplarne są zmienne ilościowe, którym poświęcony jest ten odcinek.
+Analizując dane spotkamy się z różnymi rodzajami zmiennych. W klasycznej statystyce najbardziej popularne są zmienne ilościowe, którym poświęcony jest ten odcinek.
 
 W tym odcinku nauczymy się
 
