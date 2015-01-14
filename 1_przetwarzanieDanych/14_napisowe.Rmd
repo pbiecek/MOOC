@@ -217,6 +217,10 @@ auta2012$czy_metallic <- grepl("metallic", auta2012$Kolor_napis)
 table(auta2012$czy_metallic)
 ```
 
+---
+
+# Napisy
+
 W podobny sposób, można stworzyć dodatkowe kolumny określające, czy auto ma na wyposażeniu klimatyzację lub, że jest bezwypadkowe.
 
 W drugim przykłądzie warto zwrócić uwagę na to, że argumenty są podane w innych niż domyślna, kolejności. Dlatego argument ze wzorcem musiał mieć dodatkowo wskazaną nazwę `pattern=`.
@@ -225,20 +229,10 @@ W drugim przykłądzie warto zwrócić uwagę na to, że argumenty są podane w 
 auta2012$maKlimatyzacje <- grepl("klimatyzacja", auta2012$Wyposazenie.dodatkowe_napis)
 table(auta2012$maKlimatyzacje)
 
-auta2012$bezwypadkowy <- grepl(x=auta2012$Wyposazenie.dodatkowe_napis, pattern="bezwypadkowy")
+auta2012$bezwypadkowy <- grepl(x=auta2012$Wyposazenie.dodatkowe_napis, 
+                               pattern="bezwypadkowy")
 table(auta2012$bezwypadkowy)
 ```
-
-
----
-
-# Statystyki opisowe
-
-
-**PCH: Przed zadaniem drugim powinna się znaleźć informacja, że grepl przy domyślnych
-ustawieniach robi 'partial matching'. Raz że to przydatna informacja, dwa że
-oszczędzi ludziom 'ręcznego' wpisywania wszystkich kolorów jak 'zielony-metallic'
-i dodawania wyników na kartce ')**
 
 ---
 
@@ -276,8 +270,10 @@ W pierwszej linii skleimy oba wektory, używając za separator `': '`. Następni
 Wyświetlamy 25 najczęstszych modeli.
 
 ```{r, warning=FALSE}
-auta2012$MarkaModel <- paste(auta2012$Marka, auta2012$Model, sep=": ")
+auta2012$MarkaModel   <- paste(auta2012$Marka, auta2012$Model, sep=": ")
+
 statystykiMarkiModelu <- sort(table(auta2012$MarkaModel), decreasing = TRUE)
+
 head(statystykiMarkiModelu, 25)
 ```
 
@@ -295,7 +291,7 @@ Następnie funkcją grep wybierzemy wszystkie imiona, których ostatnia litera t
 
 ```{r, warning=FALSE}
 imiona_chlopcow <- imiona_warszawa[imiona_warszawa$plec == "M", ]
-same_imiona <- unique(imiona_chlopcow$imie)
+same_imiona     <- unique(imiona_chlopcow$imie)
 grep("a$", same_imiona, value = TRUE)
 ```
 
@@ -303,7 +299,7 @@ Podobne operacje powtórzymy dla dziewcząt. Tym razem do wyrażenia regularnego
 
 ```{r, warning=FALSE}
 imiona_dziewczat <- imiona_warszawa[imiona_warszawa$plec == "K", ]
-same_imiona <- unique(imiona_dziewczat$imie)
+same_imiona      <- unique(imiona_dziewczat$imie)
 grep("[^a]$", same_imiona, value = TRUE)
 ```
 
@@ -336,11 +332,6 @@ as.numeric(as.character(fx))
 + Sprawdź ile samochodów ma zainstalowany autoalarm (oznaczony jako 'autoalarm')
 
 + Sprawdź ile samochodów ma lakier w metalicznym kolorze (oznaczony jako 'metallic')
-
-+ `r sum(grepl(auta2012$Wyposazenie.dodatkowe.napis, pattern="autoalarm"))`
-
-+ `r sum(grepl(as.character(auta2012$Kolor), pattern="metallic"))`
-
 
 ---
 

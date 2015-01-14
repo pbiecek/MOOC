@@ -242,6 +242,9 @@ auta2012$Wyposazenie.dodatkowe_napis &lt;-<span class="st"> </span><span class="
 <pre><code>## 
 ##  FALSE   TRUE 
 ##  66202 141400</code></pre>
+</div>
+<div id="napisy-2" class="slide section level1">
+<h1>Napisy</h1>
 <p>W podobny sposób, można stworzyć dodatkowe kolumny określające, czy auto ma na wyposażeniu klimatyzację lub, że jest bezwypadkowe.</p>
 <p>W drugim przykłądzie warto zwrócić uwagę na to, że argumenty są podane w innych niż domyślna, kolejności. Dlatego argument ze wzorcem musiał mieć dodatkowo wskazaną nazwę <code>pattern=</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012$maKlimatyzacje &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="st">&quot;klimatyzacja&quot;</span>, auta2012$Wyposazenie.dodatkowe_napis)
@@ -254,10 +257,6 @@ auta2012$Wyposazenie.dodatkowe_napis &lt;-<span class="st"> </span><span class="
 <pre><code>## 
 ##  FALSE 
 ## 207602</code></pre>
-</div>
-<div id="statystyki-opisowe" class="slide section level1">
-<h1>Statystyki opisowe</h1>
-<p><strong>PCH: Przed zadaniem drugim powinna się znaleźć informacja, że grepl przy domyślnych ustawieniach robi ‘partial matching’. Raz że to przydatna informacja, dwa że oszczędzi ludziom ‘ręcznego’ wpisywania wszystkich kolorów jak ‘zielony-metallic’ i dodawania wyników na kartce ’)</strong></p>
 </div>
 <div id="sklejanie-napisow" class="slide section level1">
 <h1>Sklejanie napisów</h1>
