@@ -15,98 +15,167 @@ output:
 
 # O czym jest ten odcinek
 
-A możę jak używać NA?
+Analizując dane spotkamy się z różnymi rodzajami zmiennych. Często spotykanym typem okazują się zmienne zwiazane z datami i czasem.
 
 W tym odcinku nauczymy się
 
-- Jakie podstawowe operacje można wykonywać na datach?
+- Jak tworzyć w programie R obiekty opisujące daty i czasy?
+- Jakie podstawowe operacje można wykonywać na datach i czasie?
 - Jak podsumowywać / opisywać daty?
 
-
-Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to `koty_ptaki` a drugi, znacznie większy to `auta2012`.
-
-
-W trakcie tych zajęć przedstawimy podstawowe operacje na danych jakościowych. 
-Ale zanim dojdziemy do tych operacji najpierw wczytajmy dane.
+Do ilustracji tych zagadnień wykorzystamy zbiory danych tworzone ad hoc.
 
 ---
 
-dt1 <- as.Date("2012-07-22")
-dt1
-## [1] "2012-07-22"
-non-standard formats must be specified:
+# Daty i czas
 
-dt2 <- as.Date("04/20/2011", format = "%m/%d/%Y")
-dt2
-## [1] "2011-04-20"
-dt3 <- as.Date("October 6, 2010", format = "%B %d, %Y")
-dt3
+W programie R istnieją trzy podstawowe typu zmiennych opisujące daty lub czas
 
++ Klasa `Date` służy do opisywania dat z dokładnością do dnia. Na datach można wykonywać operacje taie jak odejmowanie dwóch dat, dodawanie liczby do dnia itp.
 
++ Klasa POSIXct, służy do opisywania czasu z dokładnością do sekundy. Czas jest pamiętany jako liczba sekund od określonego początku. Suffix `ct` oznacza *calendar time*.
 
-`?`(strptime)
++ Klasa POSIXlt, służy do opisywania czasu w formacie listy wartości. Suffix `lt` oznacza *local time*.
 
+---
 
-tm1 <- as.POSIXct("2013-07-24 23:55:26")
-tm1
+# Daty
 
-tm2 <- as.POSIXct("25072013 08:32:07", format = "%d%m%Y %H:%M:%S")
-tm2
+Konstruktorem klasy `Date` jest funkcja `as.Date()`.
 
+Jako pierwszy argument przyjmuje wektor napisów opisujących daty. Drugi opcjonalny argument określa formatowanie daty. Domyślne formatowanie to rok-miesiąc-dzień. 
+
+```{r}
+as.Date("2015-02-22")
+as.Date("02/22/2015", format = "%m/%d/%Y")
+as.Date("February 2, 2015", format = "%B %d, %Y")
+```
+
+Aby uzyskać dokładną pomoc dotyczącą oznaczeń w formatowaniu daty należy otworzyć plik pomocy instrukcją `?strptime`.
+
+Obiekty klasy `Date` można tworzyć też na podstawie liczb całkowitych lub obiektów klasy POSIXct, w obu przypadkach przy pomocy funkcji `as.Date()`.
+
+---
+
+# Czas calendar time
+
+Konstruktorem klasy `POSIXct` jest funkcja `as.POSIXct()`.
+
+Jako pierwszy argument przyjmuje wektor napisów opisujących chwile czasu. Drugi opcjonalny argument określa formatowanie daty. Domyślne formatowanie to rok-miesiąc-dzień godzina:minuta:sekunda. 
+
+Aby uzyskać dokładną pomoc dotyczącą oznaczeń w formatowaniu daty należy otworzyć plik pomocy instrukcją `?strptime`.
+
+```{r}
+czas1 <- as.POSIXct("2015-02-13 12:56:26")
+czas1
+czas2 <- as.POSIXct("14022015 12:56:26", format = "%d%m%Y %H:%M:%S")
+czas2
+# struktura obiektu POSIXct
+str(czas1)
+```
+
+Na czasach można wykonywac takie operacje jak odejmowanie czy dodawane do jednego czasu okreśonego przedziału (domyślnie dni).
+
+```{r}
+# różnica czasów
+czas2 - czas1
+czas1 + 30
+```
+
+Funkcja `Sys.time()` jako wynik zwraca aktualny czas w formacie `POSIXct`.
+
+```{r}
 Sys.time()
+Sys.time() - czas1
+```
 
+---
 
-POSIXlt [local time]
-calendar time
+# Czas local time
 
-require(lubridate)
-create a time:
+Konstruktorem klasy `POSIXlt` jest funkcja `as.POSIXlt()`.
 
-tm1.lub <- ymd_hms("2013-07-24 23:55:26")
-tm1.lub
+Jako pierwszy argument przyjmuje wektor napisów opisujących chwile czasu. Drugi opcjonalny argument określa formatowanie daty.Opis formatowania stosuje się taki sam, jak w przypadku klasy `POSIXct`.
 
-tm2.lub <- mdy_hm("07/25/13 08:32")
-tm2.lub
-tm3.lub <- ydm_hm("2013-25-07 4:00am")
-tm3.lub
+```{r}
+czas1 <- as.POSIXlt("2015-02-13 12:56:26")
+czas1
+czas2 <- as.POSIXlt("14022015 12:56:26", format = "%d%m%Y %H:%M:%S")
+czas2
+```
 
-year(tm1.lub)
-## [1] 2013
-week(tm1.lub)
-## [1] 30
-wday(tm1.lub, label = TRUE)
+Z dat mozna wyłuskiwac takie informacje jak dzień tygodnia, dzień miesiąca itd.
 
-tm1.dechr <- hour(tm1.lub) + minute(tm1.lub)/60 + second(tm1.lub)/3600
-tm1.dechr
+```{r}
+# tydzień w roku, dzień miesiąca, dzień tygodnia, miesiąc i rok
+week(czas1)
+day(czas1)
+wday(czas1)
+month(czas1)
+year(czas1)
+```
 
-round_date(tm1.lub, "minute")
+---
 
+# Pakiet lubridate
+
+W podstawowy programie R operacja na datach i czasie nie zawsze są proste. Tzn proste operacje są proste, ale złożóne już niekoniecznie.
+
+Pakiet `lubridate` zawiera zestaw funkcji ułątwiający pracę z datami.
+
+Jedną z takich funkcji jest `now()`, która zwraca obiekt opisujący bieżącą chwilę.
+
+```{r}
+library(lubridate)
 now()
 today()
+```
 
-four.hours <- hours(4)
-four.hours
+Uproszczono nazwy funkcji, służące do konwerotwania napisów na czas. Nazwa funkcji staje się opisem formatu.
+
+```{r}
+ymd_hms("2015-02-14 23:59:59")
+czas3 <- mdy_hm("02/14/15 08:32")
+czas3
+```
+
+Funkcją `wday()` można odczytać dzień tygodnia, podobnei funkcje `day()`, `month()` i `year()` opisują skłądowe daty.
+
+```{r}
+wday(czas3, label = TRUE)
+```
+
+Na czasach można wykonywać wygodne operacje uzywając funkcji `days()`, `months()`, `years()`, `minutes()`, `seconds()`.
+
+```{r}
+czas3 + hours(4)
+czas3 + days(2) + months(4) + years(1)
+```
+
+---
+
+# Zadania
+
++ Używając odpowiedniego formatowania zamień napis `01-15-2015 10:20:59` na obiekt klasy `POSIXct`.
+
++ Oblicz liczbę dni pomiędzy 1 września 1945 roku a 8 maja 1945.
+
++ Sprawdź jaki dzień tygodnia będzie za 100 dni od dziś
 
 
+---
+
+# Więcej informacji
+
+Przydatne wskazówki jak pracować z czasem i datami znaleźć można w artykule  *Handling date-times in R* Cole Beck
+http://biostat.mc.vanderbilt.edu/wiki/pub/Main/ColeBeck/datestimes.pdf.
+
+Szczegółowy opis paietu `lubridate` znajduje się w artykule z JSS http://www.jstatsoft.org/v40/i03/paper
+
+Wiele interesujących informacji o pracy z czasem i datami znajsuje się tutaj:
 http://en.wikibooks.org/wiki/R_Programming/Times_and_Dates
 
 
 
-operowaniu na datach:
-[*] as.Date
 
-[*] wyciąganie nazw: dni, miesięcy,...
-- można zbudować np. zbiór danych o procesorach - mooc obliczeniowa procesorów:
-http://pl.wikipedia.org/wiki/Mikroprocesory_Intel
-np.Westmere (microarchitecture):
-http://en.wikipedia.org/wiki/Westmere_%28microarchitecture%29
-
-
-Lubridate
-
-http://www.jstatsoft.org/v40/i03/paper
-
-Handling date-times in R
-Cole Beck
-http://biostat.mc.vanderbilt.edu/wiki/pub/Main/ColeBeck/datestimes.pdf
 
