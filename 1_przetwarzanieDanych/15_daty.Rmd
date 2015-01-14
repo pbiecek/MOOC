@@ -31,6 +31,67 @@ Ale zanim dojdziemy do tych operacji najpierw wczytajmy dane.
 
 ---
 
+dt1 <- as.Date("2012-07-22")
+dt1
+## [1] "2012-07-22"
+non-standard formats must be specified:
+
+dt2 <- as.Date("04/20/2011", format = "%m/%d/%Y")
+dt2
+## [1] "2011-04-20"
+dt3 <- as.Date("October 6, 2010", format = "%B %d, %Y")
+dt3
+
+
+
+`?`(strptime)
+
+
+tm1 <- as.POSIXct("2013-07-24 23:55:26")
+tm1
+
+tm2 <- as.POSIXct("25072013 08:32:07", format = "%d%m%Y %H:%M:%S")
+tm2
+
+Sys.time()
+
+
+POSIXlt [local time]
+calendar time
+
+require(lubridate)
+create a time:
+
+tm1.lub <- ymd_hms("2013-07-24 23:55:26")
+tm1.lub
+
+tm2.lub <- mdy_hm("07/25/13 08:32")
+tm2.lub
+tm3.lub <- ydm_hm("2013-25-07 4:00am")
+tm3.lub
+
+year(tm1.lub)
+## [1] 2013
+week(tm1.lub)
+## [1] 30
+wday(tm1.lub, label = TRUE)
+
+tm1.dechr <- hour(tm1.lub) + minute(tm1.lub)/60 + second(tm1.lub)/3600
+tm1.dechr
+
+round_date(tm1.lub, "minute")
+
+now()
+today()
+
+four.hours <- hours(4)
+four.hours
+
+
+http://en.wikibooks.org/wiki/R_Programming/Times_and_Dates
+
+
+
 operowaniu na datach:
 [*] as.Date
 
@@ -44,4 +105,8 @@ http://en.wikipedia.org/wiki/Westmere_%28microarchitecture%29
 Lubridate
 
 http://www.jstatsoft.org/v40/i03/paper
+
+Handling date-times in R
+Cole Beck
+http://biostat.mc.vanderbilt.edu/wiki/pub/Main/ColeBeck/datestimes.pdf
 
