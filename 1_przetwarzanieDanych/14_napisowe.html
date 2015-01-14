@@ -122,7 +122,7 @@ koty_ptaki$habitat_napis</code></pre>
 <span class="kw">which</span>(koty_ptaki$habitat_napis %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Azja&quot;</span>, <span class="st">&quot;Afryka&quot;</span>))</code></pre>
 <pre><code>## [1] 1 2 5 6 7 9</code></pre>
 <p>Często jednak, zamiast wymieniać wszystkie wartości, które chcemy wyszukać, wygodniejsze jest opisanie tych wartości przez pewien wzorzec. Do takiego wyszukiwania służy funkcja <code>grep()</code>. Testuje ona w którym z napisów wystepuje określony ciąg znaków, a jako wynik zwraca numery napisów z tym ciągiem.</p>
-<p>Przykładowo, sprawdźmy które wiersze w kolumnie <code>habitat_napis</code> posiadają w nazwie znak <code>A</code>. Pierwszym argumentem funkcji <code>grep()</code> jest wzorzec, drugim wektor napisów. Możęmy te argumenty podać w innej kolejności, ale wtedy zmuszenie jesteśmy do podawania ich nazwy.</p>
+<p>Przykładowo, sprawdźmy które wiersze w kolumnie <code>habitat_napis</code> posiadają w nazwie znak <code>A</code>. Pierwszym argumentem funkcji <code>grep()</code> jest wzorzec, drugim wektor napisów. Możemy te argumenty podać w innej kolejności, ale wtedy zmuszenie jesteśmy do podawania ich nazwy.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grep</span>(<span class="st">&quot;A&quot;</span>, koty_ptaki$habitat_napis)</code></pre>
 <pre><code>## [1] 1 2 3 4 5 6 7 9</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># równoważnie</span>
@@ -144,8 +144,8 @@ koty_ptaki$habitat_napis</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grep</span>(<span class="st">&quot;^[AE]&quot;</span>, koty_ptaki$habitat_napis)</code></pre>
 <pre><code>## [1] 1 2 3 4 5 6 7 8 9</code></pre>
 </div>
-<div id="elementy-napisu" class="slide section level1">
-<h1>Elementy napisu</h1>
+<div id="fragmentu-napisow" class="slide section level1">
+<h1>Fragmentu napisów</h1>
 <p>Kolejną przydatną funkcją, do operowania na napisach jest <code>substr()</code>. Pozwala ona z napisu wyciąć fragment o określonej pozycji, drugim i trzecim argumentem są indeksy początku i końca napisu, który chcemy wyciąć.</p>
 <p>Przykładowo, w ten sposób możemy z dat wycinać informację o latach lub miesiącach.</p>
 <pre class="sourceCode r"><code class="sourceCode r">daty &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2014-01-01&quot;</span>, <span class="st">&quot;2015-03-15&quot;</span>, <span class="st">&quot;2010-12-01&quot;</span>)
@@ -175,6 +175,10 @@ slowa1[<span class="dv">2</span>]</code></pre>
 </div>
 <div id="wczytanie-danych-1" class="slide section level1">
 <h1>Wczytanie danych</h1>
+<p>Zbiór danych <code>koty_ptaki</code> składa się z 13 wierszy. Można cały ten zbiór danych wyświetlić na ekranie. Nie zawsze potrzebujemy więc specjalnych statystyk opisowych by zrozumieć co się dzieje w takich małych zbiorach danych.</p>
+<p>Dlatego, dalsze ćwiczenia ze zmiennymi ilościowymi przeprowadzimy na znaczeni większym zbiorze danych z ponad 200 tysiącami wartości, o nazwie <code>auta2012</code>, który znajduje się również w pakiecie <code>SmarterPoland</code>.</p>
+<p>Opis tego zbioru danych znaleźć można w odcinku <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html">https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
+<p>Wczytajmy ten zbiór danych i przyjrzyjmy się dwóm pierwszym wierszom.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
 <span class="kw">head</span>(auta2012, <span class="dv">2</span>)</code></pre>
 <pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW      Marka     Model Wersja
@@ -192,116 +196,168 @@ slowa1[<span class="dv">2</span>]</code></pre>
 ##                                                                                                                                                                                Wyposazenie.dodatkowe
 ## 1                         ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
 ## 2 ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby</code></pre>
-<p>Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.</p>
+<p>Dwie kolumny <code>Wyposazenie.dodatkowe</code> oraz <code>Kolor</code> będą nas szcezgólnie interesowały, jeżeli chodzi o analizę napisów.</p>
 </div>
-<div id="cechy-napisowe" class="slide section level1">
-<h1>Cechy napisowe</h1>
-<p>Funkcja <code>read.table()</code> wczytując tekst, domyślnie zamienia go na zmienną jakościową. To domyślne zachowanie można zmienić, ustawiając argument <code>stringsAsFactors=FALSE</code>, ale często konwersja na zmienną jakościową pozwala na przechowywanie danych w mneijszej ilości pamięci.</p>
-<p>W pewnych sytuacjach, chcemy przetwarzać dane jak napisy, po to by na tych napisach wykonywać określone operacje na napisach. Takie np. jak wyszukiwanie podciągu w tekście.</p>
-<p>Aby to zrobić, musimy w pierwszej kolejności zamienić zmienna jakościową na zmienną napisową. Konwersję cechy z cechy jakościowej na cechę napisową można wykonać funkcją <code>as.character()</code></p>
-<pre class="sourceCode r"><code class="sourceCode r">auta2012$Wyposazenie.dodatkowe.napis =<span class="st"> </span><span class="kw">as.character</span>(auta2012$Wyposazenie.dodatkowe)
-<span class="kw">summary</span>(auta2012$Wyposazenie.dodatkowe.napis)</code></pre>
-<pre><code>##    Length     Class      Mode 
-##    207602 character character</code></pre>
+<div id="napisy" class="slide section level1">
+<h1>Napisy</h1>
+<p>Wczytując dane do programu R większość funkcji, domyślnie zamienia napisy na zmienne jakościowe. To zagadnienie było szerzej omawiane w odcinku 5.</p>
+<p>W sytuacjach, gdy chcemy przetwarzać napisy, musimy zmienne jakościowe przekształcić na napisy uzywając funkcji <code>as.character()</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">auta2012$Kolor_napis &lt;-<span class="st"> </span><span class="kw">as.character</span>(auta2012$Kolor)
+auta2012$Wyposazenie.dodatkowe_napis &lt;-<span class="st"> </span><span class="kw">as.character</span>(auta2012$Wyposazenie.dodatkowe)</code></pre>
 </div>
-<div class="slide section level1">
-
-<p>O ile funkcja <code>as.character()</code> przekształca wartości na napisy, to funkcja <code>as.factor()</code> przekształca wartości na cechy jakościowe. Podobnie funkcja <code>as.numeric()</code> przekształca wartości na liczby.</p>
-<p>Należy być jednak ostrożnym przy tych konwersjach, przekształcając wartości jakościowe na liczby domyślnie R zamienia kolejne poziomy na kolejne liczby naturalne.</p>
-<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2&quot;</span>, <span class="st">&quot;4&quot;</span>, <span class="st">&quot;5.5&quot;</span>)
+<div id="napisy-1" class="slide section level1">
+<h1>Napisy</h1>
+<p>W analizie danych często stoimy przed potrzebą stworzenia nowych cech na bazie starych. Przykłądowo, jeżeli spojrzymy na wekotor kolorów samochodów, możemy uznać że interesującą cechą byloby określenie, czy lakier jest koloru matalicznego czy nie.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sort</span>(<span class="kw">table</span>(auta2012$Kolor_napis))</code></pre>
+<pre><code>## 
+##               rAlzowy      rAlzowy-metallic          pomaralczowy 
+##                    15                    62                   120 
+##               brezowy              wilniowy             fioletowy 
+##                   141                   193                   207 
+##                 zloty        zolty-metallic                bezowy 
+##                   219                   231                   296 
+## pomaralczowy-metallic             grafitowy                 szary 
+##                   459                   542                   730 
+##               bordowy                 zolty     wilniowy-metallic 
+##                   742                   960                  1006 
+##    fioletowy-metallic        bialy-metallic       bezowy-metallic 
+##                  1101                  1542                  1924 
+##      brezowy-metallic               zielony     czerwony-metallic 
+##                  1988                  2027                  2426 
+##               srebrny        zloty-metallic      bordowy-metallic 
+##                  2553                  3122                  3981 
+##             niebieski             granatowy                czarny 
+##                  4037                  4057                  5924 
+##              czerwony    grafitowy-metallic                 bialy 
+##                  7465                  9481                  9977 
+##      zielony-metallic    granatowy-metallic        szary-metallic 
+##                 10148                 10756                 10834 
+##    niebieski-metallic                             czarny-metallic 
+##                 12584                 25997                 29129 
+##      srebrny-metallic 
+##                 40626</code></pre>
+<p>Można zrobić to na kilka sposobów. Najłatwiejszym jest użycie fucnkji <code>grepl()</code> o takich samych parametrach jak funkcja <code>grep()</code> z tym wyjątkiem, że wynikiem jest wektor wartości logicznych TRUE/FALSE określający czy dany wzorzec został odnaleziony czy nie w napisach.</p>
+<pre class="sourceCode r"><code class="sourceCode r">auta2012$czy_metallic &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="st">&quot;metallic&quot;</span>, auta2012$Kolor_napis)
+<span class="kw">table</span>(auta2012$czy_metallic)</code></pre>
+<pre><code>## 
+##  FALSE   TRUE 
+##  66202 141400</code></pre>
+<p>W podobny sposób, można stworzyć dodatkowe kolumny określające, czy auto ma na wyposażeniu klimatyzację lub, że jest bezwypadkowe.</p>
+<p>W drugim przykłądzie warto zwrócić uwagę na to, że argumenty są podane w innych niż domyślna, kolejności. Dlatego argument ze wzorcem musiał mieć dodatkowo wskazaną nazwę <code>pattern=</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">auta2012$maKlimatyzacje &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="st">&quot;klimatyzacja&quot;</span>, auta2012$Wyposazenie.dodatkowe_napis)
+<span class="kw">table</span>(auta2012$maKlimatyzacje)</code></pre>
+<pre><code>## 
+##  FALSE   TRUE 
+##  44642 162960</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">auta2012$bezwypadkowy &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="dt">x=</span>auta2012$Wyposazenie.dodatkowe_napis, <span class="dt">pattern=</span><span class="st">&quot;bezwypadkowy&quot;</span>)
+<span class="kw">table</span>(auta2012$bezwypadkowy)</code></pre>
+<pre><code>## 
+##  FALSE 
+## 207602</code></pre>
+</div>
+<div id="statystyki-opisowe" class="slide section level1">
+<h1>Statystyki opisowe</h1>
+<p><strong>PCH: Przed zadaniem drugim powinna się znaleźć informacja, że grepl przy domyślnych ustawieniach robi ‘partial matching’. Raz że to przydatna informacja, dwa że oszczędzi ludziom ‘ręcznego’ wpisywania wszystkich kolorów jak ‘zielony-metallic’ i dodawania wyników na kartce ’)</strong></p>
+</div>
+<div id="sklejanie-napisow" class="slide section level1">
+<h1>Sklejanie napisów</h1>
+<p>Operacją przeciwną do dzielenia napisu na fragmenty jest sklejanie kilku napisów w jeden.</p>
+<p>Do tego celu można wykorzystać funkcję <code>paste()</code> lub <code>paste0()</code>.</p>
+<p>Przedstawmy jej działanie na prostym przykładzie. Będziemy sklejać wektor dziesięciu liter, dziesięciu cyfr i jednego napisu.</p>
+<p>Funkcje w programie R, które operują na wektorach (większość) jeżeli mają dwa argumenty o różnej długości to krótszy argument zwielokratniają tylukrotnie by dorównał długością dłuższemu (tzw. recycling rule). Z tego powodu trzeci argument, pojedyncza kropka będzie zwielokrotniona i sklejona z każdym z dziesięciu elementów wektorów <code>litery</code> i <code>cyfry</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">litery &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span>:<span class="dv">10</span>]
+cyfry  &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">10</span></code></pre>
+<p>Funkcja <code>paste()</code> skleja wartości rozdzielając je separatorem, którym domyślnie jest spacja. Znak separatora można zmienić wskazując argument <code>sep</code>. Funkcja <code>paste0()</code> tym różni się od funkcji <code>paste()</code>, że separator jest pustym napisem.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(litery, cyfry, <span class="st">&quot;.&quot;</span>)</code></pre>
+<pre><code>##  [1] &quot;A 1 .&quot;  &quot;B 2 .&quot;  &quot;C 3 .&quot;  &quot;D 4 .&quot;  &quot;E 5 .&quot;  &quot;F 6 .&quot;  &quot;G 7 .&quot; 
+##  [8] &quot;H 8 .&quot;  &quot;I 9 .&quot;  &quot;J 10 .&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(litery, cyfry, <span class="st">&quot;.&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;-&quot;</span>)</code></pre>
+<pre><code>##  [1] &quot;A-1-.&quot;  &quot;B-2-.&quot;  &quot;C-3-.&quot;  &quot;D-4-.&quot;  &quot;E-5-.&quot;  &quot;F-6-.&quot;  &quot;G-7-.&quot; 
+##  [8] &quot;H-8-.&quot;  &quot;I-9-.&quot;  &quot;J-10-.&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(litery, cyfry, <span class="st">&quot;.&quot;</span>)</code></pre>
+<pre><code>##  [1] &quot;A1.&quot;  &quot;B2.&quot;  &quot;C3.&quot;  &quot;D4.&quot;  &quot;E5.&quot;  &quot;F6.&quot;  &quot;G7.&quot;  &quot;H8.&quot;  &quot;I9.&quot;  &quot;J10.&quot;</code></pre>
+</div>
+<div id="sklejanie-napisow-1" class="slide section level1">
+<h1>Sklejanie napisów</h1>
+<p>Przedstawmy funkcję do sklejania napisów na przykładzie sklejania nazwy marki i modelu dla auta.</p>
+<p>W pierwszej linii skleimy oba wektory, używając za separator <code>': '</code>. Następnie zliczamy ile było wystąpień takich par i porządkujemy je w kolejności malejącej.</p>
+<p>Wyświetlamy 25 najczęstszych modeli.</p>
+<pre class="sourceCode r"><code class="sourceCode r">auta2012$MarkaModel &lt;-<span class="st"> </span><span class="kw">paste</span>(auta2012$Marka, auta2012$Model, <span class="dt">sep=</span><span class="st">&quot;: &quot;</span>)
+statystykiMarkiModelu &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">table</span>(auta2012$MarkaModel), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)
+<span class="kw">head</span>(statystykiMarkiModelu, <span class="dv">25</span>)</code></pre>
+<pre><code>## 
+## Volkswagen: Passat        Opel: Astra   Volkswagen: Golf 
+##               6883               6348               6096 
+##        Ford: Focus           Audi: A4       Ford: Mondeo 
+##               5691               4280               4252 
+##     Skoda: Octavia       Opel: Vectra    Renault: Megane 
+##               3954               3815               3759 
+##    Renault: Scenic    Renault: Laguna           Audi: A6 
+##               3546               3288               3045 
+##        Opel: Corsa   Volkswagen: Polo       Skoda: Fabia 
+##               3029               2714               2643 
+##      Renault: Clio       Opel: Zafira       Peugeot: 307 
+##               2469               2040               1904 
+##       Ford: Fiesta       Peugeot: 206           Audi: A3 
+##               1879               1863               1810 
+##           BMW: 320       Honda: Civic        Seat: Ibiza 
+##               1791               1703               1581 
+##      Toyota: Yaris 
+##               1552</code></pre>
+</div>
+<div id="imiona-dzieci" class="slide section level1">
+<h1>Imiona dzieci</h1>
+<p>W pakiecie <code>SmaterPoland</code> jest również dostępny zbiór danych <code>imiona_warszawa</code> ze statystykami popularności imion nadawanych noworodkom w Warszawie w różnych okresach czasu.</p>
+<p>Uzywając tego zbioru danych, możemy przetestowac regułę mówiącą, że imię dziewczynki kończy się na literkę ‘a’ a chłopca nie. Jakiś czas temu za jedyny wyjątek podawano męskie imię Bonawentura. Czy to się zmieniło?</p>
+<p>Wybierzmy do analizy tylko imiona chłopców (indeksowanie <code>imiona_warszawa$plec == &quot;M&quot;</code>). Ponieważ każde imię powtarza się dla każdego miesiąca to funkcją <code>unique()</code> usuniemy wszystkie duplikaty.</p>
+<p>Następnie funkcją grep wybierzemy wszystkie imiona, których ostatnia litera to <code>a</code> (wyrażenie regularne <code>a$</code>) i wyświetlimy te imiona. Bonawentury nie widać ale są inne imiona.</p>
+<pre class="sourceCode r"><code class="sourceCode r">imiona_chlopcow &lt;-<span class="st"> </span>imiona_warszawa[imiona_warszawa$plec ==<span class="st"> &quot;M&quot;</span>, ]
+same_imiona &lt;-<span class="st"> </span><span class="kw">unique</span>(imiona_chlopcow$imie)
+<span class="kw">grep</span>(<span class="st">&quot;a$&quot;</span>, same_imiona, <span class="dt">value =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## [1] &quot;Kosma&quot;  &quot;Nikita&quot;</code></pre>
+<p>Podobne operacje powtórzymy dla dziewcząt. Tym razem do wyrażenia regularnego podamy wzorzec wszystkie litery poza a, czyli <code>[^a]$</code>. Takich dziewczęcych imion jest wiele.</p>
+<pre class="sourceCode r"><code class="sourceCode r">imiona_dziewczat &lt;-<span class="st"> </span>imiona_warszawa[imiona_warszawa$plec ==<span class="st"> &quot;K&quot;</span>, ]
+same_imiona &lt;-<span class="st"> </span><span class="kw">unique</span>(imiona_dziewczat$imie)
+<span class="kw">grep</span>(<span class="st">&quot;[^a]$&quot;</span>, same_imiona, <span class="dt">value =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>##  [1] &quot;Abigail&quot;  &quot;Berenike&quot; &quot;Carmen&quot;   &quot;Chloe&quot;    &quot;Esmee&quot;    &quot;Gwen&quot;    
+##  [7] &quot;Inez&quot;     &quot;Ingrid&quot;   &quot;Karin&quot;    &quot;Lili&quot;     &quot;Lilli&quot;    &quot;Mercedes&quot;
+## [13] &quot;Miriam&quot;   &quot;Naomi&quot;    &quot;Nel&quot;      &quot;Nelly&quot;    &quot;Nicole&quot;   &quot;Nike&quot;    
+## [19] &quot;Nikol&quot;    &quot;Nikole&quot;   &quot;Noemi&quot;    &quot;Rachel&quot;   &quot;Sindi&quot;</code></pre>
+</div>
+<div id="liczby-cechy-jakoscowe-i-napisy" class="slide section level1">
+<h1>Liczby, cechy jakoścowe i napisy</h1>
+<p>Funkcja <code>as.character()</code> możę być przydatna jeszcz w jednej wytuacji, gdy chcemy zmienną jakościową przekształcić na zmienną liczbową. Nie powiniśmy tego zrobić bezpośrednio, ale poprzez funkcję <code>as.character()</code>.</p>
+<p>Pokażmy ten problem na przykłądzie. Zamienimy zmienne na zmienne jakościowe funkcją <code>as.factor()</code> a następnie na liczby funkcją <code>as.numeric()</code>. Okazuje się jednak, że wynik nie jest zgodny z oczekiwaniami.</p>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="fl">5.5</span>)
 (fx &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x))</code></pre>
 <pre><code>## [1] 2   4   5.5
 ## Levels: 2 4 5.5</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># liczby zgodnie z oczekiwniami </span>
-<span class="kw">as.numeric</span>(x)</code></pre>
-<pre><code>## [1] 2.0 4.0 5.5</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># uwaga! R nie wie że to są napisy, a zmienną jakościową zamienia na kolejne liczby całkowite</span>
 <span class="kw">as.numeric</span>(fx)</code></pre>
 <pre><code>## [1] 1 2 3</code></pre>
+<p>Zmienne jakościowe przez funckję <code>as.numeric()</code> zamieniane są na kolejne liczby całkowite. Jeżeli chcemy odzyskać liczby, które są treścią czynników, to musimy je wpierw zamienić na napisy, funkcją <code>as.character()</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># zmienne jakościowe na liczby należałoby tak przekształcić</span>
 <span class="kw">as.numeric</span>(<span class="kw">as.character</span>(fx))</code></pre>
 <pre><code>## [1] 2.0 4.0 5.5</code></pre>
 </div>
-<div id="statystyki-opisowe" class="slide section level1">
-<h1>Statystyki opisowe</h1>
-<p>Męskie imiona kończące się na ‘a’</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre>
-<pre><code>## 
-## Attaching package: 'dplyr'
-## 
-## The following object is masked from 'package:stats':
-## 
-##     filter
-## 
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">imiona_warszawa %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">imie =</span> <span class="kw">as.character</span>(imie)) %&gt;%
-<span class="st">  </span><span class="kw">filter</span>(plec ==<span class="st"> &quot;M&quot;</span>, <span class="kw">substr</span>(imie, <span class="kw">nchar</span>(imie), <span class="kw">nchar</span>(imie)) ==<span class="st"> &quot;a&quot;</span>) %&gt;%
-<span class="st">  </span><span class="kw">group_by</span>(imie) %&gt;%
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">liczba =</span> <span class="kw">sum</span>(liczba))</code></pre>
-<pre><code>## Source: local data frame [2 x 2]
-## 
-##     imie liczba
-## 1  Kosma     27
-## 2 Nikita      4</code></pre>
-<p>Żeńskie imiona nie kończące się na ‘a’</p>
-<pre class="sourceCode r"><code class="sourceCode r">imiona_warszawa %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">imie =</span> <span class="kw">as.character</span>(imie)) %&gt;%
-<span class="st">  </span><span class="kw">filter</span>(plec ==<span class="st"> &quot;K&quot;</span>, <span class="kw">substr</span>(imie, <span class="kw">nchar</span>(imie), <span class="kw">nchar</span>(imie)) !=<span class="st"> &quot;a&quot;</span>) %&gt;%
-<span class="st">  </span><span class="kw">group_by</span>(imie) %&gt;%
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">liczba =</span> <span class="kw">sum</span>(liczba)) %&gt;%
-<span class="st">  </span><span class="kw">group_by</span>() %&gt;%
-<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(liczba))</code></pre>
-<pre><code>## Source: local data frame [23 x 2]
-## 
-##       imie liczba
-## 1   Nicole     47
-## 2      Nel     26
-## 3    Noemi     15
-## 4     Inez     12
-## 5    Nikol     12
-## 6    Nelly      8
-## 7  Abigail      5
-## 8   Carmen      5
-## 9    Karin      4
-## 10  Miriam      4
-## ..     ...    ...</code></pre>
-</div>
-<div id="statystyki-opisowe-1" class="slide section level1">
-<h1>Statystyki opisowe</h1>
-<p>Jedną z interesujących operacji na napisach, jest sprawdzenie, czy zawierają one określony podciąg znaków. Taki test można wykonać funkcją <code>grepl()</code>, która jako wynik zwraca wartość logiczną określającą czy napis zawiera określony wzorzec czy nie.</p>
-<pre class="sourceCode r"><code class="sourceCode r">maKlimatyzacje =<span class="st"> </span><span class="kw">grepl</span>(auta2012$Wyposazenie.dodatkowe.napis, <span class="dt">pattern=</span><span class="st">&quot;klimatyzacja&quot;</span>)
-<span class="kw">table</span>(maKlimatyzacje)</code></pre>
-<pre><code>## maKlimatyzacje
-##  FALSE   TRUE 
-##  44642 162960</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">auta2012$Wyposazenie.dodatkowe.napis =<span class="st"> </span><span class="kw">as.character</span>(auta2012$Wyposazenie.dodatkowe)
-bezwypadkowy =<span class="st"> </span><span class="kw">grepl</span>(auta2012$Wyposazenie.dodatkowe.napis, <span class="dt">pattern=</span><span class="st">&quot;bezwypadkowy&quot;</span>)
-<span class="kw">table</span>(bezwypadkowy)</code></pre>
-<pre><code>## bezwypadkowy
-##  FALSE 
-## 207602</code></pre>
-<p><strong>PCH: Albo używasz nazw parametrów, albo nie. Ludzie tu się dopiero uczą! Nie wiedzą czy trzeba podawać nazwy jak ‘pattern’ czy też nie! A zatem, jest to doskonałe miejsce na dygresję i wprowadzenie na temat wywoływania funkcji, parametrów, itd. W szczególności, że w przykładzie z <code>grepl()</code> parametr ‘pattern’ jest pierwszy, a ‘x’ (u Ciebie pierwszy i bez nazwy) jest drugi.</strong></p>
-<p><strong>PCH: Przed zadaniem drugim powinna się znaleźć informacja, że grepl przy domyślnych ustawieniach robi ‘partial matching’. Raz że to przydatna informacja, dwa że oszczędzi ludziom ‘ręcznego’ wpisywania wszystkich kolorów jak ‘zielony-metallic’ i dodawania wyników na kartce ’)</strong></p>
-</div>
 <div id="zadania" class="slide section level1">
 <h1>Zadania:</h1>
 <ul>
-<li>Sprawdź ile samochodów ma zainstalowany autoalarm (oznaczony jako ‘autoalarm’)</li>
-<li>Sprawdź ile samochodów ma lakier w metalicznym kolorze (oznaczony jako ‘metallic’)</li>
+<li><p>Sprawdź ile samochodów ma zainstalowany autoalarm (oznaczony jako ‘autoalarm’)</p></li>
+<li><p>Sprawdź ile samochodów ma lakier w metalicznym kolorze (oznaczony jako ‘metallic’)</p></li>
+<li><p>0</p></li>
+<li><p>141400</p></li>
 </ul>
 </div>
-<div id="odpowiedzi" class="slide section level1">
-<h1>Odpowiedzi:</h1>
+<div id="gdzie-szukac-dodatkowych-informacji" class="slide section level1">
+<h1>Gdzie szukać dodatkowych informacji</h1>
+<p>Jedynie zarysowaliśmy temat analizy napisów.</p>
+<p>Przy przetwarzaniu większych korpiusów tekstu, pojawia się wiele interesujących tematów, takich jak analiza znaczenia analiza częstościowa, tagowanie itp.</p>
 <ul>
-<li>91453</li>
-<li>141400</li>
+<li><p>Więcej o podstawowych operacjach do pracy z napisami przeczytać można w rozdziale 2.1 ,,Przewodnika po pakiecie R’’ GiS 2013. Rozdział ten jest dostępny bezpłatnie na stronie <a href="http://biecek.pl/R/">http://biecek.pl/R/</a></p></li>
+<li><p>Gdy pracujemy z dużymi korpusami, możemy przyśpieszyć obliczenia stosując pakiet <code>stringr</code>. Bardzo dobrze przygotowany materiał opisujący funkcej tego pakietu jest udostępniony przez Gastona Sancheza na stronie <a href="http://gastonsanchez.com/Handling_and_Processing_Strings_in_R.pdf">http://gastonsanchez.com/Handling_and_Processing_Strings_in_R.pdf</a>.</p></li>
+<li><p>Interesującą alternatywą wspierająca bardziej egzotyczne języki (bardziej niż angielski) jest pakiet <code>stringi</code>. Można o nim posłuchać na wystąpnieniu Marka Gągolewskiego z II Spotkania Entuzjastów R, materiał video dostępny na stronie <a href="http://smarterpoland.pl/SER/#SERII">http://smarterpoland.pl/SER/#SERII</a></p></li>
 </ul>
-<p>stringi Marek Gągolewski <a href="http://smarterpoland.pl/SER/#SERII">http://smarterpoland.pl/SER/#SERII</a></p>
-<p>Manual do operacji na napisach</p>
-<p><a href="http://gastonsanchez.com/Handling_and_Processing_Strings_in_R.pdf">http://gastonsanchez.com/Handling_and_Processing_Strings_in_R.pdf</a></p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

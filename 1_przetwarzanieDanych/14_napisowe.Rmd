@@ -250,93 +250,109 @@ Do tego celu można wykorzystać funkcję `paste()` lub `paste0()`.
 
 Przedstawmy jej działanie na prostym przykładzie. Będziemy sklejać wektor dziesięciu liter, dziesięciu cyfr i jednego napisu.
 
-Funkcje w programie R, które operują na wektorach (większość) jeżeli mają dwa argumenty o różnej długości to krótszy argument zwielokratniają tylukrotnie by dorównał długością dłuższemu (tzw. recycling rule).
+Funkcje w programie R, które operują na wektorach (większość) jeżeli mają dwa argumenty o różnej długości to krótszy argument zwielokratniają tylukrotnie by dorównał długością dłuższemu (tzw. recycling rule). Z tego powodu trzeci argument, pojedyncza kropka będzie zwielokrotniona i sklejona z każdym z dziesięciu elementów wektorów `litery` i `cyfry`.
 
 ```{r, warning=FALSE}
 litery <- LETTERS[1:10]
 cyfry  <- 1:10
+```
 
+Funkcja `paste()` skleja wartości rozdzielając je separatorem, którym domyślnie jest spacja. Znak separatora można zmienić wskazując argument `sep`. Funkcja `paste0()` tym różni się od funkcji `paste()`, że separator jest pustym napisem.
+
+```{r, warning=FALSE}
 paste(litery, cyfry, ".")
 paste(litery, cyfry, ".", sep="-")
 paste0(litery, cyfry, ".")
 ```
 
+---
 
+# Sklejanie napisów 
 
+Przedstawmy funkcję do sklejania napisów na przykładzie sklejania nazwy marki i modelu dla auta.
 
+W pierwszej linii skleimy oba wektory, używając za separator `': '`. Następnie zliczamy ile było wystąpień takich par i porządkujemy je w kolejności malejącej.
 
+Wyświetlamy 25 najczęstszych modeli.
 
+```{r, warning=FALSE}
+auta2012$MarkaModel <- paste(auta2012$Marka, auta2012$Model, sep=": ")
+statystykiMarkiModelu <- sort(table(auta2012$MarkaModel), decreasing = TRUE)
+head(statystykiMarkiModelu, 25)
+```
 
+---
 
+# Imiona dzieci
 
+W pakiecie `SmaterPoland` jest również dostępny zbiór danych `imiona_warszawa` ze statystykami popularności imion nadawanych noworodkom w Warszawie w różnych okresach czasu.
 
+Uzywając tego zbioru danych, możemy przetestowac regułę mówiącą, że imię dziewczynki kończy się na literkę 'a' a chłopca nie. Jakiś czas temu za jedyny wyjątek podawano męskie imię Bonawentura. Czy to się zmieniło?
+
+Wybierzmy do analizy tylko imiona chłopców (indeksowanie `imiona_warszawa$plec == "M"`). Ponieważ każde imię powtarza się dla każdego miesiąca to funkcją `unique()` usuniemy wszystkie duplikaty. 
+
+Następnie funkcją grep wybierzemy wszystkie imiona, których ostatnia litera to `a` (wyrażenie regularne `a$`) i wyświetlimy te imiona. Bonawentury nie widać ale są inne imiona.
+
+```{r, warning=FALSE}
+imiona_chlopcow <- imiona_warszawa[imiona_warszawa$plec == "M", ]
+same_imiona <- unique(imiona_chlopcow$imie)
+grep("a$", same_imiona, value = TRUE)
+```
+
+Podobne operacje powtórzymy dla dziewcząt. Tym razem do wyrażenia regularnego podamy wzorzec wszystkie litery poza a, czyli `[^a]$`. Takich dziewczęcych imion jest wiele.
+
+```{r, warning=FALSE}
+imiona_dziewczat <- imiona_warszawa[imiona_warszawa$plec == "K", ]
+same_imiona <- unique(imiona_dziewczat$imie)
+grep("[^a]$", same_imiona, value = TRUE)
+```
 
 
 ---
 
-O ile funkcja `as.character()` przekształca wartości na napisy, to funkcja `as.factor()` przekształca wartości na cechy jakościowe. Podobnie funkcja `as.numeric()` przekształca wartości na liczby. 
+# Liczby, cechy jakoścowe i napisy
 
-Należy być jednak ostrożnym przy tych konwersjach, przekształcając wartości jakościowe na liczby domyślnie R zamienia kolejne poziomy na kolejne liczby naturalne.
+Funkcja `as.character()` możę być przydatna jeszcz w jednej wytuacji, gdy chcemy zmienną jakościową przekształcić na zmienną liczbową. Nie powiniśmy tego zrobić bezpośrednio, ale poprzez funkcję `as.character()`.
+
+Pokażmy ten problem na przykłądzie. Zamienimy zmienne na zmienne jakościowe funkcją `as.factor()` a następnie na liczby funkcją `as.numeric()`. Okazuje się jednak, że wynik nie jest zgodny z oczekiwaniami.
 
 ```{r, warning=FALSE}
-x <- c("2", "4", "5.5")
+x <- c(2, 4, 5.5)
 (fx <- as.factor(x))
-# liczby zgodnie z oczekiwniami 
-as.numeric(x)
 # uwaga! R nie wie że to są napisy, a zmienną jakościową zamienia na kolejne liczby całkowite
 as.numeric(fx)
+```
+
+Zmienne jakościowe przez funckję `as.numeric()` zamieniane są na kolejne liczby całkowite. Jeżeli chcemy odzyskać liczby, które są treścią czynników, to musimy je wpierw zamienić na napisy, funkcją `as.character()`.
+
+```{r, warning=FALSE}
 # zmienne jakościowe na liczby należałoby tak przekształcić
 as.numeric(as.character(fx))
 ```
 
-
 ---
-
-# Statystyki opisowe
-
-Męskie imiona kończące się na 'a'
-
-```{r, warning=FALSE}
-library(dplyr)
-imiona_warszawa %>%
-  mutate(imie = as.character(imie)) %>%
-  filter(plec == "M", substr(imie, nchar(imie), nchar(imie)) == "a") %>%
-  group_by(imie) %>%
-  summarise(liczba = sum(liczba))
-
-```
-
-Żeńskie imiona nie kończące się na 'a'
-
-```{r, warning=FALSE}
-imiona_warszawa %>%
-  mutate(imie = as.character(imie)) %>%
-  filter(plec == "K", substr(imie, nchar(imie), nchar(imie)) != "a") %>%
-  group_by(imie) %>%
-  summarise(liczba = sum(liczba)) %>%
-  group_by() %>%
-  arrange(desc(liczba))
-
-```
-
 
 # Zadania:
 + Sprawdź ile samochodów ma zainstalowany autoalarm (oznaczony jako 'autoalarm')
+
 + Sprawdź ile samochodów ma lakier w metalicznym kolorze (oznaczony jako 'metallic')
 
-# Odpowiedzi:
 + `r sum(grepl(auta2012$Wyposazenie.dodatkowe.napis, pattern="autoalarm"))`
+
 + `r sum(grepl(as.character(auta2012$Kolor), pattern="metallic"))`
 
 
-stringi
-Marek Gągolewski
-http://smarterpoland.pl/SER/#SERII
+---
 
-Manual do operacji na napisach
+# Gdzie szukać dodatkowych informacji
 
-http://gastonsanchez.com/Handling_and_Processing_Strings_in_R.pdf
+Jedynie zarysowaliśmy temat analizy napisów. 
 
+Przy przetwarzaniu większych korpiusów tekstu, pojawia się wiele interesujących tematów, takich jak analiza znaczenia analiza częstościowa, tagowanie itp.
 
++ Więcej o podstawowych operacjach do pracy z napisami przeczytać można w rozdziale 2.1 ,,Przewodnika po pakiecie R'' GiS 2013. Rozdział ten jest dostępny bezpłatnie na stronie http://biecek.pl/R/
 
-  
++ Gdy pracujemy z dużymi korpusami, możemy przyśpieszyć obliczenia stosując pakiet `stringr`. Bardzo dobrze przygotowany materiał opisujący funkcej tego pakietu jest udostępniony przez Gastona Sancheza na stronie http://gastonsanchez.com/Handling_and_Processing_Strings_in_R.pdf.
+
++ Interesującą alternatywą wspierająca bardziej egzotyczne języki (bardziej niż angielski) jest pakiet `stringi`. Można o nim posłuchać na wystąpnieniu Marka Gągolewskiego z II Spotkania Entuzjastów R, materiał video dostępny na stronie http://smarterpoland.pl/SER/#SERII
+
