@@ -382,6 +382,29 @@ taniZPolski &lt;-<span class="st"> </span>auta2012$Cena.w.PLN &lt;<span class="s
 duzyDiesel &lt;-<span class="st"> </span>auta2012$Pojemnosc.skokowa &gt;<span class="st"> </span><span class="dv">1500</span> &amp;<span class="st"> </span>auta2012$Rodzaj.paliwa ==<span class="st"> 'olej napedowy (diesel)'</span>
 <span class="kw">mean</span>(duzyDiesel, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre>
 </div>
+<div id="zadania-sezon-1-odcinek-14" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 14</h1>
+<ul>
+<li><p>Wyznacz indeksy wierszy w zbiorze danych <code>koty_ptaki</code>, w których <code>gatunek</code> zawiera dużą lub małą literę <code>S</code>.</p></li>
+<li><p>Wyznacz wszystkie wiersze, w których opisano jakiś gatunek sokoła.</p></li>
+<li><p>Sprawdź ile samochodów ma zainstalowany autoalarm (oznaczony jako ‘autoalarm’)</p></li>
+<li><p>Sprawdź ile samochodów ma lakier w metalicznym kolorze (oznaczony jako ‘metallic’)</p></li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-14" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 14</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Gdzie gatunek zaczyna się na S lub s</span>
+<span class="kw">grep</span>(<span class="st">&quot;s&quot;</span>, koty_ptaki$gatunek, <span class="dt">ignore.case =</span> <span class="ot">TRUE</span>)
+
+<span class="co"># Które wiersze dotyczą sokołów</span>
+<span class="kw">grep</span>(<span class="st">&quot;Sokol&quot;</span>, koty_ptaki$gatunek)
+
+<span class="co"># liczba ofert z autoalarmem</span>
+<span class="kw">sum</span>(<span class="kw">grepl</span>(auta2012$Wyposazenie.dodatkowe.napis, <span class="dt">pattern=</span><span class="st">&quot;autoalarm&quot;</span>))
+
+<span class="co"># liczba ofert z lakierem metallic</span>
+<span class="kw">sum</span>(<span class="kw">grepl</span>(<span class="kw">as.character</span>(auta2012$Kolor), <span class="dt">pattern=</span><span class="st">&quot;metallic&quot;</span>))</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>

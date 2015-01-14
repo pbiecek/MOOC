@@ -422,3 +422,34 @@ sum(taniZPolski, na.rm=TRUE)
 duzyDiesel <- auta2012$Pojemnosc.skokowa > 1500 & auta2012$Rodzaj.paliwa == 'olej napedowy (diesel)'
 mean(duzyDiesel, na.rm=TRUE)
 ```
+
+---
+
+# Zadania, sezon 1, odcinek 14
+
+
++ Wyznacz indeksy wierszy w zbiorze danych `koty_ptaki`, w których `gatunek` zawiera dużą lub małą literę `S`.
+
++ Wyznacz wszystkie wiersze, w których opisano jakiś gatunek sokoła.
+
++ Sprawdź ile samochodów ma zainstalowany autoalarm (oznaczony jako 'autoalarm')
+
++ Sprawdź ile samochodów ma lakier w metalicznym kolorze (oznaczony jako 'metallic')
+
+---
+
+# Odpowiedzi, sezon 1, odcinek 14
+
+```{r, eval=FALSE}
+# Gdzie gatunek zaczyna się na S lub s
+grep("s", koty_ptaki$gatunek, ignore.case = TRUE)
+
+# Które wiersze dotyczą sokołów
+grep("Sokol", koty_ptaki$gatunek)
+
+# liczba ofert z autoalarmem
+sum(grepl(auta2012$Wyposazenie.dodatkowe.napis, pattern="autoalarm"))
+
+# liczba ofert z lakierem metallic
+sum(grepl(as.character(auta2012$Kolor), pattern="metallic"))
+```
