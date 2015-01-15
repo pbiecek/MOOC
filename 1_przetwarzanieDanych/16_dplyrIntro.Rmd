@@ -15,13 +15,13 @@ output:
 
 # O czym jest ten odcinek
 
-Praca z danymi to w dużej części czyszczenie i zmiana struktury danych. Zarówno dane zbierane przez ludzi jak i przez automatyczne czujniki mają tendencje do posiadania braków, obserwacji odstających lub zwykłych błędów. Aby sensownie analizować dane, musimy przekształcić je do postaci w której wyniki anliz będą wiarygodne.
+Praca z danymi to w dużej części czyszczenie i zmiana struktury. Zarówno dane zbierane przez ludzi jak i przez automatyczne czujniki mają tendencje do zawierania braków, obserwacji odstających lub zwykłych błędów. Aby sensownie analizować dane, musimy przekształcić je do postaci w której wyniki anliz będą wiarygodne.
 
-To bardzo istotna faza, bez względu bowiem jak zaawansowana i dobrze dobrana jest nasza technika analiza danych, jeżeli na wejściu będą śmieciowe dane to na wyjściu będą śmieciowe wyniki. *Garbage in garbage out*
+Czyszceznie to bardzo istotna faza. Bez względu bowiem jak zaawansowana i dobrze dobrana jest nasza technika analiza danych, jeżeli na wejściu będą śmieciowe dane to na wyjściu będą śmieciowe wyniki. *Garbage in garbage out*
 
 W tym odcinku nauczymy się
 
-- Jak edytować zbiory danych by doprawadzić je do bardziej spójnej postaci.
+- Jak edytować zbiory danych by doprawadzić je do spójnej postaci.
 - Jak zastępować jedne wartości przez inne
 - Jak identyfikować wartości odstające / zbędne.
 
@@ -29,26 +29,43 @@ Mając dane wyczyszczone, możemy przejść do kolejnych etatów, czyli wstępne
 
 ---
 
-+ tworzenie ramki danych poprzez data.frame
-+ zmiana nazw kolumn / wierszy
-+ zmiana wartości w tabeli / indeksowanie
-+ redukcja liczby poziomów w factor
-+ podmiana przecinka na kropkę dziesiętną
-+ pomijanie braków danych
-+ normalizacja danych
-+ 
+
+# Tworzenie danych przez funkcję data.frame()
+
+```{r}
+D <- data.frame(
+      imie = c("Maja","Anna","Zosia","Joanna"),
+      więk = c("40","12,5","25","16.6"),
+      oczy = factor(c("niebieskie", "jasno-niebieskie", "ciemne", "niebieskie"))
+      )
+D <- data.frame(sapply(D,as.character), stringsAsFactors=FALSE)
+```
+
+# Edycja w całej kolumnie
 
 
-Od Krzyśka o czyszczeniu danych
+# Zamiana nazwy kolumny
 
 
+# Zamiana przecinka na kropkę
 
 
+# Usuwanie lub zastępowanie brakujących danych
 
-### Dane
+
+# Normalizacja kolumny lub wiersza
+
+
+# Zmiana nazw czynników w zmienej jakościowej / redukcja liczby poziomów
 
 Przykładowe dane:
 ```{r}
+# zmiana znaku jednego na inny wszedzie, np ó na o
+# zmiana przecinka na kropkę i konwersja na liczby
+# zmiana nazw lub kolejności czynników w zmiennej jakościowej
+# zmiana nazwy kolumny
+# zmiana jednej wartosci w macierzy [np rzad wielkosci inne]
+
 D <- data.frame(
   imie= c("Maja","Anna","Zosia","Joanna"),
   gęstość= c("0.4","0,2","0,05","0,35")
