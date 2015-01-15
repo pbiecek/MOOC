@@ -1,7 +1,7 @@
 ---
 title: "Czyszczenie i wprowadzenie do obróbki danych"
 author: "pogRomcy danych"
-date: "sezon 1 / odcinek 16 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 1 / odcinek 16 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -13,41 +13,30 @@ output:
 
 ---
 
-
-Sciagawka z zabawy danymi w dplyr
-
-http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf
-
-wiecej sciagawek
-
-http://www.rstudio.com/resources/cheatsheets/
-
-
 # O czym jest ten odcinek
+
+Praca z danymi to w dużej części czyszczenie i zmiana struktury danych. Zarówno dane zbierane przez ludzi jak i przez automatyczne czujniki mają tendencje do posiadania braków, obserwacji odstających lub zwykłych błędów. Aby sensownie analizować dane, musimy przekształcić je do postaci w której wyniki anliz będą wiarygodne.
+
+To bardzo istotna faza, bez względu bowiem jak zaawansowana i dobrze dobrana jest nasza technika analiza danych, jeżeli na wejściu będą śmieciowe dane to na wyjściu będą śmieciowe wyniki. *Garbage in garbage out*
 
 W tym odcinku nauczymy się
 
----
+- Jak edytować zbiory danych by doprawadzić je do bardziej spójnej postaci.
+- Jak zastępować jedne wartości przez inne
+- Jak identyfikować wartości odstające / zbędne.
 
-Pracując z danymi często wyróżnia się dwa stany,
-dane surowe i dane przetworzone.
-
-Dane surowe pobieramy ze źródła danych, zakładając że na podstawie tych danych możemy odpowiedzieć, na interesujące nas pytania.
-Przykładowo, szczegółowe informacje o wszystkich ofertach sprzedaży aut, to przykład danych surowych, ponieważ pobierany te dane dokładnie w tej postaci.
-
-Pytania, które nas interesują dotyczą często podzbiory całych danych, i to podzbioru, na którym wykonywane są jakieś transformacje.
-Takie przekształcone dane nazywamy danymi przetworzonymi.
-
-Przetwarzanie może być bardzo różne, 
-mając zbiór wypowiedzi, możemy liczyć częstość wystąpień poszczególnych słów,
-możemy z liczb wyciągać ostatnie cyfry, czy z dat dni tygodnia.
-
-Dzisiaj poznamy fantastyczne narzędzie, bardzo pomagające w przetwarzaniu danych.
-To narzędzie to biblioteka dplyr
-
+Mając dane wyczyszczone, możemy przejść do kolejnych etatów, czyli wstępnej obróbki, analizy i wizualizacji.
 
 ---
 
++ tworzenie ramki danych poprzez data.frame
++ zmiana nazw kolumn / wierszy
++ zmiana wartości w tabeli / indeksowanie
++ redukcja liczby poziomów w factor
++ podmiana przecinka na kropkę dziesiętną
++ pomijanie braków danych
++ normalizacja danych
++ 
 
 
 Od Krzyśka o czyszczeniu danych
@@ -122,5 +111,15 @@ D
 ```
 
 Do rozwiązywania powyższych problemów bardzo pomocne mogą okazać się funkcje: base::replace oraz car::recode.
+
+
+
+Sciagawka z zabawy danymi w dplyr
+
+http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf
+
+wiecej sciagawek
+
+http://www.rstudio.com/resources/cheatsheets/
 
 
