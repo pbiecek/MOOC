@@ -15,7 +15,7 @@ output:
 
 # O czym jest ten odcinek
 
-Analizując dane spotkamy się z różnymi rodzajami zmiennych. Często spotykanym typem okazują się zmienne zwiazane z datami i czasem.
+Analizując dane spotkamy się z różnymi rodzajami zmiennych. Często spotykanym typem okazują się zmienne związane z datami i czasem.
 
 W tym odcinku nauczymy się
 
@@ -31,11 +31,11 @@ Do ilustracji tych zagadnień wykorzystamy zbiory danych tworzone ad hoc.
 
 W programie R istnieją trzy podstawowe typu zmiennych opisujące daty lub czas
 
-+ Klasa `Date` służy do opisywania dat z dokładnością do dnia. Na datach można wykonywać operacje taie jak odejmowanie dwóch dat, dodawanie liczby do dnia itp.
++ Klasa `Date` służy do opisywania dat z dokładnością do dnia. Na datach można wykonywać operacje takie jak odejmowanie dwóch dat, dodawanie liczby do dnia itp.
 
-+ Klasa POSIXct, służy do opisywania czasu z dokładnością do sekundy. Czas jest pamiętany jako liczba sekund od określonego początku. Suffix `ct` oznacza *calendar time*.
++ Klasa POSIXct, służy do opisywania czasu z dokładnością do sekundy. Czas jest pamiętany jako liczba sekund od określonego początku. Sufiks `ct` oznacza *calendar time*.
 
-+ Klasa POSIXlt, służy do opisywania czasu w formacie listy wartości. Suffix `lt` oznacza *local time*.
++ Klasa POSIXlt, służy do opisywania czasu w formacie listy wartości. Sufiks `lt` oznacza *local time*.
 
 ---
 
@@ -66,15 +66,11 @@ Jako pierwszy argument przyjmuje wektor napisów opisujących chwile czasu. Drug
 Aby uzyskać dokładną pomoc dotyczącą oznaczeń w formatowaniu daty należy otworzyć plik pomocy instrukcją `?strptime`.
 
 ```{r}
-czas1 <- as.POSIXct("2015-02-13 12:56:26")
-czas1
-czas2 <- as.POSIXct("14022015 12:56:26", format = "%d%m%Y %H:%M:%S")
-czas2
-# struktura obiektu POSIXct
-str(czas1)
+(czas1 <- as.POSIXct("2015-02-13 12:56:26"))
+(czas2 <- as.POSIXct("14022015 12:56:26", format = "%d%m%Y %H:%M:%S"))
 ```
 
-Na czasach można wykonywac takie operacje jak odejmowanie czy dodawane do jednego czasu okreśonego przedziału (domyślnie dni).
+Na czasach można wykonywać takie operacje jak odejmowanie czy dodawane do jednego czasu określonego przedziału (domyślnie dni).
 
 ```{r}
 # różnica czasów
@@ -98,30 +94,25 @@ Konstruktorem klasy `POSIXlt` jest funkcja `as.POSIXlt()`.
 Jako pierwszy argument przyjmuje wektor napisów opisujących chwile czasu. Drugi opcjonalny argument określa formatowanie daty.Opis formatowania stosuje się taki sam, jak w przypadku klasy `POSIXct`.
 
 ```{r}
-czas1 <- as.POSIXlt("2015-02-13 12:56:26")
-czas1
-czas2 <- as.POSIXlt("14022015 12:56:26", format = "%d%m%Y %H:%M:%S")
-czas2
+(czas1 <- as.POSIXlt("2015-02-13 12:56:26"))
+(czas2 <- as.POSIXlt("14022015 12:56:26", format = "%d%m%Y %H:%M:%S"))
 ```
 
-Z dat mozna wyłuskiwac takie informacje jak dzień tygodnia, dzień miesiąca itd.
+Wiele funkcji można stosować zamiennie do obiektów klasy `POSIXlt` i `POSIXct`
 
 ```{r}
-# tydzień w roku, dzień miesiąca, dzień tygodnia, miesiąc i rok
-week(czas1)
-day(czas1)
-wday(czas1)
-month(czas1)
-year(czas1)
+# różnica czasów
+czas2 - czas1
+czas1 + 30
 ```
 
 ---
 
 # Pakiet lubridate
 
-W podstawowy programie R operacja na datach i czasie nie zawsze są proste. Tzn proste operacje są proste, ale złożóne już niekoniecznie.
+W podstawowy programie R operacja na datach i czasie nie zawsze są proste. Tzn proste operacje są proste, ale złożone już niekoniecznie.
 
-Pakiet `lubridate` zawiera zestaw funkcji ułątwiający pracę z datami.
+Pakiet `lubridate` zawiera zestaw funkcji ułatwiający pracę z datami.
 
 Jedną z takich funkcji jest `now()`, która zwraca obiekt opisujący bieżącą chwilę.
 
@@ -131,21 +122,30 @@ now()
 today()
 ```
 
-Uproszczono nazwy funkcji, służące do konwerotwania napisów na czas. Nazwa funkcji staje się opisem formatu.
+Uproszczono nazwy funkcji, służące do konwertowania napisów na czas. Nazwa funkcji staje się opisem formatu.
 
 ```{r}
 ymd_hms("2015-02-14 23:59:59")
-czas3 <- mdy_hm("02/14/15 08:32")
-czas3
+(czas3 <- mdy_hm("02/14/15 08:32"))
 ```
 
-Funkcją `wday()` można odczytać dzień tygodnia, podobnei funkcje `day()`, `month()` i `year()` opisują skłądowe daty.
+---
+
+# Pakiet lubridate
+
+Z dat można wyłuskiwać takie informacje jak dzień tygodnia, dzień miesiąca itd.
+Funkcją `wday()` można odczytać dzień tygodnia, podobnie funkcje `day()`, `month()` i `year()` opisują składowe daty.
 
 ```{r}
 wday(czas3, label = TRUE)
+# tydzień w roku, dzień miesiąca, miesiąc i rok
+week(czas1)
+day(czas1)
+month(czas1)
+year(czas1)
 ```
 
-Na czasach można wykonywać wygodne operacje uzywając funkcji `days()`, `months()`, `years()`, `minutes()`, `seconds()`.
+Na czasach można wykonywać wygodne operacje używając funkcji `days()`, `months()`, `years()`, `minutes()`, `seconds()`.
 
 ```{r}
 czas3 + hours(4)
@@ -172,10 +172,6 @@ http://biostat.mc.vanderbilt.edu/wiki/pub/Main/ColeBeck/datestimes.pdf.
 
 Szczegółowy opis paietu `lubridate` znajduje się w artykule z JSS http://www.jstatsoft.org/v40/i03/paper
 
-Wiele interesujących informacji o pracy z czasem i datami znajsuje się tutaj:
+Wiele interesujących informacji o pracy z czasem i datami znajduje się tutaj:
 http://en.wikibooks.org/wiki/R_Programming/Times_and_Dates
-
-
-
-
 
