@@ -405,6 +405,25 @@ duzyDiesel &lt;-<span class="st"> </span>auta2012$Pojemnosc.skokowa &gt;<span cl
 <span class="co"># liczba ofert z lakierem metallic</span>
 <span class="kw">sum</span>(<span class="kw">grepl</span>(<span class="kw">as.character</span>(auta2012$Kolor), <span class="dt">pattern=</span><span class="st">&quot;metallic&quot;</span>))</code></pre>
 </div>
+<div id="zadania-sezon-1-odcinek-15" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 15</h1>
+<ul>
+<li><p>Używając odpowiedniego formatowania zamień napis <code>01-15-2015 10:20:59</code> na obiekt klasy <code>POSIXct</code>.</p></li>
+<li><p>Oblicz liczbę dni pomiędzy 1 września 1945 roku a 8 maja 1945.</p></li>
+<li><p>Sprawdź jaki dzień tygodnia będzie za 100 dni od dziś</p></li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-15" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 15</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># konwersja daty</span>
+<span class="kw">mdy_hms</span>(<span class="st">&quot;01-15-2015 10:20:59&quot;</span>)
+
+<span class="co"># liczba dni różnicy</span>
+<span class="kw">dmy</span>(<span class="st">&quot;08-05-1945&quot;</span>) -<span class="st"> </span><span class="kw">dmy</span>(<span class="st">&quot;01-09-1939&quot;</span>)
+
+<span class="co"># dzień tygodnia za 100 dni od dziś</span>
+<span class="kw">wday</span>(<span class="kw">today</span>() +<span class="st"> </span><span class="kw">days</span>(<span class="dv">100</span>), <span class="dt">label =</span> <span class="ot">TRUE</span>, <span class="dt">abbr =</span> <span class="ot">FALSE</span>)</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>

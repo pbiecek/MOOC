@@ -453,3 +453,29 @@ sum(grepl(auta2012$Wyposazenie.dodatkowe.napis, pattern="autoalarm"))
 # liczba ofert z lakierem metallic
 sum(grepl(as.character(auta2012$Kolor), pattern="metallic"))
 ```
+
+---
+
+# Zadania, sezon 1, odcinek 15
+
++ Używając odpowiedniego formatowania zamień napis `01-15-2015 10:20:59` na obiekt klasy `POSIXct`.
+
++ Oblicz liczbę dni pomiędzy 1 września 1945 roku a 8 maja 1945.
+
++ Sprawdź jaki dzień tygodnia będzie za 100 dni od dziś
+
+
+---
+
+# Odpowiedzi, sezon 1, odcinek 15
+
+```{r, eval=FALSE}
+# konwersja daty
+mdy_hms("01-15-2015 10:20:59")
+
+# liczba dni różnicy
+dmy("08-05-1945") - dmy("01-09-1939")
+
+# dzień tygodnia za 100 dni od dziś
+wday(today() + days(100), label = TRUE, abbr = FALSE)
+```
