@@ -1,7 +1,7 @@
 ---
 title: "Filtrowanie danych [dplyr / select]"
 author: "pogRomcy danych"
-date: "sezon 1 / odcinek 6 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 1 / odcinek 17 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -9,7 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / wizualizacja / zaawansowane"
+    footer: "pogRomcy danych / przetwarzanie / filter"
 
 ---
 
@@ -20,6 +20,24 @@ W tym odcinku nauczymy się
 - Jak ze zbioru danych wybierać tylko interesujące nas wiersze
 
 Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to `koty_ptaki` a drugi, znacznie większy to `auta2012`.
+
+---
+
+Pracując z danymi często wyróżnia się dwa stany,
+dane surowe i dane przetworzone.
+
+Dane surowe pobieramy ze źródła danych, zakładając że na podstawie tych danych możemy odpowiedzieć, na interesujące nas pytania.
+Przykładowo, szczegółowe informacje o wszystkich ofertach sprzedaży aut, to przykład danych surowych, ponieważ pobierany te dane dokładnie w tej postaci.
+
+Pytania, które nas interesują dotyczą często podzbiory całych danych, i to podzbioru, na którym wykonywane są jakieś transformacje.
+Takie przekształcone dane nazywamy danymi przetworzonymi.
+
+Przetwarzanie może być bardzo różne, 
+mając zbiór wypowiedzi, możemy liczyć częstość wystąpień poszczególnych słów,
+możemy z liczb wyciągać ostatnie cyfry, czy z dat dni tygodnia.
+
+Dzisiaj poznamy fantastyczne narzędzie, bardzo pomagające w przetwarzaniu danych.
+To narzędzie to biblioteka dplyr
 
 ---
 
