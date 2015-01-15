@@ -16,28 +16,25 @@ output:
 
 Najtrudniejsze są początki. Aby dojść do miejsca w którym nasza praca stanie się przyjemnością i będzie efektywna, musimy nauczyć się nowego języka. A nauka, czy to języka, czy czegokolwiek innego, to seria prób, czasem niepowodzeń, kolejnych prób i tak nieustannie.
 
-Prawdziwa nauka rozpocznie się z odcinkiem 4, a więc kolejnym. Ale zanim będziemy gotowi rozpocząć naukę musimy oswoić się z narzędziem z którym przyjdzie nam pracować.
+Prawdziwa nauka rozpocznie się z odcinkiem 4, a więc kolejnym. Ale zanim będziemy gotowi rozpocząć naukę musimy oswoić się z narzędziem, z którym przyjdzie nam pracować.
 
-W tym odcinku nauczymy się
+W tym odcinku nauczymy się:
 
-* W jaki sposób wprowadzać instrukcje do programu R
-* W jaki sposób definiować nowe zmienne w programie R
-* Jak szukać pomocy dla funkcji
+* w jaki sposób wprowadzać instrukcje do programu R,
+* w jaki sposób definiować nowe zmienne w programie R,
+* jak szukać pomocy dla funkcji.
 
 Do tego odcinka jest dołączony film wideo, ilustrujący wszystkie przedstawiane operacje.
 
-Pracując ze slajdami, możemy w każdej chwili nacisnąć przycisk `T`, rozwinie on spis treści, dzięki czemu łatwo nam będzie przejść do pożądanego slajdu.
-
-Pracując ze slajdami możemy w każdej chwili nacisnąć przycisk `A` aby zamienić slajdy na ciągły dokument.
+Pracując ze slajdami, możemy w każdej chwili nacisnąć przycisk `T`, rozwinie on spis treści, dzięki czemu łatwo nam będzie przejść do pożądanego slajdu. Możemy również w każdej chwili nacisnąć przycisk `A`, aby zamienić slajdy na ciągły dokument.
 
 ---
 
 # Jak pracować z RStudio
 
-Zacznijmy naszą przygodę od krótkiego omówienia programu RStudio, 
-będziemy z nim pracować przez większość czasu, warto go bliżej poznać.
+Zacznijmy naszą przygodę od krótkiego omówienia programu RStudio. Będziemy z nim pracować przez większość czasu, warto go bliżej poznać.
 
-Po zainstalowaniu przy pierwszym otwarciu program R będzie wyglądał w poniżej przedstawiony sposób.
+Po zainstalowaniu przy pierwszym otwarciu program RStudio będzie wyglądał w poniżej przedstawiony sposób.
 
 Po lewej stronie jest interaktywna konsola, po prawej stronie są panele pomocnicze, 
 które omówimy za kilka minut.
@@ -60,7 +57,7 @@ Przećwiczmy to na kilku prostych operacjach arytmetycznych.
 2^10
 ```
 
-Na slajdach wyniki instrukcji wprowadzonych do programy R przedstawimy poprzedziwszy je znakami `##`. Poniżej znajduje się zdjęcie pokazujące jak wygląda konsola.
+Na slajdach wyniki instrukcji wprowadzanych do programu R przedstawimy poprzedziwszy je znakami `##`. Poniżej znajduje się obraz pokazujący jak wygląda konsola.
 
 ![Program RStudio](figs/RStudio6.png)
 
@@ -102,7 +99,7 @@ Operatorem `??` możemy wyszukać funkcje, która w opisie ma określone słowo 
 ```
 
 Okazuje się, że jest kilka funkcji, które mają związek z sekwencjami. 
-Ta która nas interesuje to `seq()`, znajduje się ona w pakiecie `base`.
+Ta która nas interesuje to `seq()`. Znajduje się ona w pakiecie `base`.
 Wszystkie funkcje są pogrupowane w pakiety, a pakiet `base` zawiera funkcje do podstawowych operacji.
 
 Aby wyświetlić opis dla zadanej funkcji wystarczy wykorzystać operator `?`.
@@ -111,21 +108,20 @@ Aby wyświetlić opis dla zadanej funkcji wystarczy wykorzystać operator `?`.
 ?seq
 ```
 
-Opis każdej funkcji składa się z opisu jej argumentów, szczegółowego opisu działania funkcji, oraz przykładów jej użycia.
+Opis każdej funkcji składa się z opisu jej argumentów, szczegółowego opisu działania funkcji oraz przykładów jej użycia.
+Te przykłady można skopiować i wkleić do konsoli, aby zobaczyć co jest ich wynikiem.
 
-Te przykłady można przekleić do konsoli aby zobaczyć co jest ich wynikiem.
+# Jak wykonać sekwencję liczb?
 
-# Jak zrobić sekwencję liczb?
-
-Dla funkcji `seq()` aby podać początek, koniec i krok dla sekwencji, należy wskazać argumenty `from`, `to` i `by`.
-Możemy więc stworzyć sekwencje następującą instrukcją.
+Dla funkcji `seq()`, aby podać początek, koniec i krok dla sekwencji, należy wskazać argumenty `from`, `to` i `by`.
+Możemy więc stworzyć sekwencję za pomocą następującej instrukcji.
 
 ```{r, warning=FALSE}
 sekwencja <- seq(from = 0, to = 10, by = 0.1)
 ```
 
 Zauważmy, że wartości do argumentów przypisujemy znakiem `=`. To przypisanie ma jednak inne znaczenie. Nie tworzymy nowej zmiennej o nazwie `from` ale wskazujemy, że argument funkcji ‘from’ ma mieć wartość 0.
-Dla większej czytelności, do przypisania, które tworzy zmienną w pamięci R będziemy używać operatora `<-` a do przypisania wartości do argumentu funkcji, będziemy używać operatora `=`.
+Dla większej czytelności, do przypisania, które tworzy zmienną w pamięci R, będziemy używać operatora `<-`, a do przypisania wartości do argumentu funkcji będziemy używać operatora `=`.
 
 Argumenty do funkcji możemy podać w dowolnej kolejności. Możemy najpierw określić argument `by` a następnie `from` i `to`.
 
@@ -133,22 +129,22 @@ Argumenty do funkcji możemy podać w dowolnej kolejności. Możemy najpierw okr
 sekwencja <- seq(by = 0.1, from = 0, to = 10)
 ```
 
-Jeżeli podajemy argumenty w domyślnej kolejności, opisanej w pliku pomocy, wtedy możemy pominąć podawanie ich nazwy.
-Program R z kolejności argumentów odczyta który co opisuje.
+Jeżeli podajemy argumenty w domyślnej kolejności, opisanej w pliku pomocy, wtedy możemy pominąć podawanie ich nazw.
+Program R z kolejności argumentów odczyta, który co opisuje.
 
 ```{r, warning=FALSE}
 sekwencja <- seq(0, 10, 0.1)
 ```
 
-Mamy już sekwencje liczb. Zróbmy z nią coś ciekawego.
+Mamy już sekwencję liczb. Zróbmy z nią coś ciekawego.
 
 # Wykres z morałem
 
-Funkcją `exp()` policzmy eksponentę z sekwencji, a następnie narysujmy i sekwencję i jej eksponentę funkcją `plot()`.
+Funkcją `exp()` policzmy eksponentę z sekwencji, a następnie - wykorzystując funkcję `plot()` - narysujmy i sekwencję, i jej eksponentę.
 
 Poniższy wykres, to bardzo ważny wykres, ponieważ przedstawia bardzo ważną informację dotyczącą uczenie się.
 Pierwsze godziny poznawania R poświęcimy na zbudowanie bazy funkcji R. 
-Będzie to okres pierwszych frustracji, gdy efekty będą relatywnie małe a wysiłek z naszej strony będzie duży.
+Będzie to okres pierwszych frustracji, gdy efekty będą relatywnie małe, a wysiłek z naszej strony będzie duży.
 Ale po kilku pierwszych godzinach, jeżeli tylko wytrwamy, okaże się, że nasze możliwości rosną wykładniczo.
 
 ```{r, warning=FALSE}
@@ -162,7 +158,7 @@ plot(x = sekwencja, y = poziom,
 
 Pod koniec większości odcinków przygotowaliśmy kilka zadań do wykonania.
 
-Pierwsze zadania są proste, kolejne coraz trudniejsze. Warto zmierzyć się z nimi, jedynym sposobem by nauczyć się języka programowani jest ćwiczenie, ćwiczenie i jeszcze raz ćwiczenie.
+Pierwsze zadania są proste, kolejne coraz trudniejsze. Warto zmierzyć się z nimi, gdyż najlepszym sposobem by nauczyć się języka programowania jest ćwiczenie, ćwiczenie i jeszcze raz ćwiczenie.
 
 Odpowiedzi do zadań umieszczone są na stronie kursu, można je w każdej chwili sprawdzić.
 

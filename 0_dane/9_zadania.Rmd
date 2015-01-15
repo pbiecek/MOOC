@@ -54,7 +54,7 @@ load(url("http://biecek.pl/MOOC/dane/auta2012mini.rda"))
 
 # Zadanie, sezon 1, odcinek 6
 
-- Zapisz zbiór danych `koty_ptaki` do pliku tekstowego, w którym dane są rozdzielane przecinkiem a kropką dziesiętną jest `.`
+- Zapisz zbiór danych `koty_ptaki` do pliku tekstowego, w którym dane są rozdzielane przecinkiem, a separatorem dziesiętnym jest `.` (kropka).
 - Zapisz zbiór danych `koty_ptaki` do formatu pliku Excela. Sprawdź czy dane poprawnie się zapisały.
 - Zapisz zbiór danych `koty_ptaki` do pliku binarnego. Odczytaj go następnie funkcją `load()` i sprawdź czy dane poprawnie zostały zapisane.
 
@@ -239,9 +239,9 @@ for (i in 1:nrow(koty_ptaki)) {
 
 # Zadania, sezon 1, odcinek 10
 
-* Napisz funkcję, która otrzymuje argument liczbowy a następnie wypisuje na ekran wartości od argumentu do jeden.
-* Napisz funkcję, przyjmuje argument liczbowy `n` a następnie rysuje kwadrat o boku `n` wypełniony znakami `X`.
-* Napisz funkcję, przyjmuje argument liczbowy `n` a następnie rysuje kwadrat o boku `n` ze znakami `X` na brzegu i pusty w środku.
+* Napisz funkcję, która otrzymuje argument liczbowy, a następnie wypisuje na ekran wartości od argumentu do jeden.
+* Napisz funkcję, która przyjmuje argument liczbowy `n`, a następnie rysuje kwadrat o boku `n` wypełniony znakami `X`.
+* Napisz funkcję, która przyjmuje argument liczbowy `n`, a następnie rysuje kwadrat o boku `n` ze znakami `X` na brzegu i pusty w środku.
 
 ---
 
@@ -295,11 +295,11 @@ pustyKwadrat()
 
 + Jaka jest mediana/połówkowa wielkość silnika (`Pojemnosc.skokowa`)?
 
-+ Przedstaw graficznie za pomocą wykresu pudełko-wąsy oraz histogramu rozkład cechy `Cena.w.PLN`. 
++ Przedstaw graficznie za pomocą wykresu pudełko-wąsy oraz histogramu rozkład cechy `Cena.w.PLN`. PCH: brak odpowiedzi poniżej. To celowe?
 
 + Zwróć uwagę, że pojedyncze auta o bardzo wysokich cenach, powodują że wykres jest mało czytelny. Oczyść te dane, pozostawiają tylko auta o cenie poniżej 100 tys pln. Następnie przedstaw rozkład cen aut w segmencie aut do 100 tys pln.
 
-+ Aut w jakiej cenie jest najwięcej wśród zebranych ogłoszeń?
++ Aut w jakiej cenie jest najwięcej wśród zebranych ogłoszeń? PCH: brak odpowiedzi poniżej. To celowe?
 
 
 ---

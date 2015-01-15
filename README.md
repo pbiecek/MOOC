@@ -1,4 +1,4 @@
-﻿
+
 pogRomcy danych
 ===============
 Od zera do bohatera w 60 godzin
@@ -18,7 +18,7 @@ część 1: Data smart
 + Eksploracja danych z programem R [sezon 1]
   * [intro z opisem kursu, wideo, TODO, PBi]
   * Wprowadzenie do R i RStudio
-    + odcinek 1: Dlaczego R?, [html](https://rawgit.com/pbiecek/MOOC/master/przetwarzanie_1/01_introR.html),  v1 ready
+    + odcinek 1: Dlaczego R?, [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/01_introR.html),  v1 ready
     + odcinek 2: Jak zainstalować R, RStudio oraz dodatkowe pakiety? [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/02_instalacja.html),  v1 ready
     + odcinek 3: Wprowadzenie do RStudio i systemu pomocy, [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/03_wprowadzenieDoRStudio.html), v1 ready, [video](https://github.com/pbiecek/MOOC/blob/master/1_przetwarzanieDanych/2_MOOC_Przetwarzanie_01.mp4?raw=true), 
     + odcinek 4: Interaktywna praca z R [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/04_interaktywnaPracaZR.html),

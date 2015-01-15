@@ -14,7 +14,7 @@ output:
 
 # O czym jest ten odcinek
 
-Aby wygodnie pracować z programem R potrzebujemy zainstalować silnik obliczeniowy R, wygodny edytor dzięki któremu praca z R będzie bardziej wygodna, taki jak RStudio, oraz dodatkowe biblioteki z danymi i funkcjami. Wszystkie te elementy można pobrać z Internetu bezpłatnie.
+Aby wygodnie pracować z programem R potrzebujemy zainstalować silnik obliczeniowy R, edytor dzięki któremu praca z R będzie bardziej wygodna, taki jak np. RStudio, oraz dodatkowe biblioteki z danymi i funkcjami. Wszystkie te elementy można pobrać z Internetu bezpłatnie.
 
 W tym odcinku pokażemy:
 
@@ -43,7 +43,7 @@ Na stronie w zakładce *Download* znaleźć można źródła do pobrania oraz pr
 
 Program R można bez problemu zainstalować i używać na systemach operacyjnych Windows, OSX, większości dystrybucji Linuxa.
 
-Program R możemy zainstalować również na przenośnym nośniku USB, dzięki czemu, będziemy mogli uruchamiać to środowisko na różnych komputerach.
+Program R możemy zainstalować również na przenośnym nośniku USB, dzięki czemu będziemy mogli uruchamiać to środowisko na różnych komputerach.
 
 Nie potrzebujemy specjalnych uprawnień administracyjnych aby zainstalować program R. Jeżeli korzystamy z komputera do którego nie mamy pełni dostępu, można zainstalować program R w swoim lokalnym katalogu. 
 
@@ -72,10 +72,10 @@ RStudio jest komercyjnym produktem rozwijanym przez firmę RStudio. Ten program 
 
 Instalacja sprawdza się do klikania *dalej, dalej*. Po zainstalowaniu należy uruchomić program RStudio.
 
-* Przy domyślnych ustawieniach, w programie RStudio wyświetlane są cztery panele. Lewy górny róg to miejsce w którym pisze się instrukcje. Ten instrukcje można zaznaczyć i wysłać do wykonania poleceniem CTRL+Enter. 
+* Przy domyślnych ustawieniach, w programie RStudio wyświetlane są cztery panele. Lewy górny róg to miejsce w którym pisze się instrukcje. Te instrukcje można zaznaczyć i wysłać do wykonania poleceniem CTRL+Enter. 
 * Lewy dolny panel to konsola programu R, tutaj wyświetlane są instrukcje wprowadzone do R oraz ich wyniki.
 * Prawy dolny panel przedstawia wykresy wyprodukowane przez instrukcje w R. W tym panelu jest też wyświetlana pomoc dla funkcji.
-* Prawy górny panel pokazuje jakie obiekty znajdują się obecnie w pamięci R, oraz jak są one duże.  Klikając na wybrane obiekty możemy podejrzeć ich zawartość. Każdy wiersz to obiekt. Ale po pierwszym uruchomieniu to okno będzie puste, nic jeszcze nie wczytaliśmy do pamięci.
+* Prawy górny panel pokazuje jakie obiekty znajdują się obecnie w pamięci R oraz jak są one duże.  Klikając na wybrane obiekty możemy podejrzeć ich zawartość. Każdy wiersz to obiekt. Ale po pierwszym uruchomieniu to okno będzie puste, nic jeszcze nie wczytaliśmy do pamięci.
 
 
 ![RStudio](figs/RStudio.png)
@@ -85,13 +85,11 @@ Instalacja sprawdza się do klikania *dalej, dalej*. Po zainstalowaniu należy u
 
 # Instalacja dodatkowych pakietów
 
-Program R po instalacji posiada setki przydatnych funkcji.
-
-Ale olbrzymia siła kryje się w dodatkowych pakietach, które można w każdej chwili dodać. 
-Dodatkowych pakietów, oficjalnie dostępnych w repozytorium pakietów CRAN jest na dziś dzień ponad 6000. 
+Program R po instalacji posiada setki przydatnych funkcji. Ale prawdziwa siła kryje się w dodatkowych pakietach, które można w każdej chwili dodać. 
+Dodatkowych pakietów, oficjalnie dostępnych w repozytorium pakietów CRAN, jest na dziś dzień ponad 6000. 
 Są to pakiety specjalistyczne, dla bioinformatyków, botaników, historyków, lingwistów, osób zainteresowanych obliczeniami rozproszonymi i dla wielu innych specjalistycznych zastosowań.
 
-My, na potrzeby tego kursu, będziemy korzystać z pakietu `SmarterPoland`, w którym umieszczone są dodatkowe zbiory danych na których będziemy pracować. Instalacja tego pakietu automatycznie wywoła również instalacje wszystkich pakietów zależnych, dzięki czemu jedną linijką możemy zainstalować wszystko, co nam będzie potrzebne w tym kursie.
+My, na potrzeby tego kursu, będziemy korzystać z pakietu `SmarterPoland`, w którym umieszczone są dodatkowe zbiory danych, na których będziemy pracować. Instalacja tego pakietu automatycznie wywoła również instalacje wszystkich pakietów zależnych, dzięki czemu jedną linijką możemy zainstalować wszystko, co nam będzie potrzebne w tym kursie.
 
 Instalacje nowego pakietu wykonuje się funkcją `install.packages("nazwa_pakietu")`, którą należy uruchomić w linii poleceń programu R.
 Tak więc po instalacji R i RStudio, powinniśmy uruchomić program RStudio. Następnie w konsoli (oknie z nazwą `Console`) wpisać polecenie i zakończyć je klawiszem ENTER.
