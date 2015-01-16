@@ -58,6 +58,9 @@ D <- data.frame(sapply(D,as.character), stringsAsFactors=FALSE)
 
 # Zmiana nazw czynników w zmienej jakościowej / redukcja liczby poziomów
 
+
+? polskie znaki
+
 Przykładowe dane:
 ```{r}
 # zmiana znaku jednego na inny wszedzie, np ó na o
