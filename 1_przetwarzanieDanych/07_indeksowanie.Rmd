@@ -17,14 +17,14 @@ output:
 Dane z którymi będziemy pracować mają najczęściej format tabeli lub wektora. 
 Jedną z podstawowych operacji na tabelach oraz wektorach jest wybieranie podzbioru wierszy, kolumn lub wartości.
 
-W tym odcinku dowiemy się
+W tym odcinku dowiemy się:
 
-- Jak tworzyć wektory
-- Jak indeksować wartości z wektora
-- Jak wybierać wiersze z ramki danych
-- Jak wybierać kolumny z ramki danych
-- Jak wybierać wiersze i kolumny
-- Jak indeksować wiersze i kolumny używając nazw lub wartości logicznych
+- jak tworzyć wektory,
+- jak indeksować wartości z wektora,
+- jak wybierać wiersze z ramki danych,
+- jak wybierać kolumny z ramki danych,
+- jak wybierać wiersze i kolumny,
+- jak indeksować wiersze i kolumny używając nazw lub wartości logicznych.
 
 ---
 
@@ -48,7 +48,7 @@ Przykładowa instrukcja tworząca wektor o trzech elementach.
 c(3, 4, 5)
 ```
 
-W programowaniu i analizie danych bardzo często wykorzystuje się wektory kolejnych wartości liczbowych. Takie wektory mają nawet specjalną nazwę *sekwencje*.
+W programowaniu i analizie danych bardzo często wykorzystuje się wektory kolejnych wartości liczbowych. Takie wektory mają nawet specjalną nazwę: *sekwencje*.
 
 Sekwencje kolejnych liczb można stworzyć operatorem `:`. Jeżeli chcemy zbudować sekwencję liczb równie odległych od siebie, ale z krokiem innym niż 1, to wygodnie jest wykorzystać funkcję `seq()`.
 
@@ -63,7 +63,7 @@ seq(from = 3, to = 15, by = 2)
 
 Używając funkcji `c()` można tworzyć wektory wartości logicznych (z dwoma możliwymi stanami PRAWDA/FAŁSZ oznaczanymi `TRUE`/`FALSE`), wektory napisów oraz innego rodzaju wartości.
 
-Aby wykorzystać wektor później, trzeba go przypisać do zmiennej. Można to zrobić używając operatora `->` lub `=`.
+Aby wykorzystać wektor później, trzeba go przypisać do zmiennej. Można to zrobić używając operatora `<-` lub `=`.
 Jeżeli chcemy wyświetlić zawartość zmiennej to wystarczy wpisać ją do konsoli i nacisnąć ENTER.
 
 ```{r, message=FALSE, warning=FALSE}
@@ -84,7 +84,7 @@ LETTERS
 
 # Indeksowanie wektora
 
-Indeksowanie oznacza wybieranie określonych wartości. Wartości wybieramy wskazując ich indeksy. Brzmi jak masło maślane? 
+Indeksowanie oznacza wybieranie określonych wartości. Wartości wybieramy wskazując ich indeksy.
 
 Wektor to ciąg elementów. Pierwszy z tych elementów ma indeks 1, kolejny 2, kolejny 3 i tak aż do ostatniego elementu. Indeks ostatniego elementu to jednocześnie długość wektora. Można ją sprawdzić funkcją `length()`.
 
@@ -149,9 +149,7 @@ LETTERS[10:1]
 
 Elementy wektora można również indeksować warunkiem logicznym. 
 
-W poniższym przykładzie instrukcja `LETTERS > "K"` tworzy wektor wartości logicznych weryfikujących czy kolejna litera jest większa czy mniejsza od `K` (w porządku leksykograficznym),
-
-Taki wektor wartości logicznych można wykorzystać do indeksowania wektora `LETTERS`.
+W poniższym przykładzie instrukcja `LETTERS > "K"` tworzy wektor wartości logicznych weryfikujących czy kolejna litera jest większa czy mniejsza od `K` (w porządku leksykograficznym). Taki wektor wartości logicznych można wykorzystać do indeksowania wektora `LETTERS`.
 
 ```{r, message=FALSE, warning=FALSE}
 LETTERS > "K"
@@ -202,6 +200,7 @@ koty_ptaki[3, ]
 ```
 
 Liczbę wierszy można sprawdzić funkcją `nrow()`, przydatne, jeżeli np. chcemy wyświetlić ostatni wiersz.
+[PCH: Liczbę kolumn zaś sprawdzamy funkcją ncol() ...]
 
 ```{r, message=FALSE, warning=FALSE}
 nrow(koty_ptaki)
@@ -222,7 +221,7 @@ Przykładowo, wiersze od 8 do 10 z ramki danych `koty_ptaki` można wyłuskać n
 koty_ptaki[8:10, ]
 ```
 
-Funkcja `c()` skleja wartości i sekwencje  wektor, który można następnie wykorzystać w indeksowaniu wierszy.
+Funkcja `c()` skleja wartości i sekwencje w wektor, który można następnie wykorzystać w indeksowaniu wierszy.
 
 Poniższa instrukcja wyłuskuje wiersze 3, 8, 9 i 10.
 
@@ -230,14 +229,14 @@ Poniższa instrukcja wyłuskuje wiersze 3, 8, 9 i 10.
 koty_ptaki[c(3, 8:10), ]
 ```
 
-Lub równoważnie
+Lub równoważnie:
 
 ```{r, message=FALSE, warning=FALSE}
 indeksy <- c(3, 8:10)
 koty_ptaki[indeksy, ]
 ```
 
-Funkcjami `head()` i `tail()` wyłuskuje się pierwsze lub ostatnie 6 wierszy ze zbioru danych. Do obu funkcji można podać drugi argument, określający ile pierwszych / ostatnich wierszy chcemy odczytać, domyślnie jest to 6 wierszy.
+Funkcjami `head()` i `tail()` wyłuskuje się kilka pierwszych lub ostatnich wierszy ze zbioru danych. Do obu funkcji można podać drugi argument, określający ile pierwszych / ostatnich wierszy chcemy odczytać, domyślnie jest to 6 wierszy.
 
 ```{r, message=FALSE, warning=FALSE}
 head(koty_ptaki)
@@ -269,10 +268,12 @@ Indeksując wiersze lub kolumny można też wykorzystywać ujemne indeksy. Oznac
 Przykładowo, wszystkie wiersze poza 1, 3, 8, 9 i 10 można uzyskać poleceniem.
 
 ```{r, message=FALSE, warning=FALSE}
-koty_ptaki[ - c(1, 3, 8:10), ]
+koty_ptaki[ -c(1, 3, 8:10), ]
 ```
 
 Nie można mieszać jednocześnie wartości dodatnich i ujemnych.
+
+[PCH: tutaj jeszcze warto pokazać, co robi znak minus przed wektorem (wynik polecenia -c(1, 3, 8:10))]
 
 ---
 
@@ -381,7 +382,7 @@ rownames(koty_ptaki) <- koty_ptaki$gatunek
 
 Teraz możemy odwoływać się do wierszy poprzez nazwy tych wierszy.
 
-Poniższy przykład wybiera wiersze dla czterech wskazanych gatunków oraz trzy wybrane kolumny. Jeżeli wiersze mają sensowne, to bardzo ułatwiają odwoływanie się do wierszy.
+Poniższy przykład wybiera wiersze dla czterech wskazanych gatunków oraz trzy wybrane kolumny. Jeżeli wiersze mają sensowne nazwy, to bardzo ułatwia to odwoływanie się do wierszy.
 
 ```{r, message=FALSE, warning=FALSE}
 koty_ptaki[c("Lew", "Leopard", "Jerzyk", "Strus"),
@@ -474,7 +475,7 @@ koty_ptaki[ -c(1, 3, 8:10), ]
 
 # Podsumowanie instrukcji R
 
-W tym odcinku omawialiśmy funkcje służące do indeksowania kolumn oraz jednocześnie wierszy i kolumn.
+W tym odcinku omawialiśmy funkcje służące do indeksowania wierszy, kolumn oraz jednocześnie wierszy i kolumn.
 
 ```{r, eval=FALSE}
 # indeksowanie kolumn, tylko druga kolumna, wynikiem jest wektor
@@ -510,13 +511,13 @@ koty_ptaki[c("Lew", "Leopard", "Jerzyk", "Strus"),
 
 # Zadania
 
-- Wybierz z ramki danych `koty_ptaki` wszystkie wiersze poza ,,Sokołami'' (wiersz 11 i 12)
+- Wybierz z ramki danych `koty_ptaki` wszystkie wiersze poza ,,Sokołami'' (wiersz 11 i 12).
 
-- Wybierz z ramki danych `koty_ptaki` tylko koty (pierwsze siedem wierszy)
+- Wybierz z ramki danych `koty_ptaki` tylko koty (pierwsze siedem wierszy).
 
-- Wybierz z ramki danych `koty_ptaki` tylko kolumnę z wagą i prędkością
+- Wybierz z ramki danych `koty_ptaki` tylko kolumnę z wagą i prędkością.
 
-- Wybierz z ramki danych `koty_ptaki` wszystkie kolumny poza ostatnią
+- Wybierz z ramki danych `koty_ptaki` wszystkie kolumny poza ostatnią.
 
 - Wybierz z ramki wiersze dla których waga jest mniejsza niż 100 oraz cztery pierwsze kolumny.
 

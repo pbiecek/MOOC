@@ -16,9 +16,9 @@ output:
 
 Zanim rozpoczniemy analizę danych, musimy najpierw wczytać dane do programu R.
 
-Dane mogą być przechowywane  w najróżniejszych formatach, takich jak baza danych, plik tekstowy, plik w formacie programu Excel (nowszym .xslx lub starszym .xls) lub plik w formacie innego programu do analiz danych (SAS, SPSS, itp). 
+Dane mogą być przechowywane  w najróżniejszych formatach, takich jak baza danych, plik tekstowy, plik w formacie programu Excel (nowszym .xslx lub starszym .xls) lub plik w formacie innego programu do analizy danych (SAS, SPSS, itp). 
 
-W tym odcinku dowiemy się:
+W tym odcinku odpowiemy na pytania:
 
 - Jak wczytywać dane tabelaryczne z plików tekstowych?
 - Jak wczytywać dane tabelaryczne z plików Excela [xls lub xlsx]?
@@ -36,7 +36,7 @@ Nazwa 'plik tekstowy' bierze się stąd, że treść tego pliku możemy otworzy�
 Przyjrzymy się tabeli z danymi zapisanymi w pliku
 http://biecek.pl/MOOC/dane/koty_ptaki.csv
 
-Zawartość tego pliku wygląda tak
+Zawartość tego pliku wygląda następująco:
 
 ```{}
 gatunek;waga;dlugosc;predkosc;habitat;zywotnosc;druzyna
@@ -60,15 +60,15 @@ Albatros;4;0,8;120;Poludnie;50;Ptak
 
 W jaki sposób dane tabelaryczne zapisane są w tym pliku?
 
-Wyrównując wartości, zauważymy, że logiczna struktura tego pliku to tabela wartości rozdzialna średnikami.
+Wyrównując wartości, zauważymy, że logiczna struktura tego pliku to tabela wartości rozdzielonych średnikami.
 
 ![Zbiór danych o kotach](figs/koty_ptaki_ramka2.png)
 
 Zauważmy, że:
 
-- pierwszy wiersz to nagłówek, zawiera nazwy kolumn rozdzielane średnikiem (gatunek;waga;dlugosc;predkosc;habitat;zywotnosc;druzyna)
-- kolejne wiersze to dane w postaci kolumn liczb, które są rozdzielane średnikiem `;`
-- w pliku występują liczby niecałkowite, kropką dziesiętną jest przecinek `,`
+- pierwszy wiersz to nagłówek - zawiera nazwy kolumn rozdzielane średnikiem (gatunek;waga;dlugosc;predkosc;habitat;zywotnosc;druzyna),
+- kolejne wiersze to dane w postaci kolumn liczb, które są rozdzielane znakiem `;` (średnik),
+- w pliku występują liczby, które nie są liczbami całkowitymi - separatorem dziesiętnym jest znak `,` (przecinek).
 
 ---
 
@@ -76,13 +76,13 @@ Zauważmy, że:
 
 Instrukcja wczytująca dane do R składa się zazwyczaj z trzech członów.
 
-Ostatnim (po prawej stronie na poniższym schemacie) jest funkcja, która odczytuje dane, przetwarza i zamienia na postać zrozumiałą dla progrmau R (na poniższym schemacie ta funkcja to `read.table()`).
+Ostatnim (po prawej stronie na poniższym schemacie) jest funkcja, która odczytuje dane, przetwarza i zamienia na postać zrozumiałą dla programu R (na poniższym schemacie ta funkcja to `read.table()`).
 
 Aby móc na tych danych operować, należy nadać im jakąś nazwę (lewy człon na poniższym schemacie). Tę nazwę określa się zazwyczaj terminem *zmienna*.
 
-Operacje przypisania wartości odczytanych przez funkcję do zmiennej, można wykonać operatorem `<-` lub `=`.
+Operację przypisania wartości odczytanych przez funkcję do zmiennej można wykonać operatorem `<-` lub `=`.
 
-W programie R, jeżeli wynik jakiejś funkcji nie jest przypisany do zmiennej to jest on wyświetlany na ekranie. Jeżeli jednak chcemy ten wynik wykorzystać w przyszłości, to należy go przypsać do zmiennej.
+W programie R wynik funkcji, o ile nie jest przypisany do zmiennej, jest wyświetlany na ekranie. Jeżeli chcemy wynik działania funkcji wykorzystać w przyszłości, to należy go do zmiennej przypisać.
 
 ![Zbiór danych o kotach](figs/wczytywanie.png)
 
@@ -96,7 +96,7 @@ Zajmijmy się na razie prawą stroną przedstawionego schematu, a więc funkcją
 
 Funkcja `read.table()` ma wiele argumentów (patrz kolejny slajd), ale nie musimy ich wszystkich określać. Wystarczy wskazać nazwę pliku oraz te argumenty, które powinny mieć inne wartości niż domyślne. 
 
-W przypadku rozważanego pliku musimy określić argumenty `file = "http://biecek.pl/MOOC/dane/koty_ptaki.csv"` (ścieżka do pliku tekstowego, w tym przypadku czytamy dane bezpośrednio z internetowego adresu), `sep=";"` (separatorem będzie średnik), `dec=","` (kropką dziesiętną jest przecinek), `header=TRUE` (pierwszy wiersz ma nagłówek). Ponieważ wynik tej funkcji nie jest do niczego przypisany, dlatego wczytany zbiór danych jest wyświetlany na ekranie.
+W przypadku rozważanego pliku musimy określić argumenty `file = "http://biecek.pl/MOOC/dane/koty_ptaki.csv"` (ścieżka do pliku tekstowego, w tym przypadku czytamy dane bezpośrednio z internetowego adresu), `sep=";"` (separatorem kolejnych pól będzie średnik), `dec=","` (separatorem dziesiętnym jest przecinek), `header=TRUE` (pierwszy wiersz ma nagłówek). Ponieważ wynik tej funkcji nie jest do niczego przypisany, dlatego wczytany zbiór danych jest wyświetlany na ekranie.
 
 ```{r, message=FALSE}
 read.table(file = "http://biecek.pl/MOOC/dane/koty_ptaki.csv", 
@@ -107,7 +107,7 @@ read.table(file = "http://biecek.pl/MOOC/dane/koty_ptaki.csv",
 
 # Dane tabelaryczne w plikach tekstowych
 
-Do wczytywania danych z pliku tekstowego posłużyć może funkcja `read.table()`. Ponieważ pliki tekstowe mogą mieć bardzo różną postać funkcja ta ma wiele argumentów. Wybrane agrumenty przedstawia poniższa deklaracja (jest ich więcej, ale część pominiemy by nie zaciemniać obrazu)
+Do wczytywania danych z pliku tekstowego posłużyć może funkcja `read.table()`. Ponieważ pliki tekstowe mogą mieć bardzo różną postać, funkcja ta ma wiele argumentów. Wybrane agrumenty przedstawia poniższa deklaracja (jest ich więcej, ale część pominiemy by nie zaciemniać obrazu).
 
 ```{}
 read.table(file, header = FALSE, sep = "", dec = ".",  nrows = -1,
@@ -115,15 +115,15 @@ read.table(file, header = FALSE, sep = "", dec = ".",  nrows = -1,
            stringsAsFactors = default.stringsAsFactors(), ...)
 ```
 
-Ponieważ dane mogą być zapisane z użyciem różnych formatów, argumenty tej funkcji określają format danych do wczytania. Znaczenie kolejnych argumentów to
+Ponieważ dane mogą być zapisane z użyciem różnych formatów, argumenty tej funkcji określają format danych do wczytania. Znaczenie kolejnych argumentów podane jest poniżej.
 
-- `file` - ścieżka do pliku z danymi może być też adres URL. Jeżeli wartości argumentów podajemy w ich domyślnej kolejności, to możemy pominąć nazwę arguumentów. Dlatego w kolejnych przykładach nie bedziemy podawać nazwy tego argumentu
+- `file` - ścieżka do pliku z danymi, może być też adres URL. Jeżeli wartości argumentów podajemy w ich domyślnej kolejności, to możemy pominąć nazwy argumentów (dlatego w kolejnych przykładach nie bedziemy podawać nazwy tego argumentu).
 - `header` - flaga określająca, czy pierwszy wiersz należy traktować jako nagłówek. W naszym przypadku `header=TRUE`.
-- `sep` - znak rozdzielający kolumny. W naszym przypadku `sep=";"`, ale popularnym separatorem jest znak tabulacji, przecinek lub spacja
-- `dec` - kropka dziesiętna, zazwyczaj jest to `.` lub `,`. W naszym przypadku `dec=","`
-- `nrows` - maksymalna liczba wierszy do wczytania. Domyślnie ten argument przyjmuje wartość `-1`, czyli wczytaj wszystkie wiersze 
-- `skip` - liczba pierwszych wierszy do pominięcia przy wczytywaniu danych, domyślnie 0, czyli nie pomijaj żadnego wiersza
-- `comment.char` - znak komentarza. Jeżeli w danych wystąpi ten znak to treść od tego znaku do końca lini będzie zignorowana
+- `sep` - znak rozdzielający kolumny. W naszym przypadku `sep=";"`, ale popularnymi separatorami są również znak tabulacji, przecinek lub spacja.
+- `dec` - separator dziesiętny. Zazwyczaj jest to `.` lub `,`. W naszym przypadku `dec=","`.
+- `nrows` - maksymalna liczba wierszy do wczytania. Domyślnie ten argument przyjmuje wartość `-1`, czyli wczytaj wszystkie wiersze.
+- `skip` - liczba pierwszych wierszy do pominięcia przy wczytywaniu danych, domyślnie 0, czyli nie pomijaj żadnego wiersza.
+- `comment.char` - znak komentarza. Jeżeli w danych wystąpi ten znak to treść od tego znaku do końca lini będzie zignorowana.
 - `stringsAsFactors` - czy napisy powinny być domyślnie przekształcone w zmienne jakościowe. Domyślnie `TRUE`, o konsekwencjach tego przekształcenia napiszemy w odcinku 11 *Cechy jakościowe*.
 
 ---
@@ -199,16 +199,16 @@ read.xls("http://biecek.pl/MOOC/dane/koty_ptaki.xls", sheet = 1)
 # Dane w formacie programu Excel
 
 Dlaczego dostępnych jest tak wiele pakietów do wczytywania danych z Excela do R?
-Otóż, żadne z rozwiązań je jest lepsze od wszystkich pozostałych. Jedne są szybsze, inne lepiej radzą sobie z dużymi danymi. 
+Otóż, żadne z rozwiązań nie jest wyraźnie lepsze od pozostałych. Jedne są szybsze, inne lepiej radzą sobie z dużymi danymi. 
 
-Zebranie silnych i słabych stron poszczególnych pakietów znajduje się na stronie http://www.thertrader.com/2014/02/11/a-million-ways-to-connect-r-and-excel/. Wybrane silne i słabe strony pakietów, to
+Zestawienie silnych i słabych stron poszczególnych pakietów znajduje się na stronie http://www.thertrader.com/2014/02/11/a-million-ways-to-connect-r-and-excel/. Wybrane fragmenty porównania wymieniamy poniżej.
 
 - `XLConnect` ma dużo możliwości, szczególnie dotyczących konwersji typów, ale jest wolniejszy niż inne rozwiązania i wymagający jeżeli chodzi o RAM, przez co może nie poradzić sobie z dużymi zbiorami danych.
 
 - `gdata` ma kilka użytecznych funkcji, pozwalających na nawigacji po skoroszytach, np. 
 `sheetCount()` i `sheetNames()`
 
-- Wczytując dane z plików, które zostały stworzone na innym systemie operacyjnym lub w innej lokalizacji, trzeba liczyć się z różnicami dotyczącymi kodowania polskich znaków lub np. kropek dziesiętnych w liczbach rzeczywistych. Jeżeli ten problem może nas dotyczyć, to warto zapoznać się z kartą ,,Dobrych Praktyk'' dostępnych na stronie 
+Wczytując dane z plików, które zostały stworzone na innym systemie operacyjnym lub w innej lokalizacji, trzeba liczyć się z różnicami dotyczącymi kodowania polskich znaków lub np. kropek dziesiętnych w liczbach rzeczywistych. Jeżeli ten problem może nas dotyczyć, to warto zapoznać się z kartą ,,Dobrych Praktyk'' dostępnych na stronie 
 http://withr.me/blog/2013/11/15/configure-character-encoding-for-r-under-linux-and-windows/
 
 Zestawienie najpopularniejszych pakietów wczytujących danych z Excela prezentuje poniższa tabela.
@@ -229,7 +229,7 @@ Natywnym formatem dla programu R są pliki binarne o rozszerzeniu `rda` lub `RDa
 
 Dane w tym formacie są skompresowane, przez co zajmują mniej miejsca na dysku niż w pliku tekstowym lub formacie Excela. Wadą jest to, że można je otworzyć tylko w programie R.
 
-Dane w tym formacie, do programu R można je wczytać poleceniem `load()`. Pierwszym argumentem tej funkcji jest ścieżka do pliku z danymi. Jeżeli chcemy dane odczytać z internetu, należy dodatkowo użyć funkcji `url()`. 
+Dane w tym formacie można wczytać do programu R poleceniem `load()`. Pierwszym argumentem tej funkcji jest ścieżka do pliku z danymi. Jeżeli chcemy dane odczytać z internetu, należy dodatkowo użyć funkcji `url()`. 
 
 *Uwaga!* W przeciwieństwie do wcześniej poznanych funkcji, funkcja `load()` nie zwraca zbioru danych jako wynik, ale ładuje zbiór danych bezpośrednio do przestrzeni nazw (dane zapisane są wraz z nazwą zmiennej). Dlatego w poniższym przykładzie nie ma instrukcji przypisania do zmiennej `koty_ptaki`. Nazwa tej zmiennej jest pamiętana wewnątrz pliku `rda`.
 
@@ -242,15 +242,11 @@ koty_ptaki
 
 # Wczytywanie danych z pakietów R
 
-Przygotowując ten kurs miałem taki problem. 
+Przygotowując ten kurs musiałem zmierzyć się z następującym problemem. Jak w najprostszy sposób udostępnić uczestnikom kursu kilka zbiorów danych? Rozważając różne opcje, stwierdziłem że najłatwiejsza to udpostępnienie danych z użyciem pakietu dla programu R.
 
-Jak w najprostszy sposób udostępnić uczestnikom tego kursu kilka zbiorów danych?
-Rozważając różne opcje, stwierdziłem że najłatwiejsza to z udpostępnienie danych z użyciem pakietu dla programu R.
-
-Pakiety to zbiory funkcji oraz zbiorów danych. Można takie pakiety wygodnie przygotowywać oraz udostępniać innym osobom. Są pakiety, zawierające tylko funkcje, wyłącznie zbiory danych lub obie te rzeczy.
+Pakiety to zbiory funkcji oraz zbiorów danych. Można takie pakiety wygodnie przygotowywać oraz udostępniać innym osobom. Istnieją pakiety zawierające tylko funkcje, wyłącznie zbiory danych lub oba te zestawy.
 
 Aby sprawdzić jakie zbiory danych są dostępne w określonym pakiecie, można wykorzystać funkcję `data()` z argumentem `package`. 
-
 Zobaczmy jakie zbiory danych udostępnione są w pakiecie `SmarterPoland`.
 
 ```{r, warning=FALSE, message=FALSE}
@@ -298,10 +294,10 @@ summary(tsdtr210)
 
 # Podsumowanie instrukcji R
 
-W tym odcinku omawialiśmy funkcje służące do wczytywania danych z różnych formatów, tekstowych, Excelowych, binarnych. Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.
+W tym odcinku omawialiśmy funkcje służące do wczytywania danych z różnych formatów: tekstowych, Excelowych, binarnych. Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.
 
 ```{r, eval=FALSE}
-# wczytywanie danych z plików tekstowych i przypisaie tej wartości do zmiennej `koty_ptaki`
+# wczytywanie danych z plików tekstowych i przypisanie tej wartości do zmiennej `koty_ptaki`
 koty_ptaki <- read.table("http://biecek.pl/MOOC/dane/koty_ptaki.csv", 
                         sep=";", dec=",", header=TRUE)
 # wyświetlanie wartości zmiennej

@@ -30,7 +30,7 @@ Do instalacji tych elementów potrzebny jest dostęp do Internetu.
 
 Najnowszą wersję programu R (na dzień dzisiejszy jest to wersja 3.1.2) można pobrać ze strony
 http://cran.r-project.org/.
-Nie musimy pamiętać tego adresu, wystarczy wpisać w google ‘R GNU’ a powyższy adres będzie pierwszym linkiem.
+Nie musimy pamiętać tego adresu, wystarczy wpisać w Google ‘R GNU’ a powyższy adres będzie pierwszym linkiem.
 
 Na stronie w zakładce *Download* znaleźć można źródła do pobrania oraz program skompilowany dla popularnych systemów operacyjnych. Instalacja sprowadza się do klikania *dalej, dalej*. 
 
@@ -60,7 +60,7 @@ Praca z programem R jest interaktywna, co oznacza, że wpisując polecenia do ko
 Najnowszą wersję RStudio Desktop (na dzień dzisiejszy jest to wersja 0.98) można pobrać ze strony
 http://www.rstudio.com/products/rstudio/download/.
 
-Nie musimy pamiętać tego adresu, wystarczy wpisać w google ‘R Studio download’ a powyższy adres będzie pierwszym linkiem.
+Nie musimy pamiętać tego adresu, wystarczy wpisać w Google ‘R Studio download’ a powyższy adres będzie pierwszym linkiem.
 
 RStudio jest komercyjnym produktem rozwijanym przez firmę RStudio. Ten program jest dostępny bezpłatnie do większości zastosowań na licencji AGPL 3. Odpłatnie, można również korzystać z tego programu na licencjach komercyjnych.
 
