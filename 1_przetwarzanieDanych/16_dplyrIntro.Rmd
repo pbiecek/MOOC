@@ -29,17 +29,28 @@ Mając dane wyczyszczone, możemy przejść do kolejnych etatów, czyli wstępne
 
 ---
 
-
 # Tworzenie danych przez funkcję data.frame()
 
+Na potrzeby ćwiczeń z czyszceznia danych stworzymy sztuczną ramkę danych z kilkoma błędami.
+
+Ramkę danych stworzymy funkcją `data.frame()`, kolejne argumenty to wektory, które zostaną zamienione na kolejne kolumny w ramce danych. Ostatni argument `stringsAsFactors = FALSE` określa, że napisy mają NIE być zamieniane na zmienne jakościowe (takie jest domyślne zachowanie tej funkcji).
+
 ```{r}
-D <- data.frame(
-      imie = c("Maja","Anna","Zosia","Joanna"),
-      więk = c("40","12,5","25","16.6"),
-      oczy = factor(c("niebieskie", "jasno-niebieskie", "ciemne", "niebieskie"))
-      )
-D <- data.frame(sapply(D,as.character), stringsAsFactors=FALSE)
+DF <- data.frame(
+        imie = c("Maja","Anna","Zosia","Joanna"),
+        wiek = c("40","12,5","25","16.6"),
+        numer = c(1,2,3,4),
+        oczo = factor(c("niebieskie", "jasno-niebieskie", "ciemne", "niebieskie")),
+        stringsAsFactors = FALSE)
+DF
 ```
+
+W wynikowej ramce będziemy chcieli poprawić następujące błędy:
+
++ nazwę kolumny `oczo` zamienić na `oczy`
++ zmienną `wiek` zamienić na liczbową, w tym celu trzeba wpierw zamieniż `,` na `.`
++ imię `Zosia` zamienić na `Zofia`
++ kolory oczy zamienić na dwie grupy `niebieskie` i `ciemne`.
 
 # Edycja w całej kolumnie
 

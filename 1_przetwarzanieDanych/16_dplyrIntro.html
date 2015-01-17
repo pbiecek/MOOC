@@ -48,26 +48,63 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 16 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 16 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
+<p>Praca z danymi to w dużej części czyszczenie i zmiana struktury. Zarówno dane zbierane przez ludzi jak i przez automatyczne czujniki mają tendencje do zawierania braków, obserwacji odstających lub zwykłych błędów. Aby sensownie analizować dane, musimy przekształcić je do postaci w której wyniki anliz będą wiarygodne.</p>
+<p>Czyszceznie to bardzo istotna faza. Bez względu bowiem jak zaawansowana i dobrze dobrana jest nasza technika analiza danych, jeżeli na wejściu będą śmieciowe dane to na wyjściu będą śmieciowe wyniki. <em>Garbage in garbage out</em></p>
 <p>W tym odcinku nauczymy się</p>
+<ul>
+<li>Jak edytować zbiory danych by doprawadzić je do spójnej postaci.</li>
+<li>Jak zastępować jedne wartości przez inne</li>
+<li>Jak identyfikować wartości odstające / zbędne.</li>
+</ul>
+<p>Mając dane wyczyszczone, możemy przejść do kolejnych etatów, czyli wstępnej obróbki, analizy i wizualizacji.</p>
 </div>
-<div class="slide section level1">
-
-<p>Pracując z danymi często wyróżnia się dwa stany, dane surowe i dane przetworzone.</p>
-<p>Dane surowe pobieramy ze źródła danych, zakładając że na podstawie tych danych możemy odpowiedzieć, na interesujące nas pytania. Przykładowo, szczegółowe informacje o wszystkich ofertach sprzedaży aut, to przykład danych surowych, ponieważ pobierany te dane dokładnie w tej postaci.</p>
-<p>Pytania, które nas interesują dotyczą często podzbiory całych danych, i to podzbioru, na którym wykonywane są jakieś transformacje. Takie przekształcone dane nazywamy danymi przetworzonymi.</p>
-<p>Przetwarzanie może być bardzo różne, mając zbiór wypowiedzi, możemy liczyć częstość wystąpień poszczególnych słów, możemy z liczb wyciągać ostatnie cyfry, czy z dat dni tygodnia.</p>
-<p>Dzisiaj poznamy fantastyczne narzędzie, bardzo pomagające w przetwarzaniu danych. To narzędzie to biblioteka dplyr</p>
+<div id="tworzenie-danych-przez-funkcje-data.frame" class="slide section level1">
+<h1>Tworzenie danych przez funkcję data.frame()</h1>
+<p>Na potrzeby ćwiczeń z czyszceznia danych stworzymy sztuczną ramkę danych z kilkoma błędami.</p>
+<p>Ramkę danych stworzymy funkcją <code>data.frame()</code>, kolejne argumenty to wektory, które zostaną zamienione na kolejne kolumny w ramce danych. Ostatni argument <code>stringsAsFactors = FALSE</code> określa, że napisy mają NIE być zamieniane na zmienne jakościowe (takie jest domyślne zachowanie tej funkcji).</p>
+<pre class="sourceCode r"><code class="sourceCode r">DF &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+        <span class="dt">imie =</span> <span class="kw">c</span>(<span class="st">&quot;Maja&quot;</span>,<span class="st">&quot;Anna&quot;</span>,<span class="st">&quot;Zosia&quot;</span>,<span class="st">&quot;Joanna&quot;</span>),
+        <span class="dt">wiek =</span> <span class="kw">c</span>(<span class="st">&quot;40&quot;</span>,<span class="st">&quot;12,5&quot;</span>,<span class="st">&quot;25&quot;</span>,<span class="st">&quot;16.6&quot;</span>),
+        <span class="dt">numer =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),
+        <span class="dt">oczo =</span> <span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;niebieskie&quot;</span>, <span class="st">&quot;jasno-niebieskie&quot;</span>, <span class="st">&quot;ciemne&quot;</span>, <span class="st">&quot;niebieskie&quot;</span>)),
+        <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+DF</code></pre>
+<pre><code>##     imie wiek numer             oczo
+## 1   Maja   40     1       niebieskie
+## 2   Anna 12,5     2 jasno-niebieskie
+## 3  Zosia   25     3           ciemne
+## 4 Joanna 16.6     4       niebieskie</code></pre>
 </div>
-<div class="slide section level1">
-
-<p>Od Krzyśka o czyszczeniu danych</p>
-<h3 id="dane">Dane</h3>
+<div id="edycja-w-caej-kolumnie" class="slide section level1">
+<h1>Edycja w całej kolumnie</h1>
+</div>
+<div id="zamiana-nazwy-kolumny" class="slide section level1">
+<h1>Zamiana nazwy kolumny</h1>
+</div>
+<div id="zamiana-przecinka-na-kropke" class="slide section level1">
+<h1>Zamiana przecinka na kropkę</h1>
+</div>
+<div id="usuwanie-lub-zastepowanie-brakujacych-danych" class="slide section level1">
+<h1>Usuwanie lub zastępowanie brakujących danych</h1>
+</div>
+<div id="normalizacja-kolumny-lub-wiersza" class="slide section level1">
+<h1>Normalizacja kolumny lub wiersza</h1>
+</div>
+<div id="zmiana-nazw-czynnikow-w-zmienej-jakosciowej-redukcja-liczby-poziomow" class="slide section level1">
+<h1>Zmiana nazw czynników w zmienej jakościowej / redukcja liczby poziomów</h1>
+<p>? polskie znaki</p>
 <p>Przykładowe dane:</p>
-<pre class="sourceCode r"><code class="sourceCode r">D &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># zmiana znaku jednego na inny wszedzie, np ó na o</span>
+<span class="co"># zmiana przecinka na kropkę i konwersja na liczby</span>
+<span class="co"># zmiana nazw lub kolejności czynników w zmiennej jakościowej</span>
+<span class="co"># zmiana nazwy kolumny</span>
+<span class="co"># zmiana jednej wartosci w macierzy [np rzad wielkosci inne]</span>
+
+D &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
   <span class="dt">imie=</span> <span class="kw">c</span>(<span class="st">&quot;Maja&quot;</span>,<span class="st">&quot;Anna&quot;</span>,<span class="st">&quot;Zosia&quot;</span>,<span class="st">&quot;Joanna&quot;</span>),
   gęstość=<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;0.4&quot;</span>,<span class="st">&quot;0,2&quot;</span>,<span class="st">&quot;0,05&quot;</span>,<span class="st">&quot;0,35&quot;</span>)
   )
@@ -134,6 +171,10 @@ D$częstość &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(D
 ## 3  Zofia     0.05
 ## 4 Joanna     0.35</code></pre>
 <p>Do rozwiązywania powyższych problemów bardzo pomocne mogą okazać się funkcje: base::replace oraz car::recode.</p>
+<p>Sciagawka z zabawy danymi w dplyr</p>
+<p><a href="http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf">http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf</a></p>
+<p>wiecej sciagawek</p>
+<p><a href="http://www.rstudio.com/resources/cheatsheets/">http://www.rstudio.com/resources/cheatsheets/</a></p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
