@@ -58,8 +58,9 @@ część 1: Data smart
 + Dane wokół nas,
   * Intro [intro, wideo, TODO](https://rawgit.com/pbiecek/MOOC/master/motywacja/intro.md)
   * Piotr Przybyła IPI PAN, Inżynieria lingwistyczna 
+  * Bartosz Meglicki, NCBJ / IPIPAN, Robotyka i analiza danych
   * [Sondaże - może wyborcze] Nss
-  * [Robotyka] BM
+  * [Meteo] 
   * [Diagnoza Społeczna] J Cz
   * [Badania Edukacji] IBE
 
