@@ -22,6 +22,8 @@ W tym odcinku nauczymy się
 
 Do ilustracji wykorzystamy zbiór danych pobranych z eurostatu.
 
+[dodac koty?]
+
 ---
 
 # Dane do ćwiczeń

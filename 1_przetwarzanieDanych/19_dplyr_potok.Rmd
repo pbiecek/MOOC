@@ -19,6 +19,8 @@ W tym odcinku nauczymy się
 
 - Jak składać ze sobą wywołania funkcji do przetwarzania danych w potoki przetwarzania.
 
+[dodac koty]
+
 Do ilustracji wykorzystamy zbiór `auta2012`.
 
 ---
