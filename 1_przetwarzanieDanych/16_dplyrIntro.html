@@ -254,34 +254,15 @@ D</code></pre>
 ## 2   Anna      0,2
 ## 3  Zofia     0,05
 ## 4 Joanna     0,35</code></pre>
-<h3 id="naprawa-bednych-wpisow---liczb">Naprawa błędnych wpisów - liczb</h3>
-<p>Ponieważ takich pomyłek/liczb może być więcej można zastosować funkcję: sub:</p>
-<pre class="sourceCode r"><code class="sourceCode r">D$częstość &lt;-<span class="st"> </span><span class="kw">sub</span>(<span class="st">&quot;,&quot;</span>, <span class="st">&quot;.&quot;</span>, D$częstość, <span class="dt">fixed =</span> <span class="ot">TRUE</span>)
-D</code></pre>
-<pre><code>##     imie częstość
-## 1   Maja      0.4
-## 2   Anna      0.2
-## 3  Zofia     0.05
-## 4 Joanna     0.35</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>(D,class)</code></pre>
-<pre><code>##        imie    częstość 
-## &quot;character&quot; &quot;character&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">D$imie &lt;-<span class="st"> </span><span class="kw">as.factor</span>(D$imie)
-D$częstość &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(D$częstość)
-<span class="kw">sapply</span>(D,class)</code></pre>
-<pre><code>##      imie  częstość 
-##  &quot;factor&quot; &quot;numeric&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">D</code></pre>
-<pre><code>##     imie częstość
-## 1   Maja     0.40
-## 2   Anna     0.20
-## 3  Zofia     0.05
-## 4 Joanna     0.35</code></pre>
-<p>Do rozwiązywania powyższych problemów bardzo pomocne mogą okazać się funkcje: base::replace oraz car::recode.</p>
-<p>Sciagawka z zabawy danymi w dplyr</p>
-<p><a href="http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf">http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf</a></p>
-<p>wiecej sciagawek</p>
-<p><a href="http://www.rstudio.com/resources/cheatsheets/">http://www.rstudio.com/resources/cheatsheets/</a></p>
+</div>
+<div id="co-dalej" class="slide section level1">
+<h1>Co dalej</h1>
+<p>Na tych kilku slajdach zaledwie zarysowaliśmy temat czyszceznia danych. Więcej informacji na temat poprawnia zbiorów danych znaleźć można na przykład w</p>
+<ul>
+<li>Rozdział 3.3 ,,Wstępne przetwarzanie danych’‘w książce ,,Przewodnik po pakiecie R’’, dostępnej pod adresem <a href="http://biecek.pl/R/">http://biecek.pl/R/</a></li>
+<li>W języku angielskim książka ,,An introduction to data cleaning with R’’ <a href="http://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf">http://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf</a></li>
+<li>W języku angielskim kurs na portalu Coursera ,,Getting and Cleaning Data’’ <a href="https://www.coursera.org/course/getdata">https://www.coursera.org/course/getdata</a></li>
+</ul>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

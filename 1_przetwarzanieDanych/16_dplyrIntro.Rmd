@@ -241,32 +241,15 @@ D$imie[D$imie=="Zosia"] <- "Zofia"
 D
 ```
 
-### Naprawa błędnych wpisów - liczb
-
-Ponieważ takich pomyłek/liczb może być więcej można zastosować funkcję: sub:
-```{r}
-D$częstość <- sub(",", ".", D$częstość, fixed = TRUE)
-D
-sapply(D,class)
-```
-
-```{r}
-D$imie <- as.factor(D$imie)
-D$częstość <- as.numeric(D$częstość)
-sapply(D,class)
-D
-```
-
-Do rozwiązywania powyższych problemów bardzo pomocne mogą okazać się funkcje: base::replace oraz car::recode.
+# Zadania
 
 
+# Co dalej
 
-Sciagawka z zabawy danymi w dplyr
+Na tych kilku slajdach zaledwie zarysowaliśmy temat czyszceznia danych. Więcej informacji na temat poprawnia zbiorów danych znaleźć można na przykład w pozycjach:
 
-http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf
-
-wiecej sciagawek
-
-http://www.rstudio.com/resources/cheatsheets/
++ Rozdział 3.3 ,,Wstępne przetwarzanie danych'' w książce ,,Przewodnik po pakiecie R'', dostępnej pod adresem http://biecek.pl/R/
++ W języku angielskim książka ,,An introduction to data cleaning with R'' http://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf
++ W języku angielskim kurs na portalu Coursera ,,Getting and Cleaning Data'' https://www.coursera.org/course/getdata
 
 
