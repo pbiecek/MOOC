@@ -17,11 +17,11 @@ output:
 
 Analizując dane spotkamy się z różnymi rodzajami zmiennych. W klasycznej statystyce najbardziej popularne są zmienne ilościowe, którym poświęcony jest ten odcinek.
 
-W tym odcinku nauczymy się
+W tym odcinku nauczymy się:
 
-- Jakie zmienne / cechy określa się terminem *cechy ilościowe*?
-- Jakie podstawowe operacje można wykonywać na cechach ilościowych?
-- Jak podsumowywać / opisywać cechy ilościowe?
+- jakie zmienne / cechy określa się terminem *cechy ilościowe*,
+- jakie podstawowe operacje można wykonywać na cechach ilościowych,
+- jak podsumowywać / opisywać cechy ilościowe.
 
 Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
 
@@ -29,18 +29,18 @@ Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zb
 
 # Co to znaczy: cecha ilościowa
 
-Najbliższe cztery odcinki przedstawią cztery podstawowe typy danych: ilościowe, jakościowe, napisy i wartości logiczne, nie wyczerpują one jeszcze listy wszystkich możliwych typów, można by wyróżnić jeszcze daty, dane cenzorowane oraz inne bardziej specjalistyczne typy, ale te cztery występują w 90% analiz więc na nich się skupimy.
+Najbliższe cztery odcinki przedstawią cztery podstawowe typy danych: ilościowe, jakościowe, napisy, wartości logiczne i daty. Nie wyczerpują one jeszcze listy wszystkich możliwych typów, można by wyróżnić jeszcze dane cenzorowane oraz inne bardziej specjalistyczne typy, ale te pięć występuje w 90% analiz, więc na nich się skupimy.
 
-Słowo typ, ma w tym przypadku to samo znaczenie co słowo rodzaj, możemy więc mówić o typach danych jak i o rodzajach danych. W analizie danych częściej stosowane jest słowo typ, więc będziemy się nim posługiwać.
+Słowo 'typ' ma w tym przypadku to samo znaczenie co słowo rodzaj, możemy więc mówić o typach danych jak i o rodzajach danych. W analizie danych częściej stosowane jest słowo ,,typ'', więc będziemy się nim posługiwać.
 
-Cechy ilościowe to takie, które opisują ilości. Przykładowo wysokość, długość, wagę, prędkość, powierzchnię, wiek itp.
-Często stosuje się też określenie cechy liczbowe ponieważ są wyrażane liczbami. Jednak nie zawsze to co jest opisane liczbą jest cechą ilościową. Przykładowo PESEL lub kod pocztowy opisać można liczbą ale nie reprezentują one ilości czy wielkości.
+Cechy ilościowe to takie, które opisują ilości - wysokość, długość, wagę, prędkość, powierzchnię, wiek itp.
+Często stosuje się też określenie cechy liczbowe ponieważ są one wyrażane za pomocą liczb. Jednak nie zawsze to co jest opisane liczbą jest cechą ilościową. Przykładowo PESEL lub kod pocztowy opisać można liczbą ale nie reprezentują one ilości czy wielkości.
 
-Cechy ilościowe mogą być fizyczne (masa, długość, prędkość) lub nie (iloraz inteligencji, wielkość długu publicznego, poziom procent zgadzania się z poglądami jakiejś partii). 
+Cechy ilościowe mogą być fizyczne (masa, długość, prędkość) lub nie (iloraz inteligencji, wielkość długu publicznego, procentowy poziom zgodności z poglądami jakiejś partii). 
 
 Mogą przyjmować bardzo wiele różnych wartości (np. wzrost w milimetrach) lub tylko kilka (np. liczba rąk).
 
-Ponieważ jednak są opisane liczbami, można na nich wykonywać kilka wspólnych operacji. Przyjrzyjmy się im.
+Ponieważ jednak są opisane za pomocą liczb, można na nich wykonywać kilka wspólnych operacji. Przyjrzyjmy się im.
 
 ---
 
@@ -55,7 +55,7 @@ library(SmarterPoland)
 head(koty_ptaki)
 ```
 
-Każdy wiersz opisuje jeden gatunek. Zmienne ilościowe opisane są liczbami, w tym przypadku nie ma niespodzianek, zmiennymi ilościowymi są: waga, długość, prędkość i żywotność.
+Każdy wiersz opisuje jeden gatunek. Zmienne ilościowe opisane są liczbami. W tym przypadku nie ma niespodzianek - zmiennymi ilościowymi są: waga, długość, prędkość i żywotność.
 
 ---
 
@@ -63,10 +63,9 @@ Każdy wiersz opisuje jeden gatunek. Zmienne ilościowe opisane są liczbami, w 
 
 Zbiór danych `koty_ptaki` składa się z 13 wierszy, więc każda zmienna ilościowa to 13 liczb. 
 
-Aby coś powiedzieć o każdej ze zmiennych wygodnie jest scharakteryzować je jedną lub kilkoma charakterystykami, takimi jak średnia czy mediana (mediana to wartość która pojawi się w środku gdyby te 13 liczb posortować).
+Aby coś powiedzieć o każdej ze zmiennych wygodnie jest scharakteryzować je jedną lub kilkoma wskaźnikami, takimi jak średnia czy mediana (mediana to wartość która pojawi się w środku gdyby te 13 liczb posortować).
 
-Jak sprawdzić ile wynosi średnia lub mediana dla wagi? 
-Aby policzyć średnią możemy wykorzystać funkcję `mean()` a aby wykorzystać medianę, funkcję `median()`.
+Jak sprawdzić ile wynosi średnia lub mediana dla wagi? Aby policzyć średnią możemy wykorzystać funkcję `mean()`, a do wyznaczenia mediany funkcję `median()`.
 
 ```{r}
 mean(koty_ptaki$waga)
@@ -74,9 +73,9 @@ median(koty_ptaki$waga)
 sort(koty_ptaki$waga)
 ```
 
-W ostatnim wierszu wyświetliliśmy wszystkie wagi po ich posortowaniu. Funkcja `sort()` domyślnie sortuje liczby rosnąco, możemy przy okazji sprawdzić, że rzeczywiście, środkową wartością jest 60.
+W ostatnim wierszu wyświetliliśmy wszystkie wagi po ich posortowaniu. Funkcja `sort()` domyślnie sortuje liczby rosnąco. Możemy zatem przy okazji sprawdzić, że rzeczywiście środkową wartością jest 60.
 
-Przy okazji warto zauważyć że średnia i mediana znacznie się różnią, o prawie 20 kilogramów. Jest to wynikiem tego, że najmniejsze i największe wartości różnią się od siebie o ponad dwa rzędy wielkości, w takich sytuacjach średnia często jest odległa od mediany.
+Przy okazji warto zauważyć że średnia i mediana znacznie się różnią - o prawie 20 kilogramów. Jest to wynikiem tego, że najmniejsze i największe wartości różnią się od siebie o ponad dwa rzędy wielkości. W takich sytuacjach średnia często jest odległa od mediany.
 
 ---
 
@@ -106,7 +105,7 @@ Przyjrzyjmy się takim cechom jak _Cena.w.PLN_ lub _Przebieg.w.km_.  Cechy te s�
 Pierwsza z nich przedstawia _ilość_ pieniędzy, za którą sprzedawca chce sprzedać samochód, druga opisuje _ilość_ kilometrów, którą przejechał wystawiony na aukcji samochód. 
 
 Na zmiennych ilościowych wykonać możemy kilka operacji. 
-Używając funkcji `mean()` możemy policzyć średnią cenę wystawionych aut a funkcją `median()` policzymy medianę, podobnie jak dla poprzedniego zbioru danych.
+Używając funkcji `mean()` możemy policzyć średnią cenę wystawionych aut, a funkcją `median()` policzymy medianę, podobnie jak dla poprzedniego zbioru danych.
 
 ```{r, warning=FALSE}
 mean(auta2012$Cena.w.PLN)
@@ -121,7 +120,7 @@ Jak to możliwe? Widoczne jest kilka bardzo drogich aut, które przesuwają śre
 
 # Statystyki opisowe
 
-Wczytując dane ze zbioru, którego sami nie tworzyliśmy, często chcemy zobaczyć skrajne wartości dla poszczególnych zmiennych. Skrajne czyli największe i najmniejsze.
+Wczytując dane ze zbioru, którego sami nie tworzyliśmy, często chcemy zobaczyć skrajne wartości dla poszczególnych zmiennych. Skrajne czyli najmniejsze i największe.
 
 Używając funkcji `min()` i `max()` możemy wyznaczyć minimalną i maksymalną cenę w tym zbiorze danych.
 
@@ -130,9 +129,9 @@ min(auta2012$Cena.w.PLN)
 max(auta2012$Cena.w.PLN)
 ```
 
-Najniższa cena to 400 złotych, w to jestem w stanie uwierzyć tym bardziej, że część tych cen dotyczy aut uszkodzonych.
+Najniższa cena to 400 złotych, w co jestem w stanie uwierzyć tym bardziej, że część tych cen dotyczy aut uszkodzonych.
 
-Ale najwyższa to 11 milionów 111 tysięcy 111. Być może ktoś wpisał taką cenę, ale to chyba bardziej żart niż rzeczywista wartość auta.
+Ale najwyższa to już 11 milionów 111 tysięcy 111. Być może ktoś wpisał taką cenę, ale to chyba bardziej żart niż rzeczywista wartość auta.
 
 Obie te wartości, minimum i maksimum, jako dwuelementowy wektor zwraca funkcja `range()`.
 
@@ -150,7 +149,7 @@ Pięć z tych charakterystyk, tj. minimum, 1., 2., 3. kwartyl i maksimum to tak 
 
 + Jedna czwarta samochodów ma cenę niższą od 1. kwartyla.
 + Jedna czwarta samochodów ma cenę wyższą od 1. kwartyla ale niższą od mediany (2. kwartyla).
-+ Jedna czwarta samochodów ma cenę wyższą od mediany (2. kwartyla) ale niższą od 2. kwartyla.
++ Jedna czwarta samochodów ma cenę wyższą od mediany (2. kwartyla) ale niższą od 3. kwartyla.
 + Jedna czwarta samochodów ma cenę wyższą od 3. kwartyla.
 
 Opis cechy ilościowej za pomocą tych sześciu liczb bardzo wiele o danej cesze mówi. Przyjrzyjmy się tym charakterystykom na przykładzie cen aut 
@@ -162,9 +161,9 @@ summary(auta2012$Cena.w.PLN)
 + Minimalna oferta jest na 400 pln.
 + Jedna czwarta ogłoszeń oferuje samochód w cenie niższej niż 10 900 (a ponieważ wszystkich aut jest ponad 200 tysięcy więc szybko możemy policzyć, że ponad 50 tysięcy ofert znajduje się w tym przedziale).
 + Połowa ogłoszeń oferuje samochód w cenie niższej niż 19 900.
-+ Trzy czwarte ogłoszeń oferuje samochód w cenie niższej niż 37 470, tym samym jedna czwarta ofert jest na kwotę wyższa.
++ Trzy czwarte ogłoszeń oferuje samochód w cenie niższej niż 37 470, tym samym jedna czwarta ofert jest na kwotę wyższą.
 + Maksymalna cena ofertowa to wspomniane ponad 11 milionów.
-+ Również i w tym przykładzie, średnia cena (35 760) jest znacznie, prawie dwukrotnie, wyższa od ceny środkowej. Dzieje się tak dlatego, że większość aut oferowanych jest w niższych cenach, ale niewielka część bardzo drogich aut znacznie podnosi wartość średniej. Jest to jeden z argumentów przeciwko używaniu średniej, która jest podatna na skrajne obserwacje.
++ Również i w tym przykładzie średnia cena (35 760) jest znacznie - prawie dwukrotnie - wyższa od ceny środkowej. Dzieje się tak dlatego, że większość aut oferowanych jest w niższych cenach, ale niewielka część bardzo drogich aut znacznie podnosi wartość średniej. Jest to jeden z argumentów przeciwko używaniu średniej, która jest podatna na skrajne obserwacje.
 
 ---
 

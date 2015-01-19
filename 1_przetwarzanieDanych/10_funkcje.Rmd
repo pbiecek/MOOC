@@ -15,13 +15,13 @@ output:
 
 # O czym jest ten odcinek
 
-Jedną z ważniejszych cech języków programowania jest możliwość wykorzystywania rozwiązań, które my lub ktoś inny zbudował w przeszłości. Jest to możliwe dzięki jeżeli takie dobre rozwiązania zamienimy w funkcje, czyli bloki kodu które łatwo ponownie wykorzystać.
+Jedną z ważniejszych cech języków programowania jest możliwość wykorzystywania rozwiązań, które my lub ktoś inny zbudował w przeszłości. Jest to możliwe jeżeli takie dobre rozwiązania zamienimy w funkcje, czyli bloki kodu które łatwo ponownie wykorzystać.
 
-W tym odcinku nauczymy się
+W tym odcinku nauczymy się:
 
-- Jak wywoływać funkcje?
-- Jak tworzyć własne funkcje?
-- Jak wywoływać funkcje z funkcji?
+- jak wywoływać funkcje,
+- jak tworzyć własne funkcje,
+- jak wywoływać funkcje z funkcji.
 
 Do ilustracji wykorzystamy zbiór danych to `koty_ptaki` dostępny w pakiecie `SmarterPoland`.
 
@@ -36,11 +36,11 @@ head(koty_ptaki, 3)
 
 Jest wiele powodów, dla których warto korzystać z funkcji. Trzy najistotniejsze to.
 
-* Funkcje pozwalają na łatwe, ponowne użycie poprzednio opracowanych fragmentów kodu. Dzięki temu, możemy wykorzystywać rozwiązania, które już raz zbudowaliśmy i szybciej tworzyć kolejne. Możemy wykorzystywać rozwiązania / funkcje innych osób i dzielić się z nimi własnymi funkcjami.
+* Funkcje pozwalają na łatwe, ponowne użycie poprzednio opracowanych fragmentów kodu. Dzięki temu możemy wykorzystywać rozwiązania, które już raz zbudowaliśmy i szybciej tworzyć kolejne. Możemy wykorzystywać rozwiązania / funkcje innych osób i dzielić się z nimi własnymi funkcjami.
 
-* Funkcje pozwalają na logiczny podział programu, na fragmenty, które łatwiej opisać i udokumentować. Dzięki temu łatwiej zrozumieć co się dzieje w programie, gdy można poznawać poszczególne fragmenty niezależnie.
+* Funkcje pozwalają na logiczny podział programu, na fragmenty, które łatwiej opisać i udokumentować. Łatwiej zrozumieć co się dzieje w programie, kiedy można poznawać poszczególne fragmenty niezależnie.
 
-* Funkcje pozwalają skrócić długość programu. Podobne bloki kodu można zastąpić wywołaniem funkcji, przez co będzie mniej powtarzających się podobnych bloków. A im krótszy program tył łatwiej go napisać, łatwiej go zrozumieć i łatwiej znaleźć błąd.
+* Funkcje pozwalają skrócić długość programu. Podobne bloki kodu można zastąpić wywołaniem funkcji, przez co będzie mniej powtarzających się podobnych bloków. A im krótszy program, tym łatwiej go napisać, łatwiej go zrozumieć i łatwiej znaleźć ewentualne błędy.
 
 ---
 
@@ -68,7 +68,7 @@ for (i in 1:nrow(koty_ptaki)) {
 
 # Funkcje
 
-Do tworzenia funkcji służy słowo `function`. Dla każdej funkcji należy określić listę jej argumentów oraz tak zwane ciało funkcji, czyli listę instrukcji, która funkcja wykonuje.
+Do tworzenia funkcji służy słowo `function`. Dla każdej funkcji należy określić listę jej argumentów oraz tak zwane ciało funkcji, czyli listę instrukcji, które funkcja wykonuje.
 
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
 function(argumenty_rozdzielone_przecinkiem) {
@@ -76,7 +76,7 @@ function(argumenty_rozdzielone_przecinkiem) {
 }
 ```
 
-gdzie `argumenty_rozdzielone_przecinkiem` to lista rozdzielonych przecinkiem argumentów (może być też pusta lub jednoelementowa), a `wyrażenie` to instrukcje, które mają być wykonane po wywołaniu funkcji.
+gdzie `argumenty_rozdzielone_przecinkiem` to lista rozdzielonych przecinkiem argumentów (może być też pusta lub jednoelementowa), a `wyrażenie` to instrukcje, które mają być wykonane w ramach wywołania funkcji.
 
 Wynikiem powyższej instrukcji jest funkcja, którą należy przypisać do do zmiennej, by móc jej później używać. Dlatego najczęstsze deklaracje mają również przypisanie funkcji do zmiennej, tak jak w deklaracji poniżej. 
 
@@ -86,7 +86,7 @@ nazwa_funkcji <- function(argumenty_rozdzielone_przecinkiem) {
 }
 ```
 
-Warto jednak pamiętać, że nazwa funkcji nie jest obowiązkowa i jak się okaże często będziemy używać funkcje anonimowe, czyli bez nazwy.
+Warto jednak pamiętać, że nazwa funkcji nie jest obowiązkowa i - jak się okaże - często będziemy używać funkcji anonimowych, czyli funkcji bez nazwy.
 
 ---
 
@@ -113,7 +113,7 @@ rysuj_kropki(n_kropek = 20)
 
 Jeżeli podajemy argumenty zgodnie z domyślną kolejnością, to nie musimy wskazywać ich nazw. Dotyczy to zarówno funkcji, które sami tworzymy, jak i *fabrycznych* funkcji. 
 
-W poniższym przykładzie podajemy wartość dla argumentu i ponieważ nie ma nazwy argumentu wartość ta przypisana będzie do pierwszego (w tym przypadku jedynego) argumentu.
+W poniższym przykładzie podajemy wartość dla argumentu, a ponieważ nie ma nazwy argumentu, wartość ta przypisana będzie do pierwszego (w tym przypadku jedynego) argumentu.
 
 ```{r, message=FALSE, warning=FALSE}
 rysuj_kropki(20)
@@ -135,7 +135,7 @@ rysuj_kropki <- function(n_kropek = 20) {
 }
 ```
 
-Dzięki wartościom domyślnym, jeżeli nie podamy wartości argumentu, to zostanie on zastąpiony domyślną wartością. Bardzo wygodne w sytuacji gdy funkcja ma wiele argumentów.
+Dzięki wartościom domyślnym, jeżeli nie podamy wartości argumentu, to zostanie on zastąpiony domyślną wartością. Jest to bardzo wygodne w sytuacji, gdy funkcja ma wiele argumentów.
 
 ```{r, message=FALSE, warning=FALSE}
 rysuj_kropki() 
@@ -166,7 +166,7 @@ Dlaczego tak jest?
 Otóż dlatego, że w pętli `1:n_kropek`, która znajduje się w deklaracji funkcji wektor `1:0` jest w rzeczywistości dwuelementowy.
 
 ```{r, message=FALSE, warning=FALSE}
-0:1
+1:0
 ```
 
 Jeżeli więc chcemy by dla `n_kropek = 0` funkcja działa poprawnie musimy inaczej obsłużyć tę sytuację.
@@ -177,9 +177,9 @@ Jak zaradzić temu problemowi?
 
 # Funkcje - obsługa różnych scenariuszy
 
-Ten problem można obsłużyć na kilka sposobów, przedstawimy taki, który wymaga użycia instrukcji `if()`. 
+Ten problem można obsłużyć na kilka sposobów. Przedstawimy taki, który wymaga użycia instrukcji `if()`. 
 
-Sprawdzimy, czy `n_kropek` jest równe lub mniejsze niż zero (jeżeli tak to nic nie rysuj), czy jest większe (rysuj kropki).
+Sprawdzimy, czy `n_kropek` jest równe lub mniejsze niż zero (jeżeli tak to nic nie rysuj), czy jest większe od zera (rysuj kropki).
 
 ```{r, message=FALSE, warning=FALSE}
 rysuj_kropki <- function(n_kropek = 20) {
@@ -211,9 +211,9 @@ rysuj_kropki(30)
 
 # Funkcje - więcej argumentów
 
-Funkcje mogą mieć więcej argumentów i każdy z nich może mieć lub nie mieć wartość domyślną. 
+Funkcje mogą mieć więcej argumentów i każdy z nich może mieć (lub nie) wartość domyślną. 
 
-Jeżeli wywołując funkcję podajemy argumenty w kolejności innej niż domyślna musimy podać nazwę argumentu, który określamy.
+Jeżeli wywołując funkcję podajemy argumenty w kolejności innej niż domyślna, musimy podać nazwę argumentu, który określamy.
 
 Aby to zilustrować dodajmy argument opisujący znak, który ma być rysowany. 
 
@@ -249,9 +249,9 @@ rysuj_kropki(znak="X", n_kropek = 30)
 
 # Funkcje - funkcja w funkcji
 
-Tworząc nowe funkcje możemy używać w nich innych funkcji, też tych które wcześniej zdefiniowaliśmy.
+Tworząc nowe funkcje możemy używać w nich innych funkcji, także tych które wcześniej zdefiniowaliśmy.
 
-Przykładowo poniżej zbudujmy funkcję rysującą wykres kropkowy dla wektora napisów i wektora wartości.
+Przykładowo, poniżej zbudujemy funkcję rysującą wykres kropkowy dla wektora napisów i wektora wartości.
 
 ```{r, message=FALSE, warning=FALSE}
 rysuj_wykres_kropkowy<- function(nazwy, wartosci) {
@@ -269,7 +269,7 @@ I przykładowe wywołanie.
 rysuj_wykres_kropkowy(koty_ptaki$gatunek, koty_ptaki$predkosc/5)
 ```
 
-Warto utrzymywać każdą z funkcji o niewielkiej długości, by łatwo było opisać i zapamiętać co ta funkcja robi.
+Warto utrzymywać każdą z funkcji o niewielkiej długości, aby łatwo było opisać i zapamiętać co ta funkcja robi.
 Z tego też powodu warto funkcje dobrze nazywać i dokumentować. 
 
 ---
@@ -278,8 +278,7 @@ Z tego też powodu warto funkcje dobrze nazywać i dokumentować.
 
 W funkcji z poprzedniego slajdu założyliśmy, że oba wektory są równej długości.
 
-A co jeżeli nie są?
-Może użytkownik nie wie, że powinny być.
+A co jeżeli nie są? Może użytkownik nie wie, że powinny być?
 
 Takie założenia warto sprawdzać, np. używając instrukcji `if()`. Jeżeli założenie jest ważne i bez jego spełnienia nie można kontynuować działania funkcji, to możemy przerwać działanie funkcji i zwrócić błąd poleceniem `stop()`.
 
@@ -345,9 +344,9 @@ Ale te funkcje, które powyżej stworzyliśmy wypisywały wyniki na ekranie.
 
 Domyślnie wynikiem funkcji jest wynik ostatniego wyrażenia w funkcji. Innym sposobem na wskazanie wyniku jest użycie funkcji `return()`, która przerywa działanie funkcji i jako wynik zwraca wartość argumentu funkcji `return()`.
 
-Zilustrujmy to na poniższym przykładzie. Funkcja `suma_n_liczb_losowych()` losuje `n` losowych liczb i jako wynik zwraca ich sumę. 
+Zilustrujmy to na poniższym przykładzie. Funkcja `suma_n_liczb_losowych()` losuje `n` liczb i jako wynik zwraca ich sumę. 
 
-Jeżęli jednak jako argument podana jest wartość mniejsza niż 1, to działanie funkcji jest przerywane i jako wynik zwracana jest wartość 0.
+Jeżeli jednak jako argument podana jest wartość mniejsza niż 1, to działanie funkcji jest przerywane i jako wynik zwracana jest wartość 0.
 
 ```{r, message=FALSE, warning=FALSE}
 suma_n_liczb_losowych <- function(n = 10) {
@@ -483,8 +482,8 @@ suma_n_liczb_losowych(-1)
 
 # Zadania
 
-* Napisz funkcję, która otrzymuje argument liczbowy a następnie wypisuje na ekran wartości od argumentu do jeden.
-* Napisz funkcję, przyjmuje argument liczbowy `n` a następnie rysuje kwadrat o boku `n` wypełniony znakami `X`.
-* Napisz funkcję, przyjmuje argument liczbowy `n` a następnie rysuje kwadrat o boku `n` ze znakami `X` na brzegu i pusty w środku.
+* Napisz funkcję, która otrzymuje argument liczbowy, a następnie wypisuje na ekran wartości od argumentu do jeden.
+* Napisz funkcję, przyjmuje argument liczbowy `n`, a następnie rysuje kwadrat o boku `n` wypełniony znakami `X`.
+* Napisz funkcję, przyjmuje argument liczbowy `n`, a następnie rysuje kwadrat o boku `n` ze znakami `X` na brzegu i pusty w środku.
 
 Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html

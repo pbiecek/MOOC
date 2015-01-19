@@ -15,16 +15,16 @@ output:
 
 # O czym jest ten odcinek
 
-Mnogość dostępnych algorytmów do analizy danych stawia nas często przed koniecznością wyboru. Czy użyć metody A czy metody B, każda jest lepsza w innej sytuacji. Najlepszym rozwiązaniem jest często warunkowe użycie jednej lub drugiej metody w zależności od tego jak wyglądają nasze dane.
+Mnogość dostępnych algorytmów do analizy danych stawia nas często przed koniecznością wyboru. Czy użyć metody A, czy metody B? Każda z nich może być lepsza w innej sytuacji. Najlepszym rozwiązaniem jest często warunkowe użycie jednej lub drugiej metody w zależności od tego jak wyglądają nasze dane.
 
 Do warunkowego wykonania jednej lub drugiej grupy instrukcji służą instrukcje warunkowe.
 
-W tym odcinku nauczymy się
+W tym odcinku nauczymy się:
 
-- Jak korzystać z instrukcji warunkowych?
-- Jak korzystać z instrukcji warunkowych w pętli?
+- jak korzystać z instrukcji warunkowych,
+- jak korzystać z instrukcji warunkowych w pętli.
 
-Do ilustracji wykorzystamy zbiór danych to `koty_ptaki` dostępny w pakiecie `SmarterPoland`.
+Do ilustracji wykorzystamy zbiór danych `koty_ptaki` dostępny w pakiecie `SmarterPoland`.
 
 ```{r, message=FALSE, warning=FALSE}
 library(SmarterPoland)
@@ -35,13 +35,13 @@ head(koty_ptaki, 3)
 
 # Instrukcje warunkowe
 
-Przygotowując program, często jesteśmy w sytuacji w której dalsza akcja zależy od pewnej wartości, dla nas nieznane lub potencjalnie zmieniającej się.
+Przygotowując program często jesteśmy w sytuacji, w której dalsza akcja zależy od pewnej wartości, dla nas nieznanej lub potencjalnie zmieniającej się.
 
-Przykładowo, jeżeli losujemy liczbę losową z przedziału 0-1 i w zależności co się wylosowało chcemy napisać `Orzeł` lub `Reszka`, możemy nie wiedzieć jaka wartość się wylosuje.
+Przykładowo, jeżeli losujemy liczbę losową z przedziału 0-1 i w zależności od tego jaka liczba została wylosowana chcemy napisać `Orzeł` lub `Reszka`, w czasie pisania kodu nie wiemy jaka wartość się wylosuje.
 
 Używając instrukcji warunkowych możemy opisać alternatywne scenariusze, które będą wykonane w zależności od określonego warunku.
 
-Poniższy kod wypisze na ekranie napis `Orzeł` jeżeli wylosuje się liczba mniejsza od 0.5 oraz napis `Reszka` jeżeli wylosuje się liczba większa równa 0.5.
+Poniższy kod wypisze na ekranie napis `Orzeł`, jeżeli wylosuje się liczba mniejsza od 0.5 oraz napis `Reszka`, jeżeli wylosuje się liczba większa lub równa 0.5.
 
 ```{r}
 liczbaLosowa <- runif(n = 1)
@@ -57,7 +57,7 @@ if (liczbaLosowa < 0.5) {
 
 # Instrukcje warunkowe
 
-Przygotowując algorytm przetwarzania danych, często potrzebujemy rozważyć różne możliwe sytuacje.
+Przygotowując algorytm przetwarzania danych często potrzebujemy rozważyć różne możliwe sytuacje.
 Aby zapisać warianty wykonywania w zależności od stanu określonych zmiennych, można wykorzystać instrukcje warunkowe.
 
 Najczęściej wykorzystywaną instrukcją warunkową jest `if else`, która w języku R występuje w trzech odmianach.
@@ -71,15 +71,16 @@ if (warunek)
   wyrażenie1
 
 if (warunek) 
-  wyrażenie1  else wyrażenie2
+  wyrażenie1 
+else 
+  wyrażenie2
 
 ifelse (warunek_dla_wektora, wyrażenie1, wyrażenie2) 
 ```
 
 Jeżeli wyrażenie obejmuje więcej niż jedną instrukcje, należy je otoczyć blokiem `{}`.
 
-Nawet gdy wyrażenie jest jedną instrukcją, to dodawanie nawiasów klamrowych `{}` jest popularną praktyką,
-powoduje, że kod jest czytelniejszy. 
+Nawet gdy wyrażenie jest jedną instrukcją, to dodawanie nawiasów klamrowych `{}` jest popularną praktyką, powoduje bowiem, że kod jest czytelniejszy. 
 
 ```{r, eval=FALSE}
 if (warunek) {
@@ -128,7 +129,7 @@ if (koty_ptaki[i,"druzyna"] == "Kot") {
 
 # Instrukcje warunkowe
 
-Jeżeli pracujemy na wektorach, wygodnym rozwiązaniem jest skorzystaniem z instrukcji wektorowej `ifelse()`.
+Jeżeli pracujemy na wektorach, wygodnym rozwiązaniem jest skorzystanie z instrukcji wektorowej `ifelse()`.
 
 Jej pierwszym argumentem może być wektor. Przykładowo instrukcja `koty_ptaki[,"druzyna"] == "Kot"` tworzy wektor wartości logicznych.
 
@@ -150,7 +151,7 @@ ifelse(koty_ptaki[,"druzyna"] == "Kot",
 
 Instrukcje warunkowe są często wykorzystywane wewnątrz pętli. W sytuacji gdy chcemy powtórzyć pewną operację kilkukrotnie, ale przebieg danej operacji może mieć kilka wariantów / scenariuszy.
 
-Zilustrujemy tą sytuację w poniższym przykładzie.
+Zilustrujemy tę sytuację w poniższym przykładzie.
 
 W zależności od tego czy określony gatunek jest kotem czy ptakiem wyświetlimy inną formułę.
 
@@ -173,24 +174,24 @@ for (i in 1:nrow(koty_ptaki)) {
 
 Innym częstym zastosowaniem instrukcji warunkowych jest zmiana wartości zmiennej na inną wartość w zależności od tego jaki wystąpił warunek.
 
-W przykładzie poniżej w pętli wykonujemy instrukcję warunkową która w jednej sytuacji zmienia wartość zmiennej `liczbaKotów` a w innej zmiennej `liczbaPtaków`.
+W przykładzie poniżej, w pętli wykonujemy instrukcję warunkową, która w jednej sytuacji zmienia wartość zmiennej `liczbaKotów`, a w innej zmiennej `liczbaPtaków`.
 
 ```{r, message=FALSE, warning=FALSE}
 # inicjujemy zmienne
-liczbaKotów  <- 0
-liczbaPtaków <- 0
+liczbaKotow  <- 0
+liczbaPtakow <- 0
 # w pętli będziemy zmieniać wartość zmiennych w zależności od tego 
 # czy kolejny wiersz opisuje koty czy ptaki
 for (i in 1:nrow(koty_ptaki)) {
   if (koty_ptaki[i,"druzyna"] == "Kot") {
-    liczbaKotów  <- liczbaKotów + 1
+    liczbaKotow  <- liczbaKotow + 1
   } else {
-    liczbaPtaków <- liczbaPtaków + 1
+    liczbaPtakow <- liczbaPtakow + 1
   }
 }
 # zliczamy ile było kotów i ptaków
-liczbaKotów 
-liczbaPtaków
+liczbaKotow 
+liczbaPtakow
 ```
 
 ---
@@ -256,18 +257,18 @@ for (i in 1:nrow(koty_ptaki)) {
 #    ale również zmieniać wartości zmiennych.
 # W poniższym przykładzie w zależności od tego jaki wiersz jest odczytywany 
 #    inaczej zmieniamy wartości liczników
-liczbaKotów  <- 0
-liczbaPtaków <- 0
+liczbaKotow  <- 0
+liczbaPtakow <- 0
 for (i in 1:nrow(koty_ptaki)) {
   if (koty_ptaki[i,"druzyna"] == "Kot") {
-    liczbaKotów  <- liczbaKotów + 1
+    liczbaKotow  <- liczbaKotow + 1
   } else {
-    liczbaPtaków <- liczbaPtaków + 1
+    liczbaPtakow <- liczbaPtakow + 1
   }
 }
 # zliczamy ile było kotów i ptaków
-liczbaKotów 
-liczbaPtaków
+liczbaKotow 
+liczbaPtakow
 ```
 
 ---
@@ -278,6 +279,6 @@ liczbaPtaków
 
 * Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze `lekkie`, cięższych niż 100kg wypisze `ciężkie` a w przedziale 1-100kg wypisze `średnie`. Taki efekt można uzyskać stosując dwie instrukcje `if()` lub korzystając z funkcji `switch()`.
 
-* Napisz pętlę i instrukcję warunkową sumującą łączną masę wszystkich ptaków i osobno kotów.
+* Napisz pętlę i instrukcję warunkową sumującą łączne masy wszystkich ptaków i kotów osobno.
 
 Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
