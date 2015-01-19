@@ -95,20 +95,70 @@ DF</code></pre>
 <span class="kw">colnames</span>(DF)[<span class="dv">4</span>]</code></pre>
 <pre><code>## [1] &quot;oczo&quot;</code></pre>
 <p>Funkcji <code>colnames()</code> można również użyć by zmienić nazwy kolumn. Poniższe dwie instrukcje wywołają funkcję <code>colnames&lt;-()</code>, która zmienia nazwy kolumn. Można jednocześnie zmeinić wszystkie lub tylko wybrane elementy wektora nazw kolumn.</p>
+<p>Obie poniższe instrukcje poprawią nazwę ostatniej kolumny.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(DF) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;imie&quot;</span>, <span class="st">&quot;wiek&quot;</span>, <span class="st">&quot;numer&quot;</span>, <span class="st">&quot;oczy&quot;</span>)
 <span class="kw">colnames</span>(DF)[<span class="dv">4</span>] &lt;-<span class="st"> &quot;oczy&quot;</span></code></pre>
+<p>W wyniku mamy więc zbiór danych</p>
+<pre class="sourceCode r"><code class="sourceCode r">DF</code></pre>
+<pre><code>##     imie wiek numer             oczy
+## 1   Maja   40     1       niebieskie
+## 2   Anna 12,5     2 jasno-niebieskie
+## 3  Zosia   25    NA           ciemne
+## 4 Joanna 16.6     4       niebieskie</code></pre>
 </div>
 <div id="zamiana-przecinka-na-kropke" class="slide section level1">
 <h1>Zamiana przecinka na kropkę</h1>
+<p>Jeżeli pracujemy na danych wprowadzanych przez człowieka to często zdarza się, że raz wpisuje on za kropkę dziesiętną <code>.</code> a raz <code>,</code>. Jeszcze więcej problemów tego typu występuje, gdy dane wprowadza kilka osób.</p>
+<pre class="sourceCode r"><code class="sourceCode r">DF$wiek</code></pre>
+<pre><code>## [1] &quot;40&quot;   &quot;12,5&quot; &quot;25&quot;   &quot;16.6&quot;</code></pre>
+<p>Zamienimy przecinek na kropkę i zamienimy napis na liczbę.</p>
+<p>Do podmiany znaków użyjemy funkcji <code>gsub()</code>, (opisanej także w odcinku 14 tego sezonu). Nazwy argumentów <code>pattern</code> i <code>replacement</code> można by pominąć, ponieważ są w domyślnej kolejności, ale je tutaj wpisujemy dla czytelności.</p>
+<p>Wynik przekazujemy do funkcji <code>as.numeric()</code>, która zamienia napisy na liczby. Ostateczine wynik przypisujemy do kolumny <code>wiek</code>.</p>
+<p>Dwie linie opatrzyliśmy nawiasami <code>()</code> aby wynik przypisania został wyświetlony na ekranie.</p>
+<pre class="sourceCode r"><code class="sourceCode r">(tmp &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;.&quot;</span>, DF$wiek))</code></pre>
+<pre><code>## [1] &quot;40&quot;   &quot;12.5&quot; &quot;25&quot;   &quot;16.6&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">(DF$wiek &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(tmp))</code></pre>
+<pre><code>## [1] 40.0 12.5 25.0 16.6</code></pre>
+<p>W wyniku mamy więc poprawiony zbiór danych</p>
+<pre class="sourceCode r"><code class="sourceCode r">DF</code></pre>
+<pre><code>##     imie wiek numer             oczy
+## 1   Maja 40.0     1       niebieskie
+## 2   Anna 12.5     2 jasno-niebieskie
+## 3  Zosia 25.0    NA           ciemne
+## 4 Joanna 16.6     4       niebieskie</code></pre>
+</div>
+<div id="normalizacja-kolumny-lub-wiersza" class="slide section level1">
+<h1>Normalizacja kolumny lub wiersza</h1>
+<p>W analizie danych często spotykamy się z sytuacją, gdy dane w kolumnie chcemy unormować.</p>
+<p>Unormować, czyli wycrentować, a więc usunąć z nich wartość średnią (tak by średnia była równa 0) i przeskalować, a więc podzielić by odchylenie standardowe było równe 1.</p>
+<p>Do normalizacji można wykorzystać funkcję <code>scale()</code>. Domyślnie centruje i skaluje dane, ale ustawiając dodatkowe argumenty możemy wyłącznie wycentrować lub przeskalować dane.</p>
+<p>Wynik funkcji <code>scale()</code> możemy przypisać do kolumny zbioru danych.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tylko centrowanie: scale(DF$wiek, center = TRUE, scale = FALSE)</span>
+<span class="co"># tylko skalowanie:  scale(DF$wiek, center = FALSE, scale = TRUE)</span>
+<span class="co"># normalizacja</span>
+(DF$wiekNorm &lt;-<span class="st"> </span><span class="kw">scale</span>(DF$wiek))</code></pre>
+<pre><code>##            [,1]
+## [1,]  1.3555998
+## [2,] -0.9071616
+## [3,]  0.1213663
+## [4,] -0.5698045
+## attr(,&quot;scaled:center&quot;)
+## [1] 23.525
+## attr(,&quot;scaled:scale&quot;)
+## [1] 12.15329</code></pre>
+<p>Otrzymujemy nowy, poszerzony zbiór danych</p>
+<pre class="sourceCode r"><code class="sourceCode r">DF</code></pre>
+<pre><code>##     imie wiek numer             oczy   wiekNorm
+## 1   Maja 40.0     1       niebieskie  1.3555998
+## 2   Anna 12.5     2 jasno-niebieskie -0.9071616
+## 3  Zosia 25.0    NA           ciemne  0.1213663
+## 4 Joanna 16.6     4       niebieskie -0.5698045</code></pre>
 </div>
 <div id="edycja-w-caej-kolumnie" class="slide section level1">
 <h1>Edycja w całej kolumnie</h1>
 </div>
 <div id="usuwanie-lub-zastepowanie-brakujacych-danych" class="slide section level1">
 <h1>Usuwanie lub zastępowanie brakujących danych</h1>
-</div>
-<div id="normalizacja-kolumny-lub-wiersza" class="slide section level1">
-<h1>Normalizacja kolumny lub wiersza</h1>
 </div>
 <div id="zmiana-nazw-czynnikow-w-zmienej-jakosciowej-redukcja-liczby-poziomow" class="slide section level1">
 <h1>Zmiana nazw czynników w zmienej jakościowej / redukcja liczby poziomów</h1>

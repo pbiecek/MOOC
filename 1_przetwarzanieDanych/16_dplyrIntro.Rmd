@@ -81,13 +81,53 @@ DF
 
 # Zamiana przecinka na kropkę
 
+Jeżeli pracujemy na danych wprowadzanych przez człowieka to często zdarza się, że raz wpisuje on za kropkę dziesiętną `.` a raz `,`. Jeszcze więcej problemów tego typu występuje, gdy dane wprowadza kilka osób.
 
 ```{r}
-colnames(DF)
-# czwarty element wektora
-colnames(DF)[4]
+DF$wiek
 ```
 
+Zamienimy przecinek na kropkę i zamienimy napis na liczbę. 
+
+Do podmiany znaków użyjemy funkcji `gsub()`, (opisanej także w odcinku 14 tego sezonu). Nazwy argumentów `pattern` i `replacement` można by pominąć, ponieważ są w domyślnej kolejności, ale je tutaj wpisujemy dla czytelności.
+
+Wynik przekazujemy do funkcji `as.numeric()`, która zamienia napisy na liczby. Ostateczine wynik przypisujemy do kolumny `wiek`.
+
+Dwie linie opatrzyliśmy nawiasami `()` aby wynik przypisania został wyświetlony na ekranie.
+
+```{r}
+(tmp <- gsub(pattern = ",", replacement = ".", DF$wiek))
+(DF$wiek <- as.numeric(tmp))
+```
+
+W wyniku mamy więc poprawiony zbiór danych
+
+```{r}
+DF
+```
+
+# Normalizacja kolumny lub wiersza
+
+W analizie danych często spotykamy się z sytuacją, gdy dane w kolumnie chcemy unormować. 
+
+Unormować, czyli wycrentować, a więc usunąć z nich wartość średnią (tak by średnia była równa 0) i przeskalować, a więc podzielić by odchylenie standardowe było równe 1. 
+
+Do normalizacji można wykorzystać funkcję `scale()`. Domyślnie centruje i skaluje dane, ale ustawiając dodatkowe argumenty możemy wyłącznie wycentrować lub przeskalować dane.
+
+Wynik funkcji `scale()` możemy przypisać do kolumny zbioru danych. 
+
+```{r}
+# tylko centrowanie: scale(DF$wiek, center = TRUE, scale = FALSE)
+# tylko skalowanie:  scale(DF$wiek, center = FALSE, scale = TRUE)
+# normalizacja
+(DF$wiekNorm <- scale(DF$wiek))
+```
+
+Otrzymujemy nowy, poszerzony zbiór danych
+
+```{r}
+DF
+```
 
 # Edycja w całej kolumnie
 
@@ -95,7 +135,6 @@ colnames(DF)[4]
 # Usuwanie lub zastępowanie brakujących danych
 
 
-# Normalizacja kolumny lub wiersza
 
 
 # Zmiana nazw czynników w zmienej jakościowej / redukcja liczby poziomów
