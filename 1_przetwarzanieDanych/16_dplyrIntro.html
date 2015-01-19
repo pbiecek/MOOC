@@ -67,17 +67,17 @@ pogRomcy danych
 <p>Na potrzeby ćwiczeń z czyszczenia danych stworzymy sztuczną ramkę danych z kilkoma celowo dodanymi błędami.</p>
 <p>Ramkę danych stworzymy funkcją <code>data.frame()</code>, kolejne argumenty to wektory, które zostaną zamienione na kolejne kolumny w ramce danych. Ostatni argument <code>stringsAsFactors = FALSE</code> określa, że napisy mają NIE być zamieniane na zmienne jakościowe (domyślne dochodzi do zamiany).</p>
 <pre class="sourceCode r"><code class="sourceCode r">DF &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
-        <span class="dt">imie =</span> <span class="kw">c</span>(<span class="st">&quot;Maja&quot;</span>,<span class="st">&quot;Anna&quot;</span>,<span class="st">&quot;Zosia&quot;</span>,<span class="st">&quot;Joanna&quot;</span>),
+        <span class="dt">imie =</span> <span class="kw">c</span>(<span class="st">&quot;Maja&quot;</span>,<span class="st">&quot;Anna&quot;</span>,<span class="st">&quot;Zosia&quot;</span>,<span class="st">&quot;Anna&quot;</span>),
         <span class="dt">wiek =</span> <span class="kw">c</span>(<span class="st">&quot;40&quot;</span>,<span class="st">&quot;12,5&quot;</span>,<span class="st">&quot;25&quot;</span>,<span class="st">&quot;16.6&quot;</span>),
         <span class="dt">numer =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="ot">NA</span>,<span class="dv">4</span>),
         <span class="dt">oczo =</span> <span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;niebieskie&quot;</span>, <span class="st">&quot;jasno-niebieskie&quot;</span>, <span class="st">&quot;ciemne&quot;</span>, <span class="st">&quot;niebieskie&quot;</span>)),
         <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
 DF</code></pre>
-<pre><code>##     imie wiek numer             oczo
-## 1   Maja   40     1       niebieskie
-## 2   Anna 12,5     2 jasno-niebieskie
-## 3  Zosia   25    NA           ciemne
-## 4 Joanna 16.6     4       niebieskie</code></pre>
+<pre><code>##    imie wiek numer             oczo
+## 1  Maja   40     1       niebieskie
+## 2  Anna 12,5     2 jasno-niebieskie
+## 3 Zosia   25    NA           ciemne
+## 4  Anna 16.6     4       niebieskie</code></pre>
 <p>W wynikowej ramce będziemy chcieli poprawić następujące błędy:</p>
 <ul>
 <li>nazwę kolumny <code>oczo</code> zamienić na <code>oczy</code></li>
@@ -100,11 +100,11 @@ DF</code></pre>
 <span class="kw">colnames</span>(DF)[<span class="dv">4</span>] &lt;-<span class="st"> &quot;oczy&quot;</span></code></pre>
 <p>W wyniku mamy więc zbiór danych</p>
 <pre class="sourceCode r"><code class="sourceCode r">DF</code></pre>
-<pre><code>##     imie wiek numer             oczy
-## 1   Maja   40     1       niebieskie
-## 2   Anna 12,5     2 jasno-niebieskie
-## 3  Zosia   25    NA           ciemne
-## 4 Joanna 16.6     4       niebieskie</code></pre>
+<pre><code>##    imie wiek numer             oczy
+## 1  Maja   40     1       niebieskie
+## 2  Anna 12,5     2 jasno-niebieskie
+## 3 Zosia   25    NA           ciemne
+## 4  Anna 16.6     4       niebieskie</code></pre>
 </div>
 <div id="zamiana-przecinka-na-kropke" class="slide section level1">
 <h1>Zamiana przecinka na kropkę</h1>
@@ -121,11 +121,11 @@ DF</code></pre>
 <pre><code>## [1] 40.0 12.5 25.0 16.6</code></pre>
 <p>W wyniku mamy więc poprawiony zbiór danych</p>
 <pre class="sourceCode r"><code class="sourceCode r">DF</code></pre>
-<pre><code>##     imie wiek numer             oczy
-## 1   Maja 40.0     1       niebieskie
-## 2   Anna 12.5     2 jasno-niebieskie
-## 3  Zosia 25.0    NA           ciemne
-## 4 Joanna 16.6     4       niebieskie</code></pre>
+<pre><code>##    imie wiek numer             oczy
+## 1  Maja 40.0     1       niebieskie
+## 2  Anna 12.5     2 jasno-niebieskie
+## 3 Zosia 25.0    NA           ciemne
+## 4  Anna 16.6     4       niebieskie</code></pre>
 </div>
 <div id="normalizacja-kolumny-lub-wiersza" class="slide section level1">
 <h1>Normalizacja kolumny lub wiersza</h1>
@@ -148,32 +148,32 @@ DF</code></pre>
 ## [1] 12.15329</code></pre>
 <p>Otrzymujemy nowy, poszerzony zbiór danych</p>
 <pre class="sourceCode r"><code class="sourceCode r">DF</code></pre>
-<pre><code>##     imie wiek numer             oczy   wiekNorm
-## 1   Maja 40.0     1       niebieskie  1.3555998
-## 2   Anna 12.5     2 jasno-niebieskie -0.9071616
-## 3  Zosia 25.0    NA           ciemne  0.1213663
-## 4 Joanna 16.6     4       niebieskie -0.5698045</code></pre>
+<pre><code>##    imie wiek numer             oczy   wiekNorm
+## 1  Maja 40.0     1       niebieskie  1.3555998
+## 2  Anna 12.5     2 jasno-niebieskie -0.9071616
+## 3 Zosia 25.0    NA           ciemne  0.1213663
+## 4  Anna 16.6     4       niebieskie -0.5698045</code></pre>
 </div>
 <div id="usuwanie-lub-zastepowanie-brakujacych-danych" class="slide section level1">
 <h1>Usuwanie lub zastępowanie brakujących danych</h1>
 <p>W kolumnie <code>numer</code> występują brakujące wartości <code>NA</code>.</p>
 <p>Takie wartości możemy usunąć (tzn usunąć musimy cały wiersz) korzystając z funkcji <code>na.omit()</code></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">na.omit</span>(DF)</code></pre>
-<pre><code>##     imie wiek numer             oczy   wiekNorm
-## 1   Maja 40.0     1       niebieskie  1.3555998
-## 2   Anna 12.5     2 jasno-niebieskie -0.9071616
-## 4 Joanna 16.6     4       niebieskie -0.5698045</code></pre>
+<pre><code>##   imie wiek numer             oczy   wiekNorm
+## 1 Maja 40.0     1       niebieskie  1.3555998
+## 2 Anna 12.5     2 jasno-niebieskie -0.9071616
+## 4 Anna 16.6     4       niebieskie -0.5698045</code></pre>
 <p>Lub zastąpić przez np. średnią w kolumnie. Na poniższym przykładzie funkcją <code>is.na()</code> identyfikuje wartości brakujące, funkcja <code>which()</code> wyznaza indeksy wartości brakujących. Te indeksy będą następnie wykorzystane aby nadpisać wartości brakujące przez średnią wyznaczoną przez funkcję <code>mean()</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">(ktorePuste &lt;-<span class="st"> </span><span class="kw">which</span>(<span class="kw">is.na</span>(DF$numer)))</code></pre>
 <pre><code>## [1] 3</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">DF$numer[ktorePuste] &lt;-<span class="st"> </span><span class="kw">mean</span>(DF$numer, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre>
 <p>Otrzymujemy nowy, uzupełniony zbiór danych</p>
 <pre class="sourceCode r"><code class="sourceCode r">DF</code></pre>
-<pre><code>##     imie wiek    numer             oczy   wiekNorm
-## 1   Maja 40.0 1.000000       niebieskie  1.3555998
-## 2   Anna 12.5 2.000000 jasno-niebieskie -0.9071616
-## 3  Zosia 25.0 2.333333           ciemne  0.1213663
-## 4 Joanna 16.6 4.000000       niebieskie -0.5698045</code></pre>
+<pre><code>##    imie wiek    numer             oczy   wiekNorm
+## 1  Maja 40.0 1.000000       niebieskie  1.3555998
+## 2  Anna 12.5 2.000000 jasno-niebieskie -0.9071616
+## 3 Zosia 25.0 2.333333           ciemne  0.1213663
+## 4  Anna 16.6 4.000000       niebieskie -0.5698045</code></pre>
 </div>
 <div id="nazwy-czynnikow-w-zmienej-jakosciowej" class="slide section level1">
 <h1>Nazwy czynników w zmienej jakościowej</h1>
@@ -195,69 +195,34 @@ DF$oczy</code></pre>
 ## Levels: niebieskie ciemne</code></pre>
 <p>Otrzymujemy nowy, zmieniony zbiór danych</p>
 <pre class="sourceCode r"><code class="sourceCode r">DF</code></pre>
+<pre><code>##    imie wiek    numer       oczy   wiekNorm
+## 1  Maja 40.0 1.000000 niebieskie  1.3555998
+## 2  Anna 12.5 2.000000 niebieskie -0.9071616
+## 3 Zosia 25.0 2.333333     ciemne  0.1213663
+## 4  Anna 16.6 4.000000 niebieskie -0.5698045</code></pre>
+</div>
+<div id="podmiana-dowolnej-wartosci" class="slide section level1">
+<h1>Podmiana dowolnej wartości</h1>
+<p>Często się zdarza, że w kolumnie podmienić trzeba wszystkie wartości na inne. Być może ktoś omyłkowo wpisał <code>100.00</code> zamiast <code>10000</code> i trzeba zastąpić jedną wartość przez drugą. Być może ktoś źle wpisywał nazwy terapii i chcemy te nazwy pozmieniać.</p>
+<p>Na przykłądzie poniżęj zastąpimy imiona <code>Anna</code> na <code>Joanna</code>. Wynik przyrównania zwraca wektor wartości logicznych.</p>
+<pre class="sourceCode r"><code class="sourceCode r">DF$imie==<span class="st">&quot;Anna&quot;</span></code></pre>
+<pre><code>## [1] FALSE  TRUE FALSE  TRUE</code></pre>
+<p>Można ten wektor wykorzystać do indeksowania wiersza. Jeżeli do kilkuelementowego wektora przypiszemy jedną wartość, tak jak w przykłądzie poniżej, to wszystkie elementy tego wektora zostaną zastąpione przez tą watość.</p>
+<pre class="sourceCode r"><code class="sourceCode r">DF$imie[DF$imie==<span class="st">&quot;Anna&quot;</span>] &lt;-<span class="st"> &quot;Joanna&quot;</span></code></pre>
+<p>W wyniku tej instrukcji otrzymujemy nowy, zmieniony zbiór danych</p>
+<pre class="sourceCode r"><code class="sourceCode r">DF</code></pre>
 <pre><code>##     imie wiek    numer       oczy   wiekNorm
 ## 1   Maja 40.0 1.000000 niebieskie  1.3555998
-## 2   Anna 12.5 2.000000 niebieskie -0.9071616
+## 2 Joanna 12.5 2.000000 niebieskie -0.9071616
 ## 3  Zosia 25.0 2.333333     ciemne  0.1213663
 ## 4 Joanna 16.6 4.000000 niebieskie -0.5698045</code></pre>
 </div>
-<div id="edycja-w-caej-kolumnie" class="slide section level1">
-<h1>Edycja w całej kolumnie</h1>
-<p>? polskie znaki</p>
-<p>Przykładowe dane:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># zmiana znaku jednego na inny wszedzie, np ó na o</span>
-<span class="co"># zmiana przecinka na kropkę i konwersja na liczby</span>
-<span class="co"># zmiana nazw lub kolejności czynników w zmiennej jakościowej</span>
-<span class="co"># zmiana nazwy kolumny</span>
-<span class="co"># zmiana jednej wartosci w macierzy [np rzad wielkosci inne]</span>
-
-D &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
-  <span class="dt">imie=</span> <span class="kw">c</span>(<span class="st">&quot;Maja&quot;</span>,<span class="st">&quot;Anna&quot;</span>,<span class="st">&quot;Zosia&quot;</span>,<span class="st">&quot;Joanna&quot;</span>),
-  gęstość=<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;0.4&quot;</span>,<span class="st">&quot;0,2&quot;</span>,<span class="st">&quot;0,05&quot;</span>,<span class="st">&quot;0,35&quot;</span>)
-  )
-D &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">sapply</span>(D,as.character), <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</code></pre>
-<p>Po wczytaniu danych otrzymamy tabelę:</p>
-<pre class="sourceCode r"><code class="sourceCode r">D</code></pre>
-<pre><code>##     imie gęstość
-## 1   Maja     0.4
-## 2   Anna     0,2
-## 3  Zosia    0,05
-## 4 Joanna    0,35</code></pre>
-<p>Klasy poszczególnych zmiennych w tabeli D:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>(D,class)</code></pre>
-<pre><code>##        imie     gęstość 
-## &quot;character&quot; &quot;character&quot;</code></pre>
-<p>Błędy w danych które chcemy naprawić:</p>
-<ol style="list-style-type: decimal">
-<li>Zamień nazwę kolumny: gęstość na częstość,</li>
-<li>Zamień wpisy “Zosia” na “Zofia”,</li>
-<li>Zamień przecinek na kropkę dziesiętną.</li>
-</ol>
-<h3 id="naprawa-nazwy-kolumny---gestosc">Naprawa nazwy kolumny - gęstość</h3>
-<p>Numer kolumny o błędnej nazwie “gęstość”:</p>
-<pre class="sourceCode r"><code class="sourceCode r">nr.kol &lt;-<span class="st"> </span><span class="kw">which</span>(<span class="kw">colnames</span>(D)==<span class="st">&quot;gęstość&quot;</span>)
-nr.kol</code></pre>
-<pre><code>## [1] 2</code></pre>
-<p>Zamiana nazwy kolumny:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(D)[nr.kol] &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;częstość&quot;</span>)
-D</code></pre>
-<pre><code>##     imie częstość
-## 1   Maja      0.4
-## 2   Anna      0,2
-## 3  Zosia     0,05
-## 4 Joanna     0,35</code></pre>
-<h3 id="naprawa-bednych-wpisow---zosia">Naprawa błędnych wpisów - Zosia</h3>
-<pre class="sourceCode r"><code class="sourceCode r">D$imie[D$imie==<span class="st">&quot;Zosia&quot;</span>] &lt;-<span class="st"> &quot;Zofia&quot;</span>
-D</code></pre>
-<pre><code>##     imie częstość
-## 1   Maja      0.4
-## 2   Anna      0,2
-## 3  Zofia     0,05
-## 4 Joanna     0,35</code></pre>
+<div id="zadania" class="slide section level1">
+<h1>Zadania</h1>
 </div>
 <div id="co-dalej" class="slide section level1">
 <h1>Co dalej</h1>
-<p>Na tych kilku slajdach zaledwie zarysowaliśmy temat czyszceznia danych. Więcej informacji na temat poprawnia zbiorów danych znaleźć można na przykład w</p>
+<p>Na tych kilku slajdach zaledwie zarysowaliśmy temat czyszceznia danych. Więcej informacji na temat poprawnia zbiorów danych znaleźć można na przykład w pozycjach:</p>
 <ul>
 <li>Rozdział 3.3 ,,Wstępne przetwarzanie danych’‘w książce ,,Przewodnik po pakiecie R’’, dostępnej pod adresem <a href="http://biecek.pl/R/">http://biecek.pl/R/</a></li>
 <li>W języku angielskim książka ,,An introduction to data cleaning with R’’ <a href="http://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf">http://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf</a></li>

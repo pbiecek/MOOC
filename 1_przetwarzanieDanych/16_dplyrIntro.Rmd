@@ -37,7 +37,7 @@ Ramkę danych stworzymy funkcją `data.frame()`, kolejne argumenty to wektory, k
 
 ```{r}
 DF <- data.frame(
-        imie = c("Maja","Anna","Zosia","Joanna"),
+        imie = c("Maja","Anna","Zosia","Anna"),
         wiek = c("40","12,5","25","16.6"),
         numer = c(1,2,NA,4),
         oczo = factor(c("niebieskie", "jasno-niebieskie", "ciemne", "niebieskie")),
@@ -182,66 +182,33 @@ DF
 ```
 
 
-# Edycja w całej kolumnie
+# Podmiana dowolnej wartości
 
+Często się zdarza, że w kolumnie podmienić trzeba wszystkie wartości na inne.
+ Być może ktoś omyłkowo wpisał `100.00` zamiast `10000` i trzeba zastąpić jedną wartość przez drugą.
+ Być może ktoś źle wpisywał nazwy terapii i chcemy te nazwy pozmieniać.
+ 
+ Na przykłądzie poniżęj zastąpimy imiona `Anna` na `Joanna`. Wynik przyrównania zwraca wektor wartości logicznych.
 
-
-? polskie znaki
-
-Przykładowe dane:
 ```{r}
-# zmiana znaku jednego na inny wszedzie, np ó na o
-# zmiana przecinka na kropkę i konwersja na liczby
-# zmiana nazw lub kolejności czynników w zmiennej jakościowej
-# zmiana nazwy kolumny
-# zmiana jednej wartosci w macierzy [np rzad wielkosci inne]
-
-D <- data.frame(
-  imie= c("Maja","Anna","Zosia","Joanna"),
-  gęstość= c("0.4","0,2","0,05","0,35")
-  )
-D <- data.frame(sapply(D,as.character), stringsAsFactors=FALSE)
+DF$imie=="Anna"
 ```
 
-Po wczytaniu danych otrzymamy tabelę:
+Można ten wektor wykorzystać do indeksowania wiersza. Jeżeli do kilkuelementowego wektora przypiszemy jedną wartość, tak jak w przykłądzie poniżej, to wszystkie elementy tego wektora zostaną zastąpione przez tą watość.
+
 ```{r}
-D
+DF$imie[DF$imie=="Anna"] <- "Joanna"
 ```
 
-Klasy poszczególnych zmiennych w tabeli D:
-```{r}
-sapply(D,class)
-```
-
-Błędy w danych które chcemy naprawić:
-
-1. Zamień nazwę kolumny: gęstość na częstość,
-2. Zamień wpisy "Zosia" na "Zofia",
-2. Zamień przecinek na kropkę dziesiętną.
-
-
-### Naprawa nazwy kolumny - gęstość
-
-Numer kolumny o błędnej nazwie "gęstość":
-```{r}
-nr.kol <- which(colnames(D)=="gęstość")
-nr.kol
-```
-
-Zamiana nazwy kolumny:
-```{r}
-names(D)[nr.kol] <- paste("częstość")
-D
-```
-
-### Naprawa błędnych wpisów - Zosia
+W wyniku tej instrukcji otrzymujemy nowy, zmieniony zbiór danych.
 
 ```{r}
-D$imie[D$imie=="Zosia"] <- "Zofia"
-D
+DF
 ```
 
 # Zadania
+
+
 
 
 # Co dalej
