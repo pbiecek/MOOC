@@ -52,11 +52,11 @@ pogRomcy danych
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
-<p>Praca z danymi to w dużej części czyszczenie i wielokrotna zmiana reprezentacji. Po co dane czyścić? Zarówno dane zbierane przez ludzi jak i przez automatyczne czujniki mają tendencje do zawierania braków, obserwacji odstających lub zwykłych błędów. Aby sensownie analizować dane, musimy przekształcić je do postaci w której wyniki anliz będą wiarygodne.</p>
+<p>Praca z danymi to w dużej części czyszczenie i wielokrotna zmiana reprezentacji. Po co dane czyścić? Zarówno dane zbierane przez ludzi jak i przez automatyczne czujniki mają tendencje do zawierania braków, obserwacji odstających lub zwykłych błędów. Aby sensownie analizować dane, musimy przekształcić je do postaci w której wyniki analiz będą wiarygodne.</p>
 <p>Czyszczenie to bardzo istotna faza. Bez względu bowiem jak zaawansowana i dobrze dobrana jest nasza technika analiza danych, jeżeli na wejściu będą śmieciowe dane to na wyjściu będą śmieciowe wyniki. <em>Garbage in garbage out</em></p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
-<li>Jak edytować zbiory danych by doprawadzić je do spójnej postaci.</li>
+<li>Jak edytować zbiory danych by doprowadzić je do spójnej postaci.</li>
 <li>Jak zastępować jedne wartości przez inne</li>
 <li>Jak identyfikować wartości odstające / zbędne.</li>
 </ul>
@@ -81,7 +81,7 @@ DF</code></pre>
 <p>W wynikowej ramce będziemy chcieli poprawić następujące błędy:</p>
 <ul>
 <li>nazwę kolumny <code>oczo</code> zamienić na <code>oczy</code></li>
-<li>zmienną <code>wiek</code> zamienić na liczbową, w tym celu trzeba wpierw zamieniż <code>,</code> na <code>.</code></li>
+<li>zmienną <code>wiek</code> zamienić na liczbową, w tym celu trzeba wpierw zamienić <code>,</code> na <code>.</code></li>
 <li>imię <code>Zosia</code> zamienić na <code>Zofia</code></li>
 <li>kolory oczy zamienić na dwie grupy <code>niebieskie</code> i <code>ciemne</code>.</li>
 </ul>
@@ -94,7 +94,7 @@ DF</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># czwarty element wektora</span>
 <span class="kw">colnames</span>(DF)[<span class="dv">4</span>]</code></pre>
 <pre><code>## [1] &quot;oczo&quot;</code></pre>
-<p>Funkcji <code>colnames()</code> można również użyć by zmienić nazwy kolumn. Poniższe dwie instrukcje wywołają funkcję <code>colnames&lt;-()</code>, która zmienia nazwy kolumn. Można jednocześnie zmeinić wszystkie lub tylko wybrane elementy wektora nazw kolumn.</p>
+<p>Funkcji <code>colnames()</code> można również użyć by zmienić nazwy kolumn. Poniższe dwie instrukcje wywołają funkcję <code>colnames&lt;-()</code>, która zmienia nazwy kolumn. Można jednocześnie zmienić wszystkie lub tylko wybrane elementy wektora nazw kolumn.</p>
 <p>Obie poniższe instrukcje poprawią nazwę ostatniej kolumny.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(DF) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;imie&quot;</span>, <span class="st">&quot;wiek&quot;</span>, <span class="st">&quot;numer&quot;</span>, <span class="st">&quot;oczy&quot;</span>)
 <span class="kw">colnames</span>(DF)[<span class="dv">4</span>] &lt;-<span class="st"> &quot;oczy&quot;</span></code></pre>
@@ -113,7 +113,7 @@ DF</code></pre>
 <pre><code>## [1] &quot;40&quot;   &quot;12,5&quot; &quot;25&quot;   &quot;16.6&quot;</code></pre>
 <p>Zamienimy przecinek na kropkę i zamienimy napis na liczbę.</p>
 <p>Do podmiany znaków użyjemy funkcji <code>gsub()</code>, (opisanej także w odcinku 14 tego sezonu). Nazwy argumentów <code>pattern</code> i <code>replacement</code> można by pominąć, ponieważ są w domyślnej kolejności, ale je tutaj wpisujemy dla czytelności.</p>
-<p>Wynik przekazujemy do funkcji <code>as.numeric()</code>, która zamienia napisy na liczby. Ostateczine wynik przypisujemy do kolumny <code>wiek</code>.</p>
+<p>Wynik przekazujemy do funkcji <code>as.numeric()</code>, która zamienia napisy na liczby. Ostatecznie wynik przypisujemy do kolumny <code>wiek</code>.</p>
 <p>Dwie linie opatrzyliśmy nawiasami <code>()</code> aby wynik przypisania został wyświetlony na ekranie.</p>
 <pre class="sourceCode r"><code class="sourceCode r">(tmp &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;.&quot;</span>, DF$wiek))</code></pre>
 <pre><code>## [1] &quot;40&quot;   &quot;12.5&quot; &quot;25&quot;   &quot;16.6&quot;</code></pre>
@@ -157,13 +157,13 @@ DF</code></pre>
 <div id="usuwanie-lub-zastepowanie-brakujacych-danych" class="slide section level1">
 <h1>Usuwanie lub zastępowanie brakujących danych</h1>
 <p>W kolumnie <code>numer</code> występują brakujące wartości <code>NA</code>.</p>
-<p>Takie wartości możemy usunąć (tzn usunąć musimy cały wiersz) korzystając z funkcji <code>na.omit()</code></p>
+<p>Takie wartości możemy usunąć (tzn. usunąć musimy cały wiersz) korzystając z funkcji <code>na.omit()</code></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">na.omit</span>(DF)</code></pre>
 <pre><code>##   imie wiek numer             oczy   wiekNorm
 ## 1 Maja 40.0     1       niebieskie  1.3555998
 ## 2 Anna 12.5     2 jasno-niebieskie -0.9071616
 ## 4 Anna 16.6     4       niebieskie -0.5698045</code></pre>
-<p>Lub zastąpić przez np. średnią w kolumnie. Na poniższym przykładzie funkcją <code>is.na()</code> identyfikuje wartości brakujące, funkcja <code>which()</code> wyznaza indeksy wartości brakujących. Te indeksy będą następnie wykorzystane aby nadpisać wartości brakujące przez średnią wyznaczoną przez funkcję <code>mean()</code>.</p>
+<p>Lub zastąpić przez np. średnią w kolumnie. Na poniższym przykładzie funkcją <code>is.na()</code> identyfikuje wartości brakujące, funkcja <code>which()</code> wyznacza indeksy wartości brakujących. Te indeksy będą następnie wykorzystane aby nadpisać wartości brakujące przez średnią wyznaczoną przez funkcję <code>mean()</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">(ktorePuste &lt;-<span class="st"> </span><span class="kw">which</span>(<span class="kw">is.na</span>(DF$numer)))</code></pre>
 <pre><code>## [1] 3</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">DF$numer[ktorePuste] &lt;-<span class="st"> </span><span class="kw">mean</span>(DF$numer, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre>
@@ -175,13 +175,13 @@ DF</code></pre>
 ## 3 Zosia 25.0 2.333333           ciemne  0.1213663
 ## 4  Anna 16.6 4.000000       niebieskie -0.5698045</code></pre>
 </div>
-<div id="nazwy-czynnikow-w-zmienej-jakosciowej" class="slide section level1">
-<h1>Nazwy czynników w zmienej jakościowej</h1>
+<div id="nazwy-czynnikow-w-zmiennej-jakosciowej" class="slide section level1">
+<h1>Nazwy czynników w zmiennej jakościowej</h1>
 <p>Gdy przetwarzamy zmienną jakościową, częstą operacją jest zmiana nazw poziomów, zmiana ich kolejności lub połączenie kilku poziomów w jeden.</p>
 <pre class="sourceCode r"><code class="sourceCode r">DF$oczy</code></pre>
 <pre><code>## [1] niebieskie       jasno-niebieskie ciemne           niebieskie      
 ## Levels: ciemne jasno-niebieskie niebieskie</code></pre>
-<p>Aby wyświetlić lub zmienić nazwy poziomów można wykorzystać funkcję <code>levels()</code>. W podobny sposób co dla <code>colnames()</code> tą samą fucnkją możemy wyświetlić wektor nazw lub go zmienić.</p>
+<p>Aby wyświetlić lub zmienić nazwy poziomów można wykorzystać funkcję <code>levels()</code>. W podobny sposób co dla <code>colnames()</code> tą samą funkcją możemy wyświetlić wektor nazw lub go zmienić.</p>
 <p>Jeżeli przypiszemy do niego wartości z powtarzającymi się napisami, to wskazane poziomy zostaną połączone w jeden.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(DF$oczy)</code></pre>
 <pre><code>## [1] &quot;ciemne&quot;           &quot;jasno-niebieskie&quot; &quot;niebieskie&quot;</code></pre>
@@ -189,7 +189,7 @@ DF</code></pre>
 DF$oczy</code></pre>
 <pre><code>## [1] niebieskie niebieskie ciemne     niebieskie
 ## Levels: ciemne niebieskie</code></pre>
-<p>Jeżeli chcemy zmienić kolejność poziomów w zmiennej jakościowej, to najłatwiej jest to zrobić z użyciem funckji <code>factor()</code>. W argumencie <code>levels</code> możemy podać poziomy w dowolnej kolejności. Wartości są takie same, ale kolejność poziomów jest inna. Kolejność poziomów jest ważna w tworzeniu wykresów (odpowiada ona kolejności poziomów na wykresie) oraz w modelowaniu statystycznym.</p>
+<p>Jeżeli chcemy zmienić kolejność poziomów w zmiennej jakościowej, to najłatwiej jest to zrobić z użyciem funkcji <code>factor()</code>. W argumencie <code>levels</code> możemy podać poziomy w dowolnej kolejności. Wartości są takie same, ale kolejność poziomów jest inna. Kolejność poziomów jest ważna w tworzeniu wykresów (odpowiada ona kolejności poziomów na wykresie) oraz w modelowaniu statystycznym.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">factor</span>(DF$oczy, <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&quot;niebieskie&quot;</span>, <span class="st">&quot;ciemne&quot;</span>))</code></pre>
 <pre><code>## [1] niebieskie niebieskie ciemne     niebieskie
 ## Levels: niebieskie ciemne</code></pre>
@@ -204,10 +204,10 @@ DF$oczy</code></pre>
 <div id="podmiana-dowolnej-wartosci" class="slide section level1">
 <h1>Podmiana dowolnej wartości</h1>
 <p>Często się zdarza, że w kolumnie podmienić trzeba wszystkie wartości na inne. Być może ktoś omyłkowo wpisał <code>100.00</code> zamiast <code>10000</code> i trzeba zastąpić jedną wartość przez drugą. Być może ktoś źle wpisywał nazwy terapii i chcemy te nazwy pozmieniać.</p>
-<p>Na przykłądzie poniżęj zastąpimy imiona <code>Anna</code> na <code>Joanna</code>. Wynik przyrównania zwraca wektor wartości logicznych.</p>
+<p>Na przykładzie poniżej zastąpimy imiona <code>Anna</code> na <code>Joanna</code>. Wynik przyrównania zwraca wektor wartości logicznych.</p>
 <pre class="sourceCode r"><code class="sourceCode r">DF$imie==<span class="st">&quot;Anna&quot;</span></code></pre>
 <pre><code>## [1] FALSE  TRUE FALSE  TRUE</code></pre>
-<p>Można ten wektor wykorzystać do indeksowania wiersza. Jeżeli do kilkuelementowego wektora przypiszemy jedną wartość, tak jak w przykłądzie poniżej, to wszystkie elementy tego wektora zostaną zastąpione przez tą watość.</p>
+<p>Można ten wektor wykorzystać do indeksowania wiersza. Jeżeli do kilkuelementowego wektora przypiszemy jedną wartość, tak jak w przykładzie poniżej, to wszystkie elementy tego wektora zostaną zastąpione przez tą wartość.</p>
 <pre class="sourceCode r"><code class="sourceCode r">DF$imie[DF$imie==<span class="st">&quot;Anna&quot;</span>] &lt;-<span class="st"> &quot;Joanna&quot;</span></code></pre>
 <p>W wyniku tej instrukcji otrzymujemy nowy, zmieniony zbiór danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r">DF</code></pre>
@@ -240,7 +240,7 @@ df</code></pre>
 </div>
 <div id="co-dalej" class="slide section level1">
 <h1>Co dalej</h1>
-<p>Na tych kilku slajdach zaledwie zarysowaliśmy temat czyszceznia danych. Więcej informacji na temat poprawnia zbiorów danych znaleźć można na przykład w pozycjach:</p>
+<p>Na tych kilku slajdach zaledwie zarysowaliśmy temat czyszczenia danych. Więcej informacji na temat poprawiania zbiorów danych znaleźć można na przykład w pozycjach:</p>
 <ul>
 <li>Rozdział 3.3 ,,Wstępne przetwarzanie danych’‘w książce ,,Przewodnik po pakiecie R’’, dostępnej pod adresem <a href="http://biecek.pl/R/">http://biecek.pl/R/</a></li>
 <li>W języku angielskim książka ,,An introduction to data cleaning with R’’ <a href="http://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf">http://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf</a></li>

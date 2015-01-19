@@ -15,13 +15,13 @@ output:
 
 # O czym jest ten odcinek
 
-Praca z danymi to w dużej części czyszczenie i wielokrotna zmiana reprezentacji. Po co dane czyścić? Zarówno dane zbierane przez ludzi jak i przez automatyczne czujniki mają tendencje do zawierania braków, obserwacji odstających lub zwykłych błędów. Aby sensownie analizować dane, musimy przekształcić je do postaci w której wyniki anliz będą wiarygodne.
+Praca z danymi to w dużej części czyszczenie i wielokrotna zmiana reprezentacji. Po co dane czyścić? Zarówno dane zbierane przez ludzi jak i przez automatyczne czujniki mają tendencje do zawierania braków, obserwacji odstających lub zwykłych błędów. Aby sensownie analizować dane, musimy przekształcić je do postaci w której wyniki analiz będą wiarygodne.
 
 Czyszczenie to bardzo istotna faza. Bez względu bowiem jak zaawansowana i dobrze dobrana jest nasza technika analiza danych, jeżeli na wejściu będą śmieciowe dane to na wyjściu będą śmieciowe wyniki. *Garbage in garbage out*
 
 W tym odcinku nauczymy się
 
-- Jak edytować zbiory danych by doprawadzić je do spójnej postaci.
+- Jak edytować zbiory danych by doprowadzić je do spójnej postaci.
 - Jak zastępować jedne wartości przez inne
 - Jak identyfikować wartości odstające / zbędne.
 
@@ -48,7 +48,7 @@ DF
 W wynikowej ramce będziemy chcieli poprawić następujące błędy:
 
 + nazwę kolumny `oczo` zamienić na `oczy`
-+ zmienną `wiek` zamienić na liczbową, w tym celu trzeba wpierw zamieniż `,` na `.`
++ zmienną `wiek` zamienić na liczbową, w tym celu trzeba wpierw zamienić `,` na `.`
 + imię `Zosia` zamienić na `Zofia`
 + kolory oczy zamienić na dwie grupy `niebieskie` i `ciemne`.
 
@@ -64,7 +64,7 @@ colnames(DF)
 colnames(DF)[4]
 ```
 
-Funkcji `colnames()` można również użyć by zmienić nazwy kolumn. Poniższe dwie instrukcje wywołają funkcję `colnames<-()`, która zmienia nazwy kolumn. Można jednocześnie zmeinić wszystkie lub tylko wybrane elementy wektora nazw kolumn.
+Funkcji `colnames()` można również użyć by zmienić nazwy kolumn. Poniższe dwie instrukcje wywołają funkcję `colnames<-()`, która zmienia nazwy kolumn. Można jednocześnie zmienić wszystkie lub tylko wybrane elementy wektora nazw kolumn.
 
 Obie poniższe instrukcje poprawią nazwę ostatniej kolumny.
 
@@ -91,7 +91,7 @@ Zamienimy przecinek na kropkę i zamienimy napis na liczbę.
 
 Do podmiany znaków użyjemy funkcji `gsub()`, (opisanej także w odcinku 14 tego sezonu). Nazwy argumentów `pattern` i `replacement` można by pominąć, ponieważ są w domyślnej kolejności, ale je tutaj wpisujemy dla czytelności.
 
-Wynik przekazujemy do funkcji `as.numeric()`, która zamienia napisy na liczby. Ostateczine wynik przypisujemy do kolumny `wiek`.
+Wynik przekazujemy do funkcji `as.numeric()`, która zamienia napisy na liczby. Ostatecznie wynik przypisujemy do kolumny `wiek`.
 
 Dwie linie opatrzyliśmy nawiasami `()` aby wynik przypisania został wyświetlony na ekranie.
 
@@ -133,12 +133,12 @@ DF
 
 W kolumnie `numer` występują brakujące wartości `NA`. 
 
-Takie wartości możemy usunąć (tzn usunąć musimy cały wiersz) korzystając z funkcji `na.omit()` 
+Takie wartości możemy usunąć (tzn. usunąć musimy cały wiersz) korzystając z funkcji `na.omit()` 
 ```{r}
 na.omit(DF)
 ```
 
-Lub zastąpić przez np. średnią w kolumnie. Na poniższym przykładzie funkcją `is.na()` identyfikuje wartości brakujące, funkcja `which()` wyznaza indeksy wartości brakujących. Te indeksy będą następnie wykorzystane aby nadpisać wartości brakujące przez średnią wyznaczoną przez funkcję `mean()`.
+Lub zastąpić przez np. średnią w kolumnie. Na poniższym przykładzie funkcją `is.na()` identyfikuje wartości brakujące, funkcja `which()` wyznacza indeksy wartości brakujących. Te indeksy będą następnie wykorzystane aby nadpisać wartości brakujące przez średnią wyznaczoną przez funkcję `mean()`.
 
 ```{r}
 (ktorePuste <- which(is.na(DF$numer)))
@@ -151,7 +151,7 @@ Otrzymujemy nowy, uzupełniony zbiór danych
 DF
 ```
 
-# Nazwy czynników w zmienej jakościowej 
+# Nazwy czynników w zmiennej jakościowej 
 
 Gdy przetwarzamy zmienną jakościową, częstą operacją jest zmiana nazw poziomów, zmiana ich kolejności lub połączenie kilku poziomów w jeden.
 
@@ -159,7 +159,7 @@ Gdy przetwarzamy zmienną jakościową, częstą operacją jest zmiana nazw pozi
 DF$oczy
 ```
 
-Aby wyświetlić lub zmienić nazwy poziomów można wykorzystać funkcję `levels()`. W podobny sposób co dla `colnames()` tą samą fucnkją możemy wyświetlić wektor nazw lub go zmienić.
+Aby wyświetlić lub zmienić nazwy poziomów można wykorzystać funkcję `levels()`. W podobny sposób co dla `colnames()` tą samą funkcją możemy wyświetlić wektor nazw lub go zmienić.
 
 Jeżeli przypiszemy do niego wartości z powtarzającymi się napisami, to wskazane poziomy zostaną połączone w jeden.
 
@@ -169,7 +169,7 @@ levels(DF$oczy) <- c("ciemne", "niebieskie", "niebieskie")
 DF$oczy
 ```
 
-Jeżeli chcemy zmienić kolejność poziomów w zmiennej jakościowej, to najłatwiej jest to zrobić z użyciem funckji `factor()`. W argumencie `levels` możemy podać poziomy w dowolnej kolejności. Wartości są takie same, ale kolejność poziomów jest inna. Kolejność poziomów jest ważna w tworzeniu wykresów (odpowiada ona kolejności poziomów na wykresie) oraz w modelowaniu statystycznym.
+Jeżeli chcemy zmienić kolejność poziomów w zmiennej jakościowej, to najłatwiej jest to zrobić z użyciem funkcji `factor()`. W argumencie `levels` możemy podać poziomy w dowolnej kolejności. Wartości są takie same, ale kolejność poziomów jest inna. Kolejność poziomów jest ważna w tworzeniu wykresów (odpowiada ona kolejności poziomów na wykresie) oraz w modelowaniu statystycznym.
 
 ```{r}
 factor(DF$oczy, levels=c("niebieskie", "ciemne"))
@@ -188,13 +188,13 @@ Często się zdarza, że w kolumnie podmienić trzeba wszystkie wartości na inn
  Być może ktoś omyłkowo wpisał `100.00` zamiast `10000` i trzeba zastąpić jedną wartość przez drugą.
  Być może ktoś źle wpisywał nazwy terapii i chcemy te nazwy pozmieniać.
  
- Na przykłądzie poniżęj zastąpimy imiona `Anna` na `Joanna`. Wynik przyrównania zwraca wektor wartości logicznych.
+ Na przykładzie poniżej zastąpimy imiona `Anna` na `Joanna`. Wynik przyrównania zwraca wektor wartości logicznych.
 
 ```{r}
 DF$imie=="Anna"
 ```
 
-Można ten wektor wykorzystać do indeksowania wiersza. Jeżeli do kilkuelementowego wektora przypiszemy jedną wartość, tak jak w przykłądzie poniżej, to wszystkie elementy tego wektora zostaną zastąpione przez tą watość.
+Można ten wektor wykorzystać do indeksowania wiersza. Jeżeli do kilkuelementowego wektora przypiszemy jedną wartość, tak jak w przykładzie poniżej, to wszystkie elementy tego wektora zostaną zastąpione przez tą wartość.
 
 ```{r}
 DF$imie[DF$imie=="Anna"] <- "Joanna"
@@ -227,10 +227,11 @@ df
 
 # Co dalej
 
-Na tych kilku slajdach zaledwie zarysowaliśmy temat czyszceznia danych. Więcej informacji na temat poprawnia zbiorów danych znaleźć można na przykład w pozycjach:
+Na tych kilku slajdach zaledwie zarysowaliśmy temat czyszczenia danych. Więcej informacji na temat poprawiania zbiorów danych znaleźć można na przykład w pozycjach:
 
 + Rozdział 3.3 ,,Wstępne przetwarzanie danych'' w książce ,,Przewodnik po pakiecie R'', dostępnej pod adresem http://biecek.pl/R/
 + W języku angielskim książka ,,An introduction to data cleaning with R'' http://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf
 + W języku angielskim kurs na portalu Coursera ,,Getting and Cleaning Data'' https://www.coursera.org/course/getdata
+
 
 
