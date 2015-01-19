@@ -208,7 +208,21 @@ DF
 
 # Zadania
 
+Po wczytaniu poniższej ramki danych napraw następujące błędy:
 
++ popraw nazwę kolumny `litąry`,
++ zamień wartości `Ą` i `Ć` na ,,bezogonkowe'',
++ zamień kolumnę `liczby` na kolumnę liczb,
++ zastąp brakujące dane w kolumnie `braku`.
+
+```{r}
+df <- data.frame(
+        litąry = c("Ą","B","Ć","D"),
+        liczby = c("1","2","3,0","4,0"),
+        braki = c(NA,1,NA,1),
+        stringsAsFactors = FALSE)
+df
+```
 
 
 # Co dalej

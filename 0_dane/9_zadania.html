@@ -80,7 +80,7 @@ auta2012 &lt;-<span class="st"> </span><span class="kw">read.xls</span>(<span cl
 <div id="zadanie-sezon-1-odcinek-6" class="slide section level1">
 <h1>Zadanie, sezon 1, odcinek 6</h1>
 <ul>
-<li>Zapisz zbiór danych <code>koty_ptaki</code> do pliku tekstowego, w którym dane są rozdzielane przecinkiem a kropką dziesiętną jest <code>.</code></li>
+<li>Zapisz zbiór danych <code>koty_ptaki</code> do pliku tekstowego, w którym dane są rozdzielane przecinkiem, a separatorem dziesiętnym jest <code>.</code> (kropka).</li>
 <li>Zapisz zbiór danych <code>koty_ptaki</code> do formatu pliku Excela. Sprawdź czy dane poprawnie się zapisały.</li>
 <li>Zapisz zbiór danych <code>koty_ptaki</code> do pliku binarnego. Odczytaj go następnie funkcją <code>load()</code> i sprawdź czy dane poprawnie zostały zapisane.</li>
 </ul>
@@ -240,9 +240,9 @@ for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
 <div id="zadania-sezon-1-odcinek-10" class="slide section level1">
 <h1>Zadania, sezon 1, odcinek 10</h1>
 <ul>
-<li>Napisz funkcję, która otrzymuje argument liczbowy a następnie wypisuje na ekran wartości od argumentu do jeden.</li>
-<li>Napisz funkcję, przyjmuje argument liczbowy <code>n</code> a następnie rysuje kwadrat o boku <code>n</code> wypełniony znakami <code>X</code>.</li>
-<li>Napisz funkcję, przyjmuje argument liczbowy <code>n</code> a następnie rysuje kwadrat o boku <code>n</code> ze znakami <code>X</code> na brzegu i pusty w środku.</li>
+<li>Napisz funkcję, która otrzymuje argument liczbowy, a następnie wypisuje na ekran wartości od argumentu do jeden.</li>
+<li>Napisz funkcję, która przyjmuje argument liczbowy <code>n</code>, a następnie rysuje kwadrat o boku <code>n</code> wypełniony znakami <code>X</code>.</li>
+<li>Napisz funkcję, która przyjmuje argument liczbowy <code>n</code>, a następnie rysuje kwadrat o boku <code>n</code> ze znakami <code>X</code> na brzegu i pusty w środku.</li>
 </ul>
 </div>
 <div id="odpowiedzi-sezon-1-odcinek-10" class="slide section level1">
@@ -288,9 +288,9 @@ pustyKwadrat &lt;-<span class="st"> </span>function(<span class="dt">n =</span> 
 <li><p>Jedną z cech ilościowych jest <em>Rok.produkcji</em>. Wszystkie te oferty były złożone w roku 2012, jaki był medianowy/połówkowy wiek oferowanego auta?</p></li>
 <li><p>Która cecha jest najmniej kompletna? Dla której cechy liczba brakujących wartości jest największa?</p></li>
 <li><p>Jaka jest mediana/połówkowa wielkość silnika (<code>Pojemnosc.skokowa</code>)?</p></li>
-<li><p>Przedstaw graficznie za pomocą wykresu pudełko-wąsy oraz histogramu rozkład cechy <code>Cena.w.PLN</code>.</p></li>
+<li><p>Przedstaw graficznie za pomocą wykresu pudełko-wąsy oraz histogramu rozkład cechy <code>Cena.w.PLN</code>. PCH: brak odpowiedzi poniżej. To celowe?</p></li>
 <li><p>Zwróć uwagę, że pojedyncze auta o bardzo wysokich cenach, powodują że wykres jest mało czytelny. Oczyść te dane, pozostawiają tylko auta o cenie poniżej 100 tys pln. Następnie przedstaw rozkład cen aut w segmencie aut do 100 tys pln.</p></li>
-<li><p>Aut w jakiej cenie jest najwięcej wśród zebranych ogłoszeń?</p></li>
+<li><p>Aut w jakiej cenie jest najwięcej wśród zebranych ogłoszeń? PCH: brak odpowiedzi poniżej. To celowe?</p></li>
 </ul>
 </div>
 <div id="odpowiedzi-sezon-1-odcinek-11" class="slide section level1">
@@ -423,6 +423,37 @@ duzyDiesel &lt;-<span class="st"> </span>auta2012$Pojemnosc.skokowa &gt;<span cl
 
 <span class="co"># dzień tygodnia za 100 dni od dziś</span>
 <span class="kw">wday</span>(<span class="kw">today</span>() +<span class="st"> </span><span class="kw">days</span>(<span class="dv">100</span>), <span class="dt">label =</span> <span class="ot">TRUE</span>, <span class="dt">abbr =</span> <span class="ot">FALSE</span>)</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-16" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 16</h1>
+<p>Po wczytaniu poniższej ramki danych napraw następujące błędy:</p>
+<ul>
+<li>popraw nazwę kolumny <code>litąry</code>,</li>
+<li>zamień wartości <code>Ą</code> i <code>Ć</code> na ,,bezogonkowe’’,</li>
+<li>zamień kolumnę <code>liczby</code> na kolumnę liczb,</li>
+<li>zastąp brakujące dane w kolumnie <code>braku</code>.</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+        litą<span class="dt">ry =</span> <span class="kw">c</span>(<span class="st">&quot;Ą&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;Ć&quot;</span>,<span class="st">&quot;D&quot;</span>),
+        <span class="dt">liczby =</span> <span class="kw">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;3,0&quot;</span>,<span class="st">&quot;4,0&quot;</span>),
+        <span class="dt">braki =</span> <span class="kw">c</span>(<span class="ot">NA</span>,<span class="dv">1</span>,<span class="ot">NA</span>,<span class="dv">1</span>),
+        <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+df</code></pre>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-16" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 16</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># nazwa kolumny danych</span>
+<span class="kw">colnames</span>(df)[<span class="dv">1</span>] =<span class="st"> &quot;litery&quot;</span>
+
+<span class="co"># ogonki</span>
+df[df$litery ==<span class="st"> &quot;Ą&quot;</span>] =<span class="st"> &quot;A&quot;</span>
+df[df$litery ==<span class="st"> &quot;Ć&quot;</span>] =<span class="st"> &quot;C&quot;</span>
+
+<span class="co"># liczby</span>
+df$liczby &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&quot;,&quot;</span>, <span class="st">&quot;.&quot;</span>, df$liczby))
+
+<span class="co"># brakujące dane</span>
+df$braki[<span class="kw">is.na</span>(df$braki)] &lt;-<span class="st"> </span><span class="dv">1</span></code></pre>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
