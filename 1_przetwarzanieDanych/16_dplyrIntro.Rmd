@@ -110,7 +110,7 @@ DF
 
 W analizie danych często spotykamy się z sytuacją, gdy dane w kolumnie chcemy unormować. 
 
-Unormować, czyli wycrentować, a więc usunąć z nich wartość średnią (tak by średnia była równa 0) i przeskalować, a więc podzielić by odchylenie standardowe było równe 1. 
+Unormować, czyli wycentrować, a więc usunąć z nich wartość średnią (tak by średnia była równa 0) i przeskalować, a więc podzielić by odchylenie standardowe było równe 1. 
 
 Do normalizacji można wykorzystać funkcję `scale()`. Domyślnie centruje i skaluje dane, ale ustawiając dodatkowe argumenty możemy wyłącznie wycentrować lub przeskalować dane.
 
@@ -129,15 +129,61 @@ Otrzymujemy nowy, poszerzony zbiór danych
 DF
 ```
 
-# Edycja w całej kolumnie
-
-
 # Usuwanie lub zastępowanie brakujących danych
 
+W kolumnie `numer` występują brakujące wartości `NA`. 
+
+Takie wartości możemy usunąć (tzn usunąć musimy cały wiersz) korzystając z funkcji `na.omit()` 
+```{r}
+na.omit(DF)
+```
+
+Lub zastąpić przez np. średnią w kolumnie. Na poniższym przykładzie funkcją `is.na()` identyfikuje wartości brakujące, funkcja `which()` wyznaza indeksy wartości brakujących. Te indeksy będą następnie wykorzystane aby nadpisać wartości brakujące przez średnią wyznaczoną przez funkcję `mean()`.
+
+```{r}
+(ktorePuste <- which(is.na(DF$numer)))
+DF$numer[ktorePuste] <- mean(DF$numer, na.rm=TRUE)
+```
+
+Otrzymujemy nowy, uzupełniony zbiór danych
+
+```{r}
+DF
+```
+
+# Nazwy czynników w zmienej jakościowej 
+
+Gdy przetwarzamy zmienną jakościową, częstą operacją jest zmiana nazw poziomów, zmiana ich kolejności lub połączenie kilku poziomów w jeden.
+
+```{r}
+DF$oczy
+```
+
+Aby wyświetlić lub zmienić nazwy poziomów można wykorzystać funkcję `levels()`. W podobny sposób co dla `colnames()` tą samą fucnkją możemy wyświetlić wektor nazw lub go zmienić.
+
+Jeżeli przypiszemy do niego wartości z powtarzającymi się napisami, to wskazane poziomy zostaną połączone w jeden.
+
+```{r}
+levels(DF$oczy)
+levels(DF$oczy) <- c("ciemne", "niebieskie", "niebieskie")
+DF$oczy
+```
+
+Jeżeli chcemy zmienić kolejność poziomów w zmiennej jakościowej, to najłatwiej jest to zrobić z użyciem funckji `factor()`. W argumencie `levels` możemy podać poziomy w dowolnej kolejności. Wartości są takie same, ale kolejność poziomów jest inna. Kolejność poziomów jest ważna w tworzeniu wykresów (odpowiada ona kolejności poziomów na wykresie) oraz w modelowaniu statystycznym.
+
+```{r}
+factor(DF$oczy, levels=c("niebieskie", "ciemne"))
+```
+
+Otrzymujemy nowy, zmieniony zbiór danych
+
+```{r}
+DF
+```
 
 
+# Edycja w całej kolumnie
 
-# Zmiana nazw czynników w zmienej jakościowej / redukcja liczby poziomów
 
 
 ? polskie znaki
