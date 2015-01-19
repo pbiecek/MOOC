@@ -165,23 +165,24 @@ summary(auta2012$Cena.w.PLN)
 + Maksymalna cena ofertowa to wspomniane ponad 11 milionów.
 + Również i w tym przykładzie średnia cena (35 760) jest znacznie - prawie dwukrotnie - wyższa od ceny środkowej. Dzieje się tak dlatego, że większość aut oferowanych jest w niższych cenach, ale niewielka część bardzo drogich aut znacznie podnosi wartość średniej. Jest to jeden z argumentów przeciwko używaniu średniej, która jest podatna na skrajne obserwacje.
 
+[PCH: dodałbym w tym miejscu dwa słowa o funkcji `quantile()`]
 ---
 
 # Statystyki opisowe
 
 Dotąd omówiliśmy statystyki opisowe dla jednej zmiennej. Czasem interesuje nas zależność dwóch zmiennych.
 
-Najbardziej typową statystyką opisową dla pary zmiennych ilościowych jest korelacja. Można ją wyznaczyć, używając funkcji `cor()`. Przykładowo, zobaczmy czy jest zależność pomiędzy rokiem produkcji a ceną.
+Najbardziej typową statystyką opisową dla pary zmiennych ilościowych jest korelacja. Można ją wyznaczyć używając funkcji `cor()`. Zobaczmy czy istnieje zależność pomiędzy rokiem produkcji a ceną.
 
 ```{r}
 cor(auta2012$Rok.produkcji, auta2012$Cena.w.PLN)
 ```
 
-Zależność jest dodatnia, a więc im rok produkcji wyższy (=auto jest młodsze) tym jest droższe. Korelacja przyjmuje wartości od -1 do 1. Wartość 0.34 to przeciętna korelacja, pewnie część z nas mogłaby się spodziewać wyższej. Ale tak się składa, że mamy tutaj wymieszane różne marki i modele. Funkcja `cor()` domyślnie liczy korelację Pearsona, ale może też liczyć inne korelacje, np. Spearmana. Co to dokładnie znaczy i jak z niej korzystać, to omówimy w sezonie 3.
+Zależność jest dodatnia, a więc im rok produkcji auta wyższy (auto jest młodsze), tym jest ono droższe. Korelacja przyjmuje wartości od -1 do 1. Wartość 0.34 to przeciętna korelacja, pewnie część z nas mogłaby się spodziewać wyższej. Ale tak się składa, że mamy tutaj wymieszane różne marki i modele. Funkcja `cor()` domyślnie liczy korelację Pearsona, ale może też liczyć inne korelacje, np. Spearmana. Co to dokładnie znaczy i jak z niej korzystać, to omówimy w sezonie 3.
 
-Inną przydatną funkcją, jest możliwość sprawdzenia, ile wierszy, ile aut, ma określoną cechę większą lub mniejszą od jakiejś wartości. 
+Inną przydatną funkcją, jest możliwość sprawdzenia ile aut (ile wierszy danych) ma określoną cechę większą lub mniejszą od jakiejś wartości. 
 
-Przykładowo ile jest ofert sprzedaży aut tańszych niż 5 tysięcy? Lub ile jest ofert sprzedaży aut droższych niż milion?
+Na przykład, ile jest ofert sprzedaży aut tańszych niż 5 tysięcy? Lub ile jest ofert sprzedaży aut droższych niż milion?
 
 ```{r}
 sum(auta2012$Cena.w.PLN < 5000)
@@ -207,14 +208,14 @@ Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOO
 # Brakujące wartości
 
 Może się tak zdarzyć, że oferta sprzedaży nie zawiera wszystkich informacji o aucie. Np. brakuje informacji o przebiegu. 
-Takie braki danych trzeba jakoś oznaczyć. Nie można w ich miejsce wstawić np. 0, ponieważ czymś innym jest przebieg równy 0 a czymś innym jest brak informacji o przebiegu.
+Takie braki danych trzeba jakoś oznaczyć. Nie można w ich miejsce wstawić np. 0, ponieważ czymś innym jest przebieg równy 0, a czymś innym jest brak informacji o przebiegu.
 
-Potrzebna jest więc jakaś specjalna wartość, która będzie oznaczała brakujące wartości. W programie R taką wartością jest `NA` (skrót od _non available_, czyli _niedostępne_).
+Potrzebna jest więc jakaś specjalna wartość, która będzie oznaczała brakujące wartości. W programie R taką wartością jest `NA` (skrót od _not available_, czyli _niedostępne_).
 
 Jak zauważyć, że w danych występują wartości niedostępne? 
 Ich liczba będzie wymieniona w wyniku funkcji `summary()`. Dla zmiennej `Przebieg.w.km` brakujących wartości jest prawie 40 tysięcy. Czyli dla znacznej części aut nie podano informacji o ich przebiegu.
 
-Pozostałe charakterystyki, takie jak minimum, maksimum i mediana są liczone oczywiście na pozostałych 160 tysiącach aut, dla których przebieg został podany.
+Pozostałe charakterystyki, takie jak minimum, maksimum i mediana, są liczone oczywiście na pozostałych 160 tysiącach aut, dla których przebieg został podany.
 
 ```{r, warning=FALSE}
 summary(auta2012$Przebieg.w.km)
@@ -238,8 +239,7 @@ min(auta2012$Przebieg.w.km)
 max(auta2012$Przebieg.w.km)
 ```
 
-To logiczne. Jeżeli nie wszystkie wartości są znane, to nie można policzyć ani średniej ani minimum ani maksimum.
-
+To logiczne. Jeżeli nie wszystkie wartości są znane, to nie można policzyć ani średniej, ani innej statystyki.
 Logiczne ale też mało praktyczne. 
 Często chcielibyśmy policzyć średnią, medianę, minimum tylko z tych wartości które są znane.
 
@@ -268,7 +268,7 @@ Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOO
 Powyżej opisane statystyki liczbowe można przedstawić graficznie.
 Prezentacja graficzna ma tę zaletę, że wyćwiczone oko potrafi szybko wiele dowiedzieć się z danych. 
 
-Opisując zmienną ilościową mamy do wyboru różne sposoby prezentacji, w zależności od tego ile informacji chcemy przedstawić.
+Opisując zmienną ilościową mamy do wyboru różne sposoby prezentacji, w zależności od tego, ile informacji chcemy przedstawić.
 
 Przypuśćmy, że chcemy pokazać wyłącznie średnią. Jedną liczbę. Zrobimy to za pomocą wykresu słupkowego.
 Wykres słupkowy można w programie R wyznaczyć funkcją `barplot()`.
@@ -284,9 +284,9 @@ barplot(srednia)
 
 # Graficzne statystyki opisowe - wykres słupkowy
 
-Zobaczmy jak wyglądają średnie ceny w grupach. Przykładowo w zależności od rodzaju paliwa. 
+Zobaczmy jak wyglądają średnie ceny w grupach, na przykład w zależności od rodzaju paliwa. 
 
-Do liczenia średniej w grupach wykorzystamy funkcję `tapply()`, jako pierwszy argument przyjmuje cechę ilościową, jako drugi informacje o grupach a jako trzeci nazwę zmiennej, która ma w każdej grupie być wykonana (i następnie dodatkowe argumenty). 
+Do liczenia średniej w grupach wykorzystamy funkcję `tapply()`, jako pierwszy argument przyjmuje cechę ilościową, jako drugi informacje o grupach a jako trzeci nazwę funkcji, która ma w każdej grupie być wykonana (i następnie dodatkowe argumenty). 
 
 Wynikiem będzie wektor ze średnimi. Możemy teraz użyć funkcji `barplot()`, argument `las=2` powoduje, że etykiety na osi OX pojawią się w pionie, co ułatwi ich odczytanie.
 
@@ -309,7 +309,7 @@ Ciekawszy będzie wykres, przedstawiający więcej informacji.
 W statystykach opisowych pokazaliśmy funkcją `summary()`, prezentującą sześć charakterystycznych informacji o rozkładzie (min, max, kwartyle i średnią).
 Pięć z nich, za wyjątkiem średniej, przedstawia wykres pudełko-wąsy, który w R można wykonać używając funkcji `boxplot()`.
 
-W poniższym przykładzie przedstawiamy te pięć liczb dla zmiennej `Przebieg.w.km`. Argument `horizontal=TRUE` powoduje, że wykres rysowany jest poziomo, argument `range = 0` powoduje, że nie są wyznaczane wartości odstające (a nie mówiliśmy co to za wartości, więc ich nie wyznaczajmy, wrócimy do tego tematu później).
+W poniższym przykładzie przedstawiamy te pięć liczb dla zmiennej `Przebieg.w.km`. Argument `horizontal=TRUE` powoduje, że wykres rysowany jest poziomo, argument `range = 0` powoduje, że nie są wyznaczane wartości odstające (a nie mówiliśmy co to za wartości, więc ich nie wyznaczajmy - wrócimy do tego tematu później).
 
 ```{r, warning=FALSE, fig.height=4}
 summary(auta2012$Przebieg.w.km)
@@ -344,7 +344,7 @@ Każdy z elementów tego wykresu (lewy wąs, lewa część pudełka, prawa czę�
 Z wykresu tego możemy łatwo odczytać, że 3/4 danych dotyczy aut o przebiegu poniżej 200 tys. km. Jedynie 1/4 danych ma wyższe wartości i dla tych aut rozpiętość jest bardzo duża.
 
 Jeżeli chcemy zaprezentować bardziej szczegółowe dane o przebiegu, możemy wykorzystać histogram.
-Histogram przedstawia liczbę obserwacji o określonych przedziałach wartości. Domyślnie przedziały są równo szerokie a ich liczbę wybiera algorytm uwzględniający zmienność cechy (zazwyczaj jest to od 6 do 10 przedziałów).
+Histogram przedstawia liczbę obserwacji o określonych przedziałach wartości. Domyślnie przedziały są równo szerokie, a ich liczbę wybiera algorytm uwzględniający zmienność cechy (zazwyczaj jest to od 6 do 10 przedziałów).
 
 Aby wykonać w programie R histogram, można wykorzystać funkcję `hist()`. Pierwszy argument określa dane, które mają być pokazane. Na poniższym przykładzie słupki zamalowano na szaro by były bardziej widoczne. 
 
@@ -356,13 +356,13 @@ hist(auta2012wybrane$Przebieg.w.km, col="grey")
 
 # Graficzne statystyki opisowe - histogram
 
-Argumentem `breaks` można określić liczbę przedziałów lub nawet granice przedziałów. Jeżeli mamy dużo obserwacji to często można więcej odczytać mając dużą liczbę przedziałów. W każdym przedziale histogram przedstawia liczbę obserwacji, im wyższy słupek, tym więcej było aut, o określonym przebiegu.
+Argumentem `breaks` można określić liczbę przedziałów lub nawet granice przedziałów. Jeżeli mamy dużo obserwacji to często można więcej odczytać mając dużą liczbę przedziałów. W każdym przedziale histogram przedstawia liczbę obserwacji. Im wyższy słupek, tym więcej było aut o określonym przebiegu.
 
-Na poniższym wykresie zauważyć można dwa ,,pagórki''. Jeden pobliżu 0 oraz drugi w pobliżu 180 tys. km. 
-Oznacza to, że w zbiorze danych jest jedna duża grupa aut o bardzo małym przebiegu, aut o przebiegu w okolicy 50 tys. km jest mniej, aut o przebiegu w okolicy 150 tys. km jest bardzo dużo a aut o przebiegu ponad 300 tys. km jest już bardzo mało, pojedyncze sztuki.
+Na poniższym wykresie zauważyć można dwa ,,pagórki''. Jeden w pobliżu 0 oraz drugi w pobliżu 180 tys. km. 
+Oznacza to, że w zbiorze danych jest jedna duża grupa aut o bardzo małym przebiegu, aut o przebiegu w okolicy 50 tys. km jest mniej, aut o przebiegu w okolicy 150 tys. km jest bardzo dużo, a aut o przebiegu ponad 300 tys. km jest już bardzo mało, pojedyncze sztuki.
 
-Jak widzimy zmienną ilościowa możemy opisać z różnym poziomem szczegółowości. Im większa szczegółowość tym więcej elementów na wykresie. 
-Im więcej elementów tym więcej możemy odczytać ale jest to też trudniejsze.
+Jak widzimy zmienną ilościową możemy opisać z różnym poziomem szczegółowości. Im większa szczegółowość tym więcej elementów na wykresie. 
+Im więcej elementów tym więcej możemy odczytać, ale jest to też trudniejsze.
 
 ```{r, warning=FALSE}
 hist(auta2012wybrane$Przebieg.w.km, breaks = 100, col="grey")
@@ -387,9 +387,9 @@ plot(koty_ptaki$waga, koty_ptaki$predkosc, ylab="Predkość", xlab="Waga")
 # Graficzne statystyki opisowe - wykres punktowy
 
 Użyjmy funkcji `plot()` dla danych o autach, np. by pokazać zależność pomiędzy przebiegiem a ceną.
-Okazuje się jednak, że ponieważ ofert sprzedaży aut jest bardzo wiele, lepiej nie rysować każdej oferty dużym kołem, ale pojedynczym punktem Można to osiągnąć dodając argument `pch="."`. Ponieważ i przebieg i cena auta zawierają pojedyncze bardzo duże wartości zamiast pokazywać je w standardowej skali, znacznie lepiej przedstawić je w skali logarytmicznej. To można osiągnąć dodając do wykresu argument `log="xy"`. Wartość `"xy"` oznacza, że obie osie należy zlogarytmować. 
+Okazuje się jednak, że ponieważ ofert sprzedaży aut jest bardzo wiele, lepiej nie rysować każdej oferty dużym kołem, ale pojedynczym punktem. Można to osiągnąć dodając argument `pch="."`, którym możemy zmieniać znak za pomocą którego rysowane są na wykresie punkty odpowiadające danym. Ponieważ i przebieg i cena auta zawierają pojedyncze bardzo duże wartości zamiast pokazywać je w standardowej skali, znacznie lepiej przedstawić je w skali logarytmicznej. Można to osiągnąć dodając do wykresu argument `log="xy"`. Wartość `"xy"` oznacza, że obie osie należy zlogarytmować. 
 
-Więcej informacji o wykresach rozrzutu i innych sposobach przedstawienia cechy ilościowej przedstawione jest w sezonie 3.
+Więcej informacji o wykresach rozrzutu i innych sposobach przedstawienia cechy ilościowej przedstawionych jest w sezonie 3.
 
 ```{r, warning=FALSE}
 plot(auta2012wybrane$Przebieg.w.km, auta2012wybrane$Cena.w.PLN, log="xy", pch=".")
