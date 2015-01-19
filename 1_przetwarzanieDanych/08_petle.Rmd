@@ -16,19 +16,19 @@ output:
 # O czym jest ten odcinek
 
 Silną stroną komputerów jest to, że mogą bardzo szybko powtarzać określone operacje.
-Nie są zbyt inteligentne (póki co) ale są bardzo szybie i idealne do powtarzania, powtarzania, powtarzania, powtarzania.
+Nie są zbyt inteligentne (póki co), ale są bardzo szybie i idealne do powtarzania, powtarzania, powtarzania, powtarzania...
 
 Analizując dane bardzo często znajdziemy się w sytuacji, gdy określoną czynność będziemy chcieli powtórzyć. Wykonać ją dla każdej zmiennej, dla każdego analizowanego dnia, dla każdego analizowanego zbioru danych.
 
-Narzędziem, pozwalającym na powtarzanie w kółko (w pętli) określonych operacji są pętle.
+Narzędziem pozwalającym na powtarzanie w kółko (w pętli) określonych operacji są właśnie... pętle.
 
-W tym odcinku nauczymy się
+W tym odcinku nauczymy się:
 
-- Jak i po co tworzyć pętle?
-- Jak korzystać z pętli `for()`?
-- Jak i po co tworzyć pętle w pętli?
+- jak i po co tworzyć pętle,
+- jak korzystać z pętli `for()`,
+- jak i po co tworzyć pętle w pętli.
 
-Do ilustracji wykorzystamy zbiór danych to `koty_ptaki` dostępny w pakiecie `SmarterPoland`.
+Do ilustracji wykorzystamy zbiór danych `koty_ptaki` dostępny w pakiecie `SmarterPoland`.
 
 ```{r, message=FALSE, warning=FALSE}
 library(SmarterPoland)
@@ -39,9 +39,9 @@ head(koty_ptaki, 3)
 
 # Pętle
 
-Pętle mogą być wykorzystywane aby powtórzyć jakąś operację określoną liczbę razy.
+Pętle mogą być wykorzystywane, aby powtórzyć jakąś operację określoną liczbę razy.
 
-Zacznijmy od przykładu, w którym określoną liczbę razy wyświetlimy pewien napis na ekranie.
+Zacznijmy od przykładu, w którym wielokrotnie wyświetlimy pewien napis na ekranie.
 W języku R jest kilka rodzajów pętli, które można do tego celu wykorzystać, ale najczęściej stosowana jest pętla `for` i to ją przedstawimy w pierwszej kolejności.
 
 ```{r}
@@ -55,20 +55,20 @@ for (i in 1:odliczajDo) {
 Ten sam efekt otrzymalibyśmy wpisując pięciokrotnie instrukcję `cat()` (która wyświetla swoje argumenty na ekranie). 
 
 ```{r, eval=FALSE}
-cat("Wartość zmiennej i: 5\n")
-cat("Wartość zmiennej i: 4\n")
-cat("Wartość zmiennej i: 3\n")
-cat("Wartość zmiennej i: 2\n")
 cat("Wartość zmiennej i: 1\n")
+cat("Wartość zmiennej i: 2\n")
+cat("Wartość zmiennej i: 3\n")
+cat("Wartość zmiennej i: 4\n")
+cat("Wartość zmiennej i: 5\n")
 ```
 
-Co jednak, gdybyśmy chcieli powtórzyć ją 10 000 razy? Z pewnością nikt z nas nie chciałby wpisywać przez kilka dni tych instrukcji, tym bardziej, że ten sam efekt można by osiągnąć prostą pętlą.
+Co jednak, gdybyśmy chcieli powtórzyć ją 10 000 razy? Z pewnością nikt z nas nie chciałby wpisywać przez kilka dni tych instrukcji, tym bardziej, że ten sam efekt można osiągnąć prostą pętlą.
 
 ---
 
 # Pętle
 
-Sposób użycia (tak zwana *składnia*) pętli `for` jest następujący. 
+Sposób użycia (tak zwana *składnia*) pętli `for` jest następujący:
 
 ```{r, eval=FALSE}
 for (A in B) C
@@ -90,35 +90,35 @@ for (i in 1:odliczajDo) {
 
 W poprzednim przykładzie łatwo było przewidzieć wynik całej pętli. Wyświetlała ona pięć kolejnych liczb od 1 do 5. 
 
-Pokażemy teraz bardziej złożony przykład, który symuluje tak zwany proces szkodowy. Załóżmy, że mamy flotę samochodów w której w ciągu roku zdarzyć się może X stłuczek (X będziemy losować). Naprawa każdej stłuczki kosztować będzie od 0 do 10 000 PLN. 
+Pokażemy teraz bardziej złożony przykład, który symuluje tak zwany proces szkodowy. Załóżmy, że mamy flotę samochodów, w której w ciągu roku zdarzyć się może X stłuczek (X będziemy losować). Naprawa każdej stłuczki kosztować będzie od 0 do 10 000 PLN. 
 
 ```{r, message=FALSE, warning=FALSE}
 # losujemy liczbę stłuczek
-liczbaStłuczek <- round(runif(n = 1, min = 1, max = 10))
+liczbaStluczek <- round(runif(n = 1, min = 1, max = 10))
 # dla każdej losujemy wartość szkody
-for (i in 1:liczbaStłuczek) {
-  cat("Stłuczka ", i," a jej koszt naprawy to", runif(n = 1, min=0, max=10000), "PLN\n")
+for (i in 1:liczbaStluczek) {
+  cat("Stłuczka ", i,", a jej koszt naprawy to ", runif(n = 1, min=0, max=10000), " PLN\n", sep = '')
 }
 ```
 
-W tym przykładzie, funkcja `runif()` służy do losowania `n` liczb z przedziału od `min` do `max`. W pierwszej linii wykorzystujemy ją do wylosowania liczby stłuczek z przedziału 1 do 10. Funkcja `round()` służy do zaokrąglania wyniki do liczby całkowitej.
+W tym przykładzie funkcja `runif()` służy do losowania `n` liczb z przedziału od `min` do `max`. W pierwszej linii wykorzystujemy ją do wylosowania liczby stłuczek z przedziału 1 do 10. Funkcja `round()` służy do zaokrąglania wyniku do liczby całkowitej.
 
 W każdym kroku pętli losowana jest kolejna wartość, oraz wypisywana jest na ekranie.
-Choć ta pętla wygląda na prostą i niewinną, podobny sposób losowania wielkości szkody jest w rzeczywistości wykorzystywany do zarządzania niepewnością dotyczące tego jak duże szkody z tytułu stłuczek lub innych losowych wypadków mogą wystąpić w firmach.
+Choć ta pętla wygląda na prostą i niewinną, podobny sposób losowania wielkości szkody jest w rzeczywistości wykorzystywany do zarządzania niepewnością dotyczącego tego, jak duże szkody z tytułu stłuczek lub innych losowych wypadków mogą wystąpić w firmach.
 
 ---
 
 # Pętle
 
-Jak widzieliśmy w poprzednim przypadku, liczba powtórzeń pętli nie musi być z góry określona, może zależeć od np. liczby wierszy lub liczbie kolumn w ramce danych. 
+Jak widzieliśmy w poprzednim przypadku, liczba powtórzeń pętli nie musi być z góry określona, może zależeć od np. liczby wierszy lub liczby kolumn w ramce danych. 
 
-W poniższym przykładzie dla każdej kolumny z ramki danych `koty_ptaki` wyświetlamy listę różnych wartości, które występują w tej kolumnie. Na kolejnym składzie wyjaśnimy krok po kroku co się dzieje w tej funkcji.
+W poniższym przykładzie dla każdej kolumny z ramki danych `koty_ptaki` wyświetlamy listę różnych wartości, które występują w tej kolumnie. Na kolejnym slajdzie wyjaśnimy krok po kroku co dzieje się w poniższym kodzie.
 
 ```{r, message=FALSE, warning=FALSE}
 # wektor z nazwami kolumn
 kolumny <- colnames(koty_ptaki)
 kolumny
-# pętla, która dla każdej kolumny wyświetla różne wartości występujące w tej kolumnie
+# pętla, która dla każdej kolumny wyświetla różne wartości w niej występujące
 for (i in kolumny) {
   wartosciWKolumnie <- unique(as.character(koty_ptaki[,i]))
   cat("Kolumna", i, "\n")
@@ -133,7 +133,7 @@ for (i in kolumny) {
 
 Przyjrzyjmy się pętli z poprzedniego slajdu linia po linii.
 
-Pierwsza instrukcja wykorzystuje funkcje `colnames()` do wyznaczenia nazw kolumn. Te nazwy zostaną przypisane do wektora `kolumny`, który następnie zostanie wyświetlony.
+Pierwsza instrukcja wykorzystuje funkcję `colnames()` do wyznaczenia nazw kolumn. Te nazwy zostaną przypisane do wektora `kolumny`, który następnie zostanie wyświetlony.
 
 ```{r, eval=FALSE}
 # wektor z nazwami kolumn
@@ -149,7 +149,7 @@ Wewnątrz pętli wyznaczany jest wektor różnych wartości. Jest to wykonywane 
 ```{r, eval=FALSE}
   wartosciWKolumnie <- unique(as.character(koty_ptaki[,i]))
 ```
-Dwie kolejne instrukcje `cat()` wyświetlają na ekranie w pierwszej linii nazwę kolumny a w drugiej linii liczbę różnych wartości (długość wektora `wartosciWKolumnie` wyznaczana jest funkcją `length()`) oraz wszystkie różne wartości.
+Dwie kolejne instrukcje `cat()` wyświetlają na ekranie w pierwszej linii nazwę kolumny, a w drugiej liczbę różnych wartości (długość wektora `wartosciWKolumnie` wyznaczana jest funkcją `length()`) oraz wszystkie różne wartości.
 ```{r, eval=FALSE}
   cat("Kolumna", i, "\n")
   cat("   ", length(wartosciWKolumnie), "różnych wartości:", wartosciWKolumnie, "\n")
@@ -181,7 +181,7 @@ cat(koty_ptaki[i, "gatunek"], "może ważyć do", koty_ptaki[i, "waga"], "kg\n")
 
 Powtórzmy tę operację dla każdego wiersza. Liczbę wierszy w ramce danych można odczytać poleceniem `nrow()` (od *number of rows*).
 
-Sekwencja `1:nrow(koty_ptaki)` tworzy wektor liczb od 1 do 13 (tyle jest wierszy). Dla każdego wiersza uruchamiany instrukcję z poprzedniego slajdu, wypisującą wagę kolejnego gatunku.
+Sekwencja `1:nrow(koty_ptaki)` tworzy wektor liczb od 1 do 13 (tyle jest wierszy). Dla każdego wiersza uruchamiamy instrukcję z poprzedniego slajdu, wypisującą wagę kolejnego gatunku.
 
 ```{r, message=FALSE, warning=FALSE}
 for (i in 1:nrow(koty_ptaki)) {
@@ -208,9 +208,9 @@ W języku R, jak i w każdym dojrzałym języku programowania, ten sam efekt mo�
 
 # Pętla w pętli
 
-Pętle można zanurzać w innych pętlach. Na pierwszy rzut oka, może wyglądać to dziwnie, ale jest to dosyć popularna praktyka.
+Pętle można zanurzać w innych pętlach. Na pierwszy rzut oka może wyglądać to dziwnie, ale jest to dosyć popularna praktyka.
 
-Przypuśćmy, że chcemy policzyć coś, np. korelację, podobieństwo lub różnice dla każdej pary kolumn. Jak to zrobić? Najłatwiej użyć dwóch pętli jednej w drugiej.
+Przypuśćmy, że chcemy policzyć coś, np. korelację, podobieństwo lub różnice, dla każdej pary kolumn. Jak to zrobić? Najłatwiej użyć dwóch pętli - jednej w drugiej.
 
 ```{r, eval=FALSE}
 for (i in colnames(koty_ptaki)) {
@@ -248,7 +248,7 @@ for (i in 1:n_kropek) {
 
 Powtórzmy tę pętlę dla każdego wiersza danych `koty_ptaki`, a więc różnych gatunków.
 
-Powtórzmy powyższą pętle przedstawiającą prędkość pierwszego organizmu dla każdego wiersza osobno, wyświetlając kropkami prędkość a na końcu dopisując nazwę gatunku.
+Powtórzmy powyższą pętle przedstawiającą prędkość pierwszego gatunku, ale tym razem dla każdego wiersza osobno. Kropkami przedstawmy prędkość na końcu dopisując nazwę gatunku.
 
 ```{r, message=FALSE, warning=FALSE}
 # Dla każdego wiersza w tabeli `koty_ptaki`
@@ -279,9 +279,9 @@ for (i in 1:odliczajDo) {
 }
 
 # pętla losująca wartości stłuczek dla losowej liczby stłuczek
-liczbaStłuczek <- round(runif(n = 1, min = 1, max = 10))
+liczbaStluczek <- round(runif(n = 1, min = 1, max = 10))
 # dla każdej losujemy wartość szkody
-for (i in 1:liczbaStłuczek) {
+for (i in 1:liczbaStluczek) {
   cat("Stłuczka ", i," a jej koszt naprawy to", runif(n = 1, min=0, max=10000), "PLN\n")
 }
 
