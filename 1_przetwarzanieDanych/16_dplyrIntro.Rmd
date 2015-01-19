@@ -15,9 +15,9 @@ output:
 
 # O czym jest ten odcinek
 
-Praca z danymi to w dużej części czyszczenie i zmiana struktury. Zarówno dane zbierane przez ludzi jak i przez automatyczne czujniki mają tendencje do zawierania braków, obserwacji odstających lub zwykłych błędów. Aby sensownie analizować dane, musimy przekształcić je do postaci w której wyniki anliz będą wiarygodne.
+Praca z danymi to w dużej części czyszczenie i wielokrotna zmiana reprezentacji. Po co dane czyścić? Zarówno dane zbierane przez ludzi jak i przez automatyczne czujniki mają tendencje do zawierania braków, obserwacji odstających lub zwykłych błędów. Aby sensownie analizować dane, musimy przekształcić je do postaci w której wyniki anliz będą wiarygodne.
 
-Czyszceznie to bardzo istotna faza. Bez względu bowiem jak zaawansowana i dobrze dobrana jest nasza technika analiza danych, jeżeli na wejściu będą śmieciowe dane to na wyjściu będą śmieciowe wyniki. *Garbage in garbage out*
+Czyszczenie to bardzo istotna faza. Bez względu bowiem jak zaawansowana i dobrze dobrana jest nasza technika analiza danych, jeżeli na wejściu będą śmieciowe dane to na wyjściu będą śmieciowe wyniki. *Garbage in garbage out*
 
 W tym odcinku nauczymy się
 
@@ -31,15 +31,15 @@ Mając dane wyczyszczone, możemy przejść do kolejnych etatów, czyli wstępne
 
 # Tworzenie danych przez funkcję data.frame()
 
-Na potrzeby ćwiczeń z czyszceznia danych stworzymy sztuczną ramkę danych z kilkoma błędami.
+Na potrzeby ćwiczeń z czyszczenia danych stworzymy sztuczną ramkę danych z kilkoma celowo dodanymi błędami.
 
-Ramkę danych stworzymy funkcją `data.frame()`, kolejne argumenty to wektory, które zostaną zamienione na kolejne kolumny w ramce danych. Ostatni argument `stringsAsFactors = FALSE` określa, że napisy mają NIE być zamieniane na zmienne jakościowe (takie jest domyślne zachowanie tej funkcji).
+Ramkę danych stworzymy funkcją `data.frame()`, kolejne argumenty to wektory, które zostaną zamienione na kolejne kolumny w ramce danych. Ostatni argument `stringsAsFactors = FALSE` określa, że napisy mają NIE być zamieniane na zmienne jakościowe (domyślne dochodzi do zamiany).
 
 ```{r}
 DF <- data.frame(
         imie = c("Maja","Anna","Zosia","Joanna"),
         wiek = c("40","12,5","25","16.6"),
-        numer = c(1,2,3,4),
+        numer = c(1,2,NA,4),
         oczo = factor(c("niebieskie", "jasno-niebieskie", "ciemne", "niebieskie")),
         stringsAsFactors = FALSE)
 DF
@@ -52,13 +52,44 @@ W wynikowej ramce będziemy chcieli poprawić następujące błędy:
 + imię `Zosia` zamienić na `Zofia`
 + kolory oczy zamienić na dwie grupy `niebieskie` i `ciemne`.
 
-# Edycja w całej kolumnie
-
 
 # Zamiana nazwy kolumny
 
+Aby wyświetlić nazwy kolumn można wykorzystać funkcję `colnames()`. Wynikiem jest wektor napisów, można na elementach tego wektora używać indeksów podobnie jak w poniższym przykładzie.
+Analogicznie funkcja `rownames()` pozwala na pracę z nazwami wierszy.
+
+```{r}
+colnames(DF)
+# czwarty element wektora
+colnames(DF)[4]
+```
+
+Funkcji `colnames()` można również użyć by zmienić nazwy kolumn. Poniższe dwie instrukcje wywołają funkcję `colnames<-()`, która zmienia nazwy kolumn. Można jednocześnie zmeinić wszystkie lub tylko wybrane elementy wektora nazw kolumn.
+
+Obie poniższe instrukcje poprawią nazwę ostatniej kolumny.
+
+```{r}
+colnames(DF) <- c("imie", "wiek", "numer", "oczy")
+colnames(DF)[4] <- "oczy"
+```
+
+W wyniku mamy więc zbiór danych
+
+```{r}
+DF
+```
 
 # Zamiana przecinka na kropkę
+
+
+```{r}
+colnames(DF)
+# czwarty element wektora
+colnames(DF)[4]
+```
+
+
+# Edycja w całej kolumnie
 
 
 # Usuwanie lub zastępowanie brakujących danych

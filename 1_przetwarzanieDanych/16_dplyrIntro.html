@@ -52,8 +52,8 @@ pogRomcy danych
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
-<p>Praca z danymi to w dużej części czyszczenie i zmiana struktury. Zarówno dane zbierane przez ludzi jak i przez automatyczne czujniki mają tendencje do zawierania braków, obserwacji odstających lub zwykłych błędów. Aby sensownie analizować dane, musimy przekształcić je do postaci w której wyniki anliz będą wiarygodne.</p>
-<p>Czyszceznie to bardzo istotna faza. Bez względu bowiem jak zaawansowana i dobrze dobrana jest nasza technika analiza danych, jeżeli na wejściu będą śmieciowe dane to na wyjściu będą śmieciowe wyniki. <em>Garbage in garbage out</em></p>
+<p>Praca z danymi to w dużej części czyszczenie i wielokrotna zmiana reprezentacji. Po co dane czyścić? Zarówno dane zbierane przez ludzi jak i przez automatyczne czujniki mają tendencje do zawierania braków, obserwacji odstających lub zwykłych błędów. Aby sensownie analizować dane, musimy przekształcić je do postaci w której wyniki anliz będą wiarygodne.</p>
+<p>Czyszczenie to bardzo istotna faza. Bez względu bowiem jak zaawansowana i dobrze dobrana jest nasza technika analiza danych, jeżeli na wejściu będą śmieciowe dane to na wyjściu będą śmieciowe wyniki. <em>Garbage in garbage out</em></p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
 <li>Jak edytować zbiory danych by doprawadzić je do spójnej postaci.</li>
@@ -64,29 +64,45 @@ pogRomcy danych
 </div>
 <div id="tworzenie-danych-przez-funkcje-data.frame" class="slide section level1">
 <h1>Tworzenie danych przez funkcję data.frame()</h1>
-<p>Na potrzeby ćwiczeń z czyszceznia danych stworzymy sztuczną ramkę danych z kilkoma błędami.</p>
-<p>Ramkę danych stworzymy funkcją <code>data.frame()</code>, kolejne argumenty to wektory, które zostaną zamienione na kolejne kolumny w ramce danych. Ostatni argument <code>stringsAsFactors = FALSE</code> określa, że napisy mają NIE być zamieniane na zmienne jakościowe (takie jest domyślne zachowanie tej funkcji).</p>
+<p>Na potrzeby ćwiczeń z czyszczenia danych stworzymy sztuczną ramkę danych z kilkoma celowo dodanymi błędami.</p>
+<p>Ramkę danych stworzymy funkcją <code>data.frame()</code>, kolejne argumenty to wektory, które zostaną zamienione na kolejne kolumny w ramce danych. Ostatni argument <code>stringsAsFactors = FALSE</code> określa, że napisy mają NIE być zamieniane na zmienne jakościowe (domyślne dochodzi do zamiany).</p>
 <pre class="sourceCode r"><code class="sourceCode r">DF &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
         <span class="dt">imie =</span> <span class="kw">c</span>(<span class="st">&quot;Maja&quot;</span>,<span class="st">&quot;Anna&quot;</span>,<span class="st">&quot;Zosia&quot;</span>,<span class="st">&quot;Joanna&quot;</span>),
         <span class="dt">wiek =</span> <span class="kw">c</span>(<span class="st">&quot;40&quot;</span>,<span class="st">&quot;12,5&quot;</span>,<span class="st">&quot;25&quot;</span>,<span class="st">&quot;16.6&quot;</span>),
-        <span class="dt">numer =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>),
+        <span class="dt">numer =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="ot">NA</span>,<span class="dv">4</span>),
         <span class="dt">oczo =</span> <span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;niebieskie&quot;</span>, <span class="st">&quot;jasno-niebieskie&quot;</span>, <span class="st">&quot;ciemne&quot;</span>, <span class="st">&quot;niebieskie&quot;</span>)),
         <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
 DF</code></pre>
 <pre><code>##     imie wiek numer             oczo
 ## 1   Maja   40     1       niebieskie
 ## 2   Anna 12,5     2 jasno-niebieskie
-## 3  Zosia   25     3           ciemne
+## 3  Zosia   25    NA           ciemne
 ## 4 Joanna 16.6     4       niebieskie</code></pre>
-</div>
-<div id="edycja-w-caej-kolumnie" class="slide section level1">
-<h1>Edycja w całej kolumnie</h1>
+<p>W wynikowej ramce będziemy chcieli poprawić następujące błędy:</p>
+<ul>
+<li>nazwę kolumny <code>oczo</code> zamienić na <code>oczy</code></li>
+<li>zmienną <code>wiek</code> zamienić na liczbową, w tym celu trzeba wpierw zamieniż <code>,</code> na <code>.</code></li>
+<li>imię <code>Zosia</code> zamienić na <code>Zofia</code></li>
+<li>kolory oczy zamienić na dwie grupy <code>niebieskie</code> i <code>ciemne</code>.</li>
+</ul>
 </div>
 <div id="zamiana-nazwy-kolumny" class="slide section level1">
 <h1>Zamiana nazwy kolumny</h1>
+<p>Aby wyświetlić nazwy kolumn można wykorzystać funkcję <code>colnames()</code>. Wynikiem jest wektor napisów, można na elementach tego wektora używać indeksów podobnie jak w poniższym przykładzie. Analogicznie funkcja <code>rownames()</code> pozwala na pracę z nazwami wierszy.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(DF)</code></pre>
+<pre><code>## [1] &quot;imie&quot;  &quot;wiek&quot;  &quot;numer&quot; &quot;oczo&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># czwarty element wektora</span>
+<span class="kw">colnames</span>(DF)[<span class="dv">4</span>]</code></pre>
+<pre><code>## [1] &quot;oczo&quot;</code></pre>
+<p>Funkcji <code>colnames()</code> można również użyć by zmienić nazwy kolumn. Poniższe dwie instrukcje wywołają funkcję <code>colnames&lt;-()</code>, która zmienia nazwy kolumn. Można jednocześnie zmeinić wszystkie lub tylko wybrane elementy wektora nazw kolumn.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(DF) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;imie&quot;</span>, <span class="st">&quot;wiek&quot;</span>, <span class="st">&quot;numer&quot;</span>, <span class="st">&quot;oczy&quot;</span>)
+<span class="kw">colnames</span>(DF)[<span class="dv">4</span>] &lt;-<span class="st"> &quot;oczy&quot;</span></code></pre>
 </div>
 <div id="zamiana-przecinka-na-kropke" class="slide section level1">
 <h1>Zamiana przecinka na kropkę</h1>
+</div>
+<div id="edycja-w-caej-kolumnie" class="slide section level1">
+<h1>Edycja w całej kolumnie</h1>
 </div>
 <div id="usuwanie-lub-zastepowanie-brakujacych-danych" class="slide section level1">
 <h1>Usuwanie lub zastępowanie brakujących danych</h1>
