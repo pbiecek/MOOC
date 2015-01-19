@@ -37,7 +37,7 @@ część 1: Data smart
     + odcinek 14: Cechy napisowe, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/14_napisowe.html), v1 ready
     + odcinek 15: Daty, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/15_daty.html), v1 ready
   * Przetwarzanie potokowe danych
-    + odcinek 16: Czyszczenie i wprowadzenie do obróbki danych, [intro](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanie/16_dplyrIntro.Rmd), 
+    + odcinek 16: Czyszczenie i wprowadzenie do obróbki danych, [intro](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanie/16_dplyrIntro.Rmd), v1 ready
     + odcinek 17: Filtrowanie wierszy [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/17_dplyr_filter.html), 
     + odcinek 18: Sortowanie wierszy [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/18_dplyr_sort.html), 
     + odcinek 19: Przetwarzanie potokowe [html](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/19_dplyr_potok.html), 
