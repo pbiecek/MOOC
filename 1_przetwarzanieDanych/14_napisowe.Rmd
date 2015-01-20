@@ -16,32 +16,38 @@ output:
 
 # O czym jest ten odcinek
 
-Analizując dane spotkamy się z różnymi rodzajami zmiennych. 
-Bardzo często są to napisy lub zmienne, które chcemy do napisów przekształcić (np. data, którą można przekształcić do napisy by wyłuskać rok i miesiąc).
+Analizując dane spotkamy się z różnymi rodzajami zmiennych. Bardzo często są to napisy lub zmienne, które chcemy do napisów 
+przekształcić (np. data, którą można przekształcić na napus by wyłuskać rok i miesiąc).
 
-W tym odcinku nauczymy się
+W tym odcinku nauczymy się:
 
-- Jak przekształcać zmienne na i z napisów?
-- Jakie podstawowe operacje można wykonywać na napisach?
-- Jak podsumowywać / opisywać napisy?
+- jak przekształcać zmienne z napisów i na napisy,
+- jakie podstawowe operacje można wykonywać na napisach,
+- jak podsumowywać / opisywać napisy.
 
-Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, 
+znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
 
 ---
 
 # Co to znaczy: napisy
 
-Osoby mające doświadczenie w pracy z takimi językami jak C++ czy Java są przyzwyczajone do rozdziały typów na znaki, napisy (łańcuchy znaków) i wektory napisów. W programie R nie ma tego podziału, są tylko wektory napisów. 
+Osoby mające doświadczenie w pracy z takimi językami jak C++ czy Java są przyzwyczajone do podziału typów na znaki, 
+napisy (łańcuchy znaków) i wektory napisów. W programie R nie ma tego podziału, są tylko wektory napisów. 
 
-Wektor może być jednoelementowy i długość tego jednego elementu może wynosić jeden, ale wciąż to wektor napisów. Takie wektory oznaczane są klasą `character`.
+Wektor może być jednoelementowy i długość tego jednego elementu może wynosić jeden, ale wciąż to wektor napisów. 
+Takie wektory oznaczane są klasą `character`.
 
 ```{r}
 class("A")
 ```
 
-Napisy spotkać można w różnych kontekstach. Najbardziej naturalnym jest taki, że w zbiorze danych były zebrane wypowiedzi. Np. pobierając dane z Twittera, jedną ze zmiennych opisujących pojedyncze ćwierknięcie jest treść tweetu, czyli napis o długości do 140 znaków.
+Napisy spotkać można w różnych kontekstach. Najbardziej naturalnym jest taki, że w zbiorze danych były zebrane wypowiedzi. 
+Np. pobierając dane z Twittera, jedną ze zmiennych opisujących pojedyncze ,,ćwierknięcie'' jest jego treść, czyli napis o długości do 140 znaków.
 
-Napisy pojawiają się też, gdy wczytywane są dane ilościowe lub jakościowe, ale z jakiegoś powodu w procesie wczytywania dane te wczytały się jako napisy (np. przez źle określone formatowanie). W takim przypadku, często napisy przekształcamy na pożądany typ, np. ilościowy, jakościowy, datę itp.
+Napisy pojawiają się też, gdy wczytywane są dane ilościowe lub jakościowe, ale z jakiegoś powodu w procesie 
+wczytywania dane te zinterpretowane zostały jako napisy (np. przez źle określone formatowanie). W takim przypadku napisy przekształcamy często 
+na pożądany typ, np. ilościowy, jakościowy, datę itp.
 
 ```{r}
 as.numeric("2012")     # konwersja na liczbę
@@ -53,22 +59,25 @@ as.Date("2012-01-01")  # konwersja na datę
 
 # Wczytanie danych
 
-Dane od których rozpoczniemy przykłady to `koty_ptaki` z pakietu `SmarterPoland`. Aby te dane wczytać, wystarczy włączyć pakiet, instrukcja jak to zrobić znajduje się w odcinku 2.
+Dane od których rozpoczniemy przykłady to `koty_ptaki` z pakietu `SmarterPoland`. Aby te dane wczytać, 
+wystarczy włączyć pakiet - instrukcja jak to zrobić znajduje się w odcinku 2.
 
-Włączmy pakiet i użyjmy funkcji `head()` by wyświetlić pierwsze sześć wierszy.
+Włączmy pakiet i użyjmy funkcji `head()`, by wyświetlić pierwsze sześć wierszy.
 
 ```{r, warning=FALSE, message=FALSE}
 library(SmarterPoland)
 head(koty_ptaki)
 ```
 
-Każdy wiersz opisuje jeden gatunek. Jak wiemy z poprzedniego odcinka, zmienna gatunek, habitat i drużyna to zmienne jakościowe. Przekształcimy je na napisy aby zademonstrować podstawowe operacje na napisach.
+Każdy wiersz opisuje jeden gatunek. Jak wiemy z poprzedniego odcinka, zmienne `gatunek`, `habitat` i `druzyna` to 
+zmienne jakościowe. Przekształcimy je na napisy, aby zademonstrować podstawowe operacje na napisach.
 
 ---
 
 # Konwersja na napis
 
-Wybierzmy kolumnę `habitat`. W zbiorze danych `koty_ptaki` jest to zmienna jakościowa. Użyjemy funkcji `as.character()` by ją przekształcić na napis. Otrzymane napisy zapiszemy w kolumnie `habitat_napis`.
+Wybierzmy kolumnę `habitat`. W zbiorze danych `koty_ptaki` jest to zmienna jakościowa. 
+Użyjemy funkcji `as.character()` by przekształcić ją na napis. Otrzymane napisy zapiszemy w kolumnie `habitat_napis`.
 
 ```{r, warning=FALSE, message=FALSE}
 koty_ptaki$habitat
@@ -89,7 +98,8 @@ nchar(koty_ptaki$habitat_napis)
 
 # Wyszukiwanie napisu
 
-Częstą operacją na napisach jest wyszukanie tych, które pasują do wzorca. Jeżeli chodzi nam o zgodność co do znaku, to wygodne będzie użycie funkcji `which()`. Jako wynik zwraca indeksy dla których określony warunek jest prawdziwy.
+Częstą operacją na napisach jest wyszukanie tych, które pasują do wzorca. Jeżeli chodzi nam o zgodność co do znaku, 
+to wygodne będzie użycie funkcji `which()`. Jako wynik zwraca indeksy, dla których określony warunek jest prawdziwy.
 
 ```{r, warning=FALSE, message=FALSE}
 # które wartości wektora habitat_napis to 'Azja'
@@ -98,9 +108,12 @@ which(koty_ptaki$habitat_napis == "Azja")
 which(koty_ptaki$habitat_napis %in% c("Azja", "Afryka"))
 ```
 
-Często jednak, zamiast wymieniać wszystkie wartości, które chcemy wyszukać, wygodniejsze jest opisanie tych wartości przez pewien wzorzec. Do takiego wyszukiwania służy funkcja `grep()`. Testuje ona w którym z napisów występuje określony ciąg znaków, a jako wynik zwraca numery napisów z tym ciągiem.
+Często jednak, zamiast wymieniać wszystkie wartości, które chcemy wyszukać, wygodniejsze jest opisanie tych wartości przez pewien wzorzec. 
+Do takiego wyszukiwania służy funkcja `grep()`. Testuje ona, w którym z napisów występuje określony ciąg znaków, a jako wynik zwraca numery 
+napisów z tym ciągiem.
 
-Przykładowo, sprawdźmy które wiersze w kolumnie `habitat_napis` posiadają w nazwie znak `A`. Pierwszym argumentem funkcji `grep()` jest wzorzec, drugim wektor napisów. Możemy te argumenty podać w innej kolejności, ale wtedy zmuszenie jesteśmy do podawania ich nazwy.
+Sprawdźmy, które wiersze w kolumnie `habitat_napis` posiadają w nazwie znak `A`. Pierwszym argumentem funkcji `grep()` jest wzorzec, 
+drugim wektor napisów. Możemy te argumenty podać w innej kolejności, ale wtedy zmuszeni jesteśmy do podawania ich nazwy.
 
 ```{r, warning=FALSE, message=FALSE}
 grep("A", koty_ptaki$habitat_napis)
@@ -112,19 +125,21 @@ grep(koty_ptaki$habitat_napis, pattern="A")
 
 # Wyszukiwanie napisu
 
-Jeżeli zamiast indeksów, chcemy otrzymać wartości, które zostały dopasowane, wtedy powinniśmy ustawić argument `value` na wartość TRUE.
+Jeżeli zamiast indeksów chcemy otrzymać wartości, które zostały dopasowane, wtedy powinniśmy ustawić argument `value` na wartość TRUE.
  
 ```{r, warning=FALSE, message=FALSE}
 grep("A", koty_ptaki$habitat_napis, value = TRUE)
 ```
 
-Innym przydatnym argumentem funkcji `grep()` jest możliwość określenia, że wyszukiwanie ma być wykonane z pominięciem informacji o wielkości znaków. Służy do tego argument `ignore.case=TRUE`.
+Innym przydatnym argumentem funkcji `grep()` jest możliwość określenia, że wyszukiwanie ma być wykonane z pominięciem informacji o wielkości znaków. 
+Służy do tego argument `ignore.case=TRUE`.
 
 ```{r, warning=FALSE, message=FALSE}
 grep("A", koty_ptaki$habitat_napis, ignore.case = TRUE)
 ```
 
-Określając wzorzec możemy wykorzystać wyrażenia regularne. Pozwalają one opisać pewną prawidłowość, którą chcemy wyszukać dane. Wyrażenia regularne są często stosowane aby sprawdzić czy napis jest na przykład mailem, numerem telefonu lub kodem pocztowym.
+Określając wzorzec możemy wykorzystać wyrażenia regularne. Pozwalają one opisać pewną prawidłowość, którą chcemy wyszukać w danych. 
+Wyrażenia regularne są często stosowane, aby sprawdzić czy napis jest na przykład mailem, numerem telefonu lub kodem pocztowym.
 
 Więcej o wyrażeniach regularnych można przeczytać choćby na wikipedii http://pl.wikipedia.org/wiki/Wyra%C5%BCenie_regularne#Wyra.C5.BCenia_regularne_w_praktyce.
 
@@ -138,7 +153,8 @@ grep("^[AE]", koty_ptaki$habitat_napis)
 
 # Fragmentu napisów
 
-Kolejną przydatną funkcją, do operowania na napisach jest `substr()`. Pozwala ona z napisu wyciąć fragment o określonej pozycji, drugim i trzecim argumentem są indeksy początku i końca napisu, który chcemy wyciąć. 
+Kolejną przydatną funkcją do operowania na napisach jest `substr()`. Pozwala ona z napisu wyciąć fragment o określonej pozycji, 
+drugim i trzecim argumentem są indeksy początku i końca napisu, który chcemy wyciąć. 
 
 Przykładowo, w ten sposób możemy z dat wycinać informację o latach lub miesiącach. 
 
@@ -148,7 +164,9 @@ substr(daty, 1, 4)
 substr(daty, 6, 7)
 ```
 
-Innym sposobem wyłuskiwania elementu napisu jest podanie wzorca który rozdziela istotne elementy napisu, np. słowa. W poniższym przykładzie dwa zdania są rozbijane na wyrazy (a dokładniej rozbijane na fragmenty rozdzielane spacją). Wynikiem jest dwuelementowa lista wektorów. Wybieramy pierwszy wektor i odczytujemy z niego drugie słowo.
+Innym sposobem wyłuskiwania elementu napisu jest podanie wzorca który rozdziela istotne elementy napisu, np. słowa. 
+W poniższym przykładzie dwa zdania są rozbijane na wyrazy (a dokładniej rozbijane na fragmenty rozdzielane spacją). 
+Wynikiem jest dwuelementowa lista wektorów. Wybieramy pierwszy wektor i odczytujemy z niego drugie słowo.
 
 ```{r, warning=FALSE, message=FALSE}
 zdanie <- c( "W Szczebrzeszynie chrząszcz brzmi w trzcinie", "Ząb zupa zębowa dąb zupa dębowa")
@@ -170,9 +188,11 @@ slowa1[2]
 
 # Wczytanie danych
 
-Zbiór danych `koty_ptaki` składa się z 13 wierszy. Można cały ten zbiór danych wyświetlić na ekranie. Nie zawsze potrzebujemy więc specjalnych statystyk opisowych by zrozumieć co się dzieje w takich małych zbiorach danych.
+Zbiór danych `koty_ptaki` składa się z 13 wierszy. Można cały ten zbiór danych wyświetlić na ekranie. 
+Nie zawsze potrzebujemy więc specjalnych statystyk opisowych, by zrozumieć co się dzieje w takich małych zbiorach danych.
 
-Dlatego, dalsze ćwiczenia ze zmiennymi ilościowymi przeprowadzimy na znaczeni większym zbiorze danych z ponad 200 tysiącami wartości, o nazwie `auta2012`, który znajduje się również w pakiecie `SmarterPoland`.
+Dlatego dalsze ćwiczenia ze zmiennymi ilościowymi przeprowadzimy na znaczeni większym zbiorze danych `auta2012`, z ponad 200 tysiącami wartości, 
+który również znajduje się w pakiecie `SmarterPoland`.
 
 Opis tego zbioru danych znaleźć można w odcinku https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html
 
@@ -204,13 +224,15 @@ auta2012$Wyposazenie.dodatkowe_napis <- as.character(auta2012$Wyposazenie.dodatk
 
 # Napisy
 
-W analizie danych często stoimy przed potrzebą stworzenia nowych cech na bazie starych. Przykładowo, jeżeli spojrzymy na wektor kolorów samochodów, możemy uznać że interesującą cechą byłoby określenie, czy lakier jest koloru metalicznego czy nie.
+W analizie danych często stoimy przed potrzebą stworzenia nowych cech na bazie starych. 
+Przykładowo, jeżeli spojrzymy na wektor kolorów samochodów, możemy uznać że interesującą cechą byłoby określenie, czy lakier jest koloru metalicznego czy nie.
 
 ```{r, warning=FALSE}
 sort(table(auta2012$Kolor_napis))
 ```
 
-Można zrobić to na kilka sposobów. Najłatwiejszym jest użycie funkcji `grepl()` o takich samych parametrach jak funkcja `grep()` z tym wyjątkiem, że wynikiem jest wektor wartości logicznych TRUE/FALSE określający czy dany wzorzec został odnaleziony czy nie w napisach.
+Można zrobić to na kilka sposobów. Najłatwiejszym jest użycie funkcji `grepl()`, o takich samych parametrach jak funkcja `grep()` z 
+tym wyjątkiem, że wynikiem jest wektor wartości logicznych TRUE/FALSE określający czy dany wzorzec został odnaleziony czy nie w napisach.
 
 ```{r, warning=FALSE}
 auta2012$czy_metallic <- grepl("metallic", auta2012$Kolor_napis)
@@ -221,9 +243,10 @@ table(auta2012$czy_metallic)
 
 # Napisy
 
-W podobny sposób, można stworzyć dodatkowe kolumny określające, czy auto ma na wyposażeniu klimatyzację lub, że jest bezwypadkowe.
+W podobny sposób, można stworzyć dodatkowe kolumny określające, czy auto ma na wyposażeniu klimatyzację lub czy jest bezwypadkowe.
 
-W drugim przykładzie warto zwrócić uwagę na to, że argumenty są podane w innych niż domyślna, kolejności. Dlatego argument ze wzorcem musiał mieć dodatkowo wskazaną nazwę `pattern=`.
+W drugim przykładzie warto zwrócić uwagę na to, że argumenty są podane w kolejności innej niż domyślna. 
+Dlatego argument ze wzorcem musiał mieć dodatkowo wskazaną nazwę `pattern=`.
 
 ```{r, warning=FALSE}
 auta2012$maKlimatyzacje <- grepl("klimatyzacja", auta2012$Wyposazenie.dodatkowe_napis)
@@ -233,7 +256,7 @@ auta2012$bezwypadkowy <- grepl(x=auta2012$Wyposazenie.dodatkowe_napis,
                                pattern="bezwypadkowy")
 table(auta2012$bezwypadkowy)
 ```
-
+[PCH: tak ma być, ze nie znalazł informacji o bezwypadkowych?]
 ---
 
 # Sklejanie napisów 
@@ -244,14 +267,17 @@ Do tego celu można wykorzystać funkcję `paste()` lub `paste0()`.
 
 Przedstawmy jej działanie na prostym przykładzie. Będziemy sklejać wektor dziesięciu liter, dziesięciu cyfr i jednego napisu.
 
-Funkcje w programie R, które operują na wektorach (większość) jeżeli mają dwa argumenty o różnej długości to krótszy argument zwielokrotniając tylekrotnie by dorównał długością dłuższemu (tzw. recycling rule). Z tego powodu trzeci argument, pojedyncza kropka będzie zwielokrotniona i sklejona z każdym z dziesięciu elementów wektorów `litery` i `cyfry`.
+Funkcje w programie R, które operują na wektorach (większość), jeżeli mają dwa argumenty o różnej długości to krótszy argument 
+jest zwielokrotniny tylekrotnie, aby dorównał długością dłuższemu (tzw. recycling rule). Z tego powodu trzeci argument - pojedyncza 
+kropka - będzie zwielokrotniona i sklejona z każdym z dziesięciu elementów wektorów `litery` i `cyfry`.
 
 ```{r, warning=FALSE}
 litery <- LETTERS[1:10]
 cyfry  <- 1:10
 ```
 
-Funkcja `paste()` skleja wartości rozdzielając je separatorem, którym domyślnie jest spacja. Znak separatora można zmienić wskazując argument `sep`. Funkcja `paste0()` tym różni się od funkcji `paste()`, że separator jest pustym napisem.
+Funkcja `paste()` skleja wartości rozdzielając je separatorem, którym domyślnie jest spacja. Znak separatora 
+można zmienić wskazując argument `sep`. Funkcja `paste0()` tym różni się od funkcji `paste()`, że separator jest pustym napisem.
 
 ```{r, warning=FALSE}
 paste(litery, cyfry, ".")
@@ -265,7 +291,7 @@ paste0(litery, cyfry, ".")
 
 Przedstawmy funkcję do sklejania napisów na przykładzie sklejania nazwy marki i modelu dla auta.
 
-W pierwszej linii skleimy oba wektory, używając za separator `': '`. Następnie zliczamy ile było wystąpień takich par i porządkujemy je w kolejności malejącej.
+W pierwszej linii skleimy oba wektory, używając za separator `': '`. Następnie zliczymy ile było wystąpień takich par i uporządkujemy je w kolejności malejącej.
 
 Wyświetlamy 25 najczęstszych modeli.
 
@@ -283,9 +309,10 @@ head(statystykiMarkiModelu, 25)
 
 W pakiecie `SmaterPoland` jest również dostępny zbiór danych `imiona_warszawa` ze statystykami popularności imion nadawanych noworodkom w Warszawie w różnych okresach czasu.
 
-Używając tego zbioru danych, możemy przetestować regułę mówiącą, że imię dziewczynki kończy się na literkę 'a' a chłopca nie. Jakiś czas temu za jedyny wyjątek podawano męskie imię Bonawentura. Czy to się zmieniło?
+Używając tego zbioru danych, możemy przetestować regułę mówiącą, że imię dziewczynki kończy się na literkę 'a', a chłopca nie. Jakiś czas temu za jedyny wyjątek podawano męskie 
+imię Bonawentura. Czy to się zmieniło?
 
-Wybierzmy do analizy tylko imiona chłopców (indeksowanie `imiona_warszawa$plec == "M"`). Ponieważ każde imię powtarza się dla każdego miesiąca to funkcją `unique()` usuniemy wszystkie duplikaty. 
+Wybierzmy do analizy tylko imiona chłopców (indeksowanie `imiona_warszawa$plec == "M"`). Ponieważ każde imię powtarza się dla każdego miesiąca, to funkcją `unique()` usuniemy wszystkie duplikaty. 
 
 Następnie funkcją `grep()` wybierzemy wszystkie imiona, których ostatnia litera to `a` (wyrażenie regularne `a$`) i wyświetlimy te imiona. Bonawentury nie widać ale są inne imiona.
 
@@ -308,7 +335,8 @@ grep("[^a]$", same_imiona, value = TRUE)
 
 # Liczby, cechy jakościowe i napisy
 
-Funkcja `as.character()` może być przydatna jeszcze w jednej sytuacji, gdy chcemy zmienną jakościową przekształcić na zmienną liczbową. Nie powinniśmy tego zrobić bezpośrednio, ale poprzez funkcję `as.character()`.
+Funkcja `as.character()` może być przydatna jeszcze w jednej sytuacji, tzn. gdy zmienną jakościową chcemy przekształcić na zmienną liczbową. Nie powinniśmy tego zrobić bezpośrednio, 
+ale poprzez funkcję `as.character()`.
 
 Pokażmy ten problem na przykładzie. Zamienimy zmienne na zmienne jakościowe funkcją `as.factor()` a następnie na liczby funkcją `as.numeric()`. Okazuje się jednak, że wynik nie jest zgodny z oczekiwaniami.
 
@@ -339,11 +367,11 @@ as.numeric(as.character(fx))
 
 Jedynie zarysowaliśmy temat analizy napisów. 
 
-Przy przetwarzaniu większych korpusów tekstu, pojawia się wiele interesujących tematów, takich jak analiza znaczenia analiza częstościowa, tagowanie itp.
+Przy przetwarzaniu większych korpusów tekstu, pojawia się wiele interesujących tematów, takich jak analiza znaczenia, analiza częstościowa, tagowanie itp.
 
 + Więcej o podstawowych operacjach do pracy z napisami przeczytać można w rozdziale 2.1 ,,Przewodnika po pakiecie R'' GiS 2013. Rozdział ten jest dostępny bezpłatnie na stronie http://biecek.pl/R/
 
 + Gdy pracujemy z dużymi korpusami, możemy przyśpieszyć obliczenia stosując pakiet `stringr`. Bardzo dobrze przygotowany materiał opisujący funkcje tego pakietu jest udostępniony przez Gastona Sancheza na stronie http://gastonsanchez.com/Handling_and_Processing_Strings_in_R.pdf.
 
-+ Interesującą alternatywą wspierająca bardziej egzotyczne języki (bardziej niż angielski) jest pakiet `stringi`. Można o nim posłuchać na wystąpieniu Marka Gągolewskiego z II Spotkania Entuzjastów R, materiał video dostępny na stronie http://smarterpoland.pl/SER/#SERII
++ Interesującą alternatywą wspierająca bardziej egzotyczne języki (bardziej niż angielski) jest pakiet `stringi`. Można o nim posłuchać na wystąpieniu Marka Gągolewskiego z II Spotkania Entuzjastów R. Materiał wideo dostępny jest na stronie http://smarterpoland.pl/SER/#SERII
 

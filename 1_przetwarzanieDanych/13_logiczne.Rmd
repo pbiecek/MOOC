@@ -17,11 +17,11 @@ output:
 
 Analizując dane spotkamy się z różnymi rodzajami zmiennych. Omówiliśmy ilościowe i jakościowe. Specyficzną odmianą cech jakościowych są cechy logiczne, przyjmujące wartości logiczne prawda / fałsz.
 
-W tym odcinku nauczymy się
+W tym odcinku nauczymy się:
 
-- Jakie zmienne / cechy określa się terminem *cechy logiczne*?
-- Jakie podstawowe operacje można wykonywać na cechach logicznych?
-- Jak podsumowywać / opisywać cechy logiczne?
+- jakie zmienne / cechy określa się terminem *cechy logiczne*,
+- jakie podstawowe operacje można wykonywać na cechach logicznych,
+- jak podsumowywać / opisywać cechy logiczne.
 
 Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
 
@@ -29,11 +29,15 @@ Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zb
 
 # Co to znaczy: cecha logiczna
 
-Cechy logiczne to takie, które opisują jedną z dwóch wartości logicznych prawda/fałsz. Przykładowo: czy wzrost jest większy niż 150cm, czy pada deszcz, czy pacjent przeżył 5 lat po operacji itp.
+Cechy logiczne to takie, które opisują jedną z dwóch wartości logicznych prawda/fałsz. 
+Przykładowo: czy wzrost jest większy niż 150 cm, czy pada deszcz, czy pacjent przeżył 5 lat po operacji itp.
 
-Zmienne logiczne często powstają w wyniku przetwarzania zmiennych ilościowych lub jakościowych. Mając wykształcenie opisane przez trzy poziomy, można skonstruować sztuczną cechę: czy ma wykształcenie wyższe. A mając wzrost opisany jako cecha ilościowa można skonstruować cechę logiczną, czy jest wyższy niż 1500 cm3.
+Zmienne logiczne często powstają w wyniku przetwarzania zmiennych ilościowych lub jakościowych. 
+Mając wykształcenie opisane przez trzy poziomy, można skonstruować sztuczną cechę: czy ma wykształcenie wyższe. 
+A mając wzrost opisany jako cecha ilościowa można skonstruować cechę logiczną, czy jest wyższy niż 150 cm.
 
-Zmienne logiczne można traktować jak zmienne jakościowe, przyjmują bowiem wartości z dwuelementowego słownika. Podobnie jak dla wartości jakościowych tak i dla wartości logicznych można wyznaczać tablicę liczebności.
+Zmienne logiczne można traktować jak zmienne jakościowe, przyjmują bowiem wartości z dwuelementowego słownika. 
+Podobnie jak dla wartości jakościowych, tak i dla wartości logicznych można wyznaczać tablicę liczebności.
 
 Dla zmiennych logicznych dostępnych jest kilka dodatkowych operacji logicznych, których nie można wykonać na typowych zmiennych jakościowych.
 
@@ -41,9 +45,13 @@ Dla zmiennych logicznych dostępnych jest kilka dodatkowych operacji logicznych,
 
 # Logika trójwartościowa
 
-Napisaliśmy wcześniej, że wartości logiczne przyjmują wartości `TRUE` (logiczna prawda) lub `FALSE` (logiczny fałsz). Jednak równocześnie każdy rodzaj zmiennych w programie R może również przyjmować wartości nieustaloną `NA`. Więc w gruncie rzeczy wartości logiczne operują w logice trójwartościowej.
+Napisaliśmy wcześniej, że wartości logiczne przyjmują wartości `TRUE` (logiczna prawda) lub `FALSE` (logiczny fałsz). 
+Jednak równocześnie każdy rodzaj zmiennych w programie R może również przyjmować wartości nieustaloną `NA`. 
+W gruncie rzeczy wartości logiczne operują zatem w logice trójwartościowej.
 
-Tworząc wartości logiczne często wykorzystuje się operatory logiczne `>` (większy), `>=` (większy równy), `==` (równy), `<=` (mniejszy równy), `<` (mniejszy). Gdy porównuje się takim operatorem wartość nieustaloną `NA` to wynik również jest wartością nieustaloną.
+Tworząc wartości logiczne często wykorzystuje się operatory logiczne `>` (większy), `>=` (większy równy), 
+`==` (równy), `<=` (mniejszy równy), `<` (mniejszy). Gdy porównuje się takim operatorem wartość nieustaloną `NA` 
+to wynik również jest wartością nieustaloną.
 
 ```{r}
 c(1,5,7,3,8, NA) <= 4
@@ -56,7 +64,8 @@ Tworząc wektory wartości logicznych zamiast pełnych nazw `TRUE` i `FALSE` mo�
 c(T, F, NA, TRUE, FALSE)
 ```
 
-Specjalnymi operatorami dla wartości logicznych są `|` (logiczne lub) oraz `&` (logiczne i). Pierwszy z nich zwraca jako wynik wartość `TRUE` jeżeli którykolwiek argument jest prawdziwy. Drugi zwraca jako wynik wartość `TRUE` jeżeli ona argumenty są prawdziwe.
+Specjalnymi operatorami dla wartości logicznych są `|` (logiczne lub) oraz `&` (logiczne i). Pierwszy z nich zwraca 
+jako wynik wartość `TRUE` jeżeli którykolwiek argument jest prawdziwy. Drugi zwraca jako wynik wartość `TRUE` jeżeli oba argumenty są prawdziwe.
 
 ```{r, warning=FALSE}
 TRUE | FALSE
@@ -67,13 +76,17 @@ TRUE | FALSE
 
 # Tabliczka logicznego dodawania i logicznego mnożenia
 
-Przydatną do przedstawienia możliwych wyników operatora `|` jest tabliczka logicznego dodawania. Aby ją przedstawić zdefiniujmy wektor zawierający każdą z trzech możliwych wartości logicznych.
+Przydatną do przedstawienia możliwych wyników operatora `|` jest tabliczka logicznego dodawania. Aby ją przedstawić 
+zdefiniujmy wektor zawierający każdą z trzech możliwych wartości logicznych.
 
 ```{r, warning=FALSE}
 (TRUE_FALSE_NA <- c(TRUE, FALSE, NA))
 ```
 
-Funkcja `outer()` jako argumenty przyjmuje dwa wektory a następnie dla każdej pary wartości z pierwszego i drugiego wektora stosuje funkcję, która jest trzecim argumentem. Kolejne dwie linie dodają nazwy wierszy i kolumn, tak by na koniec wyprodukować ładnie wyglądającą tabliczkę logicznego dodawania. Jeżeli którykolwiek z argumentów ma wartość logicznej prawdy to wynikiem `lub` jest logiczna prawda.
+Funkcja `outer()` jako argumenty przyjmuje dwa wektory a następnie dla każdej pary wartości z pierwszego i drugiego 
+wektora stosuje funkcję, która jest trzecim argumentem. Kolejne dwie linie dodają nazwy wierszy i kolumn, tak 
+by na koniec wyprodukować ładnie wyglądającą tabliczkę logicznego dodawania. Jeżeli którykolwiek z argumentów 
+ma wartość logicznej prawdy to wynikiem `lub` jest logiczna prawda.
 
 ```{r, warning=FALSE}
 tabliczka_dodawania <- outer(TRUE_FALSE_NA, TRUE_FALSE_NA, "|")
@@ -91,12 +104,14 @@ colnames(tabliczka_mnozenia) <- TRUE_FALSE_NA
 tabliczka_mnozenia
 ```
 
+[PCH: Warto zwrócić uwagę na wynik (TRUE | NA) oraz (FALSE & NA). Oraz na to, że && różni się od & !]
 
 ---
 
 # Wczytanie danych
 
-Dane od których rozpoczniemy przykłady to `koty_ptaki` z pakietu `SmarterPoland`. Aby te dane wczytać, wystarczy włączyć pakiet, instrukcja jak to zrobić znajduje się w odcinku 2.
+Dane od których rozpoczniemy przykłady to `koty_ptaki` z pakietu `SmarterPoland`. 
+Aby te dane wczytać, wystarczy włączyć pakiet, instrukcja jak to zrobić znajduje się w odcinku 2.
 
 Włączmy pakiet i użyjmy funkcji `head()` by wyświetlić pierwsze sześć wierszy. 
 
@@ -118,9 +133,11 @@ czy_to_kot <- koty_ptaki$druzyna == "Kot"
 czy_jest_ciezki <- koty_ptaki$waga >= 10
 ```
 
-Traktując zmienną logiczną jak dwuwartościową zmienną jakościową, możemy używać na niej np. funkcji do tabel liczebności, zarówno jednowymiarowych jak i dwuwymiarowych.
+Traktując zmienną logiczną jak dwuwartościową zmienną jakościową, możemy używać na niej 
+np. funkcji do tabel liczebności, zarówno jednowymiarowych jak i dwuwymiarowych.
 
-Patrząc na wyniki dla tabeli liczebności dla dwóch zmiennych jest tylko jeden zwierzak w tym zbiorze danych, który jest cięższy niż 10kg ale nie jest kotem.
+Patrząc na wyniki dla tabeli liczebności dla dwóch zmiennych jest tylko jeden zwierzak 
+w tym zbiorze danych, który jest cięższy niż 10kg, ale nie jest kotem.
 
 ```{r, warning=FALSE}
 table(czy_to_kot)
@@ -139,14 +156,18 @@ czy_to_kot
 !czy_to_kot
 ```
 
-W operacjach arytmetycznych wartości logiczne TRUE są przekształcane na 1 a wartości FALSE na 0. Dzięki czemu, jeżeli chcemy policzyć ile wartości ma wartość TRUE to wystarczy wartość wektora zsumować. Poniższy przykład pokazuje ile jest kotów i nie kotów w zbiorze danych.
+W operacjach arytmetycznych wartości logiczne TRUE są przekształcane na 1 a wartości FALSE na 0. 
+Dzięki czemu, jeżeli chcemy policzyć ile wartości ma wartość TRUE to wystarczy wartość wektora zsumować. 
+Poniższy przykład pokazuje ile jest kotów i nie kotów w zbiorze danych.
 
 ```{r, warning=FALSE}
 sum(czy_to_kot)
 sum(!czy_to_kot)
 ```
 
-Taki wektor wartości logicznych można mnożyć z wektorem wartości liczbowych. Poniższa instrukcja używa takiej operacji do policzenia sumy wagi wszystkich kotów w zbiorze danych. Mnożenie przez wektor wartości logicznych powoduje wyzerowanie określonych wartości.
+Taki wektor wartości logicznych można mnożyć z wektorem wartości liczbowych. Poniższa instrukcja 
+używa takiej operacji do policzenia sumy wagi wszystkich kotów w zbiorze danych. Mnożenie 
+przez wektor wartości logicznych powoduje wyzerowanie określonych wartości.
 
 ```{r, warning=FALSE}
 czy_to_kot * koty_ptaki$waga
@@ -157,9 +178,11 @@ sum(czy_to_kot * koty_ptaki$waga)
 
 # Wczytanie danych
 
-Zbiór danych `koty_ptaki` składa się z 13 wierszy. Można cały ten zbiór danych wyświetlić na ekranie. Nie zawsze potrzebujemy więc specjalnych statystyk opisowych by zrozumieć co się dzieje w takich małych zbiorach danych.
+Zbiór danych `koty_ptaki` składa się z 13 wierszy. Można cały ten zbiór danych wyświetlić na ekranie. 
+Nie zawsze potrzebujemy więc specjalnych statystyk opisowych by zrozumieć co się dzieje w takich małych zbiorach danych.
 
-Dlatego, dalsze ćwiczenia ze zmiennymi ilościowymi przeprowadzimy na znaczeni większym zbiorze danych z ponad 200 tysiącami wartości, o nazwie `auta2012`, który znajduje się również w pakiecie `SmarterPoland`.
+Dlatego dalsze ćwiczenia ze zmiennymi logicznymi przeprowadzimy na znaczenie większym zbiorze danych `auta2012` z 
+ponad 200 tysiącami wartości, który również znajduje się w pakiecie `SmarterPoland`.
 
 Opis tego zbioru danych znaleźć można w odcinku https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html
 
@@ -174,7 +197,8 @@ head(auta2012, 3)
 
 # Statystyki opisowe
 
-Wykorzystajmy wartości logiczne oraz funkcję `table()` by sprawdzić ile aut w naszych danych jest zarejestrowanych w Polsce oraz ile z nich zostało wyprodukowanych przed 2007 rokiem.
+Wykorzystajmy wartości logiczne oraz funkcję `table()`, aby sprawdzić ile aut w naszych danych jest 
+zarejestrowanych w Polsce oraz ile z nich zostało wyprodukowanych przed 2007 rokiem.
 Tak jak w przypadku zmiennych jakościowych możemy wykorzystać funkcję `prop.table()` do wyznaczenia frakcji / procentów.
 
 Co może być zaskakujące, mniej niż połowa ofert ma zadeklarowany kraj aktualnej rejestracji jako Polska.
@@ -205,7 +229,8 @@ Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOO
 
 Porównując wartości należy uważać na wartości nieokreślone, które nie zawsze zachowują się zgodnie z naszą intuicją, ale zawsze logicznie.
 
-Przykładowo, operator `!=` testuje czy wartości są różne (to negacja operatora `==`). Jak sprawdzić czy wartości w wektorze są różne od wartości brakującej `NA`? Zacznijmy od przykładu jak tego nie robić.
+Przykładowo, operator `!=` testuje czy wartości są różne (to negacja operatora `==`). Jak 
+sprawdzić czy wartości w wektorze są różne od wartości brakującej `NA`? Zacznijmy od przykładu jak tego nie robić.
 
 ```{r}
 czyOkreslonyPrzebieg <- auta2012$Przebieg.w.km != NA
@@ -213,11 +238,13 @@ head(auta2012$Przebieg.w.km)
 head(czyOkreslonyPrzebieg)
 ```
 
-Wynikiem porównania `!= NA` jest wektor wartości `NA`. Jest tak ponieważ jeżeli prawa część porównania jest nieznana to też nie wiadomo czy wartość 41000 jest od niej różna czy nie.
+Wynikiem porównania `!= NA` jest wektor wartości `NA`. Jest tak ponieważ jeżeli prawa część 
+porównania jest nieznana to też nie wiadomo czy wartość 41000 jest od niej różna czy nie.
 
-Aby sprawdzić, czy dana wartość jest wartością brakującą możemy wykorzystać funkcję `is.na()`. Jako wynik zwraca TRUE jeżeli testowana wartość to NA i FALSE w przeciwnym przypadku.
+Aby sprawdzić, czy dana wartość jest wartością brakującą możemy wykorzystać funkcję `is.na()`. 
+Jako wynik zwraca TRUE jeżeli testowana wartość to NA i FALSE w przeciwnym przypadku.
 
-Możemy użyć tej funkcji by policzyć procent wartości nie brakujących.
+Możemy użyć tej funkcji by policzyć procent wartości, dla których nie ma brakujących danych.
 
 ```{r}
 czyOkreslonyPrzebieg <- !is.na(auta2012$Przebieg.w.km)
@@ -226,13 +253,18 @@ head(czyOkreslonyPrzebieg)
 mean(czyOkreslonyPrzebieg) * 100
 ```
 
-Funkcji do testowania jest więcej, zaczynają one swoje nazwy od `is.`, wystarczy więc wpisać te trzy znaki do konsoli i nacisnąć znak TAB by zobaczyć ich listę. Część z nich sprawdza czy zmienna jest określonego typu, np. `is.factor()`, `is.numeric()`, część sprawdza czy zmienna ma określone wartości np. `is.na()` czy `is.nan()`.
+Funkcji do testowania jest więcej, zaczynają one swoje nazwy od `is.`, wystarczy więc wpisać 
+te trzy znaki do konsoli i nacisnąć klawisz TAB by zobaczyć ich listę. Część z nich sprawdza 
+czy zmienna jest określonego typu, np. `is.factor()`, `is.numeric()`, część sprawdza czy 
+zmienna ma określone wartości np. `is.na()` czy `is.nan()`.
 
 ---
 
 # Logiczne 'i' oraz logiczne 'lub'
 
-Ponieważ operatory logicznego `lub` oraz `i` są często wykorzystywane poćwiczmy je jeszcze na zbiorze danych o samochodach. Zdefiniujmy dwa wektory wartości logicznych, weryfikujących czy samochód jest aktualnie zarejestrowany w Polsce oraz czy jest starszy niż pięć lat, a więc wyprodukowany przed rokiem 2007.
+Ponieważ operatory logicznego `lub` oraz `i` są często wykorzystywane poćwiczmy je jeszcze na zbiorze danych o samochodach. 
+Zdefiniujmy dwa wektory wartości logicznych, weryfikujących czy samochód jest aktualnie zarejestrowany w Polsce 
+oraz czy jest starszy niż pięć lat, a więc wyprodukowany przed rokiem 2007.
 
 ```{r, warning=FALSE}
 pochodziZPolski <- auta2012$Kraj.aktualnej.rejestracji == "Polska"

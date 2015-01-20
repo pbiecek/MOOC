@@ -17,11 +17,11 @@ output:
 
 Analizując dane spotkamy się z różnymi rodzajami zmiennych. Często spotykanym typem okazują się zmienne związane z datami i czasem.
 
-W tym odcinku nauczymy się
+W tym odcinku nauczymy się:
 
-- Jak tworzyć w programie R obiekty opisujące daty i czasy?
-- Jakie podstawowe operacje można wykonywać na datach i czasie?
-- Jak podsumowywać / opisywać daty?
+- jak tworzyć w programie R obiekty opisujące daty i czasy,
+- jakie podstawowe operacje można wykonywać na datach i czasie,
+- jak podsumowywać / opisywać daty.
 
 Do ilustracji tych zagadnień wykorzystamy zbiory danych tworzone ad hoc.
 
@@ -29,13 +29,13 @@ Do ilustracji tych zagadnień wykorzystamy zbiory danych tworzone ad hoc.
 
 # Daty i czas
 
-W programie R istnieją trzy podstawowe typu zmiennych opisujące daty lub czas
+W programie R istnieją trzy podstawowe typu zmiennych opisujące daty lub czas.
 
 + Klasa `Date` służy do opisywania dat z dokładnością do dnia. Na datach można wykonywać operacje takie jak odejmowanie dwóch dat, dodawanie liczby do dnia itp.
 
 + Klasa POSIXct, służy do opisywania czasu z dokładnością do sekundy. Czas jest pamiętany jako liczba sekund od określonego początku. Sufiks `ct` oznacza *calendar time*.
 
-+ Klasa POSIXlt, służy do opisywania czasu w formacie listy wartości. Sufiks `lt` oznacza *local time*.
++ Klasa POSIXlt, służy do opisywania czasu w formacie listy wartości. Sufiks `lt` oznacza *local time*. [PCH: Na pewno to właściwy opis z tą listą wartości?]
 
 ---
 
@@ -53,7 +53,7 @@ as.Date("February 2, 2015", format = "%B %d, %Y")
 
 Aby uzyskać dokładną pomoc dotyczącą oznaczeń w formatowaniu daty należy otworzyć plik pomocy instrukcją `?strptime`.
 
-Obiekty klasy `Date` można tworzyć też na podstawie liczb całkowitych lub obiektów klasy POSIXct, w obu przypadkach przy pomocy funkcji `as.Date()`.
+Obiekty klasy `Date` można tworzyć także na podstawie liczb całkowitych lub obiektów klasy POSIXct, w obu przypadkach przy pomocy funkcji `as.Date()`.
 
 ---
 
@@ -70,11 +70,12 @@ Aby uzyskać dokładną pomoc dotyczącą oznaczeń w formatowaniu daty należy 
 (czas2 <- as.POSIXct("14022015 12:56:26", format = "%d%m%Y %H:%M:%S"))
 ```
 
-Na czasach można wykonywać takie operacje jak odejmowanie czy dodawane do jednego czasu określonego przedziału (domyślnie dni).
+Na czasach można wykonywać takie operacje jak odejmowanie czy dodawane do określonego przedziału czasu (domyślnie dni). [PCH: a w przykładzie poniżej czas1+30 dodaje 30 sekund :P]
 
 ```{r}
 # różnica czasów
 czas2 - czas1
+czas1
 czas1 + 30
 ```
 
@@ -91,7 +92,8 @@ Sys.time() - czas1
 
 Konstruktorem klasy `POSIXlt` jest funkcja `as.POSIXlt()`.
 
-Jako pierwszy argument przyjmuje wektor napisów opisujących chwile czasu. Drugi opcjonalny argument określa formatowanie daty.Opis formatowania stosuje się taki sam, jak w przypadku klasy `POSIXct`.
+Jako pierwszy argument przyjmuje wektor napisów opisujących chwile czasu. Drugi opcjonalny argument określa formatowanie daty. 
+Opis formatowania stosuje się taki sam, jak w przypadku klasy `POSIXct`.
 
 ```{r}
 (czas1 <- as.POSIXlt("2015-02-13 12:56:26"))
@@ -110,7 +112,7 @@ czas1 + 30
 
 # Pakiet lubridate
 
-W podstawowy programie R operacja na datach i czasie nie zawsze są proste. Tzn proste operacje są proste, ale złożone już niekoniecznie.
+W podstawowym programie R operacje na datach i czasie nie zawsze są proste. Tzn. proste operacje są proste, ale złożone już niekoniecznie.
 
 Pakiet `lubridate` zawiera zestaw funkcji ułatwiający pracę z datami.
 

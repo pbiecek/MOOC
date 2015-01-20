@@ -13,13 +13,13 @@ output:
 
 ---
 
-Analizując dane spotkamy się z różnymi rodzajami zmiennych. Bardzo często spotykane są cechy jakościowe. Są też sytuacje w których warto cechę ilościową przekształcić w jakościową. 
+Analizując dane będziemy spotykać się z różnymi rodzajami zmiennych. Bardzo często będą to cechy jakościowe, w niektórych sytuacjach będziemy chcieli cechę ilościową przekształcić w jakościową. 
 
-W tym odcinku nauczymy się
+W tym odcinku nauczymy się:
 
-- Jakie zmienne / cechy określa się terminem *cechy jakościowe*?
-- Jakie podstawowe operacje można wykonywać na cechach jakościowych?
-- Jak podsumowywać / opisywać cechy jakościowe?
+- jakie zmienne / cechy określa się terminem *cechy jakościowe*,
+- jakie podstawowe operacje można wykonywać na cechach jakościowych,
+- jak podsumowywać / opisywać cechy jakościowe.
 
 Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
 
@@ -27,11 +27,17 @@ Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zb
 
 # Co to znaczy: cecha jakościowa
 
-Cechy jakościowe to takie, które opisują przynależność do grup. Z tego powodu, często stosuje się też nazwę *zmienna grupująca*. A ponieważ w programie R taką zmienną oznacza się terminem `factor`, to w języku polskim spotyka się kalkę *zmienna faktor*. Inną stosowaną, często przez programistów, nazwą jest *zmienna czynnikowa*.
+Cechy jakościowe to takie, które opisują przynależność do grup. Z tego powodu często stosuje się też nazwę *zmienna grupująca*. 
+A ponieważ w programie R taką zmienną oznacza się terminem `factor`, to w języku polskim spotyka się kalkę *zmienna faktor*. 
+Inną nazwą, stosowaną często przez programistów, jest *zmienna czynnikowa*.
 
-Określając zmienną jakościową warto wskazać o jakich grupach mówimy, przykładami zmiennych jakościowych jest np. wykształcenie (grupy: podstawowe, średnie, wyższe), płeć (grupy: kobieta, mężczyzna), kraj zamieszkania (grupy: Polska, ...).
+Określając zmienną jakościową warto wskazać o jakich grupach mówimy, przykładami zmiennych jakościowych są 
+np. wykształcenie (grupy: podstawowe, średnie, wyższe), płeć (grupy: kobieta, mężczyzna), kraj zamieszkania (grupy: Polska, ...).
 
-Zmienna jakościowa może być opisana liczbami, jeżeli jednak te liczby nie oznaczają ilości to taka zmienna będzie zmienną jakościową. Przykładowo pierwsze dwie cyfry kodu ZIP mogą być zmienną jakościową, ocenę szkolną można traktować jako zmienną jakościową (można też jako ilościową zależnie od kontekstu), podobnie liczba drzwi samochodu, jeżeli chcemy jej użyć do pogrupowania samochodów na 3 i 5 drzwiowe, potraktujemy tę liczbę jako cechę jakościową.
+Zmienna jakościowa może być opisana liczbami, jeżeli jednak te liczby nie oznaczają ilości czu wielkości to taka zmienna 
+jest w istocie zmienną jakościową. Przykładowo pierwsze dwie cyfry kodu pcoztowego mogą być zmienną jakościową, ocenę szkolną 
+można traktować jako zmienną jakościową (można też jako ilościową zależnie od kontekstu), podobnie liczbę drzwi samochodu, jeżeli chcemy 
+jej użyć do pogrupowania samochodów na 3 i 5 drzwiowe, potraktujemy jako cechę jakościową.
 
 Jakkolwiek zmienne jakościowe mogą bardzo różnić się liczbą grup oraz rodzajem grup, można na nich wykonywać kilka wspólnych operacji. Przyjrzyjmy się im.
 
@@ -39,7 +45,7 @@ Jakkolwiek zmienne jakościowe mogą bardzo różnić się liczbą grup oraz rod
 
 # Wczytanie danych
 
-Dane od których rozpoczniemy przykłady to `koty_ptaki` z pakietu `SmarterPoland`. Aby te dane wczytać, wystarczy włączyć ten pakiet, instrukcja jak to zrobić znajduje się w odcinku 2.
+Dane od których rozpoczniemy przykłady to `koty_ptaki` z pakietu `SmarterPoland`. Aby te dane wczytać, wystarczy włączyć ten pakiet - instrukcja jak to zrobić znajduje się w odcinku 2.
 
 Włączmy pakiet i użyjmy funkcji `head()` by wyświetlić pierwsze sześć wierszy. Które z tych zmiennych to zmienne jakościowe?
 
@@ -48,25 +54,64 @@ library(SmarterPoland)
 head(koty_ptaki)
 ```
 
-Każdy wiersz opisuje jeden gatunek. Zmienne jakościowe to w poniższym przypadku wszystkie te, które nie są liczbowymi, a więc gatunek, habitat i drużyna.
+Każdy wiersz opisuje jeden gatunek. Zmienne jakościowe to w poniższym przypadku wszystkie te, które nie są liczbowymi, a więc *gatunek*, *habitat* i *druzyna*.
 
 ---
 
 # Cechy jakościowe
 
-Przyjrzyjmy się dwóm z tych zmiennych, gatunek i drużyna.
+Przyjrzyjmy się dwóm z tych zmiennych - *gatunek* i *druzyna*.
 
 ```{r}
 koty_ptaki$gatunek
 koty_ptaki$druzyna
 ```
 
+[PCH: Tutaj zakładasz, że koty_ptaki$gatunek została już skonwertowana do "factor". A jeśli ładujesz SmarterPoland w tym momencie, to masz:
+class(koty_ptaki$gatunek)
+[1] "character"
+
+co oczywiście skończy się
+levels(koty_ptaki$gatunek)
+NULL
+
+Nie ma jednak tego złego - w tym miejscu warto napisać o różnicy w character i factor! Mało tego - pokazać co się 
+stanie jeśli zrobisz as.numeric i as.character na zmiennej factor. I warto jeszcze pokazać, co zrobić, kiedy ma się
+jakąś zmienną, która - zakładamy - będzie przyjmować 3 wartości, ale w danym momencie ma tylko dwie różne wartości,
+tzn. 
+tmp <- factor(c("a","b"))
+tmp
+[1] a b
+Levels: a b
+
+tmp[3] <- "c"
+Warning message:
+In `[<-.factor`(`*tmp*`, 3, value = "c") :
+  invalid factor level, NA generated
+  
+tmp2 <- factor(c("a","b"), levels = c("a","b","c"))
+tmp2
+[1] a b
+Levels: a b c
+
+tmp2[3] <- "c"
+tmp2
+[1] a b c
+Levels: a b c
+
+EIDT: Doszedłem poniżej do miejsca, w którym to przedstawiasz na przykładzie stringsAsFactors. Może warto to
+przenieść zatem tutaj?
+
+KONIEC_PCH]
+
 Gdy te zmienne są wyświetlane, poza wartościami dodatkowo wyświetlany jest zbiór wszystkich możliwych wartości.
 Ten zbiór nazywa się najczęściej poziomami zmiennej jakościowej lub słownikiem zmiennej.
 
-Dwie podstawowe operacje na zmiennych jakościowych to odczytywanie poziomów zmiennej, co można zrobić funkcją `levels()` oraz wyznaczanie liczebności poszczególnych poziomów, co można wykonać funkcją `table()`.
+Dwie podstawowe operacje na zmiennych jakościowych to odczytywanie poziomów zmiennej, co można zrobić funkcją `levels()`, 
+oraz wyznaczanie liczebności poszczególnych poziomów, co można wykonać funkcją `table()`.
 
-To czy dana zmienna jest zmienną jakościową czy ilościową można sprawdzić używając funkcji `class()`. Jeżeli wynikiem jest napis `factor` to mamy do czynienia ze zmienną jakościową. Jeżeli wynikiem jest `integer` lub `numeric` to mamy do czynienia ze zmienną ilościową.
+To czy dana zmienna jest zmienną jakościową czy ilościową można sprawdzić używając funkcji `class()`. Jeżeli wynikiem 
+jest napis `factor` to mamy do czynienia ze zmienną jakościową. Jeżeli wynikiem jest `integer` lub `numeric` to mamy do czynienia ze zmienną ilościową.
 
 ```{r}
 class(koty_ptaki$druzyna)
@@ -100,9 +145,11 @@ Obie zmienne znacznie się różnią. Drużyna występuje tylko w dwóch wartoś
 
 # Wczytanie danych
 
-Zbiór danych `koty_ptaki` składa się z 13 wierszy. Można cały ten zbiór danych wyświetlić na ekranie. Nie zawsze potrzebujemy więc specjalnych statystyk opisowych by zrozumieć co się dzieje w takich małych zbiorach danych.
+Zbiór danych `koty_ptaki` składa się z 13 wierszy. Można cały ten zbiór danych wyświetlić na ekranie. 
+Nie zawsze potrzebujemy więc specjalnych statystyk opisowych by zrozumieć co się dzieje w takich małych zbiorach danych.
 
-Dlatego, dalsze ćwiczenia ze zmiennymi ilościowymi przeprowadzimy na znaczeni większym zbiorze danych z ponad 200 tysiącami wartości, o nazwie `auta2012`, który znajduje się również w pakiecie `SmarterPoland`.
+Dlatego dalsze ćwiczenia ze zmiennymi ilościowymi przeprowadzimy na znaczeni większym zbiorze danych `auta2012` o ponad 200 tysiącach wartości, 
+który również znajduje się w pakiecie `SmarterPoland`.
 
 Opis tego zbioru danych znaleźć można w odcinku https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html
 
@@ -122,8 +169,8 @@ Które z tych zmiennych to zmienne jakościowe?
 Przyjrzyjmy się teraz takim cechom jak `Waluta` lub `Marka`. Cechy te są opisane przez wartości z określonej listy możliwości.
 Dla cechy `Waluta` lista możliwości to `levels(auta2012$Waluta)`=`r levels(auta2012$Waluta)`.
 
-Dla cech jakościowych możemy wykonać kilka operacji.
-Jedną z nich jest wyświetlenie listy możliwych wartości. Taką listę nazywa się często słownikiem (spisem możliwych wartości).
+Dla cech jakościowych możemy wykonać kilka operacji. Jedną z nich jest wyświetlenie listy możliwych wartości. 
+Taką listę nazywa się często słownikiem (spisem możliwych wartości).
 
 Listę możliwych wartości dla zmiennej jakościowej można wyznaczyć funkcją `levels()`.
 
@@ -132,7 +179,8 @@ levels(auta2012$Waluta)
 ```
 
 Zmienne jakościowe często opisuje się tablicą liczebności, a więc informacją ile razy wystąpiła każda z wartości ze słownika.
-Tablicę liczebności można wyznaczyć funkcją `table()` lub `summary()`. Jeżeli w zmiennej jakościowej występują wartości brakujące, to funkcja `summary()` też napisze ile ich jest.
+Tablicę liczebności można wyznaczyć funkcją `table()` lub `summary()`. Jeżeli w zmiennej jakościowej występują wartości brakujące, 
+to funkcja `summary()` też napisze ile ich jest.
 
 ```{r, warning=FALSE}
 table(auta2012$Waluta)
@@ -145,7 +193,8 @@ summary(auta2012$Waluta)
 
 + Ile zmiennych w zbiorze danych `auta2012` to zmienne jakościowe? 
 
-+ Zmienna `Liczba.drzwi` przyjmuje wartości `2/3` i `4/5`. Zachowuje się ona jako zmienna jakościowa. Jednak można uznać, że liczba drzwi to cecha ilościowa, ponieważ opisuje _ilość_ drzwi w samochodzie. Jak wyjaśnić tę dualność?
++ Zmienna `Liczba.drzwi` przyjmuje wartości `2/3` i `4/5`. Zachowuje się ona jako zmienna jakościowa. Jednak można uznać, 
+że liczba drzwi to cecha ilościowa, ponieważ opisuje _ilość_ drzwi w samochodzie. Jak wyjaśnić tę dualność?
 
 Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
 
@@ -157,11 +206,13 @@ W pewnych sytuacjach, zamiast posługiwać się tablicą liczebności, wygodniej
 
 Ale jak te procenty policzyć?
 
-Można to zrobić na kilka sposobów. Funkcja `prop.table()` dzieli wartości tabeli liczebności przez sumę liczebności, a więc zamienia liczebności na frakcje.
-Przypiszmy wynik funkcji `table()` do jakiejś zmiennej, np. o nazwie `waluty` (nazwa może być dowolna, musimy jej jednak konsekwentnie używać w dalszych przykładach).
-Następnie tak otrzymaną tabelę liczebności zamieniamy na frakcje.
+Można to zrobić na kilka sposobów. Funkcja `prop.table()` dzieli wartości tabeli liczebności przez sumę liczebności, 
+a więc zamienia liczebności na frakcje. Przypiszmy wynik funkcji `table()` do jakiejś zmiennej, np. o nazwie `waluty` 
+(nazwa może być dowolna, musimy jej jednak konsekwentnie używać w dalszych przykładach). Następnie tak otrzymaną tabelę 
+liczebności zamieniamy na frakcje.
 
-W poniższym przykładzie, instrukcję przypisania wyniku obejmujemy napisami, po to by jej wynik był wyświetlony. Bez nawiasów wynik funkcji `table()` nie zostałby wyświetlony.
+W poniższym przykładzie, instrukcję przypisania wyniku obejmujemy napisami, po to by jej wynik był wyświetlony. Bez 
+nawiasów wynik funkcji `table()` nie zostałby wyświetlony, a jedynie przypisany do zmiennej `waluty`.
 
 ```{r, warning=FALSE}
 (waluty <- table(auta2012$Waluta))
@@ -172,9 +223,11 @@ prop.table(waluty)
 
 # Procenty
 
-Funkcja `prop.table()` wyznacza frakcje, ale nie wyglądają one zbyt czytelnie dla człowieka. Wygodniej by było wypisać procenty. I to nie byle jakie procenty, ale procenty które są ładnie sformatowane, np. wyświetlone z dokładnością do jednego miejsca dziesiętnego po przecinku.
+Funkcja `prop.table()` wyznacza frakcje, ale nie wyglądają one zbyt czytelnie dla człowieka. Wygodniej by było wypisać procenty. 
+I to nie byle jakie procenty, ale procenty które są ładnie sformatowane, np. wyświetlone z dokładnością do jednego miejsca dziesiętnego po przecinku.
 
-Aby zamienić frakcje na procenty, wystarczy je przemnożyć przez 100, a aby wynik przedstawić z dokładnością do jednego miejsca po przecinku wykorzystamy funkcję `round()`, która zaokrągla liczby do wskazanej liczby miejsc po kropce dziesiętnej.
+Aby zamienić frakcje na procenty, wystarczy je przemnożyć przez 100, a aby wynik przedstawić z dokładnością do jednego miejsca po przecinku wykorzystamy 
+funkcję `round()`, która zaokrągla liczby do wskazanej liczby miejsc po kropce dziesiętnej.
 
 ```{r, warning=FALSE}
 waluty <- table(auta2012$Waluta)
@@ -183,7 +236,9 @@ waluty <- table(auta2012$Waluta)
 round(procenty, digits = 1)
 ```
 
- Wszystkie przedstawione powyżej operacje działają i na pojedynczych wartościach (nazywanych skalarami) jak i na wektorach. Przykładowo operacja `100*frakcje` wymnaża liczbę `100` z każdym elementem wektora `frakcje` i wynikiem tej operacji jest wektor. Nie w każdym języku programowania można mieć takie mieszane operacje mnożenia wektorów i skalarów.
+ Wszystkie przedstawione powyżej operacje działają i na pojedynczych wartościach (nazywanych skalarami) jak i na wektorach. Przykładowo operacja `100*frakcje` 
+ wymnaża liczbę `100` z każdym elementem wektora `frakcje` i wynikiem tej operacji jest wektor. Nie w każdym języku programowania można mieć takie mieszane 
+ operacje mnożenia wektorów i skalarów.
 
 ---
 
@@ -205,10 +260,10 @@ sort(zaokragloneProcenty, decreasing = TRUE)
 
 # Procenty posortowane
 
-Wartości w wektorze można posortować też na kilka innych sposobów. 
-Bardziej skomplikowanym, ale pozwalającym na omówienie bardziej zaawansowanych przykładów indeksowania jest funkcja `order()`.
+Wartości w wektorze można posortować też na kilka innych sposobów.  Bardziej skomplikowanym, 
+ale pozwalającym na omówienie bardziej zaawansowanych przykładów indeksowania jest funkcja `order()`.
 
-Wynikiem funkcji `order()` są indeksy elementów w wektorze które tworzą ciąg rosnący. Więcej informacji o tej funkcji znaleźć można w odcinku 7.
+Wynikiem funkcji `order()` są indeksy elementów w wektorze które tworzą ciąg rosnący. Więcej informacji o tej funkcji znaleźć można w odcinku 7. [PCH: WCALE ŻE NIE MOŻNA!!!!! TAM NIC NIE MA NA TEN TEMAT!]
 
 ```{r, warning=FALSE}
 order(zaokragloneProcenty)
@@ -243,10 +298,11 @@ Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOO
 
 # Graficzne statystyki opisowe
 
-Tabele liczebności są proste w interpretacji. Podobnie jednak jak w innych przypadkach, graficzne przedstawienie tych liczb pozwala na łatwiejsze dostrzeżenie co się dzieje z danymi. Koniec końców w tabeli liczb łatwo pomylić się nawet gdy chodzi o liczbę cyfr w liczbie. Na wykresie takie wartości natychmiast rzucają się w oczy.
+Tabele liczebności są proste w interpretacji. Podobnie jednak jak w innych przypadkach, graficzne przedstawienie liczb pozwala 
+na łatwiejsze dostrzeżenie co się dzieje w danych. Koniec końców, w tabeli liczb łatwo pomylić się nawet gdy chodzi o liczbę 
+cyfr w liczbie. Na wykresie takie wartości natychmiast rzucają się w oczy.
 
-Zazwyczaj tabele liczebności przedstawia się za pomocą wykresów słupkowych.
-Wykresy słupkowe można wykonać np. funkcją `barplot()`.
+Zazwyczaj tabele liczebności przedstawia się za pomocą wykresów słupkowych. Wykresy słupkowe można wykonać np. funkcją `barplot()`.
 
 ```{r, warning=FALSE, fig.width=5, fig.height=5}
 (waluty <- table(auta2012$Waluta))
@@ -259,8 +315,8 @@ barplot(waluty)
 
 Jeżeli chcemy, by słupki były przedstawiane poziomo, do funkcji `barplot()` można dodać argument `horiz = TRUE`.
 
-Domyślnie wartości są uporządkowane alfabetycznie. Nie zawsze jednak taka kolejność ma sens.
-W tym przypadku rozsądniej jest posortować dane malejąco, co można wykonać z użyciem funkcji `sort()`.
+Domyślnie wartości są uporządkowane alfabetycznie. Nie zawsze jednak taka kolejność ma sens. W tym przypadku 
+rozsądniej jest posortować dane malejąco, co można wykonać z użyciem funkcji `sort()`.
 
 Argument `las=1` powoduje, że oś OY ma etykiety ustawione poziomo.
 
@@ -273,10 +329,7 @@ barplot(posortowaneWaluty, horiz = TRUE, las=1)
 
 # Zadania:
 
-+ Przedstaw graficznie tabelę liczebności dla zmiennej `Kraj.pochodzenia`. 
-
-Wypróbuj wykres pionowy i poziomy. 
-
++ Przedstaw graficznie tabelę liczebności dla zmiennej `Kraj.pochodzenia`. Wypróbuj wykres pionowy i poziomy. 
 Aby obrócić kierunek etykiet na osiach dodaj do funkcji `barplot()` argument `las=1`.
 
 Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
@@ -285,13 +338,17 @@ Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOO
 
 # Napisy czy czynniki?
 
-Z wyglądu, cechy jakościowe (czynniki) przypominają cechy napisowe. 
-Jednak pod spodem, ich reprezentacja jest zupełnie inna.
-Czynniki nie są pamiętane jako napisy, ale jako para - wektor liczb i słownik, określający, który napis odpowiada, której liczbie. Dzięki temu można zaoszczędzić pamięć przy przechowywaniu dużych zbiorów danych. 
+Z wyglądu, cechy jakościowe (czynniki) przypominają cechy napisowe. Jednak pod spodem, ich reprezentacja jest zupełnie inna.
+Czynniki nie są pamiętane jako napisy, ale jako para - wektor liczb i słownik, określający, który napis odpowiada, 
+której liczbie. Dzięki temu można zaoszczędzić pamięć przy przechowywaniu dużych zbiorów danych. 
 
-Na napisach zazwyczaj wykonuje się inne operacje niż na zmiennych jakościowych, może się więc tak zdarzyć, że celowo chcemy jakieś dane odczytać jako napisy. Ale gdy dane są wczytywane z pliku tekstowego w którym są napisy, domyślnie napisy są wczytywane jako czynniki. 
+Na napisach zazwyczaj wykonuje się inne operacje niż na zmiennych jakościowych, może się więc tak zdarzyć, że celowo 
+chcemy jakieś dane odczytać jako napisy. Ale gdy dane są wczytywane z pliku tekstowego w którym są napisy, domyślnie 
+traktowane są jako czynniki. 
 
-W poniższym przykładzie, takie zmienne jak `gatunek` i `habitat` są wczytywane jako zmienna klasy `factor`. Efektem ubocznym jest sposób wyświetlania wyników np. przez zmienną `cat()`. Dla zmiennej czynnikowej, ta funkcja na ekranie wypisze liczby a nie wartości napisowe. 
+W poniższym przykładzie takie zmienne jak `gatunek` i `habitat` są wczytywane jako zmienna klasy `factor`. Efektem 
+ubocznym jest sposób wyświetlania wyników np. przez zmienną `cat()`. Dla zmiennej czynnikowej, ta funkcja na ekranie 
+wypisze liczby a nie wartości napisowe. 
 
 ```{r, warning=FALSE, fig.height=5, fig.width=5}
 koty_ptaki <- read.table("http://biecek.pl/MOOC/dane/koty_ptaki.csv", 
@@ -305,7 +362,9 @@ cat(koty_ptaki$gatunek)
 
 # Napisy czy czynniki?
 
-Funkcja `read.table()` posiada argument `stringsAsFactors` określający w jaki sposób wczytywać kolumny z napisami. Ustawiwszy argument `stringsAsFactors=FALSE` wymuszamy wczytywanie danych jako zmienne napisowe. Zajmie to trochę więcej pamięci, ale samo wczytywanie będzie trochę szybsze. 
+Funkcja `read.table()` posiada argument `stringsAsFactors` określający w jaki sposób wczytywać kolumny z napisami. 
+Ustawiwszy argument `stringsAsFactors=FALSE` wymuszamy wczytywanie danych jako zmienne napisowe. Zajmie to trochę 
+więcej pamięci, ale samo wczytywanie będzie trochę szybsze. 
 
 Zauważmy jak teraz wygląda wynik funkcji `str()` i `cat()`.
 
@@ -339,13 +398,19 @@ str(napisy)
 
 # Tablice częstości
 
-A co gdybyśmy chcieli przedstawić zależność pomiędzy dwoma zmiennymi jakościowymi? Można to zrobić używając funkcji `table()` (należy kolejne zmienne podawać jako kolejne argumenty) ale można też użyć funkcją `xtabs()`, która jest trochę wygodniejsza w pracy.
+A co gdybyśmy chcieli przedstawić zależność pomiędzy dwoma zmiennymi jakościowymi? Można to zrobić używając 
+funkcji `table()` (należy kolejne zmienne podawać jako kolejne argumenty), [PCH: Tutaj przykład table(x,y)!] ale można też użyć funkcją `xtabs()`, 
+która jest trochę wygodniejsza w pracy.
 
-Pierwszym argumentem tej funkcji jest formuła o składni `~ zmienna_1 + .. + zmienna_n`, t.j. rozpoczynająca się tyldą a następnie ze zmiennymi porozdzielanymi znakiem plusa. Drugim argumentem jest ramka danych, która powinna zawierać zmienne wymienione w formule. 
+Pierwszym argumentem tej funkcji jest formuła o składni `~ zmienna_1 + .. + zmienna_n`, t.j. rozpoczynająca 
+się tyldą a następnie ze zmiennymi porozdzielanymi znakiem plusa. Drugim argumentem jest ramka danych, 
+która powinna zawierać zmienne wymienione w formule. 
 
 Wynikiem jest tablica kontyngencji o tylu wymiarach, ile zmiennych występuje w formule.
 
-Przykładowo, zestawiając ze sobą kraj pochodzenia oraz walutę w ogłoszeniu, otrzymujemy tablicę częstości o wymiarach 32 wiersze i 8 kolumn. Pierwszy wiersz tej tabeli odpowiada pustej wartości kraju pochodzenia, stąd brak nazwy w pierwszym wierszu.
+Przykładowo, zestawiając ze sobą kraj pochodzenia oraz walutę w ogłoszeniu, otrzymujemy tablicę 
+częstości o wymiarach 32 wiersze i 8 kolumn. Pierwszy wiersz tej tabeli odpowiada pustej wartości 
+kraju pochodzenia, stąd brak nazwy w pierwszym wierszu.
 
 ```{r, warning=FALSE, fig.height=5, fig.width=5}
 (krajWaluta <- xtabs( ~ Kraj.pochodzenia + Waluta, auta2012))
@@ -357,13 +422,18 @@ Przykładowo, zestawiając ze sobą kraj pochodzenia oraz walutę w ogłoszeniu,
 
 Tablice częstości nie są ramkami danych. 
 
-Gdy w grę wchodzą dwie zmienne, to wyglądają jak ramki danych, mają wiersze i kolumny. Muszą być jednak czymś innym, ponieważ w sytuacji, gdy tablica kontyngencji dotyczy trzech lub większej liczby zmiennych to wynikowa macierz kontyngencji ma więcej wymiarów niż dwa. 
+Gdy w grę wchodzą dwie zmienne, to rzeczywiście wyglądają one jak ramki danych - mają wiersze i kolumny. 
+Muszą być jednak czymś innym, ponieważ w sytuacji, gdy tablica kontyngencji dotyczy trzech lub większej 
+liczby zmiennych to wynikowa macierz kontyngencji ma więcej wymiarów niż dwa. 
 
-Funkcją `as.data.frame` można przekształcić wielowymiarowe tabele do ramki danych. Otrzyma się w tym przypadku tak zwaną reprezentację rzadką macierzy kontyngencji, w której pierwsze kolumny opisują wszystkie kombinacje czynników zmiennych a ostania kolumna opisuje liczebność występowania poszczególnej kombinacji czynników.
+Funkcją `as.data.frame` można przekształcić wielowymiarowe tabele do ramki danych. Otrzyma się w tym 
+przypadku tak zwaną reprezentację rzadką macierzy kontyngencji, w której pierwsze kolumny opisują wszystkie 
+kombinacje czynników zmiennych a ostania kolumna opisuje liczebność występowania poszczególnej kombinacji czynników.
 
 ```{r, warning=FALSE, fig.height=5, fig.width=5}
 xt <- xtabs(~Kraj.pochodzenia+Waluta, auta2012)
 xt <- as.data.frame(xt)
+# Wyświetlmy tylko te kombinacje, które rzeczywiście występują w danych:
 xt[xt$Freq > 0, ]
 ```
 
@@ -371,11 +441,16 @@ xt[xt$Freq > 0, ]
 
 # Przekształcanie zmiennych ilościowych w jakościowe
 
-Opisując dane ilościowe, często można ułatwić ich zrozumienie, jeżeli zmienne ilościowe podzieli się na przedziały. Takie przedziały są już zmienną jakościową.
+Opisując dane ilościowe, często można ułatwić ich zrozumienie, jeżeli zmienne ilościowe 
+podzieli się na przedziały. Takie przedziały są już zmienną jakościową.
 
-Zmienną jakościową z ilościowej można stworzyć używając funkcji `cut()`, która za pierwszy argument przyjmuje zmienną ilościową a za drugi przyjmuje liczbę przedziałów do zbudowania lub punkty odcięcia dla tych przedziałów.
+Zmienną jakościową z ilościowej można stworzyć używając funkcji `cut()`, która za pierwszy 
+argument przyjmuje zmienną ilościową, a ajko drugi liczbę przedziałów do zbudowania lub punkty 
+odcięcia dla tych przedziałów.
 
-W przedziale poniżej przekształcimy zmienną `waga` ze zbioru `koty_ptaki` na cztery przedziały, 0-1, 1-10, 10-100 i 100-1000. Tak stworzoną zmienną dodamy do zbioru `koty_ptaki` pod nazwą `wagaKategoria`.
+W przykładzie poniżej przekształcimy zmienną `waga` ze zbioru `koty_ptaki` na cztery 
+przedziały: 0-1, 1-10, 10-100 i 100-1000. Tak stworzoną zmienną dodamy do zbioru `koty_ptaki` 
+pod nazwą `wagaKategoria`.
 
 ```{r, warning=FALSE, fig.height=5, fig.width=5}
 koty_ptaki$waga
@@ -386,13 +461,19 @@ table(koty_ptaki$wagaKategoria)
 
 # Tablice częstości
 
-Wykorzystajmy tą nowo utworzoną zmienną do przedstawienia graficznych statystyk dla pary zmiennych jakościowych.
+Wykorzystajmy tę nowo utworzoną zmienną do przedstawienia graficznych statystyk 
+dla pary zmiennych jakościowych. Zestawimy wagę ze zmienną drużyna. 
 
-Zestawimy wagę ze zmienną drużyna. A następnie tę dwuwymiarową tabelę przekażemy do funkcji `mosaicplot()`. 
+Następnie dwuwymiarową tabelę przekażemy do funkcji `mosaicplot()`. 
 
-Rysuje ona tak zwany wykres mozaikowy przedstawiający jednocześnie wiele zależności. W pierwszym kroku szerokość kolumn odpowiada proporcjom wartości Kot i Ptak w zbiorze danych (jest ich prawie po równo, dlatego obie kolumny mają dosyć podobną szerokość). Następnie wysokość wierszy odpowiada względnemu udziałowi poszczególnych wartości w określonej kolumnie. W kolumnie Kot dominuje przedział dla wagi 10-100, a w kolumnie Ptak dominuje przedział 1-10 oznaczony kolorem niebieskim. 
+Rysuje ona tak zwany wykres mozaikowy przedstawiający jednocześnie wiele zależności. 
+W pierwszym kroku szerokość kolumn odpowiada proporcjom wartości Kot i Ptak w zbiorze danych 
+(jest ich prawie po równo, dlatego obie kolumny mają dosyć podobną szerokość). Następnie wysokość 
+wierszy odpowiada względnemu udziałowi poszczególnych wartości w określonej kolumnie. W kolumnie Kot 
+dominuje przedział dla wagi 10-100, a w kolumnie Ptak dominuje przedział 1-10 oznaczony kolorem niebieskim. 
 
-Jest to sposób na przedstawienie rozkładów warunkowych. Bardzo użyteczne, jednak wymagające pewnej wprawy w czytaniu. Więcej o wykresach mozaikowych i innych metodach przedstawiania dwóch zmiennych jakościowych znaleźć można w sezonie 3.
+Jest to sposób na przedstawienie rozkładów warunkowych. Bardzo użyteczne, jednak wymagające pewnej wprawy w czytaniu. 
+Więcej o wykresach mozaikowych i innych metodach przedstawiania dwóch zmiennych jakościowych znaleźć można w sezonie 3.
 
 ```{r, warning=FALSE, fig.height=5, fig.width=5}
 (druzynaWaga <- xtabs(~druzyna + wagaKategoria, koty_ptaki))
@@ -416,9 +497,8 @@ boxplot(Rok.produkcji ~ Rodzaj.paliwa, auta2012, las=2)
 
 # Kolejność i nazwy czynników
 
-Domyślną kolejność można  zmienić. 
-
-Jednym ze sposobów określania kolejności czynników jest argument `levels` w funkcji `factor()`. Czynniki będą mieć kolejność zgodną z tam wskazaną.
+Domyślną kolejność można zmienić. Jednym ze sposobów określania kolejności czynników jest 
+argument `levels` w funkcji `factor()`. Czynniki będą mieć kolejność zgodną z tam wskazaną.
 
 ```{r, warning=FALSE, fig.height=5, fig.width=5}
 levels(auta2012$Skrzynia.biegow)
@@ -431,9 +511,14 @@ levels(auta2012$Skrzynia.biegow)
 
 # Kolejność i nazwy czynników
 
-Jeżeli chcemy ,,posortować'' poziomy zgodnie z pewną cechą ilościową, to wygodne będzie użycie funkcji `reorder()`. Jako argumenty pobiera ona wektor ze zmienną czynnikową, wektor z dowolną zmienną i funkcję. Dla każdej grupy określonej przez zmienną czynnikową, wartości wskazanych przez drugi argument, wyznaczana jest wartość funkcji - trzeciego argumentu. Następnie czynniki są porządkowane zgodnie z kolejnością wyników trzeciej funkcji.
+Jeżeli chcemy ,,posortować'' poziomy zgodnie z pewną cechą ilościową, to wygodne będzie 
+użycie funkcji `reorder()`. Jako argumenty pobiera ona wektor ze zmienną czynnikową,
+wektor z dowolną zmienną i funkcję. Dla każdej grupy określonej przez zmienną czynnikową, 
+dla wartości wskazanych przez drugi argument wyznaczana jest wartość funkcji - trzeciego argumentu. 
+Następnie czynniki są porządkowane zgodnie z kolejnością wyników trzeciej funkcji.
 
-W przykładzie poniżej, rodzaje paliwa są porządkowane zgodnie ze średnim rokiem produkcji aut o określonym rodzaju paliwa. Tak jak się można spodziewać, bardziej ,,nowoczesne'' paliwa są w autach młodszych. 
+W przykładzie poniżej, rodzaje paliwa są porządkowane zgodnie ze średnim rokiem produkcji 
+aut o określonym rodzaju paliwa. Tak jak się można spodziewać, bardziej ,,nowoczesne'' paliwa są w autach młodszych. 
 
 ```{r, warning=FALSE, fig.height=5, fig.width=5}
 auta2012$Rodzaj.paliwa.posortowany <- reorder(auta2012$Rodzaj.paliwa, 
@@ -447,15 +532,12 @@ boxplot(Rok.produkcji ~ Rodzaj.paliwa.posortowany, auta2012, las=2)
 
 # Kolejność i nazwy czynników
 
-Nazwy czynników można też dowolnie zmieniać.
-
-Najprościej można to zrobić używając funkcji `levels<-()` tak jak na poniższym przykładzie.
+Nazwy czynników można też dowolnie zmieniać. Najprościej można to zrobić używając funkcji `levels()` tak jak na poniższym przykładzie.
 
 ```{r, warning=FALSE, fig.height=5, fig.width=5}
 levels(auta2012$Rodzaj.paliwa)
-
 levels(auta2012$Rodzaj.paliwa) <- c("", "B", "B+C", "B+L", "E", "H", "I", "L", "D", "W")
-table(auta2012$Rodzaj.paliwa)
+levels(auta2012$Rodzaj.paliwa)
 ```
 
 
@@ -463,7 +545,8 @@ table(auta2012$Rodzaj.paliwa)
 
 # Zadania:
 
-+ W zbiorze danych `auta2012` podziel zmienne *Rok.produkcji* na przedziały 1900-1990, 1991-1995, 1996-2000, 2001-2005, 2006-2010, 2011-2012 a zmienną *Przebieg.w.km* na przedziały 0-1000, 1001-10 000, 10 001-100 000, 100 001 - 1000 000, 1000 000 - 10 000 000.
++ W zbiorze danych `auta2012` podziel zmienne *Rok.produkcji* na przedziały 1900-1990, 1991-1995, 1996-2000, 2001-2005, 2006-2010, 2011-2012, 
+a zmienną *Przebieg.w.km* na przedziały 0-1000, 1001-10 000, 10 001-100 000, 100 001 - 1000 000, 1000 000 - 10 000 000.
 
 + Wyznacz tabelę liczebności dla tych dwóch nowych zmiennych.
 
