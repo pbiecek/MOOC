@@ -479,3 +479,38 @@ dmy("08-05-1945") - dmy("01-09-1939")
 # dzień tygodnia za 100 dni od dziś
 wday(today() + days(100), label = TRUE, abbr = FALSE)
 ```
+
+# Zadania, sezon 1, odcinek 16
+
+Po wczytaniu poniższej ramki danych napraw następujące błędy:
+
++ popraw nazwę kolumny `litąry`,
++ zamień wartości `Ą` i `Ć` na ,,bezogonkowe'',
++ zamień kolumnę `liczby` na kolumnę liczb,
++ zastąp brakujące dane w kolumnie `braku`.
+
+```{r, eval=FALSE}
+df <- data.frame(
+        litąry = c("Ą","B","Ć","D"),
+        liczby = c("1","2","3,0","4,0"),
+        braki = c(NA,1,NA,1),
+        stringsAsFactors = FALSE)
+df
+```
+
+# Odpowiedzi, sezon 1, odcinek 16
+
+```{r, eval=FALSE}
+# nazwa kolumny danych
+colnames(df)[1] = "litery"
+
+# ogonki
+df[df$litery == "Ą"] = "A"
+df[df$litery == "Ć"] = "C"
+
+# liczby
+df$liczby <- as.numeric(gsub(",", ".", df$liczby))
+
+# brakujące dane
+df$braki[is.na(df$braki)] <- 1
+```
