@@ -172,7 +172,7 @@ czas3 + days(2) + months(4) + years(1)
 Przydatne wskazówki jak pracować z czasem i datami znaleźć można w artykule  *Handling date-times in R* Cole Beck
 http://biostat.mc.vanderbilt.edu/wiki/pub/Main/ColeBeck/datestimes.pdf.
 
-Szczegółowy opis paietu `lubridate` znajduje się w artykule z JSS http://www.jstatsoft.org/v40/i03/paper
+Szczegółowy opis pakietu `lubridate` znajduje się w artykule z JSS http://www.jstatsoft.org/v40/i03/paper
 
 Wiele interesujących informacji o pracy z czasem i datami znajduje się tutaj:
 http://en.wikibooks.org/wiki/R_Programming/Times_and_Dates

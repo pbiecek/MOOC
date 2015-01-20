@@ -34,8 +34,8 @@ Inną nazwą, stosowaną często przez programistów, jest *zmienna czynnikowa*.
 Określając zmienną jakościową warto wskazać o jakich grupach mówimy, przykładami zmiennych jakościowych są 
 np. wykształcenie (grupy: podstawowe, średnie, wyższe), płeć (grupy: kobieta, mężczyzna), kraj zamieszkania (grupy: Polska, ...).
 
-Zmienna jakościowa może być opisana liczbami, jeżeli jednak te liczby nie oznaczają ilości czu wielkości to taka zmienna 
-jest w istocie zmienną jakościową. Przykładowo pierwsze dwie cyfry kodu pcoztowego mogą być zmienną jakościową, ocenę szkolną 
+Zmienna jakościowa może być opisana liczbami, jeżeli jednak te liczby nie oznaczają ilości czy wielkości to taka zmienna 
+jest w istocie zmienną jakościową. Przykładowo pierwsze dwie cyfry kodu pocztowego mogą być zmienną jakościową, ocenę szkolną 
 można traktować jako zmienną jakościową (można też jako ilościową zależnie od kontekstu), podobnie liczbę drzwi samochodu, jeżeli chcemy 
 jej użyć do pogrupowania samochodów na 3 i 5 drzwiowe, potraktujemy jako cechę jakościową.
 
@@ -445,7 +445,7 @@ Opisując dane ilościowe, często można ułatwić ich zrozumienie, jeżeli zmi
 podzieli się na przedziały. Takie przedziały są już zmienną jakościową.
 
 Zmienną jakościową z ilościowej można stworzyć używając funkcji `cut()`, która za pierwszy 
-argument przyjmuje zmienną ilościową, a ajko drugi liczbę przedziałów do zbudowania lub punkty 
+argument przyjmuje zmienną ilościową, a jako drugi liczbę przedziałów do zbudowania lub punkty 
 odcięcia dla tych przedziałów.
 
 W przykładzie poniżej przekształcimy zmienną `waga` ze zbioru `koty_ptaki` na cztery 

@@ -17,7 +17,7 @@ output:
 # O czym jest ten odcinek
 
 Analizując dane spotkamy się z różnymi rodzajami zmiennych. Bardzo często są to napisy lub zmienne, które chcemy do napisów 
-przekształcić (np. data, którą można przekształcić na napus by wyłuskać rok i miesiąc).
+przekształcić (np. data, którą można przekształcić na napis by wyłuskać rok i miesiąc).
 
 W tym odcinku nauczymy się:
 
@@ -141,7 +141,7 @@ grep("A", koty_ptaki$habitat_napis, ignore.case = TRUE)
 Określając wzorzec możemy wykorzystać wyrażenia regularne. Pozwalają one opisać pewną prawidłowość, którą chcemy wyszukać w danych. 
 Wyrażenia regularne są często stosowane, aby sprawdzić czy napis jest na przykład mailem, numerem telefonu lub kodem pocztowym.
 
-Więcej o wyrażeniach regularnych można przeczytać choćby na wikipedii http://pl.wikipedia.org/wiki/Wyra%C5%BCenie_regularne#Wyra.C5.BCenia_regularne_w_praktyce.
+Więcej o wyrażeniach regularnych można przeczytać choćby na Wikipedii http://pl.wikipedia.org/wiki/Wyra%C5%BCenie_regularne#Wyra.C5.BCenia_regularne_w_praktyce.
 
 Poniższe wyrażenie, sprawdza czy początek napisu to litera A lub E.
 
@@ -268,7 +268,7 @@ Do tego celu można wykorzystać funkcję `paste()` lub `paste0()`.
 Przedstawmy jej działanie na prostym przykładzie. Będziemy sklejać wektor dziesięciu liter, dziesięciu cyfr i jednego napisu.
 
 Funkcje w programie R, które operują na wektorach (większość), jeżeli mają dwa argumenty o różnej długości to krótszy argument 
-jest zwielokrotniny tylekrotnie, aby dorównał długością dłuższemu (tzw. recycling rule). Z tego powodu trzeci argument - pojedyncza 
+jest zwielokrotniony tylekrotnie, aby dorównał długością dłuższemu (tzw. recycling rule). Z tego powodu trzeci argument - pojedyncza 
 kropka - będzie zwielokrotniona i sklejona z każdym z dziesięciu elementów wektorów `litery` i `cyfry`.
 
 ```{r, warning=FALSE}
@@ -307,7 +307,7 @@ head(statystykiMarkiModelu, 25)
 
 # Imiona dzieci
 
-W pakiecie `SmaterPoland` jest również dostępny zbiór danych `imiona_warszawa` ze statystykami popularności imion nadawanych noworodkom w Warszawie w różnych okresach czasu.
+W pakiecie `SmarterPoland` jest również dostępny zbiór danych `imiona_warszawa` ze statystykami popularności imion nadawanych noworodkom w Warszawie w różnych okresach czasu.
 
 Używając tego zbioru danych, możemy przetestować regułę mówiącą, że imię dziewczynki kończy się na literkę 'a', a chłopca nie. Jakiś czas temu za jedyny wyjątek podawano męskie 
 imię Bonawentura. Czy to się zmieniło?

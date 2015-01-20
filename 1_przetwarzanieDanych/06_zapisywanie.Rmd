@@ -33,7 +33,7 @@ Zacznijmy od przykładu, w którym stworzymy sztuczny zbiór danych o trzech wie
 
 Pliki `csv` są plikami tekstowymi, ale również są poprawnie odczytywane przez program Excel, przez co jest to popularne medium wymiany danych tabelarycznych. 
 
-Aby zapisać dane do pliku możemy użyć funkcję `write.table()`. Poniższe instrukcje tworzą nowe dane oraz zapisują je do pliku `wazne_dane.csv` (w aktualnym katalogu) stosując jako separator kolumn średnik, a jako separator dziesiętny znak `.` (kropka). To, jaki katalog jest aktualnym katalogiem roboczym, można sprawdzić funckją `getwd()`.
+Aby zapisać dane do pliku możemy użyć funkcję `write.table()`. Poniższe instrukcje tworzą nowe dane oraz zapisują je do pliku `wazne_dane.csv` (w aktualnym katalogu) stosując jako separator kolumn średnik, a jako separator dziesiętny znak `.` (kropka). To, jaki katalog jest aktualnym katalogiem roboczym, można sprawdzić funkcją `getwd()`.
 
 ```{r, eval=FALSE}
 # tworzymy nowy zbiór danych
@@ -187,7 +187,7 @@ Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOO
 
 Gdzie szukać dalszych informacji o zapisie i odczycie danych w innych formatach? 
 
-Do R można wczytać i z R można zapisać dane w foramcie programu SAS, SPSS, Statistica, Stata i wielu innych
+Do R można wczytać i z R można zapisać dane w formacie programu SAS, SPSS, Statistica, Stata i wielu innych
 
 - Więcej informacji o tym jak wczytywać dane z innych formatów oraz baz danych znaleźć można w rozdziale 2.2 książki *,,Przewodnik po pakiecie R''*. Rozdział ten jest dostępny bezpłatnie pod adresem http://biecek.pl/R.
 
@@ -198,7 +198,7 @@ https://github.com/pbiecek/MOOC/blob/master/materialyZewnetrzne/R-data.pdf?raw=t
 - O ile *,,R Data Import/Export``* jest opisem ,,teoretycznym'' to bardzo ciekawe zebranie przypadków użycia funkcji do wczytywania danych z różnych formatów jest zebrane w wiki-książce *,,R programming''* dostępnej pod adresem 
 http://en.wikibooks.org/wiki/R_Programming/Importing_and_exporting_data
 
-- Interesujące zestawienie narzędzi do odczytywania danych ze stron interentowych znaleźć można na stronach z materiałami dydaktycznymi Gastona Sancheza http://gastonsanchez.com/teaching/
+- Interesujące zestawienie narzędzi do odczytywania danych ze stron internetowych znaleźć można na stronach z materiałami dydaktycznymi Gastona Sancheza http://gastonsanchez.com/teaching/
 
 *Dla entuzjastów Excela* 
 

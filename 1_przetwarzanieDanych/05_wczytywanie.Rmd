@@ -107,7 +107,7 @@ read.table(file = "http://biecek.pl/MOOC/dane/koty_ptaki.csv",
 
 # Dane tabelaryczne w plikach tekstowych
 
-Do wczytywania danych z pliku tekstowego posłużyć może funkcja `read.table()`. Ponieważ pliki tekstowe mogą mieć bardzo różną postać, funkcja ta ma wiele argumentów. Wybrane agrumenty przedstawia poniższa deklaracja (jest ich więcej, ale część pominiemy by nie zaciemniać obrazu).
+Do wczytywania danych z pliku tekstowego posłużyć może funkcja `read.table()`. Ponieważ pliki tekstowe mogą mieć bardzo różną postać, funkcja ta ma wiele argumentów. Wybrane argumenty przedstawia poniższa deklaracja (jest ich więcej, ale część pominiemy by nie zaciemniać obrazu).
 
 ```{}
 read.table(file, header = FALSE, sep = "", dec = ".",  nrows = -1,
@@ -117,13 +117,13 @@ read.table(file, header = FALSE, sep = "", dec = ".",  nrows = -1,
 
 Ponieważ dane mogą być zapisane z użyciem różnych formatów, argumenty tej funkcji określają format danych do wczytania. Znaczenie kolejnych argumentów podane jest poniżej.
 
-- `file` - ścieżka do pliku z danymi, może być też adres URL. Jeżeli wartości argumentów podajemy w ich domyślnej kolejności, to możemy pominąć nazwy argumentów (dlatego w kolejnych przykładach nie bedziemy podawać nazwy tego argumentu).
+- `file` - ścieżka do pliku z danymi, może być też adres URL. Jeżeli wartości argumentów podajemy w ich domyślnej kolejności, to możemy pominąć nazwy argumentów (dlatego w kolejnych przykładach nie będziemy podawać nazwy tego argumentu).
 - `header` - flaga określająca, czy pierwszy wiersz należy traktować jako nagłówek. W naszym przypadku `header=TRUE`.
 - `sep` - znak rozdzielający kolumny. W naszym przypadku `sep=";"`, ale popularnymi separatorami są również znak tabulacji, przecinek lub spacja.
 - `dec` - separator dziesiętny. Zazwyczaj jest to `.` lub `,`. W naszym przypadku `dec=","`.
 - `nrows` - maksymalna liczba wierszy do wczytania. Domyślnie ten argument przyjmuje wartość `-1`, czyli wczytaj wszystkie wiersze.
 - `skip` - liczba pierwszych wierszy do pominięcia przy wczytywaniu danych, domyślnie 0, czyli nie pomijaj żadnego wiersza.
-- `comment.char` - znak komentarza. Jeżeli w danych wystąpi ten znak to treść od tego znaku do końca lini będzie zignorowana.
+- `comment.char` - znak komentarza. Jeżeli w danych wystąpi ten znak to treść od tego znaku do końca linii będzie zignorowana.
 - `stringsAsFactors` - czy napisy powinny być domyślnie przekształcone w zmienne jakościowe. Domyślnie `TRUE`, o konsekwencjach tego przekształcenia napiszemy w odcinku 11 *Cechy jakościowe*.
 
 ---
@@ -174,11 +174,11 @@ Wybrane przydatne argumenty funkcji `read.table()`
 
 Innym popularnym formatem przechowywania danych są pliki w formacie Excela [rozszerzenia xls lub xlsx]. 
 
-W programie R dostępnych jest kilka pakietów pozwalających na odczytywanie danych w formacie Excela. Najpopularnijesze pakiety to `gdata`, `xlsReadWrite`, `XLConnect`, `xlsx`. Różnią się one zewnętrznymi bibliotekami, które wykorzystują, przez co z niektórych może być łatwiej skorzystać pod Windowsem z innych pod Linuxem. 
+W programie R dostępnych jest kilka pakietów pozwalających na odczytywanie danych w formacie Excela. Najpopularniejsze pakiety to `gdata`, `xlsReadWrite`, `XLConnect`, `xlsx`. Różnią się one zewnętrznymi bibliotekami, które wykorzystują, przez co z niektórych może być łatwiej skorzystać pod Windowsem z innych pod Linuxem. 
 
 W tym odcinku wykorzystamy funkcję `read.xls()` z pakietu `gdata`. Wymaga ona zainstalowanego programu `perl`. Pakiet `gdata` nie jest instalowany z podstawową dystrybucją R, dlatego przed pierwszym użyciem należy go zainstalować poleceniem `install.packages("gdata")`.
 
-Dane, które chcemy wczytać, w Excelu są dostępne pod adrese http://biecek.pl/MOOC/dane/koty_ptaki.xls i wyglądają następująco.
+Dane, które chcemy wczytać, w Excelu są dostępne pod adresem http://biecek.pl/MOOC/dane/koty_ptaki.xls i wyglądają następująco.
 
 ![Dane Excelowe](figs/excel.png)
 
@@ -213,7 +213,7 @@ http://withr.me/blog/2013/11/15/configure-character-encoding-for-r-under-linux-a
 
 Zestawienie najpopularniejszych pakietów wczytujących danych z Excela prezentuje poniższa tabela.
 
-pakiet | funkcja_odczyt | funkcja_zapis  | formaty | funkcjonalność | szybkość | jezyk
+pakiet | funkcja_odczyt | funkcja_zapis  | formaty | funkcjonalność | szybkość | język
 ---           | ---    | ---    | --- | --- | --- | ---
 openxlsx      | read.xlsx() | write.xlsx() | .xlsx | średnia  |duża | Rcpp
 gdata         | read.xls() | -- | .xlsx, .xls | mała | średnia | Perl

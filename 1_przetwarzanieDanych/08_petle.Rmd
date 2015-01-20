@@ -309,7 +309,7 @@ for (i in 1:nrow(koty_ptaki)) {
 # używając operacji na wektorach czasem można uniknąć pisania pętli
 cat(paste(koty_ptaki[,"gatunek"], "może ważyć do", koty_ptaki[,"waga"], "kg\n"))
 
-# pętla w pętli pozwala na wykonanie pewnej isntrukcji dla każdej pary kolumn
+# pętla w pętli pozwala na wykonanie pewnej instrukcji dla każdej pary kolumn
 for (i in colnames(koty_ptaki)) {
   for (j in colnames(koty_ptaki)) {
     cat("Kolumna '", i, "' i kolumna '", j, "' mają w sumie", nchar(i)+nchar(j), "znaków.\n")

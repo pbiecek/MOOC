@@ -151,7 +151,7 @@ Ale po kilku pierwszych godzinach, jeżeli tylko wytrwamy, okaże się, że nasz
 poziom <- exp(sekwencja)
 
 plot(x = sekwencja, y = poziom,
-     xlab="czas spędzony z R", ylab="poziom Data Science w krwii")
+     xlab="czas spędzony z R", ylab="poziom Data Science we krwi")
 ```
 
 # Zadanie

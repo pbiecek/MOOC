@@ -255,7 +255,7 @@ Przykładowo, poniżej zbudujemy funkcję rysującą wykres kropkowy dla wektora
 
 ```{r, message=FALSE, warning=FALSE}
 rysuj_wykres_kropkowy<- function(nazwy, wartosci) {
-  # zakładamy, że oba wektory sa tej samej długości
+  # zakładamy, że oba wektory są tej samej długości
   # funkcja seq_along(nazwy) tworzy sekwencję od 1 do długości wektora nazwy
   for (i in seq_along(nazwy)) {
     rysuj_kropki(wartosci[i])
