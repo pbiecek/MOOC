@@ -84,7 +84,7 @@ koty_ptaki</code></pre>
 </div>
 <div id="sortowanie-danych" class="slide section level1">
 <h1>Sortowanie danych</h1>
-<p>O ile wektor wartości można posortować funckją <code>sort()</code>, to do sortowania wierszy w ramce danych względe określonej kolumny wygodnie jest uzyć funkcję <code>arrange()</code>.</p>
+<p>O ile wektor wartości można posortować funkcją <code>sort()</code>, to do sortowania wierszy w ramce danych względem określonej kolumny wygodnie jest użyć funkcję <code>arrange()</code>.</p>
 <p>Ta funkcja jako pierwszy argument przyjmuje ramkę danych, a jako kolejne argumenty przyjmuje zmienne, wzdłuż których dane są sortowane.</p>
 <p>Przykładowo aby posortować wiersze w zbiorze <code>koty_ptaki</code> w kolejności rosnącej ze względu na prędkość (kolumna <code>predkosc</code>) można użyć następującej komendy.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre>
@@ -156,7 +156,7 @@ koty_ptaki</code></pre>
 <h1>Sortowanie po dwóch zmiennych</h1>
 <p>Jeżeli dla zmiennej, wzdłuż której sortujemy, mogą wystąpić remisy, czyli te same wartości, wtedy kolejność wierszy jest nieokreślona. Wygodnie jest w takich sytuacjach wskazać drugorzędowe kryterium sortowania.</p>
 <p>Przykładowo, aby posortować wiersze uwzględniając prędkość, ale zrobić to osobno dla kotów osobno dla ptaków, możemy wskazać drużynę jako główne kryterium sortowania a prędkość jako kryterium drugorzędne.</p>
-<p>Sortując po kolumnie <code>druzyna</code> wiele wierszy ma te same wartości, i o ich końcowej kolejnosci decyduje zmienna <code>predkosc</code>.</p>
+<p>Sortując po kolumnie <code>druzyna</code> wiele wierszy ma te same wartości, i o ich końcowej kolejności decyduje zmienna <code>predkosc</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(koty_ptaki, 
         druzyna,
         predkosc)</code></pre>
@@ -280,7 +280,7 @@ posortowanePorsche &lt;-
 </div>
 <div id="model-i-cena" class="slide section level1">
 <h1>Model i cena</h1>
-<p>Jeżeli wskażemy więcej niż jedną zmienną do sortowania, to w pierwszym kroku sortowanie odbędzie się wzdłuż pierwszej zmiennej, a w przypadku remisu (takich samych wartości) w drugim kropku wzdłuż drugiej zmiennej.</p>
+<p>Jeżeli wskażemy więcej niż jedną zmienną do sortowania, to w pierwszym kroku sortowanie odbędzie się wzdłuż pierwszej zmiennej, a w przypadku remisu (takich samych wartości) w drugim kroku wzdłuż drugiej zmiennej.</p>
 <p>W poniższym przypadku w pierwszym kroku sortujemy wzdłuż zmiennej <code>Model</code> auta, a gdy samochody mają ten sam model to ich kolejność jest określona przez drugą zmienną, czyli w tym przypadku cenę.</p>
 <p>Zmienna <code>Model</code> za wartości przyjmuje napisy, w tym przypadku jest sortowany w kolejności alfabetycznej.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(
@@ -325,7 +325,7 @@ posortowanePorsche &lt;-
 </div>
 <div id="sortowanie-malejaco" class="slide section level1">
 <h1>Sortowanie malejąco</h1>
-<p>Domyślnie wartości sortowane są rosnąco. Jeżeli chcemy zminić kolejnośc sortowania i sortować malejąco, to należy daną zmienną opakować funkcją <code>desc()</code>, tak jak na poniższym przykładzie.</p>
+<p>Domyślnie wartości sortowane są rosnąco. Jeżeli chcemy zmienić kolejność sortowania i sortować malejąco, to należy daną zmienną opakować funkcją <code>desc()</code>, tak jak na poniższym przykładzie.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(
    <span class="kw">arrange</span>(tylkoPorscheZDużymSilnikiem, 
         Model, <span class="kw">desc</span>(Cena.w.PLN))
@@ -369,7 +369,7 @@ posortowanePorsche &lt;-
 <div id="zadania" class="slide section level1">
 <h1>Zadania</h1>
 <ul>
-<li>Posortuj auta wzdłuż wielkości silnika (liczby koni mechanicznych, kolumna KM lub pojemności skokowej, kolumna Pojemnosc.skokowa). Które marki mają najwięszke silniki?</li>
+<li>Posortuj auta wzdłuż wielkości silnika (liczby koni mechanicznych, kolumna <code>KM</code>) lub pojemności skokowej (kolumna <code>Pojemnosc.skokowa</code>). Które marki mają największe silniki?</li>
 <li>Wybierz tylko auta marki ‘Rolls-Royce’ i posortuj je po cenie.</li>
 </ul>
 </div>

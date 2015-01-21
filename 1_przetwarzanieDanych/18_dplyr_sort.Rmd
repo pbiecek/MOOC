@@ -42,7 +42,7 @@ koty_ptaki
 
 # Sortowanie danych
 
-O ile wektor wartości można posortować funckją `sort()`, to do sortowania wierszy w ramce danych względe określonej kolumny wygodnie jest uzyć funkcję `arrange()`.
+O ile wektor wartości można posortować funkcją `sort()`, to do sortowania wierszy w ramce danych względem określonej kolumny wygodnie jest użyć funkcję `arrange()`.
 
 Ta funkcja jako pierwszy argument przyjmuje ramkę danych, a jako kolejne argumenty przyjmuje zmienne, wzdłuż których dane są sortowane.
 
@@ -78,7 +78,7 @@ Jeżeli dla zmiennej, wzdłuż której sortujemy, mogą wystąpić remisy, czyli
 
 Przykładowo, aby posortować wiersze uwzględniając prędkość, ale zrobić to osobno dla kotów osobno dla ptaków, możemy wskazać drużynę jako główne kryterium sortowania a prędkość jako kryterium drugorzędne.
 
-Sortując po kolumnie `druzyna` wiele wierszy ma te same wartości, i o ich końcowej kolejnosci decyduje zmienna `predkosc`.
+Sortując po kolumnie `druzyna` wiele wierszy ma te same wartości, i o ich końcowej kolejności decyduje zmienna `predkosc`.
 
 ```{r, warning=FALSE}
 arrange(koty_ptaki, 
@@ -122,7 +122,7 @@ tail(posortowanePorsche)
 
 # Model i cena
 
-Jeżeli wskażemy więcej niż jedną zmienną do sortowania, to w pierwszym kroku sortowanie odbędzie się wzdłuż pierwszej zmiennej, a w przypadku remisu (takich samych wartości) w drugim kropku wzdłuż drugiej zmiennej.
+Jeżeli wskażemy więcej niż jedną zmienną do sortowania, to w pierwszym kroku sortowanie odbędzie się wzdłuż pierwszej zmiennej, a w przypadku remisu (takich samych wartości) w drugim kroku wzdłuż drugiej zmiennej.
 
 W poniższym przypadku w pierwszym kroku sortujemy wzdłuż zmiennej `Model` auta, a gdy samochody mają ten sam model to ich kolejność jest określona przez drugą zmienną, czyli w tym przypadku cenę.
 
@@ -139,7 +139,7 @@ head(
 
 # Sortowanie malejąco
 
-Domyślnie wartości sortowane są rosnąco. Jeżeli chcemy zminić kolejnośc sortowania i sortować malejąco, to należy daną zmienną opakować funkcją `desc()`, tak jak na poniższym przykładzie.
+Domyślnie wartości sortowane są rosnąco. Jeżeli chcemy zmienić kolejność sortowania i sortować malejąco, to należy daną zmienną opakować funkcją `desc()`, tak jak na poniższym przykładzie.
 
 ```{r, warning=FALSE}
 head(
@@ -152,6 +152,7 @@ head(
 
 # Zadania
 
-* Posortuj auta wzdłuż wielkości silnika (liczby koni mechanicznych, kolumna `KM`) lub pojemności skokowej (kolumna `Pojemnosc.skokowa`). Które marki mają najwięszke silniki?
+* Posortuj auta wzdłuż wielkości silnika (liczby koni mechanicznych, kolumna `KM`) lub pojemności skokowej (kolumna `Pojemnosc.skokowa`). Które marki mają największe silniki?
 * Wybierz tylko auta marki 'Rolls-Royce' i posortuj je po cenie.
+
 
