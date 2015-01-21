@@ -46,13 +46,9 @@ część 1: Data smart
     + odcinek 22: Agregowanie danych [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/22_dplyr_summarise.html), 
     + odcinek 23: Przetwarzanie danych w grupach [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/23_dplyr_groupby.html)
     + odcinek 24: Reprezentacja wąska i szeroka danych, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/24_tidyr.html)
-  * Prezentacje, raporty i powtarzalne obliczenia
-    + odcinek 25: Tworzenie raportu w knirt z RStudio, [html TODO]
-  * Studium przypadku
-    + odcinek 26: Zakup samochodu wspierany danymi [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/77_przypadekUzycia.Rmd),
   * Co dalej? 
-    + odcinek 27: Co dalej? [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/99_coDalej.html)
-    + odcinek 28: W opracowaniu materiałów udział wzięli [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/00_credits.Rmd)
+    + odcinek 25: Co dalej? [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/99_coDalej.html)
+    + odcinek 26: W opracowaniu materiałów udział wzięli [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/00_credits.Rmd)
   * Challange [20 zadań] [przyklad z RStudio](http://shiny.rstudio.com/tutorial/quiz/)
 
 + Dane wokół nas,
@@ -89,6 +85,7 @@ część 2: Data master
   * Jak wybierać modele [AIC, BIC]
   * Regresja logistyczna
 
-TODO: Wprowadzić peer-review w ocenianiu wizualizacji i być może modelowania ???
 
-TODO: 20 pytań w challenges z automatyczną weryfikacją poprawności
+  * Dodać do challange?
+    + Zakup samochodu wspierany danymi [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/77_przypadekUzycia.Rmd),
+
