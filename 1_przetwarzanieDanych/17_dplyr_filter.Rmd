@@ -29,27 +29,11 @@ znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
 
 ---
 
-Pracując z danymi często wyróżnia się dwa stany,
-dane surowe i dane przetworzone.
+# Ptaki vs. koty
 
-Dane surowe pobieramy ze źródła danych, zakładając że na podstawie tych danych możemy odpowiedzieć, na interesujące nas pytania.
-Przykładowo, szczegółowe informacje o wszystkich ofertach sprzedaży aut, to przykład danych surowych, ponieważ pobierany te dane dokładnie w tej postaci.
+Rozpocznijmy przykład dla filrowania od zbioru danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem `SmarterPoland`. Jest on na tyle mały, że wynik operacji będzie można przedstawić na ekranie.
 
-Pytania, które nas interesują dotyczą często podzbiory całych danych, i to podzbioru, na którym wykonywane są jakieś transformacje.
-Takie przekształcone dane nazywamy danymi przetworzonymi.
-
-Przetwarzanie może być bardzo różne, 
-mając zbiór wypowiedzi, możemy liczyć częstość wystąpień poszczególnych słów,
-możemy z liczb wyciągać ostatnie cyfry, czy z dat dni tygodnia.
-
-Dzisiaj poznamy fantastyczne narzędzie, bardzo pomagające w przetwarzaniu danych.
-To narzędzie to biblioteka dplyr
-
----
-
-## Ptaki vs. koty
-
-W tym odcinku będziemy pracować na zbiorze danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem `SmarterPoland`. Jest on na tyle mały, że wynik operacji będzie można przedstawić na ekranie.
+Pokażemy jak z tego zbioru danych wybierać wiersze, widząc cały zbiór danych łątwiej zrozumieć które wiersze zostały wyfiltrowane.
 
 ```{r, message=FALSE}
 library(SmarterPoland)
@@ -58,29 +42,34 @@ koty_ptaki
 
 ---
 
-## Filtrowanie danych
+# Filtrowanie danych
 
-Używając funkcji **filter()** można przefiltrować dane, zostawiając tylko te, które spełniają określony warunek (jeden lub kilka).
-Pierwszym argumentem tej funkcji jest ramka danych,
-kolejne argumenty, a może być ich jeden lub więcej) to warunki logiczne, które muszę być spełnione aby dany wiersz trafił do wyniki.
+Funkcja **filter()** reduluje liczbę wierszy, zostawiając tylko te, które spełniają określony warunek (jeden lub kilka).
+Pierwszym argumentem tej funkcji jest ramka danych lub tabela danych,
+kolejne argumenty, a może być ich jeden lub więcej) to warunki logiczne.
+Wynikiem jest ramka danych z wierszami, które spełniają jednocezśnie wszystkie wskazane warunki.
 
-Przykładowo, aby zobaczyć, które zwierzaki przekraczają prędkość 100 km na godzinę możemy wykonać następującą instrukcję.
+Przykładowo, aby zobaczyć, które zwierzaki przekraczają prędkość 100 km na godzinę możemy użyć następujących komend.
+W pierwszej linii wczytujemy pakiet `dplyr`. 
 
 ```{r, message=FALSE}
 library(dplyr)
-
 filter(koty_ptaki,
        predkosc > 100)
 ```
 
 ---
 
-## Dwa lub więcej warunków
+# Dwa lub więcej warunków
 
 Możemy określać jednocześnie więcej warunków dla filtrowania.
 Każdy kolejny warunek można podać jako kolejny argument funkcji filter.
 
-Poniższy przykład wybiera ze zbioru danych tylko ptaki, które przekraczają prędkość 100 km na godzinę i występują na półkuli północnej.
+Poniższy przykład wybiera ze zbioru danych tylko te gatunki, które spełniają jednocześnie trzy warunki. 
+
+Są to ptaki, które przekraczają prędkość 100 km na godzinę i występują na półkuli północnej. 
+
+Operator `%in%` zwraca TRUE jeżeli określona wartość występuje w wektorze po prawej stronie.
 
 ```{r, warning=FALSE}
 filter(koty_ptaki,
@@ -90,12 +79,13 @@ filter(koty_ptaki,
        )
 ```
 
-
 ---
 
 # Auta
 
 Operacje filtrowania przećwiczymy też na znacznie większym zbiorze danych, który juz nie sposób w całości wyświetlić na ekranie. Mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.
+
+Zbiór danych `auta2012` jest dostępny po wczytaniu pakietu `SmarterPoland`. Poniżęj przedstawiamy 6 pierwszych wierszy z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html
 
 ```{r, message=FALSE}
 head(auta2012)
@@ -103,9 +93,29 @@ head(auta2012)
 
 ---
 
+# Tabele danych
+
+W tym miejscu warto zaznaczyć, że funkcje z pakietu `dplyr` pracują nie tylko na ramkach danych, które już znamy i które mają klasę `data.frame`, ale również na tabelach danych, obiektach o klasie `tbl`.
+
+Z użytkownego punktu widzenia, tabele danych od ramek danych różnią się sposobem wyświetlania na ekranie (nie wyświetlają się kolumny, nei mieszczące się w obecnej szerokości konsoli) ale też wewnętrzną reprezentacją, która pozwala na szybsze operowanie na danych w strukturze `tbl`. 
+
+Jeżeli mamy więc dane duże, o dużej liczbie wierszy lub kolumn, często dobrym pomysłem jest przekształcenie je na postać tabeli danych.
+
+Ramkę danych na tabelę można zamienić funkcją `tbl_df` a tabelę na ramkę danych funkcją `as.data.frame()`.
+
+```{r, warning=FALSE}
+auta2012 <- tbl_df(auta2012)
+auta2012
+```
+
+---
+
 ## Filtrowanie danych
 
-Jeżeli chcemy pozostawić tylko samochody marki Porsche, możemy użyć warunku `Marka == 'Porsche'`.
+Przypuśćmy, że chcemy ograniczyć liste aut do jednej wybranej marki.
+
+
+Przykładowo, jeżeli chcemy pozostawić tylko samochody marki Porsche, możemy użyć warunku `Marka == 'Porsche'`.
 
 ```{r, warning=FALSE}
 tmp <- filter(auta2012,

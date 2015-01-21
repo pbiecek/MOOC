@@ -61,18 +61,10 @@ pogRomcy danych
 </ul>
 <p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>SmarterPoland</code>.</p>
 </div>
-<div class="slide section level1">
-
-<p>Pracując z danymi często wyróżnia się dwa stany, dane surowe i dane przetworzone.</p>
-<p>Dane surowe pobieramy ze źródła danych, zakładając że na podstawie tych danych możemy odpowiedzieć, na interesujące nas pytania. Przykładowo, szczegółowe informacje o wszystkich ofertach sprzedaży aut, to przykład danych surowych, ponieważ pobierany te dane dokładnie w tej postaci.</p>
-<p>Pytania, które nas interesują dotyczą często podzbiory całych danych, i to podzbioru, na którym wykonywane są jakieś transformacje. Takie przekształcone dane nazywamy danymi przetworzonymi.</p>
-<p>Przetwarzanie może być bardzo różne, mając zbiór wypowiedzi, możemy liczyć częstość wystąpień poszczególnych słów, możemy z liczb wyciągać ostatnie cyfry, czy z dat dni tygodnia.</p>
-<p>Dzisiaj poznamy fantastyczne narzędzie, bardzo pomagające w przetwarzaniu danych. To narzędzie to biblioteka dplyr</p>
-</div>
-<div class="slide section level1">
-
-<h2 id="ptaki-vs.koty">Ptaki vs. koty</h2>
-<p>W tym odcinku będziemy pracować na zbiorze danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem <code>SmarterPoland</code>. Jest on na tyle mały, że wynik operacji będzie można przedstawić na ekranie.</p>
+<div id="ptaki-vs.koty" class="slide section level1">
+<h1>Ptaki vs. koty</h1>
+<p>Rozpocznijmy przykład dla filrowania od zbioru danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem <code>SmarterPoland</code>. Jest on na tyle mały, że wynik operacji będzie można przedstawić na ekranie.</p>
+<p>Pokażemy jak z tego zbioru danych wybierać wiersze, widząc cały zbiór danych łątwiej zrozumieć które wiersze zostały wyfiltrowane.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
 koty_ptaki</code></pre>
 <pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
@@ -90,13 +82,11 @@ koty_ptaki</code></pre>
 ## 12 Sokol norweski   2.00     0.7      100   Polnoc        20    Ptak
 ## 13       Albatros   4.00     0.8      120 Poludnie        50    Ptak</code></pre>
 </div>
-<div class="slide section level1">
-
-<h2 id="filtrowanie-danych">Filtrowanie danych</h2>
-<p>Używając funkcji <strong>filter()</strong> można przefiltrować dane, zostawiając tylko te, które spełniają określony warunek (jeden lub kilka). Pierwszym argumentem tej funkcji jest ramka danych, kolejne argumenty, a może być ich jeden lub więcej) to warunki logiczne, które muszę być spełnione aby dany wiersz trafił do wyniki.</p>
-<p>Przykładowo, aby zobaczyć, które zwierzaki przekraczają prędkość 100 km na godzinę możemy wykonać następującą instrukcję.</p>
+<div id="filtrowanie-danych" class="slide section level1">
+<h1>Filtrowanie danych</h1>
+<p>Funkcja <strong>filter()</strong> reduluje liczbę wierszy, zostawiając tylko te, które spełniają określony warunek (jeden lub kilka). Pierwszym argumentem tej funkcji jest ramka danych lub tabela danych, kolejne argumenty, a może być ich jeden lub więcej) to warunki logiczne. Wynikiem jest ramka danych z wierszami, które spełniają jednocezśnie wszystkie wskazane warunki.</p>
+<p>Przykładowo, aby zobaczyć, które zwierzaki przekraczają prędkość 100 km na godzinę możemy użyć następujących komend. W pierwszej linii wczytujemy pakiet <code>dplyr</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-
 <span class="kw">filter</span>(koty_ptaki,
        predkosc &gt;<span class="st"> </span><span class="dv">100</span>)</code></pre>
 <pre><code>##          gatunek  waga dlugosc predkosc  habitat zywotnosc druzyna
@@ -106,11 +96,12 @@ koty_ptaki</code></pre>
 ## 4 Sokol wedrowny  0.70     0.5      110   Polnoc        15    Ptak
 ## 5       Albatros  4.00     0.8      120 Poludnie        50    Ptak</code></pre>
 </div>
-<div class="slide section level1">
-
-<h2 id="dwa-lub-wiecej-warunkow">Dwa lub więcej warunków</h2>
+<div id="dwa-lub-wiecej-warunkow" class="slide section level1">
+<h1>Dwa lub więcej warunków</h1>
 <p>Możemy określać jednocześnie więcej warunków dla filtrowania. Każdy kolejny warunek można podać jako kolejny argument funkcji filter.</p>
-<p>Poniższy przykład wybiera ze zbioru danych tylko ptaki, które przekraczają prędkość 100 km na godzinę i występują na półkuli północnej.</p>
+<p>Poniższy przykład wybiera ze zbioru danych tylko te gatunki, które spełniają jednocześnie trzy warunki.</p>
+<p>Są to ptaki, które przekraczają prędkość 100 km na godzinę i występują na półkuli północnej.</p>
+<p>Operator <code>%in%</code> zwraca TRUE jeżeli określona wartość występuje w wektorze po prawej stronie.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(koty_ptaki,
        predkosc &gt;<span class="st"> </span><span class="dv">100</span>,
        druzyna ==<span class="st"> &quot;Ptak&quot;</span>,
@@ -124,6 +115,7 @@ koty_ptaki</code></pre>
 <div id="auta" class="slide section level1">
 <h1>Auta</h1>
 <p>Operacje filtrowania przećwiczymy też na znacznie większym zbiorze danych, który juz nie sposób w całości wyświetlić na ekranie. Mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.</p>
+<p>Zbiór danych <code>auta2012</code> jest dostępny po wczytaniu pakietu <code>SmarterPoland</code>. Poniżęj przedstawiamy 6 pierwszych wierszy z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie <a href="https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html" class="uri">https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(auta2012)</code></pre>
 <pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW         Marka     Model
 ## 1 49900    PLN      49900       brutto 140 103           Kia    Carens
@@ -168,55 +160,58 @@ koty_ptaki</code></pre>
 ## 5                                                                                                                                                                                                  ABS, ASR, centralny zamek, wspomaganie kierownicy, immobiliser
 ## 6                                                                                                      ABS, el. szyby, el. lusterka, klimatyzacja, ASR, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, welurowa tapicerka</code></pre>
 </div>
+<div id="tabele-danych" class="slide section level1">
+<h1>Tabele danych</h1>
+<p>W tym miejscu warto zaznaczyć, że funkcje z pakietu <code>dplyr</code> pracują nie tylko na ramkach danych, które już znamy i które mają klasę <code>data.frame</code>, ale również na tabelach danych, obiektach o klasie <code>tbl</code>.</p>
+<p>Z użytkownego punktu widzenia, tabele danych od ramek danych różnią się sposobem wyświetlania na ekranie (nie wyświetlają się kolumny, nei mieszczące się w obecnej szerokości konsoli) ale też wewnętrzną reprezentacją, która pozwala na szybsze operowanie na danych w strukturze <code>tbl</code>.</p>
+<p>Jeżeli mamy więc dane duże, o dużej liczbie wierszy lub kolumn, często dobrym pomysłem jest przekształcenie je na postać tabeli danych.</p>
+<p>Ramkę danych na tabelę można zamienić funkcją <code>tbl_df</code> a tabelę na ramkę danych funkcją <code>as.data.frame()</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(auta2012)</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">auta2012 &lt;-<span class="st"> </span><span class="kw">tbl_df</span>(auta2012)
+auta2012</code></pre>
+<pre><code>## Source: local data frame [207,602 x 21]
+## 
+##     Cena Waluta Cena.w.PLN Brutto.netto  KM  kW         Marka     Model
+## 1  49900    PLN      49900       brutto 140 103           Kia    Carens
+## 2  88000    PLN      88000       brutto 156 115    Mitsubishi Outlander
+## 3  86000    PLN      86000       brutto 150 110     Chevrolet   Captiva
+## 4  25900    PLN      25900       brutto 163 120         Volvo       S80
+## 5  55900    PLN      55900        netto  NA  NA Mercedes-Benz  Sprinter
+## 6  45900    PLN      45900        netto 150 110 Mercedes-Benz     Viano
+## 7  39900    PLN      39900       brutto 115  85       Renault    Trafic
+## 8  38900    PLN      38900       brutto 115  85          Ford     Focus
+## 9  24900    PLN      24900       brutto  68  50          Ford    Fusion
+## 10 79900    PLN      79900        netto 175 129    Volkswagen  Multivan
+## ..   ...    ...        ...          ... ... ...           ...       ...
+## Variables not shown: Wersja (fctr), Liczba.drzwi (fctr), Pojemnosc.skokowa
+##   (dbl), Przebieg.w.km (dbl), Rodzaj.paliwa (fctr), Rok.produkcji (dbl),
+##   Kolor (fctr), Kraj.aktualnej.rejestracji (fctr), Kraj.pochodzenia
+##   (fctr), Pojazd.uszkodzony (fctr), Skrzynia.biegow (fctr),
+##   Status.pojazdu.sprowadzonego (fctr), Wyposazenie.dodatkowe (fctr)</code></pre>
+</div>
 <div class="slide section level1">
 
 <h2 id="filtrowanie-danych-1">Filtrowanie danych</h2>
-<p>Jeżeli chcemy pozostawić tylko samochody marki Porsche, możemy użyć warunku <code>Marka == 'Porsche'</code>.</p>
+<p>Przypuśćmy, że chcemy ograniczyć liste aut do jednej wybranej marki.</p>
+<p>Przykładowo, jeżeli chcemy pozostawić tylko samochody marki Porsche, możemy użyć warunku <code>Marka == 'Porsche'</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">tmp &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012,
         Marka ==<span class="st"> &quot;Porsche&quot;</span>)
 <span class="kw">head</span>(tmp)</code></pre>
-<pre><code>##     Cena Waluta Cena.w.PLN Brutto.netto  KM  kW   Marka         Model
+<pre><code>## Source: local data frame [6 x 21]
+## 
+##     Cena Waluta Cena.w.PLN Brutto.netto  KM  kW   Marka         Model
 ## 1 244900    PLN     244900        netto 388 285 Porsche           911
 ## 2 229000    PLN     229000       brutto 355 261 Porsche           911
 ## 3 133990    PLN     133990        netto 295 217 Porsche       Boxster
 ## 4 154900    PLN     154900       brutto 295 217 Porsche       Boxster
 ## 5 162520    PLN     162520        netto 500 368 Porsche Cayenne Turbo
 ## 6 162520    PLN     162520        netto 500 368 Porsche       Cayenne
-##   Wersja Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km Rodzaj.paliwa
-## 1                 2/3              5461         32350       benzyna
-## 2                 2/3              3824         63000       benzyna
-## 3                 2/3              3387         52849       benzyna
-## 4                 2/3              3387         52849       benzyna
-## 5                 4/5              4806         57000       benzyna
-## 6                 4/5              4511         62000       benzyna
-##   Rok.produkcji            Kolor Kraj.aktualnej.rejestracji
-## 1          2008 srebrny-metallic                     Polska
-## 2          2007  czarny-metallic                     Polska
-## 3          2007  czarny-metallic                     Polska
-## 4          2007  czarny-metallic                     Polska
-## 5          2007  czarny-metallic                     Polska
-## 6          2007  czarny-metallic                     Polska
-##   Kraj.pochodzenia Pojazd.uszkodzony Skrzynia.biegow
-## 1           Polska                      automatyczna
-## 2           Polska                          manualna
-## 3           Polska                      automatyczna
-## 4           Polska                      automatyczna
-## 5           Polska                      automatyczna
-## 6           Polska                      automatyczna
-##   Status.pojazdu.sprowadzonego
-## 1                             
-## 2                             
-## 3                             
-## 4                             
-## 5                             
-## 6                             
-##                                                                                                                                                                                                                                                                                                                                                                          Wyposazenie.dodatkowe
-## 1                           ABS, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, szyberdach, ASR, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, lwiatla przeciwmglowe, kierownica wielofunkcyjna, czujnik parkowania, reg. wysokole podwozia
-## 2                                                                                                     ABS, 4x4, hak, el. szyby, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, ESP, czujnik parkowania
-## 3                                                                                                                                                                                                             ABS, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, szyberdach, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, immobiliser, ksenony, czujnik parkowania
-## 4                                                                                                                                          ABS, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, podgrzewane fotele, czujnik deszczu, lwiatla przeciwmglowe
-## 5                                               ABS, 4x4, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, lwiatla przeciwmglowe, kierownica wielofunkcyjna, czujnik parkowania
-## 6 ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, ESP, EDS, lwiatla przeciwmglowe, kierownica wielofunkcyjna, niezalezne ogrzewanie, czujnik parkowania, reg. wysokole podwozia</code></pre>
+## Variables not shown: Wersja (fctr), Liczba.drzwi (fctr), Pojemnosc.skokowa
+##   (dbl), Przebieg.w.km (dbl), Rodzaj.paliwa (fctr), Rok.produkcji (dbl),
+##   Kolor (fctr), Kraj.aktualnej.rejestracji (fctr), Kraj.pochodzenia
+##   (fctr), Pojazd.uszkodzony (fctr), Skrzynia.biegow (fctr),
+##   Status.pojazdu.sprowadzonego (fctr), Wyposazenie.dodatkowe (fctr)</code></pre>
 </div>
 <div class="slide section level1">
 
@@ -226,48 +221,20 @@ koty_ptaki</code></pre>
          Marka ==<span class="st"> &quot;Porsche&quot;</span>,
          KM &gt;<span class="st"> </span><span class="dv">300</span>)
 <span class="kw">head</span>(tylkoPorscheZDużymSilnikiem)</code></pre>
-<pre><code>##     Cena Waluta Cena.w.PLN Brutto.netto  KM  kW   Marka         Model
+<pre><code>## Source: local data frame [6 x 21]
+## 
+##     Cena Waluta Cena.w.PLN Brutto.netto  KM  kW   Marka         Model
 ## 1 244900    PLN     244900        netto 388 285 Porsche           911
 ## 2 229000    PLN     229000       brutto 355 261 Porsche           911
 ## 3 162520    PLN     162520        netto 500 368 Porsche Cayenne Turbo
 ## 4 162520    PLN     162520        netto 500 368 Porsche       Cayenne
 ## 5  69900    PLN      69900       brutto 340 250 Porsche       Cayenne
 ## 6 359000    PLN     359000       brutto 400 294 Porsche      Panamera
-##   Wersja Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km Rodzaj.paliwa
-## 1                 2/3              5461         32350       benzyna
-## 2                 2/3              3824         63000       benzyna
-## 3                 4/5              4806         57000       benzyna
-## 4                 4/5              4511         62000       benzyna
-## 5                 4/5              4511         94000       benzyna
-## 6                 4/5              4800         29000       benzyna
-##   Rok.produkcji            Kolor Kraj.aktualnej.rejestracji
-## 1          2008 srebrny-metallic                     Polska
-## 2          2007  czarny-metallic                     Polska
-## 3          2007  czarny-metallic                     Polska
-## 4          2007  czarny-metallic                     Polska
-## 5          2004   szary-metallic                     Polska
-## 6          2010  bezowy-metallic                     Polska
-##    Kraj.pochodzenia Pojazd.uszkodzony Skrzynia.biegow
-## 1            Polska                      automatyczna
-## 2            Polska                          manualna
-## 3            Polska                      automatyczna
-## 4            Polska                      automatyczna
-## 5 Stany Zjednoczone                      automatyczna
-## 6                                        automatyczna
-##   Status.pojazdu.sprowadzonego
-## 1                             
-## 2                             
-## 3                             
-## 4                             
-## 5                             
-## 6                             
-##                                                                                                                                                                                                                                                                                                                                                                                                                                       Wyposazenie.dodatkowe
-## 1                                                                                        ABS, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, szyberdach, ASR, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, lwiatla przeciwmglowe, kierownica wielofunkcyjna, czujnik parkowania, reg. wysokole podwozia
-## 2                                                                                                                                                                  ABS, 4x4, hak, el. szyby, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, ESP, czujnik parkowania
-## 3                                                                                                            ABS, 4x4, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, lwiatla przeciwmglowe, kierownica wielofunkcyjna, czujnik parkowania
-## 4                                                              ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, ESP, EDS, lwiatla przeciwmglowe, kierownica wielofunkcyjna, niezalezne ogrzewanie, czujnik parkowania, reg. wysokole podwozia
-## 5 ABS, 4x4, hak, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, szyberdach, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, instalacja gazowa, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, ESP, lwiatla przeciwmglowe, kierownica wielofunkcyjna, czujnik parkowania, reg. wysokole podwozia, bagaznik na dach, przyciemniane szyby, pod. przednia szyba
-## 6                   ABS, 4x4, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, szyberdach, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik deszczu, ESP, EDS, lwiatla przeciwmglowe, kierownica wielofunkcyjna, czujnik parkowania, reg. wysokole podwozia, przyciemniane szyby, blokada dyferencjalu</code></pre>
+## Variables not shown: Wersja (fctr), Liczba.drzwi (fctr), Pojemnosc.skokowa
+##   (dbl), Przebieg.w.km (dbl), Rodzaj.paliwa (fctr), Rok.produkcji (dbl),
+##   Kolor (fctr), Kraj.aktualnej.rejestracji (fctr), Kraj.pochodzenia
+##   (fctr), Pojazd.uszkodzony (fctr), Skrzynia.biegow (fctr),
+##   Status.pojazdu.sprowadzonego (fctr), Wyposazenie.dodatkowe (fctr)</code></pre>
 </div>
 <div class="slide section level1">
 
