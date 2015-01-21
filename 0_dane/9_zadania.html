@@ -54,9 +54,9 @@ pogRomcy danych
 <h1>Zadanie, sezon 1, odcinek 5</h1>
 <p>W kolejnych odcinkach będziemy korzystać ze zbioru danych o cenach aut. Ten zbiór danych można pobrać ze strony kursu w różnych formatach pod następującymi linkami:</p>
 <ul>
-<li><p>dane Excelowe, <a href="http://biecek.pl/MOOC/dane/auta2012mini.xls">http://biecek.pl/MOOC/dane/auta2012mini.xls</a></p></li>
-<li><p>dane tekstowe, <a href="http://biecek.pl/MOOC/dane/auta2012mini.csv">http://biecek.pl/MOOC/dane/auta2012mini.csv</a></p></li>
-<li><p>dane binarne, <a href="http://biecek.pl/MOOC/dane/auta2012mini.rda">http://biecek.pl/MOOC/dane/auta2012mini.rda</a></p></li>
+<li><p>dane Excelowe, <a href="http://biecek.pl/MOOC/dane/auta2012mini.xls" class="uri">http://biecek.pl/MOOC/dane/auta2012mini.xls</a></p></li>
+<li><p>dane tekstowe, <a href="http://biecek.pl/MOOC/dane/auta2012mini.csv" class="uri">http://biecek.pl/MOOC/dane/auta2012mini.csv</a></p></li>
+<li><p>dane binarne, <a href="http://biecek.pl/MOOC/dane/auta2012mini.rda" class="uri">http://biecek.pl/MOOC/dane/auta2012mini.rda</a></p></li>
 <li><p>w pakiecie <code>SmarterPoland</code> w zmiennej <code>auta2012</code>.</p></li>
 </ul>
 <p><em>Zadanie:</em></p>
@@ -454,6 +454,24 @@ df$liczby &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span
 
 <span class="co"># brakujące dane</span>
 df$braki[<span class="kw">is.na</span>(df$braki)] &lt;-<span class="st"> </span><span class="dv">1</span></code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-17" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 17</h1>
+<ul>
+<li>Ze zbioru danych <code>auta2012</code> pozostaw tylko samochody o wieku do pięciu lat (czyli o roku produkcji &gt; 2007). Nazwij ten wynikowy zbiór danych <code>mlodeAuta</code></li>
+<li>Z przed chwilą stworzonego zbioru danych <code>mlodeAuta</code> wybierz tylko Fiaty 500. Ile jest takich aut? (wymiary ramki danych możesz sprawdzić funkcją <strong>dim()</strong>)</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-17" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 17</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tylko mlode auta</span>
+mlodeAuta &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012, 
+                    Rok.produkcji &gt;<span class="st"> </span><span class="dv">2007</span>)
+
+<span class="co"># tylko mlode Fiaty</span>
+mlodeFiaty &lt;-<span class="st"> </span><span class="kw">filter</span>(mlodeAuta, 
+                    Model ==<span class="st"> &quot;500&quot;</span>)
+<span class="kw">nrow</span>(mlodeFiaty)</code></pre>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

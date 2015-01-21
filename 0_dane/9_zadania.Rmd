@@ -514,3 +514,23 @@ df$liczby <- as.numeric(gsub(",", ".", df$liczby))
 # brakujące dane
 df$braki[is.na(df$braki)] <- 1
 ```
+
+
+# Zadania, sezon 1, odcinek 17
+
++ Ze zbioru danych `auta2012` pozostaw tylko samochody o wieku do pięciu lat (czyli o roku produkcji > 2007). Nazwij ten wynikowy zbiór danych `mlodeAuta`
++ Z przed chwilą stworzonego zbioru danych `mlodeAuta` wybierz tylko Fiaty 500. Ile jest takich aut? 
+(wymiary ramki danych możesz sprawdzić funkcją **dim()**)
+
+# Odpowiedzi, sezon 1, odcinek 17
+
+```{r, eval=FALSE}
+# tylko mlode auta
+mlodeAuta <- filter(auta2012, 
+                    Rok.produkcji > 2007)
+
+# tylko mlode Fiaty
+mlodeFiaty <- filter(mlodeAuta, 
+                    Model == "500")
+nrow(mlodeFiaty)
+```
