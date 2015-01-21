@@ -17,7 +17,7 @@ output:
 
 Bazy danych zawierają najczęściej znacznie więcej informacji niż jest nam potrzebne. Jedną z kluczowych operacji jest więc filtrowanie, wybieranie tylko tych wierszy, które nas interesują. Przy czym 'nas interesują' oznacza spełnianie pewnych kryteriów.
 
-W procesie przygotowania danych takie filtrowanie jest niesamowicie częstą instrukcją. W odcinku 7 pokazaliśmy jak wybierać wiersze spełniające określone kryterium, używając operatora `[`. W codziennej pracy często i wygodniej i szybciej jest wykorzystać dedykowaną funkcję `filter()` z pakietu `dplyr`.
+W procesie przygotowania danych takie filtrowanie jest niesamowicie częstą instrukcją. W odcinku 7 pokazaliśmy jak wybierać wiersze spełniające określone kryterium, używając operatora `[`. W codziennej pracy, i wygodniej, i szybciej jest wykorzystać dedykowaną funkcję `filter()` z pakietu `dplyr`.
 
 W tym odcinku nauczymy się
 

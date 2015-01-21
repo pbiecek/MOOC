@@ -1,5 +1,5 @@
 ---
-title: "Sortowanie danych [dplyr / sort]"
+title: "Sortowanie danych [dplyr / arrange]"
 author: "pogRomcy danych"
 date: "sezon 1 / odcinek 18 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
@@ -9,23 +9,29 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / przetwarzanie / sort"
+    footer: "pogRomcy danych / przetwarzanie / sortowanie wierszy"
 
 ---
 
 # O czym jest ten odcinek
 
+W programie R wiersze można sortować na kilka sposobów, jeden z użyciem funkcji `order()` pokazaliśmy w odcinku 7.
+
+W codziennej pracy z danymi, i wygodniej, i szybciej jest wykorzystać dedykowaną funkcję `arrange()` z pakietu `dplyr`.
+
 W tym odcinku nauczymy się
 
-- Jak ze zbioru danych wybierać tylko interesujące nas wiersze
+- jak porządkować wiersze rosnąco / malejąco względem określonej kolumny?
+- jak i po co sortować po więcej niż jednej kolumnie?
 
-Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to `koty_ptaki` a drugi, znacznie większy to `auta2012`.
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, 
+znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
 
 ---
 
 ## Ptaki vs. koty
 
-W tym odcinku będziemy pracować na zbiorze danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem `SmarterPoland`. Jest on na tyle mały, że wynik operacji będzie można przedstawić na ekranie.
+Przykłady dla sortowanie rozpoczniemy na niewielkim zbiorze danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem `SmarterPoland`. Jest on na tyle mały, że łatwo ogarnąć go wzrokiem i przekonać się w jaki sposób zadziałało sortowanie wierszy.
 
 ```{r, message=FALSE}
 library(SmarterPoland)
@@ -35,15 +41,16 @@ koty_ptaki
 ---
 
 # Sortowanie danych
-Bardzo często w zbiorze danych jesteśmy zainteresowani znalezieniem tych wierszy, któych warotści są największe lub najmniejsze. 
 
-Również by sprawdzić, czy dane przyjmują sensowe wartości, często sprawdzamy ekstraema, największe i najmenijsze przypadku, by ocenić czy one przyjmują rozsądne wartości.
+O ile wektor wartości można posortować funckją `sort()`, to do sortowania wierszy w ramce danych względe określonej kolumny wygodnie jest uzyć funkcję `arrange()`.
 
-Do sortowania, bardzo przydatna jest funkcja `arrange()`, która jako pierwszy argument przyjmuje ramkę danych a jako kolejne argumenty przyjmuje zmienne, wzdłuż których dane są sortowane.
+Ta funkcja jako pierwszy argument przyjmuje ramkę danych, a jako kolejne argumenty przyjmuje zmienne, wzdłuż których dane są sortowane.
 
-Przykładowo aby posortować w kolejności rosnącej ze względu na prędkość można użyć następującej składni.
+Przykładowo aby posortować wiersze w zbiorze `koty_ptaki` w kolejności rosnącej ze względu na prędkość  (kolumna `predkosc`) można użyć następującej komendy.
 
 ```{r, warning=FALSE}
+library(dplyr)
+
 arrange(koty_ptaki, 
         predkosc)
 ```
@@ -52,7 +59,7 @@ arrange(koty_ptaki,
 
 # Sortowanie danych
 
-Aby posortować w koljności malejącej można albo zmienną, po której ma nastąpić sortowanie opatrzeć funkcją `desc()` lub dla zmiennych liczbowych dodać znak `-` przed zmienną.
+Aby posortować w kolejności malejącej można albo zmienną, po której ma nastąpić sortowanie opatrzeć funkcją `desc()` albo, dla zmiennych liczbowych, dodać znak `-` przed zmienną.
 
 Obie poniższe instrukcje mają taki sam efekt.
 
@@ -67,9 +74,11 @@ arrange(koty_ptaki,
 
 # Sortowanie po dwóch zmiennych
 
-Jeżeli dla zmiennej, wzdłuż której sortujemy, mogą wystąpić remisy, te same wartości, wtedy interesującą opcją jest wskazanie drugorzędnego kryterium sortowania.
+Jeżeli dla zmiennej, wzdłuż której sortujemy, mogą wystąpić remisy, czyli te same wartości, wtedy kolejność wierszy jest nieokreślona. Wygodnie jest w takich sytuacjach wskazać drugorzędowe kryterium sortowania.
 
-Przykładowo, aby posortować wzdłuż prędkości osobno dla kotów osobno dla ptaków, możemy wskazać drużynę jako główne kryterium sortowania a prędkość jako kryterium drugorzędne.
+Przykładowo, aby posortować wiersze uwzględniając prędkość, ale zrobić to osobno dla kotów osobno dla ptaków, możemy wskazać drużynę jako główne kryterium sortowania a prędkość jako kryterium drugorzędne.
+
+Sortując po kolumnie `druzyna` wiele wierszy ma te same wartości, i o ich końcowej kolejnosci decyduje zmienna `predkosc`.
 
 ```{r, warning=FALSE}
 arrange(koty_ptaki, 
@@ -79,7 +88,13 @@ arrange(koty_ptaki,
 
 ---
 
-Posortujmy dane wzdłuż ceny w polskich złotych.
+# Auta
+
+Operacje sortowania przećwiczymy też na znacznie większym zbiorze danych, który już nie sposób w całości wyświetlić na ekranie. Mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.
+
+Zbiór danych `auta2012` jest dostępny po wczytaniu pakietu `SmarterPoland`. Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html
+
+Wybierzmy ze zbioru danych tylko samochody marki `Porsche` z silnikiem ponad 300 KM, posortujmy wiersze w tym zbiorze danych zaczynając od najtańszych.
 
 ```{r, warning=FALSE}
 tylkoPorscheZDużymSilnikiem <- filter(auta2012,
@@ -93,7 +108,9 @@ posortowanePorsche <-
 
 ---
 
-Aby zobaczyć jakie wiersza są pierwsze a jakie są ostatnie w tym zbiorze danych, możemy użyć funkcji `head()` i `tail()`. Domyślnie wybiranych jest pierwszych lub ostatnich 6 wierszy. Ale ustawiając drugi argument można wyświetlać więcej lub mniej wierszy.
+# Najtańsze i najdroższe Porsche
+
+Aby zobaczyć jakie wiersza są pierwsze a jakie są ostatnie w tym zbiorze danych, możemy użyć funkcji `head()` i `tail()`. Domyślnie przedstawianych jest pierwszych lub ostatnich 6 wierszy.
 
 ```{r, warning=FALSE}
 head(posortowanePorsche)
@@ -103,11 +120,13 @@ tail(posortowanePorsche)
 
 ---
 
+# Model i cena
+
 Jeżeli wskażemy więcej niż jedną zmienną do sortowania, to w pierwszym kroku sortowanie odbędzie się wzdłuż pierwszej zmiennej, a w przypadku remisu (takich samych wartości) w drugim kropku wzdłuż drugiej zmiennej.
 
-W poniższym przypadku w pierwszym kroku sortujemy po Modelu auta, gdy samochody mają ten sam model to ich kolwjność jest określona przez drugą zmienną, czyli w tym przypadku cenie.
+W poniższym przypadku w pierwszym kroku sortujemy wzdłuż zmiennej `Model` auta, a gdy samochody mają ten sam model to ich kolejność jest określona przez drugą zmienną, czyli w tym przypadku cenę.
 
-Model jest nazwą i w tym przypadku jest sortowany w kolejności alfabetycznej.
+Zmienna `Model` za wartości przyjmuje napisy, w tym przypadku jest sortowany w kolejności alfabetycznej.
 
 ```{r, warning=FALSE}
 head(
@@ -118,7 +137,9 @@ head(
 
 ---
 
-Domyślnie dane sortowane są rosnąco. Jeżeli chcemy zrminić kolejnośc sortowania i sortować malejąco, to należy daną zmienną opakować funkcją `desc()` jak na poniższym przykładzie.
+# Sortowanie malejąco
+
+Domyślnie wartości sortowane są rosnąco. Jeżeli chcemy zminić kolejnośc sortowania i sortować malejąco, to należy daną zmienną opakować funkcją `desc()`, tak jak na poniższym przykładzie.
 
 ```{r, warning=FALSE}
 head(
@@ -130,6 +151,7 @@ head(
 ---
 
 # Zadania
+
 * Posortuj auta wzdłuż wielkości silnika (liczby koni mechanicznych, kolumna KM lub pojemności skokowej, kolumna Pojemnosc.skokowa). Które marki mają najwięszke silniki?
 * Wybierz tylko auta marki 'Rolls-Royce' i posortuj je po cenie.
 

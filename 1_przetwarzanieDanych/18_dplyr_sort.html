@@ -6,8 +6,8 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / wizualizacja / zaawansowane" /> 
-  <title>Sortowanie danych [dplyr / sort]</title>
+  <meta name="copyright" content="pogRomcy danych / przetwarzanie / sortowanie wierszy" /> 
+  <title>Sortowanie danych [dplyr / arrange]</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -44,24 +44,27 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </head>
 <body>
 <div class="slide titlepage">
-  <h1 class="title">Sortowanie danych [dplyr / sort]</h1>
+  <h1 class="title">Sortowanie danych [dplyr / arrange]</h1>
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 6 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 18 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
+<p>W programie R wiersze można sortować na kilka sposobów, jeden z użyciem funkcji <code>order()</code> pokazaliśmy w odcinku 7.</p>
+<p>W codziennej pracy z danymi, i wygodniej, i szybciej jest wykorzystać dedykowaną funkcję <code>arrange()</code> z pakietu <code>dplyr</code>.</p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
-<li>Jak ze zbioru danych wybierać tylko interesujące nas wiersze</li>
+<li>jak porządkować wiersze rosnąco / malejąco względem określonej kolumny?</li>
+<li>jak i po co sortować po więcej niż jednej kolumnie?</li>
 </ul>
-<p>Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to <code>koty_ptaki</code> a drugi, znacznie większy to <code>auta2012</code>.</p>
+<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>SmarterPoland</code>.</p>
 </div>
 <div class="slide section level1">
 
 <h2 id="ptaki-vs.koty">Ptaki vs. koty</h2>
-<p>W tym odcinku będziemy pracować na zbiorze danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem <code>SmarterPoland</code>. Jest on na tyle mały, że wynik operacji będzie można przedstawić na ekranie.</p>
+<p>Przykłady dla sortowanie rozpoczniemy na niewielkim zbiorze danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem <code>SmarterPoland</code>. Jest on na tyle mały, że łatwo ogarnąć go wzrokiem i przekonać się w jaki sposób zadziałało sortowanie wierszy.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
 koty_ptaki</code></pre>
 <pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
@@ -81,10 +84,20 @@ koty_ptaki</code></pre>
 </div>
 <div id="sortowanie-danych" class="slide section level1">
 <h1>Sortowanie danych</h1>
-<p>Bardzo często w zbiorze danych jesteśmy zainteresowani znalezieniem tych wierszy, któych warotści są największe lub najmniejsze.</p>
-<p>Również by sprawdzić, czy dane przyjmują sensowe wartości, często sprawdzamy ekstraema, największe i najmenijsze przypadku, by ocenić czy one przyjmują rozsądne wartości.</p>
-<p>Do sortowania, bardzo przydatna jest funkcja <code>arrange()</code>, która jako pierwszy argument przyjmuje ramkę danych a jako kolejne argumenty przyjmuje zmienne, wzdłuż których dane są sortowane.</p>
-<p>Przykładowo aby posortować w kolejności rosnącej ze względu na prędkość można użyć następującej składni.</p>
+<p>O ile wektor wartości można posortować funckją <code>sort()</code>, to do sortowania wierszy w ramce danych względe określonej kolumny wygodnie jest uzyć funkcję <code>arrange()</code>.</p>
+<p>Ta funkcja jako pierwszy argument przyjmuje ramkę danych, a jako kolejne argumenty przyjmuje zmienne, wzdłuż których dane są sortowane.</p>
+<p>Przykładowo aby posortować wiersze w zbiorze <code>koty_ptaki</code> w kolejności rosnącej ze względu na prędkość (kolumna <code>predkosc</code>) można użyć następującej komendy.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: 'dplyr'
+## 
+## The following object is masked from 'package:stats':
+## 
+##     filter
+## 
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(koty_ptaki, 
         predkosc)</code></pre>
 <pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
@@ -104,7 +117,7 @@ koty_ptaki</code></pre>
 </div>
 <div id="sortowanie-danych-1" class="slide section level1">
 <h1>Sortowanie danych</h1>
-<p>Aby posortować w koljności malejącej można albo zmienną, po której ma nastąpić sortowanie opatrzeć funkcją <code>desc()</code> lub dla zmiennych liczbowych dodać znak <code>-</code> przed zmienną.</p>
+<p>Aby posortować w kolejności malejącej można albo zmienną, po której ma nastąpić sortowanie opatrzeć funkcją <code>desc()</code> albo, dla zmiennych liczbowych, dodać znak <code>-</code> przed zmienną.</p>
 <p>Obie poniższe instrukcje mają taki sam efekt.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(koty_ptaki, 
         <span class="kw">desc</span>(predkosc))</code></pre>
@@ -141,8 +154,9 @@ koty_ptaki</code></pre>
 </div>
 <div id="sortowanie-po-dwoch-zmiennych" class="slide section level1">
 <h1>Sortowanie po dwóch zmiennych</h1>
-<p>Jeżeli dla zmiennej, wzdłuż której sortujemy, mogą wystąpić remisy, te same wartości, wtedy interesującą opcją jest wskazanie drugorzędnego kryterium sortowania.</p>
-<p>Przykładowo, aby posortować wzdłuż prędkości osobno dla kotów osobno dla ptaków, możemy wskazać drużynę jako główne kryterium sortowania a prędkość jako kryterium drugorzędne.</p>
+<p>Jeżeli dla zmiennej, wzdłuż której sortujemy, mogą wystąpić remisy, czyli te same wartości, wtedy kolejność wierszy jest nieokreślona. Wygodnie jest w takich sytuacjach wskazać drugorzędowe kryterium sortowania.</p>
+<p>Przykładowo, aby posortować wiersze uwzględniając prędkość, ale zrobić to osobno dla kotów osobno dla ptaków, możemy wskazać drużynę jako główne kryterium sortowania a prędkość jako kryterium drugorzędne.</p>
+<p>Sortując po kolumnie <code>druzyna</code> wiele wierszy ma te same wartości, i o ich końcowej kolejnosci decyduje zmienna <code>predkosc</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(koty_ptaki, 
         druzyna,
         predkosc)</code></pre>
@@ -161,9 +175,11 @@ koty_ptaki</code></pre>
 ## 12  Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak
 ## 13         Jerzyk   0.05     0.2      170 Euroazja        20    Ptak</code></pre>
 </div>
-<div class="slide section level1">
-
-<p>Posortujmy dane wzdłuż ceny w polskich złotych.</p>
+<div id="auta" class="slide section level1">
+<h1>Auta</h1>
+<p>Operacje sortowania przećwiczymy też na znacznie większym zbiorze danych, który już nie sposób w całości wyświetlić na ekranie. Mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.</p>
+<p>Zbiór danych <code>auta2012</code> jest dostępny po wczytaniu pakietu <code>SmarterPoland</code>. Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie <a href="https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html" class="uri">https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
+<p>Wybierzmy ze zbioru danych tylko samochody marki <code>Porsche</code> z silnikiem ponad 300 KM, posortujmy wiersze w tym zbiorze danych zaczynając od najtańszych.</p>
 <pre class="sourceCode r"><code class="sourceCode r">tylkoPorscheZDużymSilnikiem &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012,
          Marka ==<span class="st"> &quot;Porsche&quot;</span>,
          KM &gt;<span class="st"> </span><span class="dv">300</span>)
@@ -172,9 +188,9 @@ posortowanePorsche &lt;-
 <span class="st">  </span><span class="kw">arrange</span>(tylkoPorscheZDużymSilnikiem, 
         Cena.w.PLN)</code></pre>
 </div>
-<div class="slide section level1">
-
-<p>Aby zobaczyć jakie wiersza są pierwsze a jakie są ostatnie w tym zbiorze danych, możemy użyć funkcji <code>head()</code> i <code>tail()</code>. Domyślnie wybiranych jest pierwszych lub ostatnich 6 wierszy. Ale ustawiając drugi argument można wyświetlać więcej lub mniej wierszy.</p>
+<div id="najtansze-i-najdrozsze-porsche" class="slide section level1">
+<h1>Najtańsze i najdroższe Porsche</h1>
+<p>Aby zobaczyć jakie wiersza są pierwsze a jakie są ostatnie w tym zbiorze danych, możemy użyć funkcji <code>head()</code> i <code>tail()</code>. Domyślnie przedstawianych jest pierwszych lub ostatnich 6 wierszy.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(posortowanePorsche)</code></pre>
 <pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW   Marka         Model
 ## 1  1184    PLN       1184       brutto 350 257 Porsche       Cayenne
@@ -262,11 +278,11 @@ posortowanePorsche &lt;-
 ## 526                                                                                                                                                                                   ABS, el. szyby, el. lusterka, klimatyzacja, alufelgi, system nawigacji, szyberdach, ASR, centralny zamek, autoalarm, poduszka powietrzna, wspomaganie kierownicy, immobiliser, komputer
 ## 527                                                                                                                                                                                   ABS, el. szyby, el. lusterka, klimatyzacja, alufelgi, system nawigacji, szyberdach, ASR, centralny zamek, autoalarm, poduszka powietrzna, wspomaganie kierownicy, immobiliser, komputer</code></pre>
 </div>
-<div class="slide section level1">
-
+<div id="model-i-cena" class="slide section level1">
+<h1>Model i cena</h1>
 <p>Jeżeli wskażemy więcej niż jedną zmienną do sortowania, to w pierwszym kroku sortowanie odbędzie się wzdłuż pierwszej zmiennej, a w przypadku remisu (takich samych wartości) w drugim kropku wzdłuż drugiej zmiennej.</p>
-<p>W poniższym przypadku w pierwszym kroku sortujemy po Modelu auta, gdy samochody mają ten sam model to ich kolwjność jest określona przez drugą zmienną, czyli w tym przypadku cenie.</p>
-<p>Model jest nazwą i w tym przypadku jest sortowany w kolejności alfabetycznej.</p>
+<p>W poniższym przypadku w pierwszym kroku sortujemy wzdłuż zmiennej <code>Model</code> auta, a gdy samochody mają ten sam model to ich kolejność jest określona przez drugą zmienną, czyli w tym przypadku cenę.</p>
+<p>Zmienna <code>Model</code> za wartości przyjmuje napisy, w tym przypadku jest sortowany w kolejności alfabetycznej.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(
    <span class="kw">arrange</span>(tylkoPorscheZDużymSilnikiem, 
         Model, Cena.w.PLN)
@@ -307,9 +323,9 @@ posortowanePorsche &lt;-
 ## 5                                                                                        ABS, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, szyberdach, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, czujnik parkowania
 ## 6 ABS, el. szyby, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, system nawigacji, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, ksenony, tempomat, podgrzewane fotele, ESP, lwiatla przeciwmglowe, kierownica wielofunkcyjna, czujnik parkowania, pod. przednia szyba</code></pre>
 </div>
-<div class="slide section level1">
-
-<p>Domyślnie dane sortowane są rosnąco. Jeżeli chcemy zrminić kolejnośc sortowania i sortować malejąco, to należy daną zmienną opakować funkcją <code>desc()</code> jak na poniższym przykładzie.</p>
+<div id="sortowanie-malejaco" class="slide section level1">
+<h1>Sortowanie malejąco</h1>
+<p>Domyślnie wartości sortowane są rosnąco. Jeżeli chcemy zminić kolejnośc sortowania i sortować malejąco, to należy daną zmienną opakować funkcją <code>desc()</code>, tak jak na poniższym przykładzie.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(
    <span class="kw">arrange</span>(tylkoPorscheZDużymSilnikiem, 
         Model, <span class="kw">desc</span>(Cena.w.PLN))
