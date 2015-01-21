@@ -48,11 +48,9 @@ Ta funkcja jako pierwszy argument przyjmuje ramkę danych, a jako kolejne argume
 
 Przykładowo aby posortować wiersze w zbiorze `koty_ptaki` w kolejności rosnącej ze względu na prędkość  (kolumna `predkosc`) można użyć następującej komendy.
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, message=FALSE}
 library(dplyr)
-
-arrange(koty_ptaki, 
-        predkosc)
+arrange(koty_ptaki, predkosc)
 ```
 
 ---
@@ -64,10 +62,8 @@ Aby posortować w kolejności malejącej można albo zmienną, po której ma nas
 Obie poniższe instrukcje mają taki sam efekt.
 
 ```{r, warning=FALSE}
-arrange(koty_ptaki, 
-        desc(predkosc))
-arrange(koty_ptaki, 
-        -predkosc)
+arrange(koty_ptaki,   desc(predkosc))
+arrange(koty_ptaki,   -predkosc)
 ```
 
 ---
@@ -82,8 +78,7 @@ Sortując po kolumnie `druzyna` wiele wierszy ma te same wartości, i o ich koń
 
 ```{r, warning=FALSE}
 arrange(koty_ptaki, 
-        druzyna,
-        predkosc)
+        druzyna, predkosc)
 ```
 
 ---

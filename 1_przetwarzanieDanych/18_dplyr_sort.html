@@ -87,19 +87,8 @@ koty_ptaki</code></pre>
 <p>O ile wektor wartości można posortować funkcją <code>sort()</code>, to do sortowania wierszy w ramce danych względem określonej kolumny wygodnie jest użyć funkcję <code>arrange()</code>.</p>
 <p>Ta funkcja jako pierwszy argument przyjmuje ramkę danych, a jako kolejne argumenty przyjmuje zmienne, wzdłuż których dane są sortowane.</p>
 <p>Przykładowo aby posortować wiersze w zbiorze <code>koty_ptaki</code> w kolejności rosnącej ze względu na prędkość (kolumna <code>predkosc</code>) można użyć następującej komendy.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre>
-<pre><code>## 
-## Attaching package: 'dplyr'
-## 
-## The following object is masked from 'package:stats':
-## 
-##     filter
-## 
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(koty_ptaki, 
-        predkosc)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">arrange</span>(koty_ptaki, predkosc)</code></pre>
 <pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
 ## 1          Tygrys 300.00     2.5       60     Azja        25     Kot
 ## 2           Irbis  50.00     1.3       65     Azja        18     Kot
@@ -119,8 +108,7 @@ koty_ptaki</code></pre>
 <h1>Sortowanie danych</h1>
 <p>Aby posortować w kolejności malejącej można albo zmienną, po której ma nastąpić sortowanie opatrzeć funkcją <code>desc()</code> albo, dla zmiennych liczbowych, dodać znak <code>-</code> przed zmienną.</p>
 <p>Obie poniższe instrukcje mają taki sam efekt.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(koty_ptaki, 
-        <span class="kw">desc</span>(predkosc))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(koty_ptaki,   <span class="kw">desc</span>(predkosc))</code></pre>
 <pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
 ## 1          Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
 ## 2   Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak
@@ -135,8 +123,7 @@ koty_ptaki</code></pre>
 ## 11          Strus 150.00     2.5       70   Afryka        45    Ptak
 ## 12          Irbis  50.00     1.3       65     Azja        18     Kot
 ## 13         Tygrys 300.00     2.5       60     Azja        25     Kot</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(koty_ptaki, 
-        -predkosc)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(koty_ptaki,   -predkosc)</code></pre>
 <pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
 ## 1          Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
 ## 2   Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak
@@ -158,8 +145,7 @@ koty_ptaki</code></pre>
 <p>Przykładowo, aby posortować wiersze uwzględniając prędkość, ale zrobić to osobno dla kotów osobno dla ptaków, możemy wskazać drużynę jako główne kryterium sortowania a prędkość jako kryterium drugorzędne.</p>
 <p>Sortując po kolumnie <code>druzyna</code> wiele wierszy ma te same wartości, i o ich końcowej kolejności decyduje zmienna <code>predkosc</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(koty_ptaki, 
-        druzyna,
-        predkosc)</code></pre>
+        druzyna, predkosc)</code></pre>
 <pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
 ## 1          Tygrys 300.00     2.5       60     Azja        25     Kot
 ## 2           Irbis  50.00     1.3       65     Azja        18     Kot
