@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / wizualizacja / zaawansowane" /> 
+  <meta name="copyright" content="pogRomcy danych / przetwarzanie / potoki" /> 
   <title>Potokowe przetwarzanie danych</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
@@ -48,34 +48,47 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 6 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 19 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
+<p>Przetwarzanie danych składa się najczęściej z wielu kroków. Dane się filtruje, sortuje, grupuje, podsumowuje, znów filtruje, łączy się z innymi itp.</p>
+<p>Taka sekwencja operacji przypomina potok, w którym dane wypływają ze źródła a nstępnie trafiają na kolejne etapy przetwarzania.</p>
+<p>Relatywnie niedawno, do programu R wprowadzono operator pozwalający na łątwe opisywanie takich potoków przetwarzania. Można bez niego żyć, ale gdy już się go pozna i zacznie z nim pracować, życie bez niego straci na smaku.</p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
-<li>Jak składać ze sobą wywołania funkcji do przetwarzania danych w potoki przetwarzania.</li>
+<li>jak składać ze sobą wywołania funkcji do przetwarzania danych w potoki przetwarzania</li>
+<li>jakim instrukcjom operator przetwarzania potokowego jest równowazny</li>
 </ul>
-<p>Do ilustracji wykorzystamy zbiór <code>auta2012</code>.</p>
+<p>Do ilustracji tych zagadnień wykorzystamy zbiór danych <code>auta2012</code> dostępny w pakiecie <code>SmarterPoland</code>.</p>
 </div>
-<div id="przetwarzanie-potokowe" class="slide section level1">
-<h1>Przetwarzanie potokowe</h1>
-<p>Analiza danych przez większość czasu polega na przetwarzaniu danych w tą i zpowrotem.</p>
-<p>Zobaczmy taką serię operacji, która zaczyna się od wszystkich samochodów, odfiltrowuje się tylko Volkswageny, sortuje po cenie, pozostawia tylko Golfy IV oraz samochody o przebiegu poniżej 50000 km.</p>
+<div id="przetwarzanie-krok-po-kroku" class="slide section level1">
+<h1>Przetwarzanie krok po kroku</h1>
+<p>Jak już wspomnieliśmy analiza danych przez większość czasu polega na przetwarzaniu danych w tą i zpowrotem.</p>
+<p>Przyjrzyjmy się przykłądowej serii operacji. Zaczniemy od danych o wszystkich ofertach sprzedaży samochodów, odfiltrujemy samochody, które nie są Volkswagenami, pozostałe samochody posortujemy po cenie. Następnie pozostawimy tylko Golfy IV o przebiegu poniżej 50000 km.</p>
+<p>Poniższa instrukcja nie jest najkrótszą z możliwych, celowo została rozciągnięta by łatwiej było przedstawić zalety potoków.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+<span class="kw">library</span>(dplyr)
+<span class="co"># tylko volkswagen</span>
 tylkoVolkswagen &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012, 
                           Marka ==<span class="st"> &quot;Volkswagen&quot;</span>)
+<span class="co"># posortowane</span>
 posortowaneVolkswagen &lt;-<span class="st"> </span><span class="kw">arrange</span>(tylkoVolkswagen, 
                                  Cena.w.PLN)
+<span class="co"># tylko Golf VI</span>
 tylkoGolfIV &lt;-<span class="st"> </span><span class="kw">filter</span>(posortowaneVolkswagen, 
                       Model ==<span class="st"> &quot;Golf&quot;</span>, Wersja ==<span class="st"> &quot;IV&quot;</span>)
+<span class="co"># tylko z małym przbiegiem</span>
 tylkoMalyPrzebieg &lt;-<span class="st"> </span><span class="kw">filter</span>(tylkoGolfIV, 
                             Przebieg.w.km &lt;<span class="st"> </span><span class="dv">50000</span>)</code></pre>
-<p>Ta sekwencja operacji tworzy cztery pomocnicze zbiory danych: tylkoVolkswagen, posortowaneVolkswagen, tylkoGolfIV, tylkoMalyPrzebieg. Ale one zaśmiecają jedynie przestrzeń nazw.</p>
+<p>Ta sekwencja operacji tworzy cztery pomocnicze zbiory danych: <code>tylkoVolkswagen</code>, <code>posortowaneVolkswagen</code>, <code>tylkoGolfIV</code>, <code>tylkoMalyPrzebieg</code>.</p>
+<p>Jeżeli potrzebujemy tlyko ostatniego, to pozostałe wyłącznie zaśmiecają pamięć, najlepiej byłoby je od razu usunąć lub w ogóle nie tworzyć.</p>
 </div>
-<div id="przetwarzanie-potokowe-1" class="slide section level1">
-<h1>Przetwarzanie potokowe</h1>
-<p>Te operacje można złożyć w jeną wielką cebulkę, przekazując wyniki jednej funkcji bezpośrednio do kolejnej. Taka wielka cebulka wyglądałaby następująco.</p>
+<div id="przetwarzanie-na-wielka-cebulke" class="slide section level1">
+<h1>Przetwarzanie na wielką cebulkę</h1>
+<p>Ponieważ w R wyniki jednej funkcji można przekazać do innej funkcji, to również wymienione operacje można złożyć w jedną wielką cebulkę.</p>
+<p>W jedno olbrzymie wywołanie funkcji w funkcji przekazujące wyniki jednej funkcji bezpośrednio do kolejnej.</p>
+<p>Taka wielka cebulka wyglądałaby następująco.</p>
 <pre class="sourceCode r"><code class="sourceCode r">tylkoMalyPrzebieg &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(
     <span class="kw">filter</span>(
@@ -87,30 +100,112 @@ tylkoMalyPrzebieg &lt;-<span class="st"> </span><span class="kw">filter</span>(t
       Model ==<span class="st"> &quot;Golf&quot;</span>, Wersja ==<span class="st"> &quot;IV&quot;</span>), 
     Przebieg.w.km &lt;<span class="st"> </span><span class="dv">50000</span>)</code></pre>
 <p>W tym rozwiązaniu nie są tworzone zbędna nazwy zmiennych, ale sam zapis jest bardzo nieczytelny.</p>
-<p>Nawet stosując wcięcia trudno nam zauważyć, które argumenty są do której funkcji. Taki blok może się jeszcze bardziej rozrastać i tym trudniej będzie zrozumieć co się w tym kodzie dzieje.</p>
+<p>Nawet stosując wcięcia trudno nam zauważyć, które argumenty są do której funkcji.</p>
+<p>Gdy przetwarzanie jest bardziej złożone to i taki blok może się jeszcze bardziej rozrastać, a tym samym trudniej będzie zrozumieć co się w kodzie dzieje.</p>
 </div>
-<div id="przetwarzanie-potokowe-2" class="slide section level1">
+<div id="przetwarzanie-potokowe" class="slide section level1">
 <h1>Przetwarzanie potokowe</h1>
-<p>Rozwiązaniem tego problemu jest stosowanie specjalnego operatora do przetwarzania potokowaegp <code>%&gt;%</code>. Ten operator pochodzi z pakietu <code>magrittr</code> (to be pronounced with a sophisticated french accent) i jest dostępny po włączeniu pakietu <code>dplyr</code>.</p>
-<p>Jak działa ten operator? Przekazuje lewą stronę operatora jako pierwszy argument prawej strony tego operatora <code>a %&gt;% f(b)</code> jest równoważne <code>f(a, b)</code></p>
+<p>Rozwiązaniem tego problemu jest stosowanie specjalnego operatora do przetwarzania potokowego <code>%&gt;%</code>. Ten operator pochodzi z pakietu <code>magrittr</code> (cytując z jego dokumentacji: <em>to be pronounced with a sophisticated french accent</em>) i jest dostępny po włączeniu pakietu <code>dplyr</code> (jako pakiet zależny).</p>
+<p>Jak działa ten operator?</p>
+<p>Przekazuje lewą stronę operatora jako pierwszy argument prawej strony tego operatora.</p>
+<p>Tak więc instrukcja <code>a %&gt;% f(b)</code> jest równoważna instrukcji<code>f(a, b)</code>.</p>
 <p>Ta prosta sztuczka pozwala znacząco skrócić zapis i uczynić go znacznie czytelniejszym.</p>
 <pre class="sourceCode r"><code class="sourceCode r">tylkoMalyPrzebieg &lt;-<span class="st"> </span>
-<span class="st">  </span>auta2012 %&gt;%
-<span class="st">  </span><span class="kw">filter</span>(Marka ==<span class="st"> &quot;Volkswagen&quot;</span>) %&gt;%
-<span class="st">  </span><span class="kw">arrange</span>(Cena.w.PLN) %&gt;%
-<span class="st">  </span><span class="kw">filter</span>(Model ==<span class="st"> &quot;Golf&quot;</span>, Wersja ==<span class="st"> &quot;IV&quot;</span>) %&gt;%
-<span class="st">  </span><span class="kw">filter</span>(Przebieg.w.km &lt;<span class="st"> </span><span class="dv">50000</span>)</code></pre>
+<span class="st">  </span>auta2012 %&gt;%<span class="st">                                  </span><span class="co"># weź dane o autach</span>
+<span class="st">  </span><span class="kw">filter</span>(Marka ==<span class="st"> &quot;Volkswagen&quot;</span>) %&gt;%<span class="st">             </span><span class="co"># pozostaw tylko Volkswageny</span>
+<span class="st">  </span><span class="kw">arrange</span>(Cena.w.PLN) %&gt;%<span class="st">                       </span><span class="co"># posortuj malejąco po cenie</span>
+<span class="st">  </span><span class="kw">filter</span>(Model ==<span class="st"> &quot;Golf&quot;</span>, Wersja ==<span class="st"> &quot;IV&quot;</span>) %&gt;%<span class="st">   </span><span class="co"># pozostał tylko Golfy VI</span>
+<span class="st">  </span><span class="kw">filter</span>(Przebieg.w.km &lt;<span class="st"> </span><span class="dv">50000</span>)                 <span class="co"># pozostał tylko auta o małym przebiegu</span>
+
+<span class="kw">head</span>(tylkoMalyPrzebieg)</code></pre>
+<pre><code>##   Cena Waluta Cena.w.PLN Brutto.netto  KM  kW      Marka Model Wersja
+## 1 4800    PLN       4800       brutto 150 110 Volkswagen  Golf     IV
+## 2 7500    PLN       7500       brutto  75  55 Volkswagen  Golf     IV
+## 3 8000    PLN       8000       brutto 100  74 Volkswagen  Golf     IV
+## 4 8300    PLN       8300       brutto  NA  NA Volkswagen  Golf     IV
+## 5 8500    PLN       8500       brutto  75  55 Volkswagen  Golf     IV
+## 6 8500    PLN       8500       brutto 100  74 Volkswagen  Golf     IV
+##   Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km Rodzaj.paliwa Rok.produkcji
+## 1          4/5              2324           170       benzyna          1997
+## 2          4/5              1390           198       benzyna          1999
+## 3          4/5              1600           255       benzyna          1998
+## 4          2/3              1400         19000   benzyna+LPG          1988
+## 5          2/3              1390         14000       benzyna          2000
+## 6          4/5              1600         13500       benzyna          1998
+##                Kolor Kraj.aktualnej.rejestracji Kraj.pochodzenia
+## 1                                                         Niemcy
+## 2                                        Polska           Niemcy
+## 3   srebrny-metallic                     Polska           Polska
+## 4             czarny                                            
+## 5 granatowy-metallic                     Niemcy           Niemcy
+## 6 niebieski-metallic                                      Niemcy
+##   Pojazd.uszkodzony Skrzynia.biegow           Status.pojazdu.sprowadzonego
+## 1               Tak        manualna                                       
+## 2                          manualna przygotowany do rejestracji / oplacony
+## 3                          manualna           sprowadzony / zarejestrowany
+## 4                          manualna                                       
+## 5                          manualna              sprowadzony / nieoplacony
+## 6                          manualna              sprowadzony / nieoplacony
+##                                                                                                                                                                                             Wyposazenie.dodatkowe
+## 1                                      ABS, el. szyby, el. lusterka, klimatyzacja, alufelgi, centralny zamek, poduszka powietrzna, wspomaganie kierownicy, immobiliser, welurowa tapicerka, lwiatla przeciwmglowe
+## 2                                                                                                        ABS, klimatyzacja, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser
+## 3                                                                                                      ABS, hak, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser
+## 4                                                                                                         ABS, klimatyzacja, alufelgi, poduszka powietrzna, radio / CD, wspomaganie kierownicy, instalacja gazowa
+## 5 ABS, hak, el. szyby, el. lusterka, klimatyzacja, centralny zamek, autoalarm, poduszka powietrzna, wspomaganie kierownicy, immobiliser, komputer, welurowa tapicerka, lwiatla przeciwmglowe, przyciemniane szyby
+## 6                                         ABS, el. szyby, el. lusterka, szyberdach, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, welurowa tapicerka, podgrzewane fotele</code></pre>
 </div>
-<div id="przetwarzanie-potokowe-3" class="slide section level1">
-<h1>Przetwarzanie potokowe</h1>
-<p>Ten framgnet kodu można czytać w następujący sposób. Weź zbiór danych <code>auta2012</code>, następnie zasosuj funkcję <code>filter</code> pozostawiając tylko auta <code>Marka == &quot;Volkswagen&quot;</code>, następnie posortuj auta malejąco wzdłuż zmiennej <code>Cena.w.PLN</code>, następnie zastosuj funkcję <code>filter</code> pozostawiając tylko auta o modelu Golf w wersji IV, następnie zastosuj funkcję <code>filter</code> pozostawiając tylko auta o przebiegu poniżej 50 tys km.</p>
-<p>Znacznie czytelniejszy zapis. Będziemy z operatora <code>%&gt;%</code> często korzystać przy wstępnym przetwarzaniu danych.</p>
+<div id="przetwarzanie-potokowe---jak-to-czytac" class="slide section level1">
+<h1>Przetwarzanie potokowe - jak to czytać</h1>
+<p>Jak czytać taki fragment?</p>
+<p>Jest to znacznie prostsze ponieważ argumenty sa blisko nazw funkcji, możemy więc czytać opis przetwarzanai zdanie po zdaniu.</p>
+<p>Przedstawiony przykład można czytać nastepująco.</p>
+<p>Weź zbiór danych <code>auta2012</code>,</p>
+<p>następnie zasosuj funkcję <code>filter</code> pozostawiając tylko auta <code>Marka == &quot;Volkswagen&quot;</code>,</p>
+<p>następnie posortuj auta malejąco wzdłuż zmiennej <code>Cena.w.PLN</code>,</p>
+<p>następnie zastosuj funkcję <code>filter</code> pozostawiając tylko auta o modelu Golf w wersji IV,</p>
+<p>następnie zastosuj funkcję <code>filter</code> pozostawiając tylko auta o przebiegu poniżej 50 tys km.</p>
+<p>Zapis z operatorem <code>%&gt;%</code> jest w wielu sytuacjach znacznie czytelniejszy i będziemy z niego często korzystać przy przetwarzaniu danych.</p>
+<pre class="sourceCode r"><code class="sourceCode r">tylkoMalyPrzebieg &lt;-<span class="st"> </span>
+<span class="st">  </span>auta2012 %&gt;%<span class="st">                                 </span>
+<span class="st">  </span><span class="kw">filter</span>(Marka ==<span class="st"> &quot;Volkswagen&quot;</span>) %&gt;%<span class="st">            </span>
+<span class="st">  </span><span class="kw">arrange</span>(Cena.w.PLN) %&gt;%<span class="st">                      </span>
+<span class="st">  </span><span class="kw">filter</span>(Model ==<span class="st"> &quot;Golf&quot;</span>, Wersja ==<span class="st"> &quot;IV&quot;</span>) %&gt;%<span class="st">  </span>
+<span class="st">  </span><span class="kw">filter</span>(Przebieg.w.km &lt;<span class="st"> </span><span class="dv">50000</span>)                </code></pre>
+</div>
+<div id="wszystko-pynie" class="slide section level1">
+<h1>Wszystko płynie</h1>
+<p>Jeżeli chcielibyśmy otrzymać pełny przepływ w czytaniu od góry na dół potoku, to zamiast operatora przypisania <code>&lt;-</code> możemy wykorzystac operatora <code>-&gt;</code> o identycznym znaczeniu a różniący się tylko kolejnością argumentów.</p>
+<p>W poniższym kodzie zostanie wykonane przetwarzanie a w ostatnim krotku wynik zostanie przypisany do zmiennej <code>tylkoMalyPrzebieg</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">  auta2012 %&gt;%<span class="st">                                 </span>
+<span class="st">  </span><span class="kw">filter</span>(Marka ==<span class="st"> &quot;Volkswagen&quot;</span>) %&gt;%<span class="st">            </span>
+<span class="st">  </span><span class="kw">arrange</span>(Cena.w.PLN) %&gt;%<span class="st">                      </span>
+<span class="st">  </span><span class="kw">filter</span>(Model ==<span class="st"> &quot;Golf&quot;</span>, Wersja ==<span class="st"> &quot;IV&quot;</span>) %&gt;%<span class="st">  </span>
+<span class="st">  </span><span class="kw">filter</span>(Przebieg.w.km &lt;<span class="st"> </span><span class="dv">50000</span>) -&gt;
+tylkoMalyPrzebieg </code></pre>
+</div>
+<div id="co-mozna-zrobic-z-potokiem" class="slide section level1">
+<h1>Co można zrobić z potokiem</h1>
+<p>Operator <code>%&gt;%</code> jest najczęściej wykorzystywany w pracy z funkcjami z pakietów <code>dplyr</code> i <code>ggvis</code>, ale można go oczywiście stosowac do inncyh funkcji również. Koniec końców, jedyne co robi to przekazuje swój lewy argument jako pierwszy argument wyrażenia po prawej stronie.</p>
+<p>Przykładowo, aby wykorzystać funkcję <code>dim()</code> do sprawdzenia wymiarów ramki <code>tylkoMalyPrzebieg</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">tylkoMalyPrzebieg %&gt;%<span class="st"> </span><span class="kw">dim</span>()</code></pre>
+<p>Aby wyświetlić kilka pierwszych wierszy z ramki danych <code>tylkoMalyPrzebieg</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">tylkoMalyPrzebieg %&gt;%<span class="st"> </span><span class="kw">head</span>()</code></pre>
+<p>Jeżeli chceilibyśmy przekazać zbiór danych z lewej strony operatora <code>%&gt;%</code> w inne miejsce niż pierwszy argument, Rónież możemy to zrobić. Miejsce w które ma być wstawiony argument należy w tym celu zamarkowac znakiem kropki <code>.</code>.</p>
+<p>W poniższym przykłądzie używamy funkcj <code>lm()</code>, podajemy jako pierwszy argument formułę, a jako drugi argument zbiór danych. W tym przykłądzie, poniewaz zbiór danych to <code>.</code>, to będzie za niego wstawiony zbiór <code>tylkoMalyPrzebieg</code> (lewa strona operaotra <code>%&gt;%</code>).</p>
+<pre class="sourceCode r"><code class="sourceCode r">tylkoMalyPrzebieg %&gt;%<span class="st"> </span><span class="kw">lm</span>(Cena.w.PLN ~<span class="st"> </span>Przebieg.w.km, .)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Cena.w.PLN ~ Przebieg.w.km, data = .)
+## 
+## Coefficients:
+##   (Intercept)  Przebieg.w.km  
+##     1.579e+04      6.221e-02</code></pre>
 </div>
 <div id="zadania" class="slide section level1">
 <h1>Zadania</h1>
 <ul>
 <li>Użyj operatora <code>%&gt;%</code> by ze zbioru danych <code>auta2012</code> wybrać tylko 10 najtańszych aut marki Rolls-Royce.</li>
-<li>Użyj operatora <code>%&gt;%</code> by ze zbioru danych <code>auta2012</code> wybrać 5 Viklswagenów o największych silnikach.</li>
+<li>Użyj operatora <code>%&gt;%</code> by ze zbioru danych <code>auta2012</code> wybrać 5 Volkswagenów o największych silnikach.</li>
 </ul>
 </div>
 
