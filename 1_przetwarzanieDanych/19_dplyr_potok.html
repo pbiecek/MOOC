@@ -53,19 +53,19 @@ pogRomcy danych
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
 <p>Przetwarzanie danych składa się najczęściej z wielu kroków. Dane się filtruje, sortuje, grupuje, podsumowuje, znów filtruje, łączy się z innymi itp.</p>
-<p>Taka sekwencja operacji przypomina potok, w którym dane wypływają ze źródła a nstępnie trafiają na kolejne etapy przetwarzania.</p>
-<p>Relatywnie niedawno, do programu R wprowadzono operator pozwalający na łątwe opisywanie takich potoków przetwarzania. Można bez niego żyć, ale gdy już się go pozna i zacznie z nim pracować, życie bez niego straci na smaku.</p>
+<p>Taka sekwencja operacji przypomina potok, w którym dane wypływają ze źródła a następnie trafiają na kolejne etapy przetwarzania.</p>
+<p>Relatywnie niedawno, do programu R wprowadzono operator pozwalający na łatwe opisywanie takich potoków przetwarzania. Można bez niego żyć, ale gdy już się go pozna i zacznie z nim pracować, życie bez niego straci na smaku.</p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
 <li>jak składać ze sobą wywołania funkcji do przetwarzania danych w potoki przetwarzania</li>
-<li>jakim instrukcjom operator przetwarzania potokowego jest równowazny</li>
+<li>jakim instrukcjom operator przetwarzania potokowego jest równoważny</li>
 </ul>
 <p>Do ilustracji tych zagadnień wykorzystamy zbiór danych <code>auta2012</code> dostępny w pakiecie <code>SmarterPoland</code>.</p>
 </div>
 <div id="przetwarzanie-krok-po-kroku" class="slide section level1">
-<h1>Przetwarzanie krok po kroku</h1>
-<p>Jak już wspomnieliśmy analiza danych przez większość czasu polega na przetwarzaniu danych w tą i zpowrotem.</p>
-<p>Przyjrzyjmy się przykłądowej serii operacji. Zaczniemy od danych o wszystkich ofertach sprzedaży samochodów, odfiltrujemy samochody, które nie są Volkswagenami, pozostałe samochody posortujemy po cenie. Następnie pozostawimy tylko Golfy IV o przebiegu poniżej 50000 km.</p>
+<h1>Przetwarzanie ,,krok po kroku’’</h1>
+<p>Jak już wspomnieliśmy analiza danych przez większość czasu polega na przetwarzaniu danych w tą i z powrotem.</p>
+<p>Przyjrzyjmy się przykładowej serii operacji. Zaczniemy od danych o wszystkich ofertach sprzedaży samochodów, odfiltrujemy samochody, które nie są Volkswagenami, pozostałe samochody posortujemy po cenie. Następnie pozostawimy tylko Golfy IV o przebiegu poniżej 50000 km.</p>
 <p>Poniższa instrukcja nie jest najkrótszą z możliwych, celowo została rozciągnięta by łatwiej było przedstawić zalety potoków.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
 <span class="kw">library</span>(dplyr)
@@ -82,10 +82,10 @@ tylkoGolfIV &lt;-<span class="st"> </span><span class="kw">filter</span>(posorto
 tylkoMalyPrzebieg &lt;-<span class="st"> </span><span class="kw">filter</span>(tylkoGolfIV, 
                             Przebieg.w.km &lt;<span class="st"> </span><span class="dv">50000</span>)</code></pre>
 <p>Ta sekwencja operacji tworzy cztery pomocnicze zbiory danych: <code>tylkoVolkswagen</code>, <code>posortowaneVolkswagen</code>, <code>tylkoGolfIV</code>, <code>tylkoMalyPrzebieg</code>.</p>
-<p>Jeżeli potrzebujemy tlyko ostatniego, to pozostałe wyłącznie zaśmiecają pamięć, najlepiej byłoby je od razu usunąć lub w ogóle nie tworzyć.</p>
+<p>Jeżeli potrzebujemy tylko ostatniego, to pozostałe wyłącznie zaśmiecają pamięć, najlepiej byłoby je od razu usunąć lub w ogóle nie tworzyć.</p>
 </div>
 <div id="przetwarzanie-na-wielka-cebulke" class="slide section level1">
-<h1>Przetwarzanie na wielką cebulkę</h1>
+<h1>Przetwarzanie ,,na wielką cebulkę’’</h1>
 <p>Ponieważ w R wyniki jednej funkcji można przekazać do innej funkcji, to również wymienione operacje można złożyć w jedną wielką cebulkę.</p>
 <p>W jedno olbrzymie wywołanie funkcji w funkcji przekazujące wyniki jednej funkcji bezpośrednio do kolejnej.</p>
 <p>Taka wielka cebulka wyglądałaby następująco.</p>
@@ -157,13 +157,13 @@ tylkoMalyPrzebieg &lt;-<span class="st"> </span><span class="kw">filter</span>(t
 <div id="przetwarzanie-potokowe---jak-to-czytac" class="slide section level1">
 <h1>Przetwarzanie potokowe - jak to czytać</h1>
 <p>Jak czytać taki fragment?</p>
-<p>Jest to znacznie prostsze ponieważ argumenty sa blisko nazw funkcji, możemy więc czytać opis przetwarzanai zdanie po zdaniu.</p>
-<p>Przedstawiony przykład można czytać nastepująco.</p>
+<p>Jest to znacznie prostsze ponieważ argumenty są blisko nazw funkcji, możemy więc czytać opis przetwarzania zdanie po zdaniu.</p>
+<p>Przedstawiony przykład można czytać następująco.</p>
 <p>Weź zbiór danych <code>auta2012</code>,</p>
-<p>następnie zasosuj funkcję <code>filter</code> pozostawiając tylko auta <code>Marka == &quot;Volkswagen&quot;</code>,</p>
+<p>następnie zastosuj funkcję <code>filter</code> pozostawiając tylko auta <code>Marka == &quot;Volkswagen&quot;</code>,</p>
 <p>następnie posortuj auta malejąco wzdłuż zmiennej <code>Cena.w.PLN</code>,</p>
 <p>następnie zastosuj funkcję <code>filter</code> pozostawiając tylko auta o modelu Golf w wersji IV,</p>
-<p>następnie zastosuj funkcję <code>filter</code> pozostawiając tylko auta o przebiegu poniżej 50 tys km.</p>
+<p>następnie zastosuj funkcję <code>filter</code> pozostawiając tylko auta o przebiegu poniżej 50 tys. km.</p>
 <p>Zapis z operatorem <code>%&gt;%</code> jest w wielu sytuacjach znacznie czytelniejszy i będziemy z niego często korzystać przy przetwarzaniu danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r">tylkoMalyPrzebieg &lt;-<span class="st"> </span>
 <span class="st">  </span>auta2012 %&gt;%<span class="st">                                 </span>
@@ -174,8 +174,8 @@ tylkoMalyPrzebieg &lt;-<span class="st"> </span><span class="kw">filter</span>(t
 </div>
 <div id="wszystko-pynie" class="slide section level1">
 <h1>Wszystko płynie</h1>
-<p>Jeżeli chcielibyśmy otrzymać pełny przepływ w czytaniu od góry na dół potoku, to zamiast operatora przypisania <code>&lt;-</code> możemy wykorzystac operatora <code>-&gt;</code> o identycznym znaczeniu a różniący się tylko kolejnością argumentów.</p>
-<p>W poniższym kodzie zostanie wykonane przetwarzanie a w ostatnim krotku wynik zostanie przypisany do zmiennej <code>tylkoMalyPrzebieg</code>.</p>
+<p>Jeżeli chcielibyśmy otrzymać pełny przepływ w czytaniu od góry na dół potoku, to zamiast operatora przypisania <code>&lt;-</code> możemy wykorzystać operatora <code>-&gt;</code> o identycznym znaczeniu a różniący się tylko kolejnością argumentów.</p>
+<p>W poniższym kodzie zostanie wykonane przetwarzanie a w ostatnim kroku wynik zostanie przypisany do zmiennej <code>tylkoMalyPrzebieg</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">  auta2012 %&gt;%<span class="st">                                 </span>
 <span class="st">  </span><span class="kw">filter</span>(Marka ==<span class="st"> &quot;Volkswagen&quot;</span>) %&gt;%<span class="st">            </span>
 <span class="st">  </span><span class="kw">arrange</span>(Cena.w.PLN) %&gt;%<span class="st">                      </span>
@@ -185,13 +185,13 @@ tylkoMalyPrzebieg </code></pre>
 </div>
 <div id="co-mozna-zrobic-z-potokiem" class="slide section level1">
 <h1>Co można zrobić z potokiem</h1>
-<p>Operator <code>%&gt;%</code> jest najczęściej wykorzystywany w pracy z funkcjami z pakietów <code>dplyr</code> i <code>ggvis</code>, ale można go oczywiście stosowac do inncyh funkcji również. Koniec końców, jedyne co robi to przekazuje swój lewy argument jako pierwszy argument wyrażenia po prawej stronie.</p>
+<p>Operator <code>%&gt;%</code> jest najczęściej wykorzystywany w pracy z funkcjami z pakietów <code>dplyr</code> i <code>ggvis</code>, ale można go oczywiście stosować do innych funkcji również. Koniec końców, jedyne co robi to przekazuje swój lewy argument jako pierwszy argument wyrażenia po prawej stronie.</p>
 <p>Przykładowo, aby wykorzystać funkcję <code>dim()</code> do sprawdzenia wymiarów ramki <code>tylkoMalyPrzebieg</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">tylkoMalyPrzebieg %&gt;%<span class="st"> </span><span class="kw">dim</span>()</code></pre>
 <p>Aby wyświetlić kilka pierwszych wierszy z ramki danych <code>tylkoMalyPrzebieg</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">tylkoMalyPrzebieg %&gt;%<span class="st"> </span><span class="kw">head</span>()</code></pre>
-<p>Jeżeli chceilibyśmy przekazać zbiór danych z lewej strony operatora <code>%&gt;%</code> w inne miejsce niż pierwszy argument, Rónież możemy to zrobić. Miejsce w które ma być wstawiony argument należy w tym celu zamarkowac znakiem kropki <code>.</code>.</p>
-<p>W poniższym przykłądzie używamy funkcj <code>lm()</code>, podajemy jako pierwszy argument formułę, a jako drugi argument zbiór danych. W tym przykłądzie, poniewaz zbiór danych to <code>.</code>, to będzie za niego wstawiony zbiór <code>tylkoMalyPrzebieg</code> (lewa strona operaotra <code>%&gt;%</code>).</p>
+<p>Jeżeli chcielibyśmy przekazać zbiór danych z lewej strony operatora <code>%&gt;%</code> w inne miejsce niż pierwszy argument, Również możemy to zrobić. Miejsce w które ma być wstawiony argument należy w tym celu zamarkować znakiem kropki <code>.</code>.</p>
+<p>W poniższym przykładzie używamy funkcji <code>lm()</code>, podajemy jako pierwszy argument formułę, a jako drugi argument zbiór danych. W tym przykładzie, ponieważ zbiór danych to <code>.</code>, to będzie za niego wstawiony zbiór <code>tylkoMalyPrzebieg</code> (lewa strona operatora <code>%&gt;%</code>).</p>
 <pre class="sourceCode r"><code class="sourceCode r">tylkoMalyPrzebieg %&gt;%<span class="st"> </span><span class="kw">lm</span>(Cena.w.PLN ~<span class="st"> </span>Przebieg.w.km, .)</code></pre>
 <pre><code>## 
 ## Call:

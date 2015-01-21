@@ -17,25 +17,25 @@ output:
 
 Przetwarzanie danych składa się najczęściej z wielu kroków. Dane się filtruje, sortuje, grupuje, podsumowuje, znów filtruje, łączy się z innymi itp.
 
-Taka sekwencja operacji przypomina potok, w którym dane wypływają ze źródła a nstępnie trafiają na kolejne etapy przetwarzania.
+Taka sekwencja operacji przypomina potok, w którym dane wypływają ze źródła a następnie trafiają na kolejne etapy przetwarzania.
 
-Relatywnie niedawno, do programu R wprowadzono operator pozwalający na łątwe opisywanie takich potoków przetwarzania. Można bez niego żyć, ale gdy już się go pozna i zacznie z nim pracować, życie bez niego straci na smaku.
+Relatywnie niedawno, do programu R wprowadzono operator pozwalający na łatwe opisywanie takich potoków przetwarzania. Można bez niego żyć, ale gdy już się go pozna i zacznie z nim pracować, życie bez niego straci na smaku.
 
 W tym odcinku nauczymy się
 
 - jak składać ze sobą wywołania funkcji do przetwarzania danych w potoki przetwarzania
-- jakim instrukcjom operator przetwarzania potokowego jest równowazny
+- jakim instrukcjom operator przetwarzania potokowego jest równoważny
 
 Do ilustracji tych zagadnień wykorzystamy zbiór danych `auta2012` dostępny w pakiecie `SmarterPoland`.
 
 
 ---
 
-# Przetwarzanie krok po kroku
+# Przetwarzanie ,,krok po kroku''
 
-Jak już wspomnieliśmy analiza danych przez większość czasu polega na przetwarzaniu danych w tą i zpowrotem.
+Jak już wspomnieliśmy analiza danych przez większość czasu polega na przetwarzaniu danych w tą i z powrotem.
 
-Przyjrzyjmy się przykłądowej serii operacji. Zaczniemy od danych o wszystkich ofertach sprzedaży samochodów,
+Przyjrzyjmy się przykładowej serii operacji. Zaczniemy od danych o wszystkich ofertach sprzedaży samochodów,
 odfiltrujemy samochody, które nie są Volkswagenami, pozostałe samochody posortujemy po cenie. Następnie pozostawimy tylko Golfy IV o przebiegu poniżej 50000 km. 
 
 Poniższa instrukcja nie jest najkrótszą z możliwych, celowo została rozciągnięta by łatwiej było przedstawić zalety potoków.
@@ -60,11 +60,11 @@ tylkoMalyPrzebieg <- filter(tylkoGolfIV,
 Ta sekwencja operacji tworzy cztery pomocnicze zbiory danych: 
 `tylkoVolkswagen`, `posortowaneVolkswagen`, `tylkoGolfIV`, `tylkoMalyPrzebieg`.
 
-Jeżeli potrzebujemy tlyko ostatniego, to pozostałe wyłącznie zaśmiecają pamięć, najlepiej byłoby je od razu usunąć lub w ogóle nie tworzyć.
+Jeżeli potrzebujemy tylko ostatniego, to pozostałe wyłącznie zaśmiecają pamięć, najlepiej byłoby je od razu usunąć lub w ogóle nie tworzyć.
 
 ---
 
-# Przetwarzanie na wielką cebulkę
+# Przetwarzanie ,,na wielką cebulkę''
 
 Ponieważ w R wyniki jednej funkcji można przekazać do innej funkcji, to również wymienione operacje można złożyć w jedną wielką cebulkę.
 
@@ -122,19 +122,19 @@ head(tylkoMalyPrzebieg)
 
 Jak czytać taki fragment?
 
-Jest to znacznie prostsze ponieważ argumenty sa blisko nazw funkcji, możemy więc czytać opis przetwarzanai zdanie po zdaniu.
+Jest to znacznie prostsze ponieważ argumenty są blisko nazw funkcji, możemy więc czytać opis przetwarzania zdanie po zdaniu.
 
-Przedstawiony przykład można czytać nastepująco.
+Przedstawiony przykład można czytać następująco.
 
 Weź zbiór danych `auta2012`, 
 
-następnie zasosuj funkcję `filter` pozostawiając tylko auta `Marka == "Volkswagen"`,
+następnie zastosuj funkcję `filter` pozostawiając tylko auta `Marka == "Volkswagen"`,
 
 następnie posortuj auta malejąco wzdłuż zmiennej `Cena.w.PLN`,
 
 następnie zastosuj funkcję `filter` pozostawiając tylko auta o modelu Golf w wersji IV,
 
-następnie zastosuj funkcję `filter` pozostawiając tylko auta o przebiegu poniżej 50 tys km.
+następnie zastosuj funkcję `filter` pozostawiając tylko auta o przebiegu poniżej 50 tys. km.
 
 Zapis z operatorem `%>%` jest w wielu sytuacjach znacznie czytelniejszy i będziemy z niego często korzystać przy przetwarzaniu danych.
 
@@ -149,9 +149,9 @@ tylkoMalyPrzebieg <-
 
 # Wszystko płynie
 
-Jeżeli chcielibyśmy otrzymać pełny przepływ w czytaniu od góry na dół potoku, to zamiast operatora przypisania `<-` możemy wykorzystac operatora `->` o identycznym znaczeniu a różniący się tylko kolejnością argumentów.
+Jeżeli chcielibyśmy otrzymać pełny przepływ w czytaniu od góry na dół potoku, to zamiast operatora przypisania `<-` możemy wykorzystać operatora `->` o identycznym znaczeniu a różniący się tylko kolejnością argumentów.
 
-W poniższym kodzie zostanie wykonane przetwarzanie a w ostatnim krotku wynik zostanie przypisany do zmiennej `tylkoMalyPrzebieg`.
+W poniższym kodzie zostanie wykonane przetwarzanie a w ostatnim kroku wynik zostanie przypisany do zmiennej `tylkoMalyPrzebieg`.
 
 ```{r, eval=FALSE}
   auta2012 %>%                                 
@@ -164,7 +164,7 @@ tylkoMalyPrzebieg
 
 # Co można zrobić z potokiem
 
-Operator `%>%` jest najczęściej wykorzystywany w pracy z funkcjami z pakietów `dplyr` i `ggvis`, ale można go oczywiście stosowac do inncyh funkcji również. Koniec końców, jedyne co robi to przekazuje swój lewy argument jako pierwszy argument wyrażenia po prawej stronie.
+Operator `%>%` jest najczęściej wykorzystywany w pracy z funkcjami z pakietów `dplyr` i `ggvis`, ale można go oczywiście stosować do innych funkcji również. Koniec końców, jedyne co robi to przekazuje swój lewy argument jako pierwszy argument wyrażenia po prawej stronie.
 
 Przykładowo, aby wykorzystać funkcję `dim()` do sprawdzenia wymiarów ramki `tylkoMalyPrzebieg`.
 
@@ -178,9 +178,9 @@ Aby wyświetlić kilka pierwszych wierszy z ramki danych `tylkoMalyPrzebieg`.
 tylkoMalyPrzebieg %>% head()
 ```
 
-Jeżeli chceilibyśmy przekazać zbiór danych z lewej strony operatora `%>%` w inne miejsce niż pierwszy argument, Rónież możemy to zrobić. Miejsce w które ma być wstawiony argument należy w tym celu zamarkowac znakiem kropki `.`.
+Jeżeli chcielibyśmy przekazać zbiór danych z lewej strony operatora `%>%` w inne miejsce niż pierwszy argument, Również możemy to zrobić. Miejsce w które ma być wstawiony argument należy w tym celu zamarkować znakiem kropki `.`.
 
-W poniższym przykłądzie używamy funkcj `lm()`, podajemy jako pierwszy argument formułę, a jako drugi argument zbiór danych. W tym przykłądzie, poniewaz zbiór danych to `.`, to będzie za niego wstawiony zbiór `tylkoMalyPrzebieg` (lewa strona operaotra `%>%`).
+W poniższym przykładzie używamy funkcji `lm()`, podajemy jako pierwszy argument formułę, a jako drugi argument zbiór danych. W tym przykładzie, ponieważ zbiór danych to `.`, to będzie za niego wstawiony zbiór `tylkoMalyPrzebieg` (lewa strona operatora `%>%`).
  
 ```{r}
 tylkoMalyPrzebieg %>% lm(Cena.w.PLN ~ Przebieg.w.km, .)
@@ -192,3 +192,4 @@ tylkoMalyPrzebieg %>% lm(Cena.w.PLN ~ Przebieg.w.km, .)
 
 * Użyj operatora `%>%` by ze zbioru danych `auta2012` wybrać tylko 10 najtańszych aut marki Rolls-Royce.
 * Użyj operatora `%>%` by ze zbioru danych `auta2012` wybrać 5 Volkswagenów o największych silnikach.
+ 
