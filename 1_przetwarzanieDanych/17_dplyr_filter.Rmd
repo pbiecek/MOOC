@@ -15,11 +15,17 @@ output:
 
 # O czym jest ten odcinek
 
+Bazy danych zawierają najczęściej znacznie więcej informacji niż jest nam potrzebne. Jedną z kluczowych operacji jest więc filtrowanie, wybieranie tylko tych wierszy, które nas interesują. Przy czym 'nas interesują' oznacza spełnianie pewnych kryteriów.
+
+W procesie przygotowania danych takie filtrowanie jest niesamowicie częstą instrukcją. W odcinku 7 pokazaliśmy jak wybierać wiersze spełniające określone kryterium, używając operatora `[`. W codziennej pracy często i wygodniej i szybciej jest wykorzystać dedykowaną fukcję `filter()` z pakietu `dplyr`.
+
 W tym odcinku nauczymy się
 
-- Jak ze zbioru danych wybierać tylko interesujące nas wiersze
+- jak ze zbioru danych wybierać tylko interesujące nas wiersze?
+- jak tworzyć złożóne kryteria wyboru wierszy?
 
-Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to `koty_ptaki` a drugi, znacznie większy to `auta2012`.
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, 
+znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
 
 ---
 
@@ -61,6 +67,8 @@ kolejne argumenty, a może być ich jeden lub więcej) to warunki logiczne, któ
 Przykładowo, aby zobaczyć, które zwierzaki przekraczają prędkość 100 km na godzinę możemy wykonać następującą instrukcję.
 
 ```{r, message=FALSE}
+library(dplyr)
+
 filter(koty_ptaki,
        predkosc > 100)
 ```

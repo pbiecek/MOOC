@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / wizualizacja / zaawansowane" /> 
+  <meta name="copyright" content="pogRomcy danych / przetwarzanie / filter" /> 
   <title>Filtrowanie danych [dplyr / select]</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
@@ -48,15 +48,26 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 6 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 17 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
+<p>Bazy danych zawierają najczęściej znacznie więcej informacji niż jest nam potrzebne. Jedną z kluczowych operacji jest więc filtrowanie, wybieranie tylko tych wierszy, które nas interesują. Przy czym ‘nas interesują’ oznacza spełnianie pewnych kryteriów.</p>
+<p>W procesie przygotowania danych takie filtrowanie jest niesamowicie częstą instrukcją. W odcinku 7 pokazaliśmy jak wybierać wiersze spełniające określone kryterium, używając operatora <code>[</code>. W codziennej pracy często i wygodniej i szybciej jest wykorzystać dedykowaną fukcję <code>filter()</code> z pakietu <code>dplyr</code>.</p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
-<li>Jak ze zbioru danych wybierać tylko interesujące nas wiersze</li>
+<li>jak ze zbioru danych wybierać tylko interesujące nas wiersze?</li>
+<li>jak tworzyć złożóne kryteria wyboru wierszy?</li>
 </ul>
-<p>Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to <code>koty_ptaki</code> a drugi, znacznie większy to <code>auta2012</code>.</p>
+<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>SmarterPoland</code>.</p>
+</div>
+<div class="slide section level1">
+
+<p>Pracując z danymi często wyróżnia się dwa stany, dane surowe i dane przetworzone.</p>
+<p>Dane surowe pobieramy ze źródła danych, zakładając że na podstawie tych danych możemy odpowiedzieć, na interesujące nas pytania. Przykładowo, szczegółowe informacje o wszystkich ofertach sprzedaży aut, to przykład danych surowych, ponieważ pobierany te dane dokładnie w tej postaci.</p>
+<p>Pytania, które nas interesują dotyczą często podzbiory całych danych, i to podzbioru, na którym wykonywane są jakieś transformacje. Takie przekształcone dane nazywamy danymi przetworzonymi.</p>
+<p>Przetwarzanie może być bardzo różne, mając zbiór wypowiedzi, możemy liczyć częstość wystąpień poszczególnych słów, możemy z liczb wyciągać ostatnie cyfry, czy z dat dni tygodnia.</p>
+<p>Dzisiaj poznamy fantastyczne narzędzie, bardzo pomagające w przetwarzaniu danych. To narzędzie to biblioteka dplyr</p>
 </div>
 <div class="slide section level1">
 
@@ -84,7 +95,9 @@ koty_ptaki</code></pre>
 <h2 id="filtrowanie-danych">Filtrowanie danych</h2>
 <p>Używając funkcji <strong>filter()</strong> można przefiltrować dane, zostawiając tylko te, które spełniają określony warunek (jeden lub kilka). Pierwszym argumentem tej funkcji jest ramka danych, kolejne argumenty, a może być ich jeden lub więcej) to warunki logiczne, które muszę być spełnione aby dany wiersz trafił do wyniki.</p>
 <p>Przykładowo, aby zobaczyć, które zwierzaki przekraczają prędkość 100 km na godzinę możemy wykonać następującą instrukcję.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(koty_ptaki,
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+
+<span class="kw">filter</span>(koty_ptaki,
        predkosc &gt;<span class="st"> </span><span class="dv">100</span>)</code></pre>
 <pre><code>##          gatunek  waga dlugosc predkosc  habitat zywotnosc druzyna
 ## 1         Gepard 60.00     1.4      115   Afryka        12     Kot
