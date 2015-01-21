@@ -152,6 +152,6 @@ head(
 
 # Zadania
 
-* Posortuj auta wzdłuż wielkości silnika (liczby koni mechanicznych, kolumna KM lub pojemności skokowej, kolumna Pojemnosc.skokowa). Które marki mają najwięszke silniki?
+* Posortuj auta wzdłuż wielkości silnika (liczby koni mechanicznych, kolumna `KM`) lub pojemności skokowej (kolumna `Pojemnosc.skokowa`). Które marki mają najwięszke silniki?
 * Wybierz tylko auta marki 'Rolls-Royce' i posortuj je po cenie.
 

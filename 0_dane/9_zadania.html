@@ -473,6 +473,23 @@ mlodeFiaty &lt;-<span class="st"> </span><span class="kw">filter</span>(mlodeAut
                     Model ==<span class="st"> &quot;500&quot;</span>)
 <span class="kw">nrow</span>(mlodeFiaty)</code></pre>
 </div>
+<div id="zadania-sezon-1-odcinek-18" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 18</h1>
+<ul>
+<li>Posortuj auta wzdłuż wielkości silnika (liczby koni mechanicznych, kolumna <code>KM</code>) lub pojemności skokowej (kolumna <code>Pojemnosc.skokowa</code>). Które marki mają najwięszke silniki?</li>
+<li>Wybierz tylko auta marki ‘Rolls-Royce’ i posortuj je po cenie.</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-18" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 18</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># auta z największymi silnikami (deklarowanymi)</span>
+tmp &lt;-<span class="st"> </span><span class="kw">arrange</span>(auta2012, -KM)
+<span class="kw">head</span>(tmp,<span class="dv">20</span>)
+
+<span class="co"># najtańsze Rolls-Royce</span>
+RR &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012, Marka ==<span class="st"> 'Rolls-Royce'</span>)
+<span class="kw">arrange</span>(RR, Cena.w.PLN)</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>

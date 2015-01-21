@@ -534,3 +534,21 @@ mlodeFiaty <- filter(mlodeAuta,
                     Model == "500")
 nrow(mlodeFiaty)
 ```
+
+# Zadania, sezon 1, odcinek 18
+
+* Posortuj auta wzdłuż wielkości silnika (liczby koni mechanicznych, kolumna `KM`) lub pojemności skokowej (kolumna `Pojemnosc.skokowa`). Które marki mają najwięszke silniki?
+* Wybierz tylko auta marki 'Rolls-Royce' i posortuj je po cenie.
+
+# Odpowiedzi, sezon 1, odcinek 18
+
+```{r, eval=FALSE}
+# auta z największymi silnikami (deklarowanymi)
+tmp <- arrange(auta2012, -KM)
+head(tmp,20)
+
+# najtańsze Rolls-Royce
+RR <- filter(auta2012, Marka == 'Rolls-Royce')
+arrange(RR, Cena.w.PLN)
+
+```
