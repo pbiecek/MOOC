@@ -72,12 +72,30 @@ koty_ptaki %>%
 
 ---
 
-# Wyliczanie nowych zmiennych
+# Auta
+
+Operacje tworzenia nowych zmiennych przećwiczymy też na znacznie większym i złożonym zbiorze danyc. Mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.
+
+Zbiór danych `auta2012` jest dostępny po wczytaniu pakietu `SmarterPoland`. Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html
+
+```{r, message=FALSE}
+head(auta2012)
+```
+
+---
+
+# Wyliczanie jednej nowej zmiennej
 
 Policzmy najpierw wiek auta. Dane były zbierane w roku 2012, więc wiek auta to różnica pomiędzy rokiem produkcji, rokiem 2012 plus 1.
+
 ```{r, warning=FALSE}
 autaZWiekiem <- auta2012 %>%
   mutate(Wiek.auta = 2013 - Rok.produkcji)
+```
+
+Następnie wyświetlimy pierwsze 6 wierszy i dwie kolumny (wiek i rok produkcji).
+
+```{r, warning=FALSE}
 autaZWiekiem %>% 
   select(Wiek.auta, Rok.produkcji) %>%
   head()
@@ -87,29 +105,41 @@ autaZWiekiem %>%
 
 # Wyliczanie nowych zmiennych
 
-Drugą użyteczną zmienną to cena brutto. Teraz część aut ma cenę brutto a część netto. To utrudnia porównania. Przeliczmy wszystkie ceny na brutto dodając 23\% tam gdzie podana jest cena netto.
+Zauważmy też, że część cen jest netto a częśc brutto. Przeliczmy wszystkie ceny na brutto dodając 23\% tam gdzie podana jest cena netto.
+
+Wykorzystamy w tym celu funkcję `ifelse()`, która jako wynik zwraca drugi lub trzeci argument w zależności od tego czy pierwszy argument jest prawdziwy czy nie.
 
 ```{r, warning=FALSE}
 autaZCenaBrutto <- auta2012 %>%
   mutate(Cena.brutto = Cena.w.PLN * ifelse(Brutto.netto == "brutto", 1, 1.23))
+```
+
+Wyświetlmy pierwsze sześć wierszy i wybrane trzy kolumny.
+
+```{r, warning=FALSE}
 autaZCenaBrutto %>% 
   select(Cena.brutto, Brutto.netto, Cena.w.PLN) %>%
   head()
 ```
 
-Funkcja `ifelse()` jako wynik zwraca drugi lub trzegi argument w zależności od tego czy pierwszy argument jest prawdziwy czy nie.
 
 ---
 
 # Wyliczanie nowych zmiennych
 
-W jednym wykonaniu funkcji `mutate()` można podać kilka transformacji.
+W jednym wykonaniu funkcji `mutate()` można podać kilka transformacji. 
+
+Na poniższym przykładzie w jednym krkoku wykonujemy obie powyżej przedstawione transformacje.
 
 ```{r, warning=FALSE}
 autaZWiekiemIBrutto <- auta2012 %>%
   mutate(Wiek.auta = 2013 - Rok.produkcji,
          Cena.brutto = Cena.w.PLN * ifelse(Brutto.netto == "brutto", 1, 1.23))
+```
 
+Wyświetlmy wybrane kolumny.
+
+```{r, warning=FALSE}
 autaZWiekiemIBrutto %>% 
   select(Cena.brutto, Brutto.netto, Cena.w.PLN, Wiek.auta, Rok.produkcji) %>%
   head()
