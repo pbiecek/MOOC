@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / przetwarzanie / dplyr" /> 
+  <meta name="copyright" content="pogRomcy danych / przetwarzanie / mutate" /> 
   <title>Wyznaczanie nowych zmiennych danych [dplyr / mutate]</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
@@ -48,21 +48,46 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 6 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 21 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
+<p>Bardzo często na podstawie istniejących danych tworzymy nowe. Mając prędkosć w metrach na sekundę liczymy prędkość w kilometrach na godzinę. Mając wagę i wzrost liczymy BMI. Mając odległość w milach liczymy odległość w kilometrach i tak dalej.</p>
+<p>W programie R na różne sposoby można dodać nową zmienną do zbioru danych. Z tych wszystkich sposobów wygodnym i szybkim jest z wykrozystaniem funkcji <code>mutate()</code> z pakietu <code>dplyr</code>.</p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
-<li>Jak ze zbioru danych wybierać tylko interesujące nas wiersze</li>
+<li>jak do zbioru danych dodać nową kolumnę?</li>
+<li>jak nadpisać wartości w istniejącej kolumnie?</li>
 </ul>
-<p>Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to <code>koty_ptaki</code> a drugi, znacznie większy to <code>auta2012</code>.</p>
+<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>SmarterPoland</code>.</p>
+</div>
+<div id="ptaki-vs.koty" class="slide section level1">
+<h1>Ptaki vs. koty</h1>
+<p>Rozpocznijmy przykład dla tworzenia nowych zmiennych od zbioru danych o kotach i ptakach. Jest on na tyle mały, że wynik operacji będzie można przedstawić na ekranie.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+koty_ptaki</code></pre>
+<pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
+## 1          Tygrys 300.00     2.5       60     Azja        25     Kot
+## 2             Lew 200.00     2.0       80   Afryka        29     Kot
+## 3          Jaguar 100.00     1.7       90  Ameryka        15     Kot
+## 4            Puma  80.00     1.7       70  Ameryka        13     Kot
+## 5         Leopard  70.00     1.4       85     Azja        21     Kot
+## 6          Gepard  60.00     1.4      115   Afryka        12     Kot
+## 7           Irbis  50.00     1.3       65     Azja        18     Kot
+## 8          Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
+## 9           Strus 150.00     2.5       70   Afryka        45    Ptak
+## 10  Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak
+## 11 Sokol wedrowny   0.70     0.5      110   Polnoc        15    Ptak
+## 12 Sokol norweski   2.00     0.7      100   Polnoc        20    Ptak
+## 13       Albatros   4.00     0.8      120 Poludnie        50    Ptak</code></pre>
 </div>
 <div id="wyliczanie-nowych-zmiennych" class="slide section level1">
 <h1>Wyliczanie nowych zmiennych</h1>
 <p>Nie zawsze w zbiorze danych są dokładnie te zmienne, których potrzebujemy. Czasem musimy je policzyć, służy do tego funkcja o wdzięcznej nazwie <code>mutate()</code>.</p>
-<p>Przeliczmy prędkość z kilometrów na godzinę na mile na godzine, oraz taką jednostkę jak liczba swoich długości na sekundę.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+<p>W zbiorze danych <code>koty_ptaki</code> jest zmienna <code>predkosc</code> opisująca prędkość w kilometrach na godzinę.</p>
+<p>Dodajmy dwie nowe zmienne, w jednej przeliczmy prędkość z kilometrów na godzinę na mile na godzine, w drugiej przeliczymy prędkość na liczbę długości na sekundę (długość zwierząt jest w metrach).</p>
+<p>W używaniu przetwarzaniu danych wykorzystamy operator <code>%&gt;%</code> omówiony w 20 odcinku.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 koty_ptaki %&gt;%
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">predkosc.mph =</span> <span class="kw">round</span>(predkosc /<span class="st"> </span><span class="fl">0.621371</span>),
          <span class="dt">dlugosci.na.sek =</span> <span class="kw">round</span>(predkosc /<span class="st"> </span><span class="fl">3.6</span> /<span class="st"> </span>dlugosc,<span class="dv">1</span>))</code></pre>

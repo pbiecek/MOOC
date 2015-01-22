@@ -15,22 +15,43 @@ output:
 
 # O czym jest ten odcinek
 
+Bardzo często na podstawie istniejących danych tworzymy nowe.
+Mając prędkosć w metrach na sekundę liczymy prędkość w kilometrach na godzinę. Mając wagę i wzrost liczymy BMI. Mając odległość w milach liczymy odległość w kilometrach i tak dalej.
+
+W programie R na różne sposoby można dodać nową zmienną do zbioru danych. Z tych wszystkich sposobów wygodnym i szybkim jest z wykrozystaniem funkcji `mutate()` z pakietu `dplyr`.
+
 W tym odcinku nauczymy się
 
-- Jak ze zbioru danych wybierać tylko interesujące nas wiersze
+- jak do zbioru danych dodać nową kolumnę?
+- jak nadpisać wartości w istniejącej kolumnie?
 
-Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to `koty_ptaki` a drugi, znacznie większy to `auta2012`.
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, 
+znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
+
+# Ptaki vs. koty
+
+Rozpocznijmy przykład dla tworzenia nowych zmiennych od zbioru danych o kotach i ptakach. Jest on na tyle mały, że wynik operacji będzie można przedstawić na ekranie.
+
+```{r, message=FALSE}
+library(SmarterPoland)
+koty_ptaki
+```
 
 ---
 
 # Wyliczanie nowych zmiennych
+
 Nie zawsze w zbiorze danych są dokładnie te zmienne, których potrzebujemy.
 Czasem musimy je policzyć, służy do tego funkcja o wdzięcznej nazwie `mutate()`.
 
-Przeliczmy prędkość z kilometrów na godzinę na mile na godzine, oraz taką jednostkę jak liczba swoich długości na sekundę.
+W zbiorze danych `koty_ptaki` jest zmienna `predkosc` opisująca prędkość w kilometrach na godzinę.
+
+Dodajmy dwie nowe zmienne, w jednej przeliczmy prędkość z kilometrów na godzinę na mile na godzine, w drugiej przeliczymy prędkość na liczbę długości na sekundę (długość zwierząt jest w metrach).
+
+W używaniu przetwarzaniu danych wykorzystamy operator `%>%` omówiony w 20 odcinku. 
 
 ```{r, message=FALSE, warning=FALSE}
-library(SmarterPoland)
+library(dplyr)
 koty_ptaki %>%
   mutate(predkosc.mph = round(predkosc / 0.621371),
          dlugosci.na.sek = round(predkosc / 3.6 / dlugosc,1))
