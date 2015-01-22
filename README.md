@@ -38,9 +38,9 @@ część 1: Data smart
     + odcinek 15: Daty, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/15_daty.html), v1 ready
   * Przetwarzanie potokowe danych
     + odcinek 16: Czyszczenie i wprowadzenie do obróbki danych, [intro](https://rawgit.com/pbiecek/MOOC/master/1_przetwarzanieDanych/16_dplyrIntro.html), v1 ready
-    + odcinek 17: Filtrowanie wierszy [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/17_dplyr_filter.html), 
-    + odcinek 18: Sortowanie wierszy [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/18_dplyr_sort.html), 
-    + odcinek 19: Przetwarzanie potokowe [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/19_dplyr_potok.html), 
+    + odcinek 17: Filtrowanie wierszy [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/17_dplyr_filter.html), v1 ready
+    + odcinek 18: Sortowanie wierszy [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/18_dplyr_sort.html), v1 ready
+    + odcinek 19: Przetwarzanie potokowe [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/19_dplyr_potok.html), v1 ready
     + odcinek 20: Filtrowanie kolumn [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/20_dplyr_select.html), 
     + odcinek 21: Tworzenie nowych cech [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/21_dplyr_mutate.html), 
     + odcinek 22: Agregowanie danych [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/22_dplyr_summarise.html), 

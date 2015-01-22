@@ -52,7 +52,7 @@ pogRomcy danych
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
-<p>Pracując na danych o oferach sprzedaży aut można było odczuć jak niewygodna jest praca na danych które mają wiele kolumn, w sytuacji gdy potrzebujemy jedynie kilku z nich. W odcinku 7 pokazaliśmy jak wybierać kolumny spełniające określone kryterium, używając operatora <code>[</code>.</p>
+<p>Pracując na danych o ofertach sprzedaży aut można było odczuć jak niewygodna jest praca na danych które mają wiele kolumn, w sytuacji gdy potrzebujemy jedynie kilku z nich. W odcinku 7 pokazaliśmy jak wybierać kolumny spełniające określone kryterium, używając operatora <code>[</code>.</p>
 <p>W codziennej pracy aby wybrać kolumny z całego zbioru danych, i wygodniej, i szybciej jest wykorzystać dedykowaną funkcję <code>select()</code> z pakietu <code>dplyr</code>.</p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
@@ -63,9 +63,9 @@ pogRomcy danych
 </div>
 <div id="wybor-zmiennych-przez-wskazanie" class="slide section level1">
 <h1>Wybór zmiennych przez wskazanie</h1>
-<p>Zbiór <code>koty_ptaki</code> na niewiele kolumn, mozna je wszystkie wyświetlić na konsoli. Czasem jednak nadmiarowe zmienne jedynie utrudniają skupienie się na tym co ważne.</p>
-<p>Aby zmienić kolejnośc kolumn lub wybrać jedynie podzbiór interesujących kolumn wykorzystać możemy funkcję <code>select()</code>.</p>
-<p>W przykładzie poniżej wyświetlimy nazwy kolumn w zbioze danych <code>koty_ptaki</code>. A następnie wybierzemy trzy z tych kolumn w kolejnosci <code>gatunek, predkosc, waga</code>.</p>
+<p>Zbiór <code>koty_ptaki</code> na niewiele kolumn, można je wszystkie wyświetlić na konsoli. Czasem jednak nadmiarowe zmienne jedynie utrudniają skupienie się na tym co ważne.</p>
+<p>Aby zmienić kolejność kolumn lub wybrać jedynie podzbiór interesujących kolumn wykorzystać możemy funkcję <code>select()</code>.</p>
+<p>W przykładzie poniżej wyświetlimy nazwy kolumn w zbiorze danych <code>koty_ptaki</code>. A następnie wybierzemy trzy z tych kolumn w kolejności <code>gatunek, predkosc, waga</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
 <span class="kw">library</span>(dplyr)
 <span class="kw">colnames</span>(koty_ptaki)</code></pre>
@@ -90,7 +90,7 @@ pogRomcy danych
 </div>
 <div id="wybor-zmiennych-uzywajac-operatora-lub--" class="slide section level1">
 <h1>Wybór zmiennych używając operatora : lub -</h1>
-<p>Jeżeli kolumn w zbiorze danych jest wiele to wymienienie ich nazw jedna po drugiej może być niewygodne. W tym przypadku wato wykrozystać operator <code>:</code>, który pozwala na wybó kolumn od wskazanej do wskazanej.</p>
+<p>Jeżeli kolumn w zbiorze danych jest wiele to wymienienie ich nazw jedna po drugiej może być niewygodne. W tym przypadku wato wykorzystać operator <code>:</code>, który pozwala na wybór kolumn od wskazanej do wskazanej.</p>
 <pre class="sourceCode r"><code class="sourceCode r">koty_ptaki %&gt;%
 <span class="st">  </span><span class="kw">select</span>(gatunek:dlugosc, druzyna) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">head</span>()</code></pre>
@@ -101,7 +101,7 @@ pogRomcy danych
 ## 4    Puma   80     1.7     Kot
 ## 5 Leopard   70     1.4     Kot
 ## 6  Gepard   60     1.4     Kot</code></pre>
-<p>W funkcji <code>select()</code> można wykorzystac operator <code>-</code> aby wybrać z ramki danych wszystkie kolumny poza wskazanymi.</p>
+<p>W funkcji <code>select()</code> można wykorzystać operator <code>-</code> aby wybrać z ramki danych wszystkie kolumny poza wskazanymi.</p>
 <pre class="sourceCode r"><code class="sourceCode r">koty_ptaki %&gt;%
 <span class="st">  </span><span class="kw">select</span>(-habitat, -waga, -druzyna) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">head</span>()</code></pre>
@@ -134,7 +134,7 @@ pogRomcy danych
 </div>
 <div id="wybor-zmiennych-przez-wskazanie-1" class="slide section level1">
 <h1>Wybór zmiennych przez wskazanie</h1>
-<p>Przypuśćmy, że chcemy wybrać tylko Cenę, Markę, Model, Wersję i Przebieg.w.km. Wystarczy te zmienne wymienić jako argumenty funkcji select.</p>
+<p>Przypuśćmy, że chcemy wybrać tylko Cenę, Markę, Model, Wersję i Przebieg.w.km. Wystarczy te zmienne wymienić jako argumenty funkcji <code>select()</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
 <span class="st">    </span><span class="kw">select</span>(Cena.w.PLN, Marka, Model, Wersja, Przebieg.w.km) %&gt;%
 <span class="st">    </span><span class="kw">head</span>()</code></pre>
@@ -149,7 +149,7 @@ pogRomcy danych
 <div id="wybor-zmiennych-przez-usuniecie" class="slide section level1">
 <h1>Wybór zmiennych przez usunięcie</h1>
 <p>Jeżeli chcemy usunąć kilka kolumn, można co tego wykorzystać operator <code>-</code>.</p>
-<p>Na poniższym przykłądzie usuwamy 9 wskazanych kolumn.</p>
+<p>Na poniższym przykładzie usuwamy 9 wskazanych kolumn.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
 <span class="st">  </span><span class="kw">select</span>(-Cena, -Waluta, -Brutto.netto, -Rodzaj.paliwa,
          -Kraj.aktualnej.rejestracji, -Kraj.pochodzenia,
@@ -174,7 +174,7 @@ pogRomcy danych
 <div id="wybor-zmiennych-przez-wzorzec" class="slide section level1">
 <h1>Wybór zmiennych przez wzorzec</h1>
 <p>Wybierając kolumny, można również wskazywać te, których nazwy pasują do zadanego wzorca.</p>
-<p>Przykład poniżej wykorzystujemy funckję <code>martches()</code> aby wybrać wszystkie nazwy kolumn, które w nazwie mają wzorzec <code>aj</code>.</p>
+<p>Przykład poniżej wykorzystujemy funkcję <code>martches()</code> aby wybrać wszystkie nazwy kolumn, które w nazwie mają wzorzec <code>aj</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
 <span class="st">  </span><span class="kw">select</span>(<span class="kw">matches</span>(<span class="st">&quot;aj&quot;</span>)) %&gt;%
 <span class="st">  </span><span class="kw">head</span>()</code></pre>
@@ -190,7 +190,7 @@ pogRomcy danych
 <h1>Zadania</h1>
 <ul>
 <li><p>Wybierz tylko samochody marki Volvo, posortuj je po pojemności skokowej, a następnie wyświetl tylko trzy kolumny: Markę, Cenę.w.PLN i Kolor.</p></li>
-<li><p>Wybierz tylko kolumny, których nazwa kończy się na <code>a</code>.</p></li>
+<li><p>Wybierz tylko te kolumny, których nazwa kończy się na <code>a</code>.</p></li>
 </ul>
 </div>
 
