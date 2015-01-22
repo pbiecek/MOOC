@@ -9,47 +9,89 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / przetwarzanie / select"
+    footer: "pogRomcy danych / przetwarzanie / wybór kolumn "
 
 ---
 
 # O czym jest ten odcinek
 
+Pracując na danych o oferach sprzedaży aut można było odczuć jak niewygodna jest praca na danych które mają wiele kolumn, w sytuacji gdy potrzebujemy jedynie kilku z nich. W odcinku 7 pokazaliśmy jak wybierać kolumny spełniające określone kryterium, używając operatora `[`. 
+
+W codziennej pracy aby wybrać kolumny z całego zbioru danych, i wygodniej, i szybciej jest wykorzystać dedykowaną funkcję `select()` z pakietu `dplyr`.
+
 W tym odcinku nauczymy się
 
-- Jak ze zbioru danych wybierać tylko interesujące nas wiersze
+- jak ze zbioru danych wybierać tylko interesujące nas kolumny?
+- jak ze zbioru danych wybierać kolumny wszystkie poza wskazanych?
 
-Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to `koty_ptaki` a drugi, znacznie większy to `auta2012`.
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, 
+znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
 
 ---
 
-# Wybór zmiennych
+# Wybór zmiennych przez wskazanie
 
 Zbiór `koty_ptaki` na niewiele kolumn, mozna je wszystkie wyświetlić na konsoli. 
 Czasem jednak nadmiarowe zmienne jedynie utrudniają skupienie się na tym co ważne. 
+
 Aby zmienić kolejnośc kolumn lub wybrać jedynie podzbiór interesujących kolumn wykorzystać możemy funkcję `select()`.
+
+W przykładzie poniżej wyświetlimy nazwy kolumn w zbioze danych `koty_ptaki`. A następnie wybierzemy trzy z tych kolumn w kolejnosci
+`gatunek, predkosc, waga`.
 
 ```{r, warning=FALSE, message=FALSE}
 library(SmarterPoland)
+library(dplyr)
+colnames(koty_ptaki)
+
 koty_ptaki %>%
   select(gatunek, predkosc, waga)
 ```
 
+
 ---
 
-# Wybór zmiennych
-Duże zbiory danych potrafią mieć tysiące zmiennych. Często jednak pracujemy tylko na kilku z nich, a pozostałe głównie nam przeszkadzają.
+# Wybór zmiennych używając operatora : lub -
 
-Funkcja `select()` pozwala w prosty sposób wybrać kilka potrzebnych zmiennych z dużego zbioru danych. Pierwszym argumentem jest ramka danych, a kolejne to zmienne, które chcemy pozostawić. 
+Jeżeli kolumn w zbiorze danych jest wiele to wymienienie ich nazw jedna po drugiej może być niewygodne. W tym przypadku wato wykrozystać operator `:`, który pozwala na wybó kolumn od wskazanej do wskazanej.
 
-Zmienne, które chcemy pozostawić można wskazywać na kilka sposobów. Przećwiczmy je na zbiorze `auta2012`. W tym zbiorze dostępne są następujące dane.
-```{r, warning=FALSE}
-colnames(auta2012)
+```{r, warning=FALSE, message=FALSE}
+koty_ptaki %>%
+  select(gatunek:dlugosc, druzyna) %>% 
+  head()
+```
+
+W funkcji `select()` można wykorzystac operator `-` aby wybrać z ramki danych wszystkie kolumny poza wskazanymi.
+
+```{r, warning=FALSE, message=FALSE}
+koty_ptaki %>%
+  select(-habitat, -waga, -druzyna) %>% 
+  head()
 ```
 
 ---
 
+# Auta
+
+Operacje filtrowania przećwiczymy też na znacznie większym zbiorze danych, który już nie sposób w całości wyświetlić na ekranie. Mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.
+
+Zbiór danych `auta2012` jest dostępny po wczytaniu pakietu `SmarterPoland`. Poniżej przedstawiamy listę nazw kolumn z tego zbioru danych, więcej informacji o tym zbiorze danych znaleźć można na stronie https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html
+
+W tym zbiorze dostępne są następujące dane.
+
+```{r, message=FALSE}
+colnames(auta2012)
+```
+
+Funkcja `select()` pozwala w prosty sposób wybrać kilka potrzebnych zmiennych z dużego zbioru danych. Pierwszym argumentem jest ramka danych, a kolejne to zmienne, które chcemy pozostawić. 
+
+
+---
+
+# Wybór zmiennych przez wskazanie
+
 Przypuśćmy, że chcemy wybrać tylko Cenę, Markę, Model, Wersję i Przebieg.w.km. Wystarczy te zmienne wymienić jako argumenty funkcji select.
+
 ```{r, warning=FALSE}
 auta2012 %>%
     select(Cena.w.PLN, Marka, Model, Wersja, Przebieg.w.km) %>%
@@ -58,12 +100,15 @@ auta2012 %>%
 
 ---
 
-Jeżeli chcemy usunąć kilka kolumn, można co tego wykorzystać operator -. 
-A robi się to tak.
-Usuwamy 9 wskazanych kolumn.
+# Wybór zmiennych przez usunięcie
+
+Jeżeli chcemy usunąć kilka kolumn, można co tego wykorzystać operator `-`. 
+
+Na poniższym przykłądzie usuwamy 9 wskazanych kolumn.
+
 ```{r, warning=FALSE}
 auta2012 %>%
-  select(-Cena, -Waluta, -Brutto.netto, 
+  select(-Cena, -Waluta, -Brutto.netto, -Rodzaj.paliwa,
          -Kraj.aktualnej.rejestracji, -Kraj.pochodzenia,
          -Pojazd.uszkodzony, -Skrzynia.biegow,
          -Status.pojazdu.sprowadzonego, -Wyposazenie.dodatkowe) %>%
@@ -72,8 +117,12 @@ auta2012 %>%
 
 ---
 
-Można również wybierać kolumny, których nazwy pasują do pewnego wzorca.
-Przykład poniżej wybiera wszystkie nazwy kolumn, które w nazwie mają wzorzec `aj`.
+# Wybór zmiennych przez wzorzec
+
+Wybierając kolumny, można również wskazywać te, których nazwy pasują do zadanego wzorca.
+
+Przykład poniżej wykorzystujemy funckję `martches()` aby wybrać wszystkie nazwy kolumn, które w nazwie mają wzorzec `aj`.
+
 ```{r, warning=FALSE}
 auta2012 %>%
   select(matches("aj")) %>%
@@ -85,4 +134,8 @@ auta2012 %>%
 # Zadania
 
 * Wybierz tylko samochody marki Volvo, posortuj je po pojemności skokowej, a następnie wyświetl tylko trzy kolumny: Markę, Cenę.w.PLN i Kolor.
+
+* Wybierz tylko te kolumny, których nazwa kończy się na `a`.
+
+
 

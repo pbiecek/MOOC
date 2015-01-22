@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / przetwarzanie / dplyr" /> 
+  <meta name="copyright" content="pogRomcy danych / przetwarzanie / wybór kolumn" /> 
   <title>Wybór zmiennych z danych [dplyr / select]</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
@@ -48,21 +48,30 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 6 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 20 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
+<p>Pracując na danych o oferach sprzedaży aut można było odczuć jak niewygodna jest praca na danych które mają wiele kolumn, w sytuacji gdy potrzebujemy jedynie kilku z nich. W odcinku 7 pokazaliśmy jak wybierać kolumny spełniające określone kryterium, używając operatora <code>[</code>.</p>
+<p>W codziennej pracy aby wybrać kolumny z całego zbioru danych, i wygodniej, i szybciej jest wykorzystać dedykowaną funkcję <code>select()</code> z pakietu <code>dplyr</code>.</p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
-<li>Jak ze zbioru danych wybierać tylko interesujące nas wiersze</li>
+<li>jak ze zbioru danych wybierać tylko interesujące nas kolumny?</li>
+<li>jak ze zbioru danych wybierać kolumny wszystkie poza wskazanych?</li>
 </ul>
-<p>Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to <code>koty_ptaki</code> a drugi, znacznie większy to <code>auta2012</code>.</p>
+<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>SmarterPoland</code>.</p>
 </div>
-<div id="wybor-zmiennych" class="slide section level1">
-<h1>Wybór zmiennych</h1>
-<p>Zbiór <code>koty_ptaki</code> na niewiele kolumn, mozna je wszystkie wyświetlić na konsoli. Czasem jednak nadmiarowe zmienne jedynie utrudniają skupienie się na tym co ważne. Aby zmienić kolejnośc kolumn lub wybrać jedynie podzbiór interesujących kolumn wykorzystać możemy funkcję <code>select()</code>.</p>
+<div id="wybor-zmiennych-przez-wskazanie" class="slide section level1">
+<h1>Wybór zmiennych przez wskazanie</h1>
+<p>Zbiór <code>koty_ptaki</code> na niewiele kolumn, mozna je wszystkie wyświetlić na konsoli. Czasem jednak nadmiarowe zmienne jedynie utrudniają skupienie się na tym co ważne.</p>
+<p>Aby zmienić kolejnośc kolumn lub wybrać jedynie podzbiór interesujących kolumn wykorzystać możemy funkcję <code>select()</code>.</p>
+<p>W przykładzie poniżej wyświetlimy nazwy kolumn w zbioze danych <code>koty_ptaki</code>. A następnie wybierzemy trzy z tych kolumn w kolejnosci <code>gatunek, predkosc, waga</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
-koty_ptaki %&gt;%
+<span class="kw">library</span>(dplyr)
+<span class="kw">colnames</span>(koty_ptaki)</code></pre>
+<pre><code>## [1] &quot;gatunek&quot;   &quot;waga&quot;      &quot;dlugosc&quot;   &quot;predkosc&quot;  &quot;habitat&quot;   &quot;zywotnosc&quot;
+## [7] &quot;druzyna&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki %&gt;%
 <span class="st">  </span><span class="kw">select</span>(gatunek, predkosc, waga)</code></pre>
 <pre><code>##           gatunek predkosc   waga
 ## 1          Tygrys       60 300.00
@@ -79,11 +88,36 @@ koty_ptaki %&gt;%
 ## 12 Sokol norweski      100   2.00
 ## 13       Albatros      120   4.00</code></pre>
 </div>
-<div id="wybor-zmiennych-1" class="slide section level1">
-<h1>Wybór zmiennych</h1>
-<p>Duże zbiory danych potrafią mieć tysiące zmiennych. Często jednak pracujemy tylko na kilku z nich, a pozostałe głównie nam przeszkadzają.</p>
-<p>Funkcja <code>select()</code> pozwala w prosty sposób wybrać kilka potrzebnych zmiennych z dużego zbioru danych. Pierwszym argumentem jest ramka danych, a kolejne to zmienne, które chcemy pozostawić.</p>
-<p>Zmienne, które chcemy pozostawić można wskazywać na kilka sposobów. Przećwiczmy je na zbiorze <code>auta2012</code>. W tym zbiorze dostępne są następujące dane.</p>
+<div id="wybor-zmiennych-uzywajac-operatora-lub--" class="slide section level1">
+<h1>Wybór zmiennych używając operatora : lub -</h1>
+<p>Jeżeli kolumn w zbiorze danych jest wiele to wymienienie ich nazw jedna po drugiej może być niewygodne. W tym przypadku wato wykrozystać operator <code>:</code>, który pozwala na wybó kolumn od wskazanej do wskazanej.</p>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki %&gt;%
+<span class="st">  </span><span class="kw">select</span>(gatunek:dlugosc, druzyna) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>()</code></pre>
+<pre><code>##   gatunek waga dlugosc druzyna
+## 1  Tygrys  300     2.5     Kot
+## 2     Lew  200     2.0     Kot
+## 3  Jaguar  100     1.7     Kot
+## 4    Puma   80     1.7     Kot
+## 5 Leopard   70     1.4     Kot
+## 6  Gepard   60     1.4     Kot</code></pre>
+<p>W funkcji <code>select()</code> można wykorzystac operator <code>-</code> aby wybrać z ramki danych wszystkie kolumny poza wskazanymi.</p>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki %&gt;%
+<span class="st">  </span><span class="kw">select</span>(-habitat, -waga, -druzyna) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>()</code></pre>
+<pre><code>##   gatunek dlugosc predkosc zywotnosc
+## 1  Tygrys     2.5       60        25
+## 2     Lew     2.0       80        29
+## 3  Jaguar     1.7       90        15
+## 4    Puma     1.7       70        13
+## 5 Leopard     1.4       85        21
+## 6  Gepard     1.4      115        12</code></pre>
+</div>
+<div id="auta" class="slide section level1">
+<h1>Auta</h1>
+<p>Operacje filtrowania przećwiczymy też na znacznie większym zbiorze danych, który już nie sposób w całości wyświetlić na ekranie. Mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.</p>
+<p>Zbiór danych <code>auta2012</code> jest dostępny po wczytaniu pakietu <code>SmarterPoland</code>. Poniżej przedstawiamy listę nazw kolumn z tego zbioru danych, więcej informacji o tym zbiorze danych znaleźć można na stronie <a href="https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html" class="uri">https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
+<p>W tym zbiorze dostępne są następujące dane.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(auta2012)</code></pre>
 <pre><code>##  [1] &quot;Cena&quot;                         &quot;Waluta&quot;                      
 ##  [3] &quot;Cena.w.PLN&quot;                   &quot;Brutto.netto&quot;                
@@ -96,9 +130,10 @@ koty_ptaki %&gt;%
 ## [17] &quot;Kraj.pochodzenia&quot;             &quot;Pojazd.uszkodzony&quot;           
 ## [19] &quot;Skrzynia.biegow&quot;              &quot;Status.pojazdu.sprowadzonego&quot;
 ## [21] &quot;Wyposazenie.dodatkowe&quot;</code></pre>
+<p>Funkcja <code>select()</code> pozwala w prosty sposób wybrać kilka potrzebnych zmiennych z dużego zbioru danych. Pierwszym argumentem jest ramka danych, a kolejne to zmienne, które chcemy pozostawić.</p>
 </div>
-<div class="slide section level1">
-
+<div id="wybor-zmiennych-przez-wskazanie-1" class="slide section level1">
+<h1>Wybór zmiennych przez wskazanie</h1>
 <p>Przypuśćmy, że chcemy wybrać tylko Cenę, Markę, Model, Wersję i Przebieg.w.km. Wystarczy te zmienne wymienić jako argumenty funkcji select.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
 <span class="st">    </span><span class="kw">select</span>(Cena.w.PLN, Marka, Model, Wersja, Przebieg.w.km) %&gt;%
@@ -111,11 +146,12 @@ koty_ptaki %&gt;%
 ## 5      55900 Mercedes-Benz  Sprinter               169400
 ## 6      45900 Mercedes-Benz     Viano               141100</code></pre>
 </div>
-<div class="slide section level1">
-
-<p>Jeżeli chcemy usunąć kilka kolumn, można co tego wykorzystać operator -. A robi się to tak. Usuwamy 9 wskazanych kolumn.</p>
+<div id="wybor-zmiennych-przez-usuniecie" class="slide section level1">
+<h1>Wybór zmiennych przez usunięcie</h1>
+<p>Jeżeli chcemy usunąć kilka kolumn, można co tego wykorzystać operator <code>-</code>.</p>
+<p>Na poniższym przykłądzie usuwamy 9 wskazanych kolumn.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
-<span class="st">  </span><span class="kw">select</span>(-Cena, -Waluta, -Brutto.netto, 
+<span class="st">  </span><span class="kw">select</span>(-Cena, -Waluta, -Brutto.netto, -Rodzaj.paliwa,
          -Kraj.aktualnej.rejestracji, -Kraj.pochodzenia,
          -Pojazd.uszkodzony, -Skrzynia.biegow,
          -Status.pojazdu.sprowadzonego, -Wyposazenie.dodatkowe) %&gt;%
@@ -127,24 +163,18 @@ koty_ptaki %&gt;%
 ## 4      25900 163 120         Volvo       S80                 4/5
 ## 5      55900  NA  NA Mercedes-Benz  Sprinter                 4/5
 ## 6      45900 150 110 Mercedes-Benz     Viano                 4/5
-##   Pojemnosc.skokowa Przebieg.w.km          Rodzaj.paliwa Rok.produkcji
-## 1              1991         41000 olej napedowy (diesel)          2008
-## 2              2179         46500 olej napedowy (diesel)          2008
-## 3              1996          8000 olej napedowy (diesel)          2009
-## 4              2400        200000 olej napedowy (diesel)          2003
-## 5              2200        169400 olej napedowy (diesel)          2007
-## 6              2200        141100 olej napedowy (diesel)          2004
-##              Kolor
-## 1                 
-## 2                 
-## 3                 
-## 4 srebrny-metallic
-## 5            bialy
-## 6 bordowy-metallic</code></pre>
+##   Pojemnosc.skokowa Przebieg.w.km Rok.produkcji            Kolor
+## 1              1991         41000          2008                 
+## 2              2179         46500          2008                 
+## 3              1996          8000          2009                 
+## 4              2400        200000          2003 srebrny-metallic
+## 5              2200        169400          2007            bialy
+## 6              2200        141100          2004 bordowy-metallic</code></pre>
 </div>
-<div class="slide section level1">
-
-<p>Można również wybierać kolumny, których nazwy pasują do pewnego wzorca. Przykład poniżej wybiera wszystkie nazwy kolumn, które w nazwie mają wzorzec <code>aj</code>.</p>
+<div id="wybor-zmiennych-przez-wzorzec" class="slide section level1">
+<h1>Wybór zmiennych przez wzorzec</h1>
+<p>Wybierając kolumny, można również wskazywać te, których nazwy pasują do zadanego wzorca.</p>
+<p>Przykład poniżej wykorzystujemy funckję <code>martches()</code> aby wybrać wszystkie nazwy kolumn, które w nazwie mają wzorzec <code>aj</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
 <span class="st">  </span><span class="kw">select</span>(<span class="kw">matches</span>(<span class="st">&quot;aj&quot;</span>)) %&gt;%
 <span class="st">  </span><span class="kw">head</span>()</code></pre>
@@ -159,7 +189,8 @@ koty_ptaki %&gt;%
 <div id="zadania" class="slide section level1">
 <h1>Zadania</h1>
 <ul>
-<li>Wybierz tylko samochody marki Volvo, posortuj je po pojemności skokowej, a następnie wyświetl tylko trzy kolumny: Markę, Cenę.w.PLN i Kolor.</li>
+<li><p>Wybierz tylko samochody marki Volvo, posortuj je po pojemności skokowej, a następnie wyświetl tylko trzy kolumny: Markę, Cenę.w.PLN i Kolor.</p></li>
+<li><p>Wybierz tylko kolumny, których nazwa kończy się na <code>a</code>.</p></li>
 </ul>
 </div>
 
