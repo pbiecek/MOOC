@@ -145,6 +145,27 @@ autaZWiekiemIBrutto %>%
   head()
 ```
 
+
+# Klimatyczacja i nie tylko
+
+W jednym wykonaniu funkcji `mutate()` można podać kilka transformacji. 
+
+Na poniższym przykładzie w jednym krkoku wykonujemy obie powyżej przedstawione transformacje.
+
+```{r, warning=FALSE}
+autaZWiekiemIBrutto <- auta2012 %>%
+  mutate(Wiek.auta = 2013 - Rok.produkcji,
+         Cena.brutto = Cena.w.PLN * ifelse(Brutto.netto == "brutto", 1, 1.23))
+```
+
+Wyświetlmy wybrane kolumny.
+
+```{r, warning=FALSE}
+autaZWiekiemIBrutto %>% 
+  select(Cena.brutto, Brutto.netto, Cena.w.PLN, Wiek.auta, Rok.produkcji) %>%
+  head()
+```
+
 ---
 
 # Zadania
