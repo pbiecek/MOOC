@@ -550,5 +550,49 @@ head(tmp,20)
 # najtańsze Rolls-Royce
 RR <- filter(auta2012, Marka == 'Rolls-Royce')
 arrange(RR, Cena.w.PLN)
-
 ```
+
+
+# Zadania, sezon 1, odcinek 19
+
+* Użyj operatora `%>%` by ze zbioru danych `auta2012` wybrać tylko 10 najtańszych aut marki Rolls-Royce.
+* Użyj operatora `%>%` by ze zbioru danych `auta2012` wybrać 5 Volkswagenów o największych silnikach.
+ 
+# Odpowiedzi, sezon 1, odcinek 19
+
+```{r, eval=FALSE}
+# auta z największymi silnikami (deklarowanymi)
+tmp <- arrange(auta2012, -KM)
+head(tmp,20)
+
+# najtańsze Rolls-Royce
+RR <- filter(auta2012, Marka == 'Rolls-Royce')
+arrange(RR, Cena.w.PLN)
+```
+
+
+---
+
+# Zadania, sezon 1, odcinek 20
+
+* Wybierz tylko samochody marki Volvo, posortuj je po pojemności skokowej, a następnie wyświetl tylko trzy kolumny: Markę, Cenę.w.PLN i Kolor.
+
+* Wybierz tylko te kolumny, których nazwa kończy się na `a`.
+
+
+# Odpowiedzi, sezon 1, odcinek 20
+
+```{r, eval=FALSE}
+# wybrae
+auta2012 %>% filter(Marka == 'Volvo') %>%
+  arrange(Pojemnosc.skokowa) %>%
+  select(Marka, Cena.w.PLN, Kolor) 
+
+# kolumny o nazwie zakończonej na a
+auta2012 %>% select(matches("a$"))
+```
+
+
+
+
+

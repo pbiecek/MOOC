@@ -490,6 +490,40 @@ tmp &lt;-<span class="st"> </span><span class="kw">arrange</span>(auta2012, -KM)
 RR &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012, Marka ==<span class="st"> 'Rolls-Royce'</span>)
 <span class="kw">arrange</span>(RR, Cena.w.PLN)</code></pre>
 </div>
+<div id="zadania-sezon-1-odcinek-19" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 19</h1>
+<ul>
+<li>Użyj operatora <code>%&gt;%</code> by ze zbioru danych <code>auta2012</code> wybrać tylko 10 najtańszych aut marki Rolls-Royce.</li>
+<li>Użyj operatora <code>%&gt;%</code> by ze zbioru danych <code>auta2012</code> wybrać 5 Volkswagenów o największych silnikach.</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-19" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 19</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># auta z największymi silnikami (deklarowanymi)</span>
+tmp &lt;-<span class="st"> </span><span class="kw">arrange</span>(auta2012, -KM)
+<span class="kw">head</span>(tmp,<span class="dv">20</span>)
+
+<span class="co"># najtańsze Rolls-Royce</span>
+RR &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012, Marka ==<span class="st"> 'Rolls-Royce'</span>)
+<span class="kw">arrange</span>(RR, Cena.w.PLN)</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-20" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 20</h1>
+<ul>
+<li><p>Wybierz tylko samochody marki Volvo, posortuj je po pojemności skokowej, a następnie wyświetl tylko trzy kolumny: Markę, Cenę.w.PLN i Kolor.</p></li>
+<li><p>Wybierz tylko te kolumny, których nazwa kończy się na <code>a</code>.</p></li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-20" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 20</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># wybrae</span>
+auta2012 %&gt;%<span class="st"> </span><span class="kw">filter</span>(Marka ==<span class="st"> 'Volvo'</span>) %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(Pojemnosc.skokowa) %&gt;%
+<span class="st">  </span><span class="kw">select</span>(Marka, Cena.w.PLN, Kolor) 
+
+<span class="co"># kolumny o nazwie zakończonej na a</span>
+auta2012 %&gt;%<span class="st"> </span><span class="kw">select</span>(<span class="kw">matches</span>(<span class="st">&quot;a$&quot;</span>))</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>
