@@ -16,9 +16,9 @@ output:
 # O czym jest ten odcinek
 
 Bardzo często na podstawie istniejących danych tworzymy nowe.
-Mając prędkosć w metrach na sekundę liczymy prędkość w kilometrach na godzinę. Mając wagę i wzrost liczymy BMI. Mając odległość w milach liczymy odległość w kilometrach i tak dalej.
+Mając prędkość w metrach na sekundę liczymy prędkość w kilometrach na godzinę. Mając wagę i wzrost liczymy BMI. Mając odległość w milach liczymy odległość w kilometrach i tak dalej.
 
-W programie R na różne sposoby można dodać nową zmienną do zbioru danych. Z tych wszystkich sposobów wygodnym i szybkim jest z wykrozystaniem funkcji `mutate()` z pakietu `dplyr`.
+W programie R na różne sposoby można dodać nową zmienną do zbioru danych. Z tych wszystkich sposobów wygodnym i szybkim jest z wykorzystaniem funkcji `mutate()` z pakietu `dplyr`.
 
 W tym odcinku nauczymy się
 
@@ -43,7 +43,7 @@ koty_ptaki
 
 W zbiorze danych `koty_ptaki` jest zmienna `predkosc` opisująca prędkość w kilometrach na godzinę.
 
-Dodajmy dwie nowe zmienne, w jednej przeliczmy prędkość z kilometrów na godzinę na mile na godzine, w drugiej przeliczymy prędkość na liczbę długości na sekundę (długość zwierząt jest w metrach). Nową zmienną można dodać funkcją `mutate()`. Pierwszym argumentem jest ramka danych a kolejne to deklaracje nowych zmiennych w postaci `nazwa.zmiennej = sposóļ.wyznaczenia`. 
+Dodajmy dwie nowe zmienne, w jednej przeliczmy prędkość z kilometrów na godzinę na mile na godzinne, w drugiej przeliczymy prędkość na liczbę długości na sekundę (długość zwierząt jest w metrach). Nową zmienną można dodać funkcją `mutate()`. Pierwszym argumentem jest ramka danych a kolejne to deklaracje nowych zmiennych w postaci `nazwa.zmiennej = wzór.na.nową.zmiennę `. 
 
 W używaniu przetwarzaniu danych wykorzystamy operator `%>%` omówiony w 20 odcinku. 
 
@@ -58,11 +58,11 @@ koty_ptaki %>%
 
 # Nadpisywanie zmiennych
 
-Funkcję `mutate()` można też wykorzystać do zmieny wartości w zmiennej, już obecnej w zbiorze danych. 
+Funkcję `mutate()` można też wykorzystać do zmiany wartości w zmiennej, już obecnej w zbiorze danych. 
 
 W tym celu wystarczy, że nową wartość przypiszemy do nazwy istniejącej kolumny.
 
-W przykłądzie poniżęj przeliczamy długość na cale i zaokrąglamy wynik do całkowitych liczb.
+W przykładzie poniżej przeliczamy długość na cale i zaokrąglamy wynik do całkowitych liczb.
 
 ```{r, message=FALSE, warning=FALSE}
 library(dplyr)
@@ -74,7 +74,7 @@ koty_ptaki %>%
 
 # Auta
 
-Operacje tworzenia nowych zmiennych przećwiczymy też na znacznie większym i złożonym zbiorze danyc. Mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.
+Operacje tworzenia nowych zmiennych przećwiczymy też na znacznie większym i złożonym zbiorze danych. Mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.
 
 Zbiór danych `auta2012` jest dostępny po wczytaniu pakietu `SmarterPoland`. Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html
 
@@ -105,7 +105,7 @@ autaZWiekiem %>%
 
 # Wyliczanie nowych zmiennych
 
-Zauważmy też, że część cen jest netto a częśc brutto. Przeliczmy wszystkie ceny na brutto dodając 23\% tam gdzie podana jest cena netto.
+Zauważmy też, że część cen jest netto a część brutto. Przeliczmy wszystkie ceny na brutto dodając 23\% tam gdzie podana jest cena netto.
 
 Wykorzystamy w tym celu funkcję `ifelse()`, która jako wynik zwraca drugi lub trzeci argument w zależności od tego czy pierwszy argument jest prawdziwy czy nie.
 
@@ -129,7 +129,7 @@ autaZCenaBrutto %>%
 
 W jednym wykonaniu funkcji `mutate()` można podać kilka transformacji. 
 
-Na poniższym przykładzie w jednym krkoku wykonujemy obie powyżej przedstawione transformacje.
+Na poniższym przykładzie w jednym kroku wykonujemy obie powyżej przedstawione transformacje.
 
 ```{r, warning=FALSE}
 autaZWiekiemIBrutto <- auta2012 %>%
@@ -173,5 +173,6 @@ autaZWyposazeniem %>%
 
 * Dla zbioru danych `koty_ptaki` dodajmy nową zmienną. Z fizyki wiemy, że pęd to prędkość razy masa. Policz maksymalne pędy dla każdego gatunku oraz uporządkuj wiersze w kolejności od tych zdolnych do uzyskiwania najwyższego pędu.
 * Policz średni przebieg na rok, dzieląc przebieg przez wieka auta.
-* Poza koniem mechanicznym inną ciekawą jednostką mocy jest koń parowy (jednostka HP). Jeden koń mechanicnzy to 0.9863 konia parowego. Utwórz nową zmienną, która przedstawi moc aut w koniach parowych (btw: Wikipedia zna jeszcze kilka innych ciekawych jednostek mocy).
+* Poza koniem mechanicznym inną ciekawą jednostką mocy jest koń parowy (jednostka HP). Jeden koń mechaniczny to 0.9863 konia parowego. Utwórz nową zmienną, która przedstawi moc aut w koniach parowych (btw: Wikipedia zna jeszcze kilka innych ciekawych jednostek mocy).
+
 

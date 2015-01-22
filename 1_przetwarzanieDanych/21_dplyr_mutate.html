@@ -52,8 +52,8 @@ pogRomcy danych
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
-<p>Bardzo często na podstawie istniejących danych tworzymy nowe. Mając prędkosć w metrach na sekundę liczymy prędkość w kilometrach na godzinę. Mając wagę i wzrost liczymy BMI. Mając odległość w milach liczymy odległość w kilometrach i tak dalej.</p>
-<p>W programie R na różne sposoby można dodać nową zmienną do zbioru danych. Z tych wszystkich sposobów wygodnym i szybkim jest z wykrozystaniem funkcji <code>mutate()</code> z pakietu <code>dplyr</code>.</p>
+<p>Bardzo często na podstawie istniejących danych tworzymy nowe. Mając prędkość w metrach na sekundę liczymy prędkość w kilometrach na godzinę. Mając wagę i wzrost liczymy BMI. Mając odległość w milach liczymy odległość w kilometrach i tak dalej.</p>
+<p>W programie R na różne sposoby można dodać nową zmienną do zbioru danych. Z tych wszystkich sposobów wygodnym i szybkim jest z wykorzystaniem funkcji <code>mutate()</code> z pakietu <code>dplyr</code>.</p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
 <li>jak do zbioru danych dodać nową kolumnę?</li>
@@ -83,9 +83,8 @@ koty_ptaki</code></pre>
 </div>
 <div id="wyliczanie-nowych-zmiennych" class="slide section level1">
 <h1>Wyliczanie nowych zmiennych</h1>
-<p>Nie zawsze w zbiorze danych są dokładnie te zmienne, których potrzebujemy. Czasem musimy je policzyć, służy do tego funkcja o wdzięcznej nazwie <code>mutate()</code>.</p>
 <p>W zbiorze danych <code>koty_ptaki</code> jest zmienna <code>predkosc</code> opisująca prędkość w kilometrach na godzinę.</p>
-<p>Dodajmy dwie nowe zmienne, w jednej przeliczmy prędkość z kilometrów na godzinę na mile na godzine, w drugiej przeliczymy prędkość na liczbę długości na sekundę (długość zwierząt jest w metrach).</p>
+<p>Dodajmy dwie nowe zmienne, w jednej przeliczmy prędkość z kilometrów na godzinę na mile na godzinne, w drugiej przeliczymy prędkość na liczbę długości na sekundę (długość zwierząt jest w metrach). Nową zmienną można dodać funkcją <code>mutate()</code>. Pierwszym argumentem jest ramka danych a kolejne to deklaracje nowych zmiennych w postaci <code>nazwa.zmiennej = wzór.na.nową.zmiennę</code>.</p>
 <p>W używaniu przetwarzaniu danych wykorzystamy operator <code>%&gt;%</code> omówiony w 20 odcinku.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 koty_ptaki %&gt;%
@@ -120,18 +119,84 @@ koty_ptaki %&gt;%
 ## 12          161            39.7
 ## 13          193            41.7</code></pre>
 </div>
-<div id="zadanie" class="slide section level1">
-<h1>Zadanie</h1>
-<ul>
-<li>Z fizyki wiemy, że pęd to prędkość razy masa. Policz maksymalne pędy dla każdego gatunku oraz uporządkuj wierszy w kolejności od tych zdolnych do uzyskiwania najwyższego pędu.</li>
-</ul>
+<div id="nadpisywanie-zmiennych" class="slide section level1">
+<h1>Nadpisywanie zmiennych</h1>
+<p>Funkcję <code>mutate()</code> można też wykorzystać do zmiany wartości w zmiennej, już obecnej w zbiorze danych.</p>
+<p>W tym celu wystarczy, że nową wartość przypiszemy do nazwy istniejącej kolumny.</p>
+<p>W przykładzie poniżej przeliczamy długość na cale i zaokrąglamy wynik do całkowitych liczb.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+koty_ptaki %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dlugosc =</span> <span class="kw">round</span>(dlugosc *<span class="st"> </span><span class="dv">100</span> /<span class="st"> </span><span class="fl">2.54</span>))</code></pre>
+<pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
+## 1          Tygrys 300.00      98       60     Azja        25     Kot
+## 2             Lew 200.00      79       80   Afryka        29     Kot
+## 3          Jaguar 100.00      67       90  Ameryka        15     Kot
+## 4            Puma  80.00      67       70  Ameryka        13     Kot
+## 5         Leopard  70.00      55       85     Azja        21     Kot
+## 6          Gepard  60.00      55      115   Afryka        12     Kot
+## 7           Irbis  50.00      51       65     Azja        18     Kot
+## 8          Jerzyk   0.05       8      170 Euroazja        20    Ptak
+## 9           Strus 150.00      98       70   Afryka        45    Ptak
+## 10  Orzel przedni   5.00      35      160   Polnoc        20    Ptak
+## 11 Sokol wedrowny   0.70      20      110   Polnoc        15    Ptak
+## 12 Sokol norweski   2.00      28      100   Polnoc        20    Ptak
+## 13       Albatros   4.00      31      120 Poludnie        50    Ptak</code></pre>
 </div>
-<div id="wyliczanie-nowych-zmiennych-1" class="slide section level1">
-<h1>Wyliczanie nowych zmiennych</h1>
+<div id="auta" class="slide section level1">
+<h1>Auta</h1>
+<p>Operacje tworzenia nowych zmiennych przećwiczymy też na znacznie większym i złożonym zbiorze danych. Mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.</p>
+<p>Zbiór danych <code>auta2012</code> jest dostępny po wczytaniu pakietu <code>SmarterPoland</code>. Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie <a href="https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html" class="uri">https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(auta2012)</code></pre>
+<pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW         Marka     Model
+## 1 49900    PLN      49900       brutto 140 103           Kia    Carens
+## 2 88000    PLN      88000       brutto 156 115    Mitsubishi Outlander
+## 3 86000    PLN      86000       brutto 150 110     Chevrolet   Captiva
+## 4 25900    PLN      25900       brutto 163 120         Volvo       S80
+## 5 55900    PLN      55900        netto  NA  NA Mercedes-Benz  Sprinter
+## 6 45900    PLN      45900        netto 150 110 Mercedes-Benz     Viano
+##   Wersja Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km
+## 1                 4/5              1991         41000
+## 2                 4/5              2179         46500
+## 3                 4/5              1996          8000
+## 4                 4/5              2400        200000
+## 5                 4/5              2200        169400
+## 6                 4/5              2200        141100
+##            Rodzaj.paliwa Rok.produkcji            Kolor
+## 1 olej napedowy (diesel)          2008                 
+## 2 olej napedowy (diesel)          2008                 
+## 3 olej napedowy (diesel)          2009                 
+## 4 olej napedowy (diesel)          2003 srebrny-metallic
+## 5 olej napedowy (diesel)          2007            bialy
+## 6 olej napedowy (diesel)          2004 bordowy-metallic
+##   Kraj.aktualnej.rejestracji Kraj.pochodzenia Pojazd.uszkodzony
+## 1                     Polska                                   
+## 2                     Polska                                   
+## 3                     Polska                                   
+## 4                     Polska           Wlochy                  
+## 5                                                              
+## 6                                                              
+##   Skrzynia.biegow Status.pojazdu.sprowadzonego
+## 1        manualna                             
+## 2        manualna                             
+## 3        manualna                             
+## 4        manualna sprowadzony / zarejestrowany
+## 5        manualna                             
+## 6        manualna                             
+##                                                                                                                                                                                                                                             Wyposazenie.dodatkowe
+## 1                                                                                      ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
+## 2                                                              ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
+## 3                                                   ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
+## 4 ABS, hak, el. szyby, el. lusterka, klimatyzacja, alufelgi, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, welurowa tapicerka, tempomat, ESP, lwiatla przeciwmglowe, kierownica wielofunkcyjna
+## 5                                                                                                                                                                                                  ABS, ASR, centralny zamek, wspomaganie kierownicy, immobiliser
+## 6                                                                                                      ABS, el. szyby, el. lusterka, klimatyzacja, ASR, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, welurowa tapicerka</code></pre>
+</div>
+<div id="wyliczanie-jednej-nowej-zmiennej" class="slide section level1">
+<h1>Wyliczanie jednej nowej zmiennej</h1>
 <p>Policzmy najpierw wiek auta. Dane były zbierane w roku 2012, więc wiek auta to różnica pomiędzy rokiem produkcji, rokiem 2012 plus 1.</p>
 <pre class="sourceCode r"><code class="sourceCode r">autaZWiekiem &lt;-<span class="st"> </span>auta2012 %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Wiek.auta =</span> <span class="dv">2013</span> -<span class="st"> </span>Rok.produkcji)
-autaZWiekiem %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Wiek.auta =</span> <span class="dv">2013</span> -<span class="st"> </span>Rok.produkcji)</code></pre>
+<p>Następnie wyświetlimy pierwsze 6 wierszy i dwie kolumny (wiek i rok produkcji).</p>
+<pre class="sourceCode r"><code class="sourceCode r">autaZWiekiem %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(Wiek.auta, Rok.produkcji) %&gt;%
 <span class="st">  </span><span class="kw">head</span>()</code></pre>
 <pre><code>##   Wiek.auta Rok.produkcji
@@ -142,12 +207,14 @@ autaZWiekiem %&gt;%<span class="st"> </span>
 ## 5         6          2007
 ## 6         9          2004</code></pre>
 </div>
-<div id="wyliczanie-nowych-zmiennych-2" class="slide section level1">
+<div id="wyliczanie-nowych-zmiennych-1" class="slide section level1">
 <h1>Wyliczanie nowych zmiennych</h1>
-<p>Drugą użyteczną zmienną to cena brutto. Teraz część aut ma cenę brutto a część netto. To utrudnia porównania. Przeliczmy wszystkie ceny na brutto dodając 23% tam gdzie podana jest cena netto.</p>
+<p>Zauważmy też, że część cen jest netto a część brutto. Przeliczmy wszystkie ceny na brutto dodając 23% tam gdzie podana jest cena netto.</p>
+<p>Wykorzystamy w tym celu funkcję <code>ifelse()</code>, która jako wynik zwraca drugi lub trzeci argument w zależności od tego czy pierwszy argument jest prawdziwy czy nie.</p>
 <pre class="sourceCode r"><code class="sourceCode r">autaZCenaBrutto &lt;-<span class="st"> </span>auta2012 %&gt;%
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Cena.brutto =</span> Cena.w.PLN *<span class="st"> </span><span class="kw">ifelse</span>(Brutto.netto ==<span class="st"> &quot;brutto&quot;</span>, <span class="dv">1</span>, <span class="fl">1.23</span>))
-autaZCenaBrutto %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Cena.brutto =</span> Cena.w.PLN *<span class="st"> </span><span class="kw">ifelse</span>(Brutto.netto ==<span class="st"> &quot;brutto&quot;</span>, <span class="dv">1</span>, <span class="fl">1.23</span>))</code></pre>
+<p>Wyświetlmy pierwsze sześć wierszy i wybrane trzy kolumny.</p>
+<pre class="sourceCode r"><code class="sourceCode r">autaZCenaBrutto %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(Cena.brutto, Brutto.netto, Cena.w.PLN) %&gt;%
 <span class="st">  </span><span class="kw">head</span>()</code></pre>
 <pre><code>##   Cena.brutto Brutto.netto Cena.w.PLN
@@ -157,16 +224,16 @@ autaZCenaBrutto %&gt;%<span class="st"> </span>
 ## 4       25900       brutto      25900
 ## 5       68757        netto      55900
 ## 6       56457        netto      45900</code></pre>
-<p>Funkcja <code>ifelse()</code> jako wynik zwraca drugi lub trzegi argument w zależności od tego czy pierwszy argument jest prawdziwy czy nie.</p>
 </div>
-<div id="wyliczanie-nowych-zmiennych-3" class="slide section level1">
+<div id="wyliczanie-nowych-zmiennych-2" class="slide section level1">
 <h1>Wyliczanie nowych zmiennych</h1>
 <p>W jednym wykonaniu funkcji <code>mutate()</code> można podać kilka transformacji.</p>
+<p>Na poniższym przykładzie w jednym kroku wykonujemy obie powyżej przedstawione transformacje.</p>
 <pre class="sourceCode r"><code class="sourceCode r">autaZWiekiemIBrutto &lt;-<span class="st"> </span>auta2012 %&gt;%
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Wiek.auta =</span> <span class="dv">2013</span> -<span class="st"> </span>Rok.produkcji,
-         <span class="dt">Cena.brutto =</span> Cena.w.PLN *<span class="st"> </span><span class="kw">ifelse</span>(Brutto.netto ==<span class="st"> &quot;brutto&quot;</span>, <span class="dv">1</span>, <span class="fl">1.23</span>))
-
-autaZWiekiemIBrutto %&gt;%<span class="st"> </span>
+         <span class="dt">Cena.brutto =</span> Cena.w.PLN *<span class="st"> </span><span class="kw">ifelse</span>(Brutto.netto ==<span class="st"> &quot;brutto&quot;</span>, <span class="dv">1</span>, <span class="fl">1.23</span>))</code></pre>
+<p>Wyświetlmy wybrane kolumny.</p>
+<pre class="sourceCode r"><code class="sourceCode r">autaZWiekiemIBrutto %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(Cena.brutto, Brutto.netto, Cena.w.PLN, Wiek.auta, Rok.produkcji) %&gt;%
 <span class="st">  </span><span class="kw">head</span>()</code></pre>
 <pre><code>##   Cena.brutto Brutto.netto Cena.w.PLN Wiek.auta Rok.produkcji
@@ -177,11 +244,32 @@ autaZWiekiemIBrutto %&gt;%<span class="st"> </span>
 ## 5       68757        netto      55900         6          2007
 ## 6       56457        netto      45900         9          2004</code></pre>
 </div>
+<div id="klimatyzacja-i-nie-tylko" class="slide section level1">
+<h1>Klimatyzacja i nie tylko</h1>
+<p>Wykorzystajmy funkcję <code>mutate()</code> aby dodać kolumny określające czy dane auto ma klimatyzację, centralny zamek czy autoalarm.</p>
+<p>Aby sprawdzić czy w kolumnie <code>Wyposazenie.dodatkowe</code> występuje określony element użyjemy funkcji <code>grepl()</code></p>
+<pre class="sourceCode r"><code class="sourceCode r">autaZWyposazeniem &lt;-<span class="st"> </span>auta2012 %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Autoalarm =</span> <span class="kw">grepl</span>(<span class="dt">pattern =</span> <span class="st">&quot;autoalarm&quot;</span>, Wyposazenie.dodatkowe),
+         <span class="dt">Centralny.zamek =</span> <span class="kw">grepl</span>(<span class="dt">pattern =</span> <span class="st">&quot;centralny zamek&quot;</span>, Wyposazenie.dodatkowe),
+         <span class="dt">Klimatyzacja =</span> <span class="kw">grepl</span>(<span class="dt">pattern =</span> <span class="st">&quot;klimatyzacja&quot;</span>, Wyposazenie.dodatkowe))</code></pre>
+<p>Wyświetlmy wybrane kolumny.</p>
+<pre class="sourceCode r"><code class="sourceCode r">autaZWyposazeniem %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(Autoalarm, Centralny.zamek, Klimatyzacja) %&gt;%
+<span class="st">  </span><span class="kw">head</span>()</code></pre>
+<pre><code>##   Autoalarm Centralny.zamek Klimatyzacja
+## 1      TRUE            TRUE         TRUE
+## 2     FALSE            TRUE         TRUE
+## 3      TRUE            TRUE         TRUE
+## 4      TRUE            TRUE         TRUE
+## 5     FALSE            TRUE        FALSE
+## 6     FALSE            TRUE         TRUE</code></pre>
+</div>
 <div id="zadania" class="slide section level1">
 <h1>Zadania</h1>
 <ul>
+<li>Dla zbioru danych <code>koty_ptaki</code> dodajmy nową zmienną. Z fizyki wiemy, że pęd to prędkość razy masa. Policz maksymalne pędy dla każdego gatunku oraz uporządkuj wiersze w kolejności od tych zdolnych do uzyskiwania najwyższego pędu.</li>
 <li>Policz średni przebieg na rok, dzieląc przebieg przez wieka auta.</li>
-<li>Poza koniem mechanicznym inną ciekawą jednostką mocy jest koń parowy (jednostka HP). Jeden koń mechanicnzy to 0.9863 konia parowego. Utwórz nową zmienną, która przedstawi moc aut w koniach parowych (btw: Wikipedia zna jeszcze kilka innych ciekawych jednostek mocy).</li>
+<li>Poza koniem mechanicznym inną ciekawą jednostką mocy jest koń parowy (jednostka HP). Jeden koń mechaniczny to 0.9863 konia parowego. Utwórz nową zmienną, która przedstawi moc aut w koniach parowych (btw: Wikipedia zna jeszcze kilka innych ciekawych jednostek mocy).</li>
 </ul>
 </div>
 
