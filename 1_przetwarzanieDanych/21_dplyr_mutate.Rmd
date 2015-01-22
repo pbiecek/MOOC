@@ -146,16 +146,15 @@ autaZWiekiemIBrutto %>%
 ```
 
 
-# Klimatyczacja i nie tylko
+# Klimatyzacja i nie tylko
 
-W jednym wykonaniu funkcji `mutate()` można podać kilka transformacji. 
+Wykorzystajmy funkcję `mutate()` aby dodać kolumny określające czy dane auto ma klimatyzację, centralny zamek, autoalarm.
 
-Na poniższym przykładzie w jednym krkoku wykonujemy obie powyżej przedstawione transformacje.
+
 
 ```{r, warning=FALSE}
-autaZWiekiemIBrutto <- auta2012 %>%
-  mutate(Wiek.auta = 2013 - Rok.produkcji,
-         Cena.brutto = Cena.w.PLN * ifelse(Brutto.netto == "brutto", 1, 1.23))
+autaZWyposazeniem <- auta2012 %>%
+  mutate(Autoalarm = grepl())
 ```
 
 Wyświetlmy wybrane kolumny.
