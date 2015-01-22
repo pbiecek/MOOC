@@ -583,7 +583,7 @@ arrange(RR, Cena.w.PLN)
 # Odpowiedzi, sezon 1, odcinek 20
 
 ```{r, eval=FALSE}
-# wybrae
+# wybrać
 auta2012 %>% filter(Marka == 'Volvo') %>%
   arrange(Pojemnosc.skokowa) %>%
   select(Marka, Cena.w.PLN, Kolor) 
@@ -593,6 +593,31 @@ auta2012 %>% select(matches("a$"))
 ```
 
 
+---
+
+# Zadania, sezon 1, odcinek 21
+
+* Dla zbioru danych `koty_ptaki` dodajmy nową zmienną. Z fizyki wiemy, że pęd to prędkość razy masa. Policz maksymalne pędy dla każdego gatunku oraz uporządkuj wiersze w kolejności od tych zdolnych do uzyskiwania najwyższego pędu.
+* Policz średni przebieg na rok, dzieląc przebieg przez wieka auta.
+* Poza koniem mechanicznym inną ciekawą jednostką mocy jest koń parowy (jednostka HP). Jeden koń mechaniczny to 0.9863 konia parowego. Utwórz nową zmienną, która przedstawi moc aut w koniach parowych (btw: Wikipedia zna jeszcze kilka innych ciekawych jednostek mocy).
+
+# Odpowiedzi, sezon 1, odcinek 21
+
+```{r, eval=FALSE}
+# pęd
+koty_ptaki %>% 
+  mutate(pęd = predkosc*waga) %>% 
+  arrange(-pęd)
+
+# przebieg
+auta2012 %>% 
+  mutate(Wiek = 2013 - Rok.produkcji,
+         sredni_przebieg = Przebieg.w.km / Wiek)
+
+# konie
+auta2012 %>% 
+  mutate(HP = 0.9863*KM)
+```
 
 
 

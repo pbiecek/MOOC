@@ -41,12 +41,9 @@ koty_ptaki
 
 # Wyliczanie nowych zmiennych
 
-Nie zawsze w zbiorze danych są dokładnie te zmienne, których potrzebujemy.
-Czasem musimy je policzyć, służy do tego funkcja o wdzięcznej nazwie `mutate()`.
-
 W zbiorze danych `koty_ptaki` jest zmienna `predkosc` opisująca prędkość w kilometrach na godzinę.
 
-Dodajmy dwie nowe zmienne, w jednej przeliczmy prędkość z kilometrów na godzinę na mile na godzine, w drugiej przeliczymy prędkość na liczbę długości na sekundę (długość zwierząt jest w metrach).
+Dodajmy dwie nowe zmienne, w jednej przeliczmy prędkość z kilometrów na godzinę na mile na godzine, w drugiej przeliczymy prędkość na liczbę długości na sekundę (długość zwierząt jest w metrach). Nową zmienną można dodać funkcją `mutate()`. Pierwszym argumentem jest ramka danych a kolejne to deklaracje nowych zmiennych w postaci `nazwa.zmiennej = sposóļ.wyznaczenia`. 
 
 W używaniu przetwarzaniu danych wykorzystamy operator `%>%` omówiony w 20 odcinku. 
 
@@ -59,9 +56,19 @@ koty_ptaki %>%
 
 ---
 
-# Zadanie
+# Nadpisywanie zmiennych
 
-* Z fizyki wiemy, że pęd to prędkość razy masa. Policz maksymalne pędy dla każdego gatunku oraz uporządkuj wierszy w kolejności od tych zdolnych do uzyskiwania najwyższego pędu.
+Funkcję `mutate()` można też wykorzystać do zmieny wartości w zmiennej, już obecnej w zbiorze danych. 
+
+W tym celu wystarczy, że nową wartość przypiszemy do nazwy istniejącej kolumny.
+
+W przykłądzie poniżęj przeliczamy długość na cale i zaokrąglamy wynik do całkowitych liczb.
+
+```{r, message=FALSE, warning=FALSE}
+library(dplyr)
+koty_ptaki %>%
+  mutate(dlugosc = round(dlugosc * 100 / 2.54))
+```
 
 ---
 
@@ -111,6 +118,8 @@ autaZWiekiemIBrutto %>%
 ---
 
 # Zadania
+
+* Dla zbioru danych `koty_ptaki` dodajmy nową zmienną. Z fizyki wiemy, że pęd to prędkość razy masa. Policz maksymalne pędy dla każdego gatunku oraz uporządkuj wiersze w kolejności od tych zdolnych do uzyskiwania najwyższego pędu.
 * Policz średni przebieg na rok, dzieląc przebieg przez wieka auta.
 * Poza koniem mechanicznym inną ciekawą jednostką mocy jest koń parowy (jednostka HP). Jeden koń mechanicnzy to 0.9863 konia parowego. Utwórz nową zmienną, która przedstawi moc aut w koniach parowych (btw: Wikipedia zna jeszcze kilka innych ciekawych jednostek mocy).
 

@@ -516,13 +516,37 @@ RR &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012, Marka 
 </div>
 <div id="odpowiedzi-sezon-1-odcinek-20" class="slide section level1">
 <h1>Odpowiedzi, sezon 1, odcinek 20</h1>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># wybrae</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># wybrać</span>
 auta2012 %&gt;%<span class="st"> </span><span class="kw">filter</span>(Marka ==<span class="st"> 'Volvo'</span>) %&gt;%
 <span class="st">  </span><span class="kw">arrange</span>(Pojemnosc.skokowa) %&gt;%
 <span class="st">  </span><span class="kw">select</span>(Marka, Cena.w.PLN, Kolor) 
 
 <span class="co"># kolumny o nazwie zakończonej na a</span>
 auta2012 %&gt;%<span class="st"> </span><span class="kw">select</span>(<span class="kw">matches</span>(<span class="st">&quot;a$&quot;</span>))</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-21" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 21</h1>
+<ul>
+<li>Dla zbioru danych <code>koty_ptaki</code> dodajmy nową zmienną. Z fizyki wiemy, że pęd to prędkość razy masa. Policz maksymalne pędy dla każdego gatunku oraz uporządkuj wiersze w kolejności od tych zdolnych do uzyskiwania najwyższego pędu.</li>
+<li>Policz średni przebieg na rok, dzieląc przebieg przez wieka auta.</li>
+<li>Poza koniem mechanicznym inną ciekawą jednostką mocy jest koń parowy (jednostka HP). Jeden koń mechaniczny to 0.9863 konia parowego. Utwórz nową zmienną, która przedstawi moc aut w koniach parowych (btw: Wikipedia zna jeszcze kilka innych ciekawych jednostek mocy).</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-21" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 21</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pęd</span>
+koty_ptaki %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(pę<span class="dt">d =</span> predkosc*waga) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(-pęd)
+
+<span class="co"># przebieg</span>
+auta2012 %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Wiek =</span> <span class="dv">2013</span> -<span class="st"> </span>Rok.produkcji,
+         <span class="dt">sredni_przebieg =</span> Przebieg.w.km /<span class="st"> </span>Wiek)
+
+<span class="co"># konie</span>
+auta2012 %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">HP =</span> <span class="fl">0.9863</span>*KM)</code></pre>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
