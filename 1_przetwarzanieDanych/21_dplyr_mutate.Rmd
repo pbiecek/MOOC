@@ -148,20 +148,22 @@ autaZWiekiemIBrutto %>%
 
 # Klimatyzacja i nie tylko
 
-Wykorzystajmy funkcję `mutate()` aby dodać kolumny określające czy dane auto ma klimatyzację, centralny zamek, autoalarm.
+Wykorzystajmy funkcję `mutate()` aby dodać kolumny określające czy dane auto ma klimatyzację, centralny zamek czy autoalarm.
 
-
+Aby sprawdzić czy w kolumnie `Wyposazenie.dodatkowe` występuje określony element użyjemy funkcji `grepl()`
 
 ```{r, warning=FALSE}
 autaZWyposazeniem <- auta2012 %>%
-  mutate(Autoalarm = grepl())
+  mutate(Autoalarm = grepl(pattern = "autoalarm", Wyposazenie.dodatkowe),
+         Centralny.zamek = grepl(pattern = "centralny zamek", Wyposazenie.dodatkowe),
+         Klimatyzacja = grepl(pattern = "klimatyzacja", Wyposazenie.dodatkowe))
 ```
 
 Wyświetlmy wybrane kolumny.
 
 ```{r, warning=FALSE}
-autaZWiekiemIBrutto %>% 
-  select(Cena.brutto, Brutto.netto, Cena.w.PLN, Wiek.auta, Rok.produkcji) %>%
+autaZWyposazeniem %>% 
+  select(Autoalarm, Centralny.zamek, Klimatyzacja) %>%
   head()
 ```
 
