@@ -29,6 +29,26 @@ zamaist kotów lepiej dane kidney z PBImisc
 
 # Dane do ćwiczeń
 
+```{r, warning=FALSE, message=FALSE}
+library(PBImisc)
+head(kidney)
+kidney_wybrane <- kidney %>% 
+  dplyr::select(therapy, MDRD7:MDRD60)
+
+kidney_wybrane %>%
+  head()
+
+kidney_waska <- kidney_wybrane %>% 
+  gather(time, MDRD, -therapy)
+
+kidney_waska %>% 
+  head()
+```
+
+---
+
+# Dane do ćwiczeń
+
 Pakiet `tidyr` zawiera kilka użytecznych funkcji do zmiany kształtu danych. 
 Do ilustracji tych funkcji wykorzystamy zbiór danych z eurostatu o popularności transpostu w różnych krajach.
 
