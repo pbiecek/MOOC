@@ -52,18 +52,18 @@ pogRomcy danych
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
-<p>Ogląd całych danych jest możłiwy tylko gdy dane nie są zbyt duże. Mieszczą się na jednym lub kilku ekranach. Dla większych zbiorów danych konieczne jest agregowanie informacji z poziomu pojedynczych wierszy na poziom grup.</p>
-<p>Aby efektywnie przedstawiać agregaty w grupach potrzebujemy funkcji liczącej agregaty oraz funkcji definiującej grupy. Do agregacji wygodnie wykrozystać funkcję <code>summarise()</code> z pakirtu <code>dplyr</code>, którą przedstawimy w tym odcinku.</p>
+<p>Ogląd całych danych jest możliwy tylko gdy dane nie są zbyt duże. Mieszczą się na jednym lub kilku ekranach. Dla większych zbiorów danych konieczne jest agregowanie informacji z poziomu pojedynczych wierszy na poziom grup.</p>
+<p>Aby efektywnie przedstawiać agregaty w grupach potrzebujemy funkcji liczącej agregaty oraz funkcji definiującej grupy. Do agregacji wygodnie wykorzystać funkcję <code>summarise()</code> z pakietu <code>dplyr</code>, którą przedstawimy w tym odcinku.</p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
 <li>jak dla całego zbioru danych wyznaczać agregaty?</li>
-<li>jakie przykłądowe agregaty można wyznaczać?</li>
+<li>jakie przykładowe agregaty można wyznaczać?</li>
 </ul>
 <p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>SmarterPoland</code>.</p>
 </div>
 <div id="ptaki-vs.koty" class="slide section level1">
 <h1>Ptaki vs. koty</h1>
-<p>Rozpocznijmy od przykładu dla małego zbioru danych. Widząc wszystki ewiersze łatwiej będzie nam zauważyć zależność pomiędzy oryginalnymi danymi a agregatami. Ten zbiór danych jest dostarczany razem z pakietem <code>SmarterPoland</code>.</p>
+<p>Rozpocznijmy od przykładu dla małego zbioru danych. Widząc wszystkie wiersze łatwiej będzie nam zauważyć zależność pomiędzy oryginalnymi danymi a agregatami. Ten zbiór danych jest dostarczany razem z pakietem <code>SmarterPoland</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
 koty_ptaki</code></pre>
 <pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
@@ -85,7 +85,7 @@ koty_ptaki</code></pre>
 <h1>Agregaty</h1>
 <p>Do wyznaczania agregatów / podsumowań wykorzystamy funkcję <code>sumamrise()</code>. Jako pierwszy argument przyjmuje ona zbiór danych (w poniższym przykładzie przesłany za pomocą operatora <code>%&gt;%</code>), kolejne argumenty to deklaracje jak liczony ma być agregat oraz jak ma sie nazywać odpowiadająca mu kolumna.</p>
 <p>W pierwszej linii wczytujemy potrzebny pakiet <code>dplyr</code> a następnie liczymy następujące statystyki: minimalne i maksymalne prędkości, maksymalną i średnią wagą oraz coś ciut trudniejszego, maksymalną długość nazwy gatunku.</p>
-<p>Każdą z tych wartości moglibyśmy policzyć również bez funkcji <code>summarise()</code>, zalety korzystania z niej w pełni objawią sie w kolejnym odcinku.</p>
+<p>Każdą z tych wartości moglibyśmy policzyć również bez funkcji <code>summarise()</code>, zalety korzystania z niej w pełni objawią się w kolejnym odcinku.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 
 koty_ptaki %&gt;%
@@ -99,7 +99,7 @@ koty_ptaki %&gt;%
 </div>
 <div id="agregaty-szerzej" class="slide section level1">
 <h1>Agregaty szerzej</h1>
-<p>Tworząc agregaty możemy je opierać na więcej niż jednej zmiennej. W poniższych przykładach liczymy śedni i medianowy pęd oraz maksymalną prędkość mierzoną w liczbach długości ciała na sekundę. W każdym przykładzie statystykę liczymy na dwóch zmiennych.</p>
+<p>Tworząc agregaty możemy je opierać na więcej niż jednej zmiennej. W poniższych przykładach liczymy średni i medianowy pęd oraz maksymalną prędkość mierzoną w liczbach długości ciała na sekundę. W każdym przykładzie statystykę liczymy na dwóch zmiennych.</p>
 <pre class="sourceCode r"><code class="sourceCode r">koty_ptaki %&gt;%
 <span class="st">  </span><span class="kw">summarise</span>(średni.pę<span class="dt">d =</span> <span class="kw">mean</span>(waga*predkosc),
             medianowy.pę<span class="dt">d =</span> <span class="kw">median</span>(waga*predkosc),
@@ -115,7 +115,7 @@ koty_ptaki %&gt;%
 </div>
 <div id="auta" class="slide section level1">
 <h1>Auta</h1>
-<p>Pokażmy jeszcze przykład działania agregatów na większym zbiorze danych o cenach ofertowych samochodów. Będziemy pracować na kilku kolumnach, poniżej wyświetlamy tylko markę, model cenę i przebieg.</p>
+<p>Pokażmy jeszcze przykład działania agregatów na większym zbiorze danych o cenach ofertowych samochodów. Będziemy pracować na kilku kolumnach. Poniżej wyświetlamy tylko markę, model cenę i przebieg dla pierwszych 6 wierszy ze zbioru danych <code>auta2012</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
 <span class="st">  </span><span class="kw">select</span>(Marka, Model, Cena.w.PLN, Przebieg.w.km) %&gt;%
 <span class="st">  </span><span class="kw">head</span>()</code></pre>
@@ -130,23 +130,37 @@ koty_ptaki %&gt;%
 <div id="agregaty-1" class="slide section level1">
 <h1>Agregaty</h1>
 <p>Zbiór danych <code>ceny2012</code> zawiera szczegółowe informacje o parametrach każdej oferty sprzedaży. Często z takich zbiorów danych interesują nas pewne statystyki agregujące informacje ze zbioru danych.</p>
-<p>Przykładem może być średnia cena, zmienność, czyli odchylenie standardowe ceny, połówkowy przebieg czy liczba obserwacji.</p>
+<p>Przykładem może być średnia cena, rozrzut ceny, przykładowo mierzony przez odchylenie standardowe ceny, połówkowy przebieg czy jakiego przebiegu nie przekracza połowa aut.</p>
 <p>Takie agregaty możemy wyznaczyć funkcją <code>summarise()</code>. Jako pierwszy argument podajemy zbiór danych a jako kolejne wskazujemy statystyki / agregaty, które chcemy wyznaczyć z tego zbioru danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sredniaCena =</span> <span class="kw">mean</span>(Cena.w.PLN),
             <span class="dt">sdCena =</span> <span class="kw">sqrt</span>(<span class="kw">var</span>(Cena.w.PLN)),
-            <span class="dt">medianaPrzebiegu =</span> <span class="kw">median</span>(Przebieg.w.km, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),
-            <span class="dt">liczba =</span> <span class="kw">n</span>())</code></pre>
-<pre><code>##   sredniaCena   sdCena medianaPrzebiegu liczba
-## 1    35755.11 70399.67           140000 207602</code></pre>
-<p>Funkcja <code>mean()</code> wyznacza średnią, funkcja <code>var()</code> wyznacza wariancję a pierwiasterk z waiancji jest odchyleniem standardowym, funkcja <code>median()</code> wyznacza liczbę obserwacji w grupie.</p>
-<p>Nie wszystkie wartości są podane dla wszystkich zmiennych. Jeżeli jakaś wartość nei zostałą podana, to w zbiorze danych jest ona zakodowana jako NA - (ang. Not Available) brakująca wartość.</p>
+            <span class="dt">medianaPrzebiegu =</span> <span class="kw">median</span>(Przebieg.w.km, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))</code></pre>
+<pre><code>##   sredniaCena   sdCena medianaPrzebiegu
+## 1    35755.11 70399.67           140000</code></pre>
+<p>Funkcja <code>mean()</code> wyznacza średnią, funkcja <code>var()</code> wyznacza wariancję a pierwiastek z wariancji jest odchyleniem standardowym, funkcja <code>median()</code> wyznacza liczbę obserwacji w grupie.</p>
+<p>Nie wszystkie wartości są podane dla wszystkich zmiennych. Jeżeli jakaś wartość nie została podana, to w zbiorze danych jest ona zakodowana jako NA - (ang. Not Available) brakująca wartość.</p>
 <p>Jeżeli w zmiennej są wartości brakujące, to argument <code>na.rm=TRUE</code> oznacza, że wynik ma być wyznaczony po usunięciu wartości brakujących.</p>
+</div>
+<div id="agregaty-2" class="slide section level1">
+<h1>Agregaty</h1>
+<p>Definicja agregatu może być bardziej rozbudowana niż jedna instrukcja. Przykładowo aby policzyć liczbę lub procent aut z klimatyzacją w pierwszym kroku możemy użyć funkcji <code>grepl()</code> aby sprawdzić czy auto w danej ofercie ma klimatyzację, a następnie zsumować wyniki tej funkcji by otrzymać liczbę aut z klimatyzacją.</p>
+<p>Licząc procent aut z automatyczną skrzynią biegów w pierwszym kroku możemy stworzyć zmienną logiczną określającą czy zmienna <code>Skrzynia.biegow</code> przyjmuje wartość <code>automatyczna</code> a następnie policzyć procent za pomocą operacji <code>100*mean()</code></p>
+<p>Tworząc agregaty wygodnie jest korzystać z funkcji <code>n()</code>, której wynikiem jest liczba wierszy w zbiorze danych / grupie.</p>
+<pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(liczba.aut.z.klimatyzacją =<span class="st"> </span><span class="kw">sum</span>(<span class="kw">grepl</span>(<span class="st">&quot;klimatyzacja&quot;</span>, Wyposazenie.dodatkowe)),
+            procent.aut.z.klimatyzacją =<span class="st"> </span><span class="dv">100</span>*<span class="kw">mean</span>(<span class="kw">grepl</span>(<span class="st">&quot;klimatyzacja&quot;</span>, Wyposazenie.dodatkowe)),
+            <span class="dt">procent.aut.z.automatem =</span> <span class="dv">100</span>*<span class="kw">mean</span>(Skrzynia.biegow ==<span class="st"> &quot;automatyczna&quot;</span>),
+            <span class="dt">liczba.aut =</span> <span class="kw">n</span>())</code></pre>
+<pre><code>##   liczba.aut.z.klimatyzacją procent.aut.z.klimatyzacją
+## 1                    162960                   78.49635
+##   procent.aut.z.automatem liczba.aut
+## 1                16.32354     207602</code></pre>
 </div>
 <div id="zadania" class="slide section level1">
 <h1>Zadania</h1>
 <ul>
-<li>Policz sumaryczny przebieg wszystkich samochodów</li>
+<li>Policz sumaryczny przebieg wszystkich samochodów. Następnie policz ile razy okrążono kulę ziemską uwzględniając te wszystkie przebiegi.</li>
 <li>Wybierz tylko samochody marki ‘Rolls-Royce’ i policz ich średni przebieg oraz średnią cenę.</li>
 </ul>
 </div>
