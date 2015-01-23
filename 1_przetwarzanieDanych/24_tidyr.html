@@ -48,7 +48,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 7 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 24 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
@@ -58,6 +58,7 @@ pogRomcy danych
 <li>Jak przejść z szerokiej postaci do wąskiej</li>
 </ul>
 <p>Do ilustracji wykorzystamy zbiór danych pobranych z eurostatu.</p>
+<p>[dodac koty?]</p>
 </div>
 <div id="dane-do-cwiczen" class="slide section level1">
 <h1>Dane do ćwiczeń</h1>
@@ -66,19 +67,20 @@ pogRomcy danych
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
 tsdtr210 &lt;-<span class="st"> </span><span class="kw">getEurostatRCV</span>(<span class="st">&quot;tsdtr210&quot;</span>)
 <span class="kw">head</span>(tsdtr210)</code></pre>
-<pre><code>##   vehicle geo  time value
-## 1 BUS_TOT  AT 1990     NA
-## 2 BUS_TOT  BE 1990     NA
-## 3 BUS_TOT  BG 1990     NA
-## 4 BUS_TOT  CH 1990     NA
-## 5 BUS_TOT  CY 1990     NA
-## 6 BUS_TOT  CZ 1990     NA</code></pre>
+<pre><code>##                 vehicle geo time value
+## BUS_TOT_AT_1990 BUS_TOT  AT 1990    NA
+## BUS_TOT_BE_1990 BUS_TOT  BE 1990    NA
+## BUS_TOT_BG_1990 BUS_TOT  BG 1990    NA
+## BUS_TOT_CH_1990 BUS_TOT  CH 1990    NA
+## BUS_TOT_CY_1990 BUS_TOT  CY 1990    NA
+## BUS_TOT_CZ_1990 BUS_TOT  CZ 1990    NA</code></pre>
 </div>
 <div id="z-postaci-waskiej-do-szerokiej" class="slide section level1">
 <h1>Z postaci wąskiej do szerokiej</h1>
 <p>Aby przejść z postaci wąskiej do postaci szerokie, można użyć funkcji <code>spread()</code>.</p>
 <p>Jej pierwszym argumentem jest ramka z danymi, a kolejne dwie zmienne określają kolumnę w której przechowywane są klucze i wartości. Następnie ramka danych jest konwertowana w ten sposób, że wartości drugiej kolumny wejściowego zbioru danych stają się nazwami kolumn wyjściowego zbioru danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyr)
+<span class="kw">library</span>(dplyr)
 szeroka &lt;-<span class="st"> </span>
 <span class="st">  </span>tsdtr210 %&gt;%
 <span class="st">    </span><span class="kw">spread</span>(time, value)
@@ -86,18 +88,14 @@ szeroka &lt;-<span class="st"> </span>
 <span class="co"># wyświetlmy wiersze dla Polski</span>
 szeroka %&gt;%
 <span class="st">  </span><span class="kw">filter</span>(geo ==<span class="st"> &quot;PL&quot;</span>)</code></pre>
-<pre><code>##   vehicle geo 1990  1991  1992  1993  1994  1995  1996  1997  1998  1999 
-## 1 BUS_TOT  PL    NA    NA    NA    NA    NA  19.9  19.4  17.9  17.4  16.8
-## 2     CAR  PL  41.3    NA    NA    NA    NA  64.6  69.3  71.3  72.1  72.3
-## 3     TRN  PL  30.6    NA    NA    NA    NA  15.5  11.3  10.8  10.5  10.9
-##   2000  2001  2002  2003  2004  2005  2006  2007  2008  2009  2010  2011 
-## 1  15.4  14.7  13.5  13.5  13.1  12.0  10.6   9.6   8.4   7.4   6.4  10.8
-## 2  72.8  74.7  77.0  77.6  78.9  80.7  82.5  83.6  85.5  87.0  88.4  84.4
-## 3  11.7  10.6   9.5   8.8   8.0   7.3   6.9   6.8   6.2   5.5   5.2   4.8
-##   2012 
-## 1  10.7
-## 2  84.6
-## 3   4.8</code></pre>
+<pre><code>##   vehicle geo 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001
+## 1 BUS_TOT  PL   NA   NA   NA   NA   NA 19.9 19.4 17.9 17.4 16.8 15.4 14.7
+## 2     CAR  PL 41.3   NA   NA   NA   NA 64.6 69.3 71.3 72.1 72.3 72.8 74.7
+## 3     TRN  PL 30.6   NA   NA   NA   NA 15.5 11.3 10.8 10.5 10.9 11.7 10.6
+##   2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012
+## 1 13.5 13.5 13.1 12.0 10.6  9.6  8.4  7.4  6.4 10.8 10.7
+## 2 77.0 77.6 78.9 80.7 82.5 83.6 85.5 87.0 88.4 84.4 84.6
+## 3  9.5  8.8  8.0  7.3  6.9  6.8  6.2  5.5  5.2  4.8  4.8</code></pre>
 </div>
 <div id="z-szerokiej-do-waskiej" class="slide section level1">
 <h1>Z szerokiej do wąskiej</h1>
@@ -106,13 +104,13 @@ szeroka %&gt;%
 <pre class="sourceCode r"><code class="sourceCode r">szeroka %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">gather</span>(rok, wartosc, -geo, -vehicle) %&gt;%
 <span class="st">  </span><span class="kw">head</span>()</code></pre>
-<pre><code>##   vehicle geo variable value
-## 1 BUS_TOT  AT    1990     NA
-## 2 BUS_TOT  BE    1990     NA
-## 3 BUS_TOT  BG    1990     NA
-## 4 BUS_TOT  CH    1990     NA
-## 5 BUS_TOT  CY    1990     NA
-## 6 BUS_TOT  CZ    1990     NA</code></pre>
+<pre><code>##   vehicle geo  rok wartosc
+## 1 BUS_TOT  AT 1990      NA
+## 2 BUS_TOT  BE 1990      NA
+## 3 BUS_TOT  BG 1990      NA
+## 4 BUS_TOT  CH 1990      NA
+## 5 BUS_TOT  CY 1990      NA
+## 6 BUS_TOT  CZ 1990      NA</code></pre>
 </div>
 <div id="sklejanie-i-rozcinanie-kolumn." class="slide section level1">
 <h1>Sklejanie i rozcinanie kolumn.</h1>
@@ -120,18 +118,14 @@ szeroka %&gt;%
 <pre class="sourceCode r"><code class="sourceCode r">szeroka %&gt;%
 <span class="st">  </span><span class="kw">unite</span>(połącz, vehicle :<span class="st"> </span>geo, <span class="dt">sep=</span><span class="st">&quot;.&quot;</span>) %&gt;%
 <span class="st">  </span><span class="kw">head</span>(<span class="dv">3</span>)</code></pre>
-<pre><code>##       połącz 1990  1991  1992  1993  1994  1995  1996  1997  1998  1999 
-## 1 BUS_TOT.AT    NA  10.6  10.5  10.7  10.6  10.9  10.7  10.9  10.9  10.7
-## 2 BUS_TOT.BE    NA  10.1  10.3  10.3  10.4  11.2  11.2  11.1  11.1  10.7
-## 3 BUS_TOT.BG    NA    NA    NA    NA    NA  28.0  26.3  28.5  30.3  33.5
-##   2000  2001  2002  2003  2004  2005  2006  2007  2008  2009  2010  2011 
-## 1  11.0  10.9  10.9  10.9  11.0  10.5  10.4  10.8  10.2   9.6  10.3  10.1
-## 2  10.5  10.7  11.4  12.5  12.7  13.0  13.2  13.4  12.5  12.5  12.2  12.3
-## 3  31.4  32.0  33.4  28.1  25.0  24.3  22.7  21.8  20.8  16.8  16.4  15.9
-##   2012 
-## 1  10.0
-## 2  12.4
-## 3  16.9</code></pre>
+<pre><code>##       połącz 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001
+## 1 BUS_TOT.AT   NA 10.6 10.5 10.7 10.6 10.9 10.7 10.9 10.9 10.7 11.0 10.9
+## 2 BUS_TOT.BE   NA 10.1 10.3 10.3 10.4 11.2 11.2 11.1 11.1 10.7 10.5 10.7
+## 3 BUS_TOT.BG   NA   NA   NA   NA   NA 28.0 26.3 28.5 30.3 33.5 31.4 32.0
+##   2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012
+## 1 10.9 10.9 11.0 10.5 10.4 10.8 10.2  9.6 10.3 10.1 10.0
+## 2 11.4 12.5 12.7 13.0 13.2 13.4 12.5 12.5 12.2 12.3 12.4
+## 3 33.4 28.1 25.0 24.3 22.7 21.8 20.8 16.8 16.4 15.9 16.9</code></pre>
 <p>Operację odwrotną można wykonać funkcją <code>separate()</code></p>
 </div>
 <div id="zadania" class="slide section level1">
@@ -139,6 +133,7 @@ szeroka %&gt;%
 <ul>
 <li>W bazie danych eurostatu <code>prc_ppp</code> zebrane są informacje o średniej mocy nabywczej. Odczytaj te dane a następnie zamień z postaci wąskiej do szerokiej.</li>
 </ul>
+<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

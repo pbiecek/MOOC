@@ -23,6 +23,7 @@ W tym odcinku nauczymy się
 Do ilustracji wykorzystamy zbiór danych pobranych z eurostatu.
 
 [dodac koty?]
+zamaist kotów lepiej dane kidney z PBImisc
 
 ---
 
@@ -49,6 +50,7 @@ Jej pierwszym argumentem jest ramka z danymi, a kolejne dwie zmienne określają
 
 ```{r, warning=FALSE, message=FALSE}
 library(tidyr)
+library(dplyr)
 szeroka <- 
   tsdtr210 %>%
     spread(time, value)
