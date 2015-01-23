@@ -6,8 +6,8 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / wizualizacja / zaawansowane" /> 
-  <title>Sortowanie danych [dplyr / sort]</title>
+  <meta name="copyright" content="pogRomcy danych / przetwarzanie / groupowanie" /> 
+  <title>Grupowanie danych i analiz [dplyr / group_by]</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -44,26 +44,50 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </head>
 <body>
 <div class="slide titlepage">
-  <h1 class="title">Sortowanie danych [dplyr / sort]</h1>
+  <h1 class="title">Grupowanie danych i analiz [dplyr / group_by]</h1>
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 6 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 23 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
+<p>W poprzednim odcinku pokazliśmy jak liczyć na zbiorze danych statystyki / agregaty. Użyteczność tej opcji znacząco rośnie gdy liczymy te agregaty w grupach. Dzięki temu możemy później łatwo te grupy porównać. Do określania grup wykorzystamy funkcję <code>group_by()</code> z pakietu <code>dplyr</code>.</p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
-<li>Jak ze zbioru danych wybierać tylko interesujące nas wiersze</li>
+<li>jak określać jedną lub więcej zmiennych grupujących?</li>
+<li>jak liczyć agregaty w grupach?</li>
 </ul>
-<p>Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to <code>koty_ptaki</code> a drugi, znacznie większy to <code>auta2012</code>.</p>
+<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>SmarterPoland</code>.</p>
 </div>
-<div class="slide section level1">
-
-<h2 id="ptaki-vs.koty">Ptaki vs. koty</h2>
-<p>Liczenie agregatów jest bardzo wygodne, jeżeli możemy to zrobić w grupach.</p>
-<p>Ułatwia to porównywanie grup. Zobaczmy jak wygląda porównanie wagi, prędkosći i żywotności ptaków i kotów.</p>
+<div id="ptaki-vs.koty" class="slide section level1">
+<h1>Ptaki vs. koty</h1>
+<p>Rozpocznijmy od przykładu dla danych o kotach i ptakach. Jest on na tyle mały, że wynik operacji będzie można przedstawić na ekranie.</p>
+<p>Zmienna <code>druzyna</code> nadaje się świetnie na zmienną grupującą.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+koty_ptaki</code></pre>
+<pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
+## 1          Tygrys 300.00     2.5       60     Azja        25     Kot
+## 2             Lew 200.00     2.0       80   Afryka        29     Kot
+## 3          Jaguar 100.00     1.7       90  Ameryka        15     Kot
+## 4            Puma  80.00     1.7       70  Ameryka        13     Kot
+## 5         Leopard  70.00     1.4       85     Azja        21     Kot
+## 6          Gepard  60.00     1.4      115   Afryka        12     Kot
+## 7           Irbis  50.00     1.3       65     Azja        18     Kot
+## 8          Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
+## 9           Strus 150.00     2.5       70   Afryka        45    Ptak
+## 10  Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak
+## 11 Sokol wedrowny   0.70     0.5      110   Polnoc        15    Ptak
+## 12 Sokol norweski   2.00     0.7      100   Polnoc        20    Ptak
+## 13       Albatros   4.00     0.8      120 Poludnie        50    Ptak</code></pre>
+</div>
+<div id="ptaki-vs.koty-1" class="slide section level1">
+<h1>Ptaki vs. koty</h1>
+<p>Funkcja <code>group_by()</code> jako pierwszy argument przyjmuje zbiór danych a jako kolejne zmienne grupujące (jedną lub więcej). Sama funkcja <code>group_by()</code> nie powoduje wyliczenia nowych wartoścu, a jedynie zaznacza, które zmienne mają być użyte do grupowania. Przez co użycie kolejnych funkcji, takich jak <code>summarise()</code> będzie miało zmienione działanie.</p>
+<p>Zobaczmy jak wygląda użycie funkcji <code>group_by()</code> do porównania maksymalnej wagi, prędkości i żywotności w grupie ptaków i kotów.</p>
+<p>Wynikiem jest ramka danych, której kolumny to w pierwszej kolejnosci zmienne grupujące a nastepnie wyniki agregatów w grupach.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+
 koty_ptaki %&gt;%
 <span class="st">  </span><span class="kw">group_by</span>(druzyna) %&gt;%
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">najszybszy =</span> <span class="kw">max</span>(predkosc),
@@ -75,6 +99,28 @@ koty_ptaki %&gt;%
 ##   druzyna najszybszy najciezszy najzywotniejszy liczba
 ## 1     Kot        115        300              29      7
 ## 2    Ptak        170        150              50      6</code></pre>
+</div>
+<div id="auta" class="slide section level1">
+<h1>Auta</h1>
+<p>Aby przedstawić więcej możliwości, które daje operacja grupowania wykorzystamy zbiór danych <code>auta2012</code>.</p>
+<p>Poniżej przedstawiamy 6 pierwszych wierszy i wybrane kolumny z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie <a href="https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html" class="uri">https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
+<pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
+<span class="st">  </span><span class="kw">select</span>(Cena.w.PLN, Marka, Przebieg.w.km, Rodzaj.paliwa, Rok.produkcji) %&gt;%
+<span class="st">  </span><span class="kw">head</span>()</code></pre>
+<pre><code>##   Cena.w.PLN         Marka Przebieg.w.km          Rodzaj.paliwa
+## 1      49900           Kia         41000 olej napedowy (diesel)
+## 2      88000    Mitsubishi         46500 olej napedowy (diesel)
+## 3      86000     Chevrolet          8000 olej napedowy (diesel)
+## 4      25900         Volvo        200000 olej napedowy (diesel)
+## 5      55900 Mercedes-Benz        169400 olej napedowy (diesel)
+## 6      45900 Mercedes-Benz        141100 olej napedowy (diesel)
+##   Rok.produkcji
+## 1          2008
+## 2          2008
+## 3          2009
+## 4          2003
+## 5          2007
+## 6          2004</code></pre>
 </div>
 <div id="grupowanie" class="slide section level1">
 <h1>Grupowanie</h1>
@@ -214,6 +260,13 @@ koty_ptaki %&gt;%
 <li>Wybierz pięcioletnie Golfy i sprawdź czy średnia cena zależy od kraju aktualnej rejestracji. W tym celu pogrupuj po zmiennej Kraj.aktualnej.rejestracji i w każdej grupie policz średnią.</li>
 <li>Wybierz tylko Peugeoty 206 i policz średnią cenę w zależności od roku produkcji. Posortuj te grupy po roku produkcji.</li>
 </ul>
+</div>
+<div id="co-dalej" class="slide section level1">
+<h1>Co dalej</h1>
+<p>Sciagawka z zabawy danymi w dplyr</p>
+<p><a href="http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf" class="uri">http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf</a></p>
+<p>wiecej sciagawek</p>
+<p><a href="http://www.rstudio.com/resources/cheatsheets/" class="uri">http://www.rstudio.com/resources/cheatsheets/</a></p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

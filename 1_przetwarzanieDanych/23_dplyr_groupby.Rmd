@@ -1,5 +1,5 @@
 ---
-title: "Sortowanie danych [dplyr / sort]"
+title: "Grupowanie danych i analiz [dplyr / group_by]"
 author: "pogRomcy danych"
 date: "sezon 1 / odcinek 23 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
@@ -9,29 +9,46 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / przetwarzanie / group_by"
+    footer: "pogRomcy danych / przetwarzanie / groupowanie"
 
 ---
 
 # O czym jest ten odcinek
 
+W poprzednim odcinku pokazliśmy jak liczyć na zbiorze danych statystyki / agregaty. Użyteczność tej opcji znacząco rośnie gdy liczymy te agregaty w grupach. Dzięki temu możemy później łatwo te grupy porównać. Do określania grup wykorzystamy funkcję `group_by()` z pakietu `dplyr`.
+
 W tym odcinku nauczymy się
 
-- Jak ze zbioru danych wybierać tylko interesujące nas wiersze
+- jak określać jedną lub więcej zmiennych grupujących?
+- jak liczyć agregaty w grupach?
 
-Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to `koty_ptaki` a drugi, znacznie większy to `auta2012`.
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, 
+znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
 
 ---
 
-## Ptaki vs. koty
+# Ptaki vs. koty
 
-Liczenie agregatów jest bardzo wygodne, jeżeli możemy to zrobić w grupach.
+Rozpocznijmy od przykładu dla danych o kotach i ptakach. Jest on na tyle mały, że wynik operacji będzie można przedstawić na ekranie.
 
-Ułatwia to porównywanie grup.
-Zobaczmy jak wygląda porównanie wagi, prędkosći i żywotności ptaków i kotów.
+Zmienna `druzyna` nadaje się świetnie na zmienną grupującą.
+
+```{r, message=FALSE}
+library(SmarterPoland)
+koty_ptaki
+```
+
+# Ptaki vs. koty
+
+Funkcja `group_by()` jako pierwszy argument przyjmuje zbiór danych a jako kolejne zmienne grupujące (jedną lub więcej). Sama funkcja `group_by()` nie powoduje wyliczenia nowych wartoścu, a jedynie zaznacza, które zmienne mają być użyte do grupowania. Przez co użycie kolejnych funkcji, takich jak `summarise()` będzie miało zmienione działanie. 
+
+Zobaczmy jak wygląda użycie funkcji `group_by()` do porównania maksymalnej wagi, prędkości i żywotności w grupie ptaków i kotów.
+
+Wynikiem jest ramka danych, której kolumny to w pierwszej kolejnosci zmienne grupujące a nastepnie wyniki agregatów w grupach.
 
 ```{r, message=FALSE, warning=FALSE}
-library(SmarterPoland)
+library(dplyr)
+
 koty_ptaki %>%
   group_by(druzyna) %>%
   summarise(najszybszy = max(predkosc),
@@ -39,6 +56,22 @@ koty_ptaki %>%
             najzywotniejszy = max(zywotnosc),
             liczba = n())
 ```
+
+---
+
+# Auta
+
+Aby przedstawić więcej możliwości, które daje operacja grupowania wykorzystamy  zbiór danych `auta2012`.
+
+Poniżej przedstawiamy 6 pierwszych wierszy i wybrane kolumny z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html
+
+```{r, message=FALSE}
+auta2012 %>%
+  select(Cena.w.PLN, Marka, Przebieg.w.km, Rodzaj.paliwa, Rok.produkcji) %>%
+  head()
+```
+
+
 
 ---
 
