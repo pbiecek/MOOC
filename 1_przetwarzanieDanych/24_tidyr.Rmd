@@ -94,4 +94,7 @@ Operację odwrotną można wykonać funkcją `separate()`
 * W bazie danych eurostatu `prc_ppp` zebrane są informacje o średniej mocy nabywczej.
 Odczytaj te dane a następnie zamień z postaci wąskiej do szerokiej.
 
+Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+
+
 

@@ -124,135 +124,100 @@ koty_ptaki %&gt;%
 </div>
 <div id="grupowanie" class="slide section level1">
 <h1>Grupowanie</h1>
-<p>Jedną z bardziej użytecznych funkcji jest możliwość liczenia agregatów w grupach. Aby określić jedną lub kilka zmiennych grupujących można wykorzystać funkcję <code>group_by()</code>.</p>
-<p>W poniższym przykładzie liczymy agregaty osobno dla każdej grupy określonej przez <code>Rodzaj.paliwa</code>.</p>
+<p>Przykłady dla danych o cenach ofertowych aut rozpoczniemy od porównania cen i przebiegów samochodów napędznych różnymi paliwami.</p>
+<p>Aby sensownie porównywać różne rodzaje paliwa ograniczymy się do jednej marki samochodów i jednego rocznika. Na poniższym przykładzie wybieramy tylko 5-letnie Volkswageny a następnie dla aut napędzanych benzyną olejem czy gazem liczymy medianę ceny, przebiegu i liczbę aut w tej grupie.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(Marka ==<span class="st"> &quot;Volkswagen&quot;</span>, Rok.produkcji ==<span class="st"> </span><span class="dv">2007</span>) %&gt;%
 <span class="st">  </span><span class="kw">group_by</span>(Rodzaj.paliwa) %&gt;%
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">medianaCeny =</span> <span class="kw">median</span>(Cena.w.PLN, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),
             <span class="dt">medianaPrzebieg =</span> <span class="kw">median</span>(Przebieg.w.km, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),
             <span class="dt">liczba =</span> <span class="kw">n</span>())</code></pre>
-<pre><code>## Source: local data frame [6 x 4]
+<pre><code>## Source: local data frame [3 x 4]
 ## 
 ##            Rodzaj.paliwa medianaCeny medianaPrzebieg liczba
-## 1                benzyna    14900.00          119000  81694
-## 2            benzyna+LPG     9700.00          174000  10684
-## 3                 etanol    17225.52          114045     28
-## 4                hybryda    89900.00           38700    183
-## 5      naped elektryczny    19600.00          140000     55
-## 6 olej napedowy (diesel)    23900.00          150000 114958</code></pre>
+## 1                benzyna     33550.0           67000    190
+## 2            benzyna+LPG     34048.9           95000      7
+## 3 olej napedowy (diesel)     38900.0          145000   1482</code></pre>
+<p>Najliczniejszą grupą aut są samochody napędzane olejem napędowym, mają one przeszło dwukrotnie większy przebieg niż napędzane benzyną (patrząc na mediany) a mimo to sa droższe o około 15%.</p>
 </div>
-<div id="grupowanie-1" class="slide section level1">
-<h1>Grupowanie</h1>
+<div id="sortowanie" class="slide section level1">
+<h1>Sortowanie</h1>
 <p>Na agregatach możemy pracować tak jak na zwykłych ramkach danych. Możemy przekazać je dalej do funkcji które sortują, wybierają lub zmieniają zmienne.</p>
-<p>W poniższym przykładzie sortujemy agregaty po średniej cenie.</p>
+<p>W poniższym przykładzie sortujemy agregaty po liczbie obserwacji.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(Marka ==<span class="st"> &quot;Volkswagen&quot;</span>, Rok.produkcji ==<span class="st"> </span><span class="dv">2007</span>) %&gt;%
 <span class="st">  </span><span class="kw">group_by</span>(Rodzaj.paliwa) %&gt;%
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">medianaCeny =</span> <span class="kw">median</span>(Cena.w.PLN, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),
             <span class="dt">medianaPrzebieg =</span> <span class="kw">median</span>(Przebieg.w.km, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),
             <span class="dt">liczba =</span> <span class="kw">n</span>()) %&gt;%
-<span class="st">  </span><span class="kw">arrange</span>(medianaCeny)</code></pre>
-<pre><code>## Source: local data frame [6 x 4]
+<span class="st">  </span><span class="kw">arrange</span>(liczba)</code></pre>
+<pre><code>## Source: local data frame [3 x 4]
 ## 
 ##            Rodzaj.paliwa medianaCeny medianaPrzebieg liczba
-## 1            benzyna+LPG     9700.00          174000  10684
-## 2                benzyna    14900.00          119000  81694
-## 3                 etanol    17225.52          114045     28
-## 4      naped elektryczny    19600.00          140000     55
-## 5 olej napedowy (diesel)    23900.00          150000 114958
-## 6                hybryda    89900.00           38700    183</code></pre>
+## 1            benzyna+LPG     34048.9           95000      7
+## 2                benzyna     33550.0           67000    190
+## 3 olej napedowy (diesel)     38900.0          145000   1482</code></pre>
 </div>
-<div id="grupowanie-2" class="slide section level1">
-<h1>Grupowanie</h1>
+<div id="grupowanie-po-dwoch-zmiennych" class="slide section level1">
+<h1>Grupowanie po dwóch zmiennych</h1>
 <p>Grupować można po kilku zmiennych, w tym przypadku agregaty liczone są w każdym podzbiorze zmiennych.</p>
-<p>Prześledźmy teraz większy przykład przetwarzania skłądającego się z kilku kroków. Będziemy chcieli zobaczyć średnie ceny i przebiegi różnych pięcioletnich modeli Volkswagena w zależności od rodzaju paliwa.</p>
-<p>Zaczniemy od wybrania tylko pięcioletnich Volkswagenów.</p>
-<pre class="sourceCode r"><code class="sourceCode r">tmp &lt;-<span class="st"> </span>auta2012 %&gt;%
-<span class="st">  </span><span class="kw">filter</span>(Rok.produkcji ==<span class="st"> </span><span class="dv">2007</span>, Marka ==<span class="st"> &quot;Volkswagen&quot;</span>)</code></pre>
-</div>
-<div id="grupowanie-3" class="slide section level1">
-<h1>Grupowanie</h1>
-<p>Następnie do potoku dodamy informację, że chcemy grupować po modelach i po rodzajach paliwa. Dla każdej grupy chcemy wyznaczyć średnią cenę, średni przebieg i liczbę samochodów w takiej grupie.</p>
+<p>Zobaczmy jak będą wyglądały przebiegi i ceny gdy auta podzielimy dodatkowo ma modele. W grupie pięcioletnich Volkswagenów znaleźć można 19 różnych modeli.</p>
+<p>Poniższa lista instrukcji jest praktycznie identyczna z poprzednią, różnica polega na tym, że grupujemy po dwóch zmiennych, Modelu i Rodzaju paliwa.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
 <span class="st">  </span><span class="kw">filter</span>(Rok.produkcji ==<span class="st"> </span><span class="dv">2007</span>, Marka ==<span class="st"> &quot;Volkswagen&quot;</span>) %&gt;%
 <span class="st">  </span><span class="kw">group_by</span>(Model, Rodzaj.paliwa) %&gt;%
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sredniaCena =</span> <span class="kw">mean</span>(Cena.w.PLN, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),
-            <span class="dt">sredniPrzebieg =</span> <span class="kw">mean</span>(Przebieg.w.km, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),
-            <span class="dt">liczba =</span> <span class="kw">n</span>())</code></pre>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">medianaCeny =</span> <span class="kw">median</span>(Cena.w.PLN, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),
+            <span class="dt">medianaPrzebieg =</span> <span class="kw">median</span>(Przebieg.w.km, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),
+            <span class="dt">liczba =</span> <span class="kw">n</span>()) </code></pre>
 <pre><code>## Source: local data frame [35 x 5]
 ## Groups: Model
 ## 
-##        Model          Rodzaj.paliwa sredniaCena sredniPrzebieg liczba
-## 1     Beetle                benzyna    39000.00       30000.00      1
-## 2      Caddy                benzyna    27900.00      170000.00      2
-## 3      Caddy olej napedowy (diesel)    29813.10      125031.11     49
-## 4  Caravelle olej napedowy (diesel)    65458.56      151922.22      9
-## 5        Eos                benzyna    52281.67       53083.33      6
-## 6        Eos olej napedowy (diesel)    54343.11       80714.29      7
-## 7        Fox                benzyna    15593.26       80038.45     11
-## 8        Fox olej napedowy (diesel)    16608.70      135005.14      7
-## 9       Golf                benzyna    35712.02       74654.65     37
-## 10      Golf            benzyna+LPG    32925.00       78249.75      4
-## ..       ...                    ...         ...            ...    ...</code></pre>
+##        Model          Rodzaj.paliwa medianaCeny medianaPrzebieg liczba
+## 1     Beetle                benzyna     39000.0         30000.0      1
+## 2      Caddy                benzyna     27900.0        170000.0      2
+## 3      Caddy olej napedowy (diesel)     30813.0        126905.5     49
+## 4  Caravelle olej napedowy (diesel)     65900.0        170000.0      9
+## 5        Eos                benzyna     53445.0         53000.0      6
+## 6        Eos olej napedowy (diesel)     64900.0         62000.0      7
+## 7        Fox                benzyna     15227.9         69000.0     11
+## 8        Fox olej napedowy (diesel)     17000.0        137000.0      7
+## 9       Golf                benzyna     35900.0         70500.0     37
+## 10      Golf            benzyna+LPG     31650.0         99500.0      4
+## ..       ...                    ...         ...             ...    ...</code></pre>
 </div>
-<div id="grupowanie-4" class="slide section level1">
-<h1>Grupowanie</h1>
-<p>Kolejność wierszy jest przypadkowa co utrudnia jakiekolwiek porównania. Posortujmy więc te wyniki po zmiennej Model i zmiennej sredniaCena, którą przed chwilą wyznaczyliśmy.</p>
-<p>Dzięki temu auta będą posortowane po modelu a w ramach tego samego modelu po średniej cenie.</p>
+<div id="grupowanie-i-filtrowanie" class="slide section level1">
+<h1>Grupowanie i filtrowanie</h1>
+<p>W wyniku z poprzedniego wiele grup miało małą liczebność, przez co wyniki dla nich były dosyć przypadkowe a to utrudnia porównywania.</p>
+<p>Dodanie funkcji <code>filter()</code> na koniec umożliwia pozostawienei tylko tych grup, w których liczebmość przekracza 10 obserwacji.</p>
+<p>Warto zwrócić uwagę, że w poniższym przykładzie funkcja <code>filter()</code> występuje dwukrotnie, w pierwszym przypadku filtruje wiersze w oryginalnym zbiorze danych a w drugim filtruje grupy o zbyt małej liczebności.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
 <span class="st">  </span><span class="kw">filter</span>(Rok.produkcji ==<span class="st"> </span><span class="dv">2007</span>, Marka ==<span class="st"> &quot;Volkswagen&quot;</span>) %&gt;%
 <span class="st">  </span><span class="kw">group_by</span>(Model, Rodzaj.paliwa) %&gt;%
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sredniaCena =</span> <span class="kw">mean</span>(Cena.w.PLN, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),
-            <span class="dt">sredniPrzebieg =</span> <span class="kw">mean</span>(Przebieg.w.km, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">medianaCeny =</span> <span class="kw">median</span>(Cena.w.PLN, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),
+            <span class="dt">medianaPrzebieg =</span> <span class="kw">median</span>(Przebieg.w.km, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),
             <span class="dt">liczba =</span> <span class="kw">n</span>()) %&gt;%
-<span class="st">  </span><span class="kw">arrange</span>(Model, sredniaCena) </code></pre>
-<pre><code>## Source: local data frame [35 x 5]
-## Groups: Model
-## 
-##        Model          Rodzaj.paliwa sredniaCena sredniPrzebieg liczba
-## 1     Beetle                benzyna    39000.00       30000.00      1
-## 2      Caddy                benzyna    27900.00      170000.00      2
-## 3      Caddy olej napedowy (diesel)    29813.10      125031.11     49
-## 4  Caravelle olej napedowy (diesel)    65458.56      151922.22      9
-## 5        Eos                benzyna    52281.67       53083.33      6
-## 6        Eos olej napedowy (diesel)    54343.11       80714.29      7
-## 7        Fox                benzyna    15593.26       80038.45     11
-## 8        Fox olej napedowy (diesel)    16608.70      135005.14      7
-## 9       Golf            benzyna+LPG    32925.00       78249.75      4
-## 10      Golf olej napedowy (diesel)    33630.78      141550.09    244
-## ..       ...                    ...         ...            ...    ...</code></pre>
-</div>
-<div id="grupowanie-5" class="slide section level1">
-<h1>Grupowanie</h1>
-<p>Niektóre średnie są dosyć przypadkowe, ponieważ w grupie było tylko jedno / dwa auta. Usuńmy grupy, w których było mniej niż 10 samochodów, dzięki temu te średnie będą bardziej wiarygodne.</p>
-<pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
-<span class="st">  </span><span class="kw">filter</span>(Rok.produkcji ==<span class="st"> </span><span class="dv">2007</span>, Marka ==<span class="st"> &quot;Volkswagen&quot;</span>) %&gt;%
-<span class="st">  </span><span class="kw">group_by</span>(Model, Rodzaj.paliwa) %&gt;%
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sredniaCena =</span> <span class="kw">mean</span>(Cena.w.PLN, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),
-            <span class="dt">sredniPrzebieg =</span> <span class="kw">mean</span>(Przebieg.w.km, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),
-            <span class="dt">liczba =</span> <span class="kw">n</span>()) %&gt;%
-<span class="st">  </span><span class="kw">arrange</span>(Model, sredniaCena) %&gt;%
-<span class="st">  </span><span class="kw">filter</span>(liczba &gt;<span class="st"> </span><span class="dv">10</span>)</code></pre>
+<span class="st">  </span><span class="kw">filter</span>(liczba &gt;<span class="st"> </span><span class="dv">10</span>) </code></pre>
 <pre><code>## Source: local data frame [17 x 5]
 ## Groups: Model
 ## 
-##          Model          Rodzaj.paliwa sredniaCena sredniPrzebieg liczba
-## 1        Caddy olej napedowy (diesel)    29813.10      125031.11     49
-## 2          Fox                benzyna    15593.26       80038.45     11
-## 3         Golf olej napedowy (diesel)    33630.78      141550.09    244
-## 4         Golf                benzyna    35712.02       74654.65     37
-## 5    Golf Plus                benzyna    29210.81       79839.92     12
-## 6    Golf Plus olej napedowy (diesel)    35879.23      122054.61     57
-## 7        Jetta                benzyna    35366.38       70360.15     13
-## 8        Jetta olej napedowy (diesel)    36740.23      135148.20     56
-## 9     Multivan olej napedowy (diesel)    96501.81      122252.35     21
-## 10      Passat olej napedowy (diesel)    41539.08      145810.58    585
-## 11      Passat                benzyna    43658.03      109720.88     38
-## 12        Polo                benzyna    23339.83       53174.49     51
-## 13        Polo olej napedowy (diesel)    23782.99      100681.19    105
-## 14      Sharan olej napedowy (diesel)    44329.92      160596.29     46
-## 15     Touareg olej napedowy (diesel)   106323.00      132024.76     50
-## 16      Touran olej napedowy (diesel)    41105.38      154653.30    200
-## 17 Transporter olej napedowy (diesel)    52449.70      169995.65     28</code></pre>
+##          Model          Rodzaj.paliwa medianaCeny medianaPrzebieg liczba
+## 1        Caddy olej napedowy (diesel)    30813.00        126905.5     49
+## 2          Fox                benzyna    15227.90         69000.0     11
+## 3         Golf                benzyna    35900.00         70500.0     37
+## 4         Golf olej napedowy (diesel)    33900.00        140000.0    244
+## 5    Golf Plus                benzyna    26948.25         87523.5     12
+## 6    Golf Plus olej napedowy (diesel)    35900.00        122000.0     57
+## 7        Jetta                benzyna    36700.00         73200.0     13
+## 8        Jetta olej napedowy (diesel)    37250.00        145710.5     56
+## 9     Multivan olej napedowy (diesel)    92222.90        134313.0     21
+## 10      Passat                benzyna    39200.00        105024.5     38
+## 11      Passat olej napedowy (diesel)    41000.00        152139.0    585
+## 12        Polo                benzyna    23990.00         50000.0     51
+## 13        Polo olej napedowy (diesel)    24900.00         97300.0    105
+## 14      Sharan olej napedowy (diesel)    45745.00        164187.0     46
+## 15     Touareg olej napedowy (diesel)   103450.00        128770.5     50
+## 16      Touran olej napedowy (diesel)    40900.00        156500.0    200
+## 17 Transporter olej napedowy (diesel)    49450.00        170000.0     28</code></pre>
 </div>
 <div id="zadania" class="slide section level1">
 <h1>Zadania</h1>
@@ -263,10 +228,10 @@ koty_ptaki %&gt;%
 </div>
 <div id="co-dalej" class="slide section level1">
 <h1>Co dalej</h1>
-<p>Sciagawka z zabawy danymi w dplyr</p>
-<p><a href="http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf" class="uri">http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf</a></p>
-<p>wiecej sciagawek</p>
-<p><a href="http://www.rstudio.com/resources/cheatsheets/" class="uri">http://www.rstudio.com/resources/cheatsheets/</a></p>
+<p>Pakiet <code>dplyr</code> zupełnie zmienił sposób przetwarzania danych w R. Przetwarzanie stało się prostsze do opisania, 80% niezbędnej pracy można wykonać łatwiej i szybciej.</p>
+<p>Świetnym uzupełnieniem do wyników z odcinków o tym pakiecie będzie graficzna dwustronicowa ściągawka, prezentująca możliwości tego pakietu. Ta ściągawka dostępna jest na stronie <a href="http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf" class="uri">http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf</a></p>
+<p>Wiecej takich skrótowych ściagawek jest dostępnych na stronie programy rstudio <a href="http://www.rstudio.com/resources/cheatsheets/" class="uri">http://www.rstudio.com/resources/cheatsheets/</a></p>
+<p>Krótka prezentacja najważneijszych funkcji tego pakietu na przykłądzie danych o lotach znaleźć można na stronie warsztatów twórcy dplyr’a <a href="http://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html" class="uri">http://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html</a>.</p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

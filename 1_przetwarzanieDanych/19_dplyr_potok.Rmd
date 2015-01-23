@@ -193,3 +193,5 @@ tylkoMalyPrzebieg %>% lm(Cena.w.PLN ~ Przebieg.w.km, .)
 * Użyj operatora `%>%` by ze zbioru danych `auta2012` wybrać tylko 10 najtańszych aut marki Rolls-Royce.
 * Użyj operatora `%>%` by ze zbioru danych `auta2012` wybrać 5 Volkswagenów o największych silnikach.
  
+ Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+

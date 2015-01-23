@@ -155,19 +155,18 @@ auta2012 %>%
 * Wybierz pięcioletnie Golfy i sprawdź czy średnia cena zależy od kraju aktualnej rejestracji. W tym celu pogrupuj po zmiennej Kraj.aktualnej.rejestracji i w każdej grupie policz średnią.
 * Wybierz tylko Peugeoty 206 i policz średnią cenę w zależności od roku produkcji. Posortuj te grupy po roku produkcji.
 
+Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+
 # Co dalej
 
-Sciagawka z zabawy danymi w dplyr
+Pakiet `dplyr` zupełnie zmienił sposób przetwarzania danych w R. Przetwarzanie stało się prostsze do opisania, 80\% niezbędnej pracy można wykonać łatwiej i szybciej.
 
-http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf
+Świetnym uzupełnieniem do wyników z odcinków o tym pakiecie będzie graficzna dwustronicowa ściągawka, prezentująca możliwości tego pakietu. Ta ściągawka dostępna jest na stronie http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf
 
+Wiecej takich skrótowych ściagawek jest dostępnych na stronie programy rstudio http://www.rstudio.com/resources/cheatsheets/
 
+Krótka prezentacja najważneijszych funkcji tego pakietu na przykłądzie danych o lotach znaleźć można na stronie warsztatów twórcy dplyr'a http://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html.
 
-http://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html
-
-wiecej sciagawek
-
-http://www.rstudio.com/resources/cheatsheets/
 
 
 

@@ -357,6 +357,7 @@ as.numeric(as.character(fx))
 ---
 
 # Zadania:
+
 + Sprawdź ile samochodów ma zainstalowany autoalarm (oznaczony jako 'autoalarm')
 
 + Sprawdź ile samochodów ma lakier w metalicznym kolorze (oznaczony jako 'metallic')

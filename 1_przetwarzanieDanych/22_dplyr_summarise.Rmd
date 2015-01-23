@@ -144,4 +144,4 @@ auta2012 %>%
 * Policz sumaryczny przebieg wszystkich samochodów. Następnie policz ile razy okrążono kulę ziemską uwzględniając te wszystkie przebiegi.
 * Wybierz tylko samochody marki 'Rolls-Royce' i policz ich średni przebieg oraz średnią cenę.
 
-
+Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html

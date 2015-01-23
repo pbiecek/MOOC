@@ -244,5 +244,6 @@ Na tych kilku slajdach zaledwie zarysowaliśmy temat czyszczenia danych. Więcej
 + W języku angielskim książka ,,An introduction to data cleaning with R'' http://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf
 + W języku angielskim kurs na portalu Coursera ,,Getting and Cleaning Data'' https://www.coursera.org/course/getdata
 
+Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
 
 
