@@ -71,123 +71,99 @@ auta2012 %>%
   head()
 ```
 
-
-
 ---
 
 # Grupowanie
 
-Jedną z bardziej użytecznych funkcji jest możliwość liczenia agregatów w grupach. 
-Aby określić jedną lub kilka zmiennych grupujących można wykorzystać funkcję `group_by()`.
+Przykłady dla danych o cenach ofertowych aut rozpoczniemy od porównania cen i przebiegów samochodów napędznych różnymi paliwami.
 
-W poniższym przykładzie liczymy agregaty osobno dla każdej grupy określonej przez `Rodzaj.paliwa`.
+Aby sensownie porównywać różne rodzaje paliwa ograniczymy się do jednej marki samochodów i jednego rocznika. Na poniższym przykładzie wybieramy tylko 5-letnie Volkswageny a następnie dla aut napędzanych benzyną olejem czy gazem liczymy medianę ceny, przebiegu i liczbę aut w tej grupie.
 
 ```{r, warning=FALSE}
 auta2012 %>%
+  filter(Marka == "Volkswagen", Rok.produkcji == 2007) %>%
   group_by(Rodzaj.paliwa) %>%
   summarise(medianaCeny = median(Cena.w.PLN, na.rm=TRUE),
             medianaPrzebieg = median(Przebieg.w.km, na.rm=TRUE),
             liczba = n())
 ```
 
+Najliczniejszą grupą aut są samochody napędzane olejem napędowym, mają one przeszło dwukrotnie większy przebieg niż napędzane benzyną (patrząc na mediany) a mimo to sa droższe o około 15\%.
+
 ---
 
-# Grupowanie
+# Sortowanie
 
 Na agregatach możemy pracować tak jak na zwykłych ramkach danych. Możemy przekazać je dalej do funkcji które sortują, wybierają lub zmieniają zmienne.
 
-W poniższym przykładzie sortujemy agregaty po średniej cenie.
+W poniższym przykładzie sortujemy agregaty po liczbie obserwacji.
 
 ```{r, warning=FALSE}
 auta2012 %>%
+  filter(Marka == "Volkswagen", Rok.produkcji == 2007) %>%
   group_by(Rodzaj.paliwa) %>%
   summarise(medianaCeny = median(Cena.w.PLN, na.rm=TRUE),
             medianaPrzebieg = median(Przebieg.w.km, na.rm=TRUE),
             liczba = n()) %>%
-  arrange(medianaCeny)
+  arrange(liczba)
 ```
 
 ---
 
-# Grupowanie
+# Grupowanie po dwóch zmiennych
 
 Grupować można po kilku zmiennych, w tym przypadku agregaty liczone są w każdym podzbiorze zmiennych.
 
-Prześledźmy teraz większy przykład przetwarzania skłądającego się z kilku kroków.
-Będziemy chcieli zobaczyć średnie ceny i przebiegi różnych pięcioletnich modeli Volkswagena w zależności od rodzaju paliwa.
+Zobaczmy jak będą wyglądały przebiegi i ceny gdy auta podzielimy dodatkowo ma modele. W grupie pięcioletnich Volkswagenów znaleźć można 19 różnych modeli.
 
-Zaczniemy od wybrania tylko pięcioletnich Volkswagenów.
-
-```{r, warning=FALSE}
-tmp <- auta2012 %>%
-  filter(Rok.produkcji == 2007, Marka == "Volkswagen")
-```
-
----
-
-# Grupowanie
-
-Następnie do potoku dodamy informację, że chcemy grupować po modelach i po rodzajach paliwa. 
-Dla każdej grupy chcemy wyznaczyć średnią cenę, średni przebieg i liczbę samochodów w takiej grupie.
+Poniższa lista instrukcji jest praktycznie identyczna z poprzednią, różnica polega na tym, że grupujemy po dwóch zmiennych, Modelu i Rodzaju paliwa.
 
 ```{r, warning=FALSE}
 auta2012 %>%
   filter(Rok.produkcji == 2007, Marka == "Volkswagen") %>%
   group_by(Model, Rodzaj.paliwa) %>%
-  summarise(sredniaCena = mean(Cena.w.PLN, na.rm=TRUE),
-            sredniPrzebieg = mean(Przebieg.w.km, na.rm=TRUE),
-            liczba = n())
+  summarise(medianaCeny = median(Cena.w.PLN, na.rm=TRUE),
+            medianaPrzebieg = median(Przebieg.w.km, na.rm=TRUE),
+            liczba = n()) 
+
 ```
 
 ---
 
-# Grupowanie
+# Grupowanie i filtrowanie
 
-Kolejność wierszy jest przypadkowa co utrudnia jakiekolwiek porównania.
-Posortujmy więc te wyniki po zmiennej Model i zmiennej sredniaCena, którą przed chwilą wyznaczyliśmy.
+W wyniku z poprzedniego wiele grup miało małą liczebność, przez co wyniki dla nich były dosyć przypadkowe a to utrudnia porównywania.
 
-Dzięki temu auta będą posortowane po modelu a w ramach tego samego modelu po średniej cenie.
+Dodanie funkcji `filter()` na koniec umożliwia pozostawienei tylko tych grup, w których liczebmość przekracza 10 obserwacji.
+
+Warto zwrócić uwagę, że w poniższym przykładzie funkcja `filter()` występuje dwukrotnie, w pierwszym przypadku filtruje wiersze w oryginalnym zbiorze danych a w drugim filtruje grupy o zbyt małej liczebności.
 
 ```{r, warning=FALSE}
 auta2012 %>%
   filter(Rok.produkcji == 2007, Marka == "Volkswagen") %>%
   group_by(Model, Rodzaj.paliwa) %>%
-  summarise(sredniaCena = mean(Cena.w.PLN, na.rm=TRUE),
-            sredniPrzebieg = mean(Przebieg.w.km, na.rm=TRUE),
+  summarise(medianaCeny = median(Cena.w.PLN, na.rm=TRUE),
+            medianaPrzebieg = median(Przebieg.w.km, na.rm=TRUE),
             liczba = n()) %>%
-  arrange(Model, sredniaCena) 
-```
-
----
-
-# Grupowanie
-
-Niektóre średnie są dosyć przypadkowe, ponieważ w grupie było tylko jedno / dwa auta. 
-Usuńmy grupy, w których było mniej niż 10 samochodów, dzięki temu te średnie będą bardziej wiarygodne.
-
-```{r, warning=FALSE}
-auta2012 %>%
-  filter(Rok.produkcji == 2007, Marka == "Volkswagen") %>%
-  group_by(Model, Rodzaj.paliwa) %>%
-  summarise(sredniaCena = mean(Cena.w.PLN, na.rm=TRUE),
-            sredniPrzebieg = mean(Przebieg.w.km, na.rm=TRUE),
-            liczba = n()) %>%
-  arrange(Model, sredniaCena) %>%
-  filter(liczba > 10)
+  filter(liczba > 10) 
 ```
 
 ---
 
 # Zadania
+
 * Wybierz pięcioletnie Golfy i sprawdź czy średnia cena zależy od kraju aktualnej rejestracji. W tym celu pogrupuj po zmiennej Kraj.aktualnej.rejestracji i w każdej grupie policz średnią.
 * Wybierz tylko Peugeoty 206 i policz średnią cenę w zależności od roku produkcji. Posortuj te grupy po roku produkcji.
-
 
 # Co dalej
 
 Sciagawka z zabawy danymi w dplyr
 
 http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf
+
+
+
+http://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html
 
 wiecej sciagawek
 
