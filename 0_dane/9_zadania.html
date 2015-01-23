@@ -548,6 +548,27 @@ auta2012 %&gt;%<span class="st"> </span>
 auta2012 %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">HP =</span> <span class="fl">0.9863</span>*KM)</code></pre>
 </div>
+<div id="zadania-sezon-1-odcinek-22" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 22</h1>
+<ul>
+<li>Policz sumaryczny przebieg wszystkich samochodów. Następnie policz ile razy okrążono kulę ziemską uwzględniając ten sumaryczny przebieg.</li>
+<li>Wybierz tylko samochody marki ‘Rolls-Royce’ i policz ich średni przebieg oraz średnią cenę.</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-22" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 22</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># przebieg</span>
+auta2012 %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sumaryczny.przebieg =</span> <span class="kw">sum</span>(Przebieg.w.km, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+            okrążeń =<span class="st"> </span>sumaryczny.przebieg /<span class="st"> </span><span class="dv">40075</span>,
+            średnio.okrążeń =<span class="st"> </span>okrążeń /<span class="st"> </span><span class="kw">n</span>())
+
+<span class="co"># Rolls-Royce</span>
+auta2012 %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(Marka ==<span class="st"> &quot;Rolls-Royce&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>( ś<span class="dt">rednia.cena =</span> <span class="kw">mean</span>(Cena.w.PLN),
+             ś<span class="dt">redni.przebieg =</span> <span class="kw">mean</span>(Przebieg.w.km, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>

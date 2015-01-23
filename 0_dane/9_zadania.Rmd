@@ -619,5 +619,27 @@ auta2012 %>%
   mutate(HP = 0.9863*KM)
 ```
 
+# Zadania, sezon 1, odcinek 22
+
+* Policz sumaryczny przebieg wszystkich samochodów. Następnie policz ile razy okrążono kulę ziemską uwzględniając ten sumaryczny przebieg.
+* Wybierz tylko samochody marki 'Rolls-Royce' i policz ich średni przebieg oraz średnią cenę.
+
+# Odpowiedzi, sezon 1, odcinek 22
+
+```{r, eval=FALSE}
+# przebieg
+auta2012 %>%
+  summarise(sumaryczny.przebieg = sum(Przebieg.w.km, na.rm = TRUE),
+            okrążeń = sumaryczny.przebieg / 40075,
+            średnio.okrążeń = okrążeń / n())
+
+# Rolls-Royce
+auta2012 %>%
+  filter(Marka == "Rolls-Royce") %>%
+  summarise( średnia.cena = mean(Cena.w.PLN),
+             średni.przebieg = mean(Przebieg.w.km, na.rm=TRUE))
+```
+
+
 
 
