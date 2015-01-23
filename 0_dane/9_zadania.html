@@ -569,6 +569,28 @@ auta2012 %&gt;%
 <span class="st">  </span><span class="kw">summarise</span>( ś<span class="dt">rednia.cena =</span> <span class="kw">mean</span>(Cena.w.PLN),
              ś<span class="dt">redni.przebieg =</span> <span class="kw">mean</span>(Przebieg.w.km, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))</code></pre>
 </div>
+<div id="zadania-sezon-1-odcinek-23" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 23</h1>
+<ul>
+<li>Wybierz pięcioletnie Golfy i sprawdź czy średnia cena zależy od kraju aktualnej rejestracji. W tym celu pogrupuj po zmiennej Kraj.aktualnej.rejestracji i w każdej grupie policz średnią.</li>
+<li>Wybierz tylko Peugeoty 206 i policz średnią cenę w zależności od roku produkcji. Posortuj te grupy po roku produkcji.</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-23" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 23</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># golfy</span>
+auta2012 %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(Model ==<span class="st"> &quot;Golf&quot;</span>, Rok.produkcji ==<span class="st"> </span><span class="dv">2007</span>) %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(Kraj.aktualnej.rejestracji) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sredniaCena =</span> <span class="kw">mean</span>(Cena.w.PLN)) %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(sredniaCena)
+
+<span class="co"># peugeoty</span>
+auta2012 %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(Marka ==<span class="st"> &quot;Peugeot&quot;</span>, Model ==<span class="st"> &quot;206&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(Rok.produkcji) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>( ś<span class="dt">rednia.cena =</span> <span class="kw">mean</span>(Cena.w.PLN))</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>

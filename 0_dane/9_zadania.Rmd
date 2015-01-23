@@ -640,6 +640,25 @@ auta2012 %>%
              średni.przebieg = mean(Przebieg.w.km, na.rm=TRUE))
 ```
 
+# Zadania, sezon 1, odcinek 23
 
+* Wybierz pięcioletnie Golfy i sprawdź czy średnia cena zależy od kraju aktualnej rejestracji. W tym celu pogrupuj po zmiennej Kraj.aktualnej.rejestracji i w każdej grupie policz średnią.
+* Wybierz tylko Peugeoty 206 i policz średnią cenę w zależności od roku produkcji. Posortuj te grupy po roku produkcji.
 
+# Odpowiedzi, sezon 1, odcinek 23
+
+```{r, eval=FALSE}
+# golfy
+auta2012 %>%
+  filter(Model == "Golf", Rok.produkcji == 2007) %>%
+  group_by(Kraj.aktualnej.rejestracji) %>%
+  summarise(sredniaCena = mean(Cena.w.PLN)) %>%
+  arrange(sredniaCena)
+
+# peugeoty
+auta2012 %>%
+  filter(Marka == "Peugeot", Model == "206") %>%
+  group_by(Rok.produkcji) %>%
+  summarise( średnia.cena = mean(Cena.w.PLN))
+```
 
