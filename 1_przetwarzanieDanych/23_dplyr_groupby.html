@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / przetwarzanie / groupowanie" /> 
+  <meta name="copyright" content="pogRomcy danych / przetwarzanie / grupowanie" /> 
   <title>Grupowanie danych i analiz [dplyr / group_by]</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
@@ -52,7 +52,7 @@ pogRomcy danych
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
-<p>W poprzednim odcinku pokazliśmy jak liczyć na zbiorze danych statystyki / agregaty. Użyteczność tej opcji znacząco rośnie gdy liczymy te agregaty w grupach. Dzięki temu możemy później łatwo te grupy porównać. Do określania grup wykorzystamy funkcję <code>group_by()</code> z pakietu <code>dplyr</code>.</p>
+<p>W poprzednim odcinku pokazaliśmy jak liczyć na zbiorze danych statystyki / agregaty. Użyteczność tej opcji znacząco rośnie gdy liczymy te agregaty w grupach. Dzięki temu możemy później łatwo te grupy porównać. Do określania grup wykorzystamy funkcję <code>group_by()</code> z pakietu <code>dplyr</code>.</p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
 <li>jak określać jedną lub więcej zmiennych grupujących?</li>
@@ -83,9 +83,9 @@ koty_ptaki</code></pre>
 </div>
 <div id="ptaki-vs.koty-1" class="slide section level1">
 <h1>Ptaki vs. koty</h1>
-<p>Funkcja <code>group_by()</code> jako pierwszy argument przyjmuje zbiór danych a jako kolejne zmienne grupujące (jedną lub więcej). Sama funkcja <code>group_by()</code> nie powoduje wyliczenia nowych wartoścu, a jedynie zaznacza, które zmienne mają być użyte do grupowania. Przez co użycie kolejnych funkcji, takich jak <code>summarise()</code> będzie miało zmienione działanie.</p>
+<p>Funkcja <code>group_by()</code> jako pierwszy argument przyjmuje zbiór danych a jako kolejne zmienne grupujące (jedną lub więcej). Sama funkcja <code>group_by()</code> nie powoduje wyliczenia nowych wartości, a jedynie zaznacza, które zmienne mają być użyte do grupowania. Przez co użycie kolejnych funkcji, takich jak <code>summarise()</code> będzie miało zmienione działanie.</p>
 <p>Zobaczmy jak wygląda użycie funkcji <code>group_by()</code> do porównania maksymalnej wagi, prędkości i żywotności w grupie ptaków i kotów.</p>
-<p>Wynikiem jest ramka danych, której kolumny to w pierwszej kolejnosci zmienne grupujące a nastepnie wyniki agregatów w grupach.</p>
+<p>Wynikiem jest ramka danych, której kolumny to w pierwszej kolejności zmienne grupujące a następnie wyniki agregatów w grupach.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 
 koty_ptaki %&gt;%
@@ -124,7 +124,7 @@ koty_ptaki %&gt;%
 </div>
 <div id="grupowanie" class="slide section level1">
 <h1>Grupowanie</h1>
-<p>Przykłady dla danych o cenach ofertowych aut rozpoczniemy od porównania cen i przebiegów samochodów napędznych różnymi paliwami.</p>
+<p>Przykłady dla danych o cenach ofertowych aut rozpoczniemy od porównania cen i przebiegów samochodów napędzanych różnymi paliwami.</p>
 <p>Aby sensownie porównywać różne rodzaje paliwa ograniczymy się do jednej marki samochodów i jednego rocznika. Na poniższym przykładzie wybieramy tylko 5-letnie Volkswageny a następnie dla aut napędzanych benzyną olejem czy gazem liczymy medianę ceny, przebiegu i liczbę aut w tej grupie.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
 <span class="st">  </span><span class="kw">filter</span>(Marka ==<span class="st"> &quot;Volkswagen&quot;</span>, Rok.produkcji ==<span class="st"> </span><span class="dv">2007</span>) %&gt;%
@@ -138,11 +138,11 @@ koty_ptaki %&gt;%
 ## 1                benzyna     33550.0           67000    190
 ## 2            benzyna+LPG     34048.9           95000      7
 ## 3 olej napedowy (diesel)     38900.0          145000   1482</code></pre>
-<p>Najliczniejszą grupą aut są samochody napędzane olejem napędowym, mają one przeszło dwukrotnie większy przebieg niż napędzane benzyną (patrząc na mediany) a mimo to sa droższe o około 15%.</p>
+<p>Najliczniejszą grupą aut są samochody napędzane olejem napędowym, mają one przeszło dwukrotnie większy przebieg niż napędzane benzyną (patrząc na mediany) a mimo to są droższe o około 15%.</p>
 </div>
 <div id="sortowanie" class="slide section level1">
 <h1>Sortowanie</h1>
-<p>Na agregatach możemy pracować tak jak na zwykłych ramkach danych. Możemy przekazać je dalej do funkcji które sortują, wybierają lub zmieniają zmienne.</p>
+<p>Na agregatach możemy pracować tak jak na zwykłych ramkach danych. Możemy przekazać je dalej do funkcji, które sortują, wybierają lub zmieniają zmienne.</p>
 <p>W poniższym przykładzie sortujemy agregaty po liczbie obserwacji.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
 <span class="st">  </span><span class="kw">filter</span>(Marka ==<span class="st"> &quot;Volkswagen&quot;</span>, Rok.produkcji ==<span class="st"> </span><span class="dv">2007</span>) %&gt;%
@@ -188,7 +188,7 @@ koty_ptaki %&gt;%
 <div id="grupowanie-i-filtrowanie" class="slide section level1">
 <h1>Grupowanie i filtrowanie</h1>
 <p>W wyniku z poprzedniego wiele grup miało małą liczebność, przez co wyniki dla nich były dosyć przypadkowe a to utrudnia porównywania.</p>
-<p>Dodanie funkcji <code>filter()</code> na koniec umożliwia pozostawienei tylko tych grup, w których liczebmość przekracza 10 obserwacji.</p>
+<p>Dodanie funkcji <code>filter()</code> na koniec umożliwia pozostawienie tylko tych grup, w których liczebność przekracza 10 obserwacji.</p>
 <p>Warto zwrócić uwagę, że w poniższym przykładzie funkcja <code>filter()</code> występuje dwukrotnie, w pierwszym przypadku filtruje wiersze w oryginalnym zbiorze danych a w drugim filtruje grupy o zbyt małej liczebności.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
 <span class="st">  </span><span class="kw">filter</span>(Rok.produkcji ==<span class="st"> </span><span class="dv">2007</span>, Marka ==<span class="st"> &quot;Volkswagen&quot;</span>) %&gt;%
@@ -222,16 +222,17 @@ koty_ptaki %&gt;%
 <div id="zadania" class="slide section level1">
 <h1>Zadania</h1>
 <ul>
-<li>Wybierz pięcioletnie Golfy i sprawdź czy średnia cena zależy od kraju aktualnej rejestracji. W tym celu pogrupuj po zmiennej Kraj.aktualnej.rejestracji i w każdej grupie policz średnią.</li>
+<li>Wybierz pięcioletnie Golfy i sprawdź czy średnia cena zależy od kraju aktualnej rejestracji. W tym celu pogrupuj po zmiennej <code>Kraj.aktualnej.rejestracji</code> i w każdej grupie policz średnią.</li>
 <li>Wybierz tylko Peugeoty 206 i policz średnią cenę w zależności od roku produkcji. Posortuj te grupy po roku produkcji.</li>
 </ul>
+<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
 </div>
 <div id="co-dalej" class="slide section level1">
 <h1>Co dalej</h1>
 <p>Pakiet <code>dplyr</code> zupełnie zmienił sposób przetwarzania danych w R. Przetwarzanie stało się prostsze do opisania, 80% niezbędnej pracy można wykonać łatwiej i szybciej.</p>
 <p>Świetnym uzupełnieniem do wyników z odcinków o tym pakiecie będzie graficzna dwustronicowa ściągawka, prezentująca możliwości tego pakietu. Ta ściągawka dostępna jest na stronie <a href="http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf" class="uri">http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf</a></p>
-<p>Wiecej takich skrótowych ściagawek jest dostępnych na stronie programy rstudio <a href="http://www.rstudio.com/resources/cheatsheets/" class="uri">http://www.rstudio.com/resources/cheatsheets/</a></p>
-<p>Krótka prezentacja najważneijszych funkcji tego pakietu na przykłądzie danych o lotach znaleźć można na stronie warsztatów twórcy dplyr’a <a href="http://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html" class="uri">http://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html</a>.</p>
+<p>Więcej takich skrótowych ściągawek jest dostępnych na stronie firmy RStudio <a href="http://www.rstudio.com/resources/cheatsheets/" class="uri">http://www.rstudio.com/resources/cheatsheets/</a></p>
+<p>Krótka prezentacja najważniejszych funkcji tego pakietu na przykładzie danych o lotach znaleźć można na stronie warsztatów twórcy dplyr’a <a href="http://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html" class="uri">http://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html</a>.</p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
