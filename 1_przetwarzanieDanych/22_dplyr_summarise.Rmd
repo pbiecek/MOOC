@@ -9,36 +9,95 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / przetwarzanie / summarise"
+    footer: "pogRomcy danych / przetwarzanie / agregaty"
 
 ---
 
 # O czym jest ten odcinek
 
+Ogląd całych danych jest możłiwy tylko gdy dane nie są zbyt duże. Mieszczą się na jednym lub kilku ekranach.
+Dla większych zbiorów danych konieczne jest agregowanie informacji z poziomu pojedynczych wierszy na poziom grup.
+
+Aby efektywnie przedstawiać agregaty w grupach potrzebujemy funkcji liczącej agregaty oraz funkcji definiującej grupy. Do agregacji wygodnie wykrozystać funkcję `summarise()` z pakirtu `dplyr`, którą przedstawimy w tym odcinku.
+
 W tym odcinku nauczymy się
 
-- Jak ze zbioru danych wybierać tylko interesujące nas wiersze
+- jak dla całego zbioru danych wyznaczać agregaty?
+- jakie przykłądowe agregaty można wyznaczać?
 
-Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to `koty_ptaki` a drugi, znacznie większy to `auta2012`.
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, 
+znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
 
 ---
 
-# Agregaty
+# Ptaki vs. koty
 
-Funkcją `sumamrise()` możemy wyznaczyć wektor podsumowań zbiorru danych.
+Rozpocznijmy od przykładu dla małego zbioru danych. Widząc wszystki ewiersze łatwiej będzie nam zauważyć zależność pomiędzy oryginalnymi danymi a agregatami. Ten zbiór danych jest dostarczany razem z pakietem `SmarterPoland`. 
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE}
 library(SmarterPoland)
-koty_ptaki %>%
-  summarise(najszybszy = max(predkosc),
-            najwolniejszy = min(predkosc),
-            najcięższy = max(waga),
-            najkrócej.żyjacy = min(zywotnosc))
+koty_ptaki
 ```
 
 ---
 
 # Agregaty
+
+Do wyznaczania agregatów / podsumowań wykorzystamy funkcję `sumamrise()`. Jako pierwszy argument przyjmuje ona zbiór danych (w poniższym przykładzie przesłany za pomocą operatora `%>%`), kolejne argumenty to deklaracje jak liczony ma być agregat oraz jak ma sie nazywać odpowiadająca mu kolumna.
+
+W pierwszej linii wczytujemy potrzebny pakiet `dplyr` a następnie liczymy następujące statystyki: minimalne i maksymalne prędkości, maksymalną i średnią wagą oraz coś ciut trudniejszego, maksymalną długość nazwy gatunku. 
+
+Każdą z tych wartości moglibyśmy policzyć również bez funkcji `summarise()`, zalety korzystania z niej w pełni objawią sie w kolejnym odcinku.
+
+```{r, message=FALSE, warning=FALSE}
+library(dplyr)
+
+koty_ptaki %>%
+  summarise(najszybszy = max(predkosc),
+            najwolniejszy = min(predkosc),
+            najcięższy = max(waga),
+            średnia.waga = mean(waga),
+            najdłuższa.nazwa = max(nchar(as.character(gatunek))))
+```
+
+---
+
+# Agregaty szerzej
+
+Tworząc agregaty możemy je opierać na więcej niż jednej zmiennej.  W poniższych przykładach liczymy śedni i medianowy pęd oraz maksymalną prędkość mierzoną w liczbach długości ciała na sekundę. W każdym przykładzie statystykę liczymy na dwóch zmiennych.
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki %>%
+  summarise(średni.pęd = mean(waga*predkosc),
+            medianowy.pęd = median(waga*predkosc),
+            predkosc.w.dlugosciach.na.sek = max(predkosc * 1000 / dlugosc / 3600))
+```
+
+Tworząc agregaty możemy wykorzystywać agregaty policzone w poprzednim kroku. W poniższym przykładzie liczymy średnią wagę a później przeliczamy ją na funty.
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki %>%
+  summarise(średnia.waga = mean(waga),
+            średnia.waga.w.funtach = średnia.waga / 0.453)
+```
+
+
+---
+
+# Auta
+
+Pokażmy jeszcze przykład działania agregatów na większym zbiorze danych o cenach ofertowych samochodów. Będziemy pracować na kilku kolumnach, poniżej wyświetlamy tylko markę, model cenę i przebieg.
+
+```{r, message=FALSE}
+auta2012 %>%
+  select(Marka, Model, Cena.w.PLN, Przebieg.w.km) %>%
+  head()
+```
+
+---
+
+# Agregaty
+
 Zbiór danych `ceny2012` zawiera szczegółowe informacje o parametrach każdej oferty sprzedaży. Często z takich zbiorów danych interesują nas pewne statystyki agregujące informacje ze zbioru danych. 
 
 Przykładem może być średnia cena, zmienność, czyli odchylenie standardowe ceny,

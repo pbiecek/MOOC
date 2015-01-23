@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / przetwarzanie / dplyr" /> 
+  <meta name="copyright" content="pogRomcy danych / przetwarzanie / agregaty" /> 
   <title>Agregaty danych [dplyr / summarise]</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
@@ -48,27 +48,84 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 6 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 22 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
+<p>Ogląd całych danych jest możłiwy tylko gdy dane nie są zbyt duże. Mieszczą się na jednym lub kilku ekranach. Dla większych zbiorów danych konieczne jest agregowanie informacji z poziomu pojedynczych wierszy na poziom grup.</p>
+<p>Aby efektywnie przedstawiać agregaty w grupach potrzebujemy funkcji liczącej agregaty oraz funkcji definiującej grupy. Do agregacji wygodnie wykrozystać funkcję <code>summarise()</code> z pakirtu <code>dplyr</code>, którą przedstawimy w tym odcinku.</p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
-<li>Jak ze zbioru danych wybierać tylko interesujące nas wiersze</li>
+<li>jak dla całego zbioru danych wyznaczać agregaty?</li>
+<li>jakie przykłądowe agregaty można wyznaczać?</li>
 </ul>
-<p>Do ilustracji wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych to <code>koty_ptaki</code> a drugi, znacznie większy to <code>auta2012</code>.</p>
+<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>SmarterPoland</code>.</p>
+</div>
+<div id="ptaki-vs.koty" class="slide section level1">
+<h1>Ptaki vs. koty</h1>
+<p>Rozpocznijmy od przykładu dla małego zbioru danych. Widząc wszystki ewiersze łatwiej będzie nam zauważyć zależność pomiędzy oryginalnymi danymi a agregatami. Ten zbiór danych jest dostarczany razem z pakietem <code>SmarterPoland</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+koty_ptaki</code></pre>
+<pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
+## 1          Tygrys 300.00     2.5       60     Azja        25     Kot
+## 2             Lew 200.00     2.0       80   Afryka        29     Kot
+## 3          Jaguar 100.00     1.7       90  Ameryka        15     Kot
+## 4            Puma  80.00     1.7       70  Ameryka        13     Kot
+## 5         Leopard  70.00     1.4       85     Azja        21     Kot
+## 6          Gepard  60.00     1.4      115   Afryka        12     Kot
+## 7           Irbis  50.00     1.3       65     Azja        18     Kot
+## 8          Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
+## 9           Strus 150.00     2.5       70   Afryka        45    Ptak
+## 10  Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak
+## 11 Sokol wedrowny   0.70     0.5      110   Polnoc        15    Ptak
+## 12 Sokol norweski   2.00     0.7      100   Polnoc        20    Ptak
+## 13       Albatros   4.00     0.8      120 Poludnie        50    Ptak</code></pre>
 </div>
 <div id="agregaty" class="slide section level1">
 <h1>Agregaty</h1>
-<p>Funkcją <code>sumamrise()</code> możemy wyznaczyć wektor podsumowań zbiorru danych.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+<p>Do wyznaczania agregatów / podsumowań wykorzystamy funkcję <code>sumamrise()</code>. Jako pierwszy argument przyjmuje ona zbiór danych (w poniższym przykładzie przesłany za pomocą operatora <code>%&gt;%</code>), kolejne argumenty to deklaracje jak liczony ma być agregat oraz jak ma sie nazywać odpowiadająca mu kolumna.</p>
+<p>W pierwszej linii wczytujemy potrzebny pakiet <code>dplyr</code> a następnie liczymy następujące statystyki: minimalne i maksymalne prędkości, maksymalną i średnią wagą oraz coś ciut trudniejszego, maksymalną długość nazwy gatunku.</p>
+<p>Każdą z tych wartości moglibyśmy policzyć również bez funkcji <code>summarise()</code>, zalety korzystania z niej w pełni objawią sie w kolejnym odcinku.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+
 koty_ptaki %&gt;%
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">najszybszy =</span> <span class="kw">max</span>(predkosc),
             <span class="dt">najwolniejszy =</span> <span class="kw">min</span>(predkosc),
             najcięż<span class="dt">szy =</span> <span class="kw">max</span>(waga),
-            najkrócej.ż<span class="dt">yjacy =</span> <span class="kw">min</span>(zywotnosc))</code></pre>
-<pre><code>##   najszybszy najwolniejszy najcięższy najkrócej.żyjacy
-## 1        170            60        300               12</code></pre>
+            ś<span class="dt">rednia.waga =</span> <span class="kw">mean</span>(waga),
+            najdłuż<span class="dt">sza.nazwa =</span> <span class="kw">max</span>(<span class="kw">nchar</span>(<span class="kw">as.character</span>(gatunek))))</code></pre>
+<pre><code>##   najszybszy najwolniejszy najcięższy średnia.waga najdłuższa.nazwa
+## 1        170            60        300     78.59615               14</code></pre>
+</div>
+<div id="agregaty-szerzej" class="slide section level1">
+<h1>Agregaty szerzej</h1>
+<p>Tworząc agregaty możemy je opierać na więcej niż jednej zmiennej. W poniższych przykładach liczymy śedni i medianowy pęd oraz maksymalną prędkość mierzoną w liczbach długości ciała na sekundę. W każdym przykładzie statystykę liczymy na dwóch zmiennych.</p>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(średni.pę<span class="dt">d =</span> <span class="kw">mean</span>(waga*predkosc),
+            medianowy.pę<span class="dt">d =</span> <span class="kw">median</span>(waga*predkosc),
+            <span class="dt">predkosc.w.dlugosciach.na.sek =</span> <span class="kw">max</span>(predkosc *<span class="st"> </span><span class="dv">1000</span> /<span class="st"> </span>dlugosc /<span class="st"> </span><span class="dv">3600</span>))</code></pre>
+<pre><code>##   średni.pęd medianowy.pęd predkosc.w.dlugosciach.na.sek
+## 1   5905.038          5600                      236.1111</code></pre>
+<p>Tworząc agregaty możemy wykorzystywać agregaty policzone w poprzednim kroku. W poniższym przykładzie liczymy średnią wagę a później przeliczamy ją na funty.</p>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(ś<span class="dt">rednia.waga =</span> <span class="kw">mean</span>(waga),
+            ś<span class="dt">rednia.waga.w.funtach =</span> średnia.waga /<span class="st"> </span><span class="fl">0.453</span>)</code></pre>
+<pre><code>##   średnia.waga średnia.waga.w.funtach
+## 1     78.59615               173.5014</code></pre>
+</div>
+<div id="auta" class="slide section level1">
+<h1>Auta</h1>
+<p>Pokażmy jeszcze przykład działania agregatów na większym zbiorze danych o cenach ofertowych samochodów. Będziemy pracować na kilku kolumnach, poniżej wyświetlamy tylko markę, model cenę i przebieg.</p>
+<pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
+<span class="st">  </span><span class="kw">select</span>(Marka, Model, Cena.w.PLN, Przebieg.w.km) %&gt;%
+<span class="st">  </span><span class="kw">head</span>()</code></pre>
+<pre><code>##           Marka     Model Cena.w.PLN Przebieg.w.km
+## 1           Kia    Carens      49900         41000
+## 2    Mitsubishi Outlander      88000         46500
+## 3     Chevrolet   Captiva      86000          8000
+## 4         Volvo       S80      25900        200000
+## 5 Mercedes-Benz  Sprinter      55900        169400
+## 6 Mercedes-Benz     Viano      45900        141100</code></pre>
 </div>
 <div id="agregaty-1" class="slide section level1">
 <h1>Agregaty</h1>
