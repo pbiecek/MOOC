@@ -63,10 +63,13 @@ pogRomcy danych
 </div>
 <div id="dane-o-pracy-nerki" class="slide section level1">
 <h1>Dane o pracy nerki</h1>
-<p>Aby zilustrować czym jest szeroka reprezentacja danych i jak przejść z niej na wąską reprezetnację wykorzystamy zbiór danych <code>kidney</code> z pakietu <code>PBImisc</code>. Ten pakiet nie jest dostępny wraz z bazową wersją R. Należy go doinstalować funkcją <code>install.packages()</code> (informacja o tym jak to zrobić jest w odcinku 2). Po instalacji włączymy ten pakiet a następnie ze zbioru <code>kidney</code> wybierzemy kilka interesujących nas kolumn. Każdy wiersz w tym zbiorze danych opisuje jednego pacjenta. W kolumnie <code>therapy</code> znajduje się zmienna jakościowa o trzech poziomach a w kolumnach MDRD7 … MDRD60 znajdują sie pomiary sprawności nerki (mierzone współczynnikiem MDRD) w dniach 7, 30, oraz miesiącach 3, 6, 12, 24, 36 i 60 po przeszczepie.</p>
+<p>Aby zilustrować czym jest szeroka reprezentacja danych i jak przejść z niej na wąską reprezetnację wykorzystamy zbiór danych <code>kidney</code> z pakietu <code>PBImisc</code>. Ten pakiet nie jest dostępny wraz z bazową wersją R. Należy go doinstalować funkcją <code>install.packages()</code> (informacja o tym jak to zrobić jest w odcinku 2). Po instalacji włączymy ten pakiet. Do zbioru danych <code>kidney</code> dodajemy kolumnę z <code>id</code> pacjenta.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PBImisc)
-<span class="kw">library</span>(dplyr)
-kidney$id &lt;-<span class="st"> </span><span class="kw">rownames</span>(kidney)
+kidney$id &lt;-<span class="st"> </span><span class="kw">rownames</span>(kidney)</code></pre>
+<p>Następnie ze zbioru <code>kidney</code> wybierzemy kilka interesujących nas kolumn. Każdy wiersz w tym zbiorze danych opisuje jednego pacjenta. W kolumnie <code>therapy</code> znajduje się zmienna jakościowa o trzech poziomach a w kolumnach MDRD7 … MDRD60 znajdują sie pomiary sprawności nerki (mierzone współczynnikiem MDRD) w dniach 7, 30, oraz miesiącach 3, 6, 12, 24, 36 i 60 po przeszczepie.</p>
+<p>Do wyboru interesujących nas zmiennych wygodnie jest użyć funkcji <code>select()</code> z pakietu <code>dplyr</code>.</p>
+<p>Taką reprezentację danch w której kolejne pomiary MDRD opisane są przez kolejne kolumny nazywa się reprezntacją szeroką. Im więcej punktów pomiarowych dla MDRD tym więcej kolumn w zbiorze danych.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 kidney_wybrane &lt;-<span class="st"> </span>kidney %&gt;%<span class="st"> </span>
 <span class="st">  </span>dplyr::<span class="kw">select</span>(id, therapy, MDRD7:MDRD60)
 
@@ -79,15 +82,16 @@ kidney_wybrane &lt;-<span class="st"> </span>kidney %&gt;%<span class="st"> </sp
 ## 5  5      ca    36     79  64.2    64     64     79     70     63
 ## 6  6      cm     9     43  58.0    49     45     51     48     56</code></pre>
 </div>
-<div id="dane-o-pracy-nerki-1" class="slide section level1">
-<h1>Dane o pracy nerki</h1>
+<div id="dane-o-pracy-nerki---postac-waska" class="slide section level1">
+<h1>Dane o pracy nerki - postać wąska</h1>
+<p>Czym w tkim razie jest postać wąska? Łatwiej to wyjasnić na przykładzie.</p>
+<p>Użyjemy funkcji <code>gather()</code> z pakietu <code>tidyr</code>. Pierwszym argumentem jest ramka danych w postaci szerokiej. Kolejne dwa argumenty (w poniższym przykłądzie to <code>time</code> i <code>MDRD</code>) to nazwy zmiennych, które w nowym zbiorze danych będą opisywały klucze i wartości. Pozostałe argumentyto lista kolumn, które mają być przekształcone w reprezentację wąską (tutaj są to wszystkie MDRD…).</p>
+<p>Wynikiem jest reprezntacja wąska, w której kolejne pomiary MDRD zostały przedstawione za pomocą różnych wierszy. W reprezentacji wąskiej w kolumnie <code>time</code> znajduje się nazwa kolumny z oryginalnego zbioru danych, a w kolimnie <code>MDRD</code> znajdują się wartości.</p>
+<p>Zbiór danych <code>kidney_wybrane</code> miał 334 wiersze i 10 kolumn a zbiór danych <code>kidney_waska</code> ma 2672 wiersze i 4 kolumny. Każdy z 334 pacjentów jest opisany przez 8 wierszy, każdy wiersz dla innego puntku pomiarowego MDRD.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyr)
 
-kidney_waska &lt;-<span class="st"> </span>kidney_wybrane %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">gather</span>(time, MDRD, MDRD7:MDRD60)
-
-kidney_waska %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">head</span>()</code></pre>
+kidney_waska &lt;-<span class="st"> </span><span class="kw">gather</span>(kidney_wybrane, time, MDRD, MDRD7:MDRD60)
+<span class="kw">head</span>(kidney_waska)</code></pre>
 <pre><code>##   id therapy  time MDRD
 ## 1  1      tc MDRD7   46
 ## 2  2      cm MDRD7   44
@@ -96,10 +100,24 @@ kidney_waska %&gt;%<span class="st"> </span>
 ## 5  5      ca MDRD7   36
 ## 6  6      cm MDRD7    9</code></pre>
 </div>
-<div id="dane-do-cwiczen" class="slide section level1">
-<h1>Dane do ćwiczeń</h1>
-<p>Pakiet <code>tidyr</code> zawiera kilka użytecznych funkcji do zmiany kształtu danych. Do ilustracji tych funkcji wykorzystamy zbiór danych z eurostatu o popularności transpostu w różnych krajach.</p>
-<p>Do pobrania tych danych użyjemy funkcji <code>getEurostatRCV()</code>, która zwraca dane w tak zwanej wąskiej postaci.</p>
+<div id="dane-o-pracy-nerki---postac-waska-1" class="slide section level1">
+<h1>Dane o pracy nerki - postać wąska</h1>
+<p>Warto zauważyć, że zmienne nie wymienione w funkcji <code>gather()</code> (w tym przykładzie to zmienne <code>id</code> oraz <code>therapy</code>) zostaną pozostawione w ramce danych, nie będą skonwertowane na postać wąską.</p>
+<pre class="sourceCode r"><code class="sourceCode r">kidney_waska %&gt;%<span class="st"> </span><span class="kw">filter</span>(id==<span class="st">&quot;1&quot;</span>)</code></pre>
+<pre><code>##   id therapy   time MDRD
+## 1  1      tc  MDRD7   46
+## 2  1      tc MDRD30   71
+## 3  1      tc  MDRD3   65
+## 4  1      tc  MDRD6   71
+## 5  1      tc MDRD12   65
+## 6  1      tc MDRD24   70
+## 7  1      tc MDRD36   76
+## 8  1      tc MDRD60   72</code></pre>
+</div>
+<div id="dane-z-eurostatu" class="slide section level1">
+<h1>Dane z EuroStatu</h1>
+<p>Do ilustracj transforamcji z postaci wąskiej na szeroką wykorzystamy dane z Eurostatu. Dane w Eurostacie są przechowywane z kilkoma wymiarami, na takich danych wygodniej się pracuje, gdy są one w postaci wąskiej. Jednak gdy przychodzi o wyświetlania tych danych na ekranie wygodniej jest je przekształcić na postać szeroką.</p>
+<p>Do ilustracji tych funkcji wykorzystamy zbiór danych z Eurostatu o popularności transpostu w różnych krajach. Te dane są w tabeli <code>tsdtr210</code> na serwerach Eurostat. Do pobrania tych danych użyjemy funkcji <code>getEurostatRCV()</code> z pakietu <code>SmarterPoland</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
 tsdtr210 &lt;-<span class="st"> </span><span class="kw">getEurostatRCV</span>(<span class="st">&quot;tsdtr210&quot;</span>)
 <span class="kw">head</span>(tsdtr210)</code></pre>
@@ -110,20 +128,20 @@ tsdtr210 &lt;-<span class="st"> </span><span class="kw">getEurostatRCV</span>(<s
 ## BUS_TOT_CH_1990 BUS_TOT  CH 1990    NA
 ## BUS_TOT_CY_1990 BUS_TOT  CY 1990    NA
 ## BUS_TOT_CZ_1990 BUS_TOT  CZ 1990    NA</code></pre>
+<p>Pobrane dane są w postaci wąskiej. Kolumna <code>geo</code> określa kraj, kolumna <code>time</code> określa rok, kolumna <code>vehicle</code> rodzaj transportu a kolumna <code>value</code> oopuarność danego rodzaju transportu w określonym kraju w określonym roku.</p>
 </div>
 <div id="z-postaci-waskiej-do-szerokiej" class="slide section level1">
 <h1>Z postaci wąskiej do szerokiej</h1>
 <p>Aby przejść z postaci wąskiej do postaci szerokie, można użyć funkcji <code>spread()</code>.</p>
-<p>Jej pierwszym argumentem jest ramka z danymi, a kolejne dwie zmienne określają kolumnę w której przechowywane są klucze i wartości. Następnie ramka danych jest konwertowana w ten sposób, że wartości drugiej kolumny wejściowego zbioru danych stają się nazwami kolumn wyjściowego zbioru danych.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyr)
-<span class="kw">library</span>(dplyr)
-szeroka &lt;-<span class="st"> </span>
-<span class="st">  </span>tsdtr210 %&gt;%
-<span class="st">    </span><span class="kw">spread</span>(time, value)
+<p>Jej pierwszym argumentem jest ramka z danymi w postaci wąskiej. Kolejne dwie zmienne określają kolumnę w której przechowywane są klucze i wartości.</p>
+<p>Funkcja <code>spread()</code> konwertuje ramkę danych w ten sposób, że wartości drugiej kolumny wejściowego zbioru danych stają się nazwami kolumn wyjściowego zbioru danych.</p>
+<p>W poniższym przykładzie zmienna <code>time</code> jest wskazana jako klucz, a więc wartości tej zmiennej staną się nazwami kolumn w nowym zbiorze danych. Zmienna <code>value</code> jest wskazana jako wartości i to ona wypełni nowe kolumny.</p>
+<p>Pozostałe kolumny, w tym przypakdu <code>vehicle</code> i ‘geo’, pozostają w niezmienionej postaci.</p>
+<p>Wyświetlmy wiersze spełniające warunek <code>geo == &quot;PL&quot;</code>. Jak widzimy wynikowy zbiór danych <code>szeroka</code> ma 13 kolumn opisujących popularność różnych środków transportu w kolejnych latach.</p>
+<pre class="sourceCode r"><code class="sourceCode r">szeroka &lt;-<span class="st"> </span><span class="kw">spread</span>(tsdtr210, time, value)
 
 <span class="co"># wyświetlmy wiersze dla Polski</span>
-szeroka %&gt;%
-<span class="st">  </span><span class="kw">filter</span>(geo ==<span class="st"> &quot;PL&quot;</span>)</code></pre>
+szeroka %&gt;%<span class="st"> </span><span class="kw">filter</span>(geo ==<span class="st"> &quot;PL&quot;</span>)</code></pre>
 <pre><code>##   vehicle geo 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001
 ## 1 BUS_TOT  PL   NA   NA   NA   NA   NA 19.9 19.4 17.9 17.4 16.8 15.4 14.7
 ## 2     CAR  PL 41.3   NA   NA   NA   NA 64.6 69.3 71.3 72.1 72.3 72.8 74.7
@@ -133,10 +151,30 @@ szeroka %&gt;%
 ## 2 77.0 77.6 78.9 80.7 82.5 83.6 85.5 87.0 88.4 84.4 84.6
 ## 3  9.5  8.8  8.0  7.3  6.9  6.8  6.2  5.5  5.2  4.8  4.8</code></pre>
 </div>
+<div id="z-postaci-waskiej-do-szerokiej-1" class="slide section level1">
+<h1>Z postaci wąskiej do szerokiej</h1>
+<p>Dane z Eurostatu miały więcej wymiarów i każdy z nich może być użyty do stworzenia nowych kolumn. Przykładowo w poniższym przykłądzie do rozszerzenia ramki danych wykorzystamy zmienną <code>geo</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">szeroka2 &lt;-<span class="st"> </span><span class="kw">spread</span>(tsdtr210, geo, value)
+
+<span class="co"># wyświetlmy wiersze dla roku 2010</span>
+szeroka2 %&gt;%<span class="st"> </span><span class="kw">filter</span>(time ==<span class="st"> &quot;2010&quot;</span>)</code></pre>
+<pre><code>##   vehicle time   AT   BE   BG   CH   CY   CZ DE   DK   EE   EL   ES EU27
+## 1 BUS_TOT 2010 10.3 12.2 16.4  5.1 18.1 18.9  6 10.7 14.4 17.3 12.3  8.7
+## 2     CAR 2010 78.7 80.3 80.0 77.3 81.9 73.5 86 79.4 83.6 81.6 82.3 84.2
+## 3     TRN 2010 11.0  7.4  3.6 17.6   NA  7.6  8  9.9  2.0  1.1  5.4  7.1
+##   EU28   FI   FR   HR   HU   IE   IS   IT   LT   LU   LV   MK   MT   NL
+## 1  8.7  9.9  5.3 10.7 21.4 14.5 11.4 12.1  7.6 12.1 17.1 20.3 18.5  3.7
+## 2 84.2 84.9 85.5 83.7 68.6 82.6 88.6 82.4 91.7 83.5 78.2 77.5 81.5 87.2
+## 3  7.1  5.2  9.3  5.6  9.9  2.9   NA  5.6  0.7  4.5  4.7  2.2   NA  9.1
+##     NO   PL   PT   RO   SE   SI   SK   TR   UK
+## 1  6.8  6.4  6.5 12.9  7.2 10.8 15.5 38.3  6.2
+## 2 88.4 88.4 89.1 81.3 83.4 86.8 77.8 59.3 86.4
+## 3  4.8  5.2  4.4  5.9  9.4  2.5  6.7  2.4  7.5</code></pre>
+</div>
 <div id="z-szerokiej-do-waskiej" class="slide section level1">
 <h1>Z szerokiej do wąskiej</h1>
-<p>Odwrotną operację, przejście z postaci szerokiej do wąskiej, można wykonać operacją <code>gather()</code>.</p>
-<p>Pierwszym argumentem jest zbiór danych (poniżej przekazany za pomocą operatora <code>%&gt;%</code>), kolejne dwa określają nazwy nowych kolumn w których zapisane będą klucze i wartości. Trzeci argument to opis kolumn, które mają być zamienione na postać wąską.</p>
+<p>Proces przechodzenia z wąskiej postaci do szerokiej i z szerokiej do wąskiej jest odwracalny. Pokażmy jak z powrotem, przejść z postaci szerokiej do wąskiej, za pomocą funkcji <code>gather()</code>.</p>
+<p>Poniżej pierwszy argument jest przekazany za pomocą operatora <code>%&gt;%</code>, kolejne dwa określają nazwy nowych kolumn w których zapisane będą klucze i wartości. Trzeci argument to opis kolumn, które mają być zamienione na postać wąską.</p>
 <pre class="sourceCode r"><code class="sourceCode r">szeroka %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">gather</span>(rok, wartosc, -geo, -vehicle) %&gt;%
 <span class="st">  </span><span class="kw">head</span>()</code></pre>
@@ -148,8 +186,8 @@ szeroka %&gt;%
 ## 5 BUS_TOT  CY 1990      NA
 ## 6 BUS_TOT  CZ 1990      NA</code></pre>
 </div>
-<div id="sklejanie-i-rozcinanie-kolumn." class="slide section level1">
-<h1>Sklejanie i rozcinanie kolumn.</h1>
+<div id="sklejanie-i-rozcinanie-kolumn" class="slide section level1">
+<h1>Sklejanie i rozcinanie kolumn</h1>
 <p>Zdarza się, że wartości z kilku kolumn chcemy połączyć w jedną kolumnę, sklejając je ze sobą. Można tę operację łatwo wykonać funkcją <code>unite()</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">szeroka %&gt;%
 <span class="st">  </span><span class="kw">unite</span>(połącz, vehicle :<span class="st"> </span>geo, <span class="dt">sep=</span><span class="st">&quot;.&quot;</span>) %&gt;%

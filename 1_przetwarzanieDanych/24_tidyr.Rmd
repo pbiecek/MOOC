@@ -30,12 +30,21 @@ Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, to zbió
 
 # Dane o pracy nerki
 
-Aby zilustrować czym jest szeroka reprezentacja danych i jak przejść z niej na wąską reprezetnację wykorzystamy zbiór danych `kidney` z pakietu `PBImisc`. Ten pakiet nie jest dostępny wraz z bazową wersją R. Należy go doinstalować funkcją `install.packages()` (informacja o tym jak to zrobić jest w odcinku 2). Po instalacji włączymy ten pakiet a następnie ze zbioru `kidney` wybierzemy kilka interesujących nas kolumn. Każdy wiersz w tym zbiorze danych opisuje jednego pacjenta. W kolumnie `therapy` znajduje się zmienna jakościowa o trzech poziomach a w kolumnach MDRD7 ... MDRD60 znajdują sie pomiary sprawności nerki (mierzone współczynnikiem MDRD) w dniach 7, 30, oraz miesiącach 3, 6, 12, 24, 36 i 60 po przeszczepie.
+Aby zilustrować czym jest szeroka reprezentacja danych i jak przejść z niej na wąską reprezetnację wykorzystamy zbiór danych `kidney` z pakietu `PBImisc`. Ten pakiet nie jest dostępny wraz z bazową wersją R. Należy go doinstalować funkcją `install.packages()` (informacja o tym jak to zrobić jest w odcinku 2). Po instalacji włączymy ten pakiet. Do zbioru danych `kidney` dodajemy kolumnę z `id` pacjenta.
 
 ```{r, warning=FALSE, message=FALSE}
 library(PBImisc)
-library(dplyr)
 kidney$id <- rownames(kidney)
+```
+
+Następnie ze zbioru `kidney` wybierzemy kilka interesujących nas kolumn. Każdy wiersz w tym zbiorze danych opisuje jednego pacjenta. W kolumnie `therapy` znajduje się zmienna jakościowa o trzech poziomach a w kolumnach MDRD7 ... MDRD60 znajdują sie pomiary sprawności nerki (mierzone współczynnikiem MDRD) w dniach 7, 30, oraz miesiącach 3, 6, 12, 24, 36 i 60 po przeszczepie.
+
+Do wyboru interesujących nas zmiennych wygodnie jest użyć funkcji `select()` z pakietu `dplyr`.
+
+Taką reprezentację danch w której kolejne pomiary MDRD opisane są przez kolejne kolumny nazywa się reprezntacją szeroką. Im więcej punktów pomiarowych dla MDRD tym więcej kolumn w zbiorze danych.
+
+```{r, warning=FALSE, message=FALSE}
+library(dplyr)
 kidney_wybrane <- kidney %>% 
   dplyr::select(id, therapy, MDRD7:MDRD60)
 
@@ -44,29 +53,41 @@ head(kidney_wybrane)
 
 ---
 
-# Dane o pracy nerki
+# Dane o pracy nerki - postać wąska
 
+Czym w tkim razie jest postać wąska? Łatwiej to wyjasnić na przykładzie. 
 
+Użyjemy funkcji `gather()` z pakietu `tidyr`. Pierwszym argumentem jest ramka danych w postaci szerokiej.
+Kolejne dwa argumenty (w poniższym przykłądzie to `time` i `MDRD`) to nazwy zmiennych, które w nowym zbiorze danych będą opisywały klucze i wartości. Pozostałe argumentyto lista kolumn, które mają być przekształcone w reprezentację wąską (tutaj są to wszystkie MDRD...).
+
+Wynikiem jest reprezntacja wąska, w której kolejne pomiary MDRD zostały przedstawione za pomocą różnych wierszy. W reprezentacji wąskiej w kolumnie `time` znajduje się nazwa kolumny z oryginalnego zbioru danych, a w kolimnie `MDRD` znajdują się wartości.
+
+Zbiór danych `kidney_wybrane` miał 334 wiersze i 10 kolumn a zbiór danych `kidney_waska` ma 2672 wiersze i 4 kolumny. Każdy z 334 pacjentów jest opisany przez 8 wierszy, każdy wiersz dla innego puntku pomiarowego MDRD.
 
 ```{r, warning=FALSE, message=FALSE}
 library(tidyr)
 
-kidney_waska <- kidney_wybrane %>% 
-  gather(time, MDRD, MDRD7:MDRD60)
+kidney_waska <- gather(kidney_wybrane, time, MDRD, MDRD7:MDRD60)
+head(kidney_waska)
+```
+---
 
-kidney_waska %>% 
-  head()
+# Dane o pracy nerki - postać wąska
 
+Warto zauważyć, że zmienne nie wymienione w funkcji `gather()` (w tym przykładzie to zmienne `id` oraz `therapy`) zostaną pozostawione w ramce danych, nie będą skonwertowane na postać wąską.
+
+```{r, warning=FALSE, message=FALSE}
+kidney_waska %>% filter(id=="1")
 ```
 
 ---
 
-# Dane do ćwiczeń
+# Dane z EuroStatu
 
-Pakiet `tidyr` zawiera kilka użytecznych funkcji do zmiany kształtu danych. 
-Do ilustracji tych funkcji wykorzystamy zbiór danych z eurostatu o popularności transpostu w różnych krajach.
+Do ilustracj transforamcji z postaci wąskiej na szeroką wykorzystamy dane z Eurostatu. Dane w Eurostacie są przechowywane z kilkoma wymiarami, na takich danych wygodniej się pracuje, gdy są one w postaci wąskiej. Jednak gdy przychodzi o wyświetlania tych danych na ekranie wygodniej jest je przekształcić na postać szeroką.
 
-Do pobrania tych danych użyjemy funkcji `getEurostatRCV()`, która zwraca dane w tak zwanej wąskiej postaci.
+Do ilustracji tych funkcji wykorzystamy zbiór danych z Eurostatu o popularności transpostu w różnych krajach. Te dane są w tabeli `tsdtr210` na serwerach Eurostat.
+Do pobrania tych danych użyjemy funkcji `getEurostatRCV()` z pakietu `SmarterPoland`.
 
 ```{r, warning=FALSE, message=FALSE}
 library(SmarterPoland)
@@ -74,34 +95,49 @@ tsdtr210 <- getEurostatRCV("tsdtr210")
 head(tsdtr210)
 ```
 
+Pobrane dane są w postaci wąskiej. Kolumna `geo` określa kraj, kolumna `time` określa rok, kolumna `vehicle` rodzaj transportu a kolumna `value` oopuarność danego rodzaju transportu w określonym kraju w określonym roku.
+
 ---
 
 # Z postaci wąskiej do szerokiej
 
 Aby przejść z postaci wąskiej do postaci szerokie, można użyć funkcji `spread()`.
 
-Jej pierwszym argumentem jest ramka z danymi, a kolejne dwie zmienne określają kolumnę w której przechowywane są klucze i wartości. Następnie ramka danych jest konwertowana w ten sposób, że wartości drugiej kolumny wejściowego zbioru danych stają się nazwami kolumn wyjściowego zbioru danych.
+Jej pierwszym argumentem jest ramka z danymi w postaci wąskiej. Kolejne dwie zmienne określają kolumnę w której przechowywane są klucze i wartości. 
+
+Funkcja `spread()` konwertuje ramkę danych w ten sposób, że wartości drugiej kolumny wejściowego zbioru danych stają się nazwami kolumn wyjściowego zbioru danych.
+
+W poniższym przykładzie zmienna `time` jest wskazana jako klucz, a więc wartości tej zmiennej staną się nazwami kolumn w nowym zbiorze danych. Zmienna `value` jest wskazana jako wartości i to ona wypełni nowe kolumny.
+
+Pozostałe kolumny, w tym przypakdu `vehicle` i 'geo', pozostają w niezmienionej postaci.
+
+Wyświetlmy wiersze spełniające warunek `geo == "PL"`. Jak widzimy wynikowy zbiór danych `szeroka` ma 13 kolumn opisujących popularność różnych środków transportu w kolejnych latach.
 
 ```{r, warning=FALSE, message=FALSE}
-library(tidyr)
-library(dplyr)
-szeroka <- 
-  tsdtr210 %>%
-    spread(time, value)
+szeroka <- spread(tsdtr210, time, value)
 
 # wyświetlmy wiersze dla Polski
-szeroka %>%
-  filter(geo == "PL")
+szeroka %>% filter(geo == "PL")
+```
+
+# Z postaci wąskiej do szerokiej
+
+Dane z Eurostatu miały więcej wymiarów i każdy z nich może być użyty do stworzenia nowych kolumn. Przykładowo w poniższym przykłądzie do rozszerzenia ramki danych wykorzystamy zmienną `geo`.
+
+```{r, warning=FALSE, message=FALSE}
+szeroka2 <- spread(tsdtr210, geo, value)
+
+# wyświetlmy wiersze dla roku 2010
+szeroka2 %>% filter(time == "2010")
 ```
 
 ---
 
 # Z szerokiej do wąskiej
 
-Odwrotną operację, przejście z postaci szerokiej do wąskiej, można wykonać operacją `gather()`.
+Proces przechodzenia z wąskiej postaci do szerokiej i z szerokiej do wąskiej jest odwracalny. Pokażmy jak z powrotem, przejść z postaci szerokiej do wąskiej, za pomocą funkcji `gather()`.
 
-Pierwszym argumentem jest zbiór danych (poniżej przekazany za pomocą operatora `%>%`), kolejne dwa określają nazwy nowych kolumn w których zapisane będą klucze i wartości. Trzeci argument to opis kolumn, które mają być zamienione na postać wąską.
-
+Poniżej pierwszy argument jest przekazany za pomocą operatora `%>%`, kolejne dwa określają nazwy nowych kolumn w których zapisane będą klucze i wartości. Trzeci argument to opis kolumn, które mają być zamienione na postać wąską.
 
 ```{r, warning=FALSE, message=FALSE}
 szeroka %>% 
@@ -111,7 +147,7 @@ szeroka %>%
 
 ---
 
-# Sklejanie i rozcinanie kolumn.
+# Sklejanie i rozcinanie kolumn
 
 Zdarza się, że wartości z kilku kolumn chcemy połączyć w jedną kolumnę, sklejając je ze sobą.
 Można tę operację łatwo wykonać funkcją `unite()`.
