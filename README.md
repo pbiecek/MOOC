@@ -41,10 +41,10 @@ część 1: Data smart
     + odcinek 17: Filtrowanie wierszy [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/17_dplyr_filter.html), v1 ready
     + odcinek 18: Sortowanie wierszy [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/18_dplyr_sort.html), v1 ready
     + odcinek 19: Przetwarzanie potokowe [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/19_dplyr_potok.html), v1 ready
-    + odcinek 20: Filtrowanie kolumn [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/20_dplyr_select.html), 
-    + odcinek 21: Tworzenie nowych cech [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/21_dplyr_mutate.html), 
-    + odcinek 22: Agregowanie danych [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/22_dplyr_summarise.html), 
-    + odcinek 23: Przetwarzanie danych w grupach [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/23_dplyr_groupby.html)
+    + odcinek 20: Filtrowanie kolumn [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/20_dplyr_select.html), v1 ready 
+    + odcinek 21: Tworzenie nowych cech [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/21_dplyr_mutate.html), v1 ready 
+    + odcinek 22: Agregowanie danych [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/22_dplyr_summarise.html), v1 ready 
+    + odcinek 23: Przetwarzanie danych w grupach [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/23_dplyr_groupby.html), v1 ready
     + odcinek 24: Reprezentacja wąska i szeroka danych, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/24_tidyr.html)
   * Co dalej? 
     + odcinek 25: Co dalej? [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/99_coDalej.html)
@@ -88,4 +88,4 @@ część 2: Data master
 
   * Dodać do challange?
     + Zakup samochodu wspierany danymi [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/77_przypadekUzycia.Rmd),
-
+    + O rozkładach http://www3.nd.edu/~sjones20/JonesUND/BioStats_files/Distributions_1-3-11.pdf
