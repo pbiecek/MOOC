@@ -1,5 +1,5 @@
 ---
-title: "Zmiana formatu danych [tidyr]"
+title: "Reformatowanie i przerzucanie danych [tidyr]"
 author: "pogRomcy danych"
 date: "sezon 1 / odcinek 24 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
@@ -9,11 +9,25 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / przetwarzanie / tidyr"
+    footer: "pogRomcy danych / przetwarzanie / formatowanie"
 
 ---
 
 # O czym jest ten odcinek
+
+Bazy danych zawierają najczęściej znacznie więcej informacji niż jest nam potrzebne. Jedną z kluczowych operacji jest więc filtrowanie, wybieranie tylko tych wierszy, które nas interesują. Przy czym 'nas interesują' oznacza spełnianie pewnych kryteriów.
+
+W procesie przygotowania danych takie filtrowanie jest niesamowicie częstą instrukcją. W odcinku 7 pokazaliśmy jak wybierać wiersze spełniające określone kryterium, używając operatora `[`. W codziennej pracy, i wygodniej, i szybciej jest wykorzystać dedykowaną funkcję `filter()` z pakietu `dplyr`.
+
+W tym odcinku nauczymy się
+
+- jak ze zbioru danych wybierać tylko interesujące nas wiersze?
+- jak tworzyć złożone kryteria wyboru wierszy?
+
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, 
+znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
+
+
 
 W tym odcinku nauczymy się
 
@@ -43,6 +57,7 @@ kidney_waska <- kidney_wybrane %>%
 
 kidney_waska %>% 
   head()
+
 ```
 
 ---
