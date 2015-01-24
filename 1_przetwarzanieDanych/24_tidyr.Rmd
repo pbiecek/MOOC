@@ -147,15 +147,34 @@ szeroka %>%
 
 ---
 
+# Sklejanie kolumn
+
+Zdarza się, że wartości z kilku kolumn chcemy połączyć w jedną kolumnę, sklejając je ze sobą.
+Można taką operację sklejania łatwo wykonać funkcją `unite()`.
+
+Pierwszy argument tej funkcji to ramka danych. Drugi to nazwa kolumny, która zostanie utworzona przez połączenie kolumn, które sa pozostałymi argumentami. Argument `sep` określa co ma rozdzielać wartości w połączonych kolumnach.
+
+W przykłądzie poniżej w zbiorze danych `tsdtr210` tworzymy nową kolumnę o nazwie `panstwo_rok`, któ®ej wartości powstaną przez połaczenie wartości w kolumnach `geo` i `time` rozdzielając je znakiem `:`.
+
+```{r, warning=FALSE, message=FALSE}
+unite(tsdtr210, panstwo_rok, geo, time, sep=":") %>%
+  head()
+```
+
+---
+
 # Sklejanie i rozcinanie kolumn
 
 Zdarza się, że wartości z kilku kolumn chcemy połączyć w jedną kolumnę, sklejając je ze sobą.
-Można tę operację łatwo wykonać funkcją `unite()`.
+Można taką operację sklejania łatwo wykonać funkcją `unite()`.
+
+Pierwszy argument tej funkcji to ramka danych. Drugi to nazwa kolumny, która zostanie utworzona przez połączenie kolumn, które sa pozostałymi argumentami. Argument `sep` określa co ma rozdzielać wartości w połączonych kolumnach.
+
+W przykłądzie poniżej w zbiorze danych `tsdtr210` tworzymy nową kolumnę o nazwie `panstwo_rok`, któ®ej wartości powstaną przez połaczenie wartości w kolumnach `geo` i `time` rozdzielając je znakiem `:`.
 
 ```{r, warning=FALSE, message=FALSE}
-szeroka %>%
-  unite(połącz, vehicle : geo, sep=".") %>%
-  head(3)
+unite(tsdtr210, panstwo_rok, geo, time, sep=":") %>%
+  head()
 ```
 
 Operację odwrotną można wykonać funkcją `separate()`
