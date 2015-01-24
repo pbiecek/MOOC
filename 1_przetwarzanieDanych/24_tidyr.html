@@ -6,8 +6,8 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / przetwarzanie / tidyr" /> 
-  <title>Zmiana formatu danych [tidyr]</title>
+  <meta name="copyright" content="pogRomcy danych / przetwarzanie / formatowanie" /> 
+  <title>Reformatowanie i przerzucanie danych [tidyr]</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -44,7 +44,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </head>
 <body>
 <div class="slide titlepage">
-  <h1 class="title">Zmiana formatu danych [tidyr]</h1>
+  <h1 class="title">Reformatowanie i przerzucanie danych [tidyr]</h1>
   <p class="author">
 pogRomcy danych
   </p>
@@ -52,13 +52,49 @@ pogRomcy danych
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
+<p>Dane najczęściej są przedstawiane w postaci tabelarycznej. Jednak mogą być w tej tabeli różnie sformatowane. Wyróżnia się między innymi reprezentacje szeroką danych, wąską danych i reprezentacje mieszane.</p>
+<p>Po co taka róznorodność? Otóż w zalezności od tego co z danymi chcemy zrobić czasem lepiej je mieć w takiej czy innej postaci. Pakiet <code>tidyr</code> udostępnia funkcje, aby szybko i wygodnie przechodzić z jednego sposobu reprezentacji na drugi.</p>
 <p>W tym odcinku nauczymy się</p>
 <ul>
 <li>Jak przejść z wąskiej postaci na szeroką</li>
 <li>Jak przejść z szerokiej postaci do wąskiej</li>
 </ul>
-<p>Do ilustracji wykorzystamy zbiór danych pobranych z eurostatu.</p>
-<p>[dodac koty?]</p>
+<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, to zbiór danych <code>kidney</code> z pakietu <code>PBImisc</code>, pozwoli nam na ilustracje przejścia z formatu szerokiego na wąski. Drugi zbiór danych to dane z Eurostatu, które pobierzemy z użyciem pakietu <code>SmarterPoland</code>. Pozwolą one zilustrować przejście z reprezentacji wąskiej danych na szeroką.</p>
+</div>
+<div id="dane-o-pracy-nerki" class="slide section level1">
+<h1>Dane o pracy nerki</h1>
+<p>Aby zilustrować czym jest szeroka reprezentacja danych i jak przejść z niej na wąską reprezetnację wykorzystamy zbiór danych <code>kidney</code> z pakietu <code>PBImisc</code>. Ten pakiet nie jest dostępny wraz z bazową wersją R. Należy go doinstalować funkcją <code>install.packages()</code> (informacja o tym jak to zrobić jest w odcinku 2). Po instalacji włączymy ten pakiet a następnie ze zbioru <code>kidney</code> wybierzemy kilka interesujących nas kolumn. Każdy wiersz w tym zbiorze danych opisuje jednego pacjenta. W kolumnie <code>therapy</code> znajduje się zmienna jakościowa o trzech poziomach a w kolumnach MDRD7 … MDRD60 znajdują sie pomiary sprawności nerki (mierzone współczynnikiem MDRD) w dniach 7, 30, oraz miesiącach 3, 6, 12, 24, 36 i 60 po przeszczepie.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PBImisc)
+<span class="kw">library</span>(dplyr)
+kidney$id &lt;-<span class="st"> </span><span class="kw">rownames</span>(kidney)
+kidney_wybrane &lt;-<span class="st"> </span>kidney %&gt;%<span class="st"> </span>
+<span class="st">  </span>dplyr::<span class="kw">select</span>(id, therapy, MDRD7:MDRD60)
+
+<span class="kw">head</span>(kidney_wybrane)</code></pre>
+<pre><code>##   id therapy MDRD7 MDRD30 MDRD3 MDRD6 MDRD12 MDRD24 MDRD36 MDRD60
+## 1  1      tc    46     71  65.0    71     65     70     76     72
+## 2  2      cm    44     58  20.0    78     62     87     72     47
+## 3  3      cm     6     36  37.8    42     45     46     46     33
+## 4  4      tc     8     39  55.7    52     60     73     75     91
+## 5  5      ca    36     79  64.2    64     64     79     70     63
+## 6  6      cm     9     43  58.0    49     45     51     48     56</code></pre>
+</div>
+<div id="dane-o-pracy-nerki-1" class="slide section level1">
+<h1>Dane o pracy nerki</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyr)
+
+kidney_waska &lt;-<span class="st"> </span>kidney_wybrane %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(time, MDRD, MDRD7:MDRD60)
+
+kidney_waska %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>()</code></pre>
+<pre><code>##   id therapy  time MDRD
+## 1  1      tc MDRD7   46
+## 2  2      cm MDRD7   44
+## 3  3      cm MDRD7    6
+## 4  4      tc MDRD7    8
+## 5  5      ca MDRD7   36
+## 6  6      cm MDRD7    9</code></pre>
 </div>
 <div id="dane-do-cwiczen" class="slide section level1">
 <h1>Dane do ćwiczeń</h1>

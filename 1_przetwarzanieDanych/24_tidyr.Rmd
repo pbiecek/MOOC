@@ -15,42 +15,44 @@ output:
 
 # O czym jest ten odcinek
 
+Dane najczęściej są przedstawiane w postaci tabelarycznej. Jednak mogą być w tej tabeli różnie sformatowane. Wyróżnia się między innymi reprezentacje szeroką danych, wąską danych i reprezentacje mieszane.
 
-W tym odcinku nauczymy się
-
-- jak ze zbioru danych wybierać tylko interesujące nas wiersze?
-- jak tworzyć złożone kryteria wyboru wierszy?
-
-Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, 
-znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
-
-
+Po co taka róznorodność? Otóż w zalezności od tego co z danymi chcemy zrobić czasem lepiej je mieć w takiej czy innej postaci. Pakiet `tidyr` udostępnia funkcje, aby szybko i wygodnie przechodzić z jednego sposobu reprezentacji na drugi.
 
 W tym odcinku nauczymy się
 
 - Jak przejść z wąskiej postaci na szeroką
 - Jak przejść z szerokiej postaci do wąskiej
 
-Do ilustracji wykorzystamy zbiór danych pobranych z eurostatu.
-
-[dodac koty?]
-zamaist kotów lepiej dane kidney z PBImisc
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, to zbiór danych `kidney` z pakietu `PBImisc`, pozwoli nam na ilustracje przejścia z formatu szerokiego na wąski. Drugi zbiór danych to dane z Eurostatu, które pobierzemy z użyciem pakietu `SmarterPoland`. Pozwolą one zilustrować przejście z reprezentacji wąskiej danych na szeroką.
 
 ---
 
-# Dane do ćwiczeń
+# Dane o pracy nerki
+
+Aby zilustrować czym jest szeroka reprezentacja danych i jak przejść z niej na wąską reprezetnację wykorzystamy zbiór danych `kidney` z pakietu `PBImisc`. Ten pakiet nie jest dostępny wraz z bazową wersją R. Należy go doinstalować funkcją `install.packages()` (informacja o tym jak to zrobić jest w odcinku 2). Po instalacji włączymy ten pakiet a następnie ze zbioru `kidney` wybierzemy kilka interesujących nas kolumn. Każdy wiersz w tym zbiorze danych opisuje jednego pacjenta. W kolumnie `therapy` znajduje się zmienna jakościowa o trzech poziomach a w kolumnach MDRD7 ... MDRD60 znajdują sie pomiary sprawności nerki (mierzone współczynnikiem MDRD) w dniach 7, 30, oraz miesiącach 3, 6, 12, 24, 36 i 60 po przeszczepie.
 
 ```{r, warning=FALSE, message=FALSE}
 library(PBImisc)
-head(kidney)
+library(dplyr)
+kidney$id <- rownames(kidney)
 kidney_wybrane <- kidney %>% 
-  dplyr::select(therapy, MDRD7:MDRD60)
+  dplyr::select(id, therapy, MDRD7:MDRD60)
 
-kidney_wybrane %>%
-  head()
+head(kidney_wybrane)
+```
+
+---
+
+# Dane o pracy nerki
+
+
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyr)
 
 kidney_waska <- kidney_wybrane %>% 
-  gather(time, MDRD, -therapy)
+  gather(time, MDRD, MDRD7:MDRD60)
 
 kidney_waska %>% 
   head()
