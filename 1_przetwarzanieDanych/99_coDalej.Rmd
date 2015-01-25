@@ -12,20 +12,20 @@ output:
 Coraz więcej książek, podręczników i artykułów jest poświęconych programowi R.
 
 W pierwszej kolejności chciałbym polecić pozycję, którą sam przygotowałem będąc doktorantem, co jakiś czas uaktualniam, do dziś doczekała się ona trzeciego rozszerzonego wydania. 
-Można z jej pomocą poznać podstawy języka R jak również bardziej zaawansowane mechanizmy takie jak pakiet *knitr* do automatycznego tworzenia raportów, funkcje do analizy danych, prezentowania danych, optymalizacji, przetwarzania wieloskalowego oraz wiele innych tematów (omówionych jest ponad 500 funkcji dostępnych w R). Połowa tej książki dostępna jest pezpłątnie na poniższej stornie.
+Można z jej pomocą poznać podstawy języka R jak również bardziej zaawansowane mechanizmy takie jak pakiet *knitr* do automatycznego tworzenia raportów, funkcje do analizy danych, prezentowania danych, optymalizacji, przetwarzania wielkoskalowego oraz wiele innych tematów (omówionych jest ponad 500 funkcji dostępnych w R). Połowa tej książki dostępna jest bezpłatnie na poniższej stornie.
 
 > *Przewodnik po pakiecie R* *Przemysław Biecek*   
 > http://biecek.pl/R/
 
 Ale w języku polskim jest wiele książek, pisanych przez autorów kładących nacisk na sam język, na zastosowania w biologii, ekonomii czy innych dziedzinach.
 
-> Pełna lista polskich książek jest rozwijana na stronie wikipedii   
+> Pełna lista polskich książek jest rozwijana na stronie Wikipedii   
 > http://pl.wikipedia.org/wiki/R_(j%C4%99zyk_programowania)#Polskie_ksi.C4.85.C5.BCki_o_R
 
 ### W języku angielskim 
 W języku angielskim zatrzęsienie dobrych i słabych pozycji
 
-Dla osób zainteresowanych głębiej językiem szcezgólnie polecam otwartą książkę   
+Dla osób zainteresowanych głębiej językiem szczególnie polecam otwartą książkę   
 
 > *Advanced R* *Hadley Wickham*   
 > http://adv-r.had.co.nz/   
@@ -38,12 +38,12 @@ W języku angielskim są również dostępne kursy online dotyczące R na takich
 
 > https://www.coursera.org/ czy https://www.edx.org/
 
-## Dla uzytkowników Excela
+## Dla użytkowników Excela
 
 Użytkownikom Execela, którzy chcieliby przejść płynnie z Excela do R polecam świetną książkę,
-dostępną w całości online pracowaną przez Johna Taverasa ,,R for Excel Users''.
+dostępną w całości online opracowaną przez Johna Taverasa ,,R for Excel Users''.
 
-Książce przyświeca miłę dla oka motto ,,Excel analysts who know R can do more with data''.
+Książce przyświeca miłe dla oka motto ,,Excel analysts who know R can do more with data''.
 
 http://www.rforexcelusers.com/book/preface/
 
@@ -92,4 +92,5 @@ WZUR - Wrocław (już od jakiegoś czasu wstrzymany, ale kto wie)
 Lista wielu grup użytkowników R na całym świecie:   
 
 > http://blog.revolutionanalytics.com/local-r-groups.html
+
 
