@@ -6,28 +6,9 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / przetwarzanie / formatowanie" /> 
-  <title>Reformatowanie i przerzucanie danych [tidyr]</title>
+  <meta name="copyright" content="pogRomcy danych / przetwarzanie / funkcje" /> 
+  <title>Zespół realizujący</title>
   <style type="text/css">code{white-space: pre;}</style>
-  <style type="text/css">
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; }
-code > span.dt { color: #902000; }
-code > span.dv { color: #40a070; }
-code > span.bn { color: #40a070; }
-code > span.fl { color: #40a070; }
-code > span.ch { color: #4070a0; }
-code > span.st { color: #4070a0; }
-code > span.co { color: #60a0b0; font-style: italic; }
-code > span.ot { color: #007020; }
-code > span.al { color: #ff0000; font-weight: bold; }
-code > span.fu { color: #06287e; }
-code > span.er { color: #ff0000; font-weight: bold; }
-  </style>
   <link href="data:text/css,%2F%2A%20slidy%2Ecss%0A%0A%20%20%20Copyright%20%28c%29%202005%2D2010%20W3C%20%28MIT%2C%20ERCIM%2C%20Keio%29%2C%20All%20Rights%20Reserved%2E%0A%20%20%20W3C%20liability%2C%20trademark%2C%20document%20use%20and%20software%20licensing%0A%20%20%20rules%20apply%2C%20see%3A%0A%0A%20%20%20http%3A%2F%2Fwww%2Ew3%2Eorg%2FConsortium%2FLegal%2Fcopyright%2Ddocuments%0A%20%20%20http%3A%2F%2Fwww%2Ew3%2Eorg%2FConsortium%2FLegal%2Fcopyright%2Dsoftware%0A%2A%2F%0Abody%0A%7B%0A%20%20margin%3A%200%200%200%200%3B%0A%20%20padding%3A%200%200%200%200%3B%0A%20%20width%3A%20100%25%3B%0A%20%20height%3A%20100%25%3B%0A%20%20color%3A%20black%3B%0A%20%20background%2Dcolor%3A%20white%3B%0A%20%20font%2Dfamily%3A%20%22Gill%20Sans%20MT%22%2C%20%22Gill%20Sans%22%2C%20GillSans%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014pt%3B%0A%7D%0A%0Adiv%2Etoolbar%20%7B%0A%20%20position%3A%20fixed%3B%20z%2Dindex%3A%20200%3B%0A%20%20top%3A%20auto%3B%20bottom%3A%200%3B%20left%3A%200%3B%20right%3A%200%3B%0A%20%20height%3A%201%2E2em%3B%20text%2Dalign%3A%20right%3B%0A%20%20padding%2Dleft%3A%201em%3B%0A%20%20padding%2Dright%3A%201em%3B%20%0A%20%20font%2Dsize%3A%2060%25%3B%0A%20%20color%3A%20DimGray%3B%0A%20%20background%2Dcolor%3A%20rgb%28240%2C240%2C240%29%3B%0A%20%20border%2Dtop%3A%20solid%201px%20rgb%28180%2C180%2C180%29%3B%0A%7D%0A%0Adiv%2Etoolbar%20span%2Ecopyright%20%7B%0A%20%20color%3A%20DimGray%3B%0A%20%20margin%2Dleft%3A%200%2E5em%3B%0A%7D%0A%0Adiv%2Einitial%5Fprompt%20%7B%0A%20%20position%3A%20absolute%3B%0A%20%20z%2Dindex%3A%201000%3B%0A%20%20bottom%3A%201%2E2em%3B%0A%20%20width%3A%20100%25%3B%0A%20%20background%2Dcolor%3A%20rgb%28200%2C200%2C200%29%3B%0A%20%20opacity%3A%200%2E35%3B%0A%20%20background%2Dcolor%3A%20rgb%28200%2C200%2C200%2C%200%2E35%29%3B%0A%20%20cursor%3A%20pointer%3B%0A%7D%0A%0Adiv%2Einitial%5Fprompt%20p%2Ehelp%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0Adiv%2Einitial%5Fprompt%20p%2Eclose%20%7B%0A%20%20text%2Dalign%3A%20right%3B%0A%20%20font%2Dstyle%3A%20italic%3B%0A%7D%0A%0Adiv%2Eslidy%5Ftoc%20%7B%0A%20%20position%3A%20absolute%3B%0A%20%20z%2Dindex%3A%20300%3B%0A%20%20width%3A%2060%25%3B%0A%20%20max%2Dwidth%3A%2030em%3B%0A%20%20height%3A%2030em%3B%0A%20%20overflow%3A%20auto%3B%0A%20%20top%3A%20auto%3B%0A%20%20right%3A%20auto%3B%0A%20%20left%3A%204em%3B%0A%20%20bottom%3A%204em%3B%0A%20%20padding%3A%201em%3B%0A%20%20background%3A%20rgb%28240%2C240%2C240%29%3B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20font%2Dsize%3A%2060%25%3B%0A%7D%0A%0Adiv%2Eslidy%5Ftoc%20%2Etoc%5Fheading%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%20%20width%3A%20100%25%3B%0A%20%20margin%3A%200%3B%0A%20%20margin%2Dbottom%3A%201em%3B%0A%20%20border%2Dbottom%2Dstyle%3A%20solid%3B%0A%20%20border%2Dbottom%2Dcolor%3A%20rgb%28180%2C180%2C180%29%3B%0A%20%20border%2Dbottom%2Dwidth%3A%201px%3B%0A%7D%0A%0Adiv%2Eslide%20%7B%0A%20%20z%2Dindex%3A%2020%3B%0A%20%20margin%3A%200%200%200%200%3B%0A%20%20padding%2Dtop%3A%200%3B%0A%20%20padding%2Dbottom%3A%200%3B%0A%20%20padding%2Dleft%3A%2020px%3B%0A%20%20padding%2Dright%3A%2020px%3B%0A%20%20border%2Dwidth%3A%200%3B%0A%20%20clear%3A%20both%3B%0A%20%20top%3A%200%3B%0A%20%20bottom%3A%200%3B%0A%20%20left%3A%200%3B%0A%20%20right%3A%200%3B%0A%20%20line%2Dheight%3A%20120%25%3B%0A%20%20background%2Dcolor%3A%20transparent%3B%0A%7D%0A%0Adiv%2Ebackground%20%7B%0A%20%20display%3A%20none%3B%0A%7D%0A%0Adiv%2Ehandout%20%7B%0A%20%20margin%2Dleft%3A%2020px%3B%0A%20%20margin%2Dright%3A%2020px%3B%0A%7D%0A%0Adiv%2Eslide%2Etitlepage%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0Adiv%2Eslide%2Etitlepage%20h1%20%7B%0A%20%20padding%2Dtop%3A%2010%25%3B%0A%20%20margin%2Dright%3A%200%3B%0A%7D%0A%0Adiv%2Eslide%20h1%20%7B%0A%20%20padding%2Dleft%3A%200%3B%0A%20%20padding%2Dright%3A%2020pt%3B%0A%20%20padding%2Dtop%3A%204pt%3B%0A%20%20padding%2Dbottom%3A%204pt%3B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20margin%2Dleft%3A%200%3B%0A%20%20margin%2Dright%3A%2060pt%3B%0A%20%20margin%2Dbottom%3A%200%2E5em%3B%0A%20%20display%3A%20block%3B%20%0A%20%20font%2Dsize%3A%20160%25%3B%0A%20%20line%2Dheight%3A%201%2E2em%3B%0A%20%20background%3A%20transparent%3B%0A%7D%0A%0A%40media%20screen%20and%20%28max%2Ddevice%2Dwidth%3A%201024px%29%0A%7B%0A%20%20div%2Eslide%20%7B%20font%2Dsize%3A%20100%25%3B%20%7D%0A%7D%0A%0A%40media%20screen%20and%20%28max%2Ddevice%2Dwidth%3A%20800px%29%0A%7B%0A%20%20div%2Eslide%20%7B%20font%2Dsize%3A%20200%25%3B%20%7D%0A%20%20div%2Eslidy%5Ftoc%20%7B%0A%20%20%20%20top%3A%201em%3B%0A%20%20%20%20left%3A%201em%3B%0A%20%20%20%20right%3A%20auto%3B%0A%20%20%20%20width%3A%2080%25%3B%0A%20%20%20%20font%2Dsize%3A%20180%25%3B%0A%20%20%7D%0A%7D%0A%0Adiv%2Etoc%2Dheading%20%7B%0A%20%20width%3A%20100%25%3B%0A%20%20border%2Dbottom%3A%20solid%201px%20rgb%28180%2C180%2C180%29%3B%0A%20%20margin%2Dbottom%3A%201em%3B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0Aimg%20%7B%0A%20%20image%2Drendering%3A%20optimize%2Dquality%3B%0A%7D%0A%0Apre%20%7B%0A%20font%2Dsize%3A%2080%25%3B%0A%20font%2Dweight%3A%20bold%3B%0A%20line%2Dheight%3A%20120%25%3B%0A%20padding%2Dtop%3A%200%2E2em%3B%0A%20padding%2Dbottom%3A%200%2E2em%3B%0A%20padding%2Dleft%3A%201em%3B%0A%20padding%2Dright%3A%201em%3B%0A%20border%2Dstyle%3A%20solid%3B%0A%20border%2Dleft%2Dwidth%3A%201em%3B%0A%20border%2Dtop%2Dwidth%3A%20thin%3B%0A%20border%2Dright%2Dwidth%3A%20thin%3B%0A%20border%2Dbottom%2Dwidth%3A%20thin%3B%0A%20border%2Dcolor%3A%20%2395ABD0%3B%0A%20color%3A%20%2300428C%3B%0A%20background%2Dcolor%3A%20%23E4E5E7%3B%0A%7D%0A%0Ali%20pre%20%7B%20margin%2Dleft%3A%200%3B%20%7D%0A%0Ablockquote%20%7B%20font%2Dstyle%3A%20italic%20%7D%0A%0Aimg%20%7B%20background%2Dcolor%3A%20transparent%20%7D%0A%0Ap%2Ecopyright%20%7B%20font%2Dsize%3A%20smaller%20%7D%0A%0A%2Ecenter%20%7B%20text%2Dalign%3A%20center%20%7D%0A%2Efootnote%20%7B%20font%2Dsize%3A%20smaller%3B%20margin%2Dleft%3A%202em%3B%20%7D%0A%0Aa%20img%20%7B%20border%2Dwidth%3A%200%3B%20border%2Dstyle%3A%20none%20%7D%0A%0Aa%3Avisited%20%7B%20color%3A%20navy%20%7D%0Aa%3Alink%20%7B%20color%3A%20navy%20%7D%0Aa%3Ahover%20%7B%20color%3A%20red%3B%20text%2Ddecoration%3A%20underline%20%7D%0Aa%3Aactive%20%7B%20color%3A%20red%3B%20text%2Ddecoration%3A%20underline%20%7D%0A%0Aa%20%7Btext%2Ddecoration%3A%20none%7D%0A%2Etoolbar%20a%3Alink%20%7Bcolor%3A%20blue%7D%0A%2Etoolbar%20a%3Avisited%20%7Bcolor%3A%20blue%7D%0A%2Etoolbar%20a%3Aactive%20%7Bcolor%3A%20red%7D%0A%2Etoolbar%20a%3Ahover%20%7Bcolor%3A%20red%7D%0A%0Aul%20%7B%20list%2Dstyle%2Dtype%3A%20square%3B%20%7D%0Aul%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20disc%3B%20%7D%0Aul%20ul%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20circle%3B%20%7D%0Aul%20ul%20ul%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20disc%3B%20%7D%0Ali%20%7B%20margin%2Dleft%3A%200%2E5em%3B%20margin%2Dtop%3A%200%2E5em%3B%20%7D%0Ali%20li%20%7B%20font%2Dsize%3A%2085%25%3B%20font%2Dstyle%3A%20italic%20%7D%0Ali%20li%20li%20%7B%20font%2Dsize%3A%2085%25%3B%20font%2Dstyle%3A%20normal%20%7D%0A%0Adiv%20dt%0A%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%20%20margin%2Dtop%3A%201em%3B%0A%20%20margin%2Dbottom%3A%200%2E5em%3B%0A%20%20font%2Dweight%3A%20bold%3B%0A%7D%0Adiv%20dd%0A%7B%0A%20%20margin%2Dleft%3A%202em%3B%0A%20%20margin%2Dbottom%3A%200%2E5em%3B%0A%7D%0A%0A%0Ap%2Cpre%2Cul%2Col%2Cblockquote%2Ch2%2Ch3%2Ch4%2Ch5%2Ch6%2Cdl%2Ctable%20%7B%0A%20%20margin%2Dleft%3A%201em%3B%0A%20%20margin%2Dright%3A%201em%3B%0A%7D%0A%0Ap%2Esubhead%20%7B%20font%2Dweight%3A%20bold%3B%20margin%2Dtop%3A%202em%3B%20%7D%0A%0A%2Esmaller%20%7B%20font%2Dsize%3A%20smaller%20%7D%0A%2Ebigger%20%7B%20font%2Dsize%3A%20130%25%20%7D%0A%0Atd%2Cth%20%7B%20padding%3A%200%2E2em%20%7D%0A%0Aul%20%7B%0A%20%20margin%3A%200%2E5em%201%2E5em%200%2E5em%201%2E5em%3B%0A%20%20padding%3A%200%3B%0A%7D%0A%0Aol%20%7B%0A%20%20margin%3A%200%2E5em%201%2E5em%200%2E5em%201%2E5em%3B%0A%20%20padding%3A%200%3B%0A%7D%0A%0Aul%20%7B%20list%2Dstyle%2Dtype%3A%20square%3B%20%7D%0Aul%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20disc%3B%20%7D%0Aul%20ul%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20circle%3B%20%7D%0Aul%20ul%20ul%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20disc%3B%20%7D%0A%0Aul%20li%20%7B%20%0A%20%20list%2Dstyle%3A%20square%3B%0A%20%20margin%3A%200%2E1em%200em%200%2E6em%200%3B%0A%20%20padding%3A%200%200%200%200%3B%0A%20%20line%2Dheight%3A%20140%25%3B%0A%7D%0A%0Aol%20li%20%7B%20%0A%20%20margin%3A%200%2E1em%200em%200%2E6em%201%2E5em%3B%0A%20%20padding%3A%200%200%200%200px%3B%0A%20%20line%2Dheight%3A%20140%25%3B%0A%20%20list%2Dstyle%2Dtype%3A%20decimal%3B%0A%7D%0A%0Ali%20ul%20li%20%7B%20%0A%20%20font%2Dsize%3A%2085%25%3B%20%0A%20%20font%2Dstyle%3A%20italic%3B%0A%20%20list%2Dstyle%2Dtype%3A%20disc%3B%0A%20%20background%3A%20transparent%3B%0A%20%20padding%3A%200%200%200%200%3B%0A%7D%0Ali%20li%20ul%20li%20%7B%20%0A%20%20font%2Dsize%3A%2085%25%3B%20%0A%20%20font%2Dstyle%3A%20normal%3B%0A%20%20list%2Dstyle%2Dtype%3A%20circle%3B%0A%20%20background%3A%20transparent%3B%0A%20%20padding%3A%200%200%200%200%3B%0A%7D%0Ali%20li%20li%20ul%20li%20%7B%0A%20%20list%2Dstyle%2Dtype%3A%20disc%3B%0A%20%20background%3A%20transparent%3B%0A%20%20padding%3A%200%200%200%200%3B%0A%7D%0A%0Ali%20ol%20li%20%7B%0A%20%20list%2Dstyle%2Dtype%3A%20decimal%3B%0A%7D%0A%0A%0Ali%20li%20ol%20li%20%7B%0A%20%20list%2Dstyle%2Dtype%3A%20decimal%3B%0A%7D%0A%0A%2F%2A%0A%20setting%20class%3D%22outline%20on%20ol%20or%20ul%20makes%20it%20behave%20as%20an%0A%20ouline%20list%20where%20blocklevel%20content%20in%20li%20elements%20is%0A%20hidden%20by%20default%20and%20can%20be%20expanded%20or%20collapsed%20with%0A%20mouse%20click%2E%20Set%20class%3D%22expand%22%20on%20li%20to%20override%20default%0A%2A%2F%0A%0Aol%2Eoutline%20li%3Ahover%20%7B%20cursor%3A%20pointer%20%7D%0Aol%2Eoutline%20li%2Enofold%3Ahover%20%7B%20cursor%3A%20default%20%7D%0A%0Aul%2Eoutline%20li%3Ahover%20%7B%20cursor%3A%20pointer%20%7D%0Aul%2Eoutline%20li%2Enofold%3Ahover%20%7B%20cursor%3A%20default%20%7D%0A%0Aol%2Eoutline%20%7B%20list%2Dstyle%3Adecimal%3B%20%7D%0Aol%2Eoutline%20ol%20%7B%20list%2Dstyle%2Dtype%3Alower%2Dalpha%20%7D%0A%0Aol%2Eoutline%20li%2Enofold%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAIACAMzMzOvr%2FywAAAAACQAJAAACD4SPoRvG614Dctb4MEMcFAA7%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aol%2Eoutline%20li%2Eunfolded%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAMPD%2F8zMzOvr%2F%2F%2F%2F%2FywAAAAACQAJAAACEYyPoivG614LAlg7ZZbxoR8UADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aol%2Eoutline%20li%2Efolded%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAMPD%2F8zMzOvr%2F%2F%2F%2F%2FywAAAAACQAJAAACFIyPoiu2sJyCyoF7W3hxz850CFIAADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aol%2Eoutline%20li%2Eunfolded%3Ahover%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAAAAAAAA%2F8PD%2F%2F%2F%2F%2FywAAAAACQAJAAACEYSPoivG614DIlg7ZZbxoQ8UADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aol%2Eoutline%20li%2Efolded%3Ahover%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAAAAAAAA%2F8PD%2F%2F%2F%2F%2FywAAAAACQAJAAACFISPoiu2sZyCyoV7G3hxz850CFIAADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0A%0Aul%2Eoutline%20li%2Enofold%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAIACAMzMzOvr%2FywAAAAACQAJAAACD4SPoRvG614Dctb4MEMcFAA7%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aul%2Eoutline%20li%2Eunfolded%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAMPD%2F8zMzOvr%2F%2F%2F%2F%2FywAAAAACQAJAAACEYyPoivG614LAlg7ZZbxoR8UADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aul%2Eoutline%20li%2Efolded%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAMPD%2F8zMzOvr%2F%2F%2F%2F%2FywAAAAACQAJAAACFIyPoiu2sJyCyoF7W3hxz850CFIAADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aul%2Eoutline%20li%2Eunfolded%3Ahover%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAAAAAAAA%2F8PD%2F%2F%2F%2F%2FywAAAAACQAJAAACEYSPoivG614DIlg7ZZbxoQ8UADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aul%2Eoutline%20li%2Efolded%3Ahover%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAAAAAAAA%2F8PD%2F%2F%2F%2F%2FywAAAAACQAJAAACFISPoiu2sZyCyoV7G3hxz850CFIAADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0A%0A%2F%2A%20for%20slides%20with%20class%20%22title%22%20in%20table%20of%20contents%20%2A%2F%0Aa%2Etitleslide%20%7B%20font%2Dweight%3A%20bold%3B%20font%2Dstyle%3A%20italic%20%7D%0A%0A%2F%2A%0A%20hide%20images%20for%20work%20around%20for%20save%20as%20bug%0A%20where%20browsers%20fail%20to%20save%20images%20used%20by%20CSS%0A%2A%2F%0Aimg%2Ehidden%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%20%7D%0Adiv%2Einitial%5Fprompt%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%20%7D%0A%0A%20%20div%2Eslide%20%7B%0A%20%20%20%20%20visibility%3A%20visible%3B%0A%20%20%20%20%20position%3A%20inherit%3B%0A%20%20%7D%0A%20%20div%2Ehandout%20%7B%0A%20%20%20%20%20border%2Dtop%2Dstyle%3A%20solid%3B%0A%20%20%20%20%20border%2Dtop%2Dwidth%3A%20thin%3B%0A%20%20%20%20%20border%2Dtop%2Dcolor%3A%20black%3B%0A%20%20%7D%0A%0A%40media%20screen%20%7B%0A%20%20%2Ehidden%20%7B%20display%3A%20none%3B%20visibility%3A%20visible%20%7D%0A%0A%20%20div%2Eslide%2Ehidden%20%7B%20display%3A%20block%3B%20visibility%3A%20visible%20%7D%0A%20%20div%2Ehandout%2Ehidden%20%7B%20display%3A%20block%3B%20visibility%3A%20visible%20%7D%0A%20%20div%2Ebackground%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%20%7D%0A%20%20body%2Esingle%5Fslide%20div%2Einitial%5Fprompt%20%7B%20display%3A%20block%3B%20visibility%3A%20visible%20%7D%0A%20%20body%2Esingle%5Fslide%20div%2Ebackground%20%7B%20display%3A%20block%3B%20visibility%3A%20visible%20%7D%0A%20%20body%2Esingle%5Fslide%20div%2Ebackground%2Ehidden%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%20%7D%0A%20%20body%2Esingle%5Fslide%20%2Einvisible%20%7B%20visibility%3A%20hidden%20%7D%0A%20%20body%2Esingle%5Fslide%20%2Ehidden%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%20%7D%0A%20%20body%2Esingle%5Fslide%20div%2Eslide%20%7B%20position%3A%20absolute%20%7D%0A%20%20body%2Esingle%5Fslide%20div%2Ehandout%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%20%7D%0A%7D%0A%0A%40media%20print%20%7B%0A%20%20%2Ehidden%20%7B%20display%3A%20block%3B%20visibility%3A%20visible%20%7D%0A%0A%20%20div%2Eslide%20pre%20%7B%20font%2Dsize%3A%2060%25%3B%20padding%2Dleft%3A%200%2E5em%3B%20%7D%0A%20%20div%2Etoolbar%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%3B%20%7D%0A%20%20div%2Eslidy%5Ftoc%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%3B%20%7D%0A%20%20div%2Ebackground%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%3B%20%7D%0A%20%20div%2Eslide%20%7B%20page%2Dbreak%2Dbefore%3A%20always%20%7D%0A%20%20%2F%2A%20%3Afirst%2Dchild%20isn%27t%20reliable%20for%20print%20media%20%2A%2F%0A%20%20div%2Eslide%2Efirst%2Dslide%20%7B%20page%2Dbreak%2Dbefore%3A%20avoid%20%7D%0A%7D%0A%0A%2F%2A%20the%20below%20rules%20increase%20compatibility%20with%20Shiny%20and%20Bootstrap%20%2A%2F%0A%0A%2F%2A%20remove%20margins%20that%20misalign%20sliders%20%2A%2F%0A%2Ejslider%20table%20%7B%0A%20%20%20margin%2Dleft%3A%200em%3B%0A%20%20%20margin%2Dright%3A%200em%3B%0A%7D%0A%0A%2F%2A%20don%27t%20use%20very%20large%20fonts%20in%20datatables%20%2A%2F%0Atable%2EdataTable%2C%20%2Eshiny%2Ddatatable%2Doutput%20div%20%7B%0A%20%20%20font%2Dsize%3A%2014pt%3B%0A%7D%0A%0A%2F%2A%20allow%20R%20chunks%20to%20render%20in%20a%20large%20font%20%2A%2F%0Apre%2EsourceCode%2C%20code%2EsourceCode%20%7B%0A%20%20%20font%2Dsize%3A%2080%25%3B%0A%7D%0A%0A%2F%2A%20increase%20the%20input%20font%20size%20set%20by%20Bootstrap%20%2A%2F%0Alabel%2C%20button%2C%20input%2C%20select%2C%20textarea%20%7B%0A%20%20%20font%2Dsize%3A%2014pt%3B%0A%7D%0A%0A%2F%2A%20eliminate%20bullets%20in%20Bootstrap%20navigation%20lists%20%2A%2F%0Aul%2Enav%2C%20ul%2Enav%20li%20%7B%0A%20%20%20list%2Dstyle%2Dtype%3A%20none%3B%0A%7D%0A%0A" rel="stylesheet" type="text/css" media="screen, projection, print" />
   <link href="data:text/css,body%20%7B%0A%09font%2Dfamily%3A%20%27Noto%20Serif%27%2C%20%27serif%27%3B%0A%09font%2Dsize%3A%2020px%21important%3B%0A%7D%0A%0A%2Eco%20%7B%0A%09color%3A%20%23aaaaaa%21important%3B%0A%7D%0A%0Apre%20%7B%0A%09border%2Dcolor%3A%20%23eeeeee%21important%3B%0A%09background%2Dcolor%3A%20%23f5f5f5%21important%3B%0A%09font%2Dsize%3A%2018px%21important%3B%0A%09margin%2Dtop%3A%200px%21important%3B%0A%09margin%2Dbottom%3A%200px%21important%3B%0A%7D%0A%0Ah1%20%7B%0A%09padding%2Dbottom%3A%2010px%3B%0A%09border%2Dbottom%3A%202px%20solid%20%23000000%3B%0A%7D%0A%0Acode%20%7B%0A%09font%2Dsize%3A%2018px%21important%3B%0A%09color%3A%20%23aaaaaa%21important%3B%0A%7D%0A%0A%2EsourceCode%20%7B%0A%09font%2Dsize%3A%2018px%21important%3B%0A%09color%3A%20%23444444%21important%3B%0A%7D%0A%0A" rel="stylesheet" type="text/css" media="screen, projection, print" />
   <script>
@@ -44,191 +25,50 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </head>
 <body>
 <div class="slide titlepage">
-  <h1 class="title">Reformatowanie i przerzucanie danych [tidyr]</h1>
+  <h1 class="title">Zespół realizujący</h1>
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 24 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 8 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
-<div id="o-czym-jest-ten-odcinek" class="slide section level1">
-<h1>O czym jest ten odcinek</h1>
-<p>Dane najczęściej są przedstawiane w postaci tabelarycznej. Jednak mogą być w tej tabeli różnie sformatowane. Wyróżnia się między innymi reprezentacje szeroką danych, wąską danych i reprezentacje mieszane.</p>
-<p>Po co taka róznorodność? Otóż w zalezności od tego co z danymi chcemy zrobić czasem lepiej je mieć w takiej czy innej postaci. Pakiet <code>tidyr</code> udostępnia funkcje, aby szybko i wygodnie przechodzić z jednego sposobu reprezentacji na drugi.</p>
-<p>W tym odcinku nauczymy się</p>
+<div class="slide section level6">
+
+<p><em>Opracowanie materiałów</em></p>
 <ul>
-<li>Jak przejść z wąskiej postaci na szeroką</li>
-<li>Jak przejść z szerokiej postaci do wąskiej</li>
+<li>Przemysław Biecek, ICM</li>
 </ul>
-<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, to zbiór danych <code>kidney</code> z pakietu <code>PBImisc</code>, pozwoli nam na ilustracje przejścia z formatu szerokiego na wąski. Drugi zbiór danych to dane z Eurostatu, które pobierzemy z użyciem pakietu <code>SmarterPoland</code>. Pozwolą one zilustrować przejście z reprezentacji wąskiej danych na szeroką.</p>
-</div>
-<div id="dane-o-pracy-nerki" class="slide section level1">
-<h1>Dane o pracy nerki</h1>
-<p>Aby zilustrować czym jest szeroka reprezentacja danych i jak przejść z niej na wąską reprezetnację wykorzystamy zbiór danych <code>kidney</code> z pakietu <code>PBImisc</code>. Ten pakiet nie jest dostępny wraz z bazową wersją R. Należy go doinstalować funkcją <code>install.packages()</code> (informacja o tym jak to zrobić jest w odcinku 2). Po instalacji włączymy ten pakiet. Do zbioru danych <code>kidney</code> dodajemy kolumnę z <code>id</code> pacjenta.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PBImisc)
-kidney$id &lt;-<span class="st"> </span><span class="kw">rownames</span>(kidney)</code></pre>
-<p>Następnie ze zbioru <code>kidney</code> wybierzemy kilka interesujących nas kolumn. Każdy wiersz w tym zbiorze danych opisuje jednego pacjenta. W kolumnie <code>therapy</code> znajduje się zmienna jakościowa o trzech poziomach a w kolumnach MDRD7 … MDRD60 znajdują sie pomiary sprawności nerki (mierzone współczynnikiem MDRD) w dniach 7, 30, oraz miesiącach 3, 6, 12, 24, 36 i 60 po przeszczepie.</p>
-<p>Do wyboru interesujących nas zmiennych wygodnie jest użyć funkcji <code>select()</code> z pakietu <code>dplyr</code>.</p>
-<p>Taką reprezentację danch w której kolejne pomiary MDRD opisane są przez kolejne kolumny nazywa się reprezntacją szeroką. Im więcej punktów pomiarowych dla MDRD tym więcej kolumn w zbiorze danych.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-kidney_wybrane &lt;-<span class="st"> </span>kidney %&gt;%<span class="st"> </span>
-<span class="st">  </span>dplyr::<span class="kw">select</span>(id, therapy, MDRD7:MDRD60)
-
-<span class="kw">head</span>(kidney_wybrane)</code></pre>
-<pre><code>##   id therapy MDRD7 MDRD30 MDRD3 MDRD6 MDRD12 MDRD24 MDRD36 MDRD60
-## 1  1      tc    46     71  65.0    71     65     70     76     72
-## 2  2      cm    44     58  20.0    78     62     87     72     47
-## 3  3      cm     6     36  37.8    42     45     46     46     33
-## 4  4      tc     8     39  55.7    52     60     73     75     91
-## 5  5      ca    36     79  64.2    64     64     79     70     63
-## 6  6      cm     9     43  58.0    49     45     51     48     56</code></pre>
-</div>
-<div id="dane-o-pracy-nerki---postac-waska" class="slide section level1">
-<h1>Dane o pracy nerki - postać wąska</h1>
-<p>Czym w tkim razie jest postać wąska? Łatwiej to wyjasnić na przykładzie.</p>
-<p>Użyjemy funkcji <code>gather()</code> z pakietu <code>tidyr</code>. Pierwszym argumentem jest ramka danych w postaci szerokiej. Kolejne dwa argumenty (w poniższym przykłądzie to <code>time</code> i <code>MDRD</code>) to nazwy zmiennych, które w nowym zbiorze danych będą opisywały klucze i wartości. Pozostałe argumentyto lista kolumn, które mają być przekształcone w reprezentację wąską (tutaj są to wszystkie MDRD…).</p>
-<p>Wynikiem jest reprezntacja wąska, w której kolejne pomiary MDRD zostały przedstawione za pomocą różnych wierszy. W reprezentacji wąskiej w kolumnie <code>time</code> znajduje się nazwa kolumny z oryginalnego zbioru danych, a w kolimnie <code>MDRD</code> znajdują się wartości.</p>
-<p>Zbiór danych <code>kidney_wybrane</code> miał 334 wiersze i 10 kolumn a zbiór danych <code>kidney_waska</code> ma 2672 wiersze i 4 kolumny. Każdy z 334 pacjentów jest opisany przez 8 wierszy, każdy wiersz dla innego puntku pomiarowego MDRD.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyr)
-
-kidney_waska &lt;-<span class="st"> </span><span class="kw">gather</span>(kidney_wybrane, time, MDRD, MDRD7:MDRD60)
-<span class="kw">head</span>(kidney_waska)</code></pre>
-<pre><code>##   id therapy  time MDRD
-## 1  1      tc MDRD7   46
-## 2  2      cm MDRD7   44
-## 3  3      cm MDRD7    6
-## 4  4      tc MDRD7    8
-## 5  5      ca MDRD7   36
-## 6  6      cm MDRD7    9</code></pre>
-</div>
-<div id="dane-o-pracy-nerki---postac-waska-1" class="slide section level1">
-<h1>Dane o pracy nerki - postać wąska</h1>
-<p>Warto zauważyć, że zmienne nie wymienione w funkcji <code>gather()</code> (w tym przykładzie to zmienne <code>id</code> oraz <code>therapy</code>) zostaną pozostawione w ramce danych, nie będą skonwertowane na postać wąską.</p>
-<pre class="sourceCode r"><code class="sourceCode r">kidney_waska %&gt;%<span class="st"> </span><span class="kw">filter</span>(id==<span class="st">&quot;1&quot;</span>)</code></pre>
-<pre><code>##   id therapy   time MDRD
-## 1  1      tc  MDRD7   46
-## 2  1      tc MDRD30   71
-## 3  1      tc  MDRD3   65
-## 4  1      tc  MDRD6   71
-## 5  1      tc MDRD12   65
-## 6  1      tc MDRD24   70
-## 7  1      tc MDRD36   76
-## 8  1      tc MDRD60   72</code></pre>
-</div>
-<div id="dane-z-eurostatu" class="slide section level1">
-<h1>Dane z EuroStatu</h1>
-<p>Do ilustracj transforamcji z postaci wąskiej na szeroką wykorzystamy dane z Eurostatu. Dane w Eurostacie są przechowywane z kilkoma wymiarami, na takich danych wygodniej się pracuje, gdy są one w postaci wąskiej. Jednak gdy przychodzi o wyświetlania tych danych na ekranie wygodniej jest je przekształcić na postać szeroką.</p>
-<p>Do ilustracji tych funkcji wykorzystamy zbiór danych z Eurostatu o popularności transpostu w różnych krajach. Te dane są w tabeli <code>tsdtr210</code> na serwerach Eurostat. Do pobrania tych danych użyjemy funkcji <code>getEurostatRCV()</code> z pakietu <code>SmarterPoland</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
-tsdtr210 &lt;-<span class="st"> </span><span class="kw">getEurostatRCV</span>(<span class="st">&quot;tsdtr210&quot;</span>)
-<span class="kw">head</span>(tsdtr210)</code></pre>
-<pre><code>##                 vehicle geo time value
-## BUS_TOT_AT_1990 BUS_TOT  AT 1990    NA
-## BUS_TOT_BE_1990 BUS_TOT  BE 1990    NA
-## BUS_TOT_BG_1990 BUS_TOT  BG 1990    NA
-## BUS_TOT_CH_1990 BUS_TOT  CH 1990    NA
-## BUS_TOT_CY_1990 BUS_TOT  CY 1990    NA
-## BUS_TOT_CZ_1990 BUS_TOT  CZ 1990    NA</code></pre>
-<p>Pobrane dane są w postaci wąskiej. Kolumna <code>geo</code> określa kraj, kolumna <code>time</code> określa rok, kolumna <code>vehicle</code> rodzaj transportu a kolumna <code>value</code> oopuarność danego rodzaju transportu w określonym kraju w określonym roku.</p>
-</div>
-<div id="z-postaci-waskiej-do-szerokiej" class="slide section level1">
-<h1>Z postaci wąskiej do szerokiej</h1>
-<p>Aby przejść z postaci wąskiej do postaci szerokie, można użyć funkcji <code>spread()</code>.</p>
-<p>Jej pierwszym argumentem jest ramka z danymi w postaci wąskiej. Kolejne dwie zmienne określają kolumnę w której przechowywane są klucze i wartości.</p>
-<p>Funkcja <code>spread()</code> konwertuje ramkę danych w ten sposób, że wartości drugiej kolumny wejściowego zbioru danych stają się nazwami kolumn wyjściowego zbioru danych.</p>
-<p>W poniższym przykładzie zmienna <code>time</code> jest wskazana jako klucz, a więc wartości tej zmiennej staną się nazwami kolumn w nowym zbiorze danych. Zmienna <code>value</code> jest wskazana jako wartości i to ona wypełni nowe kolumny.</p>
-<p>Pozostałe kolumny, w tym przypakdu <code>vehicle</code> i ‘geo’, pozostają w niezmienionej postaci.</p>
-<p>Wyświetlmy wiersze spełniające warunek <code>geo == &quot;PL&quot;</code>. Jak widzimy wynikowy zbiór danych <code>szeroka</code> ma 13 kolumn opisujących popularność różnych środków transportu w kolejnych latach.</p>
-<pre class="sourceCode r"><code class="sourceCode r">szeroka &lt;-<span class="st"> </span><span class="kw">spread</span>(tsdtr210, time, value)
-
-<span class="co"># wyświetlmy wiersze dla Polski</span>
-szeroka %&gt;%<span class="st"> </span><span class="kw">filter</span>(geo ==<span class="st"> &quot;PL&quot;</span>)</code></pre>
-<pre><code>##   vehicle geo 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001
-## 1 BUS_TOT  PL   NA   NA   NA   NA   NA 19.9 19.4 17.9 17.4 16.8 15.4 14.7
-## 2     CAR  PL 41.3   NA   NA   NA   NA 64.6 69.3 71.3 72.1 72.3 72.8 74.7
-## 3     TRN  PL 30.6   NA   NA   NA   NA 15.5 11.3 10.8 10.5 10.9 11.7 10.6
-##   2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012
-## 1 13.5 13.5 13.1 12.0 10.6  9.6  8.4  7.4  6.4 10.8 10.7
-## 2 77.0 77.6 78.9 80.7 82.5 83.6 85.5 87.0 88.4 84.4 84.6
-## 3  9.5  8.8  8.0  7.3  6.9  6.8  6.2  5.5  5.2  4.8  4.8</code></pre>
-</div>
-<div id="z-postaci-waskiej-do-szerokiej-1" class="slide section level1">
-<h1>Z postaci wąskiej do szerokiej</h1>
-<p>Dane z Eurostatu miały więcej wymiarów i każdy z nich może być użyty do stworzenia nowych kolumn. Przykładowo w poniższym przykłądzie do rozszerzenia ramki danych wykorzystamy zmienną <code>geo</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">szeroka2 &lt;-<span class="st"> </span><span class="kw">spread</span>(tsdtr210, geo, value)
-
-<span class="co"># wyświetlmy wiersze dla roku 2010</span>
-szeroka2 %&gt;%<span class="st"> </span><span class="kw">filter</span>(time ==<span class="st"> &quot;2010&quot;</span>)</code></pre>
-<pre><code>##   vehicle time   AT   BE   BG   CH   CY   CZ DE   DK   EE   EL   ES EU27
-## 1 BUS_TOT 2010 10.3 12.2 16.4  5.1 18.1 18.9  6 10.7 14.4 17.3 12.3  8.7
-## 2     CAR 2010 78.7 80.3 80.0 77.3 81.9 73.5 86 79.4 83.6 81.6 82.3 84.2
-## 3     TRN 2010 11.0  7.4  3.6 17.6   NA  7.6  8  9.9  2.0  1.1  5.4  7.1
-##   EU28   FI   FR   HR   HU   IE   IS   IT   LT   LU   LV   MK   MT   NL
-## 1  8.7  9.9  5.3 10.7 21.4 14.5 11.4 12.1  7.6 12.1 17.1 20.3 18.5  3.7
-## 2 84.2 84.9 85.5 83.7 68.6 82.6 88.6 82.4 91.7 83.5 78.2 77.5 81.5 87.2
-## 3  7.1  5.2  9.3  5.6  9.9  2.9   NA  5.6  0.7  4.5  4.7  2.2   NA  9.1
-##     NO   PL   PT   RO   SE   SI   SK   TR   UK
-## 1  6.8  6.4  6.5 12.9  7.2 10.8 15.5 38.3  6.2
-## 2 88.4 88.4 89.1 81.3 83.4 86.8 77.8 59.3 86.4
-## 3  4.8  5.2  4.4  5.9  9.4  2.5  6.7  2.4  7.5</code></pre>
-</div>
-<div id="z-szerokiej-do-waskiej" class="slide section level1">
-<h1>Z szerokiej do wąskiej</h1>
-<p>Proces przechodzenia z wąskiej postaci do szerokiej i z szerokiej do wąskiej jest odwracalny. Pokażmy jak z powrotem, przejść z postaci szerokiej do wąskiej, za pomocą funkcji <code>gather()</code>.</p>
-<p>Poniżej pierwszy argument jest przekazany za pomocą operatora <code>%&gt;%</code>, kolejne dwa określają nazwy nowych kolumn w których zapisane będą klucze i wartości. Trzeci argument to opis kolumn, które mają być zamienione na postać wąską.</p>
-<pre class="sourceCode r"><code class="sourceCode r">szeroka %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">gather</span>(rok, wartosc, -geo, -vehicle) %&gt;%
-<span class="st">  </span><span class="kw">head</span>()</code></pre>
-<pre><code>##   vehicle geo  rok wartosc
-## 1 BUS_TOT  AT 1990      NA
-## 2 BUS_TOT  BE 1990      NA
-## 3 BUS_TOT  BG 1990      NA
-## 4 BUS_TOT  CH 1990      NA
-## 5 BUS_TOT  CY 1990      NA
-## 6 BUS_TOT  CZ 1990      NA</code></pre>
-</div>
-<div id="sklejanie-kolumn" class="slide section level1">
-<h1>Sklejanie kolumn</h1>
-<p>Zdarza się, że wartości z kilku kolumn chcemy skleić ze sobą w jedną kolumnę. Można to zrobić funkcją <code>unite()</code>.</p>
-<p>Pierwszy argument tej funkcji to ramka danych. Drugi to nazwa kolumny, która zostanie utworzona przez połączenie kolumn, które sa pozostałymi argumentami. Argument <code>sep</code> określa co ma rozdzielać wartości w połączonych kolumnach.</p>
-<p>W przykładzie poniżej w zbiorze danych <code>tsdtr210</code> tworzymy nową kolumnę o nazwie <code>panstwo_rok</code>, której wartości powstaną przez połaczenie wartości w kolumnach <code>geo</code> i <code>time</code> rozdzielając je znakiem <code>:</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unite</span>(tsdtr210, panstwo_rok, geo, time, <span class="dt">sep=</span><span class="st">&quot;:&quot;</span>) %&gt;%
-<span class="st">  </span><span class="kw">head</span>()</code></pre>
-<pre><code>##                 vehicle panstwo_rok value
-## BUS_TOT_AT_1990 BUS_TOT     AT:1990    NA
-## BUS_TOT_BE_1990 BUS_TOT     BE:1990    NA
-## BUS_TOT_BG_1990 BUS_TOT     BG:1990    NA
-## BUS_TOT_CH_1990 BUS_TOT     CH:1990    NA
-## BUS_TOT_CY_1990 BUS_TOT     CY:1990    NA
-## BUS_TOT_CZ_1990 BUS_TOT     CZ:1990    NA</code></pre>
-</div>
-<div id="rozszcezpianie-kolumn" class="slide section level1">
-<h1>Rozszcezpianie kolumn</h1>
-<p>Operację odwrotną do sklejania, a więc rozcinanie kolumn można wykonać funkcją <code>separate()</code>.</p>
-<p>Przedstawimy działanie tej funkcji na przykładzie sztucznego zbioru danych z dwoma kolumnamy - datą i id.</p>
-<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">daty =</span> <span class="kw">c</span>(<span class="st">&quot;2004-01-01&quot;</span>, <span class="st">&quot;2012-04-15&quot;</span>, <span class="st">&quot;2006-10-29&quot;</span>, <span class="st">&quot;2010-03-03&quot;</span>),
-                 <span class="dt">id =</span> <span class="dv">1</span>:<span class="dv">4</span>)
-df</code></pre>
-<pre><code>##         daty id
-## 1 2004-01-01  1
-## 2 2012-04-15  2
-## 3 2006-10-29  3
-## 4 2010-03-03  4</code></pre>
-<p>Pierwszym argumentem funkcji <code>separate()</code> jest ramka danych, którą chcemy przekształcić. Drugim argumentem jest nazwa kolumny, którą chcemy rozszczepić. Trzecim argumentem jest wektor napisów, któ®e będą nazwami nowych - rozszczepionych kolumn. Czwarty argument to separator - znak, który rozszczepi kolumny. Poniżej przedstawiamy przykłąd, w którym koulnę <code>daty</code> ze zbioru danych <code>df</code> rozszczepiamy na wartości rozdizelone znakiem <code>-</code>. Poszczególne skłądowe będą nowiły nazwy rok, miesiąc i dzień.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">separate</span>(df, daty, <span class="kw">c</span>(<span class="st">&quot;rok&quot;</span>, <span class="st">&quot;miesiac&quot;</span>, <span class="st">&quot;dzien&quot;</span>), <span class="st">&quot;-&quot;</span>)</code></pre>
-<pre><code>##    rok miesiac dzien id
-## 1 2004      01    01  1
-## 2 2012      04    15  2
-## 3 2006      10    29  3
-## 4 2010      03    03  4</code></pre>
-</div>
-<div id="zadania" class="slide section level1">
-<h1>Zadania</h1>
+<p><em>Wsparcie merytoryczne i językowe</em></p>
 <ul>
-<li>W bazie danych Eurostatu o nazwie <code>prc_ppp_ind</code> zbierane są informacje o średniej sile nabywczej. Odczytaj te dane funkcją <code>getEurostatRCV()</code> a następnie zamień z postaci wąskiej do szerokiej.</li>
-<li>Ze zbioru danych <code>kidney</code> wybierz tylko kolumny MDRD12, MDRD24, MDRD36, MDRD60 a następnie zamień je z pozstaci szerokiej do wąskiej.</li>
-<li>W zbiorze danych <code>kidney</code> niezgodności w antygenach AB i DR są opsisane przez kolumny <code>discrepancy.AB</code> i <code>discrepancy.DR</code>. Zamień je w jedną kolumnę o nazwie <code>discrepancy</code> gdzie obie niezgodności są sklejone i separowane znakiem <code>_</code>.</li>
+<li>Paweł Chudzian</li>
+<li>Katarzyna Łogwiniuk</li>
+<li>Krzysztof Trajkowski</li>
 </ul>
-<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
+<p><em>Opracowanie wideo</em></p>
+<ul>
+<li>Jarosław Skrzeczkowski, TV.Platon</li>
+<li>Łukasz Kałuża, TV.Platon</li>
+</ul>
+<p><em>Strona graficzna</em></p>
+<ul>
+<li>Podpunkt.pl</li>
+</ul>
+<p><em>Lektor</em></p>
+<ul>
+<li>Magda Karczewska</li>
+</ul>
+<p><em>Opracowanie serwisu www</em></p>
+<ul>
+<li>Paweł Dudek</li>
+</ul>
+<p><em>Wsparcie organizacyjne</em></p>
+<ul>
+<li>Michał Bojanowski</li>
+</ul>
+<p><em>Opracowanie zadań</em></p>
+<ul>
+<li>Przemysław Biecek, ICM</li>
+</ul>
+<p><em>System weryfikacji zadań</em></p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

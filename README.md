@@ -45,7 +45,7 @@ część 1: Data smart
     + odcinek 21: Tworzenie nowych cech [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/21_dplyr_mutate.html), v1 ready 
     + odcinek 22: Agregowanie danych [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/22_dplyr_summarise.html), v1 ready 
     + odcinek 23: Przetwarzanie danych w grupach [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/23_dplyr_groupby.html), v1 ready
-    + odcinek 24: Reprezentacja wąska i szeroka danych, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/24_tidyr.html)
+    + odcinek 24: Reprezentacja wąska i szeroka danych, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/24_tidyr.html), v1 ready
   * Co dalej? 
     + odcinek 25: Co dalej? [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/99_coDalej.html)
     + odcinek 26: W opracowaniu materiałów udział wzięli [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/00_credits.Rmd)

@@ -13,32 +13,40 @@ output:
 
 ---
 
-[opracowanie materiałów]
-Przemysław Biecek, ICM
+*Opracowanie materiałów*
 
-[wsparcie merytoryczne i językowe]
-* Paweł Chudzian
-* Katarzyna Łogwiniuk
-* Krzysztof Trajkowski
+* Przemysław Biecek, ICM
 
-[opracowanie wideo]
-Jarosław Skrzeczkowski, TV.Platon
-Łukasz Kałuża, TV.Platon
+*Wsparcie merytoryczne i językowe*
 
-[strona graficzna]
-Podpunkt.pl
+  * Paweł Chudzian
+  * Katarzyna Łogwiniuk
+  * Krzysztof Trajkowski
 
-[lektor]
-Magda Karczewska
+*Opracowanie wideo*
 
-[opracowanie serwisu www]
+* Jarosław Skrzeczkowski, TV.Platon
+* Łukasz Kałuża, TV.Platon
 
+*Strona graficzna*
 
-[wsparcie organizacyjne]
-Michał Bojanowski
+* Podpunkt.pl
 
-[opracowanie zadań]
-Przemysław Biecek, ICM
+*Lektor*
 
-[system weryfikacji zadań]
+* Magda Karczewska
+
+*Opracowanie serwisu www*
+
+* Paweł Dudek
+
+*Wsparcie organizacyjne*
+
+* Michał Bojanowski
+
+*Opracowanie zadań*
+
+* Przemysław Biecek, ICM
+
+*System weryfikacji zadań*
 
