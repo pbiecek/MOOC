@@ -149,12 +149,12 @@ szeroka %>%
 
 # Sklejanie kolumn
 
-Zdarza się, że wartości z kilku kolumn chcemy połączyć w jedną kolumnę, sklejając je ze sobą.
-Można taką operację sklejania łatwo wykonać funkcją `unite()`.
+Zdarza się, że wartości z kilku kolumn chcemy skleić ze sobą w jedną kolumnę.
+Można to zrobić funkcją `unite()`.
 
 Pierwszy argument tej funkcji to ramka danych. Drugi to nazwa kolumny, która zostanie utworzona przez połączenie kolumn, które sa pozostałymi argumentami. Argument `sep` określa co ma rozdzielać wartości w połączonych kolumnach.
 
-W przykłądzie poniżej w zbiorze danych `tsdtr210` tworzymy nową kolumnę o nazwie `panstwo_rok`, któ®ej wartości powstaną przez połaczenie wartości w kolumnach `geo` i `time` rozdzielając je znakiem `:`.
+W przykładzie poniżej w zbiorze danych `tsdtr210` tworzymy nową kolumnę o nazwie `panstwo_rok`, której wartości powstaną przez połaczenie wartości w kolumnach `geo` i `time` rozdzielając je znakiem `:`.
 
 ```{r, warning=FALSE, message=FALSE}
 unite(tsdtr210, panstwo_rok, geo, time, sep=":") %>%
@@ -163,29 +163,32 @@ unite(tsdtr210, panstwo_rok, geo, time, sep=":") %>%
 
 ---
 
-# Sklejanie i rozcinanie kolumn
+# Rozszcezpianie kolumn
 
-Zdarza się, że wartości z kilku kolumn chcemy połączyć w jedną kolumnę, sklejając je ze sobą.
-Można taką operację sklejania łatwo wykonać funkcją `unite()`.
+Operację odwrotną do sklejania, a więc rozcinanie kolumn można wykonać funkcją `separate()`.
 
-Pierwszy argument tej funkcji to ramka danych. Drugi to nazwa kolumny, która zostanie utworzona przez połączenie kolumn, które sa pozostałymi argumentami. Argument `sep` określa co ma rozdzielać wartości w połączonych kolumnach.
-
-W przykłądzie poniżej w zbiorze danych `tsdtr210` tworzymy nową kolumnę o nazwie `panstwo_rok`, któ®ej wartości powstaną przez połaczenie wartości w kolumnach `geo` i `time` rozdzielając je znakiem `:`.
+Przedstawimy działanie tej funkcji na przykładzie sztucznego zbioru danych z dwoma kolumnamy - datą i id.
 
 ```{r, warning=FALSE, message=FALSE}
-unite(tsdtr210, panstwo_rok, geo, time, sep=":") %>%
-  head()
+df <- data.frame(daty = c("2004-01-01", "2012-04-15", "2006-10-29", "2010-03-03"),
+                 id = 1:4)
+df
 ```
 
-Operację odwrotną można wykonać funkcją `separate()`
+Pierwszym argumentem funkcji `separate()` jest ramka danych, którą chcemy przekształcić. Drugim argumentem jest nazwa kolumny, którą chcemy rozszczepić. Trzecim argumentem jest wektor napisów, któ®e będą nazwami nowych - rozszczepionych kolumn. Czwarty argument to separator - znak, który rozszczepi kolumny. Poniżej przedstawiamy przykłąd, w którym koulnę `daty` ze zbioru danych `df` rozszczepiamy na wartości rozdizelone znakiem `-`. Poszczególne skłądowe będą nowiły nazwy rok, miesiąc i dzień.
+
+```{r, warning=FALSE, message=FALSE}
+separate(df, daty, c("rok", "miesiac", "dzien"), "-")
+```
 
 ---
 
 # Zadania
-* W bazie danych eurostatu `prc_ppp` zebrane są informacje o średniej mocy nabywczej.
-Odczytaj te dane a następnie zamień z postaci wąskiej do szerokiej.
+
+* W bazie danych Eurostatu o nazwie `prc_ppp_ind` zbierane są informacje o średniej sile nabywczej.
+Odczytaj te dane funkcją `getEurostatRCV()` a następnie zamień z postaci wąskiej do szerokiej.
+* Ze zbioru danych `kidney` wybierz tylko kolumny MDRD12, MDRD24, MDRD36, MDRD60 a następnie zamień je z pozstaci szerokiej do wąskiej.
+* W zbiorze danych `kidney` niezgodności w antygenach AB i DR są opsisane przez kolumny `discrepancy.AB` i `discrepancy.DR`. Zamień je w jedną kolumnę o nazwie `discrepancy` gdzie obie niezgodności są sklejone i separowane znakiem `_`.
 
 Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
-
-
 
