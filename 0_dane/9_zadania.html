@@ -591,6 +591,33 @@ auta2012 %&gt;%
 <span class="st">  </span><span class="kw">group_by</span>(Rok.produkcji) %&gt;%
 <span class="st">  </span><span class="kw">summarise</span>( ś<span class="dt">rednia.cena =</span> <span class="kw">mean</span>(Cena.w.PLN))</code></pre>
 </div>
+<div id="zadania-sezon-1-odcinek-24" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 24</h1>
+<ul>
+<li>W bazie danych Eurostatu o nazwie <code>prc_ppp_ind</code> zbierane są informacje o średniej sile nabywczej. Odczytaj te dane funkcją <code>getEurostatRCV()</code> a następnie zamień z postaci wąskiej do szerokiej.</li>
+<li>Ze zbioru danych <code>kidney</code> wybierz tylko kolumny MDRD12, MDRD24, MDRD36, MDRD60 a następnie zamień je z postaci szerokiej do wąskiej.</li>
+<li>W zbiorze danych <code>kidney</code> niezgodności w antygenach AB i DR są opsisane przez kolumny <code>discrepancy.AB</code> i <code>discrepancy.DR</code>. Zamień je w jedną kolumnę o nazwie <code>discrepancy</code> gdzie obie niezgodności są sklejone i separowane znakiem <code>_</code>.</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-24" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 24</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># siła nabywcza</span>
+prc_ppp_ind &lt;-<span class="st"> </span><span class="kw">getEurostatRCV</span>(<span class="st">&quot;prc_ppp_ind&quot;</span>)
+<span class="kw">spread</span>(prc_ppp_ind, time, value)
+
+<span class="co"># nerki</span>
+kidney$id &lt;-<span class="st"> </span><span class="kw">rownames</span>(kidney)
+kidney %&gt;%<span class="st"> </span>
+<span class="st">  </span>dplyr::<span class="kw">select</span>(id, MDRD12:MDRD60) %&gt;%
+<span class="st">  </span><span class="kw">gather</span>(MDRD, time, MDRD12:MDRD60) %&gt;%
+<span class="st">  </span><span class="kw">head</span>()
+
+<span class="co"># niezgodnosci</span>
+kidney %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">select</span>(therapy, discrepancy.AB, discrepancy.DR) %&gt;%
+<span class="st">  </span><span class="kw">unite</span>(discrepancy, discrepancy.AB, discrepancy.DR, <span class="dt">sep=</span><span class="st">&quot;_&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">head</span>()</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>

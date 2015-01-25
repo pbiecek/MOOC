@@ -662,3 +662,34 @@ auta2012 %>%
   summarise( średnia.cena = mean(Cena.w.PLN))
 ```
 
+
+# Zadania, sezon 1, odcinek 24
+
+* W bazie danych Eurostatu o nazwie `prc_ppp_ind` zbierane są informacje o średniej sile nabywczej.
+Odczytaj te dane funkcją `getEurostatRCV()` a następnie zamień z postaci wąskiej do szerokiej.
+* Ze zbioru danych `kidney` wybierz tylko kolumny MDRD12, MDRD24, MDRD36, MDRD60 a następnie zamień je z postaci szerokiej do wąskiej.
+* W zbiorze danych `kidney` niezgodności w antygenach AB i DR są opsisane przez kolumny `discrepancy.AB` i `discrepancy.DR`. Zamień je w jedną kolumnę o nazwie `discrepancy` gdzie obie niezgodności są sklejone i separowane znakiem `_`.
+
+# Odpowiedzi, sezon 1, odcinek 24
+
+```{r, eval=FALSE}
+# siła nabywcza
+prc_ppp_ind <- getEurostatRCV("prc_ppp_ind")
+spread(prc_ppp_ind, time, value)
+
+# nerki
+kidney$id <- rownames(kidney)
+kidney %>% 
+  dplyr::select(id, MDRD12:MDRD60) %>%
+  gather(MDRD, time, MDRD12:MDRD60) %>%
+  head()
+
+# niezgodnosci
+kidney %>%
+  dplyr::select(therapy, discrepancy.AB, discrepancy.DR) %>%
+  unite(discrepancy, discrepancy.AB, discrepancy.DR, sep="_") %>%
+  head()
+
+```
+
+
