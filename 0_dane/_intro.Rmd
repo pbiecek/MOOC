@@ -12,6 +12,15 @@ output:
     footer: "pogRomcy danych / intro"
 ---
 
+PogRomcy danych to zbiór dwóch kursów o przetwarzaniu, wizualizacji i modelowaniu statystycznym danych.
+Kursy zostały przygotowane dla osób, które pracują z danymi, lub chciałyby pracować z danymi, lub są ciekawe jak wygląda praca z danymi.
+
+W ramach tego kursu pokażemy jak pracować z programem R, bezpłatnym i bardzo potężnym narzędziem do analizy danych. 
+Pokażemy jak pisać programy do przekształcania danych, jak tworzyć wykresy oraz proste modele statystyczne.
+
+Kurs jest prowadzony na poziomie podstawowym. Zakłądamy ogólną orientację jak wygląda tabela z danymi (taka jak w Execlu).
+
+
 Materiał podzielony na dwa kursy
 
 w sezonie 1
