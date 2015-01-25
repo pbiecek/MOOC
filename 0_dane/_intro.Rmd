@@ -1,0 +1,24 @@
+---
+title: "Intro"
+author: "pogRomcy danych"
+date: "sezon 0 / odcinek 0 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / intro"
+---
+
+Materiał podzielony na dwa kursy
+
+w sezonie 1
+ w odcinkach 1-3
+ w odcinkach 4-5
+
+w sezonie 2
+
+
+
