@@ -17,12 +17,18 @@ Można z jej pomocą poznać podstawy języka R jak również bardziej zaawansow
 > *Przewodnik po pakiecie R* *Przemysław Biecek*   
 > http://biecek.pl/R/
 
-Ale w języku polskim jest wiele książek, pisanych przez autorów kładących nacisk na sam język, na zastosowania w biologii, ekonomii czy innych dziedzinach.
+Jedna z pierwszych pozycji poświęconych językowi R w języku polskim, do dzić dostępna bezpłatnie, to książka Łukasza Komsty dostępna pod adresem
+
+> *Wprowadzenie do środowiska R* *Łukasz Komsta* 
+> http://cran.r-project.org/doc/contrib/
+
+Dziś w języku polskim jest wiele książek, pisanych przez autorów kładących nacisk na język, na zastosowania (czy to w biologii, ekonomii czy innych dziedzinach) czy na określone metody (analiza danych przestrzennych, szeregów czasowych, analiza regresyjna).
 
 > Pełna lista polskich książek jest rozwijana na stronie Wikipedii   
 > http://pl.wikipedia.org/wiki/R_(j%C4%99zyk_programowania)#Polskie_ksi.C4.85.C5.BCki_o_R
 
 ### W języku angielskim 
+
 W języku angielskim zatrzęsienie dobrych i słabych pozycji
 
 Dla osób zainteresowanych głębiej językiem szczególnie polecam otwartą książkę   
