@@ -145,6 +145,7 @@ Aby wyświetlić wykres `pl_waga` można wykorzystać funkcję `print()`. Jednym
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 library(grid)
+
 print(pl_waga + ggtitle("Wykres 1"), 
       vp=viewport(x=0.25, y = 0.75, width=0.5, height=0.5))
 print(pl_waga + ggtitle("Wykres 2"), 
@@ -157,7 +158,7 @@ print(pl_waga + ggtitle("Wykres 3"),
 moze bardziej intuicyjnym rozwiazaniem byloby:
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 # siatka:
-pushViewport(vieport(layout = grid.layout(2,2)))
+pushViewport(viewport(layout = grid.layout(2,2)))
 # wklejanie wykresow do wybranych cel:
 print(pl_waga + ggtitle("Wykres 1"),
       vp= viewport(layout.pos.row=1, layout.pos.col=1))
@@ -198,7 +199,7 @@ pl + theme_economist() + ggtitle("theme_economist")
 
 Elastyczność ggplot2 jest olbrzymia. Możliwe jest tworzenie wykresów w stylu popularnych komiksów z serii XKCD http://xkcd.com/
 
-```{r, fig.height=4, fig.width=5, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 library(xkcd)
 ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
   geom_point(size=5) + xkcdaxis(c(0,300),c(50,200))
@@ -207,10 +208,9 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
 
 Bazując na motywie `theme_bw()` można uzyskać inwersję domyślnych wykresów z pakietu `ggplot2`
 
-```{r, fig.height=4, fig.width=5, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, fig.height=4, fig.width=5,  message=FALSE, warning=FALSE}
 pl + theme_bw()+theme(plot.background = element_rect(fill = "gray80"))
 ```
-
 
 
 ---
