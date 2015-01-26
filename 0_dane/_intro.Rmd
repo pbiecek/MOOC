@@ -12,6 +12,7 @@ output:
     footer: "pogRomcy danych / intro"
 ---
 
+
 PogRomcy danych to zbiór dwóch kursów o przetwarzaniu, wizualizacji i modelowaniu statystycznym danych.
 Kursy zostały przygotowane dla osób, które pracują, chciałyby, lub są ciekawe jak wygląda, praca z danymi. Oba kursy są prowadzone na poziomie podstawowym. Zakładamy jedynie ogólną orientację jak wygląda tabela z danymi (taka jak w Excelu) oraz ogólną znajomość pracy z komputerem. Wszystkie nowe pojęcia pokazujemy na ciekawych przykładach związanych z analizą prawdziwych danych.
 
@@ -54,14 +55,6 @@ Również ten blok zakończy się listą materiałów w których można znaleź�
 
 Do obu kursów dodaliśmy przykłady bardzo ciekawych ale i nietypowych zastosowań analizy danych. Pokażemy jak analiza danych jest wykorzystywana w analizie danych sondażowych, robotyce, inżynierii lingwistycznej i meteorologii.
 
-
-
-
-w sezonie 1
- w odcinkach 1-3
- w odcinkach 4-5
-
-w sezonie 2
-
+Analiza danych, a w szczególności analiza z użyciem programu R, charakteryzuje się stromą krzywą uczenia. Na początku wiele rzeczy będzie nowych i trudnych. Przygotowaliśmy jednak wiele materiałów i na bieżąco monitorujemy forum, aby odpowiadać na wszelkie pytania. Gwarantujemy też, że wysiłek włożony w poznawanie programu R opłaci się. Z czasem będziemy coraz sprawniej wykonywać analizy, a elastyczność i ekspresja programu R powodują, że praktycznie nie będzie przed nami barier związanych z analizą różnego rodzaju danych.
 
 
