@@ -13,15 +13,49 @@ output:
 ---
 
 PogRomcy danych to zbiór dwóch kursów o przetwarzaniu, wizualizacji i modelowaniu statystycznym danych.
-Kursy zostały przygotowane dla osób, które pracują z danymi, lub chciałyby pracować z danymi, lub są ciekawe jak wygląda praca z danymi.
+Kursy zostały przygotowane dla osób, które pracują, chciałyby, lub są ciekawe jak wygląda, praca z danymi. Oba kursy są prowadzone na poziomie podstawowym. Zakładamy jedynie ogólną orientację jak wygląda tabela z danymi (taka jak w Excelu) oraz ogólną znajomość pracy z komputerem. Wszystkie nowe pojęcia pokazujemy na ciekawych przykładach związanych z analizą prawdziwych danych.
 
-W ramach tego kursu pokażemy jak pracować z programem R, bezpłatnym i bardzo potężnym narzędziem do analizy danych. 
-Pokażemy jak pisać programy do przekształcania danych, jak tworzyć wykresy oraz proste modele statystyczne.
+W ramach pierwszego kursu pokażemy jak pracować z programem R, bezpłatnym i bardzo potężnym narzędziem do analizy danych. Pokażemy jak pisać programy, tworzyć funkcje, pętle, wczytywać, przetwarzać i zapisywać dane.
 
-Kurs jest prowadzony na poziomie podstawowym. Zakłądamy ogólną orientację jak wygląda tabela z danymi (taka jak w Execlu).
+W ramach drugiego kursu pokażemy co wyróżnia zły, a co dobry wykres prezentujący dane. Następnie pokażemy jak tworzyć dobre wykresy korzystając z programu R. Kurs kończy się przedstawieniem podstawowych modeli i metod statystycznych.
+
+Każdy kurs zakończony jest zbiorem 20 zadań do samodzielnego wykonania. Osoby, które wykonają 13 lub więcej zadań otrzymają certyfikat ukończenia kursu sygnowany przez Uniwersytet Warszawski. 
+
+Po rejestracji otrzymasz dostęp do materiałów dydaktycznych, forum oraz zadań. 
+
+Materiały dydaktyczne zostały podzielone na niewielkie bloki, omawiające poszczególne zagadnienia. Każdy blok kończy się krótkimi sprawdzającymi zadaniami. W materiałach znajdują się również przykładowe odpowiedzi do tych zadań.
+
+Jeżeli przerabiając kolejne porcje materiału natkniesz się na problem, którego nie potrafisz łatwo rozwiązać, lub odkryłeś coś ciekawego i chciałbyś się tym podzielić, napisz o tym na forum. Obsługa kursu śledzi forum i odpowiada na wszelkie, nawet najbardziej podstawowe pytania. Również inni uczestnicy kursu mogą Ci pomóc lub ty możesz pomóc im.
+
+Pierwszy kurs, poświęcony programowi R, rozpoczyna się od czterech odcinków w które uzasadniają dlaczego warto nauczyć się tego programu, jak zainstalować program R, doinstalować bardzo wygodny edytor RStudio oraz jak doinstalować dodatkowe pakiety do pracy z R. Następnie przedstawiane są podstawy pracy z programem R, pokażemy jak wpisywać komendy i gdzie spodziewać się ich wyniku.
+
+Kolejne trzy odcinki poświęcone są wczytywaniu i zapisywaniu tabel z danymi, oraz podstawowym operacjom na tych tabelach z danymi. Jak wczytać plik Excela do R. Jak zapisać wyniki do pliku tekstowego. Jak Wybrać tylko określone kolumny i wiersze z tabeli liczb.
+
+Odcinki od 8, 9, 10 przedstawiają komendy pozwalające na automatyzację obliczeń. Tutaj pokażemy jak działają pętle, instrukcje warunkowe oraz jak tworzyć własne funkcje.
+
+Odcinki od 11 do 15 wprowadzają funkcje i operacje typowe dla określonych typów danych. Co można zrobić z wektorem liczb? A co z wektorem napisów lub dat? Czym są zmienne logiczne i jakościowe, te zagadnienia omówimy w czwartym bloku.
+
+Odcinki 16 do 24 przedstawiają szeroki wachlarz funkcji pozwalających na swobodne przekształcanie danych. Opanowawszy te funkcje będziemy gotowi wykonać 90% typowych prac związanych z przetwarzaniem danych. Będziemy wiedzieć jak filtrować, przekształcać, agregować i grupować dane.
+
+Ten kurs jest kursem podstawowym, ale kończy go odcinek pokazujący gdzie można szukać dalszych informacji o programie R.
 
 
-Materiał podzielony na dwa kursy
+Drugi kurs jest związany z operacjami, które możemy wykonać na danych, a wiec wizualizacji oraz analizom statystycznym.
+
+Rozpoczynamy od trzech odcinków pokazujących kamienie milowe w historii wizualizacji danych, pokazujemy trudności związane z prezentowaniem danych, wynikające ze sposobu w jaki nasz mózg interpretuje obraz a następnie przedstawimy złe wykresy, przekłamujące dane.
+
+Odcinki 4, 5, 6 i 7 wprowadzą nas w świat wykresów tworzonych z użyciem pakietu ggplot2. Poznamy podstawowe i bardziej zaawansowane instrukcje, pozwalające na wykonanie praktycznie dowolnego wykresu.
+
+Odcinek 8 przedstawi dalsze źródła wiedzy związanej z tworzeniem wykresów w programie R ale i nie tylko.
+
+Kolejne odcinki przedstawią podstawowe narzędzia statystyczne do analizy danych. Testy dla średnich, testy dla tabel, podstawy modelowania regresyjnego.
+
+Również ten blok zakończy się listą materiałów w których można znaleźć więcej informacji.
+
+Do obu kursów dodaliśmy przykłady bardzo ciekawych ale i nietypowych zastosowań analizy danych. Pokażemy jak analiza danych jest wykorzystywana w analizie danych sondażowych, robotyce, inżynierii lingwistycznej i meteorologii.
+
+
+
 
 w sezonie 1
  w odcinkach 1-3
