@@ -15,25 +15,28 @@ output:
 
 # O czym jest ten odcinek
 
-Bazy danych zawierają najczęściej znacznie więcej informacji niż jest nam potrzebne. Jedną z kluczowych operacji jest więc filtrowanie, wybieranie tylko tych wierszy, które nas interesują. Przy czym 'nas interesują' oznacza spełnianie pewnych kryteriów.
+Bazy danych zawierają najczęściej znacznie więcej informacji niż jest nam potrzebne. Jedną z kluczowych operacji jest więc filtrowanie, 
+wybieranie tylko tych wierszy, które nas interesują. Przy czym stwierdzenie 'interesują nas' oznacza spełnianie pewnych kryteriów.
 
-W procesie przygotowania danych takie filtrowanie jest niesamowicie częstą instrukcją. W odcinku 7 pokazaliśmy jak wybierać wiersze spełniające określone kryterium, używając operatora `[`. W codziennej pracy, i wygodniej, i szybciej jest wykorzystać dedykowaną funkcję `filter()` z pakietu `dplyr`.
+W procesie przygotowania danych takie filtrowanie jest niesamowicie częstą instrukcją. W odcinku 7 pokazaliśmy jak wybierać wiersze spełniające 
+określone kryterium, używając operatora `[`. W codziennej pracy nie tylko wygodniej, ale i szybciej jest wykorzystać dedykowaną funkcję `filter()` z pakietu `dplyr`.
 
-W tym odcinku nauczymy się
+W tym odcinku nauczymy się:
 
-- jak ze zbioru danych wybierać tylko interesujące nas wiersze?
-- jak tworzyć złożone kryteria wyboru wierszy?
+- jak ze zbioru danych wybierać tylko interesujące nas wiersze,
+- jak tworzyć złożone kryteria wyboru wierszy.
 
-Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, 
-znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki`, a drugi, 
+znacznie większy, to `auta2012`. Oba dostępne są w pakiecie `SmarterPoland`.
 
 ---
 
 # Ptaki vs. koty
 
-Rozpocznijmy przykład dla filtrowania od zbioru danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem `SmarterPoland`. Jest on na tyle mały, że wynik operacji będzie można przedstawić na ekranie.
+Rozpocznijmy przykład filtrowania od zbioru danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem `SmarterPoland`. 
+Jest on na tyle mały, że wynik operacji będzie można przedstawić na ekranie.
 
-Pokażemy jak z tego zbioru danych wybierać wiersze, widząc cały zbiór danych łatwiej zrozumieć które wiersze zostały wyfiltrowane.
+Pokażemy jak z tego zbioru danych wybierać wiersze. Widząc cały zbiór danych łatwiej zrozumieć które wiersze zostały wyfiltrowane.
 
 ```{r, message=FALSE}
 library(SmarterPoland)
@@ -46,7 +49,7 @@ koty_ptaki
 
 Funkcja **filter()** redukuje liczbę wierszy, zostawiając tylko te, które spełniają określony warunek (jeden lub kilka).
 Pierwszym argumentem tej funkcji jest ramka danych lub tabela danych,
-kolejne argumenty, a może być ich jeden lub więcej) to warunki logiczne.
+kolejne argumenty (a może być ich jeden lub więcej) to warunki logiczne.
 Wynikiem jest ramka danych z wierszami, które spełniają jednocześnie wszystkie wskazane warunki.
 
 Przykładowo, aby zobaczyć, które zwierzaki przekraczają prędkość 100 km na godzinę możemy użyć następujących komend.
@@ -83,9 +86,11 @@ filter(koty_ptaki,
 
 # Auta
 
-Operacje filtrowania przećwiczymy też na znacznie większym zbiorze danych, który już nie sposób w całości wyświetlić na ekranie. Mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.
+Operacje filtrowania przećwiczymy też na znacznie większym zbiorze danych, który już nie sposób w całości wyświetlić na ekranie, 
+a mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.
 
-Zbiór danych `auta2012` jest dostępny po wczytaniu pakietu `SmarterPoland`. Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html
+Zbiór danych `auta2012` jest dostępny po wczytaniu pakietu `SmarterPoland`. Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych. 
+Szczegółowy opis tego zbioru znajduje się na stronie https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html
 
 ```{r, message=FALSE}
 head(auta2012)
@@ -95,9 +100,12 @@ head(auta2012)
 
 # Tabele danych
 
-W tym miejscu warto zaznaczyć, że funkcje z pakietu `dplyr` pracują nie tylko na ramkach danych, które już znamy i które mają klasę `data.frame`, ale również na tabelach danych, obiektach o klasie `tbl`.
+W tym miejscu warto zaznaczyć, że funkcje z pakietu `dplyr` pracują nie tylko na ramkach danych, które już znamy i które mają klasę `data.frame`, 
+ale również na tabelach danych - obiektach klasy `tbl`.
 
-Z użytkownego punktu widzenia, tabele danych od ramek danych różnią się sposobem wyświetlania na ekranie (nie wyświetlają się kolumny, nie mieszczące się w obecnej szerokości konsoli) ale też wewnętrzną reprezentacją, która pozwala na szybsze operowanie na danych w strukturze `tbl`. 
+Z użytkowego punktu widzenia, tabele danych od ramek danych różnią się głównie sposobem wyświetlania na ekranie (nie wyświetlają się kolumny, 
+nie mieszczące się w obecnej szerokości konsoli). W rzeczywistości różnią się także szeregiem innych właściwości, między innymi wewnętrzną 
+reprezentacją, która pozwala na szybsze operowanie na danych w strukturze `tbl`. 
 
 Jeżeli mamy więc dane duże, o dużej liczbie wierszy lub kolumn, często dobrym pomysłem jest przekształcenie je na postać tabeli danych.
 
@@ -128,13 +136,13 @@ head(tmp)
 ## Dwa warunki
 
 Możemy określać jednocześnie więcej warunków.
-Na przykład tylko samochody Audi o silnikach o liczbie koni mechanicznych przekraczających 300 możemy odfiltrować w następujący sposób.
+Na przykład tylko samochody Porsche o silnikach o liczbie koni mechanicznych przekraczających 300 możemy odfiltrować w następujący sposób.
 
 ```{r, warning=FALSE}
-tylkoPorscheZDużymSilnikiem <- filter(auta2012,
+tylkoPorscheZDuzymSilnikiem <- filter(auta2012,
          Marka == "Porsche",
          KM > 300)
-head(tylkoPorscheZDużymSilnikiem)
+head(tylkoPorscheZDuzymSilnikiem)
 ```
 
 ---

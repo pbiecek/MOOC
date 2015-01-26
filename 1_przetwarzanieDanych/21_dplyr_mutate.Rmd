@@ -20,13 +20,13 @@ Mając prędkość w metrach na sekundę liczymy prędkość w kilometrach na go
 
 W programie R na różne sposoby można dodać nową zmienną do zbioru danych. Z tych wszystkich sposobów wygodnym i szybkim jest z wykorzystaniem funkcji `mutate()` z pakietu `dplyr`.
 
-W tym odcinku nauczymy się
+W tym odcinku nauczymy się:
 
-- jak do zbioru danych dodać nową kolumnę?
-- jak nadpisać wartości w istniejącej kolumnie?
+- jak do zbioru danych dodać nową kolumnę,
+- jak nadpisać wartości w istniejącej kolumnie.
 
 Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, 
-znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
+znacznie większy, to `auta2012` - oba dostępne w pakiecie `SmarterPoland`.
 
 # Ptaki vs. koty
 
@@ -43,9 +43,10 @@ koty_ptaki
 
 W zbiorze danych `koty_ptaki` jest zmienna `predkosc` opisująca prędkość w kilometrach na godzinę.
 
-Dodajmy dwie nowe zmienne, w jednej przeliczmy prędkość z kilometrów na godzinę na mile na godzinne, w drugiej przeliczymy prędkość na liczbę długości na sekundę (długość zwierząt jest w metrach). Nową zmienną można dodać funkcją `mutate()`. Pierwszym argumentem jest ramka danych a kolejne to deklaracje nowych zmiennych w postaci `nazwa.zmiennej = wzór.na.nową.zmiennę `. 
+Dodajmy dwie nowe zmienne. W jednej przeliczmy prędkość z kilometrów na godzinę na prędkość w milach na godzinne, w drugiej przeliczymy prędkość na liczbę długości na sekundę 
+(długość zwierząt jest w metrach). Nową zmienną można dodać funkcją `mutate()`. Pierwszym argumentem jest ramka danych, a kolejne to deklaracje nowych zmiennych w postaci `nazwa.zmiennej = wzór.na.nową.zmienną`. 
 
-W używaniu przetwarzaniu danych wykorzystamy operator `%>%` omówiony w 20 odcinku. 
+W przetwarzaniu danych wykorzystamy operator `%>%` omówiony w 20 odcinku. 
 
 ```{r, message=FALSE, warning=FALSE}
 library(dplyr)
@@ -86,7 +87,7 @@ head(auta2012)
 
 # Wyliczanie jednej nowej zmiennej
 
-Policzmy najpierw wiek auta. Dane były zbierane w roku 2012, więc wiek auta to różnica pomiędzy rokiem produkcji, rokiem 2012 plus 1.
+Policzmy najpierw wiek auta. Dane były zbierane w roku 2012, więc wiek auta to różnica pomiędzy rokiem 2012 plus 1, a rokiem produkcji.
 
 ```{r, warning=FALSE}
 autaZWiekiem <- auta2012 %>%
@@ -105,7 +106,7 @@ autaZWiekiem %>%
 
 # Wyliczanie nowych zmiennych
 
-Zauważmy też, że część cen jest netto a część brutto. Przeliczmy wszystkie ceny na brutto dodając 23\% tam gdzie podana jest cena netto.
+Zauważmy, że część cen jest netto, a część brutto. Przeliczmy wszystkie ceny na brutto dodając 23\% tam gdzie podana jest cena netto.
 
 Wykorzystamy w tym celu funkcję `ifelse()`, która jako wynik zwraca drugi lub trzeci argument w zależności od tego czy pierwszy argument jest prawdziwy czy nie.
 

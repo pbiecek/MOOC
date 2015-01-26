@@ -15,16 +15,17 @@ output:
 
 # O czym jest ten odcinek
 
-Przetwarzanie danych składa się najczęściej z wielu kroków. Dane się filtruje, sortuje, grupuje, podsumowuje, znów filtruje, łączy się z innymi itp.
+Przetwarzanie danych składa się najczęściej z wielu kroków. Dane się filtruje, sortuje, grupuje, podsumowuje, znów filtruje, łączy się z innymi itd.
 
-Taka sekwencja operacji przypomina potok, w którym dane wypływają ze źródła a następnie trafiają na kolejne etapy przetwarzania.
+Taka sekwencja operacji przypomina potok, w którym dane wypływają ze źródła, a następnie trafiają na kolejne etapy przetwarzania.
 
-Relatywnie niedawno, do programu R wprowadzono operator pozwalający na łatwe opisywanie takich potoków przetwarzania. Można bez niego żyć, ale gdy już się go pozna i zacznie z nim pracować, życie bez niego straci na smaku.
+Relatywnie niedawno do programu R wprowadzono operator pozwalający na łatwe opisywanie takich potoków przetwarzania. Można bez niego żyć, 
+ale gdy już się go pozna i zacznie z nim pracować, życie bez niego straci na smaku.
 
-W tym odcinku nauczymy się
+W tym odcinku nauczymy się:
 
-- jak składać ze sobą wywołania funkcji do przetwarzania danych w potoki przetwarzania
-- jakim instrukcjom operator przetwarzania potokowego jest równoważny
+- jak składać ze sobą wywołania funkcji do przetwarzania danych w potoki przetwarzania,
+- jakim instrukcjom operator przetwarzania potokowego jest równoważny.
 
 Do ilustracji tych zagadnień wykorzystamy zbiór danych `auta2012` dostępny w pakiecie `SmarterPoland`.
 
@@ -52,7 +53,7 @@ posortowaneVolkswagen <- arrange(tylkoVolkswagen,
 # tylko Golf VI
 tylkoGolfIV <- filter(posortowaneVolkswagen, 
                       Model == "Golf", Wersja == "IV")
-# tylko z małym przbiegiem
+# tylko z małym przebiegiem
 tylkoMalyPrzebieg <- filter(tylkoGolfIV, 
                             Przebieg.w.km < 50000)
 ```
@@ -85,7 +86,7 @@ tylkoMalyPrzebieg <-
     Przebieg.w.km < 50000)
 ```
 
-W tym rozwiązaniu nie są tworzone zbędna nazwy zmiennych, ale sam zapis jest bardzo nieczytelny.
+W tym rozwiązaniu nie są tworzone zbędne zmienne, ale sam zapis jest bardzo nieczytelny.
 
 Nawet stosując wcięcia trudno nam zauważyć, które argumenty są do której funkcji.
 
@@ -149,7 +150,7 @@ tylkoMalyPrzebieg <-
 
 # Wszystko płynie
 
-Jeżeli chcielibyśmy otrzymać pełny przepływ w czytaniu od góry na dół potoku, to zamiast operatora przypisania `<-` możemy wykorzystać operatora `->` o identycznym znaczeniu a różniący się tylko kolejnością argumentów.
+Jeżeli chcielibyśmy otrzymać pełny przepływ w czytaniu od góry na dół potoku, to zamiast operatora przypisania `<-` możemy wykorzystać operator `->` o identycznym znaczeniu a różniący się tylko kolejnością argumentów.
 
 W poniższym kodzie zostanie wykonane przetwarzanie a w ostatnim kroku wynik zostanie przypisany do zmiennej `tylkoMalyPrzebieg`.
 
@@ -164,7 +165,8 @@ tylkoMalyPrzebieg
 
 # Co można zrobić z potokiem
 
-Operator `%>%` jest najczęściej wykorzystywany w pracy z funkcjami z pakietów `dplyr` i `ggvis`, ale można go oczywiście stosować do innych funkcji również. Koniec końców, jedyne co robi to przekazuje swój lewy argument jako pierwszy argument wyrażenia po prawej stronie.
+Operator `%>%` jest najczęściej wykorzystywany w pracy z funkcjami z pakietów `dplyr` i `ggvis`, ale można go oczywiście stosować również do innych funkcji. 
+Koniec końców, jedyne co robi, to przekazuje swój lewy argument jako pierwszy argument wyrażenia po prawej stronie.
 
 Przykładowo, aby wykorzystać funkcję `dim()` do sprawdzenia wymiarów ramki `tylkoMalyPrzebieg`.
 

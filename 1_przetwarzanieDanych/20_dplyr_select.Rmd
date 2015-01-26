@@ -15,14 +15,15 @@ output:
 
 # O czym jest ten odcinek
 
-Pracując na danych o ofertach sprzedaży aut można było odczuć jak niewygodna jest praca na danych które mają wiele kolumn, w sytuacji gdy potrzebujemy jedynie kilku z nich. W odcinku 7 pokazaliśmy jak wybierać kolumny spełniające określone kryterium, używając operatora `[`. 
+Pracując na danych o ofertach sprzedaży aut można było odczuć jak niewygodna jest praca na danych które mają wiele kolumn,
+w sytuacji gdy potrzebujemy jedynie kilku z nich. W odcinku 7 pokazaliśmy jak wybierać kolumny spełniające określone kryterium, używając operatora `[`. 
 
-W codziennej pracy aby wybrać kolumny z całego zbioru danych, i wygodniej, i szybciej jest wykorzystać dedykowaną funkcję `select()` z pakietu `dplyr`.
+W codziennej pracy aby wybrać kolumny z całego zbioru danych nie tylko wygodniej, ale i szybciej jest wykorzystać dedykowaną funkcję `select()` z pakietu `dplyr`.
 
-W tym odcinku nauczymy się
+W tym odcinku nauczymy się:
 
-- jak ze zbioru danych wybierać tylko interesujące nas kolumny?
-- jak ze zbioru danych wybierać kolumny wszystkie poza wskazanych?
+- jak ze zbioru danych wybierać tylko interesujące nas kolumny,
+- jak ze zbioru danych wybierać kolumny wszystkie poza wskazanych.
 
 Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, 
 znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
@@ -53,7 +54,8 @@ koty_ptaki %>%
 
 # Wybór zmiennych używając operatora : lub -
 
-Jeżeli kolumn w zbiorze danych jest wiele to wymienienie ich nazw jedna po drugiej może być niewygodne. W tym przypadku wato wykorzystać operator `:`, który pozwala na wybór kolumn od wskazanej do wskazanej.
+Jeżeli kolumn w zbiorze danych jest wiele to wymienienie ich nazw jedna po drugiej może być niewygodne. 
+W tym przypadku warto wykorzystać operator `:`, który pozwala na wybór kolumn od wskazanej do wskazanej.
 
 ```{r, warning=FALSE, message=FALSE}
 koty_ptaki %>%
@@ -102,7 +104,7 @@ auta2012 %>%
 
 # Wybór zmiennych przez usunięcie
 
-Jeżeli chcemy usunąć kilka kolumn, można co tego wykorzystać operator `-`. 
+Jeżeli chcemy usunąć kilka kolumn, można do tego wykorzystać operator `-`. 
 
 Na poniższym przykładzie usuwamy 9 wskazanych kolumn.
 
@@ -121,7 +123,7 @@ auta2012 %>%
 
 Wybierając kolumny, można również wskazywać te, których nazwy pasują do zadanego wzorca.
 
-Przykład poniżej wykorzystujemy funkcję `martches()` aby wybrać wszystkie nazwy kolumn, które w nazwie mają wzorzec `aj`.
+Przykład poniżej wykorzystujemy funkcję `matches()` aby wybrać wszystkie nazwy kolumn, które w nazwie mają wzorzec `aj`.
 
 ```{r, warning=FALSE}
 auta2012 %>%
@@ -140,4 +142,5 @@ auta2012 %>%
 Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
 
 
-
+[PCH: Moim zdaniem - co bardziej rzuca się w oczy tutaj niż w poprzednich odcinkach - nie ma sensu przedstawiać dokładnie tych samych operacji na dwóch zbiorach danych. Wystarczyłoby na autach, a zatem
+sugerowałbym usunięcie slajdów dla koty_i_ptaki.]

@@ -17,12 +17,12 @@ output:
 
 W programie R wiersze można sortować na kilka sposobów, jeden z użyciem funkcji `order()` pokazaliśmy w odcinku 7.
 
-W codziennej pracy z danymi, i wygodniej, i szybciej jest wykorzystać dedykowaną funkcję `arrange()` z pakietu `dplyr`.
+W codziennej pracy z danymi nie tylko wygodniej, ale i szybciej jest wykorzystać dedykowaną funkcję `arrange()` z pakietu `dplyr`.
 
-W tym odcinku nauczymy się
+W tym odcinku nauczymy się:
 
-- jak porządkować wiersze rosnąco / malejąco względem określonej kolumny?
-- jak i po co sortować po więcej niż jednej kolumnie?
+- jak porządkować wiersze rosnąco / malejąco względem określonej kolumny,
+- jak i po co sortować po więcej niż jednej kolumnie.
 
 Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, 
 znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
@@ -42,7 +42,7 @@ koty_ptaki
 
 # Sortowanie danych
 
-O ile wektor wartości można posortować funkcją `sort()`, to do sortowania wierszy w ramce danych względem określonej kolumny wygodnie jest użyć funkcję `arrange()`.
+O ile wektor wartości można posortować funkcją `sort()`, to do sortowania wierszy w ramce danych względem określonej kolumny wygodnie jest użyć funkcji `arrange()`.
 
 Ta funkcja jako pierwszy argument przyjmuje ramkę danych, a jako kolejne argumenty przyjmuje zmienne, wzdłuż których dane są sortowane.
 
@@ -57,7 +57,7 @@ arrange(koty_ptaki, predkosc)
 
 # Sortowanie danych
 
-Aby posortować w kolejności malejącej można albo zmienną, po której ma nastąpić sortowanie opatrzeć funkcją `desc()` albo, dla zmiennych liczbowych, dodać znak `-` przed zmienną.
+Aby posortować w kolejności malejącej można albo zmienną, po której ma nastąpić sortowanie opatrzeć funkcją `desc()`, albo - dla zmiennych liczbowych - dodać znak `-` przed zmienną.
 
 Obie poniższe instrukcje mają taki sam efekt.
 
@@ -72,9 +72,9 @@ arrange(koty_ptaki,   -predkosc)
 
 Jeżeli dla zmiennej, wzdłuż której sortujemy, mogą wystąpić remisy, czyli te same wartości, wtedy kolejność wierszy jest nieokreślona. Wygodnie jest w takich sytuacjach wskazać drugorzędowe kryterium sortowania.
 
-Przykładowo, aby posortować wiersze uwzględniając prędkość, ale zrobić to osobno dla kotów osobno dla ptaków, możemy wskazać drużynę jako główne kryterium sortowania a prędkość jako kryterium drugorzędne.
+Przykładowo, aby posortować wiersze uwzględniając prędkość, ale zrobić to osobno dla kotów osobno dla ptaków, możemy wskazać drużynę jako główne kryterium sortowania, a prędkość jako kryterium drugorzędne.
 
-Sortując po kolumnie `druzyna` wiele wierszy ma te same wartości, i o ich końcowej kolejności decyduje zmienna `predkosc`.
+Sortując po kolumnie `druzyna` wiele wierszy ma te same wartości i o ich końcowej kolejności decyduje zmienna `predkosc`.
 
 ```{r, warning=FALSE}
 arrange(koty_ptaki, 
@@ -92,12 +92,12 @@ Zbiór danych `auta2012` jest dostępny po wczytaniu pakietu `SmarterPoland`. Po
 Wybierzmy ze zbioru danych tylko samochody marki `Porsche` z silnikiem ponad 300 KM, posortujmy wiersze w tym zbiorze danych zaczynając od najtańszych.
 
 ```{r, warning=FALSE}
-tylkoPorscheZDużymSilnikiem <- filter(auta2012,
+tylkoPorscheZDuzymSilnikiem <- filter(auta2012,
          Marka == "Porsche",
          KM > 300)
 
 posortowanePorsche <-
-  arrange(tylkoPorscheZDużymSilnikiem, 
+  arrange(tylkoPorscheZDuzymSilnikiem, 
         Cena.w.PLN)
 ```
 
@@ -117,15 +117,15 @@ tail(posortowanePorsche)
 
 # Model i cena
 
-Jeżeli wskażemy więcej niż jedną zmienną do sortowania, to w pierwszym kroku sortowanie odbędzie się wzdłuż pierwszej zmiennej, a w przypadku remisu (takich samych wartości) w drugim kroku wzdłuż drugiej zmiennej.
+Jeżeli wskażemy więcej niż jedną zmienną do sortowania, to w pierwszym kroku sortowanie odbędzie się wzdłuż pierwszej zmiennej, a w przypadku remisu (takich samych wartości), w drugim kroku, wzdłuż drugiej zmiennej.
 
 W poniższym przypadku w pierwszym kroku sortujemy wzdłuż zmiennej `Model` auta, a gdy samochody mają ten sam model to ich kolejność jest określona przez drugą zmienną, czyli w tym przypadku cenę.
 
-Zmienna `Model` za wartości przyjmuje napisy, w tym przypadku jest sortowany w kolejności alfabetycznej.
+Zmienna `Model` za wartości przyjmuje napisy, a w tym przypadku sortowanie wykonywane jest w kolejności alfabetycznej.
 
 ```{r, warning=FALSE}
 head(
-   arrange(tylkoPorscheZDużymSilnikiem, 
+   arrange(tylkoPorscheZDuzymSilnikiem, 
         Model, Cena.w.PLN)
   ) 
 ```
@@ -138,7 +138,7 @@ Domyślnie wartości sortowane są rosnąco. Jeżeli chcemy zmienić kolejność
 
 ```{r, warning=FALSE}
 head(
-   arrange(tylkoPorscheZDużymSilnikiem, 
+   arrange(tylkoPorscheZDuzymSilnikiem, 
         Model, desc(Cena.w.PLN))
   ) 
 ```

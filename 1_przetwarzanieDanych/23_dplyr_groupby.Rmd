@@ -17,13 +17,13 @@ output:
 
 W poprzednim odcinku pokazaliśmy jak liczyć na zbiorze danych statystyki / agregaty. Użyteczność tej opcji znacząco rośnie gdy liczymy te agregaty w grupach. Dzięki temu możemy później łatwo te grupy porównać. Do określania grup wykorzystamy funkcję `group_by()` z pakietu `dplyr`.
 
-W tym odcinku nauczymy się
+W tym odcinku nauczymy się:
 
-- jak określać jedną lub więcej zmiennych grupujących?
-- jak liczyć agregaty w grupach?
+- jak określać jedną lub więcej zmiennych grupujących,
+- jak liczyć agregaty w grupach.
 
 Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, 
-znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
+znacznie większy, to `auta2012`. Oba zbiory są dostępne w pakiecie `SmarterPoland`.
 
 ---
 
@@ -40,11 +40,12 @@ koty_ptaki
 
 # Ptaki vs. koty
 
-Funkcja `group_by()` jako pierwszy argument przyjmuje zbiór danych a jako kolejne zmienne grupujące (jedną lub więcej). Sama funkcja `group_by()` nie powoduje wyliczenia nowych wartości, a jedynie zaznacza, które zmienne mają być użyte do grupowania. Przez co użycie kolejnych funkcji, takich jak `summarise()` będzie miało zmienione działanie. 
+Funkcja `group_by()` jako pierwszy argument przyjmuje zbiór danych, a jako kolejne zmienne grupujące (jedną lub więcej). Sama funkcja `group_by()` nie powoduje wyliczenia nowych wartości, 
+a jedynie zaznacza, które zmienne mają być użyte do grupowania, przez co użycie kolejnych funkcji (takich jak np. `summarise()`) będzie miało zmienione działanie. 
 
 Zobaczmy jak wygląda użycie funkcji `group_by()` do porównania maksymalnej wagi, prędkości i żywotności w grupie ptaków i kotów.
 
-Wynikiem jest ramka danych, której kolumny to w pierwszej kolejności zmienne grupujące a następnie wyniki agregatów w grupach.
+Wynikiem jest ramka danych, której kolumny to w pierwszej kolejności zmienne grupujące, a następnie wyniki agregatów w grupach.
 
 ```{r, message=FALSE, warning=FALSE}
 library(dplyr)
@@ -77,7 +78,8 @@ auta2012 %>%
 
 Przykłady dla danych o cenach ofertowych aut rozpoczniemy od porównania cen i przebiegów samochodów napędzanych różnymi paliwami.
 
-Aby sensownie porównywać różne rodzaje paliwa ograniczymy się do jednej marki samochodów i jednego rocznika. Na poniższym przykładzie wybieramy tylko 5-letnie Volkswageny a następnie dla aut napędzanych benzyną olejem czy gazem liczymy medianę ceny, przebiegu i liczbę aut w tej grupie.
+Aby sensownie porównywać różne rodzaje paliwa ograniczymy się do jednej marki samochodów i jednego rocznika. 
+Na poniższym przykładzie wybieramy tylko 5-letnie Volkswageny, a następnie dla aut napędzanych benzyną olejem czy gazem liczymy medianę ceny, medianę przebiegu oraz liczbę aut w każdej grupie.
 
 ```{r, warning=FALSE}
 auta2012 %>%
@@ -88,7 +90,7 @@ auta2012 %>%
             liczba = n())
 ```
 
-Najliczniejszą grupą aut są samochody napędzane olejem napędowym, mają one przeszło dwukrotnie większy przebieg niż napędzane benzyną (patrząc na mediany) a mimo to są droższe o około 15\%.
+Najliczniejszą grupą aut są samochody napędzane olejem napędowym, mają one przeszło dwukrotnie większy przebieg niż napędzane benzyną (patrząc na mediany), a mimo to są droższe o około 15\%.
 
 ---
 
@@ -132,11 +134,12 @@ auta2012 %>%
 
 # Grupowanie i filtrowanie
 
-W wyniku z poprzedniego wiele grup miało małą liczebność, przez co wyniki dla nich były dosyć przypadkowe a to utrudnia porównywania.
+W wyniku z poprzedniego działania wiele grup miało małą liczebność, przez co wyniki dla nich były dosyć przypadkowe, a to utrudnia porównywania.
 
 Dodanie funkcji `filter()` na koniec umożliwia pozostawienie tylko tych grup, w których liczebność przekracza 10 obserwacji.
 
-Warto zwrócić uwagę, że w poniższym przykładzie funkcja `filter()` występuje dwukrotnie, w pierwszym przypadku filtruje wiersze w oryginalnym zbiorze danych a w drugim filtruje grupy o zbyt małej liczebności.
+Warto zwrócić uwagę, że w poniższym przykładzie funkcja `filter()` występuje dwukrotnie. W pierwszym przypadku 
+filtruje wiersze w oryginalnym zbiorze danych, a w drugim filtruje grupy o zbyt małej liczebności.
 
 ```{r, warning=FALSE}
 auta2012 %>%

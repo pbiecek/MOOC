@@ -18,15 +18,16 @@ output:
 Ogląd całych danych jest możliwy tylko gdy dane nie są zbyt duże. Mieszczą się na jednym lub kilku ekranach.
 Dla większych zbiorów danych konieczne jest agregowanie informacji z poziomu pojedynczych wierszy na poziom grup.
 
-Aby efektywnie przedstawiać agregaty w grupach potrzebujemy funkcji liczącej agregaty oraz funkcji definiującej grupy. Do agregacji wygodnie wykorzystać funkcję `summarise()` z pakietu `dplyr`, którą przedstawimy w tym odcinku.
+Aby efektywnie przedstawiać agregaty w grupach potrzebujemy funkcji liczącej agregaty oraz funkcji definiującej grupy. 
+Do agregacji wygodnie wykorzystać funkcję `summarise()` z pakietu `dplyr`, którą przedstawimy w tym odcinku.
 
-W tym odcinku nauczymy się
+W tym odcinku nauczymy się:
 
-- jak dla całego zbioru danych wyznaczać agregaty?
-- jakie przykładowe agregaty można wyznaczać?
+- jak dla całego zbioru danych wyznaczać agregaty,
+- jakie przykładowe agregaty można wyznaczać.
 
 Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, 
-znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
+znacznie większy, to `auta2012`. Oba dostępne w pakiecie `SmarterPoland`.
 
 ---
 
@@ -43,7 +44,7 @@ koty_ptaki
 
 # Agregaty
 
-Do wyznaczania agregatów / podsumowań wykorzystamy funkcję `sumamrise()`. Jako pierwszy argument przyjmuje ona zbiór danych (w poniższym przykładzie przesłany za pomocą operatora `%>%`), kolejne argumenty to deklaracje jak liczony ma być agregat oraz jak ma sie nazywać odpowiadająca mu kolumna.
+Do wyznaczania agregatów / podsumowań wykorzystamy funkcję `summarise()`. Jako pierwszy argument przyjmuje ona zbiór danych (w poniższym przykładzie przesłany za pomocą operatora `%>%`), kolejne argumenty to deklaracje, jak liczony ma być agregat oraz jak ma się nazywać odpowiadająca mu kolumna.
 
 W pierwszej linii wczytujemy potrzebny pakiet `dplyr` a następnie liczymy następujące statystyki: minimalne i maksymalne prędkości, maksymalną i średnią wagą oraz coś ciut trudniejszego, maksymalną długość nazwy gatunku. 
 
@@ -55,9 +56,9 @@ library(dplyr)
 koty_ptaki %>%
   summarise(najszybszy = max(predkosc),
             najwolniejszy = min(predkosc),
-            najcięższy = max(waga),
-            średnia.waga = mean(waga),
-            najdłuższa.nazwa = max(nchar(as.character(gatunek))))
+            najciezszy = max(waga),
+            srednia.waga = mean(waga),
+            najdluzsza.nazwa = max(nchar(as.character(gatunek))))
 ```
 
 ---
@@ -68,8 +69,8 @@ Tworząc agregaty możemy je opierać na więcej niż jednej zmiennej.  W poniż
 
 ```{r, message=FALSE, warning=FALSE}
 koty_ptaki %>%
-  summarise(średni.pęd = mean(waga*predkosc),
-            medianowy.pęd = median(waga*predkosc),
+  summarise(sredni.ped = mean(waga*predkosc),
+            medianowy.ped = median(waga*predkosc),
             predkosc.w.dlugosciach.na.sek = max(predkosc * 1000 / dlugosc / 3600))
 ```
 
@@ -77,8 +78,8 @@ Tworząc agregaty możemy wykorzystywać agregaty policzone w poprzednim kroku. 
 
 ```{r, message=FALSE, warning=FALSE}
 koty_ptaki %>%
-  summarise(średnia.waga = mean(waga),
-            średnia.waga.w.funtach = średnia.waga / 0.453)
+  summarise(srednia.waga = mean(waga),
+            srednia.waga.w.funtach = srednia.waga / 0.453)
 ```
 
 
@@ -98,7 +99,7 @@ auta2012 %>%
 
 # Agregaty
 
-Zbiór danych `ceny2012` zawiera szczegółowe informacje o parametrach każdej oferty sprzedaży. Często z takich zbiorów danych interesują nas pewne statystyki agregujące informacje ze zbioru danych. 
+Zbiór danych `auta2012` zawiera szczegółowe informacje o parametrach każdej oferty sprzedaży. Często z takich zbiorów danych interesują nas pewne statystyki agregujące informacje ze zbioru danych. 
 
 Przykładem może być średnia cena, rozrzut ceny, przykładowo mierzony przez odchylenie standardowe ceny,
 połówkowy przebieg czy jakiego przebiegu nie przekracza połowa aut. 
@@ -113,9 +114,9 @@ auta2012 %>%
             medianaPrzebiegu = median(Przebieg.w.km, na.rm=TRUE))
 ```
 
-Funkcja `mean()` wyznacza średnią, funkcja `var()` wyznacza wariancję a pierwiastek z wariancji jest odchyleniem standardowym, funkcja `median()` wyznacza liczbę obserwacji w grupie.
+Funkcja `mean()` wyznacza średnią, funkcja `var()` wyznacza wariancję (a pierwiastek z wariancji jest odchyleniem standardowym), funkcja `median()` wyznacza medianę obserwacji w grupie.
 
-Nie wszystkie wartości są podane dla wszystkich zmiennych. Jeżeli jakaś wartość nie została podana, to w zbiorze danych jest ona zakodowana jako NA - (ang. Not Available) brakująca wartość.
+Nie wszystkie wartości są podane dla wszystkich zmiennych. Jeżeli jakaś wartość nie została podana, to w zbiorze danych jest ona zakodowana jako NA (ang. Not Available) - brakująca wartość.
 
 Jeżeli w zmiennej są wartości brakujące, to argument `na.rm=TRUE` oznacza, że wynik ma być wyznaczony po usunięciu wartości brakujących.
 
@@ -123,16 +124,16 @@ Jeżeli w zmiennej są wartości brakujące, to argument `na.rm=TRUE` oznacza, �
 
 # Agregaty
 
-Definicja agregatu może być bardziej rozbudowana niż jedna instrukcja. Przykładowo aby policzyć liczbę lub procent aut z klimatyzacją w pierwszym kroku możemy użyć funkcji `grepl()` aby sprawdzić czy auto w danej ofercie ma klimatyzację, a następnie zsumować wyniki tej funkcji by otrzymać liczbę aut z klimatyzacją. 
+Definicja agregatu może być bardziej rozbudowana niż jedna instrukcja. Przykładowo aby policzyć liczbę lub procent aut z klimatyzacją w pierwszym kroku możemy użyć funkcji `grepl()`, aby sprawdzić czy auto w danej ofercie ma klimatyzację, a następnie zsumować wyniki tej funkcji, by otrzymać liczbę aut z klimatyzacją. 
 
-Licząc procent aut z automatyczną skrzynią biegów w pierwszym kroku możemy stworzyć zmienną logiczną określającą czy zmienna `Skrzynia.biegow` przyjmuje wartość `automatyczna` a następnie policzyć procent za pomocą operacji `100*mean()`
+Licząc procent aut z automatyczną skrzynią biegów w pierwszym kroku możemy stworzyć zmienną logiczną określającą czy zmienna `Skrzynia.biegow` przyjmuje wartość `automatyczna`, a następnie policzyć procent za pomocą operacji `100*mean()`
 
 Tworząc agregaty wygodnie jest korzystać z funkcji `n()`, której wynikiem jest liczba wierszy w zbiorze danych / grupie.
 
 ```{r, warning=FALSE}
 auta2012 %>%
-  summarise(liczba.aut.z.klimatyzacją = sum(grepl("klimatyzacja", Wyposazenie.dodatkowe)),
-            procent.aut.z.klimatyzacją = 100*mean(grepl("klimatyzacja", Wyposazenie.dodatkowe)),
+  summarise(liczba.aut.z.klimatyzacja = sum(grepl("klimatyzacja", Wyposazenie.dodatkowe)),
+            procent.aut.z.klimatyzacja = 100*mean(grepl("klimatyzacja", Wyposazenie.dodatkowe)),
             procent.aut.z.automatem = 100*mean(Skrzynia.biegow == "automatyczna"),
             liczba.aut = n())
 ```
