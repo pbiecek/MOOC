@@ -89,3 +89,4 @@ część 2: Data master
   * Dodać do challange?
     + Zakup samochodu wspierany danymi [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/77_przypadekUzycia.Rmd),
     + O rozkładach http://www3.nd.edu/~sjones20/JonesUND/BioStats_files/Distributions_1-3-11.pdf
+    + do wizualizacji dodać http://www.bioinformatics.babraham.ac.uk/training/Figure%20Design%20Course%20Presentation.pdf
