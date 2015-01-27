@@ -199,8 +199,9 @@ Przykładowo, odwołanie się do trzeciego wiersza z ramki danych
 koty_ptaki[3, ]
 ```
 
-Liczbę wierszy można sprawdzić funkcją `nrow()`, przydatne, jeżeli np. chcemy wyświetlić ostatni wiersz.
-[PCH: Liczbę kolumn zaś sprawdzamy funkcją ncol() ...]
+Liczbę wierszy można sprawdzić funkcją `nrow()` (odpowiednio, liczbę kolumn sprawdzamy funkcją `ncol()`). 
+
+Przydatne, jeżeli np. chcemy wyświetlić ostatni wiersz.
 
 ```{r, message=FALSE, warning=FALSE}
 nrow(koty_ptaki)
@@ -271,9 +272,13 @@ Przykładowo, wszystkie wiersze poza 1, 3, 8, 9 i 10 można uzyskać poleceniem.
 koty_ptaki[ -c(1, 3, 8:10), ]
 ```
 
-Nie można mieszać jednocześnie wartości dodatnich i ujemnych.
+Zauważmy, że w tym przykładzie znak `-` przed funkcją `c()` tworzącą wektor, powoduje zmianę znku wszystkich elementów wektora. 
 
-[PCH: tutaj jeszcze warto pokazać, co robi znak minus przed wektorem (wynik polecenia -c(1, 3, 8:10))]
+```{r, message=FALSE, warning=FALSE}
+-c(1, 3, 8:10)
+```
+
+Uwaga! Nie można mieszać jednocześnie indeksów dodatnich i ujemnych.
 
 ---
 

@@ -146,7 +146,7 @@ na.omit(DF)
 ```
 
 Lub zastąpić przez np. średnią w kolumnie. Na poniższym przykładzie funkcją `is.na()` identyfikuje wartości brakujące, 
-funkcja `which()` [PCH: sugeruję dodać poradę dotyczącą wymowy, tzn. "z ang. wym.: hłicz"] wyznacza indeksy wartości brakujących. Te indeksy będą następnie wykorzystane aby nadpisać wartości brakujące przez średnią wyznaczoną przez funkcję `mean()`.
+funkcja `which()` wyznacza indeksy wartości brakujących. Te indeksy będą następnie wykorzystane aby nadpisać wartości brakujące przez średnią wyznaczoną przez funkcję `mean()`.
 
 ```{r}
 (ktorePuste <- which(is.na(DF$numer)))

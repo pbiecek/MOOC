@@ -35,7 +35,7 @@ W programie R istnieją trzy podstawowe typu zmiennych opisujące daty lub czas.
 
 + Klasa POSIXct, służy do opisywania czasu z dokładnością do sekundy. Czas jest pamiętany jako liczba sekund od określonego początku. Sufiks `ct` oznacza *calendar time*.
 
-+ Klasa POSIXlt, służy do opisywania czasu w formacie listy wartości. Sufiks `lt` oznacza *local time*. [PCH: Na pewno to właściwy opis z tą listą wartości?]
++ Klasa POSIXlt, służy do opisywania czasu w formacie listy wartości. Sufiks `lt` oznacza *local time*. 
 
 ---
 
@@ -70,7 +70,7 @@ Aby uzyskać dokładną pomoc dotyczącą oznaczeń w formatowaniu daty należy 
 (czas2 <- as.POSIXct("14022015 12:56:26", format = "%d%m%Y %H:%M:%S"))
 ```
 
-Na czasach można wykonywać takie operacje jak odejmowanie czy dodawane do określonego przedziału czasu (domyślnie dni). [PCH: a w przykładzie poniżej czas1+30 dodaje 30 sekund :P]
+Na czasach można wykonywać takie operacje jak odejmowanie czy dodawane do określonego przedziału czasu (dodanie liczby całkowitej, domyślnie dodaje określoną liczbę sekund).
 
 ```{r}
 # różnica czasów
@@ -99,6 +99,15 @@ Opis formatowania stosuje się taki sam, jak w przypadku klasy `POSIXct`.
 (czas1 <- as.POSIXlt("2015-02-13 12:56:26"))
 (czas2 <- as.POSIXlt("14022015 12:56:26", format = "%d%m%Y %H:%M:%S"))
 ```
+
+Obiekty klasy `POSIXlt` to listy, można się do ich elementów odwoływać przez nazwę.
+
+```{r}
+czas1$sec
+czas1$min
+czas1$zone
+```
+
 
 Wiele funkcji można stosować zamiennie do obiektów klasy `POSIXlt` i `POSIXct`
 

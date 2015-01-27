@@ -141,6 +141,3 @@ auta2012 %>%
 
 Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
 
-
-[PCH: Moim zdaniem - co bardziej rzuca się w oczy tutaj niż w poprzednich odcinkach - nie ma sensu przedstawiać dokładnie tych samych operacji na dwóch zbiorach danych. Wystarczyłoby na autach, a zatem
-sugerowałbym usunięcie slajdów dla koty_i_ptaki.]
