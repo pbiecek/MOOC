@@ -53,24 +53,24 @@ pogRomcy danych
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
 <p>Analizując dane spotkamy się z różnymi rodzajami zmiennych. Omówiliśmy ilościowe i jakościowe. Specyficzną odmianą cech jakościowych są cechy logiczne, przyjmujące wartości logiczne prawda / fałsz.</p>
-<p>W tym odcinku nauczymy się</p>
+<p>W tym odcinku nauczymy się:</p>
 <ul>
-<li>Jakie zmienne / cechy określa się terminem <em>cechy logiczne</em>?</li>
-<li>Jakie podstawowe operacje można wykonywać na cechach logicznych?</li>
-<li>Jak podsumowywać / opisywać cechy logiczne?</li>
+<li>jakie zmienne / cechy określa się terminem <em>cechy logiczne</em>,</li>
+<li>jakie podstawowe operacje można wykonywać na cechach logicznych,</li>
+<li>jak podsumowywać / opisywać cechy logiczne.</li>
 </ul>
-<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>SmarterPoland</code>.</p>
+<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>PogromcyDanych</code>.</p>
 </div>
 <div id="co-to-znaczy-cecha-logiczna" class="slide section level1">
 <h1>Co to znaczy: cecha logiczna</h1>
-<p>Cechy logiczne to takie, które opisują jedną z dwóch wartości logicznych prawda/fałsz. Przykładowo: czy wzrost jest większy niż 150cm, czy pada deszcz, czy pacjent przeżył 5 lat po operacji itp.</p>
-<p>Zmienne logiczne często powstają w wyniku przetwarzania zmiennych ilościowych lub jakościowych. Mając wykształcenie opisane przez trzy poziomy, można skonstruować sztuczną cechę: czy ma wykształcenie wyższe. A mając wzrost opisany jako cecha ilościowa można skonstruować cechę logiczną, czy jest wyższy niż 1500 cm3.</p>
-<p>Zmienne logiczne można traktować jak zmienne jakościowe, przyjmują bowiem wartości z dwuelementowego słownika. Podobnie jak dla wartości jakościowych tak i dla wartości logicznych można wyznaczać tablicę liczebności.</p>
+<p>Cechy logiczne to takie, które opisują jedną z dwóch wartości logicznych prawda/fałsz. Przykładowo: czy wzrost jest większy niż 150 cm, czy pada deszcz, czy pacjent przeżył 5 lat po operacji itp.</p>
+<p>Zmienne logiczne często powstają w wyniku przetwarzania zmiennych ilościowych lub jakościowych. Mając wykształcenie opisane przez trzy poziomy, można skonstruować sztuczną cechę: czy ma wykształcenie wyższe. A mając wzrost opisany jako cecha ilościowa można skonstruować cechę logiczną, czy jest wyższy niż 150 cm.</p>
+<p>Zmienne logiczne można traktować jak zmienne jakościowe, przyjmują bowiem wartości z dwuelementowego słownika. Podobnie jak dla wartości jakościowych, tak i dla wartości logicznych można wyznaczać tablicę liczebności.</p>
 <p>Dla zmiennych logicznych dostępnych jest kilka dodatkowych operacji logicznych, których nie można wykonać na typowych zmiennych jakościowych.</p>
 </div>
 <div id="logika-trojwartosciowa" class="slide section level1">
 <h1>Logika trójwartościowa</h1>
-<p>Napisaliśmy wcześniej, że wartości logiczne przyjmują wartości <code>TRUE</code> (logiczna prawda) lub <code>FALSE</code> (logiczny fałsz). Jednak równocześnie każdy rodzaj zmiennych w programie R może również przyjmować wartości nieustaloną <code>NA</code>. Więc w gruncie rzeczy wartości logiczne operują w logice trójwartościowej.</p>
+<p>Napisaliśmy wcześniej, że wartości logiczne przyjmują wartości <code>TRUE</code> (logiczna prawda) lub <code>FALSE</code> (logiczny fałsz). Jednak równocześnie każdy rodzaj zmiennych w programie R może również przyjmować wartości nieustaloną <code>NA</code>. W gruncie rzeczy wartości logiczne operują zatem w logice trójwartościowej.</p>
 <p>Tworząc wartości logiczne często wykorzystuje się operatory logiczne <code>&gt;</code> (większy), <code>&gt;=</code> (większy równy), <code>==</code> (równy), <code>&lt;=</code> (mniejszy równy), <code>&lt;</code> (mniejszy). Gdy porównuje się takim operatorem wartość nieustaloną <code>NA</code> to wynik również jest wartością nieustaloną.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">3</span>,<span class="dv">8</span>, <span class="ot">NA</span>) &lt;=<span class="st"> </span><span class="dv">4</span></code></pre>
 <pre><code>## [1]  TRUE FALSE FALSE  TRUE FALSE    NA</code></pre>
@@ -79,7 +79,7 @@ pogRomcy danych
 <p>Tworząc wektory wartości logicznych zamiast pełnych nazw <code>TRUE</code> i <code>FALSE</code> można również korzystać ze skrótów <code>T</code> i <code>F</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(T, F, <span class="ot">NA</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</code></pre>
 <pre><code>## [1]  TRUE FALSE    NA  TRUE FALSE</code></pre>
-<p>Specjalnymi operatorami dla wartości logicznych są <code>|</code> (logiczne lub) oraz <code>&amp;</code> (logiczne i). Pierwszy z nich zwraca jako wynik wartość <code>TRUE</code> jeżeli którykolwiek argument jest prawdziwy. Drugi zwraca jako wynik wartość <code>TRUE</code> jeżeli ona argumenty są prawdziwe.</p>
+<p>Specjalnymi operatorami dla wartości logicznych są <code>|</code> (logiczne lub) oraz <code>&amp;</code> (logiczne i). Pierwszy z nich zwraca jako wynik wartość <code>TRUE</code> jeżeli którykolwiek argument jest prawdziwy. Drugi zwraca jako wynik wartość <code>TRUE</code> jeżeli oba argumenty są prawdziwe.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="ot">TRUE</span> |<span class="st"> </span><span class="ot">FALSE</span></code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">(<span class="dv">4</span> &gt;<span class="st"> </span><span class="dv">2</span>) |<span class="st"> </span>(<span class="st">&quot;A&quot;</span> ==<span class="st"> &quot;a&quot;</span>)</code></pre>
@@ -108,12 +108,21 @@ tabliczka_mnozenia</code></pre>
 ## TRUE   TRUE FALSE    NA
 ## FALSE FALSE FALSE FALSE
 ## &lt;NA&gt;     NA FALSE    NA</code></pre>
+<p>Warto zwrócić uwagę na wynik (<code>TRUE | NA</code>). Wynikiem jest wartość <code>TRUE</code>, poinieważ bez znaczenia czy wartość nieokreślona okazałaby się prawdziwa czy fałszywa, jej logiczna suma z wartością <code>TRUE</code> dałoby wartość <code>TRUE</code>. Na podobnej zasadzie <code>FALSE &amp; NA</code> zwraca wartość <code>FALSE</code>.</p>
+<p>W programie R występują również dłuższe postacie operatorów <code>|</code> i <code>&amp;</code> czyli <code>||</code> i <code>&amp;&amp;</code>. Pomiędzy formą dłuższą i krótszą występują dwie róznice. Forma krótsza pracuje na wektorach i wykonuje operacja element wektora po elemencie, podczas gdy forma dłuższa wykonuje operacje jedynie na pierwszych elementach wektorów i jako wynik zwraca jednoelementową wartość <code>TRUE</code> lub <code>FALSE</code>. Druga różnica dotyczy zaawansowanych zastosowań, długa forma nie wykonuje ewaluacji prawego argumentu, jeżeli nie jest to niezbedne.</p>
+<p>Przykładowo pierwsza linia poniższego przykłądu wykona się poprawnie, ponieważ do określenia wyniku nie potrzebna jest ewaluacja funkcji <code>cat()</code>. Drugi przykład wykona funkcję <code>cat()</code> oraz zasygnalizuje błąd, ponieważ niesposób wyniku funckji <code>cat()</code> logicznie dodać do wartości <code>TRUE</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="ot">TRUE</span> ||<span class="st"> </span><span class="kw">cat</span>(<span class="st">&quot;Jestem tutaj !!!&quot;</span>)
+## [1] TRUE
+<span class="ot">TRUE</span> |<span class="st"> </span><span class="kw">cat</span>(<span class="st">&quot;Jestem tutaj !!!&quot;</span>)
+## Jestem tutaj !!!
+## Error in TRUE | cat(&quot;Jestem tutaj !!!&quot;) : 
+##   operations are possible only for numeric, logical or complex types</code></pre>
 </div>
 <div id="wczytanie-danych" class="slide section level1">
 <h1>Wczytanie danych</h1>
-<p>Dane od których rozpoczniemy przykłady to <code>koty_ptaki</code> z pakietu <code>SmarterPoland</code>. Aby te dane wczytać, wystarczy włączyć pakiet, instrukcja jak to zrobić znajduje się w odcinku 2.</p>
+<p>Dane od których rozpoczniemy przykłady to <code>koty_ptaki</code> z pakietu <code>PogromcyDanych</code>. Aby te dane wczytać, wystarczy włączyć pakiet, instrukcja jak to zrobić znajduje się w odcinku 2.</p>
 <p>Włączmy pakiet i użyjmy funkcji <code>head()</code> by wyświetlić pierwsze sześć wierszy.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
 <span class="kw">head</span>(koty_ptaki)</code></pre>
 <pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
 ## 1  Tygrys  300     2.5       60    Azja        25     Kot
@@ -129,7 +138,7 @@ tabliczka_mnozenia</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">czy_to_kot &lt;-<span class="st"> </span>koty_ptaki$druzyna ==<span class="st"> &quot;Kot&quot;</span>
 czy_jest_ciezki &lt;-<span class="st"> </span>koty_ptaki$waga &gt;=<span class="st"> </span><span class="dv">10</span></code></pre>
 <p>Traktując zmienną logiczną jak dwuwartościową zmienną jakościową, możemy używać na niej np. funkcji do tabel liczebności, zarówno jednowymiarowych jak i dwuwymiarowych.</p>
-<p>Patrząc na wyniki dla tabeli liczebności dla dwóch zmiennych jest tylko jeden zwierzak w tym zbiorze danych, który jest cięższy niż 10kg ale nie jest kotem.</p>
+<p>Patrząc na wyniki dla tabeli liczebności dla dwóch zmiennych jest tylko jeden zwierzak w tym zbiorze danych, który jest cięższy niż 10kg, ale nie jest kotem.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(czy_to_kot)</code></pre>
 <pre><code>## czy_to_kot
 ## FALSE  TRUE 
@@ -167,10 +176,10 @@ czy_jest_ciezki &lt;-<span class="st"> </span>koty_ptaki$waga &gt;=<span class="
 <div id="wczytanie-danych-1" class="slide section level1">
 <h1>Wczytanie danych</h1>
 <p>Zbiór danych <code>koty_ptaki</code> składa się z 13 wierszy. Można cały ten zbiór danych wyświetlić na ekranie. Nie zawsze potrzebujemy więc specjalnych statystyk opisowych by zrozumieć co się dzieje w takich małych zbiorach danych.</p>
-<p>Dlatego, dalsze ćwiczenia ze zmiennymi ilościowymi przeprowadzimy na znaczeni większym zbiorze danych z ponad 200 tysiącami wartości, o nazwie <code>auta2012</code>, który znajduje się również w pakiecie <code>SmarterPoland</code>.</p>
-<p>Opis tego zbioru danych znaleźć można w odcinku <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html">https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
+<p>Dlatego dalsze ćwiczenia ze zmiennymi logicznymi przeprowadzimy na znaczenie większym zbiorze danych <code>auta2012</code> z ponad 200 tysiącami wartości, który również znajduje się w pakiecie <code>PogromcyDanych</code>.</p>
+<p>Opis tego zbioru danych znaleźć można w odcinku <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
 <p>Wczytajmy ten zbiór danych i przyjrzyjmy się trzem pierwszym wierszom.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
 <span class="kw">head</span>(auta2012, <span class="dv">3</span>)</code></pre>
 <pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW      Marka     Model Wersja
 ## 1 49900    PLN      49900       brutto 140 103        Kia    Carens       
@@ -191,11 +200,19 @@ czy_jest_ciezki &lt;-<span class="st"> </span>koty_ptaki$waga &gt;=<span class="
 ##                                                                                                                                                                                           Wyposazenie.dodatkowe
 ## 1                                    ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
 ## 2            ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
-## 3 ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby</code></pre>
+## 3 ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
+##                                                                                                                                                                                     Wyposazenie.dodatkowe_napis
+## 1                                    ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
+## 2            ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
+## 3 ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
+##   Kolor_napis czy_metallic
+## 1                    FALSE
+## 2                    FALSE
+## 3                    FALSE</code></pre>
 </div>
 <div id="statystyki-opisowe-1" class="slide section level1">
 <h1>Statystyki opisowe</h1>
-<p>Wykorzystajmy wartości logiczne oraz funkcję <code>table()</code> by sprawdzić ile aut w naszych danych jest zarejestrowanych w Polsce oraz ile z nich zostało wyprodukowanych przed 2007 rokiem. Tak jak w przypadku zmiennych jakościowych możemy wykorzystać funkcję <code>prop.table()</code> do wyznaczenia frakcji / procentów.</p>
+<p>Wykorzystajmy wartości logiczne oraz funkcję <code>table()</code>, aby sprawdzić ile aut w naszych danych jest zarejestrowanych w Polsce oraz ile z nich zostało wyprodukowanych przed 2007 rokiem. Tak jak w przypadku zmiennych jakościowych możemy wykorzystać funkcję <code>prop.table()</code> do wyznaczenia frakcji / procentów.</p>
 <p>Co może być zaskakujące, mniej niż połowa ofert ma zadeklarowany kraj aktualnej rejestracji jako Polska.</p>
 <pre class="sourceCode r"><code class="sourceCode r">pochodziZPolski &lt;-<span class="st"> </span>auta2012$Kraj.aktualnej.rejestracji ==<span class="st"> &quot;Polska&quot;</span>
 <span class="kw">table</span>(pochodziZPolski)</code></pre>
@@ -222,7 +239,7 @@ czy_jest_ciezki &lt;-<span class="st"> </span>koty_ptaki$waga &gt;=<span class="
 <li><p>Sprawdź ile samochodów ma cenę ofertową poniżej 2 000 pln.</p></li>
 <li><p>Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3.</p></li>
 </ul>
-<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
+<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
 </div>
 <div id="testy-dla-typow-i-wartosci" class="slide section level1">
 <h1>Testy dla typów i wartości</h1>
@@ -235,14 +252,14 @@ czy_jest_ciezki &lt;-<span class="st"> </span>koty_ptaki$waga &gt;=<span class="
 <pre><code>## [1] NA NA NA NA NA NA</code></pre>
 <p>Wynikiem porównania <code>!= NA</code> jest wektor wartości <code>NA</code>. Jest tak ponieważ jeżeli prawa część porównania jest nieznana to też nie wiadomo czy wartość 41000 jest od niej różna czy nie.</p>
 <p>Aby sprawdzić, czy dana wartość jest wartością brakującą możemy wykorzystać funkcję <code>is.na()</code>. Jako wynik zwraca TRUE jeżeli testowana wartość to NA i FALSE w przeciwnym przypadku.</p>
-<p>Możemy użyć tej funkcji by policzyć procent wartości nie brakujących.</p>
+<p>Możemy użyć tej funkcji by policzyć procent wartości, dla których nie ma brakujących danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r">czyOkreslonyPrzebieg &lt;-<span class="st"> </span>!<span class="kw">is.na</span>(auta2012$Przebieg.w.km)
 <span class="kw">head</span>(czyOkreslonyPrzebieg)</code></pre>
 <pre><code>## [1] TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># procent</span>
 <span class="kw">mean</span>(czyOkreslonyPrzebieg) *<span class="st"> </span><span class="dv">100</span></code></pre>
 <pre><code>## [1] 80.94479</code></pre>
-<p>Funkcji do testowania jest więcej, zaczynają one swoje nazwy od <code>is.</code>, wystarczy więc wpisać te trzy znaki do konsoli i nacisnąć znak TAB by zobaczyć ich listę. Część z nich sprawdza czy zmienna jest określonego typu, np. <code>is.factor()</code>, <code>is.numeric()</code>, część sprawdza czy zmienna ma określone wartości np. <code>is.na()</code> czy <code>is.nan()</code>.</p>
+<p>Funkcji do testowania jest więcej, zaczynają one swoje nazwy od <code>is.</code>, wystarczy więc wpisać te trzy znaki do konsoli i nacisnąć klawisz TAB by zobaczyć ich listę. Część z nich sprawdza czy zmienna jest określonego typu, np. <code>is.factor()</code>, <code>is.numeric()</code>, część sprawdza czy zmienna ma określone wartości np. <code>is.na()</code> czy <code>is.nan()</code>.</p>
 </div>
 <div id="logiczne-i-oraz-logiczne-lub" class="slide section level1">
 <h1>Logiczne ‘i’ oraz logiczne ‘lub’</h1>
@@ -275,7 +292,7 @@ pochodziZPolskiLubStarszyNiz5Lat &lt;-<span class="st"> </span>pochodziZPolski |
 <li><p>Sprawdź ile samochodów zarejestrowanych w Polsce ma cenę ofertową poniżej 2 000 pln.</p></li>
 <li><p>Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3 oraz jest napędzanych olejem napędowym.</p></li>
 </ul>
-<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
+<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

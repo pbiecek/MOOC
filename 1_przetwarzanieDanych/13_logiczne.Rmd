@@ -23,7 +23,7 @@ W tym odcinku nauczymy się:
 - jakie podstawowe operacje można wykonywać na cechach logicznych,
 - jak podsumowywać / opisywać cechy logiczne.
 
-Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, znacznie większy, to `auta2012`, oba dostępne w pakiecie `PogromcyDanych`.
 
 ---
 
@@ -104,19 +104,33 @@ colnames(tabliczka_mnozenia) <- TRUE_FALSE_NA
 tabliczka_mnozenia
 ```
 
-[PCH: Warto zwrócić uwagę na wynik (TRUE | NA) oraz (FALSE & NA). Oraz na to, że && różni się od & !]
+Warto zwrócić uwagę na wynik (`TRUE | NA`). Wynikiem jest wartość `TRUE`, poinieważ bez znaczenia czy wartość nieokreślona okazałaby się prawdziwa czy fałszywa, jej logiczna suma z wartością `TRUE` dałoby wartość `TRUE`. Na podobnej zasadzie `FALSE & NA` zwraca wartość `FALSE`.
+
+W programie R występują również dłuższe postacie operatorów `|` i `&` czyli `||` i `&&`. Pomiędzy formą dłuższą i krótszą występują dwie róznice. Forma krótsza pracuje na wektorach i wykonuje operacja element wektora po elemencie, podczas gdy forma dłuższa wykonuje operacje jedynie na pierwszych elementach wektorów i jako wynik zwraca jednoelementową wartość `TRUE` lub `FALSE`. Druga różnica dotyczy zaawansowanych zastosowań, długa forma nie wykonuje ewaluacji prawego argumentu, jeżeli nie jest to niezbedne. 
+
+Przykładowo pierwsza linia poniższego przykłądu wykona się poprawnie, ponieważ do określenia wyniku nie potrzebna jest ewaluacja funkcji `cat()`. Drugi przykład wykona funkcję `cat()` oraz zasygnalizuje błąd, ponieważ niesposób wyniku funckji `cat()` logicznie dodać do wartości `TRUE`.
+
+```{r, warning=FALSE, eval=FALSE}
+TRUE || cat("Jestem tutaj !!!")
+## [1] TRUE
+TRUE | cat("Jestem tutaj !!!")
+## Jestem tutaj !!!
+## Error in TRUE | cat("Jestem tutaj !!!") : 
+##   operations are possible only for numeric, logical or complex types
+```
+
 
 ---
 
 # Wczytanie danych
 
-Dane od których rozpoczniemy przykłady to `koty_ptaki` z pakietu `SmarterPoland`. 
+Dane od których rozpoczniemy przykłady to `koty_ptaki` z pakietu `PogromcyDanych`. 
 Aby te dane wczytać, wystarczy włączyć pakiet, instrukcja jak to zrobić znajduje się w odcinku 2.
 
 Włączmy pakiet i użyjmy funkcji `head()` by wyświetlić pierwsze sześć wierszy. 
 
 ```{r, warning=FALSE, message=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 head(koty_ptaki)
 ```
 
@@ -182,14 +196,14 @@ Zbiór danych `koty_ptaki` składa się z 13 wierszy. Można cały ten zbiór da
 Nie zawsze potrzebujemy więc specjalnych statystyk opisowych by zrozumieć co się dzieje w takich małych zbiorach danych.
 
 Dlatego dalsze ćwiczenia ze zmiennymi logicznymi przeprowadzimy na znaczenie większym zbiorze danych `auta2012` z 
-ponad 200 tysiącami wartości, który również znajduje się w pakiecie `SmarterPoland`.
+ponad 200 tysiącami wartości, który również znajduje się w pakiecie `PogromcyDanych`.
 
 Opis tego zbioru danych znaleźć można w odcinku https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html
 
 Wczytajmy ten zbiór danych i przyjrzyjmy się trzem pierwszym wierszom. 
 
 ```{r, warning=FALSE, message=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 head(auta2012, 3)
 ```
 
