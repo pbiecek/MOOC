@@ -59,7 +59,7 @@ pogRomcy danych
 <li>jakie podstawowe operacje można wykonywać na napisach,</li>
 <li>jak podsumowywać / opisywać napisy.</li>
 </ul>
-<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>SmarterPoland</code>.</p>
+<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>PogromcyDanych</code>.</p>
 </div>
 <div id="co-to-znaczy-napisy" class="slide section level1">
 <h1>Co to znaczy: napisy</h1>
@@ -79,9 +79,9 @@ pogRomcy danych
 </div>
 <div id="wczytanie-danych" class="slide section level1">
 <h1>Wczytanie danych</h1>
-<p>Dane od których rozpoczniemy przykłady to <code>koty_ptaki</code> z pakietu <code>SmarterPoland</code>. Aby te dane wczytać, wystarczy włączyć pakiet - instrukcja jak to zrobić znajduje się w odcinku 2.</p>
+<p>Dane od których rozpoczniemy przykłady to <code>koty_ptaki</code> z pakietu <code>PogromcyDanych</code>. Aby te dane wczytać, wystarczy włączyć pakiet - instrukcja jak to zrobić znajduje się w odcinku 2.</p>
 <p>Włączmy pakiet i użyjmy funkcji <code>head()</code>, by wyświetlić pierwsze sześć wierszy.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
 <span class="kw">head</span>(koty_ptaki)</code></pre>
 <pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
 ## 1  Tygrys  300     2.5       60    Azja        25     Kot
@@ -176,10 +176,10 @@ slowa1[<span class="dv">2</span>]</code></pre>
 <div id="wczytanie-danych-1" class="slide section level1">
 <h1>Wczytanie danych</h1>
 <p>Zbiór danych <code>koty_ptaki</code> składa się z 13 wierszy. Można cały ten zbiór danych wyświetlić na ekranie. Nie zawsze potrzebujemy więc specjalnych statystyk opisowych, by zrozumieć co się dzieje w takich małych zbiorach danych.</p>
-<p>Dlatego dalsze ćwiczenia ze zmiennymi ilościowymi przeprowadzimy na znaczeni większym zbiorze danych <code>auta2012</code>, z ponad 200 tysiącami wartości, który również znajduje się w pakiecie <code>SmarterPoland</code>.</p>
+<p>Dlatego dalsze ćwiczenia ze zmiennymi ilościowymi przeprowadzimy na znaczeni większym zbiorze danych <code>auta2012</code>, z ponad 200 tysiącami wartości, który również znajduje się w pakiecie <code>PogromcyDanych</code>.</p>
 <p>Opis tego zbioru danych znaleźć można w odcinku <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
 <p>Wczytajmy ten zbiór danych i przyjrzyjmy się dwóm pierwszym wierszom.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
 <span class="kw">head</span>(auta2012, <span class="dv">2</span>)</code></pre>
 <pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW      Marka     Model Wersja
 ## 1 49900    PLN      49900       brutto 140 103        Kia    Carens       
@@ -210,9 +210,9 @@ auta2012$Wyposazenie.dodatkowe_napis &lt;-<span class="st"> </span><span class="
 <p>W analizie danych często stoimy przed potrzebą stworzenia nowych cech na bazie starych. Przykładowo, jeżeli spojrzymy na wektor kolorów samochodów, możemy uznać że interesującą cechą byłoby określenie, czy lakier jest koloru metalicznego czy nie.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sort</span>(<span class="kw">table</span>(auta2012$Kolor_napis))</code></pre>
 <pre><code>## 
-##               rAlzowy      rAlzowy-metallic          pomaralczowy 
+##                rozowy       rozowy-metallic          pomaralczowy 
 ##                    15                    62                   120 
-##               brezowy              wilniowy             fioletowy 
+##               brezowy              wisniowy             fioletowy 
 ##                   141                   193                   207 
 ##                 zloty        zolty-metallic                bezowy 
 ##                   219                   231                   296 
@@ -245,20 +245,20 @@ auta2012$Wyposazenie.dodatkowe_napis &lt;-<span class="st"> </span><span class="
 </div>
 <div id="napisy-2" class="slide section level1">
 <h1>Napisy</h1>
-<p>W podobny sposób, można stworzyć dodatkowe kolumny określające, czy auto ma na wyposażeniu klimatyzację lub czy jest bezwypadkowe.</p>
+<p>W podobny sposób, można stworzyć dodatkowe kolumny określające, czy auto ma na wyposażeniu klimatyzację lub czy szyby są przyciemniane.</p>
 <p>W drugim przykładzie warto zwrócić uwagę na to, że argumenty są podane w kolejności innej niż domyślna. Dlatego argument ze wzorcem musiał mieć dodatkowo wskazaną nazwę <code>pattern=</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012$maKlimatyzacje &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="st">&quot;klimatyzacja&quot;</span>, auta2012$Wyposazenie.dodatkowe_napis)
 <span class="kw">table</span>(auta2012$maKlimatyzacje)</code></pre>
 <pre><code>## 
 ##  FALSE   TRUE 
 ##  44642 162960</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">auta2012$bezwypadkowy &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="dt">x=</span>auta2012$Wyposazenie.dodatkowe_napis, 
-                               <span class="dt">pattern=</span><span class="st">&quot;bezwypadkowy&quot;</span>)
-<span class="kw">table</span>(auta2012$bezwypadkowy)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># około 20% oferowanych aut ma przyciemniane szyby</span>
+auta2012$szyby &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="dt">x=</span>auta2012$Wyposazenie.dodatkowe_napis, 
+                               <span class="dt">pattern=</span><span class="st">&quot;przyciemniane szyby&quot;</span>)
+<span class="kw">table</span>(auta2012$szyby)</code></pre>
 <pre><code>## 
-##  FALSE 
-## 207602</code></pre>
-<h2 id="pch-tak-ma-byc-ze-nie-znalaz-informacji-o-bezwypadkowych">[PCH: tak ma być, ze nie znalazł informacji o bezwypadkowych?]</h2>
+##  FALSE   TRUE 
+## 165480  42122</code></pre>
 </div>
 <div id="sklejanie-napisow" class="slide section level1">
 <h1>Sklejanie napisów</h1>
@@ -310,7 +310,7 @@ statystykiMarkiModelu &lt;-<span class="st"> </span><span class="kw">sort</span>
 </div>
 <div id="imiona-dzieci" class="slide section level1">
 <h1>Imiona dzieci</h1>
-<p>W pakiecie <code>SmarterPoland</code> jest również dostępny zbiór danych <code>imiona_warszawa</code> ze statystykami popularności imion nadawanych noworodkom w Warszawie w różnych okresach czasu.</p>
+<p>W pakiecie <code>PogromcyDanych</code> jest również dostępny zbiór danych <code>imiona_warszawa</code> ze statystykami popularności imion nadawanych noworodkom w Warszawie w różnych okresach czasu.</p>
 <p>Używając tego zbioru danych, możemy przetestować regułę mówiącą, że imię dziewczynki kończy się na literkę ‘a’, a chłopca nie. Jakiś czas temu za jedyny wyjątek podawano męskie imię Bonawentura. Czy to się zmieniło?</p>
 <p>Wybierzmy do analizy tylko imiona chłopców (indeksowanie <code>imiona_warszawa$plec == &quot;M&quot;</code>). Ponieważ każde imię powtarza się dla każdego miesiąca, to funkcją <code>unique()</code> usuniemy wszystkie duplikaty.</p>
 <p>Następnie funkcją <code>grep()</code> wybierzemy wszystkie imiona, których ostatnia litera to <code>a</code> (wyrażenie regularne <code>a$</code>) i wyświetlimy te imiona. Bonawentury nie widać ale są inne imiona.</p>
@@ -359,7 +359,7 @@ same_imiona      &lt;-<span class="st"> </span><span class="kw">unique</span>(im
 <li><p>Więcej o podstawowych operacjach do pracy z napisami przeczytać można w rozdziale 2.1 ,,Przewodnika po pakiecie R’’ GiS 2013. Rozdział ten jest dostępny bezpłatnie na stronie <a href="http://biecek.pl/R/" class="uri">http://biecek.pl/R/</a></p></li>
 <li><p>Gdy pracujemy z dużymi korpusami, możemy przyśpieszyć obliczenia stosując pakiet <code>stringr</code>. Bardzo dobrze przygotowany materiał opisujący funkcje tego pakietu jest udostępniony przez Gastona Sancheza na stronie <a href="http://gastonsanchez.com/Handling_and_Processing_Strings_in_R.pdf" class="uri">http://gastonsanchez.com/Handling_and_Processing_Strings_in_R.pdf</a>.</p></li>
 <li><p>Gdy pracujemy z napisami bardzo użyteczne są wyrażenia i metaznaki. Krótkie ale treściwe omówienie wyrażań regularnych, opracowane przez S. Jonesa znajduje się w dokumencie ,,String manipulation in R’’ <a href="http://www3.nd.edu/~sjones20/JonesUND/BioStats_files/RstringManipulation_2-6-13.pdf" class="uri">http://www3.nd.edu/~sjones20/JonesUND/BioStats_files/RstringManipulation_2-6-13.pdf</a>.</p></li>
-<li><p>Interesującą alternatywą wspierająca bardziej egzotyczne języki (bardziej niż angielski) jest pakiet <code>stringi</code>. Można o nim posłuchać na wystąpieniu Marka Gągolewskiego z II Spotkania Entuzjastów R. Materiał wideo dostępny jest na stronie <a href="http://smarterpoland.pl/SER/#SERII" class="uri">http://smarterpoland.pl/SER/#SERII</a></p></li>
+<li><p>Interesującą alternatywą wspierająca bardziej egzotyczne języki (bardziej niż angielski) jest pakiet <code>stringi</code>. Można o nim posłuchać na wystąpieniu Marka Gągolewskiego z II Spotkania Entuzjastów R. Materiał wideo dostępny jest na stronie <a href="http://PogromcyDanych.pl/SER/#SERII" class="uri">http://PogromcyDanych.pl/SER/#SERII</a></p></li>
 </ul>
 </div>
 
