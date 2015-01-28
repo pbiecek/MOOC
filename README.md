@@ -17,7 +17,7 @@ część 1: Data smart
 
 + Eksploracja danych z programem R [sezon 1]
   * Wprowadzenie do R i RStudio
-    + odcinek 1: Intro z opisem kursu [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/01_interaktywnaPracaZR.html),
+    + odcinek 1: Intro z opisem kursu [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/01_interaktywnaPracaZR.html),  v1 ready
     + odcinek 2: Dlaczego R?, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/02_introR.html),  v1 ready
     + odcinek 3: Jak zainstalować R, RStudio oraz dodatkowe pakiety? [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/03_instalacja.html),  v1 ready
     + odcinek 4: Wprowadzenie do RStudio i systemu pomocy, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/04_wprowadzenieDoRStudio.html), v1 ready, 
