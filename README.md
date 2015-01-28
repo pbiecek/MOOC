@@ -90,3 +90,10 @@ część 2: Data master
     + Zakup samochodu wspierany danymi [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/77_przypadekUzycia.Rmd),
     + O rozkładach http://www3.nd.edu/~sjones20/JonesUND/BioStats_files/Distributions_1-3-11.pdf
     + do wizualizacji dodać http://www.bioinformatics.babraham.ac.uk/training/Figure%20Design%20Course%20Presentation.pdf
+
+    od KTR do Data MAster
+    http://statacumen.com/teach/ADA1/ADA1_notes.pdf
+    http://powerandsamplesize.com/Calculators/Test-1-Proportion/1-Sample-Equality
+    http://onlinestatbook.com/2/power/factors.html
+    http://rpsychologist.com/d3/CI/
+    
