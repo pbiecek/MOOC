@@ -16,12 +16,11 @@ część wspólna
 część 1: Data smart
 
 + Eksploracja danych z programem R [sezon 1]
-  * [intro z opisem kursu, wideo, TODO, PBi]
   * Wprowadzenie do R i RStudio
-    + odcinek 1: Dlaczego R?, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/01_introR.html),  v1 ready
-    + odcinek 2: Jak zainstalować R, RStudio oraz dodatkowe pakiety? [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/02_instalacja.html),  v1 ready
-    + odcinek 3: Wprowadzenie do RStudio i systemu pomocy, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/03_wprowadzenieDoRStudio.html), v1 ready, [video](https://github.com/pbiecek/MOOC/blob/master/1_przetwarzanieDanych/2_MOOC_Przetwarzanie_01.mp4?raw=true), 
-    + odcinek 4: Interaktywna praca z R [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/04_interaktywnaPracaZR.html),
+    + odcinek 1: Intro z opisem kursu [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/01_interaktywnaPracaZR.html),
+    + odcinek 2: Dlaczego R?, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/02_introR.html),  v1 ready
+    + odcinek 3: Jak zainstalować R, RStudio oraz dodatkowe pakiety? [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/03_instalacja.html),  v1 ready
+    + odcinek 4: Wprowadzenie do RStudio i systemu pomocy, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/04_wprowadzenieDoRStudio.html), v1 ready, 
   * Odczytywanie, zapisywanie i indeksowanie danych
     + odcinek 5: Jak wczytać dane do R, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/05_wczytywanie.html), v1 ready
     + odcinek 6: Jak zapisać dane z R, [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/06_zapisywanie.html), v1 ready
