@@ -21,7 +21,7 @@ W tym odcinku nauczymy się:
 - jakie podstawowe operacje można wykonywać na cechach jakościowych,
 - jak podsumowywać / opisywać cechy jakościowe.
 
-Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, znacznie większy, to `auta2012`, oba dostępne w pakiecie `PogromcyDanych`.
 
 ---
 
@@ -45,12 +45,12 @@ Jakkolwiek zmienne jakościowe mogą bardzo różnić się liczbą grup oraz rod
 
 # Wczytanie danych
 
-Dane od których rozpoczniemy przykłady to `koty_ptaki` z pakietu `SmarterPoland`. Aby te dane wczytać, wystarczy włączyć ten pakiet - instrukcja jak to zrobić znajduje się w odcinku 2.
+Dane od których rozpoczniemy przykłady to `koty_ptaki` z pakietu `PogromcyDanych`. Aby te dane wczytać, wystarczy włączyć ten pakiet - instrukcja jak to zrobić znajduje się w odcinku 2.
 
 Włączmy pakiet i użyjmy funkcji `head()` by wyświetlić pierwsze sześć wierszy. Które z tych zmiennych to zmienne jakościowe?
 
 ```{r, warning=FALSE, message=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 head(koty_ptaki)
 ```
 
@@ -66,43 +66,6 @@ Przyjrzyjmy się dwóm z tych zmiennych - *gatunek* i *druzyna*.
 koty_ptaki$gatunek
 koty_ptaki$druzyna
 ```
-
-[PCH: Tutaj zakładasz, że koty_ptaki$gatunek została już skonwertowana do "factor". A jeśli ładujesz SmarterPoland w tym momencie, to masz:
-class(koty_ptaki$gatunek)
-[1] "character"
-
-co oczywiście skończy się
-levels(koty_ptaki$gatunek)
-NULL
-
-Nie ma jednak tego złego - w tym miejscu warto napisać o różnicy w character i factor! Mało tego - pokazać co się 
-stanie jeśli zrobisz as.numeric i as.character na zmiennej factor. I warto jeszcze pokazać, co zrobić, kiedy ma się
-jakąś zmienną, która - zakładamy - będzie przyjmować 3 wartości, ale w danym momencie ma tylko dwie różne wartości,
-tzn. 
-tmp <- factor(c("a","b"))
-tmp
-[1] a b
-Levels: a b
-
-tmp[3] <- "c"
-Warning message:
-In `[<-.factor`(`*tmp*`, 3, value = "c") :
-  invalid factor level, NA generated
-  
-tmp2 <- factor(c("a","b"), levels = c("a","b","c"))
-tmp2
-[1] a b
-Levels: a b c
-
-tmp2[3] <- "c"
-tmp2
-[1] a b c
-Levels: a b c
-
-EIDT: Doszedłem poniżej do miejsca, w którym to przedstawiasz na przykładzie stringsAsFactors. Może warto to
-przenieść zatem tutaj?
-
-KONIEC_PCH]
 
 Gdy te zmienne są wyświetlane, poza wartościami dodatkowo wyświetlany jest zbiór wszystkich możliwych wartości.
 Ten zbiór nazywa się najczęściej poziomami zmiennej jakościowej lub słownikiem zmiennej.
@@ -149,14 +112,14 @@ Zbiór danych `koty_ptaki` składa się z 13 wierszy. Można cały ten zbiór da
 Nie zawsze potrzebujemy więc specjalnych statystyk opisowych by zrozumieć co się dzieje w takich małych zbiorach danych.
 
 Dlatego dalsze ćwiczenia ze zmiennymi ilościowymi przeprowadzimy na znaczeni większym zbiorze danych `auta2012` o ponad 200 tysiącach wartości, 
-który również znajduje się w pakiecie `SmarterPoland`.
+który również znajduje się w pakiecie `PogromcyDanych`.
 
 Opis tego zbioru danych znaleźć można w odcinku https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html
 
 Wczytajmy ten zbiór danych i przyjrzyjmy się dwóm pierwszym wierszom. 
 
 ```{r, warning=FALSE, message=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 head(auta2012, 2)
 ```
 
