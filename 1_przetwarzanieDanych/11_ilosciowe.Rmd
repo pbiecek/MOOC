@@ -51,7 +51,7 @@ Dane od których rozpoczniemy przykłady to `koty_ptaki` z pakietu `SmarterPolan
 Włączmy pakiet i użyjmy funkcji `head()` by wyświetlić pierwsze sześć wierszy. Które z tych zmiennych to zmienne ilościowe?
 
 ```{r, warning=FALSE, message=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 head(koty_ptaki)
 ```
 
@@ -90,7 +90,7 @@ Opis tego zbioru danych znaleźć można w odcinku https://rawgit.com/pbiecek/MO
 Wczytajmy ten zbiór danych i przyjrzyjmy się trzem pierwszym wierszom. 
 
 ```{r, warning=FALSE, message=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 head(auta2012, 3)
 ```
 
@@ -158,14 +158,34 @@ Opis cechy ilościowej za pomocą tych sześciu liczb bardzo wiele o danej cesze
 summary(auta2012$Cena.w.PLN)
 ```
 
-+ Minimalna oferta jest na 400 pln.
+---
+
+# Statystyki opisowe
+
+Opiszmy wyniki funkcji `sumamry()` na przykładzie
+
+```{r, warning=FALSE}
+summary(auta2012$Cena.w.PLN)
+```
+
++ Minimalna oferta opiewa na kwotę na 400 pln.
 + Jedna czwarta ogłoszeń oferuje samochód w cenie niższej niż 10 900 (a ponieważ wszystkich aut jest ponad 200 tysięcy więc szybko możemy policzyć, że ponad 50 tysięcy ofert znajduje się w tym przedziale).
 + Połowa ogłoszeń oferuje samochód w cenie niższej niż 19 900.
 + Trzy czwarte ogłoszeń oferuje samochód w cenie niższej niż 37 470, tym samym jedna czwarta ofert jest na kwotę wyższą.
 + Maksymalna cena ofertowa to wspomniane ponad 11 milionów.
 + Również i w tym przykładzie średnia cena (35 760) jest znacznie - prawie dwukrotnie - wyższa od ceny środkowej. Dzieje się tak dlatego, że większość aut oferowanych jest w niższych cenach, ale niewielka część bardzo drogich aut znacznie podnosi wartość średniej. Jest to jeden z argumentów przeciwko używaniu średniej, która jest podatna na skrajne obserwacje.
 
-[PCH: dodałbym w tym miejscu dwa słowa o funkcji `quantile()`]
+Opisując zmienną ilościową przydatna może być funkcja `quantile()`, która wyznacza kwantyle określonego rzędu ze zbioru danych. Kwantyle rzędu `x` to taka liczba, że `100*x%` wartości jest mniejszych niż ten kwantyl.
+
+Niezbyt jasne, więc możę na przykładzie.
+
+```{r, warning=FALSE}
+quantile(auta2012$Cena.w.PLN, c(0.01, 0.1, 0.25, 0.5, 0.75, 0.90, 0.99))
+```
+
+Kwantyl rzędu `1%` to 1500, czyli co setna oferta jest tańśza niż 1500 PLN. Kwantyle rzędu `10%` to 5500, czyli jedna dziesiąta ofert jest tańsza niż 5.5 tys. Kwantyl rzędu `90%` to 72.5 tys, czyli co dziesiąty samochód jest droższy niż 72 500 pln.
+
+
 ---
 
 # Statystyki opisowe
