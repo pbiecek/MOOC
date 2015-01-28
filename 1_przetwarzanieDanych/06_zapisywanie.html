@@ -130,7 +130,13 @@ dwie_kolumny
 
 <span class="co"># podając pełną nazwę ścieżki</span>
 <span class="kw">save</span>(dwie_kolumny, <span class="dt">file=</span><span class="st">&quot;/Users/pbiecek/Documents/wazne_dane.rda&quot;</span>)</code></pre>
-<p>[PCH: Powinieneś dodać, że wraz z danymi zapisywane są również nazwy obiektów. I wspomnieć wtedy o tym co napisałeś przy okazji wczytywania za pomocą load().]</p>
+<p>Jeżeli chcemy zpisać do pliku więcej obiektów niż jeden, wystarczy je wskazać po przecinku. W poniższym przykładzie do jednego pliku zapisane będą trzy obiekty.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tworzymy dwa wektory</span>
+v1 &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">10</span>
+l1 &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span>:<span class="dv">10</span>]
+<span class="co"># Zapisujemy do pliku trzy obiekty: v1, l1, dwie_kolumny</span>
+<span class="kw">save</span>(v1, l1, dwie_kolumny, <span class="dt">file=</span><span class="st">&quot;trzy_obiekty.rda&quot;</span>)</code></pre>
+<p>Odczytując dane funkcją <code>load()</code>, do programu R wczytywane są obiekty razem z nazwami (pisaliśmy o tym w poprzednim odcinku). Dlatego możemy do jednego pliku zapisać kilka obiektów i po wczytaniu danych nie będzie kolizji nazw.</p>
 </div>
 <div id="podsumowanie-instrukcji-r" class="slide section level1">
 <h1>Podsumowanie instrukcji R</h1>

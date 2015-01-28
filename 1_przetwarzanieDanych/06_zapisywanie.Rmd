@@ -127,7 +127,17 @@ save(dwie_kolumny, file="wazne_dane.rda")
 save(dwie_kolumny, file="/Users/pbiecek/Documents/wazne_dane.rda")
 ```
 
-[PCH: Powinieneś dodać, że wraz z danymi zapisywane są również nazwy obiektów. I wspomnieć wtedy o tym co napisałeś przy okazji wczytywania za pomocą load().]
+Jeżeli chcemy zpisać do pliku więcej obiektów niż jeden, wystarczy je wskazać po przecinku. W poniższym przykładzie do jednego pliku zapisane będą trzy obiekty. 
+
+```{r, eval=FALSE}
+# tworzymy dwa wektory
+v1 <- 1:10
+l1 <- LETTERS[1:10]
+# Zapisujemy do pliku trzy obiekty: v1, l1, dwie_kolumny
+save(v1, l1, dwie_kolumny, file="trzy_obiekty.rda")
+```
+
+Odczytując dane funkcją `load()`, do programu R wczytywane są obiekty razem z nazwami (pisaliśmy o tym w poprzednim odcinku). Dlatego możemy do jednego pliku zapisać kilka obiektów i po wczytaniu danych nie będzie kolizji nazw.
 
 ---
 
