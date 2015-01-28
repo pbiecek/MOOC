@@ -53,20 +53,20 @@ pogRomcy danych
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
 <p>Program R jest świetnym narzędziem do przetwarzania danych. Mając już dane przetworzone pojawia się potrzeba by wyniki gdzieś zapisać.</p>
-<p>Podobnie jak wczytywaliśmy dane z formatów tekstowych, binarnych lub plików Excela, również możemy zapisywać dane do różnych formatów.</p>
-<p>W tym odcinku dowiemy się</p>
+<p>Podobnie jak wczytywaliśmy dane z formatów - tekstowych, binarnych lub plików Excela - możemy również zapisywać dane do różnych formatów.</p>
+<p>W tym odcinku dowiemy się:</p>
 <ul>
-<li>Jak zapisać dane tabelaryczne do plików tekstowych?</li>
-<li>Jak zapisać dane tabelaryczne do plików Excela (.xls lub .xlsx)?</li>
-<li>Jak zapisać dane w formacie binarnym programu R?</li>
-<li>Gdzie szukać informacji o tym jak zapisać dane do innych formatów?</li>
+<li>jak zapisać dane tabelaryczne do plików tekstowych,</li>
+<li>jak zapisać dane tabelaryczne do plików Excela (.xls lub .xlsx),</li>
+<li>jak zapisać dane w formacie binarnym programu R,</li>
+<li>gdzie szukać informacji o tym jak zapisać dane do innych formatów.</li>
 </ul>
 </div>
 <div id="zapisywanie-danych-do-pliku-csv" class="slide section level1">
 <h1>Zapisywanie danych do pliku csv</h1>
 <p>Zacznijmy od przykładu, w którym stworzymy sztuczny zbiór danych o trzech wierszach i dwóch kolumnach, nazwiemy go <code>dwie_kolumny</code> a następnie zapiszmy do pliku tekstowego o rozszerzeniu <code>csv</code>.</p>
 <p>Pliki <code>csv</code> są plikami tekstowymi, ale również są poprawnie odczytywane przez program Excel, przez co jest to popularne medium wymiany danych tabelarycznych.</p>
-<p>Aby zapisać dane do pliku możemy użyć funkcję <code>write.table()</code>. Poniższe instrukcje tworzą nowe dane oraz zapisują je do pliku <code>wazne_dane.csv</code> (w aktualnym katalogu) stosując jako separator kolumn średnik a jako kropkę dziesiętną znak <code>.</code>. To, jaki katalog jest aktualnym katalogiem roboczym, można sprawdzić funckją <code>getwd()</code>.</p>
+<p>Aby zapisać dane do pliku możemy użyć funkcję <code>write.table()</code>. Poniższe instrukcje tworzą nowe dane oraz zapisują je do pliku <code>wazne_dane.csv</code> (w aktualnym katalogu) stosując jako separator kolumn średnik, a jako separator dziesiętny znak <code>.</code> (kropka). To, jaki katalog jest aktualnym katalogiem roboczym, można sprawdzić funkcją <code>getwd()</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tworzymy nowy zbiór danych</span>
 dwie_kolumny &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">litery  =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>),
                            <span class="dt">liczby  =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))
@@ -89,20 +89,20 @@ dwie_kolumny
 </div>
 <div id="zapisywanie-danych-tabelarycznych-do-plikow-tekstowych" class="slide section level1">
 <h1>Zapisywanie danych tabelarycznych do plików tekstowych</h1>
-<p>Dane, które są dostępne w programie R, można zapisać do pliku tekstowego, funkcją <code>write.table()</code>. Można też funkcjami <code>write.csv()</code> lub <code>write.csv2()</code>, ale różnią się one wyłącznie domyślnymi wartościami parametrów.</p>
-<p>Formatowanie (co jest separatorem kolumn, co jest kropką dziesiętną) określa się w ten sam sposób co w funkcji <code>read.table()</code>.</p>
+<p>Dane, które są dostępne w programie R, można zapisać do pliku tekstowego funkcją <code>write.table()</code>. Można też funkcjami <code>write.csv()</code> lub <code>write.csv2()</code>, ale różnią się one wyłącznie domyślnymi wartościami parametrów.</p>
+<p>Formatowanie (co jest separatorem kolumn, co jest separatorem dziesiętnym, itp.) określa się w ten sam sposób co w funkcji <code>read.table()</code>.</p>
 <p>Formalna deklaracja funkcji <code>write.table()</code> jest następująca (pamiętajmy, że większość parametrów jest domyślna i zazwyczaj wystarczy zmienić tylko kilka).</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.table</span>(x, <span class="dt">file =</span> <span class="st">&quot;&quot;</span>, <span class="dt">append =</span> <span class="ot">FALSE</span>, <span class="dt">quote =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>,
             <span class="dt">eol =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">na =</span> <span class="st">&quot;NA&quot;</span>, <span class="dt">dec =</span> <span class="st">&quot;.&quot;</span>, <span class="dt">row.names =</span> <span class="ot">TRUE</span>,
             <span class="dt">col.names =</span> <span class="ot">TRUE</span>, <span class="dt">qmethod =</span> <span class="kw">c</span>(<span class="st">&quot;escape&quot;</span>, <span class="st">&quot;double&quot;</span>),
             <span class="dt">fileEncoding =</span> <span class="st">&quot;&quot;</span>)</code></pre>
-<p>Najczęściej wykorzystywane argumenty to</p>
+<p>Najczęściej wykorzystywane argumenty to:</p>
 <ul>
 <li><code>x</code> - określa jaka tabela/które dane mają być zapisane do pliku tekstowego,</li>
 <li><code>file</code> - określa nazwę pliku tekstowego, do którego dane będą zapisane,</li>
-<li><code>append</code> - domyślna wartość <code>FALSE</code> oznacza, że plik o nazwie <code>file</code> istnieje wcześniej to zostanie on skasowany. Jeżeli ustawić <code>append=TRUE</code> to nowe dane będą dopisane do końca poprzedniego pliku.</li>
+<li><code>append</code> - domyślna wartość <code>FALSE</code> oznacza, że jeśli plik o nazwie <code>file</code> istnieje wcześniej, to zostanie on skasowany. Jeżeli ustawimy <code>append=TRUE</code> to nowe dane będą dopisane do końca poprzedniego pliku.</li>
 <li><code>sep</code> - określa znak, który jest separatorem kolejnych wartości,</li>
-<li><code>dec</code> - określa znak, który jest kropką dziesiętną, zazwyczaj <code>.</code> lub <code>,</code>,</li>
+<li><code>dec</code> - określa znak, który jest separatorem dziesiętnym (zazwyczaj <code>.</code> lub <code>,</code>),</li>
 <li><code>row.names</code> - określa czy do pliku tekstowego mają być zapisywane nazwy wierszy, domyślnie <code>TRUE</code>,</li>
 <li><code>col.names</code> - określa czy do pliku tekstowego mają być zapisywane nazwy kolumn, domyślnie <code>TRUE</code>.</li>
 </ul>
@@ -110,19 +110,19 @@ dwie_kolumny
 <div id="zapisywanie-danych-tabelarycznych-do-plikow-w-formacie-excela" class="slide section level1">
 <h1>Zapisywanie danych tabelarycznych do plików w formacie Excela</h1>
 <p>Dane, które są dostępne w programie R, można zapisać też do pliku Excela funkcją <code>write.xls()</code>.</p>
-<p>Funkcja ta jest dostępna w większości pakietów, zawierających funkcję <code>read.xls()</code>, np. w pakiecie <code>xlsx</code> (korzysta z biblioteki Java) oraz <code>dataframe2xls</code> (korzysta z zewnętrznych bibliotek Pythona).</p>
-<p>Do zapisu do formatu Excela można też wykorzystać funkcję <code>WriteXLS()</code> z pakietu <code>WriteXLS</code> (korzysta z zewnętrznych bibliotek Perla).</p>
+<p>Funkcja ta jest dostępna w większości pakietów, zawierających funkcję <code>read.xls()</code>, np. w pakiecie <code>xlsx</code> (korzysta z biblioteki Java) oraz <code>dataframe2xls</code> (korzysta z zewnętrznych bibliotek języka Python).</p>
+<p>Do zapisu do formatu Excela można też wykorzystać funkcję <code>WriteXLS()</code> z pakietu <code>WriteXLS</code> (korzysta z zewnętrznych bibliotek języka Perl).</p>
 <p>Podstawowa funkcjonalność tych funkcji jest taka sama, pozwalają one na stworzenie nowego pliku oraz zapisania do niego tabeli.</p>
 <p>Pakiety te różnią się dodatkowymi możliwościami. Niektóre potrafią zapisywać do plików Excelowych, które mają wiele zakładek. Inne potrafią zapisywać do pliku Excela z dodanym formatowaniem, takim jak określone kolory, wielkość pisma, krój czcionki, obrysowania tabeli.</p>
-<p>Najczęściej korzystam z pakietu <code>xlsx</code>, ponieważ pozwala on na zapis danych do wielu zakładek z zadanym formatowaniem.</p>
+<p>Osobiście najczęściej korzystam z pakietu <code>xlsx</code>, ponieważ pozwala on na zapis danych do wielu zakładek z zadanym formatowaniem.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(xlsx)
 <span class="kw">write.xslx</span>(dwie_kolumny, <span class="dt">file=</span><span class="st">&quot;/Users/pbiecek/Documents/wazne_dane.csv&quot;</span>, 
             <span class="dt">sheetName=</span><span class="st">&quot;Zakladka Wazne Dane&quot;</span>)</code></pre>
 </div>
 <div id="zapisywanie-danych-do-plikow-binarnych" class="slide section level1">
 <h1>Zapisywanie danych do plików binarnych</h1>
-<p>Do pliku w formacie natywnym R, dane można zapisać funkcją <code>save()</code>. Funkcja ta zapisuje jeden lub więcej obiektów o dowolnych atrukturach. Nie tylko tabelarycznych, ale też będzie działała dla wektorów czy bardziej złożónych struktur.</p>
-<p>Wadą tego rozwiązania jest to, że format ten nie jest odczytywany rzez inne pakiety statystyczne.</p>
+<p>Do pliku w formacie natywnym R, dane można zapisać funkcją <code>save()</code>. Funkcja ta zapisuje jeden lub więcej obiektów o dowolnych strukturach - nie tylko danych tabelarycznych, ale również wektorów czy bardziej złożonych struktur.</p>
+<p>Wadą tego rozwiązania jest to, że format ten nie jest odczytywany przez inne pakiety statystyczne.</p>
 <p>Jeżeli jednak pracujemy głównie z programem R i chcemy w przyszłości te dane odczytywać tylko z programu R, to jest to najwygodniejsza opcja, produkująca najmniejsze pliki, które łatwo i szybko można ponownie wczytać poleceniem <code>load()</code>.</p>
 <p>Przykład użycia funkcji <code>save()</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># do katalogu roboczego</span>
@@ -130,10 +130,11 @@ dwie_kolumny
 
 <span class="co"># podając pełną nazwę ścieżki</span>
 <span class="kw">save</span>(dwie_kolumny, <span class="dt">file=</span><span class="st">&quot;/Users/pbiecek/Documents/wazne_dane.rda&quot;</span>)</code></pre>
+<p>[PCH: Powinieneś dodać, że wraz z danymi zapisywane są również nazwy obiektów. I wspomnieć wtedy o tym co napisałeś przy okazji wczytywania za pomocą load().]</p>
 </div>
 <div id="podsumowanie-instrukcji-r" class="slide section level1">
 <h1>Podsumowanie instrukcji R</h1>
-<p>W tym odcinku omawialiśmy funkcje służące do zapisywania danych do różnych formatów, tekstowych, Excelowych, binarnych. Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.</p>
+<p>W tym odcinku omawialiśmy funkcje służące do zapisywania danych do różnych formatów: tekstowych, Excelowych, binarnych. Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tworzymy nowy zbiór danych</span>
 dwie_kolumny &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">litery  =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>),
                            <span class="dt">liczby  =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))
@@ -169,25 +170,25 @@ dwie_kolumny
 <div id="zadanie" class="slide section level1">
 <h1>Zadanie</h1>
 <ul>
-<li><p>Zapisz zbiór danych <code>koty_ptaki</code> do pliku tekstowego, w którym dane są rozdzielane przecinkiem a kropką dziesiętną jest <code>.</code></p></li>
+<li><p>Zapisz zbiór danych <code>koty_ptaki</code> do pliku tekstowego, w którym dane są rozdzielane przecinkiem a separatorem dziesiętnym jest <code>.</code> (kropka).</p></li>
 <li><p>Zapisz zbiór danych <code>koty_ptaki</code> do formatu pliku Excela. Sprawdź czy dane poprawnie się zapisały.</p></li>
 <li><p>Zapisz zbiór danych <code>koty_ptaki</code> do pliku binarnego. Odczytaj go następnie funkcją <code>load()</code> i sprawdź czy dane poprawnie zostały zapisane.</p></li>
 </ul>
-<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
+<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
 </div>
 <div id="wiecej-informacji" class="slide section level1">
 <h1>Więcej informacji</h1>
 <p>Gdzie szukać dalszych informacji o zapisie i odczycie danych w innych formatach?</p>
-<p>Do R można wczytać i z R można zapisać dane w foramcie programu SAS, SPSS, Statistica, Stata i wielu innych</p>
+<p>Do R można wczytać i z R można zapisać dane w formacie programu SAS, SPSS, Statistica, Stata i wielu innych</p>
 <ul>
-<li><p>Więcej informacji o tym jak wczytywać dane z innych formatów oraz baz danych znaleźć można w rozdziale 2.2 książki <em>,,Przewodnik po pakiecie R’’</em>. Rozdział ten jest dostępny bezpłatnie pod adresem <a href="http://biecek.pl/R">http://biecek.pl/R</a>.</p></li>
-<li><p>Bardziej szczegółowe informacje o tym jak wczytywać i zapisywać dane z i do baz danych lub plików w egzotycznych formatach znaleźć można w dokumencie <em>,,R Data Import/Export’’</em> <a href="http://cran.r-project.org/doc/manuals/r-release/R-data.pdf">http://cran.r-project.org/doc/manuals/r-release/R-data.pdf</a> <a href="https://github.com/pbiecek/MOOC/blob/master/materialyZewnetrzne/R-data.pdf?raw=true">https://github.com/pbiecek/MOOC/blob/master/materialyZewnetrzne/R-data.pdf?raw=true</a></p></li>
-<li><p>O ile <em>,,R Data Import/Export’‘* jest opisem ,,teoretycznym’’ to bardzo ciekawe zebranie przypadków użycia funkcji do wczytywania danych z różnych formatów jest zebrane w wiki-książce </em>,,R programming’’* dostępnej pod adresem <a href="http://en.wikibooks.org/wiki/R_Programming/Importing_and_exporting_data">http://en.wikibooks.org/wiki/R_Programming/Importing_and_exporting_data</a></p></li>
-<li><p>Interesujące zestawienie narzędzi do odczytywania danych ze stron interentowych znaleźć można na stronach z materiałami dydaktycznymi Gastona Sancheza <a href="http://gastonsanchez.com/teaching/">http://gastonsanchez.com/teaching/</a></p></li>
+<li><p>Więcej informacji o tym jak wczytywać dane z innych formatów oraz baz danych znaleźć można w rozdziale 2.2 książki <em>,,Przewodnik po pakiecie R’’</em>. Rozdział ten jest dostępny bezpłatnie pod adresem <a href="http://biecek.pl/R" class="uri">http://biecek.pl/R</a>.</p></li>
+<li><p>Bardziej szczegółowe informacje o tym jak wczytywać i zapisywać dane z i do baz danych lub plików w egzotycznych formatach znaleźć można w dokumencie <em>,,R Data Import/Export’’</em> <a href="http://cran.r-project.org/doc/manuals/r-release/R-data.pdf" class="uri">http://cran.r-project.org/doc/manuals/r-release/R-data.pdf</a> <a href="https://github.com/pbiecek/MOOC/blob/master/materialyZewnetrzne/R-data.pdf?raw=true" class="uri">https://github.com/pbiecek/MOOC/blob/master/materialyZewnetrzne/R-data.pdf?raw=true</a></p></li>
+<li><p>O ile <em>,,R Data Import/Export``</em> jest opisem ,,teoretycznym’’ to bardzo ciekawe zebranie przypadków użycia funkcji do wczytywania danych z różnych formatów jest zebrane w wiki-książce <em>,,R programming’’</em> dostępnej pod adresem <a href="http://en.wikibooks.org/wiki/R_Programming/Importing_and_exporting_data" class="uri">http://en.wikibooks.org/wiki/R_Programming/Importing_and_exporting_data</a></p></li>
+<li><p>Interesujące zestawienie narzędzi do odczytywania danych ze stron internetowych znaleźć można na stronach z materiałami dydaktycznymi Gastona Sancheza <a href="http://gastonsanchez.com/teaching/" class="uri">http://gastonsanchez.com/teaching/</a></p></li>
 </ul>
 <p><em>Dla entuzjastów Excela</em></p>
 <ul>
-<li>Funkcje R można również uruchamiać wewnątrz programu Excel, należy w tym celu zainstalować dodatek RExcel(<a href="http://www.statconn.com/products.html">http://www.statconn.com/products.html</a>). Na tych filmach można zobaczyć jak pracuje się z tym dodatkiem i jak go zainstalować <a href="https://www.youtube.com/watch?v=rigtfeeqnNs">https://www.youtube.com/watch?v=rigtfeeqnNs</a>, <a href="https://www.youtube.com/watch?v=YH94AH6PVss">https://www.youtube.com/watch?v=YH94AH6PVss</a>, <a href="https://www.youtube.com/watch?v=wqgO9rrmQVY">https://www.youtube.com/watch?v=wqgO9rrmQVY</a></li>
+<li>Funkcje R można również uruchamiać wewnątrz programu Excel, należy w tym celu zainstalować dodatek RExcel(<a href="http://www.statconn.com/products.html" class="uri">http://www.statconn.com/products.html</a>). Na tych filmach można zobaczyć jak pracuje się z tym dodatkiem i jak go zainstalować <a href="https://www.youtube.com/watch?v=rigtfeeqnNs" class="uri">https://www.youtube.com/watch?v=rigtfeeqnNs</a>, <a href="https://www.youtube.com/watch?v=YH94AH6PVss" class="uri">https://www.youtube.com/watch?v=YH94AH6PVss</a>, <a href="https://www.youtube.com/watch?v=wqgO9rrmQVY" class="uri">https://www.youtube.com/watch?v=wqgO9rrmQVY</a>.</li>
 </ul>
 </div>
 
