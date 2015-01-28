@@ -59,9 +59,6 @@ Wykorzystamy zbiór danych o ofertach sprzedaży samochodów, by zobaczyć jaka 
 
 A przy okazji poznamy cztery z pięciu najważniejszych funkcji do przetwarzania danych.
 
-*** PCH: rozumiem, że to nie jest skończone? Bo nie widzę jakie cztery najważniejsze 
-funkcje są tu użyte...***
-
 ```{r, warning=FALSE}
 library(SmarterPoland)
 library(dplyr)
