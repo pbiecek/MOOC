@@ -36,7 +36,7 @@ Każdy wiersz przedstawia:
 
 * nazwę gatunku,
 * maksymalną osobniczą wagę w kilogramach i maksymalną długość ciała w metrach, 
-* maksymalną prędkość (dla ptaków w locie pionowym [PCH: a nie w poziomym?], nie w nurkowaniu) w kilometrach na godzinę, 
+* maksymalną prędkość (dla ptaków w locie poziomym, nie w nurkowaniu) w kilometrach na godzinę, 
 * obszar zamieszkania oraz żywotność w latach. 
 * Ostatnia kolumna określa czy gatunek jest dużym kotem czy ptakiem. 
 
