@@ -145,12 +145,15 @@ Proces przechodzenia z wąskiej postaci do szerokiej i z szerokiej do wąskiej j
 Poniżej pierwszy argument jest przekazany za pomocą operatora `%>%`, kolejne dwa określają nazwy nowych kolumn w których zapisane będą klucze i wartości. 
 Trzeci argument to opis kolumn, które mają być zamienione na postać wąską.
 
-[PCH: W ponizszym przykladzie nie wiadomo co to za kolumna 'wartosc'. W efekcie w wyniki pojawiaja się wartości NA.]
+W poniższym przykładzie funkcja `gather()` przekształca ramkę `szeroka` w ten sposób, że wysztkie kolumny poza `geo i `vehicle` (a więc kolumny z nazwami lat) będą zakodowane przez parę klucz `rok` i wartość `wartosc`.
+
 ```{r, warning=FALSE, message=FALSE}
 szeroka %>% 
   gather(rok, wartosc, -geo, -vehicle) %>%
-  head()
+  tail()
 ```
+
+Aby wyświetlić przykładowe 6 wierszy użyto tutaj funkcji `tail()` (wyświetla ostatnie sześć wierszy) ponieważ w pierwszych sześciu werszach są wartości `NA`,
 
 ---
 
