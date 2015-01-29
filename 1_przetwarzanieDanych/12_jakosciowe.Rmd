@@ -226,7 +226,7 @@ sort(zaokragloneProcenty, decreasing = TRUE)
 Wartości w wektorze można posortować też na kilka innych sposobów.  Bardziej skomplikowanym, 
 ale pozwalającym na omówienie bardziej zaawansowanych przykładów indeksowania jest funkcja `order()`.
 
-Wynikiem funkcji `order()` są indeksy elementów w wektorze które tworzą ciąg rosnący. Więcej informacji o tej funkcji znaleźć można w odcinku 7. [PCH: WCALE ŻE NIE MOŻNA!!!!! TAM NIC NIE MA NA TEN TEMAT!]
+Wynikiem funkcji `order()` są indeksy elementów w wektorze, które tworzą ciąg rosnący. Więcej informacji o tej funkcji znaleźć można w odcinku 7. [PCH: WCALE ŻE NIE MOŻNA!!!!! TAM NIC NIE MA NA TEN TEMAT!]
 
 ```{r, warning=FALSE}
 order(zaokragloneProcenty)

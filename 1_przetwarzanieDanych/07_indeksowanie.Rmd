@@ -176,12 +176,12 @@ LETTERS[LETTERS > "K"]
 
 Do pracy nad wybieraniem wierszy i kolumn wykorzystamy niewielki zbiór danych o kotach i ptakach.
 
-Ten zbiór danych jest dostępny w pakiecie `SmarterPoland`, wystarczy więc załadować ten pakiet. Inne sposoby na wczytanie tego zbioru danych były przedstawione w odcinku 5. 
+Ten zbiór danych jest dostępny w pakiecie `PogromcyDanych`, wystarczy więc załadować ten pakiet. Inne sposoby na wczytanie tego zbioru danych były przedstawione w odcinku 5. 
 
 Siedem kolumn i trzynaście wierszy to dobry zbiór do ćwiczeń.
 
 ```{r, message=FALSE, warning=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 koty_ptaki
 ```
 
@@ -397,6 +397,34 @@ koty_ptaki[c("Lew", "Leopard", "Jerzyk", "Strus"),
 *Uwaga* Gdybyśmy chcieli pozbyć się nazw wierszy, można to zrobić instrukcją
 ```{r, eval=FALSE}
 rownames(koty_ptaki) <- NULL
+```
+
+
+---
+
+# Sortowanie przez indeksowanie
+
+Interesujące i nieco zaawansowane zastosowanie indeksowania przedstawimy na przykładzie funkcji `order()`.
+
+Wynikiem tej funkcji, są indeksy kolejnych, rosnących wartości.
+
+Przykładowo, w kolumnie `predkosc` mamy następujące wartości
+
+```{r}
+koty_ptaki[,"predkosc"]
+```
+
+Wynikiem funkcji `order()` są indeksy kolejnych, wartości. Najmniejsza wartość to 60, na pozycji 1, kolejna to 65 na pozycji 7, kolejna to 70 na pozycjach 4 i 9 i tak dalej.
+
+```{r}
+order(koty_ptaki[,"predkosc"])
+```
+
+Możemy wykorzystać ten wynikik, aby posortować ramkę danych po określonej kolumnie. W przykładzie poniżej wykorzystujemy funkcję `order()` do wyznaczenia wektora `kolejnosc`. Któty następnie wykorzystamy do indeksowania ramki `koty_ptaki`.
+
+```{r}
+kolejnosc <- order(koty_ptaki[,"predkosc"])
+koty_ptaki[kolejnosc, ]
 ```
 
 ---
