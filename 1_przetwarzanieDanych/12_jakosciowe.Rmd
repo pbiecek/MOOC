@@ -226,7 +226,7 @@ sort(zaokragloneProcenty, decreasing = TRUE)
 Wartości w wektorze można posortować też na kilka innych sposobów.  Bardziej skomplikowanym, 
 ale pozwalającym na omówienie bardziej zaawansowanych przykładów indeksowania jest funkcja `order()`.
 
-Wynikiem funkcji `order()` są indeksy elementów w wektorze, które tworzą ciąg rosnący. Więcej informacji o tej funkcji znaleźć można w odcinku 7. [PCH: WCALE ŻE NIE MOŻNA!!!!! TAM NIC NIE MA NA TEN TEMAT!]
+Wynikiem funkcji `order()` są indeksy elementów w wektorze, które tworzą ciąg rosnący. Więcej informacji o tej funkcji znaleźć można na sladzie *Sortowanie przez indeksowanie* w odcinku 7. 
 
 ```{r, warning=FALSE}
 order(zaokragloneProcenty)
@@ -362,10 +362,13 @@ str(napisy)
 # Tablice częstości
 
 A co gdybyśmy chcieli przedstawić zależność pomiędzy dwoma zmiennymi jakościowymi? Można to zrobić używając 
-funkcji `table()` (należy kolejne zmienne podawać jako kolejne argumenty), [PCH: Tutaj przykład table(x,y)!] ale można też użyć funkcją `xtabs()`, 
-która jest trochę wygodniejsza w pracy.
+funkcji `table()` (należy kolejne zmienne podawać jako kolejne argumenty). Przykładowe wywołanie dla dwóch zmiennych: Waluty i Kraju pochodzenia.
 
-Pierwszym argumentem tej funkcji jest formuła o składni `~ zmienna_1 + .. + zmienna_n`, t.j. rozpoczynająca 
+```{r, eval=FALSE}
+table(auta2012$Kraj.pochodzenia, auta2012$Waluta)
+```
+
+Jednak wygodniej jest, takie tabele tworzyć używając funkcji `xtabs()`, która jest trochę wygodniejsza w pracy. Pierwszym argumentem tej funkcji jest formuła o składni `~ zmienna_1 + .. + zmienna_n`, t.j. rozpoczynająca 
 się tyldą a następnie ze zmiennymi porozdzielanymi znakiem plusa. Drugim argumentem jest ramka danych, 
 która powinna zawierać zmienne wymienione w formule. 
 
