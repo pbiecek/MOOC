@@ -49,7 +49,7 @@ Ten kurs jest kursem podstawowym, ale kończy go odcinek pokazujący gdzie możn
 
 ---
 
-# Drugi kurs jest o wizualizacji i modelowaniu
+# Drugi sezon jest o wizualizacji i modelowaniu
 
 Pierwszy kurs pokazuje jak przetwarzać dane, drugi kurs pokazuje po co to robić. W tej części przedstawimy zagadnienia związane z eksploracją danych, wizualizacją oraz modelowaniem statystycznym.
 
