@@ -54,17 +54,17 @@ pogRomcy danych
 <h1>O czym jest ten odcinek</h1>
 <p>Bardzo często na podstawie istniejących danych tworzymy nowe. Mając prędkość w metrach na sekundę liczymy prędkość w kilometrach na godzinę. Mając wagę i wzrost liczymy BMI. Mając odległość w milach liczymy odległość w kilometrach i tak dalej.</p>
 <p>W programie R na różne sposoby można dodać nową zmienną do zbioru danych. Z tych wszystkich sposobów wygodnym i szybkim jest z wykorzystaniem funkcji <code>mutate()</code> z pakietu <code>dplyr</code>.</p>
-<p>W tym odcinku nauczymy się</p>
+<p>W tym odcinku nauczymy się:</p>
 <ul>
-<li>jak do zbioru danych dodać nową kolumnę?</li>
-<li>jak nadpisać wartości w istniejącej kolumnie?</li>
+<li>jak do zbioru danych dodać nową kolumnę,</li>
+<li>jak nadpisać wartości w istniejącej kolumnie.</li>
 </ul>
-<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>SmarterPoland</code>.</p>
+<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code> - oba dostępne w pakiecie <code>PogromcyDanych</code>.</p>
 </div>
 <div id="ptaki-vs.koty" class="slide section level1">
 <h1>Ptaki vs. koty</h1>
 <p>Rozpocznijmy przykład dla tworzenia nowych zmiennych od zbioru danych o kotach i ptakach. Jest on na tyle mały, że wynik operacji będzie można przedstawić na ekranie.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
 koty_ptaki</code></pre>
 <pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
 ## 1          Tygrys 300.00     2.5       60     Azja        25     Kot
@@ -84,8 +84,8 @@ koty_ptaki</code></pre>
 <div id="wyliczanie-nowych-zmiennych" class="slide section level1">
 <h1>Wyliczanie nowych zmiennych</h1>
 <p>W zbiorze danych <code>koty_ptaki</code> jest zmienna <code>predkosc</code> opisująca prędkość w kilometrach na godzinę.</p>
-<p>Dodajmy dwie nowe zmienne, w jednej przeliczmy prędkość z kilometrów na godzinę na mile na godzinne, w drugiej przeliczymy prędkość na liczbę długości na sekundę (długość zwierząt jest w metrach). Nową zmienną można dodać funkcją <code>mutate()</code>. Pierwszym argumentem jest ramka danych a kolejne to deklaracje nowych zmiennych w postaci <code>nazwa.zmiennej = wzór.na.nową.zmiennę</code>.</p>
-<p>W używaniu przetwarzaniu danych wykorzystamy operator <code>%&gt;%</code> omówiony w 20 odcinku.</p>
+<p>Dodajmy dwie nowe zmienne. W jednej przeliczmy prędkość z kilometrów na godzinę na prędkość w milach na godzinne, w drugiej przeliczymy prędkość na liczbę długości na sekundę (długość zwierząt jest w metrach). Nową zmienną można dodać funkcją <code>mutate()</code>. Pierwszym argumentem jest ramka danych, a kolejne to deklaracje nowych zmiennych w postaci <code>nazwa.zmiennej = wzór.na.nową.zmienną</code>.</p>
+<p>W przetwarzaniu danych wykorzystamy operator <code>%&gt;%</code> omówiony w 20 odcinku.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 koty_ptaki %&gt;%
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">predkosc.mph =</span> <span class="kw">round</span>(predkosc /<span class="st"> </span><span class="fl">0.621371</span>),
@@ -145,7 +145,7 @@ koty_ptaki %&gt;%
 <div id="auta" class="slide section level1">
 <h1>Auta</h1>
 <p>Operacje tworzenia nowych zmiennych przećwiczymy też na znacznie większym i złożonym zbiorze danych. Mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.</p>
-<p>Zbiór danych <code>auta2012</code> jest dostępny po wczytaniu pakietu <code>SmarterPoland</code>. Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie <a href="https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html" class="uri">https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
+<p>Zbiór danych <code>auta2012</code> jest dostępny po wczytaniu pakietu <code>PogromcyDanych</code>. Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie <a href="https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html" class="uri">https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(auta2012)</code></pre>
 <pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW         Marka     Model
 ## 1 49900    PLN      49900       brutto 140 103           Kia    Carens
@@ -192,7 +192,7 @@ koty_ptaki %&gt;%
 </div>
 <div id="wyliczanie-jednej-nowej-zmiennej" class="slide section level1">
 <h1>Wyliczanie jednej nowej zmiennej</h1>
-<p>Policzmy najpierw wiek auta. Dane były zbierane w roku 2012, więc wiek auta to różnica pomiędzy rokiem produkcji, rokiem 2012 plus 1.</p>
+<p>Policzmy najpierw wiek auta. Dane były zbierane w roku 2012, więc wiek auta to różnica pomiędzy rokiem 2012 plus 1, a rokiem produkcji.</p>
 <pre class="sourceCode r"><code class="sourceCode r">autaZWiekiem &lt;-<span class="st"> </span>auta2012 %&gt;%
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Wiek.auta =</span> <span class="dv">2013</span> -<span class="st"> </span>Rok.produkcji)</code></pre>
 <p>Następnie wyświetlimy pierwsze 6 wierszy i dwie kolumny (wiek i rok produkcji).</p>
@@ -209,7 +209,7 @@ koty_ptaki %&gt;%
 </div>
 <div id="wyliczanie-nowych-zmiennych-1" class="slide section level1">
 <h1>Wyliczanie nowych zmiennych</h1>
-<p>Zauważmy też, że część cen jest netto a część brutto. Przeliczmy wszystkie ceny na brutto dodając 23% tam gdzie podana jest cena netto.</p>
+<p>Zauważmy, że część cen jest netto, a część brutto. Przeliczmy wszystkie ceny na brutto dodając 23% tam gdzie podana jest cena netto.</p>
 <p>Wykorzystamy w tym celu funkcję <code>ifelse()</code>, która jako wynik zwraca drugi lub trzeci argument w zależności od tego czy pierwszy argument jest prawdziwy czy nie.</p>
 <pre class="sourceCode r"><code class="sourceCode r">autaZCenaBrutto &lt;-<span class="st"> </span>auta2012 %&gt;%
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Cena.brutto =</span> Cena.w.PLN *<span class="st"> </span><span class="kw">ifelse</span>(Brutto.netto ==<span class="st"> &quot;brutto&quot;</span>, <span class="dv">1</span>, <span class="fl">1.23</span>))</code></pre>
@@ -271,6 +271,7 @@ koty_ptaki %&gt;%
 <li>Policz średni przebieg na rok, dzieląc przebieg przez wieka auta.</li>
 <li>Poza koniem mechanicznym inną ciekawą jednostką mocy jest koń parowy (jednostka HP). Jeden koń mechaniczny to 0.9863 konia parowego. Utwórz nową zmienną, która przedstawi moc aut w koniach parowych (btw: Wikipedia zna jeszcze kilka innych ciekawych jednostek mocy).</li>
 </ul>
+<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

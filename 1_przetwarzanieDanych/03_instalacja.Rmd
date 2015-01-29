@@ -89,13 +89,13 @@ Program R po instalacji posiada setki przydatnych funkcji. Ale prawdziwa siła k
 Dodatkowych pakietów, oficjalnie dostępnych w repozytorium pakietów CRAN, jest na dziś dzień ponad 6000. 
 Są to pakiety specjalistyczne, dla bioinformatyków, botaników, historyków, lingwistów, osób zainteresowanych obliczeniami rozproszonymi i dla wielu innych specjalistycznych zastosowań.
 
-My, na potrzeby tego kursu, będziemy korzystać z pakietu `SmarterPoland`, w którym umieszczone są dodatkowe zbiory danych, na których będziemy pracować. Instalacja tego pakietu automatycznie wywoła również instalacje wszystkich pakietów zależnych, dzięki czemu jedną linijką możemy zainstalować wszystko, co nam będzie potrzebne w tym kursie.
+My, na potrzeby tego kursu, będziemy korzystać z pakietu `PogromcyDanych`, w którym umieszczone są dodatkowe zbiory danych, na których będziemy pracować. Instalacja tego pakietu automatycznie wywoła również instalacje wszystkich pakietów zależnych, dzięki czemu jedną linijką możemy zainstalować wszystko, co nam będzie potrzebne w tym kursie.
 
 Instalacje nowego pakietu wykonuje się funkcją `install.packages("nazwa_pakietu")`, którą należy uruchomić w linii poleceń programu R.
 Tak więc po instalacji R i RStudio, powinniśmy uruchomić program RStudio. Następnie w konsoli (oknie z nazwą `Console`) wpisać polecenie i zakończyć je klawiszem ENTER.
 
 ```{r, eval=FALSE}
-install.packages("SmarterPoland")
+install.packages("PogromcyDanych")
 ```
 
 Pobierze i zainstaluje ono z Internetu wszelkie niezbędne pakiety i zbiory danych z których będziemy korzystać w tym kursie.
@@ -106,7 +106,7 @@ Pobierze i zainstaluje ono z Internetu wszelkie niezbędne pakiety i zbiory dany
 
 # Gotowi do pracy
 
-Zainstalowaliśmy program R, RStudio i pakiet SmarterPoland?
+Zainstalowaliśmy program R, RStudio i pakiet PogromcyDanych?
 
 Jeżeli tak to jesteśmy gotowi do rozpoczęcia pracy z R!
 

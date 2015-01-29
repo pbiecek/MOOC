@@ -19,10 +19,10 @@ Podczas tego kursu pracować będziemy z różnymi zbiorami danych.
 
 W tym odcinku te dane przedstawimy.
 
-Wszystkie używane w tym kursie zbiory danych są dostępne w pakiecie `SmarterPoland`.
+Wszystkie używane w tym kursie zbiory danych są dostępne w pakiecie `PogromcyDanych`.
 
 ```{r,  message=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 ```
 
 ---

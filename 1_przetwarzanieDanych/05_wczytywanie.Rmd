@@ -247,13 +247,13 @@ Przygotowując ten kurs musiałem zmierzyć się z następującym problemem. Jak
 Pakiety to zbiory funkcji oraz zbiorów danych. Można takie pakiety wygodnie przygotowywać oraz udostępniać innym osobom. Istnieją pakiety zawierające tylko funkcje, wyłącznie zbiory danych lub oba te zestawy.
 
 Aby sprawdzić jakie zbiory danych są dostępne w określonym pakiecie, można wykorzystać funkcję `data()` z argumentem `package`. 
-Zobaczmy jakie zbiory danych udostępnione są w pakiecie `SmarterPoland`.
+Zobaczmy jakie zbiory danych udostępnione są w pakiecie `PogromcyDanych`.
 
 ```{r, warning=FALSE, message=FALSE}
-data(package="SmarterPoland")
+data(package="PogromcyDanych")
 ```
 
-*Uwaga!* Pakiet `SmarterPoland` nie jest dostępny w podstawowej dystrybucji programu R i trzeba go wcześniej zainstalować poleceniem `install.packages()`. Szczegółowa instrukcja, jak to zrobić jest przedstawiona w odcinku 2 *Jak zainstalować R, RStudio oraz dodatkowe pakiety?*.
+*Uwaga!* Pakiet `PogromcyDanych` nie jest dostępny w podstawowej dystrybucji programu R i trzeba go wcześniej zainstalować poleceniem `install.packages()`. Szczegółowa instrukcja, jak to zrobić jest przedstawiona w odcinku 3 *Jak zainstalować R, RStudio oraz dodatkowe pakiety?*.
 
 ![Lista dostępnych zbiorów danych](figs/datasets_list.png)
 ---
@@ -265,7 +265,7 @@ Jednym ze zbiorów danych udostępnionych w tym pakiecie jest zbiór danych `kot
 Po wczytaniu pakietu, ten zbiór danych jest dostępny bez potrzeby stosowania dodatkowych instrukcji. Można go wyświetlić na ekranie wpisując do konsoli jego nazwę.
 
 ```{r, warning=FALSE, message=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 koty_ptaki
 ```
 
@@ -284,7 +284,10 @@ http://ec.europa.eu/eurostat/tgm/table.do?tab=table&init=1&language=en&pcode=tsd
 
 Używając API udostępnionego przez pakiet `SmarterPoland` pokażmy jak pobierać te dane bezpośrednio do R.
 
+*Uwaga!* Pakiet `SmarterPoland` nie jest dostępny w podstawowej dystrybucji programu R i trzeba go wcześniej zainstalować poleceniem `install.packages()`. Szczegółowa instrukcja, jak to zrobić jest przedstawiona w odcinku 3 *Jak zainstalować R, RStudio oraz dodatkowe pakiety?*.
+
 ```{r, warning=FALSE, message=FALSE}
+library(SmarterPoland)
 tsdtr210 <- getEurostatRCV("tsdtr210")
 head(tsdtr210, 3)
 summary(tsdtr210)
@@ -310,14 +313,15 @@ koty_ptaki_excel <- read.xls("http://biecek.pl/MOOC/dane/koty_ptaki.xls", sheet 
 # wczytywanie danych w formacie binarnym za pomocą funkcji load()
 load(url("http://biecek.pl/MOOC/dane/koty_ptaki.rda"))
 
-# wyświetlenie zbiorów danych dostępnych w pakiecie `SmarterPoland`
-data(package="SmarterPoland")
+# wyświetlenie zbiorów danych dostępnych w pakiecie `PogromcyDanych`
+data(package="PogromcyDanych")
 
-# wczytanie danych koty_ptaki z pakietu `SmarterPoland`
-library(SmarterPoland)
+# wczytanie danych koty_ptaki z pakietu `PogromcyDanych`
+library(PogromcyDanych)
 koty_ptaki
 
 # wczytanie danych z Eurostatu o wykorzystaniu różnych środków transportu w różnych krajach
+library(SmarterPoland)
 tsdtr210 <- getEurostatRCV("tsdtr210")
 head(tsdtr210, 3)
 summary(tsdtr210)
@@ -336,7 +340,7 @@ Ten zbiór danych można pobrać ze strony kursu w różnych formatach pod nast�
 
 - dane binarne, http://biecek.pl/MOOC/dane/auta2012mini.rda
 
-- w pakiecie `SmarterPoland` w zmiennej `auta2012`.
+- w pakiecie `PogromcyDanych` w zmiennej `auta2012`.
 
 *Zadanie:* 
 

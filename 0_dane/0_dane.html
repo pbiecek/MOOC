@@ -54,17 +54,17 @@ pogRomcy danych
 <h1>O czym jest ten odcinek</h1>
 <p>Podczas tego kursu pracować będziemy z różnymi zbiorami danych.</p>
 <p>W tym odcinku te dane przedstawimy.</p>
-<p>Wszystkie używane w tym kursie zbiory danych są dostępne w pakiecie <code>SmarterPoland</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)</code></pre>
+<p>Wszystkie używane w tym kursie zbiory danych są dostępne w pakiecie <code>PogromcyDanych</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)</code></pre>
 </div>
 <div id="najszybsze-koty-i-ptaki-na-swiecie" class="slide section level1">
 <h1>Najszybsze koty i ptaki na świecie</h1>
-<p>Zbiór danych <code>koty_ptaki</code> zestawia charakterystyki dla 13 gatunków. Wybrane gatunki to najszybsi przedstawiciele kotów czy ptaków.</p>
+<p>Zbiór danych <code>koty_ptaki</code> zestawia charakterystyki dla 13 gatunków. Wybrane gatunki to najszybsi przedstawiciele kotów i ptaków.</p>
 <p>Każdy wiersz przedstawia:</p>
 <ul>
 <li>nazwę gatunku,</li>
 <li>maksymalną osobniczą wagę w kilogramach i maksymalną długość ciała w metrach,</li>
-<li>maksymalną prędkość (dla ptaków w locie pionowym, nie w nurkowaniu) w kilometrach na godzinę,</li>
+<li>maksymalną prędkość (dla ptaków w locie poziomym, nie w nurkowaniu) w kilometrach na godzinę,</li>
 <li>obszar zamieszkania oraz żywotność w latach.</li>
 <li>Ostatnia kolumna określa czy gatunek jest dużym kotem czy ptakiem.</li>
 </ul>
@@ -79,7 +79,7 @@ pogRomcy danych
 </div>
 <div id="imiona-noworodkow-w-warszawie" class="slide section level1">
 <h1>Imiona noworodków w Warszawie</h1>
-<p>Ze strony <a href="http://gorny.edu.pl/imiona/index.php">http://gorny.edu.pl/imiona/index.php</a> pobrano statystyki nadawania imion noworodkom w Warszawie w latach 2004-2014.</p>
+<p>Ze strony <a href="http://gorny.edu.pl/imiona/index.php" class="uri">http://gorny.edu.pl/imiona/index.php</a> pobrano statystyki nadawania imion noworodkom w Warszawie w latach 2004-2014.</p>
 <p>Dla każdego imienia, dla każdego roku i miesiąca opisano liczbę wystąpień danego imienia u noworodków.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(imiona_warszawa)</code></pre>
 <pre><code>##    imie plec  rok miesiac liczba
@@ -256,69 +256,69 @@ pogRomcy danych
 ## PLEC                                                       Płeć
 ## województwo                                         województwo</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(diagnoza)</code></pre>
-<pre><code>##                                                                                                                                                                                        IMIE_2011
-## 1  WERONIKA                                                                                                                                                                                     
-## 2  ERNEST                                                                                                                                                                                       
-## 3  SYLWIA                                                                                                                                                                                       
-## 4  MARIOLA                                                                                                                                                                                      
-## 16  WACŁAW                                                                                                                                                                                      
-## 57 PIOTR                                                                                                                                                                                        
-##    WAGA_2013_OSOBY lata_nauki_2013 WIEK2013      PLEC    województwo
-## 1         0.277653              NA        4   kobieta Świętokrzyskie
-## 2         0.277653              11       13 mężczyzna Świętokrzyskie
-## 3         0.277653              16       23   kobieta Świętokrzyskie
-## 4         0.277653              16       27   kobieta Świętokrzyskie
-## 16        0.475255               7       78 mężczyzna   Dolnośląskie
-## 57        0.251773              12       48 mężczyzna   Dolnośląskie
-##                       EDUK4_2013                status9_2013           GP3
-## 1                           &lt;NA&gt;        inni bierni zawodowo          &lt;NA&gt;
-## 2  zasadnicze zawodowe/gimanzjum pracownicy sekt. prywatnego         UDANE
-## 3            wyższe i policealne pracownicy sekt. prywatnego   DOSYĆ DOBRE
-## 4            wyższe i policealne pracownicy sekt. prywatnego NIEZBYT UDANE
-## 16           podstawowe i niższe                     emeryci   DOSYĆ DOBRE
-## 57 zasadnicze zawodowe/gimanzjum pracownicy sekt. prywatnego         UDANE
-##              GP29           GP54_01          GP54_02          GP54_03
-## 1            &lt;NA&gt;              &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;
-## 2  POCZUCIE SENSU       RACZEJ TAK  ZDECYDOWANIE TAK ZDECYDOWANIE TAK
-## 3    PRZYJEMNOSCI       RACZEJ TAK  ZDECYDOWANIE TAK              TAK
-## 4  POCZUCIE SENSU ANI TAK, ANI NIE  ZDECYDOWANIE TAK              TAK
-## 16 POCZUCIE SENSU       RACZEJ TAK               TAK       RACZEJ TAK
-## 57 POCZUCIE SENSU       RACZEJ NIE  ZDECYDOWANIE TAK              TAK
-##             GP54_04          GP54_05          GP54_06          GP54_07
+<pre><code>##    IMIE_2011 WAGA_2013_OSOBY lata_nauki_2013 WIEK2013      PLEC
+## 1   WERONIKA        0.277653              NA        4   kobieta
+## 2     ERNEST        0.277653              11       13 mężczyzna
+## 3     SYLWIA        0.277653              16       23   kobieta
+## 4    MARIOLA        0.277653              16       27   kobieta
+## 16    WACŁAW        0.475255               7       78 mężczyzna
+## 57     PIOTR        0.251773              12       48 mężczyzna
+##       wojewodztwo                    EDUK4_2013
+## 1  Świętokrzyskie                          &lt;NA&gt;
+## 2  Świętokrzyskie zasadnicze zawodowe/gimanzjum
+## 3  Świętokrzyskie           wyższe i policealne
+## 4  Świętokrzyskie           wyższe i policealne
+## 16   Dolnośląskie           podstawowe i niższe
+## 57   Dolnośląskie zasadnicze zawodowe/gimanzjum
+##                   status9_2013           GP3           GP29
+## 1         inni bierni zawodowo          &lt;NA&gt;           &lt;NA&gt;
+## 2  pracownicy sekt. prywatnego         UDANE POCZUCIE SENSU
+## 3  pracownicy sekt. prywatnego   DOSYĆ DOBRE   PRZYJEMNOSCI
+## 4  pracownicy sekt. prywatnego NIEZBYT UDANE POCZUCIE SENSU
+## 16                     emeryci   DOSYĆ DOBRE POCZUCIE SENSU
+## 57 pracownicy sekt. prywatnego         UDANE POCZUCIE SENSU
+##              GP54_01          GP54_02          GP54_03          GP54_04
+## 1               &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;
+## 2        RACZEJ TAK  ZDECYDOWANIE TAK ZDECYDOWANIE TAK ANI TAK, ANI NIE
+## 3        RACZEJ TAK  ZDECYDOWANIE TAK              TAK       RACZEJ NIE
+## 4  ANI TAK, ANI NIE  ZDECYDOWANIE TAK              TAK ANI TAK, ANI NIE
+## 16       RACZEJ TAK               TAK       RACZEJ TAK       RACZEJ NIE
+## 57       RACZEJ NIE  ZDECYDOWANIE TAK              TAK       RACZEJ NIE
+##             GP54_05          GP54_06          GP54_07    GP54_08
+## 1              &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;       &lt;NA&gt;
+## 2               NIE       RACZEJ NIE       RACZEJ NIE RACZEJ NIE
+## 3        RACZEJ NIE       RACZEJ TAK ZDECYDOWANIE NIE RACZEJ NIE
+## 4  ZDECYDOWANIE NIE       RACZEJ NIE ANI TAK, ANI NIE        NIE
+## 16 ZDECYDOWANIE NIE ZDECYDOWANIE NIE ZDECYDOWANIE NIE RACZEJ NIE
+## 57 ZDECYDOWANIE NIE              TAK              TAK        NIE
+##             GP54_09          GP54_10          GP54_11          GP54_12
 ## 1              &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;
-## 2  ANI TAK, ANI NIE              NIE       RACZEJ NIE       RACZEJ NIE
-## 3        RACZEJ NIE       RACZEJ NIE       RACZEJ TAK ZDECYDOWANIE NIE
-## 4  ANI TAK, ANI NIE ZDECYDOWANIE NIE       RACZEJ NIE ANI TAK, ANI NIE
-## 16       RACZEJ NIE ZDECYDOWANIE NIE ZDECYDOWANIE NIE ZDECYDOWANIE NIE
-## 57       RACZEJ NIE ZDECYDOWANIE NIE              TAK              TAK
-##       GP54_08          GP54_09          GP54_10          GP54_11
-## 1        &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;
-## 2  RACZEJ NIE       RACZEJ NIE              TAK              TAK
-## 3  RACZEJ NIE ANI TAK, ANI NIE ZDECYDOWANIE TAK ZDECYDOWANIE TAK
-## 4         NIE       RACZEJ TAK       RACZEJ TAK              TAK
-## 16 RACZEJ NIE       RACZEJ TAK              TAK       RACZEJ NIE
-## 57        NIE              NIE              TAK              TAK
-##             GP54_12          GP54_13          GP54_14          GP54_15
+## 2        RACZEJ NIE              TAK              TAK ZDECYDOWANIE TAK
+## 3  ANI TAK, ANI NIE ZDECYDOWANIE TAK ZDECYDOWANIE TAK       RACZEJ NIE
+## 4        RACZEJ TAK       RACZEJ TAK              TAK       RACZEJ TAK
+## 16       RACZEJ TAK              TAK       RACZEJ NIE ANI TAK, ANI NIE
+## 57              NIE              TAK              TAK              NIE
+##             GP54_13          GP54_14          GP54_15          GP54_16
 ## 1              &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;
-## 2  ZDECYDOWANIE TAK ZDECYDOWANIE NIE ZDECYDOWANIE TAK ANI TAK, ANI NIE
-## 3        RACZEJ NIE ZDECYDOWANIE NIE ZDECYDOWANIE TAK       RACZEJ NIE
-## 4        RACZEJ TAK ZDECYDOWANIE NIE ZDECYDOWANIE TAK       RACZEJ TAK
-## 16 ANI TAK, ANI NIE       RACZEJ NIE       RACZEJ TAK              NIE
-## 57              NIE       RACZEJ NIE              TAK       RACZEJ TAK
-##             GP54_16          GP54_17          GP54_18          GP54_19
+## 2  ZDECYDOWANIE NIE ZDECYDOWANIE TAK ANI TAK, ANI NIE ZDECYDOWANIE TAK
+## 3  ZDECYDOWANIE NIE ZDECYDOWANIE TAK       RACZEJ NIE ZDECYDOWANIE TAK
+## 4  ZDECYDOWANIE NIE ZDECYDOWANIE TAK       RACZEJ TAK ZDECYDOWANIE TAK
+## 16       RACZEJ NIE       RACZEJ TAK              NIE              TAK
+## 57       RACZEJ NIE              TAK       RACZEJ TAK ANI TAK, ANI NIE
+##             GP54_17          GP54_18          GP54_19          GP54_20
 ## 1              &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;
-## 2  ZDECYDOWANIE TAK ANI TAK, ANI NIE ZDECYDOWANIE TAK ZDECYDOWANIE NIE
-## 3  ZDECYDOWANIE TAK ZDECYDOWANIE NIE ZDECYDOWANIE TAK ZDECYDOWANIE NIE
-## 4  ZDECYDOWANIE TAK       RACZEJ NIE ZDECYDOWANIE TAK ZDECYDOWANIE NIE
-## 16              TAK              NIE       RACZEJ TAK       RACZEJ NIE
-## 57 ANI TAK, ANI NIE       RACZEJ NIE       RACZEJ TAK              NIE
-##             GP54_20    GP54_21          GP54_22 GP60 GP61 GP64 GP113
-## 1              &lt;NA&gt;       &lt;NA&gt;             &lt;NA&gt;   NA   NA   NA    NA
-## 2  ZDECYDOWANIE TAK        TAK       RACZEJ TAK  176   70  900    NA
-## 3        RACZEJ TAK RACZEJ NIE       RACZEJ TAK  174   90   NA    NA
-## 4               TAK RACZEJ TAK ZDECYDOWANIE TAK  173   70  950    NA
-## 16 ZDECYDOWANIE TAK RACZEJ NIE ANI TAK, ANI NIE  158   66 2700    NA
-## 57              NIE        TAK              NIE  173   78 2500    40</code></pre>
+## 2  ANI TAK, ANI NIE ZDECYDOWANIE TAK ZDECYDOWANIE NIE ZDECYDOWANIE TAK
+## 3  ZDECYDOWANIE NIE ZDECYDOWANIE TAK ZDECYDOWANIE NIE       RACZEJ TAK
+## 4        RACZEJ NIE ZDECYDOWANIE TAK ZDECYDOWANIE NIE              TAK
+## 16              NIE       RACZEJ TAK       RACZEJ NIE ZDECYDOWANIE TAK
+## 57       RACZEJ NIE       RACZEJ TAK              NIE              NIE
+##       GP54_21          GP54_22 GP60 GP61 GP64 GP113
+## 1        &lt;NA&gt;             &lt;NA&gt;   NA   NA   NA    NA
+## 2         TAK       RACZEJ TAK  176   70  900    NA
+## 3  RACZEJ NIE       RACZEJ TAK  174   90   NA    NA
+## 4  RACZEJ TAK ZDECYDOWANIE TAK  173   70  950    NA
+## 16 RACZEJ NIE ANI TAK, ANI NIE  158   66 2700    NA
+## 57        TAK              NIE  173   78 2500    40</code></pre>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

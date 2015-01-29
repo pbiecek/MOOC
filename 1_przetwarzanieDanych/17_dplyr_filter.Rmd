@@ -27,19 +27,19 @@ W tym odcinku nauczymy się:
 - jak tworzyć złożone kryteria wyboru wierszy.
 
 Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki`, a drugi, 
-znacznie większy, to `auta2012`. Oba dostępne są w pakiecie `SmarterPoland`.
+znacznie większy, to `auta2012`. Oba dostępne są w pakiecie `PogromcyDanych`.
 
 ---
 
 # Ptaki vs. koty
 
-Rozpocznijmy przykład filtrowania od zbioru danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem `SmarterPoland`. 
+Rozpocznijmy przykład filtrowania od zbioru danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem `PogromcyDanych`. 
 Jest on na tyle mały, że wynik operacji będzie można przedstawić na ekranie.
 
 Pokażemy jak z tego zbioru danych wybierać wiersze. Widząc cały zbiór danych łatwiej zrozumieć które wiersze zostały wyfiltrowane.
 
 ```{r, message=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 koty_ptaki
 ```
 
@@ -89,7 +89,7 @@ filter(koty_ptaki,
 Operacje filtrowania przećwiczymy też na znacznie większym zbiorze danych, który już nie sposób w całości wyświetlić na ekranie, 
 a mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.
 
-Zbiór danych `auta2012` jest dostępny po wczytaniu pakietu `SmarterPoland`. Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych. 
+Zbiór danych `auta2012` jest dostępny po wczytaniu pakietu `PogromcyDanych`. Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych. 
 Szczegółowy opis tego zbioru znajduje się na stronie https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html
 
 ```{r, message=FALSE}

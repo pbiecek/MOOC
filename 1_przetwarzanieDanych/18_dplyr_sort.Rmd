@@ -25,16 +25,16 @@ W tym odcinku nauczymy się:
 - jak i po co sortować po więcej niż jednej kolumnie.
 
 Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, 
-znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
+znacznie większy, to `auta2012`, oba dostępne w pakiecie `PogromcyDanych`.
 
 ---
 
 ## Ptaki vs. koty
 
-Przykłady dla sortowanie rozpoczniemy na niewielkim zbiorze danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem `SmarterPoland`. Jest on na tyle mały, że łatwo ogarnąć go wzrokiem i przekonać się w jaki sposób zadziałało sortowanie wierszy.
+Przykłady dla sortowanie rozpoczniemy na niewielkim zbiorze danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem `PogromcyDanych`. Jest on na tyle mały, że łatwo ogarnąć go wzrokiem i przekonać się w jaki sposób zadziałało sortowanie wierszy.
 
 ```{r, message=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 koty_ptaki
 ```
 
@@ -87,7 +87,7 @@ arrange(koty_ptaki,
 
 Operacje sortowania przećwiczymy też na znacznie większym zbiorze danych, który już nie sposób w całości wyświetlić na ekranie. Mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.
 
-Zbiór danych `auta2012` jest dostępny po wczytaniu pakietu `SmarterPoland`. Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html
+Zbiór danych `auta2012` jest dostępny po wczytaniu pakietu `PogromcyDanych`. Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html
 
 Wybierzmy ze zbioru danych tylko samochody marki `Porsche` z silnikiem ponad 300 KM, posortujmy wiersze w tym zbiorze danych zaczynając od najtańszych.
 

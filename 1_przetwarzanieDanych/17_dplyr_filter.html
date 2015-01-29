@@ -52,20 +52,20 @@ pogRomcy danych
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
-<p>Bazy danych zawierają najczęściej znacznie więcej informacji niż jest nam potrzebne. Jedną z kluczowych operacji jest więc filtrowanie, wybieranie tylko tych wierszy, które nas interesują. Przy czym ‘nas interesują’ oznacza spełnianie pewnych kryteriów.</p>
-<p>W procesie przygotowania danych takie filtrowanie jest niesamowicie częstą instrukcją. W odcinku 7 pokazaliśmy jak wybierać wiersze spełniające określone kryterium, używając operatora <code>[</code>. W codziennej pracy często i wygodniej i szybciej jest wykorzystać dedykowaną funkcję <code>filter()</code> z pakietu <code>dplyr</code>.</p>
-<p>W tym odcinku nauczymy się</p>
+<p>Bazy danych zawierają najczęściej znacznie więcej informacji niż jest nam potrzebne. Jedną z kluczowych operacji jest więc filtrowanie, wybieranie tylko tych wierszy, które nas interesują. Przy czym stwierdzenie ‘interesują nas’ oznacza spełnianie pewnych kryteriów.</p>
+<p>W procesie przygotowania danych takie filtrowanie jest niesamowicie częstą instrukcją. W odcinku 7 pokazaliśmy jak wybierać wiersze spełniające określone kryterium, używając operatora <code>[</code>. W codziennej pracy nie tylko wygodniej, ale i szybciej jest wykorzystać dedykowaną funkcję <code>filter()</code> z pakietu <code>dplyr</code>.</p>
+<p>W tym odcinku nauczymy się:</p>
 <ul>
-<li>jak ze zbioru danych wybierać tylko interesujące nas wiersze?</li>
-<li>jak tworzyć złożone kryteria wyboru wierszy?</li>
+<li>jak ze zbioru danych wybierać tylko interesujące nas wiersze,</li>
+<li>jak tworzyć złożone kryteria wyboru wierszy.</li>
 </ul>
-<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>SmarterPoland</code>.</p>
+<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code>, a drugi, znacznie większy, to <code>auta2012</code>. Oba dostępne są w pakiecie <code>PogromcyDanych</code>.</p>
 </div>
 <div id="ptaki-vs.koty" class="slide section level1">
 <h1>Ptaki vs. koty</h1>
-<p>Rozpocznijmy przykład dla filtrowania od zbioru danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem <code>SmarterPoland</code>. Jest on na tyle mały, że wynik operacji będzie można przedstawić na ekranie.</p>
-<p>Pokażemy jak z tego zbioru danych wybierać wiersze, widząc cały zbiór danych łatwiej zrozumieć które wiersze zostały wyfiltrowane.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+<p>Rozpocznijmy przykład filtrowania od zbioru danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem <code>PogromcyDanych</code>. Jest on na tyle mały, że wynik operacji będzie można przedstawić na ekranie.</p>
+<p>Pokażemy jak z tego zbioru danych wybierać wiersze. Widząc cały zbiór danych łatwiej zrozumieć które wiersze zostały wyfiltrowane.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
 koty_ptaki</code></pre>
 <pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
 ## 1          Tygrys 300.00     2.5       60     Azja        25     Kot
@@ -84,7 +84,7 @@ koty_ptaki</code></pre>
 </div>
 <div id="filtrowanie-danych" class="slide section level1">
 <h1>Filtrowanie danych</h1>
-<p>Funkcja <strong>filter()</strong> redukuje liczbę wierszy, zostawiając tylko te, które spełniają określony warunek (jeden lub kilka). Pierwszym argumentem tej funkcji jest ramka danych lub tabela danych, kolejne argumenty, a może być ich jeden lub więcej) to warunki logiczne. Wynikiem jest ramka danych z wierszami, które spełniają jednocześnie wszystkie wskazane warunki.</p>
+<p>Funkcja <strong>filter()</strong> redukuje liczbę wierszy, zostawiając tylko te, które spełniają określony warunek (jeden lub kilka). Pierwszym argumentem tej funkcji jest ramka danych lub tabela danych, kolejne argumenty (a może być ich jeden lub więcej) to warunki logiczne. Wynikiem jest ramka danych z wierszami, które spełniają jednocześnie wszystkie wskazane warunki.</p>
 <p>Przykładowo, aby zobaczyć, które zwierzaki przekraczają prędkość 100 km na godzinę możemy użyć następujących komend. W pierwszej linii wczytujemy pakiet <code>dplyr</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 <span class="kw">filter</span>(koty_ptaki,
@@ -114,8 +114,8 @@ koty_ptaki</code></pre>
 </div>
 <div id="auta" class="slide section level1">
 <h1>Auta</h1>
-<p>Operacje filtrowania przećwiczymy też na znacznie większym zbiorze danych, który już nie sposób w całości wyświetlić na ekranie. Mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.</p>
-<p>Zbiór danych <code>auta2012</code> jest dostępny po wczytaniu pakietu <code>SmarterPoland</code>. Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie <a href="https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html" class="uri">https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
+<p>Operacje filtrowania przećwiczymy też na znacznie większym zbiorze danych, który już nie sposób w całości wyświetlić na ekranie, a mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.</p>
+<p>Zbiór danych <code>auta2012</code> jest dostępny po wczytaniu pakietu <code>PogromcyDanych</code>. Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie <a href="https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html" class="uri">https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(auta2012)</code></pre>
 <pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW         Marka     Model
 ## 1 49900    PLN      49900       brutto 140 103           Kia    Carens
@@ -162,8 +162,8 @@ koty_ptaki</code></pre>
 </div>
 <div id="tabele-danych" class="slide section level1">
 <h1>Tabele danych</h1>
-<p>W tym miejscu warto zaznaczyć, że funkcje z pakietu <code>dplyr</code> pracują nie tylko na ramkach danych, które już znamy i które mają klasę <code>data.frame</code>, ale również na tabelach danych, obiektach o klasie <code>tbl</code>.</p>
-<p>Z użytkownego punktu widzenia, tabele danych od ramek danych różnią się sposobem wyświetlania na ekranie (nie wyświetlają się kolumny, nie mieszczące się w obecnej szerokości konsoli) ale też wewnętrzną reprezentacją, która pozwala na szybsze operowanie na danych w strukturze <code>tbl</code>.</p>
+<p>W tym miejscu warto zaznaczyć, że funkcje z pakietu <code>dplyr</code> pracują nie tylko na ramkach danych, które już znamy i które mają klasę <code>data.frame</code>, ale również na tabelach danych - obiektach klasy <code>tbl</code>.</p>
+<p>Z użytkowego punktu widzenia, tabele danych od ramek danych różnią się głównie sposobem wyświetlania na ekranie (nie wyświetlają się kolumny, nie mieszczące się w obecnej szerokości konsoli). W rzeczywistości różnią się także szeregiem innych właściwości, między innymi wewnętrzną reprezentacją, która pozwala na szybsze operowanie na danych w strukturze <code>tbl</code>.</p>
 <p>Jeżeli mamy więc dane duże, o dużej liczbie wierszy lub kolumn, często dobrym pomysłem jest przekształcenie je na postać tabeli danych.</p>
 <p>Ramkę danych na tabelę można zamienić funkcją <code>tbl_df</code> a tabelę na ramkę danych funkcją <code>as.data.frame()</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 &lt;-<span class="st"> </span><span class="kw">tbl_df</span>(auta2012)
@@ -214,11 +214,11 @@ auta2012</code></pre>
 <div class="slide section level1">
 
 <h2 id="dwa-warunki">Dwa warunki</h2>
-<p>Możemy określać jednocześnie więcej warunków. Na przykład tylko samochody Audi o silnikach o liczbie koni mechanicznych przekraczających 300 możemy odfiltrować w następujący sposób.</p>
-<pre class="sourceCode r"><code class="sourceCode r">tylkoPorscheZDużymSilnikiem &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012,
+<p>Możemy określać jednocześnie więcej warunków. Na przykład tylko samochody Porsche o silnikach o liczbie koni mechanicznych przekraczających 300 możemy odfiltrować w następujący sposób.</p>
+<pre class="sourceCode r"><code class="sourceCode r">tylkoPorscheZDuzymSilnikiem &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012,
          Marka ==<span class="st"> &quot;Porsche&quot;</span>,
          KM &gt;<span class="st"> </span><span class="dv">300</span>)
-<span class="kw">head</span>(tylkoPorscheZDużymSilnikiem)</code></pre>
+<span class="kw">head</span>(tylkoPorscheZDuzymSilnikiem)</code></pre>
 <pre><code>## Source: local data frame [6 x 21]
 ## 
 ##     Cena Waluta Cena.w.PLN Brutto.netto  KM  kW   Marka         Model
@@ -241,6 +241,7 @@ auta2012</code></pre>
 <li>Ze zbioru danych <code>auta2012</code> pozostaw tylko samochody o wieku do pięciu lat (czyli o roku produkcji &gt; 2007). Nazwij ten wynikowy zbiór danych <code>mlodeAuta</code></li>
 <li>Z przed chwilą stworzonego zbioru danych <code>mlodeAuta</code> wybierz tylko Fiaty 500. Ile jest takich aut? (wymiary ramki danych możesz sprawdzić funkcją <strong>dim()</strong>)</li>
 </ul>
+<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

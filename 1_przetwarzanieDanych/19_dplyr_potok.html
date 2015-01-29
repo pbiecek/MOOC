@@ -52,22 +52,22 @@ pogRomcy danych
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
-<p>Przetwarzanie danych składa się najczęściej z wielu kroków. Dane się filtruje, sortuje, grupuje, podsumowuje, znów filtruje, łączy się z innymi itp.</p>
-<p>Taka sekwencja operacji przypomina potok, w którym dane wypływają ze źródła a następnie trafiają na kolejne etapy przetwarzania.</p>
-<p>Relatywnie niedawno, do programu R wprowadzono operator pozwalający na łatwe opisywanie takich potoków przetwarzania. Można bez niego żyć, ale gdy już się go pozna i zacznie z nim pracować, życie bez niego straci na smaku.</p>
-<p>W tym odcinku nauczymy się</p>
+<p>Przetwarzanie danych składa się najczęściej z wielu kroków. Dane się filtruje, sortuje, grupuje, podsumowuje, znów filtruje, łączy się z innymi itd.</p>
+<p>Taka sekwencja operacji przypomina potok, w którym dane wypływają ze źródła, a następnie trafiają na kolejne etapy przetwarzania.</p>
+<p>Relatywnie niedawno do programu R wprowadzono operator pozwalający na łatwe opisywanie takich potoków przetwarzania. Można bez niego żyć, ale gdy już się go pozna i zacznie z nim pracować, życie bez niego straci na smaku.</p>
+<p>W tym odcinku nauczymy się:</p>
 <ul>
-<li>jak składać ze sobą wywołania funkcji do przetwarzania danych w potoki przetwarzania</li>
-<li>jakim instrukcjom operator przetwarzania potokowego jest równoważny</li>
+<li>jak składać ze sobą wywołania funkcji do przetwarzania danych w potoki przetwarzania,</li>
+<li>jakim instrukcjom operator przetwarzania potokowego jest równoważny.</li>
 </ul>
-<p>Do ilustracji tych zagadnień wykorzystamy zbiór danych <code>auta2012</code> dostępny w pakiecie <code>SmarterPoland</code>.</p>
+<p>Do ilustracji tych zagadnień wykorzystamy zbiór danych <code>auta2012</code> dostępny w pakiecie <code>PogromcyDanych</code>.</p>
 </div>
 <div id="przetwarzanie-krok-po-kroku" class="slide section level1">
 <h1>Przetwarzanie ,,krok po kroku’’</h1>
 <p>Jak już wspomnieliśmy analiza danych przez większość czasu polega na przetwarzaniu danych w tą i z powrotem.</p>
 <p>Przyjrzyjmy się przykładowej serii operacji. Zaczniemy od danych o wszystkich ofertach sprzedaży samochodów, odfiltrujemy samochody, które nie są Volkswagenami, pozostałe samochody posortujemy po cenie. Następnie pozostawimy tylko Golfy IV o przebiegu poniżej 50000 km.</p>
 <p>Poniższa instrukcja nie jest najkrótszą z możliwych, celowo została rozciągnięta by łatwiej było przedstawić zalety potoków.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
 <span class="kw">library</span>(dplyr)
 <span class="co"># tylko volkswagen</span>
 tylkoVolkswagen &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012, 
@@ -78,7 +78,7 @@ posortowaneVolkswagen &lt;-<span class="st"> </span><span class="kw">arrange</sp
 <span class="co"># tylko Golf VI</span>
 tylkoGolfIV &lt;-<span class="st"> </span><span class="kw">filter</span>(posortowaneVolkswagen, 
                       Model ==<span class="st"> &quot;Golf&quot;</span>, Wersja ==<span class="st"> &quot;IV&quot;</span>)
-<span class="co"># tylko z małym przbiegiem</span>
+<span class="co"># tylko z małym przebiegiem</span>
 tylkoMalyPrzebieg &lt;-<span class="st"> </span><span class="kw">filter</span>(tylkoGolfIV, 
                             Przebieg.w.km &lt;<span class="st"> </span><span class="dv">50000</span>)</code></pre>
 <p>Ta sekwencja operacji tworzy cztery pomocnicze zbiory danych: <code>tylkoVolkswagen</code>, <code>posortowaneVolkswagen</code>, <code>tylkoGolfIV</code>, <code>tylkoMalyPrzebieg</code>.</p>
@@ -99,7 +99,7 @@ tylkoMalyPrzebieg &lt;-<span class="st"> </span><span class="kw">filter</span>(t
         Cena.w.PLN), 
       Model ==<span class="st"> &quot;Golf&quot;</span>, Wersja ==<span class="st"> &quot;IV&quot;</span>), 
     Przebieg.w.km &lt;<span class="st"> </span><span class="dv">50000</span>)</code></pre>
-<p>W tym rozwiązaniu nie są tworzone zbędna nazwy zmiennych, ale sam zapis jest bardzo nieczytelny.</p>
+<p>W tym rozwiązaniu nie są tworzone zbędne zmienne, ale sam zapis jest bardzo nieczytelny.</p>
 <p>Nawet stosując wcięcia trudno nam zauważyć, które argumenty są do której funkcji.</p>
 <p>Gdy przetwarzanie jest bardziej złożone to i taki blok może się jeszcze bardziej rozrastać, a tym samym trudniej będzie zrozumieć co się w kodzie dzieje.</p>
 </div>
@@ -174,7 +174,7 @@ tylkoMalyPrzebieg &lt;-<span class="st"> </span><span class="kw">filter</span>(t
 </div>
 <div id="wszystko-pynie" class="slide section level1">
 <h1>Wszystko płynie</h1>
-<p>Jeżeli chcielibyśmy otrzymać pełny przepływ w czytaniu od góry na dół potoku, to zamiast operatora przypisania <code>&lt;-</code> możemy wykorzystać operatora <code>-&gt;</code> o identycznym znaczeniu a różniący się tylko kolejnością argumentów.</p>
+<p>Jeżeli chcielibyśmy otrzymać pełny przepływ w czytaniu od góry na dół potoku, to zamiast operatora przypisania <code>&lt;-</code> możemy wykorzystać operator <code>-&gt;</code> o identycznym znaczeniu a różniący się tylko kolejnością argumentów.</p>
 <p>W poniższym kodzie zostanie wykonane przetwarzanie a w ostatnim kroku wynik zostanie przypisany do zmiennej <code>tylkoMalyPrzebieg</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">  auta2012 %&gt;%<span class="st">                                 </span>
 <span class="st">  </span><span class="kw">filter</span>(Marka ==<span class="st"> &quot;Volkswagen&quot;</span>) %&gt;%<span class="st">            </span>
@@ -185,7 +185,7 @@ tylkoMalyPrzebieg </code></pre>
 </div>
 <div id="co-mozna-zrobic-z-potokiem" class="slide section level1">
 <h1>Co można zrobić z potokiem</h1>
-<p>Operator <code>%&gt;%</code> jest najczęściej wykorzystywany w pracy z funkcjami z pakietów <code>dplyr</code> i <code>ggvis</code>, ale można go oczywiście stosować do innych funkcji również. Koniec końców, jedyne co robi to przekazuje swój lewy argument jako pierwszy argument wyrażenia po prawej stronie.</p>
+<p>Operator <code>%&gt;%</code> jest najczęściej wykorzystywany w pracy z funkcjami z pakietów <code>dplyr</code> i <code>ggvis</code>, ale można go oczywiście stosować również do innych funkcji. Koniec końców, jedyne co robi, to przekazuje swój lewy argument jako pierwszy argument wyrażenia po prawej stronie.</p>
 <p>Przykładowo, aby wykorzystać funkcję <code>dim()</code> do sprawdzenia wymiarów ramki <code>tylkoMalyPrzebieg</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">tylkoMalyPrzebieg %&gt;%<span class="st"> </span><span class="kw">dim</span>()</code></pre>
 <p>Aby wyświetlić kilka pierwszych wierszy z ramki danych <code>tylkoMalyPrzebieg</code>.</p>
@@ -207,6 +207,7 @@ tylkoMalyPrzebieg </code></pre>
 <li>Użyj operatora <code>%&gt;%</code> by ze zbioru danych <code>auta2012</code> wybrać tylko 10 najtańszych aut marki Rolls-Royce.</li>
 <li>Użyj operatora <code>%&gt;%</code> by ze zbioru danych <code>auta2012</code> wybrać 5 Volkswagenów o największych silnikach.</li>
 </ul>
+<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

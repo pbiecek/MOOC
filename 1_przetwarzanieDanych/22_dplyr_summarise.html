@@ -54,17 +54,17 @@ pogRomcy danych
 <h1>O czym jest ten odcinek</h1>
 <p>Ogląd całych danych jest możliwy tylko gdy dane nie są zbyt duże. Mieszczą się na jednym lub kilku ekranach. Dla większych zbiorów danych konieczne jest agregowanie informacji z poziomu pojedynczych wierszy na poziom grup.</p>
 <p>Aby efektywnie przedstawiać agregaty w grupach potrzebujemy funkcji liczącej agregaty oraz funkcji definiującej grupy. Do agregacji wygodnie wykorzystać funkcję <code>summarise()</code> z pakietu <code>dplyr</code>, którą przedstawimy w tym odcinku.</p>
-<p>W tym odcinku nauczymy się</p>
+<p>W tym odcinku nauczymy się:</p>
 <ul>
-<li>jak dla całego zbioru danych wyznaczać agregaty?</li>
-<li>jakie przykładowe agregaty można wyznaczać?</li>
+<li>jak dla całego zbioru danych wyznaczać agregaty,</li>
+<li>jakie przykładowe agregaty można wyznaczać.</li>
 </ul>
-<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>SmarterPoland</code>.</p>
+<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>. Oba dostępne w pakiecie <code>PogromcyDanych</code>.</p>
 </div>
 <div id="ptaki-vs.koty" class="slide section level1">
 <h1>Ptaki vs. koty</h1>
-<p>Rozpocznijmy od przykładu dla małego zbioru danych. Widząc wszystkie wiersze łatwiej będzie nam zauważyć zależność pomiędzy oryginalnymi danymi a agregatami. Ten zbiór danych jest dostarczany razem z pakietem <code>SmarterPoland</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+<p>Rozpocznijmy od przykładu dla małego zbioru danych. Widząc wszystkie wiersze łatwiej będzie nam zauważyć zależność pomiędzy oryginalnymi danymi a agregatami. Ten zbiór danych jest dostarczany razem z pakietem <code>PogromcyDanych</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
 koty_ptaki</code></pre>
 <pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
 ## 1          Tygrys 300.00     2.5       60     Azja        25     Kot
@@ -83,7 +83,7 @@ koty_ptaki</code></pre>
 </div>
 <div id="agregaty" class="slide section level1">
 <h1>Agregaty</h1>
-<p>Do wyznaczania agregatów / podsumowań wykorzystamy funkcję <code>sumamrise()</code>. Jako pierwszy argument przyjmuje ona zbiór danych (w poniższym przykładzie przesłany za pomocą operatora <code>%&gt;%</code>), kolejne argumenty to deklaracje jak liczony ma być agregat oraz jak ma sie nazywać odpowiadająca mu kolumna.</p>
+<p>Do wyznaczania agregatów / podsumowań wykorzystamy funkcję <code>summarise()</code>. Jako pierwszy argument przyjmuje ona zbiór danych (w poniższym przykładzie przesłany za pomocą operatora <code>%&gt;%</code>), kolejne argumenty to deklaracje, jak liczony ma być agregat oraz jak ma się nazywać odpowiadająca mu kolumna.</p>
 <p>W pierwszej linii wczytujemy potrzebny pakiet <code>dplyr</code> a następnie liczymy następujące statystyki: minimalne i maksymalne prędkości, maksymalną i średnią wagą oraz coś ciut trudniejszego, maksymalną długość nazwy gatunku.</p>
 <p>Każdą z tych wartości moglibyśmy policzyć również bez funkcji <code>summarise()</code>, zalety korzystania z niej w pełni objawią się w kolejnym odcinku.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
@@ -91,26 +91,26 @@ koty_ptaki</code></pre>
 koty_ptaki %&gt;%
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">najszybszy =</span> <span class="kw">max</span>(predkosc),
             <span class="dt">najwolniejszy =</span> <span class="kw">min</span>(predkosc),
-            najcięż<span class="dt">szy =</span> <span class="kw">max</span>(waga),
-            ś<span class="dt">rednia.waga =</span> <span class="kw">mean</span>(waga),
-            najdłuż<span class="dt">sza.nazwa =</span> <span class="kw">max</span>(<span class="kw">nchar</span>(<span class="kw">as.character</span>(gatunek))))</code></pre>
-<pre><code>##   najszybszy najwolniejszy najcięższy średnia.waga najdłuższa.nazwa
+            <span class="dt">najciezszy =</span> <span class="kw">max</span>(waga),
+            <span class="dt">srednia.waga =</span> <span class="kw">mean</span>(waga),
+            <span class="dt">najdluzsza.nazwa =</span> <span class="kw">max</span>(<span class="kw">nchar</span>(<span class="kw">as.character</span>(gatunek))))</code></pre>
+<pre><code>##   najszybszy najwolniejszy najciezszy srednia.waga najdluzsza.nazwa
 ## 1        170            60        300     78.59615               14</code></pre>
 </div>
 <div id="agregaty-szerzej" class="slide section level1">
 <h1>Agregaty szerzej</h1>
 <p>Tworząc agregaty możemy je opierać na więcej niż jednej zmiennej. W poniższych przykładach liczymy średni i medianowy pęd oraz maksymalną prędkość mierzoną w liczbach długości ciała na sekundę. W każdym przykładzie statystykę liczymy na dwóch zmiennych.</p>
 <pre class="sourceCode r"><code class="sourceCode r">koty_ptaki %&gt;%
-<span class="st">  </span><span class="kw">summarise</span>(średni.pę<span class="dt">d =</span> <span class="kw">mean</span>(waga*predkosc),
-            medianowy.pę<span class="dt">d =</span> <span class="kw">median</span>(waga*predkosc),
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sredni.ped =</span> <span class="kw">mean</span>(waga*predkosc),
+            <span class="dt">medianowy.ped =</span> <span class="kw">median</span>(waga*predkosc),
             <span class="dt">predkosc.w.dlugosciach.na.sek =</span> <span class="kw">max</span>(predkosc *<span class="st"> </span><span class="dv">1000</span> /<span class="st"> </span>dlugosc /<span class="st"> </span><span class="dv">3600</span>))</code></pre>
-<pre><code>##   średni.pęd medianowy.pęd predkosc.w.dlugosciach.na.sek
+<pre><code>##   sredni.ped medianowy.ped predkosc.w.dlugosciach.na.sek
 ## 1   5905.038          5600                      236.1111</code></pre>
 <p>Tworząc agregaty możemy wykorzystywać agregaty policzone w poprzednim kroku. W poniższym przykładzie liczymy średnią wagę a później przeliczamy ją na funty.</p>
 <pre class="sourceCode r"><code class="sourceCode r">koty_ptaki %&gt;%
-<span class="st">  </span><span class="kw">summarise</span>(ś<span class="dt">rednia.waga =</span> <span class="kw">mean</span>(waga),
-            ś<span class="dt">rednia.waga.w.funtach =</span> średnia.waga /<span class="st"> </span><span class="fl">0.453</span>)</code></pre>
-<pre><code>##   średnia.waga średnia.waga.w.funtach
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">srednia.waga =</span> <span class="kw">mean</span>(waga),
+            <span class="dt">srednia.waga.w.funtach =</span> srednia.waga /<span class="st"> </span><span class="fl">0.453</span>)</code></pre>
+<pre><code>##   srednia.waga srednia.waga.w.funtach
 ## 1     78.59615               173.5014</code></pre>
 </div>
 <div id="auta" class="slide section level1">
@@ -129,7 +129,7 @@ koty_ptaki %&gt;%
 </div>
 <div id="agregaty-1" class="slide section level1">
 <h1>Agregaty</h1>
-<p>Zbiór danych <code>ceny2012</code> zawiera szczegółowe informacje o parametrach każdej oferty sprzedaży. Często z takich zbiorów danych interesują nas pewne statystyki agregujące informacje ze zbioru danych.</p>
+<p>Zbiór danych <code>auta2012</code> zawiera szczegółowe informacje o parametrach każdej oferty sprzedaży. Często z takich zbiorów danych interesują nas pewne statystyki agregujące informacje ze zbioru danych.</p>
 <p>Przykładem może być średnia cena, rozrzut ceny, przykładowo mierzony przez odchylenie standardowe ceny, połówkowy przebieg czy jakiego przebiegu nie przekracza połowa aut.</p>
 <p>Takie agregaty możemy wyznaczyć funkcją <code>summarise()</code>. Jako pierwszy argument podajemy zbiór danych a jako kolejne wskazujemy statystyki / agregaty, które chcemy wyznaczyć z tego zbioru danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
@@ -138,21 +138,21 @@ koty_ptaki %&gt;%
             <span class="dt">medianaPrzebiegu =</span> <span class="kw">median</span>(Przebieg.w.km, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))</code></pre>
 <pre><code>##   sredniaCena   sdCena medianaPrzebiegu
 ## 1    35755.11 70399.67           140000</code></pre>
-<p>Funkcja <code>mean()</code> wyznacza średnią, funkcja <code>var()</code> wyznacza wariancję a pierwiastek z wariancji jest odchyleniem standardowym, funkcja <code>median()</code> wyznacza liczbę obserwacji w grupie.</p>
-<p>Nie wszystkie wartości są podane dla wszystkich zmiennych. Jeżeli jakaś wartość nie została podana, to w zbiorze danych jest ona zakodowana jako NA - (ang. Not Available) brakująca wartość.</p>
+<p>Funkcja <code>mean()</code> wyznacza średnią, funkcja <code>var()</code> wyznacza wariancję (a pierwiastek z wariancji jest odchyleniem standardowym), funkcja <code>median()</code> wyznacza medianę obserwacji w grupie.</p>
+<p>Nie wszystkie wartości są podane dla wszystkich zmiennych. Jeżeli jakaś wartość nie została podana, to w zbiorze danych jest ona zakodowana jako NA (ang. Not Available) - brakująca wartość.</p>
 <p>Jeżeli w zmiennej są wartości brakujące, to argument <code>na.rm=TRUE</code> oznacza, że wynik ma być wyznaczony po usunięciu wartości brakujących.</p>
 </div>
 <div id="agregaty-2" class="slide section level1">
 <h1>Agregaty</h1>
-<p>Definicja agregatu może być bardziej rozbudowana niż jedna instrukcja. Przykładowo aby policzyć liczbę lub procent aut z klimatyzacją w pierwszym kroku możemy użyć funkcji <code>grepl()</code> aby sprawdzić czy auto w danej ofercie ma klimatyzację, a następnie zsumować wyniki tej funkcji by otrzymać liczbę aut z klimatyzacją.</p>
-<p>Licząc procent aut z automatyczną skrzynią biegów w pierwszym kroku możemy stworzyć zmienną logiczną określającą czy zmienna <code>Skrzynia.biegow</code> przyjmuje wartość <code>automatyczna</code> a następnie policzyć procent za pomocą operacji <code>100*mean()</code></p>
+<p>Definicja agregatu może być bardziej rozbudowana niż jedna instrukcja. Przykładowo aby policzyć liczbę lub procent aut z klimatyzacją w pierwszym kroku możemy użyć funkcji <code>grepl()</code>, aby sprawdzić czy auto w danej ofercie ma klimatyzację, a następnie zsumować wyniki tej funkcji, by otrzymać liczbę aut z klimatyzacją.</p>
+<p>Licząc procent aut z automatyczną skrzynią biegów w pierwszym kroku możemy stworzyć zmienną logiczną określającą czy zmienna <code>Skrzynia.biegow</code> przyjmuje wartość <code>automatyczna</code>, a następnie policzyć procent za pomocą operacji <code>100*mean()</code></p>
 <p>Tworząc agregaty wygodnie jest korzystać z funkcji <code>n()</code>, której wynikiem jest liczba wierszy w zbiorze danych / grupie.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
-<span class="st">  </span><span class="kw">summarise</span>(liczba.aut.z.klimatyzacją =<span class="st"> </span><span class="kw">sum</span>(<span class="kw">grepl</span>(<span class="st">&quot;klimatyzacja&quot;</span>, Wyposazenie.dodatkowe)),
-            procent.aut.z.klimatyzacją =<span class="st"> </span><span class="dv">100</span>*<span class="kw">mean</span>(<span class="kw">grepl</span>(<span class="st">&quot;klimatyzacja&quot;</span>, Wyposazenie.dodatkowe)),
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">liczba.aut.z.klimatyzacja =</span> <span class="kw">sum</span>(<span class="kw">grepl</span>(<span class="st">&quot;klimatyzacja&quot;</span>, Wyposazenie.dodatkowe)),
+            <span class="dt">procent.aut.z.klimatyzacja =</span> <span class="dv">100</span>*<span class="kw">mean</span>(<span class="kw">grepl</span>(<span class="st">&quot;klimatyzacja&quot;</span>, Wyposazenie.dodatkowe)),
             <span class="dt">procent.aut.z.automatem =</span> <span class="dv">100</span>*<span class="kw">mean</span>(Skrzynia.biegow ==<span class="st"> &quot;automatyczna&quot;</span>),
             <span class="dt">liczba.aut =</span> <span class="kw">n</span>())</code></pre>
-<pre><code>##   liczba.aut.z.klimatyzacją procent.aut.z.klimatyzacją
+<pre><code>##   liczba.aut.z.klimatyzacja procent.aut.z.klimatyzacja
 ## 1                    162960                   78.49635
 ##   procent.aut.z.automatem liczba.aut
 ## 1                16.32354     207602</code></pre>
@@ -163,6 +163,7 @@ koty_ptaki %&gt;%
 <li>Policz sumaryczny przebieg wszystkich samochodów. Następnie policz ile razy okrążono kulę ziemską uwzględniając te wszystkie przebiegi.</li>
 <li>Wybierz tylko samochody marki ‘Rolls-Royce’ i policz ich średni przebieg oraz średnią cenę.</li>
 </ul>
+<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

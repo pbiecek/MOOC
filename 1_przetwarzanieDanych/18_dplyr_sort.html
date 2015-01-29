@@ -53,19 +53,19 @@ pogRomcy danych
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
 <p>W programie R wiersze można sortować na kilka sposobów, jeden z użyciem funkcji <code>order()</code> pokazaliśmy w odcinku 7.</p>
-<p>W codziennej pracy z danymi, i wygodniej, i szybciej jest wykorzystać dedykowaną funkcję <code>arrange()</code> z pakietu <code>dplyr</code>.</p>
-<p>W tym odcinku nauczymy się</p>
+<p>W codziennej pracy z danymi nie tylko wygodniej, ale i szybciej jest wykorzystać dedykowaną funkcję <code>arrange()</code> z pakietu <code>dplyr</code>.</p>
+<p>W tym odcinku nauczymy się:</p>
 <ul>
-<li>jak porządkować wiersze rosnąco / malejąco względem określonej kolumny?</li>
-<li>jak i po co sortować po więcej niż jednej kolumnie?</li>
+<li>jak porządkować wiersze rosnąco / malejąco względem określonej kolumny,</li>
+<li>jak i po co sortować po więcej niż jednej kolumnie.</li>
 </ul>
-<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>SmarterPoland</code>.</p>
+<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>PogromcyDanych</code>.</p>
 </div>
 <div class="slide section level1">
 
 <h2 id="ptaki-vs.koty">Ptaki vs. koty</h2>
-<p>Przykłady dla sortowanie rozpoczniemy na niewielkim zbiorze danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem <code>SmarterPoland</code>. Jest on na tyle mały, że łatwo ogarnąć go wzrokiem i przekonać się w jaki sposób zadziałało sortowanie wierszy.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+<p>Przykłady dla sortowanie rozpoczniemy na niewielkim zbiorze danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem <code>PogromcyDanych</code>. Jest on na tyle mały, że łatwo ogarnąć go wzrokiem i przekonać się w jaki sposób zadziałało sortowanie wierszy.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
 koty_ptaki</code></pre>
 <pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
 ## 1          Tygrys 300.00     2.5       60     Azja        25     Kot
@@ -84,7 +84,7 @@ koty_ptaki</code></pre>
 </div>
 <div id="sortowanie-danych" class="slide section level1">
 <h1>Sortowanie danych</h1>
-<p>O ile wektor wartości można posortować funkcją <code>sort()</code>, to do sortowania wierszy w ramce danych względem określonej kolumny wygodnie jest użyć funkcję <code>arrange()</code>.</p>
+<p>O ile wektor wartości można posortować funkcją <code>sort()</code>, to do sortowania wierszy w ramce danych względem określonej kolumny wygodnie jest użyć funkcji <code>arrange()</code>.</p>
 <p>Ta funkcja jako pierwszy argument przyjmuje ramkę danych, a jako kolejne argumenty przyjmuje zmienne, wzdłuż których dane są sortowane.</p>
 <p>Przykładowo aby posortować wiersze w zbiorze <code>koty_ptaki</code> w kolejności rosnącej ze względu na prędkość (kolumna <code>predkosc</code>) można użyć następującej komendy.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
@@ -106,7 +106,7 @@ koty_ptaki</code></pre>
 </div>
 <div id="sortowanie-danych-1" class="slide section level1">
 <h1>Sortowanie danych</h1>
-<p>Aby posortować w kolejności malejącej można albo zmienną, po której ma nastąpić sortowanie opatrzeć funkcją <code>desc()</code> albo, dla zmiennych liczbowych, dodać znak <code>-</code> przed zmienną.</p>
+<p>Aby posortować w kolejności malejącej można albo zmienną, po której ma nastąpić sortowanie opatrzeć funkcją <code>desc()</code>, albo - dla zmiennych liczbowych - dodać znak <code>-</code> przed zmienną.</p>
 <p>Obie poniższe instrukcje mają taki sam efekt.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(koty_ptaki,   <span class="kw">desc</span>(predkosc))</code></pre>
 <pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
@@ -142,8 +142,8 @@ koty_ptaki</code></pre>
 <div id="sortowanie-po-dwoch-zmiennych" class="slide section level1">
 <h1>Sortowanie po dwóch zmiennych</h1>
 <p>Jeżeli dla zmiennej, wzdłuż której sortujemy, mogą wystąpić remisy, czyli te same wartości, wtedy kolejność wierszy jest nieokreślona. Wygodnie jest w takich sytuacjach wskazać drugorzędowe kryterium sortowania.</p>
-<p>Przykładowo, aby posortować wiersze uwzględniając prędkość, ale zrobić to osobno dla kotów osobno dla ptaków, możemy wskazać drużynę jako główne kryterium sortowania a prędkość jako kryterium drugorzędne.</p>
-<p>Sortując po kolumnie <code>druzyna</code> wiele wierszy ma te same wartości, i o ich końcowej kolejności decyduje zmienna <code>predkosc</code>.</p>
+<p>Przykładowo, aby posortować wiersze uwzględniając prędkość, ale zrobić to osobno dla kotów osobno dla ptaków, możemy wskazać drużynę jako główne kryterium sortowania, a prędkość jako kryterium drugorzędne.</p>
+<p>Sortując po kolumnie <code>druzyna</code> wiele wierszy ma te same wartości i o ich końcowej kolejności decyduje zmienna <code>predkosc</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(koty_ptaki, 
         druzyna, predkosc)</code></pre>
 <pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
@@ -164,14 +164,14 @@ koty_ptaki</code></pre>
 <div id="auta" class="slide section level1">
 <h1>Auta</h1>
 <p>Operacje sortowania przećwiczymy też na znacznie większym zbiorze danych, który już nie sposób w całości wyświetlić na ekranie. Mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.</p>
-<p>Zbiór danych <code>auta2012</code> jest dostępny po wczytaniu pakietu <code>SmarterPoland</code>. Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie <a href="https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html" class="uri">https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
+<p>Zbiór danych <code>auta2012</code> jest dostępny po wczytaniu pakietu <code>PogromcyDanych</code>. Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie <a href="https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html" class="uri">https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
 <p>Wybierzmy ze zbioru danych tylko samochody marki <code>Porsche</code> z silnikiem ponad 300 KM, posortujmy wiersze w tym zbiorze danych zaczynając od najtańszych.</p>
-<pre class="sourceCode r"><code class="sourceCode r">tylkoPorscheZDużymSilnikiem &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012,
+<pre class="sourceCode r"><code class="sourceCode r">tylkoPorscheZDuzymSilnikiem &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012,
          Marka ==<span class="st"> &quot;Porsche&quot;</span>,
          KM &gt;<span class="st"> </span><span class="dv">300</span>)
 
 posortowanePorsche &lt;-
-<span class="st">  </span><span class="kw">arrange</span>(tylkoPorscheZDużymSilnikiem, 
+<span class="st">  </span><span class="kw">arrange</span>(tylkoPorscheZDuzymSilnikiem, 
         Cena.w.PLN)</code></pre>
 </div>
 <div id="najtansze-i-najdrozsze-porsche" class="slide section level1">
@@ -266,11 +266,11 @@ posortowanePorsche &lt;-
 </div>
 <div id="model-i-cena" class="slide section level1">
 <h1>Model i cena</h1>
-<p>Jeżeli wskażemy więcej niż jedną zmienną do sortowania, to w pierwszym kroku sortowanie odbędzie się wzdłuż pierwszej zmiennej, a w przypadku remisu (takich samych wartości) w drugim kroku wzdłuż drugiej zmiennej.</p>
+<p>Jeżeli wskażemy więcej niż jedną zmienną do sortowania, to w pierwszym kroku sortowanie odbędzie się wzdłuż pierwszej zmiennej, a w przypadku remisu (takich samych wartości), w drugim kroku, wzdłuż drugiej zmiennej.</p>
 <p>W poniższym przypadku w pierwszym kroku sortujemy wzdłuż zmiennej <code>Model</code> auta, a gdy samochody mają ten sam model to ich kolejność jest określona przez drugą zmienną, czyli w tym przypadku cenę.</p>
-<p>Zmienna <code>Model</code> za wartości przyjmuje napisy, w tym przypadku jest sortowany w kolejności alfabetycznej.</p>
+<p>Zmienna <code>Model</code> za wartości przyjmuje napisy, a w tym przypadku sortowanie wykonywane jest w kolejności alfabetycznej.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(
-   <span class="kw">arrange</span>(tylkoPorscheZDużymSilnikiem, 
+   <span class="kw">arrange</span>(tylkoPorscheZDuzymSilnikiem, 
         Model, Cena.w.PLN)
   ) </code></pre>
 <pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW   Marka Model Wersja
@@ -313,7 +313,7 @@ posortowanePorsche &lt;-
 <h1>Sortowanie malejąco</h1>
 <p>Domyślnie wartości sortowane są rosnąco. Jeżeli chcemy zmienić kolejność sortowania i sortować malejąco, to należy daną zmienną opakować funkcją <code>desc()</code>, tak jak na poniższym przykładzie.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(
-   <span class="kw">arrange</span>(tylkoPorscheZDużymSilnikiem, 
+   <span class="kw">arrange</span>(tylkoPorscheZDuzymSilnikiem, 
         Model, <span class="kw">desc</span>(Cena.w.PLN))
   ) </code></pre>
 <pre><code>##      Cena Waluta Cena.w.PLN Brutto.netto  KM  kW   Marka Model Wersja
@@ -358,6 +358,7 @@ posortowanePorsche &lt;-
 <li>Posortuj auta wzdłuż wielkości silnika (liczby koni mechanicznych, kolumna <code>KM</code>) lub pojemności skokowej (kolumna <code>Pojemnosc.skokowa</code>). Które marki mają największe silniki?</li>
 <li>Wybierz tylko auta marki ‘Rolls-Royce’ i posortuj je po cenie.</li>
 </ul>
+<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

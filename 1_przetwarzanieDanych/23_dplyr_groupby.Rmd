@@ -23,7 +23,7 @@ W tym odcinku nauczymy się:
 - jak liczyć agregaty w grupach.
 
 Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, 
-znacznie większy, to `auta2012`. Oba zbiory są dostępne w pakiecie `SmarterPoland`.
+znacznie większy, to `auta2012`. Oba zbiory są dostępne w pakiecie `PogromcyDanych`.
 
 ---
 
@@ -34,7 +34,7 @@ Rozpocznijmy od przykładu dla danych o kotach i ptakach. Jest on na tyle mały,
 Zmienna `druzyna` nadaje się świetnie na zmienną grupującą.
 
 ```{r, message=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 koty_ptaki
 ```
 

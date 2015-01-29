@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="poskRamiacze danych" />
+  <meta name="author" content="pogRomcy danych" />
   <meta name="copyright" content="poskRamiacze danych / wizualizacja / agregaty danych" /> 
   <title>Wykresy, które podsumowują dane</title>
   <style type="text/css">code{white-space: pre;}</style>
@@ -46,7 +46,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div class="slide titlepage">
   <h1 class="title">Wykresy, które podsumowują dane</h1>
   <p class="author">
-poskRamiacze danych
+pogRomcy danych
   </p>
   <p class="date">sezon 3 / odcinek 2 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
@@ -65,8 +65,8 @@ poskRamiacze danych
 <div id="przygotowanie-danych" class="slide section level1">
 <h1>Przygotowanie danych</h1>
 <p>Do ilustracji jak korzystać z graficznych podsumowań danych wybierzemy fragment całego zbioru danych o cenach ofertowych aut. Zawęzimy tutaj naszą uwagę do obserwacji dotyczących Skody Octavi, a ze zbioru kolumn wybierzemy informację o roku produkcji, cenie i rodzaju paliwa.</p>
-<p>Dane są dostępne w pakiecie <code>SmarterPoland</code>, a funkcje do operacji na danych w pakiecie <code>dplyr</code>. Funkcją <code>filter()</code> wybieramy interesujące nas wiersze, a funkcją <code>select()</code> interesujące nas kolumny.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+<p>Dane są dostępne w pakiecie <code>PogromcyDanych</code>, a funkcje do operacji na danych w pakiecie <code>dplyr</code>. Funkcją <code>filter()</code> wybieramy interesujące nas wiersze, a funkcją <code>select()</code> interesujące nas kolumny.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
 skody &lt;-<span class="st"> </span>auta2012 %&gt;%
 <span class="st">              </span><span class="kw">filter</span>(Marka ==<span class="st"> 'Skoda'</span>, Model ==<span class="st"> 'Octavia'</span>) %&gt;%
 <span class="st">              </span><span class="kw">select</span>(Marka, Model, Rok.produkcji, Cena.w.PLN, Rodzaj.paliwa)
@@ -97,7 +97,7 @@ skody &lt;-<span class="st"> </span>auta2012 %&gt;%
 </div>
 <div id="geometria-geom_smooth---wykresy-trendu-1" class="slide section level1">
 <h1>Geometria <code>geom_smooth()</code> - wykresy trendu</h1>
-<p>Parametry geometrii <code>geom_smooth()</code> przedstawione są na stronie <a href="http://docs.ggplot2.org/0.9.3.1/geom_smooth.html">http://docs.ggplot2.org/0.9.3.1/geom_smooth.html</a>.</p>
+<p>Parametry geometrii <code>geom_smooth()</code> przedstawione są na stronie <a href="http://docs.ggplot2.org/0.9.3.1/geom_smooth.html" class="uri">http://docs.ggplot2.org/0.9.3.1/geom_smooth.html</a>.</p>
 <p>Zmieniając je możemy uzyskać inne stopnie wygładzania (argument <code>span</code> dla <code>loess</code>), różną grubość linii, różne modele stosowane do wygładzenia itp. Jednym z parametrów jest <code>se</code>, którym możemy włączać lub wyłączać rysowanie błędów standardowych. Często interesuje nas wyłącznie trend i dodatkowe przedziały jedynie zaśmiecają wykres.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(skody, <span class="kw">aes</span>(<span class="dt">x=</span>Rok.produkcji, <span class="dt">y =</span> Cena.w.PLN)) +<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>)</code></pre>
@@ -130,7 +130,7 @@ skody &lt;-<span class="st"> </span>auta2012 %&gt;%
 <h1>Geometria <code>geom_smooth()</code> - wykresy trendu</h1>
 <p>Mówiąc o modelach wykładniczych, logarytmicznych lub potęgowych, warto rozważyć jeszcze inną ciekawą opcję, którą oferuje pakiet <code>ggplot2</code> - mianowicie transformacje osi.</p>
 <p>Jeżeli podejrzewamy, że zmiana spadek ceny z roku na rok ma charakter spadku o x procent a nie o x złotówek (czyli, używając specjalistycznej terminologii, charakter multiplikatywny a nie addytywny) warto zobaczyć ten sam wykres z osią OY w skali wykładniczej. Funkcje do zarządzania i modyfikacji osi mają prefix <code>coord_</code> i wpisawszy go, możemy nacisnąć klawisz TAB aby wyświetliła się lista wszystkich funkcji o takim prefiksie. Funkcją do transformacji osi jest funkcja <code>coord_trans()</code>, którą można określić czy i jak poszczególne osie mają być transformowane.</p>
-<p>Na stronie <a href="http://docs.ggplot2.org/current/coord_trans.html">http://docs.ggplot2.org/current/coord_trans.html</a> przedstawiane są najpopularniejsze transformacie, takie jak pierwiastkowa, potęgowa czy logarytmiczna.</p>
+<p>Na stronie <a href="http://docs.ggplot2.org/current/coord_trans.html" class="uri">http://docs.ggplot2.org/current/coord_trans.html</a> przedstawiane są najpopularniejsze transformacie, takie jak pierwiastkowa, potęgowa czy logarytmiczna.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(skody, <span class="kw">aes</span>(<span class="dt">x=</span>Rok.produkcji, <span class="dt">y =</span> Cena.w.PLN)) +<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>() +<span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">size=</span><span class="dv">5</span>) +<span class="st"> </span>
 <span class="st">  </span><span class="kw">coord_trans</span>(<span class="dt">y =</span> <span class="st">&quot;log10&quot;</span>)</code></pre>
@@ -195,7 +195,7 @@ skody &lt;-<span class="st"> </span>auta2012 %&gt;%
 </div>
 <div id="geometria-geom_boxplot---wykresy-ramka---wasy-2" class="slide section level1">
 <h1>Geometria <code>geom_boxplot()</code> - wykresy ramka - wąsy</h1>
-<p>Opis parametrów funkcji <code>geom_boxplot()</code> jest przedstawiony na stronie <a href="http://docs.ggplot2.org/0.9.3.1/geom_boxplot.html">http://docs.ggplot2.org/0.9.3.1/geom_boxplot.html</a>. Jedną z ciekawą opcji, pozwalającą na szybkie wyróżnienie określonej grupy na wykresie jest użycie cechy wykresów pudełkowych - kolor wypełnienia - do przedstawiania zmiennych.</p>
+<p>Opis parametrów funkcji <code>geom_boxplot()</code> jest przedstawiony na stronie <a href="http://docs.ggplot2.org/0.9.3.1/geom_boxplot.html" class="uri">http://docs.ggplot2.org/0.9.3.1/geom_boxplot.html</a>. Jedną z ciekawą opcji, pozwalającą na szybkie wyróżnienie określonej grupy na wykresie jest użycie cechy wykresów pudełkowych - kolor wypełnienia - do przedstawiania zmiennych.</p>
 <p>Aby wykorzystać tę cechę na wykresie, wystarczy dodać mapowanie <code>fill=Model</code> wewnątrz funkcji <code>aes()</code>. Wynikiem ubocznym będzie legenda z opisem poszczególnych mapowań.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(skody, <span class="kw">aes</span>(<span class="dt">x=</span>Model, <span class="dt">y =</span> Cena.w.PLN, <span class="dt">fill=</span>Model)) +<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre>
@@ -270,10 +270,10 @@ skody &lt;-<span class="st"> </span>auta2012 %&gt;%
 <div id="gdzie-szukac-dalej" class="slide section level1">
 <h1>Gdzie szukać dalej</h1>
 <ul>
-<li><p>Więcej informacji o tym jak budować wykresy w pakiecie ggplot2 znaleźć można w rozdziale 4 książki <em>,,Przewodnik po pakiecie R’’</em>. Więcej informacji o tej książce <a href="http://www.biecek.pl/R/">http://www.biecek.pl/R/</a></p></li>
-<li><p>Wiele przydatnych wskazówek można również znaleźć w internetowej książce <em>,,Cookbook for R’’</em> <a href="http://www.cookbook-r.com/Graphs/">http://www.cookbook-r.com/Graphs/</a></p></li>
-<li><p>Bardzo rozbudowana dokumentacja dla pakietu ggplot2 dostępna jest na stronie <em>,,ggplot2’’</em> <a href="http://docs.ggplot2.org/current/index.html">http://docs.ggplot2.org/current/index.html</a></p></li>
-<li><p>Wiele ciekawych przykładów z użyciem <em>ggplot2</em> można znaleźć na stronach <a href="http://www.ats.ucla.edu/stat/r/faq/">http://www.ats.ucla.edu/stat/r/faq/</a> oraz <a href="http://zevross.com/blog/category/r/">http://zevross.com/blog/category/r/</a></p></li>
+<li><p>Więcej informacji o tym jak budować wykresy w pakiecie ggplot2 znaleźć można w rozdziale 4 książki <em>,,Przewodnik po pakiecie R’’</em>. Więcej informacji o tej książce <a href="http://www.biecek.pl/R/" class="uri">http://www.biecek.pl/R/</a></p></li>
+<li><p>Wiele przydatnych wskazówek można również znaleźć w internetowej książce <em>,,Cookbook for R’’</em> <a href="http://www.cookbook-r.com/Graphs/" class="uri">http://www.cookbook-r.com/Graphs/</a></p></li>
+<li><p>Bardzo rozbudowana dokumentacja dla pakietu ggplot2 dostępna jest na stronie <em>,,ggplot2’’</em> <a href="http://docs.ggplot2.org/current/index.html" class="uri">http://docs.ggplot2.org/current/index.html</a></p></li>
+<li><p>Wiele ciekawych przykładów z użyciem <em>ggplot2</em> można znaleźć na stronach <a href="http://www.ats.ucla.edu/stat/r/faq/" class="uri">http://www.ats.ucla.edu/stat/r/faq/</a> oraz <a href="http://zevross.com/blog/category/r/" class="uri">http://zevross.com/blog/category/r/</a></p></li>
 </ul>
 </div>
 

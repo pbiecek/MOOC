@@ -25,7 +25,7 @@ W tym odcinku nauczymy się:
 - jak przejść z wąskiej postaci na szeroką,
 - jak przejść z szerokiej postaci do wąskiej.
 
-Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, to zbiór danych `kidney` z pakietu `PBImisc`, pozwoli nam na ilustracje przejścia z formatu szerokiego na wąski. Drugi zbiór danych to dane z Eurostatu, które pobierzemy z użyciem pakietu `SmarterPoland`. Pozwolą one zilustrować przejście z reprezentacji wąskiej danych na szeroką.
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, to zbiór danych `kidney` z pakietu `PBImisc`, pozwoli nam na ilustracje przejścia z formatu szerokiego na wąski. Drugi zbiór danych to dane z Eurostatu, które pobierzemy z użyciem pakietu `PogromcyDanych`. Pozwolą one zilustrować przejście z reprezentacji wąskiej danych na szeroką.
 
 ---
 

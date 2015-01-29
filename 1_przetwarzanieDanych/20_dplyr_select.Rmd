@@ -26,7 +26,7 @@ W tym odcinku nauczymy się:
 - jak ze zbioru danych wybierać kolumny wszystkie poza wskazanych.
 
 Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, 
-znacznie większy, to `auta2012`, oba dostępne w pakiecie `SmarterPoland`.
+znacznie większy, to `auta2012`, oba dostępne w pakiecie `PogromcyDanych`.
 
 ---
 
@@ -41,7 +41,7 @@ W przykładzie poniżej wyświetlimy nazwy kolumn w zbiorze danych `koty_ptaki`.
 `gatunek, predkosc, waga`.
 
 ```{r, warning=FALSE, message=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 library(dplyr)
 colnames(koty_ptaki)
 
@@ -77,7 +77,7 @@ koty_ptaki %>%
 
 Operacje filtrowania przećwiczymy też na znacznie większym zbiorze danych, który już nie sposób w całości wyświetlić na ekranie. Mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.
 
-Zbiór danych `auta2012` jest dostępny po wczytaniu pakietu `SmarterPoland`. Poniżej przedstawiamy listę nazw kolumn z tego zbioru danych, więcej informacji o tym zbiorze danych znaleźć można na stronie https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html
+Zbiór danych `auta2012` jest dostępny po wczytaniu pakietu `PogromcyDanych`. Poniżej przedstawiamy listę nazw kolumn z tego zbioru danych, więcej informacji o tym zbiorze danych znaleźć można na stronie https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html
 
 W tym zbiorze dostępne są następujące dane.
 

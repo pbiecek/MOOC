@@ -23,10 +23,10 @@ W tym odcinku nauczymy się:
 - jak tworzyć własne funkcje,
 - jak wywoływać funkcje z funkcji.
 
-Do ilustracji wykorzystamy zbiór danych to `koty_ptaki` dostępny w pakiecie `SmarterPoland`.
+Do ilustracji wykorzystamy zbiór danych to `koty_ptaki` dostępny w pakiecie `PogromcyDanych`.
 
 ```{r, message=FALSE, warning=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 head(koty_ptaki, 3)
 ```
 

@@ -59,7 +59,7 @@ pogRomcy danych
 <li>jakie podstawowe operacje można wykonywać na cechach ilościowych,</li>
 <li>jak podsumowywać / opisywać cechy ilościowe.</li>
 </ul>
-<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>SmarterPoland</code>.</p>
+<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>PogromcyDanych</code>.</p>
 </div>
 <div id="co-to-znaczy-cecha-ilosciowa" class="slide section level1">
 <h1>Co to znaczy: cecha ilościowa</h1>
@@ -72,7 +72,7 @@ pogRomcy danych
 </div>
 <div id="wczytanie-danych" class="slide section level1">
 <h1>Wczytanie danych</h1>
-<p>Dane od których rozpoczniemy przykłady to <code>koty_ptaki</code> z pakietu <code>SmarterPoland</code>. Aby te dane wczytać, wystarczy włączyć pakiet, instrukcja jak to zrobić znajduje się w odcinku 2.</p>
+<p>Dane od których rozpoczniemy przykłady to <code>koty_ptaki</code> z pakietu <code>PogromcyDanych</code>. Aby te dane wczytać, wystarczy włączyć pakiet, instrukcja jak to zrobić znajduje się w odcinku 2.</p>
 <p>Włączmy pakiet i użyjmy funkcji <code>head()</code> by wyświetlić pierwsze sześć wierszy. Które z tych zmiennych to zmienne ilościowe?</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
 <span class="kw">head</span>(koty_ptaki)</code></pre>
@@ -103,7 +103,7 @@ pogRomcy danych
 <div id="wczytanie-danych-1" class="slide section level1">
 <h1>Wczytanie danych</h1>
 <p>Zbiór danych <code>koty_ptaki</code> składa się z 13 wierszy. Można cały ten zbiór danych wyświetlić na ekranie. Nie zawsze potrzebujemy więc specjalnych statystyk opisowych by zrozumieć co się dzieje w takich małych zbiorach danych.</p>
-<p>Dlatego, dalsze ćwiczenia ze zmiennymi ilościowymi przeprowadzimy na znaczeni większym zbiorze danych z ponad 200 tysiącami wartości, o nazwie <code>auta2012</code>, który znajduje się również w pakiecie <code>SmarterPoland</code>.</p>
+<p>Dlatego, dalsze ćwiczenia ze zmiennymi ilościowymi przeprowadzimy na znaczeni większym zbiorze danych z ponad 200 tysiącami wartości, o nazwie <code>auta2012</code>, który znajduje się również w pakiecie <code>PogromcyDanych</code>.</p>
 <p>Opis tego zbioru danych znaleźć można w odcinku <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
 <p>Wczytajmy ten zbiór danych i przyjrzyjmy się trzem pierwszym wierszom.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)

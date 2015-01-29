@@ -32,7 +32,7 @@ W tym odcinku będziemy pracować na zbiorze danych o wynikach wyborów samorzą
 Zbiór danych `mandatySejmik2014` dla każdego z 16 województw pokazuje ile mandatów zdobyli kandydaci pod sztandarami SLD, PiS, PO, SLD i innymi. W kolumnie `ProcentWaznychGlosow` przedstawiono procent ważnych oddanych głosów (w stosunku do osób uprawnionych do głosowania) a ostatnie dwie kolumny przedstawiają długość i szerokość geograficzną środka województwa.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 head(mandatySejmik2014)
 ```
 

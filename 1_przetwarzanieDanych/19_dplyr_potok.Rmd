@@ -27,7 +27,7 @@ W tym odcinku nauczymy się:
 - jak składać ze sobą wywołania funkcji do przetwarzania danych w potoki przetwarzania,
 - jakim instrukcjom operator przetwarzania potokowego jest równoważny.
 
-Do ilustracji tych zagadnień wykorzystamy zbiór danych `auta2012` dostępny w pakiecie `SmarterPoland`.
+Do ilustracji tych zagadnień wykorzystamy zbiór danych `auta2012` dostępny w pakiecie `PogromcyDanych`.
 
 
 ---
@@ -42,7 +42,7 @@ odfiltrujemy samochody, które nie są Volkswagenami, pozostałe samochody posor
 Poniższa instrukcja nie jest najkrótszą z możliwych, celowo została rozciągnięta by łatwiej było przedstawić zalety potoków.
 
 ```{r, warning=FALSE, message=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 library(dplyr)
 # tylko volkswagen
 tylkoVolkswagen <- filter(auta2012, 

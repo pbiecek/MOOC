@@ -57,7 +57,7 @@ pogRomcy danych
 <li><p>dane Excelowe, <a href="http://biecek.pl/MOOC/dane/auta2012mini.xls" class="uri">http://biecek.pl/MOOC/dane/auta2012mini.xls</a></p></li>
 <li><p>dane tekstowe, <a href="http://biecek.pl/MOOC/dane/auta2012mini.csv" class="uri">http://biecek.pl/MOOC/dane/auta2012mini.csv</a></p></li>
 <li><p>dane binarne, <a href="http://biecek.pl/MOOC/dane/auta2012mini.rda" class="uri">http://biecek.pl/MOOC/dane/auta2012mini.rda</a></p></li>
-<li><p>w pakiecie <code>SmarterPoland</code> w zmiennej <code>auta2012</code>.</p></li>
+<li><p>w pakiecie <code>PogromcyDanych</code> w zmiennej <code>auta2012</code>.</p></li>
 </ul>
 <p><em>Zadanie:</em></p>
 <p>Wczytać do programu R dane wykorzystując każdy z tych formatów.</p>
@@ -288,9 +288,9 @@ pustyKwadrat &lt;-<span class="st"> </span>function(<span class="dt">n =</span> 
 <li><p>Jedną z cech ilościowych jest <em>Rok.produkcji</em>. Wszystkie te oferty były złożone w roku 2012, jaki był medianowy/połówkowy wiek oferowanego auta?</p></li>
 <li><p>Która cecha jest najmniej kompletna? Dla której cechy liczba brakujących wartości jest największa?</p></li>
 <li><p>Jaka jest mediana/połówkowa wielkość silnika (<code>Pojemnosc.skokowa</code>)?</p></li>
-<li><p>Przedstaw graficznie za pomocą wykresu pudełko-wąsy oraz histogramu rozkład cechy <code>Cena.w.PLN</code>. PCH: brak odpowiedzi poniżej. To celowe?</p></li>
+<li><p>Przedstaw graficznie za pomocą wykresu pudełko-wąsy oraz histogramu rozkład cechy <code>Cena.w.PLN</code>.</p></li>
 <li><p>Zwróć uwagę, że pojedyncze auta o bardzo wysokich cenach, powodują że wykres jest mało czytelny. Oczyść te dane, pozostawiają tylko auta o cenie poniżej 100 tys pln. Następnie przedstaw rozkład cen aut w segmencie aut do 100 tys pln.</p></li>
-<li><p>Aut w jakiej cenie jest najwięcej wśród zebranych ogłoszeń? PCH: brak odpowiedzi poniżej. To celowe?</p></li>
+<li><p>Aut w jakiej cenie jest najwięcej wśród zebranych ogłoszeń?</p></li>
 </ul>
 </div>
 <div id="odpowiedzi-sezon-1-odcinek-11" class="slide section level1">
@@ -306,12 +306,15 @@ pustyKwadrat &lt;-<span class="st"> </span>function(<span class="dt">n =</span> 
 <span class="co"># mediana koni mechanicznych</span>
 <span class="kw">median</span>(auta2012$KM, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
 
-<span class="co"># Usuńmy skrajne obserwacje i narysujmy rozkłąd ceny aut wykresem pudełkowym</span>
+<span class="co"># Usuńmy skrajne obserwacje i narysujmy rozkład ceny aut wykresem pudełkowym</span>
 auta2012wybrane &lt;-<span class="st"> </span>auta2012[auta2012$Cena.w.PLN &lt;<span class="st"> </span><span class="dv">100000</span>, ] 
 <span class="kw">boxplot</span>(auta2012wybrane$Cena.w.PLN, <span class="dt">horizontal =</span> <span class="ot">TRUE</span>, <span class="dt">range =</span> <span class="dv">0</span>)
 
 <span class="co"># lub histogramem</span>
-<span class="kw">hist</span>(auta2012wybrane$Cena.w.PLN, <span class="dv">50</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>)</code></pre>
+<span class="kw">hist</span>(auta2012wybrane$Cena.w.PLN, <span class="dv">50</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>)
+
+<span class="co"># najwięcej jest aut w okolicy 13000 (moda policzona po dyskretyzacji na 1000 przedziałów)</span>
+<span class="kw">which.max</span>(<span class="kw">table</span>(<span class="kw">cut</span>(auta2012wybrane$Cena.w.PLN, <span class="dv">1000</span>)))</code></pre>
 </div>
 <div id="zadania-sezon-1-odcinek-12" class="slide section level1">
 <h1>Zadania, sezon 1, odcinek 12</h1>

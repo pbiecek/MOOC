@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="poskRamiacze danych" />
+  <meta name="author" content="pogRomcy danych" />
   <meta name="copyright" content="poskRamiacze danych / wizualizacja / mapy" /> 
   <title>Pakiet ggplot2 - mapy</title>
   <style type="text/css">code{white-space: pre;}</style>
@@ -46,7 +46,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div class="slide titlepage">
   <h1 class="title">Pakiet ggplot2 - mapy</h1>
   <p class="author">
-poskRamiacze danych
+pogRomcy danych
   </p>
   <p class="date">sezon 3 / odcinek 4 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
@@ -66,7 +66,7 @@ poskRamiacze danych
 <h2 id="zbior-danych">Zbiór danych</h2>
 <p>W tym odcinku będziemy pracować na zbiorze danych o wynikach wyborów samorządowych z roku 2014 do sejmików.</p>
 <p>Zbiór danych <code>mandatySejmik2014</code> dla każdego z 16 województw pokazuje ile mandatów zdobyli kandydaci pod sztandarami SLD, PiS, PO, SLD i innymi. W kolumnie <code>ProcentWaznychGlosow</code> przedstawiono procent ważnych oddanych głosów (w stosunku do osób uprawnionych do głosowania) a ostatnie dwie kolumny przedstawiają długość i szerokość geograficzną środka województwa.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SmarterPoland)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
 <span class="kw">head</span>(mandatySejmik2014)</code></pre>
 <pre><code>##          Wojewodztwo PSL PiS PO SLD Inne ProcentWaznychGlosow     long
 ## 1       Dolnoslaskie   5   9 16   2    4             36.83847 16.38088
@@ -86,7 +86,7 @@ poskRamiacze danych
 <div id="pliki-z-mapami---shape-files" class="slide section level1">
 <h1>Pliki z mapami - shape files</h1>
 <p>Aby przedstawiać informacje na mapach w programie R, należy wpierw wczytać obrysy map. Te obrysy są udostępnione w plikach o rozszerzeniu <code>.shp</code>, nazywanych <em>shape files</em>.</p>
-<p>Pliki, które wykorzystam tutaj pochodzą z bazy danych GADM <a href="http://www.gadm.org">http://www.gadm.org</a> i mają pewne niewielkie błędy w kodowaniu, które ręcznie naprawimy. W katalogu <code>dane/POL_adm</code> znajdują się kształty obszarów na różnych poziomach szczegółowości. Plik <code>POL_adm0.shp</code> to obrys całego kraju, <code>POL_adm1.shp</code> to obrysy województw a <code>POL_adm2.shp</code> to obrysy gmin. Funkcją <code>readShapePoly()</code> wczytamy dane o obrysach województw do zmiennej <code>shp1</code>. Zmienna <code>shp1@data$VARNAME_1</code> zawiera nazwy województw, musimy w nich poprawić nazwę dla województwa Łódzkiego.</p>
+<p>Pliki, które wykorzystam tutaj pochodzą z bazy danych GADM <a href="http://www.gadm.org" class="uri">http://www.gadm.org</a> i mają pewne niewielkie błędy w kodowaniu, które ręcznie naprawimy. W katalogu <code>dane/POL_adm</code> znajdują się kształty obszarów na różnych poziomach szczegółowości. Plik <code>POL_adm0.shp</code> to obrys całego kraju, <code>POL_adm1.shp</code> to obrysy województw a <code>POL_adm2.shp</code> to obrysy gmin. Funkcją <code>readShapePoly()</code> wczytamy dane o obrysach województw do zmiennej <code>shp1</code>. Zmienna <code>shp1@data$VARNAME_1</code> zawiera nazwy województw, musimy w nich poprawić nazwę dla województwa Łódzkiego.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(maptools)
 <span class="kw">library</span>(rgdal)
 <span class="kw">library</span>(gpclib)
@@ -134,7 +134,7 @@ shp1f &lt;-<span class="st"> </span><span class="kw">fortify</span>(shp1, <span 
 </div>
 <div id="rysowanie-mapy-2" class="slide section level1">
 <h1>Rysowanie mapy</h1>
-<p>Mapy można rysować w różnych projekcjach. Aby je wybrać wystarczy dodać wywołanie funkcji <code>coord_map()</code>. Poniżej dwa przykładowe projekcie. Listę projekcji z opisem właściwości znaleźć można pod adresem <a href="http://en.wikipedia.org/wiki/List_of_map_projections">http://en.wikipedia.org/wiki/List_of_map_projections</a></p>
+<p>Mapy można rysować w różnych projekcjach. Aby je wybrać wystarczy dodać wywołanie funkcji <code>coord_map()</code>. Poniżej dwa przykładowe projekcje. Listę projekcji z opisem właściwości znaleźć można pod adresem <a href="http://en.wikipedia.org/wiki/List_of_map_projections" class="uri">http://en.wikipedia.org/wiki/List_of_map_projections</a></p>
 <pre class="sourceCode r"><code class="sourceCode r">mapka &lt;-<span class="st"> </span><span class="kw">ggplot</span>() +
 <span class="st">    </span><span class="kw">geom_map</span>(<span class="dt">data=</span>mandatySejmik2014, <span class="kw">aes</span>(<span class="dt">map_id=</span>Wojewodztwo, <span class="dt">fill=</span>ProcentWaznychGlosow), 
              <span class="dt">map=</span>shp1f) +
@@ -216,9 +216,9 @@ mapka +<span class="st"> </span><span class="kw">coord_map</span>(<span class="d
 <div id="co-dalej" class="slide section level1">
 <h1>Co dalej</h1>
 <ul>
-<li><p>Więcej informacji o tym jak budować wykresy w pakiecie ggplot2 znaleźć można w rozdziale 4 książki <em>,,Przewodnik po pakiecie R’’</em>. Więcej informacji o tej książce <a href="http://www.biecek.pl/R/">http://www.biecek.pl/R/</a></p></li>
-<li><p>Wiele przydatnych wskazówek można również znaleźć w internetowej książce <em>,,Cookbook for R’’</em> <a href="http://www.cookbook-r.com/Graphs/">http://www.cookbook-r.com/Graphs/</a></p></li>
-<li><p>Bardzo rozbudowana dokumentacja dla pakietu ggplot2 dostępna jest na stronie <em>,,ggplot2’’</em> <a href="http://docs.ggplot2.org/current/index.html">http://docs.ggplot2.org/current/index.html</a></p></li>
+<li><p>Więcej informacji o tym jak budować wykresy w pakiecie ggplot2 znaleźć można w rozdziale 4 książki <em>,,Przewodnik po pakiecie R’’</em>. Więcej informacji o tej książce <a href="http://www.biecek.pl/R/" class="uri">http://www.biecek.pl/R/</a></p></li>
+<li><p>Wiele przydatnych wskazówek można również znaleźć w internetowej książce <em>,,Cookbook for R’’</em> <a href="http://www.cookbook-r.com/Graphs/" class="uri">http://www.cookbook-r.com/Graphs/</a></p></li>
+<li><p>Bardzo rozbudowana dokumentacja dla pakietu ggplot2 dostępna jest na stronie <em>,,ggplot2’’</em> <a href="http://docs.ggplot2.org/current/index.html" class="uri">http://docs.ggplot2.org/current/index.html</a></p></li>
 </ul>
 </div>
 

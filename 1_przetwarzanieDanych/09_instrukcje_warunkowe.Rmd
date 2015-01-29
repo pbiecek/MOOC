@@ -24,10 +24,10 @@ W tym odcinku nauczymy się:
 - jak korzystać z instrukcji warunkowych,
 - jak korzystać z instrukcji warunkowych w pętli.
 
-Do ilustracji wykorzystamy zbiór danych `koty_ptaki` dostępny w pakiecie `SmarterPoland`.
+Do ilustracji wykorzystamy zbiór danych `koty_ptaki` dostępny w pakiecie `PogromcyDanych`.
 
 ```{r, message=FALSE, warning=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 head(koty_ptaki, 3)
 ```
 

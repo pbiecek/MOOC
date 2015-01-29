@@ -23,7 +23,7 @@ Ten zbiór danych można pobrać ze strony kursu w różnych formatach pod nast�
 
 - dane binarne, http://biecek.pl/MOOC/dane/auta2012mini.rda
 
-- w pakiecie `SmarterPoland` w zmiennej `auta2012`.
+- w pakiecie `PogromcyDanych` w zmiennej `auta2012`.
 
 *Zadanie:* 
 

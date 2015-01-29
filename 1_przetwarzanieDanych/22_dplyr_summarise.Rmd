@@ -27,16 +27,16 @@ W tym odcinku nauczymy się:
 - jakie przykładowe agregaty można wyznaczać.
 
 Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to `koty_ptaki` a drugi, 
-znacznie większy, to `auta2012`. Oba dostępne w pakiecie `SmarterPoland`.
+znacznie większy, to `auta2012`. Oba dostępne w pakiecie `PogromcyDanych`.
 
 ---
 
 # Ptaki vs. koty
 
-Rozpocznijmy od przykładu dla małego zbioru danych. Widząc wszystkie wiersze łatwiej będzie nam zauważyć zależność pomiędzy oryginalnymi danymi a agregatami. Ten zbiór danych jest dostarczany razem z pakietem `SmarterPoland`. 
+Rozpocznijmy od przykładu dla małego zbioru danych. Widząc wszystkie wiersze łatwiej będzie nam zauważyć zależność pomiędzy oryginalnymi danymi a agregatami. Ten zbiór danych jest dostarczany razem z pakietem `PogromcyDanych`. 
 
 ```{r, message=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 koty_ptaki
 ```
 

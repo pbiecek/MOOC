@@ -34,10 +34,10 @@ W tym odcinku będziemy pracować ze zbiorem danych `auta2012`.
 
 Do ilustracji jak korzystać z graficznych podsumowań danych wybierzemy fragment całego zbioru danych o cenach ofertowych aut. Zawęzimy tutaj naszą uwagę do obserwacji dotyczących Skody Octavi, a ze zbioru kolumn wybierzemy informację o roku produkcji, cenie i rodzaju paliwa.
 
-Dane są dostępne w pakiecie `SmarterPoland`, a funkcje do operacji na danych w pakiecie `dplyr`. Funkcją `filter()` wybieramy interesujące nas wiersze, a funkcją `select()` interesujące nas kolumny.
+Dane są dostępne w pakiecie `PogromcyDanych`, a funkcje do operacji na danych w pakiecie `dplyr`. Funkcją `filter()` wybieramy interesujące nas wiersze, a funkcją `select()` interesujące nas kolumny.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 skody <- auta2012 %>%
               filter(Marka == 'Skoda', Model == 'Octavia') %>%
               select(Marka, Model, Rok.produkcji, Cena.w.PLN, Rodzaj.paliwa)

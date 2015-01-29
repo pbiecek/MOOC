@@ -31,10 +31,10 @@ W tym odcinku dowiemy się:
 
 W tym odcinku będziemy pracować z dwoma zbiorami danych: `koty_ptaki` oraz `WIG`.
 
-Aby odtworzyć przykłady z tego odcinka potrzebny jest pakiet `SmarterPoland`. Informacja o tym jak go zainstalować jest umieszczona w odcinku drugim *Jak zainstalować R, RStudio oraz dodatkowe pakiety?*.
+Aby odtworzyć przykłady z tego odcinka potrzebny jest pakiet `PogromcyDanych`. Informacja o tym jak go zainstalować jest umieszczona w odcinku drugim *Jak zainstalować R, RStudio oraz dodatkowe pakiety?*.
 
 ```{r,  message=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 
 head(koty_ptaki)
 
@@ -85,7 +85,7 @@ Przyjrzymy się wynikowym wykresom oraz postarajmy się znaleźć jak najwięcej
 
 ```{r, fig.height=5, fig.width=5, message=FALSE, echo=FALSE}
 
-library(SmarterPoland)
+library(PogromcyDanych)
 library(ggplot2)
 
 plot(koty_ptaki$waga, koty_ptaki$predkosc)

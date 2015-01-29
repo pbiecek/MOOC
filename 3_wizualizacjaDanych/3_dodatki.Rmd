@@ -41,7 +41,7 @@ Przyjrzyjmy się wykresowi z pierwszego odcinka i zastanówmy się które elemen
 Poświęć kilka minut by znaleźć przynajmniej pięć elementów, które warto lepiej opisać na tym wykresie.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
-library(SmarterPoland)
+library(PogromcyDanych)
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   geom_point(size=5) 
 ```

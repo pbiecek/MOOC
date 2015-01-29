@@ -57,7 +57,7 @@ output:
 
 # Pakiety
 
-* SmarterPoland 
+* PogromcyDanych 
 * dplyr
 * tidyr
 * ggplot2
