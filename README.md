@@ -6,14 +6,14 @@ Od zera do bohatera w 60 godzin
 
 Materiały dla kursu MOOC 2015
 
-część wspólna
+Część wspólna
 
 + [Lista zbiorów danych](https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html)
 + [Lista funkcji i pakietów](https://rawgithub.com/pbiecek/MOOC/master/0_dane/1_skorowidz.html)
 + [Zadania i odpowiedzi](https://rawgithub.com/pbiecek/MOOC/master/0_dane/9_zadania.html)
 
 
-część 1: Data smart
+Sezon 1: Praca z danymi w programie R
 
 + Eksploracja danych z programem R [sezon 1]
   * Wprowadzenie do R i RStudio
@@ -50,17 +50,8 @@ część 1: Data smart
     + odcinek 26: W opracowaniu materiałów udział wzięli [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/00_credits.html), v1 ready
   * Challange [20 zadań] [przyklad z RStudio](http://shiny.rstudio.com/tutorial/quiz/)
 
-+ Dane wokół nas,
-  * Intro [intro, wideo, TODO](https://rawgithub.com/pbiecek/MOOC/master/motywacja/intro.md)
-  * Piotr Przybyła IPI PAN, Inżynieria lingwistyczna 
-  * Bartosz Meglicki, NCBJ / IPIPAN, Robotyka i analiza danych
-  * [Sondaże - może wyborcze] Nss
-  * [Meteo] 
-  * [Diagnoza Społeczna] J Cz
-  * [Badania Edukacji] IBE
 
-
-część 2: Data master
+Sezon 2: Wizualizacja i modelowanie danych
 
 + Wizualizacja danych
   * Historia i współczesność 
@@ -80,9 +71,16 @@ część 2: Data master
   * Regresja przedziałowo liniowa, [intro](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/przedzialowaIntro.md),   [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaMultiplikatywna.html)
   * Diagnostyka [Ascombe]
   * Analiza wariancji - jednokierunkowa, dwukierunkowa [przecięte / hierarchiczne]
-  * Modele z wieloma zmiennymi
-  * Jak wybierać modele [AIC, BIC]
-  * Regresja logistyczna
+  * Modele z wieloma zmiennymi [?]
+  * Regresja logistyczna [?]
+
++ Dane wokół nas,
+  * Intro [intro, wideo, TODO](https://rawgithub.com/pbiecek/MOOC/master/motywacja/intro.md)
+  * Piotr Przybyła IPI PAN, Inżynieria lingwistyczna 
+  * Bartosz Meglicki, NCBJ / IPIPAN, Robotyka i analiza danych
+  * [Sondaże - może wyborcze] Nss
+  * [Meteo] 
+  * [Diagnoza Społeczna] J Cz
 
 
   * Dodać do challange?
