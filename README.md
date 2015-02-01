@@ -83,7 +83,7 @@ Sezon 2: Wizualizacja i modelowanie danych
   * [Diagnoza Społeczna] J Cz
 
 
-  * Dodać do challange?
+  * Dodać do challenge?
     + Zakup samochodu wspierany danymi [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/77_przypadekUzycia.Rmd),
     + O rozkładach http://www3.nd.edu/~sjones20/JonesUND/BioStats_files/Distributions_1-3-11.pdf
     + do wizualizacji dodać http://www.bioinformatics.babraham.ac.uk/training/Figure%20Design%20Course%20Presentation.pdf
@@ -94,3 +94,4 @@ Sezon 2: Wizualizacja i modelowanie danych
     http://onlinestatbook.com/2/power/factors.html
     http://rpsychologist.com/d3/CI/
     
+    Challenge: BSE - kolejki do NFZ i obrobione csv
