@@ -29,11 +29,17 @@ W tym odcinku dowiemy się:
 - Poznamy kolejne rodzaje wykresów, takie jak wykres z etykietami lub wykres liniowy.
 - Pokażemy też jak składać różne warstwy wykresu?
 
+---
+
+# Zbiory danych
+
 W tym odcinku będziemy pracować z dwoma zbiorami danych: `koty_ptaki` oraz `WIG`.
 
 Aby odtworzyć przykłady z tego odcinka potrzebny jest pakiet `PogromcyDanych`. Informacja o tym jak go zainstalować jest umieszczona w odcinku drugim *Jak zainstalować R, RStudio oraz dodatkowe pakiety?*.
 
 ```{r,  message=FALSE}
+# jeżeli pakiet jeszcze nie jest zainstalowany należy odkomentować poniższą linijkę
+# install.packages("PogromcyDanych")
 library(PogromcyDanych)
 
 head(koty_ptaki)

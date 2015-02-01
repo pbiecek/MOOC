@@ -63,9 +63,14 @@ pogRomcy danych
 <li>Poznamy kolejne rodzaje wykresów, takie jak wykres z etykietami lub wykres liniowy.</li>
 <li>Pokażemy też jak składać różne warstwy wykresu?</li>
 </ul>
+</div>
+<div id="zbiory-danych" class="slide section level1">
+<h1>Zbiory danych</h1>
 <p>W tym odcinku będziemy pracować z dwoma zbiorami danych: <code>koty_ptaki</code> oraz <code>WIG</code>.</p>
 <p>Aby odtworzyć przykłady z tego odcinka potrzebny jest pakiet <code>PogromcyDanych</code>. Informacja o tym jak go zainstalować jest umieszczona w odcinku drugim <em>Jak zainstalować R, RStudio oraz dodatkowe pakiety?</em>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># jeżeli pakiet jeszcze nie jest zainstalowany należy odkomentować poniższą linijkę</span>
+<span class="co"># install.packages(&quot;PogromcyDanych&quot;)</span>
+<span class="kw">library</span>(PogromcyDanych)
 
 <span class="kw">head</span>(koty_ptaki)</code></pre>
 <pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
