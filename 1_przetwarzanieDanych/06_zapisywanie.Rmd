@@ -55,8 +55,27 @@ getwd()
 # Równoważnie
 write.table(dwie_kolumny, file="/Users/pbiecek/Documents/wazne_dane.csv", 
             sep = ";", dec = ".")
-
 ```
+---
+
+# Zapisywanie danych do pliku csv
+
+W wyniku poniższego wywołania funkcji `write.table()`
+
+```{r, eval=FALSE}
+write.table(dwie_kolumny, file="wazne_dane.csv", 
+            sep = ";", dec = ".")
+```
+
+Na dysku w aktualnym katalogu roboczym powstanie plik `wazne_dane.csv`. 
+
+Poniższy rysunek pokazuje treść tego pliku.
+
+![Zbiór danych o kotach](figs/wazneDane.png)
+
+Zauważmy, że w pierwszej linii znajdują się dwie wartości - nazwy kolumn.
+
+W kolejnych liniach występuja po trzy wartości, pierwsza to nazwa wiersza a dwie kolejne to wartości pierwszej i drugiej kolumny.
 
 ---
 
