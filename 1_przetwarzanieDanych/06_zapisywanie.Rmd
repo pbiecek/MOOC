@@ -126,6 +126,10 @@ write.xslx(dwie_kolumny, file="/Users/pbiecek/Documents/wazne_dane.csv",
             sheetName="Zakladka Wazne Dane")
 ```
 
+*Uwaga* Pakiet `xlsx` trzeba przed włączeniem najpierw zainstalować poleceniem `install.packages("xlsx")`.
+
+*Uwaga 2* Posiadacze systemu OSX w wersji Yosemitte (na dzień dzisiejszy, najnowszej) mogą mieć problem z włączniem pakietu `xlsx` jeżeli mają zainstalowaną złą (lub żadną) wersję programu Java. Należy zainstalować najnowszą wersję ze strony http://osxdaily.com/2014/10/21/get-java-os-x-yosemite/.
+
 ---
 
 # Zapisywanie danych do plików binarnych
