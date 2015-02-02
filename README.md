@@ -99,6 +99,12 @@ Sezon 2: Wizualizacja i modelowanie danych
     IMDB?
 
     Facebook i Łańcuch Markowa
+      - czas połówkowy o rozkład długości trwania związku
+
 
     Co ważne w życiu i diagnoza
-    
+
+
+    Akcelerometr? i proste szeregi czasowe - autokorelacja / uśrednianie z fazą
+
+
