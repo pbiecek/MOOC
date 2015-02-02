@@ -122,7 +122,7 @@ Osobiście najczęściej korzystam z pakietu `xlsx`, ponieważ pozwala on na zap
 
 ```{r, eval=FALSE}
 library(xlsx)
-write.xslx(dwie_kolumny, file="/Users/pbiecek/Documents/wazne_dane.csv", 
+write.xlsx(dwie_kolumny, file="/Users/pbiecek/Documents/wazne_dane.csv", 
             sheetName="Zakladka Wazne Dane")
 ```
 
@@ -191,7 +191,7 @@ write.table(dwie_kolumny, file="/Users/pbiecek/Documents/wazne_dane.csv",
 
 # zapisujemy dane do formatu Excela
 library(xlsx)
-write.xslx(dwie_kolumny, file="/Users/pbiecek/Documents/wazne_dane.csv", 
+write.xlsx(dwie_kolumny, file="/Users/pbiecek/Documents/wazne_dane.csv", 
             sheetName="Zakladka Wazne Dane")
 
 # zapisujemy dane do formatu binarnego
