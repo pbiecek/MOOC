@@ -265,3 +265,13 @@ http://www.sthda.com/english/wiki/easyggplot2
 edytowalne wykresy dla ggplota [do excela lub worda]
 http://www.sthda.com/english/wiki/create-an-editable-graph-from-r-software
 
+
+KTR:
+
+Może warto uwzględnić poniższą funkcję (np. w któreś części dotyczącej wykresów w ggplot2):
+Sep_Tys <- function(){function(x) format(x, big.mark = " ", scientific = FALSE)}
+czyli separator tysięczny.
+Funkcja scales::comma rozdziela duże liczby za pomocą przecinka.
+Nie jest to "szczęśliwe" rozwiązanie,
+ponieważ często na drugiej osi mogą być części ułamkowe liczby (np. 2,75 itp.).
+W takich sytuacjach warto mieć możliwość wyboru zapisu dużych liczb.
