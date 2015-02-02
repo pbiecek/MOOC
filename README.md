@@ -95,3 +95,10 @@ Sezon 2: Wizualizacja i modelowanie danych
     http://rpsychologist.com/d3/CI/
     
     Challenge: BSE - kolejki do NFZ i obrobione csv
+
+    IMDB?
+
+    Facebook i Łańcuch Markowa
+
+    Co ważne w życiu i diagnoza
+    
