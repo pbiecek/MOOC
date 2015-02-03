@@ -10,6 +10,27 @@ http://graphtv.kevinformatics.com/tt0412142
 
 
 
+tables = readHTMLTable("http://www.imdb.com/title/tt1475582/epdate?ref_=ttep_ql_4")
+names(tables)
+tables[[1]]
+tables = readHTMLTable("http://www.imdb.com/title/tt1871731/epdate?ref_=ttep_ql_4")
+names(tables)
+tb <- tables[[1]]
+
+sezon <- sapply(strsplit(as.character(tb[,1]), split=".", fixed=TRUE), `[`, 1)
+ocena <- as.numeric(as.character(tb[,3]))
+nazwa <- as.character(tb[,2])
+
+df <- data.frame(id=seq_along(sezon), sezon, ocena, nazwa)
+
+library(ggvis)
+df %>% ggvis(x = ~ id, y = ~ ocena, fill = ~sezon) %>%
+  layer_points() %>%
+  layer_smooths()
+
+
+
+
 lines <- readLines("http://thetvdb.com/?tab=seasonall&id=80379&lid=7")
 lines <- readLines("http://thetvdb.com/?tab=seasonall&id=79168&lid=7")
 lines <- readLines("http://thetvdb.com/?tab=seasonall&id=73255&lid=7")
