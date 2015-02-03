@@ -3,6 +3,7 @@
 library(XML)
 
 lines <- readLines("http://thetvdb.com/?tab=seasonall&id=80379&lid=7")
+lines <- readLines("http://thetvdb.com/?tab=seasonall&id=79168&lid=7")
 lines <- grep(lines, pattern="<tr><td class=", value = TRUE)
 
 linlin <- strsplit(lines, split='[<>\\"]')
@@ -12,12 +13,14 @@ daty <- sapply(linlin, `[`, 31)
 linki <- paste("http://thetvdb.com/", sapply(linlin, `[`, 21), sep="")
 
 stars <- sapply(linki, function(l) {
-  ll <- readLines(l)
-  c(length(strsplit(paste(ll, collapse=""), split="star.on.gif")[[1]])-4,
-    length(strsplit(paste(ll, collapse=""), split="star.off.gif")[[1]])-4)
+  ll <- paste(readLines(l), collapse="")
+  c(length(strsplit(ll, split="star.on.gif")[[1]])-4,
+    length(strsplit(ll, split="star.off.gif")[[1]])-4)
 })
 
+summary(t(stars))
 
+plot(stars[1,])
 
 
 tables = readHTMLTable("http://thetvdb.com/?tab=seasonall&id=80379&lid=7")
