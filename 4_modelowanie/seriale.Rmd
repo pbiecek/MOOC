@@ -2,6 +2,14 @@
 
 library(XML)
 
+
+http://www.seriesmonitor.com/thebigbangtheory/graphs.html
+
+# super
+http://graphtv.kevinformatics.com/tt0412142
+
+
+
 lines <- readLines("http://thetvdb.com/?tab=seasonall&id=80379&lid=7")
 lines <- readLines("http://thetvdb.com/?tab=seasonall&id=79168&lid=7")
 lines <- readLines("http://thetvdb.com/?tab=seasonall&id=73255&lid=7")
