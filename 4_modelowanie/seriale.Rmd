@@ -4,6 +4,7 @@ library(XML)
 
 lines <- readLines("http://thetvdb.com/?tab=seasonall&id=80379&lid=7")
 lines <- readLines("http://thetvdb.com/?tab=seasonall&id=79168&lid=7")
+lines <- readLines("http://thetvdb.com/?tab=seasonall&id=73255&lid=7")
 lines <- grep(lines, pattern="<tr><td class=", value = TRUE)
 
 linlin <- strsplit(lines, split='[<>\\"]')
@@ -21,6 +22,8 @@ stars <- sapply(linki, function(l) {
 summary(t(stars))
 
 plot(stars[1,])
+
+qplot()
 
 
 tables = readHTMLTable("http://thetvdb.com/?tab=seasonall&id=80379&lid=7")
