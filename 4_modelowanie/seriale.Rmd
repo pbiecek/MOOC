@@ -14,6 +14,7 @@ tables = readHTMLTable("http://www.imdb.com/title/tt1475582/epdate?ref_=ttep_ql_
 names(tables)
 tables[[1]]
 tables = readHTMLTable("http://www.imdb.com/title/tt1871731/epdate?ref_=ttep_ql_4")
+tables = readHTMLTable("http://www.imdb.com/title/tt0944947/epdate?ref_=ttep_ql_4")
 names(tables)
 tb <- tables[[1]]
 
