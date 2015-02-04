@@ -1,6 +1,16 @@
 ```{r}
-
 library(XML)
+
+ltop <- readLines("http://graphtv.kevinformatics.com/top")
+movies <- strsplit(paste(ltop, collapse=" "), split="<a href='/")[[1]]
+
+ids <- sapply(strsplit(movies, split="'"), '[', 1)[-1]
+names <- sapply(strsplit(movies, split="[<>]"), '[', 6)[-1] %>%
+  gsub(., pattern="^ *[0-9]*\\. *", replacement="") %>%
+  gsub(., pattern=" *$*", replacement="")
+
+
+
 
 
 http://www.seriesmonitor.com/thebigbangtheory/graphs.html

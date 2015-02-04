@@ -1,0 +1,28 @@
+```{r}
+
+ltop <- readLines("http://graphtv.kevinformatics.com/top")
+movies <- strsplit(paste(ltop, collapse=" "), split="<a href='/")[[1]]
+ids <- sapply(strsplit(movies, split="'"), '[', 1)[-1]
+names <- sapply(strsplit(movies, split="[<>]"), '[', 6)[-1] %>%
+  gsub(., pattern="^ *[0-9]*\\. *", replacement="") %>%
+  gsub(., pattern=" *$*", replacement="")
+
+toDownload <- data.frame(ids, names, stringsAsFactors = FALSE)
+
+res <- NULL
+i <- 4
+for (i in 188:nrow(toDownload)) {
+  nam <- toDownload[i,1]
+  tables <- readHTMLTable(paste0("http://www.imdb.com/title/",nam,"/epdate?ref_=ttep_ql_4"))
+  dat <- tables[[1]]
+  seasons <- strsplit(as.character(dat[,1]), split="[^0-9]")
+  sezon <- sapply(seasons, '[', 1)
+  odcinek <- sapply(seasons, '[', 2)
+  nazwa <- as.character(dat[,2])
+  ocena <- as.numeric(as.character(dat[,3]))
+  glosow <- as.numeric(gsub(as.character(dat[,4]), pattern=",", replacement=""))
+  cat(toDownload[i,2], "\n")
+  res[[i]] <- data.frame(serial = toDownload[i,2], nazwa, sezon, odcinek, ocena, glosow)
+}
+
+```
