@@ -1,4 +1,5 @@
 library(shiny)
+library(ggvis)
 
 seriale <- c("'Allo 'Allo!", "24", "Adventure Time", "Agatha Christie's Poirot", 
   "All in the Family", "Almost Human", "American Horror Story", 
@@ -58,6 +59,20 @@ shinyUI(fluidPage(
         margin-left: auto ;
         margin-right: auto ;
         width: 1500px;
+      }
+      .row-fluid {
+        margin-left: auto ;
+        margin-right: auto ;
+      }
+      .selectize-control {
+        margin-left: auto ;
+        margin-right: auto ;
+        width: 500px;
+      }
+      .control-label {
+        margin-left: auto ;
+        margin-right: auto ;
+        width: 500px;
       }
       .shiny-input-container {
         margin-left: auto ;
