@@ -1,5 +1,7 @@
 ```{r}
 
+setwd("~/GitHub/RandBigData/MINI_2015/")
+
 ltop <- readLines("http://graphtv.kevinformatics.com/top")
 movies <- strsplit(paste(ltop, collapse=" "), split="<a href='/")[[1]]
 ids <- sapply(strsplit(movies, split="'"), '[', 1)[-1]
@@ -24,5 +26,12 @@ for (i in 188:nrow(toDownload)) {
   cat(toDownload[i,2], "\n")
   res[[i]] <- data.frame(serial = toDownload[i,2], nazwa, sezon, odcinek, ocena, glosow)
 }
+
+for (i in 1:nrow(toDownload)) {
+  res[[i]] <- data.frame(id = 1:nrow(res[[i]]), res[[i]])
+}
+
+serialeIMDB <- do.call(rbind, res)
+save(serialeIMDB, file="serialeIMDB.rda")
 
 ```
