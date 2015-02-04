@@ -58,11 +58,17 @@ shinyUI(fluidPage(
       .ggvis-output-container {
         margin-left: auto ;
         margin-right: auto ;
-        width: 1500px;
+        width: 500px;
+      }
+      .shiny-html-output {
+        margin-left: auto ;
+        margin-right: auto ;
+        width: 500px;
       }
       .row-fluid {
         margin-left: auto ;
         margin-right: auto ;
+        width: 500px;
       }
       .selectize-control {
         margin-left: auto ;

@@ -13,9 +13,11 @@ shinyServer(function(input, output) {
   })
   
   output$opis = renderUI({
-    napis <- paste0("http://www.imdb.com/title/",mySerial()$imdbId[1],"/epdate?ref_=ttep_ql_4")
-    HTML("Dane o ocenach tego serialu można pobrać ze strony <a href='", napis, "'>",napis,"</a><br><br>",
-         )
+    ser <- mySerial()
+    napis <- paste0("http://www.imdb.com/title/",ser$imdbId[1],"/epdate?ref_=ttep_ql_4")
+    wsp <- lm(ocena~id, ser)$coef
+    HTML("Dane o ocenach serialu <b>",as.character(ser$serial[1]),"</b> można pobrać ze strony <br/> <a href='", napis, "'>",napis,"</a><br><br>",
+         "Trend dla tego serialu opisuje prosta o równaniu: <b>", signif(wsp[1], 2), ifelse(wsp[2] > 0, " + ", " "), signif(wsp[2], 2),"*odcinek</b>")
   })
   
   mySerial %>%
