@@ -12,6 +12,12 @@ shinyServer(function(input, output) {
     mySerial()[,c("nazwa", "sezon", "odcinek","ocena", "glosow")]
   })
   
+  output$opis = renderUI({
+    napis <- paste0("http://www.imdb.com/title/",mySerial()$imdbId[1],"/epdate?ref_=ttep_ql_4")
+    HTML("Dane o ocenach tego serialu można pobrać ze strony <a href='", napis, "'>",napis,"</a><br><br>",
+         )
+  })
+  
   mySerial %>%
     ggvis(x = ~id, y = ~ocena, fill = ~sezon) %>%
     layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%

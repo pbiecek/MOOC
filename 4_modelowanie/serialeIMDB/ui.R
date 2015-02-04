@@ -83,7 +83,7 @@ shinyUI(fluidPage(
   fluidRow(selectInput("serial", "Jak wygląda popularność ulubionego serialu?", 
                        choices = seriale, 
                        selected = "Friends")),
-  fluidRow(ggvisOutput("serialPlot"))
-  #,  fluidRow(dataTableOutput("mytable"))
+  fluidRow(ggvisOutput("serialPlot")),
+  fluidRow(htmlOutput("opis"))
   )
 )
