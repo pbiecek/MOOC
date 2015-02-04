@@ -1,51 +1,33 @@
 library(shiny)
-library(Hmisc)
-library(ggthemes)
-library(dplyr)
-library(ggplot2)
-load("../PISAeurope.rda")
+library(ggvis)
+#setwd("~/GitHub/MOOC/4_modelowanie/serialeIMDB/")
+load("serialeIMDB.rda")
 
 shinyServer(function(input, output) {
-  myData <- reactive({
-    pisa <- as.data.frame(pisa)
-    pisa$grouping <- pisa[,input$svariable]
-    avgs <- 
-      pisa %>% 
-      filter(CNT %in% input$scnts) %>%
-      group_by(CNT, grouping) %>%
-      summarise(math = wtd.mean(PV1MATH, W_FSTUWT, na.rm=TRUE),
-                sd = sqrt(wtd.var(PV1MATH, W_FSTUWT, na.rm=TRUE)),
-                n = n(),
-                lmath = math - 1.96* sd/sqrt(n),
-                umath = math + 1.96* sd/sqrt(n))
-    avgs <- na.omit(avgs)
-    avgs
+  mySerial <- reactive({
+    serialeIMDB[serialeIMDB$serial == input$serial, ]
   })
   
-  output$errorbarPlot <- renderPlot({
-    #
-    # data preparation
-    avgs <- myData()
-    #
-    pl <- ggplot(avgs, aes(y=math, colour=CNT, x = grouping)) + 
-      geom_errorbar(aes(ymin=lmath, ymax=umath), 
-                    width=0.2, 
-                    position=position_dodge(.2)) +
-      geom_point(
-        position=position_dodge(.2)) + 
-      coord_flip() + 
-      theme(panel.grid.major.y=element_blank())
-    # plotting
-    
-    pl + switch(input$scheme,
-                      "Grey" = theme_grey(),
-                      "Black & white" = theme_bw(),
-                      "Tufte" = theme_tufte())
+  output$mytable = renderDataTable({
+    mySerial()[,c("nazwa", "sezon", "odcinek","ocena", "glosow")]
   })
+  
+  mySerial %>%
+    ggvis(x = ~id, y = ~ocena, fill = ~sezon) %>%
+    layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
+    layer_points(fillOpacity:=0.8) %>%
+    hide_legend("fill") %>%
+    hide_axis("x") %>%
+    set_options(width = 800,padding = padding(10, 10, 50, 50)) %>%
+#    scale_numeric("y", domain=c(0, 10)) %>%
+    add_axis("x", title = "Numer odcinka", 
+             properties = axis_props(
+      grid = list(stroke = "white")      
+    )) %>% layer_model_predictions(model = "lm") %>%
+    add_tooltip(function(data){
+      paste0(data$nazwa, "<br>ocena: ",as.character(data$ocena))
+    }, "hover") %>%
+    bind_shiny("serialPlot")
+
 })
 
-
-# The 'your turn' part:
-#
-# Add an shiny interface to  your 'PISA story' plot
-#

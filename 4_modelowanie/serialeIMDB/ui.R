@@ -1,37 +1,74 @@
 library(shiny)
 
+seriale <- c("'Allo 'Allo!", "24", "Adventure Time", "Agatha Christie's Poirot", 
+  "All in the Family", "Almost Human", "American Horror Story", 
+  "Archer", "Are You Afraid of the Dark?", "Arrested Development", 
+  "Attack on Titan", "Avatar: The Last Airbender", "Avrupa yakasi", 
+  "Batman: The Animated Series", "Battlestar Galactica", "Behzat Ç.: Bir Ankara Polisiyesi", 
+  "Berserk", "Black Adder the Third", "Black Books", "Black Mirror", 
+  "Black-Adder II", "Blackadder Goes Forth", "Blue Mountain State", 
+  "Boardwalk Empire", "Borgen", "Boston Legal", "Breaking Bad", 
+  "Broadchurch", "Californication", "Call the Midwife", "Carnivàle", 
+  "Castle", "Chappelle's Show", "Code Geass: Lelouch of the Rebellion", 
+  "Community", "Cosmos", "Cosmos: A Space-Time Odyssey", "Coupling", 
+  "Courage the Cowardly Dog", "Cowboy Bebop", "Curb Your Enthusiasm", 
+  "Deadwood", "Death Note", "Dexter", "Doctor Who", "Downton Abbey", 
+  "Dragon Ball", "Dragon Ball Z", "Dragon Ball Z Kai", "Dragonball", 
+  "Entourage", "Extras", "Family Guy", "Farscape", "Father Ted", 
+  "Fawlty Towers", "Firefly", "FLCL", "Flight of the Conchords", 
+  "Foyle's War", "Freaks and Geeks", "Friday Night Lights", "Friends", 
+  "Fringe", "Fullmetal Alchemist", "Fullmetal Alchemist Brotherhood", 
+  "Futurama", "Game of Thrones", "Garth Marenghi's Darkplace", 
+  "Get Smart", "Ghost in the Shell: Stand Alone Complex", "Green Wing", 
+  "Hannibal", "Hellsing Ultimate", "Homeland", "Homicide: Life on the Street", 
+  "House M.D.", "House of Cards", "How I Met Your Mother", "I Love Lucy", 
+  "I, Claudius", "I'm Alan Partridge", "Invader ZIM", "Isler Güçler", 
+  "It's Always Sunny in Philadelphia", "Jeeves and Wooster", "Justice League", 
+  "Justified", "Late Night with Conan O'Brien", "Leyla ile Mecnun", 
+  "Life", "Life on Mars", "Lost", "Louie", "Luther", "M*A*S*H", 
+  "Mad Men", "Metalocalypse", "Misfits", "Modern Family", "Monty Python's Flying Circus", 
+  "Mr. Bean", "My So-Called Life", "Mystery Science Theater 3000", 
+  "MythBusters", "Naruto: Shippûden", "Neon Genesis Evangelion", 
+  "One Piece", "Only Fools and Horses....", "Orange Is the New Black", 
+  "Orphan Black", "Oz", "Parks and Recreation", "Party Down", "Peep Show", 
+  "Person of Interest", "Planet Earth", "Police Squad!", "Prison Break", 
+  "Psych", "Pushing Daisies", "QI", "Red Dwarf", "Red vs. Blue: The Blood Gulch Chronicles", 
+  "Regular Show", "Rescue Me", "Rome", "Rurouni Kenshin", "Samurai Champloo", 
+  "Scrubs", "Seinfeld", "Shameless", "Sherlock", "Six Feet Under", 
+  "Sons of Anarchy", "South Park", "Southland", "Spaced", "Spartacus: War of the Damned", 
+  "Star Trek", "Star Trek: The Next Generation", "Stargate SG-1", 
+  "Suits", "Summer Heights High", "Supernatural", "Terriers", "The Adventures of Pete & Pete", 
+  "The Adventures of Sherlock Holmes", "The Adventures of Tintin", 
+  "The Andy Griffith Show", "The Angry Video Game Nerd", "The Avengers: Earth's Mightiest Heroes", 
+  "The Big Bang Theory", "The Black Adder", "The Boondocks", "The Bridge", 
+  "The Bugs Bunny Show", "The Colbert Report", "The Daily Show with Jon Stewart", 
+  "The Guild", "The Inbetweeners", "The IT Crowd", "The League", 
+  "The Legend of Korra", "The Mighty Boosh", "The Muppet Show", 
+  "The Newsroom", "The Office", "The Originals", "The Prisoner", 
+  "The Shield", "The Simpsons", "The Sopranos", "The Thick of It", 
+  "The Venture Bros.", "The Walking Dead", "The West Wing", "The Wire", 
+  "The Wonder Years", "The X-Files", "Top Gear", "Trailer Park Boys", 
+  "Trigun", "True Detective", "Twilight Zone", "Twin Peaks", "Undercover", 
+  "Utopia", "Veronica Mars", "Vikings", "White Collar", "Whose Line Is It Anyway?", 
+  "X-Men", "Young Justice")
+
 shinyUI(fluidPage(
-  titlePanel("My third Shiny app!"),
-  sidebarLayout(
-    sidebarPanel(
-      
-      selectInput("svariable", "Choose grouping variable", 
-                  choices = list("Number of books" = "ST28Q01", 
-                                 "Gender" = "ST04Q01",
-                                 "Public school" = "SC01Q01"), 
-                  selected = "ST04Q01"),
-      
-      selectInput("scheme", "Choose theme", 
-                  choices = list("Grey", 
-                                 "Black & white",
-                                 "Tufte"), 
-                  selected = "Grey"),
-      
-      checkboxGroupInput("scnts", 
-                  label = h3("Choose countries"), 
-                  choices = list("Poland", 
-                        "Germany", 
-                        "Finland",
-                        "Korea",
-                        "France",
-                        "United Kingdom",
-                        "Japan"),
-                  selected = c("Poland", "Germany"))
-      
-    ),
-    
-    mainPanel(
-      plotOutput("errorbarPlot")
-    )
+  tags$head(tags$style(HTML("
+      .ggvis-output-container {
+        margin-left: auto ;
+        margin-right: auto ;
+        width: 1500px;
+      }
+      .shiny-input-container {
+        margin-left: auto ;
+        margin-right: auto ;
+        width: 500px;
+      }
+    "))),
+  fluidRow(selectInput("serial", "Jak wygląda popularność ulubionego serialu?", 
+                       choices = seriale, 
+                       selected = "Friends")),
+  fluidRow(ggvisOutput("serialPlot"))
+  #,  fluidRow(dataTableOutput("mytable"))
   )
-))
+)
