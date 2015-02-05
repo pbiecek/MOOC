@@ -1,7 +1,7 @@
 ---
-title: "Dlaczego R?"
+title: "Trendy"
 author: "pogRomcy danych"
-date: "sezon 1 / odcinek 2<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 2 / odcinek 3<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -9,108 +9,225 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / pierwsze kroki / dlaczego R"
+    footer: "pogRomcy danych / modelowanie / trendy"
 ---
 
 # O czym jest ten odcinek
 
-Jest wiele powodów, dla których warto poznać język R do analizy danych.
 
-W tym odcinku pokażemy dlaczego warto poznać R, co można w tym języku zrobić oraz powiemy jak się tego języka nauczyć. 
-Powiemy też jakie umiejętności są potrzebne by efektywnie pracować z danymi w tym czy innym narzędziu oraz powiemy jak te umiejętności nabyć.
+Analizując dane, często trafiamy na sytuację, gdy mamy do porównania dwie grupy pomiarów i jesteśmy ciekawi, czy te grupy różnią się między sobą.
 
-Czy ten język i ten kurs jest dla Ciebie?
+Analizując dane medyczne możemy mieć pacjentów biorących lek A i lek B i chcemy sprawdzić czy skuteczność obu leków jest porównywalna czy też jedne z nich jest częściej lepszy. Analizując uprawę zbóż możemy mieć dwie odmiany i chcemy sprawdzić czy jedna daje wyższe plony niż druga. Takie przykłady można mnożyć.
 
-Być może jesteś zaawansowanym w boju badaczem danych z doskonałą znajomością SPSS / SAS / Statistica czy Stata.
+Zazwyczaj gdy w jednej grupie policzymy średnią określonej cechy i w drugiej grupie policzymy średnią tej cechy to któraś z tych średnich jest większa. 
 
-Być może jesteś analitykiem biznesowym z niezłą znajomością Excela lub Tableau.
+Jeżeli porównam średnie temperatury we Wrocławiu i średnie temperatury w Warszawie, to któraś z tych średnich będzie większa. Ale czy ta różnica wynika z losowych fluktuacji temperatury czy też jest odzwierciedleniem pewnej ogólnej prawidłowości, że w jednym z tych miast jest średnio cieplej?
 
-Być może Twoje dotychczasowe doświadczenia to programowanie w językach takich jak Python, Java czy C++.
+I tutaj pojawia się statystyka. Używając takich narzędzi jak testy dla dwóch prób możemy pomóc sobie w odpowiedzi na pytanie, czy obserwowane różnice są czysto przypadkowe, czy też nie.
 
-Być może masz za sobą pierwsze przymiarki do R czy to na zajęciach czy w ramach dokształcania się.
-
-A może jeszcze nie trafiłeś na rynek pracy i z czysto poznawczej ciekawości zajrzałeś na stronę tego kursu.
-
-R jest dla Ciebie. Tak czy inaczej aby analizować dane potrzebujesz dobrego narzędzia i umiejętności pracy z danymi. 
-
-Ten odcinek ma na celu zachęcenie Cię do dokładniejszego poznania języka R.
-
+W tym odcinku, na przykładzie danych z serwisu IMDB (Internet Movie Database), pokażemy jak działa test permutacyjny, uniwersalne narzędzie do porównywania dwóch grup.
 
 ---
 
-# Dlaczego R?
+# Baza danych o filmach i serialach
 
-*R jest dojrzałym językiem programowania zaprojektowanym z myślą o analizie danych oraz wizualizacji danych dostępnym bezpłatnie na otwartej licencji GPL.*
+W bazie danych o filmach IMDB (Internet Movie Database) znaleźć można dane o serialach a w szczególności średnie oceny użytkowników wystawione kolejnym odcinkom serialu.
 
-Przyjrzyjmy się temu zdaniu dokładniej.
+Przykładowo, na stronie http://www.imdb.com/title/tt0108778/epdate?ref_=ttep_ql_4 znajdują się oceny serialu *Friends* a na stronie http://www.imdb.com/title/tt0903747/epdate?ref_=ttep_ql_4  oceny serialu *Breaking Bad*.
 
-*R jest językiem programowania.* Oznacza to, że nie jest ograniczony do kilku algorytmów, które przewidzieli twórcy, ale każdy może napisać w nim własny algorytm Co więcej wiele osób korzysta z tej opcji i tworzy nowe algorytmy które inni użytkownicy R mogą wykorzystywać. Dzięki temu liczba algorytmów i funkcji dostępnych w R bardzo szybko się zwiększa.
+Dane te zostały pobrane z Internetu i przygotowane tak, że teraz są dostępne w zbiorze danych `serialeIMDB` w pakiecie `PogromcyDanych`, który towarzyszy temu kursowi.
 
-*Jest dojrzałym językiem.* Jest rozwijany od ponad 21 lat, dzięki czemu zdążył nabrać masy krytycznej. Pewne usterki projektowe wczesnych wersji R (np. ograniczenie do 4GB RAM) zostały dostrzeżone i wyeliminowane. Dziś jest to narzędzie rozwijane i przez dużą grupę statystyków, i inżynierów oprogramowania, co jest gwarancją stabilnego rozwoju.
-
-*Zaprojektowanym z myślą o analizie danych.* Dojrzałych języków programowania jest wiele, ale niewiele z nich nadaje się do interaktywnej pracy z danymi. W języku R połączono wybrane cechy języków funkcyjnych oraz obiektowych, a nacisk położono na pracę interaktywną z danymi. Dodatkowe biblioteki wspierają łatwe tworzenie raportów z wynikami. Dzięki tym cechom R jest stworzony do analizy danych.
-
-*Wizualizacji danych.* W języku R można wykonać grafiki statystyczne o publikacyjnej jakości. Oznacza to, że bez dodatkowych narzędzi można stworzyć profesjonalny wykres. Co więcej, jest wiele pakietów, dzięki czemu tworzenie takich wykresów jest proste. Omówimy je w drugim sezonie tego kursu.
-
-*Dostępny bezpłatnie na otwartej licencji GPL.* Program R jest dostępny bezpłatnie do każdych zastosowań. Czy to na uczelni, czy w działalności komercyjnej, możemy go wykorzystywać bez żadnych opłat. Co więcej, jest otwarty na otwartej licencji, co oznacza, że każdy ma dostęp do źródeł, każdy element można zobaczyć jak funkcjonuje, można sprawdzić czy nie zawiera błędów i ewentualnie usprawnić. 
+```{r, warning=FALSE, message=FALSE}
+library(PogromcyDanych)
+head(serialeIMDB)
+```
 
 ---
 
-# Dlaczego R?
+# Czy serial Friends jest lepszy niż serial Breaking Bed?
 
-Początkowo R zyskał popularność na uczelniach. Był i jest wykorzystywany do nauczania analizy danych jak i do prowadzenia badań naukowych. Można śmiało powiedzieć, że obecnie R jest głównym narzędziem używanym w dydaktyce na dobrych uczelniach. Zdominował prowadzenie badań naukowych w wielu dziedzinach, takich jak bioinformatyka czy genetyka. Jest bardzo popularny w zastosowaniach medycznych, finansowych i wielu innych.
+Mając taki zbiór danych, możemy porównać oceny odcinków dwóch seriali. Wyciągnijmy z tego zbioru danych oceny dla serialu *Friends* i oceny dla serialu *Breaking Bad*
 
-Od kilkunastu lat rośnie popularność R w przemyśle. Jedną z przyczyn jest to, że jest to narzędzie bezpłatne. Jest w nim również
-dostępnych bardzo wiele funkcji. Ale popularność swoją zawdzięcza też temu, że coraz więcej analityków zostało "wykształconych na programie R"" oraz ten program zna. Rośnie liczba ofert pracy dla osób znających język R.
+```{r}
+ocenyFriends     <- serialeIMDB[serialeIMDB$serial == "Friends", "ocena"]
+summary(ocenyFriends)
 
-Małe firmy często wybierają R by ciąć koszty, ale R jest również używany przez gigantów. Zarówno przez firmy analityczne (jako silnik analityczny), jak i przez media. Jest używany w Google, Facebook, NY Times, New Scientist i wielu innych firmach.
+ocenyBreakingBad <- serialeIMDB[serialeIMDB$serial == "Breaking Bad", "ocena"]
+summary(ocenyBreakingBad)
+```
 
-R doskonale też integruje się z innymi rozwiązaniami informatycznymi, takimi jak Python, Java, C, C++, Hadoop, bazy danych. 
+Średnia w jednym serialu to `8.508` a w drugim `8.481`. 
 
----
-
-# Dlaczego R?
-
-Zgodnie z wynikami Google Trends, zainteresowanie R rośnie (wzrosło dwukrotnie w czasie ostatnich dziesięciu lat), podczas gdy zainteresowanie innymi pakietami do analizy danych, takimi jak SPSS, SAS czy Stata maleje. 
-
-![Google trends](figs/googleTrends.png)
+Czy to duża różnica czy mała?
 
 ---
 
-# Czy warto uczyć się programować, czy nie lepiej wybrać klikanie?
+# Czy serial Friends jest lepszy niż serial Breaking Bed?
 
-Praca w R wymaga umiejętności programowania. Dla osób przyzwyczajonych do klikanych narzędzi oznacza to trudne początku. Gdy muszą porzucić stare i złe nawyki oraz nauczyć się składni i nowych nazw funkcji. Jest to trudne i wymaga czasu, ale warto przynajmniej z kilku powodów.
+Po lewej *Breaking Bad* po prawej *Friends*. Każdy punkt to ocena jednego odcinka.
 
-Jeżeli raz opracujemy skrypt wykonujący pewną pracę, możemy następnie ją łatwo powtórzyć. Wystarczy cały skrypt skopiować. Dzięki temu w miarę nabywania doświadczenia zwiększamy nasz potencjał.
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(ggvis)
+  tmp <- serialeIMDB[serialeIMDB$serial %in% c("Friends", "Breaking Bad"), ]
+  tmp$col <- c("#4d4dce", "#EE7600")[as.numeric(droplevels(tmp$serial))]
+  tmp <- tmp %>% 
+    group_by(serial) %>%
+    mutate(serialx = as.numeric(as.character(odcinek))/(1.2*max(as.numeric(as.character(odcinek)))))
+  tmp$serialx <- as.numeric(droplevels(tmp$serial)) + tmp$serialx
+  tmp  %>%
+  ggvis(x = ~serialx, y = ~ocena, fill := ~col) %>%
+  group_by(serial) %>%
+  layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
+  layer_points(fillOpacity:=0.8, shape = ~serial) %>%
+  hide_axis("x") %>%
+  set_options(width = 640,padding = padding(10, 10, 50, 50)) %>%
+  add_legend(c("fill", "shape")) %>%
+  layer_model_predictions(model = "lm", formula = ocena ~ I(serialx*0))
+```
 
-Mamy zapisane komendy, które użyliśmy do analiz. Jeżeli po roku chcemy je odtworzyć jest to prostsze niż w przypadku klikanych narzędzi.
 
-Jeżeli otrzymujemy dziwne wyniki, to całą ścieżkę analizy, która prowadzi do tych wyników możemy przeanalizować. Jest ona zapisana krok po kroku jako skrypt. Nie musimy jej przywoływać z pamięci.
+# Czy serial Friends jest lepszy niż serial Breaking Bed?
+
+Statystycy opracowali wiele testów aby porównać wartości w dwóch grupach. W większości przypadków te testy dają zbliżone wyniki, więc zamiast przedstawiać ich leksykon wyjaśnimy na jednym przykładzie na czym polega testowanie. Przedstawimy tak zwany test permutacyjny do porównywania średnich.
+
+Pomysł na porównanie dwóch grup składa się z trzech kroków. Przedstawmy je jeden po drugim.
+
+### Krok 1: Postaw hipotezę, określ co chcesz porównać
+
+Będziemy testować hipotezę, czy wartości w jednym zbiorze są istotnie większe niż wartości w drugim zbiorze. 
+
+Tę hipotezę, sformujmy w następujący sposób: *Czy obserwowana różnica pomiędzy średnimi ocenami jest wystarczająco duża, by uznać ją za istotną?*
+
+### Krok 2: Określ miarę wielkości różnic
+
+Ustalmy, że wielkość różnicy pomiędzy grupami będziemy mierzyć za pomocą wartości bezwzględnej z różnicy pomiędzy średnimi w obu grupach.
+
+```{r}
+mean(ocenyBreakingBad)
+mean(ocenyFriends)
+# moduł różnicy średnich
+(obserwowana_roznica <- abs(mean(ocenyBreakingBad) - mean(ocenyFriends)))
+```
+
+# Czy serial Friends jest lepszy niż serial Breaking Bed?
+
+### Krok 3: Porównaj zaobserwowaną wielkość różnicy z różnicą w sytuacji gdyby grupy nie były różne
+
+Wciąż nie wiemy, czy `0.02628083` to duża różnica czy mała. Musimy ją z czymś porównać.
+Najlepiej by było porównać ją z wartościami, które byśmy obserwowali gdyby te dwie grupy się nie różniły. 
+
+Ale skąd wiadomo jakie byłyby różnice gdyby obie grupy się nie różniły? 
+Możemy to oszacować w następujący sposób
+
+* [I] Wymieszamy losowo wartości w obu grupach zachowując liczebność grup. Dzięki temu otrzymamy dwie grupy o których wiemy, że się nie różnią istotnie a jedyne różnice wynikają z losowych fluktuacji,
+* [II] Policzymy jak duża jest różnica dla tych nowo wylosowanych grup,
+* [III] Powtórzymy kroki [I] i [II] wielokrotnie aby zobaczyć jak duże wartości może przyjmować ta różnica w sytuacji gdy obie grupy nie różnią się od siebie.
+
+To liczenie różnic na próbach różniących się jedynie losową fluktuacją jest realizowane przez poniższy kod.
+
+
+```{r}
+liczbaFriends <- length(ocenyFriends)
+
+roznice <- replicate(100000, {
+  # wymeiszaj losowo wartości
+  wymieszane <- sample(c(ocenyFriends, ocenyBreakingBad))
+  # losowo dobrane repliki próby
+  oceny1 <- wymieszane[1:liczbaFriends]
+  oceny2 <- wymieszane[-(1:liczbaFriends)]
+  # różnica pomiedzy losowymi grupami
+  abs(mean(oceny1) - mean(oceny2))
+})
+```
+
+# Czy serial Friends jest lepszy niż serial Breaking Bed?
+
+Możemy teraz wartość `obserwowana_roznica` porównać z wektorem wartości `roznice`. 
+Wektor różnice opisuje jakich różnic spodziewać się możemy gdy próby różnią się wyłącznie losową fluktuacja. Gdyby `obserwowana_roznica` była znacząco większa niż wartości z wektora różnice, to byłby to silny argument za tym, że różnica w średnich nie jest przypadkowa.
+
+Porównajmy na wykresie wielkości różnic dla losowych fluktuacji (na szaro) z obserwowaną różnicą (na czerwono).
+
+```{r}
+hist(roznice, 50, col="grey", main="", las=1, border="white")
+abline(v=obserwowana_roznica, col="red", lwd=5)
+```
+
+# Czy serial Friends jest lepszy niż serial Breaking Bed?
+
+Wykres pomaga w zrozumieniu tego rozkładu, ale aby podjąć decyzje lepiej mieć jedną liczbę. Policzmy jaka część różnic dla losowych fluktuacji jest większa niż obserwowana różnica.
+
+```{r}
+mean(roznice > obserwowana_roznica) + 1/100000
+```
+
+Czy wiedząc, że gdy próby są równe to w wyniku losowych fluktuacji w 64\% przypadków obserwuje się większą różnicę niż ta pomiędzy *Friends* a *Breaking Bad* uznamy różnicę pomiędzy tymi dwoma serialami za istotną?
+
+Pewnie nie. To jaki próg przyjmiemy zależy od konkretnego zastosowania, ale często za próg wybiera się 0.05.
+
+# Czy serial Friends jest lepszy niż serial Sherlock?
+
+Porównajmy dwa inne seriale. Po lewej prezentujemy serial Sherlock po prawej Friends.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+tmp <- serialeIMDB[serialeIMDB$serial %in% c("Friends", "Sherlock"), ]
+tmp$col <- c("#4d4dce", "#EE7600")[as.numeric(droplevels(tmp$serial))]
+tmp <- tmp %>% 
+  group_by(serial) %>%
+  mutate(serialx = as.numeric(as.character(odcinek))/(1.2*max(as.numeric(as.character(odcinek)))))
+tmp$serialx <- as.numeric(droplevels(tmp$serial)) + tmp$serialx
+tmp  %>%
+ggvis(x = ~serialx, y = ~ocena, fill := ~col) %>%
+group_by(serial) %>%
+layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
+layer_points(fillOpacity:=0.8, shape = ~serial) %>%
+hide_axis("x") %>%
+set_options(width = 640,padding = padding(10, 10, 50, 50)) %>%
+add_legend(c("fill", "shape")) %>%
+layer_model_predictions(model = "lm", formula = ocena ~ I(serialx*0))
+```
+
+# Czy serial Friends jest lepszy niż serial Sherlock?
+
+Różnica średnich pomiędzy tymi dwoma serialami wynosi 0.48. Wygląda na dużo, ale czy mamy jakiś argument, że jest to więcej niż przypadkowa fluktuacja?
+
+```{r}
+ocenyFriends     <- serialeIMDB[serialeIMDB$serial == "Friends", "ocena"]
+ocenySherlock    <- serialeIMDB[serialeIMDB$serial == "Sherlock", "ocena"]
+# moduł różnicy średnich
+(obserwowana_roznica <- abs(mean(ocenyBreakingBad) - mean(ocenySherlock)))
+```
+
+Powtórzmy test permutacyjny dla tych dwóch seriali. Tym razem obserwowana różnica jest wyższa niż praktycznie wszystkie wartości wygenerowane przez test permutacyjny.
+
+```{r}
+# permutacyjny test
+liczbaFriends <- length(ocenyFriends)
+roznice <- replicate(100000, {
+  wymieszane <- sample(c(ocenyFriends, ocenySherlock))
+  oceny1 <- wymieszane[1:liczbaFriends]
+  oceny2 <- wymieszane[-(1:liczbaFriends)]
+  # różnica pomiedzy losowymi grupami
+  abs(mean(oceny1) - mean(oceny2))
+})
+# istotność różnic
+mean(roznice > obserwowana_roznica) + 1/100000
+```
 
 ---
 
-# A co o tym myślą inni?
+# Które dwa seriale różnią się istotnie?
 
-Moje przekonanie, że R jest doskonałym narzędziem do analizy danych utrzymuje się od kilkunastu lat. Osiem lat temu napisałem ,,Przewodnik po pakiecie R'', dostępny na stronie http://biecek.pl/R, który do dzisiaj doczekał się trzeciego wydania. Nie jestem z pewnością bezstronnym obserwatorem, dlatego warto przyjrzeć się temu co o R mówią analitycy z firm, szpitali czy uczelni. 
+Używając poniższej aplikacji można porównać dowolne dwa seriale oraz ocenić, czy różnica jest statystycznie istotnie różna.
 
-Bardzo ciekawe zestawienie R z innymi pakietami do analizy danych (SAS/SPSS/Stata/Statistica) znajduje się pod tym adresem http://www.burns-stat.com/pages/Tutor/R_relative_statpack.pdf.
+<center><iframe width="870" height="700" frameborder="0" src="https://smarterpoland.shinyapps.io/serialeIMDB"></iframe></center>
 
-Poniżej zamieszczam kilka cytatów analityków pracujących na co dzień z danymi, a którzy docenili R.
+---
 
-*One of the greatest advantages of R: getting your work done better and in less time.*
+# Zadania
 
-  Frank Harrell, Biostatistics, Vanderbilt University
+* Znajdź dwa seriale (inne niż Friends i Sherlock), które różnią się istotnie, przyjmując za próg istotności 0.05.
 
+* Znajdź dwa seriale (inne niż Friends i Breaking Bad), które nie różnią się istotnie, przyjmując za próg istotności 0.05.
 
-*R has really become the second language for people coming out of grad school now, and there’s an amazing amount of code being written for it,* 
-
-  Max Kuhn, associate director of nonclinical statistics at Pfizer.
-
-*R is really important to the point that it’s hard to overvalue it. It allows statisticians to do very intricate and complicated analyses without knowing the blood and guts of computing systems.* 
-
-  Google research scientist, quoted in the New York Times
-
-*The great beauty of R is that you can modify it to do all sorts of things, and you have a lot of prepackaged stuff that’s already available, so you’re standing on the shoulders of giants.* 
-
-  Google chief economist, quoted in the New York Times
 
