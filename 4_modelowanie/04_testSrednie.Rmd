@@ -20,5 +20,9 @@ Wyjaśnienie statystyki testowej
 
 Test dla większej liczby par
 
+---
+
+<iframe width="770" height="700" src="https://smarterpoland.shinyapps.io/serialeIMDB_dwieGrupy"></iframe>
+
 
 
