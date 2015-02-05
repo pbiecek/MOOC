@@ -68,9 +68,14 @@ shinyUI(fluidPage(
                             .selectize-control {
                             margin-left: auto ;
                             margin-right: auto ;
-                            width: 300px;
+                            width: 250px;
                             }
                             .control-label {
+                            margin-left: auto ;
+                            margin-right: auto ;
+                            width: 250px;
+                            }
+                            .col-sm-4 {
                             margin-left: auto ;
                             margin-right: auto ;
                             width: 300px;
@@ -78,7 +83,7 @@ shinyUI(fluidPage(
                             .shiny-input-container {
                             margin-left: auto ;
                             margin-right: auto ;
-                            width: 300px!important;
+                            width: 250px!important;
                             }
                             "))),
   fluidRow(column(width = 4, selectInput("serial1", "Porównaj popularność serialu", 
