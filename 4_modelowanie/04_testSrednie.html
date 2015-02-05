@@ -78,10 +78,7 @@ pogRomcy danych
 <h1>Czy serial Friends jest lepszy niż serial Braking Bed?</h1>
 <p>Mając taki zbiór danych, możemy porównać oceny odcinków dwóch seriali. Wyciągnijmy z tego zbioru danych oceny dla serialu <em>Friends</em> i oceny dla serialu <em>Breaking Bad</em></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-
 ocenyFriends     &lt;-<span class="st"> </span>serialeIMDB %&gt;%<span class="st">  </span><span class="kw">filter</span>(serial ==<span class="st"> &quot;Friends&quot;</span>) %&gt;%<span class="st">  </span><span class="kw">select</span>(ocena)
-ocenyBreakingBad &lt;-<span class="st"> </span>serialeIMDB %&gt;%<span class="st">  </span><span class="kw">filter</span>(serial ==<span class="st"> &quot;Breaking Bad&quot;</span>) %&gt;%<span class="st">  </span><span class="kw">select</span>(ocena)
-
 <span class="kw">summary</span>(ocenyFriends)</code></pre>
 <pre><code>##      ocena      
 ##  Min.   :7.400  
@@ -90,7 +87,8 @@ ocenyBreakingBad &lt;-<span class="st"> </span>serialeIMDB %&gt;%<span class="st
 ##  Mean   :8.512  
 ##  3rd Qu.:8.700  
 ##  Max.   :9.600</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(ocenyBreakingBad)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">ocenyBreakingBad &lt;-<span class="st"> </span>serialeIMDB %&gt;%<span class="st">  </span><span class="kw">filter</span>(serial ==<span class="st"> &quot;Breaking Bad&quot;</span>) %&gt;%<span class="st">  </span><span class="kw">select</span>(ocena)
+<span class="kw">summary</span>(ocenyBreakingBad)</code></pre>
 <pre><code>##      ocena       
 ##  Min.   : 7.400  
 ##  1st Qu.: 8.025  
@@ -103,8 +101,19 @@ ocenyBreakingBad &lt;-<span class="st"> </span>serialeIMDB %&gt;%<span class="st
 </div>
 <div id="czy-serial-friends-jest-lepszy-niz-serial-braking-bed-2" class="slide section level1">
 <h1>Czy serial Friends jest lepszy niż serial Braking Bed?</h1>
+</div>
+<div id="czy-serial-friends-jest-lepszy-niz-serial-braking-bed-3" class="slide section level1">
+<h1>Czy serial Friends jest lepszy niż serial Braking Bed?</h1>
+</div>
+<div id="czy-serial-friends-jest-lepszy-niz-serial-braking-bed-4" class="slide section level1">
+<h1>Czy serial Friends jest lepszy niż serial Braking Bed?</h1>
+</div>
+<div id="czy-serial-friends-jest-lepszy-niz-serial-braking-bed-5" class="slide section level1">
+<h1>Czy serial Friends jest lepszy niż serial Braking Bed?</h1>
+<center>
 <iframe width="770" height="700" frameborder="0" src="https://smarterpoland.shinyapps.io/serialeIMDB_dwieGrupy">
 </iframe>
+</center>
 </div>
 <div class="slide section level1">
 

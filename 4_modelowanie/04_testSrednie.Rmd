@@ -48,12 +48,10 @@ head(serialeIMDB)
 Mając taki zbiór danych, możemy porównać oceny odcinków dwóch seriali. Wyciągnijmy z tego zbioru danych oceny dla serialu *Friends* i oceny dla serialu *Breaking Bad*
 
 ```{r}
-library(dplyr)
-
-ocenyFriends     <- serialeIMDB %>%  filter(serial == "Friends") %>%  select(ocena)
+ocenyFriends     <- serialeIMDB[serialeIMDB$serial == "Friends", "ocena"]
 summary(ocenyFriends)
 
-ocenyBreakingBad <- serialeIMDB %>%  filter(serial == "Breaking Bad") %>%  select(ocena)
+ocenyBreakingBad <- serialeIMDB[serialeIMDB$serial == "Breaking Bad", "ocena"]
 summary(ocenyBreakingBad)
 ```
 
@@ -65,6 +63,26 @@ Czy to duża różnica czy mała?
 
 # Czy serial Friends jest lepszy niż serial Braking Bed?
 
+Interesujące narzędzie do porównywania dwóch grup w roku 1945 zaproponował chemik i statystyk Frank Wilcoxon.
+
+Pomysł na porównanie dwóch grup skłąda się z trzech kroków. Przedstawmy je jeden po drugim.
+
+*Postaw hipotezę, określ co chcesz porównać*
+
+Będziemy testować hipotezę, czy wartości w jednym zbiorze są istotnie większe niż wartości w drugim zbiorze. 
+
+Tę hipotezę, sformuujmy w następujący sposób: *Czy obserwowana różnica pomiędzy ocenami jest wystarczająco duża, by uznać ją za istotną?*
+
+
+```{r}
+# ile par odcinków, takich że Friends są gorsze
+sum(outer(ocenyFriends, ocenyBreakingBad, `<`))
+# ile par odcinków, takich że Friends są lepsze
+sum(outer(ocenyFriends, ocenyBreakingBad, `>`))
+# ile par odcinków, takich że Friends są są równe
+sum(outer(ocenyFriends, ocenyBreakingBad, `==`))
+```
+
 ---
 
 # Czy serial Friends jest lepszy niż serial Braking Bed?
@@ -78,7 +96,7 @@ Czy to duża różnica czy mała?
 # Czy serial Friends jest lepszy niż serial Braking Bed?
 
 
-<iframe width="770" height="700" frameborder="0" src="https://smarterpoland.shinyapps.io/serialeIMDB_dwieGrupy"></iframe>
+<center><iframe width="770" height="700" frameborder="0" src="https://smarterpoland.shinyapps.io/serialeIMDB_dwieGrupy"></iframe></center>
 
 ---
 
