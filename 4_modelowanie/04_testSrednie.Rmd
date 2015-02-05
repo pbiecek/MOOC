@@ -18,17 +18,17 @@ Analizując dane, często trafiamy na sytuację, gdy mamy do porównania dwie gr
 
 Analizując dane medyczne możemy mieć pacjentów biorących lek A i lek B i chcemy sprawdzić czy skuteczność obu leków jest porównywalna czy też jedne z nich jest częściej lepszy. Analizując uprawę zbóż możemy mieć dwie odmiany i chcemy sprawdzić czy jedna daje wyższe plony niż druga. Takie przykłady można mnożyć.
 
-Zazwyczaj gdy w jednej grupie policzymy średnią okreslonej cechy i w drugiej grupie policzymy średnią tej cechy to któraś z tych średnich jest większa. 
+Zazwyczaj gdy w jednej grupie policzymy średnią określonej cechy i w drugiej grupie policzymy średnią tej cechy to któraś z tych średnich jest większa. 
 
 Jeżeli porównam średnie temperatury we Wrocławiu i średnie temperatury w Warszawie, to któraś z tych średnich będzie większa. Ale czy ta różnica wynika z losowych fluktuacji temperatury czy też jest odzwierciedleniem pewnej ogólnej prawidłowości, że w jednym z tych miast jest średnio cieplej?
 
 I tutaj pojawia się statystyka. Używając takich narzędzi jak testy dla dwóch prób możemy pomóc sobie w odpowiedzi na pytanie, czy obserwowane różnice są czysto przypadkowe, czy też nie.
 
-W tym odcinku, na przykładzie danych z serwisu IMDB (Internet Movie Database), pokażemy jak działa test Wilcoxona, uniwersalne narzędzie do porównywania dwóch grup.
+W tym odcinku, na przykładzie danych z serwisu IMDB (Internet Movie Database), pokażemy jak działa test permutacyjny, uniwersalne narzędzie do porównywania dwóch grup.
 
 ---
 
-# Czy serial Friends jest lepszy niż serial Braking Bed?
+# Baza danych o filmach i serialach
 
 W bazie danych o filmach IMDB (Internet Movie Database) znaleźć można dane o serialach a w szczególności średnie oceny użytkowników wystawione kolejnym odcinkom serialu.
 
@@ -43,7 +43,7 @@ head(serialeIMDB)
 
 ---
 
-# Czy serial Friends jest lepszy niż serial Braking Bed?
+# Czy serial Friends jest lepszy niż serial Breaking Bed?
 
 Mając taki zbiór danych, możemy porównać oceny odcinków dwóch seriali. Wyciągnijmy z tego zbioru danych oceny dla serialu *Friends* i oceny dla serialu *Breaking Bad*
 
@@ -61,7 +61,7 @@ Czy to duża różnica czy mała?
 
 ---
 
-# Czy serial Friends jest lepszy niż serial Braking Bed?
+# Czy serial Friends jest lepszy niż serial Breaking Bed?
 
 Po lewej *Breaking Bad* po prawej *Friends*. Każdy punkt to ocena jednego odcinka.
 
@@ -86,7 +86,7 @@ library(ggvis)
 ```
 
 
-# Czy serial Friends jest lepszy niż serial Braking Bed?
+# Czy serial Friends jest lepszy niż serial Breaking Bed?
 
 Statystycy opracowali wiele testów aby porównać wartości w dwóch grupach. W większości przypadków te testy dają zbliżone wyniki, więc zamiast przedstawiać ich leksykon wyjaśnimy na jednym przykładzie na czym polega testowanie. Przedstawimy tak zwany test permutacyjny do porównywania średnich.
 
@@ -96,7 +96,7 @@ Pomysł na porównanie dwóch grup składa się z trzech kroków. Przedstawmy je
 
 Będziemy testować hipotezę, czy wartości w jednym zbiorze są istotnie większe niż wartości w drugim zbiorze. 
 
-Tę hipotezę, sformuujmy w następujący sposób: *Czy obserwowana różnica pomiędzy średnimi ocenami jest wystarczająco duża, by uznać ją za istotną?*
+Tę hipotezę, sformujmy w następujący sposób: *Czy obserwowana różnica pomiędzy średnimi ocenami jest wystarczająco duża, by uznać ją za istotną?*
 
 ### Krok 2: Określ miarę wielkości różnic
 
@@ -109,11 +109,11 @@ mean(ocenyFriends)
 (obserwowana_roznica <- abs(mean(ocenyBreakingBad) - mean(ocenyFriends)))
 ```
 
-# Czy serial Friends jest lepszy niż serial Braking Bed?
+# Czy serial Friends jest lepszy niż serial Breaking Bed?
 
 ### Krok 3: Porównaj zaobserwowaną wielkość różnicy z różnicą w sytuacji gdyby grupy nie były różne
 
-Wciąż nie wiemy, czy `0.02628083` to duża róznica czy mała. Musimy ją z czymś porównać.
+Wciąż nie wiemy, czy `0.02628083` to duża różnica czy mała. Musimy ją z czymś porównać.
 Najlepiej by było porównać ją z wartościami, które byśmy obserwowali gdyby te dwie grupy się nie różniły. 
 
 Ale skąd wiadomo jakie byłyby różnice gdyby obie grupy się nie różniły? 
@@ -123,7 +123,7 @@ Możemy to oszacować w następujący sposób
 * [II] Policzymy jak duża jest różnica dla tych nowo wylosowanych grup,
 * [III] Powtórzymy kroki [I] i [II] wielokrotnie aby zobaczyć jak duże wartości może przyjmować ta różnica w sytuacji gdy obie grupy nie różnią się od siebie.
 
-To liczenie różnic na próbach różniących się jedynie losową fluktuacją jest realizowane przez ponższy kod.
+To liczenie różnic na próbach różniących się jedynie losową fluktuacją jest realizowane przez poniższy kod.
 
 
 ```{r}
@@ -140,7 +140,7 @@ roznice <- replicate(100000, {
 })
 ```
 
-# Czy serial Friends jest lepszy niż serial Braking Bed?
+# Czy serial Friends jest lepszy niż serial Breaking Bed?
 
 Możemy teraz wartość `obserwowana_roznica` porównać z wektorem wartości `roznice`. 
 Wektor różnice opisuje jakich różnic spodziewać się możemy gdy próby różnią się wyłącznie losową fluktuacja. Gdyby `obserwowana_roznica` była znacząco większa niż wartości z wektora różnice, to byłby to silny argument za tym, że różnica w średnich nie jest przypadkowa.
@@ -152,7 +152,7 @@ hist(roznice, 50, col="grey", main="", las=1, border="white")
 abline(v=obserwowana_roznica, col="red", lwd=5)
 ```
 
-# Czy serial Friends jest lepszy niż serial Braking Bed?
+# Czy serial Friends jest lepszy niż serial Breaking Bed?
 
 Wykres pomaga w zrozumieniu tego rozkładu, ale aby podjąć decyzje lepiej mieć jedną liczbę. Policzmy jaka część różnic dla losowych fluktuacji jest większa niż obserwowana różnica.
 
@@ -188,7 +188,7 @@ layer_model_predictions(model = "lm", formula = ocena ~ I(serialx*0))
 
 # Czy serial Friends jest lepszy niż serial Sherlock?
 
-Różnica średnich pomiędzy tymi dwoma serialami wynosi 0.48. Wygląda na dużo, ale czy amy jakiś argument, że jest to więcej niż przypadkowa fluktuacja?
+Różnica średnich pomiędzy tymi dwoma serialami wynosi 0.48. Wygląda na dużo, ale czy mamy jakiś argument, że jest to więcej niż przypadkowa fluktuacja?
 
 ```{r}
 ocenyFriends     <- serialeIMDB[serialeIMDB$serial == "Friends", "ocena"]
@@ -197,7 +197,7 @@ ocenySherlock    <- serialeIMDB[serialeIMDB$serial == "Sherlock", "ocena"]
 (obserwowana_roznica <- abs(mean(ocenyBreakingBad) - mean(ocenySherlock)))
 ```
 
-Powtórzmy test permutacyjny dla tych dwóch seriali. Tym razem obserwowana różnica jest wyższa niż praktycznie wszystkie wartości wygenerowane rpzez test permutacyjny.
+Powtórzmy test permutacyjny dla tych dwóch seriali. Tym razem obserwowana różnica jest wyższa niż praktycznie wszystkie wartości wygenerowane przez test permutacyjny.
 
 ```{r}
 # permutacyjny test
@@ -209,6 +209,7 @@ roznice <- replicate(100000, {
   # różnica pomiedzy losowymi grupami
   abs(mean(oceny1) - mean(oceny2))
 })
+# istotność różnic
 mean(roznice > obserwowana_roznica) + 1/100000
 ```
 
@@ -227,4 +228,5 @@ Używając poniższej aplikacji można porównać dowolne dwa seriale oraz oceni
 * Znajdź dwa seriale (inne niż Friends i Sherlock), które różnią się istotnie, przyjmując za próg istotności 0.05.
 
 * Znajdź dwa seriale (inne niż Friends i Breaking Bad), które nie różnią się istotnie, przyjmując za próg istotności 0.05.
+
 
