@@ -157,7 +157,7 @@ abline(v=obserwowana_roznica, col="red", lwd=5)
 Wykres pomaga w zrozumieniu tego rozkładu, ale aby podjąć decyzje lepiej mieć jedną liczbę. Policzmy jaka część różnic dla losowych fluktuacji jest większa niż obserwowana różnica.
 
 ```{r}
-mean(roznice > obserwowana_roznica)
+mean(roznice > obserwowana_roznica) + 1/100000
 ```
 
 Czy wiedząc, że gdy próby są równe to w wyniku losowych fluktuacji w 64\% przypadków obserwuje się większą różnicę niż ta pomiędzy *Friends* a *Breaking Bad* uznamy różnicę pomiędzy tymi dwoma serialami za istotną?
@@ -188,17 +188,18 @@ layer_model_predictions(model = "lm", formula = ocena ~ I(serialx*0))
 
 # Czy serial Friends jest lepszy niż serial Sherlock?
 
+Różnica średnich pomiędzy tymi dwoma serialami wynosi 0.48. Wygląda na dużo, ale czy amy jakiś argument, że jest to więcej niż przypadkowa fluktuacja?
 
 ```{r}
 ocenyFriends     <- serialeIMDB[serialeIMDB$serial == "Friends", "ocena"]
-summary(ocenyFriends)
-
-ocenySherlock <- serialeIMDB[serialeIMDB$serial == "Sherlock", "ocena"]
-summary(ocenySherlock)
-
+ocenySherlock    <- serialeIMDB[serialeIMDB$serial == "Sherlock", "ocena"]
 # moduł różnicy średnich
 (obserwowana_roznica <- abs(mean(ocenyBreakingBad) - mean(ocenySherlock)))
+```
 
+Powtórzmy test permutacyjny dla tych dwóch seriali. Tym razem obserwowana różnica jest wyższa niż praktycznie wszystkie wartości wygenerowane rpzez test permutacyjny.
+
+```{r}
 # permutacyjny test
 liczbaFriends <- length(ocenyFriends)
 roznice <- replicate(100000, {
@@ -208,42 +209,22 @@ roznice <- replicate(100000, {
   # różnica pomiedzy losowymi grupami
   abs(mean(oceny1) - mean(oceny2))
 })
-mean(roznice > obserwowana_roznica)
+mean(roznice > obserwowana_roznica) + 1/100000
 ```
-
-
 
 ---
 
-# Czy serial Friends jest lepszy niż serial Braking Bed?
+# Które dwa seriale różnią się istotnie?
 
+Używając poniższej aplikacji można porównać dowolne dwa seriale oraz ocenić, czy różnica jest statystycznie istotnie różna.
 
-<center><iframe width="770" height="700" frameborder="0" src="https://smarterpoland.shinyapps.io/serialeIMDB_dwieGrupy"></iframe></center>
+<center><iframe width="870" height="700" frameborder="0" src="https://smarterpoland.shinyapps.io/serialeIMDB_dwieGrupy"></iframe></center>
 
 ---
 
+# Zadania
 
+* Znajdź dwa seriale (inne niż Friends i Sherlock), które różnią się istotnie, przyjmując za próg istotności 0.05.
 
-Wilcoxon zaproponował, by dla pytania, które postawiliśmy w kroku 1 porównać każdą wartość z jednego zbioru z każdą wartością z drugiego zbioru a następnie policzyć:
-
-* [A] ile było par, takich że wartość z pierwszego zbioru była większa od wartości z drugiego zbioru,
-* [B] ile było par, takich że wartość z pierwszego zbioru była mniejsza od wartości z drugiego zbioru,
-* [C] ile było par, takich że wartość z pierwszego zbioru była równa wartości z drugiego zbioru.
-
-Następnie, jako miarę różnicy dwóch grup wybierzemy większą z liczb [A] i [B].
-
-Jak to wygląda dla naszych seriali? 
-
-Funkcja `outer(x, y, fun)` wykonuje funkcję `fun` dla każdej pary wartości z wektorów `x` i `y`. W poniższym przykładzie porównujemy jażdą parę a następnie sumujemy ile razy wystąpiła wartość `TRUE` w porównaniu.
-
-```{r}
-# ile par odcinków, takich że Friends są gorsze
-sum(outer(ocenyFriends, ocenyBreakingBad, `<`))
-# ile par odcinków, takich że Friends są lepsze
-sum(outer(ocenyFriends, ocenyBreakingBad, `>`))
-# ile par odcinków, takich że Friends są są równe
-sum(outer(ocenyFriends, ocenyBreakingBad, `==`))
-```
-
-Tak więc porównując wszystkie pary wartości w `6260` przypadkach oceny odcinków z serialu *Friends* były gorsze a w `7700` były lepsze niż w serialu *Breaking Bad*.
+* Znajdź dwa seriale (inne niż Friends i Breaking Bad), które nie różnią się istotnie, przyjmując za próg istotności 0.05.
 
