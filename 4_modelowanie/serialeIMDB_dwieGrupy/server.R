@@ -1,5 +1,6 @@
 library(shiny)
 library(ggvis)
+library(dplyr)
 #setwd("~/GitHub/MOOC/4_modelowanie/serialeIMDB/")
 load("serialeIMDB.rda")
 
