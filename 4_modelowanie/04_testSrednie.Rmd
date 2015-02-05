@@ -14,15 +14,73 @@ output:
 
 # O czym jest ten odcinek
 
-Test Wilcoxona dla dwóch średnich
+Analizując dane, często trafiamy na sytuację, gdy mamy do porównania dwie grupy pomiarów i jesteśmy ciekawi, czy te grupy różnią się między sobą.
 
-Wyjaśnienie statystyki testowej
+Analizując dane medyczne możemy mieć pacjentów biorących lek A i lek B i chcemy sprawdzić czy skuteczność obu leków jest porównywalna czy też jedne z nich jest częściej lepszy. Analizując uprawę zbóż możemy mieć dwie odmiany i chcemy sprawdzić czy jedna daje wyższe plony niż druga. Takie przykłady można mnożyć.
 
-Test dla większej liczby par
+Zazwyczaj gdy w jednej grupie policzymy średnią okreslonej cechy i w drugiej grupie policzymy średnią tej cechy to któraś z tych średnich jest większa. 
+
+Jeżeli porównam średnie temperatury we Wrocławiu i średnie temperatury w Warszawie, to któraś z tych średnich będzie większa. Ale czy ta różnica wynika z losowych fluktuacji temperatury czy też jest odzwierciedleniem pewnej ogólnej prawidłowości, że w jednym z tych miast jest średnio cieplej?
+
+I tutaj pojawia się statystyka. Używając takich narzędzi jak testy dla dwóch prób możemy pomóc sobie w odpowiedzi na pytanie, czy obserwowane różnice są czysto przypadkowe, czy też nie.
+
+W tym odcinku, na przykładzie danych z serwisu IMDB (Internet Movie Database), pokażemy jak działa test Wilcoxona, uniwersalne narzędzie do porównywania dwóch grup.
 
 ---
 
-<iframe width="770" height="700" src="https://smarterpoland.shinyapps.io/serialeIMDB_dwieGrupy"></iframe>
+# Czy serial Friends jest lepszy niż serial Braking Bed?
+
+W bazie danych o filmach IMDB (Internet Movie Database) znaleźć można dane o serialach a w szczególności średnie oceny użytkowników wystawione kolejnym odcinkom serialu.
+
+Przykładowo, na stronie http://www.imdb.com/title/tt0108778/epdate?ref_=ttep_ql_4 znajdują się oceny serialu *Friends* a na stronie http://www.imdb.com/title/tt0903747/epdate?ref_=ttep_ql_4  oceny serialu *Breaking Bad*.
+
+Dane te zostały pobrane z Internetu i przygotowane tak, że teraz są dostępne w zbiorze danych `serialeIMDB` w pakiecie `PogromcyDanych`, który towarzyszy temu kursowi.
+
+```{r, warning=FALSE, message=FALSE}
+library(PogromcyDanych)
+head(serialeIMDB)
+```
+
+---
+
+# Czy serial Friends jest lepszy niż serial Braking Bed?
+
+Mając taki zbiór danych, możemy porównać oceny odcinków dwóch seriali. Wyciągnijmy z tego zbioru danych oceny dla serialu *Friends* i oceny dla serialu *Breaking Bad*
+
+```{r}
+library(dplyr)
+
+ocenyFriends     <- serialeIMDB %>%  filter(serial == "Friends") %>%  select(ocena)
+summary(ocenyFriends)
+
+ocenyBreakingBad <- serialeIMDB %>%  filter(serial == "Breaking Bad") %>%  select(ocena)
+summary(ocenyBreakingBad)
+```
+
+Średnia w jednym serialu to `8.508` a w drugim `8.481`. Mediana w jednym to `8.5` a w drugim `8.4`.
+
+Czy to duża różnica czy mała?
+
+---
+
+# Czy serial Friends jest lepszy niż serial Braking Bed?
+
+---
+
+# Czy serial Friends jest lepszy niż serial Braking Bed?
+
+---
+
+# Czy serial Friends jest lepszy niż serial Braking Bed?
+
+---
+
+# Czy serial Friends jest lepszy niż serial Braking Bed?
+
+
+<iframe width="770" height="700" frameborder="0" src="https://smarterpoland.shinyapps.io/serialeIMDB_dwieGrupy"></iframe>
+
+---
 
 
 
