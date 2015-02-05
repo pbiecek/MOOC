@@ -67,12 +67,25 @@ Interesujące narzędzie do porównywania dwóch grup w roku 1945 zaproponował 
 
 Pomysł na porównanie dwóch grup skłąda się z trzech kroków. Przedstawmy je jeden po drugim.
 
-*Postaw hipotezę, określ co chcesz porównać*
+# Krok 1: Postaw hipotezę, określ co chcesz porównać
 
 Będziemy testować hipotezę, czy wartości w jednym zbiorze są istotnie większe niż wartości w drugim zbiorze. 
 
 Tę hipotezę, sformuujmy w następujący sposób: *Czy obserwowana różnica pomiędzy ocenami jest wystarczająco duża, by uznać ją za istotną?*
 
+# Krok 2: Określ miarę wielkości różnic
+
+Wilcoxon zaproponował, by dla pytania, które postawiliśmy w kroku 1 porównać każdą wartość z jednego zbioru z każdą wartością z drugiego zbioru a następnie policzyć:
+
+* [A] ile było par, takich że wartość z pierwszego zbioru była większa od wartości z drugiego zbioru,
+* [B] ile było par, takich że wartość z pierwszego zbioru była mniejsza od wartości z drugiego zbioru,
+* [C] ile było par, takich że wartość z pierwszego zbioru była równa wartości z drugiego zbioru.
+
+Następnie, jako miarę różnicy dwóch grup wybierzemy większą z liczb [A] i [B].
+
+Jak to wygląda dla naszych seriali? 
+
+Funkcja `outer(x, y, fun)` wykonuje funkcję `fun` dla każdej pary wartości z wektorów `x` i `y`. W poniższym przykładzie porównujemy jażdą parę a następnie sumujemy ile razy wystąpiła wartość `TRUE` w porównaniu.
 
 ```{r}
 # ile par odcinków, takich że Friends są gorsze
@@ -83,13 +96,55 @@ sum(outer(ocenyFriends, ocenyBreakingBad, `>`))
 sum(outer(ocenyFriends, ocenyBreakingBad, `==`))
 ```
 
+Tak więc porównując wszystkie pary wartości w `6260` przypadkach oceny odcinków z serialu *Friends* były gorsze a w `7700` były lepsze niż w serialu *Breaking Bad*.
+
+Za naszą miarę różnicy wybierzemy większą z tych dwóch liczb, czyli `7700`.
+
+# Krok 3: Porównaj zaobserwowaną wielkość różnicy z różnicą w sytuacji gdyby grupy nie były różne
+
+Wciąż nie wiemy, czy to `7700` to duża róznica czy mała. Musimy ją z czymś porównać.
+
+Frank Wilcoxon zaproponował, by porównać ją z wartościami, które byśmy obserwowali gdyby te dwie grupy się nie różniły. 
+
+Ale skąd wiadomo jakie byłyby różnice gdyby obie grupy się nie różniły? Możemy to oszacować w następujący sposób
+
+* [I] Wymieszajmy losowo wartości w obu grupach zachowując jedynie liczebność grupy. Dzięki temu otrzymamy dwie grupy o których wiemy, że się nie różnią istotnie a jedyne różnice wynikają z losowych fluktuacji w przypisaniach
+* [II] Policzmy jak duża jest różnica dla tych nowo wylosowanych grup
+* [III] Powtórzmy kroki [I] i [II] wielokrotnie aby zobaczyć jak duże wartości może przyjmować ta różnica w styuacji gdy obie grupy nie różnią się od siebie
+
+```{r}
+liczbaFriends <- length(ocenyFriends)
+liczbaBreakingBad <- length(ocenyBreakingBad)
+
+roznice <- replicate(10000, {
+  wymieszane <- sample(c(ocenyFriends, ocenyBreakingBad))
+  oceny1 <- wymieszane[1:liczbaFriends]
+  oceny2 <- wymieszane[(liczbaFriends+1):(liczbaFriends+liczbaBreakingBad)]
+
+  mniejszych <- sum(outer(oceny1, oceny2, `<`))
+  wiekszych <- sum(outer(oceny1, oceny2, `>`))
+  max(mniejszych, wiekszych)
+})
+```
+
+```{r}
+quantile(roznice, seq(0,1,0.1))
+```
+
+```{r}
+mean(roznice > 7700)
+```
+
+
+
+
+
+
+
 ---
 
 # Czy serial Friends jest lepszy niż serial Braking Bed?
 
----
-
-# Czy serial Friends jest lepszy niż serial Braking Bed?
 
 ---
 

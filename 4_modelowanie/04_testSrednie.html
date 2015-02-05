@@ -77,38 +77,82 @@ pogRomcy danych
 <div id="czy-serial-friends-jest-lepszy-niz-serial-braking-bed-1" class="slide section level1">
 <h1>Czy serial Friends jest lepszy niż serial Braking Bed?</h1>
 <p>Mając taki zbiór danych, możemy porównać oceny odcinków dwóch seriali. Wyciągnijmy z tego zbioru danych oceny dla serialu <em>Friends</em> i oceny dla serialu <em>Breaking Bad</em></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-ocenyFriends     &lt;-<span class="st"> </span>serialeIMDB %&gt;%<span class="st">  </span><span class="kw">filter</span>(serial ==<span class="st"> &quot;Friends&quot;</span>) %&gt;%<span class="st">  </span><span class="kw">select</span>(ocena)
+<pre class="sourceCode r"><code class="sourceCode r">ocenyFriends     &lt;-<span class="st"> </span>serialeIMDB[serialeIMDB$serial ==<span class="st"> &quot;Friends&quot;</span>, <span class="st">&quot;ocena&quot;</span>]
 <span class="kw">summary</span>(ocenyFriends)</code></pre>
-<pre><code>##      ocena      
-##  Min.   :7.400  
-##  1st Qu.:8.300  
-##  Median :8.500  
-##  Mean   :8.512  
-##  3rd Qu.:8.700  
-##  Max.   :9.600</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">ocenyBreakingBad &lt;-<span class="st"> </span>serialeIMDB %&gt;%<span class="st">  </span><span class="kw">filter</span>(serial ==<span class="st"> &quot;Breaking Bad&quot;</span>) %&gt;%<span class="st">  </span><span class="kw">select</span>(ocena)
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   7.400   8.300   8.500   8.512   8.700   9.600</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">ocenyBreakingBad &lt;-<span class="st"> </span>serialeIMDB[serialeIMDB$serial ==<span class="st"> &quot;Breaking Bad&quot;</span>, <span class="st">&quot;ocena&quot;</span>]
 <span class="kw">summary</span>(ocenyBreakingBad)</code></pre>
-<pre><code>##      ocena       
-##  Min.   : 7.400  
-##  1st Qu.: 8.025  
-##  Median : 8.400  
-##  Mean   : 8.485  
-##  3rd Qu.: 8.800  
-##  Max.   :10.000</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   7.400   8.025   8.400   8.485   8.800  10.000</code></pre>
 <p>Średnia w jednym serialu to <code>8.508</code> a w drugim <code>8.481</code>. Mediana w jednym to <code>8.5</code> a w drugim <code>8.4</code>.</p>
 <p>Czy to duża różnica czy mała?</p>
 </div>
 <div id="czy-serial-friends-jest-lepszy-niz-serial-braking-bed-2" class="slide section level1">
 <h1>Czy serial Friends jest lepszy niż serial Braking Bed?</h1>
+<p>Interesujące narzędzie do porównywania dwóch grup w roku 1945 zaproponował chemik i statystyk Frank Wilcoxon.</p>
+<p>Pomysł na porównanie dwóch grup skłąda się z trzech kroków. Przedstawmy je jeden po drugim.</p>
+</div>
+<div id="krok-1-postaw-hipoteze-okresl-co-chcesz-porownac" class="slide section level1">
+<h1>Krok 1: Postaw hipotezę, określ co chcesz porównać</h1>
+<p>Będziemy testować hipotezę, czy wartości w jednym zbiorze są istotnie większe niż wartości w drugim zbiorze.</p>
+<p>Tę hipotezę, sformuujmy w następujący sposób: <em>Czy obserwowana różnica pomiędzy ocenami jest wystarczająco duża, by uznać ją za istotną?</em></p>
+</div>
+<div id="krok-2-okresl-miare-wielkosci-roznic" class="slide section level1">
+<h1>Krok 2: Określ miarę wielkości różnic</h1>
+<p>Wilcoxon zaproponował, by dla pytania, które postawiliśmy w kroku 1 porównać każdą wartość z jednego zbioru z każdą wartością z drugiego zbioru a następnie policzyć:</p>
+<ul>
+<li>[A] ile było par, takich że wartość z pierwszego zbioru była większa od wartości z drugiego zbioru,</li>
+<li>[B] ile było par, takich że wartość z pierwszego zbioru była mniejsza od wartości z drugiego zbioru,</li>
+<li>[C] ile było par, takich że wartość z pierwszego zbioru była równa wartości z drugiego zbioru.</li>
+</ul>
+<p>Następnie, jako miarę różnicy dwóch grup wybierzemy większą z liczb [A] i [B].</p>
+<p>Jak to wygląda dla naszych seriali?</p>
+<p>Funkcja <code>outer(x, y, fun)</code> wykonuje funkcję <code>fun</code> dla każdej pary wartości z wektorów <code>x</code> i <code>y</code>. W poniższym przykładzie porównujemy jażdą parę a następnie sumujemy ile razy wystąpiła wartość <code>TRUE</code> w porównaniu.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ile par odcinków, takich że Friends są gorsze</span>
+<span class="kw">sum</span>(<span class="kw">outer</span>(ocenyFriends, ocenyBreakingBad, <span class="st">`</span><span class="dt">&lt;</span><span class="st">`</span>))</code></pre>
+<pre><code>## [1] 6260</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ile par odcinków, takich że Friends są lepsze</span>
+<span class="kw">sum</span>(<span class="kw">outer</span>(ocenyFriends, ocenyBreakingBad, <span class="st">`</span><span class="dt">&gt;</span><span class="st">`</span>))</code></pre>
+<pre><code>## [1] 7700</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ile par odcinków, takich że Friends są są równe</span>
+<span class="kw">sum</span>(<span class="kw">outer</span>(ocenyFriends, ocenyBreakingBad, <span class="st">`</span><span class="dt">==</span><span class="st">`</span>))</code></pre>
+<pre><code>## [1] 796</code></pre>
+<p>Tak więc porównując wszystkie pary wartości w <code>6260</code> przypadkach oceny odcinków z serialu <em>Friends</em> były gorsze a w <code>7700</code> były lepsze niż w serialu <em>Breaking Bad</em>.</p>
+<p>Za naszą miarę różnicy wybierzemy większą z tych dwóch liczb, czyli <code>7700</code>.</p>
+</div>
+<div id="krok-3-porownaj-zaobserwowana-wielkosc-roznicy-z-roznica-w-sytuacji-gdyby-grupy-nie-byy-rozne" class="slide section level1">
+<h1>Krok 3: Porównaj zaobserwowaną wielkość różnicy z różnicą w sytuacji gdyby grupy nie były różne</h1>
+<p>Wciąż nie wiemy, czy to <code>7700</code> to duża róznica czy mała. Musimy ją z czymś porównać.</p>
+<p>Frank Wilcoxon zaproponował, by porównać ją z wartościami, które byśmy obserwowali gdyby te dwie grupy się nie różniły.</p>
+<p>Ale skąd wiadomo jakie byłyby różnice gdyby obie grupy się nie różniły? Możemy to oszacować w następujący sposób</p>
+<ul>
+<li>[I] Wymieszajmy losowo wartości w obu grupach zachowując jedynie liczebność grupy. Dzięki temu otrzymamy dwie grupy o których wiemy, że się nie różnią istotnie a jedyne różnice wynikają z losowych fluktuacji w przypisaniach</li>
+<li>[II] Policzmy jak duża jest różnica dla tych nowo wylosowanych grup</li>
+<li>[III] Powtórzmy kroki [I] i [II] wielokrotnie aby zobaczyć jak duże wartości może przyjmować ta różnica w styuacji gdy obie grupy nie różnią się od siebie</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">liczbaFriends &lt;-<span class="st"> </span><span class="kw">length</span>(ocenyFriends)
+liczbaBreakingBad &lt;-<span class="st"> </span><span class="kw">length</span>(ocenyBreakingBad)
+
+roznice &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">10000</span>, {
+  wymieszane &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(ocenyFriends, ocenyBreakingBad))
+  oceny1 &lt;-<span class="st"> </span>wymieszane[<span class="dv">1</span>:liczbaFriends]
+  oceny2 &lt;-<span class="st"> </span>wymieszane[(liczbaFriends<span class="dv">+1</span>):(liczbaFriends+liczbaBreakingBad)]
+
+  mniejszych &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">outer</span>(oceny1, oceny2, <span class="st">`</span><span class="dt">&lt;</span><span class="st">`</span>))
+  wiekszych &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">outer</span>(oceny1, oceny2, <span class="st">`</span><span class="dt">&gt;</span><span class="st">`</span>))
+  <span class="kw">max</span>(mniejszych, wiekszych)
+})</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">quantile</span>(roznice, <span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.1</span>))</code></pre>
+<pre><code>##   0%  10%  20%  30%  40%  50%  60%  70%  80%  90% 100% 
+## 6739 6878 6959 7039 7125 7217 7320 7433 7583 7805 9011</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(roznice &gt;<span class="st"> </span><span class="dv">7700</span>)</code></pre>
+<pre><code>## [1] 0.1419</code></pre>
 </div>
 <div id="czy-serial-friends-jest-lepszy-niz-serial-braking-bed-3" class="slide section level1">
 <h1>Czy serial Friends jest lepszy niż serial Braking Bed?</h1>
 </div>
 <div id="czy-serial-friends-jest-lepszy-niz-serial-braking-bed-4" class="slide section level1">
-<h1>Czy serial Friends jest lepszy niż serial Braking Bed?</h1>
-</div>
-<div id="czy-serial-friends-jest-lepszy-niz-serial-braking-bed-5" class="slide section level1">
 <h1>Czy serial Friends jest lepszy niż serial Braking Bed?</h1>
 <center>
 <iframe width="770" height="700" frameborder="0" src="https://smarterpoland.shinyapps.io/serialeIMDB_dwieGrupy">
