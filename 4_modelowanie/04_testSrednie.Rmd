@@ -63,17 +63,42 @@ Czy to duża różnica czy mała?
 
 # Czy serial Friends jest lepszy niż serial Braking Bed?
 
+Po lewej *Breaking Bad* po prawej *Friends*. Każdy punkt to ocena jednego odcinka.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(ggvis)
+  tmp <- serialeIMDB[serialeIMDB$serial %in% c("Friends", "Breaking Bad"), ]
+  tmp$col <- c("#4d4dce", "#EE7600")[as.numeric(droplevels(tmp$serial))]
+  tmp <- tmp %>% 
+    group_by(serial) %>%
+    mutate(serialx = as.numeric(as.character(odcinek))/(1.2*max(as.numeric(as.character(odcinek)))))
+  tmp$serialx <- as.numeric(droplevels(tmp$serial)) + tmp$serialx
+  tmp  %>%
+  ggvis(x = ~serialx, y = ~ocena, fill := ~col) %>%
+  group_by(serial) %>%
+  layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
+  layer_points(fillOpacity:=0.8, shape = ~serial) %>%
+  hide_axis("x") %>%
+  set_options(width = 640,padding = padding(10, 10, 50, 50)) %>%
+  add_legend(c("fill", "shape")) %>%
+  layer_model_predictions(model = "lm", formula = ocena ~ I(serialx*0))
+```
+
+
+# Czy serial Friends jest lepszy niż serial Braking Bed?
+
 Statystycy opracowali wiele testów aby porównać wartości w dwóch grupach. W większości przypadków te testy dają zbliżone wyniki, więc zamiast przedstawiać ich leksykon wyjaśnimy na jednym przykładzie na czym polega testowanie. Przedstawimy tak zwany test permutacyjny do porównywania średnich.
 
 Pomysł na porównanie dwóch grup składa się z trzech kroków. Przedstawmy je jeden po drugim.
 
-# Krok 1: Postaw hipotezę, określ co chcesz porównać
+### Krok 1: Postaw hipotezę, określ co chcesz porównać
 
 Będziemy testować hipotezę, czy wartości w jednym zbiorze są istotnie większe niż wartości w drugim zbiorze. 
 
 Tę hipotezę, sformuujmy w następujący sposób: *Czy obserwowana różnica pomiędzy średnimi ocenami jest wystarczająco duża, by uznać ją za istotną?*
 
-# Krok 2: Określ miarę wielkości różnic
+### Krok 2: Określ miarę wielkości różnic
 
 Ustalmy, że wielkość różnicy pomiędzy grupami będziemy mierzyć za pomocą wartości bezwzględnej z różnicy pomiędzy średnimi w obu grupach.
 
@@ -84,19 +109,22 @@ mean(ocenyFriends)
 (obserwowana_roznica <- abs(mean(ocenyBreakingBad) - mean(ocenyFriends)))
 ```
 
-# Krok 3: Porównaj zaobserwowaną wielkość różnicy z różnicą w sytuacji gdyby grupy nie były różne
+# Czy serial Friends jest lepszy niż serial Braking Bed?
+
+### Krok 3: Porównaj zaobserwowaną wielkość różnicy z różnicą w sytuacji gdyby grupy nie były różne
 
 Wciąż nie wiemy, czy `0.02628083` to duża róznica czy mała. Musimy ją z czymś porównać.
-
 Najlepiej by było porównać ją z wartościami, które byśmy obserwowali gdyby te dwie grupy się nie różniły. 
 
 Ale skąd wiadomo jakie byłyby różnice gdyby obie grupy się nie różniły? 
-
 Możemy to oszacować w następujący sposób
 
 * [I] Wymieszamy losowo wartości w obu grupach zachowując liczebność grup. Dzięki temu otrzymamy dwie grupy o których wiemy, że się nie różnią istotnie a jedyne różnice wynikają z losowych fluktuacji,
 * [II] Policzymy jak duża jest różnica dla tych nowo wylosowanych grup,
 * [III] Powtórzymy kroki [I] i [II] wielokrotnie aby zobaczyć jak duże wartości może przyjmować ta różnica w sytuacji gdy obie grupy nie różnią się od siebie.
+
+To liczenie różnic na próbach różniących się jedynie losową fluktuacją jest realizowane przez ponższy kod.
+
 
 ```{r}
 liczbaFriends <- length(ocenyFriends)
@@ -112,16 +140,19 @@ roznice <- replicate(100000, {
 })
 ```
 
+# Czy serial Friends jest lepszy niż serial Braking Bed?
+
 Możemy teraz wartość `obserwowana_roznica` porównać z wektorem wartości `roznice`. 
 Wektor różnice opisuje jakich różnic spodziewać się możemy gdy próby różnią się wyłącznie losową fluktuacja. Gdyby `obserwowana_roznica` była znacząco większa niż wartości z wektora różnice, to byłby to silny argument za tym, że różnica w średnich nie jest przypadkowa.
 
 Porównajmy na wykresie wielkości różnic dla losowych fluktuacji (na szaro) z obserwowaną różnicą (na czerwono).
 
 ```{r}
-quantile(roznice, seq(0,1,0.1))
 hist(roznice, 50, col="grey", main="", las=1, border="white")
 abline(v=obserwowana_roznica, col="red", lwd=5)
 ```
+
+# Czy serial Friends jest lepszy niż serial Braking Bed?
 
 Wykres pomaga w zrozumieniu tego rozkładu, ale aby podjąć decyzje lepiej mieć jedną liczbę. Policzmy jaka część różnic dla losowych fluktuacji jest większa niż obserwowana różnica.
 
@@ -129,15 +160,57 @@ Wykres pomaga w zrozumieniu tego rozkładu, ale aby podjąć decyzje lepiej mie�
 mean(roznice > obserwowana_roznica)
 ```
 
-Czy wiedząc, że gdy próby są równe to w wyniku losowych fluktuacji w 64\% przypadków obserwuje się większą różnicę niż ta pomiędzy *Friends* a *Breaking Bad*
+Czy wiedząc, że gdy próby są równe to w wyniku losowych fluktuacji w 64\% przypadków obserwuje się większą różnicę niż ta pomiędzy *Friends* a *Breaking Bad* uznamy różnicę pomiędzy tymi dwoma serialami za istotną?
+
+Pewnie nie. To jaki próg przyjmiemy zależy od konkretnego zastosowania, ale często za próg wybiera się 0.05.
+
+# Czy serial Friends jest lepszy niż serial Sherlock?
+
+Porównajmy dwa inne seriale. Po lewej prezentujemy serial Sherlock po prawej Friends.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+tmp <- serialeIMDB[serialeIMDB$serial %in% c("Friends", "Sherlock"), ]
+tmp$col <- c("#4d4dce", "#EE7600")[as.numeric(droplevels(tmp$serial))]
+tmp <- tmp %>% 
+  group_by(serial) %>%
+  mutate(serialx = as.numeric(as.character(odcinek))/(1.2*max(as.numeric(as.character(odcinek)))))
+tmp$serialx <- as.numeric(droplevels(tmp$serial)) + tmp$serialx
+tmp  %>%
+ggvis(x = ~serialx, y = ~ocena, fill := ~col) %>%
+group_by(serial) %>%
+layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
+layer_points(fillOpacity:=0.8, shape = ~serial) %>%
+hide_axis("x") %>%
+set_options(width = 640,padding = padding(10, 10, 50, 50)) %>%
+add_legend(c("fill", "shape")) %>%
+layer_model_predictions(model = "lm", formula = ocena ~ I(serialx*0))
+```
+
+# Czy serial Friends jest lepszy niż serial Sherlock?
 
 
+```{r}
+ocenyFriends     <- serialeIMDB[serialeIMDB$serial == "Friends", "ocena"]
+summary(ocenyFriends)
 
+ocenySherlock <- serialeIMDB[serialeIMDB$serial == "Sherlock", "ocena"]
+summary(ocenySherlock)
 
+# moduł różnicy średnich
+(obserwowana_roznica <- abs(mean(ocenyBreakingBad) - mean(ocenySherlock)))
 
----
+# permutacyjny test
+liczbaFriends <- length(ocenyFriends)
+roznice <- replicate(100000, {
+  wymieszane <- sample(c(ocenyFriends, ocenySherlock))
+  oceny1 <- wymieszane[1:liczbaFriends]
+  oceny2 <- wymieszane[-(1:liczbaFriends)]
+  # różnica pomiedzy losowymi grupami
+  abs(mean(oceny1) - mean(oceny2))
+})
+mean(roznice > obserwowana_roznica)
+```
 
-# Czy serial Friends jest lepszy niż serial Braking Bed?
 
 
 ---
