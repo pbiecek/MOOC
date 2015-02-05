@@ -5,7 +5,9 @@ load("serialeIMDB.rda")
 
 shinyServer(function(input, output) {
   mySerial <- reactive({
-    serialeIMDB[serialeIMDB$serial %in% c(input$serial1, input$serial2), ]
+    tmp <- serialeIMDB[serialeIMDB$serial %in% c(input$serial1, input$serial2), ]
+    tmp$col <- c("red4", "black")[as.numeric(droplevels(tmp$serial))]
+    tmp
   })
   
   output$opis = renderUI({
@@ -19,7 +21,7 @@ shinyServer(function(input, output) {
   })
   
   mySerial %>%
-    ggvis(x = ~id, y = ~ocena, fill = ~serial) %>%
+    ggvis(x = ~id, y = ~ocena, fill := ~col) %>%
     group_by(serial) %>%
     layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
     layer_points(fillOpacity:=0.8) %>%
@@ -32,7 +34,7 @@ shinyServer(function(input, output) {
              )) %>% 
     layer_model_predictions(model = "lm") %>%
     add_tooltip(function(data){
-      paste0(data$nazwa, "<br>ocena: ",as.character(data$ocena))
+      paste0(data$serial,"<br/>", data$nazwa, "<br>ocena: ",as.character(data$ocena))
     }, "hover") %>%
     bind_shiny("serialPlot")
   
