@@ -68,25 +68,25 @@ shinyUI(fluidPage(
                             .selectize-control {
                             margin-left: auto ;
                             margin-right: auto ;
-                            width: 500px;
+                            width: 300px;
                             }
                             .control-label {
                             margin-left: auto ;
                             margin-right: auto ;
-                            width: 500px;
+                            width: 300px;
                             }
                             .shiny-input-container {
                             margin-left: auto ;
                             margin-right: auto ;
-                            width: 500px!important;
+                            width: 300px!important;
                             }
                             "))),
-  fluidRow(selectInput("serial1", "Porównaj popularność serialu", 
-                       choices = seriale, 
-                       selected = "Friends")),
-  fluidRow(selectInput("serial2", "z popularnością serialu", 
-                                choices = seriale, 
-                                selected = "Breaking Bad")),
+  fluidRow(column(width = 4, selectInput("serial1", "Porównaj popularność serialu", 
+                             choices = seriale, 
+                             selected = "Friends"), offset=2),
+          column(width = 4, selectInput("serial2", "z popularnością serialu", 
+                              choices = seriale, 
+                              selected = "Breaking Bad"))),
   fluidRow(ggvisOutput("serialPlot")),
   fluidRow(htmlOutput("opis"))
   )

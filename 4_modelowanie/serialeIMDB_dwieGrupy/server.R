@@ -6,7 +6,11 @@ load("serialeIMDB.rda")
 shinyServer(function(input, output) {
   mySerial <- reactive({
     tmp <- serialeIMDB[serialeIMDB$serial %in% c(input$serial1, input$serial2), ]
-    tmp$col <- c("red4", "black")[as.numeric(droplevels(tmp$serial))]
+    tmp$col <- c("#4d4dce", "#EE7600")[as.numeric(droplevels(tmp$serial))]
+    tmp <- tmp %>% 
+      group_by(serial) %>%
+      mutate(serialx = as.numeric(as.character(odcinek))/(1.2*max(as.numeric(as.character(odcinek)))))
+    tmp$serialx <- as.numeric(droplevels(tmp$serial)) + tmp$serialx
     tmp
   })
   
@@ -14,25 +18,23 @@ shinyServer(function(input, output) {
     ser <- mySerial()
     napis1 <- paste0("http://www.imdb.com/title/",unique(ser$imdbId)[1],"/epdate?ref_=ttep_ql_4")
     napis2 <- paste0("http://www.imdb.com/title/",unique(ser$imdbId)[2],"/epdate?ref_=ttep_ql_4")
-    wsp <- lm(ocena~id, ser)$coef
-    HTML("Dane o ocenach serialu <b>",unique(as.character(ser$serial))[1],"</b> można pobrać ze strony <br/> <a href='", napis1, "'>",napis1,"</a><br><br>",
-         "Dane o ocenach serialu <b>",unique(as.character(ser$serial))[2],"</b> można pobrać ze strony <br/> <a href='", napis2, "'>",napis2,"</a><br><br>",
-         "Trend dla tego serialu opisuje prosta o równaniu: <b>", signif(wsp[1], 2), ifelse(wsp[2] > 0, " + ", " "), signif(wsp[2], 2),"*odcinek</b>")
+    p.val <- wilcox.test(ocena~serial, data=ser)$p.value
+    srednie <- tapply(ser$ocena, droplevels(ser$serial), mean, na.rm=TRUE)
+    HTML("Średnia ocena dla ",  input$serial1 ," to <b>", signif(srednie[input$serial1], 3), "</b>, ",
+         "średnia ocena dla ",  input$serial2 ," to <b>", signif(srednie[input$serial2], 3), "</b>, wynik testu na istotność różnicy p.value to <b>", signif(p.val, 2),
+         "</b><br><br>Dane o ocenach serialu <b>",input$serial1,"</b> można pobrać ze strony <br/> <a href='", napis1, "'>",napis1,"</a><br>",
+         "Dane o ocenach serialu <b>",input$serial2,"</b> można pobrać ze strony <br/> <a href='", napis2, "'>",napis2,"</a><br><br>")
   })
   
   mySerial %>%
-    ggvis(x = ~id, y = ~ocena, fill := ~col) %>%
+    ggvis(x = ~serialx, y = ~ocena, fill := ~col) %>%
     group_by(serial) %>%
     layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
-    layer_points(fillOpacity:=0.8) %>%
+    layer_points(fillOpacity:=0.8, shape = ~serial) %>%
     hide_axis("x") %>%
     set_options(width = 640,padding = padding(10, 10, 50, 50)) %>%
-    #    scale_numeric("y", domain=c(0, 10)) %>%
-    add_axis("x", title = "Numer odcinka", 
-             properties = axis_props(
-               grid = list(stroke = "white")      
-             )) %>% 
-    layer_model_predictions(model = "lm") %>%
+    add_legend(c("fill", "shape")) %>%
+    layer_model_predictions(model = "lm", formula = ocena ~ I(serialx*0)) %>%
     add_tooltip(function(data){
       paste0(data$serial,"<br/>", data$nazwa, "<br>ocena: ",as.character(data$ocena))
     }, "hover") %>%
