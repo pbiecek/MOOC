@@ -5,7 +5,11 @@ load("serialeIMDB.rda")
 
 shinyServer(function(input, output) {
   mySerial <- reactive({
+    serialeIMDB2 <- serialeIMDB
+    serialeIMDB2$serial <- paste0(serialeIMDB2$serial, " ")
+    serialeIMDB <- rbind(serialeIMDB, serialeIMDB2)
     tmp <- serialeIMDB[serialeIMDB$serial %in% c(input$serial1, input$serial2), ]
+    tmp$serial <- factor(tmp$serial, levels=c(input$serial1, input$serial2))
     tmp$col <- c("#4d4dce", "#EE7600")[as.numeric(droplevels(tmp$serial))]
     tmp <- tmp %>% 
       group_by(serial) %>%
@@ -17,7 +21,11 @@ shinyServer(function(input, output) {
   output$opis = renderUI({
     ser <- mySerial()
     napis1 <- paste0("http://www.imdb.com/title/",unique(ser$imdbId)[1],"/epdate?ref_=ttep_ql_4")
-    napis2 <- paste0("http://www.imdb.com/title/",unique(ser$imdbId)[2],"/epdate?ref_=ttep_ql_4")
+    if (length(unique(ser$imdbId))>1) {
+      napis2 <- paste0("http://www.imdb.com/title/",unique(ser$imdbId)[2],"/epdate?ref_=ttep_ql_4")
+    } else {
+      napis2 <- ""  
+    }
     p.val <- wilcox.test(ocena~serial, data=ser)$p.value
     srednie <- tapply(ser$ocena, droplevels(ser$serial), mean, na.rm=TRUE)
     HTML("Średnia ocena dla ",  input$serial1 ," to <b>", signif(srednie[input$serial1], 3), "</b>, ",

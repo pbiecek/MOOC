@@ -85,8 +85,8 @@ shinyUI(fluidPage(
                              choices = seriale, 
                              selected = "Friends"), offset=2),
           column(width = 4, selectInput("serial2", "z popularnością serialu", 
-                              choices = seriale, 
-                              selected = "Breaking Bad"))),
+                              choices = paste0(seriale, " "), 
+                              selected = "Breaking Bad "))),
   fluidRow(ggvisOutput("serialPlot")),
   fluidRow(htmlOutput("opis"))
   )
