@@ -83,6 +83,97 @@ serialeIMDB %>%
 
 
 
+[Test permutacyjny dla trendu?]
+
+
+# Czy serial Friends jest lepszy niż serial Breaking Bed?
+
+Statystycy opracowali wiele testów aby porównać wartości w dwóch grupach. W większości przypadków te testy dają zbliżone wyniki, więc zamiast przedstawiać ich leksykon wyjaśnimy na jednym przykładzie na czym polega testowanie. Przedstawimy tak zwany test permutacyjny do porównywania średnich.
+
+Pomysł na porównanie dwóch grup składa się z trzech kroków. Przedstawmy je jeden po drugim.
+
+### Krok 1: Postaw hipotezę, określ co chcesz porównać
+
+Będziemy testować hipotezę, czy wartości w jednym zbiorze są istotnie większe niż wartości w drugim zbiorze. 
+
+Tę hipotezę, sformujmy w następujący sposób: *Czy obserwowana różnica pomiędzy średnimi ocenami jest wystarczająco duża, by uznać ją za istotną?*
+
+### Krok 2: Określ miarę wielkości różnic
+
+Ustalmy, że wielkość różnicy pomiędzy grupami będziemy mierzyć za pomocą wartości bezwzględnej z różnicy pomiędzy średnimi w obu grupach.
+
+```{r}
+mean(ocenyBreakingBad)
+mean(ocenyFriends)
+# moduł różnicy średnich
+(obserwowana_roznica <- abs(mean(ocenyBreakingBad) - mean(ocenyFriends)))
+```
+
+# Czy serial Friends jest lepszy niż serial Breaking Bed?
+
+### Krok 3: Porównaj zaobserwowaną wielkość różnicy z różnicą w sytuacji gdyby grupy nie były różne
+
+Wciąż nie wiemy, czy `0.02628083` to duża różnica czy mała. Musimy ją z czymś porównać.
+Najlepiej by było porównać ją z wartościami, które byśmy obserwowali gdyby te dwie grupy się nie różniły. 
+
+Ale skąd wiadomo jakie byłyby różnice gdyby obie grupy się nie różniły? 
+Możemy to oszacować w następujący sposób
+
+* [I] Wymieszamy losowo wartości w obu grupach zachowując liczebność grup. Dzięki temu otrzymamy dwie grupy o których wiemy, że się nie różnią istotnie a jedyne różnice wynikają z losowych fluktuacji,
+* [II] Policzymy jak duża jest różnica dla tych nowo wylosowanych grup,
+* [III] Powtórzymy kroki [I] i [II] wielokrotnie aby zobaczyć jak duże wartości może przyjmować ta różnica w sytuacji gdy obie grupy nie różnią się od siebie.
+
+To liczenie różnic na próbach różniących się jedynie losową fluktuacją jest realizowane przez poniższy kod.
+
+
+```{r}
+liczbaFriends <- length(ocenyFriends)
+
+roznice <- replicate(100000, {
+  # wymeiszaj losowo wartości
+  wymieszane <- sample(c(ocenyFriends, ocenyBreakingBad))
+  # losowo dobrane repliki próby
+  oceny1 <- wymieszane[1:liczbaFriends]
+  oceny2 <- wymieszane[-(1:liczbaFriends)]
+  # różnica pomiedzy losowymi grupami
+  abs(mean(oceny1) - mean(oceny2))
+})
+```
+
+# Czy serial Friends jest lepszy niż serial Breaking Bed?
+
+Możemy teraz wartość `obserwowana_roznica` porównać z wektorem wartości `roznice`. 
+Wektor różnice opisuje jakich różnic spodziewać się możemy gdy próby różnią się wyłącznie losową fluktuacja. Gdyby `obserwowana_roznica` była znacząco większa niż wartości z wektora różnice, to byłby to silny argument za tym, że różnica w średnich nie jest przypadkowa.
+
+Porównajmy na wykresie wielkości różnic dla losowych fluktuacji (na szaro) z obserwowaną różnicą (na czerwono).
+
+```{r}
+hist(roznice, 50, col="grey", main="", las=1, border="white")
+abline(v=obserwowana_roznica, col="red", lwd=5)
+```
+
+# Czy serial Friends jest lepszy niż serial Breaking Bed?
+
+Wykres pomaga w zrozumieniu tego rozkładu, ale aby podjąć decyzje lepiej mieć jedną liczbę. Policzmy jaka część różnic dla losowych fluktuacji jest większa niż obserwowana różnica.
+
+```{r}
+mean(roznice > obserwowana_roznica) + 1/100000
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
