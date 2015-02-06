@@ -48,7 +48,8 @@ Używając poniższej aplikacji można wyznaczyć trend liniowy w ocenach dla od
 
 ---
 
-# Czy serial Friends jest lepszy niż serial Breaking Bed?
+# Jak wygląda trend w serialach
+
 
 Mając taki zbiór danych, możemy porównać oceny odcinków dwóch seriali. Wyciągnijmy z tego zbioru danych oceny dla serialu *Friends* i oceny dla serialu *Breaking Bad*
 
@@ -73,156 +74,25 @@ Po lewej *Breaking Bad* po prawej *Friends*. Każdy punkt to ocena jednego odcin
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
 library(ggvis)
-  tmp <- serialeIMDB[serialeIMDB$serial %in% c("Friends", "Breaking Bad"), ]
-  tmp$col <- c("#4d4dce", "#EE7600")[as.numeric(droplevels(tmp$serial))]
-  tmp <- tmp %>% 
-    group_by(serial) %>%
-    mutate(serialx = as.numeric(as.character(odcinek))/(1.2*max(as.numeric(as.character(odcinek)))))
-  tmp$serialx <- as.numeric(droplevels(tmp$serial)) + tmp$serialx
-  tmp  %>%
-  ggvis(x = ~serialx, y = ~ocena, fill := ~col) %>%
-  group_by(serial) %>%
-  layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
-  layer_points(fillOpacity:=0.8, shape = ~serial) %>%
-  hide_axis("x") %>%
-  set_options(width = 640,padding = padding(10, 10, 50, 50)) %>%
-  add_legend(c("fill", "shape")) %>%
-  layer_model_predictions(model = "lm", formula = ocena ~ I(serialx*0))
+  serialeIMDB %>%
+  filter(serial == "Breaking Bad") %>%
+    ggvis(x = ~id, y = ~ocena, fill = ~sezon) %>%
+    # ewentualnie group_by(sezon)
+    layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
+    layer_points(fillOpacity:=0.8) %>%
+    hide_legend("fill") %>%
+    layer_model_predictions(model = "lm") 
+
 ```
 
 
-# Czy serial Friends jest lepszy niż serial Breaking Bed?
 
-Statystycy opracowali wiele testów aby porównać wartości w dwóch grupach. W większości przypadków te testy dają zbliżone wyniki, więc zamiast przedstawiać ich leksykon wyjaśnimy na jednym przykładzie na czym polega testowanie. Przedstawimy tak zwany test permutacyjny do porównywania średnich.
-
-Pomysł na porównanie dwóch grup składa się z trzech kroków. Przedstawmy je jeden po drugim.
-
-### Krok 1: Postaw hipotezę, określ co chcesz porównać
-
-Będziemy testować hipotezę, czy wartości w jednym zbiorze są istotnie większe niż wartości w drugim zbiorze. 
-
-Tę hipotezę, sformujmy w następujący sposób: *Czy obserwowana różnica pomiędzy średnimi ocenami jest wystarczająco duża, by uznać ją za istotną?*
-
-### Krok 2: Określ miarę wielkości różnic
-
-Ustalmy, że wielkość różnicy pomiędzy grupami będziemy mierzyć za pomocą wartości bezwzględnej z różnicy pomiędzy średnimi w obu grupach.
-
-```{r}
-mean(ocenyBreakingBad)
-mean(ocenyFriends)
-# moduł różnicy średnich
-(obserwowana_roznica <- abs(mean(ocenyBreakingBad) - mean(ocenyFriends)))
-```
-
-# Czy serial Friends jest lepszy niż serial Breaking Bed?
-
-### Krok 3: Porównaj zaobserwowaną wielkość różnicy z różnicą w sytuacji gdyby grupy nie były różne
-
-Wciąż nie wiemy, czy `0.02628083` to duża różnica czy mała. Musimy ją z czymś porównać.
-Najlepiej by było porównać ją z wartościami, które byśmy obserwowali gdyby te dwie grupy się nie różniły. 
-
-Ale skąd wiadomo jakie byłyby różnice gdyby obie grupy się nie różniły? 
-Możemy to oszacować w następujący sposób
-
-* [I] Wymieszamy losowo wartości w obu grupach zachowując liczebność grup. Dzięki temu otrzymamy dwie grupy o których wiemy, że się nie różnią istotnie a jedyne różnice wynikają z losowych fluktuacji,
-* [II] Policzymy jak duża jest różnica dla tych nowo wylosowanych grup,
-* [III] Powtórzymy kroki [I] i [II] wielokrotnie aby zobaczyć jak duże wartości może przyjmować ta różnica w sytuacji gdy obie grupy nie różnią się od siebie.
-
-To liczenie różnic na próbach różniących się jedynie losową fluktuacją jest realizowane przez poniższy kod.
-
-
-```{r}
-liczbaFriends <- length(ocenyFriends)
-
-roznice <- replicate(100000, {
-  # wymeiszaj losowo wartości
-  wymieszane <- sample(c(ocenyFriends, ocenyBreakingBad))
-  # losowo dobrane repliki próby
-  oceny1 <- wymieszane[1:liczbaFriends]
-  oceny2 <- wymieszane[-(1:liczbaFriends)]
-  # różnica pomiedzy losowymi grupami
-  abs(mean(oceny1) - mean(oceny2))
-})
-```
-
-# Czy serial Friends jest lepszy niż serial Breaking Bed?
-
-Możemy teraz wartość `obserwowana_roznica` porównać z wektorem wartości `roznice`. 
-Wektor różnice opisuje jakich różnic spodziewać się możemy gdy próby różnią się wyłącznie losową fluktuacja. Gdyby `obserwowana_roznica` była znacząco większa niż wartości z wektora różnice, to byłby to silny argument za tym, że różnica w średnich nie jest przypadkowa.
-
-Porównajmy na wykresie wielkości różnic dla losowych fluktuacji (na szaro) z obserwowaną różnicą (na czerwono).
-
-```{r}
-hist(roznice, 50, col="grey", main="", las=1, border="white")
-abline(v=obserwowana_roznica, col="red", lwd=5)
-```
-
-# Czy serial Friends jest lepszy niż serial Breaking Bed?
-
-Wykres pomaga w zrozumieniu tego rozkładu, ale aby podjąć decyzje lepiej mieć jedną liczbę. Policzmy jaka część różnic dla losowych fluktuacji jest większa niż obserwowana różnica.
-
-```{r}
-mean(roznice > obserwowana_roznica) + 1/100000
-```
-
-Czy wiedząc, że gdy próby są równe to w wyniku losowych fluktuacji w 64\% przypadków obserwuje się większą różnicę niż ta pomiędzy *Friends* a *Breaking Bad* uznamy różnicę pomiędzy tymi dwoma serialami za istotną?
-
-Pewnie nie. To jaki próg przyjmiemy zależy od konkretnego zastosowania, ale często za próg wybiera się 0.05.
-
-# Czy serial Friends jest lepszy niż serial Sherlock?
-
-Porównajmy dwa inne seriale. Po lewej prezentujemy serial Sherlock po prawej Friends.
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-tmp <- serialeIMDB[serialeIMDB$serial %in% c("Friends", "Sherlock"), ]
-tmp$col <- c("#4d4dce", "#EE7600")[as.numeric(droplevels(tmp$serial))]
-tmp <- tmp %>% 
-  group_by(serial) %>%
-  mutate(serialx = as.numeric(as.character(odcinek))/(1.2*max(as.numeric(as.character(odcinek)))))
-tmp$serialx <- as.numeric(droplevels(tmp$serial)) + tmp$serialx
-tmp  %>%
-ggvis(x = ~serialx, y = ~ocena, fill := ~col) %>%
-group_by(serial) %>%
-layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
-layer_points(fillOpacity:=0.8, shape = ~serial) %>%
-hide_axis("x") %>%
-set_options(width = 640,padding = padding(10, 10, 50, 50)) %>%
-add_legend(c("fill", "shape")) %>%
-layer_model_predictions(model = "lm", formula = ocena ~ I(serialx*0))
-```
-
-# Czy serial Friends jest lepszy niż serial Sherlock?
-
-Różnica średnich pomiędzy tymi dwoma serialami wynosi 0.48. Wygląda na dużo, ale czy mamy jakiś argument, że jest to więcej niż przypadkowa fluktuacja?
-
-```{r}
-ocenyFriends     <- serialeIMDB[serialeIMDB$serial == "Friends", "ocena"]
-ocenySherlock    <- serialeIMDB[serialeIMDB$serial == "Sherlock", "ocena"]
-# moduł różnicy średnich
-(obserwowana_roznica <- abs(mean(ocenyBreakingBad) - mean(ocenySherlock)))
-```
-
-Powtórzmy test permutacyjny dla tych dwóch seriali. Tym razem obserwowana różnica jest wyższa niż praktycznie wszystkie wartości wygenerowane przez test permutacyjny.
-
-```{r}
-# permutacyjny test
-liczbaFriends <- length(ocenyFriends)
-roznice <- replicate(100000, {
-  wymieszane <- sample(c(ocenyFriends, ocenySherlock))
-  oceny1 <- wymieszane[1:liczbaFriends]
-  oceny2 <- wymieszane[-(1:liczbaFriends)]
-  # różnica pomiedzy losowymi grupami
-  abs(mean(oceny1) - mean(oceny2))
-})
-# istotność różnic
-mean(roznice > obserwowana_roznica) + 1/100000
-```
 
 ---
 
-# Które dwa seriale różnią się istotnie?
+# Jak wygląda rozwój trendu w ocenach dla danego serialu?
 
-Używając poniższej aplikacji można porównać dowolne dwa seriale oraz ocenić, czy różnica jest statystycznie istotnie różna.
+Używając poniższej aplikacji można przyjrzeć się ocenom kolejnych seriali i sprawdzić czy i jak wygląda trend w ich popularności.
 
 <center><iframe width="870" height="700" frameborder="0" src="https://smarterpoland.shinyapps.io/serialeIMDB"></iframe></center>
 
@@ -230,8 +100,7 @@ Używając poniższej aplikacji można porównać dowolne dwa seriale oraz oceni
 
 # Zadania
 
-* Znajdź dwa seriale (inne niż Friends i Sherlock), które różnią się istotnie, przyjmując za próg istotności 0.05.
+* Znajdź serial o najsilniej rosnącym trendzie dotyczącym ocen (ponieważ oceny są ograniczone z góry przez 10 to może nie być serial o najwiyższej średniej ocenie)
 
-* Znajdź dwa seriale (inne niż Friends i Breaking Bad), które nie różnią się istotnie, przyjmując za próg istotności 0.05.
-
+* Znajdź serial o najsilniejszym trendzie spadkowym
 
