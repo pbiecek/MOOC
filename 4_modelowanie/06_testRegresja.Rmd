@@ -50,7 +50,11 @@ Używając poniższej aplikacji można wyznaczyć trend liniowy w ocenach dla od
 
 # Jak wygląda trend w serialach
 
-Mając taki zbiór danych, pryjrzyjmy się jak wyglądają oceny dla serialu *Breaking Bad*
+Mając taki zbiór danych, pryjrzyjmy się jak wyglądają oceny dla serialu *Breaking Bad*. 
+
+Poniższy wykes przedstawia średnie oceny (na osi OY)  dla kolejnych odcinków (rozłożonych wzdłuż osi OX).
+
+Kolejne sezony są oznaczane róznymi kolorami. Czy patrząc na te wyniki widzimy jakąś globalną tendencję / trend?
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
@@ -68,7 +72,11 @@ serialeIMDB %>%
 
 # Jak wygląda trend w serialach
 
-Mając taki zbiór danych, pryjrzyjmy się jak wyglądają oceny dla serialu *Breaking Bad*
+Dodajmy do wykresu linię trendu liniowego, najlepiej dopasowanego do danych. 
+
+Teraz łatwiej zauważyć rosnącą tendencję ocen, co więcej można z wykresu odczytać tempo wzrostu.
+
+Ale jak ta linia została wyznaczona? Co to znaczy ,,najlpiej dopasowany do danych''?
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
   serialeIMDB %>%
