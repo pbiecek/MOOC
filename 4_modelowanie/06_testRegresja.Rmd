@@ -40,12 +40,6 @@ library(PogromcyDanych)
 head(serialeIMDB)
 ```
 
-# Jak wygląda trend w serialach
-
-Używając poniższej aplikacji można wyznaczyć trend liniowy w ocenach dla odcinków wybranego serialu.
-
-<center><iframe width="870" height="700" frameborder="0" src="https://smarterpoland.shinyapps.io/serialeIMDB"></iframe></center>
-
 ---
 
 # Jak wygląda trend w serialach
@@ -89,11 +83,49 @@ Ale jak ta linia została wyznaczona? Co to znaczy ,,najlepiej dopasowany do dan
     layer_model_predictions(model = "lm") 
 ```
 
+---
+
+# Jak szukać trendu liniowego?
+
+Problem znajdowania trendu liniowrgo można przedstawić na wiele sposobów. Poniżej przedstawimy go jako zagadnienie optymalizacji.
+
+Zakładamy, że trend jest liniowy, to znaczy, że można go przedstawić za pomocą równania $a_0 + a_1 * odcinek$, gdzie wartości $a_0$ i $a_1$ są nieznane.
+
+Jak je wyznaczyć? Chcielibyśmy, żeby linia trendu była jak najbliżej danych. 
+
+Ale co to znaczy jak najbliżej? 
+
+Jest wiele sposobów określania miary bliskości, ale najczęściej używany jest następujący:
+
+* Dla odcinka `i`, czyli punktu o współrzędnych ($i$, $ocena_i$) odległość od lini trendu liczymy jako 
+$$
+niedopasowanie_i = (ocena_i - (a_0 + a_1 * i))^2
+$$
+* Niedopasowanie całej krzywej trendu (oznaczane zazwyczaj jako RSS, skrót od _Residual Sum of Squares_) liczymy jako sumę niedopasowań dla każdego punktu
+$$
+RSS = \sum_i niedopasowanie_i = \sum_i (ocena_i - (a_0 + a_1 * i))^2
+$$
+* Oceny współczyników lini trendu $\hat a_0$ i $\hat a_1$ wyznacza się w ten sposób by minimalizowały niedopasownie RSS. 
+
+Aby wyprowadzić wzór na te współczynniki dobrze znać przynajmniej rachunek różniczkowy (wystarczy wtedy policzyć pochodną i przyrównać ją do zera). Aby wyznaczyć wartości tych współczynników w programie R wystarczy wykorzsytać funkcję `lm()`.
+
+---
+
+# Jak wyznaczyć współczynniki trendu liniowego w programie R
+
+
+
+
+
+
+
+
+
 
 
 ---
 
-# Jak wygląda rozwój trendu w ocenach dla danego serialu?
+# Jak wygląda rozwój trendu w ocenach dla Twojego ulubionego serialu?
 
 Używając poniższej aplikacji można przyjrzeć się ocenom kolejnych seriali i sprawdzić czy i jak wygląda trend w ich popularności.
 

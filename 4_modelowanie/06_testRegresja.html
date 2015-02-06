@@ -84,38 +84,30 @@ pogRomcy danych
 </div>
 <div id="jak-wyglada-trend-w-serialach" class="slide section level1">
 <h1>Jak wygląda trend w serialach</h1>
-<p>Używając poniższej aplikacji można wyznaczyć trend liniowy w ocenach dla odcinków wybranego serialu.</p>
-<center>
-<iframe width="870" height="700" frameborder="0" src="https://smarterpoland.shinyapps.io/serialeIMDB">
-</iframe>
-</center>
-</div>
-<div id="jak-wyglada-trend-w-serialach-1" class="slide section level1">
-<h1>Jak wygląda trend w serialach</h1>
 <p>Mając taki zbiór danych, pryjrzyjmy się jak wyglądają oceny dla serialu <em>Breaking Bad</em>.</p>
 <p>Poniższy wykes przedstawia średnie oceny (na osi OY) dla kolejnych odcinków (rozłożonych wzdłuż osi OX).</p>
 <p>Kolejne sezony są oznaczane róznymi kolorami. Czy patrząc na te wyniki widzimy jakąś globalną tendencję / trend?</p>
-<p><div id="plot_id117758372-container" class="ggvis-output-container">
-<div id="plot_id117758372" class="ggvis-output"></div>
+<p><div id="plot_id214133878-container" class="ggvis-output-container">
+<div id="plot_id214133878" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id117758372_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id117758372" data-renderer="svg">SVG</a>
+<a id="plot_id214133878_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id214133878" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id117758372_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id117758372" data-renderer="canvas">Canvas</a>
+<a id="plot_id214133878_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id214133878" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id117758372_download" class="ggvis-download" data-plot-id="plot_id117758372">Download</a>
+<a id="plot_id214133878_download" class="ggvis-download" data-plot-id="plot_id214133878">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id117758372_spec = {
+var plot_id214133878_spec = {
     "data": [
         {
             "name": ".0",
@@ -333,35 +325,35 @@ var plot_id117758372_spec = {
     "handlers": null
 }
 ;
-ggvis.getPlot("plot_id117758372").parseSpec(plot_id117758372_spec);
+ggvis.getPlot("plot_id214133878").parseSpec(plot_id214133878_spec);
 </script></p>
 </div>
-<div id="jak-wyglada-trend-w-serialach-2" class="slide section level1">
+<div id="jak-wyglada-trend-w-serialach-1" class="slide section level1">
 <h1>Jak wygląda trend w serialach</h1>
 <p>Dodajmy do wykresu linię trendu liniowego, najlepiej dopasowanego do danych.</p>
 <p>Teraz łatwiej zauważyć rosnącą tendencję ocen, co więcej można z wykresu odczytać tempo wzrostu.</p>
-<p>Ale jak ta linia została wyznaczona? Co to znaczy ,,najlpiej dopasowany do danych’’?</p>
-<p><div id="plot_id282087819-container" class="ggvis-output-container">
-<div id="plot_id282087819" class="ggvis-output"></div>
+<p>Ale jak ta linia została wyznaczona? Co to znaczy ,,najlepiej dopasowany do danych’’?</p>
+<p><div id="plot_id436300940-container" class="ggvis-output-container">
+<div id="plot_id436300940" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id282087819_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id282087819" data-renderer="svg">SVG</a>
+<a id="plot_id436300940_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id436300940" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id282087819_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id282087819" data-renderer="canvas">Canvas</a>
+<a id="plot_id436300940_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id436300940" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id282087819_download" class="ggvis-download" data-plot-id="plot_id282087819">Download</a>
+<a id="plot_id436300940_download" class="ggvis-download" data-plot-id="plot_id436300940">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id282087819_spec = {
+var plot_id436300940_spec = {
     "data": [
         {
             "name": ".0",
@@ -622,11 +614,29 @@ var plot_id282087819_spec = {
     "handlers": null
 }
 ;
-ggvis.getPlot("plot_id282087819").parseSpec(plot_id282087819_spec);
+ggvis.getPlot("plot_id436300940").parseSpec(plot_id436300940_spec);
 </script></p>
 </div>
-<div id="jak-wyglada-rozwoj-trendu-w-ocenach-dla-danego-serialu" class="slide section level1">
-<h1>Jak wygląda rozwój trendu w ocenach dla danego serialu?</h1>
+<div id="jak-szukac-trendu-liniowego" class="slide section level1">
+<h1>Jak szukać trendu liniowego?</h1>
+<p>Problem znajdowania trendu liniowrgo można przedstawić na wiele sposobów. Poniżej przedstawimy go jako zagadnienie optymalizacji.</p>
+<p>Zakładamy, że trend jest liniowy, to znaczy, że można go przedstawić za pomocą równania <span class="math">\(a_0 + a_1 * odcinek\)</span>, gdzie wartości <span class="math">\(a_0\)</span> i <span class="math">\(a_1\)</span> są nieznane.</p>
+<p>Jak je wyznaczyć? Chcielibyśmy, żeby linia trendu była jak najbliżej danych.</p>
+<p>Ale co to znaczy jak najbliżej?</p>
+<p>Jest wiele sposobów określania miary bliskości, ale najczęściej używany jest następujący:</p>
+<ul>
+<li>Dla odcinka <code>i</code>, czyli punktu o współrzędnych (<span class="math">\(i\)</span>, <span class="math">\(ocena_i\)</span>) odległość od lini trendu liczymy jako <span class="math">\[
+niedopasowanie_i = (ocena_i - (a_0 + a_1 * i))^2
+\]</span></li>
+<li>Niedopasowanie całej krzywej trendu (oznaczane zazwyczaj jako RSS, skrót od <em>Residual Sum of Squares</em>) liczymy jako sumę niedopasowań dla każdego punktu <span class="math">\[
+RSS = \sum_i niedopasowanie_i = \sum_i (ocena_i - (a_0 + a_1 * i))^2
+\]</span></li>
+<li>Oceny współczyników lini trendu <span class="math">\(\hat a_0\)</span> i <span class="math">\(\hat a_1\)</span> wyznacza się w ten sposób by minimalizowały niedopasownie RSS.</li>
+</ul>
+<p>Aby wyprowadzić wzór na te współczynniki dobrze znać przynajmniej rachunek różniczkowy (wystarczy wtedy policzyć pochodną i przyrównać ją do zera). Aby wyznaczyć wartości tych współczynników w programie R wystarczy wykorzsytaś funkcję <code>lm()</code>.</p>
+</div>
+<div id="jak-wyglada-rozwoj-trendu-w-ocenach-dla-twojego-ulubionego-serialu" class="slide section level1">
+<h1>Jak wygląda rozwój trendu w ocenach dla Twojego ulubionego serialu?</h1>
 <p>Używając poniższej aplikacji można przyjrzeć się ocenom kolejnych seriali i sprawdzić czy i jak wygląda trend w ich popularności.</p>
 <center>
 <iframe width="870" height="700" frameborder="0" src="https://smarterpoland.shinyapps.io/serialeIMDB">
