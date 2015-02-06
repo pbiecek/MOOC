@@ -56,7 +56,7 @@ Poniższy wykes przedstawia średnie oceny (na osi OY)  dla kolejnych odcinków 
 
 Kolejne sezony są oznaczane róznymi kolorami. Czy patrząc na te wyniki widzimy jakąś globalną tendencję / trend?
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=4}
 library(dplyr)
 library(ggvis)
 serialeIMDB %>%
@@ -76,9 +76,9 @@ Dodajmy do wykresu linię trendu liniowego, najlepiej dopasowanego do danych.
 
 Teraz łatwiej zauważyć rosnącą tendencję ocen, co więcej można z wykresu odczytać tempo wzrostu.
 
-Ale jak ta linia została wyznaczona? Co to znaczy ,,najlpiej dopasowany do danych''?
+Ale jak ta linia została wyznaczona? Co to znaczy ,,najlepiej dopasowany do danych''?
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=4}
   serialeIMDB %>%
   filter(serial == "Breaking Bad") %>%
   mutate(sezon = droplevels(sezon)) %>%
