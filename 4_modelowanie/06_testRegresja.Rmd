@@ -19,7 +19,7 @@ Analizując dane, często trafiamy na sytuację, gdy mamy sekwencje liczb i chce
 
 Analizując zużycie energii możemy sprawdzać czy występuje rosnący trend zapotrzebowania na energię, podobnie analizując liczbę sprzedanych biletów czy postępy w grach.
 
-Jednak nawet gdy występuje widoczny trend, bardzo rzadko wartości ukłądają się idealnie w linię. Zazwyczaj trend jest zanurzony w dużej zmienności. Jak oszacować jak silny jet ten trend?
+Jednak nawet gdy występuje widoczny trend, bardzo rzadko wartości układają się idealnie w linię. Zazwyczaj trend jest zanurzony w dużej zmienności. Jak oszacować jak silny jest ten trend?
 
 I tutaj pojawia się statystyka. Używając takich narzędzi jak regresja liniowa możemy ocenić jakie są parametry liniowego trendu.
 
@@ -44,11 +44,11 @@ head(serialeIMDB)
 
 # Jak wygląda trend w serialach
 
-Mając taki zbiór danych, pryjrzyjmy się jak wyglądają oceny dla serialu *Breaking Bad*. 
+Mając taki zbiór danych, przyjrzyjmy się jak wyglądają oceny dla serialu *Breaking Bad*. 
 
-Poniższy wykes przedstawia średnie oceny (na osi OY)  dla kolejnych odcinków (rozłożonych wzdłuż osi OX).
+Poniższy wykres przedstawia średnie oceny (na osi OY)  dla kolejnych odcinków (rozłożonych wzdłuż osi OX).
 
-Kolejne sezony są oznaczane róznymi kolorami. Czy patrząc na te wyniki widzimy jakąś globalną tendencję / trend?
+Kolejne sezony są oznaczane różnymi kolorami. Czy patrząc na te wyniki widzimy jakąś globalną tendencję / trend?
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=4}
 library(dplyr)
@@ -87,7 +87,7 @@ Ale jak ta linia została wyznaczona? Co to znaczy ,,najlepiej dopasowany do dan
 
 # Jak szukać trendu liniowego?
 
-Problem znajdowania trendu liniowrgo można przedstawić na wiele sposobów. Poniżej przedstawimy go jako zagadnienie optymalizacji.
+Problem znajdowania trendu liniowego można przedstawić na wiele sposobów. Poniżej przedstawimy go jako zagadnienie optymalizacji.
 
 Zakładamy, że trend jest liniowy, to znaczy, że można go przedstawić za pomocą równania $a_0 + a_1 * odcinek$, gdzie wartości $a_0$ i $a_1$ są nieznane.
 
@@ -105,15 +105,15 @@ $$
 $$
 RSS = \sum_i niedopasowanie_i = \sum_i (ocena_i - (a_0 + a_1 * i))^2
 $$
-* Oceny współczyników lini trendu $\hat a_0$ i $\hat a_1$ wyznacza się w ten sposób by minimalizowały niedopasownie RSS. 
+* Oceny współczyników lini trendu $\hat a_0$ i $\hat a_1$ wyznacza się w ten sposób by minimalizowały niedopasowanie RSS. 
 
-Aby wyprowadzić wzór na te współczynniki dobrze znać przynajmniej rachunek różniczkowy (wystarczy wtedy policzyć pochodną i przyrównać ją do zera). Aby wyznaczyć wartości tych współczynników w programie R wystarczy wykorzsytać funkcję `lm()`.
+Aby wyprowadzić wzór na te współczynniki dobrze znać przynajmniej rachunek różniczkowy (wystarczy wtedy policzyć pochodną i przyrównać ją do zera). Aby wyznaczyć wartości tych współczynników w programie R wystarczy wykorzystać funkcję `lm()`.
 
 ---
 
 # Jak wyznaczyć współczynniki trendu liniowego w programie R
 
-Przygotujmy zbiór danych `tylkoBreakingBad` w którym będą tylko wartości zmeinnych `id` i `ocena` dla odcinków z sezony `Breaking Bad`.
+Przygotujmy zbiór danych `tylkoBreakingBad` w którym będą tylko wartości zmiennych `id` i `ocena` dla odcinków z sezony `Breaking Bad`.
 
 ```{r}
 tylkoBreakingBad <- serialeIMDB %>%
@@ -126,7 +126,7 @@ head(tylkoBreakingBad)
 
 # Jak wyznaczyć współczynniki trendu liniowego w programie R
 
-Do wyznaczenia trendu liniowego wykorzystujemy funkcję `lm()`, która jako pierwszy argument przyjmuje formułę opisująca pomiędzy którymi zmiennymi chcemy wynzaczyć realcję, a jako drugi ardument wskazuje zbiór danych.
+Do wyznaczenia trendu liniowego wykorzystujemy funkcję `lm()`, która jako pierwszy argument przyjmuje formułę opisująca pomiędzy którymi zmiennymi chcemy wyznaczyć relację, a jako drugi argument wskazuje zbiór danych.
 
 Formuła ma znak `~` (tyldy), po jego lewej stronie podaje się zmienną którą chcemy opisać (tak zwaną zmienną objaśnianą) a po prawej stronie podaje się zmienną objaśniającą.
 
@@ -160,7 +160,8 @@ Używając poniższej aplikacji można przyjrzeć się ocenom kolejnych seriali 
 
 # Zadania
 
-* Znajdź serial o najsilniej rosnącym trendzie dotyczącym ocen (ponieważ oceny są ograniczone z góry przez 10 to może nie być serial o najwiyższej średniej ocenie)
+* Znajdź serial o najsilniej rosnącym trendzie dotyczącym ocen (ponieważ oceny są ograniczone z góry przez 10 to może nie być serial o najwyższej średniej ocenie)
 
 * Znajdź serial o najsilniejszym trendzie spadkowym
+
 

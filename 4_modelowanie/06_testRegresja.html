@@ -63,7 +63,7 @@ pogRomcy danych
 <h1>O czym jest ten odcinek</h1>
 <p>Analizując dane, często trafiamy na sytuację, gdy mamy sekwencje liczb i chcemy ocenić czy w wartościach jest widoczny trend.</p>
 <p>Analizując zużycie energii możemy sprawdzać czy występuje rosnący trend zapotrzebowania na energię, podobnie analizując liczbę sprzedanych biletów czy postępy w grach.</p>
-<p>Jednak nawet gdy występuje widoczny trend, bardzo rzadko wartości ukłądają się idealnie w linię. Zazwyczaj trend jest zanurzony w dużej zmienności. Jak oszacować jak silny jet ten trend?</p>
+<p>Jednak nawet gdy występuje widoczny trend, bardzo rzadko wartości układają się idealnie w linię. Zazwyczaj trend jest zanurzony w dużej zmienności. Jak oszacować jak silny jest ten trend?</p>
 <p>I tutaj pojawia się statystyka. Używając takich narzędzi jak regresja liniowa możemy ocenić jakie są parametry liniowego trendu.</p>
 <p>W tym odcinku, na przykładzie danych z serwisu IMDB (Internet Movie Database), pokażemy jak działa procedura wyznaczania trendu w danych.</p>
 </div>
@@ -84,30 +84,30 @@ pogRomcy danych
 </div>
 <div id="jak-wyglada-trend-w-serialach" class="slide section level1">
 <h1>Jak wygląda trend w serialach</h1>
-<p>Mając taki zbiór danych, pryjrzyjmy się jak wyglądają oceny dla serialu <em>Breaking Bad</em>.</p>
-<p>Poniższy wykes przedstawia średnie oceny (na osi OY) dla kolejnych odcinków (rozłożonych wzdłuż osi OX).</p>
-<p>Kolejne sezony są oznaczane róznymi kolorami. Czy patrząc na te wyniki widzimy jakąś globalną tendencję / trend?</p>
-<p><div id="plot_id862522250-container" class="ggvis-output-container">
-<div id="plot_id862522250" class="ggvis-output"></div>
+<p>Mając taki zbiór danych, przyjrzyjmy się jak wyglądają oceny dla serialu <em>Breaking Bad</em>.</p>
+<p>Poniższy wykres przedstawia średnie oceny (na osi OY) dla kolejnych odcinków (rozłożonych wzdłuż osi OX).</p>
+<p>Kolejne sezony są oznaczane różnymi kolorami. Czy patrząc na te wyniki widzimy jakąś globalną tendencję / trend?</p>
+<p><div id="plot_id832027785-container" class="ggvis-output-container">
+<div id="plot_id832027785" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id862522250_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id862522250" data-renderer="svg">SVG</a>
+<a id="plot_id832027785_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id832027785" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id862522250_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id862522250" data-renderer="canvas">Canvas</a>
+<a id="plot_id832027785_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id832027785" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id862522250_download" class="ggvis-download" data-plot-id="plot_id862522250">Download</a>
+<a id="plot_id832027785_download" class="ggvis-download" data-plot-id="plot_id832027785">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id862522250_spec = {
+var plot_id832027785_spec = {
     "data": [
         {
             "name": ".0",
@@ -325,7 +325,7 @@ var plot_id862522250_spec = {
     "handlers": null
 }
 ;
-ggvis.getPlot("plot_id862522250").parseSpec(plot_id862522250_spec);
+ggvis.getPlot("plot_id832027785").parseSpec(plot_id832027785_spec);
 </script></p>
 </div>
 <div id="jak-wyglada-trend-w-serialach-1" class="slide section level1">
@@ -333,27 +333,27 @@ ggvis.getPlot("plot_id862522250").parseSpec(plot_id862522250_spec);
 <p>Dodajmy do wykresu linię trendu liniowego, najlepiej dopasowanego do danych.</p>
 <p>Teraz łatwiej zauważyć rosnącą tendencję ocen, co więcej można z wykresu odczytać tempo wzrostu.</p>
 <p>Ale jak ta linia została wyznaczona? Co to znaczy ,,najlepiej dopasowany do danych’’?</p>
-<p><div id="plot_id398671897-container" class="ggvis-output-container">
-<div id="plot_id398671897" class="ggvis-output"></div>
+<p><div id="plot_id623713052-container" class="ggvis-output-container">
+<div id="plot_id623713052" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id398671897_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id398671897" data-renderer="svg">SVG</a>
+<a id="plot_id623713052_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id623713052" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id398671897_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id398671897" data-renderer="canvas">Canvas</a>
+<a id="plot_id623713052_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id623713052" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id398671897_download" class="ggvis-download" data-plot-id="plot_id398671897">Download</a>
+<a id="plot_id623713052_download" class="ggvis-download" data-plot-id="plot_id623713052">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id398671897_spec = {
+var plot_id623713052_spec = {
     "data": [
         {
             "name": ".0",
@@ -614,12 +614,12 @@ var plot_id398671897_spec = {
     "handlers": null
 }
 ;
-ggvis.getPlot("plot_id398671897").parseSpec(plot_id398671897_spec);
+ggvis.getPlot("plot_id623713052").parseSpec(plot_id623713052_spec);
 </script></p>
 </div>
 <div id="jak-szukac-trendu-liniowego" class="slide section level1">
 <h1>Jak szukać trendu liniowego?</h1>
-<p>Problem znajdowania trendu liniowrgo można przedstawić na wiele sposobów. Poniżej przedstawimy go jako zagadnienie optymalizacji.</p>
+<p>Problem znajdowania trendu liniowego można przedstawić na wiele sposobów. Poniżej przedstawimy go jako zagadnienie optymalizacji.</p>
 <p>Zakładamy, że trend jest liniowy, to znaczy, że można go przedstawić za pomocą równania <span class="math">\(a_0 + a_1 * odcinek\)</span>, gdzie wartości <span class="math">\(a_0\)</span> i <span class="math">\(a_1\)</span> są nieznane.</p>
 <p>Jak je wyznaczyć? Chcielibyśmy, żeby linia trendu była jak najbliżej danych.</p>
 <p>Ale co to znaczy jak najbliżej?</p>
@@ -631,13 +631,13 @@ niedopasowanie_i = (ocena_i - (a_0 + a_1 * i))^2
 <li>Niedopasowanie całej krzywej trendu (oznaczane zazwyczaj jako RSS, skrót od <em>Residual Sum of Squares</em>) liczymy jako sumę niedopasowań dla każdego punktu <span class="math">\[
 RSS = \sum_i niedopasowanie_i = \sum_i (ocena_i - (a_0 + a_1 * i))^2
 \]</span></li>
-<li>Oceny współczyników lini trendu <span class="math">\(\hat a_0\)</span> i <span class="math">\(\hat a_1\)</span> wyznacza się w ten sposób by minimalizowały niedopasownie RSS.</li>
+<li>Oceny współczyników lini trendu <span class="math">\(\hat a_0\)</span> i <span class="math">\(\hat a_1\)</span> wyznacza się w ten sposób by minimalizowały niedopasowanie RSS.</li>
 </ul>
-<p>Aby wyprowadzić wzór na te współczynniki dobrze znać przynajmniej rachunek różniczkowy (wystarczy wtedy policzyć pochodną i przyrównać ją do zera). Aby wyznaczyć wartości tych współczynników w programie R wystarczy wykorzsytać funkcję <code>lm()</code>.</p>
+<p>Aby wyprowadzić wzór na te współczynniki dobrze znać przynajmniej rachunek różniczkowy (wystarczy wtedy policzyć pochodną i przyrównać ją do zera). Aby wyznaczyć wartości tych współczynników w programie R wystarczy wykorzystać funkcję <code>lm()</code>.</p>
 </div>
 <div id="jak-wyznaczyc-wspoczynniki-trendu-liniowego-w-programie-r" class="slide section level1">
 <h1>Jak wyznaczyć współczynniki trendu liniowego w programie R</h1>
-<p>Przygotujmy zbiór danych <code>tylkoBreakingBad</code> w którym będą tylko wartości zmeinnych <code>id</code> i <code>ocena</code> dla odcinków z sezony <code>Breaking Bad</code>.</p>
+<p>Przygotujmy zbiór danych <code>tylkoBreakingBad</code> w którym będą tylko wartości zmiennych <code>id</code> i <code>ocena</code> dla odcinków z sezony <code>Breaking Bad</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">tylkoBreakingBad &lt;-<span class="st"> </span>serialeIMDB %&gt;%
 <span class="st">  </span><span class="kw">filter</span>(serial ==<span class="st"> &quot;Breaking Bad&quot;</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(id, ocena)
@@ -652,7 +652,7 @@ RSS = \sum_i niedopasowanie_i = \sum_i (ocena_i - (a_0 + a_1 * i))^2
 </div>
 <div id="jak-wyznaczyc-wspoczynniki-trendu-liniowego-w-programie-r-1" class="slide section level1">
 <h1>Jak wyznaczyć współczynniki trendu liniowego w programie R</h1>
-<p>Do wyznaczenia trendu liniowego wykorzystujemy funkcję <code>lm()</code>, która jako pierwszy argument przyjmuje formułę opisująca pomiędzy którymi zmiennymi chcemy wynzaczyć realcję, a jako drugi ardument wskazuje zbiór danych.</p>
+<p>Do wyznaczenia trendu liniowego wykorzystujemy funkcję <code>lm()</code>, która jako pierwszy argument przyjmuje formułę opisująca pomiędzy którymi zmiennymi chcemy wyznaczyć relację, a jako drugi argument wskazuje zbiór danych.</p>
 <p>Formuła ma znak <code>~</code> (tyldy), po jego lewej stronie podaje się zmienną którą chcemy opisać (tak zwaną zmienną objaśnianą) a po prawej stronie podaje się zmienną objaśniającą.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(ocena~id, tylkoBreakingBad)</code></pre>
 <pre><code>## 
@@ -682,7 +682,7 @@ RSS = \sum_i niedopasowanie_i = \sum_i (ocena_i - (a_0 + a_1 * i))^2
 <div id="zadania" class="slide section level1">
 <h1>Zadania</h1>
 <ul>
-<li><p>Znajdź serial o najsilniej rosnącym trendzie dotyczącym ocen (ponieważ oceny są ograniczone z góry przez 10 to może nie być serial o najwiyższej średniej ocenie)</p></li>
+<li><p>Znajdź serial o najsilniej rosnącym trendzie dotyczącym ocen (ponieważ oceny są ograniczone z góry przez 10 to może nie być serial o najwyższej średniej ocenie)</p></li>
 <li><p>Znajdź serial o najsilniejszym trendzie spadkowym</p></li>
 </ul>
 </div>
