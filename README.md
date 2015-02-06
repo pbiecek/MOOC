@@ -65,6 +65,8 @@ Sezon 2: Wizualizacja i modelowanie danych
 
 + Modelowanie danych
   * test dla dwóch grup - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/04_testSrednie.html)
+  * trend liniowy - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/06_testRegresja.html)
+
   * 2x2  - moze chi^2
   * px2  - chi^2
   * Regresja liniowa, [intro](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaIntro.md), [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaProsta.html), [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/dopasowanieModelu.html)

@@ -1,0 +1,167 @@
+---
+title: "Trendy - testy"
+author: "pogRomcy danych"
+date: "sezon 2 / odcinek 4<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / modelowanie / trendy - test"
+---
+
+# O czym jest ten odcinek
+
+
+Analizując dane, często trafiamy na sytuację, gdy mamy sekwencje liczb i chcemy ocenić czy w wartościach jest widoczny trend.
+
+Analizując zużycie energii możemy sprawdzać czy występuje rosnący trend zapotrzebowania na energię, podobnie analizując liczbę sprzedanych biletów czy postępy w grach.
+
+Jednak nawet gdy występuje widoczny trend, bardzo rzadko wartości układają się idealnie w linię. Zazwyczaj trend jest zanurzony w dużej zmienności. Jak oszacować jak silny jest ten trend?
+
+I tutaj pojawia się statystyka. Używając takich narzędzi jak regresja liniowa możemy ocenić jakie są parametry liniowego trendu.
+
+W tym odcinku, na przykładzie danych z serwisu IMDB (Internet Movie Database), pokażemy jak działa procedura wyznaczania trendu w danych.
+
+---
+
+# Baza danych o filmach i serialach
+
+W bazie danych o filmach IMDB (Internet Movie Database) znaleźć można dane o serialach a w szczególności średnie oceny użytkowników wystawione kolejnym odcinkom serialu.
+
+Przykładowo, na stronie http://www.imdb.com/title/tt0903747/epdate?ref_=ttep_ql_4 znajdują się oceny serialu *Breaking Bad*.
+
+Dane te zostały pobrane z Internetu i przygotowane tak, że teraz są dostępne w zbiorze danych `serialeIMDB` w pakiecie `PogromcyDanych`, który towarzyszy temu kursowi.
+
+```{r, warning=FALSE, message=FALSE}
+library(PogromcyDanych)
+head(serialeIMDB)
+```
+
+---
+
+# Jak wygląda trend w serialach
+
+Mając taki zbiór danych, przyjrzyjmy się jak wyglądają oceny dla serialu *Breaking Bad*. 
+
+Poniższy wykres przedstawia średnie oceny (na osi OY)  dla kolejnych odcinków (rozłożonych wzdłuż osi OX).
+
+Kolejne sezony są oznaczane różnymi kolorami. Czy patrząc na te wyniki widzimy jakąś globalną tendencję / trend?
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=4}
+library(dplyr)
+library(ggvis)
+serialeIMDB %>%
+  filter(serial == "Breaking Bad") %>%
+  mutate(sezon = droplevels(sezon)) %>%
+    ggvis(x = ~id, y = ~ocena, fill = ~sezon) %>%
+    # ewentualnie group_by(sezon)
+    layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
+    layer_points(fillOpacity:=0.8) 
+```
+
+---
+
+# Jak wygląda trend w serialach
+
+Dodajmy do wykresu linię trendu liniowego, najlepiej dopasowanego do danych. 
+
+Teraz łatwiej zauważyć rosnącą tendencję ocen, co więcej można z wykresu odczytać tempo wzrostu.
+
+Ale jak ta linia została wyznaczona? Co to znaczy ,,najlepiej dopasowany do danych''?
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=4}
+  serialeIMDB %>%
+  filter(serial == "Breaking Bad") %>%
+  mutate(sezon = droplevels(sezon)) %>%
+    ggvis(x = ~id, y = ~ocena, fill = ~sezon) %>%
+    # ewentualnie group_by(sezon)
+    layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
+    layer_points(fillOpacity:=0.8) %>%
+    layer_model_predictions(model = "lm") 
+```
+
+---
+
+# Jak szukać trendu liniowego?
+
+Problem znajdowania trendu liniowego można przedstawić na wiele sposobów. Poniżej przedstawimy go jako zagadnienie optymalizacji.
+
+Zakładamy, że trend jest liniowy, to znaczy, że można go przedstawić za pomocą równania $a_0 + a_1 * odcinek$, gdzie wartości $a_0$ i $a_1$ są nieznane.
+
+Jak je wyznaczyć? Chcielibyśmy, żeby linia trendu była jak najbliżej danych. 
+
+Ale co to znaczy jak najbliżej? 
+
+Jest wiele sposobów określania miary bliskości, ale najczęściej używany jest następujący:
+
+* Dla odcinka `i`, czyli punktu o współrzędnych ($i$, $ocena_i$) odległość od lini trendu liczymy jako 
+$$
+niedopasowanie_i = (ocena_i - (a_0 + a_1 * i))^2
+$$
+* Niedopasowanie całej krzywej trendu (oznaczane zazwyczaj jako RSS, skrót od _Residual Sum of Squares_) liczymy jako sumę niedopasowań dla każdego punktu
+$$
+RSS = \sum_i niedopasowanie_i = \sum_i (ocena_i - (a_0 + a_1 * i))^2
+$$
+* Oceny współczyników lini trendu $\hat a_0$ i $\hat a_1$ wyznacza się w ten sposób by minimalizowały niedopasowanie RSS. 
+
+Aby wyprowadzić wzór na te współczynniki dobrze znać przynajmniej rachunek różniczkowy (wystarczy wtedy policzyć pochodną i przyrównać ją do zera). Aby wyznaczyć wartości tych współczynników w programie R wystarczy wykorzystać funkcję `lm()`.
+
+---
+
+# Jak wyznaczyć współczynniki trendu liniowego w programie R
+
+Przygotujmy zbiór danych `tylkoBreakingBad` w którym będą tylko wartości zmiennych `id` i `ocena` dla odcinków z sezony `Breaking Bad`.
+
+```{r}
+tylkoBreakingBad <- serialeIMDB %>%
+  filter(serial == "Breaking Bad") %>% 
+  select(id, ocena)
+head(tylkoBreakingBad)
+```
+
+---
+
+# Jak wyznaczyć współczynniki trendu liniowego w programie R
+
+Do wyznaczenia trendu liniowego wykorzystujemy funkcję `lm()`, która jako pierwszy argument przyjmuje formułę opisująca pomiędzy którymi zmiennymi chcemy wyznaczyć relację, a jako drugi argument wskazuje zbiór danych.
+
+Formuła ma znak `~` (tyldy), po jego lewej stronie podaje się zmienną którą chcemy opisać (tak zwaną zmienną objaśnianą) a po prawej stronie podaje się zmienną objaśniającą.
+
+```{r}
+lm(ocena~id, tylkoBreakingBad)
+```
+
+Wynik funkcji `lm()` jest listą z wieloma informacjami. Współczynniki modelu znajdują się we właściwości o nazwie `coef`.
+
+```{r}
+lm(ocena~id, tylkoBreakingBad)$coef
+```
+
+Wartość `(Intercept)` to współczynnik $\hat a_0$ a `id` to współczynnik $\hat a_1$. 
+
+Tak więc dla serialu `Breaking Bad` linia, która minimalizuje RSS ma formułę
+$$
+\hat ocena = 7.90777366 +  0.01834001 * id
+$$
+
+
+---
+
+# Jak wygląda rozwój trendu w ocenach dla Twojego ulubionego serialu?
+
+Używając poniższej aplikacji można przyjrzeć się ocenom kolejnych seriali i sprawdzić czy i jak wygląda trend w ich popularności.
+
+<center><iframe width="870" height="700" frameborder="0" src="https://smarterpoland.shinyapps.io/serialeIMDB"></iframe></center>
+
+---
+
+# Zadania
+
+* Znajdź serial o najsilniej rosnącym trendzie dotyczącym ocen (ponieważ oceny są ograniczone z góry przez 10 to może nie być serial o najwyższej średniej ocenie)
+
+* Znajdź serial o najsilniejszym trendzie spadkowym
+
+
