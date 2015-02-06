@@ -50,41 +50,36 @@ Używając poniższej aplikacji można wyznaczyć trend liniowy w ocenach dla od
 
 # Jak wygląda trend w serialach
 
-
-Mając taki zbiór danych, możemy porównać oceny odcinków dwóch seriali. Wyciągnijmy z tego zbioru danych oceny dla serialu *Friends* i oceny dla serialu *Breaking Bad*
-
-```{r}
-ocenyFriends     <- serialeIMDB[serialeIMDB$serial == "Friends", "ocena"]
-summary(ocenyFriends)
-
-ocenyBreakingBad <- serialeIMDB[serialeIMDB$serial == "Breaking Bad", "ocena"]
-summary(ocenyBreakingBad)
-```
-
-Średnia w jednym serialu to `8.508` a w drugim `8.481`. 
-
-Czy to duża różnica czy mała?
-
----
-
-# Czy serial Friends jest lepszy niż serial Breaking Bed?
-
-Po lewej *Breaking Bad* po prawej *Friends*. Każdy punkt to ocena jednego odcinka.
+Mając taki zbiór danych, pryjrzyjmy się jak wyglądają oceny dla serialu *Breaking Bad*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
 library(ggvis)
+serialeIMDB %>%
+  filter(serial == "Breaking Bad") %>%
+  mutate(sezon = droplevels(sezon)) %>%
+    ggvis(x = ~id, y = ~ocena, fill = ~sezon) %>%
+    # ewentualnie group_by(sezon)
+    layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
+    layer_points(fillOpacity:=0.8) 
+```
+
+---
+
+# Jak wygląda trend w serialach
+
+Mając taki zbiór danych, pryjrzyjmy się jak wyglądają oceny dla serialu *Breaking Bad*
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
   serialeIMDB %>%
   filter(serial == "Breaking Bad") %>%
+  mutate(sezon = droplevels(sezon)) %>%
     ggvis(x = ~id, y = ~ocena, fill = ~sezon) %>%
     # ewentualnie group_by(sezon)
     layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
     layer_points(fillOpacity:=0.8) %>%
-    hide_legend("fill") %>%
     layer_model_predictions(model = "lm") 
-
 ```
-
 
 
 
