@@ -14,20 +14,18 @@ output:
 
 # O czym jest ten odcinek
 
+W poprzednim odcunki poznaliśmy metodę wyznaczania trendu liniowego. 
 
-Analizując dane, często trafiamy na sytuację, gdy mamy sekwencje liczb i chcemy ocenić czy w wartościach jest widoczny trend.
+Dzięki temu, możemy np. ocenić czy określona wartość średnio rośnie czy maleje.
+Czasem jednak współczynnik $a_1$ opisujący tempo wzrostu jet bardzo bliski $0$. Możemy wtedy zadać dodatkowe pytanie, czy obserwowany wzrost nie jest wynikiem przypadkowych fluktuacji?
 
-Analizując zużycie energii możemy sprawdzać czy występuje rosnący trend zapotrzebowania na energię, podobnie analizując liczbę sprzedanych biletów czy postępy w grach.
+I tutaj pojawia się statystyka. Używając takich narzędzi jak test dla współczynnika trendu możemy ocenić na ile wielkość współczynnika wzrostu jest nieprzypadkowa.
 
-Jednak nawet gdy występuje widoczny trend, bardzo rzadko wartości układają się idealnie w linię. Zazwyczaj trend jest zanurzony w dużej zmienności. Jak oszacować jak silny jest ten trend?
-
-I tutaj pojawia się statystyka. Używając takich narzędzi jak regresja liniowa możemy ocenić jakie są parametry liniowego trendu.
-
-W tym odcinku, na przykładzie danych z serwisu IMDB (Internet Movie Database), pokażemy jak działa procedura wyznaczania trendu w danych.
+W tym odcinku, na przykładzie danych z serwisu IMDB (Internet Movie Database), pokażemy jak działa procedura testowania trendu w danych.
 
 ---
 
-# Baza danych o filmach i serialach
+# Dane i trend liniowy
 
 W bazie danych o filmach IMDB (Internet Movie Database) znaleźć można dane o serialach a w szczególności średnie oceny użytkowników wystawione kolejnym odcinkom serialu.
 
@@ -35,10 +33,43 @@ Przykładowo, na stronie http://www.imdb.com/title/tt0903747/epdate?ref_=ttep_ql
 
 Dane te zostały pobrane z Internetu i przygotowane tak, że teraz są dostępne w zbiorze danych `serialeIMDB` w pakiecie `PogromcyDanych`, który towarzyszy temu kursowi.
 
+Wybierzemy z tego zbioru danych tylko wartości dla serialu `Breaking Bad`.
+
 ```{r, warning=FALSE, message=FALSE}
 library(PogromcyDanych)
-head(serialeIMDB)
+
+tylkoBreakingBad <- serialeIMDB %>%
+  filter(serial == "Breaking Bad") %>% 
+  select(id, ocena)
+
+head(tylkoBreakingBad)
 ```
+
+---
+
+# Dane i trend liniowy
+
+W poprzednim odcinku pokazaliśmy jak wyznaczyć współczynniki trendu liniowego z użyciem funkcji `lm()`.
+
+```{r}
+lm(ocena~id, tylkoBreakingBad)$coef
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=4}
+library(ggvis)
+library(dplyr)
+serialeIMDB %>%
+  filter(serial == "Breaking Bad") %>%
+  mutate(sezon = droplevels(sezon)) %>%
+    ggvis(x = ~id, y = ~ocena, fill = ~sezon) %>%
+    # ewentualnie group_by(sezon)
+    layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
+    layer_points(fillOpacity:=0.8) %>%
+    layer_model_predictions(model = "lm") 
+```
+
+
+
 
 ---
 
