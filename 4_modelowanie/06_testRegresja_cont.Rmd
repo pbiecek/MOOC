@@ -137,42 +137,85 @@ hist(trendy, 50, col="grey", main="", las=1, border="white", xlim=c(0, 0.02))
 abline(v=modulWzrostu, col="red", lwd=5)
 ```
 
-Jak widzimy, obserowana wartość wzrostu ocen dla serialu *Breaking Bad* jest znacznie większa niż wzrosty, któ®e byłoby widać, gdyby nie było żadnego trendu.
+Jak widzimy, obserowana wartość wzrostu ocen dla serialu *Breaking Bad* jest znacznie większa niż wzrosty, które byłoby widać, gdyby nie było żadnego trendu.
 
 # Czy wzrost ocen dla Breaking Bad to przypadek? Test permutacyjny
 
-Wykres pomaga w zrozumieniu tego rozkładu, ale aby podjąć decyzje lepiej mieć jedną liczbę. Policzmy jaka część różnic dla losowych fluktuacji jest większa niż obserwowana różnica.
+Wykres pomaga w zrozumieniu tego rozkładu, ale aby podjąć decyzje lepiej mieć jedną liczbę. Policzmy jaka część trendów dla losowych fluktuacji jest większa niż obserwowany trend dla *Breaking Bad*.
 
 ```{r, eval=FALSE}
-mean(roznice > obserwowana_roznica) + 1/100000
+mean(trendy > modulWzrostu)
 ```
 
+Zero? Gdy zaburzaliśmy losowo oceny to nie udało się uzyskać tak dużego wzrostu, co jest przekonującym argumentem za ty, że obserwowany wzrost ocen dla *Breaking Bad* nie jest przypadkowy.
 
+# A co z Przyjaciółmi?
 
+A jak wygląda trend dla serialu *Friends*? 
 
+Również jest dodatni, ale czy istotnie większy od zera? 
 
+Jest mniejszy niż dla *Breaking Bad*, ale czy wciąż istotny?
 
+```{r}
+tylkoFriends <- serialeIMDB %>%
+  filter(serial == "Friends") %>% 
+  select(id, ocena)
+lm(ocena~id, tylkoFriends)$coef
+```
 
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=4}
+library(ggvis)
+library(dplyr)
+serialeIMDB %>%
+  filter(serial == "Friends") %>%
+  mutate(sezon = droplevels(sezon)) %>%
+    ggvis(x = ~id, y = ~ocena, fill = ~sezon) %>%
+    # ewentualnie group_by(sezon)
+    layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
+    layer_points(fillOpacity:=0.8) %>%
+    layer_model_predictions(model = "lm")  %>%
+    add_tooltip(function(data){
+      paste0(data$nazwa, "<br>ocena: ",as.character(data$ocena))
+    }, "hover") 
+```
 
+# A co z Przyjaciółmi?
 
+Przeprowadźmy teraz te same obliczenia co dla *Breaking Bad* ale dla serialu *Friends*.
 
+```{r}
+# trend dla serialu Friends
+wspolczynnikiTrendu <- lm(ocena~id, tylkoFriends)$coef
+(modulWzrostu <- abs(wspolczynnikiTrendu[2]))
 
+# losowe współczynniki trendu
+trendy <- replicate(100000, {
+  tylkoFriends$wymieszane <- sample(tylkoFriends$ocena)
+  wspolczynnikiTrendu <- lm(wymieszane~id, tylkoFriends)$coef
+  abs(wspolczynnikiTrendu[2])
+})
+```
 
+Dla serialu *Friends* nawet gdy losujemy wartości ocen w kilkunastu procentach przypadków obserwujemy trend większy niż `0.00043`. Czy to oznacza, że rosnący trend jest czysto przypadkowy? 
 
-
-
-
-
-
-
-
+Pewności nie ma, ale raczej jesteśmy skłonni uznać, że obserwowany trend nie jest istotnie różny od zera. 
+Za próg przyjmuje się często 0.05 (głównie z powodów historycznych, ale już tak się utarło). Co znaczy tyle, że uznaje się trend za nieprzypadkowy jeżeli jest mniejszy o co najwyżej 5\% wartości, któ®e można by przypadkowo zaobserwować.
+ 
+```{r}
+mean(trendy > modulWzrostu)
+# wykres z wartościami
+hist(trendy, 50, col="grey", main="", las=1, border="white", xlim=c(0, 0.02))
+abline(v=modulWzrostu, col="red", lwd=5)
+```
 
 ---
 
 # Zadania
 
-* Znajdź serial o najsilniej rosnącym trendzie dotyczącym ocen (ponieważ oceny są ograniczone z góry przez 10 to może nie być serial o najwyższej średniej ocenie)
+* Znajdź serial o istotnym ujemnem trendem, to znaczy takim, którego oceny maleją.
 
-* Znajdź serial o najsilniejszym trendzie spadkowym
+* Znajdź serial (inny niż _Breaking Bad_) o istotnie dodatnim trendem. 
 
+* [Trudne] Policz dla ilu serialu ich oceny rosną a dla ilu maleją i te wzrosty lub spadki są istotnie większe niż wynikające z przypadku.
 
