@@ -127,17 +127,19 @@ trendy <- replicate(100000, {
 
 # Czy wzrost ocen dla Breaking Bad to przypadek? Test permutacyjny
 
-Możemy teraz wartość `obserwowana_roznica` porównać z wektorem wartości `roznice`. 
-Wektor różnice opisuje jakich różnic spodziewać się możemy gdy próby różnią się wyłącznie losową fluktuacja. Gdyby `obserwowana_roznica` była znacząco większa niż wartości z wektora różnice, to byłby to silny argument za tym, że różnica w średnich nie jest przypadkowa.
+Możemy teraz wartość `modulWzrostu` porównać z wektorem wartości `trendy`. 
+Wektor wielkości wzrostów jakich spodziewać się możemy gdy próby różnią się wyłącznie przypadkową zmiennością. Gdyby `modulWzrostu` był znacząco większy niż wartości z wektora `trendy`, to byłby to silny argument za tym, że trend rosnący w ocenie odcinków *Breaking Bad*  nie jest przypadkowy.
 
 Porównajmy na wykresie wielkości różnic dla losowych fluktuacji (na szaro) z obserwowaną różnicą (na czerwono).
 
 ```{r, eval=FALSE}
-hist(roznice, 50, col="grey", main="", las=1, border="white")
-abline(v=obserwowana_roznica, col="red", lwd=5)
+hist(trendy, 50, col="grey", main="", las=1, border="white", xlim=c(0, 0.02))
+abline(v=modulWzrostu, col="red", lwd=5)
 ```
 
-# Czy serial Friends jest lepszy niż serial Breaking Bed?
+Jak widzimy, obserowana wartość wzrostu ocen dla serialu *Breaking Bad* jest znacznie większa niż wzrosty, któ®e byłoby widać, gdyby nie było żadnego trendu.
+
+# Czy wzrost ocen dla Breaking Bad to przypadek? Test permutacyjny
 
 Wykres pomaga w zrozumieniu tego rozkładu, ale aby podjąć decyzje lepiej mieć jedną liczbę. Policzmy jaka część różnic dla losowych fluktuacji jest większa niż obserwowana różnica.
 

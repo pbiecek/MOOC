@@ -93,27 +93,27 @@ tylkoBreakingBad &lt;-<span class="st"> </span>serialeIMDB %&gt;%
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(ocena~id, tylkoBreakingBad)$coef</code></pre>
 <pre><code>## (Intercept)          id 
 ##  7.90777366  0.01834001</code></pre>
-<p><div id="plot_id350160676-container" class="ggvis-output-container">
-<div id="plot_id350160676" class="ggvis-output"></div>
+<p><div id="plot_id125224498-container" class="ggvis-output-container">
+<div id="plot_id125224498" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id350160676_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id350160676" data-renderer="svg">SVG</a>
+<a id="plot_id125224498_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id125224498" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id350160676_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id350160676" data-renderer="canvas">Canvas</a>
+<a id="plot_id125224498_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id125224498" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id350160676_download" class="ggvis-download" data-plot-id="plot_id350160676">Download</a>
+<a id="plot_id125224498_download" class="ggvis-download" data-plot-id="plot_id125224498">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id350160676_spec = {
+var plot_id125224498_spec = {
     "data": [
         {
             "name": ".0",
@@ -374,7 +374,7 @@ var plot_id350160676_spec = {
     "handlers": null
 }
 ;
-ggvis.getPlot("plot_id350160676").parseSpec(plot_id350160676_spec);
+ggvis.getPlot("plot_id125224498").parseSpec(plot_id125224498_spec);
 </script></p>
 </div>
 <div id="czy-wzrost-ocen-dla-breaking-bad-to-przypadek-test-permutacyjny" class="slide section level1">
@@ -397,36 +397,34 @@ ggvis.getPlot("plot_id350160676").parseSpec(plot_id350160676_spec);
 </div>
 <div id="czy-wzrost-ocen-dla-breaking-bad-to-przypadek-test-permutacyjny-1" class="slide section level1">
 <h1>Czy wzrost ocen dla Breaking Bad to przypadek? Test permutacyjny</h1>
-<h3 id="krok-3-porownaj-zaobserwowany-trend-z-trendem-w-sytuacji-gdyby-nie-byo-zaleznosci-pomiedzy-grupami">Krok 3: Porównaj zaobserwowany trend z trendem w sytuacji gdyby nie było zależności pomiędzy grupami</h3>
-<p>Wciąż nie wiemy, czy <code>0.02628083</code> to duża różnica czy mała. Musimy ją z czymś porównać. Najlepiej by było porównać ją z wartościami, które byśmy obserwowali gdyby te dwie grupy się nie różniły.</p>
-<p>Ale skąd wiadomo jakie byłyby różnice gdyby obie grupy się nie różniły? Możemy to oszacować w następujący sposób</p>
+<h3 id="krok-3-porownaj-zaobserwowany-trend-z-trendem-w-sytuacji-gdyby-nie-byo-zaleznosci">Krok 3: Porównaj zaobserwowany trend z trendem w sytuacji gdyby nie było zależności</h3>
+<p>Wciąż nie wiemy, czy <code>0.01834001</code> to duży wzrost czy mały. Musimy go z czymś porównać. Najlepiej by było porównać ją z wartościami, które byśmy obserwowali gdyby nie było prawdziwego trendu.</p>
+<p>Ale skąd wiadomo, ile wynosiłby ten współczynnik gdyby nie było trendu? Możemy to oszacować w następujący sposób</p>
 <ul>
-<li>[I] Wymieszamy losowo wartości w obu grupach zachowując liczebność grup. Dzięki temu otrzymamy dwie grupy o których wiemy, że się nie różnią istotnie a jedyne różnice wynikają z losowych fluktuacji,</li>
-<li>[II] Policzymy jak duża jest różnica dla tych nowo wylosowanych grup,</li>
-<li>[III] Powtórzymy kroki [I] i [II] wielokrotnie aby zobaczyć jak duże wartości może przyjmować ta różnica w sytuacji gdy obie grupy nie różnią się od siebie.</li>
+<li>[I] Wymieszamy losowo wartości ocen. Dzięki temu otrzymamy sekwencje ocen o której wiemy, że nie ma w niej żadnego systematycznego trendu, a ewentualna wielkość współczynika trendu wynika z losowych fluktuacji,</li>
+<li>[II] Policzymy jak duży jest trend dla tych nowo wylosowanych grup,</li>
+<li>[III] Powtórzymy kroki [I] i [II] wielokrotnie aby zobaczyć jak duże wartości może przyjmować trend w sytuacji gdy jest on wynikiem losowych fluktuacji.</li>
 </ul>
-<p>To liczenie różnic na próbach różniących się jedynie losową fluktuacją jest realizowane przez poniższy kod.</p>
-<pre class="sourceCode r"><code class="sourceCode r">liczbaFriends &lt;-<span class="st"> </span><span class="kw">length</span>(ocenyFriends)
+<p>To liczenie wartości trendu dla losowo pomieszanych danych realizowane przez poniższy kod.</p>
+<pre class="sourceCode r"><code class="sourceCode r">trendy &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">100000</span>, {
+  <span class="co"># wymieszaj losowo wartości</span>
+  tylkoBreakingBad$wymieszane &lt;-<span class="st"> </span><span class="kw">sample</span>(tylkoBreakingBad$ocena)
 
-roznice &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">100000</span>, {
-  <span class="co"># wymeiszaj losowo wartości</span>
-  wymieszane &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(ocenyFriends, ocenyBreakingBad))
-  <span class="co"># losowo dobrane repliki próby</span>
-  oceny1 &lt;-<span class="st"> </span>wymieszane[<span class="dv">1</span>:liczbaFriends]
-  oceny2 &lt;-<span class="st"> </span>wymieszane[-(<span class="dv">1</span>:liczbaFriends)]
-  <span class="co"># różnica pomiedzy losowymi grupami</span>
-  <span class="kw">abs</span>(<span class="kw">mean</span>(oceny1) -<span class="st"> </span><span class="kw">mean</span>(oceny2))
+  <span class="co"># moduł współczynnika wzrostu dla losowo wymieszanych danych</span>
+  wspolczynnikiTrendu &lt;-<span class="st"> </span><span class="kw">lm</span>(wymieszane~id, tylkoBreakingBad)$coef
+  <span class="kw">abs</span>(wspolczynnikiTrendu[<span class="dv">2</span>])
 })</code></pre>
 </div>
-<div id="czy-serial-friends-jest-lepszy-niz-serial-breaking-bed" class="slide section level1">
-<h1>Czy serial Friends jest lepszy niż serial Breaking Bed?</h1>
-<p>Możemy teraz wartość <code>obserwowana_roznica</code> porównać z wektorem wartości <code>roznice</code>. Wektor różnice opisuje jakich różnic spodziewać się możemy gdy próby różnią się wyłącznie losową fluktuacja. Gdyby <code>obserwowana_roznica</code> była znacząco większa niż wartości z wektora różnice, to byłby to silny argument za tym, że różnica w średnich nie jest przypadkowa.</p>
+<div id="czy-wzrost-ocen-dla-breaking-bad-to-przypadek-test-permutacyjny-2" class="slide section level1">
+<h1>Czy wzrost ocen dla Breaking Bad to przypadek? Test permutacyjny</h1>
+<p>Możemy teraz wartość <code>modulWzrostu</code> porównać z wektorem wartości <code>trendy</code>. Wektor wielkości wzrostów jakich spodziewać się możemy gdy próby różnią się wyłącznie przypadkową zmiennością. Gdyby <code>modulWzrostu</code> był znacząco większy niż wartości z wektora <code>trendy</code>, to byłby to silny argument za tym, że trend rosnący w ocenie odcinków <em>Breaking Bad</em> nie jest przypadkowy.</p>
 <p>Porównajmy na wykresie wielkości różnic dla losowych fluktuacji (na szaro) z obserwowaną różnicą (na czerwono).</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(roznice, <span class="dv">50</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>, <span class="dt">main=</span><span class="st">&quot;&quot;</span>, <span class="dt">las=</span><span class="dv">1</span>, <span class="dt">border=</span><span class="st">&quot;white&quot;</span>)
-<span class="kw">abline</span>(<span class="dt">v=</span>obserwowana_roznica, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">lwd=</span><span class="dv">5</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(trendy, <span class="dv">50</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>, <span class="dt">main=</span><span class="st">&quot;&quot;</span>, <span class="dt">las=</span><span class="dv">1</span>, <span class="dt">border=</span><span class="st">&quot;white&quot;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.02</span>))
+<span class="kw">abline</span>(<span class="dt">v=</span>modulWzrostu, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">lwd=</span><span class="dv">5</span>)</code></pre>
+<p>Jak widzimy, obserowana wartość wzrostu ocen dla serialu <em>Breaking Bad</em> jest znacznie większa niż wzrosty, któ®e byłoby widać, gdyby nie było żadnego trendu.</p>
 </div>
-<div id="czy-serial-friends-jest-lepszy-niz-serial-breaking-bed-1" class="slide section level1">
-<h1>Czy serial Friends jest lepszy niż serial Breaking Bed?</h1>
+<div id="czy-wzrost-ocen-dla-breaking-bad-to-przypadek-test-permutacyjny-3" class="slide section level1">
+<h1>Czy wzrost ocen dla Breaking Bad to przypadek? Test permutacyjny</h1>
 <p>Wykres pomaga w zrozumieniu tego rozkładu, ale aby podjąć decyzje lepiej mieć jedną liczbę. Policzmy jaka część różnic dla losowych fluktuacji jest większa niż obserwowana różnica.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(roznice &gt;<span class="st"> </span>obserwowana_roznica) +<span class="st"> </span><span class="dv">1</span>/<span class="dv">100000</span></code></pre>
 </div>
