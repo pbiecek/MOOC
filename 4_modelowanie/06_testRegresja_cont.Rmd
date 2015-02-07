@@ -86,7 +86,7 @@ serialeIMDB %>%
 [Test permutacyjny dla trendu?]
 
 
-# Czy serial Friends jest lepszy niż serial Breaking Bed?
+# Czy wzrost ocen dla Breaking Bad to przypadek?
 
 Statystycy opracowali wiele testów aby porównać wartości w dwóch grupach. W większości przypadków te testy dają zbliżone wyniki, więc zamiast przedstawiać ich leksykon wyjaśnimy na jednym przykładzie na czym polega testowanie. Przedstawimy tak zwany test permutacyjny do porównywania średnich.
 

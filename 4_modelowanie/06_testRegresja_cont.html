@@ -93,27 +93,27 @@ tylkoBreakingBad &lt;-<span class="st"> </span>serialeIMDB %&gt;%
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(ocena~id, tylkoBreakingBad)$coef</code></pre>
 <pre><code>## (Intercept)          id 
 ##  7.90777366  0.01834001</code></pre>
-<p><div id="plot_id958499695-container" class="ggvis-output-container">
-<div id="plot_id958499695" class="ggvis-output"></div>
+<p><div id="plot_id304532469-container" class="ggvis-output-container">
+<div id="plot_id304532469" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id958499695_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id958499695" data-renderer="svg">SVG</a>
+<a id="plot_id304532469_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id304532469" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id958499695_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id958499695" data-renderer="canvas">Canvas</a>
+<a id="plot_id304532469_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id304532469" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id958499695_download" class="ggvis-download" data-plot-id="plot_id958499695">Download</a>
+<a id="plot_id304532469_download" class="ggvis-download" data-plot-id="plot_id304532469">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id958499695_spec = {
+var plot_id304532469_spec = {
     "data": [
         {
             "name": ".0",
@@ -374,15 +374,15 @@ var plot_id958499695_spec = {
     "handlers": null
 }
 ;
-ggvis.getPlot("plot_id958499695").parseSpec(plot_id958499695_spec);
+ggvis.getPlot("plot_id304532469").parseSpec(plot_id304532469_spec);
 </script></p>
 </div>
 <div class="slide section level1">
 
 <p>[Test permutacyjny dla trendu?]</p>
 </div>
-<div id="czy-serial-friends-jest-lepszy-niz-serial-breaking-bed" class="slide section level1">
-<h1>Czy serial Friends jest lepszy niż serial Breaking Bed?</h1>
+<div id="czy-wzrost-ocen-dla-breaking-bad-to-przypadek" class="slide section level1">
+<h1>Czy wzrost ocen dla Breaking Bad to przypadek?</h1>
 <p>Statystycy opracowali wiele testów aby porównać wartości w dwóch grupach. W większości przypadków te testy dają zbliżone wyniki, więc zamiast przedstawiać ich leksykon wyjaśnimy na jednym przykładzie na czym polega testowanie. Przedstawimy tak zwany test permutacyjny do porównywania średnich.</p>
 <p>Pomysł na porównanie dwóch grup składa się z trzech kroków. Przedstawmy je jeden po drugim.</p>
 <h3 id="krok-1-postaw-hipoteze-okresl-co-chcesz-porownac">Krok 1: Postaw hipotezę, określ co chcesz porównać</h3>
@@ -392,7 +392,7 @@ ggvis.getPlot("plot_id958499695").parseSpec(plot_id958499695_spec);
 <p>Ustalmy, że wielkość różnicy pomiędzy grupami będziemy mierzyć za pomocą wartości bezwzględnej z różnicy pomiędzy średnimi w obu grupach.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># moduł różnicy średnich</span></code></pre>
 </div>
-<div id="czy-serial-friends-jest-lepszy-niz-serial-breaking-bed-1" class="slide section level1">
+<div id="czy-serial-friends-jest-lepszy-niz-serial-breaking-bed" class="slide section level1">
 <h1>Czy serial Friends jest lepszy niż serial Breaking Bed?</h1>
 <h3 id="krok-3-porownaj-zaobserwowana-wielkosc-roznicy-z-roznica-w-sytuacji-gdyby-grupy-nie-byy-rozne">Krok 3: Porównaj zaobserwowaną wielkość różnicy z różnicą w sytuacji gdyby grupy nie były różne</h3>
 <p>Wciąż nie wiemy, czy <code>0.02628083</code> to duża różnica czy mała. Musimy ją z czymś porównać. Najlepiej by było porównać ją z wartościami, które byśmy obserwowali gdyby te dwie grupy się nie różniły.</p>
@@ -415,14 +415,14 @@ roznice &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span cl
   <span class="kw">abs</span>(<span class="kw">mean</span>(oceny1) -<span class="st"> </span><span class="kw">mean</span>(oceny2))
 })</code></pre>
 </div>
-<div id="czy-serial-friends-jest-lepszy-niz-serial-breaking-bed-2" class="slide section level1">
+<div id="czy-serial-friends-jest-lepszy-niz-serial-breaking-bed-1" class="slide section level1">
 <h1>Czy serial Friends jest lepszy niż serial Breaking Bed?</h1>
 <p>Możemy teraz wartość <code>obserwowana_roznica</code> porównać z wektorem wartości <code>roznice</code>. Wektor różnice opisuje jakich różnic spodziewać się możemy gdy próby różnią się wyłącznie losową fluktuacja. Gdyby <code>obserwowana_roznica</code> była znacząco większa niż wartości z wektora różnice, to byłby to silny argument za tym, że różnica w średnich nie jest przypadkowa.</p>
 <p>Porównajmy na wykresie wielkości różnic dla losowych fluktuacji (na szaro) z obserwowaną różnicą (na czerwono).</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(roznice, <span class="dv">50</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>, <span class="dt">main=</span><span class="st">&quot;&quot;</span>, <span class="dt">las=</span><span class="dv">1</span>, <span class="dt">border=</span><span class="st">&quot;white&quot;</span>)
 <span class="kw">abline</span>(<span class="dt">v=</span>obserwowana_roznica, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">lwd=</span><span class="dv">5</span>)</code></pre>
 </div>
-<div id="czy-serial-friends-jest-lepszy-niz-serial-breaking-bed-3" class="slide section level1">
+<div id="czy-serial-friends-jest-lepszy-niz-serial-breaking-bed-2" class="slide section level1">
 <h1>Czy serial Friends jest lepszy niż serial Breaking Bed?</h1>
 <p>Wykres pomaga w zrozumieniu tego rozkładu, ale aby podjąć decyzje lepiej mieć jedną liczbę. Policzmy jaka część różnic dla losowych fluktuacji jest większa niż obserwowana różnica.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(roznice &gt;<span class="st"> </span>obserwowana_roznica) +<span class="st"> </span><span class="dv">1</span>/<span class="dv">100000</span></code></pre>
