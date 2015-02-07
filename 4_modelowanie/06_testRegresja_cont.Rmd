@@ -65,7 +65,10 @@ serialeIMDB %>%
     # ewentualnie group_by(sezon)
     layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
     layer_points(fillOpacity:=0.8) %>%
-    layer_model_predictions(model = "lm") 
+    layer_model_predictions(model = "lm")  %>%
+    add_tooltip(function(data){
+      paste0(data$nazwa, "<br>ocena: ",as.character(data$ocena))
+    }, "hover") 
 ```
 
 ---
