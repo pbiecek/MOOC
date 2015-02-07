@@ -14,6 +14,20 @@ output:
 
 # O czym jest ten odcinek
 
+Nie tylko testy
+
+* tabela kontyngencji
+
+* jak ja narysowac (mosaic plot) i jak ja czytac
+
+* testy
+
+
+```{r}
+
+
+```
+
 ```{r}
 library(PogromcyDanych)
 library(dplyr)
