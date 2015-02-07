@@ -100,36 +100,32 @@ Ustalmy, że wielkość współczynnika trendu będziemy mierzyć za pomocą war
 
 # Czy wzrost ocen dla Breaking Bad to przypadek? Test permutacyjny
 
-### Krok 3: Porównaj zaobserwowany trend z trendem w sytuacji gdyby nie było zależności pomiędzy grupami
+### Krok 3: Porównaj zaobserwowany trend z trendem w sytuacji gdyby nie było zależności
 
-Wciąż nie wiemy, czy `0.02628083` to duża różnica czy mała. Musimy ją z czymś porównać.
-Najlepiej by było porównać ją z wartościami, które byśmy obserwowali gdyby te dwie grupy się nie różniły. 
+Wciąż nie wiemy, czy `0.01834001` to duży wzrost czy mały. Musimy go z czymś porównać.
+Najlepiej by było porównać ją z wartościami, które byśmy obserwowali gdyby nie było prawdziwego trendu. 
 
-Ale skąd wiadomo jakie byłyby różnice gdyby obie grupy się nie różniły? 
+Ale skąd wiadomo, ile wynosiłby ten współczynnik gdyby nie było trendu?
 Możemy to oszacować w następujący sposób
 
-* [I] Wymieszamy losowo wartości w obu grupach zachowując liczebność grup. Dzięki temu otrzymamy dwie grupy o których wiemy, że się nie różnią istotnie a jedyne różnice wynikają z losowych fluktuacji,
-* [II] Policzymy jak duża jest różnica dla tych nowo wylosowanych grup,
-* [III] Powtórzymy kroki [I] i [II] wielokrotnie aby zobaczyć jak duże wartości może przyjmować ta różnica w sytuacji gdy obie grupy nie różnią się od siebie.
+* [I] Wymieszamy losowo wartości ocen. Dzięki temu otrzymamy sekwencje ocen o której wiemy, że nie ma w niej żadnego systematycznego trendu, a ewentualna wielkość współczynika trendu wynika z losowych fluktuacji,
+* [II] Policzymy jak duży jest trend dla tych nowo wylosowanych grup,
+* [III] Powtórzymy kroki [I] i [II] wielokrotnie aby zobaczyć jak duże wartości może przyjmować trend w sytuacji gdy jest on wynikiem losowych fluktuacji.
 
-To liczenie różnic na próbach różniących się jedynie losową fluktuacją jest realizowane przez poniższy kod.
-
+To liczenie wartości trendu dla losowo pomieszanych danych realizowane przez poniższy kod.
 
 ```{r, eval=FALSE}
-liczbaFriends <- length(ocenyFriends)
+trendy <- replicate(100000, {
+  # wymieszaj losowo wartości
+  tylkoBreakingBad$wymieszane <- sample(tylkoBreakingBad$ocena)
 
-roznice <- replicate(100000, {
-  # wymeiszaj losowo wartości
-  wymieszane <- sample(c(ocenyFriends, ocenyBreakingBad))
-  # losowo dobrane repliki próby
-  oceny1 <- wymieszane[1:liczbaFriends]
-  oceny2 <- wymieszane[-(1:liczbaFriends)]
-  # różnica pomiedzy losowymi grupami
-  abs(mean(oceny1) - mean(oceny2))
+  # moduł współczynnika wzrostu dla losowo wymieszanych danych
+  wspolczynnikiTrendu <- lm(wymieszane~id, tylkoBreakingBad)$coef
+  abs(wspolczynnikiTrendu[2])
 })
 ```
 
-# Czy serial Friends jest lepszy niż serial Breaking Bed?
+# Czy wzrost ocen dla Breaking Bad to przypadek? Test permutacyjny
 
 Możemy teraz wartość `obserwowana_roznica` porównać z wektorem wartości `roznice`. 
 Wektor różnice opisuje jakich różnic spodziewać się możemy gdy próby różnią się wyłącznie losową fluktuacja. Gdyby `obserwowana_roznica` była znacząco większa niż wartości z wektora różnice, to byłby to silny argument za tym, że różnica w średnich nie jest przypadkowa.
