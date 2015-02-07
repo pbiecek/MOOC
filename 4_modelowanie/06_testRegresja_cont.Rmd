@@ -73,47 +73,34 @@ serialeIMDB %>%
 
 ---
 
+# Czy wzrost ocen dla Breaking Bad to przypadek? Test permutacyjny
 
+Dla serialu Breaking Bad widzimy wzrostową tendencję.
+Ale czy nie jest ona przypadkowa? Czy taka tendencja może nas przekonać, że faktycznie odcinki w tym serialu są coraz lepsze (a w każdym razie coraz wyżej oceniane)?
 
+Statystycy opracowali wiele testów aby badać istotność trendu / tendencji. W większości przypadków te testy dają zbliżone wyniki, więc zamiast przedstawiać ich leksykon wyjaśnimy na jednym przykładzie na czym polega testowanie. Przedstawimy tak zwany test permutacyjny do badania trendu.
 
-
-
-
-
-
-
-
-
-
-
-[Test permutacyjny dla trendu?]
-
-
-# Czy wzrost ocen dla Breaking Bad to przypadek?
-
-Statystycy opracowali wiele testów aby porównać wartości w dwóch grupach. W większości przypadków te testy dają zbliżone wyniki, więc zamiast przedstawiać ich leksykon wyjaśnimy na jednym przykładzie na czym polega testowanie. Przedstawimy tak zwany test permutacyjny do porównywania średnich.
-
-Pomysł na porównanie dwóch grup składa się z trzech kroków. Przedstawmy je jeden po drugim.
+Pomysł na ocenę, czy trend ma istotną wzrostową tendencje składa się z trzech kroków. Przedstawmy je jeden po drugim.
 
 ### Krok 1: Postaw hipotezę, określ co chcesz porównać
 
-Będziemy testować hipotezę, czy wartości w jednym zbiorze są istotnie większe niż wartości w drugim zbiorze. 
+Będziemy testować hipotezę, czy współczynnik wzrostu jest istotnie różny od zera, czyli od braku trendu. 
 
-Tę hipotezę, sformujmy w następujący sposób: *Czy obserwowana różnica pomiędzy średnimi ocenami jest wystarczająco duża, by uznać ją za istotną?*
+Tę hipotezę, sformujmy w następujący sposób: *Czy obserwowana wartość współczynnika wzrostujest wystarczająco duża, by uznać ją za istotną?*
 
-### Krok 2: Określ miarę wielkości różnic
+### Krok 2: Określ miarę wielkości
 
-Ustalmy, że wielkość różnicy pomiędzy grupami będziemy mierzyć za pomocą wartości bezwzględnej z różnicy pomiędzy średnimi w obu grupach.
+Ustalmy, że wielkość współczynnika trendu będziemy mierzyć za pomocą wartości bezwzględnej tego współczynnika. Zarówno bowiem silny ujemny jak i silny dodatni trend uznamy za różny od zera.
 
 ```{r}
-
-# moduł różnicy średnich
-
+(wspolczynnikiTrendu <- lm(ocena~id, tylkoBreakingBad)$coef)
+# moduł współćzynnika wzrostu
+(modulWzrostu <- abs(wspolczynnikiTrendu[2]))
 ```
 
-# Czy serial Friends jest lepszy niż serial Breaking Bed?
+# Czy wzrost ocen dla Breaking Bad to przypadek? Test permutacyjny
 
-### Krok 3: Porównaj zaobserwowaną wielkość różnicy z różnicą w sytuacji gdyby grupy nie były różne
+### Krok 3: Porównaj zaobserwowany trend z trendem w sytuacji gdyby nie było zależności pomiędzy grupami
 
 Wciąż nie wiemy, czy `0.02628083` to duża różnica czy mała. Musimy ją z czymś porównać.
 Najlepiej by było porównać ją z wartościami, które byśmy obserwowali gdyby te dwie grupy się nie różniły. 
