@@ -165,3 +165,25 @@ Używając poniższej aplikacji można przyjrzeć się ocenom kolejnych seriali 
 * Znajdź serial o najsilniejszym trendzie spadkowym
 
 
+# Jak wygląda trend w serialach - Bonus
+
+Do tego miejsca mogło się zrodzić wrażenie, że być może trend liniowy to nie jedyny a może nawet nie najlepszy wybór. 
+
+Poniższa ilustracja prezentuje wyniki trendu liczonego w sposób bardziej lokalny, dzięki czemu, można zauważyć, że inna była zmiana ocen do około 30 odcinka (końca trzeciego sezonu), widać było lekką spadkową tendencję, a inna była zmiana po 30 odcinku (coraz to wyższe oceny).
+
+Jak modelować takie, bardziej złożone zależności? 
+
+Pokażemy w ostatnim odcinku tego sezonu ,,Co dalej?''.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=4}
+serialeIMDB %>%
+  filter(serial == "Breaking Bad") %>%
+  mutate(sezon = droplevels(sezon)) %>%
+    ggvis(x = ~id, y = ~ocena, fill = ~sezon) %>%
+    # ewentualnie group_by(sezon)
+    layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
+    layer_points(fillOpacity:=0.8) %>%
+    layer_smooths() 
+```
+
+
