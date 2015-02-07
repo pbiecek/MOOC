@@ -14,7 +14,33 @@ output:
 
 # O czym jest ten odcinek
 
-Test 2x2 Fishera
+```{r}
+library(PogromcyDanych)
+library(dplyr)
+
+plecCoWazne <- diagnoza %>% select(plec, gp29, waga_2013_osoby)
+head(plecCoWazne)
+```
+
+
+---
+
+# O czym jest ten odcinek
+
+```{r}
+table(plecCoWazne$plec, plecCoWazne$gp29)
+
+prop.table(table(plecCoWazne$plec, plecCoWazne$gp29), 1)
+
+fisher.test(table(plecCoWazne$plec, plecCoWazne$gp29))
+
+
+prop.table(table(diagnoza$gp54_11, cut(diagnoza$wiek2013, c(0, 25, 40, 60, 110))), 2)
+
+addmargins(table(ojcowiedziecmi = diagnoza$gp54_22, dziecirodzicami = diagnoza$gp54_11))
+```
+
+---
 
 Test 2x2 McNemara
 
