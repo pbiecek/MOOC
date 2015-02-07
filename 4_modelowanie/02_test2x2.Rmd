@@ -38,6 +38,19 @@ fisher.test(table(plecCoWazne$plec, plecCoWazne$gp29))
 prop.table(table(diagnoza$gp54_11, cut(diagnoza$wiek2013, c(0, 25, 40, 60, 110))), 2)
 
 addmargins(table(ojcowiedziecmi = diagnoza$gp54_22, dziecirodzicami = diagnoza$gp54_11))
+
+```
+
+# tez 2xp
+
+```{r}
+
+prop.table(table(diagnoza$gp29, cut(diagnoza$wiek2013, c(0, 25, 40, 60, 110))), 2)
+
+prop.table(table(diagnoza$gp29, diagnoza$eduk4_2013), 2)
+
+prop.table(table(diagnoza$eduk4_2013, cut(diagnoza$wiek2013, c(0, 25, 40, 60, 110)), diagnoza$gp29), 1:2)
+
 ```
 
 ---
