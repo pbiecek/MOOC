@@ -14,7 +14,7 @@ output:
 
 # O czym jest ten odcinek
 
-W poprzednim odcunki poznaliśmy metodę wyznaczania trendu liniowego. 
+W poprzednim odcinku poznaliśmy metodę wyznaczania trendu liniowego. 
 
 Dzięki temu, możemy np. ocenić czy określona wartość średnio rośnie czy maleje.
 Czasem jednak współczynnik $a_1$ opisujący tempo wzrostu jet bardzo bliski $0$. Możemy wtedy zadać dodatkowe pytanie, czy obserwowany wzrost nie jest wynikiem przypadkowych fluktuacji?
@@ -86,7 +86,7 @@ Pomysł na ocenę, czy trend ma istotną wzrostową tendencje składa się z trz
 
 Będziemy testować hipotezę, czy współczynnik wzrostu jest istotnie różny od zera, czyli od braku trendu. 
 
-Tę hipotezę, sformujmy w następujący sposób: *Czy obserwowana wartość współczynnika wzrostujest wystarczająco duża, by uznać ją za istotną?*
+Tę hipotezę, sformujmy w następujący sposób: *Czy obserwowana wartość współczynnika wzrostu jest wystarczająco duża, by uznać ją za istotną?*
 
 ### Krok 2: Określ miarę wielkości
 
@@ -108,7 +108,7 @@ Najlepiej by było porównać ją z wartościami, które byśmy obserwowali gdyb
 Ale skąd wiadomo, ile wynosiłby ten współczynnik gdyby nie było trendu?
 Możemy to oszacować w następujący sposób
 
-* [I] Wymieszamy losowo wartości ocen. Dzięki temu otrzymamy sekwencje ocen o której wiemy, że nie ma w niej żadnego systematycznego trendu, a ewentualna wielkość współczynika trendu wynika z losowych fluktuacji,
+* [I] Wymieszamy losowo wartości ocen. Dzięki temu otrzymamy sekwencje ocen o której wiemy, że nie ma w niej żadnego systematycznego trendu, a ewentualna wielkość współczynnika trendu wynika z losowych fluktuacji,
 * [II] Policzymy jak duży jest trend dla tych nowo wylosowanych grup,
 * [III] Powtórzymy kroki [I] i [II] wielokrotnie aby zobaczyć jak duże wartości może przyjmować trend w sytuacji gdy jest on wynikiem losowych fluktuacji.
 
@@ -137,7 +137,7 @@ hist(trendy, 50, col="grey", main="", las=1, border="white", xlim=c(0, 0.02))
 abline(v=modulWzrostu, col="red", lwd=5)
 ```
 
-Jak widzimy, obserowana wartość wzrostu ocen dla serialu *Breaking Bad* jest znacznie większa niż wzrosty, które byłoby widać, gdyby nie było żadnego trendu.
+Jak widzimy, obserwowana wartość wzrostu ocen dla serialu *Breaking Bad* jest znacznie większa niż wzrosty, które byłoby widać, gdyby nie było żadnego trendu.
 
 # Czy wzrost ocen dla Breaking Bad to przypadek? Test permutacyjny
 
@@ -200,7 +200,7 @@ trendy <- replicate(100000, {
 Dla serialu *Friends* nawet gdy losujemy wartości ocen w kilkunastu procentach przypadków obserwujemy trend większy niż `0.00043`. Czy to oznacza, że rosnący trend jest czysto przypadkowy? 
 
 Pewności nie ma, ale raczej jesteśmy skłonni uznać, że obserwowany trend nie jest istotnie różny od zera. 
-Za próg przyjmuje się często 0.05 (głównie z powodów historycznych, ale już tak się utarło). Co znaczy tyle, że uznaje się trend za nieprzypadkowy jeżeli jest mniejszy o co najwyżej 5\% wartości, któ®e można by przypadkowo zaobserwować.
+Za próg przyjmuje się często 0.05 (głównie z powodów historycznych, ale już tak się utarło). Co znaczy tyle, że uznaje się trend za nieprzypadkowy jeżeli jest mniejszy o co najwyżej 5\% wartości, które można by przypadkowo zaobserwować.
  
 ```{r}
 mean(trendy > modulWzrostu)
@@ -215,7 +215,8 @@ abline(v=modulWzrostu, col="red", lwd=5)
 
 * Znajdź serial o istotnym ujemnem trendem, to znaczy takim, którego oceny maleją.
 
-* Znajdź serial (inny niż _Breaking Bad_) o istotnie dodatnim trendem. 
+* Znajdź serial (inny niż _Breaking Bad_) o istotnie dodatnim trendzie. 
 
 * [Trudne] Policz dla ilu serialu ich oceny rosną a dla ilu maleją i te wzrosty lub spadki są istotnie większe niż wynikające z przypadku.
+
 
