@@ -22,18 +22,18 @@ Nie tylko testy
 
 * testy
 
-
-```{r}
-
-
-```
-
 ```{r}
 library(PogromcyDanych)
 library(dplyr)
 
 plecCoWazne <- diagnoza %>% select(plec, gp29, waga_2013_osoby)
 head(plecCoWazne)
+```
+
+
+```{r}
+head(TCGA_BRCA)
+
 ```
 
 
