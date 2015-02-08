@@ -34,6 +34,7 @@ shinyServer(function(input, output) {
                grid = list(stroke = "white")      
              )) %>% 
     layer_model_predictions(model = "lm") %>%
+    layer_smooths(stroke:="grey", strokeDash:=2) %>%
     add_tooltip(function(data){
       paste0(data$nazwa, "<br>ocena: ",as.character(data$ocena))
     }, "hover") %>%
