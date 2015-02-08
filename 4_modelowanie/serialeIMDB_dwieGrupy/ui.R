@@ -53,8 +53,13 @@ seriale <- c("'Allo 'Allo!", "24", "Adventure Time", "Agatha Christie's Poirot",
              "Utopia", "Veronica Mars", "Vikings", "White Collar", "Whose Line Is It Anyway?", 
              "X-Men", "Young Justice")
 
-shinyUI(fluidPage(
-  tags$head(tags$style(HTML("
+shinyUI(fluidPage(tags$script("(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+                  ga('create', 'UA-5650686-6', 'icm.edu.pl');
+                  ga('send', 'pageview');"),
+            tags$head(tags$style(HTML("
                             .ggvis-output-container {
                             margin-left: auto ;
                             margin-right: auto ;
