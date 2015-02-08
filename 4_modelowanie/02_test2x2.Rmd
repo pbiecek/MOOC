@@ -32,7 +32,15 @@ head(plecCoWazne)
 
 
 ```{r}
+# brak przerzutow dobrze rokuje
+table(TCGA_BRCA$new.tumor,
+      TCGA_BRCA$vital.status)
+
+
 head(TCGA_BRCA)
+
+table(TCGA_BRCA$TP53,
+      TCGA_BRCA$vital.status)
 
 ```
 
