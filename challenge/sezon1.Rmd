@@ -9,8 +9,30 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / eksploracja danych / zadania i odpowiedzi"
+    footer: "pogRomcy danych / challange / sezon 1 "
 ---
 
-# Zadanie, sezon 1, odcinek 5
+# Zadanie, sezon 1, odcinek 1
+
+Pod adresem `http://biecek.pl/R/dane/daneO.csv` znajduje się zbiór danych, w którego pierwszej kolumnie znajduje się zmienna `Wiek`. Policz średnią wartość z tej kolumny i przypisz do zmiennej `srWiek`.
+
+Przykładowe rozwiązanie:
+
+```{r}
+
+dat <- read.table("http://biecek.pl/R/dane/daneO.csv", sep=";")
+srWiek <- mean(dat$Wiek)
+
+```
+
+Test
+
+
+```{r}
+
+isCorrect <- ifelse(abs(srWiek - 45.5154) < 0.001, TRUE, FALSE)
+comments <- ifelse(abs(srWiek - 45.5154) < 0.001, "", "To nie jest poprawna odpowiedź")
+
+```
+
 
