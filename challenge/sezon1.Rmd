@@ -72,3 +72,38 @@ comments <- ifelse(!exists("maxPredkosc"), "Brak zmiennej o nazwie maxPredkosc",
 
 ```
 
+
+---
+
+# Zadanie, sezon 1, odcinek 3
+
+Dla zbioru danych `koty_ptaki` przygotuj wykres z użyciem pakietu `ggplot2`, na osi X przedstaw prędkość na osi Y długość poszczególnych gatunków. Każdy gatunek zaznacz punktem a do punktów dorysuj linię trendu.
+
+Wynikowy wykres zapisz do zmiennej `predkiDlugi`.
+
+Przykładowe rozwiązanie:
+
+```{r, message=FALSE, warning=FALSE}
+library(PogromcyDanych)
+library(dplyr)
+
+maxPredkosc <- koty_ptaki %>% 
+  group_by(druzyna) %>% 
+  summarise(max(predkosc)) %>% 
+  `[`(,2) %>% 
+  unlist()
+
+```
+
+Test
+
+```{r}
+
+isCorrect <- ifelse(all(maxPredkosc == c(115, 170)), 
+                    TRUE, FALSE)
+comments <- ifelse(!exists("maxPredkosc"), "Brak zmiennej o nazwie maxPredkosc", 
+                   ifelse(isCorrect, "", 
+                          "To nie jest poprawna odpowiedź"))
+
+```
+
