@@ -31,30 +31,6 @@ head(plecCoWazne)
 ```
 
 
-```{r}
-# brak przerzutow dobrze rokuje
-table(TCGA_BRCA$new.tumor,
-      TCGA_BRCA$vital.status)
-
-fisher.test(table(TCGA_BRCA$new.tumor,
-      TCGA_BRCA$vital.status))
-
-fisher.test(table(TCGA_BRCA$new.tumor,
-      TCGA_BRCA$TP53 == "Wild type"))
-
-
-head(TCGA_BRCA)
-
-table(TCGA_BRCA$TP53,
-      TCGA_BRCA$vital.status)
-
-chisq.test(table(TCGA_BRCA$TP53,
-      TCGA_BRCA$vital.status))
-
-pairwise.prop.test(TCGA_BRCA$new.tumor, TCGA_BRCA$TP53)
-
-```
-
 
 ---
 
@@ -89,4 +65,30 @@ prop.table(table(diagnoza$eduk4_2013, cut(diagnoza$wiek2013, c(0, 25, 40, 60, 11
 ---
 
 Test 2x2 McNemara
+
+
+```{r}
+# brak przerzutow dobrze rokuje
+table(TCGA_BRCA$new.tumor,
+      TCGA_BRCA$vital.status)
+
+fisher.test(table(TCGA_BRCA$new.tumor,
+      TCGA_BRCA$vital.status))
+
+fisher.test(table(TCGA_BRCA$new.tumor,
+      TCGA_BRCA$TP53 == "Wild type"))
+
+
+head(TCGA_BRCA)
+
+table(TCGA_BRCA$TP53,
+      TCGA_BRCA$vital.status)
+
+chisq.test(table(TCGA_BRCA$TP53,
+      TCGA_BRCA$vital.status))
+
+pairwise.prop.test(TCGA_BRCA$new.tumor, TCGA_BRCA$TP53)
+
+```
+
 
