@@ -58,7 +58,29 @@ pogRomcy danych
 srWiek &lt;-<span class="st"> </span><span class="kw">mean</span>(dat$Wiek)</code></pre>
 <p>Test</p>
 <pre class="sourceCode r"><code class="sourceCode r">isCorrect &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">abs</span>(srWiek -<span class="st"> </span><span class="fl">45.5154</span>) &lt;<span class="st"> </span><span class="fl">0.001</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)
-comments &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">abs</span>(srWiek -<span class="st"> </span><span class="fl">45.5154</span>) &lt;<span class="st"> </span><span class="fl">0.001</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>)</code></pre>
+comments &lt;-<span class="st"> </span><span class="kw">ifelse</span>(!<span class="kw">exists</span>(<span class="st">&quot;srWiek&quot;</span>), <span class="st">&quot;Brak zmiennej o nazwie srWiek&quot;</span>, 
+                   <span class="kw">ifelse</span>(isCorrect, <span class="st">&quot;&quot;</span>, 
+                          <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>))</code></pre>
+</div>
+<div id="zadanie-sezon-1-odcinek-2" class="slide section level1">
+<h1>Zadanie, sezon 1, odcinek 2</h1>
+<p>Dla zbioru danych <code>koty_ptaki</code> z pakiety <code>PogromcyDanych</code> policz maksymalną prędkość dla każdej grupy gatunków.</p>
+<p>Wynik zapisz to zmiennej <code>maxPredkosc</code>.</p>
+<p>Przykładowe rozwiązanie:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
+<span class="kw">library</span>(dplyr)
+
+maxPredkosc &lt;-<span class="st"> </span>koty_ptaki %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(druzyna) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="kw">max</span>(predkosc)) %&gt;%<span class="st"> </span>
+<span class="st">  `</span><span class="dt">[</span><span class="st">`</span>(,<span class="dv">2</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">unlist</span>()</code></pre>
+<p>Test</p>
+<pre class="sourceCode r"><code class="sourceCode r">isCorrect &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">all</span>(maxPredkosc ==<span class="st"> </span><span class="kw">c</span>(<span class="dv">115</span>, <span class="dv">170</span>)), 
+                    <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)
+comments &lt;-<span class="st"> </span><span class="kw">ifelse</span>(!<span class="kw">exists</span>(<span class="st">&quot;maxPredkosc&quot;</span>), <span class="st">&quot;Brak zmiennej o nazwie maxPredkosc&quot;</span>, 
+                   <span class="kw">ifelse</span>(isCorrect, <span class="st">&quot;&quot;</span>, 
+                          <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>))</code></pre>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

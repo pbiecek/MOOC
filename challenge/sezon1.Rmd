@@ -31,8 +31,44 @@ Test
 ```{r}
 
 isCorrect <- ifelse(abs(srWiek - 45.5154) < 0.001, TRUE, FALSE)
-comments <- ifelse(abs(srWiek - 45.5154) < 0.001, "", "To nie jest poprawna odpowiedź")
+comments <- ifelse(!exists("srWiek"), "Brak zmiennej o nazwie srWiek", 
+                   ifelse(isCorrect, "", 
+                          "To nie jest poprawna odpowiedź"))
 
 ```
 
+
+---
+
+# Zadanie, sezon 1, odcinek 2
+
+Dla zbioru danych `koty_ptaki` z pakiety `PogromcyDanych` policz maksymalną prędkość dla każdej grupy gatunków.
+
+Wynik zapisz to zmiennej `maxPredkosc`.
+
+Przykładowe rozwiązanie:
+
+```{r, message=FALSE, warning=FALSE}
+library(PogromcyDanych)
+library(dplyr)
+
+maxPredkosc <- koty_ptaki %>% 
+  group_by(druzyna) %>% 
+  summarise(max(predkosc)) %>% 
+  `[`(,2) %>% 
+  unlist()
+
+```
+
+Test
+
+```{r}
+
+isCorrect <- ifelse(all(maxPredkosc == c(115, 170)), 
+                    TRUE, FALSE)
+comments <- ifelse(!exists("maxPredkosc"), "Brak zmiennej o nazwie maxPredkosc", 
+                   ifelse(isCorrect, "", 
+                          "To nie jest poprawna odpowiedź"))
+
+```
 
