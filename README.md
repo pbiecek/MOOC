@@ -95,6 +95,7 @@ Sezon 2: Wizualizacja i modelowanie danych
     http://powerandsamplesize.com/Calculators/Test-1-Proportion/1-Sample-Equality
     http://onlinestatbook.com/2/power/factors.html
     http://rpsychologist.com/d3/CI/
+    http://www.stat.ncsu.edu/people/lu/courses/ST505/Ch2.pdf
     
     Challenge: BSE - kolejki do NFZ i obrobione csv
 
