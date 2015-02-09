@@ -82,6 +82,24 @@ comments &lt;-<span class="st"> </span><span class="kw">ifelse</span>(!<span cla
                    <span class="kw">ifelse</span>(isCorrect, <span class="st">&quot;&quot;</span>, 
                           <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>))</code></pre>
 </div>
+<div id="zadanie-sezon-1-odcinek-3" class="slide section level1">
+<h1>Zadanie, sezon 1, odcinek 3</h1>
+<p>Dla zbioru danych <code>koty_ptaki</code> przygotuj wykres z użyciem pakietu <code>ggplot2</code>, na osi X przedstaw prędkość na osi Y długość poszczególnych gatunków.</p>
+<p>Wynikowy wykres zapisz do zmiennej <code>predkiDlugi</code>.</p>
+<p>Przykładowe rozwiązanie:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
+<span class="kw">library</span>(ggplot2)
+
+predkiDlugi &lt;-<span class="st"> </span><span class="kw">ggplot</span>(koty_ptaki, <span class="kw">aes</span>(predkosc, dlugosc)) +<span class="st"> </span><span class="kw">geom_point</span>() +<span class="st"> </span><span class="kw">geom_smooth</span>()</code></pre>
+<p>Test</p>
+<pre class="sourceCode r"><code class="sourceCode r">isCorrect &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">all</span>(<span class="kw">as.character</span>(predkiDlugi$mapping) ==<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;predkosc&quot;</span>, <span class="st">&quot;dlugosc&quot;</span>)), 
+                    <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)
+comments &lt;-<span class="st"> </span><span class="kw">ifelse</span>(!<span class="kw">exists</span>(<span class="st">&quot;predkiDlugi&quot;</span>), <span class="st">&quot;Brak zmiennej o nazwie predkiDlugi&quot;</span>, 
+                   <span class="kw">ifelse</span>(!(<span class="st">&quot;ggplot&quot;</span> %in%<span class="st"> </span><span class="kw">class</span>(predkiDlugi)), 
+                          <span class="st">&quot;Obiekt predkiDlugi nie jest wykresem w ggplot2&quot;</span>, 
+                          <span class="kw">ifelse</span>(isCorrect, <span class="st">&quot;&quot;</span>, 
+                          <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>)))</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>
