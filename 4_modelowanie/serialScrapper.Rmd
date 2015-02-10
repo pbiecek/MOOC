@@ -36,7 +36,7 @@ toDownload <- data.frame(c("tt2193021","tt1871731"),
                          c("Arrow","Ninjago: Masters of Spinjitzu"))
 
 serialeIMDB2 <- do.call(rbind, res)
-serialeIMDB <- rbind(serialeIMDB, serialeIMDB2)
+serialeIMDB <- rbind(serialeIMDB, serialeIMDB3)
 
 Encoding(levels(serialeIMDB$nazwa))
 save(serialeIMDB, file="serialeIMDB.rda", compress = "xz", compression_level = 9)
