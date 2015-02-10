@@ -57,20 +57,20 @@ pogRomcy danych
 <p>W tym odcinku rozważymy najprostszą zależność dla pary zmiennych - zależność pomiędzy parą zmiennych binarnych.</p>
 <p>W tym odcinku nauczymy się jak:</p>
 <ul>
-<li>jak budować i jak czytac tablice kontyngencji dla pary zmiennych</li>
+<li>jak budować i jak czytać tablice kontyngencji dla pary zmiennych</li>
 <li>jak przedstawiać graficznie tabelę kontyngencji</li>
-<li>jak statystycznie testować zależność pomiedzy parą zmiennych.</li>
+<li>jak statystycznie testować zależność pomiędzy parą zmiennych.</li>
 </ul>
 <p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, to dane z Diagnozy Społecznej, dostępne w tabeli <code>diagnoza</code> a drugi o nowotworze piersi, dostępne w tabeli <code>TCGA_BRCA</code>, oba dostępne w pakiecie <code>PogromcyDanych</code>.</p>
 </div>
 <div id="jak-opisac-zaleznosc-dwoch-zmiennych-binarnych" class="slide section level1">
-<h1>Jak opisać zależnośc dwóch zmiennych binarnych</h1>
-<p>Zmienne binarne, to zmienne, które przyjmją po dwie wartości.</p>
-<p>Zmienne takie są bardo proste w opisie, wystarczy napisać ile razy wystąpiła pierwsza wartość ile razy druga i w ten sposób dwie liczby charakteryzują wszystkie obserwacje.</p>
-<p>Typową zmienną binarną jest płeć ze swoimi dwoma poziomami/wartościami. Zmiennymi binarnymi sa też zmienne logiczne przyjmujące wartości TRUE/FALSE. W obu tych przykładach w danych dopuszcza się też wartość <em>brak danych</em> (NA) ale najczęściej nawet zmienne z brakami danych, de facto przyjmujące trzy różne wartości nazywa się binarnymi.</p>
+<h1>Jak opisać zależność dwóch zmiennych binarnych</h1>
+<p>Zmienne binarne, to zmienne, które przyjmują po dwie wartości.</p>
+<p>Zmienne takie są bardzo proste w opisie, wystarczy napisać ile razy wystąpiła pierwsza wartość ile razy druga i w ten sposób dwie liczby charakteryzują wszystkie obserwacje.</p>
+<p>Typową zmienną binarną jest płeć ze swoimi dwoma poziomami/wartościami. Zmiennymi binarnymi są też zmienne logiczne przyjmujące wartości TRUE/FALSE. W obu tych przykładach w danych dopuszcza się też wartość <em>brak danych</em> (NA) ale najczęściej nawet zmienne z brakami danych, de facto przyjmujące trzy różne wartości nazywa się binarnymi.</p>
 <p>Zmienne jakościowe przyjmujące więcej poziomów lub zmienne ciągłe można binaryzować i często wykonuje się tę operację.</p>
-<p>Jeżeli mamy zmienną opisującą kolor włosów i większość osób to bruneci/brunetki, wtedy wygodnie może być zamienić zmienną jakościwą na binarną odpowiadającą na ptyanie : czy to brunet (a więc po połączeniu wszystkich pozostałych poziomów).</p>
-<p>Jeżeli mamy zmienną ciągłą - wzrost, możemy ją zbinaryzować dzieląc wzrost na dwa przedziały, np do 170 cm i powyżej.</p>
+<p>Jeżeli mamy zmienną opisującą kolor włosów i większość osób to bruneci/brunetki, wtedy wygodnie może być zamienić zmienną jakościową na binarną odpowiadającą na pytanie : czy to brunet (a więc po połączeniu wszystkich pozostałych poziomów).</p>
+<p>Jeżeli mamy zmienną ciągłą - wzrost, możemy ją zbinaryzować dzieląc wzrost na dwa przedziały, np. do 170 cm i powyżej.</p>
 <p>W tym miejscu powinno pojawić się pytanie <em>po co</em>? Po co redukować więcej informacji do dwóch poziomów?</p>
 <p>Główną zaletą jest łatwość opisu. Jedną zmienną binarną opisać można za pomocą dwóch liczb.</p>
 <p>Relację pomiędzy dwoma zmiennymi binarnymi opisać można za pomocą czterech liczb za pomocą tak zwanej tablicy kontyngencji.</p>
@@ -95,12 +95,12 @@ pogRomcy danych
 </tr>
 </tbody>
 </table>
-<p>Zależność pomiędzy dwomz zmiennymi binarnymi opisują cztery liczby, <span class="math">\(n_{1,1}\)</span> opisuje liczbę przypadków w których zmienna 1 przyjmuje wartość A a zmienna 2 wartość X, <span class="math">\(n_{1,2}\)</span> opisuje liczbę przypadków w których zmienna 1 przyjmuje wartość A a zmienna 2 wartość Y, i tak dalej.</p>
+<p>Zależność pomiędzy dwoma zmiennymi binarnymi opisują cztery liczby, <span class="math">\(n_{1,1}\)</span> opisuje liczbę przypadków w których zmienna 1 przyjmuje wartość A a zmienna 2 wartość X, <span class="math">\(n_{1,2}\)</span> opisuje liczbę przypadków w których zmienna 1 przyjmuje wartość A a zmienna 2 wartość Y, i tak dalej.</p>
 </div>
 <div id="wczytanie-danych" class="slide section level1">
 <h1>Wczytanie danych</h1>
 <p>Dane od których rozpoczniemy przykłady to <code>diagnoza</code> z pakietu <code>PogromcyDanych</code>. Aby te dane wczytać, wystarczy włączyć ten pakiet - instrukcja jak to zrobić znajduje się w odcinku 2 pierwszego sezonu.</p>
-<p>W zbiorze danych <code>diagnoza</code> dostępnych jest kilkadziesiąt kolumn, opisujących odpowiedzi na różne interesujące pytania. W tym odcinku przyjrzymy się tylko kilku wybranym kolumnom, opisującym imię, wiek, płeć, ukończoną edukację oraz odpowiedź na pytanie ,,Co jest wedlug Pana wazniejsze w zyciu?’’ (zmienna w kolumnie <code>gp29</code>) z możliwymi odpowiedziami <em>Poczucie sensu</em> i <em>Przyjemności</em>.</p>
+<p>W zbiorze danych <code>diagnoza</code> dostępnych jest kilkadziesiąt kolumn, opisujących odpowiedzi na różne interesujące pytania. W tym odcinku przyjrzymy się tylko kilku wybranym kolumnom, opisującym imię, wiek, płeć, ukończoną edukację oraz odpowiedź na pytanie ,,Co jest według Pana ważniejsze w życiu?’’ (zmienna w kolumnie <code>gp29</code>) z możliwymi odpowiedziami <em>Poczucie sensu</em> i <em>Przyjemności</em>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
 diagnoza[<span class="dv">1</span>:<span class="dv">6</span>, <span class="kw">c</span>(<span class="st">&quot;imie_2011&quot;</span>, <span class="st">&quot;wiek2013&quot;</span>, <span class="st">&quot;plec&quot;</span>, <span class="st">&quot;eduk4_2013&quot;</span>, <span class="st">&quot;gp29&quot;</span>)]</code></pre>
 <pre><code>##    imie_2011 wiek2013      plec                    eduk4_2013
@@ -121,7 +121,7 @@ diagnoza[<span class="dv">1</span>:<span class="dv">6</span>, <span class="kw">c
 <div id="jak-wyglada-tabela-kontyngencji" class="slide section level1">
 <h1>Jak wygląda tabela kontyngencji</h1>
 <p>W zbiorze danych <code>diagnoza</code> mamy dwie binarne zmienne, <code>plec</code>, czyli płeć respondenta i <code>gp29</code>, czyli odpowiedź na pytanie co jest ważniejsze w życiu.</p>
-<p>Zobaczmy jak wygląda tablica kontyngencji, zestawiajaca te dwie zmienne.</p>
+<p>Zobaczmy jak wygląda tablica kontyngencji, zestawiająca te dwie zmienne.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(diagnoza$plec, diagnoza$gp29)</code></pre>
 <pre><code>##            
 ##             PRZYJEMNOSCI POCZUCIE SENSU
@@ -129,12 +129,12 @@ diagnoza[<span class="dv">1</span>:<span class="dv">6</span>, <span class="kw">c
 ##   kobieta           5144           9421</code></pre>
 <p>Przyjrzyjmy się tym wynikom</p>
 <ul>
-<li>5114 mężczyzn odpowiedziało, że wazniejsze są przyjemności,</li>
-<li>6544 mężczyzn odpowiedziało, że wazniejsze jest poczucie sensu,</li>
-<li>5144 kobiet odpowiedziało, że wazniejsze są przyjemności,</li>
-<li>9421 kobiet odpowiedziało, że wazniejsze jest poczucie sensu.</li>
+<li>5114 mężczyzn odpowiedziało, że ważniejsze są przyjemności,</li>
+<li>6544 mężczyzn odpowiedziało, że ważniejsze jest poczucie sensu,</li>
+<li>5144 kobiet odpowiedziało, że ważniejsze są przyjemności,</li>
+<li>9421 kobiet odpowiedziało, że ważniejsze jest poczucie sensu.</li>
 </ul>
-<p>Zarówno kobiety jak i mężczyźni częściej deklarują, że ważniejsze jest poczucie sensu. Ale czy sa róznice pomiędzy tymi płciami i jak duże?</p>
+<p>Zarówno kobiety jak i mężczyźni częściej deklarują, że ważniejsze jest poczucie sensu. Ale czy są różnice pomiędzy tymi płciami i jak duże?</p>
 <p>Funkcją <code>addmargins()</code> można dodać sumę wartości w wierszach i kolumnach.</p>
 <pre class="sourceCode r"><code class="sourceCode r">plecSens &lt;-<span class="st"> </span><span class="kw">table</span>(diagnoza$plec, diagnoza$gp29)
 <span class="kw">addmargins</span>(plecSens)</code></pre>
@@ -147,7 +147,7 @@ diagnoza[<span class="dv">1</span>:<span class="dv">6</span>, <span class="kw">c
 <div id="jak-wyglada-tabela-z-procentami" class="slide section level1">
 <h1>Jak wygląda tabela z procentami</h1>
 <p>Przeliczmy liczebności na frakcje. Jaki procent mężczyzn odpowiedziało przyjemności a jaka poczucie sensu?</p>
-<p>Funkcją <code>prop.table()</code> można policzyć frakcje, dodatkowy argument określa czy mają być to proporcje w wierszach (1), kolumanch (2) czy całej macierzy (pusty argument).</p>
+<p>Funkcją <code>prop.table()</code> można policzyć frakcje, dodatkowy argument określa czy mają być to proporcje w wierszach (1), kolumnach (2) czy całej macierzy (pusty argument).</p>
 <pre class="sourceCode r"><code class="sourceCode r">plecSens &lt;-<span class="st"> </span><span class="kw">table</span>(diagnoza$plec, diagnoza$gp29)
 <span class="co"># frakcje w wierszach</span>
 <span class="kw">prop.table</span>(plecSens, <span class="dv">1</span>)</code></pre>
@@ -166,11 +166,11 @@ diagnoza[<span class="dv">1</span>:<span class="dv">6</span>, <span class="kw">c
 <h1>Jak wyglądają szanse</h1>
 <p>Pracując ze zmiennymi binarnymi często zamiast prawdopodobieństw korzysta się z tak zwanych szans (ang. odds).</p>
 <p>Co to jest szansa?</p>
-<p>Szasna wystąpienia zjawiska X to prawdopodobieństwo wystąpienia X podzielone przez prawdopodobieństwo nie wystąpienia X. Czyli jeżeli prawdopodobieństwo oznaczymy symbolem <span class="math">\(p\)</span> to otrzymamy</p>
+<p>Szansa wystąpienia zjawiska X to prawdopodobieństwo wystąpienia X podzielone przez prawdopodobieństwo nie wystąpienia X. Czyli jeżeli prawdopodobieństwo oznaczymy symbolem <span class="math">\(p\)</span> to otrzymamy</p>
 <p><span class="math">\[
 odds = \frac{p}{1-p}
 \]</span></p>
-<p>W przeciwieństwie do prawdopodobieństwa, szansa może przyjmowac wartości większe od 1.</p>
+<p>W przeciwieństwie do prawdopodobieństwa, szansa może przyjmować wartości większe od 1.</p>
 <p>Policzmy szanse, że kobieta lub mężczyzna odpowie <em>Przyjemności</em> na pytanie o to co ważniejsze.</p>
 <pre class="sourceCode r"><code class="sourceCode r">frakcje &lt;-<span class="st"> </span><span class="kw">prop.table</span>(plecSens, <span class="dv">1</span>)
 frakcje[,<span class="dv">1</span>]/frakcje[,<span class="dv">2</span>]</code></pre>
@@ -180,14 +180,14 @@ frakcje[,<span class="dv">1</span>]/frakcje[,<span class="dv">2</span>]</code></
 <div id="jak-wygladaja-ilorazy-szans" class="slide section level1">
 <h1>Jak wyglądają ilorazy szans</h1>
 <p>Jaka jest zaleta w używaniu szans nad prawdopodobieństwem?</p>
-<p>Główną zaletą jest możliwość operania na ilorazach szans. Iloraz szans przedstawia ile razy szansa w jednej grupie jest większa od szansy w dużej grupie.</p>
+<p>Główną zaletą jest możliwość operowania na ilorazach szans. Iloraz szans przedstawia ile razy szansa w jednej grupie jest większa od szansy w dużej grupie.</p>
 <p><span class="math">\[
 oddsRatio_{A/B} = odds_{A}/odds_{B} = \frac{p_A}{(1-p_A)} \frac{(1-p_B)}{p_B}
 \]</span></p>
-<p>Przedstawmy iloraz szan na przykładzie płci i odpowiedzi na pytanie o wartości.</p>
-<p>Policzymy ilu krotnie szansa na odpowiedź <em>Przyjemności</em> jest większa u męzczyzn niż u kobiet.</p>
+<p>Przedstawmy iloraz szans na przykładzie płci i odpowiedzi na pytanie o wartości.</p>
+<p>Policzymy ilu krotnie szansa na odpowiedź <em>Przyjemności</em> jest większa u mężczyzn niż u kobiet.</p>
 <p>Jeżeli iloraz szans wynosi 1 to znaczy że szanse są równe w obu grupach przez co te dwie zmienne nie są zależne.</p>
-<p>Jeżeli szansa jest mneijsza lub większa niż jeden, wtedy pojawia się zależność.</p>
+<p>Jeżeli szansa jest mniejsza lub większa niż jeden, wtedy pojawia się zależność.</p>
 <p>W przykładzie dla Diagnozy Społecznej, iloraz szans wynosi <code>1.4312</code>, co oznacza, że szansa, że dla losowo wylosowanego mężczyzny, szansa że odpowie <em>Przyjemności</em> jest o 43% większa niż u kobiety.</p>
 <pre class="sourceCode r"><code class="sourceCode r">frakcje &lt;-<span class="st"> </span><span class="kw">prop.table</span>(plecSens, <span class="dv">1</span>)
 szanse &lt;-<span class="st"> </span>frakcje[,<span class="dv">1</span>]/frakcje[,<span class="dv">2</span>]
@@ -197,7 +197,7 @@ szanse[<span class="dv">1</span>] /<span class="st"> </span>szanse[<span class="
 </div>
 <div id="wykres-mozaikowy" class="slide section level1">
 <h1>Wykres mozaikowy</h1>
-<p>Tabele kontyngencji zazwyczaj rpzedstawia się za pomocą wykresu mozaikowego.</p>
+<p>Tabele kontyngencji zazwyczaj przedstawia się za pomocą wykresu mozaikowego.</p>
 <p>W programie R wystarczy w tym celu wykorzystać funkcję <code>mosaicplot()</code>.</p>
 <p>Szerokość słupków odzwierciedla względne proporcje kobiet i mężczyzn w zbiorze danych. Każda z kolumn jest podzielona na długości słupków proporcjonalne do odpowiedzi na pytanie o to co ważne osobno dla każdej płci.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mosaicplot</span>(plecSens, <span class="dt">main=</span><span class="st">&quot;Odpowiedzi na pytanie o to co ważne w życiu&quot;</span>)</code></pre>
@@ -205,7 +205,7 @@ szanse[<span class="dv">1</span>] /<span class="st"> </span>szanse[<span class="
 </div>
 <div id="wczytanie-danych-1" class="slide section level1">
 <h1>Wczytanie danych</h1>
-<p>W zbiorze danych <code>diagnoza</code> jest ponad 38 tysięcy obserwacji. Dla tak dużej populacji testowanie nei ma praktycznie sensu, nawet bardzo małe różnice okazują się istotnie różne.</p>
+<p>W zbiorze danych <code>diagnoza</code> jest ponad 38 tysięcy obserwacji. Dla tak dużej populacji testowanie nie ma praktycznie sensu, nawet bardzo małe różnice okazują się istotnie różne.</p>
 <p>Dlatego przykład dotyczący testowania przedstawimy na innym zbiorze danych, zbiorze <code>TCGA_BRCA</code> z wybranymi zmiennymi dla raka piersi. W tym zbiorze danych mamy dane dla 999 pacjentów.</p>
 <p>Kolejne kolumny tego zbioru danych opisują mutacje genu P53, płeć pacjenta, informację czy pacjent wciąż żyje, informacja ile dni po operacji doszło do zgonu oraz informacja czy w okresie jednego roku pojawił się guz / przerzuty.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(TCGA_BRCA)</code></pre>
@@ -243,7 +243,7 @@ szanse[<span class="dv">1</span>] /<span class="st"> </span>szanse[<span class="
 <pre class="sourceCode r"><code class="sourceCode r">(szanse &lt;-<span class="st"> </span>frakcje[,<span class="dv">1</span>]/frakcje[,<span class="dv">2</span>])</code></pre>
 <pre><code>##        no       yes 
 ## 0.0497076 1.1500000</code></pre>
-<p>Iloraz szans wynosi 0.04, co znaczy, że w grupie badanych szansa na zgon osób bez przerzutów to 4% szansy na zgon osób z przerzutami. Równowaznie można powiedzieć, żę osoby z przerzutami mają 25 razy wyższą szansę na zgin niż w grupie bez przerzutów.</p>
+<p>Iloraz szans wynosi 0.04, co znaczy, że w grupie badanych szansa na zgon osób bez przerzutów to 4% szansy na zgon osób z przerzutami. Równoważnie można powiedzieć, że osoby z przerzutami mają 25 razy wyższą szansę na zgon niż w grupie bez przerzutów.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># bez przerzutów do przerzutów</span>
 szanse[<span class="dv">1</span>] /<span class="st"> </span>szanse[<span class="dv">2</span>]</code></pre>
 <pre><code>##       no 
@@ -271,12 +271,12 @@ szanse[<span class="dv">2</span>] /<span class="st"> </span>szanse[<span class="
 ## sample estimates:
 ## odds ratio 
 ##  0.0439938</code></pre>
-<p>W tym przykładzie p-wartość jest rzędu <span class="math">\(2 * 10^{-15}\)</span>, tak więc gdyby zmienne nie były zależe byłoby nieprawdopodobne by zaobserwować taką wartość.</p>
+<p>W tym przykładzie p-wartość jest rzędu <span class="math">\(2 * 10^{-15}\)</span>, tak więc gdyby zmienne nie były zależne byłoby nieprawdopodobne by zaobserwować taką wartość.</p>
 </div>
 <div id="zadania" class="slide section level1">
 <h1>Zadania</h1>
 <ol style="list-style-type: decimal">
-<li><p>W zbiorze danych <code>diagnoza</code> wiek respondenta jest w zmiennej o nazwie <code>wiek2013</code>. Wyznacz zależność pomiędzy wiekiem podzielonym na dwie grupy, poniżej i powyżej 30 roku życia, a odpowiedziami n apytanie o to co w życiu ważne.</p></li>
+<li><p>W zbiorze danych <code>diagnoza</code> wiek respondenta jest w zmiennej o nazwie <code>wiek2013</code>. Wyznacz zależność pomiędzy wiekiem podzielonym na dwie grupy, poniżej i powyżej 30 roku życia, a odpowiedziami na pytanie o to co w życiu ważne.</p></li>
 <li><p>W zbiorze danych <code>TCGA_BRCA</code> w drugiej kolumnie jest płeć pacjenta. Wyznacz zależność pomiędzy zmiennymi <code>plec</code> a <code>czy.zyje</code>. Przetestuj tą zależność testem Fishera.</p></li>
 </ol>
 </div>

@@ -22,27 +22,27 @@ W tym odcinku rozważymy najprostszą zależność dla pary zmiennych - zależno
 
 W tym odcinku nauczymy się jak:
 
-- jak budować i jak czytac tablice kontyngencji dla pary zmiennych
+- jak budować i jak czytać tablice kontyngencji dla pary zmiennych
 - jak przedstawiać graficznie tabelę kontyngencji
-- jak statystycznie testować zależność pomiedzy parą zmiennych.
+- jak statystycznie testować zależność pomiędzy parą zmiennych.
 
 Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, to dane z Diagnozy Społecznej, dostępne w tabeli `diagnoza` a drugi o nowotworze piersi, dostępne w tabeli `TCGA_BRCA`, oba dostępne w pakiecie `PogromcyDanych`.
 
 ---
 
-# Jak opisać zależnośc dwóch zmiennych binarnych
+# Jak opisać zależność dwóch zmiennych binarnych
 
-Zmienne binarne, to zmienne, które przyjmją po dwie wartości. 
+Zmienne binarne, to zmienne, które przyjmują po dwie wartości. 
 
-Zmienne takie są bardo proste w opisie, wystarczy napisać ile razy wystąpiła pierwsza wartość ile razy druga i w ten sposób dwie liczby charakteryzują wszystkie obserwacje.
+Zmienne takie są bardzo proste w opisie, wystarczy napisać ile razy wystąpiła pierwsza wartość ile razy druga i w ten sposób dwie liczby charakteryzują wszystkie obserwacje.
 
-Typową zmienną binarną jest płeć ze swoimi dwoma poziomami/wartościami. Zmiennymi binarnymi sa też zmienne logiczne przyjmujące wartości TRUE/FALSE. W obu tych przykładach w danych dopuszcza się też wartość *brak danych* (NA) ale najczęściej nawet zmienne z brakami danych, de facto przyjmujące trzy różne wartości nazywa się binarnymi.
+Typową zmienną binarną jest płeć ze swoimi dwoma poziomami/wartościami. Zmiennymi binarnymi są też zmienne logiczne przyjmujące wartości TRUE/FALSE. W obu tych przykładach w danych dopuszcza się też wartość *brak danych* (NA) ale najczęściej nawet zmienne z brakami danych, de facto przyjmujące trzy różne wartości nazywa się binarnymi.
  
 Zmienne jakościowe przyjmujące więcej poziomów lub zmienne ciągłe można binaryzować i często wykonuje się tę operację.
 
-Jeżeli mamy zmienną opisującą kolor włosów i większość osób to bruneci/brunetki, wtedy wygodnie może być zamienić zmienną jakościwą na binarną odpowiadającą na ptyanie : czy to brunet (a więc po połączeniu wszystkich pozostałych  poziomów).
+Jeżeli mamy zmienną opisującą kolor włosów i większość osób to bruneci/brunetki, wtedy wygodnie może być zamienić zmienną jakościową na binarną odpowiadającą na pytanie : czy to brunet (a więc po połączeniu wszystkich pozostałych  poziomów).
  
-Jeżeli mamy zmienną ciągłą - wzrost, możemy ją zbinaryzować dzieląc wzrost na dwa przedziały, np do 170 cm i powyżej.
+Jeżeli mamy zmienną ciągłą - wzrost, możemy ją zbinaryzować dzieląc wzrost na dwa przedziały, np. do 170 cm i powyżej.
 
 W tym miejscu powinno pojawić się pytanie *po co*? Po co redukować więcej informacji do dwóch poziomów? 
 
@@ -55,14 +55,14 @@ Relację pomiędzy dwoma zmiennymi binarnymi opisać można za pomocą czterech 
 Zmienna 2: X   |    $n_{1,1}$ |    $n_{2,1}$ 
 Zmienna 2: Y   |    $n_{1,2}$ |    $n_{2,2}$ 
 
-Zależność pomiędzy dwomz zmiennymi binarnymi opisują cztery liczby, $n_{1,1}$ opisuje liczbę przypadków w których zmienna 1 przyjmuje wartość A a zmienna 2 wartość X, $n_{1,2}$ opisuje liczbę przypadków w których zmienna 1 przyjmuje wartość A a zmienna 2 wartość Y, i tak dalej.
+Zależność pomiędzy dwoma zmiennymi binarnymi opisują cztery liczby, $n_{1,1}$ opisuje liczbę przypadków w których zmienna 1 przyjmuje wartość A a zmienna 2 wartość X, $n_{1,2}$ opisuje liczbę przypadków w których zmienna 1 przyjmuje wartość A a zmienna 2 wartość Y, i tak dalej.
 
 
 # Wczytanie danych
 
 Dane od których rozpoczniemy przykłady to `diagnoza` z pakietu `PogromcyDanych`. Aby te dane wczytać, wystarczy włączyć ten pakiet - instrukcja jak to zrobić znajduje się w odcinku 2 pierwszego sezonu.
 
-W zbiorze danych `diagnoza` dostępnych jest kilkadziesiąt kolumn, opisujących odpowiedzi na różne interesujące pytania. W tym odcinku przyjrzymy się tylko kilku  wybranym kolumnom, opisującym imię, wiek, płeć, ukończoną edukację oraz odpowiedź na pytanie ,,Co jest wedlug Pana wazniejsze w zyciu?'' (zmienna w kolumnie `gp29`) z możliwymi odpowiedziami *Poczucie sensu* i *Przyjemności*.
+W zbiorze danych `diagnoza` dostępnych jest kilkadziesiąt kolumn, opisujących odpowiedzi na różne interesujące pytania. W tym odcinku przyjrzymy się tylko kilku  wybranym kolumnom, opisującym imię, wiek, płeć, ukończoną edukację oraz odpowiedź na pytanie ,,Co jest według Pana ważniejsze w życiu?'' (zmienna w kolumnie `gp29`) z możliwymi odpowiedziami *Poczucie sensu* i *Przyjemności*.
 
 ```{r, warning=FALSE, message=FALSE}
 library(PogromcyDanych)
@@ -73,7 +73,7 @@ diagnoza[1:6, c("imie_2011", "wiek2013", "plec", "eduk4_2013", "gp29")]
 
 W zbiorze danych `diagnoza` mamy dwie binarne zmienne, `plec`, czyli płeć respondenta i `gp29`, czyli odpowiedź na pytanie co jest ważniejsze w życiu.
  
-Zobaczmy jak wygląda tablica kontyngencji, zestawiajaca te dwie zmienne.
+Zobaczmy jak wygląda tablica kontyngencji, zestawiająca te dwie zmienne.
  
 ```{r}
 table(diagnoza$plec, diagnoza$gp29)
@@ -81,13 +81,13 @@ table(diagnoza$plec, diagnoza$gp29)
 
 Przyjrzyjmy się tym wynikom
 
-- 5114 mężczyzn odpowiedziało, że wazniejsze są przyjemności,
-- 6544 mężczyzn odpowiedziało, że wazniejsze jest poczucie sensu,
-- 5144 kobiet odpowiedziało, że wazniejsze są przyjemności,
-- 9421 kobiet odpowiedziało, że wazniejsze jest poczucie sensu.
+- 5114 mężczyzn odpowiedziało, że ważniejsze są przyjemności,
+- 6544 mężczyzn odpowiedziało, że ważniejsze jest poczucie sensu,
+- 5144 kobiet odpowiedziało, że ważniejsze są przyjemności,
+- 9421 kobiet odpowiedziało, że ważniejsze jest poczucie sensu.
 
 Zarówno kobiety jak i mężczyźni częściej deklarują, że ważniejsze jest poczucie sensu. 
-Ale czy sa róznice pomiędzy tymi płciami i jak duże?
+Ale czy są różnice pomiędzy tymi płciami i jak duże?
 
 Funkcją `addmargins()` można dodać sumę wartości w wierszach i kolumnach.
 
@@ -100,7 +100,7 @@ addmargins(plecSens)
 
 Przeliczmy liczebności na frakcje. Jaki procent mężczyzn odpowiedziało przyjemności a jaka poczucie sensu?
 
-Funkcją `prop.table()` można policzyć frakcje, dodatkowy argument określa czy mają być to proporcje w wierszach (1), kolumanch (2) czy całej macierzy (pusty argument).
+Funkcją `prop.table()` można policzyć frakcje, dodatkowy argument określa czy mają być to proporcje w wierszach (1), kolumnach (2) czy całej macierzy (pusty argument).
 
 ```{r}
 plecSens <- table(diagnoza$plec, diagnoza$gp29)
@@ -116,13 +116,13 @@ Pracując ze zmiennymi binarnymi często zamiast prawdopodobieństw korzysta si�
 
 Co to jest szansa?
 
-Szasna wystąpienia zjawiska X to prawdopodobieństwo wystąpienia X podzielone przez prawdopodobieństwo nie wystąpienia X. Czyli jeżeli prawdopodobieństwo oznaczymy symbolem $p$ to otrzymamy 
+Szansa wystąpienia zjawiska X to prawdopodobieństwo wystąpienia X podzielone przez prawdopodobieństwo nie wystąpienia X. Czyli jeżeli prawdopodobieństwo oznaczymy symbolem $p$ to otrzymamy 
 
 $$
 odds = \frac{p}{1-p}
 $$
 
-W przeciwieństwie do prawdopodobieństwa, szansa może przyjmowac wartości większe od 1. 
+W przeciwieństwie do prawdopodobieństwa, szansa może przyjmować wartości większe od 1. 
 
 Policzmy szanse, że kobieta lub mężczyzna odpowie *Przyjemności* na pytanie o to co ważniejsze.
 
@@ -135,20 +135,20 @@ frakcje[,1]/frakcje[,2]
 
 Jaka jest zaleta w używaniu szans nad prawdopodobieństwem?
 
-Główną zaletą jest możliwość operania na ilorazach szans. 
+Główną zaletą jest możliwość operowania na ilorazach szans. 
 Iloraz szans przedstawia ile razy szansa w jednej grupie jest większa od szansy w dużej grupie.
 
 $$
 oddsRatio_{A/B} = odds_{A}/odds_{B} = \frac{p_A}{(1-p_A)} \frac{(1-p_B)}{p_B}
 $$
 
-Przedstawmy iloraz szan na przykładzie płci i odpowiedzi na pytanie o wartości. 
+Przedstawmy iloraz szans na przykładzie płci i odpowiedzi na pytanie o wartości. 
 
-Policzymy ilu krotnie szansa na odpowiedź *Przyjemności* jest większa u męzczyzn niż u kobiet.
+Policzymy ilu krotnie szansa na odpowiedź *Przyjemności* jest większa u mężczyzn niż u kobiet.
 
 Jeżeli iloraz szans wynosi 1 to znaczy że szanse są równe w obu grupach przez co te dwie zmienne nie są zależne.
 
-Jeżeli szansa jest mneijsza lub większa niż jeden, wtedy pojawia się zależność.
+Jeżeli szansa jest mniejsza lub większa niż jeden, wtedy pojawia się zależność.
 
 W przykładzie dla Diagnozy Społecznej, iloraz szans wynosi `1.4312`, co oznacza, że szansa, że dla losowo wylosowanego mężczyzny, szansa że odpowie *Przyjemności* jest o 43% większa niż u kobiety.
 
@@ -160,7 +160,7 @@ szanse[1] / szanse[2]
 
 # Wykres mozaikowy
 
-Tabele kontyngencji zazwyczaj rpzedstawia się za pomocą wykresu mozaikowego.
+Tabele kontyngencji zazwyczaj przedstawia się za pomocą wykresu mozaikowego.
 
 W programie R wystarczy w tym celu wykorzystać funkcję `mosaicplot()`.
 
@@ -173,7 +173,7 @@ mosaicplot(plecSens, main="Odpowiedzi na pytanie o to co ważne w życiu")
 
 # Wczytanie danych
 
-W zbiorze danych `diagnoza` jest ponad 38 tysięcy obserwacji. Dla tak dużej populacji testowanie nei ma praktycznie sensu, nawet bardzo małe różnice okazują się istotnie różne.
+W zbiorze danych `diagnoza` jest ponad 38 tysięcy obserwacji. Dla tak dużej populacji testowanie nie ma praktycznie sensu, nawet bardzo małe różnice okazują się istotnie różne.
 
 Dlatego przykład dotyczący testowania przedstawimy na innym zbiorze danych, zbiorze `TCGA_BRCA` z wybranymi zmiennymi dla raka piersi. W tym zbiorze danych mamy dane dla 999 pacjentów.
 
@@ -214,7 +214,7 @@ Policzmy szanse zgonu w grupie osób bez przerzutów i z przerzutami.
 (szanse <- frakcje[,1]/frakcje[,2])
 ```
 
-Iloraz szans wynosi 0.04, co znaczy, że w grupie badanych szansa na zgon osób bez przerzutów to 4% szansy na zgon osób z przerzutami. Równowaznie można powiedzieć, żę osoby z przerzutami mają 25 razy wyższą szansę na zgin niż w grupie bez przerzutów.
+Iloraz szans wynosi 0.04, co znaczy, że w grupie badanych szansa na zgon osób bez przerzutów to 4% szansy na zgon osób z przerzutami. Równoważnie można powiedzieć, że osoby z przerzutami mają 25 razy wyższą szansę na zgon niż w grupie bez przerzutów.
 
 ```{r}
 # bez przerzutów do przerzutów
@@ -237,11 +237,12 @@ Przedstawiona w tym teście p-wartość odpowiada prawdopodobieństwo, że ilora
 fisher.test(przerzuty_przezycia)
 ```
 
-W tym przykładzie p-wartość jest rzędu $2 * 10^{-15}$, tak więc gdyby zmienne nie były zależe byłoby nieprawdopodobne by zaobserwować taką wartość.
+W tym przykładzie p-wartość jest rzędu $2 * 10^{-15}$, tak więc gdyby zmienne nie były zależne byłoby nieprawdopodobne by zaobserwować taką wartość.
 
 # Zadania
 
-1. W zbiorze danych `diagnoza` wiek respondenta jest w zmiennej o nazwie `wiek2013`. Wyznacz zależność pomiędzy wiekiem podzielonym na dwie grupy, poniżej i powyżej 30 roku życia, a odpowiedziami n apytanie o to co w życiu ważne.
+1. W zbiorze danych `diagnoza` wiek respondenta jest w zmiennej o nazwie `wiek2013`. Wyznacz zależność pomiędzy wiekiem podzielonym na dwie grupy, poniżej i powyżej 30 roku życia, a odpowiedziami na pytanie o to co w życiu ważne.
 
 2. W zbiorze danych `TCGA_BRCA` w drugiej kolumnie jest płeć pacjenta. Wyznacz zależność pomiędzy zmiennymi `plec` a `czy.zyje`. Przetestuj tą zależność testem Fishera.
+
 
