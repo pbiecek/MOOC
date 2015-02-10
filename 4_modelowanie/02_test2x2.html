@@ -65,6 +65,37 @@ pogRomcy danych
 </div>
 <div id="jak-opisac-zaleznosc-dwoch-zmiennych-binarnych" class="slide section level1">
 <h1>Jak opisać zależnośc dwóch zmiennych binarnych</h1>
+<p>Zmienne binarne, to zmienne, które przyjmją po dwie wartości.</p>
+<p>Zmienne takie są bardo proste w opisie, wystarczy napisać ile razy wystąpiła pierwsza wartość ile razy druga i w ten sposób dwie liczby charakteryzują wszystkie obserwacje.</p>
+<p>Typową zmienną binarną jest płeć ze swoimi dwoma poziomami/wartościami. Zmiennymi binarnymi sa też zmienne logiczne przyjmujące wartości TRUE/FALSE. W obu tych przykładach w danych dopuszcza się też wartość <em>brak danych</em> (NA) ale najczęściej nawet zmienne z brakami danych, de facto przyjmujące trzy różne wartości nazywa się binarnymi.</p>
+<p>Zmienne jakościowe przyjmujące więcej poziomó∑ lub zmienne ciągłe można binaryzować i często wykonuje się tę operację.</p>
+<p>Jeżeli mamy zmienną opisującą kolor włosów i większość osób to bruneci/brunetki, wtedy wygodnie może być zamienić zmienną jakościwą na binarną odpowiadającą na ptyanie : czy to brunet (a więc po połączeniu wszystkich pozostałych poziomów).</p>
+<p>Jeżeli mamy zmienną ciągłą - wzrost, możemy ją zbinaryzować dzieląc wzrost na dwa przedziały, np do 170 cm i powyżej.</p>
+<p>W tym miejscu powinno pojawić się pytanie <em>po co</em>? Po co redukować więcej informacji do dwóch poziomów?</p>
+<p>Główną zaletą jest łatwość opisu. Jedną zmienną binarną opisać można za pomocą dwóch liczb.</p>
+<p>Relację pomiędzy dwoma zmiennymi binarnymi opisać można za pomocą czterech liczb za pomocą tak zwanej tablicy kontyngencji.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">.</th>
+<th align="left">Zmienna 1: A</th>
+<th align="left">Zmienna 1: B</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Zmienna 2: X</td>
+<td align="left"><span class="math">\(n_{1,1}\)</span></td>
+<td align="left"><span class="math">\(n_{2,1}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Zmienna 2: Y</td>
+<td align="left"><span class="math">\(n_{1,2}\)</span></td>
+<td align="left"><span class="math">\(n_{2,2}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Zależność pomiędzy dwomz zmiennymi binarnymi opisują cztery liczby, <span class="math">\(n_{1,1}\)</span> opisuje liczbę przypadków w których zmienna 1 przyjmuje wartość A a zmienna 2 wartość X, <span class="math">\(n_{1,2}\)</span> opisuje liczbę przypadków w których zmienna 1 przyjmuje wartość A a zmienna 2 wartość Y, i tak dalej.</p>
 </div>
 <div id="wczytanie-danych" class="slide section level1">
 <h1>Wczytanie danych</h1>
@@ -89,11 +120,24 @@ diagnoza[<span class="dv">1</span>:<span class="dv">6</span>, <span class="kw">c
 </div>
 <div id="jak-wyglada-tabela-kontyngencji" class="slide section level1">
 <h1>Jak wygląda tabela kontyngencji</h1>
+<p>W zbiorze danych <code>diagnoza</code> mamy dwie binarne zmienne, <code>plec</code>, czyli płeć respondenta i <code>gp29</code>, czyli odpowiedź na pytanie co jest ważniejsze w życiu.</p>
+<p>Zobaczmy jak wygląda tablica kontyngencji, zestawiajaca te dwie zmienne.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(diagnoza$plec, diagnoza$gp29)</code></pre>
 <pre><code>##            
 ##             PRZYJEMNOSCI POCZUCIE SENSU
 ##   mężczyzna         5114           6544
 ##   kobieta           5144           9421</code></pre>
+<p>Przyjrzyjmy się tym wynikom</p>
+<ul>
+<li>5114 mężczyzn odpowiedziało, że wazniejsze są przyjemności,</li>
+<li>6544 mężczyzn odpowiedziało, że wazniejsze jest poczucie sensu,</li>
+<li>5144 kobiet odpowiedziało, że wazniejsze są przyjemności,</li>
+<li>9421 kobiet odpowiedziało, że wazniejsze jest poczucie sensu.</li>
+</ul>
+<p>Zarówno kobiety jak i mężczyźni częściej deklarują, że ważniejsze jest poczucie sensu. Ale czy sa róznice pomiędzy tymi płciami i jak duże?</p>
+</div>
+<div id="jak-wyglada-tabela-kontyngencji-1" class="slide section level1">
+<h1>Jak wygląda tabela kontyngencji</h1>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prop.table</span>(<span class="kw">table</span>(diagnoza$plec, diagnoza$gp29), <span class="dv">1</span>)</code></pre>
 <pre><code>##            
 ##             PRZYJEMNOSCI POCZUCIE SENSU

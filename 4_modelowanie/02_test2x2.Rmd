@@ -32,6 +32,31 @@ Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, to dane 
 
 # Jak opisać zależnośc dwóch zmiennych binarnych
 
+Zmienne binarne, to zmienne, które przyjmją po dwie wartości. 
+
+Zmienne takie są bardo proste w opisie, wystarczy napisać ile razy wystąpiła pierwsza wartość ile razy druga i w ten sposób dwie liczby charakteryzują wszystkie obserwacje.
+
+Typową zmienną binarną jest płeć ze swoimi dwoma poziomami/wartościami. Zmiennymi binarnymi sa też zmienne logiczne przyjmujące wartości TRUE/FALSE. W obu tych przykładach w danych dopuszcza się też wartość *brak danych* (NA) ale najczęściej nawet zmienne z brakami danych, de facto przyjmujące trzy różne wartości nazywa się binarnymi.
+ 
+Zmienne jakościowe przyjmujące więcej poziomó∑ lub zmienne ciągłe można binaryzować i często wykonuje się tę operację.
+
+Jeżeli mamy zmienną opisującą kolor włosów i większość osób to bruneci/brunetki, wtedy wygodnie może być zamienić zmienną jakościwą na binarną odpowiadającą na ptyanie : czy to brunet (a więc po połączeniu wszystkich pozostałych  poziomów).
+ 
+Jeżeli mamy zmienną ciągłą - wzrost, możemy ją zbinaryzować dzieląc wzrost na dwa przedziały, np do 170 cm i powyżej.
+
+W tym miejscu powinno pojawić się pytanie *po co*? Po co redukować więcej informacji do dwóch poziomów? 
+
+Główną zaletą jest łatwość opisu. Jedną zmienną binarną opisać można za pomocą dwóch liczb.
+
+Relację pomiędzy dwoma zmiennymi binarnymi opisać można za pomocą czterech liczb za pomocą tak zwanej tablicy kontyngencji.
+
+.              |  Zmienna 1: A| Zmienna 1: B
+---------------|--------------|--------------
+Zmienna 2: X   |    $n_{1,1}$ |    $n_{2,1}$ 
+Zmienna 2: Y   |    $n_{1,2}$ |    $n_{2,2}$ 
+
+Zależność pomiędzy dwomz zmiennymi binarnymi opisują cztery liczby, $n_{1,1}$ opisuje liczbę przypadków w których zmienna 1 przyjmuje wartość A a zmienna 2 wartość X, $n_{1,2}$ opisuje liczbę przypadków w których zmienna 1 przyjmuje wartość A a zmienna 2 wartość Y, i tak dalej.
+
 
 # Wczytanie danych
 
@@ -46,15 +71,25 @@ diagnoza[1:6, c("imie_2011", "wiek2013", "plec", "eduk4_2013", "gp29")]
 
 # Jak wygląda tabela kontyngencji
 
-
+W zbiorze danych `diagnoza` mamy dwie binarne zmienne, `plec`, czyli płeć respondenta i `gp29`, czyli odpowiedź na pytanie co jest ważniejsze w życiu.
+ 
+Zobaczmy jak wygląda tablica kontyngencji, zestawiajaca te dwie zmienne.
+ 
 ```{r}
 table(diagnoza$plec, diagnoza$gp29)
-
 ```
 
+Przyjrzyjmy się tym wynikom
 
+- 5114 mężczyzn odpowiedziało, że wazniejsze są przyjemności,
+- 6544 mężczyzn odpowiedziało, że wazniejsze jest poczucie sensu,
+- 5144 kobiet odpowiedziało, że wazniejsze są przyjemności,
+- 9421 kobiet odpowiedziało, że wazniejsze jest poczucie sensu.
 
+Zarówno kobiety jak i mężczyźni częściej deklarują, że ważniejsze jest poczucie sensu. 
+Ale czy sa róznice pomiędzy tymi płciami i jak duże?
 
+# Jak wygląda tabela kontyngencji
 
 
 ```{r}
