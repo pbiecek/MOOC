@@ -14,13 +14,37 @@ output:
 
 # O czym jest ten odcinek
 
-Nie tylko testy
+Jak badać czy dwie zmienne są zależne?
 
-* tabela kontyngencji
+Co oznacza zależność?
 
-* jak ja narysowac (mosaic plot) i jak ja czytac
+W tym odcinku rozważymy najprostszą zależność dla pary zmiennych - zależność pomiędzy parą zmiennych binarnych.
 
-* testy
+W tym odcinku nauczymy się jak:
+
+- jak budować i jak czytac tablice kontyngencji dla pary zmiennych
+- jak przedstawiać graficznie tabelę kontyngencji
+- jak statystycznie testować zależność pomiedzy parą zmiennych.
+
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, to dane z Diagnozy Społecznej, dostępne w tabeli `diagnoza` a drugi o nowotworze piersi, to `TCGA_BRCA`, oba dostępne w pakiecie `PogromcyDanych`.
+
+---
+
+# Co to znaczy: cecha jakościowa
+
+# Co to znaczy: cecha jakościowa
+
+# Co to znaczy: cecha jakościowa
+
+# Co to znaczy: cecha jakościowa
+
+# Co to znaczy: cecha jakościowa
+
+# Co to znaczy: cecha jakościowa
+
+# Co to znaczy: cecha jakościowa
+
+
 
 ```{r}
 library(PogromcyDanych)
