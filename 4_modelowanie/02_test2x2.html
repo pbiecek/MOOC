@@ -156,6 +156,13 @@ diagnoza[<span class="dv">1</span>:<span class="dv">6</span>, <span class="kw">c
 </div>
 <div id="jak-wygladaja-szanse" class="slide section level1">
 <h1>Jak wyglądają szanse</h1>
+<p>Pracując ze zmiennymi binarnymi często zamiast prawdopodobieństw korzysta się z tak zwanych szans (ang. odds).</p>
+<p>Co to jest szansa?</p>
+<p>Szasna wystąpienia zjawiska X to prawdopodobieństwo wystąpienia X podzielone przez prawdopodobieństwo nie wystąpienia X. Czyli jeżęli prawdopodobieństwo oznaczymy symbolem <span class="math">\(p\)</span> to otrzymamy</p>
+<p><span class="math">\[
+odds = \frac{p}{1-p}
+\]</span></p>
+<p>Policzmy szanse, że kobieta lub mężczyzna odpowie <em>Przyjemności</em> na pytanie o to co ważniejsze.</p>
 <pre class="sourceCode r"><code class="sourceCode r">frakcje &lt;-<span class="st"> </span><span class="kw">prop.table</span>(plecSens, <span class="dv">1</span>)
 frakcje[,<span class="dv">1</span>]/frakcje[,<span class="dv">2</span>]</code></pre>
 <pre><code>## mężczyzna   kobieta 

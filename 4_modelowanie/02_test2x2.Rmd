@@ -105,28 +105,57 @@ prop.table(plecSens)
 
 # Jak wyglądają szanse
 
+Pracując ze zmiennymi binarnymi często zamiast prawdopodobieństw korzysta się z tak zwanych szans (ang. odds). 
+
+Co to jest szansa?
+
+Szasna wystąpienia zjawiska X to prawdopodobieństwo wystąpienia X podzielone przez prawdopodobieństwo nie wystąpienia X. Czyli jeżeli prawdopodobieństwo oznaczymy symbolem $p$ to otrzymamy 
+
+$$
+odds = \frac{p}{1-p}
+$$
+
+W przeciwieństwie do prawdopodobieństwa, szansa może przyjmowac wartości większe od 1. 
+
+Policzmy szanse, że kobieta lub mężczyzna odpowie *Przyjemności* na pytanie o to co ważniejsze.
+
 ```{r}
 frakcje <- prop.table(plecSens, 1)
 frakcje[,1]/frakcje[,2]
 ```
 
+# Jak wyglądają ilorazy szans
 
-# Co to znaczy: cecha jakościowa
+Jaka jest zaleta w używaniu szans nad prawdopodobieństwem?
 
-# Co to znaczy: cecha jakościowa
+Główną zaletą jest możliwość operania na ilorazach szans. 
+Iloraz szans przedstawia ile razy szansa w jednej grupie jest większa od szansy w dużej grupie.
 
-# Co to znaczy: cecha jakościowa
+$$
+oddsRatio_{A/B} = odds_{A}/odds_{B} = \frac{p_A (1-p_B)}{(1-p_A)p_B}
+$$
 
-# Co to znaczy: cecha jakościowa
+Przedstawmy iloraz szan na przykładzie płci i odpowiedzi na pytanie o wartości. 
 
+Policzymy ilu krotnie szansa na odpowiedź *Przyjemności* jest większa u męzczyzn niż u kobiet.
+
+Jeżeli iloraz szans wynosi 1 to znaczy że szanse są równe w obu grupach przez co te dwie zmienne nie są zależne.
+
+Jeżeli szansa jest mneijsza lub większa niż jeden, wtedy pojawia się zależność.
+
+W przykładzie dla Diagnozy Społecznej, iloraz szans wynosi `1.4312`, co oznacza, że szansa, że dla losowo wylosowanego mężczyzny, szansa że odpowie *Przyjemności* jest o 43% większa niż u kobiety.
+
+```{r}
+frakcje <- prop.table(plecSens, 1)
+szanse <- frakcje[,1]/frakcje[,2]
+szanse[1] / szanse[2]
+```
+
+# Wykres mozaikowy
 
 
 ```{r}
-library(PogromcyDanych)
-library(dplyr)
-
-plecCoWazne <- diagnoza %>% select(plec, gp29, waga_2013_osoby)
-head(plecCoWazne)
+mosaicplot(plecSens)
 ```
 
 
