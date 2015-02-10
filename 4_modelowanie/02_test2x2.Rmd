@@ -185,39 +185,63 @@ head(TCGA_BRCA)
 
 # Czy przerzuty pogarszają rokowanie
 
+Zobaczmy czy jest prawdopodobieństwo zgonu zależy od występowania przerzutów.
+
+Zacznijmy od wyznaczenia tablicy kontyngencji.
 
 ```{r}
-table(TCGA_BRCA$czy.nowy.guz,
-      TCGA_BRCA$czy.zyje)
+(przerzuty_przezycia <- table(TCGA_BRCA$czy.nowy.guz,
+      TCGA_BRCA$czy.zyje))
 ```
 
-```{r}
-przerzuty_przerzycia <- table(TCGA_BRCA$czy.nowy.guz,
-      TCGA_BRCA$czy.zyje)
-```
+Przedstawmy tę tabelę graficznie
 
 ```{r}
-prop.table(przerzuty_przerzycia, 1)
+mosaicplot(przerzuty_przezycia)
 ```
 
-```{r}
-frakcje <- prop.table(przerzuty_przerzycia, 1)
-frakcje[,1]/frakcje[,2]
-```
+# Czy przerzuty pogarszają rokowanie
+
+Policzmy teraz frakcje osób, które przeżyły i które zmarły osobno w grupie osób bez i z przerzutami.
 
 ```{r}
-szanse <- frakcje[,1]/frakcje[,2]
+(frakcje <- prop.table(przerzuty_przezycia, 1))
+```
+
+Policzmy szanse zgonu w grupie osób bez przerzutów i z przerzutami.
+
+```{r}
+(szanse <- frakcje[,1]/frakcje[,2])
+```
+
+Iloraz szans wynosi 0.04, co znaczy, że w grupie badanych szansa na zgon osób bez przerzutów to 4% szansy na zgon osób z przerzutami. Równowaznie można powiedzieć, żę osoby z przerzutami mają 25 razy wyższą szansę na zgin niż w grupie bez przerzutów.
+
+```{r}
+# bez przerzutów do przerzutów
+szanse[1] / szanse[2]
+# z przerzutami do bez przerzutów
 szanse[2] / szanse[1]
 ```
 
-```{r}
-fisher.test(przerzuty_przerzycia)
+# Czy przerzuty pogarszają rokowanie
 
-fisher.test(przerzuty_przerzycia)$p.value
+Iloraz szans równy 23 wydaje się byś istotnie większy niż 1.
+
+Aby przetestować czy ta zależność pomiędzy przerzutami a przeżyciem jest istotna statystyczna można przeprowadzić test.
+
+Dla tabel 2 na 2 najbardziej popularnym rozwiązaniem jest użycie testu Fishera.
+
+Przedstawiona w tym teście p-wartość odpowiada prawdopodobieństwo, że iloraz szans będzie większy niż obserwowany w sytuacji gdyby pomiędzy zmiennymi nie było żadnych zależności.
+
+```{r}
+fisher.test(przerzuty_przezycia)
 ```
 
-
+W tym przykładzie p-wartość jest rzędu $2 * 10^{-15}$, tak więc gdyby zmienne nie były zależe byłoby nieprawdopodobne by zaobserwować taką wartość.
 
 # Zadania
 
+1. W zbiorze danych `diagnoza` wiek respondenta jest w zmiennej o nazwie `wiek2013`. Wyznacz zależność pomiędzy wiekiem podzielonym na dwie grupy, poniżej i powyżej 30 roku życia, a odpowiedziami n apytanie o to co w życiu ważne.
+
+2. W zbiorze danych `TCGA_BRCA` w drugiej kolumnie jest płeć pacjenta. Wyznacz zależność pomiędzy zmiennymi `plec` a `czy.zyje`. Przetestuj tą zależność testem Fishera.
 
