@@ -13,7 +13,7 @@ toDownload <- data.frame(ids, names, stringsAsFactors = FALSE)
 
 res <- NULL
 i <- 4
-for (i in 76:nrow(toDownload)) {
+for (i in 1:nrow(toDownload)) {
   nam <- toDownload[i,1]
   tables <- readHTMLTable(paste0("http://www.imdb.com/title/",nam,"/epdate?ref_=ttep_ql_4"))
   dat <- tables[[1]]
@@ -29,5 +29,13 @@ for (i in 76:nrow(toDownload)) {
 
 serialeIMDB <- do.call(rbind, res)
 save(serialeIMDB, file="serialeIMDB.rda")
+
+
+
+toDownload <- data.frame(c("tt2193021","tt1871731"),
+                         c("Arrow","Ninjago: Masters of Spinjitzu"))
+
+
+
 
 ```
