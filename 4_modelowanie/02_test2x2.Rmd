@@ -173,46 +173,51 @@ mosaicplot(plecSens, main="Odpowiedzi na pytanie o to co ważne w życiu")
 
 # Wczytanie danych
 
-Dane od których rozpoczniemy przykłady to `diagnoza` z pakietu `PogromcyDanych`. Aby te dane wczytać, wystarczy włączyć ten pakiet - instrukcja jak to zrobić znajduje się w odcinku 2 pierwszego sezonu.
+W zbiorze danych `diagnoza` jest ponad 38 tysięcy obserwacji. Dla tak dużej populacji testowanie nei ma praktycznie sensu, nawet bardzo małe różnice okazują się istotnie różne.
 
-W zbiorze danych `diagnoza` dostępnych jest kilkadziesiąt kolumn, opisujących odpowiedzi na różne interesujące pytania. W tym odcinku przyjrzymy się tylko kilku  wybranym kolumnom, opisującym imię, wiek, płeć, ukończoną edukację oraz odpowiedź na pytanie ,,Co jest wedlug Pana wazniejsze w zyciu?'' (zmienna w kolumnie `gp29`) z możliwymi odpowiedziami *Poczucie sensu* i *Przyjemności*.
+Dlatego przykład dotyczący testowania przedstawimy na innym zbiorze danych, zbiorze `TCGA_BRCA` z wybranymi zmiennymi dla raka piersi. W tym zbiorze danych mamy dane dla 999 pacjentów.
+
+Kolejne kolumny tego zbioru danych opisują mutacje genu P53, płeć pacjenta, informację czy pacjent wciąż żyje, informacja ile dni po operacji doszło do zgonu oraz informacja czy w okresie jednego roku pojawił się guz / przerzuty.
 
 ```{r, warning=FALSE, message=FALSE}
 head(TCGA_BRCA)
 ```
 
+# Czy przerzuty pogarszają rokowanie
 
 
-
----
-
-# O czym jest ten odcinek
-
-
-
-
-```{r, eval=FALSE}
-# brak przerzutow dobrze rokuje
-table(TCGA_BRCA$new.tumor,
-      TCGA_BRCA$vital.status)
-
-fisher.test(table(TCGA_BRCA$new.tumor,
-      TCGA_BRCA$vital.status))
-
-fisher.test(table(TCGA_BRCA$new.tumor,
-      TCGA_BRCA$TP53 == "Wild type"))
-
-
-head(TCGA_BRCA)
-
-table(TCGA_BRCA$TP53,
-      TCGA_BRCA$vital.status)
-
-chisq.test(table(TCGA_BRCA$TP53,
-      TCGA_BRCA$vital.status))
-
-pairwise.prop.test(TCGA_BRCA$new.tumor, TCGA_BRCA$TP53)
-
+```{r}
+table(TCGA_BRCA$czy.nowy.guz,
+      TCGA_BRCA$czy.zyje)
 ```
+
+```{r}
+przerzuty_przerzycia <- table(TCGA_BRCA$czy.nowy.guz,
+      TCGA_BRCA$czy.zyje)
+```
+
+```{r}
+prop.table(przerzuty_przerzycia, 1)
+```
+
+```{r}
+frakcje <- prop.table(przerzuty_przerzycia, 1)
+frakcje[,1]/frakcje[,2]
+```
+
+```{r}
+szanse <- frakcje[,1]/frakcje[,2]
+szanse[2] / szanse[1]
+```
+
+```{r}
+fisher.test(przerzuty_przerzycia)
+
+fisher.test(przerzuty_przerzycia)$p.value
+```
+
+
+
+# Zadania
 
 
