@@ -52,25 +52,70 @@ pogRomcy danych
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)</code></pre>
-<pre><code>## Loading required package: dplyr
-## 
-## Attaching package: 'dplyr'
-## 
-## The following object is masked from 'package:stats':
-## 
-##     filter
-## 
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-## 
-## Loading required package: SmarterPoland
-## Loading required package: rjson
-## Loading required package: ggplot2
-## Loading required package: httr
-## Loading required package: htmltools</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<p>Jak badać czy dwie zmienne są zależne?</p>
+<p>Co oznacza zależność?</p>
+<p>W tym odcinku rozważymy najprostszą zależność dla pary zmiennych - zależność pomiędzy parą zmiennych binarnych.</p>
+<p>W tym odcinku nauczymy się jak:</p>
+<ul>
+<li>jak budować i jak czytac tablice kontyngencji dla pary zmiennych</li>
+<li>jak przedstawiać graficznie tabelę kontyngencji</li>
+<li>jak statystycznie testować zależność pomiedzy parą zmiennych.</li>
+</ul>
+<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, to dane z Diagnozy Społecznej, dostępne w tabeli <code>diagnoza</code> a drugi o nowotworze piersi, dostępne w tabeli <code>TCGA_BRCA</code>, oba dostępne w pakiecie <code>PogromcyDanych</code>.</p>
+</div>
+<div id="jak-opisac-zaleznosc-dwoch-zmiennych-binarnych" class="slide section level1">
+<h1>Jak opisać zależnośc dwóch zmiennych binarnych</h1>
+</div>
+<div id="wczytanie-danych" class="slide section level1">
+<h1>Wczytanie danych</h1>
+<p>Dane od których rozpoczniemy przykłady to <code>diagnoza</code> z pakietu <code>PogromcyDanych</code>. Aby te dane wczytać, wystarczy włączyć ten pakiet - instrukcja jak to zrobić znajduje się w odcinku 2 pierwszego sezonu.</p>
+<p>W zbiorze danych <code>diagnoza</code> dostępnych jest kilkadziesiąt kolumn, opisujących odpowiedzi na różne interesujące pytania. W tym odcinku przyjrzymy się tylko kilku wybranym kolumnom, opisującym imię, wiek, płeć, ukończoną edukację oraz odpowiedź na pytanie ,,Co jest wedlug Pana wazniejsze w zyciu?’’ (zmienna w kolumnie <code>gp29</code>) z możliwymi odpowiedziami <em>Poczucie sensu</em> i <em>Przyjemności</em>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
+diagnoza[<span class="dv">1</span>:<span class="dv">6</span>, <span class="kw">c</span>(<span class="st">&quot;imie_2011&quot;</span>, <span class="st">&quot;wiek2013&quot;</span>, <span class="st">&quot;plec&quot;</span>, <span class="st">&quot;eduk4_2013&quot;</span>, <span class="st">&quot;gp29&quot;</span>)]</code></pre>
+<pre><code>##    imie_2011 wiek2013      plec                    eduk4_2013
+## 1   WERONIKA        4   kobieta                          &lt;NA&gt;
+## 2     ERNEST       13 mężczyzna zasadnicze zawodowe/gimanzjum
+## 3     SYLWIA       23   kobieta           wyższe i policealne
+## 4    MARIOLA       27   kobieta           wyższe i policealne
+## 16    WACŁAW       78 mężczyzna           podstawowe i niższe
+## 57     PIOTR       48 mężczyzna zasadnicze zawodowe/gimanzjum
+##              gp29
+## 1            &lt;NA&gt;
+## 2  POCZUCIE SENSU
+## 3    PRZYJEMNOSCI
+## 4  POCZUCIE SENSU
+## 16 POCZUCIE SENSU
+## 57 POCZUCIE SENSU</code></pre>
+</div>
+<div id="jak-wyglada-tabela-kontyngencji" class="slide section level1">
+<h1>Jak wygląda tabela kontyngencji</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(diagnoza$plec, diagnoza$gp29)</code></pre>
+<pre><code>##            
+##             PRZYJEMNOSCI POCZUCIE SENSU
+##   mężczyzna         5114           6544
+##   kobieta           5144           9421</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prop.table</span>(<span class="kw">table</span>(diagnoza$plec, diagnoza$gp29), <span class="dv">1</span>)</code></pre>
+<pre><code>##            
+##             PRZYJEMNOSCI POCZUCIE SENSU
+##   mężczyzna    0.4386687      0.5613313
+##   kobieta      0.3531754      0.6468246</code></pre>
+</div>
+<div id="co-to-znaczy-cecha-jakosciowa" class="slide section level1">
+<h1>Co to znaczy: cecha jakościowa</h1>
+</div>
+<div id="co-to-znaczy-cecha-jakosciowa-1" class="slide section level1">
+<h1>Co to znaczy: cecha jakościowa</h1>
+</div>
+<div id="co-to-znaczy-cecha-jakosciowa-2" class="slide section level1">
+<h1>Co to znaczy: cecha jakościowa</h1>
+</div>
+<div id="co-to-znaczy-cecha-jakosciowa-3" class="slide section level1">
+<h1>Co to znaczy: cecha jakościowa</h1>
+</div>
+<div id="co-to-znaczy-cecha-jakosciowa-4" class="slide section level1">
+<h1>Co to znaczy: cecha jakościowa</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
+<span class="kw">library</span>(dplyr)
 
 plecCoWazne &lt;-<span class="st"> </span>diagnoza %&gt;%<span class="st"> </span><span class="kw">select</span>(plec, gp29, waga_2013_osoby)
 <span class="kw">head</span>(plecCoWazne)</code></pre>
@@ -84,59 +129,16 @@ plecCoWazne &lt;-<span class="st"> </span>diagnoza %&gt;%<span class="st"> </spa
 </div>
 <div id="o-czym-jest-ten-odcinek-1" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(plecCoWazne$plec, plecCoWazne$gp29)</code></pre>
-<pre><code>##            
-##             PRZYJEMNOSCI POCZUCIE SENSU
-##   mężczyzna         5114           6544
-##   kobieta           5144           9421</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prop.table</span>(<span class="kw">table</span>(plecCoWazne$plec, plecCoWazne$gp29), <span class="dv">1</span>)</code></pre>
-<pre><code>##            
-##             PRZYJEMNOSCI POCZUCIE SENSU
-##   mężczyzna    0.4386687      0.5613313
-##   kobieta      0.3531754      0.6468246</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fisher.test</span>(<span class="kw">table</span>(plecCoWazne$plec, plecCoWazne$gp29))</code></pre>
-<pre><code>## 
-##  Fisher's Exact Test for Count Data
-## 
-## data:  table(plecCoWazne$plec, plecCoWazne$gp29)
-## p-value &lt; 2.2e-16
-## alternative hypothesis: true odds ratio is not equal to 1
-## 95 percent confidence interval:
-##  1.361090 1.504971
-## sample estimates:
-## odds ratio 
-##    1.43119</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prop.table</span>(<span class="kw">table</span>(diagnoza$gp54_11, <span class="kw">cut</span>(diagnoza$wiek2013, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">25</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">110</span>))), <span class="dv">2</span>)</code></pre>
-<pre><code>##                   
-##                         (0,25]     (25,40]     (40,60]    (60,110]
-##   ZDECYDOWANIE TAK 0.157526882 0.096660808 0.085115718 0.092393417
-##   TAK              0.289516129 0.278558875 0.293846660 0.292989504
-##   RACZEJ TAK       0.295698925 0.303690685 0.290994845 0.266683945
-##   ANI TAK, ANI NIE 0.167473118 0.214235501 0.206098497 0.232344175
-##   RACZEJ NIE       0.034946237 0.051845343 0.059888121 0.053906959
-##   NIE              0.043548387 0.044815466 0.053636064 0.054425295
-##   ZDECYDOWANIE NIE 0.011290323 0.010193322 0.010420094 0.007256706</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addmargins</span>(<span class="kw">table</span>(<span class="dt">ojcowiedziecmi =</span> diagnoza$gp54_22, <span class="dt">dziecirodzicami =</span> diagnoza$gp54_11))</code></pre>
-<pre><code>##                   dziecirodzicami
-## ojcowiedziecmi     ZDECYDOWANIE TAK   TAK RACZEJ TAK ANI TAK, ANI NIE
-##   ZDECYDOWANIE TAK              728   729        721              553
-##   TAK                           626  2960       1813             1280
-##   RACZEJ TAK                    414  1441       2300             1153
-##   ANI TAK, ANI NIE              491  1496       1808             1914
-##   RACZEJ NIE                    119   361        501              274
-##   NIE                           140   474        287              233
-##   ZDECYDOWANIE NIE              100   110         88               81
-##   Sum                          2618  7571       7518             5488
-##                   dziecirodzicami
-## ojcowiedziecmi     RACZEJ NIE   NIE ZDECYDOWANIE NIE   Sum
-##   ZDECYDOWANIE TAK        142   140               54  3067
-##   TAK                     350   437               52  7518
-##   RACZEJ TAK              345   215               38  5906
-##   ANI TAK, ANI NIE        314   244               55  6322
-##   RACZEJ NIE              123    58               14  1450
-##   NIE                      89   206               17  1446
-##   ZDECYDOWANIE NIE         18    23               20   440
-##   Sum                    1381  1323              250 26149</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(plecCoWazne$plec, plecCoWazne$gp29)
+
+<span class="kw">prop.table</span>(<span class="kw">table</span>(plecCoWazne$plec, plecCoWazne$gp29), <span class="dv">1</span>)
+
+<span class="kw">fisher.test</span>(<span class="kw">table</span>(plecCoWazne$plec, plecCoWazne$gp29))
+
+
+<span class="kw">prop.table</span>(<span class="kw">table</span>(diagnoza$gp54_11, <span class="kw">cut</span>(diagnoza$wiek2013, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">25</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">110</span>))), <span class="dv">2</span>)
+
+<span class="kw">addmargins</span>(<span class="kw">table</span>(<span class="dt">ojcowiedziecmi =</span> diagnoza$gp54_22, <span class="dt">dziecirodzicami =</span> diagnoza$gp54_11))</code></pre>
 </div>
 <div id="tez-2xp" class="slide section level1">
 <h1>tez 2xp</h1>
@@ -182,6 +184,26 @@ plecCoWazne &lt;-<span class="st"> </span>diagnoza %&gt;%<span class="st"> </spa
 <div class="slide section level1">
 
 <p>Test 2x2 McNemara</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># brak przerzutow dobrze rokuje</span>
+<span class="kw">table</span>(TCGA_BRCA$new.tumor,
+      TCGA_BRCA$vital.status)
+
+<span class="kw">fisher.test</span>(<span class="kw">table</span>(TCGA_BRCA$new.tumor,
+      TCGA_BRCA$vital.status))
+
+<span class="kw">fisher.test</span>(<span class="kw">table</span>(TCGA_BRCA$new.tumor,
+      TCGA_BRCA$TP53 ==<span class="st"> &quot;Wild type&quot;</span>))
+
+
+<span class="kw">head</span>(TCGA_BRCA)
+
+<span class="kw">table</span>(TCGA_BRCA$TP53,
+      TCGA_BRCA$vital.status)
+
+<span class="kw">chisq.test</span>(<span class="kw">table</span>(TCGA_BRCA$TP53,
+      TCGA_BRCA$vital.status))
+
+<span class="kw">pairwise.prop.test</span>(TCGA_BRCA$new.tumor, TCGA_BRCA$TP53)</code></pre>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

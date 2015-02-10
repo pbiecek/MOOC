@@ -26,13 +26,40 @@ W tym odcinku nauczymy się jak:
 - jak przedstawiać graficznie tabelę kontyngencji
 - jak statystycznie testować zależność pomiedzy parą zmiennych.
 
-Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, to dane z Diagnozy Społecznej, dostępne w tabeli `diagnoza` a drugi o nowotworze piersi, to `TCGA_BRCA`, oba dostępne w pakiecie `PogromcyDanych`.
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, to dane z Diagnozy Społecznej, dostępne w tabeli `diagnoza` a drugi o nowotworze piersi, dostępne w tabeli `TCGA_BRCA`, oba dostępne w pakiecie `PogromcyDanych`.
 
 ---
 
-# Co to znaczy: cecha jakościowa
+# Jak opisać zależnośc dwóch zmiennych binarnych
 
-# Co to znaczy: cecha jakościowa
+
+# Wczytanie danych
+
+Dane od których rozpoczniemy przykłady to `diagnoza` z pakietu `PogromcyDanych`. Aby te dane wczytać, wystarczy włączyć ten pakiet - instrukcja jak to zrobić znajduje się w odcinku 2 pierwszego sezonu.
+
+W zbiorze danych `diagnoza` dostępnych jest kilkadziesiąt kolumn, opisujących odpowiedzi na różne interesujące pytania. W tym odcinku przyjrzymy się tylko kilku  wybranym kolumnom, opisującym imię, wiek, płeć, ukończoną edukację oraz odpowiedź na pytanie ,,Co jest wedlug Pana wazniejsze w zyciu?'' (zmienna w kolumnie `gp29`) z możliwymi odpowiedziami *Poczucie sensu* i *Przyjemności*.
+
+```{r, warning=FALSE, message=FALSE}
+library(PogromcyDanych)
+diagnoza[1:6, c("imie_2011", "wiek2013", "plec", "eduk4_2013", "gp29")]
+```
+
+# Jak wygląda tabela kontyngencji
+
+
+```{r}
+table(diagnoza$plec, diagnoza$gp29)
+
+```
+
+
+
+
+
+
+```{r}
+prop.table(table(diagnoza$plec, diagnoza$gp29), 1)
+```
 
 # Co to znaczy: cecha jakościowa
 
@@ -60,7 +87,7 @@ head(plecCoWazne)
 
 # O czym jest ten odcinek
 
-```{r}
+```{r, eval=FALSE}
 table(plecCoWazne$plec, plecCoWazne$gp29)
 
 prop.table(table(plecCoWazne$plec, plecCoWazne$gp29), 1)
@@ -91,7 +118,7 @@ prop.table(table(diagnoza$eduk4_2013, cut(diagnoza$wiek2013, c(0, 25, 40, 60, 11
 Test 2x2 McNemara
 
 
-```{r}
+```{r, eval=FALSE}
 # brak przerzutow dobrze rokuje
 table(TCGA_BRCA$new.tumor,
       TCGA_BRCA$vital.status)
