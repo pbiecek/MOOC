@@ -41,6 +41,9 @@ serialeIMDB <- rbind(serialeIMDB, serialeIMDB2)
 Encoding(levels(serialeIMDB$nazwa))
 save(serialeIMDB, file="serialeIMDB.rda", compress = "xz", compression_level = 9)
 
+toDownload <- data.frame(c("tt0086791","tt1442462"),
+                         c("Robin of Sherwood","The Good Wife"))
+
 
 
 ```

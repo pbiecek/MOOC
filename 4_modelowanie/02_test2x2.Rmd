@@ -153,7 +153,6 @@ szanse[1] / szanse[2]
 
 # Wykres mozaikowy
 
-
 ```{r}
 mosaicplot(plecSens)
 ```
