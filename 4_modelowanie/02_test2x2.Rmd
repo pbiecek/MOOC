@@ -89,14 +89,27 @@ Przyjrzyjmy się tym wynikom
 Zarówno kobiety jak i mężczyźni częściej deklarują, że ważniejsze jest poczucie sensu. 
 Ale czy sa róznice pomiędzy tymi płciami i jak duże?
 
-# Jak wygląda tabela kontyngencji
+# Jak wygląda tabela z procentami
 
+Przeliczmy liczebności na frakcje. Jaki procent mężczyzn odpowiedziało przyjemności a jaka poczucie sensu?
+
+Funkcją `prop.table()` można policzyć frakcje, dodatkowy argument określa czy mają być to proporcje w wierszach (1), kolumanch (2) czy całej macierzy (pusty argument).
 
 ```{r}
-prop.table(table(diagnoza$plec, diagnoza$gp29), 1)
+plecSens <- table(diagnoza$plec, diagnoza$gp29)
+# frakcje w wierszach
+prop.table(plecSens, 1)
+# frakcje w całej tabeli
+prop.table(plecSens)
 ```
 
-# Co to znaczy: cecha jakościowa
+# Jak wyglądają szanse
+
+```{r}
+frakcje <- prop.table(plecSens, 1)
+frakcje[,1]/frakcje[,2]
+```
+
 
 # Co to znaczy: cecha jakościowa
 

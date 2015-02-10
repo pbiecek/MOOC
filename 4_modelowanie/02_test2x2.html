@@ -136,13 +136,30 @@ diagnoza[<span class="dv">1</span>:<span class="dv">6</span>, <span class="kw">c
 </ul>
 <p>Zarówno kobiety jak i mężczyźni częściej deklarują, że ważniejsze jest poczucie sensu. Ale czy sa róznice pomiędzy tymi płciami i jak duże?</p>
 </div>
-<div id="jak-wyglada-tabela-kontyngencji-1" class="slide section level1">
-<h1>Jak wygląda tabela kontyngencji</h1>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prop.table</span>(<span class="kw">table</span>(diagnoza$plec, diagnoza$gp29), <span class="dv">1</span>)</code></pre>
+<div id="jak-wyglada-tabela-z-procentami" class="slide section level1">
+<h1>Jak wygląda tabela z procentami</h1>
+<p>Przeliczmy liczebności na frakcje. Jaki procent mężczyzn odpowiedziało przyjemności a jaka poczucie sensu?</p>
+<p>Funkcją <code>prop.table()</code> można policzyć frakcje, dodatkowy argument określa czy mają być to proporcje w wierszach (1), kolumanch (2) czy całej macierzy (pusty argument).</p>
+<pre class="sourceCode r"><code class="sourceCode r">plecSens &lt;-<span class="st"> </span><span class="kw">table</span>(diagnoza$plec, diagnoza$gp29)
+<span class="co"># frakcje w wierszach</span>
+<span class="kw">prop.table</span>(plecSens, <span class="dv">1</span>)</code></pre>
 <pre><code>##            
 ##             PRZYJEMNOSCI POCZUCIE SENSU
 ##   mężczyzna    0.4386687      0.5613313
 ##   kobieta      0.3531754      0.6468246</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># frakcje w całej tabeli</span>
+<span class="kw">prop.table</span>(plecSens)</code></pre>
+<pre><code>##            
+##             PRZYJEMNOSCI POCZUCIE SENSU
+##   mężczyzna    0.1950196      0.2495519
+##   kobieta      0.1961637      0.3592648</code></pre>
+</div>
+<div id="jak-wygladaja-szanse" class="slide section level1">
+<h1>Jak wyglądają szanse</h1>
+<pre class="sourceCode r"><code class="sourceCode r">frakcje &lt;-<span class="st"> </span><span class="kw">prop.table</span>(plecSens, <span class="dv">1</span>)
+frakcje[,<span class="dv">1</span>]/frakcje[,<span class="dv">2</span>]</code></pre>
+<pre><code>## mężczyzna   kobieta 
+## 0.7814792 0.5460142</code></pre>
 </div>
 <div id="co-to-znaczy-cecha-jakosciowa" class="slide section level1">
 <h1>Co to znaczy: cecha jakościowa</h1>
@@ -154,9 +171,6 @@ diagnoza[<span class="dv">1</span>:<span class="dv">6</span>, <span class="kw">c
 <h1>Co to znaczy: cecha jakościowa</h1>
 </div>
 <div id="co-to-znaczy-cecha-jakosciowa-3" class="slide section level1">
-<h1>Co to znaczy: cecha jakościowa</h1>
-</div>
-<div id="co-to-znaczy-cecha-jakosciowa-4" class="slide section level1">
 <h1>Co to znaczy: cecha jakościowa</h1>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
 <span class="kw">library</span>(dplyr)
