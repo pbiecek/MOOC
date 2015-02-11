@@ -80,6 +80,9 @@ Przedstawmy teraz jak wygląda zależność pomiędzy wiekiem a odpowiedziami na
 
 # Więcek kolumn / wierszy
 
+Strona 25 z http://diagnoza.com/pliki/kwestionariusze_instrukcje/kwestionariusze_2013.pdf
+Pytanie 54
+
 ```{r, warning=FALSE, message=FALSE}
 table(diagnoza$gp54_13, diagnoza$wiek2013_4)
 
@@ -99,6 +102,10 @@ mosaicplot(t(table(diagnoza$gp54_01, diagnoza$wiek2013_4)), las=2,
 mosaicplot(t(table(diagnoza$gp54_04, diagnoza$wiek2013_4)), las=2,
            col=c("red4","red1","pink","grey80","lightgreen","green1","green4"),
            main="Miarą sukcesu jest sta posiadania dóbr maeterialnych")
+
+mosaicplot(t(table(diagnoza$gp54_19, diagnoza$wiek2013_4)), las=2,
+           col=c("red4","red1","pink","grey80","lightgreen","green1","green4"),
+           main="Bez kar fizycznych nie da się dobrze wychować dzieci")
 
 ```
 
