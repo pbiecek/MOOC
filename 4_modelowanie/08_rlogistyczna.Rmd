@@ -43,7 +43,7 @@ diagnoza[1:6, c("imie_2011", "wiek2013", "plec", "eduk4_2013", "gp29")]
 diagnoza$coWazne <- diagnoza$gp29=="PRZYJEMNOSCI"
 diagnoza$wiek2013_4g <- cut(diagnoza$wiek2013, c(0, 25, 40, 60, 110))
 
-model <- glm(coWazne~plec+eduk4_2013+wiek2013_4g, data=diagnoza)
+model <- glm(coWazne~plec+eduk4_2013+wiek2013, data=diagnoza, family="binomial")
 summary(model)
 ```
 
@@ -53,4 +53,5 @@ summary(model)
 ```{r, message=FALSE, warning=FALSE}
 library(visreg)
 visreg(model)
+visreg(model, scale = "response", rug = 2)
 ```
