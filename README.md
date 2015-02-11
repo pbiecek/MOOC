@@ -71,9 +71,7 @@ Sezon 2: Wizualizacja i modelowanie danych
   * pxk  - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/03_test2xp.html)
   * Regresja liniowa, [intro](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaIntro.md), [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaProsta.html), [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/dopasowanieModelu.html)
   * Regresja przedziałowo liniowa, [intro](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/przedzialowaIntro.md),   [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaMultiplikatywna.html)
-  * Diagnostyka [Ascombe]
-  * Analiza wariancji - jednokierunkowa, dwukierunkowa [przecięte / hierarchiczne]
-  * Modele z wieloma zmiennymi [?]
+  * Regresja liniowa [?]
   * Regresja logistyczna [?]
 
 + Dane wokół nas,
@@ -99,14 +97,7 @@ Sezon 2: Wizualizacja i modelowanie danych
     
     Challenge: BSE - kolejki do NFZ i obrobione csv
 
-    IMDB?
-
-    Facebook i Łańcuch Markowa
-      - czas połówkowy o rozkład długości trwania związku
-
-
     Co ważne w życiu i diagnoza
-
 
     Akcelerometr? i proste szeregi czasowe - autokorelacja / uśrednianie z fazą
 
