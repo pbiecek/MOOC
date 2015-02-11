@@ -1,0 +1,49 @@
+---
+title: "Regresja logistyczna"
+author: "pogRomcy danych"
+date: "sezon 3 / odcinek 8<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / modelowanie / regresja logistyczna"
+---
+
+# O czym jest ten odcinek
+
+
+W tym odcinku nauczymy się jak:
+
+- jak budować i jak czytać tablice kontyngencji dla pary zmiennych
+- jak przedstawiać graficznie tabelę kontyngencji
+- jak statystycznie testować zależność pomiędzy parą zmiennych.
+
+
+---
+
+
+# Wczytanie danych
+
+Dane od których rozpoczniemy przykłady to `diagnoza` z pakietu `PogromcyDanych`. Aby te dane wczytać, wystarczy włączyć ten pakiet - instrukcja jak to zrobić znajduje się w odcinku 2 pierwszego sezonu.
+
+W zbiorze danych `diagnoza` dostępnych jest kilkadziesiąt kolumn, opisujących odpowiedzi na różne interesujące pytania. W tym odcinku przyjrzymy się tylko kilku  wybranym kolumnom, opisującym imię, wiek, płeć, ukończoną edukację oraz odpowiedź na pytanie ,,Co jest według Pana ważniejsze w życiu?'' (zmienna w kolumnie `gp29`) z możliwymi odpowiedziami *Poczucie sensu* i *Przyjemności*.
+
+```{r, warning=FALSE, message=FALSE}
+library(PogromcyDanych)
+diagnoza[1:6, c("imie_2011", "wiek2013", "plec", "eduk4_2013", "gp29")]
+```
+
+# Regresja logistyczna
+
+
+```{r}
+diagnoza$coWazne <- diagnoza$gp29=="PRZYJEMNOSCI"
+diagnoza$wiek2013_4g <- cut(diagnoza$wiek2013, c(0, 25, 40, 60, 110))
+
+model <- glm(coWazne~plec+eduk4_2013+wiek2013_4g, data=diagnoza)
+summary(model)
+```
+
