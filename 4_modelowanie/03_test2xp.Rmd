@@ -1,7 +1,7 @@
 ---
-title: "Dlaczego R?"
+title: "Zależność pomiędzy dwoma zmiennymi jakościowymi"
 author: "pogRomcy danych"
-date: "sezon 1 / odcinek 2<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 3 / odcinek 3<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -9,8 +9,56 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / pierwsze kroki / dlaczego R"
+    footer: "pogRomcy danych / pierwsze kroki / testy kxp"
 ---
+
+# O czym jest ten odcinek
+
+W poprzednim odcinku pokazaliśmy jak badać zależność pomiędzy dwoma zmiennymi binarnymi. 
+
+A co w sytuacji gdy zmienne nie są binarne? Temu tematowi poświęcony jest ten odcinek.
+
+W tym odcinku nauczymy się jak:
+
+- jak budować i jak czytać tablice kontyngencji dla pary zmiennych jakościowych
+- jak przedstawiać graficznie tabelę kontyngencji
+- jak statystycznie testować zależność pomiędzy parą zmiennych.
+
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, to dane z Diagnozy Społecznej, dostępne w tabeli `diagnoza` a drugi o nowotworze piersi, dostępne w tabeli `TCGA_BRCA`, oba dostępne w pakiecie `PogromcyDanych`.
+
+
+
+# Wczytanie danych
+
+Dane od których rozpoczniemy przykłady to `diagnoza` z pakietu `PogromcyDanych`. Aby te dane wczytać, wystarczy włączyć ten pakiet - instrukcja jak to zrobić znajduje się w odcinku 2 pierwszego sezonu.
+
+W zbiorze danych `diagnoza` dostępnych jest kilkadziesiąt kolumn, opisujących odpowiedzi na różne interesujące pytania. W tym odcinku przyjrzymy się tylko kilku  wybranym kolumnom, opisującym imię, wiek, płeć, ukończoną edukację oraz odpowiedź na pytanie ,,Co jest według Pana ważniejsze w życiu?'' (zmienna w kolumnie `gp29`) z możliwymi odpowiedziami *Poczucie sensu* i *Przyjemności*.
+
+```{r, warning=FALSE, message=FALSE}
+library(PogromcyDanych)
+diagnoza[1:6, c("imie_2011", "wiek2013", "plec", "eduk4_2013", "gp29")]
+```
+
+# Jak wygląda tabela kontyngencji
+
+W poprzednim odcinku przyglądaliśmy się parze zmiennych `plec`, czyli płeć respondenta i `gp29`, czyli odpowiedź na pytanie co jest ważniejsze w życiu.
+ 
+W tym odcinku przyjrzymy się zależności pomiędzy  poziomem edukacji (zmienna `eduk4_2013`) a odpowiedziami na pytanie o to co jest ważniejsze w życiu.
+
+Zobaczmy jak wygląda tablica kontyngencji, zestawiająca te dwie zmienne.
+ 
+```{r}
+table(diagnoza$eduk4_2013, diagnoza$gp29)
+```
+
+Zmienna `eduk4_2013` poza czterema poziomami edukacji ma też piąty poziom `BD/ND/FALA`, który w tych danych nie występuje. Najłatwiej go usunąć funkcją `droplevels()`.
+
+```{r}
+table(droplevels(diagnoza$eduk4_2013), diagnoza$gp29)
+```
+
+W każdej grupie wykształcenia respondenci częściej deklarują, że ważniejsze jest poczucie sensu. 
+Ale czy są różnice pomiędzy grupami wykształcenia są duże?
 
 # O czym jest ten odcinek
 
