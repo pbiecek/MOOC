@@ -107,6 +107,10 @@ mosaicplot(t(table(diagnoza$gp54_19, diagnoza$wiek2013_4)), las=2,
            col=c("red4","red1","pink","grey80","lightgreen","green1","green4"),
            main="Bez kar fizycznych nie da się dobrze wychować dzieci")
 
+mosaicplot(t(table(diagnoza$gp54_17, diagnoza$wiek2013_4)), las=2,
+           col=c("red4","red1","pink","grey80","lightgreen","green1","green4"),
+           main="Niektóre grupy ludzi nie zasługują na szacunek")
+
 ```
 
 # Proporcje
