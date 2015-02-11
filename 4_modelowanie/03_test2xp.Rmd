@@ -78,6 +78,30 @@ Przedstawmy teraz jak wygląda zależność pomiędzy wiekiem a odpowiedziami na
 (wiekTab <- table(diagnoza$wiek2013_4g, diagnoza$gp29))
 ```
 
+# Więcek kolumn / wierszy
+
+```{r, warning=FALSE, message=FALSE}
+table(diagnoza$gp54_13, diagnoza$wiek2013_4)
+
+mosaicplot(t(table(diagnoza$gp54_13, diagnoza$wiek2013_4)), las=2,
+           col=c("red4","red1","pink","grey80","lightgreen","green1","green4"),
+           main="Niektórzy są więcej warci od innych")
+
+mosaicplot(t(table(diagnoza$gp54_13, droplevels(diagnoza$eduk4_2013))), las=2,
+           col=c("red4","red1","pink","grey80","lightgreen","green1","green4"),
+           main="Niektórzy są więcej warci od innych")
+
+
+mosaicplot(t(table(diagnoza$gp54_01, diagnoza$wiek2013_4)), las=2,
+           col=c("red4","red1","pink","grey80","lightgreen","green1","green4"),
+           main="Podziwiam ludzi, którzy mają drogie domy, samochody i ubrania")
+
+mosaicplot(t(table(diagnoza$gp54_04, diagnoza$wiek2013_4)), las=2,
+           col=c("red4","red1","pink","grey80","lightgreen","green1","green4"),
+           main="Miarą sukcesu jest sta posiadania dóbr maeterialnych")
+
+```
+
 # Proporcje
 
 Używając funkcji `prop.table()` można wyznaczyć frakcje w wierszach lub kolumnach.
@@ -89,7 +113,7 @@ prop.table(wiekTab, 1)
 
 # Wykresy mozaikowe
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 mosaicplot(edukacjaTab, las=2, main="Edukacja vs. co jest ważne w życiu")
 mosaicplot(wiekTab, las=2, main="Wiek vs. co jest ważne w życiu")
 ```
