@@ -47,3 +47,10 @@ model <- glm(coWazne~plec+eduk4_2013+wiek2013_4g, data=diagnoza)
 summary(model)
 ```
 
+# Regresja logistyczna - wizualizacja
+
+
+```{r, message=FALSE, warning=FALSE}
+library(visreg)
+visreg(model)
+```
