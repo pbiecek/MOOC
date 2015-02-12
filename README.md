@@ -89,20 +89,7 @@ Sezon 2: Wizualizacja i modelowanie danych
 
   * Dodać do challenge?
     + Zakup samochodu wspierany danymi [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/77_przypadekUzycia.Rmd),
-    + O rozkładach http://www3.nd.edu/~sjones20/JonesUND/BioStats_files/Distributions_1-3-11.pdf
     + do wizualizacji dodać http://www.bioinformatics.babraham.ac.uk/training/Figure%20Design%20Course%20Presentation.pdf
 
-    od KTR do Data MAster
-    http://statacumen.com/teach/ADA1/ADA1_notes.pdf
-    http://powerandsamplesize.com/Calculators/Test-1-Proportion/1-Sample-Equality
-    http://onlinestatbook.com/2/power/factors.html
-    http://rpsychologist.com/d3/CI/
-    http://www.stat.ncsu.edu/people/lu/courses/ST505/Ch2.pdf
-    
     Challenge: BSE - kolejki do NFZ i obrobione csv
-
-    Co ważne w życiu i diagnoza
-
-    Akcelerometr? i proste szeregi czasowe - autokorelacja / uśrednianie z fazą
-
 
