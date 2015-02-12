@@ -34,3 +34,7 @@ Z reguły prezentowane testy są przedstawiane jako odrębne "byty" bez wykazywa
 Taka forma przedstawiania testów bardzo by się wyróżniała z pośród innych materiałów.
 Może będzie ciekawsza dla kursantów ?
 
+https://www.otexts.org/book/sfml
+https://www.otexts.org/book/biostat
+ 
+
