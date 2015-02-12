@@ -33,10 +33,10 @@ pogRomcy danych
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
-<p>Najliższe odcinki przedstawią kilka wybranych technik analizy danych ilościowcych i jakościowych.</p>
+<p>Najbliższe odcinki przedstawią kilka wybranych technik analizy danych ilościowych i jakościowych.</p>
 <p>Techniki te będą przedstawione na kilku poziomach. Warto być ich świadom aby sprawniej je poznawać.</p>
 <ol style="list-style-type: decimal">
-<li><p>Poziom narzędziowy. Dla każdej metody pokażemy na jednym lub dwóch przykładach, jak wykonać określioną analizę w programie R, oraz jak interpretować wyniki.</p></li>
+<li><p>Poziom narzędziowy. Dla każdej metody pokażemy na jednym lub dwóch przykładach, jak wykonać określoną analizę w programie R, oraz jak interpretować wyniki.</p></li>
 <li><p>Poziom koncepcyjny. Dla każdej metody pokażemy w jaki sposób przedstawiane algorytmy działają, jak wygląda algorytm produkujące te wyniki.</p></li>
 <li><p>Poziom problemowy. Dla każdej metody pokażemy w jaki sposób przedstawiane algorytmy są związane z problemem, który chcemy rozwiązać.</p></li>
 </ol>
@@ -44,8 +44,8 @@ pogRomcy danych
 </div>
 <div id="kluczowe-koncepcje---zaleznosc" class="slide section level1">
 <h1>Kluczowe koncepcje - zależność</h1>
-<p>Jednym z pojęć wykorzystywannym podczas analizy dancyh jest <em>zależność</em>. Najczęściej dotyczy zależności pomiędzy dwoma cechami.</p>
-<p>Kiedy mamy do czynienia z zależnośći pomiędzy zmiennymi? Jeżeli dla róznych wartości jednej zmiennej z różną częstością obserwujemy wartości drugiej zmiennej.</p>
+<p>Jednym z pojęć wykorzystywanym podczas analizy danych jest <em>zależność</em>. Najczęściej dotyczy zależności pomiędzy dwoma cechami.</p>
+<p>Kiedy mamy do czynienia z zależności pomiędzy zmiennymi? Jeżeli dla różnych wartości jednej zmiennej z różną częstością obserwujemy wartości drugiej zmiennej.</p>
 <p>Przykładowo, dla dorosłych osób jest zależność pomiędzy wzrostem a płcią.</p>
 <p>Ta zależność jest symetryczna a więc:</p>
 <ul>
@@ -54,8 +54,8 @@ pogRomcy danych
 </ul>
 <p>Zauważmy że:</p>
 <ol style="list-style-type: decimal">
-<li>Zależność jest związana z pewną tendencją ale nie daje 100% funkcyjnego związku. To znaczy, nie jest tak, że wszystkie osoby poniżej jakiegoś wzrosty są <em>zawsze</em> kobietami. Można spotkać bardzo wysokie kobiety i bardzo niskich mężczyzn ale nie przeczy to ogólnej prawidłowości, że średnio mężczyźni są wyźsi.</li>
-<li>Zależność jest widoczna dla całej populacji, ale nie musi być prawdziwa dla podgrup. Gdybyśmy porównywali dwie grupy kobiet i mężyczn i tak się złożyło, że jedną z tych grup byłyby siatkarki (wysokie kobiety) a drugą grupą byliby dżokeje (zazwyczaj niscy mężczyźni) dla tych grup nie obserwowalibyśmy zależności widocznej dla całej populacji. Jeżeli więc obserwjemy podgrupy to nie zalwsze w tych podgrupach widoczna jest zależność prawdziwa dla całej populacji.</li>
+<li>Zależność jest związana z pewną tendencją ale nie daje 100% funkcyjnego związku. To znaczy, nie jest tak, że wszystkie osoby poniżej jakiegoś wzrosty są <em>zawsze</em> kobietami. Można spotkać bardzo wysokie kobiety i bardzo niskich mężczyzn ale nie przeczy to ogólnej prawidłowości, że średnio mężczyźni są wyżsi.</li>
+<li>Zależność jest widoczna dla całej populacji, ale nie musi być prawdziwa dla podgrup. Gdybyśmy porównywali dwie grupy kobiet i mężczyzn i tak się złożyło, że jedną z tych grup byłyby siatkarki (wysokie kobiety) a drugą grupą byliby dżokeje (zazwyczaj niscy mężczyźni) dla tych grup nie obserwowalibyśmy zależności widocznej dla całej populacji. Jeżeli więc obserwujemy podgrupy to nie zawsze w tych podgrupach widoczna jest zależność prawdziwa dla całej populacji.</li>
 <li>Zależność może dotyczyć dwóch zmiennych ilościowych (np. waga i wzrost, wyższe osoby są zazwyczaj cięższe) jak i jakościowych (np. kolor włosów i kolor oczu).</li>
 <li>Siła zależności pomiędzy zmiennymi stopniuje się. Dwie zmienne mogą być bardzo słabo zależne lub silnie zależne.</li>
 </ol>
@@ -64,42 +64,42 @@ pogRomcy danych
 <h1>Kluczowe koncepcje - losowość</h1>
 <p>Choć jesteśmy przyzwyczajeni do myślenia o wartościach jak do pewnych ustalonych liczbach, to nie zawsze jest to możliwe.</p>
 <p>Przykładowo, czy można powiedzieć jaki jest średni wzrost mężczyzn w Polsce?</p>
-<p>Gdybyśmy wybrali losowo 1000 męzczyzn moglibyśmy policzyć ich wzrost i policzyć z nich średnią. Ale gdybyśmy wybrali inne 1000 osób możwmy otrzymać inną średnią. Tak więc na bazie próby możemy wnioskować coś o średnim wzroscie ale to wnioskowanie obarczone jest pewną losowością wynikającą z przypadkowośći wyboru tych 1000 osób.</p>
+<p>Gdybyśmy wybrali losowo 1000 mężczyzn moglibyśmy policzyć ich wzrost i policzyć z nich średnią. Ale gdybyśmy wybrali inne 1000 osób możemy otrzymać inną średnią. Tak więc na bazie próby możemy wnioskować coś o średnim wzroście ale to wnioskowanie obarczone jest pewną losowością wynikającą z przypadkowości wyboru tych 1000 osób.</p>
 <p>Co jednak gdybyśmy zmierzyli wszystkich Polaków? czy wtedy otrzymalibyśmy jedną stałą wartość za każdym razem? Też niekoniecznie. Rano jesteśmy wyżsi niż wieczorem. Średni wzrost zależy więc od godziny pomiaru. Jeżeli godzinę pomiaru wybieramy przypadkowo to możemy otrzymać różne średnie nawet dla tych samym osób.</p>
-<p>Co jednak gdybyśmy zmierzyli wszystkich Polaków dokłądnie o 10 rano? Czy wtedy otrzymalibyśmy jendą stałą wartość? Też nie, nie ma czegoś takiego jak uniwersalny zbiór wszystkich Polaków. W nocy ktoś umiera, ktoś się rodzi, zmeiniają się proporcje, być może nieznacznei ale zawsze, pomiędzy liczbą dzieci a dorosłych, a więc zbiór wszystkich Polaków nieustannie się zmienia a tym samym zmienia się ich średni wzrost.</p>
-<p>Oczywiście te zmiany są nieduże, ale pokazują, że nie każda wielkość jest mierzalna ze 100% dokładnością. Niektóre wilskości, takie jak średi wzrost nieustannie fluktuują i gdy o nich myślimy powinniśmy pamiętać o tych fluktuacjach.</p>
+<p>Co jednak gdybyśmy zmierzyli wszystkich Polaków dokładnie o 10 rano? Czy wtedy otrzymalibyśmy jedną stałą wartość? Też nie, nie ma czegoś takiego jak uniwersalny zbiór wszystkich Polaków. W nocy ktoś umiera, ktoś się rodzi, zmieniają się proporcje, być może nieznacznie ale zawsze, pomiędzy liczbą dzieci a dorosłych, a więc zbiór wszystkich Polaków nieustannie się zmienia a tym samym zmienia się ich średni wzrost.</p>
+<p>Oczywiście te zmiany są nieduże, ale pokazują, że nie każda wielkość jest mierzalna ze 100% dokładnością. Niektóre wilskości, takie jak średni wzrost nieustannie fluktuują i gdy o nich myślimy powinniśmy pamiętać o tych fluktuacjach.</p>
 </div>
 <div id="kluczowe-koncepcje---dokadnosc-pomiaru" class="slide section level1">
 <h1>Kluczowe koncepcje - dokładność pomiaru</h1>
 <p>Pewne cechy, tak jak wzrost są niemierzalne ponieważ cała koncepcja średniego wzrostu a taki charakter.</p>
 <p>Ale są też cechy, które (w co wierzymy) mają pewną wartość ale my możemy ją ocenić jedynie z pewną dokładnością.</p>
-<p>Przykłądowo, gdy ważymy się wagą, w chwili gdy stajemy na wadze mamy jakąś określoną masę. Ale w zależności od różnych cznynników, takich jak temperatura, sprawność wagi, możemy otrzymać różne wyniki. Standardowe wagi mają dokładność rzędu +- 2kg więc dla tej samej osoby na róznych wagach moglibyśmy otrzymać nieznacznie różne odczyty.</p>
-<p>Dokładność pomiaru dotyczy też sytuacji, w której pomiaru dokonuje się nie mechanicznym urządzeniem, ale np ankietą lub sondażem, tak jak w przypadku pomiaru preferencji politycznych. W tym przypadku błąd pomiaru wynika z niemożnośći przeprowadzenia sondażu na wszystkich Polakach, ale konieczności przeprowadzenia sondażu na próbie o zazwyczaj niewielkiej wielkości.</p>
+<p>Przykładowo, gdy ważymy się wagą, w chwili gdy stajemy na wadze mamy jakąś określoną masę. Ale w zależności od różnych czynników, takich jak temperatura, sprawność wagi, możemy otrzymać różne wyniki. Standardowe wagi mają dokładność rzędu +- 2kg więc dla tej samej osoby na różnych wagach moglibyśmy otrzymać nieznacznie różne odczyty.</p>
+<p>Dokładność pomiaru dotyczy też sytuacji, w której pomiaru dokonuje się nie mechanicznym urządzeniem, ale np ankietą lub sondażem, tak jak w przypadku pomiaru preferencji politycznych. W tym przypadku błąd pomiaru wynika z niemożności przeprowadzenia sondażu na wszystkich Polakach, ale konieczności przeprowadzenia sondażu na próbie o zazwyczaj niewielkiej wielkości.</p>
 </div>
 <div id="kluczowe-koncepcje---proba-a-populacja" class="slide section level1">
 <h1>Kluczowe koncepcje - próba a populacja</h1>
-<p>Zazwyczaj stosujemy narzędzua analizy danych bo poznać pewną ogólną prawidłowość. Uniwersalną regułę.</p>
+<p>Zazwyczaj stosujemy narzędzia analizy danych bo poznać pewną ogólną prawidłowość. Uniwersalną regułę.</p>
 <p>Gdy prowadzimy analizy skuteczności leku na 100 pacjentach robimy to nie po to by ocenić czy tych konkretnych 100 pacjentów zareaguje na terapię ale by przenieść wnioski na większą populację. Chcemy wiedzieć czy lekarstwo jest skuteczne.</p>
 <p>Zależy nam więc na ty by uogólnianie wnioski uzyskane z próby na całą populację. Z drugiej strony zdajemy sobie sprawę z przypadkowości wynikającej z próby, która nie zawsze może odzwierciedlać zależności z całej populacji.</p>
-<p>W analizie danych wiele uwagi poświęca się określeniu na ile wyniki sa dokładne a na ile ich dokłądność zależy od wielkosci i reprezentatywności próby.</p>
+<p>W analizie danych wiele uwagi poświęca się określeniu na ile wyniki są dokładne a na ile ich dokładność zależy od wielkości i reprezentatywności próby.</p>
 </div>
 <div id="kluczowe-koncepcje---estymacja-i-testowanie" class="slide section level1">
 <h1>Kluczowe koncepcje - estymacja i testowanie</h1>
 <p>W klasycznej analizie danych często dane wyróżnia się dwa rodzaje algorytmów, estymacje i testowanie.</p>
-<p>Estymacja to działąnie mające na celu oszacowanie na podstawie próby ile wynoszą parametry populacji. Przykładowo,</p>
+<p>Estymacja to działanie mające na celu oszacowanie na podstawie próby ile wynoszą parametry populacji. Przykładowo,</p>
 <ul>
 <li>na bazie 1000 ankietowanych chcemy ocenić jakie jest poparcie dla partii X.</li>
 <li>na bazie partii 100 butów chcemy ocenić jak wygląda ich wytrzymałość na ścieranie.</li>
 <li>na przykładzie 1000 samochodów chcemy ocenić jak wygląda ich bezawaryjność.</li>
 </ul>
-<p>Wynikiem jest szacunek określonej wartości oraz informacja o tym jak dokłądny jest ten szacunek.</p>
+<p>Wynikiem jest szacunek określonej wartości oraz informacja o tym jak dokładny jest ten szacunek.</p>
 <p>Testowanie, to działanie mające na celu określenie czy pewna wartość w populacji spełnia określony warunek. Przykładowo</p>
 <ul>
 <li>możemy testować czy poparcie dla partii X jest większe niż dla partii Y</li>
 <li>możemy testować, czy średnia wytrzymałość butów pozwala na ich użytkownie przez 2 sezony</li>
-<li>możemy testować, czy 80% sachochodów nie zepsuje się przez najbliższe 5 lat.</li>
+<li>możemy testować, czy 80% samochodów nie zepsuje się przez najbliższe 5 lat.</li>
 </ul>
-<p>Przedstawiając w kolejnych odcinakch różne zadadnienia analizy danych będziemy pokazywać metody służące do estymacji / szacowania określonej wartości oraz do testowania okreonych warunków dla tej wartości.</p>
+<p>Przedstawiając w kolejnych odcinkach różne zagadnienia analizy danych będziemy pokazywać metody służące do estymacji / szacowania określonej wartości oraz do testowania określonych warunków dla tej wartości.</p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
