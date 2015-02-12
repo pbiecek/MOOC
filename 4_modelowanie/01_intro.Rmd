@@ -17,6 +17,9 @@ output:
 
 Kluczowe koncepcje
  - losowość
+
+
+
  - zależność
 
 

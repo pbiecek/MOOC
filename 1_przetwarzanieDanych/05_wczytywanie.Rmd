@@ -215,7 +215,7 @@ Zestawienie najpopularniejszych pakietów wczytujących dane z Excela prezentuje
 
 pakiet | funkcja_odczyt | funkcja_zapis  | formaty | funkcjonalność | szybkość | język
 ---           | ---    | ---    | --- | --- | --- | ---
-xlsx      | read.xlsx() | write.xlsx() | .xlsx | średnia  |średnia | Java
+xlsx      | read.xlsx() | write.xlsx() | .xlsx, .xls | średnia  |mała | Java
 openxlsx      | read.xlsx() | write.xlsx() | .xlsx | średnia  |duża | Rcpp
 gdata         | read.xls() | -- | .xlsx, .xls | mała | średnia | Perl
 WriteXLS      | -- | WriteXLS() | .xlsx, .xls | mała | średnia | Perl
