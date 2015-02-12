@@ -62,6 +62,8 @@ Sezon 2: Wizualizacja i modelowanie danych
   * Dodatki do wykresów,  [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/3_dodatki.html)
   * Jak zrobić mapę, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/4_mapy.html)
 
++ Modelowanie
+  * Intro, próba, populacja, estymacja, testowanie  - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/01_intro.html)
 
 + Modelowanie danych jakościowych
   * 2x2  - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/02_test2x2.html)

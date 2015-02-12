@@ -1,0 +1,21 @@
+---
+title: "Próba, populacja, estymacja, testowanie"
+author: "pogRomcy danych"
+date: "sezon 3 / odcinek 1 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst <br> Naciśnij `T` by wyświetlić spis treści"
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / modelowanie / wstęp do modelowania"
+
+---
+
+# O czym jest ten odcinek
+
+
+próba, populacja, estymacja, testowanie
+
+

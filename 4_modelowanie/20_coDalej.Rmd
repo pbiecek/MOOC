@@ -1,7 +1,7 @@
 ---
-title: "Modelowanie i statystyka"
+title: "Regresja logistyczna"
 author: "pogRomcy danych"
-date: "sezon 3 / odcinek 1 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst <br> Naciśnij `T` by wyświetlić spis treści"
+date: "sezon 3 / odcinek 8<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -9,8 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / modelowanie / wstęp do modelowania"
-
+    footer: "pogRomcy danych / modelowanie / regresja logistyczna"
 ---
 
 # O czym jest ten odcinek
@@ -34,6 +33,4 @@ I jest chyba rzadkością. A szkoda.
 Z reguły prezentowane testy są przedstawiane jako odrębne "byty" bez wykazywania ciekawych związków.
 Taka forma przedstawiania testów bardzo by się wyróżniała z pośród innych materiałów.
 Może będzie ciekawsza dla kursantów ?
-
-
 
