@@ -54,9 +54,9 @@ Sezon 1: Praca z danymi w programie R
 Sezon 2: Wizualizacja i modelowanie danych
 
 + Wizualizacja danych
-  * Historia i współczesność 
-  * Iluzje, percepcja obrazu i kolory
-  * Info-pomyłka
+  * Historia i współczesność [film]
+  * Iluzje, percepcja obrazu i kolory [film]
+  * Info-pomyłka [film]
   * Jak zrobić wykres, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/1_podstawy.html)
   * Wykresy agregaty,  [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/2_agregaty.html)
   * Dodatki do wykresów,  [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/3_dodatki.html)

@@ -15,6 +15,11 @@ output:
 
 # O czym jest ten odcinek
 
+Kluczowe koncepcje
+ - losowość
+ - zależność
+
+
 
 próba, populacja, estymacja, testowanie
 
