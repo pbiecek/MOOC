@@ -15,8 +15,30 @@ output:
 
 # O czym jest ten odcinek
 
-Kluczowe koncepcje
- - losowość
+Najliższe odcinki przedstawią kilka wybranych technik analizy danych ilościowcych i jakościowych.
+
+Techniki te będą przedstawione na kilku poziomach. Warto być ich świadom aby sprawniej je poznawać.
+
+1. Poziom narzędziowy. Dla każdej metody pokażemy na jednym lub dwóch przykładach, jak wykonać określioną analizę w programie R, oraz jak interpretować wyniki.
+
+2. Poziom koncepcyjny. Dla każdej metody pokażemy w jaki sposób przedstawiane algorytmy działają, jak wygląda algorytm produkujące te wyniki.
+
+3. Poziom problemowy. Dla każdej metody pokażemy w jaki sposób przedstawiane algorytmy są związane z problemem, który chcemy rozwiązać. 
+
+Aby sprawnie przedstawiać wybrane algorytmy analizy danych, musimy zapoznać się wpierw z kilkoma pojęciami / koncepcjami stojącymi za statystyczną analizą danych.
+
+# Kluczowe koncepcje - zależność
+
+
+
+
+
+
+
+# Kluczowe koncepcje - zależnosć
+
+
+- losowość
 
 
 
