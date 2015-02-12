@@ -80,7 +80,16 @@ Dokładność pomiaru dotyczy też sytuacji, w której pomiaru dokonuje się nie
 
 # Kluczowe koncepcje - próba a populacja
 
+Zazwyczaj stosujemy narzędzua analizy danych bo poznać pewną ogólną prawidłowość. Uniwersalną regułę.
 
-próba, populacja, estymacja, testowanie
+Gdy prowadzimy analizy skuteczności leku na 100 pacjentach robimy to nie po to by ocenić czy tych konkretnych 100 pacjentów zareaguje na terapię ale by przenieść wnioski na większą populację. Chcemy wiedzieć czy lekarstwo jest skuteczne.
+
+Zależy nam więc na ty by uogólnianie wnioski uzyskane z próby na całą populację. Z drugiej strony zdajemy sobie sprawę z przypadkowości wynikającej z próby, która nie zawsze może odzwierciedlać zależności z całej populacji.
+
+W analizie danych wiele uwagi poświęca się określeniu na ile wyniki sa dokładne a na ile ich dokłądność zależy od wielkosci i reprezentatywności próby.
+
+
+# Kluczowe koncepcje - estymacja i testowanie
+
 
 
