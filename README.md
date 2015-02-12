@@ -63,16 +63,18 @@ Sezon 2: Wizualizacja i modelowanie danych
   * Jak zrobić mapę, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/4_mapy.html)
 
 
-+ Modelowanie danych
++ Modelowanie danych jakościowych
+  * 2x2  - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/02_test2x2.html)
+  * pxk  - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/03_test2xp.html)
+  * Regresja logistyczna  - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/08_rlogistyczna.html)
+
++ Modelowanie danych ilościowych
   * test dla dwóch grup - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/04_testSrednie.html)
   * trend liniowy - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/06_testRegresja.html)
   * trend liniowy, testy - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/06_testRegresja_cont.html)
-  * 2x2  - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/02_test2x2.html)
-  * pxk  - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/03_test2xp.html)
   * Regresja liniowa, [intro](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaIntro.md), [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaProsta.html), [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/dopasowanieModelu.html)
   * Regresja przedziałowo liniowa, [intro](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/przedzialowaIntro.md),   [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaMultiplikatywna.html)
-  * Regresja liniowa [?]
-  * Regresja logistyczna [?]
+  * Regresja liniowa - wybór zmiennych [?]
 
 + Dane wokół nas,
   * Intro [intro, wideo, TODO](https://rawgithub.com/pbiecek/MOOC/master/motywacja/intro.md)
