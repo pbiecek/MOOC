@@ -69,6 +69,16 @@ Oczywiście te zmiany są nieduże, ale pokazują, że nie każda wielkość jes
 
 # Kluczowe koncepcje - dokładność pomiaru
 
+Pewne cechy, tak jak wzrost są niemierzalne ponieważ cała koncepcja średniego wzrostu a taki charakter.
+
+Ale są też cechy, które (w co wierzymy) mają pewną wartość ale my możemy ją ocenić jedynie z pewną dokładnością.
+
+Przykłądowo, gdy ważymy się wagą, w chwili gdy stajemy na wadze mamy jakąś określoną masę. Ale w zależności od różnych cznynników, takich jak temperatura, sprawność wagi, możemy otrzymać różne wyniki. Standardowe wagi mają dokładność rzędu +- 2kg więc dla tej samej osoby na róznych wagach moglibyśmy otrzymać nieznacznie różne odczyty.
+
+Dokładność pomiaru dotyczy też sytuacji, w której pomiaru dokonuje się nie mechanicznym urządzeniem, ale np ankietą lub sondażem, tak jak w przypadku pomiaru preferencji politycznych. W tym przypadku błąd pomiaru wynika z niemożnośći przeprowadzenia sondażu na wszystkich Polakach, ale konieczności przeprowadzenia sondażu na próbie o zazwyczaj niewielkiej wielkości.
+
+
+# Kluczowe koncepcje - próba a populacja
 
 
 próba, populacja, estymacja, testowanie
