@@ -643,8 +643,17 @@ pogRomcy danych
 </div>
 <div id="oceny-odcinkow-seriali-filmowych" class="slide section level1">
 <h1>Oceny odcinków seriali filmowych</h1>
-<p>Ten zbiór danych zbiera wyniki ocen odcinków 200 najpopularnijeszych seriali telewizyjnych. Dane o ocenach oraz liczbie oddanych głosów są pobrane z serwisu <a href="http:///www.imdb.com" class="uri">http:///www.imdb.com</a>. W zbiorze danych są również umieszczone nazwy seriali oraz nazwy poszczególnych odcinków.</p>
-<p>Każdy wiersz opisuje jeden odcinek. Kolejne zmienne/kolumny opisują nazwę serialu, nazwę odcinka, numer sezonu, numer odcinak w sezonie, średnia ocena danego odcinka, liczba oddanych głosów, oraz identyfikator serialu używany e bazie IMDB.</p>
+<p>W zbiorze danych <code>serialeIMDB</code> zebraliśmy informacje o popularności odcinków seriali telewizyjnych.</p>
+<p>Z serwisu <a href="http:///www.imdb.com" class="uri">http:///www.imdb.com</a> pobraliśmy dane o ocenach oraz liczbie oddanych głosów każdego odcinka dla 200 najpopularniejszych seriali telewizyjnych. W zbiorze danych są również umieszczone nazwy seriali oraz nazwy poszczególnych odcinków.</p>
+<p>Każdy wiersz opisuje jeden odcinek, wierszy w sumie jest 20122. Kolejne zmienne/kolumny opisują:</p>
+<ul>
+<li>nazwę serialu, nazwę odcinka,</li>
+<li>numer sezonu, numer odcinak w sezonie,</li>
+<li>średnia ocena danego odcinka,</li>
+<li>liczba oddanych głosów,</li>
+<li>identyfikator serialu używany w bazie IMDB.</li>
+</ul>
+<p>Poniżej przedstawimy pierwszych 6 wierszy z tego zbioru danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(serialeIMDB)</code></pre>
 <pre><code>##   id       serial                         nazwa sezon odcinek ocena glosow
 ## 1  1 Breaking Bad                         Pilot     1       1   8.7   9357
@@ -660,6 +669,9 @@ pogRomcy danych
 ## 4 tt0903747
 ## 5 tt0903747
 ## 6 tt0903747</code></pre>
+</div>
+<div id="rokowania-dla-raka-piersi" class="slide section level1">
+<h1>Rokowania dla raka piersi</h1>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
