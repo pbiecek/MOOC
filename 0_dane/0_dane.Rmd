@@ -15,15 +15,26 @@ output:
 
 # O czym jest ten odcinek
 
-Podczas tego kursu pracować będziemy z różnymi zbiorami danych.
+Praca z danymi możę być bardzo różnorodna. Podczas kursu ,,Pogromcy Danych'' będziemy tę różnorodność przybliżać. W tym celu będziemy pracować na zbiorach danych o różnej wielkości (od kilkunastu do kilkuset tysięcy wierszy), różnym stopniu złożoności (od dwóch do dwóch tysięcy kolumn), oraz o różnym formacie (dane tekstowe, ilościowe, jakościowe). 
 
-W tym odcinku te dane przedstawimy.
+Aby ułatwić dostęp do tak różnych zbiorów danych zebraliśmy je wszystkie w jednym pakiecie o nazwie `PogromcyDanych`. Znaleźć można w nim najróżniejsze dane, w tym o cenach ofertowych aut, dane ankietowe dotyczące badań społecznych, informacje o zmianach indeksów giełdowych, imionach noworodków, wynikach skoków narciarskich czy o wynikach leczenia pacjentek z nowotworem piersi.
 
-Wszystkie używane w tym kursie zbiory danych są dostępne w pakiecie `PogromcyDanych`.
+
+
+Aby ten pakiet zainstalować należy w programie R wykonać instrukcję (wystarczy wykonać ją raz). Pobierze ona z Internetu wszystkie te zbiory danych oraz zainstaluje na dysku.
+
+```{r, eval=FALSE}
+install.packages("PogromcyDanych")
+```
+
+Po zainstalowaniu, aby korzystać z tych zbiorów danych, należy pakiet `PogromcyDanych` włączyć.
+Pakiet włącza się poniższą instrukcją (należy ją wykonać po każdym uruchomieniu programu R).
 
 ```{r,  message=FALSE}
 library(PogromcyDanych)
 ```
+
+Na kolejnych slajdach przedstawimy wszystkie znajdujące się w tym pakiecie zbiory danych.
 
 ---
 
