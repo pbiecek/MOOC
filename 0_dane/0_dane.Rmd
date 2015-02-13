@@ -62,12 +62,28 @@ head(koty_ptaki)
 
 # Imiona noworodków w Warszawie
 
-Ze strony http://gorny.edu.pl/imiona/index.php pobrano statystyki nadawania imion noworodkom w Warszawie w latach 2004-2014. 
+Zbiór danych `imiona_warszawa` przygotowaliśmy po to, by przedstawiać metody analizy trendów oraz metody analizy napisów.
 
-Dla każdego imienia, dla każdego roku i miesiąca opisano liczbę wystąpień danego imienia u noworodków.
+W tym zbiorze danych zawarto informację o liczbie urodzonych noworodków o danym imieniu w Warszawie w kolejnych miesiącach w okresie od roku 2004 do 2014. Dane te są pobrane ze strony http://gorny.edu.pl/imiona/index.php, na której można znaleźć również informacje o aktualnej liczbie urodzin. 
+
+W tym zbiorze danych jest 84816 wierszy, dane dotyczą 696 różnych imion od tych najpopularnijeszych do bardzo rzadkich. 
+
+Kolejne kolumny w tym zbiorze danych przedstawiają:
+
+* imię i płeć dziecka,
+* rok i miesiąc którego dotyczy ta statystyka,
+* liczba noworodków o danym imieniu urodzonych w Warszawie w danym roku i miesiącu.
+
+Funkcją `head()` wyświetlamy pierwsze 6 wierszy.
 
 ```{r,  message=FALSE}
 head(imiona_warszawa)
+```
+
+Funckją `levels()` wyświetlamy listę różnych imion, które są opisane w tym zbiorze danych.
+
+```{r,  message=FALSE}
+levels(imiona_warszawa$imie)
 ```
 
 ---
