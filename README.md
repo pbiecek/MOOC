@@ -8,7 +8,7 @@ Materiały dla kursu MOOC 2015
 
 Część wspólna
 
-+ [Lista zbiorów danych](https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html)
++ [Lista zbiorów danych](https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html), v1 ready,
 + [Lista funkcji i pakietów](https://rawgithub.com/pbiecek/MOOC/master/0_dane/1_skorowidz.html)
 + [Zadania i odpowiedzi](https://rawgithub.com/pbiecek/MOOC/master/0_dane/9_zadania.html)
 
