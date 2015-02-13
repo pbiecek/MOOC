@@ -594,9 +594,18 @@ pogRomcy danych
 </div>
 <div id="diagnoza-spoeczna" class="slide section level1">
 <h1>Diagnoza społeczna</h1>
-<p>Pdzbiór danych z badania Diagnoza Społeczna. Pełny zbiór danych jest dostępny pod adresem <code>http://diagnoza.com</code> oraz w pakiecie <code>pbiecek/Diagnoza</code> na GitHubie.</p>
-<p>Wybrane zmienne opisują imiona, wagi dotyczące sposobu losowania, liczbę lat nauki, płeć, wykształcenie, wzrost, waga, dochody oraz odpowiedzi na wybrane pytania dotyczące światopoglądu.</p>
-<p>Zbiór danych <code>diagnozaDict</code> opisuje nazwy kolumn ze zbioru danych <code>diagnoza</code>.</p>
+<p>Ciekawym zbiorem danych jest wynik panelowego badania <em>Diagnoza Społeczna</em>. W ramach tego projektu co dwa lata ankietuje się osoby z wybranego zbioru gospodarstw domowych, za każdym razem tych samych gospodarstw. Podczas wywiadu członkowie gospodarstw są pytani o rozmaite zagadnienia, co pozwala na budowę obrazu przemian dziejących się w Polsce. Więcej o tym badaniu, wynikach jak i zbiorze danych można przeczytać na stronie interenetowej projektu <a href="http://diagnoza.com" class="uri">http://diagnoza.com</a>.</p>
+<p>Zbiór danych w postaci gotowej do przetwarzania w programie R, znajduje się na stronie <a href="https://github.com/pbiecek/Diagnoza" class="uri">https://github.com/pbiecek/Diagnoza</a>. Można go zainstalować poleceniem <code>install_github(&quot;pbiecek/Diagnoza&quot;)</code> po wcześniejszym włączeniu pakietu <code>library(devtools)</code>.</p>
+<p>Cały zbiór danych jest bardzo duży i mogłby sprawiać trudności na mniejszych komputerach. Dlatego na potrzeby tego kursu przygotowaliśmy podzbiór zbioru danych z badania Diagnoza Społeczna.</p>
+<p>Podzbiór danych nazywa się <code>diagnoza</code> i zawiera 38461 wierszy. Każdy wiersz to odpowiedzi innej osoby. Odpowiedzi uzyskane w badaniu ankietowym zapisane są w 36 kolumnach / zmiennych. Nazwy tych zmiennych odpowiadają numerom pytań z kwestionariusza <a href="http://diagnoza.com/pliki/kwestionariusze_instrukcje/kwestionariusze_2013.pdf" class="uri">http://diagnoza.com/pliki/kwestionariusze_instrukcje/kwestionariusze_2013.pdf</a>. Opisy co znaczy które pytanie znajdują się w zbiorze danych <code>diagnozaDict</code>.</p>
+<p>Wybrane zmienne opisują:</p>
+<ul>
+<li>imiona respondentów,</li>
+<li>wagi analityczne, wynikające ze sposobu losowania,</li>
+<li>liczbę lat nauki, płeć, wykształcenie, wzrost, wagę, dochody,</li>
+<li>odpowiedzi na wybrane pytania dotyczące światopoglądu.</li>
+</ul>
+<p>Zbiór danych <code>diagnozaDict</code> opisuje nazwy kolumn ze zbioru danych <code>diagnoza</code>. Przedstawiamy opis pierwszych sześciu kolumn.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(diagnozaDict[,<span class="dv">2</span>,<span class="dt">drop=</span><span class="ot">FALSE</span>])</code></pre>
 <pre><code>##                                                     description
 ## imie_2011       IMIĘ CZŁONKA Z POMIARÓW 2003, 2005, 2007 I 2009
@@ -605,70 +614,32 @@ pogRomcy danych
 ## wiek2013                                                       
 ## plec                                                       Płeć
 ## wojewodztwo                                         województwo</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(diagnoza)</code></pre>
+<p>Poniżej przedstawiamy dwa wybrane wiersze z tego zbioru danych.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(diagnoza, <span class="dv">2</span>)</code></pre>
 <pre><code>##   imie_2011 waga_2013_osoby lata_nauki_2013 wiek2013      plec
 ## 1  WERONIKA        0.277653              NA        4   kobieta
 ## 2    ERNEST        0.277653              11       13 mężczyzna
-## 3    SYLWIA        0.277653              16       23   kobieta
-## 4   MARIOLA        0.277653              16       27   kobieta
-## 5    WACŁAW        0.475255               7       78 mężczyzna
-## 6     PIOTR        0.251773              12       48 mężczyzna
 ##      wojewodztwo                    eduk4_2013                status9_2013
 ## 1 Świętokrzyskie                          &lt;NA&gt;        inni bierni zawodowo
 ## 2 Świętokrzyskie zasadnicze zawodowe/gimanzjum pracownicy sekt. prywatnego
-## 3 Świętokrzyskie           wyższe i policealne pracownicy sekt. prywatnego
-## 4 Świętokrzyskie           wyższe i policealne pracownicy sekt. prywatnego
-## 5   Dolnośląskie           podstawowe i niższe                     emeryci
-## 6   Dolnośląskie zasadnicze zawodowe/gimanzjum pracownicy sekt. prywatnego
-##             gp3           gp29           gp54_01          gp54_02
-## 1          &lt;NA&gt;           &lt;NA&gt;              &lt;NA&gt;             &lt;NA&gt;
-## 2         UDANE POCZUCIE SENSU       RACZEJ TAK  ZDECYDOWANIE TAK
-## 3   DOSYĆ DOBRE   PRZYJEMNOSCI       RACZEJ TAK  ZDECYDOWANIE TAK
-## 4 NIEZBYT UDANE POCZUCIE SENSU ANI TAK, ANI NIE  ZDECYDOWANIE TAK
-## 5   DOSYĆ DOBRE POCZUCIE SENSU       RACZEJ TAK               TAK
-## 6         UDANE POCZUCIE SENSU       RACZEJ NIE  ZDECYDOWANIE TAK
-##            gp54_03          gp54_04          gp54_05          gp54_06
-## 1             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;
-## 2 ZDECYDOWANIE TAK ANI TAK, ANI NIE              NIE       RACZEJ NIE
-## 3              TAK       RACZEJ NIE       RACZEJ NIE       RACZEJ TAK
-## 4              TAK ANI TAK, ANI NIE ZDECYDOWANIE NIE       RACZEJ NIE
-## 5       RACZEJ TAK       RACZEJ NIE ZDECYDOWANIE NIE ZDECYDOWANIE NIE
-## 6              TAK       RACZEJ NIE ZDECYDOWANIE NIE              TAK
-##            gp54_07    gp54_08          gp54_09          gp54_10
-## 1             &lt;NA&gt;       &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;
-## 2       RACZEJ NIE RACZEJ NIE       RACZEJ NIE              TAK
-## 3 ZDECYDOWANIE NIE RACZEJ NIE ANI TAK, ANI NIE ZDECYDOWANIE TAK
-## 4 ANI TAK, ANI NIE        NIE       RACZEJ TAK       RACZEJ TAK
-## 5 ZDECYDOWANIE NIE RACZEJ NIE       RACZEJ TAK              TAK
-## 6              TAK        NIE              NIE              TAK
-##            gp54_11          gp54_12          gp54_13          gp54_14
-## 1             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;
-## 2              TAK ZDECYDOWANIE TAK ZDECYDOWANIE NIE ZDECYDOWANIE TAK
-## 3 ZDECYDOWANIE TAK       RACZEJ NIE ZDECYDOWANIE NIE ZDECYDOWANIE TAK
-## 4              TAK       RACZEJ TAK ZDECYDOWANIE NIE ZDECYDOWANIE TAK
-## 5       RACZEJ NIE ANI TAK, ANI NIE       RACZEJ NIE       RACZEJ TAK
-## 6              TAK              NIE       RACZEJ NIE              TAK
+##     gp3           gp29     gp54_01          gp54_02          gp54_03
+## 1  &lt;NA&gt;           &lt;NA&gt;        &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;
+## 2 UDANE POCZUCIE SENSU RACZEJ TAK  ZDECYDOWANIE TAK ZDECYDOWANIE TAK
+##            gp54_04 gp54_05    gp54_06    gp54_07    gp54_08    gp54_09
+## 1             &lt;NA&gt;    &lt;NA&gt;       &lt;NA&gt;       &lt;NA&gt;       &lt;NA&gt;       &lt;NA&gt;
+## 2 ANI TAK, ANI NIE     NIE RACZEJ NIE RACZEJ NIE RACZEJ NIE RACZEJ NIE
+##   gp54_10 gp54_11          gp54_12          gp54_13          gp54_14
+## 1    &lt;NA&gt;    &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;
+## 2     TAK     TAK ZDECYDOWANIE TAK ZDECYDOWANIE NIE ZDECYDOWANIE TAK
 ##            gp54_15          gp54_16          gp54_17          gp54_18
 ## 1             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;
 ## 2 ANI TAK, ANI NIE ZDECYDOWANIE TAK ANI TAK, ANI NIE ZDECYDOWANIE TAK
-## 3       RACZEJ NIE ZDECYDOWANIE TAK ZDECYDOWANIE NIE ZDECYDOWANIE TAK
-## 4       RACZEJ TAK ZDECYDOWANIE TAK       RACZEJ NIE ZDECYDOWANIE TAK
-## 5              NIE              TAK              NIE       RACZEJ TAK
-## 6       RACZEJ TAK ANI TAK, ANI NIE       RACZEJ NIE       RACZEJ TAK
-##            gp54_19          gp54_20    gp54_21          gp54_22 gp60 gp61
-## 1             &lt;NA&gt;             &lt;NA&gt;       &lt;NA&gt;             &lt;NA&gt;   NA   NA
-## 2 ZDECYDOWANIE NIE ZDECYDOWANIE TAK        TAK       RACZEJ TAK  176   70
-## 3 ZDECYDOWANIE NIE       RACZEJ TAK RACZEJ NIE       RACZEJ TAK  174   90
-## 4 ZDECYDOWANIE NIE              TAK RACZEJ TAK ZDECYDOWANIE TAK  173   70
-## 5       RACZEJ NIE ZDECYDOWANIE TAK RACZEJ NIE ANI TAK, ANI NIE  158   66
-## 6              NIE              NIE        TAK              NIE  173   78
-##   gp64 gp113
-## 1   NA    NA
-## 2  900    NA
-## 3   NA    NA
-## 4  950    NA
-## 5 2700    NA
-## 6 2500    40</code></pre>
+##            gp54_19          gp54_20 gp54_21    gp54_22 gp60 gp61 gp64
+## 1             &lt;NA&gt;             &lt;NA&gt;    &lt;NA&gt;       &lt;NA&gt;   NA   NA   NA
+## 2 ZDECYDOWANIE NIE ZDECYDOWANIE TAK     TAK RACZEJ TAK  176   70  900
+##   gp113
+## 1    NA
+## 2    NA</code></pre>
 </div>
 <div id="oceny-odcinkow-seriali-filmowych" class="slide section level1">
 <h1>Oceny odcinków seriali filmowych</h1>

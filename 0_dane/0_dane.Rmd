@@ -228,15 +228,31 @@ head(skiJumps2013)
 
 # Diagnoza społeczna
 
-Pdzbiór danych z badania Diagnoza Społeczna. Pełny zbiór danych jest dostępny pod adresem `http://diagnoza.com` oraz w pakiecie `pbiecek/Diagnoza` na GitHubie.
+Ciekawym zbiorem danych jest wynik panelowego badania *Diagnoza Społeczna*. W ramach tego projektu co dwa lata ankietuje się osoby z wybranego zbioru gospodarstw domowych, za każdym razem tych samych gospodarstw. Podczas wywiadu członkowie gospodarstw są pytani o rozmaite zagadnienia, co pozwala na budowę obrazu przemian dziejących się w Polsce. Więcej o tym badaniu, wynikach jak i zbiorze danych można przeczytać na stronie interenetowej projektu http://diagnoza.com.
 
-Wybrane zmienne opisują imiona, wagi dotyczące sposobu losowania, liczbę lat nauki, płeć, wykształcenie, wzrost, waga, dochody oraz odpowiedzi na wybrane pytania dotyczące światopoglądu.
+Zbiór danych w postaci gotowej do przetwarzania w programie R, znajduje się na stronie https://github.com/pbiecek/Diagnoza. Można go zainstalować poleceniem `install_github("pbiecek/Diagnoza")` po wcześniejszym włączeniu pakietu `library(devtools)`.
 
-Zbiór danych `diagnozaDict` opisuje nazwy kolumn ze zbioru danych `diagnoza`.
+Cały zbiór danych jest bardzo duży i mogłby sprawiać trudności na mniejszych komputerach. Dlatego na potrzeby tego kursu przygotowaliśmy podzbiór zbioru danych z badania Diagnoza Społeczna.
+
+Podzbiór danych nazywa się `diagnoza` i zawiera 38461 wierszy. Każdy wiersz to odpowiedzi innej osoby. Odpowiedzi uzyskane w badaniu ankietowym zapisane są w 36 kolumnach / zmiennych. Nazwy tych zmiennych odpowiadają numerom pytań z kwestionariusza http://diagnoza.com/pliki/kwestionariusze_instrukcje/kwestionariusze_2013.pdf. Opisy co znaczy które pytanie znajdują się w zbiorze danych `diagnozaDict`.
+
+Wybrane zmienne opisują:
+
+* imiona respondentów, 
+* wagi analityczne, wynikające ze sposobu losowania, 
+* liczbę lat nauki, płeć, wykształcenie, wzrost, wagę, dochody,
+* odpowiedzi na wybrane pytania dotyczące światopoglądu.
+
+Zbiór danych `diagnozaDict` opisuje nazwy kolumn ze zbioru danych `diagnoza`. Przedstawiamy opis pierwszych sześciu kolumn.
 
 ```{r,  message=FALSE}
 head(diagnozaDict[,2,drop=FALSE])
-head(diagnoza)
+```
+
+Poniżej przedstawiamy dwa wybrane wiersze z tego zbioru danych.
+
+```{r,  message=FALSE}
+head(diagnoza, 2)
 ```
 
 ---
