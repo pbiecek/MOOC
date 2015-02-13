@@ -62,15 +62,17 @@ pogRomcy danych
 </div>
 <div id="najszybsze-koty-i-ptaki-na-swiecie" class="slide section level1">
 <h1>Najszybsze koty i ptaki na świecie</h1>
-<p>Zbiór danych <code>koty_ptaki</code> zestawia charakterystyki dla 13 gatunków. Wybrane gatunki to najszybsi przedstawiciele kotów i ptaków.</p>
-<p>Każdy wiersz przedstawia:</p>
+<p>Zbiór danych <code>koty_ptaki</code> powstał jako tzw. ,,toy-example’’. Jest to niewielki (13 wierszy 7 kolumn) zbiór, który można w całości wyświetlić na ekranie i na którym można przećwiczyć podstawowe operacje na danych.</p>
+<p>W danych zestawiono charakterystyki dla 13 wybranych gatunków przedstawionych w kolejnych wierszach. Wybrane gatunki to najszybsi przedstawiciele kotów i ptaków. Każdy wiersz to informacje o innym gatunku.</p>
+<p>Kolejne kolumny w tym zbiorze danych przedstawiają:</p>
 <ul>
 <li>nazwę gatunku,</li>
 <li>maksymalną osobniczą wagę w kilogramach i maksymalną długość ciała w metrach,</li>
 <li>maksymalną prędkość (dla ptaków w locie poziomym, nie w nurkowaniu) w kilometrach na godzinę,</li>
-<li>obszar zamieszkania oraz żywotność w latach.</li>
-<li>Ostatnia kolumna określa czy gatunek jest dużym kotem czy ptakiem.</li>
+<li>obszar zamieszkania oraz żywotność w latach,</li>
+<li>ostatnia kolumna określa czy gatunek jest dużym kotem czy ptakiem.</li>
 </ul>
+<p>Funkcją <code>head()</code> możemy wyświetlić pierwsze 6 wierszy z tego zbioru danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(koty_ptaki)</code></pre>
 <pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
 ## 1  Tygrys  300     2.5       60    Azja        25     Kot

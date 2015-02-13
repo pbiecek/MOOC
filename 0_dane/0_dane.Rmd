@@ -40,18 +40,19 @@ Na kolejnych slajdach przedstawimy wszystkie znajdujące się w tym pakiecie zbi
 
 # Najszybsze koty i ptaki na świecie
 
-Zbiór danych `koty_ptaki` zestawia charakterystyki dla 13 gatunków.
-Wybrane gatunki to najszybsi przedstawiciele kotów i ptaków.
+Zbiór danych `koty_ptaki` powstał jako tzw. ,,toy-example''. Jest to niewielki (13 wierszy 7 kolumn) zbiór, który można w całości wyświetlić na ekranie i na którym można przećwiczyć podstawowe operacje na danych.
 
-Każdy wiersz przedstawia:
+W danych zestawiono charakterystyki dla 13 wybranych gatunków przedstawionych w kolejnych wierszach. Wybrane gatunki to najszybsi przedstawiciele kotów i ptaków. Każdy wiersz to informacje o innym gatunku. 
+
+Kolejne kolumny w tym zbiorze danych przedstawiają:
 
 * nazwę gatunku,
 * maksymalną osobniczą wagę w kilogramach i maksymalną długość ciała w metrach, 
 * maksymalną prędkość (dla ptaków w locie poziomym, nie w nurkowaniu) w kilometrach na godzinę, 
-* obszar zamieszkania oraz żywotność w latach. 
-* Ostatnia kolumna określa czy gatunek jest dużym kotem czy ptakiem. 
+* obszar zamieszkania oraz żywotność w latach,
+* ostatnia kolumna określa czy gatunek jest dużym kotem czy ptakiem. 
 
-
+Funkcją `head()` możemy wyświetlić pierwsze 6 wierszy z tego zbioru danych.
 
 ```{r,  message=FALSE}
 head(koty_ptaki)
