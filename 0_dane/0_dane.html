@@ -517,7 +517,7 @@ pogRomcy danych
 <li>kurs otwarcia, zamknięcia, kurs minimalny i maksymalny,</li>
 <li>zmiana kursu oraz wartość obrotów w tysiącach złotych.</li>
 </ul>
-<p>W zbiorze danych jest 248 wierszy, każdy wiersz odpowiada notowaniom z jednego dnia. W soboty niedziele i święta giełda jest zamknięta, stąd ta liczba dni z notowaniami.</p>
+<p>W zbiorze danych jest 248 wierszy, każdy wiersz odpowiada notowaniom z jednego dnia. W soboty, niedziele i święta giełda jest zamknięta, stąd ta liczba dni z notowaniami.</p>
 <p>Poniżej przedstawiamy pierwszych 6 wierszy z tego zbioru danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(WIG)</code></pre>
 <pre><code>##         Data Nazwa Kurs.otwarcia Kurs.maksymalny Kurs.minimalny
@@ -537,7 +537,9 @@ pogRomcy danych
 </div>
 <div id="wzrost-rodzicow-i-dzieci" class="slide section level1">
 <h1>Wzrost rodziców i dzieci</h1>
-<p>Zbiory danych zebrane przez Galtona i Pearsona by badać zależność pomiędzy wzrostem syna a ojca (<code>pearson</code>) oraz ważonej średniej z wzrostu rodziców (<code>galton</code>).</p>
+<p>Słowo regresja wywodzi się z pionierskich badań Francisa Galtona i Karla Pearsona nad zależnością wzrostu dzieci i rodziców.</p>
+<p>Oryginalne zbiory danych obu tych badaczy są dostępne w zmiennych <code>galton</code> i <code>pearson</code>. Na bazie tych zbiorów danych można opisywać zależność pomiędzy wzrostem syna a ojca (<code>pearson</code>) oraz zależność pomiędzy ważoną średnią z wzrostu rodziców (<code>galton</code>) z wzrostem syna.</p>
+<p>Poniżej przedstawiamy pierwszych 6 wierszy z każdego ze zbiorów danych. W zbiorze danych <code>galton</code> znajduje się 928 wierszy a w zbiorze danych <code>pearson</code> znajduje się 1078 wierszy.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(galton)</code></pre>
 <pre><code>##     syn rodzic
 ## 1 156.7  179.1

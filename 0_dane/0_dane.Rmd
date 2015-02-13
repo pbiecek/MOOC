@@ -191,7 +191,11 @@ head(WIG)
 
 # Wzrost rodziców i dzieci
 
-Zbiory danych zebrane przez Galtona i Pearsona by badać zależność pomiędzy wzrostem syna a ojca (`pearson`) oraz ważonej średniej z wzrostu rodziców (`galton`).
+Słowo regresja wywodzi się z pionierskich badań Francisa Galtona i Karla Pearsona nad zależnością wzrostu dzieci i rodziców. 
+
+Oryginalne zbiory danych obu tych badaczy są dostępne w zmiennych `galton` i `pearson`. Na bazie tych zbiorów danych można opisywać zależność pomiędzy wzrostem syna a ojca (`pearson`) oraz zależność pomiędzy ważoną średnią z wzrostu rodziców (`galton`) z wzrostem syna.
+
+Poniżej przedstawiamy pierwszych 6 wierszy z każdego ze zbiorów danych. W zbiorze danych `galton` znajduje się 928 wierszy a w zbiorze danych `pearson` znajduje się 1078 wierszy.
 
 ```{r,  message=FALSE}
 head(galton)
