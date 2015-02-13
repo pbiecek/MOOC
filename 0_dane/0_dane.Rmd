@@ -15,7 +15,7 @@ output:
 
 # O czym jest ten odcinek
 
-Praca z danymi możę być bardzo różnorodna. Podczas kursu ,,Pogromcy Danych'' będziemy tę różnorodność przybliżać. W tym celu będziemy pracować na zbiorach danych o różnej wielkości (od kilkunastu do kilkuset tysięcy wierszy), różnym stopniu złożoności (od dwóch do dwóch tysięcy kolumn), oraz o różnym formacie (dane tekstowe, ilościowe, jakościowe). 
+Praca z danymi może być bardzo różnorodna. Podczas kursu ,,Pogromcy Danych'' będziemy tę różnorodność przybliżać. W tym celu będziemy pracować na zbiorach danych o różnej wielkości (od kilkunastu do kilkuset tysięcy wierszy), różnym stopniu złożoności (od dwóch do dwóch tysięcy kolumn), oraz o różnym formacie (dane tekstowe, ilościowe, jakościowe). 
 
 Aby ułatwić dostęp do tak różnych zbiorów danych zebraliśmy je wszystkie w jednym pakiecie o nazwie `PogromcyDanych`. Znaleźć można w nim najróżniejsze dane, w tym o cenach ofertowych aut, dane ankietowe dotyczące badań społecznych, informacje o zmianach indeksów giełdowych, imionach noworodków, wynikach skoków narciarskich czy o wynikach leczenia pacjentek z nowotworem piersi.
 
@@ -41,7 +41,7 @@ Na kolejnych slajdach przedstawimy wszystkie znajdujące się w tym pakiecie zbi
 # Dwie wersje językowe
 
 Kurs ,,Pogromcy Danych'' jest prowadzony w dwóch wersjach językowych, polskiej i angielskiej. 
-Aby nie kopiować dwukrownie danych dla obu wersji językowych po wczytaniu pakietu `PogromcyDanych` dostępne są dane w języku polskim.
+Aby nie kopiować dwukrotnie danych dla obu wersji językowych po wczytaniu pakietu `PogromcyDanych` dostępne są dane w języku polskim.
 
 Aby przełączyć się na wersję angielską należy użyć polecenia `setLang()` tak jak na poniższym przykładzie. Ta funkcja przetłumaczy polskie nazwy danych (też nazwy kolumn i wartości) na ich angielskojęzyczne odpowiedniki.
 
@@ -54,7 +54,7 @@ W wyniku jej działania do przestrzeni nazw wkopiowane będą następujące zbio
 Nazwa polska      | Nazwa angielska    | Co to za dane?
 ------------------|--------------------|-------------------------------------------------
 koty_ptaki        | cats_birds         | Charakterystyki 13 gatunków
-imiona_warszawa   | warsaw_names       | Imiona noworotków w Warszawie
+imiona_warszawa   | warsaw_names       | Imiona noworodków w Warszawie
 mandatySejmik2014 | votes2014          | Wyniki wyborów samorządowych 2014  
 auta2012          | auta2012           | Ceny ofertowe aut w roku 2012
 WIG               | WIG                | Indeks WIG w roku 2014
@@ -100,7 +100,7 @@ Zbiór danych `imiona_warszawa` przygotowaliśmy po to, by przedstawiać metody 
 
 W tym zbiorze danych zawarto informację o liczbie urodzonych noworodków o danym imieniu w Warszawie w kolejnych miesiącach w okresie od roku 2004 do 2014. Dane te są pobrane ze strony http://gorny.edu.pl/imiona/index.php, na której można znaleźć również informacje o aktualnej liczbie urodzin. 
 
-W tym zbiorze danych jest 84816 wierszy, dane dotyczą 696 różnych imion od tych najpopularnijeszych do bardzo rzadkich. 
+W tym zbiorze danych jest 84816 wierszy, dane dotyczą 696 różnych imion od tych najpopularniejszych do bardzo rzadkich. 
 
 Kolejne kolumny w tym zbiorze danych przedstawiają:
 
@@ -114,7 +114,7 @@ Funkcją `head()` wyświetlamy pierwsze 6 wierszy.
 head(imiona_warszawa)
 ```
 
-Funckją `levels()` wyświetlamy listę różnych imion, które są opisane w tym zbiorze danych.
+Funkcją `levels()` wyświetlamy listę różnych imion, które są opisane w tym zbiorze danych.
 
 ```{r,  message=FALSE}
 levels(imiona_warszawa$imie)
@@ -228,11 +228,11 @@ head(skiJumps2013)
 
 # Diagnoza społeczna
 
-Ciekawym zbiorem danych jest wynik panelowego badania *Diagnoza Społeczna*. W ramach tego projektu co dwa lata ankietuje się osoby z wybranego zbioru gospodarstw domowych, za każdym razem tych samych gospodarstw. Podczas wywiadu członkowie gospodarstw są pytani o rozmaite zagadnienia, co pozwala na budowę obrazu przemian dziejących się w Polsce. Więcej o tym badaniu, wynikach jak i zbiorze danych można przeczytać na stronie interenetowej projektu http://diagnoza.com.
+Ciekawym zbiorem danych jest wynik panelowego badania *Diagnoza Społeczna*. W ramach tego projektu co dwa lata ankietuje się osoby z wybranego zbioru gospodarstw domowych, za każdym razem tych samych gospodarstw. Podczas wywiadu członkowie gospodarstw są pytani o rozmaite zagadnienia, co pozwala na budowę obrazu przemian dziejących się w Polsce. Więcej o tym badaniu, wynikach jak i zbiorze danych można przeczytać na stronie internetowej projektu http://diagnoza.com.
 
 Zbiór danych w postaci gotowej do przetwarzania w programie R, znajduje się na stronie https://github.com/pbiecek/Diagnoza. Można go zainstalować poleceniem `install_github("pbiecek/Diagnoza")` po wcześniejszym włączeniu pakietu `library(devtools)`.
 
-Cały zbiór danych jest bardzo duży i mogłby sprawiać trudności na mniejszych komputerach. Dlatego na potrzeby tego kursu przygotowaliśmy podzbiór zbioru danych z badania Diagnoza Społeczna.
+Cały zbiór danych jest bardzo duży i mógłby sprawiać trudności na mniejszych komputerach. Dlatego na potrzeby tego kursu przygotowaliśmy podzbiór zbioru danych z badania Diagnoza Społeczna.
 
 Podzbiór danych nazywa się `diagnoza` i zawiera 38461 wierszy. Każdy wiersz to odpowiedzi innej osoby. Odpowiedzi uzyskane w badaniu ankietowym zapisane są w 36 kolumnach / zmiennych. Nazwy tych zmiennych odpowiadają numerom pytań z kwestionariusza http://diagnoza.com/pliki/kwestionariusze_instrukcje/kwestionariusze_2013.pdf. Opisy co znaczy które pytanie znajdują się w zbiorze danych `diagnozaDict`.
 
@@ -297,9 +297,10 @@ Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych.
 head(TCGA_BRCA)
 ```
 
-Poniżej przedstawiamy liczbę packentów z podziałem na płci oraz z podizałem na rodzaj mutacji grnu TP53 (`Wild type` oznacza brak mutacji).
+Poniżej przedstawiamy liczbę pacjentów z podziałem na płci oraz z podziałem na rodzaj mutacji genu TP53 (`Wild type` oznacza brak mutacji).
 
 ```{r,  message=FALSE}
 table(TCGA_BRCA$plec)
 table(TCGA_BRCA$TP53)
 ```
+
