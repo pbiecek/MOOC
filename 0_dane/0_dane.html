@@ -249,76 +249,96 @@ pogRomcy danych
 <p>Zbiór danych <code>diagnozaDict</code> opisuje nazwy kolumn ze zbioru danych <code>diagnoza</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(diagnozaDict[,<span class="dv">2</span>,<span class="dt">drop=</span><span class="ot">FALSE</span>])</code></pre>
 <pre><code>##                                                     description
-## IMIE_2011       IMIĘ CZŁONKA Z POMIARÓW 2003, 2005, 2007 I 2009
-## WAGA_2013_OSOBY          Waga dla członków gospodarstwa z  2013
+## imie_2011       IMIĘ CZŁONKA Z POMIARÓW 2003, 2005, 2007 I 2009
+## waga_2013_osoby          Waga dla członków gospodarstwa z  2013
 ## lata_nauki_2013                         Liczba lat nauki w 2013
-## WIEK2013                                                       
-## PLEC                                                       Płeć
-## województwo                                         województwo</code></pre>
+## wiek2013                                                       
+## plec                                                       Płeć
+## wojewodztwo                                         województwo</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(diagnoza)</code></pre>
-<pre><code>##    IMIE_2011 WAGA_2013_OSOBY lata_nauki_2013 WIEK2013      PLEC
-## 1   WERONIKA        0.277653              NA        4   kobieta
-## 2     ERNEST        0.277653              11       13 mężczyzna
-## 3     SYLWIA        0.277653              16       23   kobieta
-## 4    MARIOLA        0.277653              16       27   kobieta
-## 16    WACŁAW        0.475255               7       78 mężczyzna
-## 57     PIOTR        0.251773              12       48 mężczyzna
-##       wojewodztwo                    EDUK4_2013
-## 1  Świętokrzyskie                          &lt;NA&gt;
-## 2  Świętokrzyskie zasadnicze zawodowe/gimanzjum
-## 3  Świętokrzyskie           wyższe i policealne
-## 4  Świętokrzyskie           wyższe i policealne
-## 16   Dolnośląskie           podstawowe i niższe
-## 57   Dolnośląskie zasadnicze zawodowe/gimanzjum
-##                   status9_2013           GP3           GP29
-## 1         inni bierni zawodowo          &lt;NA&gt;           &lt;NA&gt;
-## 2  pracownicy sekt. prywatnego         UDANE POCZUCIE SENSU
-## 3  pracownicy sekt. prywatnego   DOSYĆ DOBRE   PRZYJEMNOSCI
-## 4  pracownicy sekt. prywatnego NIEZBYT UDANE POCZUCIE SENSU
-## 16                     emeryci   DOSYĆ DOBRE POCZUCIE SENSU
-## 57 pracownicy sekt. prywatnego         UDANE POCZUCIE SENSU
-##              GP54_01          GP54_02          GP54_03          GP54_04
-## 1               &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;
-## 2        RACZEJ TAK  ZDECYDOWANIE TAK ZDECYDOWANIE TAK ANI TAK, ANI NIE
-## 3        RACZEJ TAK  ZDECYDOWANIE TAK              TAK       RACZEJ NIE
-## 4  ANI TAK, ANI NIE  ZDECYDOWANIE TAK              TAK ANI TAK, ANI NIE
-## 16       RACZEJ TAK               TAK       RACZEJ TAK       RACZEJ NIE
-## 57       RACZEJ NIE  ZDECYDOWANIE TAK              TAK       RACZEJ NIE
-##             GP54_05          GP54_06          GP54_07    GP54_08
-## 1              &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;       &lt;NA&gt;
-## 2               NIE       RACZEJ NIE       RACZEJ NIE RACZEJ NIE
-## 3        RACZEJ NIE       RACZEJ TAK ZDECYDOWANIE NIE RACZEJ NIE
-## 4  ZDECYDOWANIE NIE       RACZEJ NIE ANI TAK, ANI NIE        NIE
-## 16 ZDECYDOWANIE NIE ZDECYDOWANIE NIE ZDECYDOWANIE NIE RACZEJ NIE
-## 57 ZDECYDOWANIE NIE              TAK              TAK        NIE
-##             GP54_09          GP54_10          GP54_11          GP54_12
-## 1              &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;
-## 2        RACZEJ NIE              TAK              TAK ZDECYDOWANIE TAK
-## 3  ANI TAK, ANI NIE ZDECYDOWANIE TAK ZDECYDOWANIE TAK       RACZEJ NIE
-## 4        RACZEJ TAK       RACZEJ TAK              TAK       RACZEJ TAK
-## 16       RACZEJ TAK              TAK       RACZEJ NIE ANI TAK, ANI NIE
-## 57              NIE              TAK              TAK              NIE
-##             GP54_13          GP54_14          GP54_15          GP54_16
-## 1              &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;
-## 2  ZDECYDOWANIE NIE ZDECYDOWANIE TAK ANI TAK, ANI NIE ZDECYDOWANIE TAK
-## 3  ZDECYDOWANIE NIE ZDECYDOWANIE TAK       RACZEJ NIE ZDECYDOWANIE TAK
-## 4  ZDECYDOWANIE NIE ZDECYDOWANIE TAK       RACZEJ TAK ZDECYDOWANIE TAK
-## 16       RACZEJ NIE       RACZEJ TAK              NIE              TAK
-## 57       RACZEJ NIE              TAK       RACZEJ TAK ANI TAK, ANI NIE
-##             GP54_17          GP54_18          GP54_19          GP54_20
-## 1              &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;
-## 2  ANI TAK, ANI NIE ZDECYDOWANIE TAK ZDECYDOWANIE NIE ZDECYDOWANIE TAK
-## 3  ZDECYDOWANIE NIE ZDECYDOWANIE TAK ZDECYDOWANIE NIE       RACZEJ TAK
-## 4        RACZEJ NIE ZDECYDOWANIE TAK ZDECYDOWANIE NIE              TAK
-## 16              NIE       RACZEJ TAK       RACZEJ NIE ZDECYDOWANIE TAK
-## 57       RACZEJ NIE       RACZEJ TAK              NIE              NIE
-##       GP54_21          GP54_22 GP60 GP61 GP64 GP113
-## 1        &lt;NA&gt;             &lt;NA&gt;   NA   NA   NA    NA
-## 2         TAK       RACZEJ TAK  176   70  900    NA
-## 3  RACZEJ NIE       RACZEJ TAK  174   90   NA    NA
-## 4  RACZEJ TAK ZDECYDOWANIE TAK  173   70  950    NA
-## 16 RACZEJ NIE ANI TAK, ANI NIE  158   66 2700    NA
-## 57        TAK              NIE  173   78 2500    40</code></pre>
+<pre><code>##   imie_2011 waga_2013_osoby lata_nauki_2013 wiek2013      plec
+## 1  WERONIKA        0.277653              NA        4   kobieta
+## 2    ERNEST        0.277653              11       13 mężczyzna
+## 3    SYLWIA        0.277653              16       23   kobieta
+## 4   MARIOLA        0.277653              16       27   kobieta
+## 5    WACŁAW        0.475255               7       78 mężczyzna
+## 6     PIOTR        0.251773              12       48 mężczyzna
+##      wojewodztwo                    eduk4_2013                status9_2013
+## 1 Świętokrzyskie                          &lt;NA&gt;        inni bierni zawodowo
+## 2 Świętokrzyskie zasadnicze zawodowe/gimanzjum pracownicy sekt. prywatnego
+## 3 Świętokrzyskie           wyższe i policealne pracownicy sekt. prywatnego
+## 4 Świętokrzyskie           wyższe i policealne pracownicy sekt. prywatnego
+## 5   Dolnośląskie           podstawowe i niższe                     emeryci
+## 6   Dolnośląskie zasadnicze zawodowe/gimanzjum pracownicy sekt. prywatnego
+##             gp3           gp29           gp54_01          gp54_02
+## 1          &lt;NA&gt;           &lt;NA&gt;              &lt;NA&gt;             &lt;NA&gt;
+## 2         UDANE POCZUCIE SENSU       RACZEJ TAK  ZDECYDOWANIE TAK
+## 3   DOSYĆ DOBRE   PRZYJEMNOSCI       RACZEJ TAK  ZDECYDOWANIE TAK
+## 4 NIEZBYT UDANE POCZUCIE SENSU ANI TAK, ANI NIE  ZDECYDOWANIE TAK
+## 5   DOSYĆ DOBRE POCZUCIE SENSU       RACZEJ TAK               TAK
+## 6         UDANE POCZUCIE SENSU       RACZEJ NIE  ZDECYDOWANIE TAK
+##            gp54_03          gp54_04          gp54_05          gp54_06
+## 1             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;
+## 2 ZDECYDOWANIE TAK ANI TAK, ANI NIE              NIE       RACZEJ NIE
+## 3              TAK       RACZEJ NIE       RACZEJ NIE       RACZEJ TAK
+## 4              TAK ANI TAK, ANI NIE ZDECYDOWANIE NIE       RACZEJ NIE
+## 5       RACZEJ TAK       RACZEJ NIE ZDECYDOWANIE NIE ZDECYDOWANIE NIE
+## 6              TAK       RACZEJ NIE ZDECYDOWANIE NIE              TAK
+##            gp54_07    gp54_08          gp54_09          gp54_10
+## 1             &lt;NA&gt;       &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;
+## 2       RACZEJ NIE RACZEJ NIE       RACZEJ NIE              TAK
+## 3 ZDECYDOWANIE NIE RACZEJ NIE ANI TAK, ANI NIE ZDECYDOWANIE TAK
+## 4 ANI TAK, ANI NIE        NIE       RACZEJ TAK       RACZEJ TAK
+## 5 ZDECYDOWANIE NIE RACZEJ NIE       RACZEJ TAK              TAK
+## 6              TAK        NIE              NIE              TAK
+##            gp54_11          gp54_12          gp54_13          gp54_14
+## 1             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;
+## 2              TAK ZDECYDOWANIE TAK ZDECYDOWANIE NIE ZDECYDOWANIE TAK
+## 3 ZDECYDOWANIE TAK       RACZEJ NIE ZDECYDOWANIE NIE ZDECYDOWANIE TAK
+## 4              TAK       RACZEJ TAK ZDECYDOWANIE NIE ZDECYDOWANIE TAK
+## 5       RACZEJ NIE ANI TAK, ANI NIE       RACZEJ NIE       RACZEJ TAK
+## 6              TAK              NIE       RACZEJ NIE              TAK
+##            gp54_15          gp54_16          gp54_17          gp54_18
+## 1             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;             &lt;NA&gt;
+## 2 ANI TAK, ANI NIE ZDECYDOWANIE TAK ANI TAK, ANI NIE ZDECYDOWANIE TAK
+## 3       RACZEJ NIE ZDECYDOWANIE TAK ZDECYDOWANIE NIE ZDECYDOWANIE TAK
+## 4       RACZEJ TAK ZDECYDOWANIE TAK       RACZEJ NIE ZDECYDOWANIE TAK
+## 5              NIE              TAK              NIE       RACZEJ TAK
+## 6       RACZEJ TAK ANI TAK, ANI NIE       RACZEJ NIE       RACZEJ TAK
+##            gp54_19          gp54_20    gp54_21          gp54_22 gp60 gp61
+## 1             &lt;NA&gt;             &lt;NA&gt;       &lt;NA&gt;             &lt;NA&gt;   NA   NA
+## 2 ZDECYDOWANIE NIE ZDECYDOWANIE TAK        TAK       RACZEJ TAK  176   70
+## 3 ZDECYDOWANIE NIE       RACZEJ TAK RACZEJ NIE       RACZEJ TAK  174   90
+## 4 ZDECYDOWANIE NIE              TAK RACZEJ TAK ZDECYDOWANIE TAK  173   70
+## 5       RACZEJ NIE ZDECYDOWANIE TAK RACZEJ NIE ANI TAK, ANI NIE  158   66
+## 6              NIE              NIE        TAK              NIE  173   78
+##   gp64 gp113
+## 1   NA    NA
+## 2  900    NA
+## 3   NA    NA
+## 4  950    NA
+## 5 2700    NA
+## 6 2500    40</code></pre>
+</div>
+<div id="oceny-odcinkow-seriali-filmowych" class="slide section level1">
+<h1>Oceny odcinków seriali filmowych</h1>
+<p>Ten zbiór danych zbiera wyniki ocen odcinków 200 najpopularnijeszych seriali telewizyjnych. Dane o ocenach oraz liczbie oddanych głosów są pobrane z serwisu <a href="http:///www.imdb.com" class="uri">http:///www.imdb.com</a>. W zbiorze danych są również umieszczone nazwy seriali oraz nazwy poszczególnych odcinków.</p>
+<p>Każdy wiersz opisuje jeden odcinek. Kolejne zmienne/kolumny opisują nazwę serialu, nazwę odcinka, numer sezonu, numer odcinak w sezonie, średnia ocena danego odcinka, liczba oddanych głosów, oraz identyfikator serialu używany e bazie IMDB.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(serialeIMDB)</code></pre>
+<pre><code>##   id       serial                         nazwa sezon odcinek ocena glosow
+## 1  1 Breaking Bad                         Pilot     1       1   8.7   9357
+## 2  2 Breaking Bad           Cat's in the Bag...     1       2   8.2   6506
+## 3  3 Breaking Bad ...And the Bag's in the River     1       3   8.3   6176
+## 4  4 Breaking Bad                    Cancer Man     1       4   7.9   5796
+## 5  5 Breaking Bad                   Gray Matter     1       5   7.9   5664
+## 6  6 Breaking Bad      Crazy Handful of Nothin'     1       6   8.7   6521
+##      imdbId
+## 1 tt0903747
+## 2 tt0903747
+## 3 tt0903747
+## 4 tt0903747
+## 5 tt0903747
+## 6 tt0903747</code></pre>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

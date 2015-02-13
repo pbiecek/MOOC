@@ -147,4 +147,16 @@ head(diagnozaDict[,2,drop=FALSE])
 head(diagnoza)
 ```
 
+---
 
+# Oceny odcinków seriali filmowych
+
+Ten zbiór danych zbiera wyniki ocen odcinków 200 najpopularnijeszych seriali telewizyjnych.
+Dane o ocenach oraz liczbie oddanych głosów są pobrane z serwisu http:///www.imdb.com. 
+W zbiorze danych są również umieszczone nazwy seriali oraz nazwy poszczególnych odcinków.
+
+Każdy wiersz opisuje jeden odcinek. Kolejne zmienne/kolumny opisują nazwę serialu, nazwę odcinka, numer sezonu, numer odcinak w sezonie, średnia ocena danego odcinka, liczba oddanych głosów, oraz identyfikator serialu używany e bazie IMDB.
+
+```{r,  message=FALSE}
+head(serialeIMDB)
+```
