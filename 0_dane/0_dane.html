@@ -451,7 +451,7 @@ pogRomcy danych
 </div>
 <div id="ceny-ofertowa-uzywanych-aut-w-roku-2012" class="slide section level1">
 <h1>Ceny ofertowa używanych aut w roku 2012</h1>
-<p>Zbiór danych <code>auta2012</code> przygotowaliśmy po to, by dać możliwość pracy z dużym i ciekawym zbiorem danych o transakcjach.</p>
+<p>Zbiór danych <code>auta2012</code> przygotowaliśmy po to, by dać możliwość pracy z dużym i ciekawym zbiorem danych o transakcjach. Dane transakcyjne są zazwyczaj bardzo długie, a sposób ich przetwarzania jest specyficzny.</p>
 <p>Dane zostały pobrane w roku 2012 z serwisu ogłoszeń <code>otomoto.pl</code>. Zbiór danych zawiera informacje o ofertach dla przeszło 207 tysięcy ogłoszeń sprzedaży auta.</p>
 <p>Każda oferta (każdy wiersz) opisana jest przez 21 zmiennych, w tym:</p>
 <ul>
@@ -461,7 +461,7 @@ pogRomcy danych
 <li>informacja o rodzaju napędu, roku produkcji oraz przebiegu (w km),</li>
 <li>informacja o kolorze, liczbie drzwi, kraju pochodzenia, kraju rejestracji oraz wyposażeniu.</li>
 </ul>
-<p>Informacja o wyposażeniu jest opiana przez napis z wartościami rozdzielanymi przecinkiem, przez co sam napis możę być bardzo długi.</p>
+<p>Informacja o wyposażeniu jest opisana przez napis z wartościami rozdzielanymi przecinkiem, przez co sam napis może być bardzo długi.</p>
 <p>Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(auta2012)</code></pre>
 <pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW         Marka     Model
@@ -509,13 +509,16 @@ pogRomcy danych
 </div>
 <div id="indeks-wig-z-giedy-papierow-wartosciowych" class="slide section level1">
 <h1>Indeks WIG z Giełdy Papierów Wartościowych</h1>
-<p>Ze strony Giełdy Papierów Wartościowych pobrano dzienne notowania dla indeksu WIG z okresu grudzień 2013 - listopad 2014.</p>
+<p>Zbiór danych <code>WIG</code> przygotowaliśmy po to, by przyjrzeć się analizie i wizualizacji danych o dłuższych szeregach czasowych, w tym przypadku o dziennych notowaniach na giełdzie.</p>
+<p>Ze strony Giełdy Papierów Wartościowych <a href="http://www.gpwinfostrefa.pl/GPWIS2/pl/index/" class="uri">http://www.gpwinfostrefa.pl/GPWIS2/pl/index/</a> pobrano dzienne notowania dla indeksu WIG (Warszawski Indeks Giełdowy) z okresu grudzień 2013 - listopad 2014.</p>
 <p>W kolejnych kolumnach przedstawione jest:</p>
 <ul>
-<li>Data, której dotyczą notowania,</li>
-<li>Kurs otwarcia, zamknięcia, kurs minimalny i maksymalny,</li>
-<li>Zmiana kursy oraz wartość obrotów w tysiącach złotych.</li>
+<li>data, której dotyczą notowania,</li>
+<li>kurs otwarcia, zamknięcia, kurs minimalny i maksymalny,</li>
+<li>zmiana kursu oraz wartość obrotów w tysiącach złotych.</li>
 </ul>
+<p>W zbiorze danych jest 248 wierszy, każdy wiersz odpowiada notowaniom z jednego dnia. W soboty niedziele i święta giełda jest zamknięta, stąd ta liczba dni z notowaniami.</p>
+<p>Poniżej przedstawiamy pierwszych 6 wierszy z tego zbioru danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(WIG)</code></pre>
 <pre><code>##         Data Nazwa Kurs.otwarcia Kurs.maksymalny Kurs.minimalny
 ## 1 2013-12-02   WIG      54627.26        54790.24       53934.52

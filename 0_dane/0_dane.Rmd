@@ -145,7 +145,7 @@ head(mandatySejmik2014)
 
 # Ceny ofertowa używanych aut w roku 2012
 
-Zbiór danych `auta2012` przygotowaliśmy po to, by dać możliwość pracy z dużym i ciekawym zbiorem danych o transakcjach. 
+Zbiór danych `auta2012` przygotowaliśmy po to, by dać możliwość pracy z dużym i ciekawym zbiorem danych o transakcjach. Dane transakcyjne są zazwyczaj bardzo długie, a sposób ich przetwarzania jest specyficzny.
 
 Dane zostały pobrane w roku 2012 z serwisu ogłoszeń `otomoto.pl`. Zbiór danych zawiera informacje o ofertach dla przeszło 207 tysięcy ogłoszeń sprzedaży auta. 
 
@@ -157,7 +157,7 @@ Każda oferta (każdy wiersz) opisana jest przez 21 zmiennych, w tym:
 * informacja o rodzaju napędu, roku produkcji oraz przebiegu (w km),
 * informacja o kolorze, liczbie drzwi, kraju pochodzenia, kraju rejestracji oraz wyposażeniu.
 
-Informacja o wyposażeniu jest opiana przez napis z wartościami rozdzielanymi przecinkiem, przez co sam napis możę być bardzo długi.
+Informacja o wyposażeniu jest opisana przez napis z wartościami rozdzielanymi przecinkiem, przez co sam napis może być bardzo długi.
 
 Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych.
 
@@ -169,13 +169,19 @@ head(auta2012)
 
 # Indeks WIG z Giełdy Papierów Wartościowych
 
-Ze strony Giełdy Papierów Wartościowych pobrano dzienne notowania dla indeksu WIG z okresu grudzień 2013 - listopad 2014.
+Zbiór danych `WIG` przygotowaliśmy po to, by przyjrzeć się analizie i wizualizacji danych o dłuższych szeregach czasowych, w tym przypadku o dziennych notowaniach na giełdzie. 
+
+Ze strony Giełdy Papierów Wartościowych http://www.gpwinfostrefa.pl/GPWIS2/pl/index/ pobrano dzienne notowania dla indeksu WIG (Warszawski Indeks Giełdowy) z okresu grudzień 2013 - listopad 2014.
 
 W kolejnych kolumnach przedstawione jest:
 
-* Data, której dotyczą notowania,
-* Kurs otwarcia, zamknięcia, kurs minimalny i maksymalny,
-* Zmiana kursy oraz wartość obrotów w tysiącach złotych.
+* data, której dotyczą notowania,
+* kurs otwarcia, zamknięcia, kurs minimalny i maksymalny,
+* zmiana kursu oraz wartość obrotów w tysiącach złotych.
+
+W zbiorze danych jest 248 wierszy, każdy wiersz odpowiada notowaniom z jednego dnia. W soboty, niedziele i święta giełda jest zamknięta, stąd ta liczba dni z notowaniami.
+
+Poniżej przedstawiamy pierwszych 6 wierszy z tego zbioru danych.
 
 ```{r,  message=FALSE}
 head(WIG)
