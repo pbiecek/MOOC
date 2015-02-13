@@ -451,8 +451,18 @@ pogRomcy danych
 </div>
 <div id="ceny-ofertowa-uzywanych-aut-w-roku-2012" class="slide section level1">
 <h1>Ceny ofertowa używanych aut w roku 2012</h1>
-<p>Z serwisu <code>otomoto.pl</code> pobrano dane dla przeszło 207 tysięcy ogłoszeń sprzedaży auta.</p>
-<p>Każda oferta opisana jest przez 21 zmiennych, w tym rok produkcji, model, marka, wersja, wyposażenie, kraj pochodzenia i oczywiście cena.</p>
+<p>Zbiór danych <code>auta2012</code> przygotowaliśmy po to, by dać możliwość pracy z dużym i ciekawym zbiorem danych o transakcjach.</p>
+<p>Dane zostały pobrane w roku 2012 z serwisu ogłoszeń <code>otomoto.pl</code>. Zbiór danych zawiera informacje o ofertach dla przeszło 207 tysięcy ogłoszeń sprzedaży auta.</p>
+<p>Każda oferta (każdy wiersz) opisana jest przez 21 zmiennych, w tym:</p>
+<ul>
+<li>cenę, walutę i informację czy jest to cena brutto czy netto,</li>
+<li>informacja o mocy silnika w koniach mechanicznych i kW, oraz jego pojemności,</li>
+<li>informacja o modelu, marce, wersji auta,</li>
+<li>informacja o rodzaju napędu, roku produkcji oraz przebiegu (w km),</li>
+<li>informacja o kolorze, liczbie drzwi, kraju pochodzenia, kraju rejestracji oraz wyposażeniu.</li>
+</ul>
+<p>Informacja o wyposażeniu jest opiana przez napis z wartościami rozdzielanymi przecinkiem, przez co sam napis możę być bardzo długi.</p>
+<p>Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(auta2012)</code></pre>
 <pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW         Marka     Model
 ## 1 49900    PLN      49900       brutto 140 103           Kia    Carens

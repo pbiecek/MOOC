@@ -145,9 +145,21 @@ head(mandatySejmik2014)
 
 # Ceny ofertowa używanych aut w roku 2012
 
-Z serwisu `otomoto.pl` pobrano dane dla przeszło 207 tysięcy ogłoszeń sprzedaży auta. 
+Zbiór danych `auta2012` przygotowaliśmy po to, by dać możliwość pracy z dużym i ciekawym zbiorem danych o transakcjach. 
 
-Każda oferta opisana jest przez 21 zmiennych, w tym rok produkcji, model, marka, wersja, wyposażenie, kraj pochodzenia i oczywiście cena.
+Dane zostały pobrane w roku 2012 z serwisu ogłoszeń `otomoto.pl`. Zbiór danych zawiera informacje o ofertach dla przeszło 207 tysięcy ogłoszeń sprzedaży auta. 
+
+Każda oferta (każdy wiersz) opisana jest przez 21 zmiennych, w tym:
+
+* cenę, walutę i informację czy jest to cena brutto czy netto,
+* informacja o mocy silnika w koniach mechanicznych i kW, oraz jego pojemności,
+* informacja o modelu, marce, wersji auta,
+* informacja o rodzaju napędu, roku produkcji oraz przebiegu (w km),
+* informacja o kolorze, liczbie drzwi, kraju pochodzenia, kraju rejestracji oraz wyposażeniu.
+
+Informacja o wyposażeniu jest opiana przez napis z wartościami rozdzielanymi przecinkiem, przez co sam napis możę być bardzo długi.
+
+Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych.
 
 ```{r,  message=FALSE}
 head(auta2012)
