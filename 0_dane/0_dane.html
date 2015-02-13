@@ -559,14 +559,16 @@ pogRomcy danych
 </div>
 <div id="wyniki-skokow-narciarskich" class="slide section level1">
 <h1>Wyniki skoków narciarskich</h1>
-<p>Wyniki skoków narciarskich z sezonu 2013/2014. Zbiór danych został przygotowany na potrzebę konkursu na wizualizacje danych podczas konferencji <a href="http://estymator.ue.poznan.pl/pazur/">PAZUR</a>.</p>
-<p>Znaczenie poszczególnych kolumn jest opisane w zbiorze danych <code>skiJumps2013labels</code>.</p>
-<p>W zbiorze danych są informacje o:</p>
+<p>W zbiorze danych <code>skiJumps2013</code> zebrane są wyniki skoków narciarskich z sezonu 2013/2014. Ten zbiór danych został przygotowany na potrzebę konkursu na wizualizacje danych podczas konferencji <a href="http://estymator.ue.poznan.pl/pazur/">PAZUR</a>.</p>
+<p>W zbiorze danych znajduje się 2130 wierszy, każdy wiersz opisuje jeden oddany skok w zawodach w skokach narciarskich z sezonu 2013/2014.</p>
+<p>Każdy skok opisuje 16 kolumn, znaczenie poszczególnych kolumn jest opisane w zbiorze danych <code>skiJumps2013labels</code>.</p>
+<p>W zbiorze danych <code>skiJumps2013</code>, dla każdego oddanego skoku znaleźć można informacje o:</p>
 <ul>
-<li>konkursach: miejscowość, kraj, parametry skoczni,</li>
-<li>skoczkach: imię, nazwisko, narodowość, data urodzin,</li>
-<li>skokach (obu skoków, jeżeli skoczek skakał dwa razy): prędkość, odległość, punkty do klasyfikacji.</li>
+<li>konkursach, takie jak: miejscowość, kraj, parametry skoczni,</li>
+<li>skoczkach, takie jak: imię, nazwisko, narodowość, data urodzin,</li>
+<li>skokach (dwóch, jeżeli skoczek skakał dwa razy lub jednego jeżeli nie zakwalifikował się do drugiej serii): prędkość, odległość, punkty do klasyfikacji.</li>
 </ul>
+<p>Poniżej przedstawimy 6 wierszy z tego zbioru danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(skiJumps2013)</code></pre>
 <pre><code>##   jumperSurname jumperName compName compCountry   compDate compKPoint
 ## 1        AHONEN      JANNE  Kuusamo     Finland 2013-10-29        120

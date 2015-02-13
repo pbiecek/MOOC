@@ -206,15 +206,19 @@ head(pearson)
 
 # Wyniki skoków narciarskich
 
-Wyniki skoków narciarskich z sezonu 2013/2014. Zbiór danych został przygotowany na potrzebę konkursu na wizualizacje danych podczas konferencji [PAZUR](http://estymator.ue.poznan.pl/pazur/).
+W zbiorze danych `skiJumps2013` zebrane są wyniki skoków narciarskich z sezonu 2013/2014. Ten zbiór danych został przygotowany na potrzebę konkursu na wizualizacje danych podczas konferencji [PAZUR](http://estymator.ue.poznan.pl/pazur/).
 
-Znaczenie poszczególnych kolumn jest opisane w zbiorze danych `skiJumps2013labels`.
+W zbiorze danych znajduje się 2130 wierszy, każdy wiersz opisuje jeden oddany skok w zawodach w skokach narciarskich z sezonu 2013/2014.
 
-W zbiorze danych są informacje o:
+Każdy skok opisuje 16 kolumn, znaczenie poszczególnych kolumn jest opisane w zbiorze danych `skiJumps2013labels`.
 
-* konkursach: miejscowość, kraj, parametry skoczni,
-* skoczkach: imię, nazwisko, narodowość, data urodzin,
-* skokach (obu skoków, jeżeli skoczek skakał dwa razy): prędkość, odległość, punkty do klasyfikacji.
+W zbiorze danych `skiJumps2013`, dla każdego oddanego skoku znaleźć można informacje o:
+
+* konkursach, takie jak: miejscowość, kraj, parametry skoczni,
+* skoczkach, takie jak: imię, nazwisko, narodowość, data urodzin,
+* skokach (dwóch, jeżeli skoczek skakał dwa razy lub jednego jeżeli nie zakwalifikował się do drugiej serii): prędkość, odległość, punkty do klasyfikacji.
+
+Poniżej przedstawimy 6 wierszy z tego zbioru danych.
 
 ```{r,  message=FALSE}
 head(skiJumps2013)
