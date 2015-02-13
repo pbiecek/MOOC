@@ -672,6 +672,33 @@ pogRomcy danych
 </div>
 <div id="rokowania-dla-raka-piersi" class="slide section level1">
 <h1>Rokowania dla raka piersi</h1>
+<p>Z bazy danych <em>The Cancer Genome Atlas (TCGA)</em> <a href="http://cancergenome.nih.gov/" class="uri">http://cancergenome.nih.gov/</a> pobrano podzbiór danych klinicznych i genetycznych pacjentów (głównie pacjentek) z nowotworem piersi.</p>
+<p>W zbiorze danych <code>TCGA_BRCA</code> zebrano wyniki dla 999 pacjentów. Każdy wiersz to jeden pacjent. Dla każdego pacjenta podane jest 5 cech:</p>
+<ul>
+<li>informacja o mutacji genu TP53,</li>
+<li>płeć pacjenta,</li>
+<li>informacja czy pacjent żyje pięć lat po zabiegu,</li>
+<li>liczba dni od operacji do zgonu (jeżeli wystąpił),</li>
+<li>informacja o tym czy doszło do wznowy i czy pojawił się nowy guz.</li>
+</ul>
+<p>Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(TCGA_BRCA)</code></pre>
+<pre><code>##                TP53   plec czy.zyje dni.do.smierci czy.nowy.guz
+## 1         Wild type female     live             NA           no
+## 2             Other female     live             NA         &lt;NA&gt;
+## 3         Wild type female     live             NA           no
+## 4         Wild type female     live             NA           no
+## 5 Missense_Mutation female     dead           1009         &lt;NA&gt;
+## 6         Wild type female     live             NA           no</code></pre>
+<p>Poniżej przedstawiamy liczbę packentów z podziałem na płci oraz z podizałem na rodzaj mutacji grnu TP53 (<code>Wild type</code> oznacza brak mutacji).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(TCGA_BRCA$plec)</code></pre>
+<pre><code>## 
+## female   male 
+##    989     10</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(TCGA_BRCA$TP53)</code></pre>
+<pre><code>## 
+## Missense_Mutation             Other         Wild type 
+##               168               125               706</code></pre>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

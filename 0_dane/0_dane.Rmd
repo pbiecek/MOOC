@@ -281,5 +281,25 @@ head(serialeIMDB)
 
 # Rokowania dla raka piersi
 
+Z bazy danych *The Cancer Genome Atlas (TCGA)* http://cancergenome.nih.gov/ pobrano podzbiór danych klinicznych i genetycznych pacjentów (głównie pacjentek) z nowotworem piersi. 
 
+W zbiorze danych `TCGA_BRCA` zebrano wyniki dla 999 pacjentów. Każdy wiersz to jeden pacjent. Dla każdego pacjenta podane jest 5 cech:
 
+* informacja o mutacji genu TP53,
+* płeć pacjenta,
+* informacja czy pacjent żyje pięć lat po zabiegu,
+* liczba dni od operacji do zgonu (jeżeli wystąpił),
+* informacja o tym czy doszło do wznowy i czy pojawił się nowy guz.
+
+Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych.
+
+```{r,  message=FALSE}
+head(TCGA_BRCA)
+```
+
+Poniżej przedstawiamy liczbę packentów z podziałem na płci oraz z podizałem na rodzaj mutacji grnu TP53 (`Wild type` oznacza brak mutacji).
+
+```{r,  message=FALSE}
+table(TCGA_BRCA$plec)
+table(TCGA_BRCA$TP53)
+```
