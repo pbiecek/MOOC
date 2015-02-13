@@ -38,6 +38,40 @@ Na kolejnych slajdach przedstawimy wszystkie znajdujące się w tym pakiecie zbi
 
 ---
 
+# Dwie wersje językowe
+
+Kurs ,,Pogromcy Danych'' jest prowadzony w dwóch wersjach językowych, polskiej i angielskiej. 
+Aby nie kopiować dwukrownie danych dla obu wersji językowych po wczytaniu pakietu `PogromcyDanych` dostępne są dane w języku polskim.
+
+Aby przełączyć się na wersję angielską należy użyć polecenia `setLang()` tak jak na poniższym przykładzie. Ta funkcja przetłumaczy polskie nazwy danych (też nazwy kolumn i wartości) na ich angielskojęzyczne odpowiedniki.
+
+```{r, eval=FALSE}
+setLang("eng")
+```
+
+W wyniku jej działania do przestrzeni nazw wkopiowane będą następujące zbiory danych:
+
+Nazwa polska      | Nazwa angielska    | Co to za dane?
+------------------|--------------------|-------------------------------------------------
+koty_ptaki        | cats_birds         | Charakterystyki 13 gatunków
+imiona_warszawa   | warsaw_names       | Imiona noworotków w Warszawie
+mandatySejmik2014 | votes2014          | Wyniki wyborów samorządowych 2014  
+auta2012          | auta2012           | Ceny ofertowe aut w roku 2012
+WIG               | WIG                | Indeks WIG w roku 2014
+pearson           | pearson            | Dane o wzroście Pearsona
+galton            | galton             | Dane o wzroście Galtona
+skiJumps2013      | skiJumps2013       | Wyniki skoków narciarskich w sezonie 2013/2014
+skiJumps2013labels| skiJumps2013labels | Wyjaśnienia nazw kolumn
+diagnoza          | diagnosis          | Dane z projektu Diagnoza Społeczna
+diagnozaDict      | diagnosisDict      | Wyjaśnienia nazw kolumn
+seriale IMDB      | seriesIMDB         | Dane o serialach na bazie IMDB
+TCGA_BRCA         | TCGA_BRCA          | Dane o pacjentkach z nowotworem piersi
+
+Instrukcja `setLang("pol")` tłumaczy z powrotem na polskie nazwy.
+
+
+---
+
 # Najszybsze koty i ptaki na świecie
 
 Zbiór danych `koty_ptaki` powstał jako tzw. ,,toy-example''. Jest to niewielki (13 wierszy 7 kolumn) zbiór, który można w całości wyświetlić na ekranie i na którym można przećwiczyć podstawowe operacje na danych.
@@ -90,14 +124,18 @@ levels(imiona_warszawa$imie)
 
 # Wyniki wyborów samorządowych w 2014
 
-Ze stron Państwowej Komisji Wyborczej pobrano informacje o liczbie wygranych mandatów w sejmikach w wyborach samorządowych 2014. 
+Zbiór danych `mandatySejmik2014` przygotowaliśmy po to, by pokazać jak można analizować lub wizualizować dane przestrzenne. Dane pobrano ze stron Państwowej Komisji Wyborczej (http://wybory2014.pkw.gov.pl/pl/). 
+
+Dane przedstawiają informacje o liczbie wygranych mandatów w sejmikach w wyborach samorządowych w Polsce w roku 2014. Zbiór danych zawiera 16 wierszy i 9 kolumn. Każdy wiersz przedstawia wyniki dla innego województwa.
 
 Kolejne kolumny opisują:
 
-* Nazwa województwa, 
-* Liczba zdobytych mandatów przez PSL, PiS, PO, SLD i inne partie,
-* Jaki procent z uprawnionych do głosowania stanowi procent ważnych głosów,
-* Długość i szerokość geograficzna środka geograficznego województwa.
+* nazwę województwa, 
+* liczbę zdobytych mandatów przez PSL, PiS, PO, SLD i inne partie,
+* jaki procent z uprawnionych do głosowania stanowi procent ważnych głosów,
+* długość i szerokość geograficzną środka geograficznego województwa.
+
+Poniżej prezentujemy pierwsze 6 wierszy z tego zbioru danych.
 
 ```{r,  message=FALSE}
 head(mandatySejmik2014)

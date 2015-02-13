@@ -60,6 +60,90 @@ pogRomcy danych
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)</code></pre>
 <p>Na kolejnych slajdach przedstawimy wszystkie znajdujące się w tym pakiecie zbiory danych.</p>
 </div>
+<div id="dwie-wersje-jezykowe" class="slide section level1">
+<h1>Dwie wersje językowe</h1>
+<p>Kurs ,,Pogromcy Danych’’ jest prowadzony w dwóch wersjach językowych, polskiej i angielskiej. Aby nie kopiować dwukrownie danych dla obu wersji językowych po wczytaniu pakietu <code>PogromcyDanych</code> dostępne są dane w języku polskim.</p>
+<p>Aby przełączyć się na wersję angielską należy użyć polecenia <code>setLang()</code> tak jak na poniższym przykładzie. Ta funkcja przetłumaczy polskie nazwy danych (też nazwy kolumn i wartości) na ich angielskojęzyczne odpowiedniki.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setLang</span>(<span class="st">&quot;eng&quot;</span>)</code></pre>
+<p>W wyniku jej działania do przestrzeni nazw wkopiowane będą następujące zbiory danych:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Nazwa polska</th>
+<th align="left">Nazwa angielska</th>
+<th align="left">Co to za dane?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">koty_ptaki</td>
+<td align="left">cats_birds</td>
+<td align="left">Charakterystyki 13 gatunków</td>
+</tr>
+<tr class="even">
+<td align="left">imiona_warszawa</td>
+<td align="left">warsaw_names</td>
+<td align="left">Imiona noworotków w Warszawie</td>
+</tr>
+<tr class="odd">
+<td align="left">mandatySejmik2014</td>
+<td align="left">votes2014</td>
+<td align="left">Wyniki wyborów samorządowych 2014</td>
+</tr>
+<tr class="even">
+<td align="left">auta2012</td>
+<td align="left">auta2012</td>
+<td align="left">Ceny ofertowe aut w roku 2012</td>
+</tr>
+<tr class="odd">
+<td align="left">WIG</td>
+<td align="left">WIG</td>
+<td align="left">Indeks WIG w roku 2014</td>
+</tr>
+<tr class="even">
+<td align="left">pearson</td>
+<td align="left">pearson</td>
+<td align="left">Dane o wzroście Pearsona</td>
+</tr>
+<tr class="odd">
+<td align="left">galton</td>
+<td align="left">galton</td>
+<td align="left">Dane o wzroście Galtona</td>
+</tr>
+<tr class="even">
+<td align="left">skiJumps2013</td>
+<td align="left">skiJumps2013</td>
+<td align="left">Wyniki skoków narciarskich w sezonie 2013/2014</td>
+</tr>
+<tr class="odd">
+<td align="left">skiJumps2013labels</td>
+<td align="left">skiJumps2013labels</td>
+<td align="left">Wyjaśnienia nazw kolumn</td>
+</tr>
+<tr class="even">
+<td align="left">diagnoza</td>
+<td align="left">diagnosis</td>
+<td align="left">Dane z projektu Diagnoza Społeczna</td>
+</tr>
+<tr class="odd">
+<td align="left">diagnozaDict</td>
+<td align="left">diagnosisDict</td>
+<td align="left">Wyjaśnienia nazw kolumn</td>
+</tr>
+<tr class="even">
+<td align="left">seriale IMDB</td>
+<td align="left">seriesIMDB</td>
+<td align="left">Dane o serialach na bazie IMDB</td>
+</tr>
+<tr class="odd">
+<td align="left">TCGA_BRCA</td>
+<td align="left">TCGA_BRCA</td>
+<td align="left">Dane o pacjentkach z nowotworem piersi</td>
+</tr>
+</tbody>
+</table>
+<p>Instrukcja <code>setLang(&quot;pol&quot;)</code> tłumaczy z powrotem na polskie nazwy.</p>
+</div>
 <div id="najszybsze-koty-i-ptaki-na-swiecie" class="slide section level1">
 <h1>Najszybsze koty i ptaki na świecie</h1>
 <p>Zbiór danych <code>koty_ptaki</code> powstał jako tzw. ,,toy-example’’. Jest to niewielki (13 wierszy 7 kolumn) zbiór, który można w całości wyświetlić na ekranie i na którym można przećwiczyć podstawowe operacje na danych.</p>
@@ -339,14 +423,16 @@ pogRomcy danych
 </div>
 <div id="wyniki-wyborow-samorzadowych-w-2014" class="slide section level1">
 <h1>Wyniki wyborów samorządowych w 2014</h1>
-<p>Ze stron Państwowej Komisji Wyborczej pobrano informacje o liczbie wygranych mandatów w sejmikach w wyborach samorządowych 2014.</p>
+<p>Zbiór danych <code>mandatySejmik2014</code> przygotowaliśmy po to, by pokazać jak można analizować lub wizualizować dane przestrzenne. Dane pobrano ze stron Państwowej Komisji Wyborczej (<a href="http://wybory2014.pkw.gov.pl/pl/" class="uri">http://wybory2014.pkw.gov.pl/pl/</a>).</p>
+<p>Dane przedstawiają informacje o liczbie wygranych mandatów w sejmikach w wyborach samorządowych w Polsce w roku 2014. Zbiór danych zawiera 16 wierszy i 9 kolumn. Każdy wiersz przedstawia wyniki dla innego województwa.</p>
 <p>Kolejne kolumny opisują:</p>
 <ul>
-<li>Nazwa województwa,</li>
-<li>Liczba zdobytych mandatów przez PSL, PiS, PO, SLD i inne partie,</li>
-<li>Jaki procent z uprawnionych do głosowania stanowi procent ważnych głosów,</li>
-<li>Długość i szerokość geograficzna środka geograficznego województwa.</li>
+<li>nazwę województwa,</li>
+<li>liczbę zdobytych mandatów przez PSL, PiS, PO, SLD i inne partie,</li>
+<li>jaki procent z uprawnionych do głosowania stanowi procent ważnych głosów,</li>
+<li>długość i szerokość geograficzną środka geograficznego województwa.</li>
 </ul>
+<p>Poniżej prezentujemy pierwsze 6 wierszy z tego zbioru danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(mandatySejmik2014)</code></pre>
 <pre><code>##          Wojewodztwo PSL PiS PO SLD Inne ProcentWaznychGlosow     long
 ## 1       Dolnoslaskie   5   9 16   2    4             36.83847 16.38088
