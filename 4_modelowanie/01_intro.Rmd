@@ -64,7 +64,7 @@ Co jednak gdybyśmy zmierzyli wszystkich Polaków? czy wtedy otrzymalibyśmy jed
 Co jednak gdybyśmy zmierzyli wszystkich Polaków dokładnie o 10 rano? Czy wtedy otrzymalibyśmy jedną stałą wartość?
 Też nie, nie ma czegoś takiego jak uniwersalny zbiór wszystkich Polaków. W nocy ktoś umiera, ktoś się rodzi, zmieniają się proporcje, być może nieznacznie ale zawsze, pomiędzy liczbą dzieci a dorosłych, a więc zbiór wszystkich Polaków nieustannie się zmienia a tym samym zmienia się ich średni wzrost.
 
-Oczywiście te zmiany są nieduże, ale pokazują, że nie każda wielkość jest mierzalna ze 100% dokładnością. Niektóre wilskości, takie jak średni wzrost nieustannie fluktuują i gdy o nich myślimy powinniśmy pamiętać o tych fluktuacjach.
+Oczywiście te zmiany są nieduże, ale pokazują, że nie każda wielkość jest mierzalna ze 100% dokładnością. Niektóre wielkości, takie jak średni wzrost nieustannie fluktuują i gdy o nich myślimy powinniśmy pamiętać o tych fluktuacjach.
 
 
 # Kluczowe koncepcje - dokładność pomiaru
@@ -84,7 +84,7 @@ Zazwyczaj stosujemy narzędzia analizy danych bo poznać pewną ogólną prawid�
 
 Gdy prowadzimy analizy skuteczności leku na 100 pacjentach robimy to nie po to by ocenić czy tych konkretnych 100 pacjentów zareaguje na terapię ale by przenieść wnioski na większą populację. Chcemy wiedzieć czy lekarstwo jest skuteczne.
 
-Zależy nam więc na ty by uogólnianie wnioski uzyskane z próby na całą populację. Z drugiej strony zdajemy sobie sprawę z przypadkowości wynikającej z próby, która nie zawsze może odzwierciedlać zależności z całej populacji.
+Zależy nam więc na tym by uogólnianie wnioski uzyskane z próby na całą populację. Z drugiej strony zdajemy sobie sprawę z przypadkowości wynikającej z próby, która nie zawsze może odzwierciedlać zależności z całej populacji.
 
 W analizie danych wiele uwagi poświęca się określeniu na ile wyniki są dokładne a na ile ich dokładność zależy od wielkości i reprezentatywności próby.
 

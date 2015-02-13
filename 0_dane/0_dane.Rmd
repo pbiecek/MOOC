@@ -64,7 +64,7 @@ skiJumps2013      | skiJumps2013       | Wyniki skoków narciarskich w sezonie 2
 skiJumps2013labels| skiJumps2013labels | Wyjaśnienia nazw kolumn
 diagnoza          | diagnosis          | Dane z projektu Diagnoza Społeczna
 diagnozaDict      | diagnosisDict      | Wyjaśnienia nazw kolumn
-seriale IMDB      | seriesIMDB         | Dane o serialach na bazie IMDB
+serialeIMDB       | seriesIMDB         | Dane o serialach na bazie IMDB
 TCGA_BRCA         | TCGA_BRCA          | Dane o pacjentkach z nowotworem piersi
 
 Instrukcja `setLang("pol")` tłumaczy z powrotem na polskie nazwy.
