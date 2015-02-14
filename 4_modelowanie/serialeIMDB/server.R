@@ -21,7 +21,6 @@ shinyServer(function(input, output) {
   mySerial %>%
     ggvis(x = ~id, y = ~ocena, fill = ~sezon) %>%
     #     ewentualnie group_by(sezon)
-    layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
     layer_smooths(stroke:="grey", strokeDash:=2) %>%
     layer_points(size := 100,
                  size.hover := 240,

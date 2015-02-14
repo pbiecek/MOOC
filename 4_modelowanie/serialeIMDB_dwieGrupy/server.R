@@ -35,10 +35,19 @@ shinyServer(function(input, output) {
          "Dane o ocenach serialu <b>",input$serial2,"</b> można pobrać ze strony <br/> <a href='", napis2, "'>",napis2,"</a><br><br>")
   })
   
+  etykieta <- function(data){
+    if(is.null(data)) return(NULL)
+    if (is.null(data$id)) return(NULL)
+    df <- isolate(mySerial())
+    df2 <- df[df$id == data$id & df$serial == data$serial, ]
+    paste0("<b>",df2$nazwa, " (S",df2$sezon, "/", df2$odcinek,")</b>",
+           "<br>ocena: ",as.character(df2$ocena))
+  }
+  
   mySerial %>%
     ggvis(x = ~serialx, y = ~ocena, fill := ~col) %>%
     group_by(serial) %>%
-    layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
+    layer_text(text := ~id, opacity=0, fontSize:=1) %>%
     layer_model_predictions(model = "lm", formula = ocena ~ I(serialx*0)) %>%
     layer_points(size.hover := 200,
                  fillOpacity := 0.55,
@@ -46,9 +55,7 @@ shinyServer(function(input, output) {
     hide_axis("x") %>%
     set_options(width = 640,padding = padding(10, 10, 50, 50)) %>%
     add_legend(c("fill", "shape")) %>%
-    add_tooltip(function(data){
-      paste0(data$serial,"<br/>", data$nazwa, "<br>ocena: ",as.character(data$ocena))
-    }, "hover") %>%
+    add_tooltip(etykieta, "hover") %>%
     bind_shiny("serialPlot")
   
 })
