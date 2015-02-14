@@ -1,0 +1,95 @@
+---
+title: 'Polski Top Wszech Czasów'
+author: "Krzysztof Trajkowski"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+---
+
+##Pakiety
+
+```{r, warning=FALSE, message=FALSE}
+library(PogromcyDanych)
+library(XML)
+```
+
+##Przygotowanie danych 
+
+Ściągamy dane z audycji muzycznej emitowanej na antenie Programu Trzeciego Polskiego Radia.
+
+```{r, warning=FALSE, message=FALSE}
+adres <- "http://pl.wikipedia.org/wiki/Polski_Top_Wszech_Czas%C3%B3w"
+tabelki <- readHTMLTable(adres)
+class(tabelki)
+tabelki[3] # 2009
+tabelki[8] # 2014
+```
+
+Przetwarzamy obiekt (lista) na tabelki i łączymy je w jedną dużą tabele.
+
+```{r, warning=FALSE, message=FALSE}
+baza <- do.call(rbind.data.frame, tabelki[3:8])
+head(baza)
+```
+
+Usuwamy nazwy wierszy.
+```{r, warning=FALSE, message=FALSE}
+rownames(baza) = NULL
+head(baza)
+sapply(baza,class)
+```
+
+Usuwamy cudzysłów w nazwach piosenek.
+```{r, warning=FALSE, message=FALSE}
+baza$Piosenka <- gsub("\"", "", baza$Piosenka)
+```
+
+Usuwamy znak + który oznacza wzrost pozycji w porównaniu do notowania z poprzedniego roku.
+```{r, warning=FALSE, message=FALSE}
+baza$Zm. <- gsub("\\+", "", baza$Zm.)
+baza$Zm. <- as.numeric(baza$Zm.)
+```
+
+Nowa zmienna o nazwie Zmiana (zmiana pozycji na liście).
+
+```{r, warning=FALSE, message=FALSE}
+Zmiana <- replace(baza$Zm., which(baza$Zm.<0), "spadek")
+Zmiana <- replace(Zmiana, which(baza$Zm.>0), "wzrost")
+Zmiana <- replace(Zmiana, which(baza$Zm.==0), "bez zmian")
+```
+
+Nowa zmienna o nazwie Rok.not (rok notowania).
+
+```{r, warning=FALSE, message=FALSE}
+Rok.not <- seq(2009, 2014, 1)
+Rok.not <- rep(Rok.not, each=10)
+```
+
+Dodajemy nowe zmienne grupujące o nazwach: Zmiana (zmiana  pozycji na liście) i Rok.not (rok notowania) do tabeli baza.
+
+```{r, warning=FALSE, message=FALSE}
+baza <- baza %>%
+  mutate(Zmiana= Zmiana, Rok.not= Rok.not)
+head(baza)
+sapply(baza, class)
+```
+
+##Zapisanie danych do pliku
+
+```{r, warning=FALSE, message=FALSE}
+write.csv(baza, "/home/krz/Pulpit/MOOC_zadanie01/lp3top.csv", row.names =FALSE) 
+```
+
+##Wybieranie danych i wykresy
+
+```{r, warning=FALSE, message=FALSE}
+lp3top <- read.csv("/home/krz/Pulpit/MOOC_zadanie01/lp3top.csv")
+head(lp3top)
+sapply(lp3top, class)
+```
+
+```{r, warning=FALSE, message=FALSE,fig.height=5,fig.width=9}
+
+```
+
