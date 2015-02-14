@@ -24,7 +24,9 @@ shinyServer(function(input, output) {
     ggvis(x = ~id, y = ~ocena, fill = ~sezon) %>%
     # ewentualnie group_by(sezon)
     layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
-    layer_points(fillOpacity:=0.8) %>%
+    layer_points(size.hover := 200,
+                 fillOpacity := 0.55,
+                 fillOpacity.hover := 0.95) %>%
     hide_legend("fill") %>%
     hide_axis("x") %>%
     set_options(width = 640,padding = padding(10, 10, 50, 50)) %>%
