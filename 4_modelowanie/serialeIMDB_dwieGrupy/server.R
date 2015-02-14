@@ -39,13 +39,13 @@ shinyServer(function(input, output) {
     ggvis(x = ~serialx, y = ~ocena, fill := ~col) %>%
     group_by(serial) %>%
     layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
+    layer_model_predictions(model = "lm", formula = ocena ~ I(serialx*0)) %>%
     layer_points(size.hover := 200,
                  fillOpacity := 0.55,
                  fillOpacity.hover := 0.95, shape = ~serial) %>%
     hide_axis("x") %>%
     set_options(width = 640,padding = padding(10, 10, 50, 50)) %>%
     add_legend(c("fill", "shape")) %>%
-    layer_model_predictions(model = "lm", formula = ocena ~ I(serialx*0)) %>%
     add_tooltip(function(data){
       paste0(data$serial,"<br/>", data$nazwa, "<br>ocena: ",as.character(data$ocena))
     }, "hover") %>%
