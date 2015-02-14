@@ -14,7 +14,7 @@ shinyServer(function(input, output) {
     tmp$col <- c("#4d4dce", "#EE7600")[as.numeric(droplevels(tmp$serial))]
     tmp <- tmp %>% 
       group_by(serial) %>%
-      mutate(serialx = as.numeric(as.character(odcinek))/(1.2*max(as.numeric(as.character(odcinek)))))
+      mutate(serialx = as.numeric(as.character(id))/(1.2*max(as.numeric(as.character(id)))))
     tmp$serialx <- as.numeric(droplevels(tmp$serial)) + tmp$serialx
     tmp
   })
@@ -39,7 +39,9 @@ shinyServer(function(input, output) {
     ggvis(x = ~serialx, y = ~ocena, fill := ~col) %>%
     group_by(serial) %>%
     layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
-    layer_points(fillOpacity:=0.8, shape = ~serial) %>%
+    layer_points(size.hover := 200,
+                 fillOpacity := 0.55,
+                 fillOpacity.hover := 0.95, shape = ~serial) %>%
     hide_axis("x") %>%
     set_options(width = 640,padding = padding(10, 10, 50, 50)) %>%
     add_legend(c("fill", "shape")) %>%
