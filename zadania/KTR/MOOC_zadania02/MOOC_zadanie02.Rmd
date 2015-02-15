@@ -1,0 +1,289 @@
+---
+title: 'Polski Top Wszech Czasów 2009-2014'
+author: "Krzysztof Trajkowski"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+---
+
+##Zadanie 1
+
+Pod adresem http://pl.wikipedia.org/wiki/Polski_Top_Wszech_Czas%C3%B3w
+są dostępne dane *Polski Top Wszech Czasów*. Dotyczą one notowań polskich piosenek w audycji muzycznej emitowanej na antenie Programu Trzeciego Polskiego Radia. 
+
+1. Zainstaluj pakiet *XML*,
+2. Za pomocą funkcji *readHTMLTable* z pakietu *XML* wczytaj te dane (lista tabelek) do programu R.
+3. Połącz tabelki (lista tabelek) dotyczące lat 2009-2014 w jedną tabele (obiekt *data.frame*).
+4. Sprawdź wymiary otrzymanej tabeli (ilość wierszy i kolumn) a następnie zapisz otrzymaną tabelę do pliku .csv o nazwie baza1.
+
+####Polecenie 1
+
+Użytkownicy Linuksa do poprawnej instalacji pakietu *XML* w środowisku R powinni mieć zainstalowaną w systemie operacyjnym bibliotekę *libxml2-dev*.
+W przypadku dystrybucji Ubuntu można to zrobić wpisująć w konsoli poniższe polecenie:
+
+sudo apt-get install libxml2-dev
+
+install.packages("XML")
+
+####Polecenie 2
+
+```{r, warning=FALSE, message=FALSE}
+library(PogromcyDanych)
+```
+
+Wczutujemy wymagany pakiet XML:
+```{r, warning=FALSE, message=FALSE}
+library("XML")
+```
+
+Adres strony internetowej z danymi:
+```{r, warning=FALSE, message=FALSE}
+adres <- "http://pl.wikipedia.org/wiki/Polski_Top_Wszech_Czas%C3%B3w"
+```
+
+Wczytanie tabelek:
+```{r, warning=FALSE, message=FALSE}
+tabelki <- readHTMLTable(adres)
+```
+
+Sprawdzenie klasy obiektu:
+```{r, warning=FALSE, message=FALSE}
+class(tabelki)
+```
+
+####Polecenie 3
+
+Interesują nas tabelki o numerach od 3 do 8 czyli notowania dotyczące lat 2009-2014.
+```{r, warning=FALSE, message=FALSE}
+tabelki[3] # rok 2009
+tabelki[8] # rok 2014
+```
+
+```{r, warning=FALSE, message=FALSE}
+baza1 <- do.call(rbind.data.frame, tabelki[3:8])
+```
+
+####Polecenie 4
+
+Kilka pierwszych wierszy.
+```{r, warning=FALSE, message=FALSE}
+head(baza1)
+```
+
+```{r, warning=FALSE, message=FALSE}
+dim(baza1)
+```
+
+```{r, warning=FALSE, message=FALSE}
+write.csv(baza1, "/home/krz/Pulpit/MOOC_zadania02/baza1.csv", row.names =FALSE)
+```
+
+#################################################################################
+
+##Zadanie 2
+
+1. Otwórz w środowisku R plik baza1.csv.
+2. Usuń cudzysłów z nazwach piosenek oraz znak + w kolumnie o nazwie Zm.
+3. Zapisz tak przekształconą tabelę do pliku .csv o nazwie baza2.
+
+####Polecenie 1
+
+Otwieramy plik baza1.csv.
+```{r, warning=FALSE, message=FALSE}
+baza2 <- read.csv("/home/krz/Pulpit/MOOC_zadania02/baza1.csv")
+```
+
+####Polecenie 2
+
+Usuwamy cudzysłów w nazwach piosenek.
+```{r, warning=FALSE, message=FALSE}
+baza2$Piosenka <- gsub("\"", "", baza2$Piosenka)
+```
+
+Usuwamy znak + który oznacza wzrost pozycji w porównaniu do notowania z 
+poprzedniego roku.
+```{r, warning=FALSE, message=FALSE}
+baza2$Zm. <- gsub("\\+", "", baza2$Zm.)
+```
+
+####Polecenie 3
+
+Kilka pierwszych wierszy.
+```{r, warning=FALSE, message=FALSE}
+head(baza2)
+```
+
+Zapisujemy tabelę baza2 do pliku .csv o nazwie baza3.
+```{r, warning=FALSE, message=FALSE}
+write.csv(baza2, "/home/krz/Pulpit/MOOC_zadania02/baza2.csv", row.names =FALSE)
+```
+
+#################################################################################
+
+##Zadanie 3
+
+1. Otwórz w środowisku R plik baza2.csv.
+2. Dodaj do tabeli zmienną grupującą rok notowania o nazwie Rok.not.
+oraz zmienną grupującą jakościową Zmiana (zmiana pozycji na liście) na podstawie zmiennej o nazwie Zm. Wykorzystaj następujące wpisy: spadek, wzrost,
+bez zmian.
+3. Zapisz tak przekształconą tabelę do pliku .csv o nazwie baza3.
+
+####Polecenie 1
+
+Wczytujemy plik baza2.csv.
+```{r, warning=FALSE, message=FALSE}
+baza3 <- read.csv("/home/krz/Pulpit/MOOC_zadania02/baza2.csv")
+```
+
+####Polecenie 2
+
+Nowa zmienna o nazwie Rok.not (rok notowania).
+```{r, warning=FALSE, message=FALSE}
+Rok.not <- seq(2009, 2014, 1)
+Rok.not <- rep(Rok.not, each=10)
+```
+
+Nowa zmienna o nazwie Zmiana (zmiana pozycji na liście).
+```{r, warning=FALSE, message=FALSE}
+Zmiana <- replace(baza3$Zm., which(baza3$Zm.<0), "spadek")
+Zmiana <- replace(Zmiana, which(baza3$Zm.>0), "wzrost")
+Zmiana <- replace(Zmiana, which(baza3$Zm.==0), "bez zmian")
+```
+
+Dodajemy nowe zmienne grupujące o nazwach: Zmiana (zmiana  pozycji na liście) i Rok.not (rok notowania) do tabeli baza2.
+
+```{r, warning=FALSE, message=FALSE}
+baza3 <- baza3 %>%
+  mutate(Zmiana= Zmiana, Rok.not= Rok.not)
+```
+
+####Polecenie 3
+
+Kilka pierwszych wierszy.
+```{r, warning=FALSE, message=FALSE}
+head(baza3)
+```
+
+Zapisujemy tabelę baza2 do pliku .csv o nazwie baza3.
+```{r, warning=FALSE, message=FALSE}
+write.csv(baza3, "/home/krz/Pulpit/MOOC_zadania02/baza3.csv", row.names =FALSE)
+```
+
+#################################################################################
+
+##Zadanie 4
+
+1. Otwórz w środowisku R plik baza3.csv.
+2. Sprawdź ile było piosenek w pierwszej dziesiątce w podziale na dekadę w której powstawały. Wyniki przedstaw na wykresie paskowym.
+3. Sprawdź ile razy wykonawcy byli notowani w pierwszej dziesiątce. Dodatkowo nanieś na wykres otrzymane liczebności. 
+4. Sprawdź ile razy piosenki były notowane w pierwszej dziesiątce.
+5. Przedstaw w sposób graficzny (wykres paskowy) podsumowanie polskiego topu
+wszechczasów. Uwzględnij takie zmienne jak: dekada, Piosenka, Wykonawca.
+
+####Polecenie 1
+
+```{r, warning=FALSE, message=FALSE}
+lp3top <- read.csv("/home/krz/Pulpit/MOOC_zadania02/baza3.csv")
+```
+
+####Polecenie 2
+
+Nowa zmienna dekada.
+```{r, warning=FALSE, message=FALSE}
+lp3top$Rok <- as.character(lp3top$Rok)
+dekada <- replace(lp3top$Rok, grep("^196", lp3top$Rok),60)
+dekada <- replace(dekada, grep("^197", lp3top$Rok),70)
+dekada <- replace(dekada, grep("^198", lp3top$Rok),80)
+dekada <- replace(dekada, grep("^199", lp3top$Rok),90)
+```
+
+Do zboru danych (tabela lp3top) dodajemy zmienną dekada.
+```{r, warning=FALSE, message=FALSE}
+lp3top <- lp3top %>%
+  mutate(dekada= dekada)
+head(lp3top)
+```
+
+Zpisujemy tabele fo pliku csv.
+```{r, warning=FALSE, message=FALSE}
+write.csv(lp3top, "/home/krz/Pulpit/MOOC_zadania02/lp3top.csv", row.names =FALSE)
+```
+
+Sprawdzamy ile było piosenek notowanych w pierwszej dziesiątce ale w podziale
+na dekady w których powstawały. Dodatkowo dane sortujemy.
+```{r, warning=FALSE, message=FALSE}
+p01 <- lp3top %>%
+  group_by(dekada) %>%
+  summarize(ilość=n()) %>%
+  arrange(ilość)
+p01
+```
+
+Wykres paskowy.
+```{r, warning=FALSE, message=FALSE,fig.height=5,fig.width=4}
+plot01 <- ggplot(p01,aes(x= dekada, y= ilość))+
+  geom_bar(stat = "identity")+
+  scale_x_discrete(limit =p01$dekada,labels =p01$dekada)+
+  coord_flip()
+plot01
+```
+
+Najczęściej w pierwszej dziesiątce są piosenki które powstały w latach **osiemdziesiątych** w zestawieniu Polski Top Wszech Czasów
+2009-2014 .
+
+####Polecenie 3
+
+```{r, warning=FALSE, message=FALSE}
+p03 <- lp3top %>%
+  group_by(Wykonawca) %>%
+  summarize(ilość=n()) %>%
+  arrange(ilość)
+p03
+```
+
+Wykres paskowy.
+```{r, warning=FALSE, message=FALSE,fig.height=4,fig.width=5}
+plot03 <- ggplot(p03,aes(x= Wykonawca, y= ilość))+
+  geom_bar(stat = "identity")+
+  scale_x_discrete(limit =p03$Wykonawca,labels =p03$Wykonawca)+
+  geom_text(data = p03, aes(label = ilość, y = ilość), size= 4,color= "darkred", hjust=0, vjust=0.5, fontface="bold")+
+  coord_flip()
+plot03
+```
+
+Najczęściej w pierwszej dziesiątce w zestawieniu Polski Top Wszech Czasów
+są piosenki zespołu **Kult** które powstały w latach osiemdziesiątych i dziewięćdziesiątych.
+
+####Polecenie 4
+
+```{r, warning=FALSE, message=FALSE}
+p04 <- lp3top %>%
+  group_by(Piosenka) %>%
+  summarize(ilość=n()) %>%
+  arrange(ilość)
+p04
+```
+
+Wykres paskowy.
+```{r, warning=FALSE, message=FALSE,fig.height=4,fig.width=5}
+plot04 <- ggplot(p04,aes(x= Piosenka, y= ilość))+
+  geom_bar(stat = "identity")+
+  scale_x_discrete(limit =p04$Piosenka,labels =p04$Piosenka)+
+  coord_flip()
+plot04
+```
+
+####Polecenie 5
+
+```{r, warning=FALSE, message=FALSE,fig.height=5,fig.width=9}
+plot05 <- ggplot(lp3top,aes(x= dekada, fill=Piosenka))+
+  geom_bar()+facet_wrap(~Wykonawca)+
+  coord_flip()+
+  ggtitle("Polski Top Wszechczasów 2009-2014")
+plot05
+```
+
+Tylko zespół Kult w pierwszej dziesiątce ma 3 swoje piosenki.
+Czesław Niemen i zespół Dżem po dwie.
+Pozostali wykonawcy mają po jednym utworze.
