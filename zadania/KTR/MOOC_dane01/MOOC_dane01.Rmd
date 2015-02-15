@@ -1,0 +1,64 @@
+---
+title: 'Wydajność i ceny procesorów czyli opłacalność'
+author: "Krzysztof Trajkowski"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+---
+
+##Pakiety
+
+```{r, warning=FALSE, message=FALSE}
+library(XML)
+```
+
+##Przygotowanie danych 
+
+1. Testy wydajności pochodzą z serwisu www.cpubenchmark.net
+2. Ceny procesorów są pobrane z serwisu Skąpiec (jako mediana wszystkich oferowanych cen).
+3. <span style="color:red">**Data ostatniej aktualizacji rankingu: 2015-02-15 11:03**</span>
+
+$$opłacalność=\frac{wydajność}{cena}$$
+
+Ściągamy dane dotyczące procesorów np. z podstawką LGA 1150.
+
+```{r, warning=FALSE, message=FALSE}
+adres01 <- "http://www.jaki-procesor.pl/lga-1150"
+tabelki01 <- readHTMLTable(adres01)
+class(tabelki01)
+names(tabelki01)
+wyd_ogol_LGA1150 <- tabelki01$"procesory-wydajnosc-ogolna"
+wyd_1rdz_LGA1150 <- tabelki01$"procesory-wydajnosc-1-rdzen"
+class(wyd_ogol_LGA1150)
+head(wyd_ogol_LGA1150)
+```
+
+Ściągamy dane dotyczące procesorów np. dwurdzeniowych.
+
+```{r, warning=FALSE, message=FALSE}
+adres02 <- "http://www.jaki-procesor.pl/dwurdzeniowy"
+tabelki02 <- readHTMLTable(adres02)
+class(tabelki02)
+names(tabelki02)
+wyd_ogol <- tabelki02$"procesory-wydajnosc-ogolna"
+wyd_1rdz <- tabelki02$"procesory-wydajnosc-1-rdzen"
+class(wyd_ogol)
+head(wyd_ogol)
+```
+
+Dostępne procesory.
+
+```{r, warning=FALSE, message=FALSE}
+adres03 <- "http://www.jaki-procesor.pl"
+tabelki03 <- readHTMLTable(adres03)
+class(tabelki03)
+names(tabelki03)
+wyd_ogol <- tabelki03$"procesory-wydajnosc-ogolna"
+wyd_1rdz <- tabelki03$"procesory-wydajnosc-1-rdzen"
+class(wyd_ogol)
+head(wyd_ogol)
+```
+
+Powyższą tabelę można powiększyć o kilka zmienych grupujących:
+Producent, Liczba rdzeni, Model.
