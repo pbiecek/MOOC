@@ -1,0 +1,164 @@
+---
+title: 'Wydajność i ceny kart graficznych czyli opłacalność'
+author: "Krzysztof Trajkowski"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+---
+
+##Pakiety
+
+```{r, warning=FALSE, message=FALSE}
+library(XML)
+library(dplyr)
+```
+
+##Przygotowanie danych 
+
+1. Testy wydajności pochodzą z serwisu videocardbenchmark.net. 
+2. Ceny procesorów są pobrane z serwisu Skąpiec (jako mediana wszystkich oferowanych cen).
+3. <span style="color:red">**Data ostatniej aktualizacji rankingu: 2015-02-16 06:07**</span>.
+
+$$opłacalność=\frac{wydajność}{cena}$$
+
+###Ściągamy dane dotyczące kart graficznych
+
+```{r, warning=FALSE, message=FALSE}
+adres_gpu <- "http://rankingkartgraficznych.pl/"
+tabelki_gpu <- readHTMLTable(adres_gpu)
+class(tabelki_gpu)
+names(tabelki_gpu)
+gpu <- tabelki_gpu$"main-data-table"
+class(gpu)
+gpu <- gpu[,-1]
+dim(gpu)
+head(gpu)
+```
+
+###Nowe zmienne
+
+####Zmienna chłodzenie
+
+```{r, warning=FALSE, message=FALSE}
+# chłodzenie pasywne:
+adres_gpu_pas <- "http://rankingkartgraficznych.pl/ranking/chlodzenie-pasywne"
+tabelki_gpu_pas <- readHTMLTable(adres_gpu_pas)
+gpu_pas <- tabelki_gpu_pas$"main-data-table"
+nazwa_gpu_pas <- gpu_pas$Nazwa
+length(nazwa_gpu_pas)
+# chłodzenie aktywne:
+adres_gpu_akt <- "http://rankingkartgraficznych.pl/ranking/chlodzenie-aktywne"
+tabelki_gpu_akt <- readHTMLTable(adres_gpu_akt)
+gpu_akt <- tabelki_gpu_akt$"main-data-table"
+nazwa_gpu_akt <- gpu_akt$Nazwa
+length(nazwa_gpu_akt)
+# zmienna chłodzenie:
+gpu$Nazwa <- as.character(gpu$Nazwa)
+row_pas <- as.numeric(rownames(subset(gpu, Nazwa %in% paste(nazwa_gpu_pas))))
+row_akt <- as.numeric(rownames(subset(gpu, Nazwa %in% paste(nazwa_gpu_akt))))
+row_inne <- as.numeric(rownames(subset(gpu, !(Nazwa %in% c(paste(nazwa_gpu_pas),paste(nazwa_gpu_akt)) ))))
+Chłodzenie <- replace(gpu$Nazwa,row_pas,"pasywne")
+Chłodzenie <- replace(Chłodzenie,row_akt,"aktywne")
+Chłodzenie <- replace(Chłodzenie,row_inne,"brak inf.")
+table(Chłodzenie)
+class(Chłodzenie)
+```
+
+####Zmienna dystrybutor np. MSI
+
+```{r, warning=FALSE, message=FALSE}
+Dystrybutor <- sapply(1:length(gpu$Nazwa),function(x) strsplit(gpu$Nazwa[x], " ")[[1]][1])
+length(Dystrybutor)
+table(Dystrybutor)
+```
+
+####Zmienna producent: AMD, NVIDIA
+
+```{r, warning=FALSE, message=FALSE}
+gpu$GPU <- as.character(gpu$GPU)
+row_GeForce <- grep("^[GeForce]", gpu$GPU)
+row_Radeon <- grep("^[Radeon]", gpu$GPU)
+Producent <- replace(gpu$GPU, row_GeForce, "NVIDIA")
+Producent <- replace(Producent, row_Radeon, "AMD")
+table(Producent)
+```
+
+####Zmienna marka: GeForce, Radeon
+
+```{r, warning=FALSE, message=FALSE}
+Marka <- sapply(1:length(gpu$GPU),function(x) strsplit(gpu$GPU[x], " ")[[1]][1])
+length(Marka)
+table(Marka)
+```
+
+####Zmienna pamięć
+
+```{r, warning=FALSE, message=FALSE}
+# pamięć >=512MB:
+adres_gpu_512 <- "http://rankingkartgraficznych.pl/ranking/ram-512-w-gore"
+tabelki_gpu_512 <- readHTMLTable(adres_gpu_512)
+gpu_512 <- tabelki_gpu_512$"main-data-table"
+nazwa_gpu_512 <- gpu_512$Nazwa
+length(nazwa_gpu_512)
+# pamięć >=1GB:
+adres_gpu_1 <- "http://rankingkartgraficznych.pl/ranking/ram-1024-w-gore"
+tabelki_gpu_1 <- readHTMLTable(adres_gpu_1)
+gpu_1 <- tabelki_gpu_1$"main-data-table"
+nazwa_gpu_1 <- gpu_1$Nazwa
+length(nazwa_gpu_1)
+# pamięć >=1.5GB:
+adres_gpu_1.5 <- "http://rankingkartgraficznych.pl/ranking/ram-1536-w-gore"
+tabelki_gpu_1.5 <- readHTMLTable(adres_gpu_1.5)
+gpu_1.5 <- tabelki_gpu_1.5$"main-data-table"
+nazwa_gpu_1.5 <- gpu_1.5$Nazwa
+length(nazwa_gpu_1.5)
+# pamięć >=2GB:
+adres_gpu_2 <- "http://rankingkartgraficznych.pl/ranking/ram-2048-w-gore"
+tabelki_gpu_2 <- readHTMLTable(adres_gpu_2)
+gpu_2 <- tabelki_gpu_2$"main-data-table"
+nazwa_gpu_2 <- gpu_2$Nazwa
+length(nazwa_gpu_2)
+# zmienna pamięć:
+row_512 <- as.numeric(rownames(subset(gpu, Nazwa %in% paste(nazwa_gpu_512))))
+row_1 <- as.numeric(rownames(subset(gpu, Nazwa %in% paste(nazwa_gpu_1))))
+row_1.5 <- as.numeric(rownames(subset(gpu, Nazwa %in% paste(nazwa_gpu_1.5))))
+row_2 <- as.numeric(rownames(subset(gpu, Nazwa %in% paste(nazwa_gpu_2))))
+length(row_512)
+length(row_1)
+length(row_1.5)
+length(row_2)
+z512 <- rep("< 512MB",length(gpu$GPU))
+Pamięć512 <- replace(z512, row_512, ">= 512MB")
+table(Pamięć512)
+z1 <- rep("< 1GB",length(gpu$GPU))
+Pamięć1 <- replace(z1, row_1, ">= 1GB")
+table(Pamięć1)
+z1.5 <- rep("< 1.5GB",length(gpu$GPU))
+Pamięć1.5 <- replace(z1.5, row_1.5, ">= 1.5GB")
+table(Pamięć1.5)
+z2 <- rep("< 2GB",length(gpu$GPU))
+Pamięć2 <- replace(z1, row_2, ">= 2GB")
+table(Pamięć2)
+```
+
+###Ramka danych
+
+```{r, warning=FALSE, message=FALSE}
+gpu <- gpu %>% 
+  mutate(Chłodzenie= Chłodzenie,
+         Dystrybutor= Dystrybutor,
+         Producent= Producent,
+         Marka= Marka,
+         Pamięć512= Pamięć512,
+         Pamięć1= Pamięć1,
+         Pamięć1.5= Pamięć1.5,
+         Pamięć2= Pamięć2)
+dim(gpu)
+head(gpu)
+class(gpu)
+```
+
+```{r, warning=FALSE, message=FALSE}
+#write.csv(gpu, "/home/krz/Pulpit/MOOC_dane_GPU/GPUdane.csv", row.names =F)
+```
