@@ -45,9 +45,8 @@ shinyServer(function(input, output) {
   }
   
   mySerial %>%
-    ggvis(x = ~serialx, y = ~ocena, fill := ~col) %>%
+    ggvis(x = ~serialx, y = ~ocena, fill = ~sezon) %>%
     group_by(serial) %>%
-    layer_text(text := ~id, opacity=0, fontSize:=1) %>%
     layer_model_predictions(model = "lm", formula = ocena ~ I(serialx*0)) %>%
     layer_points(size.hover := 200,
                  fillOpacity := 0.55,
