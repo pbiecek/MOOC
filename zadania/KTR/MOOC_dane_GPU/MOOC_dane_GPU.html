@@ -10,6 +10,7 @@
 
 <meta name="author" content="Krzysztof Trajkowski" />
 
+<meta name="date" content="2015-02-18" />
 
 <title>Wydajność i ceny kart graficznych czyli opłacalność</title>
 
@@ -54,7 +55,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <div id="header">
 <h1 class="title">Wydajność i ceny kart graficznych czyli opłacalność</h1>
 <h4 class="author"><em>Krzysztof Trajkowski</em></h4>
-<h4 class="date"><em>16 luty, 2015</em></h4>
+<h4 class="date"><em>2015-02-18</em></h4>
 </div>
 
 <div id="TOC">
@@ -78,8 +79,8 @@ library(dplyr)</code></pre>
 <ol style="list-style-type: decimal">
 <li>Testy wydajności pochodzą z serwisu videocardbenchmark.net.</li>
 <li>Ceny procesorów są pobrane z serwisu Skąpiec (jako mediana wszystkich oferowanych cen).</li>
-<li><span style="color:red"><strong>Data ostatniej aktualizacji rankingu: 2015-02-16 06:07</strong></span>.</li>
 </ol>
+<p>Data ostatniej aktualizacji: <span style="color:red"><strong>2015-02-18</strong></span>.</p>
 <p><span class="math">\[opłacalność=\frac{wydajność}{cena}\]</span></p>
 <div id="sciagamy-dane-dotyczace-kart-graficznych" class="section level3">
 <h3>Ściągamy dane dotyczące kart graficznych</h3>
@@ -94,15 +95,15 @@ class(gpu)</code></pre>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
 <pre class="r"><code>gpu &lt;- gpu[,-1]
 dim(gpu)</code></pre>
-<pre><code>## [1] 399   5</code></pre>
+<pre><code>## [1] 388   5</code></pre>
 <pre class="r"><code>head(gpu)</code></pre>
 <pre><code>##                      Nazwa              GPU Wydajność    Cena Opłacalność
-## 1      Palit NE5X780H10FBJ   GeForce GTX780   8046.00 1597.01        5.04
-## 2     Asus 90YV04H4-M0NA00   GeForce GTX780   8046.00 1861.28        4.32
-## 3 Gigabyte GV-N78TD5-3GD-B   GeForce GTX780   8046.00 2699.00        2.98
-## 4       Asus GTX780TI-3GD5   GeForce GTX780   8046.00 2849.00        2.82
-## 5       MSI GTX 780Ti 3GD5   GeForce GTX780   8046.00 2849.00        2.82
-## 6  Asus GTXTITANBLACK-6GD5 GeForce GTXTitan   7957.00 4729.00        1.68</code></pre>
+## 1     Asus 90YV04H4-M0NA00   GeForce GTX780   8045.00 1861.28        4.32
+## 2 Gigabyte GV-N78TD5-3GD-B   GeForce GTX780   8045.00 2699.00        2.98
+## 3       Asus GTX780TI-3GD5   GeForce GTX780   8045.00 2849.00        2.82
+## 4       MSI GTX 780Ti 3GD5   GeForce GTX780   8045.00 2849.00        2.82
+## 5  Asus GTXTITANBLACK-6GD5 GeForce GTXTitan   7957.00 4729.00        1.68
+## 6   Inno3D CTBP-1SDN-N5HSX GeForce GTXTitan   7957.00 4936.71        1.61</code></pre>
 </div>
 <div id="nowe-zmienne" class="section level3">
 <h3>Nowe zmienne</h3>
@@ -121,7 +122,7 @@ tabelki_gpu_akt &lt;- readHTMLTable(adres_gpu_akt)
 gpu_akt &lt;- tabelki_gpu_akt$&quot;main-data-table&quot;
 nazwa_gpu_akt &lt;- gpu_akt$Nazwa
 length(nazwa_gpu_akt)</code></pre>
-<pre><code>## [1] 319</code></pre>
+<pre><code>## [1] 308</code></pre>
 <pre class="r"><code># zmienna chłodzenie:
 gpu$Nazwa &lt;- as.character(gpu$Nazwa)
 row_pas &lt;- as.numeric(rownames(subset(gpu, Nazwa %in% paste(nazwa_gpu_pas))))
@@ -133,7 +134,7 @@ Chłodzenie &lt;- replace(Chłodzenie,row_inne,&quot;brak inf.&quot;)
 table(Chłodzenie)</code></pre>
 <pre><code>## Chłodzenie
 ##   aktywne brak inf.   pasywne 
-##       319         2        78</code></pre>
+##       308         2        78</code></pre>
 <pre class="r"><code>class(Chłodzenie)</code></pre>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 </div>
@@ -141,15 +142,15 @@ table(Chłodzenie)</code></pre>
 <h4>Zmienna dystrybutor np. MSI</h4>
 <pre class="r"><code>Dystrybutor &lt;- sapply(1:length(gpu$Nazwa),function(x) strsplit(gpu$Nazwa[x], &quot; &quot;)[[1]][1])
 length(Dystrybutor)</code></pre>
-<pre><code>## [1] 399</code></pre>
+<pre><code>## [1] 388</code></pre>
 <pre class="r"><code>table(Dystrybutor)</code></pre>
 <pre><code>## Dystrybutor
 ##       Asus       Club       EVGA   Gainward     Galaxy   Gigabyte 
-##         73         18         19         18          1         46 
+##         71         18         18         16          1         46 
 ##         HP     Inno3D        MSI      Palit      Point PowerColor 
-##          3          5         43         21          4          2 
+##          3          5         43         17          4          1 
 ##   Sapphire    Sparkle     Vertex        XFX      ZOTAC 
-##         80          1          7         32         26</code></pre>
+##         79          1          7         32         26</code></pre>
 </div>
 <div id="zmienna-producent-amd-nvidia" class="section level4">
 <h4>Zmienna producent: AMD, NVIDIA</h4>
@@ -161,17 +162,17 @@ Producent &lt;- replace(Producent, row_Radeon, &quot;AMD&quot;)
 table(Producent)</code></pre>
 <pre><code>## Producent
 ##    AMD NVIDIA 
-##    217    182</code></pre>
+##    214    174</code></pre>
 </div>
 <div id="zmienna-marka-geforce-radeon" class="section level4">
 <h4>Zmienna marka: GeForce, Radeon</h4>
 <pre class="r"><code>Marka &lt;- sapply(1:length(gpu$GPU),function(x) strsplit(gpu$GPU[x], &quot; &quot;)[[1]][1])
 length(Marka)</code></pre>
-<pre><code>## [1] 399</code></pre>
+<pre><code>## [1] 388</code></pre>
 <pre class="r"><code>table(Marka)</code></pre>
 <pre><code>## Marka
 ## GeForce  Radeon 
-##     182     217</code></pre>
+##     174     214</code></pre>
 </div>
 <div id="zmienna-pamiec" class="section level4">
 <h4>Zmienna pamięć</h4>
@@ -181,65 +182,65 @@ tabelki_gpu_512 &lt;- readHTMLTable(adres_gpu_512)
 gpu_512 &lt;- tabelki_gpu_512$&quot;main-data-table&quot;
 nazwa_gpu_512 &lt;- gpu_512$Nazwa
 length(nazwa_gpu_512)</code></pre>
-<pre><code>## [1] 399</code></pre>
+<pre><code>## [1] 388</code></pre>
 <pre class="r"><code># pamięć &gt;=1GB:
 adres_gpu_1 &lt;- &quot;http://rankingkartgraficznych.pl/ranking/ram-1024-w-gore&quot;
 tabelki_gpu_1 &lt;- readHTMLTable(adres_gpu_1)
 gpu_1 &lt;- tabelki_gpu_1$&quot;main-data-table&quot;
 nazwa_gpu_1 &lt;- gpu_1$Nazwa
 length(nazwa_gpu_1)</code></pre>
-<pre><code>## [1] 383</code></pre>
+<pre><code>## [1] 373</code></pre>
 <pre class="r"><code># pamięć &gt;=1.5GB:
 adres_gpu_1.5 &lt;- &quot;http://rankingkartgraficznych.pl/ranking/ram-1536-w-gore&quot;
 tabelki_gpu_1.5 &lt;- readHTMLTable(adres_gpu_1.5)
 gpu_1.5 &lt;- tabelki_gpu_1.5$&quot;main-data-table&quot;
 nazwa_gpu_1.5 &lt;- gpu_1.5$Nazwa
 length(nazwa_gpu_1.5)</code></pre>
-<pre><code>## [1] 260</code></pre>
+<pre><code>## [1] 249</code></pre>
 <pre class="r"><code># pamięć &gt;=2GB:
 adres_gpu_2 &lt;- &quot;http://rankingkartgraficznych.pl/ranking/ram-2048-w-gore&quot;
 tabelki_gpu_2 &lt;- readHTMLTable(adres_gpu_2)
 gpu_2 &lt;- tabelki_gpu_2$&quot;main-data-table&quot;
 nazwa_gpu_2 &lt;- gpu_2$Nazwa
 length(nazwa_gpu_2)</code></pre>
-<pre><code>## [1] 260</code></pre>
+<pre><code>## [1] 249</code></pre>
 <pre class="r"><code># zmienna pamięć:
 row_512 &lt;- as.numeric(rownames(subset(gpu, Nazwa %in% paste(nazwa_gpu_512))))
 row_1 &lt;- as.numeric(rownames(subset(gpu, Nazwa %in% paste(nazwa_gpu_1))))
 row_1.5 &lt;- as.numeric(rownames(subset(gpu, Nazwa %in% paste(nazwa_gpu_1.5))))
 row_2 &lt;- as.numeric(rownames(subset(gpu, Nazwa %in% paste(nazwa_gpu_2))))
 length(row_512)</code></pre>
-<pre><code>## [1] 399</code></pre>
+<pre><code>## [1] 388</code></pre>
 <pre class="r"><code>length(row_1)</code></pre>
-<pre><code>## [1] 383</code></pre>
+<pre><code>## [1] 373</code></pre>
 <pre class="r"><code>length(row_1.5)</code></pre>
-<pre><code>## [1] 260</code></pre>
+<pre><code>## [1] 249</code></pre>
 <pre class="r"><code>length(row_2)</code></pre>
-<pre><code>## [1] 260</code></pre>
+<pre><code>## [1] 249</code></pre>
 <pre class="r"><code>z512 &lt;- rep(&quot;&lt; 512MB&quot;,length(gpu$GPU))
 Pamięć512 &lt;- replace(z512, row_512, &quot;&gt;= 512MB&quot;)
 table(Pamięć512)</code></pre>
 <pre><code>## Pamięć512
 ## &gt;= 512MB 
-##      399</code></pre>
+##      388</code></pre>
 <pre class="r"><code>z1 &lt;- rep(&quot;&lt; 1GB&quot;,length(gpu$GPU))
 Pamięć1 &lt;- replace(z1, row_1, &quot;&gt;= 1GB&quot;)
 table(Pamięć1)</code></pre>
 <pre><code>## Pamięć1
 ##  &lt; 1GB &gt;= 1GB 
-##     16    383</code></pre>
+##     15    373</code></pre>
 <pre class="r"><code>z1.5 &lt;- rep(&quot;&lt; 1.5GB&quot;,length(gpu$GPU))
 Pamięć1.5 &lt;- replace(z1.5, row_1.5, &quot;&gt;= 1.5GB&quot;)
 table(Pamięć1.5)</code></pre>
 <pre><code>## Pamięć1.5
 ##  &lt; 1.5GB &gt;= 1.5GB 
-##      139      260</code></pre>
+##      139      249</code></pre>
 <pre class="r"><code>z2 &lt;- rep(&quot;&lt; 2GB&quot;,length(gpu$GPU))
 Pamięć2 &lt;- replace(z1, row_2, &quot;&gt;= 2GB&quot;)
 table(Pamięć2)</code></pre>
 <pre><code>## Pamięć2
 ##  &lt; 1GB &gt;= 2GB 
-##    139    260</code></pre>
+##    139    249</code></pre>
 </div>
 </div>
 <div id="ramka-danych" class="section level3">
@@ -254,22 +255,22 @@ table(Pamięć2)</code></pre>
          Pamięć1.5= Pamięć1.5,
          Pamięć2= Pamięć2)
 dim(gpu)</code></pre>
-<pre><code>## [1] 399  13</code></pre>
+<pre><code>## [1] 388  13</code></pre>
 <pre class="r"><code>head(gpu)</code></pre>
 <pre><code>##                      Nazwa              GPU Wydajność    Cena Opłacalność
-## 1      Palit NE5X780H10FBJ   GeForce GTX780   8046.00 1597.01        5.04
-## 2     Asus 90YV04H4-M0NA00   GeForce GTX780   8046.00 1861.28        4.32
-## 3 Gigabyte GV-N78TD5-3GD-B   GeForce GTX780   8046.00 2699.00        2.98
-## 4       Asus GTX780TI-3GD5   GeForce GTX780   8046.00 2849.00        2.82
-## 5       MSI GTX 780Ti 3GD5   GeForce GTX780   8046.00 2849.00        2.82
-## 6  Asus GTXTITANBLACK-6GD5 GeForce GTXTitan   7957.00 4729.00        1.68
+## 1     Asus 90YV04H4-M0NA00   GeForce GTX780   8045.00 1861.28        4.32
+## 2 Gigabyte GV-N78TD5-3GD-B   GeForce GTX780   8045.00 2699.00        2.98
+## 3       Asus GTX780TI-3GD5   GeForce GTX780   8045.00 2849.00        2.82
+## 4       MSI GTX 780Ti 3GD5   GeForce GTX780   8045.00 2849.00        2.82
+## 5  Asus GTXTITANBLACK-6GD5 GeForce GTXTitan   7957.00 4729.00        1.68
+## 6   Inno3D CTBP-1SDN-N5HSX GeForce GTXTitan   7957.00 4936.71        1.61
 ##   Chłodzenie Dystrybutor Producent   Marka Pamięć512 Pamięć1 Pamięć1.5
-## 1    aktywne       Palit    NVIDIA GeForce  &gt;= 512MB  &gt;= 1GB  &gt;= 1.5GB
-## 2    aktywne        Asus    NVIDIA GeForce  &gt;= 512MB  &gt;= 1GB  &gt;= 1.5GB
-## 3    aktywne    Gigabyte    NVIDIA GeForce  &gt;= 512MB  &gt;= 1GB  &gt;= 1.5GB
-## 4    aktywne        Asus    NVIDIA GeForce  &gt;= 512MB  &gt;= 1GB  &gt;= 1.5GB
-## 5    aktywne         MSI    NVIDIA GeForce  &gt;= 512MB  &gt;= 1GB  &gt;= 1.5GB
-## 6    aktywne        Asus    NVIDIA GeForce  &gt;= 512MB  &gt;= 1GB  &gt;= 1.5GB
+## 1    aktywne        Asus    NVIDIA GeForce  &gt;= 512MB  &gt;= 1GB  &gt;= 1.5GB
+## 2    aktywne    Gigabyte    NVIDIA GeForce  &gt;= 512MB  &gt;= 1GB  &gt;= 1.5GB
+## 3    aktywne        Asus    NVIDIA GeForce  &gt;= 512MB  &gt;= 1GB  &gt;= 1.5GB
+## 4    aktywne         MSI    NVIDIA GeForce  &gt;= 512MB  &gt;= 1GB  &gt;= 1.5GB
+## 5    aktywne        Asus    NVIDIA GeForce  &gt;= 512MB  &gt;= 1GB  &gt;= 1.5GB
+## 6  brak inf.      Inno3D    NVIDIA GeForce  &gt;= 512MB  &gt;= 1GB  &gt;= 1.5GB
 ##   Pamięć2
 ## 1  &gt;= 2GB
 ## 2  &gt;= 2GB

@@ -1,7 +1,7 @@
 ---
 title: 'Wydajność i ceny kart graficznych czyli opłacalność'
 author: "Krzysztof Trajkowski"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+date: "`r format(Sys.time(), '%Y-%m-%d')`"
 output:
   html_document:
     toc: true
@@ -18,7 +18,8 @@ library(dplyr)
 
 1. Testy wydajności pochodzą z serwisu videocardbenchmark.net. 
 2. Ceny procesorów są pobrane z serwisu Skąpiec (jako mediana wszystkich oferowanych cen).
-3. <span style="color:red">**Data ostatniej aktualizacji rankingu: 2015-02-16 06:07**</span>.
+
+Data ostatniej aktualizacji: <span style="color:red">**`r format(Sys.time(), '%Y-%m-%d')`**</span>.
 
 $$opłacalność=\frac{wydajność}{cena}$$
 
