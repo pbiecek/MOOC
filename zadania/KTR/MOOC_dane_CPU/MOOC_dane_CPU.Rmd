@@ -1,0 +1,248 @@
+---
+title: 'Wydajność i ceny procesorów czyli opłacalność'
+author: "Krzysztof Trajkowski"
+date: "`r format(Sys.time(), '%Y-%m-%d %H:%M')`"
+output:
+  html_document:
+    toc: true
+---
+
+##Pakiety
+
+```{r, warning=FALSE, message=FALSE}
+library(XML)
+library(dplyr)
+```
+
+##Przygotowanie danych 
+
+1. Testy wydajności pochodzą z serwisu www.cpubenchmark.net
+2. Ceny procesorów są pobrane z serwisu Skąpiec (jako mediana wszystkich oferowanych cen).
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+get_data <- readLines("http://www.jaki-procesor.pl/")
+pre.lines <- grep("Data ostatniej aktualizacji",get_data)
+text <- get_data[pre.lines[1]]
+# usuń spacje na początku i końcu zdania:
+trim <- function( x ) {
+  gsub("(^[[:space:]]+|[[:space:]]+$)", "", x)
+}
+trim_text <- trim(text)
+#trim_text <- gsub(pattern = " ", replacement = "",  x = text)
+t <- gsub("</h2>", "", trim_text)
+t <- gsub("<h2>", "", t)
+```
+
+<span style="color:red">**`r paste(t)`**</span>
+
+$$opłacalność=\frac{wydajność}{cena}$$
+
+###Ściągamy dane dotyczące procesorów
+
+```{r, warning=FALSE, message=FALSE}
+adres03 <- "http://www.jaki-procesor.pl"
+tabelki03 <- readHTMLTable(adres03)
+class(tabelki03)
+names(tabelki03)
+# tabela wydajność ogólna:
+wyd_ogol <- tabelki03$"procesory-wydajnosc-ogolna"
+wyd_ogol$Cena <- as.numeric(gsub(",",".",wyd_ogol$Cena))
+wyd_ogol$Opłacalność <- as.numeric(gsub(",",".",wyd_ogol$Opłacalność))
+# tabela wydajność jednodzeniowa:
+wyd_rdz <- tabelki03$"procesory-wydajnosc-1-rdzen"
+wyd_rdz$Cena <- as.numeric(gsub(",",".",wyd_rdz$Cena))
+wyd_rdz$Opłacalność <- as.numeric(gsub(",",".",wyd_rdz$Opłacalność))
+class(wyd_ogol)
+head(wyd_ogol)
+```
+
+###Nowe zmienne - tabela wydajność ogólna
+
+####Zmienna Seria
+
+```{r, warning=FALSE, message=FALSE}
+wyd_ogol$Procesor <- as.character(wyd_ogol$Procesor)
+Seria <- sapply(1:length(wyd_ogol$Procesor),function(x) strsplit(wyd_ogol$Procesor[x], " ")[[1]][2])
+```
+
+####Zmienna Producent
+
+```{r, warning=FALSE, message=FALSE}
+Producent <- sapply(1:length(wyd_ogol$Procesor),function(x) strsplit(wyd_ogol$Procesor[x], " ")[[1]][1])
+```
+
+####Zmienna Liczba rdzeni
+
+```{r, warning=FALSE, message=FALSE}
+tabelki_1rdz <- readHTMLTable("http://www.jaki-procesor.pl/jednordzeniowy")
+# tabela wydajność ogólna:
+proc1_ogol <- tabelki_1rdz$"procesory-wydajnosc-ogolna"
+nazwa_proc1 <- proc1_ogol$Procesor
+# równania:
+row_ogol1 <- as.numeric(rownames(
+  subset(wyd_ogol, Procesor %in% paste(nazwa_proc1))))
+
+tabelki_2rdz <- readHTMLTable("http://www.jaki-procesor.pl/dwurdzeniowy")
+# tabela wydajność ogólna:
+proc2_ogol <- tabelki_2rdz$"procesory-wydajnosc-ogolna"
+nazwa_proc2 <- proc2_ogol$Procesor
+# równania:
+row_ogol2 <- as.numeric(rownames(
+  subset(wyd_ogol, Procesor %in% paste(nazwa_proc2))))
+
+tabelki_3rdz <- readHTMLTable("http://www.jaki-procesor.pl/trojrdzeniowy")
+# tabela wydajność ogólna:
+proc3_ogol <- tabelki_3rdz$"procesory-wydajnosc-ogolna"
+nazwa_proc3 <- proc3_ogol$Procesor
+# równania:
+row_ogol3 <- as.numeric(rownames(
+  subset(wyd_ogol, Procesor %in% paste(nazwa_proc3))))
+
+tabelki_4rdz <- readHTMLTable("http://www.jaki-procesor.pl/czterordzeniowy")
+# tabela wydajność ogólna:
+proc4_ogol <- tabelki_4rdz$"procesory-wydajnosc-ogolna"
+nazwa_proc4 <- proc4_ogol$Procesor
+# równania:
+row_ogol4 <- as.numeric(rownames(
+  subset(wyd_ogol, Procesor %in% paste(nazwa_proc4))))
+
+tabelki_6rdz <- readHTMLTable("http://www.jaki-procesor.pl/szesciordzeniowy")
+# tabela wydajność ogólna:
+proc6_ogol <- tabelki_6rdz$"procesory-wydajnosc-ogolna"
+nazwa_proc6 <- proc6_ogol$Procesor
+# równania:
+row_ogol6 <- as.numeric(rownames(
+  subset(wyd_ogol, Procesor %in% paste(nazwa_proc6))))
+
+tabelki_8rdz <- readHTMLTable("http://www.jaki-procesor.pl/osmiordzeniowy")
+# tabela wydajność ogólna:
+proc8_ogol <- tabelki_8rdz$"procesory-wydajnosc-ogolna"
+nazwa_proc8 <- proc8_ogol$Procesor
+# równania:
+row_ogol8 <- as.numeric(rownames(
+  subset(wyd_ogol, Procesor %in% paste(nazwa_proc8))))
+
+licz_ogol <- rep("brak inf.",length(wyd_ogol$Procesor))
+licz_ogol <- replace(licz_ogol,row_ogol1,"1")
+licz_ogol <- replace(licz_ogol,row_ogol2,"2")
+licz_ogol <- replace(licz_ogol,row_ogol3,"3")
+licz_ogol <- replace(licz_ogol,row_ogol4,"4")
+licz_ogol <- replace(licz_ogol,row_ogol6,"6")
+licz_ogol <- replace(licz_ogol,row_ogol8,"8")
+table(licz_ogol)
+```
+
+```{r, warning=FALSE, message=FALSE}
+wyd_ogol <- wyd_ogol %>%
+  mutate(Producent = Producent,
+         Seria = Seria,
+         Liczba_Rdzeni = licz_ogol)
+head(wyd_ogol)
+```
+
+
+###Nowe zmienne - tabela wydajność jednordzeniowa
+
+####Zmienna Seria
+
+```{r, warning=FALSE, message=FALSE}
+wyd_rdz$Procesor <- as.character(wyd_rdz$Procesor)
+Seria <- sapply(1:length(wyd_rdz$Procesor),function(x) strsplit(wyd_rdz$Procesor[x], " ")[[1]][2])
+```
+
+####Zmienna Producent
+
+```{r, warning=FALSE, message=FALSE}
+Producent <- sapply(1:length(wyd_rdz$Procesor),function(x) strsplit(wyd_rdz$Procesor[x], " ")[[1]][1])
+```
+
+####Zmienna Liczba rdzeni
+
+```{r, warning=FALSE, message=FALSE}
+tabelki_1rdz <- readHTMLTable("http://www.jaki-procesor.pl/jednordzeniowy")
+# tabela wydajność ogólna:
+proc1_rdz <- tabelki_1rdz$"procesory-wydajnosc-1-rdzen"
+nazwa_proc1 <- proc1_rdz$Procesor
+# równania:
+row_rdz1 <- as.numeric(rownames(
+  subset(wyd_rdz, Procesor %in% paste(nazwa_proc1))))
+
+tabelki_2rdz <- readHTMLTable("http://www.jaki-procesor.pl/dwurdzeniowy")
+# tabela wydajność ogólna:
+proc2_rdz <- tabelki_2rdz$"procesory-wydajnosc-1-rdzen"
+nazwa_proc2 <- proc2_rdz$Procesor
+# równania:
+row_rdz2 <- as.numeric(rownames(
+  subset(wyd_rdz, Procesor %in% paste(nazwa_proc2))))
+
+tabelki_3rdz <- readHTMLTable("http://www.jaki-procesor.pl/trojrdzeniowy")
+# tabela wydajność ogólna:
+proc3_rdz <- tabelki_3rdz$"procesory-wydajnosc-1-rdzen"
+nazwa_proc3 <- proc3_rdz$Procesor
+# równania:
+row_rdz3 <- as.numeric(rownames(
+  subset(wyd_rdz, Procesor %in% paste(nazwa_proc3))))
+
+tabelki_4rdz <- readHTMLTable("http://www.jaki-procesor.pl/czterordzeniowy")
+# tabela wydajność ogólna:
+proc4_rdz <- tabelki_4rdz$"procesory-wydajnosc-1-rdzen"
+nazwa_proc4 <- proc4_rdz$Procesor
+# równania:
+row_rdz4 <- as.numeric(rownames(
+  subset(wyd_rdz, Procesor %in% paste(nazwa_proc4))))
+
+tabelki_6rdz <- readHTMLTable("http://www.jaki-procesor.pl/szesciordzeniowy")
+# tabela wydajność ogólna:
+proc6_rdz <- tabelki_6rdz$"procesory-wydajnosc-1-rdzen"
+nazwa_proc6 <- proc6_rdz$Procesor
+# równania:
+row_rdz6 <- as.numeric(rownames(
+  subset(wyd_rdz, Procesor %in% paste(nazwa_proc6))))
+
+tabelki_8rdz <- readHTMLTable("http://www.jaki-procesor.pl/osmiordzeniowy")
+# tabela wydajność ogólna:
+proc8_rdz <- tabelki_8rdz$"procesory-wydajnosc-1-rdzen"
+nazwa_proc8 <- proc8_rdz$Procesor
+# równania:
+row_rdz8 <- as.numeric(rownames(
+  subset(wyd_rdz, Procesor %in% paste(nazwa_proc8))))
+
+licz_rdz <- rep("brak inf.",length(wyd_rdz$Procesor))
+licz_rdz <- replace(licz_rdz,row_rdz1,"1")
+licz_rdz <- replace(licz_rdz,row_rdz2,"2")
+licz_rdz <- replace(licz_rdz,row_rdz3,"3")
+licz_rdz <- replace(licz_rdz,row_rdz4,"4")
+licz_rdz <- replace(licz_rdz,row_rdz6,"6")
+licz_rdz <- replace(licz_rdz,row_rdz8,"8")
+table(licz_rdz)
+```
+
+```{r, warning=FALSE, message=FALSE}
+wyd_rdz <- wyd_rdz %>%
+  mutate(Producent = Producent,
+         Seria = Seria,
+         Liczba_Rdzeni = licz_rdz)
+head(wyd_rdz)
+```
+
+
+###Łaczymy tabele
+
+Wydajność ogólna i wydajność jednordzeniowa.
+
+```{r, warning=FALSE, message=FALSE}
+l_ogol <- dim(wyd_ogol)[1]
+l_1rdz <- dim(wyd_rdz)[1]
+Rodz_Wydajności <- rep(c("ogólna","jednordzeniowa"),c(l_ogol,l_1rdz))
+cpu <- rbind(wyd_ogol,wyd_rdz)
+cpu <- cpu %>%
+  mutate(Rodz_Wydajności = Rodz_Wydajności)
+head(cpu)
+tail(cpu)
+dim(cpu)
+```
+
+```{r, warning=FALSE, message=FALSE}
+#write.csv(cpu, "/home/krz/Pulpit/MOOC_dane_CPU/CPUdane.csv", row.names =F)
+```
+
