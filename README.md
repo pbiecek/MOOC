@@ -71,6 +71,7 @@ Sezon 2: Wizualizacja i modelowanie danych
   * Regresja logistyczna  - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/08_rlogistyczna.html)
 
 + Modelowanie danych ilościowych
+  * IMDB - eksploracja
   * test dla dwóch grup - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/04_testSrednie.html)
   * trend liniowy - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/06_testRegresja.html)
   * trend liniowy, testy - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/06_testRegresja_cont.html)
