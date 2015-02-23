@@ -1,0 +1,304 @@
+---
+title: "Data sets"
+author: "Data Crunchers"
+date: "season 1 / episode 1 <br><br><br><br>Press `A` to switch from slides to continuous text. Press `T` to see the table of contents."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "Data Crunchers / zbiory danych"
+
+---
+
+# What is the topic of this episode?
+
+You can process data in many ways. The course Data tameRs will introduce you to this variety. For this reason we will work on datasets of different size (from several to several hundred thousand rows), with various level of complexity (from two to two thousand columns) and prepared in different formats (text data, quantitative data and qualitative data). 
+
+All of these data sets were gathered in a single big package called `PogromcyDanych` to facilitate access to them. It contains all sorts of data sets such as data about offer prices of cars, results of opinion polls, information about changes in stock market indices, data about names given to newborn babies, ski jumping results or information about outcomes of breast cancer patients treatment.
+
+In order to install this package you need to enter the following command in R program (you need to do this only once). It will download the data sets from the Internet and install them on your disc. 
+
+
+```{r, eval=FALSE}
+install.packages("PogromcyDanych")
+```
+
+Once you install the package PogromcyDanych you need to activate it to be able to use the data sets. Use the following command to activate the package (after each activation of R).
+
+
+```{r,  message=FALSE}
+library(PogromcyDanych)
+```
+
+Next slides will show you all the data sets included in that package. 
+
+---
+
+# Two language versions
+
+,,Data crunchers'' course is available in two language versions – Polish and English. However, it was not necessary to create two language versions of data sets and thus double the data. For this reason your data loaded from the `PogromcyDanych` package will be in Polish. 
+
+If you want to switch to English use the command `setLang()` as in the example below. This function will translate the Polish names in the data sets (as well as names of columns and values) into English. 
+
+
+```{r}
+setLang("eng")
+```
+
+As a result of the function the following data sets will be copied into the namespaces:
+
+Polish name       | English name       | What type of data is this?
+------------------|--------------------|-------------------------------------------------
+koty_ptaki        | cats_birds         | Characteristics of 13 species
+imiona_warszawa   | warsaw_names       | Names of babies born in Warsaw
+mandatySejmik2014 | votes2014          | Results of the local elections 2014  
+auta2012          | auta2012           | Offer prices of cars in 2012
+WIG               | WIG                | WIG Index in  2014
+pearson           | pearson            | Pearson’s data on heights
+galton            | galton             | Galton’s data on heights
+skiJumps2013      | skiJumps2013       | Results of ski jumping competitions season  2013/2014
+skiJumps2013labels| skiJumps2013labels | Explanation of columns’ names
+diagnoza          | diagnosis          | Data from the project Diagnoza Społeczna (Social Diagnosis)
+diagnozaDict      | diagnosisDict      | Explanation of columns’ names
+serialeIMDB       | seriesIMDB         | Data on TV series on the basis of the IMDB movie database
+TCGA_BRCA         | TCGA_BRCA          | Data on breast cancer patients
+
+The `setLang("pol")` command will translate the names back into Polish. 
+
+---
+
+# The fastest cats and birds in the world
+
+The data set cats_birds was created as a so-called toy-example. It is a small set (13 rows and 7 columns) which can be fully displayed on the computer screen. You can use it to practice basic operations on the data.
+
+The data set juxtaposes characteristics of 13 chosen species of cats and birds presented in separate rows. The chosen species are the fastest members of both groups. Each row contains information on a different species. 
+
+The columns of this data set present respectively:
+
+* name of the species,
+* maximum weight of an individual animal expressed in kilograms and maximum body length in meters,
+* maximum speed (in the horizontal flight in case of birds, not during the dive) expressed in kilometers per hour,
+* habitat and length of life in years,
+* the last column specifies whether the species is a big cat or a bird.
+
+You can use the `head()` function to display the first 6 rows of this data set. 
+
+```{r,  message=FALSE}
+head(koty_ptaki)
+```
+
+---
+
+# Imiona noworodków w Warszawie
+
+Zbiór danych `imiona_warszawa` przygotowaliśmy po to, by przedstawiać metody analizy trendów oraz metody analizy napisów.
+
+W tym zbiorze danych zawarto informację o liczbie urodzonych noworodków o danym imieniu w Warszawie w kolejnych miesiącach w okresie od roku 2004 do 2014. Dane te są pobrane ze strony http://gorny.edu.pl/imiona/index.php, na której można znaleźć również informacje o aktualnej liczbie urodzin. 
+
+W tym zbiorze danych jest 84816 wierszy, dane dotyczą 696 różnych imion od tych najpopularniejszych do bardzo rzadkich. 
+
+Kolejne kolumny w tym zbiorze danych przedstawiają:
+
+* imię i płeć dziecka,
+* rok i miesiąc którego dotyczy ta statystyka,
+* liczba noworodków o danym imieniu urodzonych w Warszawie w danym roku i miesiącu.
+
+Funkcją `head()` wyświetlamy pierwsze 6 wierszy.
+
+```{r,  message=FALSE}
+head(imiona_warszawa)
+```
+
+Funkcją `levels()` wyświetlamy listę różnych imion, które są opisane w tym zbiorze danych.
+
+```{r,  message=FALSE}
+levels(imiona_warszawa$imie)
+```
+
+---
+
+# Wyniki wyborów samorządowych w 2014
+
+Zbiór danych `mandatySejmik2014` przygotowaliśmy po to, by pokazać jak można analizować lub wizualizować dane przestrzenne. Dane pobrano ze stron Państwowej Komisji Wyborczej (http://wybory2014.pkw.gov.pl/pl/). 
+
+Dane przedstawiają informacje o liczbie wygranych mandatów w sejmikach w wyborach samorządowych w Polsce w roku 2014. Zbiór danych zawiera 16 wierszy i 9 kolumn. Każdy wiersz przedstawia wyniki dla innego województwa.
+
+Kolejne kolumny opisują:
+
+* nazwę województwa, 
+* liczbę zdobytych mandatów przez PSL, PiS, PO, SLD i inne partie,
+* jaki procent z uprawnionych do głosowania stanowi procent ważnych głosów,
+* długość i szerokość geograficzną środka geograficznego województwa.
+
+Poniżej prezentujemy pierwsze 6 wierszy z tego zbioru danych.
+
+```{r,  message=FALSE}
+head(mandatySejmik2014)
+```
+
+---
+
+# Ceny ofertowa używanych aut w roku 2012
+
+Zbiór danych `auta2012` przygotowaliśmy po to, by dać możliwość pracy z dużym i ciekawym zbiorem danych o transakcjach. Dane transakcyjne są zazwyczaj bardzo długie, a sposób ich przetwarzania jest specyficzny.
+
+Dane zostały pobrane w roku 2012 z serwisu ogłoszeń `otomoto.pl`. Zbiór danych zawiera informacje o ofertach dla przeszło 207 tysięcy ogłoszeń sprzedaży auta. 
+
+Każda oferta (każdy wiersz) opisana jest przez 21 zmiennych, w tym:
+
+* cenę, walutę i informację czy jest to cena brutto czy netto,
+* informacja o mocy silnika w koniach mechanicznych i kW, oraz jego pojemności,
+* informacja o modelu, marce, wersji auta,
+* informacja o rodzaju napędu, roku produkcji oraz przebiegu (w km),
+* informacja o kolorze, liczbie drzwi, kraju pochodzenia, kraju rejestracji oraz wyposażeniu.
+
+Informacja o wyposażeniu jest opisana przez napis z wartościami rozdzielanymi przecinkiem, przez co sam napis może być bardzo długi.
+
+Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych.
+
+```{r,  message=FALSE}
+head(auta2012)
+```
+
+---
+
+# Indeks WIG z Giełdy Papierów Wartościowych
+
+Zbiór danych `WIG` przygotowaliśmy po to, by przyjrzeć się analizie i wizualizacji danych o dłuższych szeregach czasowych, w tym przypadku o dziennych notowaniach na giełdzie. 
+
+Ze strony Giełdy Papierów Wartościowych http://www.gpwinfostrefa.pl/GPWIS2/pl/index/ pobrano dzienne notowania dla indeksu WIG (Warszawski Indeks Giełdowy) z okresu grudzień 2013 - listopad 2014.
+
+W kolejnych kolumnach przedstawione jest:
+
+* data, której dotyczą notowania,
+* kurs otwarcia, zamknięcia, kurs minimalny i maksymalny,
+* zmiana kursu oraz wartość obrotów w tysiącach złotych.
+
+W zbiorze danych jest 248 wierszy, każdy wiersz odpowiada notowaniom z jednego dnia. W soboty, niedziele i święta giełda jest zamknięta, stąd ta liczba dni z notowaniami.
+
+Poniżej przedstawiamy pierwszych 6 wierszy z tego zbioru danych.
+
+```{r,  message=FALSE}
+head(WIG)
+```
+
+---
+
+# Wzrost rodziców i dzieci
+
+Słowo regresja wywodzi się z pionierskich badań Francisa Galtona i Karla Pearsona nad zależnością wzrostu dzieci i rodziców. 
+
+Oryginalne zbiory danych obu tych badaczy są dostępne w zmiennych `galton` i `pearson`. Na bazie tych zbiorów danych można opisywać zależność pomiędzy wzrostem syna a ojca (`pearson`) oraz zależność pomiędzy ważoną średnią z wzrostu rodziców (`galton`) z wzrostem syna.
+
+Poniżej przedstawiamy pierwszych 6 wierszy z każdego ze zbiorów danych. W zbiorze danych `galton` znajduje się 928 wierszy a w zbiorze danych `pearson` znajduje się 1078 wierszy.
+
+```{r,  message=FALSE}
+head(galton)
+head(pearson)
+```
+
+---
+
+# Wyniki skoków narciarskich
+
+W zbiorze danych `skiJumps2013` zebrane są wyniki skoków narciarskich z sezonu 2013/2014. Ten zbiór danych został przygotowany na potrzebę konkursu na wizualizacje danych podczas konferencji [PAZUR](http://estymator.ue.poznan.pl/pazur/).
+
+W zbiorze danych znajduje się 2130 wierszy, każdy wiersz opisuje jeden oddany skok w zawodach w skokach narciarskich z sezonu 2013/2014.
+
+Każdy skok opisuje 16 kolumn, znaczenie poszczególnych kolumn jest opisane w zbiorze danych `skiJumps2013labels`.
+
+W zbiorze danych `skiJumps2013`, dla każdego oddanego skoku znaleźć można informacje o:
+
+* konkursach, takie jak: miejscowość, kraj, parametry skoczni,
+* skoczkach, takie jak: imię, nazwisko, narodowość, data urodzin,
+* skokach (dwóch, jeżeli skoczek skakał dwa razy lub jednego jeżeli nie zakwalifikował się do drugiej serii): prędkość, odległość, punkty do klasyfikacji.
+
+Poniżej przedstawimy 6 wierszy z tego zbioru danych.
+
+```{r,  message=FALSE}
+head(skiJumps2013)
+```
+
+---
+
+# Diagnoza społeczna
+
+Ciekawym zbiorem danych jest wynik panelowego badania *Diagnoza Społeczna*. W ramach tego projektu co dwa lata ankietuje się osoby z wybranego zbioru gospodarstw domowych, za każdym razem tych samych gospodarstw. Podczas wywiadu członkowie gospodarstw są pytani o rozmaite zagadnienia, co pozwala na budowę obrazu przemian dziejących się w Polsce. Więcej o tym badaniu, wynikach jak i zbiorze danych można przeczytać na stronie internetowej projektu http://diagnoza.com.
+
+Zbiór danych w postaci gotowej do przetwarzania w programie R, znajduje się na stronie https://github.com/pbiecek/Diagnoza. Można go zainstalować poleceniem `install_github("pbiecek/Diagnoza")` po wcześniejszym włączeniu pakietu `library(devtools)`.
+
+Cały zbiór danych jest bardzo duży i mógłby sprawiać trudności na mniejszych komputerach. Dlatego na potrzeby tego kursu przygotowaliśmy podzbiór zbioru danych z badania Diagnoza Społeczna.
+
+Podzbiór danych nazywa się `diagnoza` i zawiera 38461 wierszy. Każdy wiersz to odpowiedzi innej osoby. Odpowiedzi uzyskane w badaniu ankietowym zapisane są w 36 kolumnach / zmiennych. Nazwy tych zmiennych odpowiadają numerom pytań z kwestionariusza http://diagnoza.com/pliki/kwestionariusze_instrukcje/kwestionariusze_2013.pdf. Opisy co znaczy które pytanie znajdują się w zbiorze danych `diagnozaDict`.
+
+Wybrane zmienne opisują:
+
+* imiona respondentów, 
+* wagi analityczne, wynikające ze sposobu losowania, 
+* liczbę lat nauki, płeć, wykształcenie, wzrost, wagę, dochody,
+* odpowiedzi na wybrane pytania dotyczące światopoglądu.
+
+Zbiór danych `diagnozaDict` opisuje nazwy kolumn ze zbioru danych `diagnoza`. Przedstawiamy opis pierwszych sześciu kolumn.
+
+```{r,  message=FALSE}
+head(diagnozaDict[,2,drop=FALSE])
+```
+
+Poniżej przedstawiamy dwa wybrane wiersze z tego zbioru danych.
+
+```{r,  message=FALSE}
+head(diagnoza, 2)
+```
+
+---
+
+# Oceny odcinków seriali filmowych
+
+W zbiorze danych `serialeIMDB` zebraliśmy informacje o popularności odcinków seriali telewizyjnych.
+
+Z serwisu http:///www.imdb.com pobraliśmy dane o ocenach oraz liczbie oddanych głosów każdego odcinka dla 200 najpopularniejszych seriali telewizyjnych. W zbiorze danych są również umieszczone nazwy seriali oraz nazwy poszczególnych odcinków.
+
+Każdy wiersz opisuje jeden odcinek, wierszy w sumie jest 20122. Kolejne zmienne/kolumny opisują:
+
+* nazwę serialu, nazwę odcinka, 
+* numer sezonu, numer odcinak w sezonie, 
+* średnia ocena danego odcinka, 
+* liczba oddanych głosów, 
+* identyfikator serialu używany w bazie IMDB.
+
+Poniżej przedstawimy pierwszych 6 wierszy z tego zbioru danych.
+
+```{r,  message=FALSE}
+head(serialeIMDB)
+```
+
+---
+
+# Rokowania dla raka piersi
+
+Z bazy danych *The Cancer Genome Atlas (TCGA)* http://cancergenome.nih.gov/ pobrano podzbiór danych klinicznych i genetycznych pacjentów (głównie pacjentek) z nowotworem piersi. 
+
+W zbiorze danych `TCGA_BRCA` zebrano wyniki dla 999 pacjentów. Każdy wiersz to jeden pacjent. Dla każdego pacjenta podane jest 5 cech:
+
+* informacja o mutacji genu TP53,
+* płeć pacjenta,
+* informacja czy pacjent żyje pięć lat po zabiegu,
+* liczba dni od operacji do zgonu (jeżeli wystąpił),
+* informacja o tym czy doszło do wznowy i czy pojawił się nowy guz.
+
+Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych.
+
+```{r,  message=FALSE}
+head(TCGA_BRCA)
+```
+
+Poniżej przedstawiamy liczbę pacjentów z podziałem na płci oraz z podziałem na rodzaj mutacji genu TP53 (`Wild type` oznacza brak mutacji).
+
+```{r,  message=FALSE}
+table(TCGA_BRCA$plec)
+table(TCGA_BRCA$TP53)
+```
+
