@@ -2,7 +2,7 @@ body {
 	font-family: 'Noto Serif', 'serif';
 	font-size: 20px!important;
 	color: #cfcfcf!important;
-	background-color: #460744!important;
+#	background-color: #460744!important;
 }
 
 .co {
@@ -10,10 +10,10 @@ body {
 }
 
 pre {
-#	border-color: #eeeeee!important;
-	border-color: #260724!important;
-#	background-color: #f5f5f5!important;
-	background-color: #862784!important;
+#	border-color: #260724!important;
+	border-color: #eeeeee!important;
+#	background-color: #862784!important;
+	background-color: #f5f5f5!important;
 	font-size: 18px!important;
 	margin-top: 0px!important;
 	margin-bottom: 0px!important;
