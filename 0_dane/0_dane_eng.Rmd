@@ -72,7 +72,7 @@ The `setLang("pol")` command will translate the names back into Polish.
 
 # The fastest cats and birds in the world
 
-The data set cats_birds was created as a so-called toy-example. It is a small set (13 rows and 7 columns) which can be fully displayed on the computer screen. You can use it to practice basic operations on the data.
+The data set `cats_birds` was created as a so-called toy-example. It is a small set (13 rows and 7 columns) which can be fully displayed on the computer screen. You can use it to practice basic operations on the data.
 
 The data set juxtaposes characteristics of 13 chosen species of cats and birds presented in separate rows. The chosen species are the fastest members of both groups. Each row contains information on a different species. 
 
@@ -87,77 +87,77 @@ The columns of this data set present respectively:
 You can use the `head()` function to display the first 6 rows of this data set. 
 
 ```{r,  message=FALSE}
-head(koty_ptaki)
+head(cats_birds)
 ```
 
 ---
 
-# Imiona noworodków w Warszawie
+# Names of infants born in Warsaw
 
-Zbiór danych `imiona_warszawa` przygotowaliśmy po to, by przedstawiać metody analizy trendów oraz metody analizy napisów.
+The data set `warsaw_names` was prepared to present methods of trend analysis and methods of text analysis. 
 
-W tym zbiorze danych zawarto informację o liczbie urodzonych noworodków o danym imieniu w Warszawie w kolejnych miesiącach w okresie od roku 2004 do 2014. Dane te są pobrane ze strony http://gorny.edu.pl/imiona/index.php, na której można znaleźć również informacje o aktualnej liczbie urodzin. 
+The data set contains information on the number of babies with a certain name born in Warsaw in the subsequent months of the period between 2004 and 2014.   This data was downloaded from the website `http://gorny.edu.pl/imiona/index.php` where you can also find information about the current number of births. 
 
-W tym zbiorze danych jest 84816 wierszy, dane dotyczą 696 różnych imion od tych najpopularniejszych do bardzo rzadkich. 
+There are 84816 rows in this set and the data concerns different names, from very popular names to rather rare ones.  
 
-Kolejne kolumny w tym zbiorze danych przedstawiają:
+The columns of this data set present respectively:
 
-* imię i płeć dziecka,
-* rok i miesiąc którego dotyczy ta statystyka,
-* liczba noworodków o danym imieniu urodzonych w Warszawie w danym roku i miesiącu.
+* gender and name of the child,
+*	year and month in which the data was gathered,
+*	number of babies with a given name born in Warsaw in a certain year and month.
 
-Funkcją `head()` wyświetlamy pierwsze 6 wierszy.
+You can use the `head()` function to display the first 6 rows of this data set.
 
 ```{r,  message=FALSE}
-head(imiona_warszawa)
+head(warsaw_names)
 ```
 
-Funkcją `levels()` wyświetlamy listę różnych imion, które są opisane w tym zbiorze danych.
+Use the `levels()` function to display a list of all the names included in this data set. 
 
 ```{r,  message=FALSE}
-levels(imiona_warszawa$imie)
-```
-
----
-
-# Wyniki wyborów samorządowych w 2014
-
-Zbiór danych `mandatySejmik2014` przygotowaliśmy po to, by pokazać jak można analizować lub wizualizować dane przestrzenne. Dane pobrano ze stron Państwowej Komisji Wyborczej (http://wybory2014.pkw.gov.pl/pl/). 
-
-Dane przedstawiają informacje o liczbie wygranych mandatów w sejmikach w wyborach samorządowych w Polsce w roku 2014. Zbiór danych zawiera 16 wierszy i 9 kolumn. Każdy wiersz przedstawia wyniki dla innego województwa.
-
-Kolejne kolumny opisują:
-
-* nazwę województwa, 
-* liczbę zdobytych mandatów przez PSL, PiS, PO, SLD i inne partie,
-* jaki procent z uprawnionych do głosowania stanowi procent ważnych głosów,
-* długość i szerokość geograficzną środka geograficznego województwa.
-
-Poniżej prezentujemy pierwsze 6 wierszy z tego zbioru danych.
-
-```{r,  message=FALSE}
-head(mandatySejmik2014)
+levels(warsaw_names$name)
 ```
 
 ---
 
-# Ceny ofertowa używanych aut w roku 2012
+# Local election results in Poland (2014)
 
-Zbiór danych `auta2012` przygotowaliśmy po to, by dać możliwość pracy z dużym i ciekawym zbiorem danych o transakcjach. Dane transakcyjne są zazwyczaj bardzo długie, a sposób ich przetwarzania jest specyficzny.
+The data set `votes2014` was prepared to show ways in which spatial data can be analyzed and visualized. The data was downloaded from the website of the National Electoral Commission (`http://wybory2014.pkw.gov.pl/pl/`). 
 
-Dane zostały pobrane w roku 2012 z serwisu ogłoszeń `otomoto.pl`. Zbiór danych zawiera informacje o ofertach dla przeszło 207 tysięcy ogłoszeń sprzedaży auta. 
+The data presents information about the number of seats in the regional parliaments in Poland won in 2014. The set consists of 16 rows and 9 columns. Each row presents results concerning a different voivodeship. 
 
-Każda oferta (każdy wiersz) opisana jest przez 21 zmiennych, w tym:
+The subsequent columns present respectively:
 
-* cenę, walutę i informację czy jest to cena brutto czy netto,
-* informacja o mocy silnika w koniach mechanicznych i kW, oraz jego pojemności,
-* informacja o modelu, marce, wersji auta,
-* informacja o rodzaju napędu, roku produkcji oraz przebiegu (w km),
-* informacja o kolorze, liczbie drzwi, kraju pochodzenia, kraju rejestracji oraz wyposażeniu.
+* name of the voivodeship,
+*	number of seats won by PSL, PiS, PO, SLD and other political parties,
+*	what is the percentage of valid votes of the total number of votes cast by the people entitled to vote,
+*	longitude and latitude of the geographical centre of the voivodeship.
 
-Informacja o wyposażeniu jest opisana przez napis z wartościami rozdzielanymi przecinkiem, przez co sam napis może być bardzo długi.
+Below you can see 6 first rows of this data set.
 
-Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych.
+```{r,  message=FALSE}
+head(votes2014)
+```
+
+---
+
+# Offer prices of second-hand cars in 2012
+
+The data set `auta2012` was designed with a view of creating opportunity to work on a big and interesting data set concerning transactions. Transaction data is usually rather extensive and it is processed in a very specific manner. 
+
+This data was extracted from the announcement service `otomoto.pl` in 2012. The set contains information about over 207 thousand car sales offers. 
+
+Each offer (each row) is described by 21 variables including:
+
+* price, currency and information whether the given price is a net or a gross price,
+*	information on engine power expressed in horsepower and kW and its capacity,
+*	information about model, make and version of the car,
+*	information on the type of drive, year of manufacture and mileage (in km),
+*	information about color, number of doors, country of origin, country of registration and accessories.
+
+Information about accessories is described by a very long line of text with values separated by comas.
+
+Below you can see 6 first rows of this data set.
 
 ```{r,  message=FALSE}
 head(auta2012)

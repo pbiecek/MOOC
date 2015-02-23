@@ -146,7 +146,7 @@ Data Crunchers
 </div>
 <div id="the-fastest-cats-and-birds-in-the-world" class="slide section level1">
 <h1>The fastest cats and birds in the world</h1>
-<p>The data set cats_birds was created as a so-called toy-example. It is a small set (13 rows and 7 columns) which can be fully displayed on the computer screen. You can use it to practice basic operations on the data.</p>
+<p>The data set <code>cats_birds</code> was created as a so-called toy-example. It is a small set (13 rows and 7 columns) which can be fully displayed on the computer screen. You can use it to practice basic operations on the data.</p>
 <p>The data set juxtaposes characteristics of 13 chosen species of cats and birds presented in separate rows. The chosen species are the fastest members of both groups. Each row contains information on a different species.</p>
 <p>The columns of this data set present respectively:</p>
 <ul>
@@ -157,27 +157,27 @@ Data Crunchers
 <li>the last column specifies whether the species is a big cat or a bird.</li>
 </ul>
 <p>You can use the <code>head()</code> function to display the first 6 rows of this data set.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(koty_ptaki)</code></pre>
-<pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
-## 1  Tygrys  300     2.5       60    Azja        25     Kot
-## 2     Lew  200     2.0       80  Afryka        29     Kot
-## 3  Jaguar  100     1.7       90 Ameryka        15     Kot
-## 4    Puma   80     1.7       70 Ameryka        13     Kot
-## 5 Leopard   70     1.4       85    Azja        21     Kot
-## 6  Gepard   60     1.4      115  Afryka        12     Kot</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(cats_birds)</code></pre>
+<pre><code>##   species weight length speed habitat lifespan group
+## 1   Tiger    300    2.5    60    Asia       25   Cat
+## 2    Lion    200    2.0    80  Africa       29   Cat
+## 3 Cheetah    100    1.7    90 America       15   Cat
+## 4  Jaguar     80    1.7    70 America       13   Cat
+## 5    Puma     70    1.4    85    Asia       21   Cat
+## 6 Leopard     60    1.4   115  Africa       12   Cat</code></pre>
 </div>
-<div id="imiona-noworodkow-w-warszawie" class="slide section level1">
-<h1>Imiona noworodków w Warszawie</h1>
-<p>Zbiór danych <code>imiona_warszawa</code> przygotowaliśmy po to, by przedstawiać metody analizy trendów oraz metody analizy napisów.</p>
-<p>W tym zbiorze danych zawarto informację o liczbie urodzonych noworodków o danym imieniu w Warszawie w kolejnych miesiącach w okresie od roku 2004 do 2014. Dane te są pobrane ze strony <a href="http://gorny.edu.pl/imiona/index.php" class="uri">http://gorny.edu.pl/imiona/index.php</a>, na której można znaleźć również informacje o aktualnej liczbie urodzin.</p>
-<p>W tym zbiorze danych jest 84816 wierszy, dane dotyczą 696 różnych imion od tych najpopularniejszych do bardzo rzadkich.</p>
-<p>Kolejne kolumny w tym zbiorze danych przedstawiają:</p>
+<div id="names-of-infants-born-in-warsaw" class="slide section level1">
+<h1>Names of infants born in Warsaw</h1>
+<p>The data set <code>warsaw_names</code> was prepared to present methods of trend analysis and methods of text analysis.</p>
+<p>The data set contains information on the number of babies with a certain name born in Warsaw in the subsequent months of the period between 2004 and 2014. This data was downloaded from the website <code>http://gorny.edu.pl/imiona/index.php</code> where you can also find information about the current number of births.</p>
+<p>There are 84816 rows in this set and the data concerns different names, from very popular names to rather rare ones.</p>
+<p>The columns of this data set present respectively:</p>
 <ul>
-<li>imię i płeć dziecka,</li>
-<li>rok i miesiąc którego dotyczy ta statystyka,</li>
-<li>liczba noworodków o danym imieniu urodzonych w Warszawie w danym roku i miesiącu.</li>
+<li>gender and name of the child,</li>
+<li>year and month in which the data was gathered,</li>
+<li>number of babies with a given name born in Warsaw in a certain year and month.</li>
 </ul>
-<p>Funkcją <code>head()</code> wyświetlamy pierwsze 6 wierszy.</p>
+<p>You can use the <code>head()</code> function to display the first 6 rows of this data set.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(imiona_warszawa)</code></pre>
 <pre><code>##    imie plec  rok miesiac liczba
 ## 1 Aaron    M 2004       7      0
@@ -186,7 +186,7 @@ Data Crunchers
 ## 4 Aaron    M 2004      10      0
 ## 5 Aaron    M 2004      11      0
 ## 6 Aaron    M 2004      12      0</code></pre>
-<p>Funkcją <code>levels()</code> wyświetlamy listę różnych imion, które są opisane w tym zbiorze danych.</p>
+<p>Use the <code>levels()</code> function to display a list of all the names included in this data set.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(imiona_warszawa$imie)</code></pre>
 <pre><code>##   [1] &quot;Aaron&quot;           &quot;Abigail&quot;         &quot;Ada&quot;            
 ##   [4] &quot;Adam&quot;            &quot;Adela&quot;           &quot;Adina&quot;          
@@ -464,42 +464,42 @@ Data Crunchers
 <p>Informacja o wyposażeniu jest opisana przez napis z wartościami rozdzielanymi przecinkiem, przez co sam napis może być bardzo długi.</p>
 <p>Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(auta2012)</code></pre>
-<pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW         Marka     Model
-## 1 49900    PLN      49900       brutto 140 103           Kia    Carens
-## 2 88000    PLN      88000       brutto 156 115    Mitsubishi Outlander
-## 3 86000    PLN      86000       brutto 150 110     Chevrolet   Captiva
-## 4 25900    PLN      25900       brutto 163 120         Volvo       S80
-## 5 55900    PLN      55900        netto  NA  NA Mercedes-Benz  Sprinter
-## 6 45900    PLN      45900        netto 150 110 Mercedes-Benz     Viano
-##   Wersja Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km
-## 1                 4/5              1991         41000
-## 2                 4/5              2179         46500
-## 3                 4/5              1996          8000
-## 4                 4/5              2400        200000
-## 5                 4/5              2200        169400
-## 6                 4/5              2200        141100
-##            Rodzaj.paliwa Rok.produkcji            Kolor
-## 1 olej napedowy (diesel)          2008                 
-## 2 olej napedowy (diesel)          2008                 
-## 3 olej napedowy (diesel)          2009                 
-## 4 olej napedowy (diesel)          2003 srebrny-metallic
-## 5 olej napedowy (diesel)          2007            bialy
-## 6 olej napedowy (diesel)          2004 bordowy-metallic
-##   Kraj.aktualnej.rejestracji Kraj.pochodzenia Pojazd.uszkodzony
-## 1                     Polska                                   
-## 2                     Polska                                   
-## 3                     Polska                                   
-## 4                     Polska           Wlochy                  
-## 5                                                              
-## 6                                                              
-##   Skrzynia.biegow Status.pojazdu.sprowadzonego
-## 1        manualna                             
-## 2        manualna                             
-## 3        manualna                             
-## 4        manualna sprowadzony / zarejestrowany
-## 5        manualna                             
-## 6        manualna                             
-##                                                                                                                                                                                                                                             Wyposazenie.dodatkowe
+<pre><code>##   Price Currency Price.in.PLN Gross.Net  HP  kW         Brand     Model
+## 1 49900      PLN        49900    brutto 140 103           Kia    Carens
+## 2 88000      PLN        88000    brutto 156 115    Mitsubishi Outlander
+## 3 86000      PLN        86000    brutto 150 110     Chevrolet   Captiva
+## 4 25900      PLN        25900    brutto 163 120         Volvo       S80
+## 5 55900      PLN        55900     netto  NA  NA Mercedes-Benz  Sprinter
+## 6 45900      PLN        45900     netto 150 110 Mercedes-Benz     Viano
+##   Version Nubmer.of.doors Engine.cubic.capacity Mileage
+## 1                     4/5                  1991   41000
+## 2                     4/5                  2179   46500
+## 3                     4/5                  1996    8000
+## 4                     4/5                  2400  200000
+## 5                     4/5                  2200  169400
+## 6                     4/5                  2200  141100
+##             Type.of.fuel Year            Color
+## 1 olej napedowy (diesel) 2008                 
+## 2 olej napedowy (diesel) 2008                 
+## 3 olej napedowy (diesel) 2009                 
+## 4 olej napedowy (diesel) 2003 srebrny-metallic
+## 5 olej napedowy (diesel) 2007            bialy
+## 6 olej napedowy (diesel) 2004 bordowy-metallic
+##   Country.of.current.registration Country.of.origin Is.damaged
+## 1                          Polska                             
+## 2                          Polska                             
+## 3                          Polska                             
+## 4                          Polska            Wlochy           
+## 5                                                             
+## 6                                                             
+##   Transmission                  Is.imported
+## 1     manualna                             
+## 2     manualna                             
+## 3     manualna                             
+## 4     manualna sprowadzony / zarejestrowany
+## 5     manualna                             
+## 6     manualna                             
+##                                                                                                                                                                                                                                                       Accessories
 ## 1                                                                                      ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
 ## 2                                                              ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
 ## 3                                                   ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
@@ -520,20 +520,20 @@ Data Crunchers
 <p>W zbiorze danych jest 248 wierszy, każdy wiersz odpowiada notowaniom z jednego dnia. W soboty, niedziele i święta giełda jest zamknięta, stąd ta liczba dni z notowaniami.</p>
 <p>Poniżej przedstawiamy pierwszych 6 wierszy z tego zbioru danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(WIG)</code></pre>
-<pre><code>##         Data Nazwa Kurs.otwarcia Kurs.maksymalny Kurs.minimalny
-## 1 2013-12-02   WIG      54627.26        54790.24       53934.52
-## 2 2013-12-03   WIG      54025.72        54025.72       53249.68
-## 3 2013-12-04   WIG      53222.49        53285.49       52535.56
-## 4 2013-12-05   WIG      52837.25        52900.48       52574.80
-## 5 2013-12-06   WIG      52837.58        52898.67       52513.14
-## 6 2013-12-09   WIG      53113.49        53186.73       52881.29
-##   Kurs.zamkniecia Zmiana Wartosc.obrotu.w.tys..zl
-## 1        53934.52  -1.41                 640784.2
-## 2        53276.83  -1.22                 914147.6
-## 3        52867.03  -0.77                 968047.2
-## 4        52597.13  -0.51                 808039.1
-## 5        52727.52   0.25                1012871.6
-## 6        52881.29   0.29                 599884.1</code></pre>
+<pre><code>##         Date Name Opening Price Max Price Min Price Closing Price Change
+## 1 2013-12-02  WIG      54627.26  54790.24  53934.52      53934.52  -1.41
+## 2 2013-12-03  WIG      54025.72  54025.72  53249.68      53276.83  -1.22
+## 3 2013-12-04  WIG      53222.49  53285.49  52535.56      52867.03  -0.77
+## 4 2013-12-05  WIG      52837.25  52900.48  52574.80      52597.13  -0.51
+## 5 2013-12-06  WIG      52837.58  52898.67  52513.14      52727.52   0.25
+## 6 2013-12-09  WIG      53113.49  53186.73  52881.29      52881.29   0.29
+##    Turnover
+## 1  640784.2
+## 2  914147.6
+## 3  968047.2
+## 4  808039.1
+## 5 1012871.6
+## 6  599884.1</code></pre>
 </div>
 <div id="wzrost-rodzicow-i-dzieci" class="slide section level1">
 <h1>Wzrost rodziców i dzieci</h1>
@@ -541,15 +541,15 @@ Data Crunchers
 <p>Oryginalne zbiory danych obu tych badaczy są dostępne w zmiennych <code>galton</code> i <code>pearson</code>. Na bazie tych zbiorów danych można opisywać zależność pomiędzy wzrostem syna a ojca (<code>pearson</code>) oraz zależność pomiędzy ważoną średnią z wzrostu rodziców (<code>galton</code>) z wzrostem syna.</p>
 <p>Poniżej przedstawiamy pierwszych 6 wierszy z każdego ze zbiorów danych. W zbiorze danych <code>galton</code> znajduje się 928 wierszy a w zbiorze danych <code>pearson</code> znajduje się 1078 wierszy.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(galton)</code></pre>
-<pre><code>##     syn rodzic
-## 1 156.7  179.1
-## 2 156.7  174.0
-## 3 156.7  166.4
-## 4 156.7  163.8
-## 5 156.7  162.6
-## 6 158.0  171.4</code></pre>
+<pre><code>##     son mid_parent
+## 1 156.7      179.1
+## 2 156.7      174.0
+## 3 156.7      166.4
+## 4 156.7      163.8
+## 5 156.7      162.6
+## 6 158.0      171.4</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(pearson)</code></pre>
-<pre><code>##     syn ojciec
+<pre><code>##     son father
 ## 1 151.8  165.2
 ## 2 160.6  160.7
 ## 3 160.9  165.0
@@ -683,18 +683,16 @@ Data Crunchers
 </ul>
 <p>Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(TCGA_BRCA)</code></pre>
-<pre><code>##                TP53   plec czy.zyje dni.do.smierci czy.nowy.guz
-## 1         Wild type female     live             NA           no
-## 2             Other female     live             NA         &lt;NA&gt;
-## 3         Wild type female     live             NA           no
-## 4         Wild type female     live             NA           no
-## 5 Missense_Mutation female     dead           1009         &lt;NA&gt;
-## 6         Wild type female     live             NA           no</code></pre>
+<pre><code>##                TP53 gender vital.status days.to.death new.tumor
+## 1         Wild type female         live            NA        no
+## 2             Other female         live            NA      &lt;NA&gt;
+## 3         Wild type female         live            NA        no
+## 4         Wild type female         live            NA        no
+## 5 Missense_Mutation female         dead          1009      &lt;NA&gt;
+## 6         Wild type female         live            NA        no</code></pre>
 <p>Poniżej przedstawiamy liczbę pacjentów z podziałem na płci oraz z podziałem na rodzaj mutacji genu TP53 (<code>Wild type</code> oznacza brak mutacji).</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(TCGA_BRCA$plec)</code></pre>
-<pre><code>## 
-## female   male 
-##    989     10</code></pre>
+<pre><code>## &lt; table of extent 0 &gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(TCGA_BRCA$TP53)</code></pre>
 <pre><code>## 
 ## Missense_Mutation             Other         Wild type 
