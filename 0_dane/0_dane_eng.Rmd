@@ -96,7 +96,7 @@ head(cats_birds)
 
 The data set `warsaw_names` was prepared to present methods of trend analysis and methods of text analysis. 
 
-The data set contains information on the number of babies with a certain name born in Warsaw in the subsequent months of the period between 2004 and 2014.   This data was downloaded from the website `http://gorny.edu.pl/imiona/index.php` where you can also find information about the current number of births. 
+The data set contains information on the number of babies with certain names in Warsaw in the subsequent months of the period between 2004 and 2014.   This data was downloaded from the website `http://gorny.edu.pl/imiona/index.php` where you can also find information about the current number of births. 
 
 There are 84816 rows in this set and the data concerns different names, from very popular names to rather rare ones.  
 
@@ -104,7 +104,7 @@ The columns of this data set present respectively:
 
 * gender and name of the child,
 *	year and month in which the data was gathered,
-*	number of babies with a given name born in Warsaw in a certain year and month.
+*	tatistics of first names in a given year and month.
 
 You can use the `head()` function to display the first 6 rows of this data set.
 
@@ -177,7 +177,7 @@ The subsequent columns present respectively:
 *	opening and closing share price, minimum and maximum share price,
 *	change in share price and the turnover in thousands of PLN.
 
-There are 248 rows in the data set and each row corresponds to one day of quotation.  The Warsaw stock Exchange is closed on Saturdays, Sundays and holidays and the number of quotation days is respectively smaller. 
+There are 248 rows in the data set and each row corresponds to one day of quotation.  The Warsaw Stock Exchange is closed on Saturdays, Sundays and holidays and the number of quotation days is respectively smaller. 
 
 Below you can see 6 first rows of this data set.
 

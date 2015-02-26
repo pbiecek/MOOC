@@ -106,7 +106,7 @@ Kolejne kolumny w tym zbiorze danych przedstawiają:
 
 * imię i płeć dziecka,
 * rok i miesiąc którego dotyczy ta statystyka,
-* liczba noworodków o danym imieniu urodzonych w Warszawie w danym roku i miesiącu.
+* liczbę noworodków o danym imieniu urodzonych w Warszawie w danym roku i miesiącu.
 
 Funkcją `head()` wyświetlamy pierwsze 6 wierszy.
 
@@ -152,10 +152,10 @@ Dane zostały pobrane w roku 2012 z serwisu ogłoszeń `otomoto.pl`. Zbiór dany
 Każda oferta (każdy wiersz) opisana jest przez 21 zmiennych, w tym:
 
 * cenę, walutę i informację czy jest to cena brutto czy netto,
-* informacja o mocy silnika w koniach mechanicznych i kW, oraz jego pojemności,
-* informacja o modelu, marce, wersji auta,
-* informacja o rodzaju napędu, roku produkcji oraz przebiegu (w km),
-* informacja o kolorze, liczbie drzwi, kraju pochodzenia, kraju rejestracji oraz wyposażeniu.
+* informację o mocy silnika w koniach mechanicznych i kW, oraz jego pojemności,
+* informację o modelu, marce, wersji auta,
+* informację o rodzaju napędu, roku produkcji oraz przebiegu (w km),
+* informację o kolorze, liczbie drzwi, kraju pochodzenia, kraju rejestracji oraz wyposażeniu.
 
 Informacja o wyposażeniu jest opisana przez napis z wartościami rozdzielanymi przecinkiem, przez co sam napis może być bardzo długi.
 
@@ -173,11 +173,11 @@ Zbiór danych `WIG` przygotowaliśmy po to, by przyjrzeć się analizie i wizual
 
 Ze strony Giełdy Papierów Wartościowych http://www.gpwinfostrefa.pl/GPWIS2/pl/index/ pobrano dzienne notowania dla indeksu WIG (Warszawski Indeks Giełdowy) z okresu grudzień 2013 - listopad 2014.
 
-W kolejnych kolumnach przedstawione jest:
+W kolejnych kolumnach przedstawiono:
 
-* data, której dotyczą notowania,
+* datę, której dotyczą notowania,
 * kurs otwarcia, zamknięcia, kurs minimalny i maksymalny,
-* zmiana kursu oraz wartość obrotów w tysiącach złotych.
+* zmianę kursu oraz wartość obrotów w tysiącach złotych.
 
 W zbiorze danych jest 248 wierszy, każdy wiersz odpowiada notowaniom z jednego dnia. W soboty, niedziele i święta giełda jest zamknięta, stąd ta liczba dni z notowaniami.
 
@@ -259,9 +259,9 @@ head(diagnoza, 2)
 
 # Oceny odcinków seriali filmowych
 
-W zbiorze danych `serialeIMDB` zebraliśmy informacje o popularności odcinków seriali telewizyjnych.
+W zbiorze danych `serialeIMDB` zebraliśmy informacje o popularności odcinków seriali.
 
-Z serwisu http:///www.imdb.com pobraliśmy dane o ocenach oraz liczbie oddanych głosów każdego odcinka dla 200 najpopularniejszych seriali telewizyjnych. W zbiorze danych są również umieszczone nazwy seriali oraz nazwy poszczególnych odcinków.
+Z serwisu http:///www.imdb.com pobraliśmy dane o ocenach oraz liczbie głosów oddanych na dany odcinek dla 200 najpopularniejszych seriali telewizyjnych. W zbiorze danych są również umieszczone nazwy seriali oraz nazwy poszczególnych odcinków.
 
 Każdy wiersz opisuje jeden odcinek, wierszy w sumie jest 20122. Kolejne zmienne/kolumny opisują:
 
