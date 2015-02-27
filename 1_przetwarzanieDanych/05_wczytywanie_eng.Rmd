@@ -31,7 +31,7 @@ This episode will try to answer the following questions:
 
 The name *text file* comes from the fact that the content of such file can be opened with a standard editor such as Notepad in Windows or vim in Linux/OSX. Text files can be also opened with RStudio program. If you plan to work often on big text files or on many files at the same time, you should equip yourself with a good tool like *Sublime Text*, for example. 
 
-Let us take a look at a table with data saved in the file `http://biecek.pl/MOOC/dane/koty_ptaki_eng.csv`. 
+Let us take a look at a table with data saved in the file `http://biecek.pl/MOOC/dane/cats_birds.csv`. 
 
 This is the content of that file:
 

@@ -1,0 +1,14 @@
+species;weight;length;speed;habitat;lifespan;group
+Tiger;300.00;2.5; 60;Asia;25;Cat 
+Lion;200.00;2.0; 80;Africa;29;Cat 
+Cheetah;100.00;1.7; 90;America;15;Cat 
+Jaguar; 80.00;1.7; 70;America;13;Cat 
+Puma; 70.00;1.4; 85;Asia;21;Cat 
+Leopard; 60.00;1.4;115;Africa;12;Cat 
+Irbis; 50.00;1.3; 65;Asia;18;Cat 
+Swift;  0.05;0.2;170;Eurasia;20;Bird 
+Ostrich;150.00;2.5; 70;Africa;45;Bird 
+Golden Eagle;5.00;0.9;160;North;20;Bird 
+Peregrine Falcon;0.70;0.5;110;North;15;Bird 
+Falcon Norwegian;2.00;0.7;100;North;20;Bird 
+Albatros;4.00;0.8;120;South;50;Bird 
