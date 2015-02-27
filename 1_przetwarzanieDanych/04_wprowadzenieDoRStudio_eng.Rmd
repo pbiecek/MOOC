@@ -146,4 +146,3 @@ First exercises are quite simple but their level of difficulty will grow with ti
 You can find the key to the tasks on the course’s website. You can check your performance at any time. 
 
 Your task at the end of this episode is to activate in R all the presented commands and to check whether your results are correct. 
-
