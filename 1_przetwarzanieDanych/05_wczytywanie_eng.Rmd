@@ -1,0 +1,342 @@
+---
+title: "How to load data into R?"
+author: "Data Crunchers"
+date: "season 1 / episode 4 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Press `A` to switch from slides to continuous text. <br> Press `T` to see the table of contents."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / eksploracja danych / wczytywanie danych do R"
+---
+
+# What is the topic of this episode?
+
+Before we can start the data analysis we must first load data into R.
+
+Data can be stored in many different formats such as a database, a text file, an Excel file (newer .xslx or older .xls) or as files in format of any program for data analysis (SAS, SPSS, etc.).
+
+This episode will try to answer the following questions:
+
+- How to load tabular data from text files?
+-	How to load tabular data from Excel files [xls or xlsx]?
+-	How to load data from R’s packages?
+-	Where can we look for help in loading data from files in other formats/prepared in other programs?
+
+---
+
+# Tabular data in text files
+
+The name *text file* comes from the fact that the content of such file can be opened with a standard editor such as Notepad in Windows or vim in Linux/OSX. Text files can be also opened with RStudio program. If you plan to work often on big text files or on many files at the same time, you should equip yourself with a good tool like *Sublime Text*, for example. 
+
+Let us take a look at a table with data saved in the file `http://biecek.pl/MOOC/dane/koty_ptaki_eng.csv`. 
+
+This is the content of that file:
+
+```{}
+species;weight;length;speed;habitat;lifespan;group
+Tiger;300.00;2.5; 60;Asia;25;Cat 
+Lion;200.00;2.0; 80;Africa;29;Cat 
+Cheetah;100.00;1.7; 90;America;15;Cat 
+Jaguar; 80.00;1.7; 70;America;13;Cat 
+Puma; 70.00;1.4; 85;Asia;21;Cat 
+Leopard; 60.00;1.4;115;Africa;12;Cat 
+Irbis; 50.00;1.3; 65;Asia;18;Cat 
+Swift;  0.05;0.2;170;Eurasia;20;Bird 
+Ostrich;150.00;2.5; 70;Africa;45;Bird 
+Golden Eagle;5.00;0.9;160;North;20;Bird 
+Peregrine Falcon;0.70;0.5;110;North;15;Bird 
+Falcon Norwegian;2.00;0.7;100;North;20;Bird 
+Albatros;4.00;0.8;120;South;50;Bird 
+```
+---
+
+# Tabular data in text files
+
+How is this tabular data stored in the file?
+
+Once we put the values in columns we notice that the logical structure of the file is a table with values separated by semicolons. 
+
+![Zbiór danych o kotach](figs/koty_ptaki_ramka2_eng.png)
+
+Notice that:
+
+- the first row is a subject line – it contains names of columns separated by semicolons (species;weight;length;speed;habitat;lifespan;group),
+-	next rows are formed by data in the form of columns separated by the sign `;` (semicolon),
+-	the file contains numbers other than integers – a sign used as a decimal separator is `,` (comma).
+
+---
+
+# Loading data into R
+
+The command loading data into R usually consists of three modules.  
+
+The last module (located on the right side on the model below) is a function which reads, processes and transforms the data so that it could be processed by R (on the model below this function is `read.table()`).
+
+The data needs to be given some name before it is processed (the left module of the model below). That name is often referred to as a *variable*. 
+
+You can use either `<-` or `=` operator to attribute values read by the function to the variable.
+
+Unless the result of the function is attributed to the variable, it is displayed on the screen in R. If you want to use the result in the future, you should attribute it to the variable. 
+
+![Zbiór danych o kotach](figs/wczytywanie.png)
+
+More information about attributing values to variables is presented in the episode no 4 entitled *Interactive work with R*. 
+
+---
+
+# Tabular data in text files 
+
+Let us consider first the right side of the presented model, that is, the function loading the data. 
+
+Function `read.table()` has got many arguments (see the next slide) but we do not need to define all of them here. It is enough to specify the name of the file and the arguments whose values should be other than default. 
+
+In case of the file discussed here we need to specify the arguments: 
+
+- `file = http://biecek.pl/MOOC/dane/koty_ptaki.csv` (path to the text file; in this case we read the data directly from the Internet address), 
+- `sep=";"` (semicolons will separate subsequent columns), 
+- `dec=","` (commas will be decimal separators), 
+- `header=TRUE` (the first row has a title).
+
+The loaded data set  is displayed on the computer screen because result of the function is not attributed to any variable. 
+
+```{r, message=FALSE}
+read.table(file = "http://biecek.pl/MOOC/dane/koty_ptaki.csv", 
+          sep=";", dec=",", header=TRUE)
+```
+
+---
+
+# Tabular data in text files
+
+Function `read.table()` can be used to load data from text files. This function has many arguments because text files can be very diverse. The following declaration presents chosen arguments (some of them were skipped to avoid obscuring the image).
+
+```{}
+read.table(file, header = FALSE, sep = "", dec = ".",  nrows = -1,
+           skip = 0, comment.char = "#",
+           stringsAsFactors = default.stringsAsFactors(), ...)
+```
+
+Data can be saved in many formats and for this reason the function’s arguments describe the format of the loaded data. The following list explains the meaning of the subsequent arguments.
+
+- `file` – a path to the file with data; it can also be an URL address. If we give values of arguments in the default order, we can skip names of arguments (this is why I will not write names of arguments in the following examples).
+-	`header` – a flag specifying whether the first row should be treated as a header. In our case `header=TRUE`.
+-	`sep` – a sign separating the columns. In our case `sep=";"` but there are other popular separators such as tab, comma or space.
+-	`dec` – decimal separator. It is usually ``. or `,`. In our case `dec=","`.
+-	`nrows` – a maximum number of rows to be loaded. The default value of this argument is -1, that is, load all the rows. 
+-	`skip` – number of the first rows to be skipped in the process of loading data. The default value is 0, that is, do not skip any rows.
+- `comment.char` – comment sign. If the data contains that sign, then the content from that sign up to the end of the line will be ignored. 
+-	`stringsAsFactors` – this argument states whether the text should be transformed into quality variables. Its default value is TRUE. Episode 11 entitled *Qualitative variables* will broaden your knowledge about the consequences of such transformation. 
+
+
+---
+
+# Tabular data in text files
+
+The outcome of `read.table()` function is a tabular data set called a *data frame* in R. 
+
+We need to save the result of `read.table()` function in variable to be able to work on it. We can save it for example in the variable `cats_birds`. 
+
+```{r, message=FALSE}
+cats_birds <- read.table("http://biecek.pl/MOOC/dane/cats_birds.csv", 
+                        sep=";", dec=",", header=TRUE)
+# write the variable name and it's content will be listed
+cats_birds
+```
+
+---
+
+# Tabular data in text files
+
+In RStudio all the available data is displayed in the right upper window entitled *Environment*. You should see the data in that window if you loaded it correctly. 
+
+If you double click on the chosen variable, you will open a window presenting the content of that variable. In this way you can quickly check what has been loaded into the variable `cats_birds`. 
+
+For reasons of efficiency only the first 1000 rows and several hundred columns are displayed. In case of huge data sets only small fragment of the whole will be displayed. 
+
+![Zbiór danych o kotach](figs/koty2.png)
+
+---
+
+# Data in Excel format
+
+Another popular format used to store data is Excel format [`xls` or `xlsx` files].
+
+There are several R packages allowing for reading data saved in Excel format. The most popular ones are `gdata`, `xlsReadWrite`, `XLConnect` and `xlsx`. They use different external libraries and for this reason some of them may be more efficient on Windows and some of them on Linux. 
+
+In this episode we will use `read.xls()` function from gdata package. It requires an installed version of perl program. Gdata package is not installed with the basic distribution of R so before you use it for the first time you need to install it using the command `install.packages("gdata")`. 
+
+The data that we want to load are available as an Excel file at `http://biecek.pl/MOOC/dane/koty_ptaki.xls` and it looks in the following way:
+
+![Dane Excelowe](figs/excel.png)
+
+---
+
+# Data in Excel format
+
+The function `read.xls()` requires two arguments: path to the file and the `sheet` argument, which says which Excel sheet should be read. 
+
+```{r, warning=FALSE, message=FALSE}
+library(gdata)
+read.xls("http://biecek.pl/MOOC/dane/koty_ptaki.xls", sheet = 1)
+```
+
+![Dane Excelowe](figs/excel.png)
+---
+
+# Dane w formacie programu Excel
+
+Dlaczego dostępnych jest tak wiele pakietów do wczytywania danych z Excela do R?
+Otóż, żadne z rozwiązań nie jest wyraźnie lepsze od pozostałych. Jedne są szybsze, inne lepiej radzą sobie z dużymi danymi. 
+
+Zestawienie silnych i słabych stron poszczególnych pakietów znajduje się na stronie http://www.thertrader.com/2014/02/11/a-million-ways-to-connect-r-and-excel/. Wybrane fragmenty porównania wymieniamy poniżej.
+
+- `XLConnect` ma dużo możliwości, szczególnie dotyczących konwersji typów, ale jest wolniejszy niż inne rozwiązania i wymagający jeżeli chodzi o RAM, przez co może nie poradzić sobie z dużymi zbiorami danych.
+
+- `gdata` ma kilka użytecznych funkcji, pozwalających na nawigację po skoroszytach, np. 
+`sheetCount()` i `sheetNames()`
+
+Wczytując dane z plików, które zostały stworzone na innym systemie operacyjnym lub w innej lokalizacji, trzeba liczyć się z różnicami dotyczącymi kodowania polskich znaków lub np. kropek dziesiętnych w liczbach rzeczywistych. Jeżeli ten problem może nas dotyczyć, to warto zapoznać się z kartą ,,Dobrych Praktyk'' dostępnych na stronie 
+http://withr.me/blog/2013/11/15/configure-character-encoding-for-r-under-linux-and-windows/
+
+Zestawienie najpopularniejszych pakietów wczytujących dane z Excela prezentuje poniższa tabela.
+
+pakiet | funkcja_odczyt | funkcja_zapis  | formaty | funkcjonalność | szybkość | język
+---           | ---    | ---    | --- | --- | --- | ---
+xlsx      | read.xlsx() | write.xlsx() | .xlsx, .xls | średnia  |mała | Java
+openxlsx      | read.xlsx() | write.xlsx() | .xlsx | średnia  |duża | Rcpp
+gdata         | read.xls() | -- | .xlsx, .xls | mała | średnia | Perl
+WriteXLS      | -- | WriteXLS() | .xlsx, .xls | mała | średnia | Perl
+XLConnect     | readWorksheet() | writeWorksheet() | .xlsx, .xls | duża  | mała | Java
+
+
+---
+
+# Dane binarne programu R
+
+Natywnym formatem dla programu R są pliki binarne o rozszerzeniu `rda` lub `RData`. 
+
+Dane w tym formacie są skompresowane, przez co zajmują mniej miejsca na dysku niż w pliku tekstowym lub formacie Excela. Wadą jest to, że można je otworzyć tylko w programie R.
+
+Dane w tym formacie można wczytać do programu R poleceniem `load()`. Pierwszym argumentem tej funkcji jest ścieżka do pliku z danymi. Jeżeli chcemy dane odczytać z internetu, należy dodatkowo użyć funkcji `url()`. 
+
+*Uwaga!* W przeciwieństwie do wcześniej poznanych funkcji, funkcja `load()` nie zwraca zbioru danych jako wynik, ale ładuje zbiór danych bezpośrednio do przestrzeni nazw (dane zapisane są wraz z nazwą zmiennej). Dlatego w poniższym przykładzie nie ma instrukcji przypisania do zmiennej `koty_ptaki`. Nazwa tej zmiennej jest pamiętana wewnątrz pliku `rda`.
+
+```{r, warning=FALSE, message=FALSE}
+load(url("http://biecek.pl/MOOC/dane/koty_ptaki.rda"))
+koty_ptaki
+```
+
+---
+
+# Wczytywanie danych z pakietów R
+
+Przygotowując ten kurs musiałem zmierzyć się z następującym problemem. Jak w najprostszy sposób udostępnić uczestnikom kursu kilka zbiorów danych? Rozważając różne opcje, stwierdziłem że najłatwiejsza to udpostępnienie danych z użyciem pakietu dla programu R.
+
+Pakiety to zbiory funkcji oraz zbiorów danych. Można takie pakiety wygodnie przygotowywać oraz udostępniać innym osobom. Istnieją pakiety zawierające tylko funkcje, wyłącznie zbiory danych lub oba te zestawy.
+
+Aby sprawdzić jakie zbiory danych są dostępne w określonym pakiecie, można wykorzystać funkcję `data()` z argumentem `package`. 
+Zobaczmy jakie zbiory danych udostępnione są w pakiecie `PogromcyDanych`.
+
+```{r, warning=FALSE, message=FALSE}
+data(package="PogromcyDanych")
+```
+
+*Uwaga!* Pakiet `PogromcyDanych` nie jest dostępny w podstawowej dystrybucji programu R i trzeba go wcześniej zainstalować poleceniem `install.packages()`. Szczegółowa instrukcja, jak to zrobić jest przedstawiona w odcinku 3 *Jak zainstalować R, RStudio oraz dodatkowe pakiety?*.
+
+![Lista dostępnych zbiorów danych](figs/datasets_list.png)
+---
+
+# Wczytywanie danych z pakietów R
+
+Jednym ze zbiorów danych udostępnionych w tym pakiecie jest zbiór danych `koty_ptaki`.
+
+Po wczytaniu pakietu, ten zbiór danych jest dostępny bez potrzeby stosowania dodatkowych instrukcji. Można go wyświetlić na ekranie wpisując do konsoli jego nazwę.
+
+```{r, warning=FALSE, message=FALSE}
+library(PogromcyDanych)
+koty_ptaki
+```
+
+---
+
+# Wczytywanie danych poprzez web API
+
+
+Pewne dane dostępne są przez serwisy z danymi poprzez API (ang. Application Programming Interface).
+Oznacza to, że nie możemy pobrać wszystkich danych z bazy danych, ale możemy tą bazę odpytywać o określone informacje.
+
+W ten sposób można dostać się do danych takich gigantów jak WorldBank, Eurostat czy osatnio GUS.
+
+Przykładem niech będzie baza Eurostat, do której można sięgać używając funkcji `getEurostatRCV()` z pakietu `SmarterPoland`. W bazie Eurostat tabela `tsdtr210` zawiera dane o ilości pasażero-kilometrów dla różnych krajów i środków transportu. Ta tabela jest dostępna w pliku 
+http://ec.europa.eu/eurostat/tgm/table.do?tab=table&init=1&language=en&pcode=tsdtr210&plugin=1
+
+Używając API udostępnionego przez pakiet `SmarterPoland` pokażmy jak pobierać te dane bezpośrednio do R.
+
+*Uwaga!* Pakiet `SmarterPoland` nie jest dostępny w podstawowej dystrybucji programu R i trzeba go wcześniej zainstalować poleceniem `install.packages()`. Szczegółowa instrukcja, jak to zrobić jest przedstawiona w odcinku 3 *Jak zainstalować R, RStudio oraz dodatkowe pakiety?*.
+
+```{r, warning=FALSE, message=FALSE}
+library(SmarterPoland)
+tsdtr210 <- getEurostatRCV("tsdtr210")
+head(tsdtr210, 3)
+summary(tsdtr210)
+```
+
+---
+
+# Podsumowanie instrukcji R
+
+W tym odcinku omawialiśmy funkcje służące do wczytywania danych z różnych formatów: tekstowych, Excelowych, binarnych. Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.
+
+```{r, eval=FALSE}
+# wczytywanie danych z plików tekstowych i przypisanie tej wartości do zmiennej `koty_ptaki`
+koty_ptaki <- read.table("http://biecek.pl/MOOC/dane/koty_ptaki.csv", 
+                        sep=";", dec=",", header=TRUE)
+# wyświetlanie wartości zmiennej
+koty_ptaki
+
+# wczytywanie danych w formacie Excela za pomocą funkcji `read.xls()` z pakietu `gdata`
+library(gdata)
+koty_ptaki_excel <- read.xls("http://biecek.pl/MOOC/dane/koty_ptaki.xls", sheet = 1)
+
+# wczytywanie danych w formacie binarnym za pomocą funkcji load()
+load(url("http://biecek.pl/MOOC/dane/koty_ptaki.rda"))
+
+# wyświetlenie zbiorów danych dostępnych w pakiecie `PogromcyDanych`
+data(package="PogromcyDanych")
+
+# wczytanie danych koty_ptaki z pakietu `PogromcyDanych`
+library(PogromcyDanych)
+koty_ptaki
+
+# wczytanie danych z Eurostatu o wykorzystaniu różnych środków transportu w różnych krajach
+library(SmarterPoland)
+tsdtr210 <- getEurostatRCV("tsdtr210")
+head(tsdtr210, 3)
+summary(tsdtr210)
+```
+
+---
+
+# Zadanie
+
+W kolejnych odcinkach będziemy korzystać ze zbioru danych o cenach aut. 
+Ten zbiór danych można pobrać ze strony kursu w różnych formatach pod następującymi linkami:
+
+- dane Excelowe, http://biecek.pl/MOOC/dane/auta2012mini.xls
+
+- dane tekstowe, http://biecek.pl/MOOC/dane/auta2012mini.csv
+
+- dane binarne, http://biecek.pl/MOOC/dane/auta2012mini.rda
+
+- w pakiecie `PogromcyDanych` w zmiennej `auta2012`.
+
+*Zadanie:* 
+
+Wczytać do programu R dane wykorzystując każdy z tych formatów.
+
+*Uwaga!* Wskazane pliki mają do 3.5 MB wielkości. Ich pobieranie może trochę potrwać jeżeli połączenie internetowe nie jest dobre lub wiele osób jednocześnie z niego korzysta.
+
+Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
