@@ -186,96 +186,91 @@ read.xls("http://biecek.pl/MOOC/dane/koty_ptaki.xls", sheet = 1)
 ![Dane Excelowe](figs/excel.png)
 ---
 
-# Dane w formacie programu Excel
+# Data in Excel format
 
-Dlaczego dostępnych jest tak wiele pakietów do wczytywania danych z Excela do R?
-Otóż, żadne z rozwiązań nie jest wyraźnie lepsze od pozostałych. Jedne są szybsze, inne lepiej radzą sobie z dużymi danymi. 
+Why are there so many packages for loading data from Excel into R? Because none of the solutions that they propose is better than the others. Some of them are faster while other are better at coping with huge data sets. 
 
-Zestawienie silnych i słabych stron poszczególnych pakietów znajduje się na stronie http://www.thertrader.com/2014/02/11/a-million-ways-to-connect-r-and-excel/. Wybrane fragmenty porównania wymieniamy poniżej.
+An overview of strengths and weaknesses is available at: http://www.thertrader.com/2014/02/11/a-million-ways-to-connect-r-and-excel/. Below you can find chosen fragments of that overview:
 
-- `XLConnect` ma dużo możliwości, szczególnie dotyczących konwersji typów, ale jest wolniejszy niż inne rozwiązania i wymagający jeżeli chodzi o RAM, przez co może nie poradzić sobie z dużymi zbiorami danych.
+- `XLConnect` offers many possibilities, especially as far as conversion of files of various types is concerned. However, it is slower than other solutions and requires a lot of RAM. As a result it cannot manage extensive data sets. 
+-	`gdata` has got several useful functions facilitating navigation through sheets such as `sheetCount()` and `sheetNames()`.
 
-- `gdata` ma kilka użytecznych funkcji, pozwalających na nawigację po skoroszytach, np. 
-`sheetCount()` i `sheetNames()`
+When you load data from the files created on a different operating system than the one you are using or in a different place, you have to be prepared for problems concerning Polish characters encoding for example decimal full stops in real numbers. If you suspect that you may have this problems you should read the charter of ‘Good Practice’ available at http://withr.me/blog/2013/11/15/configure-character-encoding-for-r-under-linux-and-windows/. 
 
-Wczytując dane z plików, które zostały stworzone na innym systemie operacyjnym lub w innej lokalizacji, trzeba liczyć się z różnicami dotyczącymi kodowania polskich znaków lub np. kropek dziesiętnych w liczbach rzeczywistych. Jeżeli ten problem może nas dotyczyć, to warto zapoznać się z kartą ,,Dobrych Praktyk'' dostępnych na stronie 
-http://withr.me/blog/2013/11/15/configure-character-encoding-for-r-under-linux-and-windows/
+The following table presents a comparison of most popular packages loading data from Excel.
 
-Zestawienie najpopularniejszych pakietów wczytujących dane z Excela prezentuje poniższa tabela.
-
-pakiet | funkcja_odczyt | funkcja_zapis  | formaty | funkcjonalność | szybkość | język
+package       | read_function | write_function  | formats | features | speed | language
 ---           | ---    | ---    | --- | --- | --- | ---
-xlsx      | read.xlsx() | write.xlsx() | .xlsx, .xls | średnia  |mała | Java
-openxlsx      | read.xlsx() | write.xlsx() | .xlsx | średnia  |duża | Rcpp
-gdata         | read.xls() | -- | .xlsx, .xls | mała | średnia | Perl
-WriteXLS      | -- | WriteXLS() | .xlsx, .xls | mała | średnia | Perl
-XLConnect     | readWorksheet() | writeWorksheet() | .xlsx, .xls | duża  | mała | Java
+xlsx          | read.xlsx() | write.xlsx() | .xlsx, .xls | medium  | slow | Java
+openxlsx      | read.xlsx() | write.xlsx() | .xlsx | medium  | fast | Rcpp
+gdata         | read.xls() | -- | .xlsx, .xls | small | medium | Perl
+WriteXLS      | -- | WriteXLS() | .xlsx, .xls | small | medium | Perl
+XLConnect     | readWorksheet() | writeWorksheet() | .xlsx, .xls | a lot  | slow | Java
 
 
 ---
 
-# Dane binarne programu R
+# R’s binary data
 
-Natywnym formatem dla programu R są pliki binarne o rozszerzeniu `rda` lub `RData`. 
+A native format for R are `rda` or `RData` binary files. 
 
-Dane w tym formacie są skompresowane, przez co zajmują mniej miejsca na dysku niż w pliku tekstowym lub formacie Excela. Wadą jest to, że można je otworzyć tylko w programie R.
+Data saved in this format is compressed and it occupies less space on the disc than the same data saved as a text or an Excel file. The problem is that they can be opened only in R.
 
-Dane w tym formacie można wczytać do programu R poleceniem `load()`. Pierwszym argumentem tej funkcji jest ścieżka do pliku z danymi. Jeżeli chcemy dane odczytać z internetu, należy dodatkowo użyć funkcji `url()`. 
+Data in that format can be loaded into R with a command `load()`. The first argument of this function is a path to the file with the data. If you want to load the data from the Internet, you should additionally use the function `url()`. 
 
-*Uwaga!* W przeciwieństwie do wcześniej poznanych funkcji, funkcja `load()` nie zwraca zbioru danych jako wynik, ale ładuje zbiór danych bezpośrednio do przestrzeni nazw (dane zapisane są wraz z nazwą zmiennej). Dlatego w poniższym przykładzie nie ma instrukcji przypisania do zmiennej `koty_ptaki`. Nazwa tej zmiennej jest pamiętana wewnątrz pliku `rda`.
+*Note!* Unlike other functions that we have previously discussed, `load()` function does not process and then give the data set as a result but it loads the data set directly into the name space (the data is saved along with the name of the variable). This is why the example below does not include the command attributing the data to the variable `cats_birds`. The name of the variable is saved inside the `rda` file. 
 
 ```{r, warning=FALSE, message=FALSE}
-load(url("http://biecek.pl/MOOC/dane/koty_ptaki.rda"))
-koty_ptaki
+load(url("http://biecek.pl/MOOC/dane/cats_birds.rda"))
+cats_birds
 ```
 
 ---
 
-# Wczytywanie danych z pakietów R
+# Loading data from R packages
 
-Przygotowując ten kurs musiałem zmierzyć się z następującym problemem. Jak w najprostszy sposób udostępnić uczestnikom kursu kilka zbiorów danych? Rozważając różne opcje, stwierdziłem że najłatwiejsza to udpostępnienie danych z użyciem pakietu dla programu R.
+When I was preparing this course I had to face the following problem. I did not know how to make available several data sets to the participants of this course. I considered various options and I finally decided that the easiest way would be to make the data sets available using a package for R. 
 
-Pakiety to zbiory funkcji oraz zbiorów danych. Można takie pakiety wygodnie przygotowywać oraz udostępniać innym osobom. Istnieją pakiety zawierające tylko funkcje, wyłącznie zbiory danych lub oba te zestawy.
+Packages are sets of functions and data sets. It is easy to prepare them and to disseminate them to other people. Some packages contain only functions, some packages are made composed of data sets only, while others include both elements. 
 
-Aby sprawdzić jakie zbiory danych są dostępne w określonym pakiecie, można wykorzystać funkcję `data()` z argumentem `package`. 
-Zobaczmy jakie zbiory danych udostępnione są w pakiecie `PogromcyDanych`.
+If you want to check which data sets are available in a given package, you may use a function `data()` with an argument `package`. Let us see what data sets were made available in the package called `PogromcyDanych`.
 
 ```{r, warning=FALSE, message=FALSE}
 data(package="PogromcyDanych")
 ```
 
-*Uwaga!* Pakiet `PogromcyDanych` nie jest dostępny w podstawowej dystrybucji programu R i trzeba go wcześniej zainstalować poleceniem `install.packages()`. Szczegółowa instrukcja, jak to zrobić jest przedstawiona w odcinku 3 *Jak zainstalować R, RStudio oraz dodatkowe pakiety?*.
+*Note!* The package `ProgromcyDanych` is not available in the basic distribution of R. It must be preinstalled with a command `install.packages()`. You may find detailed information on how to do that in the episode 3 entitled *How to install R, RStudio and additional packages?*
+
+List of the available data sets
 
 ![Lista dostępnych zbiorów danych](figs/datasets_list.png)
 ---
 
-# Wczytywanie danych z pakietów R
+# Loading data from R packages
 
-Jednym ze zbiorów danych udostępnionych w tym pakiecie jest zbiór danych `koty_ptaki`.
+One of the data sets made available in that package is the data set called `cats_birds`. 
 
-Po wczytaniu pakietu, ten zbiór danych jest dostępny bez potrzeby stosowania dodatkowych instrukcji. Można go wyświetlić na ekranie wpisując do konsoli jego nazwę.
+Once you load the package, the data set is available and you do not need to use any additional commands to activate it. You can display it on the screen by entering its name into the console. 
 
 ```{r, warning=FALSE, message=FALSE}
 library(PogromcyDanych)
-koty_ptaki
+cats_birds
 ```
 
 ---
 
-# Wczytywanie danych poprzez web API
+# Loading data through web API
+
+Some data is available in the services with data through API (Application Programming Interface). It means that although you cannot download all the data from the database, you can ask that base about particular pieces of information.    
+
+In this way you can access giants such as WorlBank, Eurostat or, quite recently, GUS. 
 
 
-Pewne dane dostępne są przez serwisy z danymi poprzez API (ang. Application Programming Interface).
-Oznacza to, że nie możemy pobrać wszystkich danych z bazy danych, ale możemy tą bazę odpytywać o określone informacje.
+We shall use Eurostat as an example. You can access this database using `getEurostatRCV()` function from the package `SmarterPoland`. A table `tsdtr210` from Eurostat database contains information about the number of passenger kilometers for various countries and means of transport. The table is available in the file http://ec.europa.eu/eurostat/tgm/table.do?tab=table&init=1&language=en&pcode=tsdtr210&plugin=1 
 
-W ten sposób można dostać się do danych takich gigantów jak WorldBank, Eurostat czy osatnio GUS.
+I will show you how to load data directly into R using API from the package `SmarterPoland`. 
 
-Przykładem niech będzie baza Eurostat, do której można sięgać używając funkcji `getEurostatRCV()` z pakietu `SmarterPoland`. W bazie Eurostat tabela `tsdtr210` zawiera dane o ilości pasażero-kilometrów dla różnych krajów i środków transportu. Ta tabela jest dostępna w pliku 
-http://ec.europa.eu/eurostat/tgm/table.do?tab=table&init=1&language=en&pcode=tsdtr210&plugin=1
-
-Używając API udostępnionego przez pakiet `SmarterPoland` pokażmy jak pobierać te dane bezpośrednio do R.
-
-*Uwaga!* Pakiet `SmarterPoland` nie jest dostępny w podstawowej dystrybucji programu R i trzeba go wcześniej zainstalować poleceniem `install.packages()`. Szczegółowa instrukcja, jak to zrobić jest przedstawiona w odcinku 3 *Jak zainstalować R, RStudio oraz dodatkowe pakiety?*.
+*Note!* The package `SmarterPoland` is not available in the basic distribution of R. It must be preinstalled with a command `install.packages()`. You may find detailed information on how to do that in the episode 3 entitled *How to install R, RStudio and additional packages?*
 
 ```{r, warning=FALSE, message=FALSE}
 library(SmarterPoland)
@@ -286,32 +281,32 @@ summary(tsdtr210)
 
 ---
 
-# Podsumowanie instrukcji R
+# Summary of R instructions
 
-W tym odcinku omawialiśmy funkcje służące do wczytywania danych z różnych formatów: tekstowych, Excelowych, binarnych. Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.
+In this episode we have discussed functions for loading data from files in various formats: text, Excel and binary files. Below you will find a list of all the functions used in this episode.
 
 ```{r, eval=FALSE}
-# wczytywanie danych z plików tekstowych i przypisanie tej wartości do zmiennej `koty_ptaki`
-koty_ptaki <- read.table("http://biecek.pl/MOOC/dane/koty_ptaki.csv", 
+# loading data from text files and attributing that value to the variable `cats_birds`
+koty_ptaki <- read.table("http://biecek.pl/MOOC/dane/cats_birds.csv", 
                         sep=";", dec=",", header=TRUE)
-# wyświetlanie wartości zmiennej
+# # displaying value of the variable
 koty_ptaki
 
-# wczytywanie danych w formacie Excela za pomocą funkcji `read.xls()` z pakietu `gdata`
+# loading data in Excel format with the function `read.xls()` from the package `gdata`
 library(gdata)
 koty_ptaki_excel <- read.xls("http://biecek.pl/MOOC/dane/koty_ptaki.xls", sheet = 1)
 
-# wczytywanie danych w formacie binarnym za pomocą funkcji load()
+# loading data in binary format with the function `load()`
 load(url("http://biecek.pl/MOOC/dane/koty_ptaki.rda"))
 
-# wyświetlenie zbiorów danych dostępnych w pakiecie `PogromcyDanych`
+# displaying data sets available in the package `PogromcyDanych`
 data(package="PogromcyDanych")
 
-# wczytanie danych koty_ptaki z pakietu `PogromcyDanych`
+# loading data koty_ptaki from the package `PogromcyDanych`
 library(PogromcyDanych)
 koty_ptaki
 
-# wczytanie danych z Eurostatu o wykorzystaniu różnych środków transportu w różnych krajach
+# loading data from Eurostat on use of various means of transport in different countries
 library(SmarterPoland)
 tsdtr210 <- getEurostatRCV("tsdtr210")
 head(tsdtr210, 3)
@@ -320,23 +315,23 @@ summary(tsdtr210)
 
 ---
 
-# Zadanie
+# Exercise
 
-W kolejnych odcinkach będziemy korzystać ze zbioru danych o cenach aut. 
-Ten zbiór danych można pobrać ze strony kursu w różnych formatach pod następującymi linkami:
+In the next episodes we will use a data set with data on prices of cars. It can be downloaded from the webpage of the course in different formats at the following addresses:
 
-- dane Excelowe, http://biecek.pl/MOOC/dane/auta2012mini.xls
+- Excel data, http://biecek.pl/MOOC/dane/auta2012mini.xls
 
-- dane tekstowe, http://biecek.pl/MOOC/dane/auta2012mini.csv
+- text data, http://biecek.pl/MOOC/dane/auta2012mini.csv
 
-- dane binarne, http://biecek.pl/MOOC/dane/auta2012mini.rda
+- binary data, http://biecek.pl/MOOC/dane/auta2012mini.rda
 
-- w pakiecie `PogromcyDanych` w zmiennej `auta2012`.
+- in the package `PogromcyDanych` in the variable `auta2012`.
 
-*Zadanie:* 
+*Exercise:* 
 
-Wczytać do programu R dane wykorzystując każdy z tych formatów.
+Load the data into R using all of the above formats.
 
-*Uwaga!* Wskazane pliki mają do 3.5 MB wielkości. Ich pobieranie może trochę potrwać jeżeli połączenie internetowe nie jest dobre lub wiele osób jednocześnie z niego korzysta.
+*Note!* The files’ size is up to 3,5MB. If your Internet connection is not very efficient or if many people use it at the same time, downloading the files may take a long while. 
 
-Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+You may find the key to the exercises at https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+
