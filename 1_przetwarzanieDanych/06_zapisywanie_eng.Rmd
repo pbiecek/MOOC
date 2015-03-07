@@ -128,116 +128,117 @@ write.xlsx(two_cols, file="/Users/pbiecek/Documents/important_data.xlsx",
             sheetName="A Very Important Data")
 ```
 
-*Uwaga* Pakiet `xlsx` trzeba przed włączeniem najpierw zainstalować poleceniem `install.packages("xlsx")`.
+*Note.* Before you activate `xlsx` package you need to install it using the command `install.packages("xlsx")`.
 
-*Uwaga 2* Posiadacze systemu OSX w wersji Yosemitte (na dzień dzisiejszy, najnowszej) mogą mieć problem z włączniem pakietu `xlsx` jeżeli mają zainstalowaną złą (lub żadną) wersję programu Java. Należy zainstalować najnowszą wersję ze strony http://osxdaily.com/2014/10/21/get-java-os-x-yosemite/.
+*Note 2*. Users of OSX Yosemite (the latest version at present) may encounter problems in launching the `xlsx` package if they have installed the wrong version of Java (or none at all). Install the latest version from the website http://osxdaily.com/2014/10/21/get-java-os-x-yosemite/.
 
-*Uwaga 3* Posiadacze systemu Ubuntu mogą doinstalować potrzebne biblioteki poleceniem `sudo apt-get install r-cran-rjava`
+*Note 3*. Users of Ubuntu may install necessary libraries using the command `sudo apt-get install r-cran-rjava`.
  
 ---
 
-# Zapisywanie danych do plików binarnych
+# Saving data to binary files
 
-Do pliku w formacie natywnym R, dane można zapisać funkcją `save()`. Funkcja ta zapisuje jeden lub więcej obiektów o dowolnych strukturach - nie tylko danych tabelarycznych, ale również wektorów czy bardziej złożonych struktur (o tym czym są wektory czy inne struktury opowiemy w odcinku https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/07_indeksowanie.html). 
+You can use the `save()` function to save data to binary files native to R. This function saves one or more objects of any structure  –not only tabular data but also vectors and even more complex structures. 
 
-Wadą tego rozwiązania jest to, że format ten nie jest odczytywany przez inne pakiety statystyczne. 
+A disadvantage of this solution is the fact that this format is not read by other statistical packages. 
 
-Jeżeli jednak pracujemy głównie z programem R i chcemy w przyszłości te dane odczytywać tylko z programu R, to jest to najwygodniejsza opcja, produkująca najmniejsze pliki, które łatwo i szybko można ponownie wczytać poleceniem `load()`.
+However, if you work mainly on R and you want to read your data also in R in the future, this is the most convenient option. It produces files of the smallest size which can be easily and quickly loaded with the command `load()`.
 
-Przykład użycia funkcji `save()`.
+Example of use of the `save()` function. 
 
 ```{r, eval=FALSE}
-# do katalogu roboczego
-save(dwie_kolumny, file="wazne_dane.rda")
-
-# podając pełną nazwę ścieżki
-save(dwie_kolumny, file="/Users/pbiecek/Documents/wazne_dane.rda")
+# to working directory
+save(two_cols, file="important_data.rda")
+# a full path 
+save(two_cols, file="/Users/pbiecek/Documents/important_data.rda")
 ```
 
-Jeżeli chcemy zpisać do pliku więcej obiektów niż jeden, wystarczy je wskazać po przecinku. W poniższym przykładzie do jednego pliku zapisane będą trzy obiekty. 
+If you want to save to the file more than one object, you only need to write them down separating them with comas. In the following example three objects will be saved to one file. 
 
 ```{r, eval=FALSE}
-# tworzymy dwa wektory
+# let's create two vectors
 v1 <- 1:10
 l1 <- LETTERS[1:10]
-# Zapisujemy do pliku trzy obiekty: v1, l1, dwie_kolumny
-save(v1, l1, dwie_kolumny, file="trzy_obiekty.rda")
+# Saving all three objects to a single file: v1, l1, two_cols
+save(v1, l1, two_cols, file="three_objs.rda")
 ```
 
-Odczytując dane funkcją `load()`, do programu R wczytywane są obiekty razem z nazwami (pisaliśmy o tym w odcinku https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/05_wczytywanie.html). Dlatego możemy do jednego pliku zapisać kilka obiektów i po wczytaniu danych nie będzie kolizji nazw.
+When you load data into R with the function `load()`, you load objects along with their names (I wrote about this in the episode https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/05_wczytywanie_eng.html).  This is why several object can be saved to one file without the risk of name collision.  
 
 ---
 
-# Podsumowanie instrukcji R
+# Summary of R instructions
 
-W tym odcinku omawialiśmy funkcje służące do zapisywania danych do różnych formatów: tekstowych, Excelowych, binarnych. Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.
+This episode was devoted to functions for saving data to files in the following formats: text, Excel and binary files. Below you may see a list of all the commands presented in this episode. 
+
 
 ```{r, eval=FALSE}
-# tworzymy nowy zbiór danych
-dwie_kolumny <- data.frame(litery  = c("A", "B", "C"),
-                           liczby  = c(1,2,3))
-dwie_kolumny
-#   litery liczby
-# 1      A      1
-# 2      B      2
-# 3      C      3
+# a new dataset
+two_cols <- data.frame(letters  = c("A", "B", "C"),
+                       numbers  = c(1,2,3))
+two_cols
+#   letters numbers
+# 1       A       1
+# 2       B       2
+# 3       C       3
 
-# zapisujemy do pliku tekstowego w lokalnym katalogu
-write.table(dwie_kolumny, file="wazne_dane.csv", 
+write.table(two_cols, file="important_data.csv", 
             sep = ";", dec = ".")
-# który katalog jest lokalny/roboczy
+
+# where the file was written
 getwd()
 # /Users/pbiecek/Documents
 
-# Równoważnie możemy użyć ścieżki bezwzględnej
-write.table(dwie_kolumny, file="/Users/pbiecek/Documents/wazne_dane.csv", 
+# write with full path
+write.table(two_cols, file="/Users/pbiecek/Documents/important_data.csv", 
             sep = ";", dec = ".")
 
-# zapisujemy dane do formatu Excela
+
 library(xlsx)
-write.xlsx(dwie_kolumny, file="/Users/pbiecek/Documents/wazne_dane.xlsx", 
-            sheetName="Zakladka Wazne Dane")
+write.xlsx(two_cols, file="/Users/pbiecek/Documents/important_data.xlsx", 
+            sheetName="A Very Important Data")
 
-# zapisujemy dane do formatu binarnego
-# do katalogu roboczego
-save(dwie_kolumny, file="wazne_dane.rda")
+# to working directory
+save(two_cols, file="important_data.rda")
+# a full path 
+save(two_cols, file="/Users/pbiecek/Documents/important_data.rda")
 
-# podając pełną nazwę ścieżki
-save(dwie_kolumny, file="/Users/pbiecek/Documents/wazne_dane.rda")
+# let's create two vectors
+v1 <- 1:10
+l1 <- LETTERS[1:10]
+# Saving all three objects to a single file: v1, l1, two_cols
+save(v1, l1, two_cols, file="three_objs.rda")
 ```
 
 ---
 
-# Zadanie
+# Exercise
 
-- Zapisz zbiór danych `koty_ptaki` do pliku tekstowego, w którym dane są rozdzielane przecinkiem a separatorem dziesiętnym jest `.` (kropka).
+- Save the data set `cats_birds` to a text file in which data is separated by comas and a full stop is a decimal separator. 
 
-- Zapisz zbiór danych `koty_ptaki` do formatu pliku Excela. Sprawdź czy dane poprawnie się zapisały.
+-	Save the data set `cats_birds` to an Excel file. Check if the data was correctly saved.
 
-- Zapisz zbiór danych `koty_ptaki` do pliku binarnego. Odczytaj go następnie funkcją `load()` i sprawdź czy dane poprawnie zostały zapisane.
+- Save the data set `cats_birds` to a binary file. Then load it with the function `load()` and check if the data was correctly saved. 
 
-Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+Sample answers are available at  https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
 
 ---
 
-# Więcej informacji 
+# More information
 
-Gdzie szukać dalszych informacji o zapisie i odczycie danych w innych formatach? 
+Where you can look for  further information on saving and reading data in various formats?
 
-Do R można wczytać i z R można zapisać dane w formacie programu SAS, SPSS, Statistica, Stata i wielu innych
+You can load data to R and save data from R in formats of programs such as SAS, SPSS, Statistica, Stata and many other programs. 
 
-- Więcej informacji o tym jak wczytywać dane z innych formatów oraz baz danych znaleźć można w rozdziale 2.2 książki *,,Przewodnik po pakiecie R''*. Rozdział ten jest dostępny bezpłatnie pod adresem http://biecek.pl/R.
+- More information on loading data from other formats and databases can be found in chapter 2.2 of the book *,,Przewodnik po pakiecie R''* (Guide to R package). This chapter is available free of charge at http://biecek.pl/R.
 
-- Bardziej szczegółowe informacje o tym jak wczytywać i zapisywać dane z i do baz danych lub plików w egzotycznych formatach znaleźć można w dokumencie *,,R Data Import/Export''*
-http://cran.r-project.org/doc/manuals/r-release/R-data.pdf
-https://github.com/pbiecek/MOOC/blob/master/materialyZewnetrzne/R-data.pdf?raw=true
+-	More detailed data on loading and saving data from and to databases and files in more exotic formats can be found in the document *,,R Data Import/Export''* http://cran.r-project.org/doc/manuals/r-release/R-data.pdf https://github.com/pbiecek/MOOC/blob/master/materialyZewnetrzne/R-data.pdf?raw=true
 
-- O ile *,,R Data Import/Export``* jest opisem ,,teoretycznym'' to bardzo ciekawe zebranie przypadków użycia funkcji do wczytywania danych z różnych formatów jest zebrane w wiki-książce *,,R programming''* dostępnej pod adresem 
-http://en.wikibooks.org/wiki/R_Programming/Importing_and_exporting_data
+-	While *,,R Data Import/Export''* is a ‘theoretic’ description, you may look at a very interesting compilation of examples of uses of functions for loading data in various formats in the form of a wikibook entitled *,,R programming''* available at http://en.wikibooks.org/wiki/R_Programming/Importing_and_exporting_data. 
 
-- Interesujące zestawienie narzędzi do odczytywania danych ze stron internetowych znaleźć można na stronach z materiałami dydaktycznymi Gastona Sancheza http://gastonsanchez.com/teaching/
+-	An interesting list of tools for reading data from websites can be found on the sites of Gaston Sanchez containing educational materials at http://gastonsanchez.com/teaching/
 
-*Dla entuzjastów Excela* 
+*For Excel enthusiasts* 
 
-- Funkcje R można również uruchamiać wewnątrz programu Excel, należy w tym celu zainstalować dodatek RExcel(http://www.statconn.com/products.html). Na tych filmach można zobaczyć jak pracuje się z tym dodatkiem i jak go zainstalować https://www.youtube.com/watch?v=rigtfeeqnNs, https://www.youtube.com/watch?v=YH94AH6PVss, https://www.youtube.com/watch?v=wqgO9rrmQVY.
+- R functions can be also launched inside Excel, yet first you need to install an add-on RExcel  (http://www.statconn.com/products.html). The films available here will show you how to use this add-on and how to install it   https://www.youtube.com/watch?v=rigtfeeqnNs, https://www.youtube.com/watch?v=YH94AH6PVss, https://www.youtube.com/watch?v=wqgO9rrmQVY.
 
