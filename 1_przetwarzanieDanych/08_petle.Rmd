@@ -71,7 +71,9 @@ Co jednak, gdybyśmy chcieli powtórzyć ją 10 000 razy? Z pewnością nikt z n
 Sposób użycia (tak zwana *składnia*) pętli `for` jest następujący:
 
 ```{r, eval=FALSE}
-for (A in B) C
+for (A in B) {
+  C
+}
 ```
 
 W wyniku działania tej pętli wyrażenie `C` będzie wykonane dla każdej wartości z wektora `B`. Co więcej, aktualny krok pętli jest określony przez zmienną `A` i można z tej wartości korzystać wewnątrz wyrażenia `C`.
@@ -83,6 +85,14 @@ for (i in 1:odliczajDo) {
   cat("Wartość zmiennej i: ", i, "\n")
 }
 ```
+
+---
+
+# Pętle
+
+Poniższy schemat ilustruje sposób działania pętli for.
+
+<center><img width="1000" src="figs/schematFOR.png" /></center>
 
 ---
 
