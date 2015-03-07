@@ -1,0 +1,82 @@
+MySQLdb client
+--------------
+1. sudo  apt-get install libmysqlclient-dev python-dev
+2. sudo pip install MySQL-python
+
+AppArmor setup
+--------------
+Proces jest opisany pod adresem: https://github.com/jeroenooms/RAppArmor.
+Ja przeprowadziłem ręczną instalację, wg. opisu z tej strony.
+
+-1. Instalacja apparmor-utils i libapparmor-dev: apt-get install apparmor-utils libapparmor-dev
+0. Skopiowanie plików profili:
+	cd /usr/local/lib/R/site-library/RAppArmor/
+	sudo cp -Rf profiles/debian/* /etc/apparmor.d/
+1. Restart apparmor: sudo service apparmor restart
+2. Wyłączenie profilu usr.bin.r: sudo aa-disable usr.bin.r
+3. Włączenie biblioteki: library(RAppArmor)
+4. Do kontroli dostępu do plików domyślnie używamy profilu r-base (/etc/rapparmor.d/r-base).
+   Jeżeli pozwala na zbyt wiele, trzeba skopiować ten plik z inną nazwą, restartować apparmor i skonfigurować profil 
+   w pliku eval.conf jako wartość AA-PROFILE
+5. Limity konfigurujemy bezpośrednio w eval.conf:
+    RLIMIT_AS - maksymalna przestrzeń adresowa którą można zaadresować (~ liczba bajtów dostępnej pamięci wirtualnej)         
+                Mam z tym ustawieniem nienajlepsze doświadczenia, bo przy 100MB nie ładował się dplyr. Teraz jest 1GB.
+    RLIMIT_CPU - timeout - po tylu sekindach pracy proces zostanie zabity - jednak to słabe, bo to czas procesora, więc
+                wszelkie blokujące operacje, czy sleep nie zostanie ubity. Mamy własne rozwiązanie - patrz TIMEOUT niżej.
+    RLIMIT_FSIZE - maksymalny rozmiar pliku, który proces może utworzyć      
+    RLIMIT_NOFILE - liczba otwartych plików    
+    RLIMIT_NPROC - liczba procesów potomnych, dla użytkownika. Nie można przesadzać z ograniczeniem, bo jest to limit
+        na użytkownika. Jakaś rozsądna wartość, która pozwoli zapobiec fork bombie powinna być ok.
+    RLIMIT_STACK - maksymalny rozmiar stosu,
+    Pozostałe są opisane w dokumentacji RAppArmor, ale też w dokumentacji linuxowego ulimit i są to:
+    RLIMIT_RTPRIO, RLIMIT_SIGPENDING, RLIMIT_CORE, RLIMIT_DATA, RLIMIT_MEMLOCK, RLIMIT_NICE, RLIMIT_RTTIME, RLIMIT_MSGQUEUE
+
+    Ogólnie ujmując stosowanie limitów wymaga sporej ostrożności, bo nie zawsze zachowują się zgodnie z intuicją (patrz AS i NPROC).
+
+Pozostałe elementy konfiguracji
+-------------------------------
+6. TIMEOUT - po tylu sekundach sesja R zostanie ubita.
+7. WAIT-SECONDS - to czas uśpienia procesu ewaluatora. Proces jest usypiany, gdy nie ma w bazie żadnych nowych zadań do oceny.
+8. DB-* - konfiguracja dostępu do bazy danych. Nazwy mówią za siebie.
+9. LOG-LEVEL-* - poziom logowania - DEBUG, INFO, WARNING, ERROR, CRITICAL. NOTSET to brak logowania. 
+
+Parametry linii poleceń
+-----------------------
+Preferowane jest uruchamianie przez załączony skrypt eval-keep-alive.sh (patrz niżej)
+
+usage: eval.py [-h] -c CONFIG [-i INSTANCES] [-l LOG]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c CONFIG, --config CONFIG
+                        Configuration file
+  -i INSTANCES, --instances INSTANCES
+                        Number of parallel evaluator processes
+  -l LOG, --log LOG     Log file name (default eval.log)
+
+CONFIG: nazwa pliku konfiguracyjnego w formacie JSON
+INSTANCES: liczba procesów ewaluatora działających równolegle. Najpewniej wystarczy 1, bo nie wyobrażam sobie liczba rozwiązań
+przychodzących do systemu była większa niż kilka - kilkanaście na minutę. W zasadzie 1 proces jest bezpieczniejszy,
+bo unikamy niebezpieczeństw wieloprocesowego środowiska, ale w razie potrzeby można zwiększać liczbę jednocześnie działających
+procesów bez większych obaw, jedynie zwiększając obciążenie maszyny.
+LOG: nazwa pliku z logiem. 
+
+Skrypt keep alive
+-----------------
+Skrypt dba o to, żeby instancja procesu eval.py była zawsze uruchomiona. Powinien zostać wpisany do crontab-a:
+
+*/10 * * * * cd /katalog/aplikacji/evaluator/czyli/lokalizacja/skryptu/ && bash eval-keep-alive.sh
+
+Odczytuje on z pliku .evaluator-lock pid procesu aplikacji i, jeżeli proces nie istnieje, uruchamia go ponownie.
+
+Uwagi
+-----
+- Nie uruchamiamy kilku instancji ewaluatora jednocześnie (nie mam na myśli opcji -i, tylko jednoczesne wywołanie większej liczby
+eval.py). Dostęp do bazy danych jest blokowany w ramach jednej instancji i chroni przed wielodostępem w obrębie aplikacji, 
+ale nie pomiędzy aplikacjami).
+- Podczas uruchmienia tworzony jest plik .evalutor-lock, który po pierwsze chroni przed wielokrotnym uruchomieniem aplikacji,
+a po drugie pozwala na łagodne zatrzymanie programu w przypadku gdy plik usuniemy. Aby ponownie uruchomić program, jeśli plik istnieje, 
+należy go najpierw usunąć. W przeciwnym przypadku aplikacja nie uruchomi się, zgłaszając błąd.
+- SIGINT jest obsługiwany, więc ctrl-c zostanie przechwycone. W takim przypadku usuwany jest plik .evaluator-lock i program
+kończy działanie
+
