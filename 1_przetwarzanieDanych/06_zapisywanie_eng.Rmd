@@ -1,0 +1,243 @@
+---
+title: "How to save data from R?"
+author: "Data Crunchers"
+date: "season 1 / episode 6 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Press `A` to switch from slides to continuous text. <br> Press `T` to see the table of contents."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / eksploracja danych / zapisywanie danych z R"
+---
+
+# What is this episode about?
+
+R is an excellent tool for data processing. But once you have processed the data you need to save it for the future somehow.
+
+Like in case of loading data saved in various formats: as text, binary or Excel files. We can also save data in many different formats. 
+
+In this episode you will learn:
+
+- How to save tabular data to text files?
+-	How to save tabular data to Excel files (.xls or .xlsx)?
+-	How to save data to the binary format of R?
+-	Where to look for further information about saving data in other formats?
+
+---
+
+# Saving data to csv file
+
+Let us start from an imaginary example. We have an artificial data set composed of three rows and two columns. We shall call it `two_cols` and then save it as a `csv` text file.
+
+`csv` format files are text files but they are also correctly read by Excel. For that reason they are a popular medium for tabular data exchange. 
+
+You can save data using the  function `write.table()`. The commands presented below create new data and save it to the file `important_data.csv` (in the current directory) using a semicolon as a column separator and sign `.` (full stop) as a decimal separator. In order to check which catalogue is the current working catalogue you can use function `getwd()`.
+
+```{r, eval=FALSE}
+# a new dataset
+two_cols <- data.frame(letters  = c("A", "B", "C"),
+                       numbers  = c(1,2,3))
+two_cols
+#   letters numbers
+# 1       A       1
+# 2       B       2
+# 3       C       3
+
+write.table(two_cols, file="important_data.csv", 
+            sep = ";", dec = ".")
+
+# where the file was written
+getwd()
+# /Users/pbiecek/Documents
+
+# write with full path
+write.table(two_cols, file="/Users/pbiecek/Documents/important_data.csv", 
+            sep = ";", dec = ".")
+```
+---
+
+# Saving data to csv file
+
+As a result of calling the function `write.table()`
+
+```{r, eval=FALSE}
+write.table(two_cols, file="important_data.csv", 
+            sep = ";", dec = ".")
+```
+
+a file `wazne_dane.csv` will be created on the current working directory.
+
+The image below presents the content of that file. 
+
+![Zbiór danych o kotach](figs/wazneDane.png)
+
+Notice that there are two values in the first line – they are titles of the columns.  
+
+There are three values in each of the following lines. The first value is the title of the row, while the next two values are values of the second and the third column. 
+
+---
+
+# Saving tabular data to text files
+
+Data available in R can be saved to a text file with the `write.table()` function. You can also use other functions such as `write.csv()` or `write.csv2()` which differ only in the default values of the parameters.
+
+Formatting (specifying what sign is used as a column separator, decimal separator etc.) is done in the same way as in case of the function `read.table()`.
+
+This is a formal function declaration (let us remember that values of most parameters are default and usually only few of them need to be changed).
+
+```{r, eval=FALSE}
+write.table(x, file = "", append = FALSE, quote = TRUE, sep = " ",
+            eol = "\n", na = "NA", dec = ".", row.names = TRUE,
+            col.names = TRUE, qmethod = c("escape", "double"),
+            fileEncoding = "")
+```
+
+Most frequently used arguments:
+
+- `x` – specifies which table/data is to be saved to the text file,
+-	`file` – specifies the name of the text file to which the data will be saved,
+-	`append` – default value `FALSE` means that if a file called file already exists, it will be deleted. If you change the argument’s value to `append=TRUE`, new data will be added at the end of the previously saved file. 
+-	`sep` – specifies the sign used as a separator of subsequent values,
+-	`dec` – specifies the sign used as a decimal separator (usually `.` or `,`),
+-	`row.names` – states whether or not titles of rows are to be saved to the text file; default value `TRUE`,
+-	`col.names` - states whether or not titles of columns are to be saved to the text file; default value `TRUE`. 
+
+
+---
+
+# Saving tabular data to Excel files
+
+Data available in R can be also saved to an Excel file with the function `write.xls()`. 
+
+This function is available in most packages including the function `read.xls()` such as for example the package `xlsx` (using Java library) and `dataframe2xls` (using external Python libraries). 
+
+Another function which can be used to save data to Excel files is `WriteXLS()` from the package `WriteXLS` (using external Perl libraries). 
+
+The basic functionality of these functions is the same – they allow for creation of new files and saving tables to it. 
+
+The difference between these packages lies in additional possibilities. Some packages allow for saving data into Excel files with many sheets. Other packages are able to save data into Excel files along with formatting such as colors, font size, font type or table’s outline style. 
+
+Personally I usually use the package `xlsx` because it allows for saving data in many sheets along with specified formatting. 
+
+
+```{r, eval=FALSE}
+library(xlsx)
+write.xlsx(two_cols, file="/Users/pbiecek/Documents/important_data.xlsx", 
+            sheetName="A Very Important Data")
+```
+
+*Uwaga* Pakiet `xlsx` trzeba przed włączeniem najpierw zainstalować poleceniem `install.packages("xlsx")`.
+
+*Uwaga 2* Posiadacze systemu OSX w wersji Yosemitte (na dzień dzisiejszy, najnowszej) mogą mieć problem z włączniem pakietu `xlsx` jeżeli mają zainstalowaną złą (lub żadną) wersję programu Java. Należy zainstalować najnowszą wersję ze strony http://osxdaily.com/2014/10/21/get-java-os-x-yosemite/.
+
+*Uwaga 3* Posiadacze systemu Ubuntu mogą doinstalować potrzebne biblioteki poleceniem `sudo apt-get install r-cran-rjava`
+ 
+---
+
+# Zapisywanie danych do plików binarnych
+
+Do pliku w formacie natywnym R, dane można zapisać funkcją `save()`. Funkcja ta zapisuje jeden lub więcej obiektów o dowolnych strukturach - nie tylko danych tabelarycznych, ale również wektorów czy bardziej złożonych struktur (o tym czym są wektory czy inne struktury opowiemy w odcinku https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/07_indeksowanie.html). 
+
+Wadą tego rozwiązania jest to, że format ten nie jest odczytywany przez inne pakiety statystyczne. 
+
+Jeżeli jednak pracujemy głównie z programem R i chcemy w przyszłości te dane odczytywać tylko z programu R, to jest to najwygodniejsza opcja, produkująca najmniejsze pliki, które łatwo i szybko można ponownie wczytać poleceniem `load()`.
+
+Przykład użycia funkcji `save()`.
+
+```{r, eval=FALSE}
+# do katalogu roboczego
+save(dwie_kolumny, file="wazne_dane.rda")
+
+# podając pełną nazwę ścieżki
+save(dwie_kolumny, file="/Users/pbiecek/Documents/wazne_dane.rda")
+```
+
+Jeżeli chcemy zpisać do pliku więcej obiektów niż jeden, wystarczy je wskazać po przecinku. W poniższym przykładzie do jednego pliku zapisane będą trzy obiekty. 
+
+```{r, eval=FALSE}
+# tworzymy dwa wektory
+v1 <- 1:10
+l1 <- LETTERS[1:10]
+# Zapisujemy do pliku trzy obiekty: v1, l1, dwie_kolumny
+save(v1, l1, dwie_kolumny, file="trzy_obiekty.rda")
+```
+
+Odczytując dane funkcją `load()`, do programu R wczytywane są obiekty razem z nazwami (pisaliśmy o tym w odcinku https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/05_wczytywanie.html). Dlatego możemy do jednego pliku zapisać kilka obiektów i po wczytaniu danych nie będzie kolizji nazw.
+
+---
+
+# Podsumowanie instrukcji R
+
+W tym odcinku omawialiśmy funkcje służące do zapisywania danych do różnych formatów: tekstowych, Excelowych, binarnych. Poniżej znajduje się zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.
+
+```{r, eval=FALSE}
+# tworzymy nowy zbiór danych
+dwie_kolumny <- data.frame(litery  = c("A", "B", "C"),
+                           liczby  = c(1,2,3))
+dwie_kolumny
+#   litery liczby
+# 1      A      1
+# 2      B      2
+# 3      C      3
+
+# zapisujemy do pliku tekstowego w lokalnym katalogu
+write.table(dwie_kolumny, file="wazne_dane.csv", 
+            sep = ";", dec = ".")
+# który katalog jest lokalny/roboczy
+getwd()
+# /Users/pbiecek/Documents
+
+# Równoważnie możemy użyć ścieżki bezwzględnej
+write.table(dwie_kolumny, file="/Users/pbiecek/Documents/wazne_dane.csv", 
+            sep = ";", dec = ".")
+
+# zapisujemy dane do formatu Excela
+library(xlsx)
+write.xlsx(dwie_kolumny, file="/Users/pbiecek/Documents/wazne_dane.xlsx", 
+            sheetName="Zakladka Wazne Dane")
+
+# zapisujemy dane do formatu binarnego
+# do katalogu roboczego
+save(dwie_kolumny, file="wazne_dane.rda")
+
+# podając pełną nazwę ścieżki
+save(dwie_kolumny, file="/Users/pbiecek/Documents/wazne_dane.rda")
+```
+
+---
+
+# Zadanie
+
+- Zapisz zbiór danych `koty_ptaki` do pliku tekstowego, w którym dane są rozdzielane przecinkiem a separatorem dziesiętnym jest `.` (kropka).
+
+- Zapisz zbiór danych `koty_ptaki` do formatu pliku Excela. Sprawdź czy dane poprawnie się zapisały.
+
+- Zapisz zbiór danych `koty_ptaki` do pliku binarnego. Odczytaj go następnie funkcją `load()` i sprawdź czy dane poprawnie zostały zapisane.
+
+Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+
+---
+
+# Więcej informacji 
+
+Gdzie szukać dalszych informacji o zapisie i odczycie danych w innych formatach? 
+
+Do R można wczytać i z R można zapisać dane w formacie programu SAS, SPSS, Statistica, Stata i wielu innych
+
+- Więcej informacji o tym jak wczytywać dane z innych formatów oraz baz danych znaleźć można w rozdziale 2.2 książki *,,Przewodnik po pakiecie R''*. Rozdział ten jest dostępny bezpłatnie pod adresem http://biecek.pl/R.
+
+- Bardziej szczegółowe informacje o tym jak wczytywać i zapisywać dane z i do baz danych lub plików w egzotycznych formatach znaleźć można w dokumencie *,,R Data Import/Export''*
+http://cran.r-project.org/doc/manuals/r-release/R-data.pdf
+https://github.com/pbiecek/MOOC/blob/master/materialyZewnetrzne/R-data.pdf?raw=true
+
+- O ile *,,R Data Import/Export``* jest opisem ,,teoretycznym'' to bardzo ciekawe zebranie przypadków użycia funkcji do wczytywania danych z różnych formatów jest zebrane w wiki-książce *,,R programming''* dostępnej pod adresem 
+http://en.wikibooks.org/wiki/R_Programming/Importing_and_exporting_data
+
+- Interesujące zestawienie narzędzi do odczytywania danych ze stron internetowych znaleźć można na stronach z materiałami dydaktycznymi Gastona Sancheza http://gastonsanchez.com/teaching/
+
+*Dla entuzjastów Excela* 
+
+- Funkcje R można również uruchamiać wewnątrz programu Excel, należy w tym celu zainstalować dodatek RExcel(http://www.statconn.com/products.html). Na tych filmach można zobaczyć jak pracuje się z tym dodatkiem i jak go zainstalować https://www.youtube.com/watch?v=rigtfeeqnNs, https://www.youtube.com/watch?v=YH94AH6PVss, https://www.youtube.com/watch?v=wqgO9rrmQVY.
+
