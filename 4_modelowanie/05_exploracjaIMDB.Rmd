@@ -1,5 +1,5 @@
 ---
-title: "Eksploracja"
+title: "Eksploracja danych o serialach"
 author: "pogRomcy danych"
 date: "sezon 2 / odcinek 3<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
@@ -14,7 +14,13 @@ output:
 
 # O czym jest ten odcinek
 
+Pierwszy etap analizy danych to eksploracja. 
 
+Pierwsze spojrzenie na danych. Zbadanie z jakimi zmiennymi, z jakimi zakresami mamy do czynienia.
+
+W tym celu najczęściej ogląda się każdą zmienna osobno, ewentualnie parami, bazując na prostych podsumowaniach graficznych lub tabelarycznych.
+
+W tym odcinku pokażemy jak przedstawiać rozkład zmiennej ciągłej oraz zmiennej dyskrektnej, za pomocą kilku popularnych statystyk. 
 
 ---
 
