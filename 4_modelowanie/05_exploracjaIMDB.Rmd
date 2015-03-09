@@ -1,0 +1,94 @@
+---
+title: "Eksploracja"
+author: "pogRomcy danych"
+date: "sezon 2 / odcinek 3<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / modelowanie / eksploracja"
+---
+
+# O czym jest ten odcinek
+
+
+
+---
+
+# Baza danych o filmach i serialach
+
+W bazie danych o filmach IMDB (Internet Movie Database) znaleźć można dane o serialach a w szczególności średnie oceny użytkowników wystawione kolejnym odcinkom serialu.
+
+Przykładowo, na stronie http://www.imdb.com/title/tt0903747/epdate?ref_=ttep_ql_4 znajdują się oceny serialu *Breaking Bad*.
+
+Dane te zostały pobrane z Internetu i przygotowane tak, że teraz są dostępne w zbiorze danych `serialeIMDB` w pakiecie `PogromcyDanych`, który towarzyszy temu kursowi.
+
+```{r, warning=FALSE, message=FALSE}
+library(PogromcyDanych)
+library(dplyr)
+
+head(serialeIMDB)
+```
+
+---
+
+# Jak wygląda trend w serialach
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+levels(serialeIMDB$serial)
+```
+
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+BreakingBad <- filter(serialeIMDB, serial == "Breaking Bad") 
+BreakingBad
+```
+
+# A
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+BreakingBad$sezon <- droplevels(BreakingBad$sezon)
+
+summary(BreakingBad$ocena)
+```
+
+# A
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+barplot(BreakingBad$ocena)
+```
+
+# A
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+barplot(BreakingBad$ocena, col=BreakingBad$sezon)
+```
+
+# A
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+arrange(BreakingBad, ocena)
+```
+
+# A
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+hist(BreakingBad$ocena, 10, col="grey")
+```
+
+# A
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+boxplot(BreakingBad$ocena )
+```
+
+# A
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+boxplot(BreakingBad$ocena ~ BreakingBad$sezon)
+```
+
