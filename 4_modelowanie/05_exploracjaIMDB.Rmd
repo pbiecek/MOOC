@@ -10,15 +10,21 @@ output:
     css: ../style.css
     font_adjustment: 0
     footer: "pogRomcy danych / modelowanie / eksploracja"
+
 ---
+
+```{r, echo=FALSE}
+library(knitr)
+opts_chunk$set( message=FALSE,tidy.opts=list(keep.blank.line=TRUE, width.cutoff=130),options(width=130))
+```
 
 # O czym jest ten odcinek
 
 Pierwszy etap analizy danych to eksploracja. 
 
-Pierwsze spojrzenie na danych. Zbadanie z jakimi zmiennymi, z jakimi zakresami mamy do czynienia.
+Pierwsze spojrzenie na dane. Sprawdzenie z jakimi zmiennymi, z jakimi zakresami mamy do czynienia.
 
-W tym celu najczęściej ogląda się każdą zmienna osobno, ewentualnie parami, bazując na prostych podsumowaniach graficznych lub tabelarycznych.
+W tym celu najczęściej ogląda się każdą zmienną osobno, ewentualnie parami, bazując na prostych podsumowaniach graficznych lub tabelarycznych.
 
 W tym odcinku pokażemy jak przedstawiać rozkład zmiennej ciągłej oraz zmiennej dyskrektnej, za pomocą kilku popularnych statystyk. 
 
@@ -30,71 +36,128 @@ W bazie danych o filmach IMDB (Internet Movie Database) znaleźć można dane o 
 
 Przykładowo, na stronie http://www.imdb.com/title/tt0903747/epdate?ref_=ttep_ql_4 znajdują się oceny serialu *Breaking Bad*.
 
-Dane te zostały pobrane z Internetu i przygotowane tak, że teraz są dostępne w zbiorze danych `serialeIMDB` w pakiecie `PogromcyDanych`, który towarzyszy temu kursowi.
+Dane te zostały pobrane z Internetu i przygotowane tak, że teraz są dostępne w zbiorze danych `serialeIMDB` w pakiecie `PogromcyDanych`, który towarzyszy temu kursowi. Ten zbiór danych składa się z ponad 20 tysięcy wierszy oraz 8 kolumn/zmiennych. Przyjrzyjmy się tym kolumnom po kolei.
 
 ```{r, warning=FALSE, message=FALSE}
 library(PogromcyDanych)
-library(dplyr)
 
+dim(serialeIMDB)
 head(serialeIMDB)
 ```
 
 ---
 
-# Jak wygląda trend w serialach
+# Seriale
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+Każdy wiersz w zbiorze danych `serialeIMDB` opisuje oceny jednego odcinka jednego z przeszło 200 seriali.
+
+Kolumna danych o nazwie `serial` jest zmienną jakościową, przyjmującą za wartości nazwy seriali. Listę poziomów zmiennej jakościowej można wyświetlić funkcją `levels()`
+
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
 levels(serialeIMDB$serial)
 ```
 
 ---
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+# Tabela liczebności
+
+Inną użyteczną funkcją dla zmiennych jakościowych jest tabela częstości, przedstawiającą jak często określona wartość występuje w wektorze.
+
+Tabelę częstości można wyznaczyć funkcją `table()`. Wynik tej funkcji można wyświetlić na ekranie, lub jak w poniższym przykładzie zapisać do zmiennej.
+
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+tabela <- table(serialeIMDB$serial)
+```
+
+Tabelę liczebności dla 200 rozkłądów trudo się przegląda. Jeżeli interesują nas najczęstsze lub najrzadsze wartości to aby je odczytać warto tabelę liczebności posortować.
+
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+sort(tabela, decreasing = TRUE)
+```
+
+---
+
+# Breaking Bad
+
+Trudno operuje się na dużym zbiorze danych. 
+
+Na potrzeby dalszych przykładów wybierzmy z tego zbioru danych jeden serial, któremu przyjrzymy się bliżej.
+
+```{r,  message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
 BreakingBad <- filter(serialeIMDB, serial == "Breaking Bad") 
-BreakingBad
+# o ilu odcinkach dostępna jest informacja dla tego serialu? 
+dim(BreakingBad)
 ```
 
-# A
+# Co się dzieje z ocenami odcinków?
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
-BreakingBad$sezon <- droplevels(BreakingBad$sezon)
+Z pewnoscią interesującą informajcą jest to jak dany serial oceniano.
 
-summary(BreakingBad$ocena)
-```
+Ta informacja dostępna jest w kolumnie `ocena` i można się do niej dostać odwołując się do tej kolumny operatorem `$`.
 
-# A
+Ale przecież każdy odcinek podobał się inaczej, jeden bardziej inny mniej. 
+Porównajmy trzy sposoby przedstawienia informacji o ocenach 
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+- wektor liczb
+- wykres słupkowy
+- wykres punktowy
+
+Czy któryś z tych sposobów prezentacji liczb pozwala na zauważenie czegoś ciekawego?
+
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
+BreakingBad$ocena
 barplot(BreakingBad$ocena)
+plot(BreakingBad$ocena)
 ```
 
-# A
+Wykres punktowy, jako jedyny z powyższych pozwala na łatwe zauważenie, że od odcinka 45 oceny odcinków się poprawiły. 
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
-barplot(BreakingBad$ocena, col=BreakingBad$sezon)
-```
+Dlaczego ten informacji nie widać tak łatwo na innych wykresach?
 
-# A
+# Sortowanie
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+Często interesujące są obserwacje skrajne. Jak najłatwiej się zorientować które odcinki uzyskują skrane oceny?
+
+Najłatwiej posotrtować odcinki po ocenie i wyświetlić taki posortowany zbiór danych.
+
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
 arrange(BreakingBad, ocena)
 ```
 
+# Jak oceniano ten serial
+
+Dla serialy Breaking Bad mamy dostępną informację o 62 odcinakch, ale czasem chcielibyśmy myśleć o nich jak o pewnej całości. Czy cały serial jest dobry czy nie?
+
+Jak podsumować oceny z 62 odcinków? Wiele informacji niesie tak zwanych pięć liczb Tukeya oraz średnia.
+
+Średnia (`Mean`) to średnia arytmetyczna z wszystkich ocen. Pozostałe pięć liczb przedstawiają: 
+
+- `Min` ocenę najgorszego odcinka, 
+- `Max` ocenę najlepszego odcinka,
+- `Median` ocenę środkowego odcinka (jeżeli jest nieparzysta liczba odcinków) lub średnią z dwóch środkowych odcinków (jeżeli jest parzysta liczna odcinków),
+- `1st Qu.` i `3rd Qu.`, czyli oceny ćwiartkowe (połowa obserwacji od minimum do mediany i od mediany do maksimum).
+
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+summary(BreakingBad$ocena)
+```
+
+
 # A
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
 hist(BreakingBad$ocena, 10, col="grey")
 ```
 
 # A
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
 boxplot(BreakingBad$ocena )
 ```
 
 # A
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+BreakingBad$sezon <- droplevels(BreakingBad$sezon)
 boxplot(BreakingBad$ocena ~ BreakingBad$sezon)
 ```
 
