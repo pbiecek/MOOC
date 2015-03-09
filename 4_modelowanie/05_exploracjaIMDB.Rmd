@@ -141,23 +141,51 @@ Jak podsumować oceny z 62 odcinków? Wiele informacji niesie tak zwanych pięć
 summary(BreakingBad$ocena)
 ```
 
+# Pięć liczb - wykres pudełko wąsy
 
-# A
+Pięć liczb Tukeya można przedstawić graficznie. 
 
-```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
-hist(BreakingBad$ocena, 10, col="grey")
-```
+Służy do tego wykres nazywany pudełko-wąsy lub ramka-wąsy lub z angielskiego boxplot.
 
-# A
+Jest na tym wykresie pięć poziomych linii i każda odpowiada jednemu kwartylowi.
 
 ```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
 boxplot(BreakingBad$ocena )
 ```
 
-# A
+# Pięć liczb - wykres pudełko wąsy
+
+Zaletą wykresu pudełko - wąsy jest to, że pozwala łatwiej i lepiej porównać grupy obserwacji.
+
+Zobaczmy jak oceny odcinków różnią się pomiędzy sezonami.
+
+W funkcji `boxplot()` użyjemy znaku formuły `~` aby określić, że chcemy przedstawiać oceny w podziale na sezony.
+
+Co możmy odczytać z takiej reprezentacji danych? Naprawdę wiele rzeczy, znajdźmy trzy ciekawe obserwacje.
 
 ```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
 BreakingBad$sezon <- droplevels(BreakingBad$sezon)
 boxplot(BreakingBad$ocena ~ BreakingBad$sezon)
 ```
 
+Jedną jest to, że najlepsze oceny ma sezon 5. Jego mediana jest powyżej całego pudełka dla sezonów 1 i 2, co oznacza, że ponad połowa odcinków z sezonu 5 była wyżej oceniana niż najlepszy z odcinków z pierwszych dwóch sezonów.
+
+Najsłabsze wyniki notuje sezon 3. W nim to znajduje się odcinej najgożej oceniany. Też dla niego mediana jest najniżej.
+
+Największą zmienność obserwuje się dla sezonu 4. Byłw nim i bardzo słaby odcinek (jak na ten serial) i bardzo dobry odcinek.
+
+# Histogram
+
+Jak inaczej można przedstawić rozkład ocen?
+
+Interesującą alternatywą jest histogram.
+
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+hist(BreakingBad$ocena, 10, col="grey")
+```
+
+# Zadania
+
+- Wybierz serial *Friday Night Lights* zobacz jak wygląda popularność tego serialu
+
+- Zamiast prezentować informację o ocenie odcinka przedstaw informację o liczbie oddanych głosów (popularności) odcinka. Czy te same statystyki nadają się równie dbrze do prezentacji informacji o ocenie i o liczbie głosów?
