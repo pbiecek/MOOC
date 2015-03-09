@@ -26,7 +26,7 @@ Pierwsze spojrzenie na dane. Sprawdzenie z jakimi zmiennymi, z jakimi zakresami 
 
 W tym celu najczęściej ogląda się każdą zmienną osobno, ewentualnie parami, bazując na prostych podsumowaniach graficznych lub tabelarycznych.
 
-W tym odcinku pokażemy jak przedstawiać rozkład zmiennej ciągłej oraz zmiennej dyskrektnej, za pomocą kilku popularnych statystyk. 
+W tym odcinku pokażemy jak przedstawiać rozkład zmiennej ciągłej oraz zmiennej dyskretnej, za pomocą kilku popularnych statystyk. 
 
 ---
 
@@ -69,7 +69,7 @@ Tabelę częstości można wyznaczyć funkcją `table()`. Wynik tej funkcji moż
 tabela <- table(serialeIMDB$serial)
 ```
 
-Tabelę liczebności dla 200 rozkłądów trudo się przegląda. Jeżeli interesują nas najczęstsze lub najrzadsze wartości to aby je odczytać warto tabelę liczebności posortować.
+Tabelę liczebności dla 200 rozkładów trudno się przegląda. Jeżeli interesują nas najczęstsze lub najrzadsze wartości to aby je odczytać warto tabelę liczebności posortować.
 
 ```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
 sort(tabela, decreasing = TRUE)
@@ -91,7 +91,7 @@ dim(BreakingBad)
 
 # Co się dzieje z ocenami odcinków?
 
-Z pewnoscią interesującą informajcą jest to jak dany serial oceniano.
+Z pewnością interesującą informacją jest to jak dany serial oceniano.
 
 Ta informacja dostępna jest w kolumnie `ocena` i można się do niej dostać odwołując się do tej kolumny operatorem `$`.
 
@@ -116,9 +116,9 @@ Dlaczego ten informacji nie widać tak łatwo na innych wykresach?
 
 # Sortowanie
 
-Często interesujące są obserwacje skrajne. Jak najłatwiej się zorientować które odcinki uzyskują skrane oceny?
+Często interesujące są obserwacje skrajne. Jak najłatwiej się zorientować które odcinki uzyskują skrajne oceny?
 
-Najłatwiej posotrtować odcinki po ocenie i wyświetlić taki posortowany zbiór danych.
+Najłatwiej posortować odcinki po ocenie i wyświetlić taki posortowany zbiór danych.
 
 ```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
 arrange(BreakingBad, ocena)
@@ -126,7 +126,7 @@ arrange(BreakingBad, ocena)
 
 # Jak oceniano ten serial
 
-Dla serialy Breaking Bad mamy dostępną informację o 62 odcinakch, ale czasem chcielibyśmy myśleć o nich jak o pewnej całości. Czy cały serial jest dobry czy nie?
+Dla serialu Breaking Bad mamy dostępną informację o 62 odcinkach, ale czasem chcielibyśmy myśleć o nich jak o pewnej całości. Czy cały serial jest dobry czy nie?
 
 Jak podsumować oceny z 62 odcinków? Wiele informacji niesie tak zwanych pięć liczb Tukeya oraz średnia.
 
@@ -161,7 +161,7 @@ Zobaczmy jak oceny odcinków różnią się pomiędzy sezonami.
 
 W funkcji `boxplot()` użyjemy znaku formuły `~` aby określić, że chcemy przedstawiać oceny w podziale na sezony.
 
-Co możmy odczytać z takiej reprezentacji danych? Naprawdę wiele rzeczy, znajdźmy trzy ciekawe obserwacje.
+Co możemy odczytać z takiej reprezentacji danych? Naprawdę wiele rzeczy, znajdźmy trzy ciekawe obserwacje.
 
 ```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
 BreakingBad$sezon <- droplevels(BreakingBad$sezon)
@@ -170,9 +170,9 @@ boxplot(BreakingBad$ocena ~ BreakingBad$sezon)
 
 Jedną jest to, że najlepsze oceny ma sezon 5. Jego mediana jest powyżej całego pudełka dla sezonów 1 i 2, co oznacza, że ponad połowa odcinków z sezonu 5 była wyżej oceniana niż najlepszy z odcinków z pierwszych dwóch sezonów.
 
-Najsłabsze wyniki notuje sezon 3. W nim to znajduje się odcinej najgożej oceniany. Też dla niego mediana jest najniżej.
+Najsłabsze wyniki notuje sezon 3. W nim to znajduje się odcinek najgorzej oceniany. Też dla niego mediana jest najniżej.
 
-Największą zmienność obserwuje się dla sezonu 4. Byłw nim i bardzo słaby odcinek (jak na ten serial) i bardzo dobry odcinek.
+Największą zmienność obserwuje się dla sezonu 4. Był w nim i bardzo słaby odcinek (jak na ten serial) i bardzo dobry odcinek.
 
 # Histogram
 
@@ -188,4 +188,5 @@ hist(BreakingBad$ocena, 10, col="grey")
 
 - Wybierz serial *Friday Night Lights* zobacz jak wygląda popularność tego serialu
 
-- Zamiast prezentować informację o ocenie odcinka przedstaw informację o liczbie oddanych głosów (popularności) odcinka. Czy te same statystyki nadają się równie dbrze do prezentacji informacji o ocenie i o liczbie głosów?
+- Zamiast prezentować informację o ocenie odcinka przedstaw informację o liczbie oddanych głosów (popularności) odcinka. Czy te same statystyki nadają się równie dobrze do prezentacji informacji o ocenie i o liczbie głosów?
+
