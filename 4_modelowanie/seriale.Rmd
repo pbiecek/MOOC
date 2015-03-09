@@ -78,7 +78,31 @@ html_text(nodes)
 as.numeric(gsub(html_text(nodes), pattern="[^0-9\\.]", replacement=""))
 
 
+#####
+# Blog
+library(rvest)
+library(PogromcyDanych)
+serialsToParse <- levels(serialeIMDB$imdbId)
 
+ratingsGroup <- matrix("", length(serialsToParse), 14)
+rownames(ratingsGroup) <- serialsToParse
+colnames(ratingsGroup) <- c("Males", "Females", "Aged under 18", "Males under 18", 
+"Females under 18", "Aged 18-29", "Males Aged 18-29", "Females Aged 18-29", 
+"Aged 30-44", "Males Aged 30-44", "Females Aged 30-44", 
+"Aged 45+", "Males Aged 45+", "Females Aged 45+")
+
+i <- 0
+for (serial in serialsToParse) {
+  page <- html(paste0("http://www.imdb.com/title/",serial,"/ratings")) 
+  
+  nodes3 <- html_nodes(page, "table:nth-child(11) td:nth-child(3)")
+  ratingsGroup[serial,] <- gsub(html_text(nodes3)[-1], pattern="[^0-9\\.]", replacement="")[1:14]
+}
+
+
+
+
+# Full opcja
 
 library(rvest)
 library(PogromcyDanych)
