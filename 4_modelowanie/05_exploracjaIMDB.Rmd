@@ -85,6 +85,8 @@ Dlatego na potrzeby dalszych przykładów wybierzmy z tego zbioru danych jeden s
 
 ```{r,  message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
 BreakingBad <- filter(serialeIMDB, serial == "Breaking Bad") 
+
+filter(serialeIMDB, serial == "Star Trek: The Next Generation") 
 # o ilu odcinkach dostępna jest informacja dla tego serialu? 
 dim(BreakingBad)
 ```
@@ -189,6 +191,62 @@ Jak inaczej można przedstawić rozkład ocen?
 Interesującą alternatywą jest histogram.
 
 ```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+hist(BreakingBad$ocena, 10, col="grey")
+```
+
+# Co może dac nam histogram czego nie dają inne miary?
+
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
+TheShield <- filter(serialeIMDB, serial == "The Shield")
+hist(TheShield$ocena, 10, col="grey")
+boxplot(TheShield$ocena, col="grey", range = 10)
+```
+
+---
+
+# Podsumowanie instrukcji R
+
+W tym odcinku omawialiśmy funkcje służące do eksploracji liczbowej i graficznej danych ilościowych.
+
+```{r, eval=FALSE}
+# pakiet z danymi
+library(PogromcyDanych)
+
+# wielkość danych i kilka pierwszych wierszy
+dim(serialeIMDB)
+head(serialeIMDB)
+
+# wartości zmiennych jakościowych
+levels(serialeIMDB$serial)
+
+# jak wyznaczyć tabelę liczebności i ją posortować
+tabela <- table(serialeIMDB$serial)
+sort(tabela, decreasing = TRUE)
+
+# wybieramy tylko dane dotyczące serialu Breaking Bad
+BreakingBad <- filter(serialeIMDB, serial == "Breaking Bad") 
+# o ilu odcinkach dostępna jest informacja dla tego serialu? 
+dim(BreakingBad)
+
+# różne sposoby oglądania informacji o odcinkach
+BreakingBad$ocena
+barplot(BreakingBad$ocena)
+plot(BreakingBad$ocena)
+
+# sortowanie danych
+arrange(BreakingBad, ocena)
+
+# podsumowanie danych o ocenach
+summary(BreakingBad$ocena)
+
+# wykres pudełkowy
+boxplot(BreakingBad$ocena )
+
+# wykres pudełkowy dla grup
+BreakingBad$sezon <- droplevels(BreakingBad$sezon)
+boxplot(BreakingBad$ocena ~ BreakingBad$sezon)
+
+# histogram a więc pełna informacja o rozkładzie
 hist(BreakingBad$ocena, 10, col="grey")
 ```
 
