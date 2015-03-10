@@ -54,39 +54,40 @@ Sezon 1: Praca z danymi w programie R
 Sezon 2: Wizualizacja i modelowanie danych
 
 + Wizualizacja danych
-  * Historia i współczesność [film]
-  * Iluzje, percepcja obrazu i kolory [film]
-  * Info-pomyłka [film]
-  * Jak zrobić wykres, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/1_podstawy.html)
-  * Wykresy agregaty,  [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/2_agregaty.html)
-  * Dodatki do wykresów,  [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/3_dodatki.html)
-  * Jak zrobić mapę, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/4_mapy.html)
+  * Jak zrobić wykres w pakiecie ggplot2
+    + odcinek 1: Intro
+    + odcinek 2: Jak zrobić wykres, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/1_podstawy.html)
+    + odcinek 3: Wykresy agregaty,  [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/2_agregaty.html)
+    + odcinek 4: Dodatki do wykresów,  [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/3_dodatki.html)
+    + odcinek 5: Jak zrobić mapę, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/4_mapy.html)
+  * Co czyni wykres złym lub dobrym?
+    + odcinek 6: Historia i współczesność [film]
+    + odcinek 7: Iluzje, percepcja obrazu i kolory [film]
+    + odcinek 8: Info-pomyłka [film]
+    + odcinek 9: [film]
 
-+ Modelowanie
-  * Intro, próba, populacja, estymacja, testowanie  - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/01_intro.html)
-
-+ Modelowanie danych jakościowych
-  * 2x2  - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/02_test2x2.html)
-  * pxk  - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/03_test2xp.html)
-  * Regresja logistyczna  - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/08_rlogistyczna.html)
-
-+ Modelowanie danych ilościowych
-  * IMDB - eksploracja
-  * test dla dwóch grup - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/04_testSrednie.html)
-  * trend liniowy - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/06_testRegresja.html)
-  * trend liniowy, testy - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/06_testRegresja_cont.html)
-  * Regresja liniowa, [intro](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaIntro.md), [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaProsta.html), [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/dopasowanieModelu.html)
-  * Regresja przedziałowo liniowa, [intro](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/przedzialowaIntro.md),   [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaMultiplikatywna.html)
-  * Regresja liniowa - wybór zmiennych [?]
-
-+ Dane wokół nas,
-  * Intro [intro, wideo, TODO](https://rawgithub.com/pbiecek/MOOC/master/motywacja/intro.md)
-  * Piotr Przybyła IPI PAN, Inżynieria lingwistyczna 
-  * Bartosz Meglicki, NCBJ / IPIPAN, Robotyka i analiza danych
-  * [Sondaże - może wyborcze] Nss
-  * [Meteo] 
-  * [Diagnoza Społeczna] J Cz
-
++ Podstawy analizy statystycznej
+  * odcinek 10: Intro, próba, populacja, estymacja, testowanie  - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/01_intro.html)
+  *  Modelowanie danych ilościowych
+    + odcinek 11: IMDB - eksploracja
+    + trend liniowy - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/06_testRegresja.html)
+    + trend liniowy, testy - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/06_testRegresja_cont.html)
+    + test dla dwóch grup - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/04_testSrednie.html)
+    + Regresja liniowa, [intro](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaIntro.md), [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaProsta.html), [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/dopasowanieModelu.html)
+    + Regresja przedziałowo liniowa, [intro](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/przedzialowaIntro.md),   [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaMultiplikatywna.html)
+  * Modelowanie danych jakościowych
+    + 2x2 - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/02_test2x2.html)
+    + pxk - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/03_test2xp.html)
+    + Regresja logistyczna - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/08_rlogistyczna.html)
+  * Dane wokół nas,
+    + Piotr Przybyła IPI PAN, Inżynieria lingwistyczna 
+    + Bartosz Meglicki, NCBJ / IPIPAN, Robotyka i analiza danych
+    + [Sondaże - może wyborcze] Nss
+    + [Meteo] 
+  * Co dalej? 
+    + odcinek 25: Co dalej? 
+    + odcinek 26: W opracowaniu materiałów udział wzięli 
+  * Challange [20 zadań] 
 
   * Dodać do challenge?
     + Zakup samochodu wspierany danymi [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/77_przypadekUzycia.Rmd),
