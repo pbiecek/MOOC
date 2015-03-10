@@ -15,7 +15,7 @@ output:
 
 ```{r, echo=FALSE}
 library(knitr)
-opts_chunk$set( message=FALSE,tidy.opts=list(keep.blank.line=TRUE, width.cutoff=130),options(width=130))
+opts_chunk$set( message=FALSE,tidy.opts=list(keep.blank.line=TRUE, width.cutoff=120),options(width=120))
 ```
 
 # O czym jest ten odcinek
@@ -51,7 +51,7 @@ head(serialeIMDB)
 
 Każdy wiersz w zbiorze danych `serialeIMDB` opisuje oceny jednego odcinka jednego z przeszło 200 seriali.
 
-Kolumna danych o nazwie `serial` jest zmienną jakościową, przyjmującą za wartości nazwy seriali. Listę poziomów zmiennej jakościowej można wyświetlić funkcją `levels()`
+Kolumna danych o nazwie `serial` jest zmienną jakościową, przyjmującą za wartości nazwy seriali. Listę poziomów zmiennej jakościowej można wyświetlić funkcją `levels()`.
 
 ```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
 levels(serialeIMDB$serial)
@@ -79,9 +79,9 @@ sort(tabela, decreasing = TRUE)
 
 # Breaking Bad
 
-Trudno operuje się na dużym zbiorze danych. 
+Praca na zbiorze danych o wszytkich odcinakch jest trudniejsza, ponieważ nei jesteśmy w stanie ogarnąć wzrokiem wszystkich 20 tysięci wuerszy.
 
-Na potrzeby dalszych przykładów wybierzmy z tego zbioru danych jeden serial, któremu przyjrzymy się bliżej.
+Dlatego na potrzeby dalszych przykładów wybierzmy z tego zbioru danych jeden serial, któremu przyjrzymy się bliżej.
 
 ```{r,  message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
 BreakingBad <- filter(serialeIMDB, serial == "Breaking Bad") 
@@ -96,17 +96,24 @@ Z pewnością interesującą informacją jest to jak dany serial oceniano.
 Ta informacja dostępna jest w kolumnie `ocena` i można się do niej dostać odwołując się do tej kolumny operatorem `$`.
 
 Ale przecież każdy odcinek podobał się inaczej, jeden bardziej inny mniej. 
-Porównajmy trzy sposoby przedstawienia informacji o ocenach 
-
-- wektor liczb
-- wykres słupkowy
-- wykres punktowy
-
+Porównajmy trzy sposoby przedstawienia informacji o ocenach.
 Czy któryś z tych sposobów prezentacji liczb pozwala na zauważenie czegoś ciekawego?
+
+Wektor liczb
 
 ```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
 BreakingBad$ocena
+```
+
+Wykres słupkowy
+
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
 barplot(BreakingBad$ocena)
+```
+
+Wykres punktowy
+
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
 plot(BreakingBad$ocena)
 ```
 
@@ -166,6 +173,7 @@ Co możemy odczytać z takiej reprezentacji danych? Naprawdę wiele rzeczy, znaj
 ```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=8}
 BreakingBad$sezon <- droplevels(BreakingBad$sezon)
 boxplot(BreakingBad$ocena ~ BreakingBad$sezon)
+
 ```
 
 Jedną jest to, że najlepsze oceny ma sezon 5. Jego mediana jest powyżej całego pudełka dla sezonów 1 i 2, co oznacza, że ponad połowa odcinków z sezonu 5 była wyżej oceniana niż najlepszy z odcinków z pierwszych dwóch sezonów.
