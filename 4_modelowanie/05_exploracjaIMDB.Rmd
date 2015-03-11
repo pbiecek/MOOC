@@ -26,7 +26,16 @@ Pierwsze spojrzenie na dane. Sprawdzenie z jakimi zmiennymi, z jakimi zakresami 
 
 W tym celu najczęściej ogląda się każdą zmienną osobno, ewentualnie parami, bazując na prostych podsumowaniach graficznych lub tabelarycznych.
 
-W tym odcinku pokażemy jak przedstawiać rozkład zmiennej ciągłej oraz zmiennej dyskretnej, za pomocą kilku popularnych statystyk. 
+W tym odcinku pokażemy jak przedstawiać rozkład zmiennej ciągłej oraz zmiennej dyskretnej, za pomocą kilku popularnych statystyk. Dla zmiennej ciągłej
+
+- średniej, mediany,
+- pięciu liczb Tukeya,
+- wykresu ramka wąsy, histogramu.
+
+Dla zmiennej dyskretnej
+
+- tablicy kontyngencji.
+
 
 ---
 
@@ -137,9 +146,16 @@ arrange(BreakingBad, ocena)
 
 Dla serialu Breaking Bad mamy dostępną informację o 62 odcinkach, ale czasem chcielibyśmy myśleć o nich jak o pewnej całości. Czy cały serial jest dobry czy nie?
 
-Jak podsumować oceny z 62 odcinków? Wiele informacji niesie tak zwanych pięć liczb Tukeya oraz średnia.
+Jak podsumować oceny z 62 odcinków? 
 
-Średnia (`Mean`) to średnia arytmetyczna z wszystkich ocen. Pozostałe pięć liczb przedstawiają: 
+Dwa najpoopularniejsze podejscia to średnia oraz mediana (czyli element środkowy). Można je prosto wyznaczyć ale często nie mówią wielu interesujących aspektów o danych. Np jakich?
+
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
+mean(BreakingBad$ocena)
+median(BreakingBad$ocena)
+```
+
+Wiele informacji niesie tak zwanych pięć liczb Tukeya oraz średnia. Średnia (`Mean`) to średnia arytmetyczna z wszystkich ocen. Pozostałe pięć liczb przedstawiają: 
 
 - `Min` ocenę najgorszego odcinka, 
 - `Max` ocenę najlepszego odcinka,
@@ -175,7 +191,6 @@ Co możemy odczytać z takiej reprezentacji danych? Naprawdę wiele rzeczy, znaj
 ```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
 BreakingBad$sezon <- droplevels(BreakingBad$sezon)
 boxplot(BreakingBad$ocena ~ BreakingBad$sezon)
-
 ```
 
 Jedną jest to, że najlepsze oceny ma sezon 5. Jego mediana jest powyżej całego pudełka dla sezonów 1 i 2, co oznacza, że ponad połowa odcinków z sezonu 5 była wyżej oceniana niż najlepszy z odcinków z pierwszych dwóch sezonów.
@@ -263,7 +278,9 @@ boxplot(TheShield$ocena, col="grey", range = 10)
 
 # Zadania
 
-- Wybierz serial *Friday Night Lights* zobacz jak wygląda popularność tego serialu
+- Wybierz serial *Friday Night Lights* zobacz jak wygląda popularność tego serialu. Czy jest bardziej popularny niż *Breaking Bad*?
 
-- Zamiast prezentować informację o ocenie odcinka przedstaw informację o liczbie oddanych głosów (popularności) odcinka. Czy te same statystyki nadają się równie dobrze do prezentacji informacji o ocenie i o liczbie głosów?
+- Zobacz jak popularność tego serialu zmieniała się w czasie. Czy zaobserwowałeś coś interesującego?
+
+- Zamiast prezentować informacje o ocenach odcinków przedstaw informacje o liczbie oddanych głosów (popularności) odcinków. Czy te same statystyki nadają się równie dobrze do prezentacji informacji o ocenie i o liczbie głosów?
 

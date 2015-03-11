@@ -55,7 +55,16 @@ pogRomcy danych
 <p>Pierwszy etap analizy danych to eksploracja.</p>
 <p>Pierwsze spojrzenie na dane. Sprawdzenie z jakimi zmiennymi, z jakimi zakresami mamy do czynienia.</p>
 <p>W tym celu najczęściej ogląda się każdą zmienną osobno, ewentualnie parami, bazując na prostych podsumowaniach graficznych lub tabelarycznych.</p>
-<p>W tym odcinku pokażemy jak przedstawiać rozkład zmiennej ciągłej oraz zmiennej dyskretnej, za pomocą kilku popularnych statystyk.</p>
+<p>W tym odcinku pokażemy jak przedstawiać rozkład zmiennej ciągłej oraz zmiennej dyskretnej, za pomocą kilku popularnych statystyk. Dla zmiennej ciągłej</p>
+<ul>
+<li>średniej, mediany,</li>
+<li>pięciu liczb Tukeya,</li>
+<li>wykresu ramka wąsy, histogramu.</li>
+</ul>
+<p>Dla zmiennej dyskretnej</p>
+<ul>
+<li>tablicy kontyngencji.</li>
+</ul>
 </div>
 <div id="baza-danych-o-filmach-i-serialach" class="slide section level1">
 <h1>Baza danych o filmach i serialach</h1>
@@ -666,8 +675,13 @@ pogRomcy danych
 <div id="jak-oceniano-ten-serial" class="slide section level1">
 <h1>Jak oceniano ten serial</h1>
 <p>Dla serialu Breaking Bad mamy dostępną informację o 62 odcinkach, ale czasem chcielibyśmy myśleć o nich jak o pewnej całości. Czy cały serial jest dobry czy nie?</p>
-<p>Jak podsumować oceny z 62 odcinków? Wiele informacji niesie tak zwanych pięć liczb Tukeya oraz średnia.</p>
-<p>Średnia (<code>Mean</code>) to średnia arytmetyczna z wszystkich ocen. Pozostałe pięć liczb przedstawiają:</p>
+<p>Jak podsumować oceny z 62 odcinków?</p>
+<p>Dwa najpoopularniejsze podejscia to średnia oraz mediana (czyli element środkowy). Można je prosto wyznaczyć ale często nie mówią wielu interesujących aspektów o danych. Np jakich?</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(BreakingBad$ocena)</code></pre>
+<pre><code>## [1] 8.480645</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">median</span>(BreakingBad$ocena)</code></pre>
+<pre><code>## [1] 8.4</code></pre>
+<p>Wiele informacji niesie tak zwanych pięć liczb Tukeya oraz średnia. Średnia (<code>Mean</code>) to średnia arytmetyczna z wszystkich ocen. Pozostałe pięć liczb przedstawiają:</p>
 <ul>
 <li><code>Min</code> ocenę najgorszego odcinka,</li>
 <li><code>Max</code> ocenę najlepszego odcinka,</li>
@@ -768,8 +782,9 @@ TheShield &lt;-<span class="st"> </span><span class="kw">filter</span>(serialeIM
 <div id="zadania" class="slide section level1">
 <h1>Zadania</h1>
 <ul>
-<li><p>Wybierz serial <em>Friday Night Lights</em> zobacz jak wygląda popularność tego serialu</p></li>
-<li><p>Zamiast prezentować informację o ocenie odcinka przedstaw informację o liczbie oddanych głosów (popularności) odcinka. Czy te same statystyki nadają się równie dobrze do prezentacji informacji o ocenie i o liczbie głosów?</p></li>
+<li><p>Wybierz serial <em>Friday Night Lights</em> zobacz jak wygląda popularność tego serialu. Czy jest bardziej popularny niż <em>Breaking Bad</em>?</p></li>
+<li><p>Zobacz jak popularność tego serialu zmieniała się w czasie. Czy zaobserwowałeś coś interesującego?</p></li>
+<li><p>Zamiast prezentować informacje o ocenach odcinków przedstaw informacje o liczbie oddanych głosów (popularności) odcinków. Czy te same statystyki nadają się równie dobrze do prezentacji informacji o ocenie i o liczbie głosów?</p></li>
 </ul>
 </div>
 
