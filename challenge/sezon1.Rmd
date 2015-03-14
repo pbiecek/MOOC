@@ -12,6 +12,25 @@ output:
     footer: "pogRomcy danych / challange / sezon 1 "
 ---
 
+# Poziom 1 - proste zadania
+
+
+# Poziom 2 - zadania porównywalne z tymi z odcinków
+
+
+# Poziom 3 - zadania trudniejsze niż te na odcinkach
+
+
+# Poziom 4 - wymagające
+
+
+# Poziom 5 - bardzo wymagające
+
+
+
+
+
+
 # Zadanie, sezon 1, odcinek 1
 
 Pod adresem `http://biecek.pl/R/dane/daneO.csv` znajduje się zbiór danych, w którego pierwszej kolumnie znajduje się zmienna `Wiek`. Policz średnią wartość z tej kolumny i przypisz do zmiennej `srWiek`.
