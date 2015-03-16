@@ -366,7 +366,7 @@ Ale trudno z niego bardzo dokłądnie odczytać wartości liczbow.
 
 Aby wyliczyć dokładne częstości, możemy wykorzystać poznane w pierwszym sezonie funkcje `group_by()` i `summarise()`.
 
-```{r, fig.height=4, fig.width=5, message=FALSE}
+```{r, fig.height=4, fig.width=6, message=FALSE}
 # dla każdej kombinacji grup Model / Rodzaj.pawliwa wyznacz liczbę obserwacji 
 skody %>% 
   group_by(Model, Rodzaj.paliwa) %>%
@@ -391,5 +391,12 @@ http://zevross.com/blog/category/r/
 
 # Zadanie, sezon 2, odcinek 3
 
-+ Przedstaw graficznie za pomocą wykresu punktowego zależność pomiędzy żywotnością (kolumna `zywotnosc`) a wagą zwierzęcia (kolumna `waga`).
++ Wybierz samochody marki Volkswagen model Passat a następnie narysuj jak średnia cena zależy od roku produkcji za pomocą geometrii `geom_smooth()`.
+
++ Wybierz samochody marki Volkswagen, narysuj jak średnia cena zależy od roku produkcji, różnymi kolorami przedstaw różne modele Volkswagena.
+
++ Wybierz pięcioletnie auta marki Volkswagen i za pomocą wykresu ramka - wąsy przedstaw jak cena auta zależy od modelu.
+
++ Dla wybranych pięcioletnich aut marki Volkswagen przedstaw w podziale na modele jaka część aut ma silnik diesla.
+
 
