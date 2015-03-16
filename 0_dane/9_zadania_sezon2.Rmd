@@ -50,3 +50,57 @@ ggplot(WIG, aes(x = Data, ymin=Kurs.minimalny, ymax=Kurs.maksymalny)) +
   geom_ribbon()
 
 ```
+
+---
+
+# Zadanie, sezon 2, odcinek 3
+
++ Wybierz samochody marki Volkswagen model Passat a następnie narysuj jak średnia cena zależy od roku produkcji za pomocą geometrii `geom_smooth()`.
+
++ Wybierz samochody marki Volkswagen, narysuj jak średnia cena zależy od roku produkcji, różnymi kolorami przedstaw różne modele Volkswagena.
+
++ Wybierz pięcioletnie auta marki Volkswagen i za pomocą wykresu ramka - wąsy przedstaw jak cena auta zależy od modelu.
+
++ Dla wybranych pięcioletnich aut marki Volkswagen przedstaw w podziale na modele jaka część aut ma silnik diesla.
+
+# Odpowiedź, sezon 2, odcinek 3
+
+```{r, message=FALSE, eval=FALSE}
+# Wybierz samochody marki Volkswagen model Passat a następnie narysuj 
+# jak średnia cena zależy od roku produkcji za pomocą geometrii `geom_smooth()`.
+
+passat <- auta2012 %>%
+              filter(Marka == 'Volkswagen', Model == 'Passat', Rok.produkcji > 1990) %>%
+              select(Marka, Model, Rok.produkcji, Cena.w.PLN, Rodzaj.paliwa)
+
+ggplot(passat, aes(x=Rok.produkcji, y=Cena.w.PLN)) + 
+  geom_smooth()
+
+# Wybierz samochody marki Volkswagen, narysuj jak średnia cena zależy 
+# od przebiegu, różnymi kolorami przedstaw różne modele Volkswagena.
+
+volkswagen <- auta2012 %>%
+              filter(Marka == 'Volkswagen', Model %in% c('Passat', 'Golf', 'Polo', 'Sharan'), Rok.produkcji > 1990, Rok.produkcji < 2012) %>%
+              select(Marka, Model, Rok.produkcji, Cena.w.PLN, Rodzaj.paliwa)
+
+ggplot(volkswagen, aes(x=Rok.produkcji, y=Cena.w.PLN, color=Model)) + 
+  geom_smooth()
+
+# Wybierz pięcioletnie auta marki Volkswagen i za pomocą wykresu 
+# ramka - wąsy przedstaw jak cena auta zależy od modelu.
+
+volkswagen <- auta2012 %>%
+              filter(Marka == 'Volkswagen', Rok.produkcji == 2007, Model %in% c('Passat', 'Golf', 'Polo', 'Sharan')) %>%
+              select(Marka, Model, Rok.produkcji, Cena.w.PLN, Rodzaj.paliwa)
+
+ggplot(volkswagen, aes(x=Model, y=Cena.w.PLN)) + 
+  geom_boxplot()
+
+# Dla wybranych pięcioletnich aut marki Volkswagen przedstaw w podziale 
+# na modele jaka część aut ma silnik diesla.
+
+ggplot(volkswagen, aes(x=Model, fill=Rodzaj.paliwa)) + 
+  geom_bar(position = 'fill')
+
+```
+
