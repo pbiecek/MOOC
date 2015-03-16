@@ -54,7 +54,7 @@ pogRomcy danych
 <h1>O czym jest ten odcinek</h1>
 <p>Dane są czymś abstrakcyjnym i patrząc w tabele liczb często trudno zrozumieć zależności pomiędzy różnymi zmiennymi.</p>
 <p>Ale znacznie łatwiej dostrzec lub zrozumieć te zależności, jeżeli dane przedstawi się graficznie w poprawny sposób.</p>
-<p>Pierwsza połowa seoznu 2 poświęcona jest wizualizacji danych. W tym odcinku poznamy pakiet graficzny <code>ggplot2</code>, pozwalający na tworzenie dobrze wyglądających i czytelnych wykresów.</p>
+<p>Pierwsza połowa sezonu 2 poświęcona jest wizualizacji danych. W tym odcinku poznamy pakiet graficzny <code>ggplot2</code>, pozwalający na tworzenie dobrze wyglądających i czytelnych wykresów.</p>
 <p>W tym odcinku dowiemy się:</p>
 <ul>
 <li>W programie R wykresy można tworzyć z użyciem najróżniejszych pakietów. Dowiemy się, dlaczego w pierwszej kolejności warto poznać i dlaczego warto używać pakietu <code>ggplot2</code>?</li>
@@ -68,13 +68,13 @@ pogRomcy danych
 <h1>Zbiory danych</h1>
 <p>W tym odcinku będziemy pracować z dwoma zbiorami danych: <code>koty_ptaki</code> oraz <code>WIG</code>. Oba zbiory są dostępne z pakietu <code>PogromcyDanych</code>.</p>
 <p>Aby odtworzyć przykłady z tego odcinka potrzebny jest zainstalowany pakiet <code>PogromcyDanych</code>. Informacja o tym jak go zainstalować jest umieszczona w odcinku trzecim pierwszego sezonu <em>Jak zainstalować R, RStudio oraz dodatkowe pakiety?</em>.</p>
-<p>Funkcją <code>library()</code> włączamy pakiet i mozęmy sprawdzić jak wyglądają pierwsze wiersze z obu zbiorów danych.</p>
+<p>Funkcją <code>library()</code> włączamy pakiet i możemy sprawdzić jak wyglądają pierwsze wiersze z obu zbiorów danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># jeżeli pakiet jeszcze nie jest zainstalowany należy odkomentować poniższą linijkę</span>
 <span class="co"># install.packages(&quot;PogromcyDanych&quot;)</span>
 
 <span class="co"># wczytujemy pakiet </span>
 <span class="kw">library</span>(PogromcyDanych)
-<span class="co"># wyświtlamy pierwsze wiersze z interesującego nas zbioru danych</span>
+<span class="co"># wyświetlamy pierwsze wiersze z interesującego nas zbioru danych</span>
 <span class="kw">head</span>(koty_ptaki)</code></pre>
 <pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
 ## 1  Tygrys  300     2.5       60    Azja        25     Kot
@@ -117,7 +117,7 @@ pogRomcy danych
 <span class="kw">plot</span>(koty_ptaki$waga, koty_ptaki$predkosc)
 
 <span class="co"># funkcje graficzne, które będziemy omawiać, wymagają włączenia dodatkowego pakietu ggplot2</span>
-<span class="co"># jeżęli ten pakiet nie jest zainstalowany, należy go zainstalować poleceniem install.packages(&quot;ggplot2&quot;)</span>
+<span class="co"># jeżeli ten pakiet nie jest zainstalowany, należy go zainstalować poleceniem install.packages(&quot;ggplot2&quot;)</span>
 <span class="kw">library</span>(ggplot2)
 <span class="co"># w pakiecie ggplot2 wykresy wygodnie tworzy się funkcją ggplot</span>
 <span class="kw">ggplot</span>(koty_ptaki, <span class="kw">aes</span>(<span class="dt">x=</span>waga, <span class="dt">y=</span>predkosc)) +
@@ -125,7 +125,7 @@ pogRomcy danych
 </div>
 <div id="co-rozni-te-dwa-wykresy" class="slide section level1">
 <h1>Co różni te dwa wykresy?</h1>
-<p>Dla kolejnych wierszy zbioru danych <code>koty_ptaki</code>, na wykresie przedstawiamy zależność pomiędzy zmiennymi <code>waga</code> a <code>prędkosc</code>. Każdy wiersz opisany jest przez jeden punkt, przez co wykres ten nazywa się wykresem punktowym.</p>
+<p>Dla kolejnych wierszy zbioru danych <code>koty_ptaki</code>, na wykresie przedstawiamy zależność pomiędzy zmiennymi <code>waga</code> a <code>predkosc</code>. Każdy wiersz opisany jest przez jeden punkt, przez co wykres ten nazywa się wykresem punktowym.</p>
 <p>Na tym wykresie przedstawiane są duże koty i ptaki. Lżejsze gatunki to głównie ptaki, które są też szybsze niż duże koty. Więc przedstawiany wykres pokazuje, że im cięższy osobnik, tym niższa jego prędkość maksymalna.</p>
 <p>Pomimo jednak tego, że oba wykresy przedstawiają te same dane, a więc zależność przedstawiona na obu wykresach jest ta sama, to jednak wykresy te wyglądają różnie.</p>
 <p>Przyjrzymy się obu wykresom oraz postarajmy się znaleźć jak najwięcej różnic i zastanówmy się, który sposób prezentacji jest lepszy.</p>
@@ -155,7 +155,7 @@ pogRomcy danych
 <li>Podejrzewamy, że dwie zmienne są zależne i chcemy przedstawić tę zależność (chcemy pokazać jak cena auta zmienia się z jego przebiegiem).</li>
 <li>Podejrzewamy, że w jednej zmiennej występują nietypowe obserwacje (np. bardzo duże) i chcemy zobaczyć jakim wartościom stowarzyszonej zmiennej one odpowiadają (np. czy osoby o bardzo wysokiej wadze to osoby bardzo wysokie czy nie).</li>
 </ol>
-<p>Na wykresie punktowym można również zaznaczyć grup wierszy. Oznaczając je kolorem, kształtem lub wielkością. Pozwala to dodatkowo na porównanie grup pod względem przedstawianych zmiennych (patrz slady 13-16). Taki wykres punktowy z grupami warto stosować gdy:</p>
+<p>Na wykresie punktowym można również zaznaczyć grup wierszy. Oznaczając je kolorem, kształtem lub wielkością. Pozwala to dodatkowo na porównanie grup pod względem przedstawianych zmiennych (patrz slajdy 13-16). Taki wykres punktowy z grupami warto stosować gdy:</p>
 <ol style="list-style-type: decimal">
 <li>Nie wiemy czy grupy różnią się pod kątem danej pary zmiennych i chcemy to sprawdzić (np. czy auta 3 drzwiowe różnią się od 5 drzwiowych jeżeli chodzi o cenę i przebieg).</li>
 <li>Wiemy, że grupy się różnią i chcemy pokazać w jaki sposób (np. aby pokazać, że kobiety są średnio niższe i znacznie lżejsze niż mężczyźni).</li>
@@ -204,7 +204,7 @@ pogRomcy danych
 </div>
 <div id="jak-budowac-wykresy-z-ggplot2" class="slide section level1">
 <h1>Jak budować wykresy z <code>ggplot2</code>?</h1>
-<p>Spójrzmy raz jeszcze na polecenie twrzące wykres i przeanalizujemy jak wygląda sposób myślenia przy tworzeniu wykresu.</p>
+<p>Spójrzmy raz jeszcze na polecenie tworzące wykres i przeanalizujemy jak wygląda sposób myślenia przy tworzeniu wykresu.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(koty_ptaki, <span class="kw">aes</span>(<span class="dt">x=</span>waga, <span class="dt">y=</span>predkosc, <span class="dt">shape=</span>druzyna)) +
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">5</span>) </code></pre>
 <p>W pierwszym kroku wybieramy zmienne, które chcemy przedstawić na wykresie. W naszym przypadku te zmienne to <code>predkosc</code>, <code>waga</code> oraz <code>druzyna</code>.</p>
@@ -245,7 +245,7 @@ pogRomcy danych
 </div>
 <div id="geometria-geom_text---etykiety-tekstowe-na-wykresie" class="slide section level1">
 <h1>Geometria <code>geom_text()</code> - etykiety tekstowe na wykresie</h1>
-<p>Zobaczmy, jak skorzystać z innych geometrii. Za przykład posłuży nam wykres z napisami, któ®y można wykonać używając warstwy <code>geom_text()</code>. Szczegółowy opis tej geometrii, wraz z przykładami użycia, znajduje się na stronie <a href="http://docs.ggplot2.org/current/geom_text.html" class="uri">http://docs.ggplot2.org/current/geom_text.html</a>. W sekcji <code>Aesthetics</code> znaleźć można listę cech, które można modyfikować. Aby skorzystać z tej geometrii należy określić przynajmenij trzy cechy: <code>x</code>, <code>y</code> i <code>label</code>.</p>
+<p>Zobaczmy, jak skorzystać z innych geometrii. Za przykład posłuży nam wykres z napisami, który można wykonać używając warstwy <code>geom_text()</code>. Szczegółowy opis tej geometrii, wraz z przykładami użycia, znajduje się na stronie <a href="http://docs.ggplot2.org/current/geom_text.html" class="uri">http://docs.ggplot2.org/current/geom_text.html</a>. W sekcji <code>Aesthetics</code> znaleźć można listę cech, które można modyfikować. Aby skorzystać z tej geometrii należy określić przynajmniej trzy cechy: <code>x</code>, <code>y</code> i <code>label</code>.</p>
 <p>A tak wygląda przykładowe wywołanie:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(koty_ptaki, <span class="kw">aes</span>(<span class="dt">x=</span> waga, <span class="dt">y=</span>predkosc, <span class="dt">label=</span>gatunek)) +
 <span class="st">  </span><span class="kw">geom_text</span>()</code></pre>
@@ -254,7 +254,7 @@ pogRomcy danych
 <div id="geometria-geom_text---pozycjonowanie-napisu" class="slide section level1">
 <h1>Geometria <code>geom_text()</code> - pozycjonowanie napisu</h1>
 <p>Zauważmy, że niektóre napisy wychodzą poza wykres. Nie wygląda to najlepiej. Można ten problem naprawić na dwa sposoby. Jeden to rozszerzenie zakresu wartości na osi OX (dodanie marginesów), drugi to pozycjonowanie napisów względem ich lewego brzegu a nie środka (współrzędne <code>x</code> i <code>y</code> to domyślnie współrzędne środka napisu).</p>
-<p>Spróbujmy tego drugiego rozwiązania. Czytająd plik z pomocą dla geometrii <code>geom_text()</code> można zauważyć, że za pozycjonowanie odpowiadają cechy <code>hjust</code> (w poziomie) i <code>vjust</code> (w pionie). Zobaczmy jak wyglądać będzie użycie tych argumentów.</p>
+<p>Spróbujmy tego drugiego rozwiązania. Czytają plik z pomocą dla geometrii <code>geom_text()</code> można zauważyć, że za pozycjonowanie odpowiadają cechy <code>hjust</code> (w poziomie) i <code>vjust</code> (w pionie). Zobaczmy jak wyglądać będzie użycie tych argumentów.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(koty_ptaki, <span class="kw">aes</span>(<span class="dt">x=</span> waga, <span class="dt">y=</span>predkosc, <span class="dt">label=</span>gatunek)) +
 <span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">hjust=</span><span class="dv">0</span>) +<span class="st"> </span><span class="kw">xlim</span>(<span class="dv">0</span>,<span class="dv">350</span>)</code></pre>
 <p>Zauważmy, że argument <code>hjust</code> definiujemy wewnątrz funkcji <code>geom_text()</code> ale poza blokiem <code>aes()</code>. Nie mapuje on żadnej zmiennej na cechy wykresu ale przypisuje określonej cesze stałą wartość (w tym przypadku <code>0</code>).</p>
@@ -276,7 +276,7 @@ pogRomcy danych
 <p>Stosowanie etykiet na wykresie ma wady i zalety. Do głównych zalet zaliczyć można:</p>
 <ol style="list-style-type: decimal">
 <li>Nazwy obiektów pozwalają zorientować się co reprezentuje dany punkt. Jest to przydatne, jeżeli wykres wykorzystujemy do identyfikacji <em>ciekawych</em> obserwacji, np. najbardziej odstających, najbardziej charakterystycznych.</li>
-<li>Jeżęli etykiety są zbyt i przestają być czytelne, to można je skracać do kilku pierwszych liter np. funkcją <code>substr()</code>.</li>
+<li>Jeżeli etykiety są zbyt i przestają być czytelne, to można je skracać do kilku pierwszych liter np. funkcją <code>substr()</code>.</li>
 <li>Jeżeli wykres przedstawia tylko kilka obserwacji, to nazwy lepiej <em>wypełniają</em> wykres, nie pozostawiając dużych pustych przestrzeni, które źle wyglądają wizualnie.</li>
 </ol>
 <p>A główne wady to:</p>
@@ -307,7 +307,7 @@ pogRomcy danych
 </div>
 <div id="geometria-geom_line---wykres-liniowy" class="slide section level1">
 <h1>Geometria <code>geom_line()</code> - wykres liniowy</h1>
-<p>Pierwsze zetknięcie z pakietem <code>ggplot</code> wymaga często przestawienia się na nowy sposób myśłenia o wykresach. Ale gdy już się w ten sposób wejdzie, to okazuje sie, że poznawsze dwie geometrie, z kolejnych korzysta się już naprawdę prosto.</p>
+<p>Pierwsze zetknięcie z pakietem <code>ggplot</code> wymaga często przestawienia się na nowy sposób myślenia o wykresach. Ale gdy już się w ten sposób wejdzie, to okazuje się, że poznawszy dwie geometrie, z kolejnych korzysta się już naprawdę prosto.</p>
 <p>Przykładowo, geometria <code>geom_line()</code> służy do rysowania linii. Aby ją wykorzystać na wykresie, wystarczy ją dodać do wykresu znakiem <code>+</code>.</p>
 <p>Przedstawimy tę geometrię na przykładzie danych o indeksie WIG. Poniżej dwie pierwsze linie z tego zbioru danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(WIG,<span class="dv">2</span>)</code></pre>
@@ -324,13 +324,13 @@ pogRomcy danych
 </div>
 <div id="kiedy-stosowac-linie-na-wykresie" class="slide section level1">
 <h1>Kiedy stosować linie na wykresie?</h1>
-<p>Z punktu widzenia programu R, to równie dobrze możemy te same dane (dwie zmienen liczbowe) przedstawić używając punktów jak i używając linii.</p>
+<p>Z punktu widzenia programu R, to równie dobrze możemy te same dane (dwie zmienne liczbowe) przedstawić używając punktów jak i używając linii.</p>
 <p>Jest jednak duża różnica w sposobie w jaki będziemy takie wykresy postrzegać.</p>
 <p>Punkty nie mają kierunku, więc chmura punktów na wykresie pozwoli ocenić czy te punktu układają się wzdłuż jakiejś krzywej (jest zależność pomiędzy zmiennymi), czy tworzą kilka grup (są skupiska), czy występują wartości odstające.</p>
 <p>Linie na wykresie mają kierunek. Patrząc na linie nasze oko ocenia ich względne długości oraz względne kierunki, szacując kąty pomiędzy liniami.</p>
 <p>Z tego powodu, wykresów liniowych najlepiej używać gdy:</p>
 <ol style="list-style-type: decimal">
-<li>Chcemy przedstawić trend, pokazzać jak pewna wartość zmienia się w czasie. Standardowo na osi poziomej <code>x</code> przedstawia się czas a na osi pionowej <code>y</code> wartość.</li>
+<li>Chcemy przedstawić trend, pokazać jak pewna wartość zmienia się w czasie. Standardowo na osi poziomej <code>x</code> przedstawia się czas a na osi pionowej <code>y</code> wartość.</li>
 <li>Chcemy przedstawić tempo zmiany trendu, czy tempo wzrostu rośnie czy maleje (czy kąty są coraz większe czy nie)</li>
 <li>Chcemy pokazać zmienność pomiędzy sąsiednimi pomiarami. Ponieważ sąsiednie pomiary połączone są linią, będzie widać czy ta linia gwałtownie czy spokojnie zmienia kierunki.</li>
 </ol>
@@ -338,7 +338,7 @@ pogRomcy danych
 <div id="geometria-geom_ribbon---wykres-wstega" class="slide section level1">
 <h1>Geometria <code>geom_ribbon()</code> - wykres wstęga</h1>
 <p>Ostatnim przykładem w tym odcinku będzie geometria <code>geom_ribbon()</code> do rysowania wstęg.</p>
-<p>Jest to o tyle ciekawy przykład, że wymagać będzie wskazania inej cechy niż <code>y</code>, tak się bowiem składa, że wstęgi są opisane przedziałem, czyli cechami <code>ymin</code> i <code>ymax</code>. Każdą z tych cech możemy połączyć ze zmienną lub przypisać do nich stałą wartość.</p>
+<p>Jest to o tyle ciekawy przykład, że wymagać będzie wskazania innej cechy niż <code>y</code>, tak się bowiem składa, że wstęgi są opisane przedziałem, czyli cechami <code>ymin</code> i <code>ymax</code>. Każdą z tych cech możemy połączyć ze zmienną lub przypisać do nich stałą wartość.</p>
 <p>Na poniższym przykładzie rysujemy wstęgę rozpinającą się od zera (stała wartość <code>ymin=0</code>) do wartości indeksu WIG (<code>ymax=Kurs.zamkniecia</code>).</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(WIG, <span class="kw">aes</span>(<span class="dt">x=</span>Data, <span class="dt">ymin=</span><span class="dv">0</span>, <span class="dt">ymax=</span>Kurs.zamkniecia)) +<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_ribbon</span>()</code></pre>
