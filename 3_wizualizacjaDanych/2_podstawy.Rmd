@@ -447,11 +447,13 @@ Opanowaliśmy podstawy tworzenia wykresów z użyciem pakietu `ggplot2`. W kolej
 
 # Zadania:
 
-+ Przedstaw graficznie za pomocą wykresu pudełko-wąsy oraz histogramu rozkład cechy `Cena.w.PLN`. 
++ Przedstaw graficznie za pomocą wykresu punktowego zależność pomiędzy żywotnością (kolumna `zywotnosc`) a wagą zwierzęcia (kolumna `waga`).
 
-+ Zwróć uwagę, że pojedyncze auta o bardzo wysokich cenach, powodują że wykres jest mało czytelny. Oczyść te dane, pozostawiają tylko auta o cenie poniżej 100 tys. pln. Następnie przedstaw rozkład cen aut w segmencie aut do 100 tys. pln.
++ Zaznacz kolorem lub kształtem punktu informację czy przedstawiany jest ptak czy kot. Czy są różnice pomiędzy żywotnością a wagą dla kotów i ptaków?
 
-+ Aut w jakiej cenie jest najwięcej wśród zebranych ogłoszeń?
++ Użyj etykiet by odczytać który ptak i który kot żyją najdłużej.
+
++ Używając geometrii wstęga (`geom_ribbon`) przedstaw kurs minimalny i maksymalny każdego dnia na podstawie danych ze zbioru `WIG`.
 
 Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania_sezon2.html
 
