@@ -177,7 +177,7 @@ summary(auta2012$Cena.w.PLN)
 
 Opisując zmienną ilościową przydatna może być funkcja `quantile()`, która wyznacza kwantyle określonego rzędu ze zbioru danych. Kwantyle rzędu `x` to taka liczba, że `100*x%` wartości jest mniejszych niż ten kwantyl.
 
-Niezbyt jasne, więc możę na przykładzie.
+Niezbyt jasne? Więc może na przykładzie.
 
 ```{r, warning=FALSE}
 quantile(auta2012$Cena.w.PLN, c(0.01, 0.1, 0.25, 0.5, 0.75, 0.90, 0.99))
