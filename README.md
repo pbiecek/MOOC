@@ -61,10 +61,11 @@ Sezon 2: Wizualizacja i modelowanie danych
     + odcinek 4: Dodatki do wykresów,  [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/3_dodatki.html)
     + odcinek 5: Jak zrobić mapę, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/4_mapy.html)
   * Co czyni wykres złym lub dobrym?
-    + odcinek 6: Historia i współczesność [film]
-    + odcinek 7: Iluzje, percepcja obrazu i kolory [film]
-    + odcinek 8: Info-pomyłka [film]
-    + odcinek 9: [film]
+    + odcinek 6: Historia i współczesność [film, wizualizacja_historia.mp4]
+    + odcinek 7: Iluzje, percepcja obrazu i kolory [film, wizualizacja_iluzja.mp4]
+    + odcinek 8: Info-pomyłka [film, wizualizacja_infopomylka.mp4]
+    + odcinek 9: Jak dobierać kolory [film, wizualizacja_kolory.mp4]
+    + odcinek 10: Jak pokazywać różne liczby [film, wizualizacja_liczby.mp4]
 
 + Podstawy analizy statystycznej
   * odcinek 10: Intro, próba, populacja, estymacja, testowanie  - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/01_intro.html)
