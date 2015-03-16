@@ -84,6 +84,53 @@ pogRomcy danych
 <span class="kw">ggplot</span>(WIG, <span class="kw">aes</span>(<span class="dt">x =</span> Data, <span class="dt">ymin=</span>Kurs.minimalny, <span class="dt">ymax=</span>Kurs.maksymalny)) +<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_ribbon</span>()</code></pre>
 </div>
+<div id="zadanie-sezon-2-odcinek-3" class="slide section level1">
+<h1>Zadanie, sezon 2, odcinek 3</h1>
+<ul>
+<li><p>Wybierz samochody marki Volkswagen model Passat a następnie narysuj jak średnia cena zależy od roku produkcji za pomocą geometrii <code>geom_smooth()</code>.</p></li>
+<li><p>Wybierz samochody marki Volkswagen, narysuj jak średnia cena zależy od roku produkcji, różnymi kolorami przedstaw różne modele Volkswagena.</p></li>
+<li><p>Wybierz pięcioletnie auta marki Volkswagen i za pomocą wykresu ramka - wąsy przedstaw jak cena auta zależy od modelu.</p></li>
+<li><p>Dla wybranych pięcioletnich aut marki Volkswagen przedstaw w podziale na modele jaka część aut ma silnik diesla.</p></li>
+</ul>
+</div>
+<div id="odpowiedz-sezon-2-odcinek-3" class="slide section level1">
+<h1>Odpowiedź, sezon 2, odcinek 3</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Wybierz samochody marki Volkswagen model Passat a następnie narysuj </span>
+<span class="co"># jak średnia cena zależy od roku produkcji za pomocą geometrii `geom_smooth()`.</span>
+
+passat &lt;-<span class="st"> </span>auta2012 %&gt;%
+<span class="st">              </span><span class="kw">filter</span>(Marka ==<span class="st"> 'Volkswagen'</span>, Model ==<span class="st"> 'Passat'</span>, Rok.produkcji &gt;<span class="st"> </span><span class="dv">1990</span>) %&gt;%
+<span class="st">              </span><span class="kw">select</span>(Marka, Model, Rok.produkcji, Cena.w.PLN, Rodzaj.paliwa)
+
+<span class="kw">ggplot</span>(passat, <span class="kw">aes</span>(<span class="dt">x=</span>Rok.produkcji, <span class="dt">y=</span>Cena.w.PLN)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>()
+
+<span class="co"># Wybierz samochody marki Volkswagen, narysuj jak średnia cena zależy </span>
+<span class="co"># od przebiegu, różnymi kolorami przedstaw różne modele Volkswagena.</span>
+
+volkswagen &lt;-<span class="st"> </span>auta2012 %&gt;%
+<span class="st">              </span><span class="kw">filter</span>(Marka ==<span class="st"> 'Volkswagen'</span>, Model %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">'Passat'</span>, <span class="st">'Golf'</span>, <span class="st">'Polo'</span>, <span class="st">'Sharan'</span>), Rok.produkcji &gt;<span class="st"> </span><span class="dv">1990</span>, Rok.produkcji &lt;<span class="st"> </span><span class="dv">2012</span>) %&gt;%
+<span class="st">              </span><span class="kw">select</span>(Marka, Model, Rok.produkcji, Cena.w.PLN, Rodzaj.paliwa)
+
+<span class="kw">ggplot</span>(volkswagen, <span class="kw">aes</span>(<span class="dt">x=</span>Rok.produkcji, <span class="dt">y=</span>Cena.w.PLN, <span class="dt">color=</span>Model)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>()
+
+<span class="co"># Wybierz pięcioletnie auta marki Volkswagen i za pomocą wykresu </span>
+<span class="co"># ramka - wąsy przedstaw jak cena auta zależy od modelu.</span>
+
+volkswagen &lt;-<span class="st"> </span>auta2012 %&gt;%
+<span class="st">              </span><span class="kw">filter</span>(Marka ==<span class="st"> 'Volkswagen'</span>, Rok.produkcji ==<span class="st"> </span><span class="dv">2007</span>, Model %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">'Passat'</span>, <span class="st">'Golf'</span>, <span class="st">'Polo'</span>, <span class="st">'Sharan'</span>)) %&gt;%
+<span class="st">              </span><span class="kw">select</span>(Marka, Model, Rok.produkcji, Cena.w.PLN, Rodzaj.paliwa)
+
+<span class="kw">ggplot</span>(volkswagen, <span class="kw">aes</span>(<span class="dt">x=</span>Model, <span class="dt">y=</span>Cena.w.PLN)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>()
+
+<span class="co"># Dla wybranych pięcioletnich aut marki Volkswagen przedstaw w podziale </span>
+<span class="co"># na modele jaka część aut ma silnik diesla.</span>
+
+<span class="kw">ggplot</span>(volkswagen, <span class="kw">aes</span>(<span class="dt">x=</span>Model, <span class="dt">fill=</span>Rodzaj.paliwa)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">'fill'</span>)</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>
