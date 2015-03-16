@@ -1,7 +1,7 @@
 ---
-title: "Jak zrobić wykres w ggplot2"
+title: "Jak zrobić wykres w ggplot2?"
 author: "pogRomcy danych"
-date: "sezon 3 / odcinek 4 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst <br> Naciśnij `T` by wyświetlić spis treści"
+date: "sezon 2 / odcinek 2 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst <br> Naciśnij `T` by wyświetlić spis treści"
 output:
   slidy_presentation:
     includes:
@@ -15,11 +15,11 @@ output:
 
 # O czym jest ten odcinek
 
-Dane są czymś abstrakcyjnym i często trudno zrozumieć zależności pomiędzy różnymi zmiennymi.
+Dane są czymś abstrakcyjnym i patrząc w tabele liczb często trudno zrozumieć zależności pomiędzy różnymi zmiennymi.
 
-Ale znacznie łatwiej dostrzec lub zrozumieć te zależności, jeżeli tylko poprawnie się je przedstawi graficznie.
+Ale znacznie łatwiej dostrzec lub zrozumieć te zależności, jeżeli dane przedstawi się graficznie w poprawny sposób.
 
-Cały sezon 3 poświęcony jest wizualizacji danych, ale w tym odcinku poznamy pakiet graficzny `ggplot2`, pozwalający na tworzenie dobrze wyglądających i czytelnych wykresów.
+Pierwsza połowa seoznu 2 poświęcona jest wizualizacji danych. W tym odcinku poznamy pakiet graficzny `ggplot2`, pozwalający na tworzenie dobrze wyglądających i czytelnych wykresów.
 
 W tym odcinku dowiemy się:
 
@@ -27,21 +27,25 @@ W tym odcinku dowiemy się:
 - Jednym z najpopularniejszych sposobów przedstawiania danych są wykresy punktowe. Pokażemy jak tworzyć takie wykresy.
 - Jednym z kluczowych pomysłów w pakiecie `ggplot2` są mapowania zmiennych na właściwości wykresu, dokładnie omówimy na czym polega ten pomysł.
 - Poznamy kolejne rodzaje wykresów, takie jak wykres z etykietami lub wykres liniowy.
-- Pokażemy też jak składać różne warstwy wykresu?
+- Pokażemy też jak składać różne warstwy w jeden czytelny wykres.
 
 ---
 
 # Zbiory danych
 
-W tym odcinku będziemy pracować z dwoma zbiorami danych: `koty_ptaki` oraz `WIG`.
+W tym odcinku będziemy pracować z dwoma zbiorami danych: `koty_ptaki` oraz `WIG`. Oba zbiory są dostępne z pakietu `PogromcyDanych`.
 
-Aby odtworzyć przykłady z tego odcinka potrzebny jest pakiet `PogromcyDanych`. Informacja o tym jak go zainstalować jest umieszczona w odcinku drugim *Jak zainstalować R, RStudio oraz dodatkowe pakiety?*.
+Aby odtworzyć przykłady z tego odcinka potrzebny jest zainstalowany pakiet `PogromcyDanych`. Informacja o tym jak go zainstalować jest umieszczona w odcinku trzecim pierwszego sezonu *Jak zainstalować R, RStudio oraz dodatkowe pakiety?*.
+
+Funkcją `library()` włączamy pakiet i mozęmy sprawdzić jak wyglądają pierwsze wiersze z obu zbiorów danych.
 
 ```{r,  message=FALSE}
 # jeżeli pakiet jeszcze nie jest zainstalowany należy odkomentować poniższą linijkę
 # install.packages("PogromcyDanych")
-library(PogromcyDanych)
 
+# wczytujemy pakiet 
+library(PogromcyDanych)
+# wyświtlamy pierwsze wiersze z interesującego nas zbioru danych
 head(koty_ptaki)
 
 head(WIG)
@@ -69,12 +73,16 @@ My skupimy się na jednym, na pakiecie `ggplot2`. Dlaczego? Jest ku temu kilka p
 Wykorzystując zbiór danych `koty_ptaki` przedstawmy zależność wagi od prędkości dla wybranych gatunków. Wykorzystamy w tym celu dwa pakiety graficzne dostępne w programie R, pakiet `graphics` z funkcją `plot()` oraz pakiet `ggplot2`  z funkcją `ggplot()`. 
 
 Poniższe instrukcje tworzą wykres z domyślnymi ustawieniami.
-To, w jaki sposób tworzą one wykres wyjaśnimy na kolejnym slajdzie o tytule *Elementy wykresu punktowego*, w tym miejscu, przyjrzyjmy się wyłącznie wynikom, które obie instrukcje produkują.
+To, w jaki sposób tworzą one wykres wyjaśnimy za cztery slajdy, na slajdzie o tytule *Elementy wykresu punktowego*. W tym miejscu, przyjrzyjmy się wyłącznie wynikom, które obie instrukcje produkują.
 
 ```{r,  message=FALSE, eval=FALSE}
-library(ggplot2)        # ten pakiet pozwala na tworzenie wykresów 
-
+# bez ładowania dodatkowych pakietów, możemy korzystać z funkcji plot()
 plot(koty_ptaki$waga, koty_ptaki$predkosc)
+
+# funkcje graficzne, które będziemy omawiać, wymagają włączenia dodatkowego pakietu ggplot2
+# jeżęli ten pakiet nie jest zainstalowany, należy go zainstalować poleceniem install.packages("ggplot2")
+library(ggplot2)
+# w pakiecie ggplot2 wykresy wygodnie tworzy się funkcją ggplot
 ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
   geom_point()
 ```
@@ -83,11 +91,13 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
 
 # Co różni te dwa wykresy?
 
-Dla wybranych gatunków, na wykresie punktowym przedstawiamy zależność pomiędzy wagą a prędkością osobników tego gatunku. Lżejsze gatunki to głównie ptaki, które są też szybsze niż duże koty, więc przedstawiany wykres pokazuje, że im cięższy osobnik, tym niższa jego prędkość maksymalna.
+Dla kolejnych wierszy zbioru danych `koty_ptaki`, na wykresie przedstawiamy zależność pomiędzy zmiennymi `waga` a `prędkosc`. Każdy wiersz opisany jest przez jeden punkt, przez co wykres ten nazywa się wykresem punktowym.
 
-Pomimo jednak tego, że zależność przedstawiona na obu wykresach jest ta sama, ponieważ przedstawiają one te same dane, to jednak wykresy te wyglądają różnie.
+Na tym wykresie przedstawiane są duże koty i ptaki. Lżejsze gatunki to głównie ptaki, które są też szybsze niż duże koty. Więc przedstawiany wykres pokazuje, że im cięższy osobnik, tym niższa jego prędkość maksymalna.
 
-Przyjrzymy się wynikowym wykresom oraz postarajmy się znaleźć jak najwięcej różnic i zastanówmy się, który sposób prezentacji jest lepszy.
+Pomimo jednak tego, że oba wykresy przedstawiają te same dane, a więc zależność przedstawiona na obu wykresach jest ta sama, to jednak wykresy te wyglądają różnie.
+
+Przyjrzymy się obu wykresom oraz postarajmy się znaleźć jak najwięcej różnic i zastanówmy się, który sposób prezentacji jest lepszy.
 
 ```{r, fig.height=5, fig.width=5, message=FALSE, echo=FALSE}
 
@@ -105,31 +115,37 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
 # Co różni te dwa wykresy?
 
 Oczywiście te wykresy różnią się wieloma elementami. 
-Różnice, które uznałem za najistotniejsze to:
+Różnice, które zauważyłem i uznałem za najistotniejsze to:
 
-- Na prawym wykresie widoczne są pionowe i poziome linie pomocnicze, ułatwiają one dokładniejsze odczytanie współrzędnych punktów niż w przypadku lewego wykresu.
-- Linie pomocnicze są białe na szarym tle, przez co nie dominują wykresu i są delikatnie przesunięte na drugi plan.
-- Jeżeli wykres umieszczamy na białej stronie internetowej to szare tło umożliwia szybką lokalizację wykresu.
-- Oba wykresy wypełniają obszar 10 x 10 cm, ale lewy wykres ma duże marginesy, przez co mniej miejsca pozostaje na prezentacje danych. Prawy wykres ma małe marginesy, przez co jest więcej miejsca na zaprezentowanie danych.
-- Etykiety na osiach na prawym wykresie są poziome, nie trzeba obracać głowy by je odczytać.
-- Etykiety na prawym wykresie są pomniejszone i wyszarzane, przesunięte na drugi plan. Wciąż są widoczne ale mniej dominują wykres, pozwalając przesunąć dane na pierwszy plan.
-- Nazwy na osiach są krótsze i czytelniejsze, nie ma członu `koty_ptaki$`, który nie jest potrzebny.
-- Punkty zaznaczone są kropkami a nie pustymi okręgami, dzięki czemu zajmują mniej miejsca, więcej ich się zmieści na wykresie i łatwiej odczytać współrzędne punktu.
+1. Na prawym wykresie widoczne są pionowe i poziome linie pomocnicze, ułatwiają one dokładniejsze odczytanie współrzędnych punktów niż w przypadku lewego wykresu.
+2. Na prawym wykresie linie pomocnicze są białe na szarym tle, przez co nie dominują wykresu i są delikatnie przesunięte na drugi plan.
+3. Jeżeli wykres umieszczamy na białej stronie internetowej to szare tło umożliwia szybką lokalizację wykresu.
+4. Oba wykresy wypełniają obszar 10 x 10 cm, ale lewy wykres ma duże marginesy, przez co mniej miejsca pozostaje na prezentacje danych. Prawy wykres ma małe marginesy, przez co jest więcej miejsca na zaprezentowanie danych.
+5. Etykiety na osiach na prawym wykresie są poziome, nie trzeba obracać głowy by je odczytać.
+6. Etykiety na prawym wykresie są pomniejszone i wyszarzane, przesunięte na drugi plan. Wciąż są widoczne ale mniej dominują wykres, pozwalając przesunąć dane na pierwszy plan.
+7. Nazwy na osiach są krótsze i czytelniejsze, nie ma członu `koty_ptaki$`, który nie jest potrzebny.
+8. Punkty zaznaczone są kropkami a nie pustymi okręgami, dzięki czemu zajmują mniej miejsca, więcej ich się zmieści na wykresie i łatwiej odczytać współrzędne punktu.
 
 Używając pakietu `ggplot2` otrzymujemy przy fabrycznych ustawieniach czytelny wykres. Jeżeli chcemy go zmienić, możemy zmienić każdy jego element. Ale jeżeli nie chcemy, możemy skupić się na danych a nie upiększaniu wykresu.
+
+```{r, fig.height=5, fig.width=5, message=FALSE, echo=FALSE}
+plot(koty_ptaki$waga, koty_ptaki$predkosc)
+ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
+  geom_point()
+```
 
 
 ---
 
 # Kiedy należy używać wykresu punktowego?
 
-Wykres punktowy stosuje się najczęściej w sytuacji gdy dla pewnego zbioru obiektów mamy dwie zmienne ilościowe (np. dla państw to może być PKB i średnia długość życia, dla osób to może być wzrost i waga, dla samochodów to może być przebieg i cena).
+Wykres punktowy stosuje się najczęściej w sytuacji gdy dla pewnego zbioru obiektów (najczęściej opisanego wiersz po wierszu), przedstawić chcemy zależność pomiędzy dwiema zmiennymi liczbowymi/ilościowymi. Np. dla państw to może być zależność pomiędzy PKB i średnia długość życia, dla osób to może być wzrost i waga, dla samochodów to może być przebieg i cena. Dodatkowo:
 
 1. Nie wiemy czy i jakiej zależności się spodziewać (czy i jak długość życia jest związana z PKB).
 2. Podejrzewamy, że dwie zmienne są zależne i chcemy przedstawić tę zależność (chcemy pokazać jak cena auta zmienia się z jego przebiegiem).
 3. Podejrzewamy, że w jednej zmiennej występują nietypowe obserwacje (np. bardzo duże) i chcemy zobaczyć jakim wartościom stowarzyszonej zmiennej one odpowiadają (np. czy osoby o bardzo wysokiej wadze to osoby bardzo wysokie czy nie).
 
-Na wykresie punktowym można również zaznaczyć grupy, pozwala to dodatkowo na porównanie grup pod względem przedstawianych zmiennych. Taki wykres punktowy z grupami warto stosować gdy:
+Na wykresie punktowym można również zaznaczyć grup wierszy. Oznaczając je kolorem, kształtem lub wielkością. Pozwala to dodatkowo na porównanie grup pod względem przedstawianych zmiennych (patrz slady 13-16). Taki wykres punktowy z grupami warto stosować gdy:
 
 1. Nie wiemy czy grupy różnią się pod kątem danej pary zmiennych i chcemy to sprawdzić (np. czy auta 3 drzwiowe różnią się od 5 drzwiowych jeżeli chodzi o cenę i przebieg).
 2. Wiemy, że grupy się różnią i chcemy pokazać w jaki sposób (np. aby pokazać, że kobiety są średnio niższe i znacznie lżejsze niż mężczyźni).
@@ -138,10 +154,12 @@ Na wykresie punktowym można również zaznaczyć grupy, pozwala to dodatkowo na
 
 # Jak zrobić wykres punktowy?
 
-Przyjrzyjmy się instrukcji, która tworzy wykres punktowy.
+Przyjrzyjmy się instrukcji, która tworzy wykres punktowy (na kolejnym slajdzie jest przedstawiony rozbiór na części pierwsze).
 
 ```{r, fig.height=4, fig.width=4}
+# pierwsze trzy wiersze ze zbioru danych
 head(koty_ptaki, 3)
+# instrukcja rysująca wykres, poniżej wynik
 ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
   geom_point()
 ```
@@ -150,6 +168,8 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
 
 # Elementy wykresu punktowego
 
+Przyjrzyjmy się instrukcji, która tworzy wykres punktowy.
+
 ```{r, eval=FALSE}
 ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
   geom_point()
@@ -157,9 +177,9 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
 
 Trzy elementy są kluczowe w tej instrukcji.
 
-- Funkcja `ggplot()` tworzy trzon wykresu. Opisuje ona jakie zmienne będą przedstawione na wykresie, ale nie określa w jaki sposób. Zazwyczaj przyjmuje ona dwa argumenty. Pierwszy to zbiór danych (w tym przypadku `koty_ptaki`). Drugi argument to lista par, określająca które zmienne i w jaki sposób mają być przedstawione na wykresie. Te pary określa się zazwyczaj nazwą ,,mapowania'', określają one które zmienne mają być przedstawione za pomocą jakich cech wykresu. 
-- Mapowania opisuje funkcja `aes()`. Argumenty tej funkcji to pary `cecha wykresu=zmienna`. Każda z tych par opisuje w jaki sposób określona zmienne ma być przedstawiona. W powyższym przypadku opis ten oznacza, że zmienna `waga` ma być przedstawiona przez współrzędne `x` a zmienna `predkosc` ma być przedstawiona przez zmienną `y`.
-- Trzon wykresu rozbudowuje się dodając, z użyciem operatora `+`, kolejne funkcje. W tym przypadku funkcja `geom_point()` dodaje do wykresu warstwę przedstawiającą dane za pomocą punktów. Funkcje, o nazwach rozpoczynających się od `geom_` nazywamy geometriami, określają one w jaki sposób dane są prezentowane. Czy jako punkty, linie, obszary czy jeszcze inaczej. W tym sezonie poznamy kilka geometrii, zbiór wszystkich dostępnych geometrii znaleźć można na stronie http://docs.ggplot2.org.
+- Funkcja `ggplot()` tworzy trzon wykresu. Opisuje ona jakie zmienne będą przedstawione na wykresie, ale nie określa w jaki sposób. Zazwyczaj przyjmuje ona dwa argumenty. Pierwszy to zbiór danych (w tym przypadku `koty_ptaki`). Drugi argument to lista par, określająca które zmienne i w jaki sposób mają być przedstawione na wykresie. Te pary nazywa się  ,,mapowaniami'', określają one które zmienne mają być przedstawione za pomocą jakich cech wykresu. 
+- Mapowania opisuje funkcja `aes()`. Argumenty tej funkcji to pary `cecha wykresu=zmienna`. Każda z tych par opisuje w jaki sposób określona zmienne ma być przedstawiona. W powyższym przypadku opis ten oznacza, że zmienna `waga` ma być przedstawiona przez współrzędną `x` a zmienna `predkosc` ma być przedstawiona przez współrzędną `y` wykresu.
+- Trzon wykresu rozbudowuje się dodając kolejne funkcje z użyciem operatora `+`. W tym przypadku funkcja `geom_point()` dodaje do wykresu warstwę przedstawiającą dane za pomocą punktów. Funkcje, o nazwach rozpoczynających się od `geom_` nazywamy geometriami, określają one w jaki sposób dane są prezentowane. Czy jako punkty (`geom_point()`), linie (`geom_line()`), obszary czy jeszcze inaczej. W tym sezonie poznamy kilka geometrii, zbiór wszystkich dostępnych geometrii znaleźć można na stronie http://docs.ggplot2.org.
 
 ---
 
