@@ -1,0 +1,49 @@
+---
+title: "Wizualizacja danych"
+author: "pogRomcy danych"
+date: "sezon 2 / odcinek 1 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst <br> Naciśnij `T` by wyświetlić spis treści"
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / wizualizacja / into"
+
+---
+
+# O czym jest ten odcinek
+
+Sezon drugi składa się z dwóch części, jednej poświęconej wizualizacji i jednej poświęconej modelowaniu.
+
+Seria o wizualizacji też jest podzielona na dwie części: narzędziową i teoretyczną.
+
+W części narzędziowej pokazujemy praktycznie jak tworzyć wykresy w programie R. W części teoretycznej omawiamy podstawowe zagadnienia z wizualizacji danych.
+
+Część narzędziowa wymaga pewnego wyjaśnienia. W programie R wykresy można tworzyć na wiele bardzo różnych sposobów. Jest podstawowa grafika i funkcje oparte na pakiecie `graphics`, są rozwiązania oparte o pakiet `grid` czyli `ggplot2` i `lattice`. Są w końcu rozwiązania opracowane dla grafiki internetowej, czyli `ggvis` i inne internetowe pakiety. Omawianie ich wszystkich nie miało sensu.
+
+Najbardziej zaawansowana i najbardziej dojrzała jest rodzina wykresów opartych o pakiet `ggplot2`. Ma ona również wiele ciekawych rozwiązań, dlatego zdecydowaliśmy się ją właśnie tutaj omówić.
+
+# Jak zrobić wykres w pakiecie ggplot2
+
+Część narzędziowa składa się z czterech odcinków
+
+- Jak zrobić wykres? - Wprowadzenie do pakietu `ggplot2`, tutaj przedstawimy kluczowe rozwiązania tego pakietu oraz pokazęmy jak zrobić wykresy z prostymi geometriami,
+- Wykresy agregaty - Kontynuacja prezentacji geometrii pakietu `ggplot2`, w tym odcinku zaprezentowane będą gemetrie, które liczą agregaty z danych,
+- Dodatki do wykresów - W tym odcinku pokażemy jak upiększać wykresy, zmieniać kolory, wielkości, kształty i mieć pełną kontrolę nad tym co i jak wygląda.
+- Jak zrobić mapę? - Ostatni odcinek serii narzędziowej pokazuje jak narysować mapę używając pakietu `ggplot2`.
+
+
+# Co czyni wykres złym lub dobrym?
+
+Część teoretyczna składa się z pięciu odcinków. Każdy z nich to krótki film.
+
+- Historia i współczesność - Przedstawia najciekawsze historyczne grafiki statystyczne oraz pokazuje jak dobre pomysły z historii znajdują nowe zastosowania dzisiaj,
+- Iluzje - Przedstawia wybrane problemy z systemem widzenia, który wiele rzeczy robi dobrze, ale nie jest zbyt dokładny.
+- Info-pomyłka - Przedstawia wykresy gubiące lub zniekształcające infromacje. Ku przestrodze.
+- Jak dobierać kolory? - Przedstawia wybrane problemy z doborem kolorów, oraz odpowiada na fundamentalne pytanie: Jak dobierać kolory?
+- Jak pokazywać różne liczby? - Przedstawia wybrane problemy z prezentacją liczb różnych typów.
+
+Każda z tych części to streszczenie jednego z rozdziałów z ksiązki ,,Zbiór esejów o sztuce prezentacji danych'' http://biecek.pl/Eseje
+
