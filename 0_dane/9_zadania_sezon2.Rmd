@@ -14,4 +14,39 @@ output:
 
 # Zadanie, sezon 2, odcinek 2
 
++ Przedstaw graficznie za pomocą wykresu punktowego zależność pomiędzy żywotnością (kolumna `zywotnosc`) a wagą zwierzęcia (kolumna `waga`).
 
++ Zaznacz kolorem lub kształtem punktu informację czy przedstawiany jest ptak czy kot. Czy są różnice pomiędzy żywotnością a wagą dla kotów i ptaków?
+
++  Użyj etykiet by odczytać który ptak i który kot żyją najdłużej
+
++ Używając geometrii wstęga (`geom_ribbon`) przedstaw kurs minimalny i maksymalny każdego dnia na podstawie danych ze zbioru `WIG`.
+
+
+# Odpowiedź, sezon 2, odcinek 2
+
+```{r, message=FALSE, eval=FALSE}
+library(PogromcyDanych)
+library(ggplot2)
+
+# Przedstaw graficznie za pomocą wykresu punktowego zależność pomiędzy 
+# żywotnością (kolumna `zywotnosc`) a wagą zwierzęcia (kolumna `waga`).
+ggplot(koty_ptaki, aes(x = waga, y=zywotnosc)) + 
+  geom_point()
+
+# Zaznacz kolorem lub kształtem punktu informację czy przedstawiany 
+# jest ptak czy kot. Czy są różnice pomiędzy żywotnością a wagą dla 
+# kotów i ptaków?
+ggplot(koty_ptaki, aes(x = waga, y=zywotnosc, color=druzyna, shape=druzyna)) + 
+  geom_point()
+
+# Użyj etykiet by odczytać który ptak i który kot żyją najdłużej
+ggplot(koty_ptaki, aes(x = waga, y=zywotnosc, color=druzyna, shape=druzyna, label=gatunek)) + 
+  geom_text()
+
+# Używając geometrii wstęga (`geom_ribbon`) przedstaw kurs minimalny 
+# i maksymalny każdego dnia na podstawie danych ze zbioru `WIG`.
+ggplot(WIG, aes(x = Data, ymin=Kurs.minimalny, ymax=Kurs.maksymalny)) + 
+  geom_ribbon()
+
+```
