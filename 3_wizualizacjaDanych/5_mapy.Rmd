@@ -1,7 +1,7 @@
 ---
 title: "Pakiet ggplot2 - mapy"
 author: "pogRomcy danych"
-date: "sezon 3 / odcinek 4 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 2 / odcinek 5 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -9,48 +9,70 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "poskRamiacze danych / wizualizacja / mapy"
+    footer: "pogRomcy danych / wizualizacja / mapy"
 
 ---
 
-## O czym to będzie
+# O czym jest ten odcinek
+
+Jednym z bardzo atrakcyjnych wizualnie sposobów prezentacji danych są kartogramy, czyli popularne ,,mapki''.
 
 W tym odcinku nauczymy się
 
-- Jak wczytywać dane o mapach
-- Jak przedstawiać na mapach informacje za pomocą koloru wypełnienia
-- Jak przedstawiać na mapach informacje za pomocą wielkości punktów lub słupków
+- Jak wczytywać dane o mapach?
+- Jak przedstawiać na mapach informacje za pomocą koloru wypełnienia?
+- Jak przedstawiać na mapach informacje za pomocą wielkości punktów lub słupków?
 
-W tym odcinku będziemy pracować ze zbiorem danych `mandatySejmik2014`.
+W tym odcinku będziemy pracować ze zbiorem danych `mandatySejmik2014`, który jest dostępny w pakiecie `PogromcyDanych`.
 
 ---
 
-## Zbiór danych
+# Zbiór danych
 
 W tym odcinku będziemy pracować na zbiorze danych o wynikach wyborów samorządowych z roku 2014 do sejmików.
 
-Zbiór danych `mandatySejmik2014` dla każdego z 16 województw pokazuje ile mandatów zdobyli kandydaci pod sztandarami SLD, PiS, PO, SLD i innymi. W kolumnie `ProcentWaznychGlosow` przedstawiono procent ważnych oddanych głosów (w stosunku do osób uprawnionych do głosowania) a ostatnie dwie kolumny przedstawiają długość i szerokość geograficzną środka województwa.
+Zbiór danych `mandatySejmik2014` dla każdego z 16 województw pokazuje ile mandatów zdobyli kandydaci pod sztandarami SLD, PiS, PO, SLD i innymi.
+
+W kolumnie `ProcentWaznychGlosow` przedstawiono procent ważnych oddanych głosów (w stosunku do osób uprawnionych do głosowania) a ostatnie dwie kolumny przedstawiają długość i szerokość geograficzną środka województwa.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+# jeżeli pakiet nie jest zainstalowany, należy go najpierw zainstalować 
+# funkcją install.packages("PogromcyDanych")
 library(PogromcyDanych)
+# pierwsze sześć wierszy ze zbioru danych
 head(mandatySejmik2014)
 ```
 
 ---
 
-# Pliki z mapami - shape files
+# Pliki z mapami / kształtami - shape files
 
-Aby przedstawiać informacje na mapach w programie R, należy wpierw wczytać obrysy map. Te obrysy są udostępnione w plikach o rozszerzeniu `.shp`, nazywanych *shape files*. 
+Aby przedstawiać informacje na mapach w programie R, należy wpierw wczytać obrysy obszarów z map.
 
-Pliki, które wykorzystam tutaj pochodzą z bazy danych GADM http://www.gadm.org i mają pewne niewielkie błędy w kodowaniu, które ręcznie naprawimy. W katalogu `dane/POL_adm` znajdują się kształty obszarów na różnych poziomach szczegółowości. Plik `POL_adm0.shp` to obrys całego kraju, `POL_adm1.shp` to obrysy województw a `POL_adm2.shp` to obrysy gmin. Funkcją `readShapePoly()` wczytamy dane o obrysach województw do zmiennej `shp1`. Zmienna `shp1@data$VARNAME_1` zawiera nazwy województw, musimy w nich poprawić nazwę dla województwa Łódzkiego.
+Takie dane są udostępnione w plikach o rozszerzeniu `.shp`, nazywanych z angielska *shape files* i z tej nazwy będę korzystał poniżej. 
 
+Pliki z kształtami województw Polsi, które wykorzystam w tym odcinku, pochodzą z bazy danych GADM http://www.gadm.org i mają pewne niewielkie błędy w kodowaniu, które ręcznie naprawimy. 
+
+Po pobraniu danych, w katalogu `dane/POL_adm` znajdują się kształty obszarów na różnych poziomach szczegółowości. Plik `POL_adm0.shp` to obrys całego kraju, `POL_adm1.shp` to obrysy województw a `POL_adm2.shp` to obrysy gmin. 
+
+Funkcją `readShapePoly()` wczytamy dane o obrysach województw do zmiennej `shp1`. 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+# zanim zaczniemy pracować, potrzebujemy wczytać kilka bibliotek
 library(maptools)
 library(rgdal)
 library(gpclib)
 gpclibPermit()
+# wczytujemy dane o kształtach województw
 shp1 <- readShapePoly("../dane/POL_adm/POL_adm1.shp") 
+```
 
+Obiekt `shp1` to obiekt klasy `SpatialPolygonsDataFrame` i więcej o jego elementach, można dowiedzieć się z pliku pomocy `?SpatialPolygonsDataFrame`.
+
+Przykłądowo, zmienna `shp1@data` zawiera zbiór danych dołączony do kształtów, a w tym konkretnym pliku `shp1@data$VARNAME_1` zawiera nazwy województw.
+
+Z uwagi na błąd w kodowaniu musimy w nim poprawić nazwę dla województwa Łódzkiego.
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 # W zmiennej VARNAME_1 znajdują się nazwy województw
 shp1@data$VARNAME_1 <- as.character(shp1@data$VARNAME_1)
 shp1@data$VARNAME_1
