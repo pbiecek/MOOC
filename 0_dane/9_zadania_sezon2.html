@@ -131,6 +131,46 @@ volkswagen &lt;-<span class="st"> </span>auta2012 %&gt;%
 <span class="kw">ggplot</span>(volkswagen, <span class="kw">aes</span>(<span class="dt">x=</span>Model, <span class="dt">fill=</span>Rodzaj.paliwa)) +<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">'fill'</span>)</code></pre>
 </div>
+<div id="zadanie-sezon-2-odcinek-4" class="slide section level1">
+<h1>Zadanie, sezon 2, odcinek 4</h1>
+<ul>
+<li><p>Podobnie jak w poprzednim odcinku, wybierz samochody marki Volkswagen model Passat a następnie narysuj jak średnia cena zależy od roku produkcji za pomocą geometrii <code>geom_smooth()</code>. Następnie zobacz jak ten wykres będzie wyglądał z motywami <code>theme_bw()</code>, <code>theme_excel()</code> i <code>theme_economist()</code>.</p></li>
+<li><p>Zmień poniższy wykres, zamieniając skalę kolorów na od zielonego do czerwonego, kropki zamień na kwadraty a do wykresu dodaj tytuł (i odpowiednie etykiety osi).</p></li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(koty_ptaki, <span class="kw">aes</span>(<span class="dt">x=</span>waga, <span class="dt">y=</span>predkosc, <span class="dt">size=</span>zywotnosc, <span class="dt">color=</span>zywotnosc)) +
+<span class="st">  </span><span class="kw">geom_point</span>() </code></pre>
+</div>
+<div id="odpowiedzi-sezon-2-odcinek-4" class="slide section level1">
+<h1>Odpowiedzi, sezon 2, odcinek 4</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Podobnie jak w poprzednim odcinku, wybierz samochody marki Volkswagen model </span>
+<span class="co"># Passat a następnie narysuj jak średnia cena zależy od roku produkcji za pomocą</span>
+<span class="co"># geometrii `geom_smooth()`. Następnie zobacz jak ten wykres będzie wyglądał </span>
+<span class="co"># z motywami `theme_bw()`, `theme_excel()` i `theme_economist()`.</span>
+
+passat &lt;-<span class="st"> </span>auta2012 %&gt;%
+<span class="st">              </span><span class="kw">filter</span>(Marka ==<span class="st"> 'Volkswagen'</span>, Model ==<span class="st"> 'Passat'</span>, Rok.produkcji &gt;<span class="st"> </span><span class="dv">1990</span>) %&gt;%
+<span class="st">              </span><span class="kw">select</span>(Marka, Model, Rok.produkcji, Cena.w.PLN, Rodzaj.paliwa)
+
+pl &lt;-<span class="st"> </span><span class="kw">ggplot</span>(passat, <span class="kw">aes</span>(<span class="dt">x=</span>Rok.produkcji, <span class="dt">y=</span>Cena.w.PLN)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>()
+
+<span class="kw">library</span>(ggthemes)
+pl +<span class="st"> </span><span class="kw">theme_bw</span>() +<span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;theme_bw&quot;</span>)
+pl +<span class="st"> </span><span class="kw">theme_excel</span>() +<span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;theme_excel&quot;</span>)
+pl +<span class="st"> </span><span class="kw">theme_minimal</span>() +<span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;theme_minimal&quot;</span>)
+pl +<span class="st"> </span><span class="kw">theme_economist</span>() +<span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;theme_economist&quot;</span>)
+
+
+<span class="co"># Zmień poniższy wykres, zamieniając skalę kolorów na od zielonego do czerwonego,</span>
+<span class="co"># kropki zamień na kwadraty a do wykresu dodaj tytuł (i odpowiednie etykiety osi).</span>
+<span class="co"># ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +</span>
+<span class="co">#    geom_point() </span>
+
+<span class="kw">ggplot</span>(koty_ptaki, <span class="kw">aes</span>(<span class="dt">x=</span>waga, <span class="dt">y=</span>predkosc, <span class="dt">size=</span>zywotnosc, <span class="dt">color=</span>zywotnosc)) +
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">shape=</span><span class="dv">18</span>) +<span class="st">  </span>
+<span class="st">  </span><span class="kw">scale_color_gradient</span>(<span class="dt">high =</span> <span class="st">&quot;green3&quot;</span>, <span class="dt">low =</span> <span class="st">&quot;red3&quot;</span>) +
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Zielone latające kwadraty&quot;</span>) +<span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Waga [kg]&quot;</span>) +<span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Prędkość [km/h]&quot;</span>)</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>
