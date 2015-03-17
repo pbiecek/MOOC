@@ -352,6 +352,7 @@ Elastyczność pakietu `ggplot2` jest olbrzymia. Można robić bardzo niestandar
 Przykładowo, możliwe jest tworzenie wykresów w stylu popularnych komiksów z serii XKCD http://xkcd.com/
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+# aby można było rysować wykresy jak w komiksach XKCD potrzebny jest pakiet xkcd
 library(xkcd)
 ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
   geom_point(size=5) + xkcdaxis(c(0,300),c(50,200))
@@ -384,12 +385,15 @@ https://gss.civilservice.gov.uk/wp-content/uploads/2014/12/Effective-graphs-and-
 
 # Zadanie, sezon 2, odcinek 4
 
-+ Wybierz samochody marki Volkswagen model Passat a następnie narysuj jak średnia cena zależy od roku produkcji za pomocą geometrii `geom_smooth()`.
++ Podobnie jak w poprzednim odcinku, wybierz samochody marki Volkswagen model Passat a następnie narysuj jak średnia cena zależy od roku produkcji za pomocą geometrii `geom_smooth()`. Następnie zobacz jak ten wykres będzie wyglądał z motywami `theme_bw()`, `theme_excel()` i `theme_economist()`.
 
-+ Wybierz samochody marki Volkswagen, narysuj jak średnia cena zależy od roku produkcji, różnymi kolorami przedstaw różne modele Volkswagena.
++ Zmień poniższy wykres, zamieniając skalę kolorów na od zielonego do czerwonego, kropki zamień na kwadraty a do wykresu dodaj tytuł (i odpowiednie etykiety osi).
 
-+ Wybierz pięcioletnie auta marki Volkswagen i za pomocą wykresu ramka - wąsy przedstaw jak cena auta zależy od modelu.
+```{r, eval=FALSE}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
+  geom_point() 
+```
 
-+ Dla wybranych pięcioletnich aut marki Volkswagen przedstaw w podziale na modele jaka część aut ma silnik diesla.
+
 
 
