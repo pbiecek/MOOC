@@ -81,7 +81,7 @@ W poniższym przykładzie do wykresu dodajemy cztery linijki, każda zmieniając
 
 # Adnotacje, napisy na osiach i tytuły
 
-A oto i wykres po dodaniu tych modfyfikacji
+A oto i wykres po dodaniu tych modyfikacji
 ```{r, fig.height=5, fig.width=5, message=FALSE, warning=FALSE, eval=FALSE}
 # Przed [lewy]
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
@@ -133,7 +133,7 @@ A mapując na cechy `x` i `y` (współrzędne) interesującym parametrem jest `e
 
 # Większa kontrola nad mapowaniami
 
-A oto i przykładowe zastoswanie wszystkich tych modyfikacji mapowań.
+A oto i przykładowe zastosowanie wszystkich tych modyfikacji mapowań.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, eval=FALSE}
 # Przed [lewy]
@@ -166,17 +166,17 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna, color=druzyna)) +
 
 # Większa kontrola nad mapowaniami - zmienne ciągłe
 
-Zobaczmy jak wygląda kontrolowanie mapowaniami zmiennych ciągłych. Jako przykłąd wykorzystamy zmienną `zywotnosc`. Będziemy ją mapować na kolor i wielkość punktu.
+Zobaczmy jak wygląda kontrolowanie mapowaniami zmiennych ciągłych. Jako przykład wykorzystamy zmienną `zywotnosc`. Będziemy ją mapować na kolor i wielkość punktu.
 
 Jeżeli nie podoba nam się domyślny dobór kolorów (dla zmiennych ciągłych od czarnego do niebieskiego), to funkcją `scale_color_gradient()` możemy określić pomiędzy jakimi wartościami `low=` i `high=` ma rozpinać się skala kolorów. 
 
 Dla wielkości punktu określamy jaki przedział żywotności ma być prezentowany `limits=` oraz na jakiej wielkości punkty ten przedział ma być przedstawiony `range=`.
 
-Więcej inforamcji o możliwych dodatkowych parametrach znaleźć można w plikach pomocy dla funkcji `?scale_color_gradient` i `?scale_size_continuous`.
+Więcej informacji o możliwych dodatkowych parametrach znaleźć można w plikach pomocy dla funkcji `?scale_color_gradient` i `?scale_size_continuous`.
 
 # Większa kontrola nad mapowaniami - zmienne ciągłe
 
-A oto i przykładowe zastoswanie wszystkich tych modyfikacji mapowań.
+A oto i przykładowe zastosowanie wszystkich tych modyfikacji mapowań.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, eval=FALSE}
 # Przed [lewy]
@@ -271,7 +271,7 @@ Domyślnie zarysowany jest cały obszar o współrzędnych [0,1]x[0,1], ale moż
 
 Jest to bardzo wygodne, jeżeli chcemy zmieścić kilka wykresów obok siebie. 
 
-Poniższy przykład rysuje ten sam wykres trzykrotnie, za każdym razem w innym miejscu i z innym tytułem. Argumenty `x` i `y` określają środek zarysowanego obszaru, a `width` i `height` szerokość i wysokość zarysowanego prostokątu.
+Poniższy przykład rysuje ten sam wykres trzykrotnie, za każdym razem w innym miejscu i z innym tytułem. Argumenty `x` i `y` określają środek zarysowanego obszaru, a `width` i `height` szerokość i wysokość zarysowanego prostokąta.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 library(grid)
@@ -288,14 +288,14 @@ print(pl_waga + ggtitle("Wykres 3"),
 
 # Wiele wykresów w jednym oknie
 
-Argument `vp=` pozwala na rysowanie w dolonym elemencie wykresu. 
+Argument `vp=` pozwala na rysowanie w dotlonym elemencie wykresu. 
 
 Ale jeżeli chcemy rysować wykresy na regularnej siatce to wygodnie jest najpierw określić tę siatkę funkcją `grid.layout()` a następnie wypełnić ją wykresami wskazując pozycje siatki do zarysowania.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 # siatka o rozmiarze dwa wiersze i dwie kolumny
 pushViewport(viewport(layout = grid.layout(2,2)))
-# wklejanie wykresow do wybranych komórek
+# wklejanie wykresów do wybranych komórek
 # rysujemy w komórce o współrzędnych 1x1
 print(pl_waga + ggtitle("Wykres 1"),
       vp = viewport(layout.pos.row=1, layout.pos.col=1))
@@ -318,7 +318,7 @@ Okazuje się, że w prosty sposób można zmienić wygląd całego wykresu, uży
 Poniżej przykład dla czterech motywów graficznych, warto zobaczyć jak wyglądają pozostałe.
 
 ```{r, fig.height=4, fig.width=5, eval=FALSE}
-# przygotowujemy wykres puntkowy
+# przygotowujemy wykres punktowy
 pl <- ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   geom_point(size=5) 
 # pakiet z dodatkowymi motywami 
@@ -393,7 +393,4 @@ https://gss.civilservice.gov.uk/wp-content/uploads/2014/12/Effective-graphs-and-
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
   geom_point() 
 ```
-
-
-
 
