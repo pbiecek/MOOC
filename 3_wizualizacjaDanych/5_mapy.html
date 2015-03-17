@@ -90,7 +90,7 @@ pogRomcy danych
 <h1>Pliki z mapami / kształtami - shape files</h1>
 <p>Aby przedstawiać informacje na mapach w programie R, należy wpierw wczytać obrysy obszarów z map.</p>
 <p>Takie dane są udostępnione w plikach o rozszerzeniu <code>.shp</code>, nazywanych z angielska <em>shape files</em> i z tej nazwy będę korzystał poniżej.</p>
-<p>Pliki z kształtami województw Polsi, które wykorzystam w tym odcinku, pochodzą z bazy danych GADM <a href="http://www.gadm.org" class="uri">http://www.gadm.org</a> i mają pewne niewielkie błędy w kodowaniu, które ręcznie naprawimy.</p>
+<p>Pliki z kształtami województw Polski, które wykorzystam w tym odcinku, pochodzą z bazy danych GADM <a href="http://www.gadm.org" class="uri">http://www.gadm.org</a> i mają pewne niewielkie błędy w kodowaniu, które ręcznie naprawimy.</p>
 <p>Po pobraniu danych, w katalogu <code>dane/POL_adm</code> znajdują się kształty obszarów na różnych poziomach szczegółowości. Plik <code>POL_adm0.shp</code> to obrys całego kraju, <code>POL_adm1.shp</code> to obrysy województw a <code>POL_adm2.shp</code> to obrysy gmin.</p>
 <p>Funkcją <code>readShapePoly()</code> wczytamy dane o obrysach województw do zmiennej <code>shp1</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># zanim zaczniemy pracować, potrzebujemy wczytać kilka bibliotek</span>
@@ -102,7 +102,7 @@ pogRomcy danych
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># wczytujemy dane o kształtach województw</span>
 shp1 &lt;-<span class="st"> </span><span class="kw">readShapePoly</span>(<span class="st">&quot;../dane/POL_adm/POL_adm1.shp&quot;</span>) </code></pre>
 <p>Obiekt <code>shp1</code> to obiekt klasy <code>SpatialPolygonsDataFrame</code> i więcej o jego elementach, można dowiedzieć się z pliku pomocy <code>?SpatialPolygonsDataFrame</code>.</p>
-<p>Przykłądowo, zmienna <code>shp1@data</code> zawiera zbiór danych dołączony do kształtów, a w tym konkretnym pliku <code>shp1@data$VARNAME_1</code> zawiera nazwy województw.</p>
+<p>Przykładowo, zmienna <code>shp1@data</code> zawiera zbiór danych dołączony do kształtów, a w tym konkretnym pliku <code>shp1@data$VARNAME_1</code> zawiera nazwy województw.</p>
 <p>Z uwagi na błąd w kodowaniu musimy w nim poprawić nazwę dla województwa Łódzkiego.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># W zmiennej VARNAME_1 znajdują się nazwy województw</span>
 shp1@data$VARNAME_1 &lt;-<span class="st"> </span><span class="kw">as.character</span>(shp1@data$VARNAME_1)
@@ -140,7 +140,7 @@ shp1f &lt;-<span class="st"> </span><span class="kw">fortify</span>(shp1, <span 
 <p>Geometrii <code>geom_path()</code> będziemy używać do rysowania obrysów województw.</p>
 <p>Ale aby zaznaczyć wartości liczbowe na mapie za pomocą koloru wypełnienia, do tego użyjemy geometrii <code>geom_map()</code>.</p>
 <p>Argument <code>map=</code> tej geometrii wskazuje obiekt przedstawiający województwa (tutaj <code>shp1f</code>). Argument <code>data=</code> wskazuje na obiekt z danymi liczbowymi, czyli nasze dane o mandatach w sejmikach. W mapowaniach dla geometrii <code>geom_map()</code> określa się też cechę <code>map_id=</code> aby wskazać nazwy województw oraz <code>fill=</code> by wskazać która zmienna ma być przedstawiona kolorem wypełnienia.</p>
-<p>Poniższy przykład rysuje kartogram, w którym infomacja o procencie oddanych ważnych głosów przedstawiamy kolorem wypełnienia</p>
+<p>Poniższy przykład rysuje kartogram, w którym informacja o procencie oddanych ważnych głosów przedstawiamy kolorem wypełnienia</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pusty zrąb wykresu</span>
 <span class="kw">ggplot</span>() +
 <span class="st">  </span><span class="co"># rysowanie wypełnień</span>
@@ -153,7 +153,7 @@ shp1f &lt;-<span class="st"> </span><span class="kw">fortify</span>(shp1, <span 
 <div id="rysowanie-mapy" class="slide section level1">
 <h1>Rysowanie mapy</h1>
 <p>Z rysowaniem map związane jest pojęcie projekcji, czyli sposobu odwzorowania trójwymiarowej powierzchni globu na dwuwymiarowej powierzchni wykresu.</p>
-<p>Mapy można rysować w różnych projekcjach, nie ma jednej idealnej. Niektóre zachwouja lepiej pola, inne kąty, inne długości odcinków.Listę projekcji z opisem właściwości można znaleźć pod adresem <a href="http://en.wikipedia.org/wiki/List_of_map_projections" class="uri">http://en.wikipedia.org/wiki/List_of_map_projections</a></p>
+<p>Mapy można rysować w różnych projekcjach, nie ma jednej idealnej. Niektóre zachowują lepiej pola, inne kąty, inne długości odcinków. Listę projekcji z opisem właściwości można znaleźć pod adresem <a href="http://en.wikipedia.org/wiki/List_of_map_projections" class="uri">http://en.wikipedia.org/wiki/List_of_map_projections</a></p>
 <p>W programie R, w pakiecie <code>ggplot</code> możemy korzystać z większości popularnych projekcji. Aby wybrać którąś z nich, wystarczy dodać wywołanie funkcji <code>coord_map()</code>.</p>
 <p>Poniżej dwa przykładowe wykresy, różniące się projekcjami. Ponieważ w skali globu obszar Polski nie jest duży, różnice pomiędzy mapami są raczej subtelne.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># przygotowujemy wykres, tak jak w poprzednim odcinku</span>
@@ -171,9 +171,9 @@ mapka +<span class="st"> </span><span class="kw">coord_map</span>(<span class="d
 </div>
 <div id="rysowanie-mapy---pracujemy-nad-szczegoami" class="slide section level1">
 <h1>Rysowanie mapy - pracujemy nad szczegółami</h1>
-<p>Narysowaliśmy już kilka kartogramów. Ale nei są one jeszcez najpiękniejsze. Jak je modyfikować?</p>
+<p>Narysowaliśmy już kilka kartogramów. Ale nie są one jeszcze najpiękniejsze. Jak je modyfikować?</p>
 <p>Mapy wykonane z pakietem <code>ggplot2</code> modyfikuje się podobnie jak inne wykresy w pakiecie <code>ggplot2</code>.</p>
-<p>Na poniższym przykłądzie przedstawiamy kilka przykładowych zmian. Funkcją <code>theme_bw()</code> zmieniamy domyślny motyw wykresu, funkcją <code>scale_fill_gradient()</code> zmieniamy sposób reprezentacji zmiennej za pomocą koloru wypełniania, a dodatkowymi argumentami funkcji <code>theme()</code> usuwamy wszystkie dodatkowe elementy wykresu.</p>
+<p>Na poniższym przykładzie przedstawiamy kilka przykładowych zmian. Funkcją <code>theme_bw()</code> zmieniamy domyślny motyw wykresu, funkcją <code>scale_fill_gradient()</code> zmieniamy sposób reprezentacji zmiennej za pomocą koloru wypełniania, a dodatkowymi argumentami funkcji <code>theme()</code> usuwamy wszystkie dodatkowe elementy wykresu.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() +
 <span class="st">    </span><span class="kw">geom_map</span>(<span class="dt">data=</span>mandatySejmik2014, <span class="kw">aes</span>(<span class="dt">map_id=</span>Wojewodztwo, <span class="dt">fill=</span>ProcentWaznychGlosow), 
              <span class="dt">map=</span>shp1f) +
@@ -182,7 +182,7 @@ mapka +<span class="st"> </span><span class="kw">coord_map</span>(<span class="d
 <span class="st">  </span><span class="kw">coord_map</span>(<span class="dt">projection=</span><span class="st">&quot;mercator&quot;</span>) +
 <span class="st">  </span><span class="co"># zmieniamy motyw graficzny, usuwając szare tło</span>
 <span class="st">  </span><span class="kw">theme_bw</span>() +
-<span class="st">  </span><span class="co"># zmienną ilosciową będizemy prezentować na skali kolorów od szarości po czerń</span>
+<span class="st">  </span><span class="co"># zmienną ilościową będziemy prezentować na skali kolorów od szarości po czerń</span>
 <span class="st">  </span><span class="kw">scale_fill_gradient</span>(<span class="dt">low =</span> <span class="st">&quot;grey90&quot;</span>, <span class="dt">high =</span> <span class="st">&quot;black&quot;</span>) +
 <span class="st">  </span><span class="co"># dodatkowe elementy motywu usuwają wszystko co zbędne z wykresu, linie pomocnicze, osie</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(),     <span class="dt">panel.border =</span> <span class="kw">element_blank</span>(),
@@ -193,7 +193,7 @@ mapka +<span class="st"> </span><span class="kw">coord_map</span>(<span class="d
 </div>
 <div id="rysowanie-mapy---zmienna-jako-wielkosc-punktu." class="slide section level1">
 <h1>Rysowanie mapy - zmienna jako wielkość punktu.</h1>
-<p>Nie zawsze przedstawianie danych za pomocą koloru wypełneinia to dobry pomysł.</p>
+<p>Nie zawsze przedstawianie danych za pomocą koloru wypełnienia to dobry pomysł.</p>
 <p>Alternatywny sposób prezentacji informacji na mapie to np. wielkość punktu.</p>
 <p>Do rysowania punktów można wykorzystać geometrię <code>geom_point()</code>, wskazując jako współrzędne punktu środki województw, a wielkość punktu uzależniamy od zmiennej <code>ProcentWaznychGlosow</code>.</p>
 <p>Aby punkty były bardziej widoczne powiększamy je modyfikując mapowanie za pomocą funkcji <code>scale_size_continuous()</code>.</p>
@@ -204,7 +204,7 @@ mapka +<span class="st"> </span><span class="kw">coord_map</span>(<span class="d
 <span class="st">  </span><span class="kw">coord_map</span>(<span class="dt">projection=</span><span class="st">&quot;mercator&quot;</span>) +
 <span class="st">  </span><span class="co"># zmieniamy motyw graficzny, usuwając szare tło</span>
 <span class="st">  </span><span class="kw">theme_bw</span>() +
-<span class="st">  </span><span class="co"># zmienną ilosciową będziemy prezentować na skali wielkości punktów od 1 do 20</span>
+<span class="st">  </span><span class="co"># zmienną ilościową będziemy prezentować na skali wielkości punktów od 1 do 20</span>
 <span class="st">  </span><span class="kw">scale_size_continuous</span>(<span class="dt">range=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">20</span>)) +
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(),     <span class="dt">panel.border =</span> <span class="kw">element_blank</span>(),
         <span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>(),    <span class="dt">axis.text.y =</span> <span class="kw">element_blank</span>(),
@@ -234,19 +234,19 @@ mapka +<span class="st"> </span><span class="kw">coord_map</span>(<span class="d
 <div id="rysowanie-mapy---zmienna-jako-dugosc-paska-1" class="slide section level1">
 <h1>Rysowanie mapy - zmienna jako długość paska</h1>
 <p>Jeżeli udało się narysować na mapie wyniki dla jednej partii, możemy dodać kolejne warstwy z wynikami dla kolejnych partii.</p>
-<p>Na poniższym wykresie realizujemy ten pomysł. Dodajemy słupki prezentujące liczbę zdobytych mandatów przez PiS, PSL i SLD, każdą partię oznaczamy innym kolorem. Łatwiej dzięki temu zauważyć, któ®a partia wygrała w którym województwie i z jaką przewagą.</p>
+<p>Na poniższym wykresie realizujemy ten pomysł. Dodajemy słupki prezentujące liczbę zdobytych mandatów przez PiS, PSL i SLD, każdą partię oznaczamy innym kolorem. Łatwiej dzięki temu zauważyć, która partia wygrała w którym województwie i z jaką przewagą.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() +
 <span class="st">  </span><span class="kw">geom_path</span>(<span class="dt">data=</span>shp1f, <span class="kw">aes</span>(<span class="dt">x=</span>long, <span class="dt">y=</span>lat, <span class="dt">group=</span>id), <span class="dt">colour=</span><span class="st">&quot;grey&quot;</span>, <span class="dt">size=</span><span class="fl">0.25</span>) +
-<span class="st">  </span><span class="co"># warstwa z paskami, krezentująca liczbę mandatów zdobytych przez PO</span>
+<span class="st">  </span><span class="co"># warstwa z paskami, prezentująca liczbę mandatów zdobytych przez PO</span>
 <span class="st">  </span><span class="kw">geom_rect</span>(<span class="dt">data=</span>mandatySejmik2014, <span class="kw">aes</span>(<span class="dt">xmin=</span>long<span class="fl">-0.3</span>, <span class="dt">xmax=</span>long<span class="fl">-0.1</span>, 
                                         <span class="dt">ymin=</span>lat, <span class="dt">ymax=</span>lat +<span class="st"> </span>PO/<span class="dv">15</span>), <span class="dt">fill=</span><span class="st">&quot;orange3&quot;</span>, <span class="dt">color=</span><span class="st">&quot;white&quot;</span>) +
-<span class="st">  </span><span class="co"># warstwa z paskami, krezentująca liczbę mandatów zdobytych przez PiS</span>
+<span class="st">  </span><span class="co"># warstwa z paskami, prezentująca liczbę mandatów zdobytych przez PiS</span>
 <span class="st">  </span><span class="kw">geom_rect</span>(<span class="dt">data=</span>mandatySejmik2014, <span class="kw">aes</span>(<span class="dt">xmin=</span>long<span class="fl">-0.1</span>, <span class="dt">xmax=</span>long<span class="fl">+0.1</span>, 
                                         <span class="dt">ymin=</span>lat, <span class="dt">ymax=</span>lat +<span class="st"> </span>PiS/<span class="dv">15</span>), <span class="dt">fill=</span><span class="st">&quot;blue3&quot;</span>, <span class="dt">color=</span><span class="st">&quot;white&quot;</span>) +
-<span class="st">  </span><span class="co"># warstwa z paskami, krezentująca liczbę mandatów zdobytych przez PSL</span>
+<span class="st">  </span><span class="co"># warstwa z paskami, prezentująca liczbę mandatów zdobytych przez PSL</span>
 <span class="st">  </span><span class="kw">geom_rect</span>(<span class="dt">data=</span>mandatySejmik2014, <span class="kw">aes</span>(<span class="dt">xmin=</span>long<span class="fl">+0.1</span>, <span class="dt">xmax=</span>long<span class="fl">+0.3</span>, 
                                         <span class="dt">ymin=</span>lat, <span class="dt">ymax=</span>lat +<span class="st"> </span>PSL/<span class="dv">15</span>), <span class="dt">fill=</span><span class="st">&quot;green3&quot;</span>, <span class="dt">color=</span><span class="st">&quot;white&quot;</span>) +
-<span class="st">  </span><span class="co"># warstwa z paskami, krezentująca liczbę mandatów zdobytych przez SLD</span>
+<span class="st">  </span><span class="co"># warstwa z paskami, prezentująca liczbę mandatów zdobytych przez SLD</span>
 <span class="st">  </span><span class="kw">geom_rect</span>(<span class="dt">data=</span>mandatySejmik2014, <span class="kw">aes</span>(<span class="dt">xmin=</span>long<span class="fl">+0.5</span>, <span class="dt">xmax=</span>long<span class="fl">+0.3</span>, 
                                         <span class="dt">ymin=</span>lat, <span class="dt">ymax=</span>lat +<span class="st"> </span>SLD/<span class="dv">15</span>), <span class="dt">fill=</span><span class="st">&quot;red&quot;</span>, <span class="dt">color=</span><span class="st">&quot;white&quot;</span>) +
 <span class="st">  </span><span class="co"># inne graficzne parametry, tak jak w poprzednim przykładzie</span>
