@@ -92,6 +92,6 @@ Sezon 2: Wizualizacja i modelowanie danych
 
 
   * Dodać do challenge?
-    + Zakup samochodu wspierany danymi [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/77_przypadekUzycia.Rmd),
+    + dwa większe zadania: zakup samochodu wspierany danymi [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/77_przypadekUzycia.Rmd),
 
     Challenge: BSE - kolejki do NFZ i obrobione csv
