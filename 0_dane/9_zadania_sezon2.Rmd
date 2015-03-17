@@ -104,3 +104,47 @@ ggplot(volkswagen, aes(x=Model, fill=Rodzaj.paliwa)) +
 
 ```
 
+# Zadanie, sezon 2, odcinek 4
+
++ Podobnie jak w poprzednim odcinku, wybierz samochody marki Volkswagen model Passat a następnie narysuj jak średnia cena zależy od roku produkcji za pomocą geometrii `geom_smooth()`. Następnie zobacz jak ten wykres będzie wyglądał z motywami `theme_bw()`, `theme_excel()` i `theme_economist()`.
+
++ Zmień poniższy wykres, zamieniając skalę kolorów na od zielonego do czerwonego, kropki zamień na kwadraty a do wykresu dodaj tytuł (i odpowiednie etykiety osi).
+
+```{r, eval=FALSE}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
+  geom_point() 
+```
+
+# Odpowiedzi, sezon 2, odcinek 4
+
+```{r, message=FALSE, eval=FALSE}
+# Podobnie jak w poprzednim odcinku, wybierz samochody marki Volkswagen model 
+# Passat a następnie narysuj jak średnia cena zależy od roku produkcji za pomocą
+# geometrii `geom_smooth()`. Następnie zobacz jak ten wykres będzie wyglądał 
+# z motywami `theme_bw()`, `theme_excel()` i `theme_economist()`.
+
+passat <- auta2012 %>%
+              filter(Marka == 'Volkswagen', Model == 'Passat', Rok.produkcji > 1990) %>%
+              select(Marka, Model, Rok.produkcji, Cena.w.PLN, Rodzaj.paliwa)
+
+pl <- ggplot(passat, aes(x=Rok.produkcji, y=Cena.w.PLN)) + 
+  geom_smooth()
+
+library(ggthemes)
+pl + theme_bw() + ggtitle("theme_bw")
+pl + theme_excel() + ggtitle("theme_excel")
+pl + theme_minimal() + ggtitle("theme_minimal")
+pl + theme_economist() + ggtitle("theme_economist")
+
+
+# Zmień poniższy wykres, zamieniając skalę kolorów na od zielonego do czerwonego,
+# kropki zamień na kwadraty a do wykresu dodaj tytuł (i odpowiednie etykiety osi).
+# ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
+#    geom_point() 
+
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
+    geom_point(shape=18) +  
+  scale_color_gradient(high = "green3", low = "red3") +
+  ggtitle("Zielone latające kwadraty") + xlab("Waga [kg]") + ylab("Prędkość [km/h]")
+```
+
