@@ -82,32 +82,47 @@ shp1@data$VARNAME_1[4] <- "Lodzkie"
 
 ---
 
-# Rysowanie mapy
+# Rysowanie mapy województw
 
-Aby dane wczytane przez funkcję `readShapePoly()` można było narysować w pakiecie `ggplot2` należy je najpierw przekonwertować funkcją `fortify()`. Zmienia ona format danych na tabelaryczny, w poniższym przykładzie nowy format dla obrysów województw jest zapisany w zmiennej `shp1f`. 
+Dane wczytane przez funkcję `readShapePoly()` mają specyficzną strukturę - listy wektorów, będących obrysami obszarów. Jedno województwo to nie zawsze obrys jednego obszaru, jeżeli mamy województwa nadmorskie, oraz chcemy uwzględnić wyspy, to na jedno województwo będą się składały też obrysy każdej z wysp.
 
-Pierwsze dwie kolumny tej tabeli to współrzędne geograficzne punktów na obrysie każdego województwa. Używając geometrii `geom_path` narysujemy te obrysy. 
+Aby można było takie dane narysować w pakiecie `ggplot2` należy je wpierw przetransportować do formatu tabelarycznego. Najłatwiej to zrobić funkcją `fortify()`. Zmienia ona format danych na tabelaryczny. W poniższym przykładzie nowy format dla obrysów województw jest zapisany w zmiennej `shp1f`. 
+
+Pierwsze dwie kolumny tej tabeli to współrzędne geograficzne punktów na obrysie każdego województwa. 
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 library(ggplot2)
 # fortify zmienia format danych na zgodny z pakietem ggplot2
 shp1f <- fortify(shp1, region = "VARNAME_1")
 head(shp1f, 4)
+```
 
+Mając dane w formacie tabelarycznym, możemy je narysować, np. używając geometrii `geom_path`. Tak jak na poniższym przykładzie.
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 ggplot() +
   geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="black", size=0.25)
 ```
 
 ---
 
-# Rysowanie mapy
+# Rysowanie mapy województw - `geom_map()`
 
-Geometrii `geom_path()` będziemy używać do rysowania obrysów województw. Do zaznaczania wartości liczbowych za pomocą koloru wypełnienia użyjemy geometrii `geom_map()`. Argument `map=` tej geometrii wskazuje obiekt przedstawiający województwa, argument `data=` wskazuje na obiekt z danymi liczbowymi. W mapowaniach określamy cechę `map_id=` aby wskazać nazwy województw a `fill=` by wskazać która zmienna ma być przedstawiona kolorem wypełnienia.
+Geometrii `geom_path()` będziemy używać do rysowania obrysów województw. 
+
+Ale aby zaznaczyć wartości liczbowe na mapie za pomocą koloru wypełnienia, do tego użyjemy geometrii `geom_map()`. 
+
+Argument `map=` tej geometrii wskazuje obiekt przedstawiający województwa (tutaj `shp1f`). Argument `data=` wskazuje na obiekt z danymi liczbowymi, czyli nasze dane o mandatach w sejmikach. W mapowaniach dla geometrii `geom_map()` określa się też cechę `map_id=` aby wskazać nazwy województw oraz `fill=` by wskazać która zmienna ma być przedstawiona kolorem wypełnienia.
+
+Poniższy przykład rysuje kartogram, w którym infomacja o procencie oddanych ważnych głosów przedstawiamy kolorem wypełnienia
 
 ```{r, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
+# pusty zrąb wykresu
 ggplot() +
+  # rysowanie wypełnień
     geom_map(data=mandatySejmik2014, aes(map_id=Wojewodztwo, fill=ProcentWaznychGlosow), 
              map=shp1f) +
+  # rysowanie obrysów na czarko
     geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="black", size=0.25)
 ```
 
@@ -115,16 +130,27 @@ ggplot() +
 
 # Rysowanie mapy
 
-Mapy można rysować w różnych projekcjach. Aby je wybrać wystarczy dodać wywołanie funkcji `coord_map()`. Poniżej dwa przykładowe projekcje. Listę projekcji z opisem właściwości znaleźć można pod adresem http://en.wikipedia.org/wiki/List_of_map_projections
+Z rysowaniem map związane jest pojęcie projekcji, czyli sposobu odwzorowania trójwymiarowej powierzchni globu na dwuwymiarowej powierzchni wykresu.
+
+Mapy można rysować w różnych projekcjach, nie ma jednej idealnej. Niektóre zachwouja lepiej pola, inne kąty, inne długości odcinków.Listę projekcji z opisem właściwości można znaleźć pod adresem http://en.wikipedia.org/wiki/List_of_map_projections
+
+W programie R, w pakiecie `ggplot` możemy korzystać z większości popularnych projekcji.
+Aby wybrać którąś z nich, wystarczy dodać wywołanie funkcji `coord_map()`. 
+
+Poniżej dwa przykładowe wykresy, różniące się projekcjami. Ponieważ w skali globu obszar Polski nie jest duży, różnice pomiędzy mapami są raczej subtelne.
 
 ```{r, fig.height=4, fig.width=7, message=FALSE, warning=FALSE, eval=FALSE}
+# przygotowujemy wykres, tak jak w poprzednim odcinku
 mapka <- ggplot() +
     geom_map(data=mandatySejmik2014, aes(map_id=Wojewodztwo, fill=ProcentWaznychGlosow), 
              map=shp1f) +
     geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="black", size=0.25) 
 
-mapka + coord_map(projection="mercator")
-mapka + coord_map(projection="stereographic")
+# przekształcamy mapę, stosując projekcję mercator (odwzorowanie walcowe równokątne)
+# zachowuje kąty pomiędzy równoleżnikami a południkami
+mapka + coord_map(projection="mercator") + ggtitle("mercator")
+# projekcja stereographic (rzut stereograficzny)
+mapka + coord_map(projection="stereographic") + ggtitle("stereographic")
 ```
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, echo=FALSE}
 mapka <- ggplot() +
@@ -132,25 +158,32 @@ mapka <- ggplot() +
              map=shp1f) +
     geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="black", size=0.25) 
 
-mapka + coord_map(projection="mercator")
-mapka + coord_map(projection="stereographic")
+mapka + coord_map(projection="mercator") + ggtitle("mercator")
+mapka + coord_map(projection="stereographic") + ggtitle("stereographic")
 ```
 
 ---
 
-# Rysowanie mapy - zmienna jako kolor wypełnienia
+# Rysowanie mapy - pracujemy nad szczegółami
 
-Mapy modyfikuje się podobnie jak inne wykresy w pakiecie `ggplot2`. Przedstawmy kilka przykładowych zmian, funkcją `theme_bw()` zmieniamy domyślny motyw wykresu, funkcją `scale_fill_gradient()` zmieniamy sposób reprezentacji zmiennej za pomocą koloru wypełniania, a dodatkowymi argumentami funkcji `theme()` usuwamy wszystkie dodatkowe elementy wykresu.
+Narysowaliśmy już kilka kartogramów. Ale nei są one jeszcez najpiękniejsze. Jak je modyfikować?
 
+Mapy wykonane z pakietem `ggplot2` modyfikuje się podobnie jak inne wykresy w pakiecie `ggplot2`. 
+
+Na poniższym przykłądzie przedstawiamy kilka przykładowych zmian. Funkcją `theme_bw()` zmieniamy domyślny motyw wykresu, funkcją `scale_fill_gradient()` zmieniamy sposób reprezentacji zmiennej za pomocą koloru wypełniania, a dodatkowymi argumentami funkcji `theme()` usuwamy wszystkie dodatkowe elementy wykresu.
 
 ```{r, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
 ggplot() +
     geom_map(data=mandatySejmik2014, aes(map_id=Wojewodztwo, fill=ProcentWaznychGlosow), 
              map=shp1f) +
     geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="white", size=1) +
+  # określamy projekcje mercator
   coord_map(projection="mercator") +
+  # zmieniamy motyw graficzny, usuwając szare tło
   theme_bw() +
+  # zmienną ilosciową będizemy prezentować na skali kolorów od szarości po czerń
   scale_fill_gradient(low = "grey90", high = "black") +
+  # dodatkowe elementy motywu usuwają wszystko co zbędne z wykresu, linie pomocnicze, osie
   theme(axis.ticks = element_blank(),     panel.border = element_blank(),
         axis.text.x = element_blank(),    axis.text.y = element_blank(),
         panel.grid.minor=element_blank(), panel.grid.major=element_blank(),
@@ -161,14 +194,23 @@ ggplot() +
 
 # Rysowanie mapy - zmienna jako wielkość punktu.
 
-Alternatywny sposób prezentacji informacji na mapie jest wielkość punktu. Do rysowania punktów można wykorzystać geometrię `geom_point()`, wskazując jako współrzędne punktu środki województw a wielkość punktu uzależniamy od zmiennej `ProcentWaznychGlosow`. Aby punkty były bardziej widoczne powiększamy je modyfikując mapowanie za pomocą funkcji `scale_size_continuous()`.
+Nie zawsze przedstawianie danych za pomocą koloru wypełneinia to dobry pomysł.
+
+Alternatywny sposób prezentacji informacji na mapie to np. wielkość punktu. 
+
+Do rysowania punktów można wykorzystać geometrię `geom_point()`, wskazując jako współrzędne punktu środki województw, a wielkość punktu uzależniamy od zmiennej `ProcentWaznychGlosow`. 
+
+Aby punkty były bardziej widoczne powiększamy je modyfikując mapowanie za pomocą funkcji `scale_size_continuous()`.
 
 ```{r, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
 ggplot() +
   geom_point(data=mandatySejmik2014, aes(x=long, y=lat, size=ProcentWaznychGlosow)) +
   geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="black", size=0.25) +
+  # określamy projekcje mercator
   coord_map(projection="mercator") +
+  # zmieniamy motyw graficzny, usuwając szare tło
   theme_bw() +
+  # zmienną ilosciową będziemy prezentować na skali wielkości punktów od 1 do 20
   scale_size_continuous(range=c(1,20)) +
   theme(axis.ticks = element_blank(),     panel.border = element_blank(),
         axis.text.x = element_blank(),    axis.text.y = element_blank(),
@@ -181,16 +223,20 @@ ggplot() +
 # Rysowanie mapy - zmienna jako długość paska
 
 Jeszcze innym sposobem prezentacji danych liczbowych na mapach są długości słupków. 
-Aby dorysować informację o mandatach zdobytych przez PO wykorzystamy geometrię `geom_rect()`. Należy do niej podać współrzędne `xmin` i `xmax` oznaczające początek i koniec słupka oraz `ymin` i `ymax` zależne od wartości zmiennej `PO`.
+
+Aby dorysować informację o mandatach zdobytych przez PO wykorzystamy geometrię `geom_rect()`. 
+
+Należy do niej podać współrzędne `xmin` i `xmax` oznaczające początek i koniec słupka oraz `ymin` i `ymax` zależne od wartości zmiennej `PO`.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 ggplot() +
   geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="grey", size=0.25) +
   geom_rect(data=mandatySejmik2014, aes(xmin=long-0.3, xmax=long-0.1, 
                                         ymin=lat, ymax=lat + PO/15), fill="orange3", color="white") +
+  # określamy projekcje mercator
   coord_map(projection="mercator") +
+  # zmieniamy motyw graficzny, usuwając szare tło
   theme_bw() +
-  scale_size_continuous(range=c(1,20)) +
   theme(axis.ticks = element_blank(),     panel.border = element_blank(),
         axis.text.x = element_blank(),    axis.text.y = element_blank(),
         panel.grid.minor=element_blank(), panel.grid.major=element_blank(),
@@ -201,19 +247,26 @@ ggplot() +
 
 # Rysowanie mapy - zmienna jako długość paska
 
-Na poniższym wykresie rozszerzamy pomysł z poprzedniego slajdu, dodając również słupki prezentujące liczbę zdobytych mandatów przez PiS, PSL i SLD.
+Jeżeli udało się narysować na mapie wyniki dla jednej partii, możemy dodać kolejne warstwy z wynikami dla kolejnych partii.
+
+Na poniższym wykresie realizujemy ten pomysł. Dodajemy słupki prezentujące liczbę zdobytych mandatów przez PiS, PSL i SLD, każdą partię oznaczamy innym kolorem. Łatwiej dzięki temu zauważyć, któ®a partia wygrała w którym województwie i z jaką przewagą.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 ggplot() +
   geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="grey", size=0.25) +
+  # warstwa z paskami, krezentująca liczbę mandatów zdobytych przez PO
   geom_rect(data=mandatySejmik2014, aes(xmin=long-0.3, xmax=long-0.1, 
                                         ymin=lat, ymax=lat + PO/15), fill="orange3", color="white") +
+  # warstwa z paskami, krezentująca liczbę mandatów zdobytych przez PiS
   geom_rect(data=mandatySejmik2014, aes(xmin=long-0.1, xmax=long+0.1, 
                                         ymin=lat, ymax=lat + PiS/15), fill="blue3", color="white") +
+  # warstwa z paskami, krezentująca liczbę mandatów zdobytych przez PSL
   geom_rect(data=mandatySejmik2014, aes(xmin=long+0.1, xmax=long+0.3, 
                                         ymin=lat, ymax=lat + PSL/15), fill="green3", color="white") +
+  # warstwa z paskami, krezentująca liczbę mandatów zdobytych przez SLD
   geom_rect(data=mandatySejmik2014, aes(xmin=long+0.5, xmax=long+0.3, 
                                         ymin=lat, ymax=lat + SLD/15), fill="red", color="white") +
+  # inne graficzne parametry, tak jak w poprzednim przykładzie
   coord_map(projection="mercator") +
   theme_bw() +
   scale_size_continuous(range=c(1,20)) +
@@ -226,10 +279,10 @@ ggplot() +
 
 # Co dalej
 
-- Więcej informacji o tym jak budować wykresy w pakiecie ggplot2 znaleźć można w rozdziale 4 książki *,,Przewodnik po pakiecie R''*. Więcej informacji o tej książce http://www.biecek.pl/R/
+- Świetne omówienie możliwości prezentowania danych na mapach zaprezentowanie jest w tym artykule *ggmap: Spatial Visualization with ggplot2* http://journal.r-project.org/archive/2013-1/kahle-wickham.pdf
+
+- Krótkim streszczeniem, z ciekawymi przykładami będzie ten blog *Making Maps in R* http://www.kevjohnson.org/making-maps-in-r/
 
 - Wiele przydatnych wskazówek można również znaleźć w internetowej książce *,,Cookbook for R''* http://www.cookbook-r.com/Graphs/
-
-- Bardzo rozbudowana dokumentacja dla pakietu ggplot2 dostępna jest na stronie *,,ggplot2''* http://docs.ggplot2.org/current/index.html
 
 
