@@ -61,11 +61,11 @@ Sezon 2: Wizualizacja i modelowanie danych
     + odcinek 4: Dodatki do wykresów,  [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/3_dodatki.html), v1 ready 
     + odcinek 5: Jak zrobić mapę, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/4_mapy.html), v1 ready
   * Co czyni wykres złym lub dobrym?
-    + odcinek 6: Historia i współczesność [film, wizualizacja_historia.mp4]
-    + odcinek 7: Iluzje, percepcja obrazu i kolory [film, wizualizacja_iluzja.mp4]
-    + odcinek 8: Info-pomyłka [film, wizualizacja_infopomylka.mp4]
-    + odcinek 9: Jak dobierać kolory [film, wizualizacja_kolory.mp4]
-    + odcinek 10: Jak pokazywać różne liczby [film, wizualizacja_liczby.mp4]
+    + odcinek 6: Historia i współczesność [materiały video](http://pogromcydanych.icm.edu.pl/video/wizualizacja_historia.mp4)
+    + odcinek 7: Iluzje, percepcja obrazu i kolory [materiały video](http://pogromcydanych.icm.edu.pl/video/wizualizacja_iluzja.mp4)
+    + odcinek 8: Info-pomyłka [materiały video](http://pogromcydanych.icm.edu.pl/video/wizualizacja_infopomylka.mp4)
+    + odcinek 9: Jak dobierać kolory [materiały video](http://pogromcydanych.icm.edu.pl/video/wizualizacja_kolory.mp4)
+    + odcinek 10: Jak pokazywać różne liczby [materiały video](http://pogromcydanych.icm.edu.pl/video/wizualizacja_liczby.mp4)
 
 + Podstawy modelowania statystycznego
   *  Wprowadzenie
@@ -84,7 +84,7 @@ Sezon 2: Wizualizacja i modelowanie danych
   * Dane wokół nas,
     + Piotr Przybyła IPI PAN, Inżynieria lingwistyczna [materiały video](https://www.youtube.com/watch?v=h11cP2V5EmE&feature=youtu.be)
     + Bartosz Meglicki, NCBJ / IPIPAN, Robotyka i analiza danych [materiały video](https://www.youtube.com/watch?v=k3uL7Foy3J4&feature=youtu.be)
-    + [Sondaże] Nss [materiały video](https://www.youtube.com/watch?v=LcTB5qK-EKU&feature=youtu.be)
+    + Zbyszek Marczewski, Jakub Rutkowsk, Przemek Kopa (Na straży sondaży), Sondaże [materiały video](https://www.youtube.com/watch?v=LcTB5qK-EKU&feature=youtu.be)
   * Co dalej? 
     + odcinek 25: Co dalej? 
     + odcinek 26: W opracowaniu materiałów udział wzięli [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/00_credits.html), v1 ready
