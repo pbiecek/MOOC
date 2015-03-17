@@ -61,10 +61,10 @@ Sezon 2: Wizualizacja i modelowanie danych
     + odcinek 4: Dodatki do wykresów,  [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/3_dodatki.html), v1 ready 
     + odcinek 5: Jak zrobić mapę, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/4_mapy.html), v1 ready
   * Co czyni wykres złym lub dobrym?
-    + odcinek 6: Historia i współczesność [materiały video](http://pogromcydanych.icm.edu.pl/video/wizualizacja_historia.mp4)
-    + odcinek 7: Iluzje, percepcja obrazu i kolory [materiały video](http://pogromcydanych.icm.edu.pl/video/wizualizacja_iluzja.mp4)
-    + odcinek 8: Info-pomyłka [materiały video](http://pogromcydanych.icm.edu.pl/video/wizualizacja_infopomylka.mp4)
-    + odcinek 9: Jak dobierać kolory [materiały video](http://pogromcydanych.icm.edu.pl/video/wizualizacja_kolory.mp4)
+    + odcinek 6: Historia i współczesność [materiały video](http://pogromcydanych.icm.edu.pl/video/wizualizacja_historia.mp4),  v1 ready
+    + odcinek 7: Iluzje, percepcja obrazu i kolory [materiały video](http://pogromcydanych.icm.edu.pl/video/wizualizacja_iluzja.mp4),  v1 ready
+    + odcinek 8: Info-pomyłka [materiały video](http://pogromcydanych.icm.edu.pl/video/wizualizacja_infopomylka.mp4),  v1 ready
+    + odcinek 9: Jak dobierać kolory [materiały video](http://pogromcydanych.icm.edu.pl/video/wizualizacja_kolory.mp4),  v1 ready
     + odcinek 10: Jak pokazywać różne liczby [materiały video](http://pogromcydanych.icm.edu.pl/video/wizualizacja_liczby.mp4)
 
 + Podstawy modelowania statystycznego
