@@ -58,8 +58,8 @@ Sezon 2: Wizualizacja i modelowanie danych
     + odcinek 1: Intro, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/1_intro.html), v1 ready
     + odcinek 2: Jak zrobić wykres, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/2_podstawy.html), v1 ready
     + odcinek 3: Wykresy agregaty,  [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/2_agregaty.html), v1 ready
-    + odcinek 4: Dodatki do wykresów,  [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/3_dodatki.html)
-    + odcinek 5: Jak zrobić mapę, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/4_mapy.html)
+    + odcinek 4: Dodatki do wykresów,  [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/3_dodatki.html), v1 ready 
+    + odcinek 5: Jak zrobić mapę, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/4_mapy.html), v1 ready
   * Co czyni wykres złym lub dobrym?
     + odcinek 6: Historia i współczesność [film, wizualizacja_historia.mp4]
     + odcinek 7: Iluzje, percepcja obrazu i kolory [film, wizualizacja_iluzja.mp4]
@@ -84,7 +84,6 @@ Sezon 2: Wizualizacja i modelowanie danych
     + Piotr Przybyła IPI PAN, Inżynieria lingwistyczna 
     + Bartosz Meglicki, NCBJ / IPIPAN, Robotyka i analiza danych
     + [Sondaże - może wyborcze] Nss
-    + [Meteo] 
   * Co dalej? 
     + odcinek 25: Co dalej? 
     + odcinek 26: W opracowaniu materiałów udział wzięli 
@@ -92,7 +91,6 @@ Sezon 2: Wizualizacja i modelowanie danych
 
   * Dodać do challenge?
     + Zakup samochodu wspierany danymi [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/77_przypadekUzycia.Rmd),
-    + do wizualizacji dodać http://www.bioinformatics.babraham.ac.uk/training/Figure%20Design%20Course%20Presentation.pdf
 
     Challenge: BSE - kolejki do NFZ i obrobione csv
 
