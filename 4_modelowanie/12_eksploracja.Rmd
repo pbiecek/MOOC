@@ -1,7 +1,7 @@
 ---
-title: "Eksploracja danych o serialach"
+title: "Eksploracja danych"
 author: "pogRomcy danych"
-date: "sezon 2 / odcinek 3<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 2 / odcinek 12<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -18,7 +18,7 @@ library(knitr)
 opts_chunk$set( message=FALSE,tidy.opts=list(keep.blank.line=TRUE, width.cutoff=120),options(width=120))
 ```
 
-# O czym jest ten odcinek
+# O czym jest ten odcinek?
 
 Pierwszy etap analizy danych to eksploracja. 
 
