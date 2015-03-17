@@ -435,6 +435,8 @@ ggplot(WIG, aes(x=Data, ymin=0, ymax=Kurs.zamkniecia)) +
 
 Opanowaliśmy podstawy tworzenia wykresów z użyciem pakietu `ggplot2`. W kolejnych odcinkach przedstawimy więcej informacji, ale można ich też poszukać w poniższych źródłach.
 
+- Bardzo interesująca prezentacja o projektowaniu wykresów, o nazwie *Figure Design* jest dostępna pod adresem http://www.bioinformatics.babraham.ac.uk/training/Figure%20Design%20Course%20Presentation.pdf
+
 - Więcej informacji o tym jak budować wykresy w pakiecie ggplot2 znaleźć można w rozdziale 4 książki *,,Przewodnik po pakiecie R''*. Więcej informacji o tej książce http://www.biecek.pl/R/
 
 - Wiele przydatnych wskazówek można również znaleźć w internetowej książce *,,Cookbook for R''* http://www.cookbook-r.com/Graphs/
