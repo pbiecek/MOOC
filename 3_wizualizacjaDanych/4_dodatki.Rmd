@@ -203,22 +203,43 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
 
 ---
 
-# Legenda
+# Modyfikacja legendy wykresu
 
-Pakiet `ggplot2` automatycznie tworzy i rysuje legendę. W wielu przypadkach to domyślne zachowanie jest wystarczające, ale czasem chcemy umieścić tę legendę w innym miejscu, inaczej ją zatytułować czy pokolorować.
+Pakiet `ggplot2` automatycznie tworzy i rysuje legendę. W wielu przypadkach to domyślne zachowanie jest wystarczające i legenda jest wystarczająco czytelna. Ale czasem chcemy umieścić tę legendę w innym miejscu, inaczej ją zatytułować czy pokolorować.
 
-Oczywiście to wszystko możemy zrobić, ustawiając poszczególne argumenty motywu (funkcją `theme()`) lub funkcji mapujących.
+Wszystko to możemy zrobić, najczęściej wystarczy zmodyfikować poszczególne argumenty motywu, używając funkcji `theme()`.
 
 W poniższym przykładzie funkcja `theme()` służy do określenia koloru tła i obramowania w legendzie, wielkość tytułu legendy oraz jej pozycję. Funkcja `scale_shape_manual()` określa elementy mapowania, tytuł legendy i nazwę kluczy na legendzie.
 
-```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+# Modyfikacja legendy wykresu
+
+Przykład zmian w legendzie
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, eval=FALSE}
+# Przed [lewy]
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
+  geom_point(size=5) 
+# Po [prawy]
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
+  geom_point(size=5) +
+  # zmiana napisów w legendzie dotyczących mapowania na kształt
+  scale_shape_manual(values=c("K", "P"), labels=c("Duże Koty", "Wściekłe Ptaki"), name="Jakie \n to \n zwierze?") +
+  # dodanie szarego tła, większego tytułu oraz zmiana położenia legendy
+  theme(legend.background = element_rect(color="red", fill="grey95"), 
+        legend.title = element_text(size=15), 
+        legend.position=c(0.8,0.8)) # 0.8, 0.8 to współrzędne gdzie ma pojawić się legenda
+```
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, echo=FALSE}
+# Przed [lewy]
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
+  geom_point(size=5) 
+# Po [prawy]
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   geom_point(size=5) +
   scale_shape_manual(values=c("K", "P"), labels=c("Duże Koty", "Wściekłe Ptaki"), name="Jakie \n to \n zwierze?") +
   theme(legend.background = element_rect(color="red", fill="grey95"), 
         legend.title = element_text(size=15), 
-        legend.position=c(0.8,0.8)) # 0.8, 0.8 to współrzędne gdzie ma pojawić się legenda
-
+        legend.position=c(0.8,0.8)) 
 ```
 
 ---
