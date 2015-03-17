@@ -79,7 +79,30 @@ W poniższym przykładzie do wykresu dodajemy cztery linijki, każda zmieniając
 
 4. Funkcją `geom_text()` dodajemy etykiety dla wybranych punktów na wykresie. Zaznaczyliśmy najszybszego kota i ptaka.
 
-```{r, fig.height=5, fig.width=5, message=FALSE, warning=FALSE}
+# Adnotacje, napisy na osiach i tytuły
+
+A oto i wykres po dodaniu tych modfyfikacji
+```{r, fig.height=5, fig.width=5, message=FALSE, warning=FALSE, eval=FALSE}
+# Przed [lewy]
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
+  geom_point(size=5)
+# Po [prawy]
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
+  geom_point(size=5) + 
+  # większy i czytelny tytuł
+  ggtitle("Lżejszym łatwiej szybko biegać!") + theme(plot.title = element_text(size=20)) + 
+  # opisy osi
+  xlab("Waga [kg]") + ylab("Prędkość [km/h]") + 
+  # tytuł w legendzie
+  scale_shape_discrete(name="Koty czy Ptaki?") + theme(legend.position="top") + 
+  # dodatkowe napisy na wykresie
+  geom_text(data=koty_ptaki[c(6,8),], aes(label=gatunek), hjust=-0.2)
+```
+```{r, fig.height=5, fig.width=5, message=FALSE, warning=FALSE, echo=FALSE}
+# Przed
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
+  geom_point(size=5)
+# Po
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   geom_point(size=5) + 
   # większy i czytelny tytuł
@@ -94,29 +117,84 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
 
 ---
 
-# Mapowania
+# Większa kontrola nad mapowaniami
 
-Jedną z zalet pakietu `ggplot2` jest to, że wystarczy że wskażemy jakie zmienne mają być przedstawione na wykresie, oraz jakie cechy wykresu mają te zmienne opisać. R automatycznie dobiera sposób prezentacji uwzględniając typ zmiennej, czy przyjmuje ona kilka wartości czy wiele, czy jest zmienną ilościową czy jakościową itp. 
+Mapowania to jedna z największych wartości pakietu `ggplot2`. Wystarczy, że wskażemy jakie zmienne mają być przedstawione na wykresie, oraz jakie cechy wykresu mają te zmienne opisać a program R automatycznie dobiera sposób prezentacji uwzględniając typ zmiennej, sprawdzając czy przyjmuje ona kilka wartości czy wiele, czy jest zmienną ilościową czy jakościową itp. 
 
-Czasem jednak, chcielibyśmy zmienić sposób reprezentacji zmiennych. Możemy to zrobić korzystając z funkcji `scale_xxx_yyy()` gdzie `xxx` opisuje cechę na której mapujemy a `yyy` opisuje sposób reprezentacji. Przykładowo, funkcja `scale_shape_manual()` pozwala na zarządzanie mapowaniem zmiennej na kształty. Argument `values=` pozwala na wskazanie jakimi wartościami mają być przedstawione poszczególne grupy, argument `breaks=` pozwala wskazać kolejność poziomów w legendzie. W podobny sposób `scale_color_manual()` pozwala na podanie kolorów, jakie mają kodować zmienne.
-Dla mapowania na cechy `x` i `y` wykresy interesującym parametrem jest `expand=`, który pozwala na określenie jak duże mają być marginesy na osi. 
+Czasem jednak, chcielibyśmy zmienić sposób reprezentacji zmiennych, a więc zmienić domyślne mapowanie. 
 
+Możemy to zrobić korzystając z funkcji o nazwach zgodnych z szablonem `scale_xxx_yyy()`, gdzie `xxx` opisuje cechę na którą mapujemy (`shape`/`size`/`color`/`x`/`y`), a `yyy` opisuje sposób reprezentacji. 
 
-```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+Przykładowo, funkcja `scale_shape_manual()` pozwala na zarządzanie mapowaniem zmiennej na kształty punktów. Argument `values=` pozwala na wskazanie jakimi kształtami mają być przedstawione poszczególne grupy, a argument `breaks=` pozwala wskazać wartości mapowanej zmiennej w legendzie. 
+
+W podobny sposób `scale_color_manual()` pozwala na ręczne (manualne) wskazanie kolorów, które mają kodować poszczególne wartości.
+
+A mapując na cechy `x` i `y` (współrzędne) interesującym parametrem jest `expand=`, który pozwala na określenie jak duże mają być marginesy na osi. 
+
+# Większa kontrola nad mapowaniami
+
+A oto i przykładowe zastoswanie wszystkich tych modyfikacji mapowań.
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, eval=FALSE}
+# Przed [lewy]
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna, color=druzyna)) +
+  geom_point(size=5) 
+# Po [prawy]
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna, color=druzyna)) +
   geom_point(size=5) +
+  # określamy kształty poszczególnych grup K/P oraz etykiety w legndzie
   scale_shape_manual(values=c("K", "P"), breaks=c("Kot", "Ptak")) +
+  # określamy kolory (ciemnoniebieski i ciemnoczerwony)
   scale_color_manual(values=c("blue3", "red3"), breaks=c("Kot", "Ptak")) +
+  # dla osi OY usuwany marginesy poza zakresem 0-200
+  scale_y_continuous(limits=c(0,200), expand=c(0,0)) 
+```
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, echo=FALSE}
+# Przed
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna, color=druzyna)) +
+  geom_point(size=5) 
+# Po
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna, color=druzyna)) +
+  geom_point(size=5) +
+  # określamy kształty poszczególnych grup K/P oraz etykiety w legndzie
+  scale_shape_manual(values=c("K", "P"), breaks=c("Kot", "Ptak")) +
+  # określamy kolory (ciemnoniebieski i ciemnoczerwony)
+  scale_color_manual(values=c("blue3", "red3"), breaks=c("Kot", "Ptak")) +
+  # dla osi OY usuwany marginesy poza zakresem 0-200
   scale_y_continuous(limits=c(0,200), expand=c(0,0)) 
 ```
 
----
+# Większa kontrola nad mapowaniami - zmienne ciągłe
 
-# Mapowania
+Zobaczmy jak wygląda kontrolowanie mapowaniami zmiennych ciągłych. Jako przykłąd wykorzystamy zmienną `zywotnosc`. Będziemy ją mapować na kolor i wielkość punktu.
 
-Zobaczmy jak wygląda kontrolowanie mapowaniami zmiennych ciągłych. Tym razem na kolor i wielkość punktu zamapujemy ciągłą zmienną `zywotnosc`. Jeżeli nie podoba nam się domyślny dobór kolorów, to funkcją `scale_color_gradient()` możemy określić pomiędzy jakimi wartościami `low=` i `high=` ma rozpinać się skala kolorów. Dla wielkości punktu określamy jaki przedział żywotności ma być prezentowany `limits=` oraz na jakiej wielkości punkty ten przedział ma być przedstawiony `range=`.
+Jeżeli nie podoba nam się domyślny dobór kolorów (dla zmiennych ciągłych od czarnego do niebieskiego), to funkcją `scale_color_gradient()` możemy określić pomiędzy jakimi wartościami `low=` i `high=` ma rozpinać się skala kolorów. 
 
-```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+Dla wielkości punktu określamy jaki przedział żywotności ma być prezentowany `limits=` oraz na jakiej wielkości punkty ten przedział ma być przedstawiony `range=`.
+
+Więcej inforamcji o możliwych dodatkowych parametrach znaleźć można w plikach pomocy dla funkcji `?scale_color_gradient` i `?scale_size_continuous`.
+
+# Większa kontrola nad mapowaniami - zmienne ciągłe
+
+A oto i przykładowe zastoswanie wszystkich tych modyfikacji mapowań.
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, eval=FALSE}
+# Przed [lewy]
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
+  geom_point() 
+# Po [prawy]
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
+  geom_point() +
+  # zmiana zakresu wartości dla wielkosci punktów
+  scale_size_continuous(range=c(5,15), limits=c(10,50)) +
+  # zmiana skali kolorów (ciągła skala podaje się dwa skrajne kolory)
+  scale_color_gradient(low="gold", high="red4")
+```
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, echo=FALSE}
+# Przed
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
+  geom_point() 
+# Po
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
   geom_point() +
   scale_size_continuous(range=c(5,15), limits=c(10,50)) +
