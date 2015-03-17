@@ -246,53 +246,91 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
 
 # Wiele wykresów w jednym oknie
 
-W programie R wszystko jest obiektem. Oznacza to, że również wynik funkcji `ggplot()` jest obiektem, który można przypisać do zmiennej i później wielokrotnie wykorzystać. Zilustrujmy to przykładem. Poniższa instrukcja przypisze definicje wykresy do zmiennej `pl_waga`. Żaden wykres nie będzie narysowany chyba, że wyświetlimy zawartość zmiennej `pl_waga`.
+Bardzo często chcemy umieścić kilka wykresów obok siebie. Poniżej pokażemy jak to zrobić.
+
+W programie R wszystko jest obiektem. Oznacza to, że również wynik funkcji `ggplot()` jest obiektem, który można przypisać do zmiennej i później wielokrotnie wykorzystać.
+
+Zilustrujmy to przykładem. Poniższa instrukcja przypisze definicje wykresu punktowego do zmiennej `pl_waga`. Żaden wykres nie będzie narysowany chyba, że wyświetlimy zawartość zmiennej `pl_waga`.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 pl_waga <- ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
                 geom_point(size=5)
 ```
 
-Aby wyświetlić wykres `pl_waga` można wykorzystać funkcję `print()`. Jednym z argumentów tej funkcji jest `vp=` pozwalający określić w którym miejscu wykres ma być rysowany. Domyślnie zarysowany jest cały obszar o współrzędnych [0-1], ale możemy zażyczyć sobie by wykres rysowany był w mniejszym obszarze. Jest to bardzo wygodne, jeżeli chcemy zmieścić kilka wykresów obok siebie. Poniższy przykład rysuje ten sam wykres trzykrotnie, za każdym razem w innym miejscu i z innym tytułem.
+Aby wyświetlić wykres `pl_waga` można wykorzystać funkcję `print()`. 
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+print(pl_waga)
+```
+
+# Wiele wykresów w jednym oknie
+
+Jednym z argumentów tej funkcji `print()` dla wykresów, jest argument `vp=` pozwalający określić w którym miejscu wykres ma być rysowany. 
+
+Domyślnie zarysowany jest cały obszar o współrzędnych [0,1]x[0,1], ale możemy zażyczyć sobie by wykres rysowany był w mniejszym obszarze. 
+
+Jest to bardzo wygodne, jeżeli chcemy zmieścić kilka wykresów obok siebie. 
+
+Poniższy przykład rysuje ten sam wykres trzykrotnie, za każdym razem w innym miejscu i z innym tytułem. Argumenty `x` i `y` określają środek zarysowanego obszaru, a `width` i `height` szerokość i wysokość zarysowanego prostokątu.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 library(grid)
-
+# rysujemy wykres w kwadracie o szerokości i wysokości 0.5 ekranu, w lewym górnym rogu 
 print(pl_waga + ggtitle("Wykres 1"), 
       vp=viewport(x=0.25, y = 0.75, width=0.5, height=0.5))
+# rysujemy wykres w kwadracie o szerokości i wysokości 0.5 ekranu, w lewym dolnym rogu 
 print(pl_waga + ggtitle("Wykres 2"), 
       vp=viewport(x=0.25, y = 0.25, width=0.5, height=0.5))
+# rysujemy wykres w prostokącie o szerokości 0.5 a wysokości pełnego ekranu, po prawej stronie 
 print(pl_waga + ggtitle("Wykres 3"), 
       vp=viewport(x=0.75, y = 0.5, width=0.5, height=1))
 ```
 
-[TODO] wyjasnic jakie znaczenie maja parametry x=0.25, y=0.75 ...
-moze bardziej intuicyjnym rozwiazaniem byloby:
+# Wiele wykresów w jednym oknie
+
+Argument `vp=` pozwala na rysowanie w dolonym elemencie wykresu. 
+
+Ale jeżeli chcemy rysować wykresy na regularnej siatce to wygodnie jest najpierw określić tę siatkę funkcją `grid.layout()` a następnie wypełnić ją wykresami wskazując pozycje siatki do zarysowania.
+
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
-# siatka:
+# siatka o rozmiarze dwa wiersze i dwie kolumny
 pushViewport(viewport(layout = grid.layout(2,2)))
-# wklejanie wykresow do wybranych cel:
+# wklejanie wykresow do wybranych komórek
+# rysujemy w komórce o współrzędnych 1x1
 print(pl_waga + ggtitle("Wykres 1"),
-      vp= viewport(layout.pos.row=1, layout.pos.col=1))
+      vp = viewport(layout.pos.row=1, layout.pos.col=1))
+# rysujemy w komórce o współrzędnych 2x1
 print(pl_waga + ggtitle("Wykres 2"),
-      vp= viewport(layout.pos.row=2, layout.pos.col=1))
+      vp = viewport(layout.pos.row=2, layout.pos.col=1))
+# rysujemy w komórce o współrzędnych 1:2x2
 print(pl_waga + ggtitle("Wykres 3"),
-      vp= viewport(layout.pos.row=1:2, layout.pos.col=2))
+      vp = viewport(layout.pos.row=1:2, layout.pos.col=2))
 ```
 
 ---
 
 # Motywy graficzne
 
-Do tego miejsca mogło nam trochę obrzydnąć szare tło na wykresach. Okazuje się, że w prosty sposób można zmienić wygląd wykresu, używając motywów, czyli kompletów ustawień graficznych. Wiele takich motywów dostępnych jest w pakiecie `ggthemes`. Aby zmienić wygląd wykresu wystarczy dodać funkcję z motywem. Nazwy tych funkcji rozpoczynają się od `theme_`. Poniżej przykład dla czterech motywów graficznych.
+Do tego miejsca mogło nam trochę obrzydnąć szare tło na wykresach. 
+
+Okazuje się, że w prosty sposób można zmienić wygląd całego wykresu, używając tzw. motywów, czyli kompletów ustawień graficznych. Wiele takich motywów dostępnych jest w pakiecie `ggthemes`. Aby zmienić wygląd wykresu wystarczy dodać funkcję z motywem. Nazwy tych funkcji rozpoczynają się od `theme_`. 
+
+Poniżej przykład dla czterech motywów graficznych, warto zobaczyć jak wyglądają pozostałe.
 
 ```{r, fig.height=4, fig.width=5, eval=FALSE}
-library(ggthemes)
+# przygotowujemy wykres puntkowy
 pl <- ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   geom_point(size=5) 
+# pakiet z dodatkowymi motywami 
+# jeżeli nie jest zainstalowany, należy go dodać funkcją install.packages()
+library(ggthemes)
+# białe tło i szare linie pomocnicze
 pl + theme_bw()
+# wykres stylizowany na wykresy z Excela
 pl + theme_excel()
+# wykres z usuniętymi dodatkowymi elementami
 pl + theme_minimal()
+# wykres stylizowany na gazecie Economist
 pl + theme_economist()
 ```
 ```{r, fig.height=4, fig.width=5, echo=FALSE, message=FALSE, warning=FALSE}
@@ -309,7 +347,9 @@ pl + theme_economist() + ggtitle("theme_economist")
 
 # Ciekawostki
 
-Elastyczność ggplot2 jest olbrzymia. Możliwe jest tworzenie wykresów w stylu popularnych komiksów z serii XKCD http://xkcd.com/
+Elastyczność pakietu `ggplot2` jest olbrzymia. Można robić bardzo niestandardowe rzeczy.
+
+Przykładowo, możliwe jest tworzenie wykresów w stylu popularnych komiksów z serii XKCD http://xkcd.com/
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 library(xkcd)
@@ -318,10 +358,10 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
 
 ```
 
-Bazując na motywie `theme_bw()` można uzyskać inwersję domyślnych wykresów z pakietu `ggplot2`
+A bazując na motywie `theme_bw()` można uzyskać inwersję domyślnych wykresów z pakietu `ggplot2`. Nie są to być może codziennie używane możliwości, ale pokazują, że zgłębiając pakiet `ggplot2` nie natkniemy się na barierę w stylu ,,tego się nie da zrobić''.
 
 ```{r, fig.height=4, fig.width=5,  message=FALSE, warning=FALSE}
-pl + theme_bw()+theme(plot.background = element_rect(fill = "gray80"))
+pl + theme_bw() + theme(plot.background = element_rect(fill = "gray80"))
 ```
 
 
@@ -329,61 +369,27 @@ pl + theme_bw()+theme(plot.background = element_rect(fill = "gray80"))
 
 # Co dalej
 
-Do’s and Don’ts 
-http://stat545-ubc.github.io/block015_graph-dos-donts.html
-
-No no’s
-Do: make the data stand out
-Do: spare your reader from mental gymnastics
-Do: use position along a common scale
-Do: take control of aspect ratio
-Do: think about including zero
-Do: choose the scale with intention
-Do: connect the dots with care
-Do: convey groups clearly
-
-
-Ten Simple Rules for Better Figures
-
-http://www.ploscompbiol.org/article/info:doi/10.1371/journal.pcbi.1003833
-
-Twenty rules for good graphics
-
-http://robjhyndman.com/hyndsight/graphics/
-
-
----
-
-# Co dalej
-
-- Więcej informacji o tym jak budować wykresy w pakiecie ggplot2 znaleźć można w rozdziale 4 książki *,,Przewodnik po pakiecie R''*. Więcej informacji o tej książce http://www.biecek.pl/R/
-
-- Wiele przydatnych wskazówek można również znaleźć w internetowej książce *,,Cookbook for R''* http://www.cookbook-r.com/Graphs/
-
-- Bardzo rozbudowana dokumentacja dla pakietu ggplot2 dostępna jest na stronie *,,ggplot2''* http://docs.ggplot2.org/current/index.html
-
-- Effective tables and graphs in official statistics, Government Statistical Service (London)
-https://gss.civilservice.gov.uk/wp-content/uploads/2014/12/Effective-graphs-and-tables-in-official-statistics-version-1.pdf
-
-
-
-
-INNE:
-
-
-easyGgplot2 - nakłądki na pakiet ggplot2
+- Informację o różnych nakładkach dla pakietu `ggplot2` znaleźć można na `easyGgplot2` 
 http://www.sthda.com/english/wiki/easyggplot2
 
-edytowalne wykresy dla ggplota [do excela lub worda]
-http://www.sthda.com/english/wiki/create-an-editable-graph-from-r-software
+- Wklejając wykresy do Excela lub Worda może nam zależeć na wykresach, które można edytować. In a to jest metoda http://www.sthda.com/english/wiki/create-an-editable-graph-from-r-software
+
+- Wiele przydatnych wskazówek można również znaleźć w internetowej książce *,,Cookbook for R''* http://www.cookbook-r.com/Graphs/ oraz w dokumencie *Effective tables and graphs in official statistics, Government Statistical Service*
+https://gss.civilservice.gov.uk/wp-content/uploads/2014/12/Effective-graphs-and-tables-in-official-statistics-version-1.pdf
+
+- W internecie znaleźć można wiele stron z poradami, jak robić dobre wykresy. Wybrane ciekawe listy takich porad to:
+    * *Do’s and Don’ts* http://stat545-ubc.github.io/block015_graph-dos-donts.html
+    * *Ten Simple Rules for Better Figures*  http://www.ploscompbiol.org/article/info:doi/10.1371/journal.pcbi.1003833
+    * *Twenty rules for good graphics* http://robjhyndman.com/hyndsight/graphics/
+
+# Zadanie, sezon 2, odcinek 4
+
++ Wybierz samochody marki Volkswagen model Passat a następnie narysuj jak średnia cena zależy od roku produkcji za pomocą geometrii `geom_smooth()`.
+
++ Wybierz samochody marki Volkswagen, narysuj jak średnia cena zależy od roku produkcji, różnymi kolorami przedstaw różne modele Volkswagena.
+
++ Wybierz pięcioletnie auta marki Volkswagen i za pomocą wykresu ramka - wąsy przedstaw jak cena auta zależy od modelu.
+
++ Dla wybranych pięcioletnich aut marki Volkswagen przedstaw w podziale na modele jaka część aut ma silnik diesla.
 
 
-KTR:
-
-Może warto uwzględnić poniższą funkcję (np. w któreś części dotyczącej wykresów w ggplot2):
-Sep_Tys <- function(){function(x) format(x, big.mark = " ", scientific = FALSE)}
-czyli separator tysięczny.
-Funkcja scales::comma rozdziela duże liczby za pomocą przecinka.
-Nie jest to "szczęśliwe" rozwiązanie,
-ponieważ często na drugiej osi mogą być części ułamkowe liczby (np. 2,75 itp.).
-W takich sytuacjach warto mieć możliwość wyboru zapisu dużych liczb.
