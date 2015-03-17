@@ -57,7 +57,7 @@ Sezon 2: Wizualizacja i modelowanie danych
   * Jak zrobić wykres w pakiecie ggplot2
     + odcinek 1: Intro, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/1_intro.html), v1 ready
     + odcinek 2: Jak zrobić wykres, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/2_podstawy.html), v1 ready
-    + odcinek 3: Wykresy agregaty,  [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/2_agregaty.html)
+    + odcinek 3: Wykresy agregaty,  [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/2_agregaty.html), v1 ready
     + odcinek 4: Dodatki do wykresów,  [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/3_dodatki.html)
     + odcinek 5: Jak zrobić mapę, [materialy html](https://rawgithub.com/pbiecek/MOOC/master/3_wizualizacjaDanych/4_mapy.html)
   * Co czyni wykres złym lub dobrym?
