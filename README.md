@@ -67,30 +67,31 @@ Sezon 2: Wizualizacja i modelowanie danych
     + odcinek 9: Jak dobierać kolory [film, wizualizacja_kolory.mp4]
     + odcinek 10: Jak pokazywać różne liczby [film, wizualizacja_liczby.mp4]
 
-+ Podstawy analizy statystycznej
-  * odcinek 10: Intro, próba, populacja, estymacja, testowanie  - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/01_intro.html)
++ Podstawy modelowania statystycznego
+  *  Wprowadzenie
+    + odcinek 11: Spis treści i lista kluczowych pojęć - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/01_intro.html)
+    + odcinek 12: Eksploracja danych - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/05_exploracjaIMDB.html)
   *  Modelowanie danych ilościowych
-    + odcinek 11: IMDB - eksploracja
-    + trend liniowy - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/06_testRegresja.html)
-    + trend liniowy, testy - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/06_testRegresja_cont.html)
-    + test dla dwóch grup - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/04_testSrednie.html)
-    + Regresja liniowa, [intro](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaIntro.md), [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaProsta.html), [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/dopasowanieModelu.html)
-    + Regresja przedziałowo liniowa, [intro](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/przedzialowaIntro.md),   [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaMultiplikatywna.html)
-  * Modelowanie danych jakościowych
-    + 2x2 - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/02_test2x2.html)
-    + pxk - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/03_test2xp.html)
-    + Regresja logistyczna - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/08_rlogistyczna.html)
+    + odcinek 13: Zmienne ilościowe - analiza trendu - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/06_testRegresja.html)
+    + odcinek 14: Zmienne ilościowe - testowanie trendu - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/06_testRegresja_cont.html)
+    + odcinek 15: Zmienne ilościowe - porównanie dwóch grup - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/04_testSrednie.html)
+    + odcinek 16: Zmienne ilościowe - regresja liniowa - Regresja liniowa, [intro](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaIntro.md), [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaProsta.html), [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/dopasowanieModelu.html), Regresja przedziałowo liniowa, [intro](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/przedzialowaIntro.md),   [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaMultiplikatywna.html)
+
+  *  Modelowanie danych jakościowych
+    + odcinek 17: Zmienne jakościowe - tabele 2x2 - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/02_test2x2.html)
+    + odcinek 18: Zmienne jakościowe - tabele kontyngencji - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/03_test2xp.html)
+    + odcinek 19: Zmienne jakościowe - regresja logistyczna - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/08_rlogistyczna.html)
   * Dane wokół nas,
-    + Piotr Przybyła IPI PAN, Inżynieria lingwistyczna 
-    + Bartosz Meglicki, NCBJ / IPIPAN, Robotyka i analiza danych
-    + [Sondaże - może wyborcze] Nss
+    + Piotr Przybyła IPI PAN, Inżynieria lingwistyczna [materiały video](https://www.youtube.com/watch?v=h11cP2V5EmE&feature=youtu.be)
+    + Bartosz Meglicki, NCBJ / IPIPAN, Robotyka i analiza danych [materiały video](https://www.youtube.com/watch?v=k3uL7Foy3J4&feature=youtu.be)
+    + [Sondaże] Nss [materiały video](https://www.youtube.com/watch?v=LcTB5qK-EKU&feature=youtu.be)
   * Co dalej? 
     + odcinek 25: Co dalej? 
-    + odcinek 26: W opracowaniu materiałów udział wzięli 
+    + odcinek 26: W opracowaniu materiałów udział wzięli [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/00_credits.html), v1 ready
   * Challange [20 zadań] 
+
 
   * Dodać do challenge?
     + Zakup samochodu wspierany danymi [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/77_przypadekUzycia.Rmd),
 
     Challenge: BSE - kolejki do NFZ i obrobione csv
-
