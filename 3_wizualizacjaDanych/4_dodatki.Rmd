@@ -1,7 +1,7 @@
 ---
-title: "Pakiet ggplot2 - poziom zaawansowany"
+title: "Pakiet ggplot2 - praca nad detalami"
 author: "pogRomcy danych"
-date: "sezon 3 / odcinek 3 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 2 / odcinek 4 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -9,32 +9,33 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "poskRamiacze danych / wizualizacja / zaawansowane"
+    footer: "pogRomcy danych / wizualizacja / dopieszczanie"
 
 ---
 
 # O czym jest ten odcinek
 
 Funkcje z pakietu ggplot2 wyglądają dobrze przy domyślnych ustawieniach.
+
 Ale tworząc bardziej złożoną grafikę, często pojawia się potrzeba zmiany jakiegoś detalu.
 
 W tym odcinku nauczymy się:
 
 - Jak dodać adnotacje do wykresu?
-- Jak zmieniać mapowania kształtu?
-- Jak zmieniać mapowania kolorów?
-- Jak modyfikować legendę?
+- Jak kontrolować mapowanie dla cechy `shape` (kształt)?
+- Jak kontrolować mapowanie dla cechy `color` (kolor)?
+- Jak modyfikować legendę wykresu?
 - Jak zmieniać motywy graficzne wykresu?
 
 ---
 
-# Adnotacje
+# Adnotacje, napisy na osiach i tytuły
 
-Bardzo ważnym, a często niedocenianym elementem wykresu, są tytuły i opisy.
+Dobry tytuł wykresu i opisy osi to elementy, które znacznie ułatwiają poprawne odczytanie wykresu, choć często ich wkład jest umniejszany.
 
-Dlaczego ważnym? Ponieważ bez tytułów i opisów czytelnik może nie mieć pojęcia co wykres przedstawia. Jeżeli czytelnik nie wie co wykres przedstawia to taki wykres jest bezużyteczny.
+Dlaczego są one takie ważne? Ponieważ bez tytułu i opisu osi czytelnik może nie mieć pojęcia co wykres przedstawia. Jeżeli czytelnik nie wie co wykres przedstawia to taki wykres jest bezużyteczny.
 
-Dlaczego niedocenianym? Ponieważ twórca wykresu zazwyczaj wie co wykres przedstawia i niekoniecznie ma ochotę i czas by dbać o czytelnika.
+Dlaczego umniejszany? Ponieważ twórca wykresu zazwyczaj wie co wykres przedstawia i niekoniecznie ma ochotę i czas by dbać o czytelnika.
 
 Będziemy tworzyć bardzo dobre wykresy, ponieważ na naszych wykresach wszystko będzie jasne i opisane.
 Przyjrzyjmy się wykresowi z pierwszego odcinka i zastanówmy się które elementy warto dodatkowo opisać?
@@ -48,13 +49,13 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
 
 ---
 
-# Adnotacje
+# Adnotacje, napisy na osiach i tytuły
 
 Czy to było trudne zadanie? 
 
-Mogło tak być, ponieważ widzieliśmy ten wykres już wiele razy i wiemy co on przedstawia. Jeżeli jednak udało Ci się znaleźć elementy, warto dodatkowego opisu to świetnie, jesteś na dobrej ścieżce.
+Mogło być, ponieważ widzieliśmy ten wykres już wiele razy i wiemy co on przedstawia. Jeżeli jednak udało Ci się znaleźć elementy, które warto dodatkowo opisać, to świetnie, jesteś na dobrej ścieżce by krytycznie patrzeć na wykresy.
 
-Oto co ja znalazłem
+Oto co ja znalazłem:
 
 - W opisach osi brakuje jednostek. Jest informacja 'waga' ale w jakich to jednostkach? Kilogramach, funtach? 
 - Podobny problem dotyczy prędkości, czy to kilometry na godzinę czy mile?
@@ -62,20 +63,32 @@ Oto co ja znalazłem
 - Ale o co chodzi z tym wykresem? Gdzie jest tytuł? Co on w ogóle przedstawia?
 - Jakie gatunki reprezentują najbardziej skrajne punkty? Który kot i który ptak jest najszybszy?
 
-Zobaczmy jak przygotować wykres z odpowiednimi adnotacjami
+Zobaczmy jak przygotować wykres z odpowiednimi adnotacjami.
 
 ---
 
-# Adnotacje
+# Adnotacje, napisy na osiach i tytuły
 
-W poniższym kodzie do wykresu dodajemy cztery linijki, każda zmieniająca określony aspekt wykresu. Funkcja `ggtitle()` dodaje tytuł do wykresu a funkcją `theme()` zmieniamy wielkość tytułu wykresu, większy będzie wyraźniejszy. Funkcjami `xlab()` i `ylab()` dodajemy opisy dla osi. Aby zmienić tytuł legendy należy określić argument `name` (nazwa) dla funkcji opisującej mapowanie na rozmiar (`scale_shape_discrete()`), a funkcją `theme()` przesuwamy tę legendę na górę wykresu. Funkcją `geom_text()` dodajemy etykiety dla wybranych punktów na wykresie.
+W poniższym przykładzie do wykresu dodajemy cztery linijki, każda zmieniająca określony element wykresu.
+
+1. Funkcja `ggtitle()` dodaje tytuł do wykresu a funkcją `theme()` zmieniamy wielkość tytułu wykresu. Większy będzie wyraźniejszy. 
+
+2. Funkcjami `xlab()` i `ylab()` dodajemy opisy dla osi. Dodaliśmy w nich jednostki, warto też by opisy zaczynały się dużą literą i miały polskie znaki.
+
+3. Aby zmienić tytuł legendy należy określić argument `name` (nazwa) dla funkcji opisującej mapowanie na rozmiar (`scale_shape_discrete()`), a funkcją `theme()` przesuwamy tę legendę na górę wykresu. 
+
+4. Funkcją `geom_text()` dodajemy etykiety dla wybranych punktów na wykresie. Zaznaczyliśmy najszybszego kota i ptaka.
 
 ```{r, fig.height=5, fig.width=5, message=FALSE, warning=FALSE}
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   geom_point(size=5) + 
+  # większy i czytelny tytuł
   ggtitle("Lżejszym łatwiej szybko biegać!") + theme(plot.title = element_text(size=20)) + 
+  # opisy osi
   xlab("Waga [kg]") + ylab("Prędkość [km/h]") + 
+  # tytuł w legendzie
   scale_shape_discrete(name="Koty czy Ptaki?") + theme(legend.position="top") + 
+  # dodatkowe napisy na wykresie
   geom_text(data=koty_ptaki[c(6,8),], aes(label=gatunek), hjust=-0.2)
 ```
 
