@@ -75,19 +75,19 @@ Sezon 2: Wizualizacja i modelowanie danych
     + odcinek 13: Zmienne ilościowe - analiza trendu - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/06_testRegresja.html)
     + odcinek 14: Zmienne ilościowe - testowanie trendu - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/06_testRegresja_cont.html)
     + odcinek 15: Zmienne ilościowe - porównanie dwóch grup - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/04_testSrednie.html)
-    + odcinek 16: Zmienne ilościowe - regresja liniowa - Regresja liniowa, [intro](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaIntro.md), [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaProsta.html), [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/dopasowanieModelu.html), Regresja przedziałowo liniowa, [intro](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/przedzialowaIntro.md),   [materialy html](https://rawgithub.com/pbiecek/MOOC/master/modelowanie/regresjaMultiplikatywna.html)
+    + odcinek 16: Zmienne ilościowe - regresja liniowa - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/16_regresjaProsta.html), 
+    + odcinek 17: Zmienne ilościowe - regresja przedziałowo liniowa - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/17_regresjaMultiplikatywna.html)
 
   *  Modelowanie danych jakościowych
-    + odcinek 17: Zmienne jakościowe - tabele 2x2 - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/02_test2x2.html)
-    + odcinek 18: Zmienne jakościowe - tabele kontyngencji - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/03_test2xp.html)
-    + odcinek 19: Zmienne jakościowe - regresja logistyczna - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/08_rlogistyczna.html)
+    + odcinek 18: Zmienne jakościowe - tabele 2x2 - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/02_test2x2.html)
+    + odcinek 19: Zmienne jakościowe - tabele kontyngencji - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/03_test2xp.html)
   * Dane wokół nas,
-    + Piotr Przybyła IPI PAN, Inżynieria lingwistyczna [materiały video](https://www.youtube.com/watch?v=h11cP2V5EmE&feature=youtu.be)
-    + Bartosz Meglicki, NCBJ / IPIPAN, Robotyka i analiza danych [materiały video](https://www.youtube.com/watch?v=k3uL7Foy3J4&feature=youtu.be)
-    + Zbyszek Marczewski, Jakub Rutkowsk, Przemek Kopa (Na straży sondaży), Sondaże [materiały video](https://www.youtube.com/watch?v=LcTB5qK-EKU&feature=youtu.be)
+    + odcinek 20: Piotr Przybyła, IPI PAN, Inżynieria lingwistyczna [materiały video](https://www.youtube.com/watch?v=h11cP2V5EmE&feature=youtu.be)
+    + odcinek 21: Bartosz Meglicki, NCBJ / IPIPAN, Robotyka i analiza danych [materiały video](https://www.youtube.com/watch?v=k3uL7Foy3J4&feature=youtu.be)
+    + odcinek 22: Zbyszek Marczewski, Jakub Rutkowski, Przemek Kopa, Na straży sondaży, Sondaże [materiały video](https://www.youtube.com/watch?v=LcTB5qK-EKU&feature=youtu.be)
   * Co dalej? 
-    + odcinek 25: Co dalej? 
-    + odcinek 26: W opracowaniu materiałów udział wzięli [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/00_credits.html), v1 ready
+    + odcinek 23: Co dalej? 
+    + odcinek 24: W opracowaniu materiałów udział wzięli [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/00_credits.html), v1 ready
   * Challange [20 zadań] 
 
 
