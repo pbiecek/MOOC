@@ -1,7 +1,7 @@
 ---
-title: "Zależność pomiędzy dwoma zmiennymi binarnymi"
+title: "Zależność pomiędzy dwiema zmiennymi binarnymi"
 author: "pogRomcy danych"
-date: "sezon 3 / odcinek 2<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 2 / odcinek 18<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -9,7 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / pierwsze kroki / testy 2x2"
+    footer: "pogRomcy danych / modelowanie / testy 2x2"
 ---
 
 # O czym jest ten odcinek
@@ -173,7 +173,7 @@ mosaicplot(plecSens, main="Odpowiedzi na pytanie o to co ważne w życiu")
 
 # Wczytanie danych
 
-W zbiorze danych `diagnoza` jest ponad 38 tysięcy obserwacji. Dla tak dużej populacji testowanie nie ma praktycznie sensu, nawet bardzo małe różnice okazują się istotnie różne.
+W zbiorze danych `diagnoza` jest ponad 38 tysięcy obserwacji. Dla tak dużej populacji, nawet bardzo małe różnice okazują się istotnie różne.
 
 Dlatego przykład dotyczący testowania przedstawimy na innym zbiorze danych, zbiorze `TCGA_BRCA` z wybranymi zmiennymi dla raka piersi. W tym zbiorze danych mamy dane dla 999 pacjentów.
 

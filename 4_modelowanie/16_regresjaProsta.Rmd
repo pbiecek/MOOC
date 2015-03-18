@@ -28,7 +28,7 @@ Dziś zmierzymy się z tym pytaniem.
 Przyjrzymy się bardzo znanemu zbiorowi danych, który przedstawia zależność pomiędzy wzrostem rodzica a dziecka.
 
 Zaczniemy od przyjrzenia się temu, jak wygląda zależność,
-następnie odpowiemy na pytanie jaka część wzrostu jest odzedziczalna
+następnie odpowiemy na pytanie jaka część wzrostu jest odziedziczalna
 a na koniec spróbujemy oszacować jaki będzie wzrost moich dzieci.
 
 ---
@@ -231,7 +231,7 @@ Zależność wzrostu pomiędzy dzieckiem a rodzicem można opisywać różnymi m
 
 Z jednej strony zbyt proste modele (1 i 2) nie opisują dobrze danych, widać na poniższym wykresie, że występuje dla nich systematyczny błąd.
 
-Z drugiej strony, zbyt złożone modele (4) powodują, żę trudno nam zrozumieć całą relację. Co  z tego, że mamy średnią dzieci dla rodziców o wzroście 170 i 172 cm, skoro nie potrafimy tej wiedzy rozszerzyć na rodziców o wzroście 171 cm?
+Z drugiej strony, zbyt złożone modele (4) powodują, że trudno nam zrozumieć całą relację. Co  z tego, że mamy średnią dzieci dla rodziców o wzroście 170 i 172 cm, skoro nie potrafimy tej wiedzy rozszerzyć na rodziców o wzroście 171 cm?
  
 Praca z modelowaniem to wybieranie modelu, który do danych pasuje dobrze, ale nie za dobrze. Często (nie zawsze) sprawdza się model liniowy.
  
@@ -262,4 +262,5 @@ ggplot(galton, aes(x=rodzic, y=syn)) +
 Dla tego zbioru danych wyznacz model regresji liniowej oraz narysuj zbiór danych z zaznaczoną krzywą regresji liniowej.
 
 Czy parametry regresji liniowej w zbiorze pearsona (z wysokością ojca) różnią się od parametrów ze zbioru galtona (ze średnią wysokością rodziców)?
+
 

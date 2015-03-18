@@ -330,4 +330,27 @@ sapply(marki, function(marka) {
 } )
 ```
 
+# Zadania, sezon 2, odcinek 18
+
++ W zbiorze danych `diagnoza` wiek respondenta jest w zmiennej o nazwie `wiek2013`. Wyznacz zależność pomiędzy wiekiem podzielonym na dwie grupy, poniżej i powyżej 30 roku życia, a odpowiedziami na pytanie o to co w życiu ważne.
+
++ W zbiorze danych `TCGA_BRCA` w drugiej kolumnie jest płeć pacjenta. Wyznacz zależność pomiędzy zmiennymi `plec` a `czy.zyje`. Przetestuj tą zależność testem Fishera.
+
+W zbiorze danych `TCGA_BRCA` zbadaj czy jest i jaka jest zależność pomiędzy 
+
++ przeżyciami (kolumna `czy.zyje` a mutacjami `TP53`),
++ płcią a mutacjami `TP53`,
++ płcią a zmienną `czy.zyje`.
+
+Zależność przedstaw za pomocą tabeli z liczebnościami oraz częstościami.
+
+# Zadania, sezon 2, odcinek 19
+
+```{r, eval=FALSE}
+table(TCGA_BRCA$czy.zyje,
+      TCGA_BRCA$TP53)
+prop.table(table(TCGA_BRCA$czy.zyje,
+      TCGA_BRCA$TP53), 2)
+```
+
 

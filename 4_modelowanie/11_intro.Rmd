@@ -1,7 +1,7 @@
 ---
 title: "Próba, populacja, estymacja, testowanie"
 author: "pogRomcy danych"
-date: "sezon 3 / odcinek 1 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst <br> Naciśnij `T` by wyświetlić spis treści"
+date: "sezon 2 / odcinek 11 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst <br> Naciśnij `T` by wyświetlić spis treści"
 output:
   slidy_presentation:
     includes:
@@ -75,7 +75,7 @@ Ale są też cechy, które (w co wierzymy) mają pewną wartość ale my możemy
 
 Przykładowo, gdy ważymy się wagą, w chwili gdy stajemy na wadze mamy jakąś określoną masę. Ale w zależności od różnych czynników, takich jak temperatura, sprawność wagi, możemy otrzymać różne wyniki. Standardowe wagi mają dokładność rzędu +- 2kg więc dla tej samej osoby na różnych wagach moglibyśmy otrzymać nieznacznie różne odczyty.
 
-Dokładność pomiaru dotyczy też sytuacji, w której pomiaru dokonuje się nie mechanicznym urządzeniem, ale np ankietą lub sondażem, tak jak w przypadku pomiaru preferencji politycznych. W tym przypadku błąd pomiaru wynika z niemożności przeprowadzenia sondażu na wszystkich Polakach, ale konieczności przeprowadzenia sondażu na próbie o zazwyczaj niewielkiej wielkości.
+Dokładność pomiaru dotyczy też sytuacji, w której pomiaru dokonuje się nie mechanicznym urządzeniem, ale np. ankietą lub sondażem, tak jak w przypadku pomiaru preferencji politycznych. W tym przypadku błąd pomiaru wynika z niemożności przeprowadzenia sondażu na wszystkich Polakach, ale konieczności przeprowadzenia sondażu na próbie o zazwyczaj niewielkiej wielkości.
 
 
 # Kluczowe koncepcje - próba a populacja
@@ -110,4 +110,30 @@ Testowanie, to działanie mające na celu określenie czy pewna wartość w popu
 
 Przedstawiając w kolejnych odcinkach różne zagadnienia analizy danych będziemy pokazywać metody służące do estymacji / szacowania określonej wartości oraz do testowania określonych warunków dla tej wartości.
 
+# Spis treści
+
+Materiały o modelowaniu, zostały podzielone na następujące odcinki
+
+Wprowadzający do eksploracji danych
+
++ eksploracja danych
+
+Dwa odcinki poświęcone analizie trendu
+
++ zmienne ilościowe - analiza trendu 
++ zmienne ilościowe - testowanie trendu
+
+Odcinek poświęcony analizie średnich
+
++ zmienne ilościowe - porównanie dwóch grup 
+
+Dwa odcinki poświęcone regresji liniowej, przedziałowej i multiplikatywnej
+
++ zmienne ilościowe - regresja liniowa 
++ zmienne ilościowe - regresja przedziałowo liniowa 
+
+Dwa odcinki poświęcone zmiennym jakościowym
+
++ zmienne jakościowe - tabele 2x2 
++ zmienne jakościowe - tabele kontyngencji 
 
