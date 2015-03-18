@@ -7,7 +7,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
   <meta name="copyright" content="pogRomcy danych / modelowanie / trendy" /> 
-  <title>Trendy</title>
+  <title>Trendy w danych</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -53,18 +53,20 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </head>
 <body>
 <div class="slide titlepage">
-  <h1 class="title">Trendy</h1>
+  <h1 class="title">Trendy w danych</h1>
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 2 / odcinek 3<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 2 / odcinek 13<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
-<h1>O czym jest ten odcinek</h1>
+<h1>O czym jest ten odcinek?</h1>
 <p>Analizując dane, często trafiamy na sytuację, gdy mamy sekwencje liczb i chcemy ocenić czy w wartościach jest widoczny trend.</p>
-<p>Analizując zużycie energii możemy sprawdzać czy występuje rosnący trend zapotrzebowania na energię, podobnie analizując liczbę sprzedanych biletów czy postępy w grach.</p>
-<p>Jednak nawet gdy występuje widoczny trend, bardzo rzadko wartości układają się idealnie w linię. Zazwyczaj trend jest zanurzony w dużej zmienności. Jak oszacować jak silny jest ten trend?</p>
+<p>Analizując zużycie energii możemy sprawdzać czy występuje rosnący trend zapotrzebowania na energię. Jeżeli pracujemy z danymi o sprzedaży biletów może interesować nas trend w liczbie sprzedanych biletów.</p>
+<p>Jednak nawet gdy występuje widoczny trend, bardzo rzadko wartości układają się idealnie w linię. Zazwyczaj trend jest zanurzony w dużych fluktuacjach.</p>
+<p>Jak więc oszacować z jakim trendem liniowym mamy do czynienia?</p>
 <p>I tutaj pojawia się statystyka. Używając takich narzędzi jak regresja liniowa możemy ocenić jakie są parametry liniowego trendu.</p>
+<p>Oczywiście nie zawsze tendencje ukłądają się w liniowy wzrost lub liniowy spadek. Potraktujemy więc prace z trendem liniowym jako pierwszy krok zanim zaczniemy dopasowywać bardziej złożone zależności.</p>
 <p>W tym odcinku, na przykładzie danych z serwisu IMDB (Internet Movie Database), pokażemy jak działa procedura wyznaczania trendu w danych.</p>
 </div>
 <div id="baza-danych-o-filmach-i-serialach" class="slide section level1">
@@ -72,6 +74,7 @@ pogRomcy danych
 <p>W bazie danych o filmach IMDB (Internet Movie Database) znaleźć można dane o serialach a w szczególności średnie oceny użytkowników wystawione kolejnym odcinkom serialu.</p>
 <p>Przykładowo, na stronie <a href="http://www.imdb.com/title/tt0903747/epdate?ref_=ttep_ql_4" class="uri">http://www.imdb.com/title/tt0903747/epdate?ref_=ttep_ql_4</a> znajdują się oceny serialu <em>Breaking Bad</em>.</p>
 <p>Dane te zostały pobrane z Internetu i przygotowane tak, że teraz są dostępne w zbiorze danych <code>serialeIMDB</code> w pakiecie <code>PogromcyDanych</code>, który towarzyszy temu kursowi.</p>
+<p>Na przykłądzie tych danych poświczymy prace z trendem liniowym.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
 <span class="kw">head</span>(serialeIMDB)</code></pre>
 <pre><code>##   id       serial                         nazwa sezon odcinek ocena glosow
@@ -90,31 +93,31 @@ pogRomcy danych
 ## 6 tt0903747</code></pre>
 </div>
 <div id="jak-wyglada-trend-w-serialach" class="slide section level1">
-<h1>Jak wygląda trend w serialach</h1>
+<h1>Jak wygląda trend w serialach?</h1>
 <p>Mając taki zbiór danych, przyjrzyjmy się jak wyglądają oceny dla serialu <em>Breaking Bad</em>.</p>
-<p>Poniższy wykres przedstawia średnie oceny (na osi OY) dla kolejnych odcinków (rozłożonych wzdłuż osi OX).</p>
+<p>Poniższy wykres przedstawia średnie oceny (na osi OY) dla kolejnych odcinków (rozłożonych wzdłuż osi OX). W poprzednim odcinku pokazaliśmy jak zrobić taki wykres.</p>
 <p>Kolejne sezony są oznaczane różnymi kolorami. Czy patrząc na te wyniki widzimy jakąś globalną tendencję / trend?</p>
-<p><div id="plot_id629909962-container" class="ggvis-output-container">
-<div id="plot_id629909962" class="ggvis-output"></div>
+<p><div id="plot_id321462868-container" class="ggvis-output-container">
+<div id="plot_id321462868" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id629909962_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id629909962" data-renderer="svg">SVG</a>
+<a id="plot_id321462868_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id321462868" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id629909962_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id629909962" data-renderer="canvas">Canvas</a>
+<a id="plot_id321462868_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id321462868" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id629909962_download" class="ggvis-download" data-plot-id="plot_id629909962">Download</a>
+<a id="plot_id321462868_download" class="ggvis-download" data-plot-id="plot_id321462868">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id629909962_spec = {
+var plot_id321462868_spec = {
     "data": [
         {
             "name": ".0",
@@ -332,35 +335,35 @@ var plot_id629909962_spec = {
     "handlers": null
 }
 ;
-ggvis.getPlot("plot_id629909962").parseSpec(plot_id629909962_spec);
+ggvis.getPlot("plot_id321462868").parseSpec(plot_id321462868_spec);
 </script></p>
 </div>
 <div id="jak-wyglada-trend-w-serialach-1" class="slide section level1">
-<h1>Jak wygląda trend w serialach</h1>
+<h1>Jak wygląda trend w serialach?</h1>
 <p>Dodajmy do wykresu linię trendu liniowego, najlepiej dopasowanego do danych.</p>
 <p>Teraz łatwiej zauważyć rosnącą tendencję ocen, co więcej można z wykresu odczytać tempo wzrostu.</p>
 <p>Ale jak ta linia została wyznaczona? Co to znaczy ,,najlepiej dopasowany do danych’’?</p>
-<p><div id="plot_id501190431-container" class="ggvis-output-container">
-<div id="plot_id501190431" class="ggvis-output"></div>
+<p><div id="plot_id524967137-container" class="ggvis-output-container">
+<div id="plot_id524967137" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id501190431_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id501190431" data-renderer="svg">SVG</a>
+<a id="plot_id524967137_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id524967137" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id501190431_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id501190431" data-renderer="canvas">Canvas</a>
+<a id="plot_id524967137_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id524967137" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id501190431_download" class="ggvis-download" data-plot-id="plot_id501190431">Download</a>
+<a id="plot_id524967137_download" class="ggvis-download" data-plot-id="plot_id524967137">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id501190431_spec = {
+var plot_id524967137_spec = {
     "data": [
         {
             "name": ".0",
@@ -621,13 +624,13 @@ var plot_id501190431_spec = {
     "handlers": null
 }
 ;
-ggvis.getPlot("plot_id501190431").parseSpec(plot_id501190431_spec);
+ggvis.getPlot("plot_id524967137").parseSpec(plot_id524967137_spec);
 </script></p>
 </div>
 <div id="jak-szukac-trendu-liniowego" class="slide section level1">
 <h1>Jak szukać trendu liniowego?</h1>
 <p>Problem znajdowania trendu liniowego można przedstawić na wiele sposobów. Poniżej przedstawimy go jako zagadnienie optymalizacji.</p>
-<p>Zakładamy, że trend jest liniowy, to znaczy, że można go przedstawić za pomocą równania <span class="math">\(a_0 + a_1 * odcinek\)</span>, gdzie wartości <span class="math">\(a_0\)</span> i <span class="math">\(a_1\)</span> są nieznane.</p>
+<p>Zakładamy, że trend jest liniowy, to znaczy, że można go przedstawić za pomocą równania <span class="math">\(a_0 + a_1 * numerOdcinka\)</span>, gdzie wartości <span class="math">\(a_0\)</span> i <span class="math">\(a_1\)</span> są nieznane.</p>
 <p>Jak je wyznaczyć? Chcielibyśmy, żeby linia trendu była jak najbliżej danych.</p>
 <p>Ale co to znaczy jak najbliżej?</p>
 <p>Jest wiele sposobów określania miary bliskości, ale najczęściej używany jest następujący:</p>
@@ -640,14 +643,18 @@ RSS = \sum_i niedopasowanie_i = \sum_i (ocena_i - (a_0 + a_1 * i))^2
 \]</span></li>
 <li>Oceny współczyników lini trendu <span class="math">\(\hat a_0\)</span> i <span class="math">\(\hat a_1\)</span> wyznacza się w ten sposób by minimalizowały niedopasowanie RSS.</li>
 </ul>
-<p>Aby wyprowadzić wzór na te współczynniki dobrze znać przynajmniej rachunek różniczkowy (wystarczy wtedy policzyć pochodną i przyrównać ją do zera). Aby wyznaczyć wartości tych współczynników w programie R wystarczy wykorzystać funkcję <code>lm()</code>.</p>
+<p>Aby wyprowadzić wzór na te współczynniki dobrze znać przynajmniej rachunek różniczkowy (wystarczy wtedy policzyć pochodną i przyrównać ją do zera).</p>
+<p>Aby wyznaczyć wartości tych współczynników w programie R wystarczy wykorzystać funkcję <code>lm()</code>.</p>
 </div>
 <div id="jak-wyznaczyc-wspoczynniki-trendu-liniowego-w-programie-r" class="slide section level1">
 <h1>Jak wyznaczyć współczynniki trendu liniowego w programie R</h1>
-<p>Przygotujmy zbiór danych <code>tylkoBreakingBad</code> w którym będą tylko wartości zmiennych <code>id</code> i <code>ocena</code> dla odcinków z sezony <code>Breaking Bad</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">tylkoBreakingBad &lt;-<span class="st"> </span>serialeIMDB %&gt;%
+<p>Przygotujmy zbiór danych <code>tylkoBreakingBad</code> w którym będą tylko wartości zmiennych <code>id</code> i <code>ocena</code> dla odcinków z serialu <code>Breaking Bad</code>.</p>
+<p>Więcej o tym jak działają funkcje <code>filter()</code> i <code>select()</code> przeczytać można w pierwszym sezonie.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># wybierz tylko dwie kolumny i wiersze dla jednego serialu</span>
+tylkoBreakingBad &lt;-<span class="st"> </span>serialeIMDB %&gt;%
 <span class="st">  </span><span class="kw">filter</span>(serial ==<span class="st"> &quot;Breaking Bad&quot;</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(id, ocena)
+<span class="co"># pierwsze 6 wierszy z nowo przygotowanego zbioru danych</span>
 <span class="kw">head</span>(tylkoBreakingBad)</code></pre>
 <pre><code>##   id ocena
 ## 1  1   8.7
@@ -659,8 +666,9 @@ RSS = \sum_i niedopasowanie_i = \sum_i (ocena_i - (a_0 + a_1 * i))^2
 </div>
 <div id="jak-wyznaczyc-wspoczynniki-trendu-liniowego-w-programie-r-1" class="slide section level1">
 <h1>Jak wyznaczyć współczynniki trendu liniowego w programie R</h1>
-<p>Do wyznaczenia trendu liniowego wykorzystujemy funkcję <code>lm()</code>, która jako pierwszy argument przyjmuje formułę opisująca pomiędzy którymi zmiennymi chcemy wyznaczyć relację, a jako drugi argument wskazuje zbiór danych.</p>
-<p>Formuła ma znak <code>~</code> (tyldy), po jego lewej stronie podaje się zmienną którą chcemy opisać (tak zwaną zmienną objaśnianą) a po prawej stronie podaje się zmienną objaśniającą.</p>
+<p>Do wyznaczenia trendu liniowego wykorzystujemy funkcję <code>lm()</code> (nazwa od <em>linear model</em> czyli model liniowy).</p>
+<p>Funkcja <code>lm()</code> jako pierwszy argument przyjmuje formułę opisująca pomiędzy którymi zmiennymi chcemy wyznaczyć relację, a jako drugi argument wskazuje zbiór danych.</p>
+<p>Formuła ma znak <code>~</code> (tyldy), po jego lewej stronie wskazuje się zmienną którą chcemy opisać (tak zwaną zmienną objaśnianą), a po prawej stronie podaje się zmienną objaśniającą.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(ocena~id, tylkoBreakingBad)</code></pre>
 <pre><code>## 
 ## Call:
@@ -674,17 +682,69 @@ RSS = \sum_i niedopasowanie_i = \sum_i (ocena_i - (a_0 + a_1 * i))^2
 <pre><code>## (Intercept)          id 
 ##  7.90222105  0.01836267</code></pre>
 <p>Wartość <code>(Intercept)</code> to współczynnik <span class="math">\(\hat a_0\)</span> a <code>id</code> to współczynnik <span class="math">\(\hat a_1\)</span>.</p>
-<p>Tak więc dla serialu <code>Breaking Bad</code> linia, która minimalizuje RSS ma formułę <span class="math">\[
-\hat ocena = 7.90777366 +  0.01834001 * id
+</div>
+<div id="jak-wyznaczyc-wspoczynniki-trendu-liniowego-w-programie-r-2" class="slide section level1">
+<h1>Jak wyznaczyć współczynniki trendu liniowego w programie R</h1>
+<p>Tak więc dla serialu <code>Breaking Bad</code> linia, która minimalizuje RSS ma formułę to <span class="math">\[
+ocena =  7.90222  +  0.01836 * id
 \]</span></p>
+<p>Jak czytać to równanie?</p>
+<p>Za <code>id</code> należy podstawiać numer odcinka aby odczytać oszacowanie oceny danego odcinka.</p>
+<p>Przykładowo, dla odcinka pierwszego <code>id=1</code>, a wiec oszacowanie startowej oceny to <span class="math">\[
+ocena_1 =  7.90222  +  0.01836 = 7.92058
+\]</span></p>
+<p>Co odcinek, średnia zmiana oceny wynosi 0.01836.</p>
+<p>I tak po 62 odcinkach, dopasowany trend szacuje popularność końcówki sezonu na</p>
+<p><span class="math">\[
+ocena_{62} =  7.90222  +  62*0.01836 = 9.04054
+\]</span></p>
+<p>Korzystając z tych średnich, musimy oczywiście mieć na uwadze, że linia prosta to jakieś dopasowanie, ale niekoniecznie idealne.</p>
+<p>Jak dopasowywać bardziej złożóne modele - o tym napiszemy w kolejnych odcinkach.</p>
 </div>
 <div id="jak-wyglada-rozwoj-trendu-w-ocenach-dla-twojego-ulubionego-serialu" class="slide section level1">
 <h1>Jak wygląda rozwój trendu w ocenach dla Twojego ulubionego serialu?</h1>
 <p>Używając poniższej aplikacji można przyjrzeć się ocenom kolejnych seriali i sprawdzić czy i jak wygląda trend w ich popularności.</p>
+<p>Jeżeli aplikacja się wyłączyła (jest wyszarzona), to należy odświeżyć tę stronę w przeglądarce.</p>
 <center>
 <iframe width="870" height="700" frameborder="0" src="https://smarterpoland.shinyapps.io/serialeIMDB">
 </iframe>
 </center>
+</div>
+<div id="podsumowanie-instrukcji-r" class="slide section level1">
+<h1>Podsumowanie instrukcji R</h1>
+<p>W tym odcinku omawialiśmy funkcje służące do wyznaczania trendu liniowego.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># wykres z ocenami odcinków, pakiet ggvis</span>
+<span class="kw">library</span>(PogromcyDanych)
+<span class="kw">library</span>(ggvis)
+serialeIMDB %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(serial ==<span class="st"> &quot;Breaking Bad&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sezon =</span> <span class="kw">droplevels</span>(sezon)) %&gt;%
+<span class="st">    </span><span class="kw">ggvis</span>(<span class="dt">x =</span> ~id, <span class="dt">y =</span> ~ocena, <span class="dt">fill =</span> ~sezon) %&gt;%
+<span class="st">    </span><span class="kw">layer_text</span>(text :<span class="er">=</span><span class="st"> </span><span class="er">~</span>nazwa, <span class="dt">opacity=</span><span class="dv">0</span>, fontSize:<span class="er">=</span><span class="dv">1</span>) %&gt;%
+<span class="st">    </span><span class="kw">layer_points</span>(fillOpacity:<span class="er">=</span><span class="fl">0.8</span>) 
+
+<span class="co"># wykres z trendem, pakiet ggvis</span>
+  serialeIMDB %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(serial ==<span class="st"> &quot;Breaking Bad&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sezon =</span> <span class="kw">droplevels</span>(sezon)) %&gt;%
+<span class="st">    </span><span class="kw">ggvis</span>(<span class="dt">x =</span> ~id, <span class="dt">y =</span> ~ocena, <span class="dt">fill =</span> ~sezon) %&gt;%
+<span class="st">    </span><span class="co"># ewentualnie group_by(sezon)</span>
+<span class="st">    </span><span class="kw">layer_text</span>(text :<span class="er">=</span><span class="st"> </span><span class="er">~</span>nazwa, <span class="dt">opacity=</span><span class="dv">0</span>, fontSize:<span class="er">=</span><span class="dv">1</span>) %&gt;%
+<span class="st">    </span><span class="kw">layer_points</span>(fillOpacity:<span class="er">=</span><span class="fl">0.8</span>) %&gt;%
+<span class="st">    </span><span class="kw">layer_model_predictions</span>(<span class="dt">model =</span> <span class="st">&quot;lm&quot;</span>) 
+
+<span class="co"># wybierz tylko dwie kolumny i wiersze dla jednego serialu</span>
+tylkoBreakingBad &lt;-<span class="st"> </span>serialeIMDB %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(serial ==<span class="st"> &quot;Breaking Bad&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(id, ocena)
+<span class="co"># pierwsze 6 wierszy z nowo przygotowanego zbioru danych</span>
+<span class="kw">head</span>(tylkoBreakingBad)
+
+<span class="co"># wyznacz trend liniowy dla serialu BreakingBad</span>
+<span class="kw">lm</span>(ocena~id, tylkoBreakingBad)
+
+<span class="co"># odczytaj z trendu liniowego współczynniki trendu</span>
+<span class="kw">lm</span>(ocena~id, tylkoBreakingBad)$coef</code></pre>
 </div>
 <div id="zadania" class="slide section level1">
 <h1>Zadania</h1>
@@ -699,27 +759,27 @@ RSS = \sum_i niedopasowanie_i = \sum_i (ocena_i - (a_0 + a_1 * i))^2
 <p>Poniższa ilustracja prezentuje wyniki trendu liczonego w sposób bardziej lokalny, dzięki czemu, można zauważyć, że inna była zmiana ocen do około 30 odcinka (końca trzeciego sezonu), widać było lekką spadkową tendencję, a inna była zmiana po 30 odcinku (coraz to wyższe oceny).</p>
 <p>Jak modelować takie, bardziej złożone zależności?</p>
 <p>Pokażemy w ostatnim odcinku tego sezonu ,,Co dalej?’’.</p>
-<p><div id="plot_id536571840-container" class="ggvis-output-container">
-<div id="plot_id536571840" class="ggvis-output"></div>
+<p><div id="plot_id833961440-container" class="ggvis-output-container">
+<div id="plot_id833961440" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id536571840_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id536571840" data-renderer="svg">SVG</a>
+<a id="plot_id833961440_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id833961440" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id536571840_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id536571840" data-renderer="canvas">Canvas</a>
+<a id="plot_id833961440_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id833961440" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id536571840_download" class="ggvis-download" data-plot-id="plot_id536571840">Download</a>
+<a id="plot_id833961440_download" class="ggvis-download" data-plot-id="plot_id833961440">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id536571840_spec = {
+var plot_id833961440_spec = {
     "data": [
         {
             "name": ".0",
@@ -980,7 +1040,7 @@ var plot_id536571840_spec = {
     "handlers": null
 }
 ;
-ggvis.getPlot("plot_id536571840").parseSpec(plot_id536571840_spec);
+ggvis.getPlot("plot_id833961440").parseSpec(plot_id833961440_spec);
 </script></p>
 </div>
 
