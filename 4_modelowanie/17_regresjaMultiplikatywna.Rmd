@@ -1,0 +1,297 @@
+---
+title: "Regresja multiplikatywna"
+author: "pogRomcy danych"
+date: "sezon 2 / odcinek 17<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    mathjax: "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / modelowanie / regresja multiplikatywna"
+---
+
+
+# Regresja liniowa - kontynuacja
+
+W poprzednim odcinku przedstawialiśmy model dla liniowej zależności pomiędzy wzrostem dzieci a rodziców.
+
+Ale analizując rzeczywiste dane, często możemy spotkać sytuacje w których zależność pomiędzy zmiennymi nie wygląda na liniową.
+
+Również w takich sytuacjach regresja jest użytecznym narzędziem, ponieważ często zależności można sprowadzić do liniowych wykonując transformacje zmiennych.
+
+Jak? 
+
+O tym poniżej.
+
+W tej części będziemy bazować na przykładach dotyczących cen samochodów. Zacznijmy więc pracę od wczytania danych.
+
+# Wczytanie danych
+
+W pakiecie `PogromcyDanych` dostępny jest zbiór danych `auta2012`, na którym już pracowaliśmy w pierwszym sezonie. Znajdują się w nim oferty sprzedaży aut bardzo różnych marek. 
+
+W tym odcinku podejmiemy się analizy statystycznej tego zbioru danych. Ale analizowanie wszystkich ofert w w jednym worku nie ma sensu. 
+Dlatego dalsze analizy przeprowadzimy wyłącznie na podzbiorze danych dotyczącym marki Volkswagen.
+
+Dlaczego tej? Jest ona najpopularniejsza w zebranych ogłoszeniach, jest dla niej najwięcej obserwacji. Co nie bez znaczenia wyniki wychodzą ciekawe.
+
+Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.
+
+```{r, warning=FALSE, width=8, height=8, message=FALSE, warning=FALSE}
+# w tym pakiecie znajduje się zbiór danych auta2012
+library(PogromcyDanych)      
+# funkcja filter pozostawia wybrane wiersze ze zbioru danych
+volkswagen <- auta2012 %>%
+  filter(Marka == "Volkswagen")
+# pierwsze dwa wiersze
+head(volkswagen, 2)
+```
+
+# Jaka to zależność?
+
+Zobaczmy jak wygląda zależność ceny od wieku Volkswagena. 
+
+W naszym zbiorze danych nie ma zmiennej wiek, jest jedynie rok produkcji.
+Wiedząc, że te oferty były zbierane w styczniu 2012 roku łatwo nam będzie wyznaczyć wiek auta (2012 - rok produkcji).
+
+Zacznijmy więc od wyznaczenia zmiennej wiek auta (funkcja `mutate()` w poniższym przykładzie), a następnie usunięcia aut ponad 20 letnich (funkcja `filter()`, bardzo starych aut jest niewiele, są nietypowe i będą nam przeszkadzać w modelowaniu).
+
+```{r, warning=FALSE}
+mlodeVolkswageny <- volkswagen %>%
+  mutate(Wiek = 2012 - Rok.produkcji) %>%
+  filter(Wiek < 20)
+```
+
+Wykorzystamy funkcję `lm()`, którą poznaliśmy w poprzednim odcinku, do wyznaczenia liniowej zależności pomiędzy ceną a wiekiem auta. 
+
+```{r, warning=FALSE}
+modelCenaWiek <- lm(Cena.w.PLN ~ Wiek, data=mlodeVolkswageny)
+# współczynniki modelu
+coef(modelCenaWiek)
+```
+
+# Jaka to zależność?
+
+Mając współczynniki, możemy ocenić że średnia cena nowo używanego auta według modelu liniowego to 67430 oraz co roku auto traci średnio -4220 pln na wartości. Te dwie liczby są użyteczne, ale jeszcze więcej mozna odczytać z wykresu.
+
+Narysujemy więc obie zmienne dorysowując do nich linię trendu liniowego.
+
+```{r, warning=FALSE, width=8, height=6, message=FALSE, warning=FALSE}
+ggplot(mlodeVolkswageny, aes(y=Cena.w.PLN, x = Wiek)) + 
+  geom_point() + 
+  geom_smooth(method="lm", col="red", size=2) +
+  # funkcją ylim() ograniczamy zakres na osiach, by wykres był czytelniejszy
+  ylim(0,400000)
+```
+
+Gdyby bezrefleksyjnie przyjąć wyniki estymacji, okazałoby się, że zależność pomiędzy ceną a wiekiem opisana jest przez równanie
+
+$Średnia.cena = 67640.352 - 4236.639 * Wiek$
+
+Nieufność powinna w nas wzbudzić obserwacja, że podstawiając do tego wzoru za zmienną wiek wartość 16 lub więcej lat, okaże się, że otrzymujemy oszacowanie średniej ceny ujemne. Jest to jeden z sygnałów, że coś jest nie tak z naszym modelem.
+
+Co możemy z tym zrobić?
+
+
+# Jeżeli nie liniowa, to jaka?
+
+Gdy się zastanowić, łatwo dojść do wniosku, że auta tracą na wartości najwięcej w pierwszych latach, gdy są najdroższe.
+
+Starsze auta są już tańsze i mniej tracą na wartości. Nie dotyczy to antyków, ale analizowane volkswageny nie są antykami (dlatego mamy tylko auta młodsze niż 20 lat).
+
+Model, który możemy rozważyć, to model w którym co roku auta tracą pewien procent swojej ceny.
+
+Taką zależność można opisać jako
+
+$Cena.w.roku.i+1 = Cena.w.roku.i * (1-procent) = Cena.w.roku.i * wsp$
+
+i równoważnie 
+
+$Cena.w.roku.i = Cena.w.roku.0 * (1-procent)^i = Cena.w.roku.0 * wsp^i$
+
+Takie zależności nazywamy multiplikatywnymi. Można je sprowadzić do zależności liniowych logarytmując obie strony (Tak, logarytmy się przydają).
+
+_log(Cena.w.roku.i) = log(Cena.w.roku.0) +  log(wsp) * i_
+
+czyli korzystając ze nazw zmiennych ze zbioru danych
+
+_log(Cena) = b0 + b1 * Wiek_
+
+A to już wygląda jak model liniowy!
+
+# Może logarytmiczna / multiplikatywna
+
+Zobaczmy najpierw, jak te dane wyglądać będą, jeżeli ceny przedstawimy w skali logarytmicznej. Dodając funkcje `scale_y_continuous()` zmieniamy osie wykresu. Do punktów dorysujemy linię regresji.
+
+```{r, warning=FALSE}
+ggplot(mlodeVolkswageny, aes(y=Cena.w.PLN, x = Wiek)) + 
+  geom_point() + 
+  geom_smooth(size=2) + geom_smooth(method="lm", col="red", size=2) +
+  scale_y_continuous(trans="log10")
+```
+
+Na rysunku, po zlogarytmowaniu danych, ta zależność wygląda na idealnie liniową.
+
+# Logarytmiczna / multiplikatywna w R
+
+Zbudowac taki model multiplikatywny z użyciem funkcji `lm()` należy wpierw musimy policzyć logarytm ceny.
+
+```{r, warning=FALSE}
+# dodajemy nową kolumnę logCena.w.PLN
+mlodeVolkswageny <- mlodeVolkswageny %>%
+  mutate(logCena.w.PLN = log10(Cena.w.PLN))
+
+# budujemy model na logarytmach
+modelCenaWiek <- lm(logCena.w.PLN ~ Wiek, data=mlodeVolkswageny)
+wsp <- coef(modelCenaWiek)
+wsp
+```
+
+Jeżeli przejść teraz ze skali logarytmicznej (logarytm dziesiętny) na oryginalną skalę, 
+to okaże się, że średnia cena wyjściowa to $10^```r wsp[1]``` = ```r 10^wsp[1]```$.
+
+Drugi współczynnik wynosi ```r wsp[2]```, co oznacza, że cena w kolejnym roku to ```r 10^wsp[2]``` ceny z poprzedniego roku, 
+czyli przecietnie, corocznie auto traci 15% swojej ceny.
+
+# Zależność kawałkami liniowa
+
+Są sytuacje, w których zależność pomiędzy dwiema zmiennymi można opisać nie tyle przez linię prosta co przez łamaną, czyli krzywą prostą na odcinkach. 
+
+Za przykład takiej zależności posłuży nam zależność pomiędzy przebiegiem a wiekiem auta.
+
+Zanim będziemy kontynuować jakiekolwiek modelowanie musimy wpierw przyjrzeć się danym.
+
+W modelowaniu obowiązuje żelazna zasada _śmieci na wejściu — śmieci na wyjściu_ (ang. garbage in, garbage out). 
+Bez względu na to jakie metody będziemy wykorzystywać, jeżeli w danych są błędy to nasze modelowanie prowadzić może do bezsensownych wniosków.
+
+Zobaczmy jak wygląda przegieg i wiek aut.
+
+```{r, warning=FALSE, fig.width=6, fig.height=5}
+ggplot(mlodeVolkswageny, aes(y=Przebieg.w.km, x = Wiek)) + 
+  geom_point()
+```
+
+Przyglądając się dokłądniej, okazuje się, że są wśród naszych ofert auta o absurdalnym przebiegu ponad 15 milionów kilometrów. To ewidentny błąd. 
+
+Usuńmy wszystkie wiersze , których przebieg przekracza czterysta tysięcy kilometrów.
+
+```{r, warning=FALSE}
+mlodeVolkswageny <-   auta2012 %>%
+  filter(Marka == "Volkswagen") %>%
+  mutate(Wiek = 2012 - Rok.produkcji) %>%
+  filter(Wiek < 20) %>%
+  filter(Przebieg.w.km < 400000)
+```
+
+# Zależność kawałkami liniowa
+
+Po oczyszczeniu danych narsujmy zależność pomiędzy przebiegiem a wiekiem raz jeszcze.
+
+Kolorem czerwonym zaznaczamy linię trendu regresji prostej, kolorem niebieskim zaznaczamy wygładzoną średnią w latach.
+
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=5}
+ggplot(mlodeVolkswageny, aes(y=Przebieg.w.km, x = Wiek)) + 
+  geom_point()+
+  geom_smooth(size=2) + geom_smooth(method="lm", col="red", size=2) 
+```
+
+Trend wygładzony i liniowy odstają od siebie znacząco. Co to oznacza? Być możę zalężność w danych wcale nie jest liniowa.
+
+Niebieska linia, to linia wygładzonego trendu, lokalnie przybliżającego dane. Gdy się jej przyjrzeć, okazuje się, że ma ona bardzo ciekawe zachowanie. 
+
+# Zależność kawałkami liniowa
+
+```{r, warning=FALSE, echo=FALSE, fig.width=6, fig.height=5, message=FALSE}
+ggplot(mlodeVolkswageny, aes(y=Przebieg.w.km, x = Wiek)) + 
+  geom_point() +
+  geom_smooth(size=2) + geom_smooth(method="lm", col="red", size=2) 
+```
+
+Przez pierwsze pięć lat auta gwałtownie przybierają na liczniku, a po piątym roku to tempo znacząco spada.
+
+Czy volkswagenami starszymi niż 5 lat mniej się jeździ? Jest to jakieś wytłumaczenie, ale inne, badziej prawdopodobne, jest takie że starsze auta rzadziej są serwisowane, a przez to ich przebiegi często są wartościami deklarowanymi.
+
+# Zależność kawałkami liniowa
+
+W jaki sposób zamodelować taką łamaną krzywą?
+
+Potrzebujemy modelu, który będzie miał inną krzywą nachylenia w przedziale do 5 lat i ponad 5 lat.
+
+Można taki model zbudować w następujący sposób
+
+_Średni przebieg = b0 + b1 * wiek[0+] + b2 * wiek[5+]_
+
+gdzie _wiek[5+]_ to zmienna przyjmująca wartość _0_, jeżeli wiek jest mniejszy niż 5 oraz wartość _wiek-5_ gdy wiek jest większy niż 5.
+
+Stosując taką dodatkową zmienną, zależność pomiędzy wiekiem a przebiegiem będzie opisana przez współczynnik _b1_ gdy wiek jest w przedziale 0-5 lat oraz przez współczynnik _b1 + b2_ gdy wiek jest wyższy niż 5 lat.
+
+```{r, warning=FALSE}
+mlodeVolkswageny <- mlodeVolkswageny %>%
+  mutate(Wiek0 = ifelse(Wiek >= 0, Wiek, 0),
+         Wiek5 = ifelse(Wiek >= 5, Wiek - 5, 0))
+
+# model z nowymi zmiennymi
+M1 <- lm(Przebieg.w.km ~ Wiek0 + Wiek5, data=mlodeVolkswageny)
+M1
+```
+
+Zauważmy, że powyższy model szacuje przebieg dla nowych aut na _b0_.
+Bardziej naturalnym modelem jest taki, który dla nowych aut będzie 
+prognozował przebieg zero. Można to osiągnąć usuwając wyraz wolny.
+
+# Zależność kawałkami liniowa bez wyrazu wolnego
+
+Po usunięciu wyrazu wolnego mamy do czynienia z modelem.
+
+_Średni przebieg = b1 * wiek[0+] + b2 * wiek[5+]_
+
+Co w programie R można zapisać jako
+
+```{r, warning=FALSE}
+M2 <- lm(Przebieg.w.km ~ Wiek0 + Wiek5 - 1, data=mlodeVolkswageny)
+M2
+```
+
+Jak odczytać ten model?
+
+Dla aut o wieku poniżej 5 lat obserwuje się średnie zwiększanie przebiegu w tempie ```r format(round(M2$coef[1]))```km na rok, ale już dla aut starszych niż 5 lat obserwuje się wydłużanie średniego przebiegu w tempie ```r round(sum(M2$coef))```km na rok.
+
+Na obiekcie klasy `lm()` można wykonywać interesujące operacje. Przykładowo funkcją `summary()` można zbadać czy elementy tego modelu są istotnie różne od zera (ostatnia kolumna poniższego zestawienia to p-wartość).
+
+```{r, warning=FALSE}
+summary(M2)
+```
+
+# Zestawienie modeli
+
+Rozważaliśmy jak dotąd kilka różnych modeli.
+
+Przedstawmy te modele graficznie i zobaczmy, który wygląda na bliższy danych.
+
+Aby pokazać jak wygląda model regresji łamanej wykorzystamy do funkcję `predict()`, która  dla zadanego wieku wyznacza średni przebieg zgodnie z określonym modelem. 
+
+Z przedstawianych modeli, najsensowniej wygląda niebieska krzywa, czyli model `M2`.
+
+```{r, warning=FALSE, message=FALSE}
+# sztuczny zbiór danych, na potrzeby pokazywania modeli
+topred <- data.frame(Wiek0 = c(0, 5, 20), Wiek5 = c(0, 0, 15))
+topred$M1 <- predict(M1, newdata = topred)
+topred$M2 <- predict(M2, newdata = topred)
+
+# graficznie predstawiamy dane i dorysowane do nich modele
+ggplot(mlodeVolkswageny, aes(y=Przebieg.w.km, x = Wiek)) + 
+  geom_point() + 
+  geom_smooth(method="lm", col="red", size=2) +
+  geom_line(data= topred, aes(y=M1, x = Wiek0), size=2, col="green") + 
+  geom_line(data= topred, aes(y=M2, x = Wiek0), size=2, col="blue")
+```
+
+# Zadania
+
++ Wykonaj modelowanie z użyciem modelu multiplikatywnego dla innej marki. 
++ Jeżeli model multiplikatywny wygląda na uzasadniony, policz ile procent corocznie traci na cenie auto danej marki.
++ Zobacz jak wygląda zależność pomiędzy ceną a wiekiem dla innych marek. Dziesięć najczęstszych marek w tym zbiorze danych to ```r paste(collapse=", ", names(head(rev(sort(table(auta2012$Marka))),10)))```
++ Wykonaj modelowanie z użyciem łamanej regresji dla innych marek.
+
