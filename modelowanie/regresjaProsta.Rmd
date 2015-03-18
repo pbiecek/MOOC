@@ -1,16 +1,42 @@
 ---
-title: "Modelowanie / regresja prosta"
+title: "Regresja prosta"
+author: "pogRomcy danych"
+date: "sezon 2 / odcinek 16<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
-  html_document:
-    toc: yes
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / modelowanie / regresja prosta"
 ---
 
-## Kim był Francis Galton?
+# Wprowadzenie
+
+Jak myślicie, czy wzrost jest dziedziczny?
+
+Czy dzieci wysokich rodziców są wysokie?
+
+Pewnie tak, 
+ale mam znajomego, który jest niewysoki, 165cm, ale ma bardzo wysokie dziecko.
+
+Jak to jest, jaka część wzrostu dziecka jest zależna od wzrostu rodzica?
+
+Dziś zmierzymy się z tym pytaniem.
+
+Przyjrzymy się bardzo znanemu zbiorowi danych, który przedstawia zależność pomiędzy wzrostem rodzica a dziecka.
+
+Zaczniemy od przyjrzenia się temu, jak wygląda zależność,
+następnie odpowiemy na pytanie jaka część wzrostu jest odzedziczalna
+a na koniec spróbujemy oszacować jaki będzie wzrost moich dzieci.
+
+---
+
+# Kim był Francis Galton?
 
 Podstawy matematyczne liniowych metod analizy danych powstały na przełomie XVIII i XIX
 wieku. Metody te były z początku wykorzystywane w nawigacji oraz astronomii.
-
-!["Francis Galton 1850". Domena publiczna via Wikimedia Commons](Francis_Galton.jpg)
 
 Termin regresja został użyty po raz pierwszy przez Sir Francisa Galtona jeszcze
 w XIX wieku. Francis Galton był człowiekiem renesansu, zajmującym się zarówno
@@ -22,44 +48,47 @@ bardzo wysokich ojców są średnio wyżsi niż synowie niższych ojców, ale ic
 średni wzrost jest niższy niż średni wzrost ojców. Podobnie wzrost synów niskich
 ojców jest bliższy średniej w populacji. To zjawisko nazwał ,,dążeniem do przeciętności''
 lub ,,tendencją do przeciętności'' (w języku angielskim ten współczynnik
-nazywa się ang. regression toward the mean). Galton zaproponował równanie
+nazywa się *regression toward the mean*). Galton zaproponował równanie
 opisujące zależność między wzrostem synów i ojców lub równoważnie opisujące
 regresję wzrostu z pokolenia na pokolenie w kierunku wartości przeciętnej (dziś
 nazwalibyśmy to równanie równaniem regresji). 
 
-## Czy wzrost rodziców się liczy?
+!["Francis Galton 1850". Domena publiczna via Wikimedia Commons](Francis_Galton.jpg)
+
+
+# Czy wzrost rodziców się liczy?
 
 Naszą przygodę z regresją liniową również rozpoczniemy od danych zebranych przez Galtona.
 Zbiór danych nazywa się `galton`, zobaczmy kilka pierwszych obserwacji z tego zbioru.
 
 ```{r, warning=FALSE, width=8, height=8, message=FALSE}
-library(SmarterPoland)      # w tym pakiecie znajduje się zbiór danych galton
-
+# w tym pakiecie znajduje się zbiór danych galton
+library(PogromcyDanych)      
+# pierwsze 6 wierszy
 head(galton)
 ```
-**PCH: Znajduje się, ale tylko w wersji bieżącej wersji na githubie. Tam jednak
-znajduje się też zbiór auto2012!**
 
 W kolumnie `rodzic` przedstawiona jest średni ważony wzrost rodziców (średnia wzrostu
-ojca i 1,08 wzrostu matki), a w kolumnie `syn` wzrost dorosłego syna. Dane są w calach.
+ojca i 1,08 wzrostu matki), a w kolumnie `syn` wzrost dorosłego syna. Wzrosty podane są w centymetrach.
 
-*PCH: Jak w calach, to chyba suma wzrostu obu rodziców i babci ;) Stawiałbym jednak na
-centrymetry**
+# Czy wzrost rodziców się liczy?
 
-Pytanie, które interesowało Galtona jak również interesuje nas, to czy jest zależność pomiędzy wzrostem rodziców a dziecka.
-Modelowanie zawsze rozpoczyna się od wykresu, zobaczmy jak ta zależność wygląda graficznie.
+Pytanie, które interesowało Galtona, jak również interesuje nas, to czy jest zależność pomiędzy wzrostem rodziców a dziecka.
+
+Modelowanie zawsze rozpoczyna się od wykresu, zobaczmy więc jak ta zależność pomiędzy wzrostem dziecka a rodzica wygląda graficznie.
+
+Do przedstawienia zależności wykorzystujemy pakiet `ggplot2` i funkcję `ggplot()`. Więcej informacji o tym, jak z tej funkcji korzystać znajduje się w pierwszych czterech odcinkach tego sezonu (poświęconych wizualizacji).
 
 ```{r, warning=FALSE, width=8, height=8}
 ggplot(galton, aes(x=rodzic, y=syn)) + 
   geom_point() 
 ```
 
-**PCH: Panie, a co to ten ggplot? Może jakieś słowo wyjaśnienia? No bo jak na.rm znaczy 
-usuń NA, to ktoś jest gotowy pomyśleć, że `ggplot()` to funkcja do rysowania
-wykresów typu Galton-Galton ;)**
+# Bez szumu mało widać
 
-Ponieważ dane są zbierane z dokładnością do połowy cala, punkty dla różnych wierszy pokrywają się. 
-Rysując takie dane warto zaburzyć je małym zastrzykiem szumu.
+Ponieważ dane są zbierane z dokładnością do połowy cala, punkty dla różnych wierszy pokrywają się. Jedna kropka może oznaczać wiele par wzrost rodzica x wzrost dziecka.
+
+Oglądając takie dane (zbieranie z niewielką precyzją), na potrzeby prezentacji warto je zaburzyć małym zastrzykiem szumu.
 Zrobimy to argumentem `position = "jitter"`.
 
 ```{r, warning=FALSE, width=8, height=8}
@@ -67,190 +96,170 @@ ggplot(galton, aes(x=rodzic, y=syn)) +
   geom_point(position = "jitter") 
 ```
 
-## Jaka to zależność?
+# Jaka to zależność?
 
 Wygląda na to, że jakaś zależność występuje, ale jaka?
 Jedną z możliwości jest policzenie średniego wzrostu dziecka dla każdej grupy średniego wzrostu rodziców.
 
-```{r, warning=FALSE, width=8, height=8}
-(srednie = galton %>%
-  group_by(rodzic) %>%
-  summarise(srednia = mean(syn)))
+Używając operatora `%>%` (szerzej omówionego w pierwszym sezonie), średni wzrost dziecka dla każdej grupy wzrostów rodziców wyznacza się następująco.
 
-#
-# poniższa funkcja dorysowuje średnie w grupach
-ggplot(galton, aes(x=rodzic, y=syn)) + 
-  geom_point(position = "jitter") +
-  geom_line(data=srednie, aes(x=rodzic, y=srednia), size=2, color = "blue") + 
-  geom_point(data=srednie, aes(x=rodzic, y=srednia), size=5, color = "blue") 
+```{r, warning=FALSE, width=8, height=8}
+srednie <- galton %>%
+  group_by(rodzic) %>%
+  summarise(srednia = mean(syn))
+# wyświetl te średnie
+srednie
 ```
 
-**PCH: No dobra, powinienem był to napisać już wcześniej, ale i tak tego nie unikniemy.
-Moim zdaniem używanie `dplyr` jak gdyby to była najbardziej typowa konstrukcja w R
-nie pomoże osobom robiącym kurs. Zaczną zaraz - naśladując - używać tak wszystkich
-funkcji. Zwłaszcza, że najpierw pokazujesz jak używać mean, median, quantile,
-a potem sam napierasz dplyrem i to bez słowa komentarza. Czyli albo chociaż
-przedstawienie sensu i składni dplyra (jakby wszyscy pisali potoki w shellu :/),
-albo robimy to w 'czystym' R. Sprawa nr 2. Daruj ludziom na tym etapie wyświetlanie 
-za pomocą nawiasów. Pisz srednia = ..., a potem print(srednia). Liczba nawiasów
-powoduje, że kod bardziej przypomina już LISPa niż R ;). No i ten ggplot znowu 
-skomplikowany. Napisz co robisz w poszczególnych liniach - wtedy ludzie być może
-będą mogli próbować modyfikować te wykresy w ramach ćwiczeń.**
+# Jaka to zależność?
 
+Narysujmy na niebiesko wektor średnich ,,w grupach wzrostów rodziców'', w tle pokażemy wszystkie przypadki ze zbioru danych.
 
-Pięknie, widzimy, że im wyżsi rodzice tym średnio wyższe dzieci. 
+Pięknie! Widzimy, że im wyżsi rodzice tym średnio wyższe dzieci. 
+
 Jednak posługiwanie się samymi średnimi jest dosyć niewygodne.
 Aby opisać tą zależność należy pamiętać średnią dla każdego wzrostu rodziców.
 Co więcej średnie w grupach bardzo wysokich lub bardzo niskich rodziców wyznaczane są na bazie tylko kilku obserwacji, a więc wyznaczane są niedokładnie.
 
-### Zadania:
-+ Dla każdego wzrostu rodzica wyznacz o ile średnio niższe są dzieci od rodziców
 
-### Odpowiedzi:
 ```{r, warning=FALSE, width=8, height=8}
-srednie %>%
-  mutate(roznica = srednia - rodzic)
+ggplot(galton, aes(x=rodzic, y=syn)) + 
+  geom_point(position = "jitter") +
+# poniższa funkcja dorysowuje średnie w grupach
+  geom_line(data=srednie, aes(x=rodzic, y=srednia), size=2, color = "blue") + 
+  geom_point(data=srednie, aes(x=rodzic, y=srednia), size=5, color = "blue") 
 ```
 
-**PCH: Czy mi się wydaje, czy zakładasz, że osobom, którym tłumaczysz kilka 'zajęć' wcześniej
-co znaczy 'na.rm' będzie znane i naturalne w tej sytuacji użycie `dplyr::mutate`?**
 
-## Model liniowy
+# Model liniowy
 
-Wygodniej by było opisać zależność pomiędzy wzrostem rodzica a średnim wzrostem dziecka za pomocą mniejszej liczby parametrów.
+Wygodniej by było opisać zależność pomiędzy wzrostem rodzica a średnim wzrostem dziecka za pomocą mniejszej liczby parametrów, niż pamiętanie średniego wzrostu dzieci dla każdego możliwego wzrostu rodzica.
 
 Załóżmy, że można tę zależność opisać zależnością liniową, a więc zależnością
 
-_średni.wzrost.dziecka = b0 + wzrost.rodziców * b1_
+$średni.wzrost.dziecka = b_0 + średni.wzrost.rodziców * b_1$
 
-gdzie _b0_ i _b1_ to pewne nieznane wartości. 
+gdzie $b_0$ i $b_1$ to pewne nieznane wartości. 
 
 Metoda regresji liniowej pozwala wyznaczyć te nieznane wartości.
-Dokładny opis algorytmu wyznaczania tych wartości jest opisany w kolejnym punkcie,
+Dokładny opis algorytmu wyznaczania tych wartości jest opisany w kolejnym punkcie, poniżej
 przyjrzyjmy się, jak można to zrobić w programie R.
 
-## Estymacja współczynników
+# Ocena współczynników
 
 Proces wyznaczania nieznanych wartości w oparciu o model i dane nazywa się estymacją.
-W programie R, do estymacji można wykorzystać funkcję `lm()` (skrót od ang. linear model).
+
+W programie R, do estymacji można wykorzystać funkcję `lm()` (skrót od *linear model*).
 
 Dla modelu 
-_średni.wzrost.dziecka = b0 + wzrost.rodziców * b1_
+$średni.wzrost.dziecka = b_0 + średni.wzrost.rodziców * b_1$
 
 lub używając nazw zmiennych z naszego zbioru danych
-_syn = b0 + rodzic * b1_
+$syn = b_0 + rodzic * b_1$
 
 Funkcja estymująca parametry wygląda następująco.
 
 ```{r, warning = FALSE, width = 8, height = 8}
 lm(syn ~ 1 + rodzic, data = galton)
+# osoby lubiące parametr %>% mogą też napisać
+# galton %>% lm(syn ~ 1 + rodzic, data = .)
 ```
-
-**PCH: po takim wstępie to ja bym raczej próbował `galton %>% lm(syn ~ 1 + rodzic)` :D**
 
 Funkcja `lm()` przyjmuje dwa argumenty, pierwszy to formuła opisująca przyjęty model, drugi argument wskazuje zbiór danych.
 
-Formuła składa się z lewej strony i prawej, rozdzielonej znakiem `~`. Lewa strona opisuje zmienną, którą chcemy opisać, tzw. zmienną objaśnianą, a prawa strona składa się z zmiennych, które wykorzystujemy do opisania lewej strony, czyli zmiennych objaśniających. Zapis `1 + parent` oznacza, że średni wzrost dziecka chcemy opisać za pomocą wyrażenia _1 * b0 + parent * b1_,
-w którym należy wyznaczyć _b0_ i _b1_.
+Formuła składa się z lewej strony i prawej, rozdzielonej znakiem `~`. Lewa strona opisuje zmienną, którą chcemy opisać, tzw. zmienną objaśnianą, a prawa strona składa się z zmiennych, które wykorzystujemy do opisania lewej strony, czyli zmiennych objaśniających. Zapis `1 + parent` oznacza, że średni wzrost dziecka chcemy opisać za pomocą wyrażenia $1 * b_0 + parent * b_1$,
+w którym należy wyznaczyć $b_0$ i $b_1$.
 
-Wynikiem funkcji `lm()` jest szczegółowy opis dopasowanego modelu, jeżeli interesują nas jedynie oceny  _b0_ i _b1_, możemy się odwołać do tych ocen przez właściwość `coef` wyniku.
+# Ocena współczynników
+
+Wynikiem funkcji `lm()` jest szczegółowy opis dopasowanego modelu. Jeżeli interesują nas jedynie oceny  $b_0$ i $b_1$, możemy się odwołać do tych ocen przez funkcję `coef()`.
 
 ```{r, warning=FALSE, width=8, height=8}
-lm(syn~1 + rodzic, data=galton)$coef
+modelSynRodzic <- lm(syn ~ 1 + rodzic, data=galton)
+coef(modelSynRodzic)
 ```
 
-**PCH: Ja bym ludziom darował właściwości, czy też atrybytu na tym etapie. Raczej
-poszedłbym w kierunku:**
+A wiec otrzymujemy model
 
-```
-> model <- lm(syn ~ 1 + rodzic, data = galton)
-> coef(model)
-(Intercept)      rodzic 
-  60.812990    0.646291 
-```
-
-_średni.wzrost.dziecka = 23.9415 + wzrost.rodzica * 0.6462906_
-
-**PCH: Skąd powyżej wartość 23.9415 ?**
+_średni.wzrost.dziecka = 60.813 + wzrost.rodzica * 0.6463_
 
 W formule możemy pominąć człon `1+`, jest on domyślnie dodawany do formuły, dlatego taki sam wynik otrzymamy stosując następującą instrukcję.
 
 ```{r, warning=FALSE, width=8, height=8}
-lm(syn~rodzic, data=galton)$coef
-```
-
-**PCH: Jak wyżej, tzn.:**
-
-```
-> model <- lm(syn ~ rodzic, data = galton)
-> coef(model)
-(Intercept)      rodzic 
-  60.812990    0.646291 
+# wartość 1 dodawana jest automatycznie
+modelSynRodzic <- lm(syn ~ rodzic, data=galton)
+coef(modelSynRodzic)
 ```
 
 
-### Zadania:
-+ Mając wyznaczone parametry _b0_ i _b1_ policz oceny średniego wzrostu dziecka dla każdego średniego wzrostu rodzica
-+ Wyznacz różnice pomiędzy ocenami z modelu liniowego a średnimi liczonymi osobno dla każdej grupy rodziców
-
-### Odpowiedzi:
-```{r, warning=FALSE, width=8, height=8}
-(wspolczynniki = lm(syn~rodzic, data=galton)$coef)
-srednie %>%
-  mutate(m.liniowy = wspolczynniki[1] + rodzic*wspolczynniki[2],
-         roznica = srednia - m.liniowy)
-```
-
-**PCH: Zaraz, zaraz. Jeszcze nie było ani słowa o indeksowaniu, no to skąd 
-wspolczynniki[1]!? Ani słowa również o mutate!!!**
-
-## Jak wygląda ta zależność
+# Jak wygląda zależność pomiędzy wzrostem dziecka a rodzica
 
 W powyższym toku rozumowania rozważaliśmy kilka alternatywnych modeli. Podsumujmy je tutaj. 
 
 1. Model, w którym średni wzrost dziecka jest równy wzrostowi rodzica,
-_średni.wzrost.dziecka = wzrost.rodziców_
+$średni.wzrost.dziecka = wzrost.rodziców$
 
 2. Model, w którym nie ma zależności pomiędzy wzrostem rodziców a dzieci, a więc, że dla każdego wzrostu rodziców, średni wzrost dzieci jest taki sam,
-_średni.wzrost.dziecka = b0_
+$średni.wzrost.dziecka = b_0$
 
 3. Model, w którym wzrost dziecka jest liniowo zależny od wzrostu rodziców
-_średni.wzrost.dziecka = b0 + wzrost.rodziców * b1_
+$średni.wzrost.dziecka = b_0 + wzrost.rodziców * b_1$
 
 4. Model, w średni wzrost dziecka jest różny dla każdego wzrostu rodzica.
 
-**PCH: Ja nie zauważyłem rozważań nad wszystkimi? Tylko 3 i 4, chyba że coś pomyliłem?**
-
 Modele te zostały uporządkowane ze względu na liczbę nieznanych parametrów. Pierwszy z powyższych modeli nie ma żadnego parametru, kolejny ma jeden parametr, kolejny dwa a ostatni 11 parametrów.
 
-### Zadania:
-+ Poniższy wykres przedstawia wszystkie rozważane modele. Wskaż który kolor odpowiada któremu modelowi
+Pokażmy jak każdy z tych czterech modeli wygląda na tle danych. Oznaczenia kolorów: pierwszy model to kolor złoty, drugi - czarny, trzeci - czerwony, czwarty - niebieski.
 
 ```{r, warning=FALSE, width=8, height=8}
 ggplot(galton, aes(x=rodzic, y=syn)) + 
   geom_point(position = "jitter")+
+  # model 4, dla każdej grupy wzrostu rodziców wyznaczamy średni wzrost dzieci
   geom_line(data=srednie, aes(x=rodzic, y=srednia), size=2, color = "blue") + 
   geom_point(data=srednie, aes(x=rodzic, y=srednia), size=5, color = "blue")  + 
+  # model 3, do danych dopasowujemy trend liniowy
   geom_smooth(method="lm", se=FALSE, size=3, color="red") +
+  # model 2, wzost dziecka jest taki jak wzrost rodzica
   geom_abline(size=2, color="gold3")+
+  # model 1, wzrost dziecka nei zależy od wzrostu rodzica
   geom_abline(size=2, slope=0, intercept=mean(galton$syn))
 ```
 
-### Odpowiedzi:
-+ Pierwszy to kolor złoty, drugi - czarny, trzeci - czerwony, czwarty - niebieski.
+# Który model wybrać?
+ 
+Zależność wzrostu pomiędzy dzieckiem a rodzicem można opisywać różnymi modelami. Który wybrać?
+
+Z jednej strony zbyt proste modele (1 i 2) nie opisują dobrze danych, widać na poniższym wykresie, że występuje dla nich systematyczny błąd.
+
+Z drugiej strony, zbyt złożone modele (4) powodują, żę trudno nam zrozumieć całą relację. Co  z tego, że mamy średnią dzieci dla rodziców o wzroście 170 i 172 cm, skoro nie potrafimy tej wiedzy rozszerzyć na rodziców o wzroście 171 cm?
+ 
+Praca z modelowaniem to wybieranie modelu, który do danych pasuje dobrze, ale nie za dobrze. Często (nie zawsze) sprawdza się model liniowy.
+ 
+```{r, warning=FALSE, width=8, height=6, echo=FALSE}
+ggplot(galton, aes(x=rodzic, y=syn)) + 
+  geom_point(position = "jitter")+
+  # model 4, dla każdej grupy wzrostu rodziców wyznaczamy średni wzrost dzieci
+  geom_line(data=srednie, aes(x=rodzic, y=srednia), size=2, color = "blue") + 
+  geom_point(data=srednie, aes(x=rodzic, y=srednia), size=5, color = "blue")  + 
+  # model 3, do danych dopasowujemy trend liniowy
+  geom_smooth(method="lm", se=FALSE, size=3, color="red") +
+  # model 2, wzost dziecka jest taki jak wzrost rodzica
+  geom_abline(size=2, color="gold3")+
+  # model 1, wzrost dziecka nei zależy od wzrostu rodzica
+  geom_abline(size=2, slope=0, intercept=mean(galton$syn))
+```
 
 
-## Projekt
-W pakiecie `SmarterPoland` udostępniony jest również zbiór danych `pearson` zebrany przez Pearsona. W tym zbiorze danych zebrane są wzrosty ojców i synów.
+# Zadania
++ Dla każdego wzrostu rodzica ze zbioru danych `galton` wyznacz o ile średnio niższe są dzieci od rodziców
+
++ Mając wyznaczone parametry _b0_ i _b1_ policz oceny średniego wzrostu dziecka dla każdego średniego wzrostu rodzica
+
++ Wyznacz różnice pomiędzy ocenami z modelu liniowego a średnimi liczonymi osobno dla każdej grupy rodziców
+
++  W pakiecie `PogromcyDanych` udostępniony jest również zbiór danych `pearson` zebrany przez Pearsona. W tym zbiorze danych zebrane są wzrosty ojców i synów.
 
 Dla tego zbioru danych wyznacz model regresji liniowej oraz narysuj zbiór danych z zaznaczoną krzywą regresji liniowej.
 
 Czy parametry regresji liniowej w zbiorze pearsona (z wysokością ojca) różnią się od parametrów ze zbioru galtona (ze średnią wysokością rodziców)?
 
-Przygotuj dokument knitra z opisem zależności liniowej pomiędzy wzrostem syna a ojca.
-
-**PCH: knitra? Już? A może najpierw indeksowanie, czy coś w tym stylu? Może łatwiej
-byłoby ludziom, gdyby im zasugerować RStudio? A czy to nie są przypadkiem
-te same biedne istoty, którym nie chcesz utrudniać życia tłumacząc jak załadować 
-dane z pliku na dysku lokalnym i wolisz już kazać ściągać im 70MB za każdym razem,
-bo tak będzie łatwiej?**
