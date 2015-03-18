@@ -70,13 +70,13 @@ Sezon 2: Wizualizacja i modelowanie danych
 + Podstawy modelowania statystycznego
   *  Wprowadzenie
     + odcinek 11: Spis treści i lista kluczowych pojęć - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/01_intro.html)
-    + odcinek 12: Eksploracja danych - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/05_exploracjaIMDB.html)
+    + odcinek 12: Eksploracja danych - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/05_exploracjaIMDB.html),  v1 ready
   *  Modelowanie danych ilościowych
-    + odcinek 13: Zmienne ilościowe - analiza trendu - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/06_testRegresja.html)
-    + odcinek 14: Zmienne ilościowe - testowanie trendu - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/06_testRegresja_cont.html)
-    + odcinek 15: Zmienne ilościowe - porównanie dwóch grup - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/04_testSrednie.html)
-    + odcinek 16: Zmienne ilościowe - regresja liniowa - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/16_regresjaProsta.html), 
-    + odcinek 17: Zmienne ilościowe - regresja przedziałowo liniowa - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/17_regresjaMultiplikatywna.html)
+    + odcinek 13: Zmienne ilościowe - analiza trendu - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/06_testRegresja.html),  v1 ready
+    + odcinek 14: Zmienne ilościowe - testowanie trendu - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/06_testRegresja_cont.html),  v1 ready
+    + odcinek 15: Zmienne ilościowe - porównanie dwóch grup - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/04_testSrednie.html),  v1 ready
+    + odcinek 16: Zmienne ilościowe - regresja liniowa - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/16_regresjaProsta.html),  v1 ready
+    + odcinek 17: Zmienne ilościowe - regresja przedziałowo liniowa - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/17_regresjaMultiplikatywna.html),  v1 ready
 
   *  Modelowanie danych jakościowych
     + odcinek 18: Zmienne jakościowe - tabele 2x2 - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/02_test2x2.html)

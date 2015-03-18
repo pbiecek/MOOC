@@ -258,4 +258,76 @@ srednie %>%
 ```
 
 
+# Zadania, sezon 2, odcinek 17
+
++ Wykonaj modelowanie z użyciem modelu multiplikatywnego dla innej marki. 
+
++ Jeżeli model multiplikatywny wygląda na uzasadniony, policz ile procent corocznie traci na cenie auto danej marki.
+
++ Zobacz jak wygląda zależność pomiędzy ceną a wiekiem dla innych marek. 
+
++ Wykonaj modelowanie z użyciem łamanej regresji dla innych marek.
+
+# Odpowiedzi, sezon 2, odcinek 17
  
+```{r, warning=FALSE, fig.width=4, fig.height=4, eval=FALSE}
+toyota <- auta2012 %>%
+  filter(Marka == "Toyota") %>%
+  mutate(Wiek = 2012 - Rok.produkcji) %>%
+  filter(Wiek < 20)
+
+lm(Cena.w.PLN ~ Wiek, data=toyota)$coef
+
+ggplot(toyota, aes(y=Cena.w.PLN, x = Wiek)) + 
+  geom_point() + 
+  geom_smooth(method="lm", col="red", size=2) +
+  ylim(0,400000)
+
+
+marki <- names(head(rev(sort(table(auta2012$Marka))),10))
+invisible(sapply(marki, function(marka) {
+  wybranamarka <- auta2012 %>%
+    filter(Marka == marka) %>%
+    mutate(Wiek = 2012 - Rok.produkcji) %>%
+    filter(Wiek < 20,
+           Przebieg.w.km < 400000) %>%
+    mutate(Wiek0 = ifelse(Wiek >= 0, Wiek, 0),
+         Wiek5 = ifelse(Wiek >= 5, Wiek - 5, 0))
+  
+    M1 = lm(Przebieg.w.km ~ Wiek0 + Wiek5, data=wybranamarka)
+    M2 = lm(Przebieg.w.km ~ Wiek0 + Wiek5 - 1, data=wybranamarka)
+    
+    topred = data.frame(Wiek0 = c(0,5,20), Wiek5 = c(0, 0, 15))
+    topred$M1 = predict(M1, newdata = topred)
+    topred$M2 = predict(M2, newdata = topred)
+    
+    plot(ggplot(wybranamarka, aes(y=Przebieg.w.km, x = Wiek)) + 
+      geom_point() + 
+      geom_smooth(method="lm", col="red", size=2) +
+      geom_line(data= topred, aes(y=M1, x = Wiek0), size=2, col="green") + 
+      geom_line(data= topred, aes(y=M2, x = Wiek0), size=2, col="blue") +
+    ggtitle(marka))
+  
+} ))
+
+
+marki <- names(head(rev(sort(table(auta2012$Marka))),10))
+sapply(marki, function(marka) {
+  wybranamarka <- auta2012 %>%
+    filter(Marka == marka) %>%
+    mutate(Wiek = 2012 - Rok.produkcji) %>%
+    filter(Wiek < 20) %>%
+    mutate(logCena.w.PLN = log10(Cena.w.PLN))
+  
+  plot(ggplot(wybranamarka, aes(y=Cena.w.PLN, x = Wiek)) + 
+    geom_point() + 
+    geom_smooth(method="lm", col="red", size=2) +
+    ggtitle(marka) + scale_y_continuous(trans="log10"))
+  
+  wsp <- lm(logCena.w.PLN ~ Wiek, data=wybranamarka)$coef
+  procent <- 1- 10^(wsp[2])
+  round(100*procent,1)
+} )
+```
+
+
