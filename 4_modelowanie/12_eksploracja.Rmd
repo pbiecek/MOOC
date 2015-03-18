@@ -20,37 +20,49 @@ opts_chunk$set( message=FALSE,tidy.opts=list(keep.blank.line=TRUE, width.cutoff=
 
 # O czym jest ten odcinek?
 
-Pierwszy etap analizy danych to eksploracja. 
+Zanim zacznie się budować modele, zanim rozpocznie się analizę danych, wcześniej warto przyjrzeć sie tym danym bliżej.
 
-Pierwsze spojrzenie na dane. Sprawdzenie z jakimi zmiennymi, z jakimi zakresami mamy do czynienia.
+Takie przyglądanie się danym, często bez konkretnego celu, nazywa się eksploracją. 
 
-W tym celu najczęściej ogląda się każdą zmienną osobno, ewentualnie parami, bazując na prostych podsumowaniach graficznych lub tabelarycznych.
+Pierwsze spojrzenie na dane. Sprawdzenie z jakimi zmiennymi, z jakimi zakresami zmiennych, jakimi relacjami pomiędzy zmiennymi mamy do czynienia.
 
-W tym odcinku pokażemy jak przedstawiać rozkład zmiennej ciągłej oraz zmiennej dyskretnej, za pomocą kilku popularnych statystyk. Dla zmiennej ciągłej
+Eksplorację często zaczyna się od przyjrzenia każdej ze zmiennych osobno, ewentualnie parami, bazując na prostych podsumowaniach graficznych lub tabelarycznych.
 
-- średniej, mediany,
-- pięciu liczb Tukeya,
-- wykresu ramka wąsy, histogramu.
+W tym odcinku pokażemy jak przedstawiać rozkład zmiennej ilościowej oraz zmiennej jakościowej, za pomocą kilku popularnych statystyk. 
 
-Dla zmiennej dyskretnej
+Dla zmiennej ilościowej (liczbowej) przedstawimy
 
-- tablicy kontyngencji.
+- średnią, medianę,
+- pięć liczb Tukeya,
+- wykres ramka wąsy, histogram.
 
+Dla zmiennej jakościowej (z kategoriami) przedstawimy
+
+- tablicy kontyngencji,
+- sortowanie.
 
 ---
 
 # Baza danych o filmach i serialach
 
-W bazie danych o filmach IMDB (Internet Movie Database) znaleźć można dane o serialach a w szczególności średnie oceny użytkowników wystawione kolejnym odcinkom serialu.
+W bazie danych o filmach IMDB (Internet Movie Database) znaleźć można różne ciekawe dane o serialach. W szczególności średnie oceny użytkowników wystawione kolejnym odcinkom serialu.
 
 Przykładowo, na stronie http://www.imdb.com/title/tt0903747/epdate?ref_=ttep_ql_4 znajdują się oceny serialu *Breaking Bad*.
 
-Dane te zostały pobrane z Internetu i przygotowane tak, że teraz są dostępne w zbiorze danych `serialeIMDB` w pakiecie `PogromcyDanych`, który towarzyszy temu kursowi. Ten zbiór danych składa się z ponad 20 tysięcy wierszy oraz 8 kolumn/zmiennych. Przyjrzyjmy się tym kolumnom po kolei.
+Na potrzeby tego odcinka z Internetu pobraliśmy dane, oczyściliśmy je i udostępniliśmy w zbiorze danych `serialeIMDB` w pakiecie `PogromcyDanych`, który towarzyszy temu kursowi. 
+
+Cały zbiór danych jest dosyć duży, wszystkich odcinków wszystkich seriali jest ponad 20 tysięcy wierszy, każdy opisany przez 8 kolumn/zmiennych. 
+
+Dla kilku pierwszych wierszy przyjrzyjmy się tym kolumnom po kolei.
 
 ```{r, warning=FALSE, message=FALSE}
+# wczytujemy zbiór danych, jeżeli nie jest zainstalowany to należy go zainstalować
+# poleceniem install.packages("PogromcyDanych")
 library(PogromcyDanych)
-
+# wielkość zbioru danych
 dim(serialeIMDB)
+# pierwsze 6 wierszy, w kolejnych kolumnach jest nazwa serialu, nazwa odcinka, 
+# numer sezonu, numer odcinka, średnia ocena, liczba oddanych głosów, oraz identyfikator z bazy IMDB
 head(serialeIMDB)
 ```
 
@@ -62,6 +74,8 @@ Każdy wiersz w zbiorze danych `serialeIMDB` opisuje oceny jednego odcinka jedne
 
 Kolumna danych o nazwie `serial` jest zmienną jakościową, przyjmującą za wartości nazwy seriali. Listę poziomów zmiennej jakościowej można wyświetlić funkcją `levels()`.
 
+Zapis `serialeIMDB$serial` oznacza odwołanie się do kolumny `serial` ze zbioru danych `serialeIMDB`.
+
 ```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
 levels(serialeIMDB$serial)
 ```
@@ -70,15 +84,21 @@ levels(serialeIMDB$serial)
 
 # Tabela liczebności
 
-Inną użyteczną funkcją dla zmiennych jakościowych jest tabela częstości, przedstawiającą jak często określona wartość występuje w wektorze.
+Kolumna `serialeIMDB$serial` zawiera nazwy seriali, często powtarzające się.
+
+Użyteczną funkcją do eksploracji zmiennych jakościowych jest tabela częstości. Przedstawia ona jak często określona wartość występuje w wektorze.
 
 Tabelę częstości można wyznaczyć funkcją `table()`. Wynik tej funkcji można wyświetlić na ekranie, lub jak w poniższym przykładzie zapisać do zmiennej.
 
 ```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
 tabela <- table(serialeIMDB$serial)
+# pierwsze 6 wartości z wektora
+head(tabela)
 ```
 
-Tabelę liczebności dla 200 rozkładów trudno się przegląda. Jeżeli interesują nas najczęstsze lub najrzadsze wartości to aby je odczytać warto tabelę liczebności posortować.
+Tabelę liczebności dla 200 seriali trudno się przegląda. Jeżeli interesują nas najczęstsze lub najrzadsze wartości to aby je odczytać warto tabelę liczebności posortować (funkcja `sort()`). 
+
+Po posortowaniu w sposób malejący (argument `decreasing = TRUE`) najczęstsze wartości znajdą się na początku a najrzadsze na końcu posortowanego wektora.
 
 ```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
 sort(tabela, decreasing = TRUE)
@@ -88,55 +108,66 @@ sort(tabela, decreasing = TRUE)
 
 # Breaking Bad
 
-Praca na zbiorze danych o wszytkich odcinakch jest trudniejsza, ponieważ nei jesteśmy w stanie ogarnąć wzrokiem wszystkich 20 tysięci wuerszy.
+Cały zbiór danych o serialach ma ponad 20 tysięcy wierszy.
+Praca na tak dużym zbiorze danych, o wszytkich serialach jest trudna, ponieważ nie jesteśmy w stanie ogarnąć wzrokiem wszystkich 20 tysięcy wierszy.
 
-Dlatego na potrzeby dalszych przykładów wybierzmy z tego zbioru danych jeden serial, któremu przyjrzymy się bliżej.
+Dlatego na potrzeby dalszych przykładów wybierzmy z tego zbioru danych jeden serial, któremu przyjrzymy się bliżej. Poniżej będzie to *Breaking Bad*, ale warto poeksperymentować również z innymi serialami.
 
 ```{r,  message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
+# funkcją filter() wybieramy tylko wiersze dla serialu Breaking Bad
 BreakingBad <- filter(serialeIMDB, serial == "Breaking Bad") 
-
-filter(serialeIMDB, serial == "Star Trek: The Next Generation") 
 # o ilu odcinkach dostępna jest informacja dla tego serialu? 
 dim(BreakingBad)
+
+# a jak wyglądają dane dla serialu Star Trek: The Next Generation
+filter(serialeIMDB, serial == "Star Trek: The Next Generation") 
 ```
 
 # Co się dzieje z ocenami odcinków?
 
-Z pewnością interesującą informacją jest to jak dany serial oceniano.
+Co ciekawego możemy zrobić z danymi dla jednego serialu?
 
+Z pewnością interesującą informacją jest to jak dany serial oceniano.
 Ta informacja dostępna jest w kolumnie `ocena` i można się do niej dostać odwołując się do tej kolumny operatorem `$`.
 
 Ale przecież każdy odcinek podobał się inaczej, jeden bardziej inny mniej. 
 Porównajmy trzy sposoby przedstawienia informacji o ocenach.
 Czy któryś z tych sposobów prezentacji liczb pozwala na zauważenie czegoś ciekawego?
 
-Wektor liczb
+Odcinki są uporządkowane zgodnie z datą emisji.
+
+[HINT] Od odcinka 45 oceny odcinków się poprawiają. Na którym sposobie prezentacji widać to najwyraźniej? A na którym najmniej wyraźnie. Dlaczego?
+
+1. Sposób pierwszy: wektor liczb
 
 ```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
 BreakingBad$ocena
 ```
 
-Wykres słupkowy
+# Co się dzieje z ocenami odcinków?
+
+2. Sposób drugi: wykres słupkowy, wysokość słupka odpowiada ocenie.
+
 
 ```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
 barplot(BreakingBad$ocena)
 ```
 
-Wykres punktowy
+# Co się dzieje z ocenami odcinków?
+
+3. Sposób trzeci: wykres punktowy, pozycja punktu odpowiada ocenie odcinka.
 
 ```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
 plot(BreakingBad$ocena)
 ```
 
-Wykres punktowy, jako jedyny z powyższych pozwala na łatwe zauważenie, że od odcinka 45 oceny odcinków się poprawiły. 
-
-Dlaczego ten informacji nie widać tak łatwo na innych wykresach?
-
 # Sortowanie
 
-Często interesujące są obserwacje skrajne. Jak najłatwiej się zorientować które odcinki uzyskują skrajne oceny?
+Często interesujące obserwacje to skrajne obserwacje. 
 
-Najłatwiej posortować odcinki po ocenie i wyświetlić taki posortowany zbiór danych.
+Ale jak najłatwiej się zorientować które odcinki uzyskują skrajne oceny?
+
+Najłatwiej posortować odcinki po ocenie i wyświetlić taki posortowany zbiór danych. Na początku będą te o skranie niskich ocenach, na końcu te o skranie wysokich ocenach.
 
 ```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
 arrange(BreakingBad, ocena)
@@ -144,23 +175,29 @@ arrange(BreakingBad, ocena)
 
 # Jak oceniano ten serial
 
-Dla serialu Breaking Bad mamy dostępną informację o 62 odcinkach, ale czasem chcielibyśmy myśleć o nich jak o pewnej całości. Czy cały serial jest dobry czy nie?
+Dla serialu Breaking Bad mamy dostępną informację o 62 odcinkach. 
+
+Każdy z nich ma określoną średnią ocenę, ale czasem chcielibyśmy myśleć o wszystkich odcinakch nich jak o pewnej całości. Czy cały serial jest dobry czy nie?
 
 Jak podsumować oceny z 62 odcinków? 
 
-Dwa najpoopularniejsze podejscia to średnia oraz mediana (czyli element środkowy). Można je prosto wyznaczyć ale często nie mówią wielu interesujących aspektów o danych. Np jakich?
+Dwa najpoopularniejsze podejscia to średnia oraz mediana (czyli element środkowy). Można je prosto wyznaczyć funkcjami `mean()` i `median()`.
 
 ```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
 mean(BreakingBad$ocena)
 median(BreakingBad$ocena)
 ```
 
-Wiele informacji niesie tak zwanych pięć liczb Tukeya oraz średnia. Średnia (`Mean`) to średnia arytmetyczna z wszystkich ocen. Pozostałe pięć liczb przedstawiają: 
+Mediana to wartość, która po postorowaniu jest w środku (lub dla parzystej liczby wartości, jest to średnia z dwóćh wartości po środku).
+
+Więcej inforamcji niż sama średnia, niesie tak zwanych pięć liczb Tukeya. Można je wyznaczyć (razem ze średnią arytmetyczną) funkcją `summary()`. Te pięć liczb przedstawia: 
 
 - `Min` ocenę najgorszego odcinka, 
 - `Max` ocenę najlepszego odcinka,
 - `Median` ocenę środkowego odcinka (jeżeli jest nieparzysta liczba odcinków) lub średnią z dwóch środkowych odcinków (jeżeli jest parzysta liczna odcinków),
 - `1st Qu.` i `3rd Qu.`, czyli oceny ćwiartkowe (połowa obserwacji od minimum do mediany i od mediany do maksimum).
+
+Pięć liczb Tukeya dzieli wartości na cztery równoliczne grupy.
 
 ```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
 summary(BreakingBad$ocena)
@@ -168,11 +205,11 @@ summary(BreakingBad$ocena)
 
 # Pięć liczb - wykres pudełko wąsy
 
-Pięć liczb Tukeya można przedstawić graficznie. 
-
-Służy do tego wykres nazywany pudełko-wąsy lub ramka-wąsy lub z angielskiego boxplot.
+Pięć liczb Tukeya można przedstawić graficznie. Służy do tego wykres nazywany pudełko-wąsy lub ramka-wąsy lub z angielskiego boxplot.
 
 Jest na tym wykresie pięć poziomych linii i każda odpowiada jednemu kwartylowi.
+
+Pomiędzy sąsiednimi poziomymi liniami mieści się tyle samo wartości. Jeżeli jednej z tych odcinków jest dłuższy niż pozostałę, to oznacza że wartości w nim są rzadsze niż w innych.
 
 ```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
 boxplot(BreakingBad$ocena )
@@ -184,34 +221,59 @@ Zaletą wykresu pudełko - wąsy jest to, że pozwala łatwiej i lepiej porówna
 
 Zobaczmy jak oceny odcinków różnią się pomiędzy sezonami.
 
-W funkcji `boxplot()` użyjemy znaku formuły `~` aby określić, że chcemy przedstawiać oceny w podziale na sezony.
+Jak to zrobić w programie R? W funkcji `boxplot()` użyjemy znaku formuły `~` aby określić, że chcemy przedstawiać oceny w podziale na sezony. Lewa strona tego symbolu określa zmienną którą chcemy podsumować, a prawa strona określa grupy, które chcemy porównać.
 
-Co możemy odczytać z takiej reprezentacji danych? Naprawdę wiele rzeczy, znajdźmy trzy ciekawe obserwacje.
+Co możemy odczytać z takiej reprezentacji danych? Naprawdę wiele rzeczy. Spróbujmy zmierzyć się z tym zagadnieniem przez chwilę samdzielnie. Na poniższym wykresie znajdźmy trzy ciekawe obserwacje.
 
 ```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
 BreakingBad$sezon <- droplevels(BreakingBad$sezon)
 boxplot(BreakingBad$ocena ~ BreakingBad$sezon)
 ```
 
-Jedną jest to, że najlepsze oceny ma sezon 5. Jego mediana jest powyżej całego pudełka dla sezonów 1 i 2, co oznacza, że ponad połowa odcinków z sezonu 5 była wyżej oceniana niż najlepszy z odcinków z pierwszych dwóch sezonów.
+# Pięć liczb - wykres pudełko wąsy
 
-Najsłabsze wyniki notuje sezon 3. W nim to znajduje się odcinek najgorzej oceniany. Też dla niego mediana jest najniżej.
+Co ciekawego udało się znaleźć? Dla mnei najciekawsze obserwacje to:
 
-Największą zmienność obserwuje się dla sezonu 4. Był w nim i bardzo słaby odcinek (jak na ten serial) i bardzo dobry odcinek.
+1. Najlepsze oceny ma sezon 5. Jego mediana jest powyżej całego pudełka dla sezonów 1 i 2, co oznacza, że ponad połowa odcinków z sezonu 5 była wyżej oceniana niż najlepszy z odcinków z pierwszych dwóch sezonów.
+
+2. Najsłabsze wyniki notuje sezon 3. W nim to znajduje się odcinek najgorzej oceniany. Też dla niego mediana jest najniżej.
+
+3. Największą zmienność obserwuje się dla sezonu 4. Był w nim i bardzo słaby odcinek (jak na ten serial) i bardzo dobry odcinek.
+
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5, echo=FALSE}
+boxplot(BreakingBad$ocena ~ BreakingBad$sezon)
+```
 
 # Histogram
 
 Jak inaczej można przedstawić rozkład ocen?
 
-Interesującą alternatywą jest histogram.
+Interesującą alternatywą jest histogram. Zasada prezentacji danych jest następująca:
+
+Dzielimy zakres wartości na pewną liczbę (poniżej na `breaks = 10`) przedziałów o równej długości. Następnie w każdym przedziale sprawdzamy ile wartości do niego wpada. Na wykresie wysokością słupka oznaczamy liczbę tych obserwacji.
+
+Im wyższe słupki, tym większe zagęszczenie obserwacji w danym przedziale.
 
 ```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
-hist(BreakingBad$ocena, 10, col="grey")
+hist(BreakingBad$ocena, breaks = 10, col="grey")
 ```
 
 # Co może dac nam histogram czego nie dają inne miary?
 
-```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
+Histogram jest bardziej skomplikowanym wykresem niż wykres pudełkowy.
+
+Pytanie czy ta komplikacja niesie użyteczną informację?
+
+Tak! Łatwo to zauważyć dla serialu *The Shield*. Patrząc na histogram dostrzeżemy, że jest grupa odcinków o ocenach w okolicy 5-5.5, jest też grupa odcinków o ocenach w przedziale 7.5-9. Za to nie ma odcinków o ocenie pomiędzy 5.5 a 7.
+
+Takiej informacji nie sposób odczytać ze zwykłego wykresu ramka-wąsy.
+
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5, eval=FALSE}
+TheShield <- filter(serialeIMDB, serial == "The Shield")
+hist(TheShield$ocena, 10, col="grey")
+boxplot(TheShield$ocena, col="grey", range = 10)
+```
+```{r, message=FALSE, warning=FALSE, fig.width=6, fig.height=5.5, echo=FALSE}
 TheShield <- filter(serialeIMDB, serial == "The Shield")
 hist(TheShield$ocena, 10, col="grey")
 boxplot(TheShield$ocena, col="grey", range = 10)
