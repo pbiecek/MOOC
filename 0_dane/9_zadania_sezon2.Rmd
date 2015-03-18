@@ -222,3 +222,40 @@ sort(wspolczynnikTrendu)
 
 ```
 
+# Zadania, sezon 2, odcinek 15
+
++ Dla każdego wzrostu rodzica ze zbioru danych `galton` wyznacz o ile średnio niższe są dzieci od rodziców.
+
++ Mając wyznaczone parametry _b0_ i _b1_ policz oceny średniego wzrostu dziecka dla każdego średniego wzrostu rodzica.
+
++ Wyznacz różnice pomiędzy ocenami z modelu liniowego a średnimi liczonymi osobno dla każdej grupy rodziców.
+
++  W pakiecie `PogromcyDanych` udostępniony jest również zbiór danych `pearson` zebrany przez Pearsona. W tym zbiorze danych zebrane są wzrosty ojców i synów.
+
+Dla tego zbioru danych wyznacz model regresji liniowej oraz narysuj zbiór danych z zaznaczoną krzywą regresji liniowej.
+
+Czy parametry regresji liniowej w zbiorze pearsona (z wysokością ojca) różnią się od parametrów ze zbioru galtona (ze średnią wysokością rodziców)?
+
+# Odpowiedzi, sezon 2, odcinek 15
+
+```{r, warning=FALSE, width=8, height=8, eval=FALSE}
+# Dla każdego wzrostu rodzica ze zbioru danych `galton` wyznacz 
+# o ile średnio niższe są dzieci od rodziców
+# wykorzystując funkcje z pakietu dplyr
+srednie %>%
+  mutate(roznica = srednia - rodzic)
+
+# Mając wyznaczone parametry _b0_ i _b1_ policz oceny średniego wzrostu 
+# dziecka dla każdego średniego wzrostu rodzica
+wspolczynniki = coef(lm(syn~rodzic, data=galton)
+wspolczynniki
+
+# Wyznacz różnice pomiędzy ocenami z modelu liniowego 
+# a średnimi liczonymi osobno dla każdej grupy rodziców
+srednie %>%
+  mutate(m.liniowy = wspolczynniki[1] + rodzic*wspolczynniki[2],
+         roznica = srednia - m.liniowy)
+```
+
+
+ 
