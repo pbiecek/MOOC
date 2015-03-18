@@ -90,7 +90,7 @@ Pomysł na ocenę, czy trend ma istotną wzrostową tendencje składa się z trz
 
 ### Krok 1: Postaw hipotezę, określ co chcesz porównać
 
-Będziemy testować hipotezę (=przypuszcznie), czy współczynnik wzrostu jest istotnie różny od zera, czyli od braku trendu. 
+Będziemy testować hipotezę (=przypuszczenie), czy współczynnik wzrostu jest istotnie różny od zera, czyli od braku trendu. 
 
 Tę hipotezę, sformujmy w następujący sposób: *Czy obserwowana wartość współczynnika wzrostu jest wystarczająco duża, by uznać ją za istotną?*
 
@@ -140,7 +140,7 @@ trendy <- c(trendy, modulBreakingBad)
 head(trendy, 20)
 ```
 
-# Czy wzrost ocen dla Breaking Bad to przypadek? Test permutacyjny
+# Czy wzrost ocen dla Breaking Bad to przypadek? Porównanie wartości
 
 Możemy teraz wartość `modulBreakingBad` porównać z wektorem wartości referencyjnych - `trendy`.
 
@@ -150,14 +150,14 @@ Porównajmy na wykresie wielkości różnic dla losowych fluktuacji (na szaro) z
 
 Jak widzimy, obserwowana wartość wzrostu ocen dla serialu *Breaking Bad* jest znacznie większa niż wzrosty, które byłoby widać, gdyby nie było żadnej prawdziwej tendencji.
 
-```{r, cache=TRUE}
+```{r, cache=TRUE, fig.width=8, fig.height=6}
 # jak wyglądają przypadkowe współczynniki
 hist(trendy, 50, col="grey", main="", las=1, border="white", xlim=c(0, 0.02))
 # dorysuj na czerwono gdzie jest współczynnik dla BreakingBad
 abline(v=modulBreakingBad, col="red", lwd=5)
 ```
 
-# Czy wzrost ocen dla Breaking Bad to przypadek? Test permutacyjny
+# Czy wzrost ocen dla Breaking Bad to przypadek? P-wartość
 
 Wykres pomaga w zobaczeniu jak wyglądają przypadkowe współczynniki na tle obserwowanej wartości. 
 
@@ -180,7 +180,7 @@ A jak wygląda trend dla serialu *Friends*?
 
 Co do wartości to wynosi niewiele ponad 0.000432, czyli jest również dodatni, ale mniejszy niż dla Breaking Bad. 
 
-Hipoteza, którą chcemy sprawdzić, to czy ten trned istotnie większy od zera? 
+Hipoteza, którą chcemy sprawdzić, to czy ten trend istotnie większy od zera? 
 
 ```{r}
 tylkoFriends <- serialeIMDB %>% filter(serial == "Friends") %>% select(id, ocena)
@@ -206,9 +206,9 @@ serialeIMDB %>%
 
 # A co z Przyjaciółmi? Testowanie
 
-Zweryfikujemy hipotezę o ostotności trendu w ten sam sposób co dla serialu *Breaking Bad*.
+Zweryfikujemy hipotezę o istotności trendu w ten sam sposób co dla serialu *Breaking Bad*.
 
-Przeprowadźmy te same obliczenia, a wyniki porównamy w ten sam sposób co porzednio.
+Przeprowadźmy te same obliczenia, a wyniki porównamy w ten sam sposób co poprzednio.
 
 ```{r, cache=TRUE}
 # trend dla serialu Friends
@@ -230,7 +230,7 @@ Mamy wyznaczony referencyjny wektor wzrostów `trendy`. Jak na jego tle wygląda
 
 # A co z Przyjaciółmi? Testowanie
 
-```{r, cache=TRUE, fig.width=6, fig.height=4}
+```{r, cache=TRUE, fig.width=8, fig.height=6}
 # wykres z wartościami referencyjnymi i wzrostem dla serialu Przyjaciele
 hist(trendy, 50, col="grey", main="", las=1, border="white")
 abline(v=modulFriends, col="red", lwd=5)
@@ -238,7 +238,7 @@ abline(v=modulFriends, col="red", lwd=5)
 
 # A co z Przyjaciółmi? P-wartość
 
-Już graficzna ocena sytuacji, pokazuje, że mamy do czynienia z inną sytuacją.Tym razem dosyć często się zdarza, żeby losowe permutacje wektora ocen owocowały większym współczynnikiem wzrostu niż ten, który obserwujemy dla serialu Przyjaciele.
+Już graficzna ocena sytuacji, pokazuje, że mamy do czynienia z inną sytuacją. Tym razem dosyć często się zdarza, żeby losowe permutacje wektora ocen owocowały większym współczynnikiem wzrostu niż ten, który obserwujemy dla serialu Przyjaciele.
 
 Jak opisać te różnice jedną liczbą?
 
@@ -260,11 +260,11 @@ Przyjmując za próg 0.05, p-wartość którą obserwujemy dla trendu dla sezonu
 
 Wyniki, które otrzymaliśmy dla serialu *Breaking Bad* są inne niż dla serialu *Friends*.
 
-W przypadku serialu *Breaking Bad* próbowaliśmy 99 999 razy losowo pomieszać dane by na pomieszanych zaobserować wzrost większy, niż w przypadku oryginalnej kolejności. To się nie udało, co przekonało nas, że obserwowany trend dla *Breaking Bad* jest *istotnie większy od przypadkowego (=0)*.
+W przypadku serialu *Breaking Bad* próbowaliśmy 99 999 razy losowo pomieszać dane by na pomieszanych zaobserwować wzrost większy, niż w przypadku oryginalnej kolejności. To się nie udało, co przekonało nas, że obserwowany trend dla *Breaking Bad* jest *istotnie większy od przypadkowego (=0)*.
 
-W przypadku serialy *Friends* próbowaliśmy tego samego. Z tą różnicą, że udawało się dosyć często w wyniku losowych permutacji uzyskać wartości większe, niż dla oryginalnej kolejności. 
+W przypadku serialu *Friends* próbowaliśmy tego samego. Z tą różnicą, że udawało się dosyć często w wyniku losowych permutacji uzyskać wartości większe, niż dla oryginalnej kolejności. 
 
-Statystykę, opisującą jaka część losowo wygenerowanych trendów jest większa, niż zaobserowowany trend, nazywamy p-wartością. Przyjeliśmy też, że jeżeli p-wartość będzie mała, np. mniejsza niż 0.05 (arbitralny wybór, ale się przyjeło) to uznamy, że trend jest istotny. 
+Statystykę, opisującą jaka część losowo wygenerowanych trendów jest większa, niż zaobserwowany trend, nazywamy p-wartością. Przyjęliśmy też, że jeżeli p-wartość będzie mała, np. mniejsza niż 0.05 (arbitralny wybór, ale się przyjęło) to uznamy, że trend jest istotny. 
 
 Tyle, że dla serialu *Friends* obserwowana p-wartość jest znacznie większa niż 0.05, przez co uznamy, że trend nie jest istotnie różny od przypadkowego (=0).
 
@@ -313,10 +313,9 @@ mean(trendy >= modulBreakingBad)
 
 # Zadania
 
-* Znajdź serial o istotnym ujemnem trendem, to znaczy takim, którego oceny maleją.
+* Znajdź serial o istotnym ujemnym trendem, to znaczy takim, którego oceny maleją.
 
 * Znajdź serial (inny niż _Breaking Bad_) o istotnie dodatnim trendzie. 
 
 * [Trudne] Policz dla ilu serialu ich oceny rosną a dla ilu maleją i te wzrosty lub spadki są istotnie większe niż wynikające z przypadku.
-
 
