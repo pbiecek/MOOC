@@ -171,6 +171,55 @@ pl +<span class="st"> </span><span class="kw">theme_economist</span>() +<span cl
 <span class="st">  </span><span class="kw">scale_color_gradient</span>(<span class="dt">high =</span> <span class="st">&quot;green3&quot;</span>, <span class="dt">low =</span> <span class="st">&quot;red3&quot;</span>) +
 <span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Zielone latające kwadraty&quot;</span>) +<span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Waga [kg]&quot;</span>) +<span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Prędkość [km/h]&quot;</span>)</code></pre>
 </div>
+<div id="zadanie-sezon-2-odcinek-12" class="slide section level1">
+<h1>Zadanie, sezon 2, odcinek 12</h1>
+<ul>
+<li><p>Wybierz serial <em>Friday Night Lights</em> zobacz jak wygląda popularność tego serialu. Czy jest bardziej popularny niż <em>Breaking Bad</em>?</p></li>
+<li><p>Zobacz jak popularność tego serialu zmieniała się w czasie. Czy zaobserwowałeś coś interesującego?</p></li>
+<li><p>Zamiast prezentować informacje o ocenach odcinków przedstaw informacje o liczbie oddanych głosów (popularności) odcinków. Czy te same statystyki nadają się równie dobrze do prezentacji informacji o ocenie i o liczbie głosów?</p></li>
+</ul>
+</div>
+<div id="odpowiedz-sezon-2-odcinek-12" class="slide section level1">
+<h1>Odpowiedź, sezon 2, odcinek 12</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Wybierz serial *Friday Night Lights* zobacz jak wygląda popularność tego serialu. </span>
+<span class="co"># Czy jest bardziej popularny niż *Breaking Bad*?</span>
+
+FNL &lt;-<span class="st"> </span><span class="kw">filter</span>(serialeIMDB, serial ==<span class="st"> &quot;Friday Night Lights&quot;</span>)
+<span class="kw">summary</span>(FNL$glosow)
+BB &lt;-<span class="st"> </span><span class="kw">filter</span>(serialeIMDB, serial ==<span class="st"> &quot;Breaking Bad&quot;</span>)
+<span class="kw">summary</span>(BB$glosow)
+
+<span class="co"># Zobacz jak popularność tego serialu zmieniała się w czasie. </span>
+<span class="co"># Czy zaobserwowałeś coś interesującego?</span>
+
+<span class="kw">plot</span>(FNL$glosow)</code></pre>
+</div>
+<div id="zadanie-sezon-2-odcinek-13" class="slide section level1">
+<h1>Zadanie, sezon 2, odcinek 13</h1>
+<ul>
+<li><p>Znajdź serial o najsilniej rosnącym trendzie dotyczącym ocen (ponieważ oceny są ograniczone z góry przez 10 to może nie być serial o najwyższej średniej ocenie)</p></li>
+<li><p>Znajdź serial o najsilniejszym trendzie spadkowym</p></li>
+</ul>
+</div>
+<div id="odpowiedz-sezon-2-odcinek-13" class="slide section level1">
+<h1>Odpowiedź, sezon 2, odcinek 13</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Znajdź serial o najsilniej rosnącym trendzie dotyczącym ocen </span>
+<span class="co"># (ponieważ oceny są ograniczone z góry przez 10 to może nie być serial o najwyższej średniej ocenie)</span>
+
+<span class="co"># Znajdź serial o najsilniejszym trendzie spadkowym</span>
+
+nazwy_seriali &lt;-<span class="st"> </span><span class="kw">levels</span>(serialeIMDB$serial)
+wspolczynnikTrendu &lt;-<span class="st"> </span><span class="kw">c</span>()
+
+for (ser in nazwy_seriali) {
+  jedenSerial &lt;-<span class="st"> </span>serialeIMDB %&gt;%
+<span class="st">    </span><span class="kw">filter</span>(serial ==<span class="st"> </span>ser) %&gt;%<span class="st"> </span>
+<span class="st">    </span><span class="kw">select</span>(id, ocena)
+  wspolczynnikTrendu[ser] &lt;-<span class="st"> </span><span class="kw">lm</span>(ocena~id, jedenSerial)$coef[<span class="dv">2</span>]
+}
+<span class="co"># na początku najsilniejsze spadki, na koniec wzrosty</span>
+<span class="kw">sort</span>(wspolczynnikTrendu)</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>

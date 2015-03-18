@@ -148,3 +148,77 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
   ggtitle("Zielone latające kwadraty") + xlab("Waga [kg]") + ylab("Prędkość [km/h]")
 ```
 
+# Zadanie, sezon 2, odcinek 12
+
+- Wybierz serial *Friday Night Lights* zobacz jak wygląda popularność tego serialu. Czy jest bardziej popularny niż *Breaking Bad*?
+
+- Zobacz jak popularność tego serialu zmieniała się w czasie. Czy zaobserwowałeś coś interesującego?
+
+- Zamiast prezentować informacje o ocenach odcinków przedstaw informacje o liczbie oddanych głosów (popularności) odcinków. Czy te same statystyki nadają się równie dobrze do prezentacji informacji o ocenie i o liczbie głosów?
+
+# Odpowiedź, sezon 2, odcinek 12
+
+```{r, message=FALSE, eval=FALSE}
+# Wybierz serial *Friday Night Lights* zobacz jak wygląda popularność tego serialu. 
+# Czy jest bardziej popularny niż *Breaking Bad*?
+
+FNL <- filter(serialeIMDB, serial == "Friday Night Lights")
+summary(FNL$glosow)
+BB <- filter(serialeIMDB, serial == "Breaking Bad")
+summary(BB$glosow)
+
+# Zobacz jak popularność tego serialu zmieniała się w czasie. 
+# Czy zaobserwowałeś coś interesującego?
+
+plot(FNL$glosow)
+```
+
+# Zadanie, sezon 2, odcinek 13
+
+* Znajdź serial o najsilniej rosnącym trendzie dotyczącym ocen (ponieważ oceny są ograniczone z góry przez 10 to może nie być serial o najwyższej średniej ocenie)
+
+* Znajdź serial o najsilniejszym trendzie spadkowym
+
+# Odpowiedź, sezon 2, odcinek 13
+
+```{r, message=FALSE, eval=FALSE}
+# Znajdź serial o najsilniej rosnącym trendzie dotyczącym ocen 
+# (ponieważ oceny są ograniczone z góry przez 10 to może nie być serial o najwyższej średniej ocenie)
+
+# Znajdź serial o najsilniejszym trendzie spadkowym
+
+nazwy_seriali <- levels(serialeIMDB$serial)
+wspolczynnikTrendu <- c()
+
+for (ser in nazwy_seriali) {
+  jedenSerial <- serialeIMDB %>%
+    filter(serial == ser) %>% 
+    select(id, ocena)
+  wspolczynnikTrendu[ser] <- lm(ocena~id, jedenSerial)$coef[2]
+}
+# na początku najsilniejsze spadki, na koniec wzrosty
+sort(wspolczynnikTrendu)
+
+```
+
+
+# Zadanie, sezon 2, odcinek 14
+
+* Znajdź serial o istotnym ujemnem trendem, to znaczy takim, którego oceny maleją.
+
+* Znajdź serial (inny niż _Breaking Bad_) o istotnie dodatnim trendzie. 
+
+* [Trudne] Policz dla ilu serialu ich oceny rosną a dla ilu maleją i te wzrosty lub spadki są istotnie większe niż wynikające z przypadku.
+
+# Odpowiedź, sezon 2, odcinek 14
+
+```{r, message=FALSE, eval=FALSE}
+# Znajdź serial o istotnym ujemnem trendzie, to znaczy takim, którego oceny maleją.
+
+# Znajdź serial (inny niż _Breaking Bad_) o istotnie dodatnim trendzie. 
+
+# Rozwiązanie: Jak w zadaniu 13, plus testowanie istotności dla skrajnych wartości
+# uwaga, może się długo liczyć!!!
+
+```
+
