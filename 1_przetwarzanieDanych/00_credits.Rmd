@@ -1,7 +1,7 @@
 ---
 title: "Zespół realizujący"
 author: "pogRomcy danych"
-date: "sezon 1 / odcinek 8 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 1 / odcinek 24 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -9,7 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / przetwarzanie / funkcje"
+    footer: "pogRomcy danych / przetwarzanie / twórcy"
 
 ---
 
@@ -17,16 +17,22 @@ output:
 
 * Przemysław Biecek, ICM
 
+*Dane wokół nas*
+
+* Piotr Przybyła
+* Bartosz Meglicki, 
+* zespół Na Straży Sondaży: Jakub Rutkowski, Zbigniew Marczewski, Przemysław Kopa
+ 
 *Wsparcie merytoryczne i językowe*
 
-  * Paweł Chudzian
-  * Katarzyna Łogwiniuk
-  * Krzysztof Trajkowski
+* Paweł Chudzian
+* Katarzyna Łogwiniuk
+* Krzysztof Trajkowski
 
 *Opracowanie wideo*
 
-* Jarosław Skrzeczkowski, TV.Platon
-* Łukasz Kałuża, TV.Platon
+* Jarosław Skrzeczkowski, ICM.TV
+* Łukasz Kałuża, ICM.TV
 
 *Strona graficzna*
 
@@ -42,7 +48,7 @@ output:
 
 *Wsparcie organizacyjne*
 
-* Michał Bojanowski
+* Michał Bojanowski, ICM
 
 *Opracowanie zadań*
 
@@ -50,3 +56,4 @@ output:
 
 *System weryfikacji zadań*
 
+* Cezary Chudzian
