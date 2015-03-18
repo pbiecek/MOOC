@@ -1,7 +1,7 @@
 ---
 title: "Testy równości średnich"
 author: "pogRomcy danych"
-date: "sezon 2 / odcinek 2<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 2 / odcinek 15<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -12,17 +12,17 @@ output:
     footer: "pogRomcy danych / modelowanie / testy średnich"
 ---
 
-# O czym jest ten odcinek
+# O czym jest ten odcinek?
 
 Analizując dane, często trafiamy na sytuację, gdy mamy do porównania dwie grupy pomiarów i jesteśmy ciekawi, czy te grupy różnią się między sobą.
 
-Analizując dane medyczne możemy mieć pacjentów biorących lek A i lek B i chcemy sprawdzić czy skuteczność obu leków jest porównywalna czy też jedne z nich jest częściej lepszy. Analizując uprawę zbóż możemy mieć dwie odmiany i chcemy sprawdzić czy jedna daje wyższe plony niż druga. Takie przykłady można mnożyć.
+W przypadku danych medycznych to mogą być pacjęci biorący lek A i lek B, a pytanie, które nas może nurtować to czy skuteczność obu leków jest porównywalna czy też jedne z nich jest istotnie lepszy. Analizując uprawę zbóż możemy mieć dwie odmiany i chcemy sprawdzić czy jedna daje wyższe plony niż druga. Podobne przykłady można mnożyć.
 
-Zazwyczaj gdy w jednej grupie policzymy średnią określonej cechy i w drugiej grupie policzymy średnią tej cechy to któraś z tych średnich jest większa. 
+Zazwyczaj gdy w jednej grupie policzymy średnią określonej cechy i w drugiej grupie policzymy średnią tej cechy, to któraś z tych średnich jest większa. Ale czy to istotna różnica?
 
-Jeżeli porównam średnie temperatury we Wrocławiu i średnie temperatury w Warszawie, to któraś z tych średnich będzie większa. Ale czy ta różnica wynika z losowych fluktuacji temperatury czy też jest odzwierciedleniem pewnej ogólnej prawidłowości, że w jednym z tych miast jest średnio cieplej?
+Przykłądowo, jeżeli porównam średnie temperatury we Wrocławiu i średnie temperatury w Warszawie, w okresie ostatnich 30 dni to średnia we Wrocławiu jest wyższa o około 0,5 stopnia Celcjusza. Ale czy ta różnica wynika z losowych fluktuacji temperatury czy też jest odzwierciedleniem pewnej ogólnej prawidłowości, że we Wrocławiu jest średnio cieplej?
 
-I tutaj pojawia się statystyka. Używając takich narzędzi jak testy dla dwóch prób możemy pomóc sobie w odpowiedzi na pytanie, czy obserwowane różnice są czysto przypadkowe, czy też nie.
+W odpowiedzi na podobnie sformułowane pytania pojawia się statystyka. Używając takich narzędzi jak testy dla dwóch prób możemy pomóc sobie w odpowiedzi na pytanie, czy obserwowane różnice są czysto przypadkowe, czy też nie.
 
 W tym odcinku, na przykładzie danych z serwisu IMDB (Internet Movie Database), pokażemy jak działa test permutacyjny, uniwersalne narzędzie do porównywania dwóch grup.
 
@@ -45,12 +45,16 @@ head(serialeIMDB)
 
 # Czy serial Friends jest lepszy niż serial Breaking Bed?
 
-Mając taki zbiór danych, możemy porównać oceny odcinków dwóch seriali. Wyciągnijmy z tego zbioru danych oceny dla serialu *Friends* i oceny dla serialu *Breaking Bad*
+Mając zbiór danych o serialach, możemy porównać oceny odcinków dwóch seriali. 
+
+Na początek wyciągnijmy ze zbioru danych o wszystkich serialach dwa podzbiory, osobno oceny dla serialu *Friends* i oceny dla serialu *Breaking Bad*
 
 ```{r}
+# oceny dla serialu Friends
 ocenyFriends     <- serialeIMDB[serialeIMDB$serial == "Friends", "ocena"]
 summary(ocenyFriends)
 
+# oceny dla serialu Breaking Bad
 ocenyBreakingBad <- serialeIMDB[serialeIMDB$serial == "Breaking Bad", "ocena"]
 summary(ocenyBreakingBad)
 ```
@@ -61,9 +65,13 @@ Czy to duża różnica czy mała?
 
 ---
 
-# Czy serial Friends jest lepszy niż serial Breaking Bed?
+# Graficzne zestawienie
+
+Pokażmy jak oceny dla obu seriali wyglądają gdy się je zestawi obok siebie na wspólnej osi.
 
 Po lewej *Breaking Bad* po prawej *Friends*. Każdy punkt to ocena jednego odcinka.
+
+Czy obserowana różnica jest duża, a czy jest istotna?
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
@@ -86,7 +94,7 @@ library(ggvis)
 ```
 
 
-# Czy serial Friends jest lepszy niż serial Breaking Bed?
+# Testowanie średnich - algorytm
 
 Statystycy opracowali wiele testów aby porównać wartości w dwóch grupach. W większości przypadków te testy dają zbliżone wyniki, więc zamiast przedstawiać ich leksykon wyjaśnimy na jednym przykładzie na czym polega testowanie. Przedstawimy tak zwany test permutacyjny do porównywania średnich.
 
@@ -94,7 +102,7 @@ Pomysł na porównanie dwóch grup składa się z trzech kroków. Przedstawmy je
 
 ### Krok 1: Postaw hipotezę, określ co chcesz porównać
 
-Będziemy testować hipotezę, czy wartości w jednym zbiorze są istotnie większe niż wartości w drugim zbiorze. 
+Będziemy testować hipotezę (=przypuszczenie), czy wartości w jednym zbiorze są istotnie większe niż wartości w drugim zbiorze. 
 
 Tę hipotezę, sformujmy w następujący sposób: *Czy obserwowana różnica pomiędzy średnimi ocenami jest wystarczająco duża, by uznać ją za istotną?*
 
@@ -109,11 +117,11 @@ mean(ocenyFriends)
 (obserwowana_roznica <- abs(mean(ocenyBreakingBad) - mean(ocenyFriends)))
 ```
 
-# Czy serial Friends jest lepszy niż serial Breaking Bed?
+# Testowanie średnich - algorytm
 
 ### Krok 3: Porównaj zaobserwowaną wielkość różnicy z różnicą w sytuacji gdyby grupy nie były różne
 
-Wciąż nie wiemy, czy `0.02628083` to duża różnica czy mała. Musimy ją z czymś porównać.
+Wciąż nie wiemy, czy `0.026` to duża różnica czy mała. Musimy ją z czymś porównać.
 Najlepiej by było porównać ją z wartościami, które byśmy obserwowali gdyby te dwie grupy się nie różniły. 
 
 Ale skąd wiadomo jakie byłyby różnice gdyby obie grupy się nie różniły? 
@@ -121,52 +129,73 @@ Możemy to oszacować w następujący sposób
 
 * [I] Wymieszamy losowo wartości w obu grupach zachowując liczebność grup. Dzięki temu otrzymamy dwie grupy o których wiemy, że się nie różnią istotnie a jedyne różnice wynikają z losowych fluktuacji,
 * [II] Policzymy jak duża jest różnica dla tych nowo wylosowanych grup,
-* [III] Powtórzymy kroki [I] i [II] wielokrotnie aby zobaczyć jak duże wartości może przyjmować ta różnica w sytuacji gdy obie grupy nie różnią się od siebie.
+* [III] Powtórzymy kroki [I] i [II] wielokrotnie (np. 99 999 razy) aby zobaczyć jak duże wartości może przyjmować ta różnica w sytuacji gdy obie grupy nie różnią się od siebie.
 
 To liczenie różnic na próbach różniących się jedynie losową fluktuacją jest realizowane przez poniższy kod.
 
 
 ```{r}
+# połączony wektor ocen z obu seriali
+ocenyRazem <- c(ocenyFriends, ocenyBreakingBad)
+# ile pierwszych ocen pochodzi z Friends
 liczbaFriends <- length(ocenyFriends)
-
-roznice <- replicate(100000, {
-  # wymeiszaj losowo wartości
-  wymieszane <- sample(c(ocenyFriends, ocenyBreakingBad))
-  # losowo dobrane repliki próby
+# wynikiem funkcji replicate będzie 99999 wartości, modułów różnic średnich po wymieszaniu obserwacji pomiędzy grupami
+roznice <- replicate(99999, {
+  # wymieszaj losowo wartości pomiędzy grupami
+  wymieszane <- sample(ocenyRazem)
+  # losowo dobrane próby, pierwsze 'liczbaFriends' wartości to grupa pierwsza, reszta to druga
   oceny1 <- wymieszane[1:liczbaFriends]
   oceny2 <- wymieszane[-(1:liczbaFriends)]
   # różnica pomiedzy losowymi grupami
   abs(mean(oceny1) - mean(oceny2))
 })
+# jedną z permutacji jest brak permutacji, dodajemy więc obserwowaną różnicę
+roznice <- c(roznice, obserwowana_roznica)
+# wyświetl 20 różnic zaobserowanych w przypadku losowego podziału na grupy
+head(roznice,20)
 ```
 
 # Czy serial Friends jest lepszy niż serial Breaking Bed?
 
 Możemy teraz wartość `obserwowana_roznica` porównać z wektorem wartości `roznice`. 
-Wektor różnice opisuje jakich różnic spodziewać się możemy gdy próby różnią się wyłącznie losową fluktuacja. Gdyby `obserwowana_roznica` była znacząco większa niż wartości z wektora różnice, to byłby to silny argument za tym, że różnica w średnich nie jest przypadkowa.
+
+Wektor `roznice` opisuje jakich różnic spodziewać się możemy, gdy próby różnią się wyłącznie losowymi fluktuacjami. Gdyby `obserwowana_roznica` była znacząco większa niż wartości z wektora różnice, to byłby to silny argument za tym, że różnica w średnich nie jest przypadkowa.
 
 Porównajmy na wykresie wielkości różnic dla losowych fluktuacji (na szaro) z obserwowaną różnicą (na czerwono).
 
 ```{r}
+# wektor referencyjnych różnic po losowym podziale na grupy
 hist(roznice, 50, col="grey", main="", las=1, border="white")
+# obserowana różnica w średnich pomiędzy Friends a Breaking Bad
 abline(v=obserwowana_roznica, col="red", lwd=5)
 ```
 
-# Czy serial Friends jest lepszy niż serial Breaking Bed?
+# Czy serial Friends jest lepszy niż serial Breaking Bed? - p-wartość
 
-Wykres pomaga w zrozumieniu tego rozkładu, ale aby podjąć decyzje lepiej mieć jedną liczbę. Policzmy jaka część różnic dla losowych fluktuacji jest większa niż obserwowana różnica.
+Wykres pomaga w zrozumieniu na ile obserowana różnica średnich różni się od tych, wygenerowanych przez losowe fluktuacje.
+
+Ale aby podjąć decyzje lepiej mieć jedną liczbę. Policzmy jaka część różnic dla losowych fluktuacji jest większa lub równa niż obserwowana różnica. Taka częstość jest nazywana p-wartością.
 
 ```{r}
-mean(roznice > obserwowana_roznica) + 1/100000
+# p-wartość
+mean(roznice >= obserwowana_roznica) 
 ```
 
-Czy wiedząc, że gdy próby są równe to w wyniku losowych fluktuacji w 64\% przypadków obserwuje się większą różnicę niż ta pomiędzy *Friends* a *Breaking Bad* uznamy różnicę pomiędzy tymi dwoma serialami za istotną?
+Gdy próby są losowo wymieszane, a więc ich średnie, teoretycznie są równe.
+Czy wiedząc, że w wyniku losowych przypisać aż w 64\% przypadków obserwuje się większą różnicę niż ta pomiędzy *Friends* a *Breaking Bad*, czy uznamy różnicę pomiędzy tymi dwoma serialami za istotną?
 
-Pewnie nie. To jaki próg przyjmiemy zależy od konkretnego zastosowania, ale często za próg wybiera się 0.05.
+Pewnie nie. To jaki próg przyjmiemy zależy od konkretnego zastosowania, ale często za próg wybiera się 0.05. Z powodów historycznych.
+
+W każdym razie, jeżeli otrzymana p-wartość jest mniejsza niż 0.05, to przyjmiemy, że obserowana wartość jest istotnie różna od przypadkowej (=0). Jeżeli otrzymana p-wartość jest większa równa 0.05 to przyjmiemy, że nie ma istotnych statystycznie różnic.
+
+W przypadku part Friends i Breaking Bad, ta różnica była niewielka i nie istotna.
+
 
 # Czy serial Friends jest lepszy niż serial Sherlock?
 
-Porównajmy dwa inne seriale. Po lewej prezentujemy serial Sherlock po prawej Friends.
+Porównajmy teraz dwa inne seriale. 
+
+Zacznijmy od wykresu, po lewej prezentujemy serial Sherlock po prawej Friends.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 tmp <- serialeIMDB[serialeIMDB$serial %in% c("Friends", "Sherlock"), ]
@@ -194,23 +223,46 @@ Różnica średnich pomiędzy tymi dwoma serialami wynosi 0.48. Wygląda na duż
 ocenyFriends     <- serialeIMDB[serialeIMDB$serial == "Friends", "ocena"]
 ocenySherlock    <- serialeIMDB[serialeIMDB$serial == "Sherlock", "ocena"]
 # moduł różnicy średnich
-(obserwowana_roznica <- abs(mean(ocenyBreakingBad) - mean(ocenySherlock)))
+(obserwowana_roznica <- abs(mean(ocenyFriends) - mean(ocenySherlock)))
 ```
 
 Powtórzmy test permutacyjny dla tych dwóch seriali. Tym razem obserwowana różnica jest wyższa niż praktycznie wszystkie wartości wygenerowane przez test permutacyjny.
 
 ```{r}
+# połączony wektor ocen z obu seriali
+ocenyRazem <- c(ocenyFriends, ocenySherlock)
+# ile pierwszych ocen pochodzi z Friends
+liczbaFriends <- length(ocenyFriends)
 # permutacyjny test
 liczbaFriends <- length(ocenyFriends)
-roznice <- replicate(100000, {
-  wymieszane <- sample(c(ocenyFriends, ocenySherlock))
+roznice <- replicate(99999, {
+  wymieszane <- sample(ocenyRazem)
   oceny1 <- wymieszane[1:liczbaFriends]
   oceny2 <- wymieszane[-(1:liczbaFriends)]
   # różnica pomiedzy losowymi grupami
   abs(mean(oceny1) - mean(oceny2))
 })
-# istotność różnic
-mean(roznice > obserwowana_roznica) + 1/100000
+# dodajemy obserowaną różnicę
+roznice <- c(roznice, obserwowana_roznica)
+```
+
+# Czy serial Friends jest lepszy niż serial Sherlock? - p-wartość
+
+Policzywszy różnice dla losowych fluktuacji, możemy zestawić je graficznie z różnicą średnich dla Sherlocka i Friends. 
+
+Tym razem p-wartość jest bardzo mała, obserwowana różnica średnich pomiędzy serialami jest znacznie większa niż te, które widać dla losowego podziału na grupy.
+
+Uznamy więc, że Sherlock ma istotnie wyższą średnią ocen niż Friends.
+
+```{r}
+# p-wartość dla różnicy średnich
+mean(roznice >= obserwowana_roznica)
+```
+```{r}
+# wektor referencyjnych różnic po losowym podziale na grupy
+hist(roznice, 50, col="grey", main="", las=1, border="white", xlim=c(0,0.5))
+# obserwowana różnica w średnich pomiędzy Friends a Sherlock
+abline(v=obserwowana_roznica, col="red", lwd=5)
 ```
 
 ---
