@@ -1,7 +1,7 @@
 ---
-title: "Zależność pomiędzy dwoma zmiennymi jakościowymi"
+title: "Zależność pomiędzy dwiema zmiennymi jakościowymi"
 author: "pogRomcy danych"
-date: "sezon 3 / odcinek 3<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 2 / odcinek 19<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -9,7 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / pierwsze kroki / testy kxp"
+    footer: "pogRomcy danych / modelowanie / testy kxp"
 ---
 
 # O czym jest ten odcinek
@@ -62,7 +62,7 @@ Ale czy są różnice pomiędzy grupami wykształcenia są duże?
 
 # Jak wygląda tabela kontyngencji dla wieku
 
-Zobaczmy jak wygląda zależość pomiędzy wiekiem a odpowiedziami na pytanie o sens w życiu.
+Zobaczmy jak wygląda zależność pomiędzy wiekiem a odpowiedziami na pytanie o sens w życiu.
 
 Wiek jest zmienną ciągłą, zamienimy więc ją na zmienną jakościową o czterech poziomach.
 Aby zdyskretyzować zmienną ciągłą na dyskretną wykorzystamy funkcję `cut()` w której za granice przedziałów wiekowych wybierzemy 0, 25, 40, 60 i 110 lat.
@@ -72,50 +72,18 @@ diagnoza$wiek2013_4g <- cut(diagnoza$wiek2013, c(0, 25, 40, 60, 110))
 table(diagnoza$wiek2013_4g)
 ```
 
-Przedstawmy teraz jak wygląda zależność pomiędzy wiekiem a odpowiedziami na pytani o to co jest ważneijsze w życiu?
+Przedstawmy teraz jak wygląda zależność pomiędzy wiekiem a odpowiedziami na pytani o to co jest ważniejsze w życiu?
 
 ```{r}
-(wiekTab <- table(diagnoza$wiek2013_4g, diagnoza$gp29))
-```
-
-# Więcek kolumn / wierszy
-
-Strona 25 z http://diagnoza.com/pliki/kwestionariusze_instrukcje/kwestionariusze_2013.pdf
-Pytanie 54
-
-```{r, warning=FALSE, message=FALSE}
-table(diagnoza$gp54_13, diagnoza$wiek2013_4)
-
-mosaicplot(t(table(diagnoza$gp54_13, diagnoza$wiek2013_4)), las=2,
-           col=c("red4","red1","pink","grey80","lightgreen","green1","green4"),
-           main="Niektórzy są więcej warci od innych")
-
-mosaicplot(t(table(diagnoza$gp54_13, droplevels(diagnoza$eduk4_2013))), las=2,
-           col=c("red4","red1","pink","grey80","lightgreen","green1","green4"),
-           main="Niektórzy są więcej warci od innych")
-
-
-mosaicplot(t(table(diagnoza$gp54_01, diagnoza$wiek2013_4)), las=2,
-           col=c("red4","red1","pink","grey80","lightgreen","green1","green4"),
-           main="Podziwiam ludzi, którzy mają drogie domy, samochody i ubrania")
-
-mosaicplot(t(table(diagnoza$gp54_04, diagnoza$wiek2013_4)), las=2,
-           col=c("red4","red1","pink","grey80","lightgreen","green1","green4"),
-           main="Miarą sukcesu jest sta posiadania dóbr maeterialnych")
-
-mosaicplot(t(table(diagnoza$gp54_19, diagnoza$wiek2013_4)), las=2,
-           col=c("red4","red1","pink","grey80","lightgreen","green1","green4"),
-           main="Bez kar fizycznych nie da się dobrze wychować dzieci")
-
-mosaicplot(t(table(diagnoza$gp54_17, diagnoza$wiek2013_4)), las=2,
-           col=c("red4","red1","pink","grey80","lightgreen","green1","green4"),
-           main="Niektóre grupy ludzi nie zasługują na szacunek")
-
+wiekTab <- table(diagnoza$wiek2013_4g, diagnoza$gp29)
+wiekTab
 ```
 
 # Proporcje
 
 Używając funkcji `prop.table()` można wyznaczyć frakcje w wierszach lub kolumnach.
+
+Zobaczmy jak wyglądają proporcje odpowiedzi na pytanie o poczucie sensu w różnych grupach edukacji i wieku.
 
 ```{r}
 prop.table(edukacjaTab, 1)
@@ -124,23 +92,70 @@ prop.table(wiekTab, 1)
 
 # Wykresy mozaikowe
 
+Tabele częstości można przedstawić graficznie.
+
+Często wykorzystuje się do tego wykres mozaikowy. Pola kwadratów oznaczają liczbę odpowiedzi w tej kombinacji cech. Względne wysokości słupków odpowiadają względnym proporcjom w grupach określonych przez kolumny.
+
 ```{r, warning=FALSE, message=FALSE}
 mosaicplot(edukacjaTab, las=2, main="Edukacja vs. co jest ważne w życiu")
 mosaicplot(wiekTab, las=2, main="Wiek vs. co jest ważne w życiu")
 ```
 
-# O czym jest ten odcinek
+# Więcej kolumn / wierszy
 
-Zależność w diagnozie pomiędzy co jest wazne a grupa wiekowa
+A teraz wykonajmy modelowanie dla innej zmiennej. Np. zobaczmy na ile identyfikacja z pytanie, *Podziwiam ludzi, którzy mają drogie domy, samochody i ubrania* koreluje z wiekiem (więcej informacji o pytaniach znaleźć można w kwestionariuszu kwestionariusza http://diagnoza.com/pliki/kwestionariusze_instrukcje/kwestionariusze_2013.pdf).
 
-```{r, eval=FALSE}
-table(TCGA_BRCA$czy.zyje,
-      TCGA_BRCA$TP53)
-prop.table(table(TCGA_BRCA$czy.zyje,
-      TCGA_BRCA$TP53), 2)
-# brak przerzutow dobrze rokuje
-fisher.test(table(TCGA_BRCA$czy.zyje,
-      TCGA_BRCA$TP53))
+Pytanie dotyczy odpowiedzi na pytanie *Niektórzy są więcej warci od innych*
+
+```{r, warning=FALSE, message=FALSE, fig.width=7, fig.height=5}
+wiekPodziwiam <- table(diagnoza$gp54_13, diagnoza$wiek2013_4)
+wiekPodziwiam
+
+# zależnosć przedstawiona graficznie
+mosaicplot(t(wiekPodziwiam), las=2,
+           col=c("red4","red1","pink","grey80","lightgreen","green1","green4"),
+           main="Podziwiam ludzi, którzy mają drogie domy, samochody i ubrania")
 ```
+
+# Czy jest zależność?
+
+Aby sprawdzić, czy pomiędzy parą zmiennych jakościowych jest zależność, można wykonać test $\chi^2$.
+
+Sprawdza on na ile obserwowana tabela częstości jest daleka od takiej, którą byśmy obserwowali, gdyby zmienne nie były zależne.
+
+Test $\chi^2$ wykonuje się funkcją `chisq.test()`. Wynikiem jest p-wartość dla hiptoezy o niezależności. Małe p-wartości (zwyczajowo poniżej 0.05) interpretuje się jako przesłanki o zależności pomiędzy zmiennymi.
+
+```{r, warning=FALSE, message=FALSE, fig.width=7, fig.height=5}
+wiekPodziwiam <- table(diagnoza$gp54_13, diagnoza$wiek2013_4)
+chisq.test(wiekPodziwiam)
+```
+
+# Czy jest zależność?
+
+Z wyniku funkcji `chisq.test()` można też odczytać, jak wyglądają obie porównywane tabele.
+
+W polu `observed` znajduje się tabela częstości obserwowana w danych.
+
+```{r, warning=FALSE, message=FALSE, fig.width=7, fig.height=5}
+chisq.test(wiekPodziwiam)$observed
+```
+
+A w polu `$expected` znajduje się tabela częstości oczekiwanych, gdyby nie było żadnej zależności.
+
+```{r, warning=FALSE, message=FALSE, fig.width=7, fig.height=5}
+chisq.test(wiekPodziwiam)$expected
+```
+
+Jeżeli te tabele są daleko od siebie, to jest to przesłanka, że zmienne są zależne (=nie są niezależne).
+
+# Zadanie
+
+W zbiorze danych `TCGA_BRCA` zbadaj czy jest i jaka jest zależność pomiędzy 
+
++ przeżyciami (kolumna `czy.zyje` a mutacjami `TP53`),
++ płcią a mutacjami `TP53`,
++ płcią a zmienną `czy.zyje`.
+
+Zależność przedstaw za pomocą tabeli z liczebnościami oraz częstościami.
 
 

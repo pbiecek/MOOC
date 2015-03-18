@@ -69,7 +69,7 @@ Sezon 2: Wizualizacja i modelowanie danych
 
 + Podstawy modelowania statystycznego
   *  Wprowadzenie
-    + odcinek 11: Spis treści i lista kluczowych pojęć - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/01_intro.html)
+    + odcinek 11: Spis treści i lista kluczowych pojęć - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/01_intro.html),  v1 ready
     + odcinek 12: Eksploracja danych - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/05_exploracjaIMDB.html),  v1 ready
   *  Modelowanie danych ilościowych
     + odcinek 13: Zmienne ilościowe - analiza trendu - [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/06_testRegresja.html),  v1 ready

@@ -336,6 +336,27 @@ marki &lt;-<span class="st"> </span><span class="kw">names</span>(<span class="k
   <span class="kw">round</span>(<span class="dv">100</span>*procent,<span class="dv">1</span>)
 } )</code></pre>
 </div>
+<div id="zadania-sezon-2-odcinek-18" class="slide section level1">
+<h1>Zadania, sezon 2, odcinek 18</h1>
+<ul>
+<li><p>W zbiorze danych <code>diagnoza</code> wiek respondenta jest w zmiennej o nazwie <code>wiek2013</code>. Wyznacz zależność pomiędzy wiekiem podzielonym na dwie grupy, poniżej i powyżej 30 roku życia, a odpowiedziami na pytanie o to co w życiu ważne.</p></li>
+<li><p>W zbiorze danych <code>TCGA_BRCA</code> w drugiej kolumnie jest płeć pacjenta. Wyznacz zależność pomiędzy zmiennymi <code>plec</code> a <code>czy.zyje</code>. Przetestuj tą zależność testem Fishera.</p></li>
+</ul>
+<p>W zbiorze danych <code>TCGA_BRCA</code> zbadaj czy jest i jaka jest zależność pomiędzy</p>
+<ul>
+<li>przeżyciami (kolumna <code>czy.zyje</code> a mutacjami <code>TP53</code>),</li>
+<li>płcią a mutacjami <code>TP53</code>,</li>
+<li>płcią a zmienną <code>czy.zyje</code>.</li>
+</ul>
+<p>Zależność przedstaw za pomocą tabeli z liczebnościami oraz częstościami.</p>
+</div>
+<div id="zadania-sezon-2-odcinek-19" class="slide section level1">
+<h1>Zadania, sezon 2, odcinek 19</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(TCGA_BRCA$czy.zyje,
+      TCGA_BRCA$TP53)
+<span class="kw">prop.table</span>(<span class="kw">table</span>(TCGA_BRCA$czy.zyje,
+      TCGA_BRCA$TP53), <span class="dv">2</span>)</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>

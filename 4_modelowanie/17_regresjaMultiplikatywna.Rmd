@@ -32,7 +32,7 @@ W tej części będziemy bazować na przykładach dotyczących cen samochodów. 
 
 W pakiecie `PogromcyDanych` dostępny jest zbiór danych `auta2012`, na którym już pracowaliśmy w pierwszym sezonie. Znajdują się w nim oferty sprzedaży aut bardzo różnych marek. 
 
-W tym odcinku podejmiemy się analizy statystycznej tego zbioru danych. Ale analizowanie wszystkich ofert w w jednym worku nie ma sensu. 
+W tym odcinku podejmiemy się analizy statystycznej tego zbioru danych. Ale analizowanie wszystkich ofert w jednym worku nie ma sensu. 
 Dlatego dalsze analizy przeprowadzimy wyłącznie na podzbiorze danych dotyczącym marki Volkswagen.
 
 Dlaczego tej? Jest ona najpopularniejsza w zebranych ogłoszeniach, jest dla niej najwięcej obserwacji. Co nie bez znaczenia wyniki wychodzą ciekawe.
@@ -136,7 +136,7 @@ Na rysunku, po zlogarytmowaniu danych, ta zależność wygląda na idealnie lini
 
 # Logarytmiczna / multiplikatywna w R
 
-Zbudowac taki model multiplikatywny z użyciem funkcji `lm()` należy wpierw musimy policzyć logarytm ceny.
+Zbudować taki model multiplikatywny z użyciem funkcji `lm()` należy wpierw musimy policzyć logarytm ceny.
 
 ```{r, warning=FALSE}
 # dodajemy nową kolumnę logCena.w.PLN
@@ -153,7 +153,7 @@ Jeżeli przejść teraz ze skali logarytmicznej (logarytm dziesiętny) na orygin
 to okaże się, że średnia cena wyjściowa to $10^```r wsp[1]``` = ```r 10^wsp[1]```$.
 
 Drugi współczynnik wynosi ```r wsp[2]```, co oznacza, że cena w kolejnym roku to ```r 10^wsp[2]``` ceny z poprzedniego roku, 
-czyli przecietnie, corocznie auto traci 15% swojej ceny.
+czyli przeciętnie, corocznie auto traci 15% swojej ceny.
 
 # Zależność kawałkami liniowa
 
@@ -166,14 +166,14 @@ Zanim będziemy kontynuować jakiekolwiek modelowanie musimy wpierw przyjrzeć s
 W modelowaniu obowiązuje żelazna zasada _śmieci na wejściu — śmieci na wyjściu_ (ang. garbage in, garbage out). 
 Bez względu na to jakie metody będziemy wykorzystywać, jeżeli w danych są błędy to nasze modelowanie prowadzić może do bezsensownych wniosków.
 
-Zobaczmy jak wygląda przegieg i wiek aut.
+Zobaczmy jak wygląda przebieg i wiek aut.
 
 ```{r, warning=FALSE, fig.width=6, fig.height=5}
 ggplot(mlodeVolkswageny, aes(y=Przebieg.w.km, x = Wiek)) + 
   geom_point()
 ```
 
-Przyglądając się dokłądniej, okazuje się, że są wśród naszych ofert auta o absurdalnym przebiegu ponad 15 milionów kilometrów. To ewidentny błąd. 
+Przyglądając się dokładniej, okazuje się, że są wśród naszych ofert auta o absurdalnym przebiegu ponad 15 milionów kilometrów. To ewidentny błąd. 
 
 Usuńmy wszystkie wiersze , których przebieg przekracza czterysta tysięcy kilometrów.
 
@@ -187,7 +187,7 @@ mlodeVolkswageny <-   auta2012 %>%
 
 # Zależność kawałkami liniowa
 
-Po oczyszczeniu danych narsujmy zależność pomiędzy przebiegiem a wiekiem raz jeszcze.
+Po oczyszczeniu danych narysujmy zależność pomiędzy przebiegiem a wiekiem raz jeszcze.
 
 Kolorem czerwonym zaznaczamy linię trendu regresji prostej, kolorem niebieskim zaznaczamy wygładzoną średnią w latach.
 
@@ -211,7 +211,7 @@ ggplot(mlodeVolkswageny, aes(y=Przebieg.w.km, x = Wiek)) +
 
 Przez pierwsze pięć lat auta gwałtownie przybierają na liczniku, a po piątym roku to tempo znacząco spada.
 
-Czy volkswagenami starszymi niż 5 lat mniej się jeździ? Jest to jakieś wytłumaczenie, ale inne, badziej prawdopodobne, jest takie że starsze auta rzadziej są serwisowane, a przez to ich przebiegi często są wartościami deklarowanymi.
+Czy volkswagenami starszymi niż 5 lat mniej się jeździ? Jest to jakieś wytłumaczenie, ale inne, bardziej prawdopodobne, jest takie że starsze auta rzadziej są serwisowane, a przez to ich przebiegi często są wartościami deklarowanymi.
 
 # Zależność kawałkami liniowa
 
@@ -294,4 +294,5 @@ ggplot(mlodeVolkswageny, aes(y=Przebieg.w.km, x = Wiek)) +
 + Jeżeli model multiplikatywny wygląda na uzasadniony, policz ile procent corocznie traci na cenie auto danej marki.
 + Zobacz jak wygląda zależność pomiędzy ceną a wiekiem dla innych marek. Dziesięć najczęstszych marek w tym zbiorze danych to ```r paste(collapse=", ", names(head(rev(sort(table(auta2012$Marka))),10)))```
 + Wykonaj modelowanie z użyciem łamanej regresji dla innych marek.
+
 
