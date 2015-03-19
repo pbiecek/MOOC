@@ -49,8 +49,9 @@ wcount: $(files:.Rmd=.txt)
 lcount: $(files:.Rmd=.txt)
 	wc -l $(files:.Rmd=.txt) > $@
 
+
 stats.txt: wcount lcount
-	Rscript -e 'wcount <- read.table("wcount"); lcount <- read.table("lcount"); rval <- data.frame(wcount=wcount[[1]]-lcount[[1]], fname=wcount[[2]]); rval$$strony <- rval$$wcount / 1500; rval$$stronycum <- cumsum(rval$$strony); gdata::write.fwf(rval, file="$@")'
+	Rscript -e 'wcount <- read.table("wcount"); lcount <- read.table("lcount"); rval <- data.frame(wcount=wcount[[1]]-lcount[[1]], fname=wcount[[2]]); rval$$strony <- rval$$wcount / 1500; rval$$znakicum <- cumsum(rval$$wcount); rval$$stronycum <- cumsum(rval$$strony); gdata::write.fwf(rval, file="$@")'
 
 slajdy-pl.zip: $(files:.Rmd=.html)
 	zip $@ $^
