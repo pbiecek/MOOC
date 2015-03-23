@@ -16,9 +16,9 @@ output:
 # O czym jest ten odcinek
 
 Silną stroną komputerów jest to, że mogą bardzo szybko powtarzać określone operacje.
-Nie są zbyt inteligentne (póki co), ale są bardzo szybie i idealne do powtarzania, powtarzania, powtarzania, powtarzania...
+Nie są zbyt inteligentne (póki co), ale są bardzo szybkie i idealne do powtarzania, powtarzania, powtarzania, powtarzania...
 
-Analizując dane bardzo często znajdziemy się w sytuacji, gdy określoną czynność będziemy chcieli powtórzyć. Wykonać ją dla każdej zmiennej, dla każdego analizowanego dnia, dla każdego analizowanego zbioru danych.
+Analizując dane bardzo często znajdziemy się w sytuacji, gdy określoną czynność będziemy chcieli powtórzyć. Wykonać ją dla każdej zmiennej, dla każdego analizowanego okresu czasu, dla każdego analizowanego zbioru danych.
 
 Narzędziem pozwalającym na powtarzanie w kółko (w pętli) określonych operacji są właśnie... pętle.
 
@@ -68,7 +68,7 @@ Co jednak, gdybyśmy chcieli powtórzyć ją 10 000 razy? Z pewnością nikt z n
 
 # Pętle
 
-Sposób użycia (tak zwana *składnia*) pętli `for` jest następujący:
+Sposób użycia (tak zwana *składnia*) pętli `for` jest następująca:
 
 ```{r, eval=FALSE}
 for (A in B) {
