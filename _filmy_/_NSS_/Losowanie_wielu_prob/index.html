@@ -1,0 +1,45 @@
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="generator" content="R package animation 2.3">
+	<title>Symulacja zwiekszania wielkoœci próby</title>
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/styles.css" />
+	<link rel="stylesheet" href="css/scianimator.css" />
+  <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/github.min.css">
+
+	<script src="js/jquery-1.4.4.min.js"></script>
+	<script src="js/jquery.scianimator.min.js"></script>
+  <script type="text/javascript" src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+  <script type="text/javascript" src="http://yandex.st/highlightjs/7.3/languages/r.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+<body>
+
+	<div class="scianimator"><div id="Losowanie_wielu_prob" style="display: inline-block;"></div></div>
+	<div class="scianimator" style="width: 480px; text-align: left"><pre><code class="r">## Symulowanie zwiêkszania prób
+library(RCurl)
+library(bitops)
+library(XML)
+library(knitr)
+library(ggplot2)
+library(animation)
+ani.options(interval = 0.05, nmax = 18)
+par(mar = c(3, 3, 2, 0.5), mgp = c(2, 0.5, 0), tcl = -0.3, 
+    cex.axis = 0.8, cex.lab = 0.8, cex.main = 1)
+for (i in 1:ani.options("nmax")) {
+    hist(proba[[i]], xlim = c(0, 1), ylim = c(0, 500), xlab = paste("Wielkoœæ próby:", 
+        c(i + 1), sep = " "), col = "black")
+    abline(v = 7/20, col = "red")
+    ani.pause(1)
+}
+## R version 3.1.1 (2014-07-10)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Other packages: RCurl 1.95-4.5, bitops 1.0-6, XML 3.98-1.1, knitr 1.6, ggplot2 1.0.0, animation
+## 2.3</code></pre></div>
+	<script src="js/Losowanie_wielu_prob.js"></script>
+<!-- highlight R code -->
+
+</body>
+</html>
