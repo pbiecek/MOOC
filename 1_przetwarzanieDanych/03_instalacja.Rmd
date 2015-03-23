@@ -20,7 +20,7 @@ W tym odcinku pokażemy:
 
 - Jak zainstalować program R?
 - Jak zainstalować program RStudio?
-- Jak zainstalować dodatkowe biblioteki / pakiety do programy R?
+- Jak zainstalować dodatkowe biblioteki / pakiety do programu R?
 
 Do instalacji tych elementów potrzebny jest dostęp do Internetu.
 
@@ -62,7 +62,7 @@ http://www.rstudio.com/products/rstudio/download/.
 
 Nie musimy pamiętać tego adresu, wystarczy wpisać w Google ‘R Studio download’ a powyższy adres będzie pierwszym linkiem.
 
-RStudio jest komercyjnym produktem rozwijanym przez firmę RStudio. Ten program jest dostępny bezpłatnie do większości zastosowań na licencji AGPL 3. Odpłatnie, można również korzystać z tego programu na licencjach komercyjnych.
+RStudio jest komercyjnym produktem rozwijanym przez firmę RStudio. Ten program jest dostępny bezpłatnie do większości zastosowań na licencji AGPL 3. Jego bardziej rozbudowana wersja, z dodatkowymi możliwościami jest dostępna odpłatnie.
 
 ![Instalacja RStudio](figs/installRStudio.png)
 
@@ -75,7 +75,7 @@ Instalacja sprawdza się do klikania *dalej, dalej*. Po zainstalowaniu należy u
 * Przy domyślnych ustawieniach, w programie RStudio wyświetlane są cztery panele. Lewy górny róg to miejsce w którym pisze się instrukcje. Te instrukcje można zaznaczyć i wysłać do wykonania poleceniem CTRL+Enter. 
 * Lewy dolny panel to konsola programu R, tutaj wyświetlane są instrukcje wprowadzone do R oraz ich wyniki.
 * Prawy dolny panel przedstawia wykresy wyprodukowane przez instrukcje w R. W tym panelu jest też wyświetlana pomoc dla funkcji.
-* Prawy górny panel pokazuje jakie obiekty znajdują się obecnie w pamięci R oraz jak są one duże.  Klikając na wybrane obiekty możemy podejrzeć ich zawartość. Każdy wiersz to obiekt. Ale po pierwszym uruchomieniu to okno będzie puste, nic jeszcze nie wczytaliśmy do pamięci.
+* Prawy górny panel pokazuje jakie obiekty znajdują się obecnie w pamięci R oraz jak są one duże.  Klikając na wybrane obiekty możemy podejrzeć ich zawartość. Każdy wiersz to obiekt. Ale po pierwszym uruchomieniu to okno będzie puste, ponieważ nic jeszcze nie wczytaliśmy do pamięci.
 
 
 ![RStudio](figs/RStudio.png)
@@ -101,7 +101,7 @@ library(PogromcyDanych)
 
 Pobierze i zainstaluje ono z Internetu wszelkie niezbędne pakiety i zbiory danych z których będziemy korzystać w tym kursie.
 
-*Uwaga* O ile polecenie `install.packages()` instaluje na komputerze odpowiedni pakiet. Przed jego użyciem za każdym razem powinniśmy pakiet włączyć poleceniem `library()`.
+*Uwaga* O ile polecenie `install.packages()` instaluje na komputerze odpowiedni pakiet, to przed jego użyciem za każdym razem powinniśmy pakiet włączyć poleceniem `library()`.
 
 ![Pakiety](figs/install_packages.png)
 
