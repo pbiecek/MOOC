@@ -14,13 +14,17 @@ output:
 
 # Wprowadzenie
 
-Zespół Na Straży Sondaży przygotował dla PogRomców Danych materiały pomocnicze do odcinka dotyczącego badań sondażowych. Dowiecie się z nich, jak przygotowuje się kwestionariusze, czym różni się sondaż telefoniczny od bezpośredniego, na czym polega dobór losowy próby, jak za jego pomocą przeprowadzić prawidłowe wnioskowanie o populacji, a także jakimi błędami mogą być obarczone badania sondażowe. Mamy nadzieję, że dzięki naszym materiałom przekonacie się, że prawdziwe sondaże to nie wróżenie z fusów, lecz rzetelna analiza danych uzyskanych przy pomocy metody reprezentacyjnej.
+Zespół Na Straży Sondaży przygotował dla PogRomców Danych materiały pomocnicze do odcinka dotyczącego badań sondażowych. 
+
+Dowiecie się z nich, jak przygotowuje się kwestionariusze, czym różni się sondaż telefoniczny od bezpośredniego, na czym polega dobór losowy próby, jak za jego pomocą przeprowadzić prawidłowe wnioskowanie o populacji, a także jakimi błędami mogą być obarczone badania sondażowe. 
+
+Mamy nadzieję, że dzięki naszym materiałom przekonacie się, że prawdziwe sondaże to nie wróżenie z fusów, lecz rzetelna analiza danych uzyskanych przy pomocy metody reprezentacyjnej.
 
 # 1. Wstęp
 Z badań przeprowadzonych przez zespół Na Straży Sondaży w 2014 r. wynika, że 95%
 Polaków nie wie jak powstają sondaże!
 
-```{r 1_wykres_slupkowy, echo=FALSE, fig.align='center', fig.height=8, fig.width=10}
+```{r 1_wykres_slupkowy, echo=FALSE, fig.align='center', fig.height=5, fig.width=7}
 options(OutDec= ",", scipen=10); # scipen - zapis naukowy liczb
 library(ggplot2)
 
@@ -44,9 +48,10 @@ box( col = "grey90")
 ```
 
 Jak interpretować ten wynik? Co on oznacza? Odpowiedź jest prosta. Praktycznie nic, bo ta informacja nie ma żadnej wartości. Dlaczego? Nie tylko dlatego, że jest zmyślona. Podstawowy problem stanowi brak jakiejkolwiek noty metodologicznej: nie powiedziałem dokładnie kiedy zorganizowano badanie, jaką techniką je przeprowadzono (telefonicznie czy bezpośrednio), jak zadano pytanie - co to znaczy, że ktoś wie jak powstają sondaże, a także nie zdefiniowałem kim są Polacy - czy są to obywatele, czy mieszkańcy Polski, w jakim byli wieku. Nie podałem również jakim błędem mogą być obarczone wyniki (tzw. błąd statystyczny), ani ile osób wzięło udział w badaniu. Codziennie w prasie i innych mediach pojawiają się podobne “dane sondażowe”. Czy mają one jakąkolwiek wartość? Czy można im zaufać? Jak odróżnić “dobry” sondaż od “złego”.
+
 Na te oraz inne pytania postaramy się udzielić odpowiedzi w trakcie naszego kursu. Pokażemy na czym polega sondaż, z jakich elementów się składa, jakie są jago ograniczenia - czego nie powie nam nawet najlepsze badanie. Zaczniemy od przykładów łatwych, a skończymy na bardziej zaawansowanych próbując wcielić się na chwilę w rolę “sondażysty”. W imieniu zespołu Na Straży Sondaży zapraszamy do odkrywania niezwykłych możliwości, ale także pewnych ograniczeń metody zwanej reprezentacyjną, metody która stoi za wszystkimi sondażami.
 
-__Zadania 1:__  
+# Zadania 1:
 
   1. Wymień trzy artykuły prasowe z 2014 r., w których powołano się na wyniki badań społecznych (sondaży). Napisz ile osób wzięło udział w badaniu oraz kiedy je zrealizowano, o ile w artykule podano tego rodzaju informacje. 
 
@@ -60,9 +65,10 @@ L.p.          | Tytuł artykułu| Link do strony z artykułem | Czy podano wielk
 # 2. Metoda reprezentacyjna
 
 Na pierwszy rzut oka badanie sondażowe, badanie na próbie, może się wydawać zadaniem karkołomnym. Oto na podstawie niewielkiej liczby obserwacji np. 1000 respondentów, staramy się opisać dużo większą, czasami nawet o kilka rzędów, populację. Czy ma to jakikolwiek sens? Czy da się wyznaczyć na tej podstawie przeciętną wagę, wzrost, miesięczne wydatki, liczbę przeczytanych książek albo czas spędzany dziennie na Facebooku przez dorosłych mieszkańców Polski. Trzeba wiedzieć, że oficjalnie mieszka około 31 mln ludzi w wieku 18 i więcej lat. W tej sytuacji 1000 osób stanowi w zaokrągleniu trzy dziesięciotysięczne PROCENTA populacji (1 000 /31 000 000 = 0,000032)!!! To bardzo mało. Trudno uwierzyć, że taka garstka obserwacji może dostarczyć nam wiarygodnych informacji o całej badanej zbiorowości. Dla porównania zastanówmy się, czy na podstawie jednego kilometra drogi da się powiedzieć, jak będzie wyglądała cała podróż mierząca 300 000 km (Ziemia w obwodzie liczy tylko 40 000 km). Na pierwszy rzut oka nie. Okazuje się jednak, że nauka, pod postacią statystyki, daje nam pewne narzędzia, które pozwalają trafnie wnioskować o dużych “obiektach” nawet na podstawie ich niewielkiego wycinka. W przypadku podróży kluczem do sukcesu byłoby umiejętne wybranie takich małych odcinków z całej drogi, które ułożą się w próbny kilometr.
+
 Statystycy i badacze społeczni wiedzą doskonale, że dobrze dobrana próba stanowi świetny opis całej populacji. Jak to możliwe? Co trzeba zrobić, żeby przy użyciu małego kamyka dowiedzieć się czegoś o wielkiej "górze"?
 
-__Zadania 2:__      
+# Zadania 2:      
 
   1. Wymień trzy badania na próbach przeprowadzone przez instytucje państwowe  i podaj link do ich wyników lub raportu. Mogą to być badania z roku 2014, ale także wcześniejszych lat. 
 
@@ -75,9 +81,12 @@ L.p.          |Nazwa instytucji publikującej wyniki | Tytuł badania  | Link do
 # 3. Przykłady prób
 
 Zacznijmy od naszych codziennych doświadczeń. Wbrew pozorom większość naszej wiedzy o świecie czerpiemy z prób. I nie chodzi tu o metodę prób i błędów. Przyjrzyjmy się naszemu zdrowiu. Czasami zdarza się, że lekarz każe nam zrobić badanie krwi. Ale czy to oznacza, że trzeba zbadać całą krew w organizmie, wszystkie komórki? Na szczęście nie. Wystarczy mała próbka. Lekarz pobiera od nas zaledwie 10 ml krwi. W całym organizmie mamy jej aż 4,5l (4500ml). Tak więc próba stanowi 1/450. całej objętości krwi. To bardzo bardzo mało. Mimo to lekarz potrafi określić, co dzieje się w całym organizmie, a nie tylko w pobranej próbce. 
-Weźmy inny, mniej dramatyczny przykład. Wyobraźmy sobie, że chcemy ugotować zupę i lubimy, gdy jest ona odpowiednio słona. Jak to sprawdzamy? Czy musimy wypić całą zupę z garnka? Absolutnie nie. Wystarczy jedna łyżeczka, która zawiera 15ml zupy i stanowi zaledwie 3/1000 pięciolitrowego garnka. Znowu dobraliśmy niewielką próbkę, żeby zbadać większą całość. Ale przypadek zupy jest szczególny. Żeby przekonać się, czy zupa jest odpowiednio słona, musimy ją najpierw dobrze WYMIESZAĆ. Tylko wtedy proporcja soli w łyżce zupy, będzie taka sama jak proporcja w całym garnku - łyżka zupy będzie dobrze reprezentować całą zupę. Kluczową kwestią jest więc REPREZENTATYWNOŚĆ PRÓBY.  Na pewno niektórzy słyszeli już to pojęcie. Zapamiętajmy je na chwilę, chociaż później będziemy musieli z niego zrezygnować. Reprezentatywność można rozumieć na różne sposoby. Często mówi się, że tak jak w przypadku łyżki zupy, próba musi być “miniaturą” populacji. Innymi słowy powinna odtwarzać strukturę i zależności obserwowane w całej zbiorowości. W przypadku badania krwi lub zupy brzmi to sensownie. Zauważmy jednak, że badane substancje są “jednorodne”. Każda porcja zupy czy krwi jest właściwie identyczna (dla uproszczenia, bo specjaliści z pewnością powiedzą, że to nie jest takie proste). A co jeśli badana zbiorowość nie jest i nie może być jednorodna? To problem, z którym bardzo często mierzą się nauki społeczne.
 
-__Zadania 3:__      
+Weźmy inny, mniej dramatyczny przykład. Wyobraźmy sobie, że chcemy ugotować zupę i lubimy, gdy jest ona odpowiednio słona. Jak to sprawdzamy? Czy musimy wypić całą zupę z garnka? Absolutnie nie. Wystarczy jedna łyżeczka, która zawiera 15ml zupy i stanowi zaledwie 3/1000 pięciolitrowego garnka. Znowu dobraliśmy niewielką próbkę, żeby zbadać większą całość. Ale przypadek zupy jest szczególny. Żeby przekonać się, czy zupa jest odpowiednio słona, musimy ją najpierw dobrze WYMIESZAĆ. Tylko wtedy proporcja soli w łyżce zupy, będzie taka sama jak proporcja w całym garnku - łyżka zupy będzie dobrze reprezentować całą zupę. Kluczową kwestią jest więc REPREZENTATYWNOŚĆ PRÓBY.  Na pewno niektórzy słyszeli już to pojęcie. Zapamiętajmy je na chwilę, chociaż później będziemy musieli z niego zrezygnować. Reprezentatywność można rozumieć na różne sposoby. Często mówi się, że tak jak w przypadku łyżki zupy, próba musi być “miniaturą” populacji. Innymi słowy powinna odtwarzać strukturę i zależności obserwowane w całej zbiorowości. W przypadku badania krwi lub zupy brzmi to sensownie.
+
+Zauważmy jednak, że badane substancje są “jednorodne”. Każda porcja zupy czy krwi jest właściwie identyczna (dla uproszczenia, bo specjaliści z pewnością powiedzą, że to nie jest takie proste). A co jeśli badana zbiorowość nie jest i nie może być jednorodna? To problem, z którym bardzo często mierzą się nauki społeczne.
+
+# Zadania 3:
 
   1. Podaj przykład badania na próbie, które można przeprowadzić w naszym codziennym życiu (np. badanie ilości soli w zupie). 
 
@@ -102,11 +111,14 @@ Przejdźmy do badań społecznych i tzw.  sondaży politycznych. Ich wyniki czę
 W powyższej tabeli umieściliśmy procentowy rozkład dwóch cech w populacji pełnoletnich  mieszkańców Polski (dane fikcyjne). Pierwszą cechą jest miejsce zamieszkania (w wierszach), a drugą poparcie dla partii X (w kolumnach). Widzimy, że w miastach mieszka 60% ludności, a na wsi 40%. Łącznie w całej zbiorowości (RAZEM) 35% obywateli zagłosowałoby na partię X, 15% na inną partię, a 50% w ogóle nie wzięłoby udziału w wyborach. Możemy również powiedzieć, że osoby mieszkające w mieście i popierające partię X stanowią 25% ogółu  uprawnionych do głosowania, a także że osoby które mieszkają na wsi i nie biorą udziału w wyborach stanowią 20% populacji. Oczywiście, w normalnych warunkach tego typu informacje są niedostępne dla badacze. My je “odsłaniamy” potrzeby kursu. 
  
 Zastanówmy się jak z powyższej populacji dobrać próbę reprezentatywną, aby móc trafnie na jej podstawie ocenić, jaki procent mieszkańców Polski popiera partię X?
+
 I tu pojawia się pierwszy problem. Nie da się bowiem “wymieszać” obywateli tak jak zupy. Zbiorowość nie jest jednorodna. Preferencje wśród mieszkańców miast i wsi nie są identyczne. Nie ma więc gwarancji, że jeśli idąc ulicą w mieście lub na wsi zapytamy dowolnych 10 osób o ich preferencje partyjne to będziemy mogli powiedzieć jakie jest poparcie w całym kraju. W uproszczeniu w mieście 4 na 10 osób zagłosowałoby na  (bo 25%/60%???0,4), a na wsi 1 na 4 (bo 10%/40%=0,25). W pierwszym przypadku poparcie będzie zawyżone, a w drugim zaniżone, w stosunku do ogólnokrajowych wyników (35%). Widać więc, że nie każda próba będzie “REPREZENTATYWNA”. I tu zatrzymajmy się znowu przy definicji REPREZENTATYWNOŚCI. Zauważmy, że zależy nam na tym, aby wynik z próby był zgodny z tym co obserwujemy w populacji. Czyli w zasadzie nie musi być tak, że próba jest miniatura populacji. Ważniejsze jest to, że na jej podstawie prawidłowo odgadujemy wyniki dla całej zbiorowości.
+
 Żeby przeprowadzić nasz polityczny sondaż musimy zrealizować badanie zarówno na wsi jak i w mieście. Każda osoba należąca do populacji musi mieć szansę znalezienia się w próbie. To bardzo ważne. Sposób dobierania próby, zwany schematem, nie może uniemożliwiać nikomu znalezienia się w próbie. 
+
 W dalszej części kursu pokażemy jak prawidłowo zdefiniować populację, jak błędy w kwestionariuszu mogą wpłynąć na zachowanie respondentów, jak dobrać, a dokładnie wylosować próbę reprezentatywną, 
 
-__Zadania 4:__      
+# Zadania 4:
 
   1. Czy w przypadku badania populacji mieszkańców Polski, wyniki sondy ulicznej przeprowadzonej w Warszawie, Krakowie lub Poznaniu można uznać za wiarygodne (dające się uogólnić na całą populację)?    
     + TAK
@@ -143,6 +155,7 @@ Trudno sobie bowiem wyobrazić badanie dochodów mieszkańców Polski przeprowad
 Wywiady "bezpośrednie" są realizowane w "terenie", najczęściej w miejscu zamieszkania losowo dobranych respondentów. Pozwalają on dotrzeć do największej grupy ludności, nieosiągalnej poprzez połączenie telefoniczne, bądź przez Internet. Tego typu technikę często stosuje się w badaniach ogólnopolskich, dotyczących populacji mieszkańców całego kraju. Metoda bezpośrednia wiąże się z dużymi kosztami oraz długim okresem realizacji. Ankieterzy musza bowiem dotrzeć osobiście do wszystkich respondentów. Czasami pokonują w tym celu kilkadziesiąt kilometrów. Zdarza się bowiem, że  odległości między poszczególnymi respondentami są bardzo duże. Co więcej, respondenci bywają nieuchwytni i w związku z tym, aby się z nimi skontaktować, trzeba wielokrotnie ponawiać wizyty. Sondaże bezpośrednie wymagają więc dużych nakładów pracy. Mają one jednak jedną poważną zaletę. Są nią ankieterzy. Dzięki nim respondenci chętniej biorą udział w badaniu. Odsetkiem odmów wzięcia udziału w sondażach realizowanych metodą bezpośrednią jest stosunkowo niski. Respondentom trudniej jest odmówić ankieterowi, który odwiedza ich bezpośrednio, niż takiemu który kontaktuje się z nimi telefonicznie.       
 
 Wywiady telefoniczne to zupełnie inna bajka. Obecnie jest to jedna z najczęściej wykorzystywanych metod zbierania danych. Jej popularność wynika  przede wszystkim z niskich kosztów oraz krótkiego czasu realizacji. Łatwiej jest bowiem przeprowadzić 1000 rozmów telefonicznych niż zorganizować 1000 spotkań z respondentami. Sami jednak wiemy, jak takie badania wyglądają w praktyce: „przepraszam, nie mam czasu” albo „już brałem udział w tym badaniu” przychodzi nam przez telefon dużo łatwiej, niż podobne zachowanie w bezpośredniej konfrontacji z ankieterem. Nic więc dziwnego, że w tego rodzaju badaniach tylko co dziesiąty telefon kończy się zrealizowanym wywiadem. Dla porównania technika bezpośrednia pozwala zrealizować wywiad z co trzecią dobraną do próby osobą.      
+
 Poważnym ograniczeniem badań telefonicznych jest to, że mogą one być realizowane tylko w odniesieniu do populacji, której członkowie posiadają telefony. Co więcej wywiady telefoniczne  musza być w miarę krótkie ponieważ respondenci nie lubią długo "wisieć" na telefonie. W związku z tym konieczne jest również ograniczenie liczby pytań w ankiecie, a co za tym idzie ograniczenie liczby możliwych do przeprowadzenia analiz.    
 
 Ostatnia grupa technik to wspomniane wcześniej ankiety internetowe. Nie chodzi tu o sondy umieszczane na stronach WWW, ale o badania, w których sondażysta wybiera respondentów np. wysyłając im maile z kluczem do ankiety umieszczonej w sieci. Tego typu techniki budzą wiele kontrowersji, szczególnie gdy są wykorzystywane do wnioskowania o populacjach, takich jak mieszkańcy Polski. Wiadomo bowiem, że nie wszyscy członkowie takiej zbiorowości posiadają komputer i wiedzą jak korzystać z Internetu. Innymi słowy jest to technika wykluczająca duże grupy społeczne, prawdopodobnie większe niż w przypadku badania telefonicznego. W związku z tym trudno jest mówić o reprezentatywności wyników w tym przypadku. Powodem dla którego realizuje się tego rodzaju badania jest koszt, niewątpliwie niższy niż w przypadku wywiadów bezpośrednich czy telefonicznych.   
@@ -160,15 +173,18 @@ Aby łatwiej rozróżniać poszczególne metody zbierania danych sondażyści, n
 Szczególnie istotną cechą różnicującą opisane powyżej techniki jest tak zwany poziom realizacji próby (nazywany również poziomem response-rate), czyli odsetek osób wytypowanych przez nas do udziału w badaniu, z którymi faktycznie udało się przeprowadzić wywiad. Warto wiedzieć, że praktycznie nigdy nie występuje sytuacja, w której sondażystom udaje się zapytać o opinię wszystkie osoby dobrane przez nich do próby. Dzieje się tak z kilku powodów. Po pierwsze, nie do wszystkich osób udaje się dotrzeć/dodzwonić. Powodem mogą być choroby, wakacje, delegacje służbowe itp. Ponadto część osób, do których uda się dotrzeć, z różnych przyczyn odmawia wzięcia udziału w badaniu.  Oba te czynniki są dodatkowym źródłem błędu w badaniu i celem każdego dobrego badacza jest ich zminimalizowanie. Jest to kolejny powód dla które technika zbierania danych ma tak istotne znacznie.     
 
 Problem poprawnego zdefiniowania populacji oraz dobrania do niej odpowiedniej techniki badawczej dobrze ilustruje przykład historyczny. W 1936 roku „Literary Digest”, popularny magazyn informacyjny przeprowadził w USA badanie przedwyborcze. Do ludzi wybranych z książek telefonicznych i list rejestracyjnych samochodów wysłano DZIESIĘĆ MILIONÓW kart pocztowych, pytając, na kogo zamierzają oddać głos w wyborach prezydenckich – na republikanina Alfa Landona czy demokratę Franklina Roosevelta? Odpowiedziało ponad dwa miliony ludzi, wskazując że nowym prezydentem wybrany zostanie Alf Landon (57%), a nie Franklin Roosevelt (43%). Mogłoby się wydawać, że przebadanie tylu osób jest dużo bardziej wiarygodne i miarodajne niż przeprowadzenie badania na niewielkim wycinku populacji. Nic bardziej mylnego. Realne wybory dość drastycznie zweryfikowały wnioski z tych badań – nowym prezydentem został Franklin Roosevelt, mając największą przewagę głosów w historii – otrzymał 61%.        
+
 Dla porównania, w tym samym czasie, przedwyborczy sondaż przeprowadził również  George Gallup, który trafnie przewidział wyniki wyborów. W swoim badaniu posłużył się on jednak niewielką próbą kwotową (czyli opartą na znajomości określonych cech populacji, np. płeć, dochód, wiek, miejsce zamieszkania itp.) zrealizowaną technika bezpośrednią.     
+
 Na czym więc polegał problem „Literary Digest”? Na całkowitym braku kontroli nad próbą. Na pytanie zadane przez magazyn odpowiedziało zaledwie 22% wszystkich zapytanych osób. Jak się okazało karty w większości odsyłali republikanie. Drugi problem polegał na nieprawidłowym zdefiniowaniu populacji. Respondenci do badania zostali dobrani na podstawie spisu abonentów telefonicznych i właścicieli samochodów. Taka konstrukcja próby dawała nadreprezentację zamożnych wyborców, czyli pominięcie ludzi biednych, którzy w większości głosowali na „New deal” Roosevelta.     
+
 Przykład ten ilustruje, jak dobór nawet dużej próby z niepoprawnie zdefiniowanej populacji może doprowadzić do zupełnie nietrafnych wniosków.  Analizując wyniki badań sondażowych należy zawsze zwracać uwagę na technikę realizacji oraz sposób definiowania populacji. Prawidłowa definicja zbiorowości generalnej powinna zawierać informacje o:
 
 * położeniu w przestrzeni zbiorowości (mieszkańcy Polski, mieszkańcy Poznania itp.)  
 * wieku respondentów (pełnoletni Polacy, osoby w wieku 15 i więcej ukończonych lat itp.)   
 * inne cechy (osoby posiadające obywatelstwo polskie, osoby z wykształceniem wyższym itp.)
 
-__Zadania 5:__      
+# Zadania 5:
 
   1. Wymień trzy firmy zajmujące się badaniem rynku i opinii społecznej, które w 2014 r. prowadziły badania sondażowe w Polsce. Podaj link do strony, na której firmy te publikują swoje raporty.     
 
@@ -229,7 +245,7 @@ Czasami jednak kontrowersje są nie do uniknięcia. Dotyczy to tzw. [kwestii dra
 
 Problemy związane z budowaniem kwestionariusza i interpretacją otrzymanych na jego podstawie wyników przeanalizujemy na przykładzie zadań.
 
-__Zadania 6:__      
+# Zadania 6:
 
   1.  Odpowiedz na pytania związane z następującym badaniem: Firma EkstraSondaż przygotowała w 2015 r. raport „Młodzież kpująca substancje psychoaktywne przez internet” dla Państwowego Zakładu Badań nad sieciami komputerowymi. Dane zostały zebrane od respondentów przez Internet. W badaniu wzięli udział uczniowie wybranych szkół w całej Polsce, którzy dostali adres internetowy oraz indywidualne hasło do strony z ankietą. Łącznie próba badawcza liczyła 1050 nastolatków - osób w wieku 13-16 lat. Spośród nich  560  zdeklarowało, że robi zakupy przez internet. W tej grupie 15 osób zadeklarowało, że zdarzyło im się kupić substancje psychotropowe (Pytanie brzmiało: „Czy zdarzyło Ci się kupić przez internet  substancje psychotropowe, w tym leki wpływające na funkcjonowanie mózgu?” ). Wiadomo również, że w badaniu wzięło udział 180 szesnastolatków, z czego 110 robi zakupy przez internet, a 10 deklaruje zakup substancji psychotropowych. 
     a. Czy uważasz, że respondenci generalnie (a wiec przytłaczająca większość z nich) udzielali szczerych  odpowiedzi na pytanie o to, czy kupują substancje psychotropowe - zarówno Ci którzy przyznali się do tego typu zachowań jak i ci którzy ich nie potwierdzili?  
@@ -459,7 +475,7 @@ Na pierwszy rzut oka widać, że nie wszystkie wyniki są zgodne z tym, co obser
 
 ### Wykres 7.1. Poziom absencji wyborczej w próbach dwuosobowch
 
-```{r, echo=FALSE, fig.align='center', fig.height=7, fig.width=13}
+```{r, echo=FALSE, fig.align='center', fig.height=5, fig.width=7}
 
 par(mar=c(5,4,1,0))
 b.6<-barplot(c(10*9, 20*10, 10*9), las=1, ylim=c(0, 230))
@@ -492,7 +508,7 @@ Wiemy teraz dokładnie czego możemy się spodziewać po naszym schemacie losowa
 
 ### Wykres 7.2. Symulacja - rozkład oszacowania absencji z 10 000 prób
 
-```{r, echo=FALSE, fig.align='center', fig.height=7, fig.width=13}
+```{r, echo=FALSE, fig.align='center', fig.height=5, fig.width=7}
 
 p2<-c();
 for (i in 1:10000){
@@ -556,7 +572,7 @@ Dla ponad połowy wszystkich możliwych prób oszacowanie poziomu absencji jest 
 Oczywiście to, że nasz schemat doboru respondentów generuje próby, które przeciętnie się nie mylą, nie rozwiązuje problemu błędów, czyli przeszacowań i niedoszacowań. Zauważmy, że w przypadku losowania prób dwuosobowych i badania problemu absencji wyborczej prawie co druga próba daje wynik poważnie "obciążone", czyli odbigające od rzeczywistych. 
 Dlatego w następnej części naszego odcinka przyjrzymy się sposobom wnioskowania na podstawie próby i sposobom radzenia sobie z błędami oszacowań generowanymi dla danego schematu losowania próby.     
 
-__Zadania 7:__   
+# Zadania 7:
 
   1. Odpowiedz na pytania związane ze schematem losowania __4__ respondentów w sposób prosty bezzwrotny z omawianej populacji 20 obywateli (załączonej do rozdziału):       
   
@@ -582,9 +598,12 @@ __Zadania 7:__
 
 # 8. Błąd oszacowania
 
-Omówiliśmy już wstępnie dobór losowy respondentów do badania sondażowego i wiemy, że wyniki z prób przeciętnie powinny "trafiać w punkt". Pozostaje jednak problem błędów. Jak zauważyliśmy na przykładzie sondażu dotyczącego absencji wyborczej, duża część prób może dawać nieprawidłowe oszacowania. Cóż z tego więc, że nasz schemat losowania średnio rzecz biorąc daje dobre wyniki skoro my dobierzemy jedną próbę i ona właśnie chybi?!       
-Przeciętnie dobra celność to za mało. Schemat losowania powinien dodatkowo gwarantować, że dla przeważającej większości prób oszacowania badanego parametru populacji będą bardzo bliskie rzeczywistym wartościom. Innymi słowy ryzyko popełnienia dużego błędu powinno być jak najmniejsze. Próby uzyskane przy pomocy schematu spełniającego powyższe warunki nazwiemy reprezentatywnymi __(?)__.           
+Omówiliśmy już wstępnie dobór losowy respondentów do badania sondażowego i wiemy, że wyniki z prób przeciętnie powinny "trafiać w punkt". Pozostaje jednak problem błędów. Jak zauważyliśmy na przykładzie sondażu dotyczącego absencji wyborczej, duża część prób może dawać nieprawidłowe oszacowania. Cóż z tego więc, że nasz schemat losowania średnio rzecz biorąc daje dobre wyniki skoro my dobierzemy jedną próbę i ona właśnie chybi?!    
+
+Przeciętnie dobra celność to za mało. Schemat losowania powinien dodatkowo gwarantować, że dla przeważającej większości prób oszacowania badanego parametru populacji będą bardzo bliskie rzeczywistym wartościom. Innymi słowy ryzyko popełnienia dużego błędu powinno być jak najmniejsze. Próby uzyskane przy pomocy schematu spełniającego powyższe warunki nazwiemy reprezentatywnymi __(?)__.     
+
 Zagadnienie błędu oszacowań uzyskiwanych z prób losowych omówimy na nowym przykładzie badania sondażowego. Będzie ono dotyczyło poziomu poparcia dla partii X.      
+
 W stosunku do badania absencji wyborczej zmienimy niewiele. Po prostu w kolumnie “Preferencje wyborcze” zamiast odpowiedzi "Nie idę na wybory"  teraz będziemy analizowali występowanie wartości "Głosuję na partię X". Zwiększymy również liczbę respondentów - z 2 do 6. Tak samo jak wcześniej zastosujemy jednak losowanie proste bez zwracania i technikę CAPI. Pytanie w kwestionariuszu będzie natomiast brzmiało: "__Gdyby wybory do sejmu odbywały się w najbliższą niedzielę to czy zagłosowałby/ałaby Pan/i na partię X?__". Odpowiedzi "nie chodzę na wybory" oraz "zagłosuję na inną partię" liczymy razem, jako brak poparcia dla X.    
 
 ### Tabela 8.1. Rozkład poparcia dla partii X w (fikcyjnej) populacji dorosłych obywateli Polski
@@ -658,8 +677,11 @@ for (p in kmin:kmax){
          20|          8372160
 
 Wiemy już w ilu próbach wystąpi każdy obywatel. Teraz zastanówmy się, z jaką częstotliwością występują poszczególne wyniki, czyli ile jest takich prób, w których poparcie dla partii X wyniesie  100% (6/6), ile takich, w których poparcie dla partii X wyniesie 83% (5/6) itd. Odpowiedź na to pytanie można uzyskać na dwa sposoby. Albo stosując proste, ale wymagające dużego skupienia, obliczenia na papierze albo stosując mniej obciążające i szybsze obliczenia na komputerze.           
-Zacznijmy od obliczeń na papierze. Zastanówmy się, ile może być takich prób, w których poparcie dla partii X wyniesie 83,3% (5/6). Przykładowo preferencje w nich mogą się ułożyć w następującej kolejności (X, X, X, X, X, nX). Losowanie tego rodzaju próby przeprowadzimy w następujący sposób. Pierwszego respondenta X dobieramy spośród wszystkich osób popierających partię X w populacji - łącznie jest ich 7. Potem drugiego respondenta dobieramy spośród pozostałych 6 osób popierających X, potem trzeciego respondenta dobieramy spośród pozostałych 5 osób popierających X, itd aż dochodzimy do szóstego respondenta. Dobierzemy go z innej grupy, osób nie popierających X (nX). W populacji jest ich 13. Ostatecznie więc liczba prób, dla których preferencje układają się w kolejności (X, X, X, X, X, nX), jest równa 7\*6\*5\*4\*3\*13=`r print(7*6*5*4*3*13, digits = 16)`. No tak, ale my chcemy wiedzieć, ile jest dokładnie wszystkich prób, w  których poparcie wynosi 83,3%, nie tylko takich, w których osoba nX została wylosowana jako ostatnia. Żeby się tego dowiedzieć musimy zauważyć, że obywatel deklarujący nX może zostać wylosowany, jako szósty, piąty, czwarty, … lub jako pierwszy. Czyli może on zostać ustawiony na sześć sposobów w próbie. Innymi słowy każda próba typu (X, X, X, X, X, nX) ma swoich pięć odpowiedników, w których występują ci sami obywatele X w tej samej kolejności i tylko obywatel nX "przeskakuje" między nimi. Ostatecznie więc liczba prób dających 83,3% (5/6) poparcia dla partii X wyniesie (7\*6\*5\*4\*3\*13)\*6=32760\*6=`r print((7*6*5*4*3*13)*6,digits = 16)`.          
+
+Zacznijmy od obliczeń na papierze. Zastanówmy się, ile może być takich prób, w których poparcie dla partii X wyniesie 83,3% (5/6). Przykładowo preferencje w nich mogą się ułożyć w następującej kolejności (X, X, X, X, X, nX). Losowanie tego rodzaju próby przeprowadzimy w następujący sposób. Pierwszego respondenta X dobieramy spośród wszystkich osób popierających partię X w populacji - łącznie jest ich 7. Potem drugiego respondenta dobieramy spośród pozostałych 6 osób popierających X, potem trzeciego respondenta dobieramy spośród pozostałych 5 osób popierających X, itd aż dochodzimy do szóstego respondenta. Dobierzemy go z innej grupy, osób nie popierających X (nX). W populacji jest ich 13. Ostatecznie więc liczba prób, dla których preferencje układają się w kolejności (X, X, X, X, X, nX), jest równa 7\*6\*5\*4\*3\*13=`r print(7*6*5*4*3*13, digits = 16)`. No tak, ale my chcemy wiedzieć, ile jest dokładnie wszystkich prób, w  których poparcie wynosi 83,3%, nie tylko takich, w których osoba nX została wylosowana jako ostatnia. Żeby się tego dowiedzieć musimy zauważyć, że obywatel deklarujący nX może zostać wylosowany, jako szósty, piąty, czwarty, … lub jako pierwszy. Czyli może on zostać ustawiony na sześć sposobów w próbie. Innymi słowy każda próba typu (X, X, X, X, X, nX) ma swoich pięć odpowiedników, w których występują ci sami obywatele X w tej samej kolejności i tylko obywatel nX "przeskakuje" między nimi. Ostatecznie więc liczba prób dających 83,3% (5/6) poparcia dla partii X wyniesie (7\*6\*5\*4\*3\*13)\*6=32760\*6=`r print((7*6*5*4*3*13)*6,digits = 16)`.        
+
 A ile będzie prób, w których poparcie dla partii X wynosi 66,7% (4/6)? Podobnie jak poprzednio, zacznijmy od przykładowej kombinacji odpowiedzi (X, X, X, X , nX, nX). Dokładnie w tej kolejności preferencje możemy mieć w 7\*6\*5\*4\*13\*12=131040 próbach. Teraz zastanówmy się, na ile sposobów możemy “ustawić” dwie preferencje nX na sześciu miejscach (alternatywnie można się zastanawiać, na ile sposobów ustawić 4 preferencje X, ale wynik będzie dokładnie taki sam).          
+
 Załóżmy, że preferencje nX otrzymaliśmy od obywatela 7 i 8 - dokładnie w tej kolejności. Mamy więc próbę (X,X,X,X,7,8). Na ile sposobów obywatele 7 i 8 mogą "przeskoczyć" innych respondentów, jednocześnie pozostając w takim samym układzie względem siebie? Jeżeli 7 zajmie pierwsze miejsce to 8 może zająć drugie, trzecie, czwarte, ..., szóste. Czyli jeżeli 7 zajmie pierwsze miejsce to 8 może zając 5 pozostałych. Idąc dalej tym tokiem myślenia  możemy napisać, że:            
 
   * jeżeli 7 zajmuje pierwsze miejsce to 8 może zająć 5 pozostałych;
@@ -669,7 +691,9 @@ Załóżmy, że preferencje nX otrzymaliśmy od obywatela 7 i 8 - dokładnie w t
   * jeżeli 7 zajmuje piąte miejsce to 8 może zająć 1 pozostałe;     
  
 Ostatecznie otrzymujemy więc 5\+4\+3\+2\+1=`r 5+4+3+2+1` różnych wersji początkowego układu preferencji (X,X,X,X,7,8) Pamiętajmy, że 7,8 to tylko jedna z 13\*12=`r 13*12` par dających dwie preferencje nX w próbie (inna może byc para 8,7). Dodatkowo na każdą z nich przypada 7\*6\*5\*4= `r 7*6*5*4` różnych układów respondentów tworzących preferencje (X,X,X,X). Ostatecznie więc prób, w których poparcie dla partii X wyniesie 66,7% (4/7) jest (7\*6\*5\*4)\*(13\*12)\*15=`r (7*6*5*4)*(13*12)*15`       
-Na powyższy problem można też popatrzeć inaczej. Wystarczy zauważyć, że dla dwóch preferencji X mamy do przydzielenia łącznie 6 miejsc. Pierwsza z preferencji może zając jedno miejsce z 6, a druga jedno z 5 pozostałych. Łącznie możemy więc wyróżnić 6\*5=`r 6*5` różnych ich ustawień. Ale uwaga! Pamiętajmy , że kolejność respondentów musi pozostać niezmieniona. Jeżeli najpierw dobieramy obywatela 7, a potem 8 to znaczy, że akceptujemy próbę (7,..,..,..,..,8) a odrzucamy (8,..,..,..,..,7). Pozbywamy się więc wszystkich "duplikatów". W ten sposób otrzymujemy (6\*5)/2=`r (6*5)/2` różnych ustawień dla pary obywateli 7 i 8, przy zachowaniu ich kolejności. To jest dokładnie tyle ile otrzymaliśmy dla wcześniejszych obliczeń.      
+
+Na powyższy problem można też popatrzeć inaczej. Wystarczy zauważyć, że dla dwóch preferencji X mamy do przydzielenia łącznie 6 miejsc. Pierwsza z preferencji może zając jedno miejsce z 6, a druga jedno z 5 pozostałych. Łącznie możemy więc wyróżnić 6\*5=`r 6*5` różnych ich ustawień. Ale uwaga! Pamiętajmy , że kolejność respondentów musi pozostać niezmieniona. Jeżeli najpierw dobieramy obywatela 7, a potem 8 to znaczy, że akceptujemy próbę (7,..,..,..,..,8) a odrzucamy (8,..,..,..,..,7). Pozbywamy się więc wszystkich "duplikatów". W ten sposób otrzymujemy (6\*5)/2=`r (6*5)/2` różnych ustawień dla pary obywateli 7 i 8, przy zachowaniu ich kolejności. To jest dokładnie tyle ile otrzymaliśmy dla wcześniejszych obliczeń.     
+
 A co z próbami, w których poparcie dla partii X wynosi 50% (3/6). Na podobnej zasadzie jak wcześniej możemy policzyć, że dla prób, w których preferencje występują w kolejności (X, X, X, nX, nX, nX) jest (7\*6\*5)\*(13\*12\*11)=`r (7*6*5)*(13*12*11)` . Następnie liczmy na ile sposobów możemy "wymieszać" każdą taką próbę, nie burząc jednocześnie porządku wśród respondentów o preferencjach X oraz nX oddzielnie. Pierwsza z preferencji nX może zająć jedno z 6  miejsc, druga jedno z pozostałych 5, trzecia jedno z pozostałych 4 - łącznie 6\*5\*4=`r 6*5*4`. Musimy już tylko pozbyć się "duplikatów". Trzy preferencje nX można potencjalnie ustawić na 3\*2\*1=`r 3*2` sposobów. Nas interesuje tylko jedna z nich, bo nie chcemy zmieniać kolejności preferencji. W związku z tym respondentów nX można "ustawić" nie na 6\*5\*4=`r 6*5*4` tylko na (6\*5\*4)/6=`r (6*5*4)/6` sposobów. Szacowana poparcie dla partii X na poziomie 50% (3/6) wystąpi więc w (7\*6\*5)\*(13\*12\*11)\*(6\*5\*4)/6=`r (7*6*5)*(13*12*11)*(6*5*4)/6` próbach.      
 
 Obliczenia dla pozostałych wyników otrzymywanych przy użyciu schematu losowania 6 respondentów zostały umieszczone w poniższej tabeli oraz na wykresie.
@@ -689,7 +713,7 @@ Obliczenia dla pozostałych wyników otrzymywanych przy użyciu schematu losowan
 
  
 ### Wykres 8.1. Poparcie dla partii X w próbach sześcioosobowych
-```{r,echo=FALSE, fig.align='center', fig.height=7, fig.width=13}
+```{r,echo=FALSE, fig.align='center', fig.height=5, fig.width=7}
 # p6.2=p6.3<-matrix( m$Glosowanie[p6], nrow = 20*19*18*17*16*15, ncol = 6);
 # p6.2<-rowSums( p6.2==1)/6;
 # p6.2<-data.frame(table(p6.2));
@@ -735,7 +759,7 @@ Czy istnieje jakiś sposób żeby temu zaradzić? Na szczęście tak. Polega on 
 
 ### Wykres 8.1. Rozkłady wyników z prób składających się z 6,  9, 12 oraz 15 respondentów
 
-```{r, echo=FALSE, fig.align='center', fig.height=8, fig.width=13}
+```{r, echo=FALSE, fig.align='center', fig.height=5, fig.width=7}
 proby<-list()
 for (n in 6:20) {
   kmin<-(n-13)*(n>12)
@@ -819,8 +843,8 @@ Wiemy już teraz, że zwiększanie próby "przybliża" wyniki do prawidłowej wa
 
 ### Wykres 8.2. Odchylenie standardowe poparcia dla partii X dla schematów losowania od 6 do 20 respondentów
 
-```{r, echo=FALSE, fig.align='center', fig.height=7, fig.width=13}
-proby<-list()
+```{r, echo=FALSE, fig.align='center', fig.height=5, fig.width=7}
+proby <- list()
 for (n in 6:20) {
   kmin<-(n-13)*(n>12)
   kmax<-n*(n<8)+7*(n>7)
@@ -970,7 +994,7 @@ W ten sposób zamknęliśmy rozważania dotyczące błędów oszacowania. Najwa�
   3. Określenie "błąd statystyczny" dotyczy granic przedziału, który zdaniem statystyków "na pewno" (czyli na 95%) obejmuje swym zasięgiem poszukiwany parametr.
 
 
-__Zadania 8:__     
+# Zadania 8:
   1. Napisz, jak rozumiesz określenie "reprezentatywność próby":     
             ......................................................................................................................................................................................        
                       ......................................................................................................................................................................................;       
@@ -1063,7 +1087,7 @@ W powyższej tabeli widzimy, że w prawie połowie wszystkich analizowanych pró
 
 ### Wykres 9.1. Rozkład poparcia partii X w próbach 6 osobowych przy niepełnej realizacji (bez mieszkańców miast)  
 
-```{r, echo=FALSE, fig.align='center', fig.height=7, fig.width=13}
+```{r, echo=FALSE, fig.align='center', fig.height=5, fig.width=7}
 realizacja<-c()
 for (i in 0:6) {
   realizacja[i+1]<-prod(12:(12-5+i))^(i<6)*prod(8:(9-i))^(i>0)*choose(6,i)
@@ -1107,7 +1131,8 @@ Tak oto przekonaliśmy się, że wszystkie wysiłki włożone w przygotowanie ko
 
 Niski poziom realizacji próby, może sie przyczynić do obciążenia wyników. Będą one wtedy systematynie dążyły do innej wartośći niż ta w badanej zbiorowości. Właściwie będą one dazyły do wartości występującej w populacji dostępnych respondentów. W konsekwencji im bardziej dostępni respondenci różnią się od respondentów niedostępnych, tym większe obciążenie wyników. Na koniec kursu zapamiętajmy więc, że prawdziwi sondażyści robią wszystko co w ich mocy, żeby poziom realizacji próby był jak najwyższy. Pamiętajcie o tym, gdy ktoś zaprosi Was do udziału w badaniu sondażowy.
 
-__Zadania 9:__      
+# Zadania 9:
+
   1. w wylosowanej wcześniej próby 15 osób wyłącz wszyskie osoby zamieszkałe w mieście. Podaj liczby porządkowe osób, kótre zostały w próbie.
   2. Jaki teraz jest poziom poparcia dla partii X w twojej próbie?
   3. Podaj błąd kwadratowy twojego wyniku względem poparcia dla partii X w populacji.
