@@ -136,7 +136,7 @@ write.xlsx(dwie_kolumny, file="/Users/pbiecek/Documents/wazne_dane.xlsx",
 
 # Zapisywanie danych do plików binarnych
 
-Do pliku w formacie natywnym R, dane można zapisać funkcją `save()`. Funkcja ta zapisuje jeden lub więcej obiektów o dowolnych strukturach - nie tylko danych tabelarycznych, ale również wektorów czy bardziej złożonych struktur (o tym czym są wektory czy inne struktury opowiemy w odcinku https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/07_indeksowanie.html). 
+Do pliku w formacie natywnym R (*natywnym, czyli właściwym dla programu R*), dane można zapisać funkcją `save()`. Funkcja ta zapisuje jeden lub więcej obiektów o dowolnych strukturach - nie tylko danych tabelarycznych, ale również wektorów czy bardziej złożonych struktur (o tym czym są wektory czy inne struktury opowiemy w odcinku https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/07_indeksowanie.html). 
 
 Wadą tego rozwiązania jest to, że format ten nie jest odczytywany przez inne pakiety statystyczne. 
 
