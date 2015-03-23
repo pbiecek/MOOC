@@ -12,8 +12,47 @@ output:
     footer: "pogRomcy danych / challange / sezon 1 "
 ---
 
-# Poziom 1 - proste zadania
+# Poziom 1 - zadanie 1
 
+Do zmiennej `wynik` przypisz wartość wyrażenia $sqrt((2+517)*1.23)$.
+
+<textarea rows="6" cols="70">
+Tutaj wklej rozwiązanie. 
+</textarea>
+
+<button type="button">Wyślij rozwiązanie!</button>
+
+# Poziom 1 - zadanie 2
+
+W zbiorze danych `koty_ptaki` w kolumnie `predkosc` znajduje się maksymalna prędkość rozwijana przez gatunek w kilometrach na godzinę.
+
+Używajac funkcji `ifelse()` do zmiennej `wynik` przypisz wektor z wartościami `szybko` i `wolny` w zależności od tego czy zwierze jest szybsze niż 44 km/h czy nie.
+
+
+<textarea rows="6" cols="70">
+Tutaj wklej rozwiązanie. 
+</textarea>
+
+<button type="button">Wyślij rozwiązanie!</button>
+
+# Poziom 1 - zadanie 3
+
+
+
+<textarea rows="6" cols="70">
+Tutaj wklej rozwiązanie. 
+</textarea>
+
+<button type="button">Wyślij rozwiązanie!</button>
+
+# Poziom 1 - zadanie 4
+
+
+<textarea rows="6" cols="70">
+Tutaj wklej rozwiązanie. 
+</textarea>
+
+<button type="button">Wyślij rozwiązanie!</button>
 
 # Poziom 2 - zadania porównywalne z tymi z odcinków
 
