@@ -79,7 +79,7 @@ Zgodnie z wynikami Google Trends, zainteresowanie R rośnie (wzrosło dwukrotnie
 
 # Czy warto uczyć się programować, czy nie lepiej wybrać klikanie?
 
-Praca w R wymaga umiejętności programowania. Dla osób przyzwyczajonych do klikanych narzędzi oznacza to trudne początku. Gdy muszą porzucić stare i złe nawyki oraz nauczyć się składni i nowych nazw funkcji. Jest to trudne i wymaga czasu, ale warto przynajmniej z kilku powodów.
+Praca w R wymaga umiejętności programowania. Dla osób przyzwyczajonych do klikanych narzędzi oznacza to trudne początki, gdy muszą porzucić stare i złe nawyki oraz nauczyć się składni i nowych nazw funkcji. Jest to trudne i wymaga czasu, ale warto przynajmniej z kilku powodów.
 
 Jeżeli raz opracujemy skrypt wykonujący pewną pracę, możemy następnie ją łatwo powtórzyć. Wystarczy cały skrypt skopiować. Dzięki temu w miarę nabywania doświadczenia zwiększamy nasz potencjał.
 
