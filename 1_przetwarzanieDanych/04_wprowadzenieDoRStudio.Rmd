@@ -77,7 +77,7 @@ zmienna2 <- 2^10
 
 Zauważmy, że w oknie po prawej górnej stronie wyświetliły się nowo zdefiniowane zmienne oraz ich wartości.
 
-W każdej chwili możemy sprawdzić, jakie zmienne program R aktualnie pamięta, oraz jakie są wartości tych zmiennych.
+Okno to pozwala w każdej chwili sprawdzić, jakie zmienne program R aktualnie pamięta, oraz jakie są wartości tych zmiennych. 
 
 ![Zmienne](figs/RStudio4.png)
 
@@ -118,6 +118,7 @@ Możemy więc stworzyć sekwencję za pomocą następującej instrukcji.
 
 ```{r, warning=FALSE}
 sekwencja <- seq(from = 0, to = 10, by = 0.1)
+sekwencja
 ```
 
 Zauważmy, że wartości do argumentów przypisujemy znakiem `=`. To przypisanie ma jednak inne znaczenie. Nie tworzymy nowej zmiennej o nazwie `from` ale wskazujemy, że argument funkcji ‘from’ ma mieć wartość 0.
@@ -140,7 +141,7 @@ Mamy już sekwencję liczb. Zróbmy z nią coś ciekawego.
 
 # Wykres z morałem
 
-Funkcją `exp()` policzmy eksponentę z sekwencji, a następnie - wykorzystując funkcję `plot()` - narysujmy i sekwencję, i jej eksponentę.
+Funkcją `exp()` policzmy eksponentę (*eksponenta, inaczej funkcja wykładnicza, to bardzo szybko rosnąca funkcja matematyczna*) z sekwencji, a następnie - wykorzystując funkcję `plot()` - narysujmy i sekwencję, i jej eksponentę.
 
 Poniższy wykres, to bardzo ważny wykres, ponieważ przedstawia bardzo ważną informację dotyczącą uczenie się.
 Pierwsze godziny poznawania R poświęcimy na zbudowanie bazy funkcji R. 
@@ -162,6 +163,6 @@ Pierwsze zadania są proste, kolejne coraz trudniejsze. Warto zmierzyć się z n
 
 Odpowiedzi do zadań umieszczone są na stronie kursu, można je w każdej chwili sprawdzić.
 
-Zadanie do tego odcinak polega na uruchomieniu wszystkich przedstawionych instrukcji w programie RStudio i sprawdzeniu czy otrzymuje się te same wyniki.
+Zadanie do tego odcinek polega na uruchomieniu wszystkich przedstawionych instrukcji w programie RStudio i sprawdzeniu czy otrzymuje się te same wyniki.
 
 
