@@ -89,6 +89,9 @@ Tutaj wklej rozwiązanie.
 
 # Poziom 2 zadanie 7
 
+Ze zbioru danych `auta2012` wybierz tylko auta marki `Volkswagen`.
+
+Następnie średnią cenę wybranych samochodów przypisz do zmiennej `wynikCena` a średni przebieg przypisz do zmiennej `wynikPrzebieg`.
 
 <textarea rows="6" cols="70">
 Tutaj wklej rozwiązanie. 
