@@ -74,7 +74,11 @@ Tutaj wklej rozwiązanie.
 
 # Poziom 2 zadanie 6
 
+W zbiorze danych `auta2012` w kolumnie `Wyposazenie.dodatkowe` po przecinku wypisane są elementy wyposażenia auta.
 
+Jeżeli auto ma klimatyzację to w tej kolumnie znajduje się napis `klimatyzacja`. Sprawdź jak wiele aut ma klimatyzację.
+
+Wyznacz macierz kontyngencji i zapisz ją do zmiennej `wynik`.
 
 <textarea rows="6" cols="70">
 Tutaj wklej rozwiązanie. 
