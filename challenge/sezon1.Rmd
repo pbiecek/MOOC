@@ -37,7 +37,9 @@ Tutaj wklej rozwiązanie.
 
 # Poziom 1 - zadanie 3
 
+Użyj funkcji `filter()` wybierz ze zbioru danych `koty_ptaki` tylko zwierzęta o długości ponad 1m. Przypisz tą nową ramkę danych do zmiennej `wynik`.
 
+Nie zapomnij w tym rozwiązaniu najpierw włączyć pakiet `dplyr`,
 
 <textarea rows="6" cols="70">
 Tutaj wklej rozwiązanie. 
@@ -47,12 +49,56 @@ Tutaj wklej rozwiązanie.
 
 # Poziom 1 - zadanie 4
 
+Użyj funkcji `arrange()`, uporządkuj wiersze w zbiorze danych `koty_ptaki` rosnąco zgodnie z prędkością. 
+Przypisz tą nową ramkę danych do zmiennej `wynik`.
+
+Nie zapomnij w tym rozwiązaniu najpierw włączyć pakiet `dplyr`,
 
 <textarea rows="6" cols="70">
 Tutaj wklej rozwiązanie. 
 </textarea>
 
 <button type="button">Wyślij rozwiązanie!</button>
+
+# Poziom 2 zadanie 5
+
+
+
+<textarea rows="6" cols="70">
+Tutaj wklej rozwiązanie. 
+</textarea>
+
+<button type="button">Wyślij rozwiązanie!</button>
+
+# Poziom 2 zadanie 6
+
+
+<textarea rows="6" cols="70">
+Tutaj wklej rozwiązanie. 
+</textarea>
+
+<button type="button">Wyślij rozwiązanie!</button>
+
+
+# Poziom 2 zadanie 7
+
+
+<textarea rows="6" cols="70">
+Tutaj wklej rozwiązanie. 
+</textarea>
+
+<button type="button">Wyślij rozwiązanie!</button>
+
+
+# Poziom 2 zadanie 8
+
+
+<textarea rows="6" cols="70">
+Tutaj wklej rozwiązanie. 
+</textarea>
+
+<button type="button">Wyślij rozwiązanie!</button>
+
 
 # Poziom 2 - zadania porównywalne z tymi z odcinków
 
