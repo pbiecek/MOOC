@@ -62,7 +62,9 @@ Tutaj wklej rozwiązanie.
 
 # Poziom 2 zadanie 5
 
+W zbiorze danych `auta2012` w kolumnie `Marka` znajdują się nazwy marek oferowanych do sprzedaży samochodów.
 
+Zbuduj wektor nazw marek samochodów i przypisz go do zmiennej `wynik`.
 
 <textarea rows="6" cols="70">
 Tutaj wklej rozwiązanie. 
@@ -71,6 +73,7 @@ Tutaj wklej rozwiązanie.
 <button type="button">Wyślij rozwiązanie!</button>
 
 # Poziom 2 zadanie 6
+
 
 
 <textarea rows="6" cols="70">
