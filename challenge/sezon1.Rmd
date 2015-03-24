@@ -115,30 +115,31 @@ Tutaj wklej rozwiązanie.
 
 # Poziom 3 zadanie 9
 
+Ze zbioru danych `auta2012` wybierz tylko auta marki `Volkswagen`.
+
+Wybierz kolumnę z rodzajem paliwa a następnie narysuj wykres słupkowy prezentujący jak często auta mają poszcezgólne rodzaje paliwa.
+
 
 # Poziom 3 zadanie 10
 
+Napisz funkcję, która przyjmuje jeden argument o nazwie `marka` a jako wynik zwraca procent aut tej marki, które są wyposażone w klimatyzację. Procent jest wyznaczany na bazie zbioru danych `auta2012`.
+
+Zapisz tę funkcje pod nazwą `procKlima`.
 
 # Poziom 3 zadanie 11
+
+Ze zbioru danych `auta2012` wybierz samochody Toyota Corolla, a następnie narysuj historam cen tych ofert.
 
 
 # Poziom 3 zadanie 12
 
+Ze zbioru danych `auta2012` wybierz samochody Toyota, pogrupuj je po modelu, a następnie policz dla każdego modelu średnią cenę. 
 
-# Poziom 3 - zadania trudniejsze niż te na odcinkach
+Tak wyznaczoną ramkę z kolumna opisującą model oraz kolumną opisującą średnią cenę tego modelu posortuj po cenie, tak by najdroższe modele były na górze a najtańsze na dole.
 
+Wynik przypisz do zmiennej `wynik`.
 
-# Poziom 4 - wymagające
-
-
-# Poziom 5 - bardzo wymagające
-
-
-
-
-
-
-# Zadanie, sezon 1, odcinek 1
+# Poziom 4 zadanie 13
 
 Pod adresem `http://biecek.pl/R/dane/daneO.csv` znajduje się zbiór danych, w którego pierwszej kolumnie znajduje się zmienna `Wiek`. Policz średnią wartość z tej kolumny i przypisz do zmiennej `srWiek`.
 
@@ -163,10 +164,7 @@ comments <- ifelse(!exists("srWiek"), "Brak zmiennej o nazwie srWiek",
 
 ```
 
-
----
-
-# Zadanie, sezon 1, odcinek 2
+# Poziom 4 zadanie 14
 
 Dla zbioru danych `koty_ptaki` z pakiety `PogromcyDanych` policz maksymalną prędkość dla każdej grupy gatunków.
 
@@ -199,35 +197,30 @@ comments <- ifelse(!exists("maxPredkosc"), "Brak zmiennej o nazwie maxPredkosc",
 ```
 
 
----
+# Poziom 4 zadanie 15
 
-# Zadanie, sezon 1, odcinek 3
 
-Dla zbioru danych `koty_ptaki` przygotuj wykres z użyciem pakietu `ggplot2`, na osi X przedstaw prędkość na osi Y długość poszczególnych gatunków. 
 
-Wynikowy wykres zapisz do zmiennej `predkiDlugi`.
+# Poziom 4 zadanie 16
 
-Przykładowe rozwiązanie:
 
-```{r, message=FALSE, warning=FALSE}
-library(PogromcyDanych)
-library(ggplot2)
 
-predkiDlugi <- ggplot(koty_ptaki, aes(predkosc, dlugosc)) + geom_point() + geom_smooth()
+# Poziom 5 zadanie 17
 
-```
 
-Test
 
-```{r}
+# Poziom 5 zadanie 18
 
-isCorrect <- ifelse(all(as.character(predkiDlugi$mapping) == c("predkosc", "dlugosc")), 
-                    TRUE, FALSE)
-comments <- ifelse(!exists("predkiDlugi"), "Brak zmiennej o nazwie predkiDlugi", 
-                   ifelse(!("ggplot" %in% class(predkiDlugi)), 
-                          "Obiekt predkiDlugi nie jest wykresem w ggplot2", 
-                          ifelse(isCorrect, "", 
-                          "To nie jest poprawna odpowiedź")))
 
-```
+
+# Poziom 5 zadanie 19
+
+
+
+# Poziom 5 zadanie 20
+
+
+
+
+
 

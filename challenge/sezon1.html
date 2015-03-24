@@ -140,27 +140,26 @@ Wyślij rozwiązanie!
 </div>
 <div id="poziom-3-zadanie-9" class="slide section level1">
 <h1>Poziom 3 zadanie 9</h1>
+<p>Ze zbioru danych <code>auta2012</code> wybierz tylko auta marki <code>Volkswagen</code>.</p>
+<p>Wybierz kolumnę z rodzajem paliwa a następnie narysuj wykres słupkowy prezentujący jak często auta mają poszcezgólne rodzaje paliwa.</p>
 </div>
 <div id="poziom-3-zadanie-10" class="slide section level1">
 <h1>Poziom 3 zadanie 10</h1>
+<p>Napisz funkcję, która przyjmuje jeden argument o nazwie <code>marka</code> a jako wynik zwraca procent aut tej marki, które są wyposażone w klimatyzację. Procent jest wyznaczany na bazie zbioru danych <code>auta2012</code>.</p>
+<p>Zapisz tę funkcje pod nazwą <code>procKlima</code>.</p>
 </div>
 <div id="poziom-3-zadanie-11" class="slide section level1">
 <h1>Poziom 3 zadanie 11</h1>
+<p>Ze zbioru danych <code>auta2012</code> wybierz samochody Toyota Corolla, a następnie narysuj historam cen tych ofert.</p>
 </div>
 <div id="poziom-3-zadanie-12" class="slide section level1">
 <h1>Poziom 3 zadanie 12</h1>
+<p>Ze zbioru danych <code>auta2012</code> wybierz samochody Toyota, pogrupuj je po modelu, a następnie policz dla każdego modelu średnią cenę.</p>
+<p>Tak wyznaczoną ramkę z kolumna opisującą model oraz kolumną opisującą średnią cenę tego modelu posortuj po cenie, tak by najdroższe modele były na górze a najtańsze na dole.</p>
+<p>Wynik przypisz do zmiennej <code>wynik</code>.</p>
 </div>
-<div id="poziom-3---zadania-trudniejsze-niz-te-na-odcinkach" class="slide section level1">
-<h1>Poziom 3 - zadania trudniejsze niż te na odcinkach</h1>
-</div>
-<div id="poziom-4---wymagajace" class="slide section level1">
-<h1>Poziom 4 - wymagające</h1>
-</div>
-<div id="poziom-5---bardzo-wymagajace" class="slide section level1">
-<h1>Poziom 5 - bardzo wymagające</h1>
-</div>
-<div id="zadanie-sezon-1-odcinek-1" class="slide section level1">
-<h1>Zadanie, sezon 1, odcinek 1</h1>
+<div id="poziom-4-zadanie-13" class="slide section level1">
+<h1>Poziom 4 zadanie 13</h1>
 <p>Pod adresem <code>http://biecek.pl/R/dane/daneO.csv</code> znajduje się zbiór danych, w którego pierwszej kolumnie znajduje się zmienna <code>Wiek</code>. Policz średnią wartość z tej kolumny i przypisz do zmiennej <code>srWiek</code>.</p>
 <p>Przykładowe rozwiązanie:</p>
 <pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;http://biecek.pl/R/dane/daneO.csv&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;;&quot;</span>)
@@ -171,8 +170,8 @@ comments &lt;-<span class="st"> </span><span class="kw">ifelse</span>(!<span cla
                    <span class="kw">ifelse</span>(isCorrect, <span class="st">&quot;&quot;</span>, 
                           <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>))</code></pre>
 </div>
-<div id="zadanie-sezon-1-odcinek-2" class="slide section level1">
-<h1>Zadanie, sezon 1, odcinek 2</h1>
+<div id="poziom-4-zadanie-14" class="slide section level1">
+<h1>Poziom 4 zadanie 14</h1>
 <p>Dla zbioru danych <code>koty_ptaki</code> z pakiety <code>PogromcyDanych</code> policz maksymalną prędkość dla każdej grupy gatunków.</p>
 <p>Wynik zapisz to zmiennej <code>maxPredkosc</code>.</p>
 <p>Przykładowe rozwiązanie:</p>
@@ -191,23 +190,23 @@ comments &lt;-<span class="st"> </span><span class="kw">ifelse</span>(!<span cla
                    <span class="kw">ifelse</span>(isCorrect, <span class="st">&quot;&quot;</span>, 
                           <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>))</code></pre>
 </div>
-<div id="zadanie-sezon-1-odcinek-3" class="slide section level1">
-<h1>Zadanie, sezon 1, odcinek 3</h1>
-<p>Dla zbioru danych <code>koty_ptaki</code> przygotuj wykres z użyciem pakietu <code>ggplot2</code>, na osi X przedstaw prędkość na osi Y długość poszczególnych gatunków.</p>
-<p>Wynikowy wykres zapisz do zmiennej <code>predkiDlugi</code>.</p>
-<p>Przykładowe rozwiązanie:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
-<span class="kw">library</span>(ggplot2)
-
-predkiDlugi &lt;-<span class="st"> </span><span class="kw">ggplot</span>(koty_ptaki, <span class="kw">aes</span>(predkosc, dlugosc)) +<span class="st"> </span><span class="kw">geom_point</span>() +<span class="st"> </span><span class="kw">geom_smooth</span>()</code></pre>
-<p>Test</p>
-<pre class="sourceCode r"><code class="sourceCode r">isCorrect &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">all</span>(<span class="kw">as.character</span>(predkiDlugi$mapping) ==<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;predkosc&quot;</span>, <span class="st">&quot;dlugosc&quot;</span>)), 
-                    <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)
-comments &lt;-<span class="st"> </span><span class="kw">ifelse</span>(!<span class="kw">exists</span>(<span class="st">&quot;predkiDlugi&quot;</span>), <span class="st">&quot;Brak zmiennej o nazwie predkiDlugi&quot;</span>, 
-                   <span class="kw">ifelse</span>(!(<span class="st">&quot;ggplot&quot;</span> %in%<span class="st"> </span><span class="kw">class</span>(predkiDlugi)), 
-                          <span class="st">&quot;Obiekt predkiDlugi nie jest wykresem w ggplot2&quot;</span>, 
-                          <span class="kw">ifelse</span>(isCorrect, <span class="st">&quot;&quot;</span>, 
-                          <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>)))</code></pre>
+<div id="poziom-4-zadanie-15" class="slide section level1">
+<h1>Poziom 4 zadanie 15</h1>
+</div>
+<div id="poziom-4-zadanie-16" class="slide section level1">
+<h1>Poziom 4 zadanie 16</h1>
+</div>
+<div id="poziom-5-zadanie-17" class="slide section level1">
+<h1>Poziom 5 zadanie 17</h1>
+</div>
+<div id="poziom-5-zadanie-18" class="slide section level1">
+<h1>Poziom 5 zadanie 18</h1>
+</div>
+<div id="poziom-5-zadanie-19" class="slide section level1">
+<h1>Poziom 5 zadanie 19</h1>
+</div>
+<div id="poziom-5-zadanie-20" class="slide section level1">
+<h1>Poziom 5 zadanie 20</h1>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
