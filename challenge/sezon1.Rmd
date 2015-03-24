@@ -102,6 +102,9 @@ Tutaj wklej rozwiązanie.
 
 # Poziom 2 zadanie 8
 
+Używając funkcji z pakietu `dplyr` wyznacz średnią cenę dla różnych marek.
+
+Pogrupuj dane markami a następnie w tych grupach wyznacz średnią cenę.
 
 <textarea rows="6" cols="70">
 Tutaj wklej rozwiązanie. 
@@ -110,7 +113,16 @@ Tutaj wklej rozwiązanie.
 <button type="button">Wyślij rozwiązanie!</button>
 
 
-# Poziom 2 - zadania porównywalne z tymi z odcinków
+# Poziom 3 zadanie 9
+
+
+# Poziom 3 zadanie 10
+
+
+# Poziom 3 zadanie 11
+
+
+# Poziom 3 zadanie 12
 
 
 # Poziom 3 - zadania trudniejsze niż te na odcinkach
