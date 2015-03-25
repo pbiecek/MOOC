@@ -1,0 +1,300 @@
+---
+title: "Conditional commands"
+author: "Data tameRs"
+date: season 1 / episode 9<br><br> All rights reserved.<br> Using without permission is prohibited <br><br><br><br>Press `A` to change slides into text <br> Press `T` to display table of contents.
+output:
+  beamer_presentation:
+    highlight: default
+  slidy_presentation:
+    css: ../style.css
+    font_adjustment: 0
+    footer: pogRomcy danych / programowanie / instrukcje warunkowe
+    highlight: default
+    includes:
+      in_header: ../tracking.html
+---
+
+# What is this episode about?
+
+Due to multiplicity of available data analysis algorithms, we cannot simply apply any chosen method, but we are often forced to look for the best method in our particular case. Each method can be the best one in a given context. In many cases the best solution is to conditionally choose this or that method depending on the type of data that we deal with. 
+
+We use conditional commands in order to perform conditionally different groups of commands. 
+
+In this episode you will learn:
+
+- How to use conditional commands?
+- How to use conditional commands in a loop?
+
+
+As an illustration we will use the data set `koty_ptaki` available in the package `PogromcyDanych`. 
+
+```{r, message=FALSE, warning=FALSE}
+library(PogromcyDanych)
+head(koty_ptaki, 3)
+```
+
+---
+
+# Conditional commands
+
+When you are designing a program, you often find yourself in a situation in which you see that your further actions depend on some unknown or potentially changeable value. 
+
+
+For example, when you randomly choose one number from the range 0-1 and you want to write `Heads` or `Tails` depending on the result, you do not know what to write while you are writing the code as you do not know which value you will draw. 
+
+Thanks to conditional commands you can write alternative scenarios to be acted out according to the given condition. 
+
+The following code will display the word `Heads` on the screen if a number smaller than 0,5 is drawn and the word `Tails` if a number bigger or equal to 0,5 is drawn. 
+
+```{r}
+liczbaLosowa <- runif(n = 1)
+
+if (liczbaLosowa < 0.5) {
+  cat("Heads")
+} else {
+  cat("Tails")
+}
+```
+
+---
+
+# Conditional commands
+
+When we are preparing a data processing algorithm, we often need to take into account various possible situations. 
+We can use conditional commands to create alternative processing schemes carried out depending on the state of certain variables. 
+
+The most commonly used conditional command is `if else`. There are three types of this command in R. 
+
+If the `condition` written after the if part is true, the command `expression1` will be performed. Otherwise, the program will carry out the command `expression2` (if it is defined).
+
+The third type specified below is the command `ifelse()` which operates not only on one logical value TRUE/FALSE but on a whole vector of logical values. 
+
+
+```{r, eval=FALSE}
+if (condition) 
+  expression1
+
+if (condition) 
+  expression1 
+else 
+  expression2
+
+ifelse (condition_for_vector, expression1, expression2) 
+```
+
+If your expression contains more than one command, put it inside the brackets `{}`.  
+
+It is a quite common practice to insert expressions inside the brackets `{}` even if they contain only one command, as it improves readability of the whole code. 
+
+```{r, eval=FALSE}
+if (condition) {
+  expression1
+}
+
+if (condition) {
+  expression1
+} else {
+  expression2 
+}
+```
+
+---
+
+# Conditional commands
+
+Now I will use the first row from the data frame `koty_ptaki` to demonstrate various types of the conditional command. We first need to transform the column `gatunek` into the column of characters. Otherwise names of the species would not be properly displayed.  We will work only on the first row but we will save the index of that row in the variable `i`. This way it will be easier for us to use that code in a loop later on. 
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki$gatunek <- as.character(koty_ptaki$gatunek)
+i <- 9
+koty_ptaki[i,]
+```
+
+If we use only the `if` part, nothing will be displayed on the screen when the `condition` is false. 
+
+```{r, message=FALSE, warning=FALSE}
+if (koty_ptaki[i,"druzyna"] == "Kot") {
+  cat(koty_ptaki[i,"gatunek"], "is an big cat.")
+}
+```
+
+Je¿eli u¿yjemy instrukcji `if-else`, to gdy `warunek` oka¿e siê byæ fa³szywy wyœwietli siê wynik czêœci `else`.
+If we use the command `if-else`, the part after the `else` will be executed when the condition turns out to be false. 
+
+```{r, message=FALSE, warning=FALSE}
+if (koty_ptaki[i,"druzyna"] == "Kot") {
+  cat(koty_ptaki[i,"gatunek"], "is a big cat.")
+} else {
+  cat(koty_ptaki[i,"gatunek"], "is a bird.")
+}
+```
+
+
+---
+
+# Conditional commands
+
+If you work on vectors, the easiest solution is to use the vector command `ifelse()`. 
+
+Its first argument may be a vector. For example, the command `koty_ptaki[,”druzyna”] == “Kot”`  creates a vector of logical values. 
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[,"druzyna"] == "Kot"
+```
+
+We will use that command in the command `ifelse()` and our result will be a vector of text values  with `“Another big cat”` for TRUE value and `“Another fast bird”` for `FALSE` value. 
+
+
+```{r, message=FALSE, warning=FALSE}
+ifelse(koty_ptaki[,"druzyna"] == "Kot",
+  "Another big cat",
+  "Another fast bird")
+```
+
+---
+
+# Conditional commands and loops
+
+Conditional commands are frequently used inside the loops when a certain operation needs to be repeated several times but its course may have several potential scenarios. 
+
+Let me illustrate such situation using an example.
+
+This code will display a different tetx for cats and a different text for birds.   
+
+
+```{r, message=FALSE, warning=FALSE}
+# loop will be executed for each row
+for (i in 1:nrow(koty_ptaki)) {
+  # inside the loop, the execution depends on the condition and instruction if
+  if (koty_ptaki[i,"druzyna"] == "Kot") {
+    cat(koty_ptaki[i,"gatunek"], "is a big and fast cat.\n")
+  } else {
+    cat(koty_ptaki[i,"gatunek"], "is a bird.\n")
+  }
+}
+```
+
+---
+
+# Conditional commands and loops
+
+Conditional commands are often used to change the value of the variable depending on the condition. 
+
+The example below presents a loop with a conditional command which changes the value of variable `liczbaKotów` in one case or changes the value of the variable `liczbaPtaków` in the other case. 
+
+
+```{r, message=FALSE, warning=FALSE}
+# we create the variables in the first place
+liczbaKotow  <- 0
+liczbaPtakow <- 0
+# inside the loop, we will change the value of those variables depending on
+# whether a row describes a cat or a bird
+for (i in 1:nrow(koty_ptaki)) {
+  if (koty_ptaki[i,"druzyna"] == "Kot") {
+    liczbaKotow  <- liczbaKotow + 1
+  } else {
+    liczbaPtakow <- liczbaPtakow + 1
+  }
+}
+# we count the number of cats and birds
+liczbaKotow 
+liczbaPtakow
+```
+
+---
+
+# Summary of R instructions
+
+In this episode we have discussed conditional commands.
+
+Below you can see a list of all the commands used in this episode. 
+
+
+```{r, eval=FALSE}
+# Conditional command which will be executed differently
+#depending on the value we draw
+randomNumber <- runif(n = 1)
+if (randomNumber < 0.5) {
+  cat("Heads")
+} else {
+  cat("Tails")
+}
+
+# Conditional command with the if block alone
+i <- 9
+if (koty_ptaki[i,"druzyna"] == "Kot") {
+  cat(koty_ptaki[i,"gatunek"], "is a big cat.")
+}
+
+# Conditional command with the if-else block
+if (koty_ptaki[i,"druzyna"] == "Kot") {
+  cat(koty_ptaki[i,"gatunek"], "is a big cat.")
+} else {
+  cat(koty_ptaki[i,"gatunek"], "is a bird.")
+}
+
+# Logical conditions can be performed on a vectors
+koty_ptaki[,"druzyna"] == "Kot"
+
+# Conditional command ifelse() also works on a vector
+ifelse(koty_ptaki[,"druzyna"] == "Kot",
+  "Another big cat",
+  "Another fast bird")
+```
+
+---
+
+# Summary of R instructions
+
+In this episode we have discussed conditional commands. 
+
+Below you can see a list of all the commands used in this episode.
+
+
+```{r, eval=FALSE}
+#Inside loops, when you wish to perform different operations on different rows,
+#it is easy to use conditional commands
+
+for (i in 1:nrow(koty_ptaki)) {
+  # inside the loop, the execution depends on the condition and instruction if
+  if (koty_ptaki[i,"druzyna"] == "Kot") {
+    cat(koty_ptaki[i,"gatunek"], "is a big and fast cat.\n")
+  } else {
+    cat(koty_ptaki[i,"gatunek"], "is a bird.\n")
+  }
+}
+
+# With conditional commands we may not only print text, 
+#but also change the values of the variable
+#In the example below, the values of counting variables 
+#are changed differently depending on the row the loop is working on.
+
+
+liczbaKotow  <- 0
+liczbaPtakow <- 0
+for (i in 1:nrow(koty_ptaki)) {
+  if (koty_ptaki[i,"druzyna"] == "Kot") {
+    liczbaKotow  <- liczbaKotow + 1
+  } else {
+    liczbaPtakow <- liczbaPtakow + 1
+  }
+}
+# we count the number of cats and birds
+liczbaKotow 
+liczbaPtakow
+```
+
+---
+
+
+# Exercises
+
+* Write a conditional command which will display `light` for animals which weight less than 1kg and `heavy` for animals which weight more than 1kg.
+
+* Write a conditional command which will display `light` for animals which weight less than 1kg, `heavy` for animals which weight more than 100kg and `medium` for animals
+which weight between 1-100kg. You can achieve the same effects using two commands `if()` or the function `switch()`. 
+
+* Write a loop and a conditional command summing up weights of all the cats and all the birds separately
+
+You may find sample answers at https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+
