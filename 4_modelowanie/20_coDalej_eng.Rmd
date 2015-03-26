@@ -1,0 +1,44 @@
+---
+title: "Logistic regression"
+author: "data busteRs"
+date: "season 3 / episode 8<br><br> All rights reserved.<br> Usage allowed only with the author's permission.   <br><br><br><br> Press `A` to turn slides into full text. <br> Press `T` to show Table of Contents."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / modelowanie / regresja logistyczna"
+---
+
+# What is this episode about
+
+
+KTR:
+
+http://yatani.jp/teaching/doku.php?id=hcistats:start
+
+
+
+I think that in the part: Data modeling, relationships between tests may be underlined/demonstrated.
+For example :
+[*] strong McNemar's test and strong binomial test,
+[*] McNemar's test and chi-square proportion test,
+[*] chi square/LR test and logit/Poisson model,
+
+I like such a presentation of different solutions very much. And it is probably rare. A pity. In general presented tests are presented as separate "entities" without showing interesting relationships. This form of presenting tests would significantly stand out amongst other materials. Maybe it will be more interesting to the students?
+
+https://www.otexts.org/book/sfml
+https://www.otexts.org/book/biostat
+ 
+od KTR do Data MAster
+http://statacumen.com/teach/ADA1/ADA1_notes.pdf
+http://powerandsamplesize.com/Calculators/Test-1-Proportion/1-Sample-Equality
+http://onlinestatbook.com/2/power/factors.html
+http://rpsychologist.com/d3/CI/
+http://www.stat.ncsu.edu/people/lu/courses/ST505/Ch2.pdf
+
+
++ O rozkładach http://www3.nd.edu/~sjones20/JonesUND/BioStats_files/Distributions_1-3-11.pdf
+
