@@ -5,9 +5,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / eksploracja danych / indeksowanie" /> 
-  <title>Indeksowanie ramek danych i wektorów</title>
+  <meta name="author" content="Data Crunchers" />
+  <meta name="copyright" content="Data Crunchers / zbiory danych" /> 
+  <title>Data sets</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -28,7 +28,7 @@ code > span.al { color: #ff0000; font-weight: bold; }
 code > span.fu { color: #06287e; }
 code > span.er { color: #ff0000; font-weight: bold; }
   </style>
-  <link href="data:text/css,%2F%2A%20slidy%2Ecss%0A%0A%20%20%20Copyright%20%28c%29%202005%2D2010%20W3C%20%28MIT%2C%20ERCIM%2C%20Keio%29%2C%20All%20Rights%20Reserved%2E%0A%20%20%20W3C%20liability%2C%20trademark%2C%20document%20use%20and%20software%20licensing%0A%20%20%20rules%20apply%2C%20see%3A%0A%0A%20%20%20http%3A%2F%2Fwww%2Ew3%2Eorg%2FConsortium%2FLegal%2Fcopyright%2Ddocuments%0A%20%20%20http%3A%2F%2Fwww%2Ew3%2Eorg%2FConsortium%2FLegal%2Fcopyright%2Dsoftware%0A%2A%2F%0Abody%0A%7B%0A%20%20margin%3A%200%200%200%200%3B%0A%20%20padding%3A%200%200%200%200%3B%0A%20%20width%3A%20100%25%3B%0A%20%20height%3A%20100%25%3B%0A%20%20color%3A%20black%3B%0A%20%20background%2Dcolor%3A%20white%3B%0A%20%20font%2Dfamily%3A%20%22Gill%20Sans%20MT%22%2C%20%22Gill%20Sans%22%2C%20GillSans%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014pt%3B%0A%7D%0A%0Adiv%2Etoolbar%20%7B%0A%20%20position%3A%20fixed%3B%20z%2Dindex%3A%20200%3B%0A%20%20top%3A%20auto%3B%20bottom%3A%200%3B%20left%3A%200%3B%20right%3A%200%3B%0A%20%20height%3A%201%2E2em%3B%20text%2Dalign%3A%20right%3B%0A%20%20padding%2Dleft%3A%201em%3B%0A%20%20padding%2Dright%3A%201em%3B%20%0A%20%20font%2Dsize%3A%2060%25%3B%0A%20%20color%3A%20DimGray%3B%0A%20%20background%2Dcolor%3A%20rgb%28240%2C240%2C240%29%3B%0A%20%20border%2Dtop%3A%20solid%201px%20rgb%28180%2C180%2C180%29%3B%0A%7D%0A%0Adiv%2Etoolbar%20span%2Ecopyright%20%7B%0A%20%20color%3A%20DimGray%3B%0A%20%20margin%2Dleft%3A%200%2E5em%3B%0A%7D%0A%0Adiv%2Einitial%5Fprompt%20%7B%0A%20%20position%3A%20absolute%3B%0A%20%20z%2Dindex%3A%201000%3B%0A%20%20bottom%3A%201%2E2em%3B%0A%20%20width%3A%20100%25%3B%0A%20%20background%2Dcolor%3A%20rgb%28200%2C200%2C200%29%3B%0A%20%20opacity%3A%200%2E35%3B%0A%20%20background%2Dcolor%3A%20rgb%28200%2C200%2C200%2C%200%2E35%29%3B%0A%20%20cursor%3A%20pointer%3B%0A%7D%0A%0Adiv%2Einitial%5Fprompt%20p%2Ehelp%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0Adiv%2Einitial%5Fprompt%20p%2Eclose%20%7B%0A%20%20text%2Dalign%3A%20right%3B%0A%20%20font%2Dstyle%3A%20italic%3B%0A%7D%0A%0Adiv%2Eslidy%5Ftoc%20%7B%0A%20%20position%3A%20absolute%3B%0A%20%20z%2Dindex%3A%20300%3B%0A%20%20width%3A%2060%25%3B%0A%20%20max%2Dwidth%3A%2030em%3B%0A%20%20height%3A%2030em%3B%0A%20%20overflow%3A%20auto%3B%0A%20%20top%3A%20auto%3B%0A%20%20right%3A%20auto%3B%0A%20%20left%3A%204em%3B%0A%20%20bottom%3A%204em%3B%0A%20%20padding%3A%201em%3B%0A%20%20background%3A%20rgb%28240%2C240%2C240%29%3B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20font%2Dsize%3A%2060%25%3B%0A%7D%0A%0Adiv%2Eslidy%5Ftoc%20%2Etoc%5Fheading%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%20%20width%3A%20100%25%3B%0A%20%20margin%3A%200%3B%0A%20%20margin%2Dbottom%3A%201em%3B%0A%20%20border%2Dbottom%2Dstyle%3A%20solid%3B%0A%20%20border%2Dbottom%2Dcolor%3A%20rgb%28180%2C180%2C180%29%3B%0A%20%20border%2Dbottom%2Dwidth%3A%201px%3B%0A%7D%0A%0Adiv%2Eslide%20%7B%0A%20%20z%2Dindex%3A%2020%3B%0A%20%20margin%3A%200%200%200%200%3B%0A%20%20padding%2Dtop%3A%200%3B%0A%20%20padding%2Dbottom%3A%200%3B%0A%20%20padding%2Dleft%3A%2020px%3B%0A%20%20padding%2Dright%3A%2020px%3B%0A%20%20border%2Dwidth%3A%200%3B%0A%20%20clear%3A%20both%3B%0A%20%20top%3A%200%3B%0A%20%20bottom%3A%200%3B%0A%20%20left%3A%200%3B%0A%20%20right%3A%200%3B%0A%20%20line%2Dheight%3A%20120%25%3B%0A%20%20background%2Dcolor%3A%20transparent%3B%0A%7D%0A%0Adiv%2Ebackground%20%7B%0A%20%20display%3A%20none%3B%0A%7D%0A%0Adiv%2Ehandout%20%7B%0A%20%20margin%2Dleft%3A%2020px%3B%0A%20%20margin%2Dright%3A%2020px%3B%0A%7D%0A%0Adiv%2Eslide%2Etitlepage%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0Adiv%2Eslide%2Etitlepage%20h1%20%7B%0A%20%20padding%2Dtop%3A%2010%25%3B%0A%20%20margin%2Dright%3A%200%3B%0A%7D%0A%0Adiv%2Eslide%20h1%20%7B%0A%20%20padding%2Dleft%3A%200%3B%0A%20%20padding%2Dright%3A%2020pt%3B%0A%20%20padding%2Dtop%3A%204pt%3B%0A%20%20padding%2Dbottom%3A%204pt%3B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20margin%2Dleft%3A%200%3B%0A%20%20margin%2Dright%3A%2060pt%3B%0A%20%20margin%2Dbottom%3A%200%2E5em%3B%0A%20%20display%3A%20block%3B%20%0A%20%20font%2Dsize%3A%20160%25%3B%0A%20%20line%2Dheight%3A%201%2E2em%3B%0A%20%20background%3A%20transparent%3B%0A%7D%0A%0A%40media%20screen%20and%20%28max%2Ddevice%2Dwidth%3A%201024px%29%0A%7B%0A%20%20div%2Eslide%20%7B%20font%2Dsize%3A%20100%25%3B%20%7D%0A%7D%0A%0A%40media%20screen%20and%20%28max%2Ddevice%2Dwidth%3A%20800px%29%0A%7B%0A%20%20div%2Eslide%20%7B%20font%2Dsize%3A%20200%25%3B%20%7D%0A%20%20div%2Eslidy%5Ftoc%20%7B%0A%20%20%20%20top%3A%201em%3B%0A%20%20%20%20left%3A%201em%3B%0A%20%20%20%20right%3A%20auto%3B%0A%20%20%20%20width%3A%2080%25%3B%0A%20%20%20%20font%2Dsize%3A%20180%25%3B%0A%20%20%7D%0A%7D%0A%0Adiv%2Etoc%2Dheading%20%7B%0A%20%20width%3A%20100%25%3B%0A%20%20border%2Dbottom%3A%20solid%201px%20rgb%28180%2C180%2C180%29%3B%0A%20%20margin%2Dbottom%3A%201em%3B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0Aimg%20%7B%0A%20%20image%2Drendering%3A%20optimize%2Dquality%3B%0A%7D%0A%0Apre%20%7B%0A%20font%2Dsize%3A%2080%25%3B%0A%20font%2Dweight%3A%20bold%3B%0A%20line%2Dheight%3A%20120%25%3B%0A%20padding%2Dtop%3A%200%2E2em%3B%0A%20padding%2Dbottom%3A%200%2E2em%3B%0A%20padding%2Dleft%3A%201em%3B%0A%20padding%2Dright%3A%201em%3B%0A%20border%2Dstyle%3A%20solid%3B%0A%20border%2Dleft%2Dwidth%3A%201em%3B%0A%20border%2Dtop%2Dwidth%3A%20thin%3B%0A%20border%2Dright%2Dwidth%3A%20thin%3B%0A%20border%2Dbottom%2Dwidth%3A%20thin%3B%0A%20border%2Dcolor%3A%20%2395ABD0%3B%0A%20color%3A%20%2300428C%3B%0A%20background%2Dcolor%3A%20%23E4E5E7%3B%0A%7D%0A%0Ali%20pre%20%7B%20margin%2Dleft%3A%200%3B%20%7D%0A%0Ablockquote%20%7B%20font%2Dstyle%3A%20italic%20%7D%0A%0Aimg%20%7B%20background%2Dcolor%3A%20transparent%20%7D%0A%0Ap%2Ecopyright%20%7B%20font%2Dsize%3A%20smaller%20%7D%0A%0A%2Ecenter%20%7B%20text%2Dalign%3A%20center%20%7D%0A%2Efootnote%20%7B%20font%2Dsize%3A%20smaller%3B%20margin%2Dleft%3A%202em%3B%20%7D%0A%0Aa%20img%20%7B%20border%2Dwidth%3A%200%3B%20border%2Dstyle%3A%20none%20%7D%0A%0Aa%3Avisited%20%7B%20color%3A%20navy%20%7D%0Aa%3Alink%20%7B%20color%3A%20navy%20%7D%0Aa%3Ahover%20%7B%20color%3A%20red%3B%20text%2Ddecoration%3A%20underline%20%7D%0Aa%3Aactive%20%7B%20color%3A%20red%3B%20text%2Ddecoration%3A%20underline%20%7D%0A%0Aa%20%7Btext%2Ddecoration%3A%20none%7D%0A%2Etoolbar%20a%3Alink%20%7Bcolor%3A%20blue%7D%0A%2Etoolbar%20a%3Avisited%20%7Bcolor%3A%20blue%7D%0A%2Etoolbar%20a%3Aactive%20%7Bcolor%3A%20red%7D%0A%2Etoolbar%20a%3Ahover%20%7Bcolor%3A%20red%7D%0A%0Aul%20%7B%20list%2Dstyle%2Dtype%3A%20square%3B%20%7D%0Aul%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20disc%3B%20%7D%0Aul%20ul%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20circle%3B%20%7D%0Aul%20ul%20ul%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20disc%3B%20%7D%0Ali%20%7B%20margin%2Dleft%3A%200%2E5em%3B%20margin%2Dtop%3A%200%2E5em%3B%20%7D%0Ali%20li%20%7B%20font%2Dsize%3A%2085%25%3B%20font%2Dstyle%3A%20italic%20%7D%0Ali%20li%20li%20%7B%20font%2Dsize%3A%2085%25%3B%20font%2Dstyle%3A%20normal%20%7D%0A%0Adiv%20dt%0A%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%20%20margin%2Dtop%3A%201em%3B%0A%20%20margin%2Dbottom%3A%200%2E5em%3B%0A%20%20font%2Dweight%3A%20bold%3B%0A%7D%0Adiv%20dd%0A%7B%0A%20%20margin%2Dleft%3A%202em%3B%0A%20%20margin%2Dbottom%3A%200%2E5em%3B%0A%7D%0A%0A%0Ap%2Cpre%2Cul%2Col%2Cblockquote%2Ch2%2Ch3%2Ch4%2Ch5%2Ch6%2Cdl%2Ctable%20%7B%0A%20%20margin%2Dleft%3A%201em%3B%0A%20%20margin%2Dright%3A%201em%3B%0A%7D%0A%0Ap%2Esubhead%20%7B%20font%2Dweight%3A%20bold%3B%20margin%2Dtop%3A%202em%3B%20%7D%0A%0A%2Esmaller%20%7B%20font%2Dsize%3A%20smaller%20%7D%0A%2Ebigger%20%7B%20font%2Dsize%3A%20130%25%20%7D%0A%0Atd%2Cth%20%7B%20padding%3A%200%2E2em%20%7D%0A%0Aul%20%7B%0A%20%20margin%3A%200%2E5em%201%2E5em%200%2E5em%201%2E5em%3B%0A%20%20padding%3A%200%3B%0A%7D%0A%0Aol%20%7B%0A%20%20margin%3A%200%2E5em%201%2E5em%200%2E5em%201%2E5em%3B%0A%20%20padding%3A%200%3B%0A%7D%0A%0Aul%20%7B%20list%2Dstyle%2Dtype%3A%20square%3B%20%7D%0Aul%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20disc%3B%20%7D%0Aul%20ul%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20circle%3B%20%7D%0Aul%20ul%20ul%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20disc%3B%20%7D%0A%0Aul%20li%20%7B%20%0A%20%20list%2Dstyle%3A%20square%3B%0A%20%20margin%3A%200%2E1em%200em%200%2E6em%200%3B%0A%20%20padding%3A%200%200%200%200%3B%0A%20%20line%2Dheight%3A%20140%25%3B%0A%7D%0A%0Aol%20li%20%7B%20%0A%20%20margin%3A%200%2E1em%200em%200%2E6em%201%2E5em%3B%0A%20%20padding%3A%200%200%200%200px%3B%0A%20%20line%2Dheight%3A%20140%25%3B%0A%20%20list%2Dstyle%2Dtype%3A%20decimal%3B%0A%7D%0A%0Ali%20ul%20li%20%7B%20%0A%20%20font%2Dsize%3A%2085%25%3B%20%0A%20%20font%2Dstyle%3A%20italic%3B%0A%20%20list%2Dstyle%2Dtype%3A%20disc%3B%0A%20%20background%3A%20transparent%3B%0A%20%20padding%3A%200%200%200%200%3B%0A%7D%0Ali%20li%20ul%20li%20%7B%20%0A%20%20font%2Dsize%3A%2085%25%3B%20%0A%20%20font%2Dstyle%3A%20normal%3B%0A%20%20list%2Dstyle%2Dtype%3A%20circle%3B%0A%20%20background%3A%20transparent%3B%0A%20%20padding%3A%200%200%200%200%3B%0A%7D%0Ali%20li%20li%20ul%20li%20%7B%0A%20%20list%2Dstyle%2Dtype%3A%20disc%3B%0A%20%20background%3A%20transparent%3B%0A%20%20padding%3A%200%200%200%200%3B%0A%7D%0A%0Ali%20ol%20li%20%7B%0A%20%20list%2Dstyle%2Dtype%3A%20decimal%3B%0A%7D%0A%0A%0Ali%20li%20ol%20li%20%7B%0A%20%20list%2Dstyle%2Dtype%3A%20decimal%3B%0A%7D%0A%0A%2F%2A%0A%20setting%20class%3D%22outline%20on%20ol%20or%20ul%20makes%20it%20behave%20as%20an%0A%20ouline%20list%20where%20blocklevel%20content%20in%20li%20elements%20is%0A%20hidden%20by%20default%20and%20can%20be%20expanded%20or%20collapsed%20with%0A%20mouse%20click%2E%20Set%20class%3D%22expand%22%20on%20li%20to%20override%20default%0A%2A%2F%0A%0Aol%2Eoutline%20li%3Ahover%20%7B%20cursor%3A%20pointer%20%7D%0Aol%2Eoutline%20li%2Enofold%3Ahover%20%7B%20cursor%3A%20default%20%7D%0A%0Aul%2Eoutline%20li%3Ahover%20%7B%20cursor%3A%20pointer%20%7D%0Aul%2Eoutline%20li%2Enofold%3Ahover%20%7B%20cursor%3A%20default%20%7D%0A%0Aol%2Eoutline%20%7B%20list%2Dstyle%3Adecimal%3B%20%7D%0Aol%2Eoutline%20ol%20%7B%20list%2Dstyle%2Dtype%3Alower%2Dalpha%20%7D%0A%0Aol%2Eoutline%20li%2Enofold%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAIACAMzMzOvr%2FywAAAAACQAJAAACD4SPoRvG614Dctb4MEMcFAA7%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aol%2Eoutline%20li%2Eunfolded%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAMPD%2F8zMzOvr%2F%2F%2F%2F%2FywAAAAACQAJAAACEYyPoivG614LAlg7ZZbxoR8UADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aol%2Eoutline%20li%2Efolded%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAMPD%2F8zMzOvr%2F%2F%2F%2F%2FywAAAAACQAJAAACFIyPoiu2sJyCyoF7W3hxz850CFIAADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aol%2Eoutline%20li%2Eunfolded%3Ahover%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAAAAAAAA%2F8PD%2F%2F%2F%2F%2FywAAAAACQAJAAACEYSPoivG614DIlg7ZZbxoQ8UADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aol%2Eoutline%20li%2Efolded%3Ahover%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAAAAAAAA%2F8PD%2F%2F%2F%2F%2FywAAAAACQAJAAACFISPoiu2sZyCyoV7G3hxz850CFIAADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0A%0Aul%2Eoutline%20li%2Enofold%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAIACAMzMzOvr%2FywAAAAACQAJAAACD4SPoRvG614Dctb4MEMcFAA7%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aul%2Eoutline%20li%2Eunfolded%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAMPD%2F8zMzOvr%2F%2F%2F%2F%2FywAAAAACQAJAAACEYyPoivG614LAlg7ZZbxoR8UADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aul%2Eoutline%20li%2Efolded%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAMPD%2F8zMzOvr%2F%2F%2F%2F%2FywAAAAACQAJAAACFIyPoiu2sJyCyoF7W3hxz850CFIAADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aul%2Eoutline%20li%2Eunfolded%3Ahover%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAAAAAAAA%2F8PD%2F%2F%2F%2F%2FywAAAAACQAJAAACEYSPoivG614DIlg7ZZbxoQ8UADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aul%2Eoutline%20li%2Efolded%3Ahover%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAAAAAAAA%2F8PD%2F%2F%2F%2F%2FywAAAAACQAJAAACFISPoiu2sZyCyoV7G3hxz850CFIAADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0A%0A%2F%2A%20for%20slides%20with%20class%20%22title%22%20in%20table%20of%20contents%20%2A%2F%0Aa%2Etitleslide%20%7B%20font%2Dweight%3A%20bold%3B%20font%2Dstyle%3A%20italic%20%7D%0A%0A%2F%2A%0A%20hide%20images%20for%20work%20around%20for%20save%20as%20bug%0A%20where%20browsers%20fail%20to%20save%20images%20used%20by%20CSS%0A%2A%2F%0Aimg%2Ehidden%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%20%7D%0Adiv%2Einitial%5Fprompt%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%20%7D%0A%0A%20%20div%2Eslide%20%7B%0A%20%20%20%20%20visibility%3A%20visible%3B%0A%20%20%20%20%20position%3A%20inherit%3B%0A%20%20%7D%0A%20%20div%2Ehandout%20%7B%0A%20%20%20%20%20border%2Dtop%2Dstyle%3A%20solid%3B%0A%20%20%20%20%20border%2Dtop%2Dwidth%3A%20thin%3B%0A%20%20%20%20%20border%2Dtop%2Dcolor%3A%20black%3B%0A%20%20%7D%0A%0A%40media%20screen%20%7B%0A%20%20%2Ehidden%20%7B%20display%3A%20none%3B%20visibility%3A%20visible%20%7D%0A%0A%20%20div%2Eslide%2Ehidden%20%7B%20display%3A%20block%3B%20visibility%3A%20visible%20%7D%0A%20%20div%2Ehandout%2Ehidden%20%7B%20display%3A%20block%3B%20visibility%3A%20visible%20%7D%0A%20%20div%2Ebackground%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%20%7D%0A%20%20body%2Esingle%5Fslide%20div%2Einitial%5Fprompt%20%7B%20display%3A%20block%3B%20visibility%3A%20visible%20%7D%0A%20%20body%2Esingle%5Fslide%20div%2Ebackground%20%7B%20display%3A%20block%3B%20visibility%3A%20visible%20%7D%0A%20%20body%2Esingle%5Fslide%20div%2Ebackground%2Ehidden%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%20%7D%0A%20%20body%2Esingle%5Fslide%20%2Einvisible%20%7B%20visibility%3A%20hidden%20%7D%0A%20%20body%2Esingle%5Fslide%20%2Ehidden%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%20%7D%0A%20%20body%2Esingle%5Fslide%20div%2Eslide%20%7B%20position%3A%20absolute%20%7D%0A%20%20body%2Esingle%5Fslide%20div%2Ehandout%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%20%7D%0A%7D%0A%0A%40media%20print%20%7B%0A%20%20%2Ehidden%20%7B%20display%3A%20block%3B%20visibility%3A%20visible%20%7D%0A%0A%20%20div%2Eslide%20pre%20%7B%20font%2Dsize%3A%2060%25%3B%20padding%2Dleft%3A%200%2E5em%3B%20%7D%0A%20%20div%2Etoolbar%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%3B%20%7D%0A%20%20div%2Eslidy%5Ftoc%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%3B%20%7D%0A%20%20div%2Ebackground%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%3B%20%7D%0A%20%20div%2Eslide%20%7B%20page%2Dbreak%2Dbefore%3A%20always%20%7D%0A%20%20%2F%2A%20%3Afirst%2Dchild%20isn%27t%20reliable%20for%20print%20media%20%2A%2F%0A%20%20div%2Eslide%2Efirst%2Dslide%20%7B%20page%2Dbreak%2Dbefore%3A%20avoid%20%7D%0A%7D%0A%0A%2F%2A%20the%20below%20rules%20increase%20compatibility%20with%20Shiny%20and%20Bootstrap%20%2A%2F%0A%0A%2F%2A%20remove%20margins%20that%20misalign%20sliders%20%2A%2F%0A%2Ejslider%20table%20%7B%0A%20%20%20margin%2Dleft%3A%200em%3B%0A%20%20%20margin%2Dright%3A%200em%3B%0A%7D%0A%0A%2F%2A%20don%27t%20use%20very%20large%20fonts%20in%20datatables%20%2A%2F%0Atable%2EdataTable%2C%20%2Eshiny%2Ddatatable%2Doutput%20div%20%7B%0A%20%20%20font%2Dsize%3A%2014pt%3B%0A%7D%0A%0A%2F%2A%20adjust%20footer%20element%20size%20for%20DT%20package%20%2A%2F%0A%2EdataTables%5Finfo%2C%20%2EdataTables%5Fpaginate%20%7B%0A%20%20font%2Dsize%3A%2019px%3B%0A%7D%0A%0A%2F%2A%20allow%20R%20chunks%20to%20render%20in%20a%20large%20font%20%2A%2F%0Apre%2EsourceCode%2C%20code%2EsourceCode%20%7B%0A%20%20%20font%2Dsize%3A%2080%25%3B%0A%7D%0A%0A%2F%2A%20increase%20the%20input%20font%20size%20set%20by%20Bootstrap%20%2A%2F%0Alabel%2C%20button%2C%20input%2C%20select%2C%20textarea%20%7B%0A%20%20%20font%2Dsize%3A%2014pt%3B%0A%7D%0A%0A%2F%2A%20eliminate%20bullets%20in%20Bootstrap%20navigation%20lists%20%2A%2F%0Aul%2Enav%2C%20ul%2Enav%20li%20%7B%0A%20%20%20list%2Dstyle%2Dtype%3A%20none%3B%0A%7D%0A%0A" rel="stylesheet" type="text/css" media="screen, projection, print" />
+  <link href="data:text/css,%2F%2A%20slidy%2Ecss%0A%0A%20%20%20Copyright%20%28c%29%202005%2D2010%20W3C%20%28MIT%2C%20ERCIM%2C%20Keio%29%2C%20All%20Rights%20Reserved%2E%0A%20%20%20W3C%20liability%2C%20trademark%2C%20document%20use%20and%20software%20licensing%0A%20%20%20rules%20apply%2C%20see%3A%0A%0A%20%20%20http%3A%2F%2Fwww%2Ew3%2Eorg%2FConsortium%2FLegal%2Fcopyright%2Ddocuments%0A%20%20%20http%3A%2F%2Fwww%2Ew3%2Eorg%2FConsortium%2FLegal%2Fcopyright%2Dsoftware%0A%2A%2F%0Abody%0A%7B%0A%20%20margin%3A%200%200%200%200%3B%0A%20%20padding%3A%200%200%200%200%3B%0A%20%20width%3A%20100%25%3B%0A%20%20height%3A%20100%25%3B%0A%20%20color%3A%20black%3B%0A%20%20background%2Dcolor%3A%20white%3B%0A%20%20font%2Dfamily%3A%20%22Gill%20Sans%20MT%22%2C%20%22Gill%20Sans%22%2C%20GillSans%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014pt%3B%0A%7D%0A%0Adiv%2Etoolbar%20%7B%0A%20%20position%3A%20fixed%3B%20z%2Dindex%3A%20200%3B%0A%20%20top%3A%20auto%3B%20bottom%3A%200%3B%20left%3A%200%3B%20right%3A%200%3B%0A%20%20height%3A%201%2E2em%3B%20text%2Dalign%3A%20right%3B%0A%20%20padding%2Dleft%3A%201em%3B%0A%20%20padding%2Dright%3A%201em%3B%20%0A%20%20font%2Dsize%3A%2060%25%3B%0A%20%20color%3A%20DimGray%3B%0A%20%20background%2Dcolor%3A%20rgb%28240%2C240%2C240%29%3B%0A%20%20border%2Dtop%3A%20solid%201px%20rgb%28180%2C180%2C180%29%3B%0A%7D%0A%0Adiv%2Etoolbar%20span%2Ecopyright%20%7B%0A%20%20color%3A%20DimGray%3B%0A%20%20margin%2Dleft%3A%200%2E5em%3B%0A%7D%0A%0Adiv%2Einitial%5Fprompt%20%7B%0A%20%20position%3A%20absolute%3B%0A%20%20z%2Dindex%3A%201000%3B%0A%20%20bottom%3A%201%2E2em%3B%0A%20%20width%3A%20100%25%3B%0A%20%20background%2Dcolor%3A%20rgb%28200%2C200%2C200%29%3B%0A%20%20opacity%3A%200%2E35%3B%0A%20%20background%2Dcolor%3A%20rgb%28200%2C200%2C200%2C%200%2E35%29%3B%0A%20%20cursor%3A%20pointer%3B%0A%7D%0A%0Adiv%2Einitial%5Fprompt%20p%2Ehelp%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0Adiv%2Einitial%5Fprompt%20p%2Eclose%20%7B%0A%20%20text%2Dalign%3A%20right%3B%0A%20%20font%2Dstyle%3A%20italic%3B%0A%7D%0A%0Adiv%2Eslidy%5Ftoc%20%7B%0A%20%20position%3A%20absolute%3B%0A%20%20z%2Dindex%3A%20300%3B%0A%20%20width%3A%2060%25%3B%0A%20%20max%2Dwidth%3A%2030em%3B%0A%20%20height%3A%2030em%3B%0A%20%20overflow%3A%20auto%3B%0A%20%20top%3A%20auto%3B%0A%20%20right%3A%20auto%3B%0A%20%20left%3A%204em%3B%0A%20%20bottom%3A%204em%3B%0A%20%20padding%3A%201em%3B%0A%20%20background%3A%20rgb%28240%2C240%2C240%29%3B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20font%2Dsize%3A%2060%25%3B%0A%7D%0A%0Adiv%2Eslidy%5Ftoc%20%2Etoc%5Fheading%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%20%20width%3A%20100%25%3B%0A%20%20margin%3A%200%3B%0A%20%20margin%2Dbottom%3A%201em%3B%0A%20%20border%2Dbottom%2Dstyle%3A%20solid%3B%0A%20%20border%2Dbottom%2Dcolor%3A%20rgb%28180%2C180%2C180%29%3B%0A%20%20border%2Dbottom%2Dwidth%3A%201px%3B%0A%7D%0A%0Adiv%2Eslide%20%7B%0A%20%20z%2Dindex%3A%2020%3B%0A%20%20margin%3A%200%200%200%200%3B%0A%20%20padding%2Dtop%3A%200%3B%0A%20%20padding%2Dbottom%3A%200%3B%0A%20%20padding%2Dleft%3A%2020px%3B%0A%20%20padding%2Dright%3A%2020px%3B%0A%20%20border%2Dwidth%3A%200%3B%0A%20%20clear%3A%20both%3B%0A%20%20top%3A%200%3B%0A%20%20bottom%3A%200%3B%0A%20%20left%3A%200%3B%0A%20%20right%3A%200%3B%0A%20%20line%2Dheight%3A%20120%25%3B%0A%20%20background%2Dcolor%3A%20transparent%3B%0A%7D%0A%0Adiv%2Ebackground%20%7B%0A%20%20display%3A%20none%3B%0A%7D%0A%0Adiv%2Ehandout%20%7B%0A%20%20margin%2Dleft%3A%2020px%3B%0A%20%20margin%2Dright%3A%2020px%3B%0A%7D%0A%0Adiv%2Eslide%2Etitlepage%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0Adiv%2Eslide%2Etitlepage%20h1%20%7B%0A%20%20padding%2Dtop%3A%2010%25%3B%0A%20%20margin%2Dright%3A%200%3B%0A%7D%0A%0Adiv%2Eslide%20h1%20%7B%0A%20%20padding%2Dleft%3A%200%3B%0A%20%20padding%2Dright%3A%2020pt%3B%0A%20%20padding%2Dtop%3A%204pt%3B%0A%20%20padding%2Dbottom%3A%204pt%3B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20margin%2Dleft%3A%200%3B%0A%20%20margin%2Dright%3A%2060pt%3B%0A%20%20margin%2Dbottom%3A%200%2E5em%3B%0A%20%20display%3A%20block%3B%20%0A%20%20font%2Dsize%3A%20160%25%3B%0A%20%20line%2Dheight%3A%201%2E2em%3B%0A%20%20background%3A%20transparent%3B%0A%7D%0A%0A%40media%20screen%20and%20%28max%2Ddevice%2Dwidth%3A%201024px%29%0A%7B%0A%20%20div%2Eslide%20%7B%20font%2Dsize%3A%20100%25%3B%20%7D%0A%7D%0A%0A%40media%20screen%20and%20%28max%2Ddevice%2Dwidth%3A%20800px%29%0A%7B%0A%20%20div%2Eslide%20%7B%20font%2Dsize%3A%20200%25%3B%20%7D%0A%20%20div%2Eslidy%5Ftoc%20%7B%0A%20%20%20%20top%3A%201em%3B%0A%20%20%20%20left%3A%201em%3B%0A%20%20%20%20right%3A%20auto%3B%0A%20%20%20%20width%3A%2080%25%3B%0A%20%20%20%20font%2Dsize%3A%20180%25%3B%0A%20%20%7D%0A%7D%0A%0Adiv%2Etoc%2Dheading%20%7B%0A%20%20width%3A%20100%25%3B%0A%20%20border%2Dbottom%3A%20solid%201px%20rgb%28180%2C180%2C180%29%3B%0A%20%20margin%2Dbottom%3A%201em%3B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0Aimg%20%7B%0A%20%20image%2Drendering%3A%20optimize%2Dquality%3B%0A%7D%0A%0Apre%20%7B%0A%20font%2Dsize%3A%2080%25%3B%0A%20font%2Dweight%3A%20bold%3B%0A%20line%2Dheight%3A%20120%25%3B%0A%20padding%2Dtop%3A%200%2E2em%3B%0A%20padding%2Dbottom%3A%200%2E2em%3B%0A%20padding%2Dleft%3A%201em%3B%0A%20padding%2Dright%3A%201em%3B%0A%20border%2Dstyle%3A%20solid%3B%0A%20border%2Dleft%2Dwidth%3A%201em%3B%0A%20border%2Dtop%2Dwidth%3A%20thin%3B%0A%20border%2Dright%2Dwidth%3A%20thin%3B%0A%20border%2Dbottom%2Dwidth%3A%20thin%3B%0A%20border%2Dcolor%3A%20%2395ABD0%3B%0A%20color%3A%20%2300428C%3B%0A%20background%2Dcolor%3A%20%23E4E5E7%3B%0A%7D%0A%0Ali%20pre%20%7B%20margin%2Dleft%3A%200%3B%20%7D%0A%0Ablockquote%20%7B%20font%2Dstyle%3A%20italic%20%7D%0A%0Aimg%20%7B%20background%2Dcolor%3A%20transparent%20%7D%0A%0Ap%2Ecopyright%20%7B%20font%2Dsize%3A%20smaller%20%7D%0A%0A%2Ecenter%20%7B%20text%2Dalign%3A%20center%20%7D%0A%2Efootnote%20%7B%20font%2Dsize%3A%20smaller%3B%20margin%2Dleft%3A%202em%3B%20%7D%0A%0Aa%20img%20%7B%20border%2Dwidth%3A%200%3B%20border%2Dstyle%3A%20none%20%7D%0A%0Aa%3Avisited%20%7B%20color%3A%20navy%20%7D%0Aa%3Alink%20%7B%20color%3A%20navy%20%7D%0Aa%3Ahover%20%7B%20color%3A%20red%3B%20text%2Ddecoration%3A%20underline%20%7D%0Aa%3Aactive%20%7B%20color%3A%20red%3B%20text%2Ddecoration%3A%20underline%20%7D%0A%0Aa%20%7Btext%2Ddecoration%3A%20none%7D%0A%2Etoolbar%20a%3Alink%20%7Bcolor%3A%20blue%7D%0A%2Etoolbar%20a%3Avisited%20%7Bcolor%3A%20blue%7D%0A%2Etoolbar%20a%3Aactive%20%7Bcolor%3A%20red%7D%0A%2Etoolbar%20a%3Ahover%20%7Bcolor%3A%20red%7D%0A%0Aul%20%7B%20list%2Dstyle%2Dtype%3A%20square%3B%20%7D%0Aul%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20disc%3B%20%7D%0Aul%20ul%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20circle%3B%20%7D%0Aul%20ul%20ul%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20disc%3B%20%7D%0Ali%20%7B%20margin%2Dleft%3A%200%2E5em%3B%20margin%2Dtop%3A%200%2E5em%3B%20%7D%0Ali%20li%20%7B%20font%2Dsize%3A%2085%25%3B%20font%2Dstyle%3A%20italic%20%7D%0Ali%20li%20li%20%7B%20font%2Dsize%3A%2085%25%3B%20font%2Dstyle%3A%20normal%20%7D%0A%0Adiv%20dt%0A%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%20%20margin%2Dtop%3A%201em%3B%0A%20%20margin%2Dbottom%3A%200%2E5em%3B%0A%20%20font%2Dweight%3A%20bold%3B%0A%7D%0Adiv%20dd%0A%7B%0A%20%20margin%2Dleft%3A%202em%3B%0A%20%20margin%2Dbottom%3A%200%2E5em%3B%0A%7D%0A%0A%0Ap%2Cpre%2Cul%2Col%2Cblockquote%2Ch2%2Ch3%2Ch4%2Ch5%2Ch6%2Cdl%2Ctable%20%7B%0A%20%20margin%2Dleft%3A%201em%3B%0A%20%20margin%2Dright%3A%201em%3B%0A%7D%0A%0Ap%2Esubhead%20%7B%20font%2Dweight%3A%20bold%3B%20margin%2Dtop%3A%202em%3B%20%7D%0A%0A%2Esmaller%20%7B%20font%2Dsize%3A%20smaller%20%7D%0A%2Ebigger%20%7B%20font%2Dsize%3A%20130%25%20%7D%0A%0Atd%2Cth%20%7B%20padding%3A%200%2E2em%20%7D%0A%0Aul%20%7B%0A%20%20margin%3A%200%2E5em%201%2E5em%200%2E5em%201%2E5em%3B%0A%20%20padding%3A%200%3B%0A%7D%0A%0Aol%20%7B%0A%20%20margin%3A%200%2E5em%201%2E5em%200%2E5em%201%2E5em%3B%0A%20%20padding%3A%200%3B%0A%7D%0A%0Aul%20%7B%20list%2Dstyle%2Dtype%3A%20square%3B%20%7D%0Aul%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20disc%3B%20%7D%0Aul%20ul%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20circle%3B%20%7D%0Aul%20ul%20ul%20ul%20%7B%20list%2Dstyle%2Dtype%3A%20disc%3B%20%7D%0A%0Aul%20li%20%7B%20%0A%20%20list%2Dstyle%3A%20square%3B%0A%20%20margin%3A%200%2E1em%200em%200%2E6em%200%3B%0A%20%20padding%3A%200%200%200%200%3B%0A%20%20line%2Dheight%3A%20140%25%3B%0A%7D%0A%0Aol%20li%20%7B%20%0A%20%20margin%3A%200%2E1em%200em%200%2E6em%201%2E5em%3B%0A%20%20padding%3A%200%200%200%200px%3B%0A%20%20line%2Dheight%3A%20140%25%3B%0A%20%20list%2Dstyle%2Dtype%3A%20decimal%3B%0A%7D%0A%0Ali%20ul%20li%20%7B%20%0A%20%20font%2Dsize%3A%2085%25%3B%20%0A%20%20font%2Dstyle%3A%20italic%3B%0A%20%20list%2Dstyle%2Dtype%3A%20disc%3B%0A%20%20background%3A%20transparent%3B%0A%20%20padding%3A%200%200%200%200%3B%0A%7D%0Ali%20li%20ul%20li%20%7B%20%0A%20%20font%2Dsize%3A%2085%25%3B%20%0A%20%20font%2Dstyle%3A%20normal%3B%0A%20%20list%2Dstyle%2Dtype%3A%20circle%3B%0A%20%20background%3A%20transparent%3B%0A%20%20padding%3A%200%200%200%200%3B%0A%7D%0Ali%20li%20li%20ul%20li%20%7B%0A%20%20list%2Dstyle%2Dtype%3A%20disc%3B%0A%20%20background%3A%20transparent%3B%0A%20%20padding%3A%200%200%200%200%3B%0A%7D%0A%0Ali%20ol%20li%20%7B%0A%20%20list%2Dstyle%2Dtype%3A%20decimal%3B%0A%7D%0A%0A%0Ali%20li%20ol%20li%20%7B%0A%20%20list%2Dstyle%2Dtype%3A%20decimal%3B%0A%7D%0A%0A%2F%2A%0A%20setting%20class%3D%22outline%20on%20ol%20or%20ul%20makes%20it%20behave%20as%20an%0A%20ouline%20list%20where%20blocklevel%20content%20in%20li%20elements%20is%0A%20hidden%20by%20default%20and%20can%20be%20expanded%20or%20collapsed%20with%0A%20mouse%20click%2E%20Set%20class%3D%22expand%22%20on%20li%20to%20override%20default%0A%2A%2F%0A%0Aol%2Eoutline%20li%3Ahover%20%7B%20cursor%3A%20pointer%20%7D%0Aol%2Eoutline%20li%2Enofold%3Ahover%20%7B%20cursor%3A%20default%20%7D%0A%0Aul%2Eoutline%20li%3Ahover%20%7B%20cursor%3A%20pointer%20%7D%0Aul%2Eoutline%20li%2Enofold%3Ahover%20%7B%20cursor%3A%20default%20%7D%0A%0Aol%2Eoutline%20%7B%20list%2Dstyle%3Adecimal%3B%20%7D%0Aol%2Eoutline%20ol%20%7B%20list%2Dstyle%2Dtype%3Alower%2Dalpha%20%7D%0A%0Aol%2Eoutline%20li%2Enofold%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAIACAMzMzOvr%2FywAAAAACQAJAAACD4SPoRvG614Dctb4MEMcFAA7%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aol%2Eoutline%20li%2Eunfolded%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAMPD%2F8zMzOvr%2F%2F%2F%2F%2FywAAAAACQAJAAACEYyPoivG614LAlg7ZZbxoR8UADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aol%2Eoutline%20li%2Efolded%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAMPD%2F8zMzOvr%2F%2F%2F%2F%2FywAAAAACQAJAAACFIyPoiu2sJyCyoF7W3hxz850CFIAADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aol%2Eoutline%20li%2Eunfolded%3Ahover%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAAAAAAAA%2F8PD%2F%2F%2F%2F%2FywAAAAACQAJAAACEYSPoivG614DIlg7ZZbxoQ8UADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aol%2Eoutline%20li%2Efolded%3Ahover%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAAAAAAAA%2F8PD%2F%2F%2F%2F%2FywAAAAACQAJAAACFISPoiu2sZyCyoV7G3hxz850CFIAADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0A%0Aul%2Eoutline%20li%2Enofold%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAIACAMzMzOvr%2FywAAAAACQAJAAACD4SPoRvG614Dctb4MEMcFAA7%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aul%2Eoutline%20li%2Eunfolded%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAMPD%2F8zMzOvr%2F%2F%2F%2F%2FywAAAAACQAJAAACEYyPoivG614LAlg7ZZbxoR8UADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aul%2Eoutline%20li%2Efolded%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAMPD%2F8zMzOvr%2F%2F%2F%2F%2FywAAAAACQAJAAACFIyPoiu2sJyCyoF7W3hxz850CFIAADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aul%2Eoutline%20li%2Eunfolded%3Ahover%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAAAAAAAA%2F8PD%2F%2F%2F%2F%2FywAAAAACQAJAAACEYSPoivG614DIlg7ZZbxoQ8UADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0Aul%2Eoutline%20li%2Efolded%3Ahover%20%7B%0A%20%20padding%3A%200%200%200%2020px%3B%0A%20%20background%3A%20transparent%20url%28data%3Aimage%2Fgif%3Bbase64%2CR0lGODdhCQAJAKEDAAAAAAAA%2F8PD%2F%2F%2F%2F%2FywAAAAACQAJAAACFISPoiu2sZyCyoV7G3hxz850CFIAADs%3D%29%20no%2Drepeat%200px%200%2E5em%3B%0A%7D%0A%0A%2F%2A%20for%20slides%20with%20class%20%22title%22%20in%20table%20of%20contents%20%2A%2F%0Aa%2Etitleslide%20%7B%20font%2Dweight%3A%20bold%3B%20font%2Dstyle%3A%20italic%20%7D%0A%0A%2F%2A%0A%20hide%20images%20for%20work%20around%20for%20save%20as%20bug%0A%20where%20browsers%20fail%20to%20save%20images%20used%20by%20CSS%0A%2A%2F%0Aimg%2Ehidden%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%20%7D%0Adiv%2Einitial%5Fprompt%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%20%7D%0A%0A%20%20div%2Eslide%20%7B%0A%20%20%20%20%20visibility%3A%20visible%3B%0A%20%20%20%20%20position%3A%20inherit%3B%0A%20%20%7D%0A%20%20div%2Ehandout%20%7B%0A%20%20%20%20%20border%2Dtop%2Dstyle%3A%20solid%3B%0A%20%20%20%20%20border%2Dtop%2Dwidth%3A%20thin%3B%0A%20%20%20%20%20border%2Dtop%2Dcolor%3A%20black%3B%0A%20%20%7D%0A%0A%40media%20screen%20%7B%0A%20%20%2Ehidden%20%7B%20display%3A%20none%3B%20visibility%3A%20visible%20%7D%0A%0A%20%20div%2Eslide%2Ehidden%20%7B%20display%3A%20block%3B%20visibility%3A%20visible%20%7D%0A%20%20div%2Ehandout%2Ehidden%20%7B%20display%3A%20block%3B%20visibility%3A%20visible%20%7D%0A%20%20div%2Ebackground%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%20%7D%0A%20%20body%2Esingle%5Fslide%20div%2Einitial%5Fprompt%20%7B%20display%3A%20block%3B%20visibility%3A%20visible%20%7D%0A%20%20body%2Esingle%5Fslide%20div%2Ebackground%20%7B%20display%3A%20block%3B%20visibility%3A%20visible%20%7D%0A%20%20body%2Esingle%5Fslide%20div%2Ebackground%2Ehidden%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%20%7D%0A%20%20body%2Esingle%5Fslide%20%2Einvisible%20%7B%20visibility%3A%20hidden%20%7D%0A%20%20body%2Esingle%5Fslide%20%2Ehidden%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%20%7D%0A%20%20body%2Esingle%5Fslide%20div%2Eslide%20%7B%20position%3A%20absolute%20%7D%0A%20%20body%2Esingle%5Fslide%20div%2Ehandout%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%20%7D%0A%7D%0A%0A%40media%20print%20%7B%0A%20%20%2Ehidden%20%7B%20display%3A%20block%3B%20visibility%3A%20visible%20%7D%0A%0A%20%20div%2Eslide%20pre%20%7B%20font%2Dsize%3A%2060%25%3B%20padding%2Dleft%3A%200%2E5em%3B%20%7D%0A%20%20div%2Etoolbar%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%3B%20%7D%0A%20%20div%2Eslidy%5Ftoc%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%3B%20%7D%0A%20%20div%2Ebackground%20%7B%20display%3A%20none%3B%20visibility%3A%20hidden%3B%20%7D%0A%20%20div%2Eslide%20%7B%20page%2Dbreak%2Dbefore%3A%20always%20%7D%0A%20%20%2F%2A%20%3Afirst%2Dchild%20isn%27t%20reliable%20for%20print%20media%20%2A%2F%0A%20%20div%2Eslide%2Efirst%2Dslide%20%7B%20page%2Dbreak%2Dbefore%3A%20avoid%20%7D%0A%7D%0A%0A%2F%2A%20the%20below%20rules%20increase%20compatibility%20with%20Shiny%20and%20Bootstrap%20%2A%2F%0A%0A%2F%2A%20remove%20margins%20that%20misalign%20sliders%20%2A%2F%0A%2Ejslider%20table%20%7B%0A%20%20%20margin%2Dleft%3A%200em%3B%0A%20%20%20margin%2Dright%3A%200em%3B%0A%7D%0A%0A%2F%2A%20don%27t%20use%20very%20large%20fonts%20in%20datatables%20%2A%2F%0Atable%2EdataTable%2C%20%2Eshiny%2Ddatatable%2Doutput%20div%20%7B%0A%20%20%20font%2Dsize%3A%2014pt%3B%0A%7D%0A%0A%2F%2A%20allow%20R%20chunks%20to%20render%20in%20a%20large%20font%20%2A%2F%0Apre%2EsourceCode%2C%20code%2EsourceCode%20%7B%0A%20%20%20font%2Dsize%3A%2080%25%3B%0A%7D%0A%0A%2F%2A%20increase%20the%20input%20font%20size%20set%20by%20Bootstrap%20%2A%2F%0Alabel%2C%20button%2C%20input%2C%20select%2C%20textarea%20%7B%0A%20%20%20font%2Dsize%3A%2014pt%3B%0A%7D%0A%0A%2F%2A%20eliminate%20bullets%20in%20Bootstrap%20navigation%20lists%20%2A%2F%0Aul%2Enav%2C%20ul%2Enav%20li%20%7B%0A%20%20%20list%2Dstyle%2Dtype%3A%20none%3B%0A%7D%0A%0A" rel="stylesheet" type="text/css" media="screen, projection, print" />
   <link href="data:text/css,body%20%7B%0A%09font%2Dfamily%3A%20%27Noto%20Serif%27%2C%20%27serif%27%3B%0A%09font%2Dsize%3A%2020px%21important%3B%0A%23%09color%3A%20%23cfcfcf%21important%3B%0A%23%09background%2Dcolor%3A%20%23460744%21important%3B%0A%7D%0A%0A%2Eco%20%7B%0A%09color%3A%20%23aaaaaa%21important%3B%0A%7D%0A%0Apre%20%7B%0A%23%09border%2Dcolor%3A%20%23260724%21important%3B%0A%09border%2Dcolor%3A%20%23eeeeee%21important%3B%0A%23%09background%2Dcolor%3A%20%23862784%21important%3B%0A%09background%2Dcolor%3A%20%23f5f5f5%21important%3B%0A%09font%2Dsize%3A%2018px%21important%3B%0A%09margin%2Dtop%3A%200px%21important%3B%0A%09margin%2Dbottom%3A%200px%21important%3B%0A%7D%0A%0Ah1%20%7B%0A%09padding%2Dbottom%3A%2010px%3B%0A%09border%2Dbottom%3A%202px%20solid%20%23000000%3B%0A%7D%0A%0Acode%20%7B%0A%09font%2Dsize%3A%2018px%21important%3B%0A%09color%3A%20%23aaaaaa%21important%3B%0A%7D%0A%0A%2EsourceCode%20%7B%0A%09font%2Dsize%3A%2018px%21important%3B%0A%09color%3A%20%23444444%21important%3B%0A%7D%0A%0A" rel="stylesheet" type="text/css" media="screen, projection, print" />
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -44,496 +44,665 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </head>
 <body>
 <div class="slide titlepage">
-  <h1 class="title">Indeksowanie ramek danych i wektorów</h1>
+  <h1 class="title">Data sets</h1>
   <p class="author">
-pogRomcy danych
+Data Crunchers
   </p>
-  <p class="date">sezon 1 / odcinek 7<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">season 1 / episode 1 <br><br><br><br>Press <code>A</code> to switch from slides to continuous text. Press <code>T</code> to see the table of contents.</p>
 </div>
-<div id="o-czym-jest-ten-odcinek" class="slide section level1">
-<h1>O czym jest ten odcinek</h1>
-<p>Dane z którymi będziemy pracować mają najczęściej format tabeli lub wektora. Jedną z podstawowych operacji na tabelach oraz wektorach jest wybieranie podzbioru wierszy, kolumn lub wartości.</p>
-<p>W tym odcinku dowiemy się:</p>
+<div id="what-is-the-topic-of-this-episode" class="slide section level1">
+<h1>What is the topic of this episode?</h1>
+<p>You can process data in many ways. The course Data Crunchers will introduce you to this variety. For this reason we will work on datasets of different size (from several to several hundred thousand rows), with various level of complexity (from two to two thousand columns) and prepared in different formats (text data, quantitative data and qualitative data).</p>
+<p>All of these data sets were gathered in a single big package called <code>PogromcyDanych</code> to facilitate access to them. It contains all sorts of data sets such as data about offer prices of cars, results of opinion polls, information about changes in stock market indices, data about names given to newborn babies, ski jumping results or information about outcomes of breast cancer patients treatment.</p>
+<p>In order to install this package you need to enter the following command in R program (you need to do this only once). It will download the data sets from the Internet and install them on your disc.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;PogromcyDanych&quot;</span>)</code></pre>
+<p>Once you install the package PogromcyDanych you need to activate it to be able to use the data sets. Use the following command to activate the package (after each activation of R).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)</code></pre>
+<p>Next slides will show you all the data sets included in that package.</p>
+</div>
+<div id="two-language-versions" class="slide section level1">
+<h1>Two language versions</h1>
+<p>,,Data crunchers’’ course is available in two language versions – Polish and English. However, it was not necessary to create two language versions of data sets and thus double the data. For this reason your data loaded from the <code>PogromcyDanych</code> package will be in Polish.</p>
+<p>If you want to switch to English use the command <code>setLang()</code> as in the example below. This function will translate the Polish names in the data sets (as well as names of columns and values) into English.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setLang</span>(<span class="st">&quot;eng&quot;</span>)</code></pre>
+<p>As a result of the function the following data sets will be copied into the namespaces:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Polish name</th>
+<th align="left">English name</th>
+<th align="left">What type of data is this?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">koty_ptaki</td>
+<td align="left">cats_birds</td>
+<td align="left">Characteristics of 13 species</td>
+</tr>
+<tr class="even">
+<td align="left">imiona_warszawa</td>
+<td align="left">warsaw_names</td>
+<td align="left">Names of babies born in Warsaw</td>
+</tr>
+<tr class="odd">
+<td align="left">mandatySejmik2014</td>
+<td align="left">votes2014</td>
+<td align="left">Results of the local elections 2014</td>
+</tr>
+<tr class="even">
+<td align="left">auta2012</td>
+<td align="left">auta2012</td>
+<td align="left">Offer prices of cars in 2012</td>
+</tr>
+<tr class="odd">
+<td align="left">WIG</td>
+<td align="left">WIG</td>
+<td align="left">WIG Index in 2014</td>
+</tr>
+<tr class="even">
+<td align="left">pearson</td>
+<td align="left">pearson</td>
+<td align="left">Pearson’s data on heights</td>
+</tr>
+<tr class="odd">
+<td align="left">galton</td>
+<td align="left">galton</td>
+<td align="left">Galton’s data on heights</td>
+</tr>
+<tr class="even">
+<td align="left">skiJumps2013</td>
+<td align="left">skiJumps2013</td>
+<td align="left">Results of ski jumping competitions season 2013/2014</td>
+</tr>
+<tr class="odd">
+<td align="left">skiJumps2013labels</td>
+<td align="left">skiJumps2013labels</td>
+<td align="left">Explanation of columns’ names</td>
+</tr>
+<tr class="even">
+<td align="left">diagnoza</td>
+<td align="left">diagnosis</td>
+<td align="left">Data from the project Diagnoza Społeczna (Social Diagnosis)</td>
+</tr>
+<tr class="odd">
+<td align="left">diagnozaDict</td>
+<td align="left">diagnosisDict</td>
+<td align="left">Explanation of columns’ names</td>
+</tr>
+<tr class="even">
+<td align="left">serialeIMDB</td>
+<td align="left">seriesIMDB</td>
+<td align="left">Data on TV series on the basis of the IMDB movie database</td>
+</tr>
+<tr class="odd">
+<td align="left">TCGA_BRCA</td>
+<td align="left">TCGA_BRCA</td>
+<td align="left">Data on breast cancer patients</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>setLang(&quot;pol&quot;)</code> command will translate the names back into Polish.</p>
+</div>
+<div id="the-fastest-cats-and-birds-in-the-world" class="slide section level1">
+<h1>The fastest cats and birds in the world</h1>
+<p>The data set <code>cats_birds</code> was created as a so-called toy-example. It is a small set (13 rows and 7 columns) which can be fully displayed on the computer screen. You can use it to practice basic operations on the data.</p>
+<p>The data set juxtaposes characteristics of 13 chosen species of cats and birds presented in separate rows. The chosen species are the fastest members of both groups. Each row contains information on a different species.</p>
+<p>The columns of this data set present respectively:</p>
 <ul>
-<li>jak tworzyć wektory,</li>
-<li>jak indeksować wartości z wektora,</li>
-<li>jak wybierać wiersze z ramki danych,</li>
-<li>jak wybierać kolumny z ramki danych,</li>
-<li>jak wybierać wiersze i kolumny,</li>
-<li>jak indeksować wiersze i kolumny używając nazw lub wartości logicznych.</li>
+<li>name of the species,</li>
+<li>maximum weight of an individual animal expressed in kilograms and maximum body length in meters,</li>
+<li>maximum speed (in the horizontal flight in case of birds, not during the dive) expressed in kilometers per hour,</li>
+<li>habitat and length of life in years,</li>
+<li>the last column specifies whether the species is a big cat or a bird.</li>
 </ul>
+<p>You can use the <code>head()</code> function to display the first 6 rows of this data set.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(cats_birds)</code></pre>
+<pre><code>##   species weight length speed habitat lifespan group
+## 1   Tiger    300    2.5    60    Asia       25   Cat
+## 2    Lion    200    2.0    80  Africa       29   Cat
+## 3 Cheetah    100    1.7    90 America       15   Cat
+## 4  Jaguar     80    1.7    70 America       13   Cat
+## 5    Puma     70    1.4    85    Asia       21   Cat
+## 6 Leopard     60    1.4   115  Africa       12   Cat</code></pre>
 </div>
-<div id="wektory" class="slide section level1">
-<h1>Wektory</h1>
-<p>Jednym z podstawowych rodzajów danych w programie R są wektory.</p>
-<p>Wektory mogą zawierać liczby, napisy, wartości logiczne lub inne typy. Zacznijmy od wektorów wartości liczbowych.</p>
-<p>W programie R nawet jedną wartość jest wektorem, tyle że małym, jednoelementowym.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">4</span></code></pre>
-<pre><code>## [1] 4</code></pre>
-<p>Dłuższe wektory można tworzyć np. funkcją <code>c()</code>, która pozwala na sklejenie kilku wartości w jeden wektor.</p>
-<p>Przykładowa instrukcja tworząca wektor o trzech elementach.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</code></pre>
-<pre><code>## [1] 3 4 5</code></pre>
-<p>W programowaniu i analizie danych bardzo często wykorzystuje się wektory kolejnych wartości liczbowych. Takie wektory mają nawet specjalną nazwę: <em>sekwencje</em>.</p>
-<p>Sekwencje kolejnych liczb można stworzyć operatorem <code>:</code>. Jeżeli chcemy zbudować sekwencję liczb równie odległych od siebie, ale z krokiem innym niż 1, to wygodnie jest wykorzystać funkcję <code>seq()</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span>:<span class="dv">7</span></code></pre>
-<pre><code>## [1] 2 3 4 5 6 7</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">3</span>, <span class="dt">to =</span> <span class="dv">15</span>, <span class="dt">by =</span> <span class="dv">2</span>)</code></pre>
-<pre><code>## [1]  3  5  7  9 11 13 15</code></pre>
-</div>
-<div id="wektory-1" class="slide section level1">
-<h1>Wektory</h1>
-<p>Używając funkcji <code>c()</code> można tworzyć wektory wartości logicznych (z dwoma możliwymi stanami PRAWDA/FAŁSZ oznaczanymi <code>TRUE</code>/<code>FALSE</code>), wektory napisów oraz innego rodzaju wartości.</p>
-<p>Aby wykorzystać wektor później, trzeba go przypisać do zmiennej. Można to zrobić używając operatora <code>&lt;-</code> lub <code>=</code>. Jeżeli chcemy wyświetlić zawartość zmiennej to wystarczy wpisać ją do konsoli i nacisnąć ENTER.</p>
-<pre class="sourceCode r"><code class="sourceCode r">co_drugi &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)
-co_drugi</code></pre>
-<pre><code>## [1]  TRUE FALSE  TRUE FALSE  TRUE FALSE</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">literki &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;alfa&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;delta&quot;</span>)
-literki</code></pre>
-<pre><code>## [1] &quot;alfa&quot;  &quot;beta&quot;  &quot;gamma&quot; &quot;delta&quot;</code></pre>
-<p>W dalszym ciągu tego odcinka wykorzystamy wektor kolejnych liter w języku angielskim zapisany w zmiennej <code>LETTERS</code>. Użyjemy tego wektora do ćwiczeń w indeksowaniu.</p>
-<pre class="sourceCode r"><code class="sourceCode r">LETTERS</code></pre>
-<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot;
-## [18] &quot;R&quot; &quot;S&quot; &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
-</div>
-<div id="indeksowanie-wektora" class="slide section level1">
-<h1>Indeksowanie wektora</h1>
-<p>Indeksowanie oznacza wybieranie określonych wartości. Wartości wybieramy wskazując ich indeksy.</p>
-<p>Wektor to ciąg elementów. Pierwszy z tych elementów ma indeks 1, kolejny 2, kolejny 3 i tak aż do ostatniego elementu. Indeks ostatniego elementu to jednocześnie długość wektora. Można ją sprawdzić funkcją <code>length()</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(LETTERS)</code></pre>
-<pre><code>## [1] 26</code></pre>
-<p>Aby odwołać się do określonych indeksów wektora należy użyć operatora <code>[]</code>. Wewnątrz nawiasów kwadratowych podaje się indeks elementu, do którego chcemy się odwołać.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pierwszy element wektora</span>
-LETTERS[<span class="dv">1</span>]</code></pre>
-<pre><code>## [1] &quot;A&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># piąty</span>
-LETTERS[<span class="dv">5</span>]</code></pre>
-<pre><code>## [1] &quot;E&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ostatni element wektora</span>
-LETTERS[<span class="dv">26</span>]</code></pre>
-<pre><code>## [1] &quot;Z&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># zamiast podawać wartość 26 można wstawić funkcję, która jako wynik zwróci długość wektora</span>
-LETTERS[<span class="kw">length</span>(LETTERS)]</code></pre>
-<pre><code>## [1] &quot;Z&quot;</code></pre>
-</div>
-<div id="indeksowanie-wektora-1" class="slide section level1">
-<h1>Indeksowanie wektora</h1>
-<p>Odwołując się do wektorów, możemy podać indeks więcej niż jednej wartości. Zasada jest jednak taka, że indeksy muszą być wektorem. Do tego przyda nam się już poznana funkcja <code>c()</code>.</p>
-<p>Przykładowo, aby wybrać pierwszy, piąty i ostatni element z wektora LETTERS musimy wpierw skonstruować wektor z tymi trzema indeksami.</p>
-<pre class="sourceCode r"><code class="sourceCode r">LETTERS[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">26</span>)]</code></pre>
-<pre><code>## [1] &quot;A&quot; &quot;E&quot; &quot;Z&quot;</code></pre>
-<p>Równoważnie można najpierw stworzyć wektor indeksów a następnie wykorzystać go do indeksowania wektora <code>LETTERS</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">indeksy &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">26</span>)
-LETTERS[indeksy]</code></pre>
-<pre><code>## [1] &quot;A&quot; &quot;E&quot; &quot;Z&quot;</code></pre>
-<p>Aby wybrać więcej elementów z wektora wygodnie jest wykorzystać sekwencje.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># dziesięć pierwszych liter</span>
-LETTERS[<span class="dv">1</span>:<span class="dv">10</span>]</code></pre>
-<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pięć pierwszych i pięć ostatnich</span>
-LETTERS[<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">5</span>, <span class="dv">21</span>:<span class="dv">26</span>)]</code></pre>
-<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># co druga litera, indeksujemy sekwencją od 1 do 26 z krokiem co 2</span>
-coDruga &lt;-<span class="st"> </span>LETTERS[<span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="dv">26</span>, <span class="dt">by =</span> <span class="dv">2</span>)]
-coDruga</code></pre>
-<pre><code>##  [1] &quot;A&quot; &quot;C&quot; &quot;E&quot; &quot;G&quot; &quot;I&quot; &quot;K&quot; &quot;M&quot; &quot;O&quot; &quot;Q&quot; &quot;S&quot; &quot;U&quot; &quot;W&quot; &quot;Y&quot;</code></pre>
-</div>
-<div id="indeksowanie-wektora-2" class="slide section level1">
-<h1>Indeksowanie wektora</h1>
-<p>Sekwencje wartości nie muszą być rosnące. Można je wykorzystać np. do tego by odwrócić kolejność elementów w wektorze.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">10</span>:<span class="dv">1</span></code></pre>
-<pre><code>##  [1] 10  9  8  7  6  5  4  3  2  1</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">LETTERS[<span class="dv">10</span>:<span class="dv">1</span>]</code></pre>
-<pre><code>##  [1] &quot;J&quot; &quot;I&quot; &quot;H&quot; &quot;G&quot; &quot;F&quot; &quot;E&quot; &quot;D&quot; &quot;C&quot; &quot;B&quot; &quot;A&quot;</code></pre>
-<p>Elementy wektora można również indeksować warunkiem logicznym.</p>
-<p>W poniższym przykładzie instrukcja <code>LETTERS &gt; &quot;K&quot;</code> tworzy wektor wartości logicznych weryfikujących czy kolejna litera jest większa czy mniejsza od <code>K</code> (w porządku leksykograficznym). Taki wektor wartości logicznych można wykorzystać do indeksowania wektora <code>LETTERS</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">LETTERS &gt;<span class="st"> &quot;K&quot;</span></code></pre>
-<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [12]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-## [23]  TRUE  TRUE  TRUE  TRUE</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tylko litery spełniające określony warunek</span>
-<span class="co"># w tym przypadku litery występujące po literze 'K'</span>
-LETTERS[LETTERS &gt;<span class="st"> &quot;K&quot;</span>]</code></pre>
-<pre><code>##  [1] &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot; &quot;R&quot; &quot;S&quot; &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
-</div>
-<div id="zadania" class="slide section level1">
-<h1>Zadania</h1>
+<div id="names-of-infants-born-in-warsaw" class="slide section level1">
+<h1>Names of infants born in Warsaw</h1>
+<p>The data set <code>warsaw_names</code> was prepared to present methods of trend analysis and methods of text analysis.</p>
+<p>The data set contains information on the number of babies with a certain name born in Warsaw in the subsequent months of the period between 2004 and 2014. This data was downloaded from the website <code>http://gorny.edu.pl/imiona/index.php</code> where you can also find information about the current number of births.</p>
+<p>There are 84816 rows in this set and the data concerns different names, from very popular names to rather rare ones.</p>
+<p>The columns of this data set present respectively:</p>
 <ul>
-<li><p>Zbuduj sekwencję dziesięciu kolejnych małych liter alfabetu łacińskiego.</p></li>
-<li><p>Zbuduj sekwencję dziesięciu kolejnych liczb nieparzystych zaczynając od 3.</p></li>
-<li><p>Z wektora <code>LETTERS</code> wybierz litery na pozycjach 5, 10, 15, 20 i 25.</p></li>
-<li><p>Wypisz wartości wektora <code>LETTERS</code> od końca.</p></li>
+<li>gender and name of the child,</li>
+<li>year and month in which the data was gathered,</li>
+<li>number of babies with a given name born in Warsaw in a certain year and month.</li>
 </ul>
+<p>You can use the <code>head()</code> function to display the first 6 rows of this data set.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(warsaw_names)</code></pre>
+<pre><code>##    name sex year month count
+## 1 Aaron   M 2004     7     0
+## 2 Aaron   M 2004     8     0
+## 3 Aaron   M 2004     9     0
+## 4 Aaron   M 2004    10     0
+## 5 Aaron   M 2004    11     0
+## 6 Aaron   M 2004    12     0</code></pre>
+<p>Use the <code>levels()</code> function to display a list of all the names included in this data set.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(warsaw_names$name)</code></pre>
+<pre><code>##   [1] &quot;Aaron&quot;           &quot;Abigail&quot;         &quot;Ada&quot;            
+##   [4] &quot;Adam&quot;            &quot;Adela&quot;           &quot;Adina&quot;          
+##   [7] &quot;Adrian&quot;          &quot;Adriana&quot;         &quot;Adrianna&quot;       
+##  [10] &quot;Agata&quot;           &quot;Agnieszka&quot;       &quot;Alan&quot;           
+##  [13] &quot;Albert&quot;          &quot;Aldona&quot;          &quot;Aleks&quot;          
+##  [16] &quot;Aleksander&quot;      &quot;Aleksandra&quot;      &quot;Aleksy&quot;         
+##  [19] &quot;Alex&quot;            &quot;Alicja&quot;          &quot;Alina&quot;          
+##  [22] &quot;Alma&quot;            &quot;Alwin&quot;           &quot;Amadeusz&quot;       
+##  [25] &quot;Amanda&quot;          &quot;Amelia&quot;          &quot;Amnezja&quot;        
+##  [28] &quot;Anastazja&quot;       &quot;Anatol&quot;          &quot;Anatolia&quot;       
+##  [31] &quot;Andrzej&quot;         &quot;Andżelika&quot;       &quot;Aneta&quot;          
+##  [34] &quot;Angela&quot;          &quot;Angelika&quot;        &quot;Angelina&quot;       
+##  [37] &quot;Aniela&quot;          &quot;Anika&quot;           &quot;Anita&quot;          
+##  [40] &quot;Anna&quot;            &quot;AnnaMaria&quot;       &quot;Annika&quot;         
+##  [43] &quot;Anton&quot;           &quot;Antoni&quot;          &quot;Antonia&quot;        
+##  [46] &quot;Antonina&quot;        &quot;Antoniusz&quot;       &quot;Apolinary&quot;      
+##  [49] &quot;Apolonia&quot;        &quot;Apoloniusz&quot;      &quot;Ariadna&quot;        
+##  [52] &quot;Ariana&quot;          &quot;Arkadiusz&quot;       &quot;Arleta&quot;         
+##  [55] &quot;Armand&quot;          &quot;Arnold&quot;          &quot;Arseniusz&quot;      
+##  [58] &quot;Artur&quot;           &quot;August&quot;          &quot;Augustyn&quot;       
+##  [61] &quot;Aura&quot;            &quot;Aurelia&quot;         &quot;Aurora&quot;         
+##  [64] &quot;Bakary&quot;          &quot;Balbina&quot;         &quot;Barabasz&quot;       
+##  [67] &quot;Barbara&quot;         &quot;Barta&quot;           &quot;Bartek&quot;         
+##  [70] &quot;Bastian&quot;         &quot;Bazyli&quot;          &quot;Beata&quot;          
+##  [73] &quot;Belzebub&quot;        &quot;Benedykt&quot;        &quot;Beniamin&quot;       
+##  [76] &quot;Benita&quot;          &quot;Berenika&quot;        &quot;Berenike&quot;       
+##  [79] &quot;Bernadetta&quot;      &quot;Bernard&quot;         &quot;Bianka&quot;         
+##  [82] &quot;Bibianna&quot;        &quot;Blanka&quot;          &quot;Błażej&quot;         
+##  [85] &quot;Bogdan&quot;          &quot;Bogna&quot;           &quot;Bogumił&quot;        
+##  [88] &quot;Bogumiła&quot;        &quot;Bogusław&quot;        &quot;Bogusława&quot;      
+##  [91] &quot;Bogusz&quot;          &quot;Bolesław&quot;        &quot;Borys&quot;          
+##  [94] &quot;Bożena&quot;          &quot;Brajan&quot;          &quot;Brian&quot;          
+##  [97] &quot;Bronisław&quot;       &quot;Bronisława&quot;      &quot;Bruno&quot;          
+## [100] &quot;Brygida&quot;         &quot;Calineczka&quot;      &quot;Carmen&quot;         
+## [103] &quot;Caspian&quot;         &quot;Cecylia&quot;         &quot;Celina&quot;         
+## [106] &quot;Cezary&quot;          &quot;Chaim&quot;           &quot;Chelsea&quot;        
+## [109] &quot;Chiara&quot;          &quot;Chloe&quot;           &quot;Cyntia&quot;         
+## [112] &quot;Cypinia&quot;         &quot;Cyprian&quot;         &quot;Cyryl&quot;          
+## [115] &quot;Czesław&quot;         &quot;Dąbrowka&quot;        &quot;Dacjan&quot;         
+## [118] &quot;Dagmara&quot;         &quot;Dagna&quot;           &quot;Daida&quot;          
+## [121] &quot;Dalia&quot;           &quot;Damian&quot;          &quot;Daniel&quot;         
+## [124] &quot;Daniela&quot;         &quot;Danuta&quot;          &quot;Daria&quot;          
+## [127] &quot;Dariusz&quot;         &quot;Dawid&quot;           &quot;Debora&quot;         
+## [130] &quot;Delfina&quot;         &quot;Denis&quot;           &quot;Diana&quot;          
+## [133] &quot;Dionizy&quot;         &quot;Dobrawa&quot;         &quot;Dobromiła&quot;      
+## [136] &quot;Dobromir&quot;        &quot;Dobrosława&quot;      &quot;Dominik&quot;        
+## [139] &quot;Dominika&quot;        &quot;Donald&quot;          &quot;Dorian&quot;         
+## [142] &quot;Dorota&quot;          &quot;Dymitr&quot;          &quot;Edgar&quot;          
+## [145] &quot;Edmund&quot;          &quot;Edward&quot;          &quot;Edwin&quot;          
+## [148] &quot;Edyta&quot;           &quot;Elena&quot;           &quot;Eleonora&quot;       
+## [151] &quot;Eliasz&quot;          &quot;Eliot&quot;           &quot;Eliza&quot;          
+## [154] &quot;Eljasz&quot;          &quot;Elmira&quot;          &quot;Elvis&quot;          
+## [157] &quot;Elwira&quot;          &quot;Elżbieta&quot;        &quot;Emanuel&quot;        
+## [160] &quot;Emanuela&quot;        &quot;Emil&quot;            &quot;Emilia&quot;         
+## [163] &quot;Emilian&quot;         &quot;Emma&quot;            &quot;Ernest&quot;         
+## [166] &quot;Erwin&quot;           &quot;Eryk&quot;            &quot;Eryka&quot;          
+## [169] &quot;Esmee&quot;           &quot;Estera&quot;          &quot;Eugenia&quot;        
+## [172] &quot;Eunika&quot;          &quot;Ewa&quot;             &quot;Ewelina&quot;        
+## [175] &quot;Fabian&quot;          &quot;Faustyna&quot;        &quot;Felicja&quot;        
+## [178] &quot;Felicjan&quot;        &quot;Felicyta&quot;        &quot;Feliks&quot;         
+## [181] &quot;Ferdynand&quot;       &quot;Filip&quot;           &quot;Filipina&quot;       
+## [184] &quot;Filomena&quot;        &quot;Florentyna&quot;      &quot;Florian&quot;        
+## [187] &quot;Fontanna&quot;        &quot;Franciszek&quot;      &quot;FranciszekJózef&quot;
+## [190] &quot;Franciszka&quot;      &quot;Franczeska&quot;      &quot;Frida&quot;          
+## [193] &quot;Fryderyk&quot;        &quot;Gabor&quot;           &quot;Gabriel&quot;        
+## [196] &quot;Gabriela&quot;        &quot;Gaja&quot;            &quot;Gaspar&quot;         
+## [199] &quot;Gaweł&quot;           &quot;Gerard&quot;          &quot;Gloria&quot;         
+## [202] &quot;Gniewko&quot;         &quot;Gniewosz&quot;        &quot;Gotard&quot;         
+## [205] &quot;Gracja&quot;          &quot;Gracjan&quot;         &quot;Gracjana&quot;       
+## [208] &quot;Grażyna&quot;         &quot;Greta&quot;           &quot;Gryzelda&quot;       
+## [211] &quot;Grzegorz&quot;        &quot;Guantanamera&quot;    &quot;Gustaw&quot;         
+## [214] &quot;Gwen&quot;            &quot;Gwidon&quot;          &quot;Hadrian&quot;        
+## [217] &quot;Halina&quot;          &quot;Hana&quot;            &quot;Hanna&quot;          
+## [220] &quot;Hektor&quot;          &quot;Helena&quot;          &quot;Henryk&quot;         
+## [223] &quot;Herbert&quot;         &quot;Herman&quot;          &quot;Hiacynta&quot;       
+## [226] &quot;Hieronim&quot;        &quot;Hipolit&quot;         &quot;Honorata&quot;       
+## [229] &quot;Horacy&quot;          &quot;Hubert&quot;          &quot;Hugo&quot;           
+## [232] &quot;Ida&quot;             &quot;Idalia&quot;          &quot;Idzi&quot;           
+## [235] &quot;Iga&quot;             &quot;Ignacy&quot;          &quot;Igor&quot;           
+## [238] &quot;Ilia&quot;            &quot;Ilian&quot;           &quot;Ilona&quot;          
+## [241] &quot;Imre&quot;            &quot;Ina&quot;             &quot;Inetta&quot;         
+## [244] &quot;Inez&quot;            &quot;Inga&quot;            &quot;Ingrid&quot;         
+## [247] &quot;Irena&quot;           &quot;Ireneusz&quot;        &quot;Irma&quot;           
+## [250] &quot;Irmina&quot;          &quot;Ivar&quot;            &quot;Ivo&quot;            
+## [253] &quot;Iwo&quot;             &quot;Iwona&quot;           &quot;Izaak&quot;          
+## [256] &quot;Izabela&quot;         &quot;Jacek&quot;           &quot;Jadwiga&quot;        
+## [259] &quot;Jaga&quot;            &quot;Jagna&quot;           &quot;Jagoda&quot;         
+## [262] &quot;Jakub&quot;           &quot;Jan&quot;             &quot;Jana&quot;           
+## [265] &quot;Janina&quot;          &quot;JanJakub&quot;        &quot;JanJózef&quot;       
+## [268] &quot;Janko&quot;           &quot;Jano&quot;            &quot;JanPaweł&quot;       
+## [271] &quot;Janusz&quot;          &quot;Jaromir&quot;         &quot;Jarosław&quot;       
+## [274] &quot;Jarowit&quot;         &quot;Jarzyna&quot;         &quot;Jasmina&quot;        
+## [277] &quot;Jaśmina&quot;         &quot;Jędrzej&quot;         &quot;Jeremi&quot;         
+## [280] &quot;Jeremiasz&quot;       &quot;Jerzy&quot;           &quot;JerzyMichał&quot;    
+## [283] &quot;Jesica&quot;          &quot;Jeżyna&quot;          &quot;Joachim&quot;        
+## [286] &quot;Joanna&quot;          &quot;Jolanta&quot;         &quot;Jonasz&quot;         
+## [289] &quot;Jonata&quot;          &quot;Jonatan&quot;         &quot;Jordan&quot;         
+## [292] &quot;Jowita&quot;          &quot;Józef&quot;           &quot;Józefina&quot;       
+## [295] &quot;Judyta&quot;          &quot;Julia&quot;           &quot;Julian&quot;         
+## [298] &quot;Julianna&quot;        &quot;Julita&quot;          &quot;Juliusz&quot;        
+## [301] &quot;Jurand&quot;          &quot;Justyn&quot;          &quot;Justyna&quot;        
+## [304] &quot;Kacper&quot;          &quot;Kaj&quot;             &quot;Kaja&quot;           
+## [307] &quot;Kajetan&quot;         &quot;Kalina&quot;          &quot;Kalista&quot;        
+## [310] &quot;Kamil&quot;           &quot;Kamila&quot;          &quot;Karen&quot;          
+## [313] &quot;Karena&quot;          &quot;Karin&quot;           &quot;Karina&quot;         
+## [316] &quot;Karla&quot;           &quot;Karol&quot;           &quot;Karolina&quot;       
+## [319] &quot;Kasandra&quot;        &quot;Kasjan&quot;          &quot;Kasjana&quot;        
+## [322] &quot;Kasper&quot;          &quot;Katarzyna&quot;       &quot;Kayla&quot;          
+## [325] &quot;Kazimiera&quot;       &quot;Kazimierz&quot;       &quot;Kevin&quot;          
+## [328] &quot;Kiara&quot;           &quot;Kinga&quot;           &quot;Kira&quot;           
+## [331] &quot;Klara&quot;           &quot;Klaudia&quot;         &quot;Klaudiusz&quot;      
+## [334] &quot;Klaudyna&quot;        &quot;Klemens&quot;         &quot;Klementyna&quot;     
+## [337] &quot;Kleofas&quot;         &quot;Kolin&quot;           &quot;Konrad&quot;         
+## [340] &quot;Konstancja&quot;      &quot;Konstanty&quot;       &quot;Kora&quot;           
+## [343] &quot;Kordian&quot;         &quot;Korina&quot;          &quot;Kornel&quot;         
+## [346] &quot;Kornelia&quot;        &quot;Korneliusz&quot;      &quot;Kosma&quot;          
+## [349] &quot;Kryspin&quot;         &quot;Krystian&quot;        &quot;Krystyna&quot;       
+## [352] &quot;Krzesimir&quot;       &quot;Krzysztof&quot;       &quot;Krzysztofa&quot;     
+## [355] &quot;Ksawery&quot;         &quot;Ksawier&quot;         &quot;Ksenia&quot;         
+## [358] &quot;Laila&quot;           &quot;Lambert&quot;         &quot;Lana&quot;           
+## [361] &quot;Lara&quot;            &quot;Lars&quot;            &quot;Larysa&quot;         
+## [364] &quot;Laura&quot;           &quot;Lea&quot;             &quot;Lech&quot;           
+## [367] &quot;Leila&quot;           &quot;Leja&quot;            &quot;Lena&quot;           
+## [370] &quot;Leo&quot;             &quot;Leokadia&quot;        &quot;Leon&quot;           
+## [373] &quot;Leonard&quot;         &quot;Leonardo&quot;        &quot;Leonia&quot;         
+## [376] &quot;Leopold&quot;         &quot;Letycja&quot;         &quot;Levente&quot;        
+## [379] &quot;Lew&quot;             &quot;Lewin&quot;           &quot;Lidia&quot;          
+## [382] &quot;Lili&quot;            &quot;Lilia&quot;           &quot;Liliana&quot;        
+## [385] &quot;Lilla&quot;           &quot;Lilli&quot;           &quot;Lisa&quot;           
+## [388] &quot;Liwia&quot;           &quot;Lorena&quot;          &quot;Lotta&quot;          
+## [391] &quot;Lubomir&quot;         &quot;Łucja&quot;           &quot;Lucjan&quot;         
+## [394] &quot;Łucjan&quot;          &quot;Lucjusz&quot;         &quot;Lucyna&quot;         
+## [397] &quot;Ludmiła&quot;         &quot;Ludomił&quot;         &quot;Ludwik&quot;         
+## [400] &quot;Ludwika&quot;         &quot;Luiza&quot;           &quot;Łukasz&quot;         
+## [403] &quot;Lukrecja&quot;        &quot;Luna&quot;            &quot;Maciej&quot;         
+## [406] &quot;Magdalena&quot;       &quot;Magnolia&quot;        &quot;Maja&quot;           
+## [409] &quot;Makary&quot;          &quot;Maks&quot;            &quot;Maksym&quot;         
+## [412] &quot;Maksymilian&quot;     &quot;Maksymilianna&quot;   &quot;Małgorzata&quot;     
+## [415] &quot;Malina&quot;          &quot;Malwina&quot;         &quot;Manuel&quot;         
+## [418] &quot;Marcel&quot;          &quot;Marcela&quot;         &quot;Marceli&quot;        
+## [421] &quot;Marcelina&quot;       &quot;Marcella&quot;        &quot;Marcianna&quot;      
+## [424] &quot;Marcin&quot;          &quot;Marcjanna&quot;       &quot;Marcus&quot;         
+## [427] &quot;Marek&quot;           &quot;Margarita&quot;       &quot;Maria&quot;          
+## [430] &quot;MariaAntonina&quot;   &quot;Marian&quot;          &quot;Marianna&quot;       
+## [433] &quot;Marietta&quot;        &quot;Marika&quot;          &quot;Marina&quot;         
+## [436] &quot;Mariola&quot;         &quot;Marisa&quot;          &quot;Mariusz&quot;        
+## [439] &quot;Marlena&quot;         &quot;Marletta&quot;        &quot;Marta&quot;          
+## [442] &quot;Martin&quot;          &quot;Martyna&quot;         &quot;Maryla&quot;         
+## [445] &quot;Maryna&quot;          &quot;Marzena&quot;         &quot;Masza&quot;          
+## [448] &quot;Mateusz&quot;         &quot;Matylda&quot;         &quot;Maura&quot;          
+## [451] &quot;Maurycy&quot;         &quot;Max&quot;             &quot;Melania&quot;        
+## [454] &quot;Melchior&quot;        &quot;Melisa&quot;          &quot;Mercedes&quot;       
+## [457] &quot;Mia&quot;             &quot;Michał&quot;          &quot;Michalina&quot;      
+## [460] &quot;Mieczysław&quot;      &quot;Mieszko&quot;         &quot;Mika&quot;           
+## [463] &quot;Mikaela&quot;         &quot;Mikołaj&quot;         &quot;Mił&quot;            
+## [466] &quot;Mila&quot;            &quot;Miła&quot;            &quot;Milada&quot;         
+## [469] &quot;Milan&quot;           &quot;Milena&quot;          &quot;Milla&quot;          
+## [472] &quot;Milo&quot;            &quot;Miłosz&quot;          &quot;Mira&quot;           
+## [475] &quot;Miranda&quot;         &quot;Mirella&quot;         &quot;Miriam&quot;         
+## [478] &quot;Miron&quot;           &quot;Mirosław&quot;        &quot;Mirosława&quot;      
+## [481] &quot;Monika&quot;          &quot;Morfeusz&quot;        &quot;Mrówka&quot;         
+## [484] &quot;Myszon&quot;          &quot;Nadia&quot;           &quot;Nadzieja&quot;       
+## [487] &quot;Naomi&quot;           &quot;Napoleon&quot;        &quot;Nastazja&quot;       
+## [490] &quot;Natalia&quot;         &quot;Natan&quot;           &quot;Nataniel&quot;       
+## [493] &quot;Natasza&quot;         &quot;Nawojka&quot;         &quot;Nazar&quot;          
+## [496] &quot;Nel&quot;             &quot;Nela&quot;            &quot;Nelly&quot;          
+## [499] &quot;Nestor&quot;          &quot;Nicola&quot;          &quot;Nicole&quot;         
+## [502] &quot;Nika&quot;            &quot;Nike&quot;            &quot;Nikita&quot;         
+## [505] &quot;Nikodem&quot;         &quot;Nikol&quot;           &quot;Nikola&quot;         
+## [508] &quot;Nikolas&quot;         &quot;Nikole&quot;          &quot;Nikoletta&quot;      
+## [511] &quot;Nikolina&quot;        &quot;Nina&quot;            &quot;Niunia&quot;         
+## [514] &quot;Noam&quot;            &quot;Noe&quot;             &quot;Noemi&quot;          
+## [517] &quot;Norbert&quot;         &quot;Norman&quot;          &quot;Odo&quot;            
+## [520] &quot;Odolan&quot;          &quot;Oksana&quot;          &quot;Oktawia&quot;        
+## [523] &quot;Oktawian&quot;        &quot;Olaf&quot;            &quot;Oleg&quot;           
+## [526] &quot;Olena&quot;           &quot;Olga&quot;            &quot;Olgierd&quot;        
+## [529] &quot;Olimpia&quot;         &quot;Oliwia&quot;          &quot;Oliwier&quot;        
+## [532] &quot;Orest&quot;           &quot;Oriana&quot;          &quot;Oskar&quot;          
+## [535] &quot;Oswald&quot;          &quot;Otylia&quot;          &quot;Paloma&quot;         
+## [538] &quot;Pamela&quot;          &quot;Pascal&quot;          &quot;Patrycja&quot;       
+## [541] &quot;Patrycjusz&quot;      &quot;Patryk&quot;          &quot;Paul&quot;           
+## [544] &quot;Paula&quot;           &quot;Paulina&quot;         &quot;Paweł&quot;          
+## [547] &quot;Petronela&quot;       &quot;Piotr&quot;           &quot;Pola&quot;           
+## [550] &quot;Przemysław&quot;      &quot;Rachel&quot;          &quot;Rachela&quot;        
+## [553] &quot;Radomił&quot;         &quot;Radosław&quot;        &quot;Radosz&quot;         
+## [556] &quot;Rafał&quot;           &quot;Rajmund&quot;         &quot;Ramona&quot;         
+## [559] &quot;Raul&quot;            &quot;Rebeka&quot;          &quot;Regina&quot;         
+## [562] &quot;Remigiusz&quot;       &quot;Renata&quot;          &quot;Rita&quot;           
+## [565] &quot;Robert&quot;          &quot;Roch&quot;            &quot;Rodion&quot;         
+## [568] &quot;Roger&quot;           &quot;Roksana&quot;         &quot;Roland&quot;         
+## [571] &quot;Roman&quot;           &quot;Romeo&quot;           &quot;Romuald&quot;        
+## [574] &quot;Romualda&quot;        &quot;Ronald&quot;          &quot;Roxana&quot;         
+## [577] &quot;Róża&quot;            &quot;Rozalia&quot;         &quot;Rudolf&quot;         
+## [580] &quot;Rufus&quot;           &quot;Rupert&quot;          &quot;Ruth&quot;           
+## [583] &quot;Ryszard&quot;         &quot;Sabina&quot;          &quot;Safira&quot;         
+## [586] &quot;Salomea&quot;         &quot;Samanta&quot;         &quot;Samira&quot;         
+## [589] &quot;Samuel&quot;          &quot;Sandra&quot;          &quot;Sara&quot;           
+## [592] &quot;Sasha&quot;           &quot;Saturnin&quot;        &quot;Scott&quot;          
+## [595] &quot;Sebastian&quot;       &quot;Selena&quot;          &quot;Selina&quot;         
+## [598] &quot;Selma&quot;           &quot;Serafin&quot;         &quot;Sergiusz&quot;       
+## [601] &quot;Seweryn&quot;         &quot;Sindi&quot;           &quot;Sławomir&quot;       
+## [604] &quot;Sofia&quot;           &quot;Sonia&quot;           &quot;Stanisław&quot;      
+## [607] &quot;Stefan&quot;          &quot;Stefania&quot;        &quot;Stella&quot;         
+## [610] &quot;Sylas&quot;           &quot;Sylwester&quot;       &quot;Sylwia&quot;         
+## [613] &quot;Symeon&quot;          &quot;Szarlota&quot;        &quot;Szczepan&quot;       
+## [616] &quot;Szymon&quot;          &quot;Tadeusz&quot;         &quot;Tamara&quot;         
+## [619] &quot;Tatiana&quot;         &quot;Telimena&quot;        &quot;Teo&quot;            
+## [622] &quot;Teodor&quot;          &quot;Teofil&quot;          &quot;Teresa&quot;         
+## [625] &quot;Theo&quot;            &quot;Thorgal&quot;         &quot;Tito&quot;           
+## [628] &quot;Tobiasz&quot;         &quot;Tola&quot;            &quot;Tomasz&quot;         
+## [631] &quot;Torkil&quot;          &quot;Toro&quot;            &quot;Tradycja&quot;       
+## [634] &quot;Tristan&quot;         &quot;Tycjan&quot;          &quot;Tymon&quot;          
+## [637] &quot;Tymoteusz&quot;       &quot;Tytus&quot;           &quot;Uljana&quot;         
+## [640] &quot;Urszula&quot;         &quot;Vanessa&quot;         &quot;Victoria&quot;       
+## [643] &quot;Viktoria&quot;        &quot;Viorika&quot;         &quot;Viviana&quot;        
+## [646] &quot;Waldemar&quot;        &quot;Waleria&quot;         &quot;Walerian&quot;       
+## [649] &quot;Walter&quot;          &quot;Wanda&quot;           &quot;Wasyl&quot;          
+## [652] &quot;Wawrzyniec&quot;      &quot;Wera&quot;            &quot;Weronika&quot;       
+## [655] &quot;Wida&quot;            &quot;Wiera&quot;           &quot;Wiesława&quot;       
+## [658] &quot;Wiktor&quot;          &quot;Wiktoria&quot;        &quot;Wilhelm&quot;        
+## [661] &quot;Wiliam&quot;          &quot;Wincenty&quot;        &quot;Wioletta&quot;       
+## [664] &quot;Wisenna&quot;         &quot;Wit&quot;             &quot;Witold&quot;         
+## [667] &quot;Witomir&quot;         &quot;Władysław&quot;       &quot;Włodzimierz&quot;    
+## [670] &quot;Wojciech&quot;        &quot;Wolfgang&quot;        &quot;Wolter&quot;         
+## [673] &quot;Xawery&quot;          &quot;Xawier&quot;          &quot;Xenia&quot;          
+## [676] &quot;Zachariasz&quot;      &quot;Zachary&quot;         &quot;Żaklina&quot;        
+## [679] &quot;Żaneta&quot;          &quot;Zara&quot;            &quot;Zbigniew&quot;       
+## [682] &quot;Zeira&quot;           &quot;Zenon&quot;           &quot;Ziemomysł&quot;      
+## [685] &quot;Ziemosław&quot;       &quot;Ziemowit&quot;        &quot;Zoe&quot;            
+## [688] &quot;Zofia&quot;           &quot;Zoja&quot;            &quot;Zola&quot;           
+## [691] &quot;Zoya&quot;            &quot;Zuzanna&quot;         &quot;Zygmunt&quot;        
+## [694] &quot;Żyraf&quot;           &quot;Zyta&quot;            &quot;Żywia&quot;</code></pre>
 </div>
-<div id="ptaki-vs-koty" class="slide section level1">
-<h1>Ptaki vs koty</h1>
-<p>Do pracy nad wybieraniem wierszy i kolumn wykorzystamy niewielki zbiór danych o kotach i ptakach.</p>
-<p>Ten zbiór danych jest dostępny w pakiecie <code>PogromcyDanych</code>, wystarczy więc załadować ten pakiet. Inne sposoby na wczytanie tego zbioru danych były przedstawione w odcinku 5.</p>
-<p>Siedem kolumn i trzynaście wierszy to dobry zbiór do ćwiczeń.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
-koty_ptaki</code></pre>
-<pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
-## 1          Tygrys 300.00     2.5       60     Azja        25     Kot
-## 2             Lew 200.00     2.0       80   Afryka        29     Kot
-## 3          Jaguar 100.00     1.7       90  Ameryka        15     Kot
-## 4            Puma  80.00     1.7       70  Ameryka        13     Kot
-## 5         Leopard  70.00     1.4       85     Azja        21     Kot
-## 6          Gepard  60.00     1.4      115   Afryka        12     Kot
-## 7           Irbis  50.00     1.3       65     Azja        18     Kot
-## 8          Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
-## 9           Strus 150.00     2.5       70   Afryka        45    Ptak
-## 10  Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak
-## 11 Sokol wedrowny   0.70     0.5      110   Polnoc        15    Ptak
-## 12 Sokol norweski   2.00     0.7      100   Polnoc        20    Ptak
-## 13       Albatros   4.00     0.8      120 Poludnie        50    Ptak</code></pre>
-</div>
-<div id="indeksowanie-wierszy-w-ramce-danych" class="slide section level1">
-<h1>Indeksowanie wierszy w ramce danych</h1>
-<p>Zasadnicza różnica pomiędzy wektorem a ramką danych jest taka, że wektor jest jednowymiarowy. Wartości są ustawione w ciągu. W ramce danych wartości są ułożone w dwa wymiary, wiersze i kolumny. Indeksując wartości w ramce danych podaje się wektor indeksów dla wierszy i wektor wartości dla kolumn.</p>
-<p>Aby odwoływać się do wierszy lub kolumn ramki danych można wykorzystać operator <code>[,]</code>. Obowiązkowym elementem jest przecinek. Przed przecinkiem należy wpisać indeksy wierszy, po przecinku indeksy kolumn. Jeżeli przed przecinkiem lub po przecinku nie będzie żadnych wartości to wybrane będą wszystkie elementy w wierszu / kolumnie.</p>
-<p>Przykładowo, odwołanie się do trzeciego wiersza z ramki danych</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="dv">3</span>, ]</code></pre>
-<pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
-## 3  Jaguar  100     1.7       90 Ameryka        15     Kot</code></pre>
-<p>Liczbę wierszy można sprawdzić funkcją <code>nrow()</code> (odpowiednio, liczbę kolumn sprawdzamy funkcją <code>ncol()</code>).</p>
-<p>Przydatne, jeżeli np. chcemy wyświetlić ostatni wiersz.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(koty_ptaki)</code></pre>
-<pre><code>## [1] 13</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="dv">13</span>, ]</code></pre>
-<pre><code>##     gatunek waga dlugosc predkosc  habitat zywotnosc druzyna
-## 13 Albatros    4     0.8      120 Poludnie        50    Ptak</code></pre>
-</div>
-<div id="indeksowanie-wierszy-w-ramce-danych-1" class="slide section level1">
-<h1>Indeksowanie wierszy w ramce danych</h1>
-<p>Jeżeli chcemy wybrać więcej niż jeden wiersz należy, podobnie jak dla wektorów, podać kilka indeksów przed przecinkiem.</p>
-<p>Aby odwołać się do kilku kolejnych wierszy można wykorzystać sekwencję zbudowaną z operatorem <code>:</code>.</p>
-<p>Przykładowo, wiersze od 8 do 10 z ramki danych <code>koty_ptaki</code> można wyłuskać następująco.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="dv">8</span>:<span class="dv">10</span>, ]</code></pre>
-<pre><code>##          gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
-## 8         Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
-## 9          Strus 150.00     2.5       70   Afryka        45    Ptak
-## 10 Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak</code></pre>
-<p>Funkcja <code>c()</code> skleja wartości i sekwencje w wektor, który można następnie wykorzystać w indeksowaniu wierszy.</p>
-<p>Poniższa instrukcja wyłuskuje wiersze 3, 8, 9 i 10.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>), ]</code></pre>
-<pre><code>##          gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
-## 3         Jaguar 100.00     1.7       90  Ameryka        15     Kot
-## 8         Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
-## 9          Strus 150.00     2.5       70   Afryka        45    Ptak
-## 10 Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak</code></pre>
-<p>Lub równoważnie:</p>
-<pre class="sourceCode r"><code class="sourceCode r">indeksy &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>)
-koty_ptaki[indeksy, ]</code></pre>
-<pre><code>##          gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
-## 3         Jaguar 100.00     1.7       90  Ameryka        15     Kot
-## 8         Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
-## 9          Strus 150.00     2.5       70   Afryka        45    Ptak
-## 10 Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak</code></pre>
-<p>Funkcjami <code>head()</code> i <code>tail()</code> wyłuskuje się kilka pierwszych lub ostatnich wierszy ze zbioru danych. Do obu funkcji można podać drugi argument, określający ile pierwszych / ostatnich wierszy chcemy odczytać, domyślnie jest to 6 wierszy.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(koty_ptaki)</code></pre>
-<pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
-## 1  Tygrys  300     2.5       60    Azja        25     Kot
-## 2     Lew  200     2.0       80  Afryka        29     Kot
-## 3  Jaguar  100     1.7       90 Ameryka        15     Kot
-## 4    Puma   80     1.7       70 Ameryka        13     Kot
-## 5 Leopard   70     1.4       85    Azja        21     Kot
-## 6  Gepard   60     1.4      115  Afryka        12     Kot</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(koty_ptaki)</code></pre>
-<pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
-## 8          Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
-## 9           Strus 150.00     2.5       70   Afryka        45    Ptak
-## 10  Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak
-## 11 Sokol wedrowny   0.70     0.5      110   Polnoc        15    Ptak
-## 12 Sokol norweski   2.00     0.7      100   Polnoc        20    Ptak
-## 13       Albatros   4.00     0.8      120 Poludnie        50    Ptak</code></pre>
-</div>
-<div id="indeksowanie-wierszy-w-ramce-danych-2" class="slide section level1">
-<h1>Indeksowanie wierszy w ramce danych</h1>
-<p>Jako indeksy można również wykorzystać wektor wartości logicznych.</p>
-<p>Wybiegając trochę w przyszłość, użyjemy kolumny <code>predkosc</code> aby wybrać z ramki danych tylko te wiersze, dla których prędkość jest wyższa niż 100.</p>
-<pre class="sourceCode r"><code class="sourceCode r">najszybsze &lt;-<span class="st"> </span>koty_ptaki$predkosc &gt;<span class="st"> </span><span class="dv">100</span>
-najszybsze</code></pre>
-<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE
-## [12] FALSE  TRUE</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[najszybsze, ]</code></pre>
-<pre><code>##           gatunek  waga dlugosc predkosc  habitat zywotnosc druzyna
-## 6          Gepard 60.00     1.4      115   Afryka        12     Kot
-## 8          Jerzyk  0.05     0.2      170 Euroazja        20    Ptak
-## 10  Orzel przedni  5.00     0.9      160   Polnoc        20    Ptak
-## 11 Sokol wedrowny  0.70     0.5      110   Polnoc        15    Ptak
-## 13       Albatros  4.00     0.8      120 Poludnie        50    Ptak</code></pre>
-</div>
-<div id="indeksowanie-wierszy-w-ramce-danych-3" class="slide section level1">
-<h1>Indeksowanie wierszy w ramce danych</h1>
-<p>Indeksując wiersze lub kolumny można też wykorzystywać ujemne indeksy. Oznaczają one, wszystkie wartości poza wskazanymi.</p>
-<p>Przykładowo, wszystkie wiersze poza 1, 3, 8, 9 i 10 można uzyskać poleceniem.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[ -<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>), ]</code></pre>
-<pre><code>##           gatunek  waga dlugosc predkosc  habitat zywotnosc druzyna
-## 2             Lew 200.0     2.0       80   Afryka        29     Kot
-## 4            Puma  80.0     1.7       70  Ameryka        13     Kot
-## 5         Leopard  70.0     1.4       85     Azja        21     Kot
-## 6          Gepard  60.0     1.4      115   Afryka        12     Kot
-## 7           Irbis  50.0     1.3       65     Azja        18     Kot
-## 11 Sokol wedrowny   0.7     0.5      110   Polnoc        15    Ptak
-## 12 Sokol norweski   2.0     0.7      100   Polnoc        20    Ptak
-## 13       Albatros   4.0     0.8      120 Poludnie        50    Ptak</code></pre>
-<p>Zauważmy, że w tym przykładzie znak <code>-</code> przed funkcją <code>c()</code> tworzącą wektor, powoduje zmianę znaku wszystkich elementów wektora.</p>
-<pre class="sourceCode r"><code class="sourceCode r">-<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>)</code></pre>
-<pre><code>## [1]  -1  -3  -8  -9 -10</code></pre>
-<p>Uwaga! Nie można mieszać jednocześnie indeksów dodatnich i ujemnych.</p>
-</div>
-<div id="indeksowanie-kolumn-w-ramce-danych" class="slide section level1">
-<h1>Indeksowanie kolumn w ramce danych</h1>
-<p>Podobnie jak wiersze, można indeksować również kolumny.</p>
-<p>Aby wyłuskać drugą kolumnę można wskazać jej numer po przecinku.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[, <span class="dv">2</span>]</code></pre>
-<pre><code>##  [1] 300.00 200.00 100.00  80.00  70.00  60.00  50.00   0.05 150.00   5.00
-## [11]   0.70   2.00   4.00</code></pre>
-<p>Wybranie jednej kolumny powoduje, że jako wynik otrzymujemy nie ramkę danych ale wektor. Łatwo to poznać po sposobie wyświetlania danych.</p>
-<p>Aby zapobiec takiej konwersji na wektor i jako wynik wciąż mieć ramkę danych, należy dodać do operatora indeksowania argument <code>drop=FALSE</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[,<span class="dv">2</span>, drop=<span class="ot">FALSE</span>]</code></pre>
-<pre><code>##      waga
-## 1  300.00
-## 2  200.00
-## 3  100.00
-## 4   80.00
-## 5   70.00
-## 6   60.00
-## 7   50.00
-## 8    0.05
-## 9  150.00
-## 10   5.00
-## 11   0.70
-## 12   2.00
-## 13   4.00</code></pre>
-<p><em>Uwaga</em> Ten dziwny zapis jest konsekwencją tego, że operator <code>[,]</code> jest w gruncie rzeczy funkcją. Więcej o zaawansowanych elementach języka dowiemy się w kolejnych odcinkach.</p>
-</div>
-<div id="indeksowanie-kolumn-w-ramce-danych-1" class="slide section level1">
-<h1>Indeksowanie kolumn w ramce danych</h1>
-<p>W ramce danych kolumny możemy indeksować nie tylko numerami ale również nazwami (kolumny są nazywane).</p>
-<p>Nazwy kolumn z ramki danych można odczytać funkcją <code>colnames()</code>. Wynikiem tej funkcji jest wektor z nazwami.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(koty_ptaki)</code></pre>
-<pre><code>## [1] &quot;gatunek&quot;   &quot;waga&quot;      &quot;dlugosc&quot;   &quot;predkosc&quot;  &quot;habitat&quot;   &quot;zywotnosc&quot;
-## [7] &quot;druzyna&quot;</code></pre>
-<p>Aby wyłuskać z ramki danych kolumnę o nazwie <code>waga</code> możemy użyć tej nazwy jako indeksu.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[, <span class="st">&quot;waga&quot;</span>]</code></pre>
-<pre><code>##  [1] 300.00 200.00 100.00  80.00  70.00  60.00  50.00   0.05 150.00   5.00
-## [11]   0.70   2.00   4.00</code></pre>
-<p>Ponieważ operacja odwołania się do jednej kolumny w danych jest dosyć częsta, można ją wykonać na kilka innych sposobów. Najpopularniejszym jest użycie operatora <code>$</code>.</p>
-<p>Z jego pomocą do kolumny <code>waga</code> możemy odwołać się w ten sposób.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki$waga</code></pre>
-<pre><code>##  [1] 300.00 200.00 100.00  80.00  70.00  60.00  50.00   0.05 150.00   5.00
-## [11]   0.70   2.00   4.00</code></pre>
-</div>
-<div id="indeksowanie-kolumn-w-ramce-danych-2" class="slide section level1">
-<h1>Indeksowanie kolumn w ramce danych</h1>
-<p>Aby wybrać więcej niż jedna kolumnę, podobnie jak w przypadku wierszy i wektorów można wykorzystać funkcję <code>c()</code>.</p>
-<p>Przykładowo, jeżeli chcemy wybrać drugą, czwartą, piątą i szóstą kolumnę możemy użyć instrukcji.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># równoważnie moglibyśmy napisać </span>
-<span class="co"># koty_ptaki[, c(&quot;waga&quot;, &quot;predkosc&quot;, &quot;habitat&quot;, &quot;zywotnosc&quot;)]</span>
-koty_ptaki[, <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>:<span class="dv">6</span>)]</code></pre>
-<pre><code>##      waga predkosc  habitat zywotnosc
-## 1  300.00       60     Azja        25
-## 2  200.00       80   Afryka        29
-## 3  100.00       90  Ameryka        15
-## 4   80.00       70  Ameryka        13
-## 5   70.00       85     Azja        21
-## 6   60.00      115   Afryka        12
-## 7   50.00       65     Azja        18
-## 8    0.05      170 Euroazja        20
-## 9  150.00       70   Afryka        45
-## 10   5.00      160   Polnoc        20
-## 11   0.70      110   Polnoc        15
-## 12   2.00      100   Polnoc        20
-## 13   4.00      120 Poludnie        50</code></pre>
-</div>
-<div id="wybieranie-podramki-z-ramki-danych" class="slide section level1">
-<h1>Wybieranie podramki z ramki danych</h1>
-<p>Możemy jednocześnie odwoływać się do wierszy i kolumn w ramce danych, wybierając jej podramkę.</p>
-<p>Przykładowo, wybór czterech wierszy i czterech kolumn może wyglądać tak.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">8</span>:<span class="dv">10</span>), <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>:<span class="dv">6</span>)]</code></pre>
-<pre><code>##      waga predkosc  habitat zywotnosc
-## 3  100.00       90  Ameryka        15
-## 8    0.05      170 Euroazja        20
-## 9  150.00       70   Afryka        45
-## 10   5.00      160   Polnoc        20</code></pre>
-<p>Wybór czterech wierszy i jednej kolumny.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">8</span>:<span class="dv">10</span>), <span class="dv">2</span>]</code></pre>
-<pre><code>## [1] 100.00   0.05 150.00   5.00</code></pre>
-<p>Jeden wiersz i cztery kolumny.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="dv">3</span>, <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>:<span class="dv">6</span>)]</code></pre>
-<pre><code>##   waga predkosc habitat zywotnosc
-## 3  100       90 Ameryka        15</code></pre>
-</div>
-<div id="wybieranie-podramki-z-ramki-danych-nazwami" class="slide section level1">
-<h1>Wybieranie podramki z ramki danych nazwami</h1>
-<p>Pokazaliśmy wcześniej, jak można odwoływać się do kolumn poprzez ich nazwy.</p>
-<p>Podobnie można zrobić z wierszami. Funkcja <code>rownames()</code> pokazuje jak nazywają się wiersze w ramce danych.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(koty_ptaki)</code></pre>
-<pre><code>##  [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;12&quot; &quot;13&quot;</code></pre>
-<p>Te nazwy niewiele mówią, używanie ich do indeksowania nie miałoby sensu. Zmieńmy więc nazwy wierszy na takie jak w kolumnie <code>gatunek</code></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(koty_ptaki) &lt;-<span class="st"> </span>koty_ptaki$gatunek</code></pre>
-<p>Teraz możemy odwoływać się do wierszy poprzez nazwy tych wierszy.</p>
-<p>Poniższy przykład wybiera wiersze dla czterech wskazanych gatunków oraz trzy wybrane kolumny. Jeżeli wiersze mają sensowne nazwy, to wygodniej jest odwoływać się do wierszy przez nazy niż przez indeksy liczbowe.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="kw">c</span>(<span class="st">&quot;Lew&quot;</span>, <span class="st">&quot;Leopard&quot;</span>, <span class="st">&quot;Jerzyk&quot;</span>, <span class="st">&quot;Strus&quot;</span>),
-           <span class="kw">c</span>(<span class="st">&quot;waga&quot;</span>, <span class="st">&quot;dlugosc&quot;</span>, <span class="st">&quot;predkosc&quot;</span>)]</code></pre>
-<pre><code>##           waga dlugosc predkosc
-## Lew     200.00     2.0       80
-## Leopard  70.00     1.4       85
-## Jerzyk    0.05     0.2      170
-## Strus   150.00     2.5       70</code></pre>
-<p><em>Uwaga</em> Gdybyśmy chcieli pozbyć się nazw wierszy, można to zrobić instrukcją</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(koty_ptaki) &lt;-<span class="st"> </span><span class="ot">NULL</span></code></pre>
-</div>
-<div id="sortowanie-przez-indeksowanie" class="slide section level1">
-<h1>Sortowanie przez indeksowanie</h1>
-<p>Interesujące i nieco zaawansowane zastosowanie indeksowania przedstawimy na przykładzie funkcji <code>order()</code>.</p>
-<p>Wynikiem tej funkcji, są indeksy kolejnych, rosnących wartości.</p>
-<p>Przykładowo, w kolumnie <code>predkosc</code> mamy następujące wartości</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[,<span class="st">&quot;predkosc&quot;</span>]</code></pre>
-<pre><code>##  [1]  60  80  90  70  85 115  65 170  70 160 110 100 120</code></pre>
-<p>Wynikiem funkcji <code>order()</code> są indeksy kolejnych, wartości. Najmniejsza wartość to 60, na pozycji 1, kolejna to 65 na pozycji 7, kolejna to 70 na pozycjach 4 i 9 i tak dalej.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">order</span>(koty_ptaki[,<span class="st">&quot;predkosc&quot;</span>])</code></pre>
-<pre><code>##  [1]  1  7  4  9  2  5  3 12 11  6 13 10  8</code></pre>
-<p>Możemy wykorzystać ten wynik, aby posortować ramkę danych po określonej kolumnie. W przykładzie poniżej wykorzystujemy funkcję <code>order()</code> do wyznaczenia wektora <code>kolejnosc</code>. Któty następnie wykorzystamy do indeksowania ramki <code>koty_ptaki</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">kolejnosc &lt;-<span class="st"> </span><span class="kw">order</span>(koty_ptaki[,<span class="st">&quot;predkosc&quot;</span>])
-koty_ptaki[kolejnosc, ]</code></pre>
-<pre><code>##                       gatunek   waga dlugosc predkosc  habitat zywotnosc
-## Tygrys                 Tygrys 300.00     2.5       60     Azja        25
-## Irbis                   Irbis  50.00     1.3       65     Azja        18
-## Puma                     Puma  80.00     1.7       70  Ameryka        13
-## Strus                   Strus 150.00     2.5       70   Afryka        45
-## Lew                       Lew 200.00     2.0       80   Afryka        29
-## Leopard               Leopard  70.00     1.4       85     Azja        21
-## Jaguar                 Jaguar 100.00     1.7       90  Ameryka        15
-## Sokol norweski Sokol norweski   2.00     0.7      100   Polnoc        20
-## Sokol wedrowny Sokol wedrowny   0.70     0.5      110   Polnoc        15
-## Gepard                 Gepard  60.00     1.4      115   Afryka        12
-## Albatros             Albatros   4.00     0.8      120 Poludnie        50
-## Orzel przedni   Orzel przedni   5.00     0.9      160   Polnoc        20
-## Jerzyk                 Jerzyk   0.05     0.2      170 Euroazja        20
-##                druzyna
-## Tygrys             Kot
-## Irbis              Kot
-## Puma               Kot
-## Strus             Ptak
-## Lew                Kot
-## Leopard            Kot
-## Jaguar             Kot
-## Sokol norweski    Ptak
-## Sokol wedrowny    Ptak
-## Gepard             Kot
-## Albatros          Ptak
-## Orzel przedni     Ptak
-## Jerzyk            Ptak</code></pre>
-</div>
-<div id="podsumowanie-instrukcji-r" class="slide section level1">
-<h1>Podsumowanie instrukcji R</h1>
-<p>W tym odcinku omawialiśmy funkcje służące do tworzenia wektorów, sekwencji oraz indeksowania wektorów.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tworzenie wektorów liczb i sekwencji</span>
-<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)
-<span class="dv">2</span>:<span class="dv">7</span>
-<span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">3</span>, <span class="dt">to =</span> <span class="dv">15</span>, <span class="dt">by =</span> <span class="dv">2</span>)
-
-<span class="co"># wektory wartości logicznych i napisowych</span>
-co_drugi &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)
-co_drugi
-
-literki &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;alfa&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;delta&quot;</span>)
-literki
-
-<span class="co"># wyznaczanie długości wektora LETTERS</span>
-<span class="kw">length</span>(LETTERS)
-
-<span class="co"># indeksowanie pojedynczego elementu wektora, pierwszy element</span>
-LETTERS[<span class="dv">1</span>]
-<span class="co"># zamiast podawać wartość 26 można wstawić funkcję, która jako wynik zwróci długość wektora</span>
-LETTERS[<span class="kw">length</span>(LETTERS)]
-
-<span class="co"># indeksowanie kilku elementów wektora</span>
-LETTERS[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">26</span>)]
-<span class="co"># z użyciem zmiennej pomocniczej</span>
-indeksy &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">26</span>)
-LETTERS[indeksy]
-
-<span class="co"># dziesięć pierwszych liter od J do A</span>
-LETTERS[<span class="dv">10</span>:<span class="dv">1</span>]
-<span class="co"># pięć pierwszych i pięć ostatnich</span>
-LETTERS[<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">5</span>, <span class="dv">21</span>:<span class="dv">26</span>)]
-<span class="co"># co druga litera, indeksujemy sekwencją od 1 do 26 z krokiem co 2</span>
-LETTERS[<span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="dv">26</span>, <span class="dt">by =</span> <span class="dv">2</span>)]
-
-<span class="co"># używanie wartości logicznych do indeksowania wektora tylko litery występujące po literze 'K'</span>
-LETTERS[LETTERS &gt;<span class="st"> &quot;K&quot;</span>]</code></pre>
-</div>
-<div id="podsumowanie-instrukcji-r-1" class="slide section level1">
-<h1>Podsumowanie instrukcji R</h1>
-<p>W tym odcinku omawialiśmy funkcje służące do indeksowania wierszy w ramkach danych.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># indeksowanie pojedynczego wiersza</span>
-koty_ptaki[<span class="dv">3</span>, ]
-
-<span class="co"># liczba wierszy</span>
-<span class="kw">nrow</span>(koty_ptaki)
-
-<span class="co"># indeksowanie kilku wierszy </span>
-koty_ptaki[<span class="dv">8</span>:<span class="dv">10</span>, ]
-koty_ptaki[<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>), ]
-<span class="co"># z użyciem zmiennej pomocniczej</span>
-indeksy &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>)
-koty_ptaki[indeksy, ]
-
-<span class="co"># pierwsze 6 wierszy i ostatnie 6 wierszy</span>
-<span class="kw">head</span>(koty_ptaki)
-<span class="kw">tail</span>(koty_ptaki)
-
-<span class="co"># indeksowanie wierszy warunkiem logicznym</span>
-najszybsze &lt;-<span class="st"> </span>koty_ptaki$predkosc &gt;<span class="st"> </span><span class="dv">100</span>
-koty_ptaki[najszybsze, ]
-
-<span class="co"># używanie ujemnych indeksów by pominąć wiersze</span>
-koty_ptaki[ -<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>), ]</code></pre>
-</div>
-<div id="podsumowanie-instrukcji-r-2" class="slide section level1">
-<h1>Podsumowanie instrukcji R</h1>
-<p>W tym odcinku omawialiśmy funkcje służące do indeksowania wierszy, kolumn oraz jednocześnie wierszy i kolumn.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># indeksowanie kolumn, tylko druga kolumna, wynikiem jest wektor</span>
-koty_ptaki[, <span class="dv">2</span>]
-<span class="co"># drop=FALSE powoduje, że wynikiem jest ramka danych</span>
-koty_ptaki[,<span class="dv">2</span>, drop=<span class="ot">FALSE</span>]
-
-<span class="co"># nazwy kolumn</span>
-<span class="kw">colnames</span>(koty_ptaki)
-
-<span class="co"># indeksowanie jednej kolumny z użyciem nazwy</span>
-koty_ptaki[, <span class="st">&quot;waga&quot;</span>]
-koty_ptaki$waga
-
-<span class="co"># indeksowanie kilku kolumn </span>
-<span class="co"># koty_ptaki[, c(&quot;waga&quot;, &quot;predkosc&quot;, &quot;habitat&quot;, &quot;zywotnosc&quot;)]</span>
-koty_ptaki[, <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>:<span class="dv">6</span>)]
-
-<span class="co"># jednoczesne indeksowanie wierszy i kolumn</span>
-koty_ptaki[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">8</span>:<span class="dv">10</span>), <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>:<span class="dv">6</span>)]
-
-<span class="co"># wektor nazw wierszy</span>
-<span class="kw">rownames</span>(koty_ptaki)
-<span class="co"># przypisanie nowych nazw dla wierszy</span>
-<span class="kw">rownames</span>(koty_ptaki) &lt;-<span class="st"> </span>koty_ptaki$gatunek
-
-<span class="co"># odwoływanie się przez nazwy wierszy i kolumn</span>
-koty_ptaki[<span class="kw">c</span>(<span class="st">&quot;Lew&quot;</span>, <span class="st">&quot;Leopard&quot;</span>, <span class="st">&quot;Jerzyk&quot;</span>, <span class="st">&quot;Strus&quot;</span>),
-           <span class="kw">c</span>(<span class="st">&quot;waga&quot;</span>, <span class="st">&quot;dlugosc&quot;</span>, <span class="st">&quot;predkosc&quot;</span>)]</code></pre>
-</div>
-<div id="zadania-1" class="slide section level1">
-<h1>Zadania</h1>
+<div id="local-election-results-in-poland-2014" class="slide section level1">
+<h1>Local election results in Poland (2014)</h1>
+<p>The data set <code>votes2014</code> was prepared to show ways in which spatial data can be analyzed and visualized. The data was downloaded from the website of the National Electoral Commission (<code>http://wybory2014.pkw.gov.pl/pl/</code>).</p>
+<p>The data presents information about the number of seats in the regional parliaments in Poland won in 2014. The set consists of 16 rows and 9 columns. Each row presents results concerning a different voivodeship.</p>
+<p>The subsequent columns present respectively:</p>
 <ul>
-<li><p>Wybierz z ramki danych <code>koty_ptaki</code> wszystkie wiersze poza ,,Sokołami’’ (wiersz 11 i 12).</p></li>
-<li><p>Wybierz z ramki danych <code>koty_ptaki</code> tylko koty (pierwsze siedem wierszy).</p></li>
-<li><p>Wybierz z ramki danych <code>koty_ptaki</code> tylko kolumnę z wagą i prędkością.</p></li>
-<li><p>Wybierz z ramki danych <code>koty_ptaki</code> wszystkie kolumny poza ostatnią.</p></li>
-<li><p>Wybierz z ramki wiersze dla których waga jest mniejsza niż 100 oraz cztery pierwsze kolumny.</p></li>
+<li>name of the voivodeship,</li>
+<li>number of seats won by PSL, PiS, PO, SLD and other political parties,</li>
+<li>what is the percentage of valid votes of the total number of votes cast by the people entitled to vote,</li>
+<li>longitude and latitude of the geographical centre of the voivodeship.</li>
 </ul>
-<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
+<p>Below you can see 6 first rows of this data set.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(votes2014)</code></pre>
+<pre><code>##          Voivodeship PSL PiS PO SLD Other Prc_valid_votes     long
+## 1       Dolnoslaskie   5   9 16   2     4        36.83847 16.38088
+## 2 Kujawsko-Pomorskie  10   7 14   2     0        36.60884 18.50218
+## 3            Lodzkie  10  12 10   1     0        40.13651 19.40827
+## 4          Lubelskie  12  13  7   1     0        41.98316 22.90889
+## 5           Lubuskie   8   5 10   5     2        36.75825 15.34234
+## 6        Malopolskie   8  17 14   0     0        40.56634 20.30085
+##        lat
+## 1 51.07988
+## 2 53.02223
+## 3 51.55958
+## 4 51.24725
+## 5 52.20549
+## 6 49.84203</code></pre>
+</div>
+<div id="offer-prices-of-second-hand-cars-in-2012" class="slide section level1">
+<h1>Offer prices of second-hand cars in 2012</h1>
+<p>The data set <code>auta2012</code> was designed with a view of creating opportunity to work on a big and interesting data set concerning transactions. Transaction data is usually rather extensive and it is processed in a very specific manner.</p>
+<p>This data was extracted from the announcement service <code>otomoto.pl</code> in 2012. The set contains information about over 207 thousand car sales offers.</p>
+<p>Each offer (each row) is described by 21 variables including:</p>
+<ul>
+<li>price, currency and information whether the given price is a net or a gross price,</li>
+<li>information on engine power expressed in horsepower and kW and its capacity,</li>
+<li>information about model, make and version of the car,</li>
+<li>information on the type of drive, year of manufacture and mileage (in km),</li>
+<li>information about color, number of doors, country of origin, country of registration and accessories.</li>
+</ul>
+<p>Information about accessories is described by a very long line of text with values separated by comas.</p>
+<p>Below you can see 6 first rows of this data set.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(auta2012)</code></pre>
+<pre><code>##   Price Currency Price.in.PLN Gross.Net  HP  kW         Brand     Model
+## 1 49900      PLN        49900    brutto 140 103           Kia    Carens
+## 2 88000      PLN        88000    brutto 156 115    Mitsubishi Outlander
+## 3 86000      PLN        86000    brutto 150 110     Chevrolet   Captiva
+## 4 25900      PLN        25900    brutto 163 120         Volvo       S80
+## 5 55900      PLN        55900     netto  NA  NA Mercedes-Benz  Sprinter
+## 6 45900      PLN        45900     netto 150 110 Mercedes-Benz     Viano
+##   Version Nubmer.of.doors Engine.cubic.capacity Mileage
+## 1                     4/5                  1991   41000
+## 2                     4/5                  2179   46500
+## 3                     4/5                  1996    8000
+## 4                     4/5                  2400  200000
+## 5                     4/5                  2200  169400
+## 6                     4/5                  2200  141100
+##             Type.of.fuel Year            Color
+## 1 olej napedowy (diesel) 2008                 
+## 2 olej napedowy (diesel) 2008                 
+## 3 olej napedowy (diesel) 2009                 
+## 4 olej napedowy (diesel) 2003 srebrny-metallic
+## 5 olej napedowy (diesel) 2007            bialy
+## 6 olej napedowy (diesel) 2004 bordowy-metallic
+##   Country.of.current.registration Country.of.origin Is.damaged
+## 1                          Polska                             
+## 2                          Polska                             
+## 3                          Polska                             
+## 4                          Polska            Wlochy           
+## 5                                                             
+## 6                                                             
+##   Transmission                  Is.imported
+## 1     manualna                             
+## 2     manualna                             
+## 3     manualna                             
+## 4     manualna sprowadzony / zarejestrowany
+## 5     manualna                             
+## 6     manualna                             
+##                                                                                                                                                                                                                                                       Accessories
+## 1                                                                                      ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
+## 2                                                              ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
+## 3                                                   ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
+## 4 ABS, hak, el. szyby, el. lusterka, klimatyzacja, alufelgi, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, welurowa tapicerka, tempomat, ESP, lwiatla przeciwmglowe, kierownica wielofunkcyjna
+## 5                                                                                                                                                                                                  ABS, ASR, centralny zamek, wspomaganie kierownicy, immobiliser
+## 6                                                                                                      ABS, el. szyby, el. lusterka, klimatyzacja, ASR, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, welurowa tapicerka</code></pre>
+</div>
+<div id="wig-index-of-the-warsaw-stock-exchange" class="slide section level1">
+<h1>WIG, index of the Warsaw Stock Exchange</h1>
+<p>The data set <code>WIG</code> was prepared so that we could take a look at the analysis and visualization of data with longer time series. In this case the data concerns daily quotations on a stock exchange.</p>
+<p>Information about the daily performance for WIG (Warsaw Stock Exchange Index) from the period December 2013- November 2014 were downloaded from the webpage of the Warsaw Stock Exchange.</p>
+<p>The subsequent columns present respectively:</p>
+<ul>
+<li>data of quotation,</li>
+<li>opening and closing share price, minimum and maximum share price,</li>
+<li>change in share price and the turnover in thousands of PLN.</li>
+</ul>
+<p>There are 248 rows in the data set and each row corresponds to one day of quotation. The Warsaw stock Exchange is closed on Saturdays, Sundays and holidays and the number of quotation days is respectively smaller.</p>
+<p>Below you can see 6 first rows of this data set.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(WIG)</code></pre>
+<pre><code>##         Date Name Opening Price Max Price Min Price Closing Price Change
+## 1 2013-12-02  WIG      54627.26  54790.24  53934.52      53934.52  -1.41
+## 2 2013-12-03  WIG      54025.72  54025.72  53249.68      53276.83  -1.22
+## 3 2013-12-04  WIG      53222.49  53285.49  52535.56      52867.03  -0.77
+## 4 2013-12-05  WIG      52837.25  52900.48  52574.80      52597.13  -0.51
+## 5 2013-12-06  WIG      52837.58  52898.67  52513.14      52727.52   0.25
+## 6 2013-12-09  WIG      53113.49  53186.73  52881.29      52881.29   0.29
+##    Turnover
+## 1  640784.2
+## 2  914147.6
+## 3  968047.2
+## 4  808039.1
+## 5 1012871.6
+## 6  599884.1</code></pre>
+</div>
+<div id="height-of-parents-and-children" class="slide section level1">
+<h1>Height of parents and children</h1>
+<p>The word regression comes from the pioneering studies carried out by Francis Galton and Karl Pearson concerning relationship between height of parents and their children.</p>
+<p>The original data sets created by the scientists are available in the variables galton and pearson. Using these data sets we can describe relationship between the height of a son and his father (<code>pearson</code>) and relationship between the weighted average height of the parents (<code>galton</code>) and their son’s height.</p>
+<p>Below you can see 6 first rows of each data set. There are 928 rows in the galton data set and 1078 rows in the pearson data set.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(galton)</code></pre>
+<pre><code>##     son mid_parent
+## 1 156.7      179.1
+## 2 156.7      174.0
+## 3 156.7      166.4
+## 4 156.7      163.8
+## 5 156.7      162.6
+## 6 158.0      171.4</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(pearson)</code></pre>
+<pre><code>##     son father
+## 1 151.8  165.2
+## 2 160.6  160.7
+## 3 160.9  165.0
+## 4 159.5  167.0
+## 5 163.3  155.3
+## 6 163.2  160.1</code></pre>
+</div>
+<div id="results-of-ski-jumping-competitions" class="slide section level1">
+<h1>Results of ski jumping competitions</h1>
+<p>The data set <code>skiJumps2013</code> contains results of ski jumping competitions season 2013/2014. It was created during construction of a diagram for a competition for the best data visualization during <a href="http://estymator.ue.poznan.pl/pazur/">PAZUR</a> conference.</p>
+<p>The data set consists of 2130 rows. Each row describes one jump during the ski jumping competitions season 2013/2014.</p>
+<p>Each jump is described by 16 columns. Their content is described in the data set <code>skiJumps2013labels</code>.</p>
+<p>The <code>skiJumps2013</code> data set contains the following information about each particular jump:</p>
+<ul>
+<li>information about competition –city, country, parameters of a ski jump,</li>
+<li>information about the ski jumper –name, surname, nationality, date of birth,</li>
+<li>information about the jumps themselves (two jumps if the jumper jumped twice or one jump if the jumper did not qualify for the second round) –speed, distance, points added to the classification.</li>
+</ul>
+<p>Below you can see 6 first rows of this data set.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(skiJumps2013)</code></pre>
+<pre><code>##   jumperSurname jumperName compName compCountry   compDate compKPoint
+## 1        AHONEN      JANNE  Kuusamo     Finland 2013-10-29        120
+## 2        AMMANN      SIMON  Kuusamo     Finland 2013-10-29        120
+## 3        AMMANN      SIMON  Kuusamo     Finland 2013-10-29        120
+## 4     ASIKAINEN      LAURI  Kuusamo     Finland 2013-10-29        120
+## 5        BIEGUN  KRZYSZTOF  Kuusamo     Finland 2013-10-29        120
+## 6        BIEGUN  KRZYSZTOF  Kuusamo     Finland 2013-10-29        120
+##   jumpSeries jumperCountry jumpSpeed jumpDistance jumpPoints
+## 1          1           FIN      90.8        114.5       50.1
+## 2          1           SUI      90.3        128.0       74.4
+## 3          2           SUI      90.6        129.5       77.1
+## 4          1           FIN      90.1        112.5       46.5
+## 5          2           POL      90.1        125.0       69.0
+## 6          1           POL      90.1        128.0       74.4
+##   jumpTotalPoints compTotalPoints classPoints classPrize jumperDateOfBirth
+## 1           114.8           114.8          NA         NA        1977-05-11
+## 2           122.6           122.6          NA         NA        1981-06-25
+## 3           128.3           250.9          15       1450        1981-06-25
+## 4           104.9           104.9          NA         NA        1989-05-28
+## 5           119.2           242.3          13       1300        1994-05-21
+## 6           123.1           123.1          NA         NA        1994-05-21</code></pre>
+</div>
+<div id="social-diagnosis" class="slide section level1">
+<h1>Social Diagnosis</h1>
+<p>Results of the panel research called <em>Social Diagnosis</em> (<em>Diagnoza Społeczna</em>) form a very interesting data set. The same people from a chosen group of households are polled every two years. The questions concern various issues and the answers of the participants allow for construction of a model of social changes taking place in Poland. You can find more information about this research, its results, as well as information about the data set on the project’s website <code>http://diagnoza.com</code>.</p>
+<p>The data set in the form or R binary files available on the website <code>https://github.com/pbiecek/Diagnoza</code>. You can install it using a command <code>install_github(&quot;pbiecek/Diagnoza&quot;)</code> after previous activation of the <code>library(devtools)</code> package.</p>
+<p>The whole data set is large and small computers might have problems with it. For the purposes of this course I have prepared a subset of the data set from the Social Diagnosis research.</p>
+<p>The subset is called diagnoza and it consists of 38461 rows. Each row presents answers of one person. The responses received in the pools are presented in 36 columns/variables. The names of the variables correspond to the questions asked in the poll <code>http://diagnoza.com/pliki/kwestionariusze_instrukcje/kwestionariusze_2013.pdf</code>.</p>
+<p>The data set diagnozaDict gives full versions of all the questions.</p>
+<p>The variables describe among other things:</p>
+<ul>
+<li>names of the respondents,</li>
+<li>analytical weights resulting from the draw method,</li>
+<li>number of years of study, gender, education, height, weight, income,</li>
+<li>answers to chosen questions concerning the worldview.</li>
+</ul>
+<p>The data set called diagnozaDict describes names of columns form the diagnoza data set. These are the first six columns.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(diagnosisDict[,<span class="dv">2</span>,<span class="dt">drop=</span><span class="ot">FALSE</span>])</code></pre>
+<pre><code>##                                                     description
+## imie_2011       IMIĘ CZŁONKA Z POMIARÓW 2003, 2005, 2007 I 2009
+## waga_2013_osoby          Waga dla członków gospodarstwa z  2013
+## lata_nauki_2013                         Liczba lat nauki w 2013
+## wiek2013                                                       
+## plec                                                       Płeć
+## wojewodztwo                                         województwo</code></pre>
+<p>Below you can see two rows taken from that data set.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(diagnosis, <span class="dv">2</span>)</code></pre>
+<pre><code>##   imie_2011 waga_2013_osoby lata_nauki_2013 wiek2013  plec    wojewodztwo
+## 1  WERONIKA        0.277653              NA        4 WOMAN Świętokrzyskie
+## 2    ERNEST        0.277653              11       13   MAN Świętokrzyskie
+##           eduk4_2013                  status9_2013     gp3
+## 1               &lt;NA&gt; OTHER PROFESSIONALLY INACTIVE    &lt;NA&gt;
+## 2 VOCATIONAL/GRAMMAR   EMPLOYEES IN PRIVATE SECTOR PLEASED
+##                                                           gp29
+## 1                                                         &lt;NA&gt;
+## 2 SENSE OF PURPOSE, ACHIEVING IMPORTANT GOALS DESPITE DIFFICUL
+##        gp54_01        gp54_02        gp54_03                    gp54_04
+## 1         &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;                       &lt;NA&gt;
+## 2 RATHER AGREE DEFINITELY YES DEFINITELY YES NEITHER AGREE NOR DISAGREE
+##    gp54_05         gp54_06    gp54_07      gp54_08      gp54_09 gp54_10
+## 1     &lt;NA&gt;            &lt;NA&gt;       &lt;NA&gt;         &lt;NA&gt;         &lt;NA&gt;    &lt;NA&gt;
+## 2 DISAGREE RATHER DISAGREE RACZEJ NIE PROBABLY NOT PROBABLY NOT     YES
+##   gp54_11        gp54_12             gp54_13          gp54_14
+## 1    &lt;NA&gt;           &lt;NA&gt;                &lt;NA&gt;             &lt;NA&gt;
+## 2     YES DEFINITELY YES DEFINITELY DISAGREE DEFINITELY AGREE
+##                      gp54_15        gp54_16                    gp54_17
+## 1                       &lt;NA&gt;           &lt;NA&gt;                       &lt;NA&gt;
+## 2 NEITHER AGREE NOR DISAGREE DEFINITELY YES NEITHER AGREE NOR DISAGREE
+##            gp54_18        gp54_19        gp54_20 gp54_21    gp54_22 gp60
+## 1             &lt;NA&gt;           &lt;NA&gt;           &lt;NA&gt;    &lt;NA&gt;       &lt;NA&gt;   NA
+## 2 DEFINITELY AGREE DEFINITELY NOT DEFINITELY YES     YES RATHER YES  176
+##   gp61 gp64 gp113
+## 1   NA   NA    NA
+## 2   70  900    NA</code></pre>
+</div>
+<div id="assessment-of-episodes-of-tv-series" class="slide section level1">
+<h1>Assessment of episodes of TV series</h1>
+<p>The data set called <code>seriesIMDB</code> contains information about popularity of particular episodes of TV series.</p>
+<p>I downloaded the data about assessment and number of votes cast for each episode of 200 most popular TV series from the website <code>http:///www.imdb.com</code>. The data set also includes names of the series and titles of particular episodes.</p>
+<p>Each of 20122 rows describes one episode. The subsequent variables/columns give the following information:</p>
+<ul>
+<li>title of the series and title of an episode,</li>
+<li>number of the season and number of the episode,</li>
+<li>average assessment of a given episode,</li>
+<li>number of votes,</li>
+<li>identification number of the series in IMDB database.</li>
+</ul>
+<p>Below you can see 6 first rows of this data set.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(seriesIMDB)</code></pre>
+<pre><code>##   id       series                          name season part note votes
+## 1  1 Breaking Bad                         Pilot      1    1  8.7  9357
+## 2  2 Breaking Bad           Cat's in the Bag...      1    2  8.2  6506
+## 3  3 Breaking Bad ...And the Bag's in the River      1    3  8.3  6176
+## 4  4 Breaking Bad                    Cancer Man      1    4  7.9  5796
+## 5  5 Breaking Bad                   Gray Matter      1    5  7.9  5664
+## 6  6 Breaking Bad      Crazy Handful of Nothin'      1    6  8.7  6521
+##      imdbId
+## 1 tt0903747
+## 2 tt0903747
+## 3 tt0903747
+## 4 tt0903747
+## 5 tt0903747
+## 6 tt0903747</code></pre>
+</div>
+<div id="the-prognosis-of-breast-cancer" class="slide section level1">
+<h1>The prognosis of breast cancer</h1>
+<p>I downloaded a subset of clinical and genetic data concerning breast cancer patients (mainly female patients) from the database <em>The Cancer Genome Atlas (TCGA)</em> <code>http://cancergenome.nih.gov/</code>.</p>
+<p>The data set <code>TCGA_BRCA</code> contains data about 999 patients. Each row corresponds to one patient and gives five basic pieces of information:</p>
+<ul>
+<li>information on TP53 gene mutation,</li>
+<li>patient’s gender,</li>
+<li>information whether the patient lived for five years after the surgery,</li>
+<li>number of days between the surgery and death (if it occurred),</li>
+<li>information whether there was a relapse and a new tumor.</li>
+</ul>
+<p>Below you can see 6 first rows of this data set.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(TCGA_BRCA)</code></pre>
+<pre><code>##                TP53 gender vital.status days.to.death new.tumor
+## 1         Wild type female         live            NA        no
+## 2             Other female         live            NA      &lt;NA&gt;
+## 3         Wild type female         live            NA        no
+## 4         Wild type female         live            NA        no
+## 5 Missense_Mutation female         dead          1009      &lt;NA&gt;
+## 6         Wild type female         live            NA        no</code></pre>
+<p>Below you can see number of patients broken down by gender and type of TP53 gene mutation (<code>Wild type</code> means lack of mutation).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(TCGA_BRCA$gender)</code></pre>
+<pre><code>## 
+## female   male 
+##    989     10</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(TCGA_BRCA$TP53)</code></pre>
+<pre><code>## 
+## Missense_Mutation             Other         Wild type 
+##               168               125               706</code></pre>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
@@ -560,7 +729,7 @@ koty_ptaki[<span class="kw">c</span>(<span class="st">&quot;Lew&quot;</span>, <s
       $('head').append("<link href='../do_kursu/kurs.css' rel='stylesheet' type='text/css' />");
       $('body').prepend('<div id="top-bg"></div><div id="top" onclick="location=\''+index+'\'"></div><div id="top-mobile" onclick="location=\''+index+'\'"></div><div id="chat"></div><div class="chat-button"></div>');
   $('h1.title').after('<img src="'+img+'" class="image-first-screen" />');
-  $('#chat').load("http://pogromcydanych.icm.edu.pl/app/index.php/chat/07");
+  $('#chat').load("http://pogromcydanych.icm.edu.pl/app/index.php/chat/0");
 });
 $(window).load(function(){
   $('#chat').animate({"scrollTop": $('#chat')[0].scrollHeight}, 300);
