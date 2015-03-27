@@ -6,8 +6,8 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / przetwarzanie / filter" /> 
-  <title>Filtrowanie danych [dplyr / select]</title>
+  <meta name="copyright" content="pogRomcy danych / eksploracja danych / zadania i odpowiedzi" /> 
+  <title>Zadania i odpowiedzi</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -44,204 +44,582 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </head>
 <body>
 <div class="slide titlepage">
-  <h1 class="title">Filtrowanie danych [dplyr / select]</h1>
+  <h1 class="title">Zadania i odpowiedzi</h1>
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 17 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 0 / odcinek 0 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
-<div id="o-czym-jest-ten-odcinek" class="slide section level1">
-<h1>O czym jest ten odcinek</h1>
-<p>Bazy danych zawierają najczęściej znacznie więcej informacji niż jest nam potrzebne. Jedną z kluczowych operacji jest więc filtrowanie, wybieranie tylko tych wierszy, które nas interesują. Przy czym stwierdzenie ‘interesują nas’ oznacza spełnianie pewnych kryteriów.</p>
-<p>W procesie przygotowania danych takie filtrowanie jest niesamowicie częstą instrukcją. W odcinku 7 pokazaliśmy jak wybierać wiersze spełniające określone kryterium, używając operatora <code>[</code>. W codziennej pracy nie tylko wygodniej, ale i szybciej jest wykorzystać dedykowaną funkcję <code>filter()</code> z pakietu <code>dplyr</code>.</p>
-<p>W tym odcinku nauczymy się:</p>
+<div id="zadanie-sezon-1-odcinek-5" class="slide section level1">
+<h1>Zadanie, sezon 1, odcinek 5</h1>
+<p>W kolejnych odcinkach będziemy korzystać ze zbioru danych o cenach aut. Ten zbiór danych można pobrać ze strony kursu w różnych formatach pod następującymi linkami:</p>
 <ul>
-<li>jak ze zbioru danych wybierać tylko interesujące nas wiersze,</li>
-<li>jak tworzyć złożone kryteria wyboru wierszy.</li>
+<li><p>dane Excelowe, <a href="http://biecek.pl/MOOC/dane/auta2012mini.xls" class="uri">http://biecek.pl/MOOC/dane/auta2012mini.xls</a></p></li>
+<li><p>dane tekstowe, <a href="http://biecek.pl/MOOC/dane/auta2012mini.csv" class="uri">http://biecek.pl/MOOC/dane/auta2012mini.csv</a></p></li>
+<li><p>dane binarne, <a href="http://biecek.pl/MOOC/dane/auta2012mini.rda" class="uri">http://biecek.pl/MOOC/dane/auta2012mini.rda</a></p></li>
+<li><p>w pakiecie <code>PogromcyDanych</code> w zmiennej <code>auta2012</code>.</p></li>
 </ul>
-<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code>, a drugi, znacznie większy, to <code>auta2012</code>. Oba dostępne są w pakiecie <code>PogromcyDanych</code>.</p>
+<p><em>Zadanie:</em></p>
+<p>Wczytać do programu R dane wykorzystując każdy z tych formatów.</p>
+<p><em>Uwaga!</em> Wskazane pliki mają do 3.5 MB wielkości. Ich pobieranie może trochę potrwać jeżeli połączenie internetowe nie jest dobre lub wiele osób jednocześnie z niego korzysta.</p>
 </div>
-<div id="ptaki-vs.koty" class="slide section level1">
-<h1>Ptaki vs. koty</h1>
-<p>Rozpocznijmy przykład filtrowania od zbioru danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem <code>PogromcyDanych</code>. Jest on na tyle mały, że wynik operacji będzie można przedstawić na ekranie.</p>
-<p>Pokażemy jak z tego zbioru danych wybierać wiersze. Widząc cały zbiór danych łatwiej zrozumieć które wiersze zostały wyfiltrowane.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
-koty_ptaki</code></pre>
-<pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
-## 1          Tygrys 300.00     2.5       60     Azja        25     Kot
-## 2             Lew 200.00     2.0       80   Afryka        29     Kot
-## 3          Jaguar 100.00     1.7       90  Ameryka        15     Kot
-## 4            Puma  80.00     1.7       70  Ameryka        13     Kot
-## 5         Leopard  70.00     1.4       85     Azja        21     Kot
-## 6          Gepard  60.00     1.4      115   Afryka        12     Kot
-## 7           Irbis  50.00     1.3       65     Azja        18     Kot
-## 8          Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
-## 9           Strus 150.00     2.5       70   Afryka        45    Ptak
-## 10  Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak
-## 11 Sokol wedrowny   0.70     0.5      110   Polnoc        15    Ptak
-## 12 Sokol norweski   2.00     0.7      100   Polnoc        20    Ptak
-## 13       Albatros   4.00     0.8      120 Poludnie        50    Ptak</code></pre>
-</div>
-<div id="filtrowanie-danych" class="slide section level1">
-<h1>Filtrowanie danych</h1>
-<p>Funkcja <strong>filter()</strong> redukuje liczbę wierszy, zostawiając tylko te, które spełniają określony warunek (jeden lub kilka). Pierwszym argumentem tej funkcji jest ramka danych lub tabela danych, kolejne argumenty (a może być ich jeden lub więcej) to warunki logiczne. Wynikiem jest ramka danych z wierszami, które spełniają jednocześnie wszystkie wskazane warunki.</p>
-<p>Przykładowo, aby zobaczyć, które zwierzaki przekraczają prędkość 100 km na godzinę możemy użyć następujących komend. W pierwszej linii wczytujemy pakiet <code>dplyr</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-<span class="kw">filter</span>(koty_ptaki,
-       predkosc &gt;<span class="st"> </span><span class="dv">100</span>)</code></pre>
-<pre><code>##          gatunek  waga dlugosc predkosc  habitat zywotnosc druzyna
-## 1         Gepard 60.00     1.4      115   Afryka        12     Kot
-## 2         Jerzyk  0.05     0.2      170 Euroazja        20    Ptak
-## 3  Orzel przedni  5.00     0.9      160   Polnoc        20    Ptak
-## 4 Sokol wedrowny  0.70     0.5      110   Polnoc        15    Ptak
-## 5       Albatros  4.00     0.8      120 Poludnie        50    Ptak</code></pre>
-</div>
-<div id="dwa-lub-wiecej-warunkow" class="slide section level1">
-<h1>Dwa lub więcej warunków</h1>
-<p>Możemy określać jednocześnie więcej warunków dla filtrowania. Każdy kolejny warunek można podać jako kolejny argument funkcji <code>filter()</code>.</p>
-<p>Poniższy przykład wybiera ze zbioru danych tylko te gatunki, które spełniają jednocześnie trzy warunki.</p>
-<p>Są to ptaki, które przekraczają prędkość 100 km na godzinę i występują na półkuli północnej.</p>
-<p>Operator <code>%in%</code> zwraca TRUE jeżeli określona wartość występuje w wektorze po prawej stronie.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(koty_ptaki,
-       predkosc &gt;<span class="st"> </span><span class="dv">100</span>,
-       druzyna ==<span class="st"> &quot;Ptak&quot;</span>,
-       habitat %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Polnoc&quot;</span>, <span class="st">&quot;Euroazja&quot;</span>)
-       )</code></pre>
-<pre><code>##          gatunek waga dlugosc predkosc  habitat zywotnosc druzyna
-## 1         Jerzyk 0.05     0.2      170 Euroazja        20    Ptak
-## 2  Orzel przedni 5.00     0.9      160   Polnoc        20    Ptak
-## 3 Sokol wedrowny 0.70     0.5      110   Polnoc        15    Ptak</code></pre>
-</div>
-<div id="auta" class="slide section level1">
-<h1>Auta</h1>
-<p>Operacje filtrowania przećwiczymy też na znacznie większym zbiorze danych, który już nie sposób w całości wyświetlić na ekranie, a mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.</p>
-<p>Zbiór danych <code>auta2012</code> jest dostępny po wczytaniu pakietu <code>PogromcyDanych</code>. Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie <a href="https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html" class="uri">https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(auta2012)</code></pre>
-<pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW         Marka     Model
-## 1 49900    PLN      49900       brutto 140 103           Kia    Carens
-## 2 88000    PLN      88000       brutto 156 115    Mitsubishi Outlander
-## 3 86000    PLN      86000       brutto 150 110     Chevrolet   Captiva
-## 4 25900    PLN      25900       brutto 163 120         Volvo       S80
-## 5 55900    PLN      55900        netto  NA  NA Mercedes-Benz  Sprinter
-## 6 45900    PLN      45900        netto 150 110 Mercedes-Benz     Viano
-##   Wersja Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km
-## 1                 4/5              1991         41000
-## 2                 4/5              2179         46500
-## 3                 4/5              1996          8000
-## 4                 4/5              2400        200000
-## 5                 4/5              2200        169400
-## 6                 4/5              2200        141100
-##            Rodzaj.paliwa Rok.produkcji            Kolor
-## 1 olej napedowy (diesel)          2008                 
-## 2 olej napedowy (diesel)          2008                 
-## 3 olej napedowy (diesel)          2009                 
-## 4 olej napedowy (diesel)          2003 srebrny-metallic
-## 5 olej napedowy (diesel)          2007            bialy
-## 6 olej napedowy (diesel)          2004 bordowy-metallic
-##   Kraj.aktualnej.rejestracji Kraj.pochodzenia Pojazd.uszkodzony
-## 1                     Polska                                   
-## 2                     Polska                                   
-## 3                     Polska                                   
-## 4                     Polska           Wlochy                  
-## 5                                                              
-## 6                                                              
-##   Skrzynia.biegow Status.pojazdu.sprowadzonego
-## 1        manualna                             
-## 2        manualna                             
-## 3        manualna                             
-## 4        manualna sprowadzony / zarejestrowany
-## 5        manualna                             
-## 6        manualna                             
-##                                                                                                                                                                                                                                             Wyposazenie.dodatkowe
-## 1                                                                                      ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
-## 2                                                              ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
-## 3                                                   ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby
-## 4 ABS, hak, el. szyby, el. lusterka, klimatyzacja, alufelgi, ASR, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, welurowa tapicerka, tempomat, ESP, lwiatla przeciwmglowe, kierownica wielofunkcyjna
-## 5                                                                                                                                                                                                  ABS, ASR, centralny zamek, wspomaganie kierownicy, immobiliser
-## 6                                                                                                      ABS, el. szyby, el. lusterka, klimatyzacja, ASR, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, welurowa tapicerka</code></pre>
-</div>
-<div id="tabele-danych" class="slide section level1">
-<h1>Tabele danych</h1>
-<p>W tym miejscu warto zaznaczyć, że funkcje z pakietu <code>dplyr</code> pracują nie tylko na ramkach danych, które już znamy i które mają klasę <code>data.frame</code>, ale również na tabelach danych - obiektach klasy <code>tbl</code>.</p>
-<p>Z użytkowego punktu widzenia, tabele danych od ramek danych różnią się głównie sposobem wyświetlania na ekranie (nie wyświetlają się kolumny, nie mieszczące się w obecnej szerokości konsoli). W rzeczywistości różnią się także szeregiem innych właściwości, między innymi wewnętrzną reprezentacją, która pozwala na szybsze operowanie na danych w strukturze <code>tbl</code>.</p>
-<p>Jeżeli mamy więc dane duże, o dużej liczbie wierszy lub kolumn, często dobrym pomysłem jest przekształcenie je na postać tabeli danych.</p>
-<p>Ramkę danych na tabelę można zamienić funkcją <code>tbl_df</code> a tabelę na ramkę danych funkcją <code>as.data.frame()</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">auta2012 &lt;-<span class="st"> </span><span class="kw">tbl_df</span>(auta2012)
-auta2012</code></pre>
-<pre><code>## Source: local data frame [207,602 x 21]
-## 
-##     Cena Waluta Cena.w.PLN Brutto.netto  KM  kW         Marka     Model
-## 1  49900    PLN      49900       brutto 140 103           Kia    Carens
-## 2  88000    PLN      88000       brutto 156 115    Mitsubishi Outlander
-## 3  86000    PLN      86000       brutto 150 110     Chevrolet   Captiva
-## 4  25900    PLN      25900       brutto 163 120         Volvo       S80
-## 5  55900    PLN      55900        netto  NA  NA Mercedes-Benz  Sprinter
-## 6  45900    PLN      45900        netto 150 110 Mercedes-Benz     Viano
-## 7  39900    PLN      39900       brutto 115  85       Renault    Trafic
-## 8  38900    PLN      38900       brutto 115  85          Ford     Focus
-## 9  24900    PLN      24900       brutto  68  50          Ford    Fusion
-## 10 79900    PLN      79900        netto 175 129    Volkswagen  Multivan
-## ..   ...    ...        ...          ... ... ...           ...       ...
-## Variables not shown: Wersja (fctr), Liczba.drzwi (fctr), Pojemnosc.skokowa
-##   (dbl), Przebieg.w.km (dbl), Rodzaj.paliwa (fctr), Rok.produkcji (dbl),
-##   Kolor (fctr), Kraj.aktualnej.rejestracji (fctr), Kraj.pochodzenia
-##   (fctr), Pojazd.uszkodzony (fctr), Skrzynia.biegow (fctr),
-##   Status.pojazdu.sprowadzonego (fctr), Wyposazenie.dodatkowe (fctr)</code></pre>
-</div>
-<div class="slide section level1">
+<div id="odpowiedzi-sezon-1-odcinek-5" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 5</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plik tekstowy</span>
+auta2012 &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="dt">file =</span> <span class="st">&quot;http://biecek.pl/MOOC/dane/auta2012mini.csv&quot;</span>, 
+          <span class="dt">sep=</span><span class="st">&quot;;&quot;</span>, <span class="dt">dec=</span><span class="st">&quot;,&quot;</span>, <span class="dt">header=</span><span class="ot">TRUE</span>)
 
-<h2 id="filtrowanie-danych-1">Filtrowanie danych</h2>
-<p>Przypuśćmy, że chcemy ograniczyć listę aut do jednej wybranej marki.</p>
-<p>Przykładowo, jeżeli chcemy pozostawić tylko samochody marki Porsche, możemy użyć warunku <code>Marka == 'Porsche'</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">tmp &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012,
-        Marka ==<span class="st"> &quot;Porsche&quot;</span>)
-<span class="kw">head</span>(tmp)</code></pre>
-<pre><code>## Source: local data frame [6 x 21]
-## 
-##     Cena Waluta Cena.w.PLN Brutto.netto  KM  kW   Marka         Model
-## 1 244900    PLN     244900        netto 388 285 Porsche           911
-## 2 229000    PLN     229000       brutto 355 261 Porsche           911
-## 3 133990    PLN     133990        netto 295 217 Porsche       Boxster
-## 4 154900    PLN     154900       brutto 295 217 Porsche       Boxster
-## 5 162520    PLN     162520        netto 500 368 Porsche Cayenne Turbo
-## 6 162520    PLN     162520        netto 500 368 Porsche       Cayenne
-## Variables not shown: Wersja (fctr), Liczba.drzwi (fctr), Pojemnosc.skokowa
-##   (dbl), Przebieg.w.km (dbl), Rodzaj.paliwa (fctr), Rok.produkcji (dbl),
-##   Kolor (fctr), Kraj.aktualnej.rejestracji (fctr), Kraj.pochodzenia
-##   (fctr), Pojazd.uszkodzony (fctr), Skrzynia.biegow (fctr),
-##   Status.pojazdu.sprowadzonego (fctr), Wyposazenie.dodatkowe (fctr)</code></pre>
-</div>
-<div class="slide section level1">
+<span class="co"># plik Excela</span>
+<span class="kw">library</span>(gdata)
+auta2012 &lt;-<span class="st"> </span><span class="kw">read.xls</span>(<span class="st">&quot;http://biecek.pl/MOOC/dane/auta2012mini.xls&quot;</span>, <span class="dt">sheet=</span><span class="dv">1</span>)
 
-<h2 id="dwa-warunki">Dwa warunki</h2>
-<p>Możemy określać jednocześnie więcej warunków. Na przykład tylko samochody Porsche o silnikach o liczbie koni mechanicznych przekraczających 300 możemy odfiltrować w następujący sposób.</p>
-<pre class="sourceCode r"><code class="sourceCode r">tylkoPorscheZDuzymSilnikiem &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012,
-         Marka ==<span class="st"> &quot;Porsche&quot;</span>,
-         KM &gt;<span class="st"> </span><span class="dv">300</span>)
-<span class="kw">head</span>(tylkoPorscheZDuzymSilnikiem)</code></pre>
-<pre><code>## Source: local data frame [6 x 21]
-## 
-##     Cena Waluta Cena.w.PLN Brutto.netto  KM  kW   Marka         Model
-## 1 244900    PLN     244900        netto 388 285 Porsche           911
-## 2 229000    PLN     229000       brutto 355 261 Porsche           911
-## 3 162520    PLN     162520        netto 500 368 Porsche Cayenne Turbo
-## 4 162520    PLN     162520        netto 500 368 Porsche       Cayenne
-## 5  69900    PLN      69900       brutto 340 250 Porsche       Cayenne
-## 6 359000    PLN     359000       brutto 400 294 Porsche      Panamera
-## Variables not shown: Wersja (fctr), Liczba.drzwi (fctr), Pojemnosc.skokowa
-##   (dbl), Przebieg.w.km (dbl), Rodzaj.paliwa (fctr), Rok.produkcji (dbl),
-##   Kolor (fctr), Kraj.aktualnej.rejestracji (fctr), Kraj.pochodzenia
-##   (fctr), Pojazd.uszkodzony (fctr), Skrzynia.biegow (fctr),
-##   Status.pojazdu.sprowadzonego (fctr), Wyposazenie.dodatkowe (fctr)</code></pre>
+<span class="co"># plik rda</span>
+<span class="co"># nie trzeba przypisywać do zmiennej</span>
+<span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;http://biecek.pl/MOOC/dane/auta2012mini.rda&quot;</span>))</code></pre>
 </div>
-<div class="slide section level1">
+<div id="zadanie-sezon-1-odcinek-6" class="slide section level1">
+<h1>Zadanie, sezon 1, odcinek 6</h1>
+<ul>
+<li>Zapisz zbiór danych <code>koty_ptaki</code> do pliku tekstowego, w którym dane są rozdzielane przecinkiem, a separatorem dziesiętnym jest <code>.</code> (kropka).</li>
+<li>Zapisz zbiór danych <code>koty_ptaki</code> do formatu pliku Excela. Sprawdź czy dane poprawnie się zapisały.</li>
+<li>Zapisz zbiór danych <code>koty_ptaki</code> do pliku binarnego. Odczytaj go następnie funkcją <code>load()</code> i sprawdź czy dane poprawnie zostały zapisane.</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-6" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 6</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plik tekstowy</span>
+<span class="kw">write.table</span>(koty_ptaki, <span class="dt">file =</span> <span class="st">&quot;dane_o_kotach.csv&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>, <span class="dt">dec=</span><span class="st">&quot;.&quot;</span>)
 
-<h2 id="zadania">Zadania</h2>
+<span class="co"># plik Excela</span>
+<span class="kw">library</span>(xlsx)
+<span class="kw">write.xls</span>(koty_ptaki, <span class="dt">file =</span> <span class="st">&quot;koty_ptaki.xlsx&quot;</span>, <span class="dt">sheetName=</span><span class="st">&quot;Zakladka 1&quot;</span>)
+
+<span class="co"># dane binarne</span>
+<span class="kw">save</span>(koty_ptaki, <span class="dt">file=</span><span class="st">&quot;koty_ptaki.rda&quot;</span>)
+<span class="kw">load</span>(<span class="st">&quot;koty_ptaki.rda&quot;</span>)</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-7" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 7</h1>
+<ul>
+<li><p>Zbuduj sekwencję dziesięciu kolejnych małych liter alfabetu łacińskiego.</p></li>
+<li><p>Zbuduj sekwencję dziesięciu kolejnych liczb nieparzystych zaczynając od <code>3</code>.</p></li>
+<li><p>Z wektora <code>LETTERS</code> wybierz litery na pozycjach 5, 10, 15, 20 i 25.</p></li>
+<li><p>Wypisz wartości wektora <code>LETTERS</code> od końca.</p></li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-7" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 7</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># kolejne litery</span>
+<span class="kw">c</span>(<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>, <span class="st">'d'</span>, <span class="st">'e'</span>, <span class="st">'f'</span>, <span class="st">'g'</span>, <span class="st">'h'</span>, <span class="st">'i'</span>, <span class="st">'j'</span>)</code></pre>
+<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">letters[<span class="dv">1</span>:<span class="dv">10</span>]</code></pre>
+<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># nieparzyste od 3</span>
+<span class="kw">seq</span>(<span class="dv">3</span>, <span class="dv">21</span>, <span class="dv">2</span>)</code></pre>
+<pre><code>##  [1]  3  5  7  9 11 13 15 17 19 21</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># wybrane z LETTERS</span>
+LETTERS[<span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>)]</code></pre>
+<pre><code>## [1] &quot;E&quot; &quot;J&quot; &quot;O&quot; &quot;T&quot; &quot;Y&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># od końca wektor LETTERS</span>
+LETTERS[<span class="dv">26</span>:<span class="dv">1</span>]</code></pre>
+<pre><code>##  [1] &quot;Z&quot; &quot;Y&quot; &quot;X&quot; &quot;W&quot; &quot;V&quot; &quot;U&quot; &quot;T&quot; &quot;S&quot; &quot;R&quot; &quot;Q&quot; &quot;P&quot; &quot;O&quot; &quot;N&quot; &quot;M&quot; &quot;L&quot; &quot;K&quot; &quot;J&quot;
+## [18] &quot;I&quot; &quot;H&quot; &quot;G&quot; &quot;F&quot; &quot;E&quot; &quot;D&quot; &quot;C&quot; &quot;B&quot; &quot;A&quot;</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-7-1" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 7</h1>
+<ul>
+<li><p>Wybierz z ramki danych <code>koty_ptaki</code> wszystkie wiersze poza ,,Sokołami’’ (wiersz 11 i 12)</p></li>
+<li><p>Wybierz z ramki danych <code>koty_ptaki</code> tylko koty (pierwsze siedem wierszy)</p></li>
+<li><p>Wybierz z ramki danych <code>koty_ptaki</code> tylko kolumnę z wagą i prędkością</p></li>
+<li><p>Wybierz z ramki danych <code>koty_ptaki</code> wszystkie kolumny poza ostatnią</p></li>
+<li><p>Wybierz z ramki wiersze dla których waga jest mniejsza niż 100 oraz cztery pierwsze kolumny.</p></li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-7-1" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 7</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># poza sokołami</span>
+koty_ptaki[-<span class="st"> </span>(<span class="dv">11</span>:<span class="dv">12</span>), ]
+koty_ptaki[<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">10</span>, <span class="dv">13</span>), ]
+
+<span class="co"># tylko koty</span>
+koty_ptaki[<span class="dv">1</span>:<span class="dv">7</span>, ]
+koty_ptaki[koty_ptaki$druzyna ==<span class="st"> &quot;Kot&quot;</span>, ]
+
+<span class="co"># tylko dwie kolumny</span>
+koty_ptaki[, <span class="kw">c</span>(<span class="st">&quot;waga&quot;</span>, <span class="st">&quot;predkosc&quot;</span>)]
+koty_ptaki[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)]
+
+<span class="co"># poza ostatnią</span>
+koty_ptaki[, <span class="dv">1</span>:<span class="dv">6</span>]
+koty_ptaki[, -<span class="dv">7</span>]
+
+<span class="co"># lekkie </span>
+koty_ptaki[koty_ptaki$waga &lt;<span class="st"> </span><span class="dv">100</span>, <span class="dv">1</span>:<span class="dv">4</span>]</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-8" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 8</h1>
+<ul>
+<li>Napisz pętlę, która dla każdego wiersza z tabeli <code>koty_ptaki</code> wypisze żywotność określonego gatunku.</li>
+<li>Napisz pętlę, która przedstawi żywotność za pomocą wykresu, na którym każdy rok przedstawiony jest jako jeden <code>#</code>.</li>
+<li>Napisz pętlę, która narysuje wykres z żywotnością, ale z nazwami gatunku po lewej stronie. Co więcej, przed każdą nazwą gatunku należy dodać tyle znaków spacja, aby nazwy były wyrównane do prawej strony. Długość napisu, mierzoną w liczbie znaków można odczytać funkcją <code>nchar()</code>.</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-8" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 8</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Pętla z żywotnością</span>
+for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
+  <span class="kw">cat</span>(<span class="st">&quot;Osobniki gatunku:&quot;</span>, koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;żyją do&quot;</span>, 
+      koty_ptaki[i,<span class="st">&quot;zywotnosc&quot;</span>], <span class="st">&quot;lat</span><span class="ch">\n</span><span class="st">&quot;</span>)
+}
+
+<span class="co"># Żywotność za pomocą wykresu</span>
+for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
+  n_kropek &lt;-<span class="st"> </span>koty_ptaki[i,<span class="st">&quot;zywotnosc&quot;</span>] 
+  for (j in <span class="dv">1</span>:n_kropek)
+    <span class="kw">cat</span>(<span class="st">&quot;#&quot;</span>)
+  <span class="kw">cat</span>(<span class="st">&quot; &quot;</span>, koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+}
+
+<span class="co"># Nazwa gatunku po lewej stronie</span>
+for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
+  <span class="co"># uzupełniamy spacje</span>
+  n_spacji &lt;-<span class="st"> </span><span class="dv">15</span> -<span class="st"> </span><span class="kw">nchar</span>(<span class="kw">as.character</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>])) 
+  for (j in <span class="dv">1</span>:n_spacji)
+    <span class="kw">cat</span>(<span class="st">&quot; &quot;</span>)
+  <span class="kw">cat</span>( koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot; &quot;</span>)
+  <span class="co"># wykres rysuje żytowność za pomocą #</span>
+  n_kropek &lt;-<span class="st"> </span>koty_ptaki[i,<span class="st">&quot;zywotnosc&quot;</span>] 
+  for (j in <span class="dv">1</span>:n_kropek)
+    <span class="kw">cat</span>(<span class="st">&quot;#&quot;</span>)
+  <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+}</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-9" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 9</h1>
+<ul>
+<li>Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze <code>lekkie</code>, a dla cięższych niż 1 kg <code>ciężkie</code>.</li>
+<li>Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze <code>lekkie</code>, cięższych niż 100kg wypisze <code>ciężkie</code> a w przedziale 1-100kg wypisze <code>średnie</code>. Taki efekt można uzyskać stosując dwie instrukcje <code>if()</code> lub korzystając z funkcji <code>switch()</code>.</li>
+<li>Napisz pętlę i instrukcję warunkową sumującą łączną masę wszystkich ptaków i osobno kotów.</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-9" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 9</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Lekkie / ciężkie</span>
+for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
+  if (koty_ptaki[i,<span class="st">&quot;waga&quot;</span>] &lt;<span class="st"> </span><span class="dv">100</span>) {
+    <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to lekkie zwierze.</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  } else {
+    <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to ciężkie zwierze.</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+}
+
+<span class="co"># Lekkie / średnie / ciężkie</span>
+for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
+  if (koty_ptaki[i,<span class="st">&quot;waga&quot;</span>] &lt;<span class="st"> </span><span class="dv">1</span>) {
+    <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to lekkie zwierze.</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  } else {
+    if (koty_ptaki[i,<span class="st">&quot;waga&quot;</span>] &lt;<span class="st"> </span><span class="dv">100</span>) {
+      <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to średnie zwierze.</span><span class="ch">\n</span><span class="st">&quot;</span>)
+    } else {
+      <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to ciężkie zwierze.</span><span class="ch">\n</span><span class="st">&quot;</span>)
+    }
+  }
+}
+
+<span class="co"># Ważymy koty i ptaki</span>
+wagaKoty &lt;-<span class="st"> </span><span class="dv">0</span>
+wagaPtaki &lt;-<span class="st"> </span><span class="dv">0</span>
+for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
+  if (koty_ptaki[i,<span class="st">&quot;druzyna&quot;</span>] ==<span class="st"> &quot;Kot&quot;</span>) {
+    wagaKoty &lt;-<span class="st"> </span>wagaKoty +<span class="st"> </span>koty_ptaki[i,<span class="st">&quot;waga&quot;</span>]
+  } else {
+    wagaPtaki &lt;-<span class="st"> </span>wagaPtaki +<span class="st"> </span>koty_ptaki[i,<span class="st">&quot;waga&quot;</span>]
+  }
+}</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-10" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 10</h1>
+<ul>
+<li>Napisz funkcję, która otrzymuje argument liczbowy, a następnie wypisuje na ekran wartości od argumentu do jeden.</li>
+<li>Napisz funkcję, która przyjmuje argument liczbowy <code>n</code>, a następnie rysuje kwadrat o boku <code>n</code> wypełniony znakami <code>X</code>.</li>
+<li>Napisz funkcję, która przyjmuje argument liczbowy <code>n</code>, a następnie rysuje kwadrat o boku <code>n</code> ze znakami <code>X</code> na brzegu i pusty w środku.</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-10" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 10</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># odliczanie do 1</span>
+odliczaj &lt;-<span class="st"> </span>function(<span class="dt">od =</span> <span class="dv">10</span>) {
+  for (i in od:<span class="dv">1</span>) {
+    <span class="kw">cat</span>(i, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+}
+<span class="kw">odliczaj</span>(<span class="dv">5</span>)
+
+<span class="co"># rysuj kwadrat</span>
+kwadrat &lt;-<span class="st"> </span>function(<span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">znak=</span><span class="st">&quot;X&quot;</span>) {
+  for (i in <span class="dv">1</span>:n) {
+    for (j in <span class="dv">1</span>:n) {
+      <span class="kw">cat</span>(znak)
+    }
+    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+}
+<span class="kw">kwadrat</span>()
+
+<span class="co"># rysuj pusty kwadrat</span>
+pustyKwadrat &lt;-<span class="st"> </span>function(<span class="dt">n =</span> <span class="dv">5</span>, <span class="dt">znak=</span><span class="st">&quot;X&quot;</span>) {
+  for (i in <span class="dv">1</span>:n) {
+    for (j in <span class="dv">1</span>:n) {
+      if (i ==<span class="st"> </span><span class="dv">1</span> |<span class="st"> </span>j ==<span class="st"> </span><span class="dv">1</span> |<span class="st"> </span>i ==<span class="st"> </span>n |<span class="st"> </span>j ==<span class="st"> </span>n) {
+        <span class="kw">cat</span>(znak)
+      } else {
+        <span class="kw">cat</span> (<span class="st">&quot; &quot;</span>)
+      }
+    }
+    <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  }
+}
+<span class="kw">pustyKwadrat</span>()</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-11" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 11</h1>
+<ul>
+<li><p>W zbiorze danych <em>auta2012</em> aż 7 cech to cechy ilościowe. Wymień które.</p></li>
+<li><p>Jedną z cech ilościowych jest <em>Rok.produkcji</em>. Wszystkie te oferty były złożone w roku 2012, jaki był medianowy/połówkowy wiek oferowanego auta?</p></li>
+<li><p>Która cecha jest najmniej kompletna? Dla której cechy liczba brakujących wartości jest największa?</p></li>
+<li><p>Jaka jest mediana/połówkowa wielkość silnika (<code>Pojemnosc.skokowa</code>)?</p></li>
+<li><p>Przedstaw graficznie za pomocą wykresu pudełko-wąsy oraz histogramu rozkład cechy <code>Cena.w.PLN</code>.</p></li>
+<li><p>Zwróć uwagę, że pojedyncze auta o bardzo wysokich cenach, powodują że wykres jest mało czytelny. Oczyść te dane, pozostawiają tylko auta o cenie poniżej 100 tys pln. Następnie przedstaw rozkład cen aut w segmencie aut do 100 tys pln.</p></li>
+<li><p>Aut w jakiej cenie jest najwięcej wśród zebranych ogłoszeń?</p></li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-11" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 11</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Zmienne ilościowe</span>
+<span class="co"># `Cena`, `Cena.w.PLN`, `KM`, `kW`, `Pojemnosc.skokowa`, `Przebieg.w.km`, `Rok.produkcji`</span>
+
+<span class="co"># medianowy wiek to 2012 - mediana roku produkcji</span>
+<span class="dv">2012</span> -<span class="st"> </span><span class="kw">median</span>(auta2012$Rok.produkcji)
+
+<span class="co"># Dla zmiennej `Przebieg.w.km`  jest 39 559 brakujących wartości. Ta zmienna jest najmniej kompletna.</span>
+
+<span class="co"># mediana koni mechanicznych</span>
+<span class="kw">median</span>(auta2012$KM, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
+
+<span class="co"># Usuńmy skrajne obserwacje i narysujmy rozkład ceny aut wykresem pudełkowym</span>
+auta2012wybrane &lt;-<span class="st"> </span>auta2012[auta2012$Cena.w.PLN &lt;<span class="st"> </span><span class="dv">100000</span>, ] 
+<span class="kw">boxplot</span>(auta2012wybrane$Cena.w.PLN, <span class="dt">horizontal =</span> <span class="ot">TRUE</span>, <span class="dt">range =</span> <span class="dv">0</span>)
+
+<span class="co"># lub histogramem</span>
+<span class="kw">hist</span>(auta2012wybrane$Cena.w.PLN, <span class="dv">50</span>, <span class="dt">col=</span><span class="st">&quot;grey&quot;</span>)
+
+<span class="co"># najwięcej jest aut w okolicy 13000 (moda policzona po dyskretyzacji na 1000 przedziałów)</span>
+<span class="kw">which.max</span>(<span class="kw">table</span>(<span class="kw">cut</span>(auta2012wybrane$Cena.w.PLN, <span class="dv">1000</span>)))</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-12" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 12</h1>
+<ul>
+<li><p>Ile zmiennych w zbiorze danych <code>auta2012</code> to zmienne jakościowe?</p></li>
+<li><p>Zmienna <code>Liczba.drzwi</code> przyjmuje wartości <code>2/3</code> i <code>4/5</code>. Zachowuje się ona jako zmienna jakościowa. Jednak można uznać, że liczba drzwi to cecha ilościowa, ponieważ opisuje <em>ilość</em> drzwi w samochodzie. Jak wyjaśnić tę dualność?</p></li>
+<li><p>Cecha <code>Marka</code> opisuje markę samochodu. Sprawdź, która marka jest najpopularniejsza.</p></li>
+<li><p>Cecha <code>Rodzaj.paliwa</code> opisuje rodzaj paliwa wykorzystywanego przez auto. Czy jest to benzyna, olej, gaz? Sprawdź jaki procent samochodów jest napędzana na benzynę.</p></li>
+<li><p>Przedstaw graficznie tabelę liczebności dla zmiennej <code>Kraj.pochodzenia</code>. Wypróbuj wykres pionowy i poziomy. Aby obrócić kierunek etykiet na osiach dodaj do funkcji <code>barplot()</code> argument <code>las=1</code>.</p></li>
+<li><p>W zbiorze danych <code>auta2012</code> podziel zmienne <em>Rok.produkcji</em> na przedziały 1900-1990, 1991-1995, 1996-2000, 2001-2005, 2006-2010, 2011-2012 a zmienną <em>Przebieg.w.km</em> na przedziały 0-1000, 1001-10 000, 10 001-100 000, 100 001 - 1000 000, 1000 000 - 10 000 000.</p></li>
+<li><p>Wyznacz tabelę liczebności dla tych dwóch nowych zmienych.</p></li>
+<li><p>Przedstaw tę tabelę graficznie.</p></li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-12" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 12</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(<span class="kw">which</span>(<span class="kw">sapply</span>(auta2012, class) ==<span class="st"> &quot;factor&quot;</span>))
+##  [1] &quot;Waluta&quot;                       &quot;Brutto.netto&quot;                 &quot;Marka&quot;                       
+##  [4] &quot;Model&quot;                        &quot;Wersja&quot;                       &quot;Liczba.drzwi&quot;                
+##  [7] &quot;Rodzaj.paliwa&quot;                &quot;Kolor&quot;                        &quot;Kraj.aktualnej.rejestracji&quot;  
+## [10] &quot;Kraj.pochodzenia&quot;             &quot;Pojazd.uszkodzony&quot;            &quot;Skrzynia.biegow&quot;             
+## [13] &quot;Status.pojazdu.sprowadzonego&quot; &quot;Wyposazenie.dodatkowe&quot;      </code></pre>
+<p>Pewne zmienne, w zależności od kontekstu, mogą być traktowane i analizowane jak zmienne ilościowe lub zmienne jakościowe. Do nas należy wybór, która z tych opcji jest właściwsza.</p>
+<p>Przykładowo, w typowych analizach takich danych nie ma sensu liczenia sumy lub średniej liczby drzwi. Co by bowiem by znaczyło, że auta wystawione do sprzedaży w styczniu miały średnio 3.8 drzwi? Dla zwykłego odbiory taka średnia nie ma sensu, niewiele bowiem mówi o zmiennej. Nie ma specjalnie sensu stwierdzenie, że samochody marki Porsche mają średnio o 0.5 mniej drzwi niż samochody marki Toyota.</p>
+<p>Ale już, gdybyśmy byli warsztatem malarskim, który ma pomalować te wszystkie drzwi, i w cenniku ma cenę od elementu, dla takiego warsztatu suma drzwi może mieć sens. W takim przypadku sensownie byłoby potraktowanie tej zmiennej jako zmiennej ilościowej i zsumowanie liczby drzwi.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Nazwa najpopularniejszej marki</span>
+<span class="kw">names</span>(<span class="kw">which.max</span>(<span class="kw">table</span>(auta2012$Marka)))
+
+<span class="co"># Jaki procent aut jeździ na benzynie?</span>
+<span class="dv">100</span>*<span class="kw">prop.table</span>(<span class="kw">table</span>(auta2012$Rodzaj.paliwa))[<span class="st">&quot;benzyna&quot;</span>]
+
+<span class="co"># Kraj pochodzenia aut</span>
+posortowanaTabela &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">table</span>(auta2012$Kraj.pochodzenia))
+<span class="kw">barplot</span>(posortowanaTabela, <span class="dt">horiz =</span> <span class="ot">TRUE</span>, <span class="dt">las=</span><span class="dv">1</span>)
+
+<span class="co"># Kategoryzacja</span>
+auta2012$Rok.produkcjiKat &lt;-<span class="st"> </span><span class="kw">cut</span>(auta2012$Rok.produkcji, <span class="kw">c</span>(<span class="dv">1900</span>, <span class="fl">1990.5</span>, <span class="fl">1995.5</span>, <span class="fl">2000.5</span>, <span class="fl">2005.5</span>, <span class="fl">2010.5</span>, <span class="fl">2012.5</span>))
+auta2012$Przebieg.w.kmKat &lt;-<span class="st"> </span><span class="kw">cut</span>(auta2012$Przebieg.w.km, <span class="kw">c</span>(<span class="dv">0-1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>, <span class="dv">1000000</span>, <span class="dv">10000000</span>))
+
+<span class="co"># Tablica liczebności</span>
+(przebiegRok &lt;-<span class="st"> </span><span class="kw">xtabs</span>(~Rok.produkcjiKat +<span class="st"> </span>Przebieg.w.kmKat, auta2012))
+
+<span class="co"># wykres tablicy liczebności</span>
+<span class="kw">mosaicplot</span>(przebiegRok, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">color=</span><span class="ot">TRUE</span>)</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-13" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 13</h1>
+<ul>
+<li><p>Sprawdź ile samochodów ma cenę ofertową poniżej 2 000 pln.</p></li>
+<li><p>Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3.</p></li>
+<li><p>Sprawdź ile samochodów zarejestrowanych w Polsce ma cenę ofertową poniżej 2 000 pln.</p></li>
+<li><p>Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3 oraz jest napędzanych olejem napędowym.</p></li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-13" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 13</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Liczba ofert poniżej 2 000</span>
+<span class="kw">sum</span>(auta2012$Cena.w.PLN &lt;<span class="st"> </span><span class="dv">2000</span>, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
+
+<span class="co"># Procent aut o silnikach &gt;= 1500cm3</span>
+<span class="dv">100</span>*<span class="kw">mean</span>(auta2012$Pojemnosc.skokowa &gt;=<span class="st"> </span><span class="dv">1500</span>, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
+
+<span class="co"># Zarejestrowany w Polsce i poniżej 2k</span>
+taniZPolski &lt;-<span class="st"> </span>auta2012$Cena.w.PLN &lt;<span class="st"> </span><span class="dv">2000</span> &amp;<span class="st"> </span>auta2012$Kraj.aktualnej.rejestracji ==<span class="st"> &quot;Polska&quot;</span>
+<span class="kw">sum</span>(taniZPolski, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)
+
+<span class="co"># Diesel z silnikiem &gt;1500</span>
+duzyDiesel &lt;-<span class="st"> </span>auta2012$Pojemnosc.skokowa &gt;<span class="st"> </span><span class="dv">1500</span> &amp;<span class="st"> </span>auta2012$Rodzaj.paliwa ==<span class="st"> 'olej napedowy (diesel)'</span>
+<span class="kw">mean</span>(duzyDiesel, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-14" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 14</h1>
+<ul>
+<li><p>Wyznacz indeksy wierszy w zbiorze danych <code>koty_ptaki</code>, w których <code>gatunek</code> zawiera dużą lub małą literę <code>S</code>.</p></li>
+<li><p>Wyznacz wszystkie wiersze, w których opisano jakiś gatunek sokoła.</p></li>
+<li><p>Sprawdź ile samochodów ma zainstalowany autoalarm (oznaczony jako ‘autoalarm’)</p></li>
+<li><p>Sprawdź ile samochodów ma lakier w metalicznym kolorze (oznaczony jako ‘metallic’)</p></li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-14" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 14</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Gdzie gatunek zaczyna się na S lub s</span>
+<span class="kw">grep</span>(<span class="st">&quot;s&quot;</span>, koty_ptaki$gatunek, <span class="dt">ignore.case =</span> <span class="ot">TRUE</span>)
+
+<span class="co"># Które wiersze dotyczą sokołów</span>
+<span class="kw">grep</span>(<span class="st">&quot;Sokol&quot;</span>, koty_ptaki$gatunek)
+
+<span class="co"># liczba ofert z autoalarmem</span>
+<span class="kw">sum</span>(<span class="kw">grepl</span>(auta2012$Wyposazenie.dodatkowe.napis, <span class="dt">pattern=</span><span class="st">&quot;autoalarm&quot;</span>))
+
+<span class="co"># liczba ofert z lakierem metallic</span>
+<span class="kw">sum</span>(<span class="kw">grepl</span>(<span class="kw">as.character</span>(auta2012$Kolor), <span class="dt">pattern=</span><span class="st">&quot;metallic&quot;</span>))</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-15" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 15</h1>
+<ul>
+<li><p>Używając odpowiedniego formatowania zamień napis <code>01-15-2015 10:20:59</code> na obiekt klasy <code>POSIXct</code>.</p></li>
+<li><p>Oblicz liczbę dni pomiędzy 1 września 1945 roku a 8 maja 1945.</p></li>
+<li><p>Sprawdź jaki dzień tygodnia będzie za 100 dni od dziś</p></li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-15" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 15</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># konwersja daty</span>
+<span class="kw">mdy_hms</span>(<span class="st">&quot;01-15-2015 10:20:59&quot;</span>)
+
+<span class="co"># liczba dni różnicy</span>
+<span class="kw">dmy</span>(<span class="st">&quot;08-05-1945&quot;</span>) -<span class="st"> </span><span class="kw">dmy</span>(<span class="st">&quot;01-09-1939&quot;</span>)
+
+<span class="co"># dzień tygodnia za 100 dni od dziś</span>
+<span class="kw">wday</span>(<span class="kw">today</span>() +<span class="st"> </span><span class="kw">days</span>(<span class="dv">100</span>), <span class="dt">label =</span> <span class="ot">TRUE</span>, <span class="dt">abbr =</span> <span class="ot">FALSE</span>)</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-16" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 16</h1>
+<p>Po wczytaniu poniższej ramki danych napraw następujące błędy:</p>
+<ul>
+<li>popraw nazwę kolumny <code>litąry</code>,</li>
+<li>zamień wartości <code>Ą</code> i <code>Ć</code> na ,,bezogonkowe’’,</li>
+<li>zamień kolumnę <code>liczby</code> na kolumnę liczb,</li>
+<li>zastąp brakujące dane w kolumnie <code>braku</code>.</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+        litą<span class="dt">ry =</span> <span class="kw">c</span>(<span class="st">&quot;Ą&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;Ć&quot;</span>,<span class="st">&quot;D&quot;</span>),
+        <span class="dt">liczby =</span> <span class="kw">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;3,0&quot;</span>,<span class="st">&quot;4,0&quot;</span>),
+        <span class="dt">braki =</span> <span class="kw">c</span>(<span class="ot">NA</span>,<span class="dv">1</span>,<span class="ot">NA</span>,<span class="dv">1</span>),
+        <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+df</code></pre>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-16" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 16</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># nazwa kolumny danych</span>
+<span class="kw">colnames</span>(df)[<span class="dv">1</span>] =<span class="st"> &quot;litery&quot;</span>
+
+<span class="co"># ogonki</span>
+df[df$litery ==<span class="st"> &quot;Ą&quot;</span>] =<span class="st"> &quot;A&quot;</span>
+df[df$litery ==<span class="st"> &quot;Ć&quot;</span>] =<span class="st"> &quot;C&quot;</span>
+
+<span class="co"># liczby</span>
+df$liczby &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">gsub</span>(<span class="st">&quot;,&quot;</span>, <span class="st">&quot;.&quot;</span>, df$liczby))
+
+<span class="co"># brakujące dane</span>
+df$braki[<span class="kw">is.na</span>(df$braki)] &lt;-<span class="st"> </span><span class="dv">1</span></code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-17" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 17</h1>
 <ul>
 <li>Ze zbioru danych <code>auta2012</code> pozostaw tylko samochody o wieku do pięciu lat (czyli o roku produkcji &gt; 2007). Nazwij ten wynikowy zbiór danych <code>mlodeAuta</code></li>
 <li>Z przed chwilą stworzonego zbioru danych <code>mlodeAuta</code> wybierz tylko Fiaty 500. Ile jest takich aut? (wymiary ramki danych możesz sprawdzić funkcją <strong>dim()</strong>)</li>
 </ul>
-<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-17" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 17</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tylko mlode auta</span>
+mlodeAuta &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012, 
+                    Rok.produkcji &gt;<span class="st"> </span><span class="dv">2007</span>)
+
+<span class="co"># tylko mlode Fiaty</span>
+mlodeFiaty &lt;-<span class="st"> </span><span class="kw">filter</span>(mlodeAuta, 
+                    Model ==<span class="st"> &quot;500&quot;</span>)
+<span class="kw">nrow</span>(mlodeFiaty)</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-18" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 18</h1>
+<ul>
+<li>Posortuj auta wzdłuż wielkości silnika (liczby koni mechanicznych, kolumna <code>KM</code>) lub pojemności skokowej (kolumna <code>Pojemnosc.skokowa</code>). Które marki mają najwięszke silniki?</li>
+<li>Wybierz tylko auta marki ‘Rolls-Royce’ i posortuj je po cenie.</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-18" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 18</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># auta z największymi silnikami (deklarowanymi)</span>
+tmp &lt;-<span class="st"> </span><span class="kw">arrange</span>(auta2012, -KM)
+<span class="kw">head</span>(tmp,<span class="dv">20</span>)
+
+<span class="co"># najtańsze Rolls-Royce</span>
+RR &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012, Marka ==<span class="st"> 'Rolls-Royce'</span>)
+<span class="kw">arrange</span>(RR, Cena.w.PLN)</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-19" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 19</h1>
+<ul>
+<li>Użyj operatora <code>%&gt;%</code> by ze zbioru danych <code>auta2012</code> wybrać tylko 10 najtańszych aut marki Rolls-Royce.</li>
+<li>Użyj operatora <code>%&gt;%</code> by ze zbioru danych <code>auta2012</code> wybrać 5 Volkswagenów o największych silnikach.</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-19" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 19</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># auta z największymi silnikami (deklarowanymi)</span>
+tmp &lt;-<span class="st"> </span><span class="kw">arrange</span>(auta2012, -KM)
+<span class="kw">head</span>(tmp,<span class="dv">20</span>)
+
+<span class="co"># najtańsze Rolls-Royce</span>
+RR &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012, Marka ==<span class="st"> 'Rolls-Royce'</span>)
+<span class="kw">arrange</span>(RR, Cena.w.PLN)</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-20" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 20</h1>
+<ul>
+<li><p>Wybierz tylko samochody marki Volvo, posortuj je po pojemności skokowej, a następnie wyświetl tylko trzy kolumny: Markę, Cenę.w.PLN i Kolor.</p></li>
+<li><p>Wybierz tylko te kolumny, których nazwa kończy się na <code>a</code>.</p></li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-20" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 20</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># wybrać</span>
+auta2012 %&gt;%<span class="st"> </span><span class="kw">filter</span>(Marka ==<span class="st"> 'Volvo'</span>) %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(Pojemnosc.skokowa) %&gt;%
+<span class="st">  </span><span class="kw">select</span>(Marka, Cena.w.PLN, Kolor) 
+
+<span class="co"># kolumny o nazwie zakończonej na a</span>
+auta2012 %&gt;%<span class="st"> </span><span class="kw">select</span>(<span class="kw">matches</span>(<span class="st">&quot;a$&quot;</span>))</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-21" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 21</h1>
+<ul>
+<li>Dla zbioru danych <code>koty_ptaki</code> dodajmy nową zmienną. Z fizyki wiemy, że pęd to prędkość razy masa. Policz maksymalne pędy dla każdego gatunku oraz uporządkuj wiersze w kolejności od tych zdolnych do uzyskiwania najwyższego pędu.</li>
+<li>Policz średni przebieg na rok, dzieląc przebieg przez wieka auta.</li>
+<li>Poza koniem mechanicznym inną ciekawą jednostką mocy jest koń parowy (jednostka HP). Jeden koń mechaniczny to 0.9863 konia parowego. Utwórz nową zmienną, która przedstawi moc aut w koniach parowych (btw: Wikipedia zna jeszcze kilka innych ciekawych jednostek mocy).</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-21" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 21</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pęd</span>
+koty_ptaki %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(pę<span class="dt">d =</span> predkosc*waga) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(-pęd)
+
+<span class="co"># przebieg</span>
+auta2012 %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Wiek =</span> <span class="dv">2013</span> -<span class="st"> </span>Rok.produkcji,
+         <span class="dt">sredni_przebieg =</span> Przebieg.w.km /<span class="st"> </span>Wiek)
+
+<span class="co"># konie</span>
+auta2012 %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">HP =</span> <span class="fl">0.9863</span>*KM)</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-22" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 22</h1>
+<ul>
+<li>Policz sumaryczny przebieg wszystkich samochodów. Następnie policz ile razy okrążono kulę ziemską uwzględniając ten sumaryczny przebieg.</li>
+<li>Wybierz tylko samochody marki ‘Rolls-Royce’ i policz ich średni przebieg oraz średnią cenę.</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-22" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 22</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># przebieg</span>
+auta2012 %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sumaryczny.przebieg =</span> <span class="kw">sum</span>(Przebieg.w.km, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+            okrążeń =<span class="st"> </span>sumaryczny.przebieg /<span class="st"> </span><span class="dv">40075</span>,
+            średnio.okrążeń =<span class="st"> </span>okrążeń /<span class="st"> </span><span class="kw">n</span>())
+
+<span class="co"># Rolls-Royce</span>
+auta2012 %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(Marka ==<span class="st"> &quot;Rolls-Royce&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>( ś<span class="dt">rednia.cena =</span> <span class="kw">mean</span>(Cena.w.PLN),
+             ś<span class="dt">redni.przebieg =</span> <span class="kw">mean</span>(Przebieg.w.km, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-23" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 23</h1>
+<ul>
+<li>Wybierz pięcioletnie Golfy i sprawdź czy średnia cena zależy od kraju aktualnej rejestracji. W tym celu pogrupuj po zmiennej Kraj.aktualnej.rejestracji i w każdej grupie policz średnią.</li>
+<li>Wybierz tylko Peugeoty 206 i policz średnią cenę w zależności od roku produkcji. Posortuj te grupy po roku produkcji.</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-23" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 23</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># golfy</span>
+auta2012 %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(Model ==<span class="st"> &quot;Golf&quot;</span>, Rok.produkcji ==<span class="st"> </span><span class="dv">2007</span>) %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(Kraj.aktualnej.rejestracji) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sredniaCena =</span> <span class="kw">mean</span>(Cena.w.PLN)) %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(sredniaCena)
+
+<span class="co"># peugeoty</span>
+auta2012 %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(Marka ==<span class="st"> &quot;Peugeot&quot;</span>, Model ==<span class="st"> &quot;206&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(Rok.produkcji) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>( ś<span class="dt">rednia.cena =</span> <span class="kw">mean</span>(Cena.w.PLN))</code></pre>
+</div>
+<div id="zadania-sezon-1-odcinek-24" class="slide section level1">
+<h1>Zadania, sezon 1, odcinek 24</h1>
+<ul>
+<li>W bazie danych Eurostatu o nazwie <code>prc_ppp_ind</code> zbierane są informacje o średniej sile nabywczej. Odczytaj te dane funkcją <code>getEurostatRCV()</code> a następnie zamień z postaci wąskiej do szerokiej.</li>
+<li>Ze zbioru danych <code>kidney</code> wybierz tylko kolumny MDRD12, MDRD24, MDRD36, MDRD60 a następnie zamień je z postaci szerokiej do wąskiej.</li>
+<li>W zbiorze danych <code>kidney</code> niezgodności w antygenach AB i DR są opsisane przez kolumny <code>discrepancy.AB</code> i <code>discrepancy.DR</code>. Zamień je w jedną kolumnę o nazwie <code>discrepancy</code> gdzie obie niezgodności są sklejone i separowane znakiem <code>_</code>.</li>
+</ul>
+</div>
+<div id="odpowiedzi-sezon-1-odcinek-24" class="slide section level1">
+<h1>Odpowiedzi, sezon 1, odcinek 24</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># siła nabywcza</span>
+prc_ppp_ind &lt;-<span class="st"> </span><span class="kw">getEurostatRCV</span>(<span class="st">&quot;prc_ppp_ind&quot;</span>)
+<span class="kw">spread</span>(prc_ppp_ind, time, value)
+
+<span class="co"># nerki</span>
+kidney$id &lt;-<span class="st"> </span><span class="kw">rownames</span>(kidney)
+kidney %&gt;%<span class="st"> </span>
+<span class="st">  </span>dplyr::<span class="kw">select</span>(id, MDRD12:MDRD60) %&gt;%
+<span class="st">  </span><span class="kw">gather</span>(MDRD, time, MDRD12:MDRD60) %&gt;%
+<span class="st">  </span><span class="kw">head</span>()
+
+<span class="co"># niezgodnosci</span>
+kidney %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">select</span>(therapy, discrepancy.AB, discrepancy.DR) %&gt;%
+<span class="st">  </span><span class="kw">unite</span>(discrepancy, discrepancy.AB, discrepancy.DR, <span class="dt">sep=</span><span class="st">&quot;_&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">head</span>()</code></pre>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
@@ -268,7 +646,7 @@ auta2012</code></pre>
       $('head').append("<link href='../do_kursu/kurs.css' rel='stylesheet' type='text/css' />");
       $('body').prepend('<div id="top-bg"></div><div id="top" onclick="location=\''+index+'\'"></div><div id="top-mobile" onclick="location=\''+index+'\'"></div><div id="chat"></div><div class="chat-button"></div>');
   $('h1.title').after('<img src="'+img+'" class="image-first-screen" />');
-  $('#chat').load("http://pogromcydanych.icm.edu.pl/app/index.php/chat/17");
+  $('#chat').load("http://pogromcydanych.icm.edu.pl/app/index.php/chat/9");
 });
 $(window).load(function(){
   $('#chat').animate({"scrollTop": $('#chat')[0].scrollHeight}, 300);
