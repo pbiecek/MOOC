@@ -199,28 +199,4 @@ comments <- ifelse(!exists("maxPredkosc"), "Brak zmiennej o nazwie maxPredkosc",
 
 # Poziom 4 zadanie 15
 
-
-
-# Poziom 4 zadanie 16
-
-
-
-# Poziom 5 zadanie 17
-
-
-
-# Poziom 5 zadanie 18
-
-
-
-# Poziom 5 zadanie 19
-
-
-
-# Poziom 5 zadanie 20
-
-
-
-
-
-
+POZOSTAŁE SĄ W BAZIE
