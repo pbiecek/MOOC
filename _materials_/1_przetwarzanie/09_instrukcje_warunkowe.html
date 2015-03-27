@@ -282,20 +282,27 @@ liczbaPtakow</code></pre>
   </script>
 
 <!-- doklejony kod Podpunkt-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="//use.typekit.net/oam6dux.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 <script>
 (function () {
   var index = '../index.html';
-  var headID = document.getElementsByTagName("head")[0];         
-  var cssNode = document.createElement('link');
-  cssNode.type = 'text/css';
-  cssNode.rel = 'stylesheet';
-  cssNode.href = '../do_kursu/kurs.css';
-  headID.appendChild(cssNode);
-  document.body.innerHTML +='<div id="top-bg"></div><div id="top" onclick="location=\''+index+'\'"></div><div id="top-mobile" onclick="location=\''+index+'\'"></div>';
+  var img = '../do_kursu/kurs.png';
+
+    $(document).ready(function(){
+      $('head').append("<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:600&subset=latin,latin-ext' rel='stylesheet' type='text/css' />");
+      $('head').append("<link href='../do_kursu/kurs.css' rel='stylesheet' type='text/css' />");
+      $('body').prepend('<div id="top-bg"></div><div id="top" onclick="location=\''+index+'\'"></div><div id="top-mobile" onclick="location=\''+index+'\'"></div><div id="chat"></div><div class="chat-button"></div>');
+  $('h1.title').after('<img src="'+img+'" class="image-first-screen" />');
+  $('#chat').load("http://pogromcydanych.icm.edu.pl/app/index.php/chat/09");
+});
+$(window).load(function(){
+  $('#chat').animate({"scrollTop": $('#chat')[0].scrollHeight}, 300);
+  $('.chat-button, .close').on( "click", function() { $('#chat, .chat-button').toggleClass('clicked');});
+});
 })();
 </script>
-  <!-- /doklejony kod Podpunkt --> 
-  </body>
+<!-- /doklejony kod Podpunkt-->
+</body>
 </html>

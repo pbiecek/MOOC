@@ -708,6 +708,12 @@ input {-webkit-appearance: none; border-radius: 0;}
   display: inline-block;
   cursor: pointer;
   padding-left: 0.5em;
+  -webkit-transition: all 250ms ease-in-out;
+   transition: all 250ms ease-in-out;
+}
+.section-7 .kurs h3:hover {
+  padding-left: 0.8em;
+  opacity: 0.6;
 }
 .section-7 .kurs-icon {
   width: 27px;
@@ -718,8 +724,8 @@ input {-webkit-appearance: none; border-radius: 0;}
   left: -3px;
   background: url('img/arrow-down.png') center center no-repeat;
   background-color: rgb(255,110,117); /*orange;*/
-   -webkit-transition: all 250ms ease-out;
-   transition: all 250ms ease-out;
+   -webkit-transition: all 250ms ease-in-out;
+   transition: all 250ms ease-in-out;
    cursor pointer;
 }
 .section-7 .kurs.ok .kurs-icon {
