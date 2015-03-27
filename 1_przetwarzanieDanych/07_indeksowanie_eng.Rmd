@@ -1,0 +1,576 @@
+---
+title: "Indexing data frames and vectors "
+author: "Data tameRs"
+date: season 1 / episode 7<br><br> All rights reserved.<br> Using without permission is prohibited <br><br><br><br>Press `A` to change slides into text <br> Press `T` to display table of contents.
+output:
+  beamer_presentation:
+    highlight: default
+  slidy_presentation:
+    css: ../style.css
+    font_adjustment: 0
+    footer: pogRomcy danych / eksploracja danych / indeksowanie
+    highlight: default
+    in_header: ../tracking.html
+    includes: null
+---
+
+# What is this episode about?
+
+We will work most of the time on data in the form of tables or vectors. One of the basic operations performed on tables and vectors is selecting subsets of rows, columns or values.
+
+In this episode you will learn:
+
+- how to create vectors,
+- how to index values from vectors/arrays,
+-	how to select rows from data frames,
+-	how to select columns from data frames,
+-	how to select rows and columns,
+-	how to index rows and columns using names and logical values.
+
+
+---
+
+# Vectors
+
+One of the standard types of data in R are vectors. 
+
+Vectors may consist of numbers, words, logical values or other types of values. Let us start from numerical values. 
+
+In R even one value constitutes a vector, although it is a small and one-element vector.
+
+
+
+```{r}
+4
+```
+
+Longer vectors can be created with the function c(). It allows us to make one vector out of several values.
+Below you can see an example command creating a vector composed of three elements. 
+
+
+```{r}
+c(3, 4, 5)
+```
+
+Programming and data analysis frequently uses vectors of subsequent numerical values. They are referred to as  *sequences*.
+
+You may use the operator `:` to create sequences of subsequent numbers. However, if you want to build a sequence of numbers with even intervals other than 1, you may use a more convenient function  `seq()`.
+
+```{r}
+2:7
+seq(from = 3, to = 15, by = 2)
+```
+
+---
+
+# Vectors
+
+The `c()` function allows you to create vectors of logical values (with two optional states labeled `TRUE`/`FALSE`)), text or other types of values. 
+
+If you want to use the vector in the future, you need to attribute it to a variable. You may perform that operation using the operator `<-` or `=`. If you want to display the content of the variable, you only need to enter its name into the console and press ENTER. 
+
+
+```{r, message=FALSE, warning=FALSE}
+co_drugi <- c(TRUE, FALSE, TRUE, FALSE, TRUE, FALSE)
+co_drugi
+
+literki <- c("alfa", "beta", "gamma", "delta")
+literki
+```
+
+In the next part of this episode we will use a vector of subsequent letters of the English alphabet saved in the variable `LETTERS`. We need it for our training in indexing. 
+
+```{r, message=FALSE, warning=FALSE}
+LETTERS
+```
+
+---
+
+# Indexing vectors
+
+Indexing means selecting specific values. We select values by referring to their indices. 
+
+A vector is a sequence of elements. The first element of this sequence has an index of 1, the next one has an index of 2, the next of 3 and so on up to the last element. Index of the last element is also the length of the vector. It can be checked by the function  `length()`.
+
+```{r, message=FALSE, warning=FALSE}
+length(LETTERS)
+```
+
+If you want to refer to specific indices of the vector, use the operator `[]`. Write the index of the element which you want to refer to inside the square brackets. 
+
+```{r, message=FALSE, warning=FALSE}
+# first element of the vector
+LETTERS[1]
+# fifth
+LETTERS[5]
+# last element
+LETTERS[26]
+# instead of passing 26 as an argument, you can use a function which returns length of the vector
+LETTERS[length(LETTERS)]
+```
+
+---
+
+# Indexing vectors
+
+When you refer to vectors you may write indices of more than one value. Remember only that indices must be vectors. For this purpose you will need the `c()` function discussed above.
+
+For example, in order to select the first, fifth and last element of the LETTERS vector you first need to create a vector with three indices. 
+
+```{r, message=FALSE, warning=FALSE}
+LETTERS[c(1,5,26)]
+```
+
+There is another equally correct solution. You can first create  a vector of indices and then use is to index the `LETTERS` vector. 
+
+```{r, message=FALSE, warning=FALSE}
+indeksy <- c(1, 5, 26)
+LETTERS[indeksy]
+```
+
+Sequences are very useful when you want to select more elements from a vector. 
+
+```{r, message=FALSE, warning=FALSE}
+# first ten letters
+LETTERS[1:10]
+# five first and five last letters
+LETTERS[c(1:5, 21:26)]
+# every second letter, we use sequence from 1 to 26 by 2
+coDruga <- LETTERS[seq(from = 1, to = 26, by = 2)]
+coDruga
+```
+
+---
+
+# Indexing vectors
+
+Sequences of values do not necessarily need to be increasing. They can be used to reverse the order of the elements of the vector, for example: 
+
+```{r, message=FALSE, warning=FALSE}
+10:1
+LETTERS[10:1]
+```
+
+Elements of a vector can also be indexed with a logical expression. 
+ 
+In the example below the command `LETTERS > "K"` creates a vector of logical values which determines whether the following letter is bigger or smaller than `K` (in the lexicographic order). Such vector of logical values can be used in indexing the `LETTERS` vector. 
+
+
+
+```{r, message=FALSE, warning=FALSE}
+LETTERS > "K"
+# only letters satisfying condition
+# in this case - these following the letter 'K'
+LETTERS[LETTERS > "K"]
+```
+
+---
+
+# Exercises
+
+- Build a sequence of ten subsequent letters of the Latin alphabet.
+
+- Build a sequence of ten subsequent odd numbers starting from 3. 
+
+-	Select letters with indices 5, 10, 15, 20 and 25 from the vector LETTERS.
+
+- Write values of the vector LETTERS backwards. 
+
+
+
+---
+
+# Cats vs. birds 
+
+We will use a small data set about cats and dogs to learn selecting rows and columns. 
+
+This data set is available in the package `PogromcyDanych` –just load the package. Other ways in which you can load that particular data set were presented in the episode 5. 
+
+Seven columns and thirteen rows is just the right data set to excercise. 
+
+```{r, message=FALSE, warning=FALSE}
+library(PogromcyDanych)
+koty_ptaki
+```
+
+---
+
+# Indexing rows in the data frame
+
+The principal difference between any vector and a data frame is the fact that vectors are one-dimensional. Their values form sequences. A data frame, on the other hand, presents data located in two dimensions of rows and columns. When we index values in a data frame we give a vector of indices for rows and vector of values for columns. 
+
+You can use the operator `[,]` to refer to rows or columns of the data frame. A comma is an indispensable element. Write indices for rows before the comma and indices for columns after the comma. If there is no value before or after comma, the program will select all the elements of the column / row. 
+
+
+This is an example of reference to the third row of the data frame.  
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[3, ]
+```
+
+You can check the number of rows using the function `nrow()` (we check the number of columns with the function `ncol()` respectively).
+
+These functions are very useful, for example if you want to display the last row. 
+
+```{r, message=FALSE, warning=FALSE}
+nrow(koty_ptaki)
+koty_ptaki[13, ]
+```
+
+---
+
+# Indexing rows in the data frame
+
+If you want to choose more than one row you need to write their indices separating them with commas, just like in case of vectors.
+
+In order to refer to several subsequent rows you can use a sequence created with the operator `:`.
+
+
+For example, rows from 8 to 10 of the data frame `koty_ptaki` can be selected with the following command.
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[8:10, ]
+```
+
+The function `c()` connects values and sequences and transforms them into a vector which can be used in indexing rows. 
+
+The following command selects rows number 3, 8, 9 and 10. 
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[c(3, 8:10), ]
+```
+
+Or for the same effect:
+
+```{r, message=FALSE, warning=FALSE}
+indeksy <- c(3, 8:10)
+koty_ptaki[indeksy, ]
+```
+
+
+Functions `head()` and `tail()` serve to select several first or last rows of the data set. Both functions can be developed by an addition of a second argument specifying number of first / last rows that we want to read –the default number is 6. 
+
+
+```{r, message=FALSE, warning=FALSE}
+head(koty_ptaki)
+tail(koty_ptaki)
+```
+
+---
+
+# Indexing rows in the data frame
+
+Vector of the logical values can also be used as index. 
+
+Looking ahead a little bit, we will use the column `predkosc` to choose  only these rows of the data frame for which the value of speed does not exceed 100.
+
+```{r, message=FALSE, warning=FALSE}
+fastest <- koty_ptaki$predkosc > 100
+fastest
+
+koty_ptaki[fastest, ]
+```
+
+---
+
+# Indexing rows in the data frame
+
+Negative indices can also be used in indexing rows and columns. These indices refer to all the values except those specifically selected. 
+
+For example, all the rows apart from rows no 1,3,8,9 and 10 can be selected with this command. 
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[ -c(1, 3, 8:10), ]
+```
+
+Notice that in this example the sign `–` located before the function `c()` creating a vector modifies the sign of all the elements of that vector. 
+
+```{r, message=FALSE, warning=FALSE}
+-c(1, 3, 8:10)
+```
+
+*Note* You shouldn’t to use simultaneously positive and negative signs. 
+
+---
+
+# Indexing columns in the data frame
+
+Columns can be indexed just like rows.
+
+In order to select the second column you may write its number after comma.
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[, 2]
+```
+
+When you select one column your result is a vector, not a data frame. You can easily imagine this when you take a look at the manner in which the data is displayed.
+
+If you do not want to transform a column into vector and still receive a data frame, you need to add an argument `drop=FALSE` to the indexing operator. 
+
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[,2, drop=FALSE]
+```
+
+*Note* This strange form of command results from the fact that the operator `[,]` is really a function. You will learn more about more advanced elements of the programming language in the next episodes of the course. 
+
+---
+
+# Indexing columns in the data frame  
+
+Columns in the data frame can be indexed not only with numbers but also with names (columns bear names). 
+
+Names of the columns in the data frame can be read with the function `colnames()`. When you use this function you will receive a vector with names of columns. 
+
+```{r, message=FALSE, warning=FALSE}
+colnames(koty_ptaki)
+```
+
+If you want to select a column entitled `waga` from the data frame, you may use that name as an index. 
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[, "waga"]
+```
+
+We refer to only one column quite often while working on R so this operation can be performed in more than way. The most popular way is to use the operator `$`. 
+
+Using this operator we can refer to the columns named `waga` in the following way.  
+
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki$waga
+```
+
+---
+
+# Indexing columns in the data frame  
+
+If you want to select more than one column, you can use the function `c()`, just like in case of rows and vectors.
+
+For example, if you want to select the second, fourth, fifth and sixth column, you can use the following command. 
+
+```{r, message=FALSE, warning=FALSE}
+# we may just as well write:
+# koty_ptaki[, c("waga", "predkosc", "habitat", "zywotnosc")]
+koty_ptaki[, c(2,4:6)]
+```
+
+---
+
+# Selecting sub-frames from the data frame
+
+We can refer to both rows and columns in the data frame at the same time by selecting one of its sub-frames. 
+
+For example, you may select four rows and four columns with the following command. 
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[c(3,8:10), c(2,4:6)]
+```
+
+Selection of four rows and one column.
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[c(3,8:10), 2]
+```
+
+Selection of one row and four columns. 
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[3, c(2,4:6)]
+```
+
+---
+
+# Selecting sub-frames from data frames with the use of names
+
+You already know how to  refer to columns by using their names.
+
+You can do the same with rows. The function `rownames()` reveals names of rows in the data frame.   
+
+
+```{r, message=FALSE, warning=FALSE}
+rownames(koty_ptaki)
+```
+
+Yet these names say very little and it would not make sense to use them in indexing. Let us then change the names of rows for the names located in the column `gatunek`.  
+
+```{r, message=FALSE, warning=FALSE}
+rownames(koty_ptaki) <- koty_ptaki$gatunek
+```
+
+Now we can refer to the rows through names of these rows. 
+
+In the following example rows referring to the four chosen species and three columns are selected. If names of rows are meaningful, they facilitate selecting the rows a great deal. 
+
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki[c("Lew", "Leopard", "Jerzyk", "Strus"),
+           c("waga", "dlugosc", "predkosc")]
+```
+
+*Note* If you want to get rid of names of rows, you can do so with the following command. 
+```{r, eval=FALSE}
+rownames(koty_ptaki) <- NULL
+```
+
+
+---
+
+# Sorting through indexing
+
+I would like to present a very interesting and a little advanced use of indexing on the example of the function `order()`. 
+
+This function creates indexes of subsequent growing values.
+
+For example, the column `predkosc` contains the following values.
+
+```{r}
+koty_ptaki[,"predkosc"]
+```
+
+The function `order()` creates indexes of subsequent growing values. The smallest value is 60 and it’s in the first position. The next value is 65 and it occupies the 7th position. Then we have 70 –at the 4th and 9th positions and so forth. 
+
+
+```{r}
+order(koty_ptaki[,"predkosc"])
+```
+
+We can use this result to sort the data frame by a certain column. An example below presents use of the function `order()` in creation of the vector `kolejnosc` which is in turn used in indexing the data frame called `koty_ptaki`. 
+
+```{r}
+kolejnosc <- order(koty_ptaki[,"predkosc"])
+koty_ptaki[kolejnosc, ]
+```
+
+---
+
+# Summary of R commands
+
+This episode was devoted to functions creating vectors and sequences as well as functions indexing vectors. 
+
+```{r, eval=FALSE}
+# creating vectors of numbers and sequences
+c(3, 4, 5)
+2:7
+seq(from = 3, to = 15, by = 2)
+
+# logical and character vector
+co_drugi <- c(TRUE, FALSE, TRUE, FALSE, TRUE, FALSE)
+co_drugi
+
+literki <- c("alfa", "beta", "gamma", "delta")
+literki
+
+# determining the length of a vector
+length(LETTERS)
+
+# indexing a single element (in this case: the first one)
+LETTERS[1]
+# instead of passing 26 as an argument, you can use a function which returns length of the vector
+LETTERS[length(LETTERS)]
+
+# indexing several elements of a vector
+LETTERS[c(1,5,26)]
+# using auxiliary variables
+indeksy <- c(1, 5, 26)
+LETTERS[indeksy]
+
+# first ten letters
+LETTERS[10:1]
+# first five and last five letters
+LETTERS[c(1:5, 21:26)]
+# every second letter, using sequence from 1 to 26 by 2
+LETTERS[seq(from = 1, to = 26, by = 2)]
+
+# using logical values for indexing vector. In this case, only these letters following letter 'K'
+LETTERS[LETTERS > "K"]
+```
+
+---
+
+# Summary of R commands
+
+We have discussed functions allowing us to index rows in the data frames.  
+
+
+```{r, eval=FALSE}
+
+# indexing a single row
+koty_ptaki[3, ]
+
+# number of rows
+nrow(koty_ptaki)
+
+# indexing several rows
+koty_ptaki[8:10, ]
+koty_ptaki[c(3, 8:10), ]
+
+# using auxiliary variables
+indeksy <- c(3, 8:10)
+koty_ptaki[indeksy, ]
+
+# first 6 rows, last 6 rows
+head(koty_ptaki)
+tail(koty_ptaki)
+
+# indeksowanie wierszy warunkiem logicznym indexing rows using logical expression
+najszybsze <- koty_ptaki$predkosc > 100
+koty_ptaki[najszybsze, ]
+
+# u¿ywanie ujemnych indeksów by pomin¹æ wiersze
+koty_ptaki[ -c(1, 3, 8:10), ]
+```
+
+---
+
+# Summary of R commands  
+
+We have discussed functions allowing us to index rows and columns in the data frame separately and jointly.
+
+
+```{r, eval=FALSE}
+# indexing columns. In this case: second column as a vector
+koty_ptaki[, 2]
+# and as a data.frame, using argument drop=FALSE 
+koty_ptaki[,2, drop=FALSE]
+
+# column names
+colnames(koty_ptaki)
+
+# indexing the single column using its name
+koty_ptaki[, "waga"]
+koty_ptaki$waga
+
+# indexing multiple columns
+# koty_ptaki[, c("waga", "predkosc", "habitat", "zywotnosc")]
+koty_ptaki[, c(2,4:6)]
+
+# indexing both columns and rows in the single command
+koty_ptaki[c(3,8:10), c(2,4:6)]
+
+# vector of row names
+rownames(koty_ptaki)
+# setting new names for the rows
+rownames(koty_ptaki) <- koty_ptaki$gatunek
+
+# using row and column names
+koty_ptaki[c("Lew", "Leopard", "Jerzyk", "Strus"),
+           c("waga", "dlugosc", "predkosc")]
+```
+
+---
+
+# Exercises
+
+- Select all the rows except "Soko³y" (falcons: "Sokol wedrowny" and "Sokol norweski", rows 11 and 12) from the data frame `koty_ptaki`.
+
+-	Select only cats (first seven rows) from the data frame `koty_ptaki`.
+
+-	Select only the column with weight and speed from the data frame `koty_ptaki`.
+
+-	Select all the columns the data frame `koty_ptaki` except the last one. 
+
+-	Select rows for which weight is less than 100 and first four columns from `koty_ptaki`. 
+
+
+
+You can find sample answers at https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html 
