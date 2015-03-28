@@ -1,0 +1,248 @@
+---
+title: "Dependence between two binary variables"
+author: "data busteRs"
+date: "season 2 / episode 18<br><br> All rights reserved.<br> Usage allowed only with the author's permission.  <br><br><br><br>Press `A` to turn slides into full text. <br> Press `T` to show Table of Contents."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / modelowanie / testy 2x2"
+---
+
+# What is this episode about
+
+How to check whether two variables are dependent?
+
+What does dependence mean?
+
+In this episode we'll analyze the simplest dependence for a pair of variables - dependence between a pair of binary variables.
+
+In this episode we'll learn how to:
+
+- ???how to build and read contingency tables for a pair of variables
+- ???how to graphically present a contingency table
+- ???how to statistically test a dependence between a pair of variables.
+
+To illustrate those issues we'll use two data sets. First is the Social Diagnosis data, available in the `diagnoza` table, and the other is breast cancer data, available in the `TCGA_BRCA` table, both available in the `PogromcyDanych` packet.
+
+---
+
+# How to describe dependence of two binary variables?
+
+Binary variable are variables which assume two values each. 
+
+Such variables are very easy to describe, you just have to write how many times the first value occurred, how many the second did, and thus two numbers characterize all of the observations.
+
+A typical binary variable is sex with its two levels/values. Logical variables assuming TRUE/FALSE values are also binary variables. In both of these cases value *brak danych* (NA) is also allowed, but more often than not even the variables with no data, de facto assuming three different values, are called binary.
+ 
+Qualitative variables which assume more levels or continuous variables can be made binary this operation is often performed.
+
+If we have a variable describing the hair color and the majority of people are dark-haired, then it may be convenient to convert a qualitative variable into a binary one responding to the question: is this a dark-haired person (thus after the combination of all other levels).
+ 
+If there is a continuous variable - height, we can make it binary by dividing height into two compartments, e.g. up to 170 cm and above.
+
+We should now pose the question *what for*? Why reduce more information to two levels? 
+
+Main advantage is simplicity of description. One binary variable can be described with two numbers.
+
+Relationship between two binary variables can be described with four numbers, using the so called contingency table.
+
+.               |  Variable 1: A | Variable 1: B
+----------------|----------------|--------------
+Variable 2: X   |    $n_{1,1}$   |    $n_{2,1}$ 
+Variable 2: Y   |    $n_{1,2}$   |    $n_{2,2}$ 
+
+Dependence between two binary variables is described with four numbers, $n_{1,1}$ describes the number of cases in which the variable 1 has a value of A and variable 2 the value of X, $n_{1,2}$ describes the number of cases in which the variable 1 has a value of A and variable 2 the value of Y, and so forth.
+
+
+# Loading the data
+
+Data with which we'll start the examples is `diagnoza` from the `PogromcyDanych` packet. To load this data you just have to open this packet - instructions how to do this is in the 2nd episode of the first season.
+
+In the `diagnoza` data set there are tens of columns that describe the answers to various interesting questions. In this episode we will look at only a few selected columns, describing the name, age, gender, education, and answer to the question "What do you think is more important in life?" (variable in the `gp29` column) with possible answers: *sense of purpose* and *pleasures*.
+
+```{r, warning=FALSE, message=FALSE}
+library(PogromcyDanych)
+diagnoza[1:6, c("imie_2011", "wiek2013", "plec", "eduk4_2013", "gp29")]
+```
+
+# How does the contingency table look like?
+
+In the `diagnoza` data set we have two binary variables, `plec`, which is the respondent's gender, and `gp29`, which is the answer to the question what is more important in life.
+ 
+Let's see how does a contingency table comparing those two variables look like.
+ 
+```{r}
+table(diagnoza$plec, diagnoza$gp29)
+```
+
+Let's look closely at those results
+
+- ???5114 of males answered that pleasures are more important,
+- ???6544 of males answered that sense of purpose is more important,
+- ???5144 of females answered that pleasures are more important,
+- ???9421 of females answered that sense of purpose is more important.
+
+Both females and males more often declare that the sense of purpose is more important.
+But are there differences between those genders, and to what extent?
+
+The `addmargins()` function allows us to add up the sum of values in lines and columns.
+
+```{r}
+plecSens <- table(diagnoza$plec, diagnoza$gp29)
+addmargins(plecSens)
+```
+
+# How does the table with percentages look like?
+
+Let's recalculate numbers into fractions. What percentage of males answered pleasures, and what sense of purpose?
+
+The `prop.table()` function allows us to calculate fractions, the additional argument specifies whether the proportions shall be in rows (1), columns (2) or the entire matrix (empty argument).
+
+```{r}
+plecSens <- table(diagnoza$plec, diagnoza$gp29)
+# frakcje w wierszach
+prop.table(plecSens, 1)
+# frakcje w całej tabeli
+prop.table(plecSens)
+```
+
+# How do the odds look like?
+
+While working on binary variables we often use, instead of probabilities, the so called odds. 
+
+What are the odds?
+
+The odds for occurrence of the development X is the probability of occurrence of X divided by the probability of non-occurrence of X. Thus, if we mark probability with the $p$ symbol we will get 
+
+$$
+odds = \frac{p}{1-p}
+$$
+
+As opposed to probability, the odds can assume values larger than 1. 
+
+Let's calculate the odds that a female or a male answers *Pleasures* to the question of what is more important.
+
+```{r}
+frakcje <- prop.table(plecSens, 1)
+frakcje[,1]/frakcje[,2]
+```
+
+# What are the odds ratios
+
+What is the advantage of using odds against probability?
+
+The main advantage is the possibility to operate on odds ratios.
+Odds ratio present by how much are the odds in one group larger than the odds in the other group.
+
+$$
+oddsRatio_{A/B} = odds_{A}/odds_{B} = \frac{p_A}{(1-p_A)} \frac{(1-p_B)}{p_B}
+$$
+
+Let's present the odds ratio base on gender and the answer to the question. 
+
+Let's calculate by how many times are the odds for the answer *Pleasures* bigger in males than in females.
+
+If the odds ratio is 1 it means that the odds are equal in both groups, and therefore those two variables are not dependent.
+
+If the odds are smaller or larger than one, then the dependence occurs.
+
+In the example for the Social Diagnosis the odds ratio is `1.4312`, which means that the odds that a randomly selected male will answer *Pleasures* is 43% larger than for a female.
+
+```{r}
+frakcje <- prop.table(plecSens, 1)
+szanse <- frakcje[,1]/frakcje[,2]
+szanse[1] / szanse[2]
+```
+
+# Mosaic plot
+
+Contingency tables are usually presented with the mosaic plot.
+
+In R program it is sufficient to use the `mosaicplot()` function.
+
+The width of the bars reflects the relative proportions of men and women in the data set. Each column is divided into bar lengths proportional to the answer to the question about what is important, for each gender separately.
+
+```{r, warning=FALSE, message=FALSE}
+mosaicplot(plecSens, main="Odpowiedzi na pytanie o to co ważne w życiu")
+```
+
+
+# Loading the data
+
+In the `diagnoza` data set there are more than 38 thousand observations. For such a large population, even very small differences turn out to be significantly different.
+
+Therefore, we will present an example concerning testing on another data set, the `TCGA_BRCA` set with certain variables for breast cancer. In this data set, we have data for 999 patients.
+
+Subsequent columns of the data set describe P53 gene mutations, gender of the patient, information whether patient is still alive, the information on how many days after the operation have passed before the death, and information whether within the period of one year the tumor/metastasis appeared.
+
+```{r, warning=FALSE, message=FALSE}
+head(TCGA_BRCA)
+```
+
+# Do metastases worsen prognosis
+
+Let's see if the probability of death depends on the presence of metastases.
+
+Let's start with determining the contingency table.
+
+```{r}
+(przerzuty_przezycia <- table(TCGA_BRCA$czy.nowy.guz,
+      TCGA_BRCA$czy.zyje))
+```
+
+Let's display this table graphically
+
+```{r}
+mosaicplot(przerzuty_przezycia)
+```
+
+# Do metastases worsen prognosis
+
+Now let's count fractions of survivors and persons who died alone in group of persons with and without metastases.
+
+```{r}
+(frakcje <- prop.table(przerzuty_przezycia, 1))
+```
+
+Let's calculate the odds of death in a group of persons with and without metastases.
+
+```{r}
+(szanse <- frakcje[,1]/frakcje[,2])
+```
+
+The odds ratio is 0.04, which means that in the studied group, odds of death of people without metastases is 4% of odds of death of people with metastases. Equivalently, we can say that those with metastases have 25 times higher odds of death than the group without metastases.
+
+```{r}
+# bez przerzutów do przerzutów
+szanse[1] / szanse[2]
+# z przerzutami do bez przerzutów
+szanse[2] / szanse[1]
+```
+
+# Do metastases worsen prognosis
+
+The odds ratio of 23 seems to be significantly larger than 1.
+
+To check whether that dependence between metastases and surviving is statistically significant we may perform a test.
+
+For 2x2 tables, the most popular solution is performing Fisher's exact test.
+
+The p-value presented in this test represents the probability that the odds ratio will be greater than the one observed in the event that there are no dependencies between variables.
+
+```{r}
+fisher.test(przerzuty_przezycia)
+```
+
+In this example, p-value is $2 * 10^{-15}$, so if the variables were not dependent, it would be impossible to observe such a value.
+
+# Tasks
+
+1. In the `diagnoza` data set the repondent's name is located in a variable named `wiek2013`. Determine the dependence between age divided into two groups, below and above 30 years of age, and the answers to the question about what is important in life.
+
+2. In the `TCGA_BRCA` data set, the patient's gender is located in the second column. Determine the dependence between `plec` and `czy.zyje`. Test this dependence with Fisher's exact test.
+
+

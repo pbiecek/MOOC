@@ -1,0 +1,158 @@
+---
+title: "Dependence between two qualitative variables"
+author: "data busteRs"
+date: "season 2 / episode 19 <br><br> All rights reserved.<br> Usage allowed only with the author's permission.   <br><br><br><br> Press `A` to turn slides into full text.  <br> Press `T` to show Table of Contents. "
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / modelowanie / testy kxp"
+---
+
+# What is this episode about
+
+In the last episode we have shown how to study dependence between two binary variables. 
+
+But what about a case when the variables are not binary? This is the subject of this episode?
+
+In this episode we'll learn how to:
+
+- how to build and read contingency tables for a pair of qualitative variables
+- how to graphically present a contingency table
+- how to statistically test a dependence between a pair of variables.
+
+To illustrate those issues we'll use two data sets. First is the Social Diagnosis data, available in the  `diagnoza` table, and the other is breast cancer data, available in the `TCGA_BRCA`table, both available in the `PogromcyDanych` packet.
+
+
+# Loading the data
+
+Data with which we'll start the examples is `diagnoza` from the `PogromcyDanych`packet. To load this data you just have to open this packet - instructions how to do this is in the 2nd episode of the first season.
+
+In the  `diagnoza` data set there are tens of columns that describe the answers to various interesting questions. In this episode we will look at only a few selected columns, describing the name, age, gender, education, and answer to the question "What do you think is more important in life?" (variable in the  `gp29`column) with possible answers: *sense of purpose* and *pleasures*.
+
+```{r, warning=FALSE, message=FALSE}
+library(PogromcyDanych)
+diagnoza[1:6, c("imie_2011", "wiek2013", "plec", "eduk4_2013", "gp29")]
+```
+
+# How does the contingency table look like for education?
+
+In the last episode we looked at a pair of variables,  `plec`, which is the respondent's gender, and  `gp29`, which is the answer to the question what is more important in life.
+ 
+In this episode we'll look at dependences between the education level ( `eduk4_2013`variable), and and the answers to the question what is more important in life.
+
+Let's see how does a contingency table comparing those two variables look like.
+ 
+```{r}
+table(diagnoza$eduk4_2013, diagnoza$gp29)
+```
+
+The `eduk4_2013` variable, outside the four levels of education also has a fifth level  `BD/ND/FALA`, which is not present in the data. Easiest way to delete it is using the `droplevels()`function.
+
+```{r}
+(edukacjaTab <- table(droplevels(diagnoza$eduk4_2013), diagnoza$gp29))
+```
+
+In each education level group, the respondents more often declare that the sense of purpose is more important. But are there differences between those education groups, and to what extent?
+
+# How does the contingency table for age look like?
+
+Let's see what is the dependence between age and the answers to the question about the purpose of life.
+
+Age is a continuous variable, so we will replace it with a qualitative variable of the four levels. To digitize the continuous variable into a discrete one we will use the  `cut()` function in which we will select 0, 25, 40, 60 and 110 years as age ranges limits.
+ 
+```{r}
+diagnoza$wiek2013_4g <- cut(diagnoza$wiek2013, c(0, 25, 40, 60, 110))
+table(diagnoza$wiek2013_4g)
+```
+
+Let's present the dependence between age and the answers to the question about what is more important in life.
+
+```{r}
+wiekTab <- table(diagnoza$wiek2013_4g, diagnoza$gp29)
+wiekTab
+```
+
+# Proportions
+
+By using the  `prop.table()` function we can determine fractions in lines or columns.
+
+Let's see how the proportions of the answers to the question about the sense of purpose look like in different age and education groups.
+
+```{r}
+prop.table(edukacjaTab, 1)
+prop.table(wiekTab, 1)
+```
+
+# Mosaic plot
+
+Frequency tables may be displayed graphically.
+
+Mosaic plot is often used for that purpose. Square areas denote the number of answers in this combination of features. The relative height of bars corresponds to the relative proportions in the groups defined by columns.
+
+```{r, warning=FALSE, message=FALSE}
+mosaicplot(edukacjaTab, las=2, main="Edukacja vs. co jest ważne w życiu")
+mosaicplot(wiekTab, las=2, main="Wiek vs. co jest ważne w życiu")
+```
+
+# More columns / lines
+
+Now, let's perform modeling for a different variable. For example, let's see to what extent identification with the question *I admire people who have expensive houses, cars and clothes* correlates with age (more information on the questions can be found in the questionnaire http://diagnoza.com/pliki/kwestionariusze_instrukcje/kwestionariusze_2013.pdf).
+
+The question concerns an answer to the question  *Some people are worth more than others*
+
+```{r, warning=FALSE, message=FALSE, fig.width=7, fig.height=5}
+wiekPodziwiam <- table(diagnoza$gp54_13, diagnoza$wiek2013_4)
+wiekPodziwiam
+
+# zależnosć przedstawiona graficznie
+mosaicplot(t(wiekPodziwiam), las=2,
+           col=c("red4","red1","pink","grey80","lightgreen","green1","green4"),
+           main="Podziwiam ludzi, którzy mają drogie domy, samochody i ubrania")
+```
+
+# Is there a dependence?
+
+To check whether there is a dependence between a pair of qualitative variables, we may perform a test $\chi^2$.
+
+It verifies the extent to which the observed frequency table is far from the one we would have observed if the variables were not dependent.
+
+Test $\chi^2$ is performed with the`chisq.test()` function. The result is the p-value for the independence hypothesis. Small p-values (customarily below 0.05) are interpreted as the conditions for the dependence between variables.
+
+```{r, warning=FALSE, message=FALSE, fig.width=7, fig.height=5}
+wiekPodziwiam <- table(diagnoza$gp54_13, diagnoza$wiek2013_4)
+chisq.test(wiekPodziwiam)
+```
+
+# Is there a dependence?
+
+The result of the  `chisq.test()` function allows us to see how do both of the compared tables look like.
+
+The `observed` field includes the frequency table observed in data.
+
+```{r, warning=FALSE, message=FALSE, fig.width=7, fig.height=5}
+chisq.test(wiekPodziwiam)$observed
+```
+
+The `$expected` field includes table of expected frequencies, in case there was no dependence.
+
+```{r, warning=FALSE, message=FALSE, fig.width=7, fig.height=5}
+chisq.test(wiekPodziwiam)$expected
+```
+
+If these tables are far apart, this is the premise that the variables are dependent (= not independent).
+
+# Task
+
+In the  `TCGA_BRCA` data set whether, and if so, what is the dependence between 
+
++ surviving (`czy.zyje` column and mutations `TP53`),
++ gender and mutations  `TP53`,
++ gender and `czy.zyje`variable.
+
+Present the dependence with a table containing amounts and frequencies.
+
+
