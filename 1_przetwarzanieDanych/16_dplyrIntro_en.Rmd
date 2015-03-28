@@ -1,0 +1,238 @@
+---
+title: "Data Cleaning and Introduction to Data Processing"
+author: "data busteRs"
+date: "Season 1 / Episode 16 <br><br> All rights reserved.<br> The use shall be subject to prior consent of the author.  <br><br><br><br>Press `A` to see the plain text instead of the slides. <br> Press `T` to display the table of contents."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "data busteRs / processing / cleaning and processing"
+
+---
+
+# What Is This Episode About
+
+Working with the data mostly includes cleaning and repeated change of the representations. Why the data need to be cleaned? Both the data collected by humans and the automatic sensors tend to contain gaps, outliers, or common mistakes. In order to meaningfully analyse the data, we need to convert them into the forms, in which the results of our analysis are reliable.
+
+Cleaning is a very important phase. Because no matter how sophisticated and well-chosen our data analysis tool is, if the input data are garbage, the output data will be garbage, too. *Garbage in garbage out*
+
+In this episode, we will learn:
+
+- How to edit the sets of data to make them coherent.
+- How to replace one value by another.
+- How to identify the outliers / redundant data.
+
+As soon as the data are cleaned, we can move on to another stages, i.e. pre-processing, analysis, and visualisation.
+
+---
+
+# Data Creation Using ‘data.frame()’ Function
+
+For the purpose of data cleaning exercise, we will create an artificial data frame with a few errors intentionally added.
+
+We create the data frame with the function `data.frame()`, where the subsequent arguments are the vectors, which will be converted into the subsequent columns in the data frame. The last argument `stringsAsFactors = FALSE` defines that the strings of characters are NOT to be replaced with the qualitative variables (replacement is default).
+
+```{r}
+DF <- data.frame(
+        imie = c("Maja","Anna","Zosia","Anna"),
+        wiek = c("40","12,5","25","16.6"),
+        numer = c(1,2,NA,4),
+        oczo = factor(c("niebieskie", "jasno-niebieskie", "ciemne", "niebieskie")),
+        stringsAsFactors = FALSE)
+DF
+```
+
+We will want to correct the following errors in the resulting frame:
+
++ replace the name of the column `oczo` by `oczy`,
++ replace the variable `wiek` by quantitative variable; for this purpose we need to replace `,` with `.` first,
++ replace the name `Zosia` by `Zofia`,
++ replace the eye colours with two groups `niebieskie` and `ciemne`.
+
+
+# Column Name Replacement
+
+To view the column name, you can use the function `colnames()`. The result is a vector of strings; you can use the indices for the elements of this vector, as in the following example. Similarly, the function `rownames()` allows you to work with the names of rows.
+
+```{r}
+colnames(DF)
+# czwarty element wektora
+colnames(DF)[4]
+```
+
+The function `colnames()` mcan also be used to change the column names. The following two instructions will run the function `colnames<-()`, which will change the column names. You can also change all or only selected vector elements of the column names.
+
+Both of the below instructions will correct the name of the last column.
+
+```{r}
+colnames(DF) <- c("imie", "wiek", "numer", "oczy")
+colnames(DF)[4] <- "oczy"
+```
+
+It will yield a set of data.
+
+```{r}
+DF
+```
+
+# Conversion of Comma into Dot
+
+If we are working on the data entered by a human, it is often the case that she or he alternates between `.` and `,`. 
+This problem escalates if the data are entered by several different persons.
+
+```{r}
+DF$wiek
+```
+
+We will replace the comma with the dot, and convert the strings of characters into the numbers. 
+
+To replace the characters, we will use the function `gsub()`, (also described in the Episode 14 of this Season). The argument names `pattern` and `replacement` can be omitted as their order is default, but we enter them here for clarity.
+
+Then, we use the function `as.numeric()`, to convert the strings of characters into the numbers. Finally, we assign the result to the column `wiek`.
+
+We apply the parentheses `()` to two lines to display the assignment result on the screen.
+
+```{r}
+(tmp <- gsub(pattern = ",", replacement = ".", DF$wiek))
+(DF$wiek <- as.numeric(tmp))
+```
+
+It will yield an amended set of data.
+
+```{r}
+DF
+```
+
+# Column or Row Normalisation
+
+In analysing the data, we often need to normalise the data in a column. 
+
+To normalise or centralise, i.e. to remove a mean value from them (so as the mean value equals 0), and re-scale, i.e. divide so as the standard deviation equals 1. 
+
+For normalisation, the function `scale()`. can be used. By default, it centralises and scales the data, but by setting additional argument, we can only centralise or re-scale the data.
+
+The result of the function `scale()` can be assigned to the column of the set of data. 
+
+```{r}
+# tylko centrowanie: scale(DF$wiek, center = TRUE, scale = FALSE)
+# tylko skalowanie:  scale(DF$wiek, center = FALSE, scale = TRUE)
+# normalizacja
+(DF$wiekNorm <- scale(DF$wiek))
+```
+
+As a result we will get a new, extended set of data.
+
+```{r}
+DF
+```
+
+# Removal or Replacement of Missing Data
+
+In the column `numer`, there are missing values `NA`. 
+
+These values can be removed (i.e. the whole row needs to be removed) using the function `na.omit()` 
+```{r}
+na.omit(DF)
+```
+
+Alternatively, replace with, for example, a mean value in the column. In the following example, the function `is.na()` identifies the missing values, the function `which()` determines the indices of the missing values. Next, these indexes will be used to overwrite the missing values by the mean value determined by the function `mean()`.
+
+```{r}
+(ktorePuste <- which(is.na(DF$numer)))
+DF$numer[ktorePuste] <- mean(DF$numer, na.rm=TRUE)
+```
+
+As a result we will get a new, complete set of data.
+
+```{r}
+DF
+```
+
+# Names of Qualitative Variable Factors 
+
+If we process a qualitative variable, we often change the level names, order, or paste several levels into one.
+
+```{r}
+DF$oczy
+```
+
+To view or change the level names, you can use the function `levels()`. Similarly as for `colnames()`, we can use this function to view or change the names vector.
+
+If we assign the values with the repeated strings of characters to such vector, the defined levels will merge into one.
+
+```{r}
+levels(DF$oczy)
+levels(DF$oczy) <- c("ciemne", "niebieskie", "niebieskie")
+DF$oczy
+```
+
+If we want to change the level order in a qualitative variable, the easiest way to do it is to apply the function `factor()`. 
+We can specify any order of the levels in the argument `levels`. The values are the same, but the order of levels is different.
+The level order is important in creating the charts (it corresponds to the order of the levels of the chart) and in the statistical modelling.
+
+```{r}
+factor(DF$oczy, levels=c("niebieskie", "ciemne"))
+```
+
+As a result we will get a new, amended set of data.
+
+```{r}
+DF
+```
+
+
+# Replacement of Any Value
+
+It is often the case that we need to replace all values by others in a column. Perhaps someone entered `100.00` instead of `10000` by mistake, and you need to replace one value by the other. Perhaps someone wrong typed the name of a therapy, and we want to change these names.
+ 
+In the following example, we will replace the name `Anna` with `Joanna`. The comparison result returns the vector of the logic values.
+
+```{r}
+DF$imie=="Anna"
+```
+
+This vector can be used to index a row. If we assign one value to a several-element vector, as illustrated below, then all elements of such vector will be replaced by this value.
+
+```{r}
+DF$imie[DF$imie=="Anna"] <- "Joanna"
+```
+
+As a result of this instruction, we will get a new, amended set of data.
+
+```{r}
+DF
+```
+
+# Exercises
+
+After loading the below data frame, correct the following errors:
+
++ correct the column name `litary`,
++ replace the value `X` and `Y` with `A` and `B` accordingly,
++ replace the column `liczby` by the number column,
++ replace the missing data in the column `braki`.
+
+```{r}
+df <- data.frame(
+        litary = c("X","B","Y","D"),
+        liczby = c("1","2","3,0","4,0"),
+        braki = c(NA,1,NA,1),
+        stringsAsFactors = FALSE)
+df
+```
+
+
+# What’s Next?
+
+We have only outlined the topic of data cleaning on these several slides. For more information on improving the data sets, please refer to the following publications:
+
++ Chapter 3.3 “Pre-Processing of Data” in the book “R Package Guide” available at http://biecek.p1/R/
++ The English book titled “An introduction to Data Cleaning with R” at http://cran.r- project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_c1eaning_with_R.pdf
++ The English course on the Courser’s website “Getting and Cleaning Data” at https://www.coursera.org/course/getdata
+
+Sample answers are available at https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+
+
