@@ -37,7 +37,7 @@ head(koty_ptaki, 3)
 
 ---
 
-# Pętle
+# Pętle - od 1 do 5
 
 Pętle mogą być wykorzystywane, aby powtórzyć jakąś operację określoną liczbę razy.
 
@@ -66,7 +66,7 @@ Co jednak, gdybyśmy chcieli powtórzyć ją 10 000 razy? Z pewnością nikt z n
 
 ---
 
-# Pętle
+# Pętle - schemat
 
 Sposób użycia (tak zwana *składnia*) pętli `for` jest następująca:
 
@@ -88,7 +88,7 @@ for (i in 1:odliczajDo) {
 
 ---
 
-# Pętle
+# Pętle - schemat
 
 Poniższy schemat ilustruje sposób działania pętli for.
 
@@ -96,7 +96,7 @@ Poniższy schemat ilustruje sposób działania pętli for.
 
 ---
 
-# Pętle
+# Pętle - koszty napraw
 
 W poprzednim przykładzie łatwo było przewidzieć wynik całej pętli. Wyświetlała ona pięć kolejnych liczb od 1 do 5. 
 
@@ -107,7 +107,8 @@ Pokażemy teraz bardziej złożony przykład, który symuluje tak zwany proces s
 liczbaStluczek <- round(runif(n = 1, min = 1, max = 10))
 # dla każdej losujemy wartość szkody
 for (i in 1:liczbaStluczek) {
-  cat("Stłuczka ", i,", a jej koszt naprawy to ", runif(n = 1, min=0, max=10000), " PLN\n", sep = '')
+  cat("Stłuczka ", i,", a jej koszt naprawy to ", 
+      runif(n = 1, min=0, max=10000), " PLN\n", sep = '')
 }
 ```
 
@@ -118,7 +119,52 @@ Choć ta pętla wygląda na prostą i niewinną, podobny sposób losowania wielk
 
 ---
 
-# Pętle
+# Pętle - koszty napraw
+
+W pętli z poprzedniego przykładu wyświetlaliśmy na ekranie kolejne koszty.
+A co trzeba zrobić by te wszystkie koszty zliczyć?
+
+Wewnątrz pętli możemy wykonywać operacje na liczbach.
+Przykładowo możemy te koszty zsumować.
+
+W poniższym przykłądzie wewnątrz pętli co krok zmienia się wartość `sumaKosztow`.
+
+```{r, message=FALSE, warning=FALSE}
+# losujemy liczbę stłuczek
+liczbaStluczek <- round(runif(n = 1, min = 1, max = 10))
+sumaKosztow <- 0
+# dla każdej losujemy wartość szkody
+for (i in 1:liczbaStluczek) {
+  koszt <- runif(n = 1, min=0, max=10000)
+  sumaKosztow <- sumaKosztow + koszt
+  cat("Stłuczka ", i,", a jej koszt naprawy to ",  koszt, " PLN\n", sep = '')
+  cat("Suma dotychczasowych kosztów to ",  sumaKosztow, " PLN\n", sep = '')
+}
+sumaKosztow
+```
+
+---
+
+# Pętle - wartości w sekwencji
+
+Przedstawione jak dotąd pętle przechodziły po wartościach od 1 do okreśonej liczby. 
+Jest tak bardzo często, ale nie zawsze. 
+
+Indeksy pętli mogą być dowolnymi wartościami, np liczbami z krokiem co 3. Pokażmy na przykładzie, w którym wyświetlimy co trzecią nazwę zwierzęcia z tabeli `koty_ptaki`.
+
+```{r, message=FALSE, warning=FALSE}
+coTrzeci <- seq(1, nrow(koty_ptaki), 3)
+coTrzeci
+for (i in coTrzeci) {
+  # aby się dobrze wyświetlała, i-tą wartość z kolumny `gatunek` musimy zamienić na napis
+  nazwa <- as.character(koty_ptaki[i, "gatunek"])
+  cat("Zwierzak ", i," to ",  nazwa, "\n", sep = '')
+}
+```
+
+---
+
+# Pętle - nazwy kolumn
 
 Jak widzieliśmy w poprzednim przypadku, liczba powtórzeń pętli nie musi być z góry określona, może zależeć od np. liczby wierszy lub liczby kolumn w ramce danych. 
 
@@ -139,7 +185,7 @@ for (i in kolumny) {
 
 ---
 
-# Pętle
+# Pętle - nazwy kolumn
 
 Przyjrzyjmy się pętli z poprzedniego slajdu linia po linii.
 
@@ -168,7 +214,7 @@ Dwie kolejne instrukcje `cat()` wyświetlają na ekranie w pierwszej linii nazw�
 
 ---
 
-# Pętle
+# Pętle - iteracja po wierszu / kolumnie
 
 Typowe zastosowania pętli to wykonanie pewnej operacji dla każdego wiersza lub każdej kolumny zbioru danych. 
 
@@ -187,7 +233,7 @@ cat(koty_ptaki[i, "gatunek"], "może ważyć do", koty_ptaki[i, "waga"], "kg\n")
 
 ---
 
-# Pętle
+# Pętle - iteracja po wierszu / kolumnie
 
 Powtórzmy tę operację dla każdego wiersza. Liczbę wierszy w ramce danych można odczytać poleceniem `nrow()` (od *number of rows*).
 
