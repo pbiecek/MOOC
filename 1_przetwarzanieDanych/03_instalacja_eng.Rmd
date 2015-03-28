@@ -9,10 +9,10 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / pierwsze kroki / instalacja"
+    footer: "Data Crunchers / first steps / installation"
 ---
 
-# O czym jest ten odcinek
+# What is the topic of this episode?
 
 In order to work comfortably with program R you need to preinstall compute engine R, some editor facilitating work with R such as for example RStudio and additional libraries with databases and functions. All of these elements can be downloaded from the Internet free of charge. 
 
