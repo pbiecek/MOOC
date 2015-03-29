@@ -1,6 +1,6 @@
 ---
 title: "How to save data from R?"
-author: "Data Crunchers"
+author: "Data CruncheRs"
 date: "season 1 / episode 6 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Press `A` to switch from slides to continuous text. <br> Press `T` to see the table of contents."
 output:
   slidy_presentation:
@@ -9,7 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / eksploracja danych / zapisywanie danych z R"
+    footer: "Data CruncheRs / eksploracja danych / zapisywanie danych z R"
 ---
 
 # What is this episode about?

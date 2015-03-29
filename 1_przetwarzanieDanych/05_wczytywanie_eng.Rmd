@@ -1,6 +1,6 @@
 ---
 title: "How to load data into R?"
-author: "Data Crunchers"
+author: "Data CruncheRs"
 date: "season 1 / episode 4 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Press `A` to switch from slides to continuous text. <br> Press `T` to see the table of contents."
 output:
   slidy_presentation:
@@ -9,7 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "Data Crunchers / reading, writing and indexing data / reading data into R"
+    footer: "Data CruncheRs / reading, writing and indexing data / reading data into R"
 ---
 
 # What is the topic of this episode?
