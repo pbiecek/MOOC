@@ -1,6 +1,6 @@
 ---
 title: "Data sets"
-author: "Data Crunchers"
+author: "Data CruncheRs"
 date: "season 1 / episode 1 <br><br><br><br>Press `A` to switch from slides to continuous text. Press `T` to see the table of contents."
 output:
   slidy_presentation:
@@ -9,7 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "Data Crunchers / zbiory danych"
+    footer: "Data CruncheRs / zbiory danych"
 
 ---
 
