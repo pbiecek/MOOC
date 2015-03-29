@@ -1,0 +1,154 @@
+---
+title: "Data Arrangement [dplyr / arrange]"
+author: "Data CruncheRs"
+date: "Season 1 / Episode 18 <br><br> All rights reserved.<br> The use shall be subject to prior consent of the author.  <br><br><br><br>Press `A` to see the plain text instead of the slides. <br> Press `T` to display the table of contents."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "Data CruncheRs / processing / rows arrangement"
+
+---
+
+# What Is This Episode About?
+
+In the R program, the rows can be arranged in several ways, we showed one of the methods using the function `order()` in the Episode 7.
+
+In our everyday work with the data, it is not only more convenient, but also quicker to use the dedicated function `arrange()` of the package `dplyr`.
+
+In this episode, we will learn:
+
+- How to arrange the rows in the ascending/descending order by a specified column.
+- How and why to arrange more than one column.
+
+To illustrate these issues, we will use two sets of data. The first small set of data is `koty_ptaki` and the second, considerably bigger one is `auta2012`, both available in the `PogromcyDanych` package.
+
+---
+
+## Birds Vs Cats
+
+Let's start with an arrangement example with a small cats and birds set of data. This set of data is delivered along with the package `PogromcyDanych`. It is small enough to be taken in and see how the row arrangement works.
+
+```{r, message=FALSE}
+library(PogromcyDanych)
+koty_ptaki
+```
+
+---
+
+# Data Arrangement
+
+While a value vector can be sorted using the function `sort()`, it is more convenient to use the function `arrange()` to arrange the rows in the data frame by a certain column.
+
+This function assumes the data frame as the first argument, and the variables by which the data are sorted, as the subsequent arguments.
+
+For example, in order to arrange the rows in the set of data `koty_ptaki` in the ascending order of speed (the column `predkosc`) you can use the following command.
+
+```{r, warning=FALSE, message=FALSE}
+library(dplyr)
+arrange(koty_ptaki, predkosc)
+```
+
+---
+
+# Data Arrangement
+
+In order to arrange in the descending order, you can either use the function `desc()` for the sorting variable, or - for the quantitative variables - add a character - before the variable.
+
+Both instructions have the same effect.
+
+```{r, warning=FALSE}
+arrange(koty_ptaki,   desc(predkosc))
+arrange(koty_ptaki,   -predkosc)
+```
+
+---
+
+# Arrangement by Two Variables
+
+If a sorting variable is repeated, i.e. there can be remixes (the same values) of such variable, the order of the rows is indeterminate. Then, it is more convenient to define the secondary sorting criterion.
+
+For example, in order to arrange the rows by speed, but separately for the cats and the birds, we can indicate the team (druzyna) as the main sorting criterion, and the speed as the secondary criterion.
+
+When sorting, The column `druzyna` includes many rows with the same values and their final order depends on the variable `predkosc`.
+
+```{r, warning=FALSE}
+arrange(koty_ptaki, 
+        druzyna, predkosc)
+```
+
+---
+
+# Cars
+
+We will practice the sorting operations on much bigger set of data, which cannot be viewed in whole on the screen. Namely, the set of data on the second-hand car offer prices.
+
+The set of data `auta2012` is available after downloading the package `PogromcyDanych`. Please find below six first rows of this set of data. You can find the detailed description of this set at https://rawgithub.com/pbiecek/MOOC/master/O_dane/O_dane.html.
+
+Let's select only the car make Porsche with the 300 KM engine from the set of data, and arrange the rows in this set starting from the cheapest ones.
+
+```{r, warning=FALSE}
+tylkoPorscheZDuzymSilnikiem <- filter(auta2012,
+         Marka == "Porsche",
+         KM > 300)
+
+posortowanePorsche <-
+  arrange(tylkoPorscheZDuzymSilnikiem, 
+        Cena.w.PLN)
+```
+
+---
+
+# Cheapest and Most Expensive Porsche
+
+In order to see, which rows are the first and which are the last in this set of data, we can use the function `head()` and `tail()`. By default, the first or last six rows are displayed.
+
+```{r, warning=FALSE}
+head(posortowanePorsche)
+
+tail(posortowanePorsche)
+```
+
+---
+
+# Model and Price
+
+If we indicate more than one variable for sorting, the data will be sorted by the first variable first, and in the case of any remix (the same values), by the second variable.
+
+In the below example, we arrange the data by the variable of car `Model` in the first step, and if there are the same models of the cars, the order of such cars will be determined by the second variable, i.e. the price.
+
+The variable `Model` uses the strings of characters as the values, and they are arranged in the alphabetical order.
+
+```{r, warning=FALSE}
+head(
+   arrange(tylkoPorscheZDuzymSilnikiem, 
+        Model, Cena.w.PLN)
+  ) 
+```
+
+---
+
+# Descending Order Arrangement
+
+By default, the values are arranged in the ascending order. If we want to change the arrangement order and arrange the data in the descending order, we should apply the function `desc()` to the variable, as shown on the below example.
+
+```{r, warning=FALSE}
+head(
+   arrange(tylkoPorscheZDuzymSilnikiem, 
+        Model, desc(Cena.w.PLN))
+  ) 
+```
+
+---
+
+# Exercises
+
+* Arrange the cars by the motor size (number of the horse power units, the column `KM`) or by the cylinder capacity (the column `Pojemnosc.skokowa`). Which makes feature the largest engines?
+* Select only the "Rolls-Royce" cars and arrange them by the price.
+
+You can find the exemplary answers at https://rawgit.com/pbiecek/MOOC/master/O_dane/9_zadania.html.
+
+
