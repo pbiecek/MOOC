@@ -184,7 +184,7 @@ plot(FNL$glosow)
 # Find a TV show with the steepest increasing trend in ratings.
 # (because the ratings cannot be larger than 10 it does not have to be a show with the highest mean rating)
 
-# Find a TV show with the steepest decreasing trend in ratings.
+# Find a TV show with the steepest declining trend in ratings.
 
 nazwy_seriali <- levels(serialeIMDB$serial)
 wspolczynnikTrendu <- c()
@@ -212,13 +212,13 @@ sort(wspolczynnikTrendu)
 # Response, season 2, episode 14
 
 ```{r, message=FALSE, eval=FALSE}
-# Znajdź serial o istotnym ujemnem trendzie, to znaczy takim, którego oceny maleją.
+# Find a TV show with a substantitial declining trend in ratings.
 
-# Znajdź serial (inny niż _Breaking Bad_) o istotnie dodatnim trendzie. 
+# Find a TV show (other than _Breaking Bad_) with a substantial increasing
+# trend in ratings.
 
-# Rozwiązanie: Jak w zadaniu 13, plus testowanie istotności dla skrajnych wartości
-# uwaga, może się długo liczyć!!!
-
+# Solution: As in task 13, plus testing for extreme values.
+# Caution: it can take quite some time!!!
 ```
 
 # Tasks, season 2, episode 15
@@ -238,19 +238,19 @@ Are the linear regression parameters in the pearson set (with father’s height)
 # Responses, season 2, episode 15
 
 ```{r, warning=FALSE, width=8, height=8, eval=FALSE}
-# Dla każdego wzrostu rodzica ze zbioru danych `galton` wyznacz 
-# o ile średnio niższe są dzieci od rodziców
-# wykorzystując funkcje z pakietu dplyr
+# For every value of parent's height from the `galton` data calculate, using
+# functions from package 'dplyr', by how much on average children are lower than
+# parents
 srednie %>%
   mutate(roznica = srednia - rodzic)
 
-# Mając wyznaczone parametry _b0_ i _b1_ policz oceny średniego wzrostu 
-# dziecka dla każdego średniego wzrostu rodzica
+# Given linear model parameters _b0_ and _b1_ calculate estimated heights of
+# chilren for every value of parent's height.
 wspolczynniki = coef(lm(syn~rodzic, data=galton)
 wspolczynniki
 
-# Wyznacz różnice pomiędzy ocenami z modelu liniowego 
-# a średnimi liczonymi osobno dla każdej grupy rodziców
+# Calculate differences between values predicted with the linear model and
+# (conditional) means calculated for every parent group separately.
 srednie %>%
   mutate(m.liniowy = wspolczynniki[1] + rodzic*wspolczynniki[2],
          roznica = srednia - m.liniowy)
