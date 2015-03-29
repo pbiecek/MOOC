@@ -1,6 +1,6 @@
 ---
 title: "Dates"
-author: "data busteRs"
+author: "Data CruncheRs"
 date: "Season 1 / Episode 15 <br><br><br><br>Press `A` to see the plain text instead of the slides. <br> Press `T` to display the table of contents."
 output:
   slidy_presentation:
@@ -9,7 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "data busteRs / processing / dates"
+    footer: "Data CruncheRs / processing / dates"
 
 ---
 
@@ -66,24 +66,24 @@ It adopts the vector of character strings, which describe the moments, to be the
 To get assistance on the date format designations, please open the help file using the instruction `?strptime`.
 
 ```{r}
-(czas1 <- as.POSIXct("2015-02-13 12:56:26"))
-(czas2 <- as.POSIXct("14022015 12:56:26", format = "%d%m%Y %H:%M:%S"))
+(time1 <- as.POSIXct("2015-02-13 12:56:26"))
+(time2 <- as.POSIXct("14022015 12:56:26", format = "%d%m%Y %H:%M:%S"))
 ```
 
 You can perform such operations on time as subtraction or addition to one time of a specified interval (days by default).
 
 ```{r}
-# różnica czasów
-czas2 - czas1
-czas1
-czas1 + 30
+# time differences
+time2 - time1
+time1
+time1 + 30
 ```
 
 The function `Sys.time()` returns the current time in the format `POSIXct`as the result.
 
 ```{r}
 Sys.time()
-Sys.time() - czas1
+Sys.time() - time1
 ```
 
 ---
@@ -96,25 +96,25 @@ It adopts the vector of character strings, which describe the moments, to be the
 The format description is the same as in the case of the class `POSIXct`.
 
 ```{r}
-(czas1 <- as.POSIXlt("2015-02-13 12:56:26"))
-(czas2 <- as.POSIXlt("14022015 12:56:26", format = "%d%m%Y %H:%M:%S"))
+(time1 <- as.POSIXlt("2015-02-13 12:56:26"))
+(time2 <- as.POSIXlt("14022015 12:56:26", format = "%d%m%Y %H:%M:%S"))
 ```
 
 Objects of the class `POSIXlt` are lists, it is possible to refer to their elements by using the name.
 
 ```{r}
-czas1$sec
-czas1$min
-czas1$zone
+time1$sec
+time1$min
+time1$zone
 ```
 
 
 Many functions can be applied interchangeably with the objects of the class `POSIXlt` and `POSIXct`.
 
 ```{r}
-# różnica czasów
-czas2 - czas1
-czas1 + 30
+# time differences
+time2 - time1
+time1 + 30
 ```
 
 ---
@@ -137,7 +137,7 @@ The function names used to convert the strings of characters into time were simp
 
 ```{r}
 ymd_hms("2015-02-14 23:59:59")
-(czas3 <- mdy_hm("02/14/15 08:32"))
+(time3 <- mdy_hm("02/14/15 08:32"))
 ```
 
 ---
@@ -147,19 +147,19 @@ ymd_hms("2015-02-14 23:59:59")
 You can extract such information as a day of week, a day of month, etc. from the dates. Using the function `wday()` you can read a day of week, similarly the functions `day()`, `month()` and `year()` describe the date components.
 
 ```{r}
-wday(czas3, label = TRUE)
-# tydzień w roku, dzień miesiąca, miesiąc i rok
-week(czas1)
-day(czas1)
-month(czas1)
-year(czas1)
+wday(time3, label = TRUE)
+# week of a year, day of a month, month and year
+week(time1)
+day(time1)
+month(time1)
+year(time1)
 ```
 
 You can perform the convenient operations using the function `days()`, `months()`, `years()`, `minutes()` and `seconds()`on time.
 
 ```{r}
-czas3 + hours(4)
-czas3 + days(2) + months(4) + years(1)
+time3 + hours(4)
+time3 + days(2) + months(4) + years(1)
 ```
 
 ---
@@ -180,7 +180,7 @@ czas3 + days(2) + months(4) + years(1)
 You can find the useful tips how to work with time and dates in the article titled  *Handling date-times in R* by Cole Beck at
 http://biostat.mc.vanderbilt.edu/wiki/pub/Main/ColeBeck/datestimes.pdf.
 
-The detailed description of the package `lubridate` can be found in the JSS�s article at http://www.jstatsoft.org/v40/i03/paper
+The detailed description of the package `lubridate` can be found in the JSS's article at http://www.jstatsoft.org/v40/i03/paper
 
 A lot of interesting information on handling the dates and time is available at
 http://en.wikibooks.org/wiki/R_Programming/Times_and_Dates
