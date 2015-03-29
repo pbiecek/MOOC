@@ -1,6 +1,8 @@
 ifeq ( $(origin knitr_error), undefined )
 knitr_error=TRUE
 endif
+# options(warn)
+warn=1
 
 .PHONY: default
 default: $(files:=.html)
@@ -30,7 +32,7 @@ ifeq ($(use_code),1)
 	Rscript -e 'knitr::knit("$<", output="$@")'
 
 %.html: %.Rmd
-	Rscript -e 'library(knitr); opts_chunk$$set(error=$(knitr_error));rmarkdown::render("$<")' | tee $(<:.Rmd=.log) 2>&1
+	Rscript -e 'options(warn=$(warn));library(knitr); opts_chunk$$set(error=$(knitr_error));rmarkdown::render("$<")' | tee $(<:.Rmd=.log) 2>&1
 else
 %.md: %.Rmd
 	Rscript -e 'library(knitr);opts_chunk$$set(eval=FALSE, echo=FALSE, results="hide");knitr::knit("$<", output="$@")'
@@ -62,3 +64,14 @@ slajdy-pl.zip: $(files:=.html)
 
 slajdy-eng.zip: $(files:=_eng.html)
 	zip $@ $^
+
+# testy
+checks.md:
+	echo "# Footers ALL" > $@
+	grep -H "footer:" $(files:=.Rmd) $(files:=_eng.Rmd) | sort >> $@
+	echo "# Footers PL" >> $@
+	grep -H "footer:" $(files:=.Rmd) | sort >> $@
+	echo "# Footers ANG" >> $@
+	grep -H "footer:" $(files:=_eng.Rmd) | sort >> $@
+	echo "# Authors" >> $@
+	grep -H "author:" $(files:=.Rmd) $(files:=_eng.Rmd) | sort >> $@
