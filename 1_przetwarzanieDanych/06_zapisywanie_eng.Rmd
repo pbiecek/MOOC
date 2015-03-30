@@ -220,7 +220,7 @@ save(v1, l1, two_cols, file="three_objs.rda")
 
 - Save the data set `cats_birds` to a binary file. Then load it with the function `load()` and check if the data was correctly saved. 
 
-Sample answers are available at  https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+Sample answers are available at  http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html
 
 ---
 

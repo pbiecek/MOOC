@@ -333,5 +333,5 @@ Load the data into R using all of the above formats.
 
 *Note!* The files’ size is up to 3,5MB. If your Internet connection is not very efficient or if many people use it at the same time, downloading the files may take a long while. 
 
-You may find the key to the exercises at https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+You may find the key to the exercises at http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html
 
