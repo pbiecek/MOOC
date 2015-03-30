@@ -3,8 +3,6 @@ title: "Functions"
 author: "Data tameRs"
 date: season 1 / episode 10<br><br> All rights reserved.<br> Using without permission is prohibited <br><br><br><br>Press `A` to change slides into text <br> Press `T` to display table of contents.
 output:
-  beamer_presentation:
-    highlight: default
   slidy_presentation:
     css: ../style.css
     font_adjustment: 0
@@ -126,7 +124,7 @@ draw_dots(20)
 
 ---
 
-# Functions –default arguments
+# Functions: default arguments
 
 If we frequently call a function selecting the same value of a parameter, we can easily spare ourselves a lot of writing by defining that value as a default value.
 
@@ -154,7 +152,7 @@ draw_dots(35)
 
 ---
 
-# Functions –dealing with various scenarios
+# Functions: dealing with various scenarios
 
 We would like our functions to work just as we have planed.  However, in reality functions are sometimes faulty. We also have to face unexpected situations from time to time.
 
@@ -181,7 +179,7 @@ How to solve this problem?
 
 ---
 
-# Functions –dealing with various scenarios
+# Functions: dealing with various scenarios
 
 We can deal with this problem in several ways. We will employ a solution using the command `if()`. 
 
@@ -215,7 +213,7 @@ draw_dots(30)
 
 ---
 
-# Functions –more arguments
+# Functions: more arguments
 
 Functions may have more arguments and each of the arguments can have (or not) a default value.
 
@@ -252,7 +250,7 @@ draw_dots(signs="X", n_dots = 30)
 
 ---
 
-# Functions –a function within a function
+# Functions - a function within a function
 
 When we create new functions we can also use other already defined functions.
 
@@ -314,9 +312,9 @@ draw_dotplot(koty_ptaki$gatunek, 5)
 
 # Passing the arguments along 
 
-List of function’s arguments contains also a special argument `...` . It allows us to pass along all the other arguments to the internal functions.
+List of function's arguments contains also a special argument `...` . It allows us to pass along all the other arguments to the internal functions.
 
-In the example below the operator `...` can be seen in two places –in the list of arguments of the function `draw_dotplot()` and in the list of arguments of the function `draw_dots()`. 
+In the example below the operator `...` can be seen in two places - in the list of arguments of the function `draw_dotplot()` and in the list of arguments of the function `draw_dots()`. 
 
 All the arguments of the function `draw_dotplot()` which have names different from `name` and `values`  will be passed along to the function `draw_dots()`. 
 
@@ -329,7 +327,7 @@ draw_dotplot <- function(name, values, ...) {
 }
 ```
 
-Let us illustrate this case with an example. We call `draw_dotplot()` with three arguments. The third argument, `signs = “x”` will be passed along to the function `draw_dots()` and as result there will be the x signs on the chart. 
+Let us illustrate this case with an example. We call `draw_dotplot()` with three arguments. The third argument, `signs = "x"` will be passed along to the function `draw_dots()` and as result there will be the x signs on the chart. 
 
 ```{r, message=FALSE, warning=FALSE}
 draw_dotplot(name = LETTERS[1:5], values = 1:5, signs = "X")
