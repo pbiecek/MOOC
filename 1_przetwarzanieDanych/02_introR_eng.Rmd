@@ -1,7 +1,7 @@
 ---
 title: "Why R?"
 author: "Data CruncheRs"
-date: "Season 1 / Episode 2 <br> Przemysław Biecek @ University of Warsaw <br> Press` A` to convert slides to continuous text. <br> `T` Press to display a table of contents."
+date: "Season 1 / Episode 2 <br> Przemysław Biecek @ University of Warsaw <br> Press `A` to convert slides to continuous text. <br> `T` Press to display a table of contents."
 output:
   slidy_presentation:
     includes:
@@ -72,7 +72,7 @@ R also integrates well with other IT solutions, such as Python, Java, C, C++, Ha
 
 According to the results of the Google Trends, the interest in R is growing. It has more than doubled in the last ten years, while the attention on other data analysis software such as SPSS, SAS or Stata declines.
 
-! [Google trends] (figs / googleTrends.png)
+![Google trends](figs/googleTrends.png)
 
 ---
 
