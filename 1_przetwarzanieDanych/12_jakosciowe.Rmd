@@ -111,7 +111,7 @@ Obie zmienne znacznie się różnią. Drużyna występuje tylko w dwóch wartoś
 Zbiór danych `koty_ptaki` składa się z 13 wierszy. Można cały ten zbiór danych wyświetlić na ekranie. 
 Nie zawsze potrzebujemy więc specjalnych statystyk opisowych by zrozumieć co się dzieje w takich małych zbiorach danych.
 
-Dlatego dalsze ćwiczenia ze zmiennymi ilościowymi przeprowadzimy na znaczeni większym zbiorze danych `auta2012` o ponad 200 tysiącach wartości, 
+Dlatego dalsze ćwiczenia ze zmiennymi jakościowymi przeprowadzimy na znaczeni większym zbiorze danych `auta2012` o ponad 200 tysiącach wartości, 
 który również znajduje się w pakiecie `PogromcyDanych`.
 
 Opis tego zbioru danych znaleźć można w odcinku https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html
@@ -394,7 +394,7 @@ liczby zmiennych to wynikowa macierz kontyngencji ma więcej wymiarów niż dwa.
 
 Funkcją `as.data.frame` można przekształcić wielowymiarowe tabele do ramki danych. Otrzyma się w tym 
 przypadku tak zwaną reprezentację rzadką macierzy kontyngencji, w której pierwsze kolumny opisują wszystkie 
-kombinacje czynników zmiennych a ostania kolumna opisuje liczebność występowania poszczególnej kombinacji czynników.
+kombinacje czynników zmiennych a ostatnia kolumna opisuje liczebność występowania poszczególnej kombinacji czynników.
 
 ```{r, warning=FALSE, fig.height=5, fig.width=5}
 xt <- xtabs(~Kraj.pochodzenia+Waluta, auta2012)

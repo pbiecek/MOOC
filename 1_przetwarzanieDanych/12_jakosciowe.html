@@ -134,7 +134,7 @@ pogRomcy danych
 <div id="wczytanie-danych-1" class="slide section level1">
 <h1>Wczytanie danych</h1>
 <p>Zbiór danych <code>koty_ptaki</code> składa się z 13 wierszy. Można cały ten zbiór danych wyświetlić na ekranie. Nie zawsze potrzebujemy więc specjalnych statystyk opisowych by zrozumieć co się dzieje w takich małych zbiorach danych.</p>
-<p>Dlatego dalsze ćwiczenia ze zmiennymi ilościowymi przeprowadzimy na znaczeni większym zbiorze danych <code>auta2012</code> o ponad 200 tysiącach wartości, który również znajduje się w pakiecie <code>PogromcyDanych</code>.</p>
+<p>Dlatego dalsze ćwiczenia ze zmiennymi jakościowymi przeprowadzimy na znaczeni większym zbiorze danych <code>auta2012</code> o ponad 200 tysiącach wartości, który również znajduje się w pakiecie <code>PogromcyDanych</code>.</p>
 <p>Opis tego zbioru danych znaleźć można w odcinku <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
 <p>Wczytajmy ten zbiór danych i przyjrzyjmy się dwóm pierwszym wierszom.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
@@ -388,7 +388,7 @@ zaokragloneProcenty[kolejnoscPosortowanych]</code></pre>
 <h1>Tablice częstości</h1>
 <p>Tablice częstości nie są ramkami danych.</p>
 <p>Gdy w grę wchodzą dwie zmienne, to rzeczywiście wyglądają one jak ramki danych - mają wiersze i kolumny. Muszą być jednak czymś innym, ponieważ w sytuacji, gdy tablica kontyngencji dotyczy trzech lub większej liczby zmiennych to wynikowa macierz kontyngencji ma więcej wymiarów niż dwa.</p>
-<p>Funkcją <code>as.data.frame</code> można przekształcić wielowymiarowe tabele do ramki danych. Otrzyma się w tym przypadku tak zwaną reprezentację rzadką macierzy kontyngencji, w której pierwsze kolumny opisują wszystkie kombinacje czynników zmiennych a ostania kolumna opisuje liczebność występowania poszczególnej kombinacji czynników.</p>
+<p>Funkcją <code>as.data.frame</code> można przekształcić wielowymiarowe tabele do ramki danych. Otrzyma się w tym przypadku tak zwaną reprezentację rzadką macierzy kontyngencji, w której pierwsze kolumny opisują wszystkie kombinacje czynników zmiennych a ostatnia kolumna opisuje liczebność występowania poszczególnej kombinacji czynników.</p>
 <pre class="sourceCode r"><code class="sourceCode r">xt &lt;-<span class="st"> </span><span class="kw">xtabs</span>(~Kraj.pochodzenia+Waluta, auta2012)
 xt &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(xt)
 <span class="co"># Wyświetlmy tylko te kombinacje, które rzeczywiście występują w danych:</span>
