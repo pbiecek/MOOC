@@ -191,7 +191,7 @@ slowa1[2]
 Zbiór danych `koty_ptaki` składa się z 13 wierszy. Można cały ten zbiór danych wyświetlić na ekranie. 
 Nie zawsze potrzebujemy więc specjalnych statystyk opisowych, by zrozumieć co się dzieje w takich małych zbiorach danych.
 
-Dlatego dalsze ćwiczenia ze zmiennymi ilościowymi przeprowadzimy na znaczeni większym zbiorze danych `auta2012`, z ponad 200 tysiącami wartości, 
+Dlatego dalsze ćwiczenia z napisami przeprowadzimy na znacznie większym zbiorze danych `auta2012`, z ponad 200 tysiącami wartości, 
 który również znajduje się w pakiecie `PogromcyDanych`.
 
 Opis tego zbioru danych znaleźć można w odcinku https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html
