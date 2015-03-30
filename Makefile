@@ -32,7 +32,7 @@ ifeq ($(use_code),1)
 	Rscript -e 'knitr::knit("$<", output="$@")'
 
 %.html: %.Rmd
-	Rscript -e 'options(warn=$(warn));library(knitr); opts_chunk$$set(error=$(knitr_error));rmarkdown::render("$<")' | tee $(<:.Rmd=.log) 2>&1
+	Rscript -e 'options(warn=$(warn));library(knitr); opts_chunk$$set(error=$(knitr_error));rmarkdown::render("$<", output_format="all")' | tee $(<:.Rmd=.log) 2>&1
 else
 %.md: %.Rmd
 	Rscript -e 'library(knitr);opts_chunk$$set(eval=FALSE, echo=FALSE, results="hide");knitr::knit("$<", output="$@")'
