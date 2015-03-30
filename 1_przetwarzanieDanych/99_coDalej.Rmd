@@ -1,8 +1,16 @@
 ---
-title: "Praca z programem R / Co dalej?"
+title: "Co dalej?"
+author: "pogRomcy danych"
+date: "sezon 1 / odcinek 27 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora.  <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
-  html_document:
-    toc: yes
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / co dalej / co dalej"
+
 ---
 
 Kurs, który właśnie Państwo ukończyli jest łagodnym wprowadzeniem do programu R. 
