@@ -289,11 +289,13 @@ div.slidy_toc {
   bottom: 4em;
   padding: 1em;
   background: rgb(0,25,169); /*blue*/
-  border-style: solid;
-  border-width: 2px;
+  border: 0;
+  box-shadow: 5px -5px rgba(0,0,0,0.2);
   font-size: 60%;
   color: rgb(255,110,117); /*orange*/;
+  line-height: 1.8;
 }
+
 div.slidy_toc .toc_heading {
   text-align: center;
   width: 100%;
@@ -305,8 +307,11 @@ div.slidy_toc .toc_heading {
 }
 div.slidy_toc a{ 
   color: white !important;
+  text-decoration: none;
 }
-
+div.slidy_toc a:hover{ 
+  text-decoration: underline;
+}
 div.slide {
   width: 100%;
   z-index: 20;
@@ -399,7 +404,10 @@ div.slide p {
 }
 img.image-first-screen {
   display: block;
-  width: 300px;
+  width: 100%;
+  max-width: 500px;
+  margin: -5em 0 -7em 0;
+  z-index: -1;
   position: relative;
   left: 50%;
     -webkit-transform: translateX(-50%);
@@ -409,7 +417,7 @@ img.image-first-screen {
 code {
   font-family: 'Source Code Pro';
   font-size: 16px!important;
-  color: rgba(0,25,169,0.5) !important; /*blue*/
+  color: rgb(255,110,117)!important; /*orange*/
  
 }
 code > span {font-style: normal !important;}
@@ -419,7 +427,7 @@ code > span.dv { color: rgb(70,160,255) !important; }
 code > span.bn { color: #40a070; }
 code > span.fl { color: #40a070; }
 code > span.ch { color: #4070a0; }
-code > span.st { color: rgba(0,25,169,0.5) !important; }
+code > span.st { color: rgb(0,25,169) !important; }
 code > span.co { color: #60aa0b0; }
 code > span.ot { color: rgb(197,42,51) !important; }
 code > span.al { color: #ff0000; }
@@ -484,16 +492,17 @@ pre {
  border-bottom-width: 0;
  border-color: rgb(255,110,117) !important;
  background-color: #fef4f3!important;
+ margin-bottom: 1em !important;
  /*margin-top: 1em !important;
- margin-bottom: 1em !important;*/
- display: table !important;
+ display: table !important;*/
+ overflow: auto !important;
  width: 100%;
 }
 pre > code {
-  color: rgb(0,25,169)!important; /*blue*/
+  color: rgba(0,25,169,0.5)!important; /*blue*/
   border: 0;
   text-align: left;
-  line-height: 1.5
+  line-height: 1.5;
 }
 .slide > pre:last-of-type {
   margin-bottom: 2em !important;
@@ -663,7 +672,7 @@ ul.outline li.folded:hover {
 }
 
 /* for slides with class "title" in table of contents */
-a.titleslide { font-weight: bold; font-style: italic }
+a.titleslide { font-weight: bold; font-style: normal }
 
 /*
  hide images for work around for save as bug
@@ -724,7 +733,8 @@ table.dataTable, .shiny-datatable-output div {
 
 /* allow R chunks to render in a large font */
 pre.sourceCode, code.sourceCode {
-   display: table;
+  /* display: table;*/
+    margin-bottom: 0 !important;
    font-size: 16px !important;
    color: rgb(0,25,169)!important; /*blue*/
 }
