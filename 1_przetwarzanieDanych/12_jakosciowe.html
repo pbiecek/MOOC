@@ -48,7 +48,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 12 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 12 <br><br> Przemysław Biecek @ Uniwersytet Warszawski<br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div class="slide section level1">
 
@@ -135,7 +135,7 @@ pogRomcy danych
 <h1>Wczytanie danych</h1>
 <p>Zbiór danych <code>koty_ptaki</code> składa się z 13 wierszy. Można cały ten zbiór danych wyświetlić na ekranie. Nie zawsze potrzebujemy więc specjalnych statystyk opisowych by zrozumieć co się dzieje w takich małych zbiorach danych.</p>
 <p>Dlatego dalsze ćwiczenia ze zmiennymi jakościowymi przeprowadzimy na znaczeni większym zbiorze danych <code>auta2012</code> o ponad 200 tysiącach wartości, który również znajduje się w pakiecie <code>PogromcyDanych</code>.</p>
-<p>Opis tego zbioru danych znaleźć można w odcinku <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html</a></p>
+<p>Opis tego zbioru danych znaleźć można w odcinku <a href="http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/0_dane.html" class="uri">http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/0_dane.html</a></p>
 <p>Wczytajmy ten zbiór danych i przyjrzyjmy się dwóm pierwszym wierszom.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
 <span class="kw">head</span>(auta2012, <span class="dv">2</span>)</code></pre>
@@ -178,7 +178,7 @@ pogRomcy danych
 <li><p>Ile zmiennych w zbiorze danych <code>auta2012</code> to zmienne jakościowe?</p></li>
 <li><p>Zmienna <code>Liczba.drzwi</code> przyjmuje wartości <code>2/3</code> i <code>4/5</code>. Zachowuje się ona jako zmienna jakościowa. Jednak można uznać, że liczba drzwi to cecha ilościowa, ponieważ opisuje <em>ilość</em> drzwi w samochodzie. Jak wyjaśnić tę dualność?</p></li>
 </ul>
-<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
+<p>Przykładowe odpowiedzi znajdują się na stronie <a href="http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html" class="uri">http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html</a></p>
 </div>
 <div id="procenty" class="slide section level1">
 <h1>Procenty</h1>
@@ -258,7 +258,7 @@ zaokragloneProcenty[kolejnoscPosortowanych]</code></pre>
 <li><p>Cecha <code>Marka</code> opisuje markę samochodu. Sprawdź, która marka jest najpopularniejsza.</p></li>
 <li><p>Cecha <code>Rodzaj.paliwa</code> opisuje rodzaj paliwa wykorzystywanego przez auto. Czy jest to benzyna, olej, gaz? Sprawdź jaki procent samochodów jest napędzana na benzynę.</p></li>
 </ul>
-<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
+<p>Przykładowe odpowiedzi znajdują się na stronie <a href="http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html" class="uri">http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html</a></p>
 </div>
 <div id="graficzne-statystyki-opisowe" class="slide section level1">
 <h1>Graficzne statystyki opisowe</h1>
@@ -285,7 +285,7 @@ zaokragloneProcenty[kolejnoscPosortowanych]</code></pre>
 <ul>
 <li>Przedstaw graficznie tabelę liczebności dla zmiennej <code>Kraj.pochodzenia</code>. Wypróbuj wykres pionowy i poziomy. Aby obrócić kierunek etykiet na osiach dodaj do funkcji <code>barplot()</code> argument <code>las=1</code>.</li>
 </ul>
-<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
+<p>Przykładowe odpowiedzi znajdują się na stronie <a href="http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html" class="uri">http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html</a></p>
 </div>
 <div id="napisy-czy-czynniki" class="slide section level1">
 <h1>Napisy czy czynniki?</h1>
@@ -558,7 +558,7 @@ xt[xt$Freq &gt;<span class="st"> </span><span class="dv">0</span>, ]</code></pre
 <li><p>Wyznacz tabelę liczebności dla tych dwóch nowych zmiennych.</p></li>
 <li><p>Przedstaw tę tabelę graficznie.</p></li>
 </ul>
-<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
+<p>Przykładowe odpowiedzi znajdują się na stronie <a href="http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html" class="uri">http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html</a></p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

@@ -5,9 +5,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / eksploracja danych / indeksowanie" /> 
-  <title>Indeksowanie ramek danych i wektorów</title>
+  <meta name="author" content="Data Masters" />
+  <meta name="copyright" content="pogRomcy danych / przetwarzanie / zmienne napisowe" /> 
+  <title>String of Characters Features</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -44,193 +44,45 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </head>
 <body>
 <div class="slide titlepage">
-  <h1 class="title">Indeksowanie ramek danych i wektorów</h1>
+  <h1 class="title">String of Characters Features</h1>
   <p class="author">
-pogRomcy danych
+Data Masters
   </p>
-  <p class="date">sezon 1 / odcinek 7<br><br> Przemysław Biecek @ Uniwersytet Warszawski<br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">Season 1 / Episode 14 <br><br> All rights reserved.<br> The use shall be subject to prior consent of the author. <br><br><br><br>Press <code>A</code> to see the plain text instead of the slides. <br> Press <code>T</code> to display the table of contents.</p>
 </div>
-<div id="o-czym-jest-ten-odcinek" class="slide section level1">
-<h1>O czym jest ten odcinek</h1>
-<p>Dane z którymi będziemy pracować mają najczęściej format tabeli lub wektora. Jedną z podstawowych operacji na tabelach oraz wektorach jest wybieranie podzbioru wierszy, kolumn lub wartości.</p>
-<p>W tym odcinku dowiemy się:</p>
+<div id="what-is-this-episode-about" class="slide section level1">
+<h1>What Is This Episode About?</h1>
+<p>When analysing the data, we encounter different types of variables. They very often include the string of characters or the variables to be converted to the string of characters (e.g. date, which can be converted to a string of characters to extract year and month).</p>
+<p>In this episode, we will learn:</p>
 <ul>
-<li>jak tworzyć wektory,</li>
-<li>jak indeksować wartości z wektora,</li>
-<li>jak wybierać wiersze z ramki danych,</li>
-<li>jak wybierać kolumny z ramki danych,</li>
-<li>jak wybierać wiersze i kolumny,</li>
-<li>jak indeksować wiersze i kolumny używając nazw lub wartości logicznych.</li>
+<li>How to convert the variables from and into the strings of characters,</li>
+<li>What basic operations can be performed on the strings of characters,</li>
+<li>How to sum up/describe the strings of characters.</li>
 </ul>
+<p>To illustrate these issues, we will use two sets of data. The first small set of data is <code>koty_ptaki</code> and the second, considerably bigger is one <code>auta2012</code>, both available in the <code>PogromcyDanych</code> package.</p>
 </div>
-<div id="wektory" class="slide section level1">
-<h1>Wektory</h1>
-<p>Jednym z podstawowych rodzajów danych w programie R są wektory.</p>
-<p>Wektory mogą zawierać liczby, napisy, wartości logiczne lub inne typy. Zacznijmy od wektorów wartości liczbowych.</p>
-<p>W programie R nawet jedną wartość jest wektorem, tyle że małym, jednoelementowym.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">4</span></code></pre>
-<pre><code>## [1] 4</code></pre>
-<p>Dłuższe wektory można tworzyć np. funkcją <code>c()</code>, która pozwala na sklejenie kilku wartości w jeden wektor.</p>
-<p>Przykładowa instrukcja tworząca wektor o trzech elementach.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</code></pre>
-<pre><code>## [1] 3 4 5</code></pre>
-<p>W programowaniu i analizie danych bardzo często wykorzystuje się wektory kolejnych wartości liczbowych. Takie wektory mają nawet specjalną nazwę: <em>sekwencje</em>.</p>
-<p>Sekwencje kolejnych liczb można stworzyć operatorem <code>:</code>. Jeżeli chcemy zbudować sekwencję liczb równie odległych od siebie, ale z krokiem innym niż 1, to wygodnie jest wykorzystać funkcję <code>seq()</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span>:<span class="dv">7</span></code></pre>
-<pre><code>## [1] 2 3 4 5 6 7</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">3</span>, <span class="dt">to =</span> <span class="dv">15</span>, <span class="dt">by =</span> <span class="dv">2</span>)</code></pre>
-<pre><code>## [1]  3  5  7  9 11 13 15</code></pre>
+<div id="what-does-string-of-characters-mean" class="slide section level1">
+<h1>What Does String of Characters Mean?</h1>
+<p>The persons experienced in working with the languages, such as C++ or Java are accustomed to the following type classification: characters, strings of characters, and vectors of strings of characters. There is no such classification in the R program, except the vectors of strings of characters.</p>
+<p>A vector can be made up of one element, and it can be one element long, but still it is a vector of strings of characters. Such vectors are marked as the <code>character</code> class.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(<span class="st">&quot;A&quot;</span>)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>The strings of characters can be found in various contexts. The most natural is that a set of data contains the statements collected. For example, when retrieving the data from Twitter, one of the variables, which describe a single “twit”, is its content, i.e. a string of 140 characters.</p>
+<p>The strings of characters can also be found when downloading the quantitative or qualitative data, if such data, for any reasons whatsoever, have been interpreted as the strings of characters in the course of the downloading process (e.g. due to an improperly defined formatting). In such a case, we often convert them into a desired type, such as quantitative, qualitative, date, etc.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(<span class="st">&quot;2012&quot;</span>)     <span class="co"># konwersja na liczbę</span></code></pre>
+<pre><code>## [1] 2012</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>)) <span class="co"># konwersja na zmienną jakościową</span></code></pre>
+<pre><code>## [1] A B A A
+## Levels: A B</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.Date</span>(<span class="st">&quot;2012-01-01&quot;</span>)  <span class="co"># konwersja na datę</span></code></pre>
+<pre><code>## [1] &quot;2012-01-01&quot;</code></pre>
 </div>
-<div id="wektory-1" class="slide section level1">
-<h1>Wektory</h1>
-<p>Używając funkcji <code>c()</code> można tworzyć wektory wartości logicznych (z dwoma możliwymi stanami PRAWDA/FAŁSZ oznaczanymi <code>TRUE</code>/<code>FALSE</code>), wektory napisów oraz innego rodzaju wartości.</p>
-<p>Aby wykorzystać wektor później, trzeba go przypisać do zmiennej. Można to zrobić używając operatora <code>&lt;-</code> lub <code>=</code>. Jeżeli chcemy wyświetlić zawartość zmiennej to wystarczy wpisać ją do konsoli i nacisnąć ENTER.</p>
-<pre class="sourceCode r"><code class="sourceCode r">co_drugi &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)
-co_drugi</code></pre>
-<pre><code>## [1]  TRUE FALSE  TRUE FALSE  TRUE FALSE</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">literki &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;alfa&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;delta&quot;</span>)
-literki</code></pre>
-<pre><code>## [1] &quot;alfa&quot;  &quot;beta&quot;  &quot;gamma&quot; &quot;delta&quot;</code></pre>
-<p>W dalszym ciągu tego odcinka wykorzystamy wektor kolejnych liter w języku angielskim zapisany w zmiennej <code>LETTERS</code>. Użyjemy tego wektora do ćwiczeń w indeksowaniu.</p>
-<pre class="sourceCode r"><code class="sourceCode r">LETTERS</code></pre>
-<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot; &quot;K&quot; &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot;
-## [18] &quot;R&quot; &quot;S&quot; &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
-</div>
-<div id="indeksowanie-wektora" class="slide section level1">
-<h1>Indeksowanie wektora</h1>
-<p>Indeksowanie oznacza wybieranie określonych wartości. Wartości wybieramy wskazując ich indeksy.</p>
-<p>Wektor to ciąg elementów. Pierwszy z tych elementów ma indeks 1, kolejny 2, kolejny 3 i tak aż do ostatniego elementu. Indeks ostatniego elementu to jednocześnie długość wektora. Można ją sprawdzić funkcją <code>length()</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(LETTERS)</code></pre>
-<pre><code>## [1] 26</code></pre>
-<p>Aby odwołać się do określonych indeksów wektora należy użyć operatora <code>[]</code>. Wewnątrz nawiasów kwadratowych podaje się indeks elementu, do którego chcemy się odwołać.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pierwszy element wektora</span>
-LETTERS[<span class="dv">1</span>]</code></pre>
-<pre><code>## [1] &quot;A&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># piąty</span>
-LETTERS[<span class="dv">5</span>]</code></pre>
-<pre><code>## [1] &quot;E&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ostatni element wektora</span>
-LETTERS[<span class="dv">26</span>]</code></pre>
-<pre><code>## [1] &quot;Z&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># zamiast podawać wartość 26 można wstawić funkcję, która jako wynik zwróci długość wektora</span>
-LETTERS[<span class="kw">length</span>(LETTERS)]</code></pre>
-<pre><code>## [1] &quot;Z&quot;</code></pre>
-</div>
-<div id="indeksowanie-wektora-1" class="slide section level1">
-<h1>Indeksowanie wektora</h1>
-<p>Odwołując się do wektorów, możemy podać indeks więcej niż jednej wartości. Zasada jest jednak taka, że indeksy muszą być wektorem. Do tego przyda nam się już poznana funkcja <code>c()</code>.</p>
-<p>Przykładowo, aby wybrać pierwszy, piąty i ostatni element z wektora LETTERS musimy wpierw skonstruować wektor z tymi trzema indeksami.</p>
-<pre class="sourceCode r"><code class="sourceCode r">LETTERS[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">26</span>)]</code></pre>
-<pre><code>## [1] &quot;A&quot; &quot;E&quot; &quot;Z&quot;</code></pre>
-<p>Równoważnie można najpierw stworzyć wektor indeksów a następnie wykorzystać go do indeksowania wektora <code>LETTERS</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">indeksy &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">26</span>)
-LETTERS[indeksy]</code></pre>
-<pre><code>## [1] &quot;A&quot; &quot;E&quot; &quot;Z&quot;</code></pre>
-<p>Aby wybrać więcej elementów z wektora wygodnie jest wykorzystać sekwencje.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># dziesięć pierwszych liter</span>
-LETTERS[<span class="dv">1</span>:<span class="dv">10</span>]</code></pre>
-<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pięć pierwszych i pięć ostatnich</span>
-LETTERS[<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">5</span>, <span class="dv">21</span>:<span class="dv">26</span>)]</code></pre>
-<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># co druga litera, indeksujemy sekwencją od 1 do 26 z krokiem co 2</span>
-coDruga &lt;-<span class="st"> </span>LETTERS[<span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="dv">26</span>, <span class="dt">by =</span> <span class="dv">2</span>)]
-coDruga</code></pre>
-<pre><code>##  [1] &quot;A&quot; &quot;C&quot; &quot;E&quot; &quot;G&quot; &quot;I&quot; &quot;K&quot; &quot;M&quot; &quot;O&quot; &quot;Q&quot; &quot;S&quot; &quot;U&quot; &quot;W&quot; &quot;Y&quot;</code></pre>
-</div>
-<div id="indeksowanie-wektora-2" class="slide section level1">
-<h1>Indeksowanie wektora</h1>
-<p>Sekwencje wartości nie muszą być rosnące. Można je wykorzystać np. do tego by odwrócić kolejność elementów w wektorze.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="dv">10</span>:<span class="dv">1</span></code></pre>
-<pre><code>##  [1] 10  9  8  7  6  5  4  3  2  1</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">LETTERS[<span class="dv">10</span>:<span class="dv">1</span>]</code></pre>
-<pre><code>##  [1] &quot;J&quot; &quot;I&quot; &quot;H&quot; &quot;G&quot; &quot;F&quot; &quot;E&quot; &quot;D&quot; &quot;C&quot; &quot;B&quot; &quot;A&quot;</code></pre>
-<p>Elementy wektora można również indeksować warunkiem logicznym.</p>
-<p>W poniższym przykładzie instrukcja <code>LETTERS &gt; &quot;K&quot;</code> tworzy wektor wartości logicznych weryfikujących czy kolejna litera jest większa czy mniejsza od <code>K</code> (w porządku leksykograficznym). Taki wektor wartości logicznych można wykorzystać do indeksowania wektora <code>LETTERS</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">LETTERS &gt;<span class="st"> &quot;K&quot;</span></code></pre>
-<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [12]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-## [23]  TRUE  TRUE  TRUE  TRUE</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tylko litery spełniające określony warunek</span>
-<span class="co"># w tym przypadku litery występujące po literze 'K'</span>
-LETTERS[LETTERS &gt;<span class="st"> &quot;K&quot;</span>]</code></pre>
-<pre><code>##  [1] &quot;L&quot; &quot;M&quot; &quot;N&quot; &quot;O&quot; &quot;P&quot; &quot;Q&quot; &quot;R&quot; &quot;S&quot; &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
-</div>
-<div id="zadania" class="slide section level1">
-<h1>Zadania</h1>
-<ul>
-<li><p>Zbuduj sekwencję dziesięciu kolejnych małych liter alfabetu łacińskiego.</p></li>
-<li><p>Zbuduj sekwencję dziesięciu kolejnych liczb nieparzystych zaczynając od 3.</p></li>
-<li><p>Z wektora <code>LETTERS</code> wybierz litery na pozycjach 5, 10, 15, 20 i 25.</p></li>
-<li><p>Wypisz wartości wektora <code>LETTERS</code> od końca.</p></li>
-</ul>
-</div>
-<div id="ptaki-vs-koty" class="slide section level1">
-<h1>Ptaki vs koty</h1>
-<p>Do pracy nad wybieraniem wierszy i kolumn wykorzystamy niewielki zbiór danych o kotach i ptakach.</p>
-<p>Ten zbiór danych jest dostępny w pakiecie <code>PogromcyDanych</code>, wystarczy więc załadować ten pakiet. Inne sposoby na wczytanie tego zbioru danych były przedstawione w odcinku 5.</p>
-<p>Siedem kolumn i trzynaście wierszy to dobry zbiór do ćwiczeń.</p>
+<div id="data-downloading-reading-data" class="slide section level1">
+<h1>Data Downloading (Reading Data?)</h1>
+<p>The data we start our examples with include <code>koty_ptaki</code> of the <code>PogromcyDanych</code> package. To download these data, please run the package (for instructions how to do it, see Episode 2).</p>
+<p>Let’s run the package and use the function <code>head()</code> to display first six rows.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
-koty_ptaki</code></pre>
-<pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
-## 1          Tygrys 300.00     2.5       60     Azja        25     Kot
-## 2             Lew 200.00     2.0       80   Afryka        29     Kot
-## 3          Jaguar 100.00     1.7       90  Ameryka        15     Kot
-## 4            Puma  80.00     1.7       70  Ameryka        13     Kot
-## 5         Leopard  70.00     1.4       85     Azja        21     Kot
-## 6          Gepard  60.00     1.4      115   Afryka        12     Kot
-## 7           Irbis  50.00     1.3       65     Azja        18     Kot
-## 8          Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
-## 9           Strus 150.00     2.5       70   Afryka        45    Ptak
-## 10  Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak
-## 11 Sokol wedrowny   0.70     0.5      110   Polnoc        15    Ptak
-## 12 Sokol norweski   2.00     0.7      100   Polnoc        20    Ptak
-## 13       Albatros   4.00     0.8      120 Poludnie        50    Ptak</code></pre>
-</div>
-<div id="indeksowanie-wierszy-w-ramce-danych" class="slide section level1">
-<h1>Indeksowanie wierszy w ramce danych</h1>
-<p>Zasadnicza różnica pomiędzy wektorem a ramką danych jest taka, że wektor jest jednowymiarowy. Wartości są ustawione w ciągu. W ramce danych wartości są ułożone w dwa wymiary, wiersze i kolumny. Indeksując wartości w ramce danych podaje się wektor indeksów dla wierszy i wektor wartości dla kolumn.</p>
-<p>Aby odwoływać się do wierszy lub kolumn ramki danych można wykorzystać operator <code>[,]</code>. Obowiązkowym elementem jest przecinek. Przed przecinkiem należy wpisać indeksy wierszy, po przecinku indeksy kolumn. Jeżeli przed przecinkiem lub po przecinku nie będzie żadnych wartości to wybrane będą wszystkie elementy w wierszu / kolumnie.</p>
-<p>Przykładowo, odwołanie się do trzeciego wiersza z ramki danych</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="dv">3</span>, ]</code></pre>
-<pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
-## 3  Jaguar  100     1.7       90 Ameryka        15     Kot</code></pre>
-<p>Liczbę wierszy można sprawdzić funkcją <code>nrow()</code> (odpowiednio, liczbę kolumn sprawdzamy funkcją <code>ncol()</code>).</p>
-<p>Przydatne, jeżeli np. chcemy wyświetlić ostatni wiersz.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(koty_ptaki)</code></pre>
-<pre><code>## [1] 13</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="dv">13</span>, ]</code></pre>
-<pre><code>##     gatunek waga dlugosc predkosc  habitat zywotnosc druzyna
-## 13 Albatros    4     0.8      120 Poludnie        50    Ptak</code></pre>
-</div>
-<div id="indeksowanie-wierszy-w-ramce-danych-1" class="slide section level1">
-<h1>Indeksowanie wierszy w ramce danych</h1>
-<p>Jeżeli chcemy wybrać więcej niż jeden wiersz należy, podobnie jak dla wektorów, podać kilka indeksów przed przecinkiem.</p>
-<p>Aby odwołać się do kilku kolejnych wierszy można wykorzystać sekwencję zbudowaną z operatorem <code>:</code>.</p>
-<p>Przykładowo, wiersze od 8 do 10 z ramki danych <code>koty_ptaki</code> można wyłuskać następująco.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="dv">8</span>:<span class="dv">10</span>, ]</code></pre>
-<pre><code>##          gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
-## 8         Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
-## 9          Strus 150.00     2.5       70   Afryka        45    Ptak
-## 10 Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak</code></pre>
-<p>Funkcja <code>c()</code> skleja wartości i sekwencje w wektor, który można następnie wykorzystać w indeksowaniu wierszy.</p>
-<p>Poniższa instrukcja wyłuskuje wiersze 3, 8, 9 i 10.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>), ]</code></pre>
-<pre><code>##          gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
-## 3         Jaguar 100.00     1.7       90  Ameryka        15     Kot
-## 8         Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
-## 9          Strus 150.00     2.5       70   Afryka        45    Ptak
-## 10 Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak</code></pre>
-<p>Lub równoważnie:</p>
-<pre class="sourceCode r"><code class="sourceCode r">indeksy &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>)
-koty_ptaki[indeksy, ]</code></pre>
-<pre><code>##          gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
-## 3         Jaguar 100.00     1.7       90  Ameryka        15     Kot
-## 8         Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
-## 9          Strus 150.00     2.5       70   Afryka        45    Ptak
-## 10 Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak</code></pre>
-<p>Funkcjami <code>head()</code> i <code>tail()</code> wyłuskuje się kilka pierwszych lub ostatnich wierszy ze zbioru danych. Do obu funkcji można podać drugi argument, określający ile pierwszych / ostatnich wierszy chcemy odczytać, domyślnie jest to 6 wierszy.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(koty_ptaki)</code></pre>
+<span class="kw">head</span>(koty_ptaki)</code></pre>
 <pre><code>##   gatunek waga dlugosc predkosc habitat zywotnosc druzyna
 ## 1  Tygrys  300     2.5       60    Azja        25     Kot
 ## 2     Lew  200     2.0       80  Afryka        29     Kot
@@ -238,302 +90,277 @@ koty_ptaki[indeksy, ]</code></pre>
 ## 4    Puma   80     1.7       70 Ameryka        13     Kot
 ## 5 Leopard   70     1.4       85    Azja        21     Kot
 ## 6  Gepard   60     1.4      115  Afryka        12     Kot</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(koty_ptaki)</code></pre>
-<pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
-## 8          Jerzyk   0.05     0.2      170 Euroazja        20    Ptak
-## 9           Strus 150.00     2.5       70   Afryka        45    Ptak
-## 10  Orzel przedni   5.00     0.9      160   Polnoc        20    Ptak
-## 11 Sokol wedrowny   0.70     0.5      110   Polnoc        15    Ptak
-## 12 Sokol norweski   2.00     0.7      100   Polnoc        20    Ptak
-## 13       Albatros   4.00     0.8      120 Poludnie        50    Ptak</code></pre>
+<p>Each row describes one species. As we know from the previous episode, the variables <code>species</code>, <code>habitat</code> and <code>druzyna</code> are the qualitative variables. We will convert them into the strings of characters to demonstrate the basic operations with the strings of characters.</p>
 </div>
-<div id="indeksowanie-wierszy-w-ramce-danych-2" class="slide section level1">
-<h1>Indeksowanie wierszy w ramce danych</h1>
-<p>Jako indeksy można również wykorzystać wektor wartości logicznych.</p>
-<p>Wybiegając trochę w przyszłość, użyjemy kolumny <code>predkosc</code> aby wybrać z ramki danych tylko te wiersze, dla których prędkość jest wyższa niż 100.</p>
-<pre class="sourceCode r"><code class="sourceCode r">najszybsze &lt;-<span class="st"> </span>koty_ptaki$predkosc &gt;<span class="st"> </span><span class="dv">100</span>
-najszybsze</code></pre>
-<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE
-## [12] FALSE  TRUE</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[najszybsze, ]</code></pre>
-<pre><code>##           gatunek  waga dlugosc predkosc  habitat zywotnosc druzyna
-## 6          Gepard 60.00     1.4      115   Afryka        12     Kot
-## 8          Jerzyk  0.05     0.2      170 Euroazja        20    Ptak
-## 10  Orzel przedni  5.00     0.9      160   Polnoc        20    Ptak
-## 11 Sokol wedrowny  0.70     0.5      110   Polnoc        15    Ptak
-## 13       Albatros  4.00     0.8      120 Poludnie        50    Ptak</code></pre>
+<div id="conversion-into-string-of-characters" class="slide section level1">
+<h1>Conversion into String (of Characters ?)</h1>
+<p>Select the column <code>habitat</code>. It is a qualitative variable in the <code>koty_ptaki</code> set of data. Let’s use the function <code>as.character()</code> to convert it into a string of characters. We will save the resulting strings of characters in the column <code>habitat_napis</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki$habitat</code></pre>
+<pre><code>##  [1] Azja     Afryka   Ameryka  Ameryka  Azja     Afryka   Azja    
+##  [8] Euroazja Afryka   Polnoc   Polnoc   Polnoc   Poludnie
+## Levels: Afryka Ameryka Azja Euroazja Polnoc Poludnie</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki$habitat_napis &lt;-<span class="st"> </span><span class="kw">as.character</span>(koty_ptaki$habitat)
+koty_ptaki$habitat_napis</code></pre>
+<pre><code>##  [1] &quot;Azja&quot;     &quot;Afryka&quot;   &quot;Ameryka&quot;  &quot;Ameryka&quot;  &quot;Azja&quot;     &quot;Afryka&quot;  
+##  [7] &quot;Azja&quot;     &quot;Euroazja&quot; &quot;Afryka&quot;   &quot;Polnoc&quot;   &quot;Polnoc&quot;   &quot;Polnoc&quot;  
+## [13] &quot;Poludnie&quot;</code></pre>
+<p>The function <code>length()</code> checks the length of each vector. The function <code>nchar()</code> checks the number of the characters in each string.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># liczba napisów</span>
+<span class="kw">length</span>(koty_ptaki$habitat_napis)</code></pre>
+<pre><code>## [1] 13</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># długość każdego napisu</span>
+<span class="kw">nchar</span>(koty_ptaki$habitat_napis)</code></pre>
+<pre><code>##  [1] 4 6 7 7 4 6 4 8 6 6 6 6 8</code></pre>
 </div>
-<div id="indeksowanie-wierszy-w-ramce-danych-3" class="slide section level1">
-<h1>Indeksowanie wierszy w ramce danych</h1>
-<p>Indeksując wiersze lub kolumny można też wykorzystywać ujemne indeksy. Oznaczają one, wszystkie wartości poza wskazanymi.</p>
-<p>Przykładowo, wszystkie wiersze poza 1, 3, 8, 9 i 10 można uzyskać poleceniem.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[ -<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>), ]</code></pre>
-<pre><code>##           gatunek  waga dlugosc predkosc  habitat zywotnosc druzyna
-## 2             Lew 200.0     2.0       80   Afryka        29     Kot
-## 4            Puma  80.0     1.7       70  Ameryka        13     Kot
-## 5         Leopard  70.0     1.4       85     Azja        21     Kot
-## 6          Gepard  60.0     1.4      115   Afryka        12     Kot
-## 7           Irbis  50.0     1.3       65     Azja        18     Kot
-## 11 Sokol wedrowny   0.7     0.5      110   Polnoc        15    Ptak
-## 12 Sokol norweski   2.0     0.7      100   Polnoc        20    Ptak
-## 13       Albatros   4.0     0.8      120 Poludnie        50    Ptak</code></pre>
-<p>Zauważmy, że w tym przykładzie znak <code>-</code> przed funkcją <code>c()</code> tworzącą wektor, powoduje zmianę znaku wszystkich elementów wektora.</p>
-<pre class="sourceCode r"><code class="sourceCode r">-<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>)</code></pre>
-<pre><code>## [1]  -1  -3  -8  -9 -10</code></pre>
-<p>Uwaga! Nie można mieszać jednocześnie indeksów dodatnich i ujemnych.</p>
+<div id="string-of-characters-retrieval-search" class="slide section level1">
+<h1>String of Characters Retrieval (/search ?)</h1>
+<p>A common string of characters operation is to search for the strings of characters that match a pattern. If a character accuracy is important for us, the use of the function <code>which()</code> would be convenient. The result returns the indexes, for which a specified condition is true.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># które wartości wektora habitat_napis to 'Azja'</span>
+<span class="kw">which</span>(koty_ptaki$habitat_napis ==<span class="st"> &quot;Azja&quot;</span>)</code></pre>
+<pre><code>## [1] 1 5 7</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># które wartości wektora habitat_napis to 'Azja' lub `Afryka`</span>
+<span class="kw">which</span>(koty_ptaki$habitat_napis %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Azja&quot;</span>, <span class="st">&quot;Afryka&quot;</span>))</code></pre>
+<pre><code>## [1] 1 2 5 6 7 9</code></pre>
+<p>However, it is often more convenient to describe the values to be retrieved using a certain pattern rather than to list all of them. The function <code>grep()</code> is used for such retrieval. It tests, which strings of characters contain a specific string of characters, and, as a result, returns the numbers of the strings of characters with such string.</p>
+<p>Let’s check, which rows in the column <code>habitat_napis</code> include <code>A</code> character in its name. The first argument of the function <code>grep()</code> is a pattern, the second – the vector of strings of characters. We can specify these arguments in a different order, but then we will need to specify their name.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grep</span>(<span class="st">&quot;A&quot;</span>, koty_ptaki$habitat_napis)</code></pre>
+<pre><code>## [1] 1 2 3 4 5 6 7 9</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># równoważnie</span>
+<span class="kw">grep</span>(koty_ptaki$habitat_napis, <span class="dt">pattern=</span><span class="st">&quot;A&quot;</span>)</code></pre>
+<pre><code>## [1] 1 2 3 4 5 6 7 9</code></pre>
 </div>
-<div id="indeksowanie-kolumn-w-ramce-danych" class="slide section level1">
-<h1>Indeksowanie kolumn w ramce danych</h1>
-<p>Podobnie jak wiersze, można indeksować również kolumny.</p>
-<p>Aby wyłuskać drugą kolumnę można wskazać jej numer po przecinku.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[, <span class="dv">2</span>]</code></pre>
-<pre><code>##  [1] 300.00 200.00 100.00  80.00  70.00  60.00  50.00   0.05 150.00   5.00
-## [11]   0.70   2.00   4.00</code></pre>
-<p>Wybranie jednej kolumny powoduje, że jako wynik otrzymujemy nie ramkę danych ale wektor. Łatwo to poznać po sposobie wyświetlania danych.</p>
-<p>Aby zapobiec takiej konwersji na wektor i jako wynik wciąż mieć ramkę danych, należy dodać do operatora indeksowania argument <code>drop=FALSE</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[,<span class="dv">2</span>, drop=<span class="ot">FALSE</span>]</code></pre>
-<pre><code>##      waga
-## 1  300.00
-## 2  200.00
-## 3  100.00
-## 4   80.00
-## 5   70.00
-## 6   60.00
-## 7   50.00
-## 8    0.05
-## 9  150.00
-## 10   5.00
-## 11   0.70
-## 12   2.00
-## 13   4.00</code></pre>
-<p><em>Uwaga</em> Ten dziwny zapis jest konsekwencją tego, że operator <code>[,]</code> jest w gruncie rzeczy funkcją. Więcej o zaawansowanych elementach języka dowiemy się w kolejnych odcinkach.</p>
+<div id="string-of-characters-retrieval" class="slide section level1">
+<h1>String of Characters Retrieval</h1>
+<p>If instead of the indexes, we would like to get the values, which were matched, then we should set the argument <code>value</code> as <code>TRUE</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grep</span>(<span class="st">&quot;A&quot;</span>, koty_ptaki$habitat_napis, <span class="dt">value =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## [1] &quot;Azja&quot;    &quot;Afryka&quot;  &quot;Ameryka&quot; &quot;Ameryka&quot; &quot;Azja&quot;    &quot;Afryka&quot;  &quot;Azja&quot;   
+## [8] &quot;Afryka&quot;</code></pre>
+<p>Another useful argument of the function <code>grep()</code> is a possibility to define that the search should be performed disregarding information whether the character is small or capital. We use the argument <code>ignore.case=TRUE</code> to do so.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grep</span>(<span class="st">&quot;A&quot;</span>, koty_ptaki$habitat_napis, <span class="dt">ignore.case =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## [1] 1 2 3 4 5 6 7 8 9</code></pre>
+<p>In defining a pattern, we can use the regular expressions. They allow describing a certain regularity to be searched for in the data. The regular expressions are often used to check whether a string of characters is, for example, an email, a telephone number, or a zip code.</p>
+<p>For more details concerning the regular expressions, see, for example, Wikipedia at <a href="http://pl.wikipedia.org/wiki/Wyra%C5%BCenie_regularne#Wyra.C5.BCenia_regularne_w_praktyce">http://pl.wikipedia.org/wiki/Wyra%C5%BCenie_regularne#Wyra.C5.BCenia_regularne_w_praktyce</a>.</p>
+<p>The below expression checks whether the string of characters starts with <code>A</code> or <code>E</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grep</span>(<span class="st">&quot;^[AE]&quot;</span>, koty_ptaki$habitat_napis)</code></pre>
+<pre><code>## [1] 1 2 3 4 5 6 7 8 9</code></pre>
 </div>
-<div id="indeksowanie-kolumn-w-ramce-danych-1" class="slide section level1">
-<h1>Indeksowanie kolumn w ramce danych</h1>
-<p>W ramce danych kolumny możemy indeksować nie tylko numerami ale również nazwami (kolumny są nazywane).</p>
-<p>Nazwy kolumn z ramki danych można odczytać funkcją <code>colnames()</code>. Wynikiem tej funkcji jest wektor z nazwami.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(koty_ptaki)</code></pre>
-<pre><code>## [1] &quot;gatunek&quot;   &quot;waga&quot;      &quot;dlugosc&quot;   &quot;predkosc&quot;  &quot;habitat&quot;   &quot;zywotnosc&quot;
-## [7] &quot;druzyna&quot;</code></pre>
-<p>Aby wyłuskać z ramki danych kolumnę o nazwie <code>waga</code> możemy użyć tej nazwy jako indeksu.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[, <span class="st">&quot;waga&quot;</span>]</code></pre>
-<pre><code>##  [1] 300.00 200.00 100.00  80.00  70.00  60.00  50.00   0.05 150.00   5.00
-## [11]   0.70   2.00   4.00</code></pre>
-<p>Ponieważ operacja odwołania się do jednej kolumny w danych jest dosyć częsta, można ją wykonać na kilka innych sposobów. Najpopularniejszym jest użycie operatora <code>$</code>.</p>
-<p>Z jego pomocą do kolumny <code>waga</code> możemy odwołać się w ten sposób.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki$waga</code></pre>
-<pre><code>##  [1] 300.00 200.00 100.00  80.00  70.00  60.00  50.00   0.05 150.00   5.00
-## [11]   0.70   2.00   4.00</code></pre>
+<div id="string-of-characters-fragment" class="slide section level1">
+<h1>String of Characters Fragment</h1>
+<p><code>PS: (substract) zamiast cut</code> Another useful feature for operating with the strings of characters is <code>substr()</code>. It enables to cut out a fragment at a specific position from a string of characters; the second and the third arguments are the indexes of the beginning and end of the relevant string of characters.</p>
+<p>For example, in this way we can remove years or months from the dates.</p>
+<pre class="sourceCode r"><code class="sourceCode r">daty &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2014-01-01&quot;</span>, <span class="st">&quot;2015-03-15&quot;</span>, <span class="st">&quot;2010-12-01&quot;</span>)
+<span class="kw">substr</span>(daty, <span class="dv">1</span>, <span class="dv">4</span>)</code></pre>
+<pre><code>## [1] &quot;2014&quot; &quot;2015&quot; &quot;2010&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">substr</span>(daty, <span class="dv">6</span>, <span class="dv">7</span>)</code></pre>
+<pre><code>## [1] &quot;01&quot; &quot;03&quot; &quot;12&quot;</code></pre>
+<p>Another method to retrieve a string of characters element is to define a pattern, which separates the important elements of a string of characters, such as words. The below example features two sentences broken into the words (specifically, broken into the fragments separated with a space). It yields a two-element list of the vectors. We select the first vector, and read its second word.</p>
+<pre class="sourceCode r"><code class="sourceCode r">zdanie &lt;-<span class="st"> </span><span class="kw">c</span>( <span class="st">&quot;W Szczebrzeszynie chrząszcz brzmi w trzcinie&quot;</span>, <span class="st">&quot;Ząb zupa zębowa dąb zupa dębowa&quot;</span>)
+(podzielony &lt;-<span class="st"> </span><span class="kw">strsplit</span>(zdanie, <span class="st">&quot; &quot;</span>))</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;W&quot;               &quot;Szczebrzeszynie&quot; &quot;chrząszcz&quot;       &quot;brzmi&quot;          
+## [5] &quot;w&quot;               &quot;trzcinie&quot;       
+## 
+## [[2]]
+## [1] &quot;Ząb&quot;    &quot;zupa&quot;   &quot;zębowa&quot; &quot;dąb&quot;    &quot;zupa&quot;   &quot;dębowa&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">slowa1 &lt;-<span class="st"> </span>podzielony[[<span class="dv">1</span>]]
+slowa1[<span class="dv">2</span>]</code></pre>
+<pre><code>## [1] &quot;Szczebrzeszynie&quot;</code></pre>
 </div>
-<div id="indeksowanie-kolumn-w-ramce-danych-2" class="slide section level1">
-<h1>Indeksowanie kolumn w ramce danych</h1>
-<p>Aby wybrać więcej niż jedna kolumnę, podobnie jak w przypadku wierszy i wektorów można wykorzystać funkcję <code>c()</code>.</p>
-<p>Przykładowo, jeżeli chcemy wybrać drugą, czwartą, piątą i szóstą kolumnę możemy użyć instrukcji.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># równoważnie moglibyśmy napisać </span>
-<span class="co"># koty_ptaki[, c(&quot;waga&quot;, &quot;predkosc&quot;, &quot;habitat&quot;, &quot;zywotnosc&quot;)]</span>
-koty_ptaki[, <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>:<span class="dv">6</span>)]</code></pre>
-<pre><code>##      waga predkosc  habitat zywotnosc
-## 1  300.00       60     Azja        25
-## 2  200.00       80   Afryka        29
-## 3  100.00       90  Ameryka        15
-## 4   80.00       70  Ameryka        13
-## 5   70.00       85     Azja        21
-## 6   60.00      115   Afryka        12
-## 7   50.00       65     Azja        18
-## 8    0.05      170 Euroazja        20
-## 9  150.00       70   Afryka        45
-## 10   5.00      160   Polnoc        20
-## 11   0.70      110   Polnoc        15
-## 12   2.00      100   Polnoc        20
-## 13   4.00      120 Poludnie        50</code></pre>
-</div>
-<div id="wybieranie-podramki-z-ramki-danych" class="slide section level1">
-<h1>Wybieranie podramki z ramki danych</h1>
-<p>Możemy jednocześnie odwoływać się do wierszy i kolumn w ramce danych, wybierając jej podramkę.</p>
-<p>Przykładowo, wybór czterech wierszy i czterech kolumn może wyglądać tak.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">8</span>:<span class="dv">10</span>), <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>:<span class="dv">6</span>)]</code></pre>
-<pre><code>##      waga predkosc  habitat zywotnosc
-## 3  100.00       90  Ameryka        15
-## 8    0.05      170 Euroazja        20
-## 9  150.00       70   Afryka        45
-## 10   5.00      160   Polnoc        20</code></pre>
-<p>Wybór czterech wierszy i jednej kolumny.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">8</span>:<span class="dv">10</span>), <span class="dv">2</span>]</code></pre>
-<pre><code>## [1] 100.00   0.05 150.00   5.00</code></pre>
-<p>Jeden wiersz i cztery kolumny.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="dv">3</span>, <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>:<span class="dv">6</span>)]</code></pre>
-<pre><code>##   waga predkosc habitat zywotnosc
-## 3  100       90 Ameryka        15</code></pre>
-</div>
-<div id="wybieranie-podramki-z-ramki-danych-nazwami" class="slide section level1">
-<h1>Wybieranie podramki z ramki danych nazwami</h1>
-<p>Pokazaliśmy wcześniej, jak można odwoływać się do kolumn poprzez ich nazwy.</p>
-<p>Podobnie można zrobić z wierszami. Funkcja <code>rownames()</code> pokazuje jak nazywają się wiersze w ramce danych.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(koty_ptaki)</code></pre>
-<pre><code>##  [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;12&quot; &quot;13&quot;</code></pre>
-<p>Te nazwy niewiele mówią, używanie ich do indeksowania nie miałoby sensu. Zmieńmy więc nazwy wierszy na takie jak w kolumnie <code>gatunek</code></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(koty_ptaki) &lt;-<span class="st"> </span>koty_ptaki$gatunek</code></pre>
-<p>Teraz możemy odwoływać się do wierszy poprzez nazwy tych wierszy.</p>
-<p>Poniższy przykład wybiera wiersze dla czterech wskazanych gatunków oraz trzy wybrane kolumny. Jeżeli wiersze mają sensowne nazwy, to wygodniej jest odwoływać się do wierszy przez nazy niż przez indeksy liczbowe.</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[<span class="kw">c</span>(<span class="st">&quot;Lew&quot;</span>, <span class="st">&quot;Leopard&quot;</span>, <span class="st">&quot;Jerzyk&quot;</span>, <span class="st">&quot;Strus&quot;</span>),
-           <span class="kw">c</span>(<span class="st">&quot;waga&quot;</span>, <span class="st">&quot;dlugosc&quot;</span>, <span class="st">&quot;predkosc&quot;</span>)]</code></pre>
-<pre><code>##           waga dlugosc predkosc
-## Lew     200.00     2.0       80
-## Leopard  70.00     1.4       85
-## Jerzyk    0.05     0.2      170
-## Strus   150.00     2.5       70</code></pre>
-<p><em>Uwaga</em> Gdybyśmy chcieli pozbyć się nazw wierszy, można to zrobić instrukcją</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(koty_ptaki) &lt;-<span class="st"> </span><span class="ot">NULL</span></code></pre>
-</div>
-<div id="sortowanie-przez-indeksowanie" class="slide section level1">
-<h1>Sortowanie przez indeksowanie</h1>
-<p>Interesujące i nieco zaawansowane zastosowanie indeksowania przedstawimy na przykładzie funkcji <code>order()</code>.</p>
-<p>Wynikiem tej funkcji, są indeksy kolejnych, rosnących wartości.</p>
-<p>Przykładowo, w kolumnie <code>predkosc</code> mamy następujące wartości</p>
-<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[,<span class="st">&quot;predkosc&quot;</span>]</code></pre>
-<pre><code>##  [1]  60  80  90  70  85 115  65 170  70 160 110 100 120</code></pre>
-<p>Wynikiem funkcji <code>order()</code> są indeksy kolejnych, wartości. Najmniejsza wartość to 60, na pozycji 1, kolejna to 65 na pozycji 7, kolejna to 70 na pozycjach 4 i 9 i tak dalej.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">order</span>(koty_ptaki[,<span class="st">&quot;predkosc&quot;</span>])</code></pre>
-<pre><code>##  [1]  1  7  4  9  2  5  3 12 11  6 13 10  8</code></pre>
-<p>Możemy wykorzystać ten wynik, aby posortować ramkę danych po określonej kolumnie. W przykładzie poniżej wykorzystujemy funkcję <code>order()</code> do wyznaczenia wektora <code>kolejnosc</code>. Któty następnie wykorzystamy do indeksowania ramki <code>koty_ptaki</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">kolejnosc &lt;-<span class="st"> </span><span class="kw">order</span>(koty_ptaki[,<span class="st">&quot;predkosc&quot;</span>])
-koty_ptaki[kolejnosc, ]</code></pre>
-<pre><code>##                       gatunek   waga dlugosc predkosc  habitat zywotnosc
-## Tygrys                 Tygrys 300.00     2.5       60     Azja        25
-## Irbis                   Irbis  50.00     1.3       65     Azja        18
-## Puma                     Puma  80.00     1.7       70  Ameryka        13
-## Strus                   Strus 150.00     2.5       70   Afryka        45
-## Lew                       Lew 200.00     2.0       80   Afryka        29
-## Leopard               Leopard  70.00     1.4       85     Azja        21
-## Jaguar                 Jaguar 100.00     1.7       90  Ameryka        15
-## Sokol norweski Sokol norweski   2.00     0.7      100   Polnoc        20
-## Sokol wedrowny Sokol wedrowny   0.70     0.5      110   Polnoc        15
-## Gepard                 Gepard  60.00     1.4      115   Afryka        12
-## Albatros             Albatros   4.00     0.8      120 Poludnie        50
-## Orzel przedni   Orzel przedni   5.00     0.9      160   Polnoc        20
-## Jerzyk                 Jerzyk   0.05     0.2      170 Euroazja        20
-##                druzyna
-## Tygrys             Kot
-## Irbis              Kot
-## Puma               Kot
-## Strus             Ptak
-## Lew                Kot
-## Leopard            Kot
-## Jaguar             Kot
-## Sokol norweski    Ptak
-## Sokol wedrowny    Ptak
-## Gepard             Kot
-## Albatros          Ptak
-## Orzel przedni     Ptak
-## Jerzyk            Ptak</code></pre>
-</div>
-<div id="podsumowanie-instrukcji-r" class="slide section level1">
-<h1>Podsumowanie instrukcji R</h1>
-<p>W tym odcinku omawialiśmy funkcje służące do tworzenia wektorów, sekwencji oraz indeksowania wektorów.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tworzenie wektorów liczb i sekwencji</span>
-<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)
-<span class="dv">2</span>:<span class="dv">7</span>
-<span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">3</span>, <span class="dt">to =</span> <span class="dv">15</span>, <span class="dt">by =</span> <span class="dv">2</span>)
-
-<span class="co"># wektory wartości logicznych i napisowych</span>
-co_drugi &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)
-co_drugi
-
-literki &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;alfa&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;delta&quot;</span>)
-literki
-
-<span class="co"># wyznaczanie długości wektora LETTERS</span>
-<span class="kw">length</span>(LETTERS)
-
-<span class="co"># indeksowanie pojedynczego elementu wektora, pierwszy element</span>
-LETTERS[<span class="dv">1</span>]
-<span class="co"># zamiast podawać wartość 26 można wstawić funkcję, która jako wynik zwróci długość wektora</span>
-LETTERS[<span class="kw">length</span>(LETTERS)]
-
-<span class="co"># indeksowanie kilku elementów wektora</span>
-LETTERS[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">26</span>)]
-<span class="co"># z użyciem zmiennej pomocniczej</span>
-indeksy &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">26</span>)
-LETTERS[indeksy]
-
-<span class="co"># dziesięć pierwszych liter od J do A</span>
-LETTERS[<span class="dv">10</span>:<span class="dv">1</span>]
-<span class="co"># pięć pierwszych i pięć ostatnich</span>
-LETTERS[<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">5</span>, <span class="dv">21</span>:<span class="dv">26</span>)]
-<span class="co"># co druga litera, indeksujemy sekwencją od 1 do 26 z krokiem co 2</span>
-LETTERS[<span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="dv">26</span>, <span class="dt">by =</span> <span class="dv">2</span>)]
-
-<span class="co"># używanie wartości logicznych do indeksowania wektora tylko litery występujące po literze 'K'</span>
-LETTERS[LETTERS &gt;<span class="st"> &quot;K&quot;</span>]</code></pre>
-</div>
-<div id="podsumowanie-instrukcji-r-1" class="slide section level1">
-<h1>Podsumowanie instrukcji R</h1>
-<p>W tym odcinku omawialiśmy funkcje służące do indeksowania wierszy w ramkach danych.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># indeksowanie pojedynczego wiersza</span>
-koty_ptaki[<span class="dv">3</span>, ]
-
-<span class="co"># liczba wierszy</span>
-<span class="kw">nrow</span>(koty_ptaki)
-
-<span class="co"># indeksowanie kilku wierszy </span>
-koty_ptaki[<span class="dv">8</span>:<span class="dv">10</span>, ]
-koty_ptaki[<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>), ]
-<span class="co"># z użyciem zmiennej pomocniczej</span>
-indeksy &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>)
-koty_ptaki[indeksy, ]
-
-<span class="co"># pierwsze 6 wierszy i ostatnie 6 wierszy</span>
-<span class="kw">head</span>(koty_ptaki)
-<span class="kw">tail</span>(koty_ptaki)
-
-<span class="co"># indeksowanie wierszy warunkiem logicznym</span>
-najszybsze &lt;-<span class="st"> </span>koty_ptaki$predkosc &gt;<span class="st"> </span><span class="dv">100</span>
-koty_ptaki[najszybsze, ]
-
-<span class="co"># używanie ujemnych indeksów by pominąć wiersze</span>
-koty_ptaki[ -<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>), ]</code></pre>
-</div>
-<div id="podsumowanie-instrukcji-r-2" class="slide section level1">
-<h1>Podsumowanie instrukcji R</h1>
-<p>W tym odcinku omawialiśmy funkcje służące do indeksowania wierszy, kolumn oraz jednocześnie wierszy i kolumn.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># indeksowanie kolumn, tylko druga kolumna, wynikiem jest wektor</span>
-koty_ptaki[, <span class="dv">2</span>]
-<span class="co"># drop=FALSE powoduje, że wynikiem jest ramka danych</span>
-koty_ptaki[,<span class="dv">2</span>, drop=<span class="ot">FALSE</span>]
-
-<span class="co"># nazwy kolumn</span>
-<span class="kw">colnames</span>(koty_ptaki)
-
-<span class="co"># indeksowanie jednej kolumny z użyciem nazwy</span>
-koty_ptaki[, <span class="st">&quot;waga&quot;</span>]
-koty_ptaki$waga
-
-<span class="co"># indeksowanie kilku kolumn </span>
-<span class="co"># koty_ptaki[, c(&quot;waga&quot;, &quot;predkosc&quot;, &quot;habitat&quot;, &quot;zywotnosc&quot;)]</span>
-koty_ptaki[, <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>:<span class="dv">6</span>)]
-
-<span class="co"># jednoczesne indeksowanie wierszy i kolumn</span>
-koty_ptaki[<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">8</span>:<span class="dv">10</span>), <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>:<span class="dv">6</span>)]
-
-<span class="co"># wektor nazw wierszy</span>
-<span class="kw">rownames</span>(koty_ptaki)
-<span class="co"># przypisanie nowych nazw dla wierszy</span>
-<span class="kw">rownames</span>(koty_ptaki) &lt;-<span class="st"> </span>koty_ptaki$gatunek
-
-<span class="co"># odwoływanie się przez nazwy wierszy i kolumn</span>
-koty_ptaki[<span class="kw">c</span>(<span class="st">&quot;Lew&quot;</span>, <span class="st">&quot;Leopard&quot;</span>, <span class="st">&quot;Jerzyk&quot;</span>, <span class="st">&quot;Strus&quot;</span>),
-           <span class="kw">c</span>(<span class="st">&quot;waga&quot;</span>, <span class="st">&quot;dlugosc&quot;</span>, <span class="st">&quot;predkosc&quot;</span>)]</code></pre>
-</div>
-<div id="zadania-1" class="slide section level1">
-<h1>Zadania</h1>
+<div id="excercise" class="slide section level1">
+<h1>Excercise</h1>
 <ul>
-<li><p>Wybierz z ramki danych <code>koty_ptaki</code> wszystkie wiersze poza ,,Sokołami’’ (wiersz 11 i 12).</p></li>
-<li><p>Wybierz z ramki danych <code>koty_ptaki</code> tylko koty (pierwsze siedem wierszy).</p></li>
-<li><p>Wybierz z ramki danych <code>koty_ptaki</code> tylko kolumnę z wagą i prędkością.</p></li>
-<li><p>Wybierz z ramki danych <code>koty_ptaki</code> wszystkie kolumny poza ostatnią.</p></li>
-<li><p>Wybierz z ramki wiersze dla których waga jest mniejsza niż 100 oraz cztery pierwsze kolumny.</p></li>
+<li><p>Find the row indexes in the set of data <code>koty_ptaki</code>, in which <code>gatunek</code> contains a small or capital letter <code>S</code>.</p></li>
+<li><p>Find all rows in which any species of a falcon is described.</p></li>
 </ul>
-<p>Przykładowe odpowiedzi znajdują się na stronie <a href="http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html" class="uri">http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html</a></p>
+</div>
+<div id="data-downloading-reading-data-1" class="slide section level1">
+<h1>Data Downloading (Reading data)</h1>
+<p>The data set named <code>koty_ptaki</code> is made up of 13 rows. The whole data set can be displayed on the screen. We not always need a special descriptive statistics to understand what is going on in such a small data set.</p>
+<p>Therefore, the next exercises on the quantitative variables will be done using a considerably larger set of data <code>auta2012</code> including more than 200,000 values, which is also contained in the <code>PogromcyDanych</code> package.</p>
+<p>The description of this data set can be found in the Episode <a href="https://rawgit.com/pbiecek/MOOC/master/O_dane/O_dane.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/O_dane/O_dane.html</a>.</p>
+<p>Let’s download this set of data and analyse the first two rows.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
+<span class="kw">head</span>(auta2012, <span class="dv">2</span>)</code></pre>
+<pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW      Marka     Model Wersja
+## 1 49900    PLN      49900       brutto 140 103        Kia    Carens       
+## 2 88000    PLN      88000       brutto 156 115 Mitsubishi Outlander       
+##   Liczba.drzwi Pojemnosc.skokowa Przebieg.w.km          Rodzaj.paliwa
+## 1          4/5              1991         41000 olej napedowy (diesel)
+## 2          4/5              2179         46500 olej napedowy (diesel)
+##   Rok.produkcji Kolor Kraj.aktualnej.rejestracji Kraj.pochodzenia
+## 1          2008                           Polska                 
+## 2          2008                           Polska                 
+##   Pojazd.uszkodzony Skrzynia.biegow Status.pojazdu.sprowadzonego
+## 1                          manualna                             
+## 2                          manualna                             
+##                                                                                                                                                                                Wyposazenie.dodatkowe
+## 1                         ABS, el. lusterka, klimatyzacja, alufelgi, centralny zamek, autoalarm, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, przyciemniane szyby
+## 2 ABS, 4x4, el. lusterka, klimatyzacja, skorzana tapicerka, alufelgi, centralny zamek, poduszka powietrzna, radio / CD, wspomaganie kierownicy, immobiliser, komputer, tempomat, przyciemniane szyby</code></pre>
+<p>Two columns <code>Wyposażenie.dodatkowe</code> and <code>Kolor</code> will be of a special interest for us as far as the analysis of the strings of characters is concerned.</p>
+</div>
+<div id="strings-of-characters" class="slide section level1">
+<h1>Strings of Characters</h1>
+<p>When downloading the data to the R program, most of the functions replace the strings of characters with the qualitative variables by default. This issue has been more widely described in the Episode 5.</p>
+<p>If we want to process the strings of characters, we need to convert the qualitative variables into the strings of characters using the feature <code>as.character()</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">auta2012$Kolor_napis &lt;-<span class="st"> </span><span class="kw">as.character</span>(auta2012$Kolor)
+auta2012$Wyposazenie.dodatkowe_napis &lt;-<span class="st"> </span><span class="kw">as.character</span>(auta2012$Wyposazenie.dodatkowe)</code></pre>
+</div>
+<div id="strings-of-characters-1" class="slide section level1">
+<h1>Strings of Characters</h1>
+<p>In the data analysis, we often face the need to create the new features on the basis of the old ones. For example, if we look at the car colour vector, we could consider a question whether the lacquer paint is metallic or not be an interesting feature.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sort</span>(<span class="kw">table</span>(auta2012$Kolor_napis))</code></pre>
+<pre><code>## 
+##                rozowy       rozowy-metallic          pomaralczowy 
+##                    15                    62                   120 
+##               brezowy              wisniowy             fioletowy 
+##                   141                   193                   207 
+##                 zloty        zolty-metallic                bezowy 
+##                   219                   231                   296 
+## pomaralczowy-metallic             grafitowy                 szary 
+##                   459                   542                   730 
+##               bordowy                 zolty     wilniowy-metallic 
+##                   742                   960                  1006 
+##    fioletowy-metallic        bialy-metallic       bezowy-metallic 
+##                  1101                  1542                  1924 
+##      brezowy-metallic               zielony     czerwony-metallic 
+##                  1988                  2027                  2426 
+##               srebrny        zloty-metallic      bordowy-metallic 
+##                  2553                  3122                  3981 
+##             niebieski             granatowy                czarny 
+##                  4037                  4057                  5924 
+##              czerwony    grafitowy-metallic                 bialy 
+##                  7465                  9481                  9977 
+##      zielony-metallic    granatowy-metallic        szary-metallic 
+##                 10148                 10756                 10834 
+##    niebieski-metallic                             czarny-metallic 
+##                 12584                 25997                 29129 
+##      srebrny-metallic 
+##                 40626</code></pre>
+<p>You can do it in several ways. The easiest way is to use the function <code>grepl()</code>, with the same parameters as the function <code>grep()</code> except that the result is the logic value vector TRUE/FALSE stating whether a given pattern has been found in the strings of characters.</p>
+<pre class="sourceCode r"><code class="sourceCode r">auta2012$czy_metallic &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="st">&quot;metallic&quot;</span>, auta2012$Kolor_napis)
+<span class="kw">table</span>(auta2012$czy_metallic)</code></pre>
+<pre><code>## 
+##  FALSE   TRUE 
+##  66202 141400</code></pre>
+</div>
+<div id="strings-of-characters-2" class="slide section level1">
+<h1>Strings of Characters</h1>
+<p>In a similar way, you can create the additional columns that determine whether a car is equipped with air conditioning, or the windows are tinted.</p>
+<p>In the second example, it is worth noting that the arguments are listed in the order other than the default order. Therefore, a specific name pattern= was required for the argument with a <code>pattern=</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">auta2012$maKlimatyzacje &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="st">&quot;klimatyzacja&quot;</span>, auta2012$Wyposazenie.dodatkowe_napis)
+<span class="kw">table</span>(auta2012$maKlimatyzacje)</code></pre>
+<pre><code>## 
+##  FALSE   TRUE 
+##  44642 162960</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># około 20% oferowanych aut ma przyciemniane szyby</span>
+auta2012$szyby &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="dt">x=</span>auta2012$Wyposazenie.dodatkowe_napis, 
+                               <span class="dt">pattern=</span><span class="st">&quot;przyciemniane szyby&quot;</span>)
+<span class="kw">table</span>(auta2012$szyby)</code></pre>
+<pre><code>## 
+##  FALSE   TRUE 
+## 165480  42122</code></pre>
+</div>
+<div id="strings-of-characters-pasting" class="slide section level1">
+<h1>Strings of Characters Pasting</h1>
+<p>An operation that is opposite to the string of characters cutting out into the fragments, is an operation of pasting several strings of characters to form one string of characters.</p>
+<p>For this purpose, you can use the function <code>paste()</code> or <code>paste0()</code>.</p>
+<p>We will present its effects in the below, simple example. We will paste a vector including ten letters, ten numbers, and one string of characters.</p>
+<p>If the functions in the R program, which operate on the vectors (most of them), include two arguments of different length, the shorter argument will be multiplied as many times as needed to make its length equal the length of the longer one (so-called recycling rule). For this reason, the third argument – a single dot – will be multiplied and pasted to each of ten elements of the vector <code>litery</code> and <code>cyfry</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">litery &lt;-<span class="st"> </span>LETTERS[<span class="dv">1</span>:<span class="dv">10</span>]
+cyfry  &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">10</span></code></pre>
+<p>The function <code>paste()</code> pastes the values while separating them with the separators, i.e. a space by default. You can change a separator character by indicating the argument <code>sep</code>. The function <code>paste0()</code> differs from the function <code>paste()</code> in such a way that the separator is an empty string of characters.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(litery, cyfry, <span class="st">&quot;.&quot;</span>)</code></pre>
+<pre><code>##  [1] &quot;A 1 .&quot;  &quot;B 2 .&quot;  &quot;C 3 .&quot;  &quot;D 4 .&quot;  &quot;E 5 .&quot;  &quot;F 6 .&quot;  &quot;G 7 .&quot; 
+##  [8] &quot;H 8 .&quot;  &quot;I 9 .&quot;  &quot;J 10 .&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(litery, cyfry, <span class="st">&quot;.&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;-&quot;</span>)</code></pre>
+<pre><code>##  [1] &quot;A-1-.&quot;  &quot;B-2-.&quot;  &quot;C-3-.&quot;  &quot;D-4-.&quot;  &quot;E-5-.&quot;  &quot;F-6-.&quot;  &quot;G-7-.&quot; 
+##  [8] &quot;H-8-.&quot;  &quot;I-9-.&quot;  &quot;J-10-.&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(litery, cyfry, <span class="st">&quot;.&quot;</span>)</code></pre>
+<pre><code>##  [1] &quot;A1.&quot;  &quot;B2.&quot;  &quot;C3.&quot;  &quot;D4.&quot;  &quot;E5.&quot;  &quot;F6.&quot;  &quot;G7.&quot;  &quot;H8.&quot;  &quot;I9.&quot;  &quot;J10.&quot;</code></pre>
+</div>
+<div id="strings-of-characters-pasting-1" class="slide section level1">
+<h1>Strings of Characters Pasting</h1>
+<p>Let’s present the paste function illustrated with an example of pasting a name of a car make and model.</p>
+<p>We will paste both vectors in the first row considering <code>': '</code> as the separator. Next, we will count the frequency of such pairs and put them in the descending order.</p>
+<p>Please find below 25 most common models.</p>
+<pre class="sourceCode r"><code class="sourceCode r">auta2012$MarkaModel   &lt;-<span class="st"> </span><span class="kw">paste</span>(auta2012$Marka, auta2012$Model, <span class="dt">sep=</span><span class="st">&quot;: &quot;</span>)
+
+statystykiMarkiModelu &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">table</span>(auta2012$MarkaModel), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)
+
+<span class="kw">head</span>(statystykiMarkiModelu, <span class="dv">25</span>)</code></pre>
+<pre><code>## 
+## Volkswagen: Passat        Opel: Astra   Volkswagen: Golf 
+##               6883               6348               6096 
+##        Ford: Focus           Audi: A4       Ford: Mondeo 
+##               5691               4280               4252 
+##     Skoda: Octavia       Opel: Vectra    Renault: Megane 
+##               3954               3815               3759 
+##    Renault: Scenic    Renault: Laguna           Audi: A6 
+##               3546               3288               3045 
+##        Opel: Corsa   Volkswagen: Polo       Skoda: Fabia 
+##               3029               2714               2643 
+##      Renault: Clio       Opel: Zafira       Peugeot: 307 
+##               2469               2040               1904 
+##       Ford: Fiesta       Peugeot: 206           Audi: A3 
+##               1879               1863               1810 
+##           BMW: 320       Honda: Civic        Seat: Ibiza 
+##               1791               1703               1581 
+##      Toyota: Yaris 
+##               1552</code></pre>
+</div>
+<div id="names-of-children" class="slide section level1">
+<h1>Names of Children</h1>
+<p>The package <code>PogromcyDanych</code> also contains the set of data named <code>imiona_warszawa</code> including the popularity statistics of the names given to the new-borns in Warsaw in different periods.</p>
+<p>Using this set of data we can test a rule that a female name ends with ‘a’, and a male name does not. Some time ago, the only exception was a male name Bonawentura. Has anything changed?</p>
+<p>Let’s select only the male names to be analysed (indexing <code>imiona_warszawa$plec == &quot;M&quot;</code>). Since each name is repeated for each month, we use the function <code>unique()</code> to remove all duplicates.</p>
+<p>Next, using the function <code>grep()</code> we will select all names with the last letter of <code>a</code> (regular expression <code>a$</code>), and display these names. There is no Bonawentura, but there are other names.</p>
+<pre class="sourceCode r"><code class="sourceCode r">imiona_chlopcow &lt;-<span class="st"> </span>imiona_warszawa[imiona_warszawa$plec ==<span class="st"> &quot;M&quot;</span>, ]
+same_imiona     &lt;-<span class="st"> </span><span class="kw">unique</span>(imiona_chlopcow$imie)
+<span class="kw">grep</span>(<span class="st">&quot;a$&quot;</span>, same_imiona, <span class="dt">value =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## [1] &quot;Kosma&quot;  &quot;Nikita&quot;</code></pre>
+<p>We will repeat a similar operation for the girls. This time, we will determine all letters except <code>a</code>, i.e. <code>[^a]$</code> for a regular expression pattern. There are many such female names.</p>
+<pre class="sourceCode r"><code class="sourceCode r">imiona_dziewczat &lt;-<span class="st"> </span>imiona_warszawa[imiona_warszawa$plec ==<span class="st"> &quot;K&quot;</span>, ]
+same_imiona      &lt;-<span class="st"> </span><span class="kw">unique</span>(imiona_dziewczat$imie)
+<span class="kw">grep</span>(<span class="st">&quot;[^a]$&quot;</span>, same_imiona, <span class="dt">value =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>##  [1] &quot;Abigail&quot;  &quot;Berenike&quot; &quot;Carmen&quot;   &quot;Chloe&quot;    &quot;Esmee&quot;    &quot;Gwen&quot;    
+##  [7] &quot;Inez&quot;     &quot;Ingrid&quot;   &quot;Karin&quot;    &quot;Lili&quot;     &quot;Lilli&quot;    &quot;Mercedes&quot;
+## [13] &quot;Miriam&quot;   &quot;Naomi&quot;    &quot;Nel&quot;      &quot;Nelly&quot;    &quot;Nicole&quot;   &quot;Nike&quot;    
+## [19] &quot;Nikol&quot;    &quot;Nikole&quot;   &quot;Noemi&quot;    &quot;Rachel&quot;   &quot;Sindi&quot;</code></pre>
+</div>
+<div id="numbers-qualitative-features-and-strings-of-characters" class="slide section level1">
+<h1>Numbers, Qualitative Features, and Strings of Characters</h1>
+<p>The function <code>as.character()</code> can be used also if we want to convert a qualitative variable into a quantitative variable. We are not allowed to do it directly, but using the function <code>as.character()</code>.</p>
+<p>Let’s demonstrate this problem with an example. We will convert the variables into the qualitative variables using the function <code>as.factor()</code>, and next into the numbers with the function <code>as.numeric()</code>. It turns out, however, that the result is not as expected.</p>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="fl">5.5</span>)
+(fx &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x))</code></pre>
+<pre><code>## [1] 2   4   5.5
+## Levels: 2 4 5.5</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># uwaga! R nie wie że to są napisy, a zmienną jakościową zamienia na kolejne liczby całkowite</span>
+<span class="kw">as.numeric</span>(fx)</code></pre>
+<pre><code>## [1] 1 2 3</code></pre>
+<p>The qualitative variables are converted using the function <code>as.numeric()</code> into the subsequent integers. If we want to retrieve the numbers being a part of the factors, we must convert them into the strings of characters first using the function <code>as.character()</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># zmienne jakościowe na liczby należałoby tak przekształcić</span>
+<span class="kw">as.numeric</span>(<span class="kw">as.character</span>(fx))</code></pre>
+<pre><code>## [1] 2.0 4.0 5.5</code></pre>
+</div>
+<div id="exercises" class="slide section level1">
+<h1>Exercises:</h1>
+<ul>
+<li><p>Check how many cars are equipped with the alarm system (referred to as ‘autoalarm’).</p></li>
+<li><p>Check the lacquer paint of how many cars is metallic (referred to as ‘metallic’).</p></li>
+</ul>
+<p>You can find the exemplary answers at <a href="https://rawgit.com/pbiecek/MOOC/master/O_dane/9_zadania.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/O_dane/9_zadania.html</a>.</p>
+</div>
+<div id="where-can-you-find-more-information" class="slide section level1">
+<h1>Where Can You Find More Information</h1>
+<p>We have only outlined a topic of the strings of characters analysis.</p>
+<p>For processing larger text corpuses, many interesting topics come up, such as the analysis of meaning, the frequency analysis, tagging, etc.</p>
+<ul>
+<li><p>You can find more details on the basic operations with the strings of characters in the chapter 2.1 of the “R Package Guide” GiS 2013. This chapter is available free of charge at <a href="http://biecek.pl/R/" class="uri">http://biecek.pl/R/</a></p></li>
+<li><p>When working with the large corpuses, you can accelerate the computations using the package <code>stringr</code>. The very well developed material concerning the features of this package is shared by Gaston Sanchez at <a href="http://gastonsanchez.com/Handling_and_Processing_Strings_in_R.pdf" class="uri">http://gastonsanchez.com/Handling_and_Processing_Strings_in_R.pdf</a>.</p></li>
+<li><p>When working with the strings of characters, the expressions and metacharacters are very useful. A brief, but concise overview of the regular expressions developed by S. Jones is included in the document “String Manipulation in R” at <a href="http://www3.nd.edu/~sjones20/JonesUND/BioStats_files/RstringManipulation_2-6-13.pdf" class="uri">http://www3.nd.edu/~sjones20/JonesUND/BioStats_files/RstringManipulation_2-6-13.pdf</a>.</p></li>
+<li><p>A very interesting alternative that supports more exotic languages (more exotic than English) is the package stringi. You can listen to the speech of Marek Gągolewski at the 2nd Meeting of the R Enthusiasts. The video is available at <a href="http://PogromcyDanych.pl/SER/#SERII" class="uri">http://PogromcyDanych.pl/SER/#SERII</a>.</p></li>
+</ul>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
@@ -546,26 +373,5 @@ koty_ptaki[<span class="kw">c</span>(<span class="st">&quot;Lew&quot;</span>, <s
     })();
   </script>
 
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="//use.typekit.net/oam6dux.js"></script>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-<script>
-(function () {
-  var index = 'http://pogromcy.danych.icm.edu.pl';
-  var img = 'http://biecek.pl/MOOC/kurs1/kurs2.png';
-    $(document).ready(function(){
-      $('head').append("<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:600&subset=latin,latin-ext' rel='stylesheet' type='text/css' />");
-      $('head').append("<link href='../do_kursu/kurs.css' rel='stylesheet' type='text/css' />");
-      $('body').prepend('<div id="top-bg"></div><div id="top" onclick="location=\''+index+'\'"></div><div id="top-mobile" onclick="location=\''+index+'\'"></div><div id="chat"></div><div class="chat-button"></div>');
-  $('h1.title').after('<img src="'+img+'" class="image-first-screen" />');
-  $('#chat').load("../chat.php");
-});
-$(window).load(function(){
-  $('#chat').animate({"scrollTop": $('#chat')[0].scrollHeight}, 300);
-  $('.chat-button, .close').on( "click", function() { $('#chat, .chat-button').toggleClass('clicked');});
-});
-})();
-</script>
 </body>
 </html>

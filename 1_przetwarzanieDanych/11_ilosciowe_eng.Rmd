@@ -8,7 +8,7 @@ output:
   slidy_presentation:
     css: ../style.css
     font_adjustment: 0
-    footer: pogRomcy danych / przetwarzanie / zmienne iloœciowe
+    footer: pogRomcy danych / przetwarzanie / zmienne ilo?ciowe
     highlight: default
     includes:
       in_header: ../tracking.html
@@ -17,7 +17,7 @@ output:
 
 # What is this episode about?
 
-When we analyze data we come across various types of variables. This episode will be devoted to the most popular groups of variables in the classical statistics –quantitative variables. 
+When we analyze data we come across various types of variables. This episode will be devoted to the most popular groups of variables in the classical statistics ?quantitative variables. 
 
 In this episode you will learn:
 
@@ -34,9 +34,9 @@ We will use two data sets to illustrate these issues. The first set, `koty_ptaki
 
 In the next four episodes I will present five basic types of data: quantitative data, qualitative data, texts, logical values and dates. Although they do not exhaust the list of all possible types of data (there are also censored data and other more specialized types), we will focus on them because you will meet them in 90% of all the analyses.
 
-The word ‘type’ means the same as the word ‘kind’ in this context. We can talk about types and kinds of data. However, data analysis jargon commonly uses the word ‘type’ and we will also use that word in our discussion. 
+The word ?type? means the same as the word ?kind? in this context. We can talk about types and kinds of data. However, data analysis jargon commonly uses the word ?type? and we will also use that word in our discussion. 
 
-Quantitative variables are characteristics which describe quantities –height, length, weight, speed, surface area, age etc. They are also sometimes called the numerical variables as they are expressed in numbers. However, not every variable expressed in numbers is a quantitative characteristic. The National Personal Identification Number PESEL or a postal code are expressed in numbers but they do not represent measurable quantities such as amount or size. 
+Quantitative variables are characteristics which describe quantities ?height, length, weight, speed, surface area, age etc. They are also sometimes called the numerical variables as they are expressed in numbers. However, not every variable expressed in numbers is a quantitative characteristic. The National Personal Identification Number PESEL or a postal code are expressed in numbers but they do not represent measurable quantities such as amount or size. 
 
 Quantitative variables can be physical (mass, length, speed) or not (intelligence quotient, amount of the public debt, level of acceptance of views of a certain party expressed in percentage points). 
 
@@ -58,7 +58,7 @@ library(PogromcyDanych)
 head(koty_ptaki)
 ```
 
-Each row described one species. Quantitative variables are expressed in numbers. There are no surprises in this example –the quantitative characteristics are: weight (waga), length (dlugosc), speed (predkosc) and longevity (zywotnosc). 
+Each row described one species. Quantitative variables are expressed in numbers. There are no surprises in this example ?the quantitative characteristics are: weight (waga), length (dlugosc), speed (predkosc) and longevity (zywotnosc). 
 ---
 
 # Descriptive statistics
@@ -78,7 +78,7 @@ sort(koty_ptaki$waga)
 
 The last row presents all the weights in the ascending order. The function `sort()` puts the numbers in the ascending order by default. In this way we can also confirm that 60 is really the median. 
 
-By the way, notice that there is a big difference between the mean and the median –almost 20 kilograms. It results from the fact that the smallest and the biggest values differ by more than two orders of magnitude. In such cases the mean is usually quite different from the median. 
+By the way, notice that there is a big difference between the mean and the median ?almost 20 kilograms. It results from the fact that the smallest and the biggest values differ by more than two orders of magnitude. In such cases the mean is usually quite different from the median. 
 
 ---
 
@@ -181,7 +181,7 @@ summary(auta2012$Cena.w.PLN)
 +	Half of all the offers for sale offered cars for less than PLN 19 900.
 +	Three fourth of all the offers for sale offered cars for less than 37 470 and, at the same time, one fourth of all the offers for sale offered cars for a higher price. 
 +	The maximum price is the mentioned above PLN 11 million.
-+	Also in this case the mean price (35 760) is considerably –almost two times –higher than the median price. It results from the fact that most of the cars offered for sale are relatively cheaper while a small number of very expensive cars pushes the mean price up. This is one of the reasons against the use of mean, which is so vulnerable to extreme observations
++	Also in this case the mean price (35 760) is considerably ?almost two times ?higher than the median price. It results from the fact that most of the cars offered for sale are relatively cheaper while a small number of very expensive cars pushes the mean price up. This is one of the reasons against the use of mean, which is so vulnerable to extreme observations
 
 When we describe a quantitative variable we may employ a very useful function `quantile()` which determines values of specific quartiles form the data set. An x-quartile is such a number that `100*x%` of its value is smaller than that quartile.
 
@@ -225,7 +225,7 @@ You will find more information on the uses and workings of summing in the episod
 # Exercises
 
 +  There are 7 quantitative characteristics in the data set `auta2012`. Name them.
-+ One of the quantitative characteristics is `Rok.produkcji`. What is the median year of manufacture of the cars offered for sale? All the offers were submitted in 2012 –what was the median age of the cars offered for sale?
++ One of the quantitative characteristics is `Rok.produkcji`. What is the median year of manufacture of the cars offered for sale? All the offers were submitted in 2012 ?what was the median age of the cars offered for sale?
 
 You may find sample answers at https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
 
@@ -292,7 +292,7 @@ You may find sample answers at https://rawgit.com/pbiecek/MOOC/master/0_dane/9_z
 
 ---
 
-# Graphic descriptive statistic –a bar chart
+# Graphic descriptive statistic ?a bar chart
 
 The descriptive statistics presented above can be displayed in the graphic form. A great advantage of the graphic presentations is that fact that a well-trained eye quickly reads a lot of information from them.
 
@@ -310,13 +310,13 @@ barplot(srednia)
 
 ---
 
-# Graphic descriptive statistic –a bar chart
+# Graphic descriptive statistic ?a bar chart
 
 Let us check average prices calculated for specific groups. We can divide the cars in groups taking into consideration for example the type of fuel that they use. 
 
 We will use the function `tapply()` to calculate the mean for groups. Its first argument is the quantitative variable; its second argument is information about groups and its third argument is name of the function which is to be performed for each group (and then all the additional arguments). 
 
-The result will be a vector with means. Now we can use the function `barplot()`. The argument `las=2` will ensure that the labels on the OX axis will be displayed vertically –they will be easier to read. 
+The result will be a vector with means. Now we can use the function `barplot()`. The argument `las=2` will ensure that the labels on the OX axis will be displayed vertically ?they will be easier to read. 
 
 You will learn much more about the art of preparing good-looking charts in the season 2. 
 
@@ -332,13 +332,13 @@ barplot(srednie, las=2)
 
 ---
 
-# Graphic descriptive statistic –a box plot
+# Graphic descriptive statistic ?a box plot
 
 One bar looks strange and it conveys little information. It presents only one number and it is difficult to read it as there is nothing to compare it with.
 
 A chart presenting more information would be much more interesting. For the descriptive statistics we used the function `summary()` which presents six characteristic pieces of information concerning distribution (minimum, maximum, quartiles, mean). Five of these numbers, except for mean, are included in the box plot which can be prepared in R with the function `boxplot()`. 
 
-The example below presents these five numbers calculated for the variable `Przebieg.w.km`. Thanks to the argument `horizontal=TRUE` the whole chart is drawn horizontally, while the argument `range=0` ensures that the outliers are not included on the plot (as we have not discussed them yet, let us not draw them –we will return to this topic later on).
+The example below presents these five numbers calculated for the variable `Przebieg.w.km`. Thanks to the argument `horizontal=TRUE` the whole chart is drawn horizontally, while the argument `range=0` ensures that the outliers are not included on the plot (as we have not discussed them yet, let us not draw them ?we will return to this topic later on).
 
 
 
@@ -350,9 +350,9 @@ boxplot(auta2012$Przebieg.w.km,
 
 ---
 
-# Graphic descriptive statistic –a box plot
+# Graphic descriptive statistic ?a box plot
 
-What a strange diagram! Is there something wrong? Look at the axis –its range is up to 10^9 = 1 000 000 000 km. Yet when we look at the result of the function `summary()` we notice that indeed one of the rows contains such enormous value.
+What a strange diagram! Is there something wrong? Look at the axis ?its range is up to 10^9 = 1 000 000 000 km. Yet when we look at the result of the function `summary()` we notice that indeed one of the rows contains such enormous value.
 Such big values are most probably mistakes. It is most unlikely that mileage of any car in the world was even close to that value (if any car was driving non-stop at the speed of 100km/h, after 100 years its mileage would be only 8 000 000km).  
 
 Data is often polluted and the graphic presentation allows us to notice that fact very easily. 
@@ -368,7 +368,7 @@ boxplot(auta2012wybrane$Przebieg.w.km, horizontal=TRUE, range=0)
 
 ---
 
-# Graphic descriptive statistic –a histogram
+# Graphic descriptive statistic ?a histogram
 
 Each element of this diagram (left whisker, left part of the box, right part of the box, right whisker) presents 1/4 of all data. This plot shows us clearly that 3/4 of all data concerns cars with mileage less than 200 thousand km. Only 1/4 of data contains higher values and for this group of cars the range of mileage is very wide.
 
@@ -383,11 +383,11 @@ hist(auta2012wybrane$Przebieg.w.km, col="grey")
 
 ---
 
-# Graphic descriptive statistic –a histogram
+# Graphic descriptive statistic ?a histogram
 
 The argument `breaks` allows us to specify the number of intervals and even the boundaries of the intervals. If we have many observations, we usually create more detailed and informative diagrams by drawing many intervals. Each interval of the histogram presents the number of observations. The higher the bar, the more cars with a certain mileage there are in the data set. 
 
-You can notice two ‘hills’ on the histogram below. One of them is near 0 and the other around 180 thousand km. It means that the data set includes many cars with very small mileage and only few cars with the mileage close to 50 thousand km. There are also many cars with the mileage close to 150 thousand km and just several cars with the mileage of 300 thousand km.   
+You can notice two ?hills? on the histogram below. One of them is near 0 and the other around 180 thousand km. It means that the data set includes many cars with very small mileage and only few cars with the mileage close to 50 thousand km. There are also many cars with the mileage close to 150 thousand km and just several cars with the mileage of 300 thousand km.   
 
 As you could see, quantitative values can be described with various level of detail. The more detailed is our description, the more elements there are on the chart. The more elements, the more information can be read from the chart, but also the more difficult it is to read it at all. 
 
@@ -400,7 +400,7 @@ hist(auta2012wybrane$Przebieg.w.km, breaks = 100, col="grey")
 
 ---
 
-# Graphic descriptive statistic –a scatter plot
+# Graphic descriptive statistic ?a scatter plot
 
 Can we present two quantitative variables and the relationship between them at the same time?
 
@@ -416,10 +416,10 @@ plot(koty_ptaki$waga, koty_ptaki$predkosc, ylab="Speed", xlab="Weight")
 
 ---
 
-# Graphic descriptive statistic –a scatter plot
+# Graphic descriptive statistic ?a scatter plot
 
 Let us use the function `plot()` to show the relationship between mileage and price on the basis of the data on cars.
-There are so many offers that it turns out that it is better to mark specific offers as dots, not big circles. We can do that by adding the argument `pch=` which allows us to modify the signs used to mark points representing data on the plot. Individual values of both mileage and price are very high. Instead of using a standard scale it is better to use a logarithmic scale. You can do that when you add the argument `log=”xy”`. The value “xy” means that both axes must be logarithmed.
+There are so many offers that it turns out that it is better to mark specific offers as dots, not big circles. We can do that by adding the argument `pch=` which allows us to modify the signs used to mark points representing data on the plot. Individual values of both mileage and price are very high. Instead of using a standard scale it is better to use a logarithmic scale. You can do that when you add the argument `log=?xy?`. The value ?xy? means that both axes must be logarithmed.
 
 More information on scatter plots and other ways of displaying quantitative characteristics will be presented in the season 3. 
 

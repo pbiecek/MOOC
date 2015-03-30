@@ -48,7 +48,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 8<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 8<br><br> Przemysław Biecek @ Uniwersytet Warszawski<br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
@@ -121,15 +121,14 @@ for (i in <span class="dv">1</span>:liczbaStluczek) {
   <span class="kw">cat</span>(<span class="st">&quot;Stłuczka &quot;</span>, i,<span class="st">&quot;, a jej koszt naprawy to &quot;</span>, 
       <span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">min=</span><span class="dv">0</span>, <span class="dt">max=</span><span class="dv">10000</span>), <span class="st">&quot; PLN</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">''</span>)
 }</code></pre>
-<pre><code>## Stłuczka 1, a jej koszt naprawy to 525.8738 PLN
-## Stłuczka 2, a jej koszt naprawy to 7765.392 PLN
-## Stłuczka 3, a jej koszt naprawy to 3650.028 PLN
-## Stłuczka 4, a jej koszt naprawy to 7368.82 PLN
-## Stłuczka 5, a jej koszt naprawy to 2836.576 PLN
-## Stłuczka 6, a jej koszt naprawy to 2045.979 PLN
-## Stłuczka 7, a jej koszt naprawy to 2107.769 PLN
-## Stłuczka 8, a jej koszt naprawy to 9566.235 PLN
-## Stłuczka 9, a jej koszt naprawy to 85.87541 PLN</code></pre>
+<pre><code>## Stłuczka 1, a jej koszt naprawy to 7726.47 PLN
+## Stłuczka 2, a jej koszt naprawy to 9265.96 PLN
+## Stłuczka 3, a jej koszt naprawy to 8586.008 PLN
+## Stłuczka 4, a jej koszt naprawy to 1767.042 PLN
+## Stłuczka 5, a jej koszt naprawy to 690.1404 PLN
+## Stłuczka 6, a jej koszt naprawy to 8990.59 PLN
+## Stłuczka 7, a jej koszt naprawy to 3866.993 PLN
+## Stłuczka 8, a jej koszt naprawy to 2997.499 PLN</code></pre>
 <p>W tym przykładzie funkcja <code>runif()</code> służy do losowania <code>n</code> liczb z przedziału od <code>min</code> do <code>max</code>. W pierwszej linii wykorzystujemy ją do wylosowania liczby stłuczek z przedziału 1 do 10. Funkcja <code>round()</code> służy do zaokrąglania wyniku do liczby całkowitej.</p>
 <p>W każdym kroku pętli losowana jest kolejna wartość, oraz wypisywana jest na ekranie. Choć ta pętla wygląda na prostą i niewinną, podobny sposób losowania wielkości szkody jest w rzeczywistości wykorzystywany do zarządzania niepewnością dotyczącego tego, jak duże szkody z tytułu stłuczek lub innych losowych wypadków mogą wystąpić w firmach.</p>
 </div>
@@ -148,16 +147,26 @@ for (i in <span class="dv">1</span>:liczbaStluczek) {
   <span class="kw">cat</span>(<span class="st">&quot;Stłuczka &quot;</span>, i,<span class="st">&quot;, a jej koszt naprawy to &quot;</span>,  koszt, <span class="st">&quot; PLN</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">''</span>)
   <span class="kw">cat</span>(<span class="st">&quot;Suma dotychczasowych kosztów to &quot;</span>,  sumaKosztow, <span class="st">&quot; PLN</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">''</span>)
 }</code></pre>
-<pre><code>## Stłuczka 1, a jej koszt naprawy to 5104.346 PLN
-## Suma dotychczasowych kosztów to 5104.346 PLN
-## Stłuczka 2, a jej koszt naprawy to 6005.504 PLN
-## Suma dotychczasowych kosztów to 11109.85 PLN
-## Stłuczka 3, a jej koszt naprawy to 4917.388 PLN
-## Suma dotychczasowych kosztów to 16027.24 PLN
-## Stłuczka 4, a jej koszt naprawy to 9830.867 PLN
-## Suma dotychczasowych kosztów to 25858.1 PLN</code></pre>
+<pre><code>## Stłuczka 1, a jej koszt naprawy to 9533.673 PLN
+## Suma dotychczasowych kosztów to 9533.673 PLN
+## Stłuczka 2, a jej koszt naprawy to 4569.922 PLN
+## Suma dotychczasowych kosztów to 14103.59 PLN
+## Stłuczka 3, a jej koszt naprawy to 2462.421 PLN
+## Suma dotychczasowych kosztów to 16566.02 PLN
+## Stłuczka 4, a jej koszt naprawy to 5042.871 PLN
+## Suma dotychczasowych kosztów to 21608.89 PLN
+## Stłuczka 5, a jej koszt naprawy to 4270.209 PLN
+## Suma dotychczasowych kosztów to 25879.1 PLN
+## Stłuczka 6, a jej koszt naprawy to 7107.391 PLN
+## Suma dotychczasowych kosztów to 32986.49 PLN
+## Stłuczka 7, a jej koszt naprawy to 6416.551 PLN
+## Suma dotychczasowych kosztów to 39403.04 PLN
+## Stłuczka 8, a jej koszt naprawy to 6598.087 PLN
+## Suma dotychczasowych kosztów to 46001.13 PLN
+## Stłuczka 9, a jej koszt naprawy to 6170.35 PLN
+## Suma dotychczasowych kosztów to 52171.48 PLN</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">sumaKosztow</code></pre>
-<pre><code>## [1] 25858.1</code></pre>
+<pre><code>## [1] 52171.48</code></pre>
 </div>
 <div id="petle---wartosci-w-sekwencji" class="slide section level1">
 <h1>Pętle - wartości w sekwencji</h1>
@@ -391,7 +400,7 @@ for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
 <li><p>Napisz pętlę, która przedstawi żywotność za pomocą wykresu, na którym każdy rok przedstawiony jest jako jeden <code>#</code>.</p></li>
 <li><p>Napisz pętlę, która narysuje wykres z żywotnością, ale z nazwami gatunku po lewej stronie. Co więcej, przed każdą nazwą gatunku należy dodać tyle znaków spacja, aby nazwy były wyrównane do prawej strony. Długość napisu, mierzoną w liczbie znaków można odczytać funkcją <code>nchar()</code>.</p></li>
 </ul>
-<p>Przykładowe odpowiedzi znajdują się na stronie <a href="https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html" class="uri">https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html</a></p>
+<p>Przykładowe odpowiedzi znajdują się na stronie <a href="http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html" class="uri">http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html</a></p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
