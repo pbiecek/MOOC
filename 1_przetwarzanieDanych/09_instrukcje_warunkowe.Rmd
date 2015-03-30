@@ -98,15 +98,22 @@ if (warunek) {
 
 # Instrukcje warunkowe
 
-Na przykładzie pierwszego wiersza z tabeli danych `koty_ptaki` zademonstrujemy jak działają kolejne odmiany instrukcji warunkowej. Kolumnę `gatunek` musimy zamienić na kolumnę napisów, inaczej nazwy gatunków będą się źle wyświetlały. Będziemy pracować na pierwszym wierszu, ale indeks tego wiersza zapiszemy w zmiennej `i`. Dzięki temu, łatwiej nam będzie później wykorzystać ten kod w pętli.
-
+Zauważmy jeszcze, że w kolumnie `gatunek` dane są przechowywane nie jako napisy ale jako zmienne jakościowe (więcej o tych zmiennych napiszemy w odcinku 12. Cechy jakościowe).
+```{r, message=FALSE, warning=FALSE}
+koty_ptaki$gatunek
+```
+Dlatego zanim przystąpimy do pracy, zastąpimy te zmienne napisami (zrobi to funkcja `as.character()`).
 ```{r, message=FALSE, warning=FALSE}
 koty_ptaki$gatunek <- as.character(koty_ptaki$gatunek)
+```
+Na przykładzie dziewiątego wiersza z tabeli danych `koty_ptaki` zademonstrujemy jak działają kolejne odmiany instrukcji warunkowej. Kolumnę `gatunek` musimy zamienić na kolumnę napisów, inaczej nazwy gatunków będą się źle wyświetlały. Będziemy pracować na dziewiątym wierszu, ale indeks tego wiersza zapiszemy w zmiennej `i`. Dzięki temu, łatwiej nam będzie później wykorzystać ten kod w pętli.
+
+```{r, message=FALSE, warning=FALSE}
 i <- 9
 koty_ptaki[i,]
 ```
 
-Jeżeli użyjemy wyłącznie bloku `if`, to w sytuacji gdy `warunek` jest fałszywy nic się wyświetli na ekranie.
+Jeżeli użyjemy wyłącznie bloku `if`, to w sytuacji gdy `warunek` jest fałszywy nic się nie wyświetli na ekranie.
 
 ```{r, message=FALSE, warning=FALSE}
 if (koty_ptaki[i,"druzyna"] == "Kot") {
