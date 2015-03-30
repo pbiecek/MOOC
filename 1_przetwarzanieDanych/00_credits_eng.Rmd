@@ -1,0 +1,66 @@
+---
+title: "Team"
+author: "Data CruncheRs"
+date: "season 1 /episode 24<br><br> All rights reserved.<br> Use of the content permitted only with the consent of the author.  <br><br><br><br>Press `A` to switch from slides to continuous text.  <br> Press `T` to see the table of contents.  "
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "Data CruncheRs / processing / team"
+
+---
+
+Data CruncheRs have been developed in collaboration with [ICS](http://www.ics-graduateschool.nl) as a part of **Warsaw School for Data Analysis** ([WSAD](http://wsad.uw.edu.pl)) - a project financed by European Union through European Social Fund.
+
+\
+\
+
+
+
+*Didactic materials*
+
+* Przemysław Biecek, ICM
+
+*Data around us*
+
+* Piotr Przybyła
+* Bartosz Meglicki, 
+* Team of "Na Straży Sondaży": Jakub Rutkowski, Zbigniew Marczewski, Przemysław Kopa
+ 
+*Substantive and language support*
+
+* Paweł Chudzian
+* Katarzyna Łogwiniuk
+* Krzysztof Trajkowski
+
+*Video shooting and editing*
+
+* Jarosław Skrzeczkowski, ICM.TV
+* Łukasz Kałuża, ICM.TV
+
+*Graphical design*
+
+* Podpunkt.pl
+
+*Reader*
+
+* Magda Karczewska
+
+*WWW development*
+
+* Paweł Dudek
+
+*Organizational assistance*
+
+* Michał Bojanowski, ICM
+
+*Exercises*
+
+* Przemysław Biecek, ICM
+
+*Exercise checking system*
+
+* Cezary Chudzian
