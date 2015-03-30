@@ -67,13 +67,11 @@ slajdy-eng.zip: $(files:=_eng.html)
 
 # testy
 checks:
-	echo "@ Footers ALL" > $@
-	grep -H "footer:" $(files:=.Rmd) $(files:=_eng.Rmd) | sort >> $@
-	echo "@ Footers PL" >> $@
-	grep -H "footer:" $(files:=.Rmd) | sort >> $@
+	echo "@ Authors" > $@
+	grep -H "author:" $(files:=_eng.Rmd) | sort >> $@
+	echo "@ Date" >> $@
+	grep -H "date:" $(files:=_eng.Rmd) | sort >> $@
 	echo "@ Footers ANG" >> $@
 	grep -H "footer:" $(files:=_eng.Rmd) | sort >> $@
-	echo "@ Authors" >> $@
-	grep -H "author:" $(files:=.Rmd) $(files:=_eng.Rmd) | sort >> $@
 	echo "@ All R comments (eng)" >> $@
-	grep -H "^\s*#" $(files:=_eng.Rmd) >> $@
+	grep -nH "^\s*#" $(files:=_eng.Rmd) >> $@
