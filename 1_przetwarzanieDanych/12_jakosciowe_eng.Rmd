@@ -1,6 +1,6 @@
 ---
 title: "Qualitative variables"
-author: "Data tameRs"
+author: "Data CruncheRs"
 date: season 1 / episode 12 <br><br> All rights reserved.<br> Using without permission is prohibited <br><br><br><br>Press `A` to change slides into text <br> Press `T` to display table of contents.
 output:
   beamer_presentation:
@@ -8,7 +8,7 @@ output:
   slidy_presentation:
     css: ../style.css
     font_adjustment: 0
-    footer: pogRomcy danych / przetwarzanie / zmienne jakoœciowe
+    footer: Data CruncheRs / data processing / qualitative variables
     highlight: default
     includes:
       in_header: ../tracking.html
@@ -31,7 +31,7 @@ We will use two data sets to illustrate these issues. The first set, `koty_ptaki
 
 # What does it mean: a qualitative variable
 
-Qualitative variables are categorical variables –they specify groups to which the data belongs. For that reason they are also called  *grouping variables*. 
+Qualitative variables are categorical variables - they specify groups to which the data belongs. For that reason they are also called  *grouping variables*. 
 Another name frequently used by programmers is a *factor variable* (zmienna czynnikowa).
 
 _As this type of variable is referred to as *factor* in R, in Polish we use a loanword: "zmienna faktor"_
@@ -41,7 +41,7 @@ e.g. education (groups: primary, secondary, higher education), gender (groups: m
 
 A qualitative variable can be expressed in numbers, yet unless these numbers stand for amount of size, such a variable is in reality a qualitative variable.
 For example, the first two numbers of a postal code may be a qualitative variable, while a school grade may be treated as a qualitative variable (or a quantitative variable depending on the context). 
-The same concerns the number of car doors –if we want to use this characteristic to divide cars into two groups of two-door and three-door models, then this variable is treated a s a qualitative variable. 
+The same concerns the number of car doors - if we want to use this characteristic to divide cars into two groups of two-door and three-door models, then this variable is treated a s a qualitative variable. 
 
 Although qualitative variables can greatly differ as far as number and type of groups are concerned, there are several operations which can be performed on all of them. Let us see what are these operations. 
 
@@ -51,7 +51,7 @@ Although qualitative variables can greatly differ as far as number and type of g
 
 # Loading data
 
-Our first examples will be based on the data set `koty_ptaki` from the package `PogromcyDanych`. In order to load this data you only need to activate the package –the instructions can be found in the episode 2. 
+Our first examples will be based on the data set `koty_ptaki` from the package `PogromcyDanych`. In order to load this data you only need to activate the package - the instructions can be found in the episode 2. 
 
 Let us activate the package and use the function `head()` to display the first six rows. Which of the displayed variables are qualitative variables? 
 
@@ -67,7 +67,7 @@ Each row describes one species. In this case all non-numerical variables are qua
 
 # Qualitative variables
 
-Let us look at two variables – *gatunek* and *druzyna*.
+Let us look at two variables -  *gatunek* and *druzyna*.
 
 ```{r}
 koty_ptaki$gatunek
@@ -96,7 +96,7 @@ class(koty_ptaki$dlugosc)
 
 When we apply the two functions to two random variables from the data set `koty_ptaki` we receive the following results. 
 
-Result of the function `levels()` is a vector of words –levels of the qualitative variable. 
+Result of the function `levels()` is a vector of words - levels of the qualitative variable. 
 
 
 ```{r}
@@ -182,7 +182,7 @@ In some cases it is much more convenient to use a table with percentage values r
 
 But how can we calculate these percentage values?
 
-It can be done in several ways. The function `prop.table()` divides the values form the frequency distribution table by the sum of all the occurrences –it transforms quantities into fractions. 
+It can be done in several ways. The function `prop.table()` divides the values form the frequency distribution table by the sum of all the occurrences - it transforms quantities into fractions. 
 Now let us attribute the result of the function `table()` to some variable, e.g. variable called `Waluta` (we can choose any name but afterwards we have to use it consistently).
 Then we transform our newly created frequency distribution table into fractions.
 
@@ -404,7 +404,7 @@ For example, if we juxtapose the country of origin and currency we get a frequen
 
 Frequency distribution tables are not data frames.
 
-When they contain only two variables they indeed look like data frames –they have rows and columns.
+When they contain only two variables they indeed look like data frames - they have rows and columns.
 Yet they must be something different because when a contingency table concerns three or more variables, the resulting contingency table has more than two dimensions. 
 
 The function `as.data.frame` serves to transform multidimensional tables into data frames.
@@ -494,11 +494,11 @@ levels(auta2012$Skrzynia.biegow)
 
 If you wish to sort the levels with respect to certain quantitative value, you can use a very convenient function `reorder()`. 
 Its arguments are a vector with a factor variable, a vector with any variable and a function.
-For each group defined by the factor variable and for values determined by the second argument the value of the function -the second argument –is specified.
+For each group defined by the factor variable and for values determined by the second argument the value of the function -the second argument - is specified.
 Then the factors are sorted in accordance with the order of the results of the third function. 
 
 In the following example types of fuel are ordered by the average year of manufacture of cars running on a certain type of fuel. 
-As you could expect, more ‘modern’ fuels are used in newer cars. 
+As you could expect, more "modern" fuels are used in newer cars. 
 
 
  
