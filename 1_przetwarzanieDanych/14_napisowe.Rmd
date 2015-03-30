@@ -194,7 +194,7 @@ Nie zawsze potrzebujemy więc specjalnych statystyk opisowych, by zrozumieć co 
 Dlatego dalsze ćwiczenia z napisami przeprowadzimy na znacznie większym zbiorze danych `auta2012`, z ponad 200 tysiącami wartości, 
 który również znajduje się w pakiecie `PogromcyDanych`.
 
-Opis tego zbioru danych znaleźć można w odcinku https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html
+Opis tego zbioru danych znaleźć można w odcinku http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/0_dane.html
 
 Wczytajmy ten zbiór danych i przyjrzyjmy się dwóm pierwszym wierszom. 
 
@@ -363,7 +363,7 @@ as.numeric(as.character(fx))
 
 + Sprawdź ile samochodów ma lakier w metalicznym kolorze (oznaczony jako 'metallic')
 
-Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html
 
 ---
 

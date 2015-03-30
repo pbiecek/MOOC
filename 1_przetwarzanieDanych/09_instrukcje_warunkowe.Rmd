@@ -288,4 +288,4 @@ liczbaPtakow
 
 * Napisz pętlę i instrukcję warunkową sumującą łączne masy wszystkich ptaków i kotów osobno.
 
-Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html

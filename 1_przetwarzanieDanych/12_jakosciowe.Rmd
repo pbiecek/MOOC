@@ -114,7 +114,7 @@ Nie zawsze potrzebujemy więc specjalnych statystyk opisowych by zrozumieć co s
 Dlatego dalsze ćwiczenia ze zmiennymi jakościowymi przeprowadzimy na znaczeni większym zbiorze danych `auta2012` o ponad 200 tysiącach wartości, 
 który również znajduje się w pakiecie `PogromcyDanych`.
 
-Opis tego zbioru danych znaleźć można w odcinku https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html
+Opis tego zbioru danych znaleźć można w odcinku http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/0_dane.html
 
 Wczytajmy ten zbiór danych i przyjrzyjmy się dwóm pierwszym wierszom. 
 
@@ -159,7 +159,7 @@ summary(auta2012$Waluta)
 + Zmienna `Liczba.drzwi` przyjmuje wartości `2/3` i `4/5`. Zachowuje się ona jako zmienna jakościowa. Jednak można uznać, 
 że liczba drzwi to cecha ilościowa, ponieważ opisuje _ilość_ drzwi w samochodzie. Jak wyjaśnić tę dualność?
 
-Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html
 
 ---
 
@@ -255,7 +255,7 @@ kolejnoscPosortowanych[1:3]
 
 + Cecha `Rodzaj.paliwa` opisuje rodzaj paliwa wykorzystywanego przez auto. Czy jest to benzyna, olej, gaz? Sprawdź jaki procent samochodów jest napędzana na benzynę.
 
-Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html
 
 ---
 
@@ -295,7 +295,7 @@ barplot(posortowaneWaluty, horiz = TRUE, las=1)
 + Przedstaw graficznie tabelę liczebności dla zmiennej `Kraj.pochodzenia`. Wypróbuj wykres pionowy i poziomy. 
 Aby obrócić kierunek etykiet na osiach dodaj do funkcji `barplot()` argument `las=1`.
 
-Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html
 
 ---
 
@@ -518,5 +518,5 @@ a zmienną *Przebieg.w.km* na przedziały 0-1000, 1001-10 000, 10 001-100 000, 1
 
 + Przedstaw tę tabelę graficznie.
 
-Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html
 

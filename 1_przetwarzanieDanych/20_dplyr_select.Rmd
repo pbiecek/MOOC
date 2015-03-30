@@ -139,5 +139,5 @@ auta2012 %>%
 
 * Wybierz tylko te kolumny, których nazwa kończy się na `a`.
 
-Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html
 

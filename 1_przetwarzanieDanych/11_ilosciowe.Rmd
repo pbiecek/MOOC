@@ -85,7 +85,7 @@ Zbiór danych `koty_ptaki` składa się z 13 wierszy. Można cały ten zbiór da
 
 Dlatego, dalsze ćwiczenia ze zmiennymi ilościowymi przeprowadzimy na znacznie większym zbiorze danych z ponad 200 tysiącami wartości, o nazwie `auta2012`, który znajduje się również w pakiecie `PogromcyDanych`.
 
-Opis tego zbioru danych znaleźć można w odcinku https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html
+Opis tego zbioru danych znaleźć można w odcinku http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/0_dane.html
 
 Wczytajmy ten zbiór danych i przyjrzyjmy się trzem pierwszym wierszom. 
 
@@ -225,7 +225,7 @@ Więcej o tym dlaczego i jak działa to sumowanie omówimy w odcinku 13 o cechac
 
 + Jedną z cech ilościowych jest _Rok.produkcji_. Jaki jest medianowy/połówkowy rok produkcji oferowanych aut? Wszystkie te oferty były złożone w roku 2012, jaki był medianowy/połówkowy wiek oferowanego auta?
 
-Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html
 
 ---
 
@@ -283,7 +283,7 @@ max(auta2012$Przebieg.w.km, na.rm=TRUE)
 
 + Jaka jest mediana/połówkowa wielkość silnika (`Pojemnosc.skokowa`)?
 
-Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html
 
 ---
 
@@ -429,5 +429,5 @@ plot(auta2012wybrane$Przebieg.w.km, auta2012wybrane$Cena.w.PLN, log="xy", pch=".
 
 + Aut w jakiej cenie jest najwięcej wśród zebranych ogłoszeń?
 
-Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html
 
