@@ -78,7 +78,7 @@ function(argumenty_rozdzielone_przecinkiem) {
 
 gdzie `argumenty_rozdzielone_przecinkiem` to lista rozdzielonych przecinkiem argumentów (może być też pusta lub jednoelementowa), a `wyrażenie` to instrukcje, które mają być wykonane w ramach wywołania funkcji.
 
-Wynikiem powyższej instrukcji jest funkcja, którą należy przypisać do do zmiennej, by móc jej później używać. Dlatego najczęstsze deklaracje mają również przypisanie funkcji do zmiennej, tak jak w deklaracji poniżej. 
+Wynikiem powyższej instrukcji jest funkcja, którą należy przypisać do zmiennej, by móc jej później używać. Dlatego najczęstsze deklaracje mają również przypisanie funkcji do zmiennej, tak jak w deklaracji poniżej. 
 
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
 nazwa_funkcji <- function(argumenty_rozdzielone_przecinkiem) {
@@ -169,7 +169,7 @@ Otóż dlatego, że w pętli `1:n_kropek`, która znajduje się w deklaracji fun
 1:0
 ```
 
-Jeżeli więc chcemy by dla `n_kropek = 0` funkcja działa poprawnie musimy inaczej obsłużyć tę sytuację.
+Jeżeli więc chcemy by dla `n_kropek = 0` funkcja działała poprawnie musimy inaczej obsłużyć tę sytuację.
 
 Jak zaradzić temu problemowi?
 
