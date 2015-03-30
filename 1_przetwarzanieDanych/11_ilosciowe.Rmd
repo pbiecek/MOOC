@@ -83,7 +83,7 @@ Przy okazji warto zauważyć że średnia i mediana znacznie się różnią - o 
 
 Zbiór danych `koty_ptaki` składa się z 13 wierszy. Można cały ten zbiór danych wyświetlić na ekranie. Nie zawsze potrzebujemy więc specjalnych statystyk opisowych by zrozumieć co się dzieje w takich małych zbiorach danych.
 
-Dlatego, dalsze ćwiczenia ze zmiennymi ilościowymi przeprowadzimy na znaczeni większym zbiorze danych z ponad 200 tysiącami wartości, o nazwie `auta2012`, który znajduje się również w pakiecie `PogromcyDanych`.
+Dlatego, dalsze ćwiczenia ze zmiennymi ilościowymi przeprowadzimy na znacznie większym zbiorze danych z ponad 200 tysiącami wartości, o nazwie `auta2012`, który znajduje się również w pakiecie `PogromcyDanych`.
 
 Opis tego zbioru danych znaleźć można w odcinku https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html
 
@@ -158,6 +158,10 @@ Opis cechy ilościowej za pomocą tych sześciu liczb bardzo wiele o danej cesze
 summary(auta2012$Cena.w.PLN)
 ```
 
+Te pięć liczb, dzielących wszystkie obserwacje na czery równoliczne części ilustruje wykres pudełkowy.
+
+<center><img width="800" src="figs/boxP.jpg" /></center>
+
 ---
 
 # Statystyki opisowe
@@ -183,7 +187,7 @@ Niezbyt jasne? Więc może na przykładzie.
 quantile(auta2012$Cena.w.PLN, c(0.01, 0.1, 0.25, 0.5, 0.75, 0.90, 0.99))
 ```
 
-Kwantyl rzędu `1%` to 1500, czyli co setna oferta jest tańśza niż 1500 PLN. Kwantyle rzędu `10%` to 5500, czyli jedna dziesiąta ofert jest tańsza niż 5.5 tys. Kwantyl rzędu `90%` to 72.5 tys, czyli co dziesiąty samochód jest droższy niż 72 500 pln.
+Kwantyl rzędu `1%` to 1500, czyli co setna oferta jest tańsza niż 1500 PLN. Kwantyle rzędu `10%` to 5500, czyli jedna dziesiąta ofert jest tańsza niż 5.5 tys. Kwantyl rzędu `90%` to 72.5 tys, czyli co dziesiąty samochód jest droższy niż 72 500 pln.
 
 
 ---
@@ -251,7 +255,7 @@ Najpoważniejszą jest taka, że części statystyk nie można policzyć.
 
 Przykładowo, średnia z 1 i 3 to 2. Ale ile wynosi średnia z 1 i _nie wiadomo_? 
 
-Dlatego gdy liczmy średnie lub inne statystyki z wektorów, które zawierają wartości nieokreślone to wynik też jest wartością nieokreśloną `NA`.
+Dlatego gdy liczymy średnie lub inne statystyki z wektorów, które zawierają wartości nieokreślone to wynik też jest wartością nieokreśloną `NA`.
 
 ```{r, warning=FALSE}
 mean(auta2012$Przebieg.w.km)
@@ -304,6 +308,8 @@ barplot(srednia)
 
 # Graficzne statystyki opisowe - wykres słupkowy
 
+Jeden słupek wygląda dziwnie, mało czytelnie. To dlatego, że wykres przedstawia jedną liczbę, trudno więc do czegoś się na nim odnieść.
+
 Zobaczmy jak wyglądają średnie ceny w grupach, na przykład w zależności od rodzaju paliwa. 
 
 Do liczenia średniej w grupach wykorzystamy funkcję `tapply()`, jako pierwszy argument przyjmuje cechę ilościową, jako drugi informacje o grupach a jako trzeci nazwę funkcji, która ma w każdej grupie być wykonana (i następnie dodatkowe argumenty). 
@@ -323,9 +329,8 @@ barplot(srednie, las=2)
 
 # Graficzne statystyki opisowe - wykres pudełkowy
 
-Jeden słupek wygląda dziwnie, mało czytelnie. To dlatego, że wykres przedstawia jedną liczbę, trudno więc do czegoś się na nim odnieść.
-
 Ciekawszy będzie wykres, przedstawiający więcej informacji. 
+
 W statystykach opisowych pokazaliśmy funkcją `summary()`, prezentującą sześć charakterystycznych informacji o rozkładzie (min, max, kwartyle i średnią).
 Pięć z nich, za wyjątkiem średniej, przedstawia wykres pudełko-wąsy, który w R można wykonać używając funkcji `boxplot()`.
 
