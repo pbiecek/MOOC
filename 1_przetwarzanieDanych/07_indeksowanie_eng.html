@@ -476,11 +476,11 @@ koty_ptaki[indeksy, ]
 <span class="kw">head</span>(koty_ptaki)
 <span class="kw">tail</span>(koty_ptaki)
 
-<span class="co"># indeksowanie wierszy warunkiem logicznym indexing rows using logical expression</span>
+<span class="co"># indexing rows using logical expression</span>
 najszybsze &lt;-<span class="st"> </span>koty_ptaki$predkosc &gt;<span class="st"> </span><span class="dv">100</span>
 koty_ptaki[najszybsze, ]
 
-<span class="co"># uzywanie ujemnych indeksow by pominac wiersze</span>
+<span class="co"># use negative values to drop elements</span>
 koty_ptaki[ -<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">8</span>:<span class="dv">10</span>), ]</code></pre>
 </div>
 <div id="summary-of-r-commands-2" class="slide section level1">
@@ -517,7 +517,7 @@ koty_ptaki[<span class="kw">c</span>(<span class="st">&quot;Lew&quot;</span>, <s
 <div id="exercises-1" class="slide section level1">
 <h1>Exercises</h1>
 <ul>
-<li><p>Select all the rows except “Sokoły” (falcons: “Sokol wedrowny” and “Sokol norweski”, rows 11 and 12) from the data frame <code>koty_ptaki</code>.</p></li>
+<li><p>Select all the rows except “Sokoły” (falcons: “Sokół wedrowny” and “Sokół norweski”, rows 11 and 12) from the data frame <code>koty_ptaki</code>.</p></li>
 <li><p>Select only cats (first seven rows) from the data frame <code>koty_ptaki</code>.</p></li>
 <li><p>Select only the column with weight and speed from the data frame <code>koty_ptaki</code>.</p></li>
 <li><p>Select all the columns the data frame <code>koty_ptaki</code> except the last one.</p></li>

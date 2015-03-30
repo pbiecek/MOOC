@@ -246,11 +246,7 @@ koty_ptaki[indeksy, ]
 ```
 
 
-<<<<<<< HEAD
-Functions `head()` and `tail()` serve to select several first or last rows of the data set. Both functions can be developed by an addition of a second argument specifying number of first / last rows that we want to read ?the default number is 6. 
-=======
 Functions `head()` and `tail()` serve to select several first or last rows of the data set. Both functions can be developed by an addition of a second argument specifying number of first / last rows that we want to read the default number is 6. 
->>>>>>> s1e7eng
 
 
 ```{r, message=FALSE, warning=FALSE}
@@ -285,21 +281,13 @@ For example, all the rows apart from rows no 1,3,8,9 and 10 can be selected with
 koty_ptaki[ -c(1, 3, 8:10), ]
 ```
 
-<<<<<<< HEAD
-Notice that in this example the sign `?` located before the function `c()` creating a vector modifies the sign of all the elements of that vector. 
-=======
 Notice that in this example the sign `-` located before the function `c()` creating a vector modifies the sign of all the elements of that vector. 
->>>>>>> s1e7eng
 
 ```{r, message=FALSE, warning=FALSE}
 -c(1, 3, 8:10)
 ```
 
-<<<<<<< HEAD
-*Note* You shouldn?t to use simultaneously positive and negative signs. 
-=======
 *Note* You shouldn't to use simultaneously positive and negative signs. 
->>>>>>> s1e7eng
 
 ---
 
@@ -437,11 +425,7 @@ For example, the column `predkosc` contains the following values.
 koty_ptaki[,"predkosc"]
 ```
 
-<<<<<<< HEAD
-The function `order()` creates indexes of subsequent growing values. The smallest value is 60 and it?s in the first position. The next value is 65 and it occupies the 7th position. Then we have 70 ?at the 4th and 9th positions and so forth. 
-=======
 The function `order()` creates indexes of subsequent growing values. The smallest value is 60 and it's in the first position. The next value is 65 and it occupies the 7th position. Then we have 70 at the 4th and 9th positions and so forth. 
->>>>>>> s1e7eng
 
 
 ```{r}
@@ -526,15 +510,11 @@ koty_ptaki[indeksy, ]
 head(koty_ptaki)
 tail(koty_ptaki)
 
-# indeksowanie wierszy warunkiem logicznym indexing rows using logical expression
+# indexing rows using logical expression
 najszybsze <- koty_ptaki$predkosc > 100
 koty_ptaki[najszybsze, ]
 
-<<<<<<< HEAD
-# u?ywanie ujemnych indeks?w by pomin?? wiersze
-=======
-# uzywanie ujemnych indeksow by pominac wiersze
->>>>>>> s1e7eng
+# use negative values to drop elements
 koty_ptaki[ -c(1, 3, 8:10), ]
 ```
 
@@ -579,11 +559,7 @@ koty_ptaki[c("Lew", "Leopard", "Jerzyk", "Strus"),
 
 # Exercises
 
-<<<<<<< HEAD
-- Select all the rows except "Soko?y" (falcons: "Sokol wedrowny" and "Sokol norweski", rows 11 and 12) from the data frame `koty_ptaki`.
-=======
-- Select all the rows except "Sokoły" (falcons: "Sokol wedrowny" and "Sokol norweski", rows 11 and 12) from the data frame `koty_ptaki`.
->>>>>>> s1e7eng
+- Select all the rows except "Sokoły" (falcons: "Sokół wedrowny" and "Sokół norweski", rows 11 and 12) from the data frame `koty_ptaki`.
 
 -	Select only cats (first seven rows) from the data frame `koty_ptaki`.
 
