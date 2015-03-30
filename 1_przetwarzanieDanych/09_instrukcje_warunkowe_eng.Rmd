@@ -118,7 +118,7 @@ if (koty_ptaki[i,"druzyna"] == "Kot") {
 }
 ```
 
-Je¿eli u¿yjemy instrukcji `if-else`, to gdy `warunek` oka¿e siê byæ fa³szywy wyœwietli siê wynik czêœci `else`.
+Je?eli u?yjemy instrukcji `if-else`, to gdy `warunek` oka?e si? by? fa?szywy wy?wietli si? wynik cz??ci `else`.
 If we use the command `if-else`, the part after the `else` will be executed when the condition turns out to be false. 
 
 ```{r, message=FALSE, warning=FALSE}
@@ -136,13 +136,13 @@ if (koty_ptaki[i,"druzyna"] == "Kot") {
 
 If you work on vectors, the easiest solution is to use the vector command `ifelse()`. 
 
-Its first argument may be a vector. For example, the command `koty_ptaki[,”druzyna”] == “Kot”`  creates a vector of logical values. 
+Its first argument may be a vector. For example, the command `koty_ptaki[,?druzyna?] == ?Kot?`  creates a vector of logical values. 
 
 ```{r, message=FALSE, warning=FALSE}
 koty_ptaki[,"druzyna"] == "Kot"
 ```
 
-We will use that command in the command `ifelse()` and our result will be a vector of text values  with `“Another big cat”` for TRUE value and `“Another fast bird”` for `FALSE` value. 
+We will use that command in the command `ifelse()` and our result will be a vector of text values  with `?Another big cat?` for TRUE value and `?Another fast bird?` for `FALSE` value. 
 
 
 ```{r, message=FALSE, warning=FALSE}
@@ -180,7 +180,7 @@ for (i in 1:nrow(koty_ptaki)) {
 
 Conditional commands are often used to change the value of the variable depending on the condition. 
 
-The example below presents a loop with a conditional command which changes the value of variable `liczbaKotów` in one case or changes the value of the variable `liczbaPtaków` in the other case. 
+The example below presents a loop with a conditional command which changes the value of variable `liczbaKot?w` in one case or changes the value of the variable `liczbaPtak?w` in the other case. 
 
 
 ```{r, message=FALSE, warning=FALSE}
