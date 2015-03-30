@@ -150,6 +150,6 @@ head(
 * Posortuj auta wzdłuż wielkości silnika (liczby koni mechanicznych, kolumna `KM`) lub pojemności skokowej (kolumna `Pojemnosc.skokowa`). Które marki mają największe silniki?
 * Wybierz tylko auta marki 'Rolls-Royce' i posortuj je po cenie.
 
-Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html
 
 

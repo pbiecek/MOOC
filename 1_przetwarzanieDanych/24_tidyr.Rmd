@@ -203,6 +203,6 @@ Odczytaj te dane funkcją `getEurostatRCV()`, a następnie zamień z postaci wą
 * Ze zbioru danych `kidney` wybierz tylko kolumny MDRD12, MDRD24, MDRD36, MDRD60 a następnie zamień je z postaci szerokiej do wąskiej.
 * W zbiorze danych `kidney` niezgodności w antygenach AB i DR są opisane przez kolumny `discrepancy.AB` i `discrepancy.DR`. Zamień je w jedną kolumnę o nazwie `discrepancy` gdzie obie niezgodności są sklejone i separowane znakiem `_`.
 
-Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html
 
 

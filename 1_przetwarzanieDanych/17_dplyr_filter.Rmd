@@ -153,5 +153,5 @@ head(tylkoPorscheZDuzymSilnikiem)
 + Z przed chwilą stworzonego zbioru danych `mlodeAuta` wybierz tylko Fiaty 500. Ile jest takich aut? 
 (wymiary ramki danych możesz sprawdzić funkcją **dim()**)
 
-Przykładowe odpowiedzi znajdują się na stronie https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html
 
