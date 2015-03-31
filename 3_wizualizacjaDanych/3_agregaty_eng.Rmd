@@ -1,0 +1,406 @@
+---
+title: "Charts which present data summaries"
+author: "Data CruncheRs"
+date: "season 2 / episode 3 <br><br> All rights reserved.<br> The use shall be subject
+to prior consent of the author<br><br><br><br> Press `A` to see the plain text instead
+of the slides <br> Press `T` to display the table of contents"
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "Data CruncheRs / wizualizacja / agregaty danych"
+
+---
+
+# What is this episode about?
+
+In the previous episode we have shown each observation/each row from the data set on charts. Information on the subsequent rows were presented with points, lines or inscriptions.
+
+However, when data are large and contain hundreds or thousands of observations it is not possible to present each of them separately.
+When there are too many elements on the chart, then the chart turns into great patchwork of points and curves. In this case it is often better to present summaries/statistics instead of raw data.
+
+In this episode we will learn how to graphically present summaries of data 
+
+- How to create a trend charts showing smoothed average?
+- How to create a box-and-whisker chart /box chart showing Tukey's five numbers? 
+- How to create a histogram showing distribution?
+- How to create bar charts showing numbers of observations?
+
+In this episode we will work with `auta2012` data set.
+
+---
+
+# Preparation of data
+
+Data set concerning offer prices of used cars were used in the first season. These data are fully described in the file https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html
+
+For the purpose of this episode and presented examples, we will choose a fragment from the data set on car's offer prices. We will limit our attention to observations concerning Skoda Octavia and from the set of columns we will choose 5 pieces of information on the production year, price and type of fuel.
+
+Full data are available in `PogromcyDanych package`. We will also use `dplyr` package which was discussed in the first season. The `filter()` function is used to select concerned rows and the `select()` function is used to select columns.
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
+library(PogromcyDanych)
+skody <- auta2012 %>%
+              filter(Marka == 'Skoda', Model == 'Octavia') %>%
+              select(Marka, Model, Rok.produkcji, Cena.w.PLN, Rodzaj.paliwa)
+head(skody)
+```
+
+---
+
+# Geometry geom_point() - not for everything
+
+When we want to present dependence between the pair of variables, `geom_point()` geometry point is often used. However, when there is too many points such presentation may be hardly legible. In such cases it is worth considering `geom_smooth()` geometry presenting smoothed local average.
+
+Let's compare relation between the price of a car (for 2012) and the production year. If we present these data by means of points, we notice that some dependence exists, but it is difficult for us to read it exactly. There are so many points that they overlap and it is difficult to realize which prices are typical for various statistical yearbooks.
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
+ggplot(skody, aes(x=Rok.produkcji, y = Cena.w.PLN)) + 
+  geom_point()
+```
+
+---
+
+# Geometry geom_smooth() - trend charts
+
+Substitution of `geom_point()` with `geom_smooth()` results in the fact that smooth local average is drawn instead of points.
+
+How exactly can we determine this smooth average? If data has fewer than 1000 observations, `loess()` (Local Polynomial Regression Fitting) function is used and if there are more than 1000 observations `gam()` (Generalized Additive Models) function is used. Details for each of these methods may be read from help files for `loess()`and `gam()` functions.
+
+Geometry `geom_smooth()` draws information on standard error for average grade. Grey interval around the average presents precision of average estimation. At places where this average is determined on a small set of observations standard error is higher, therefore accuracy of evaluation is lower.
+
+How does this relation between the average price and the production year look like (prices for 2012)?
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
+ggplot(skody, aes(x=Rok.produkcji, y = Cena.w.PLN)) + 
+  geom_smooth()
+```
+
+---
+
+# Geometry geom_smooth() - trend charts, standard error of the mean
+
+Parameters of `geom_smooth()` geometry are presented on the website http://docs.ggplot2.org/0.9.3.1/geom_smooth.html.
+
+If we change them we can obtain different degrees of smoothening (argument `span` for `loess`), different line thickness, different models used for smoothening, etc.
+
+One of the parameters is `se` which is used to switch on or switch off drawing of standard errors. Frequently we are interested only in trend and additional intervals only clutter the chart. They can be switched off by adding `se=FALSE`.
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
+ggplot(skody, aes(x=Rok.produkcji, y = Cena.w.PLN)) + 
+  geom_smooth(se=FALSE)
+```
+
+---
+
+# Geometry geom_smooth() - composition of layers
+
+In `ggplot2` package we can merge in one chart layers with different geometries.
+
+For instance, we can merge a layer which shows trends and a layer which shows single points. In many situations it is a very good idea to show each observation in the background and a main trend in relations in the foreground
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
+ggplot(skody, aes(x=Rok.produkcji, y=Cena.w.PLN)) + 
+  geom_point() + 
+  geom_smooth(se=FALSE)
+```
+
+---
+
+# Geometry geom_smooth() - composition of layers
+
+When we have several layers on the chart, we often want to make some layers more and other less visible. Two features which strongly emphasize visibility are size and colour.
+
+We will use `size` feature to emphasize the trend and decrease visibility of the layer with points. We reduce points and enlarge trend line to mark, even more strongly, which layer should be more visible.
+
+We determine the size of lines and points with `size` argument for each layer separately.
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
+ggplot(skody, aes(x=Rok.produkcji, y=Cena.w.PLN)) + 
+  geom_point(size=0.8) + 
+  geom_smooth(se=FALSE, size=3)
+```
+
+---
+
+# Geometry geom_smooth() - trend charts
+
+Another useful possibility of modifying `geom_smooth()` geometry is the possibility to change the smoothing function. There is a selection, between linear regression (parameter `method="lm"`), logistic regression and generalized linear models (parameter `method="glm"`), robust regression (parameter `method="rlm"`) already listed exponential (parameter `method="gam"` or `method="loess"`) and others.
+
+Additionally, for regression models we can adjust not only linear trend, but also polynomial, exponential or power dependencies. Description of model structure can be expressed by formula parameter, using typical R format for description of formulas.
+
+In the example below we add square trend to describe relations between variables. With `formula=y~poly(x,2)` argument we determine square trend, with `method="lm"` argument we determine the manner of calculating coefficients for this trend.
+
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
+ggplot(skody, aes(x=Rok.produkcji, y=Cena.w.PLN)) + 
+  geom_smooth(se=FALSE, method="lm", formula=y~poly(x,2)) + 
+  geom_point()
+```
+
+---
+
+# Geometry geom_smooth() - trend charts
+
+When discussing exponential, logarithmic or power models, it is worth considering another interesting option which is offered in `ggplot2` package, namely axis transformations.
+
+If we suspect that the price falls not by x zlotys, but by x percent each year (namely, using specialist terminology multiplicative nature rather than additive) it is good to see the same chart with OY axis in the exponential scale.
+
+Functions which manage and modify axis have `coord_` prefix. When we enter it in RStudio, we can press TAB key to display a list of all features starting from this word.
+
+The function for axis transition is `coord_trans()` which can be used for identification of whether and how particular axes must be transformed.
+
+In the following example we use `coord_trans()` function to use logarithmic transformation for OY axis.
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
+ggplot(skody, aes(x=Rok.produkcji, y = Cena.w.PLN)) + 
+  geom_point() + 
+  geom_smooth(se=FALSE, size=5) + 
+  coord_trans(y = "log10")
+```
+
+Website http://docs.ggplot2.org/current/coord_trans.html presents the most popular transformations, such as: root, power or logarithmic.
+
+---
+
+# Geometry geom_smooth() - trend charts
+
+When we analyze trend we do not know with which trend we are dealing with. In such case it is extremely important to have the possibility to compare various trends with data.
+
+The `ggplot2` package enables creation of the chart by overlapping one layer on another. It is very useful to present different ways of trend determination side by side. 
+
+Now, we add another layers to our chart: a linear trend line, quadratic trend line and GAM algorithm trend.  Each of these trends will be drawn by `geom_sooth()` function with specification of additional arguments.
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
+ggplot(skody, aes(x=Rok.produkcji, y = Cena.w.PLN)) + 
+  geom_point() + 
+  geom_smooth(se=FALSE, size=3) +
+  geom_smooth(method="lm", formula=y~poly(x,2), se=FALSE, size=3, color="green") +
+  geom_smooth(method="lm", se=FALSE, size=3, color="red") 
+```
+
+---
+
+# Qualitative variables
+
+Geometry `geom_smooth()` was useful for presenting summaries of two quantitative variables.
+
+Let's now focus on geometries for presenting relations between qualitative variables. First, we prepare the data in a way to have interesting variables for presentation.
+
+We will still be using data set on prices of five-year Skoda cars, and as qualitative variable we will use `Model` and `Rodzaj.paliwa`.
+
+Again, with `filter()` and `select()` functions we will choose concerned lines and columns.
+
+Previously we worked with `Octavia` model, now we will work with five-year old cars, so we introduce a change in `filter()` function.
+
+```{r, fig.height=4, fig.width=5}
+skody <- auta2012 %>%
+              filter(Marka == 'Skoda', Rok.produkcji==2007) %>%
+              select(Marka, Model, Rok.produkcji, Cena.w.PLN, Rodzaj.paliwa)
+head(skody)
+```
+
+---
+
+# Geometry geom_point() does not manage
+
+Do different models of five-year Skodas have various prices?
+
+I think so. But how these average prices differ and how much diverse they are? 
+Let's try to answer this question by presenting relation between the price and the model.
+
+We can see that `geom_point()` geometry is able to deal with the situation when one of the variables is not quantitative, but presents the name of the model. In the following values `Octavia`, `Roomster`, `Superb` are being mapped on x coefficient on the chart. By default the order corresponds to the alphabetical order of names.
+
+But is this presentation clear?
+
+```{r, fig.height=4, fig.width=5}
+ggplot(skody, aes(x=Model, y = Cena.w.PLN)) + 
+  geom_point()
+```
+
+---
+
+# Geometry geom_boxplot() - box and whiskers chart
+ 
+Considering bars of points from the previous slide, it is difficult to read what the variability of prices is and what should be compared between models.
+
+To compare numeric variable between groups, box and whiskers charts are much more suitable. They show the so-called Tukey five, namely minimum observation from the group, maximum, median (middle observation) and two quartiles. These five numbers divide interval of feature variability into 4 equal intervals. From minimum value to the bottom quartile, from the bottom quartile to median, from median to the top quartile and from the top quartile to maximum element.
+
+Graphically, quartiles and median present edges and centre of the frame. Minimum and maximum element constitute the lowest and the highest value on the chart. Additionally, if some observations are far from edges of the box (further than 1.5 of width of the box) they are represented by a separate point. Why are these points presented? Frequently, they help to identify outliers when one or several observations are far from the rest of the box.
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
+ggplot(skody, aes(x=Model, y = Cena.w.PLN)) + 
+  geom_boxplot()
+```
+
+---
+
+# Geometry geom_boxplot() - box and whiskers chart
+
+In the case of box charts, the order is of no importance. Very often, for mainly aesthetic reasons we want to arrange groups from the greatest to the smallest. In order to do this on the box-and-whisker chart, prior we need to change groups sequence in the data set.
+
+For this purpose `reorder()` function is used. As the first argument, it takes a vector with grouping variable, the second argument is a vector of values and the third argument is chosen function. The order of levels is changed so as to meet the sequence of the function's results.
+
+In the example below levels of `Model` are ordered in such a way so as to correspond to median (`median()` function) of prices of subsequent models.
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
+# changing the order of models from alphabetical to the one determined by median price 
+skody$Model <- reorder(skody$Model, skody$Cena.w.PLN, median)
+# smae instruction, by the chart is more legible
+ggplot(skody, aes(x=Model, y = Cena.w.PLN)) + 
+  geom_boxplot()
+```
+
+---
+
+# Geometry geom_boxplot() - box and whiskers chart
+
+Parameters description for `geom_boxplot()` function is presented on the website http://docs.ggplot2.org/0.9.3.1/geom_boxplot.html.
+
+One of the interesting options, allowing fast distinction of a given group on the chart is the use of box chart's feature - fill - to  present variables.
+
+In order to use this feature on the chart, we add `fill=Model` mapping inside the function
+`aes()`. A side effect will be the legend with description of particular mappings.
+
+Colours itself do not bring new information to the chart, but can facilitate references to the elements of the chart. It is possible to refer e.g. to the blue box instead of the box for cars such as Skoda Octavia.
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
+ggplot(skody, aes(x=Model, y = Cena.w.PLN, fill=Model)) + 
+  geom_boxplot()
+```
+
+---
+
+# Geometry geom_hist() - histogram
+
+Box and whiskers chart presents 5 numbers describing values in the group. More detailed description which frequently enables better understanding and presentation of variability of the data is histogram.
+
+Histogram presents numbers (or frequency) of values in certain ranges using bars length. Definition is complex, we will see what it means on the example.
+
+Let us selected five-year Skodas and see how variation of their prices looks like.
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
+ggplot(skody, aes(x=Cena.w.PLN)) + 
+  geom_histogram()
+```
+
+The `geom_histogram()` function estimates on how many equally long intervals the set of values must be divided. In this case the price was divided into approximately 30 intervals. The chart presents the number of observations which are contained in the specified section.
+
+Which additional information we can read from this chart? E.g. how many cars there are in the price below 20 thousand or above 60 thousand. Such information cannot be read straight from box-and-whiskers chart.
+
+---
+
+# Geometry geom_hist() - histogram
+
+Presentation of data using histogram gives wide opportunities thanks to adding information on groups of observation. This can be done e.g. by changing `fill` feature, namely the fill colour for the geometry.
+
+In the following example cars are marked with different colours. Data contains 5 different models among five-year Skodas, each is marked by different colour. Visually, we can assess not only how many cars are in every price range, but we can also estimate the number of cars of a given model in the specified ranges.
+
+As we see, Fabia and Oktavia are most popular and they occupy the most space on the chart. Additionally, the value of 30 thousand separates these two models well. Fabia is cheaper and Oktavia is more expensive.
+
+To increase legibility of particular groups, we added white framing of particular bars with `color='white'` argument.
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
+ggplot(skody, aes(x=Cena.w.PLN, fill=Model)) + 
+  geom_histogram(color='white')
+```
+
+---
+
+# Geometry geom_bar() - bar charts
+
+One of most popular charts are bar charts. Hence, it is time to discuss them. In `ggplot2` package such charts can be prepared using `geom_bar()` geometry. It counts the number of application of particular groups and presents these numbers on the chart using height of bars.
+
+Both in usage and appearance it is similar to `geom_hist()` geometry. What makes them different is that it uses qualitative variables (groups) and the other quantitative variables (changing them into intervals).
+
+In `geom_bar()` geometry it is enough to indicate the grouping variable. Frequencies for levels of this variable will be designated automatically and presented on `y` coordinate.
+
+Let's see which models of Skoda constitute the majority among five-year-old cars.
+
+```{r, fig.height=4, fig.width=5, message=FALSE}
+ggplot(skody, aes(x=Model)) + 
+  geom_bar()
+```
+
+---
+
+# Geometry geom_bar() - bar charts
+
+Like in the case of the histogram, we can mark additional grouping variable on bar charts. It is frequently made by mapping the grouping variable for fill colour (`fill` feature).
+
+This will automatically add a legend to the chart. It enables assessment of share of particular sub-groups inside groups.
+
+In the following example we will add information on the type of fuel. Additional mapping of `fill=Rodzaj.paliwa` will divide bars into fragments with lengths proportional to share of sale offers of different type of fuel.
+
+What can be read from this chart? There is not much Skodas with gas installation. If we are looking for a car with diesel engine, it can be found more often among Skoda `Octavia` rather than `Superb` or `Roomster`.
+
+```{r, fig.height=4, fig.width=6, message=FALSE}
+ggplot(skody, aes(x=Model, fill=Rodzaj.paliwa)) + 
+  geom_bar()
+```
+
+---
+
+# Geometry geom_bar() - bar charts, conditional charts
+
+So far the histogram and bar charts showed the number of lines in particular groups e.g. car models.
+
+However, if we begin to present information on the subsequent variables it is convenient to be independent from the size of these groups.
+
+For instance, if we are interested in considerable share of cars with diesel engine, namely relation of cars running on oil among Skoda `Fabia` group, we need to drop the number of observations within groups.
+
+Such operation can be performed in `geom_bar()` geometry by adding position="fill" argument.
+
+```{r, fig.height=4, fig.width=6, message=FALSE}
+ggplot(skody, aes(x=Model, fill=Rodzaj.paliwa)) + 
+  geom_bar(position="fill")
+```
+
+---
+
+# How to exactly the size of groups?
+
+The chart enables us to create impressions on the size of presented values.
+
+However, it is difficult to read numeric values from it. 
+
+In order to calculate accurate frequencies we can use functions which we know from the first season: `group_by()` and `summarise()`.
+
+```{r, fig.height=4, fig.width=6, message=FALSE}
+# for each combination of values of Model and Rodzaj.paliwa
+# we calculate the number of observations
+skody %>% 
+  group_by(Model, Rodzaj.paliwa) %>%
+  summarise(liczba = n()) 
+```
+
+---
+
+
+# Where to search further
+
+- More information on how to build charts in ggplot2 package can be found in Chapter 4 of the book *,,Przewodnik po pakiecie R’’*. For more information on this book visit http://www.biecek.pl/R/
+
+- Many useful instructions can be found in the online book: *,,Cookbook for R”* http://www.cookbookr.com/Graphs/
+
+- Very extensive documentation of ggplot2 package is available on the *"ggplot2"* website. http://docs.ggplot2.org/current/index.html
+
+- Many interesting examples with the use of *"ggplot2"* can be found on websites:
+http://www.ats.ucla.edu/stat/r/faq/ and
+http://zevross.com/blog/category/r/
+
+---
+
+# Exercises for season 2, episode 3
+
++ Select `Volkswagen Passat` and present on the chart how the average price depends on the production year using `geom_smooth()` geometry.
+
++ Select `Volkswagen` and draw how the average price depends on the production year. Present different `Volkswagen` models with the use of different colours.
+
++ Select five-year cars `Volkswagen` model and using box-and-whiskers chart present how the price of car depends on the model.
+.
+
++ Selected five-year cars from `Volkswagen` model and present the percentage of cars equipped with diesel engine by the models.

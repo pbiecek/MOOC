@@ -1,14 +1,12 @@
 ---
 title: "Loops"
-author: "Data tameRs"
-date: season 1 / episode 8<br><br> All rights reserved.<br> Using without permission is prohibited <br><br><br><br>Press `A` to change slides into text <br> Press `T` to display table of contents.
+author: "Data CruncheRs"
+date: season 1 / episode 8<br><br><br><br>Press `A` to change slides into text <br> Press `T` to display table of contents.
 output:
-  beamer_presentation:
-    highlight: default
   slidy_presentation:
     css: ../style.css
     font_adjustment: 0
-    footer: pogRomcy danych / programowanie / pêtle
+    footer: Data CruncheRs / programming / loops
     highlight: default
     includes:
       in_header: ../tracking.html
@@ -206,7 +204,7 @@ for (i in 1:nrow(koty_ptaki)) {
 
 Loops can be very often avoided as R works on vectors quite naturally. 
 
-For example, you can achieve the same effect as the one presented in the previous slide directly using column vectors. Both `koty_ptaki[,”gatunek”]` and `koty_ptaki[,”waga”]` are vectors. The function `paste()` will combine them and make a text vector out of them, while the function `cat()` will display all the elements of that newly formed vector. 
+For example, you can achieve the same effect as the one presented in the previous slide directly using column vectors. Both `koty_ptaki[,'gatunek']` and `koty_ptaki[,'waga']` are vectors. The function `paste()` will combine them and make a text vector out of them, while the function `cat()` will display all the elements of that newly formed vector. 
 
 
 ```{r, message=FALSE, warning=FALSE}
@@ -222,7 +220,7 @@ In R, as well as in any well developed programming language, the same effect can
 
 Loops can be placed inside other loops. At first glance it might seem strange but it is a very common practice. 
 
-Let us assume that we want to calculate something, e.g. a correlation, similarity or difference between each pair of columns. How to do it? The easiest way is to use two loops – one loop inside the other one. 
+Let us assume that we want to calculate something, e.g. a correlation, similarity or difference between each pair of columns. How to do it? The easiest way is to use two loops - one loop inside the other one. 
 
 ```{r, eval=FALSE}
 for (i in colnames(koty_ptaki)) {
@@ -243,7 +241,7 @@ We will use the possibility of placing one loop in another loop to visualize dat
 Let us start from one loop which will present speed with dots. The more dots, the higher the speed. 
 Each dot on the screen will stand for 5 km/h. 
 
-The first row in the data set `koty_ptaki` describes speed of the Gyrfalcon ("Sokol norweski"). We will read it (with the command `koty_ptaki[i,”predkosc”]`; then we will calculate the number of dots which we need to use to present speed (by dividing by 5). At the end we will draw the dots using the command `cat()`.
+The first row in the data set `koty_ptaki` describes speed of the Gyrfalcon ("Sokol norweski"). We will read it (with the command `koty_ptaki[i,'predkosc']`; then we will calculate the number of dots which we need to use to present speed (by dividing by 5). At the end we will draw the dots using the command `cat()`.
 
 
 ```{r, message=FALSE, warning=FALSE}
@@ -312,9 +310,9 @@ for (i in kolumny) {
 
 ---
 
-# Podsumowanie instrukcji R
+# Function summary
 
-Poni¿ej znajduje siê zestawienie wszystkich wykorzystanych w tym odcinku instrukcji.
+Below are samples of all R expressions used in this episode.
 
 ```{r, eval=FALSE}
 # a loop that, for each row, prints the weight of an animal it describes

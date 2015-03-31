@@ -1,7 +1,7 @@
 ---
 title: "Introduction to R and RStudio"
-author: "Data Crunchers"
-date: "season 1 / episode 4 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Press `A` to switch from slides to continuous text. <br> Press `T` to see the table of contents."
+author: "Data CruncheRs"
+date: "season 1 / episode 4<br><br><br><br>Press `A` to switch from slides to continuous text. <br> Press `T` to see the table of contents."
 output:
   slidy_presentation:
     includes:
@@ -9,7 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / pierwsze kroki / wprowadzenie do RStudio"
+    footer: "Data CruncheRs / first steps / introduction to RStudio"
 ---
 
 # What is the topic of this episode?
