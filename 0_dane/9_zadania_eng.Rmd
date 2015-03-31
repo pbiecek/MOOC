@@ -1,0 +1,699 @@
+---
+title: "Tasks and responses"
+author: "Data CruncheRs"
+date: "season 0 / episode 0<br<br><br><br><br>Press `A` to convert slides into a continuous text. <br> Press `T` to display table of contents."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "Data CruncheRs / data exploration / tasks and solutions"
+---
+
+# Task, season 1, episode 5
+
+In these episodes we will be using a data set concerning car prices. The data set may be downloaded from the course site in various formats at the following links:
+
+- Excel data, http://biecek.pl/MOOC/dane/auta2012mini.xls
+
+- text data, http://biecek.pl/MOOC/dane/auta2012mini.csv
+
+- binary data, http://biecek.pl/MOOC/dane/auta2012mini.rda
+
+- in the packet  `PogromcyDanych` in a variable  `auta2012`.
+
+*Task:* 
+
+Download the data to the R program, using each of the formats.
+
+*Note!* The files are up to 3,5 MB. Downloading them may take some time if the Internet connection is not very good or if many persons use it at the same time.
+
+---
+
+# Responses, season 1, episode 5
+
+```{r, eval=FALSE}
+# plain text file
+auta2012 <- read.table(file = "http://biecek.pl/MOOC/dane/auta2012mini.csv", 
+          sep=";", dec=",", header=TRUE)
+
+# Excel file
+library(gdata)
+auta2012 <- read.xls("http://biecek.pl/MOOC/dane/auta2012mini.xls", sheet=1)
+
+# rda file
+# it is not necessary to assign an object
+load(url("http://biecek.pl/MOOC/dane/auta2012mini.rda"))
+
+```
+
+---
+
+# Task, season 1, episode 6
+
+- Save the data set  `koty_ptaki` to a text file in which the data is separated with commas and . (a dot) is the decimal separator.
+- Save the data set `koty_ptaki` to an Excel format file. Check if the data is saved correctly.
+- Save the data set `koty_ptaki` to a binary file. Then read it with the function  `load()` and check if the data is saved correctly.
+
+---
+
+# Responses, season 1, episode 6
+
+```{r, eval=FALSE}
+# plain text file
+write.table(koty_ptaki, file = "dane_o_kotach.csv", sep=",", dec=".")
+
+# Excela file
+library(xlsx)
+write.xls(koty_ptaki, file = "koty_ptaki.xlsx", sheetName="Zakladka 1")
+
+# binary data from rda file
+save(koty_ptaki, file="koty_ptaki.rda")
+load("koty_ptaki.rda")
+```
+
+---
+
+# Tasks, season 1, episode 7
+
+- Develop a sequence of ten consecutive lower case letters in the Latin alphabet.
+
+- Develop a sequence of ten consecutive odd numbers, starting from  `3`.
+
+- From the  `LETTERS` vector select the letters in positions  5, 10, 15, 20 and 25.
+
+- Write down values of the  `LETTERS` vector, starting from the end.
+
+---
+
+# Responses, season 1, episode 7
+
+```{r}
+# letter sequence
+c('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j')
+letters[1:10]
+
+# odd numbers starting from 3
+seq(3, 21, 2)
+
+# selected from LETTERS
+LETTERS[c(5, 10, 15, 20, 25)]
+
+# LETTERS vector in reverse order
+LETTERS[26:1]
+```
+
+---
+
+# Tasks, season 1, episode 7
+
+- Select from the data frame `koty_ptaki` all lines apart from “Falcons” (lines 11 and 12)
+
+- Select from the data frame  `koty_ptaki` only cats (the first seven lines)
+
+- Select from the data frame  `koty_ptaki` only the column with weight and speed
+
+- Select from the data frame  `koty_ptaki` all columns apart from the last one
+
+- Select from the frame the lines with the weight under 100 and the first four columns.
+
+---
+
+# Responses, season 1, episode 7
+
+```{r, eval=FALSE}
+# all but falcons
+koty_ptaki[- (11:12), ]
+koty_ptaki[c(1:10, 13), ]
+
+# all but cats
+koty_ptaki[1:7, ]
+koty_ptaki[koty_ptaki$druzyna == "Kot", ]
+
+# only two columns
+koty_ptaki[, c("waga", "predkosc")]
+koty_ptaki[, c(2, 4)]
+
+# all but last column
+koty_ptaki[, 1:6]
+koty_ptaki[, -7]
+
+# low-weight birds
+koty_ptaki[koty_ptaki$waga < 100, 1:4]
+```
+
+---
+
+# Tasks, season 1, episode 8
+
+* Write a loop which for the first line in the  `koty_ptaki` table will specify the lifetime of the specific species.
+* Write a loop which will present the lifetime, using a graph where each year is presented as one `#`.
+* Write a loop which will have a graph with the lifetime, but also the species names on the left. Additionally, under each species name add enough space characters so that alignment to the right is possible. The length of the text measured in the number of characters can be read with the  `nchar()`function. 
+
+---
+
+# Responses, season 1, episode 8
+
+```{r, eval=FALSE}
+# Loop with vitality
+for (i in 1:nrow(koty_ptaki)) {
+  cat("Osobniki gatunku:", koty_ptaki[i,"gatunek"], "żyją do", 
+      koty_ptaki[i,"zywotnosc"], "lat\n")
+}
+
+# Vitality on a chart
+for (i in 1:nrow(koty_ptaki)) {
+  n_kropek <- koty_ptaki[i,"zywotnosc"] 
+  for (j in 1:n_kropek)
+    cat("#")
+  cat(" ", koty_ptaki[i,"gatunek"], "\n")
+}
+
+# Speicies names on left-hand side
+for (i in 1:nrow(koty_ptaki)) {
+  # adding white spaces
+  n_spacji <- 15 - nchar(as.character(koty_ptaki[i,"gatunek"])) 
+  for (j in 1:n_spacji)
+    cat(" ")
+  cat( koty_ptaki[i,"gatunek"], " ")
+  # vitality is represented with '#'
+  n_kropek <- koty_ptaki[i,"zywotnosc"] 
+  for (j in 1:n_kropek)
+    cat("#")
+  cat("\n")
+}
+
+```
+
+---
+
+# Tasks, season 1, episode 9
+
+* Write a conditional instruction which for animals lighter than 1 kg will specify `lekkie`and for those heavier than 1 kg.`ciężkie`.
+* Write a conditional instruction which for animals lighter than 1 kg will specify `lekkie`,  and for those heavier than 100 kg:`ciężkie` and in the range of 1­100 will specify  `średnie`. Such an effect can be obtained using two instructions  `if()` or using the `switch()` function.
+* Write a loop and conditional instruction summing up the total weight of all birds and cats separately.
+
+---
+
+# Responses, season 1, episode 9
+
+```{r, eval=FALSE}
+# Low- / High-weight
+for (i in 1:nrow(koty_ptaki)) {
+  if (koty_ptaki[i,"waga"] < 100) {
+    cat(koty_ptaki[i,"gatunek"], "to lekkie zwierze.\n")
+  } else {
+    cat(koty_ptaki[i,"gatunek"], "to ciężkie zwierze.\n")
+  }
+}
+
+# low- / medium- / high-weight
+for (i in 1:nrow(koty_ptaki)) {
+  if (koty_ptaki[i,"waga"] < 1) {
+    cat(koty_ptaki[i,"gatunek"], "to lekkie zwierze.\n")
+  } else {
+    if (koty_ptaki[i,"waga"] < 100) {
+      cat(koty_ptaki[i,"gatunek"], "to średnie zwierze.\n")
+    } else {
+      cat(koty_ptaki[i,"gatunek"], "to ciężkie zwierze.\n")
+    }
+  }
+}
+
+# Weighing cats and birds
+wagaKoty <- 0
+wagaPtaki <- 0
+for (i in 1:nrow(koty_ptaki)) {
+  if (koty_ptaki[i,"druzyna"] == "Kot") {
+    wagaKoty <- wagaKoty + koty_ptaki[i,"waga"]
+  } else {
+    wagaPtaki <- wagaPtaki + koty_ptaki[i,"waga"]
+  }
+}
+```
+
+---
+
+# Tasks, season 1, episode 10
+
+* Write a function which is assigned a number argument, and which then writes in the screen the values from the argument to one.
+* Write a function which is assigned a number argument  `n`, and which then draws a square with the side  `n` filled in with  `X`characters.
+* Write a function which is assigned a number argument  `n`, and which then draws a square with the side  `n` and characters  `X` at the edge, and which is empty inside.
+
+---
+
+# Responses, season 1, episode 10
+
+```{r, eval=FALSE}
+# counting down to 1
+odliczaj <- function(od = 10) {
+  for (i in od:1) {
+    cat(i, "\n")
+  }
+}
+odliczaj(5)
+
+# Draw a square
+kwadrat <- function(n = 5, znak="X") {
+  for (i in 1:n) {
+    for (j in 1:n) {
+      cat(znak)
+    }
+    cat("\n")
+  }
+}
+kwadrat()
+
+# Draw an empty square
+pustyKwadrat <- function(n = 5, znak="X") {
+  for (i in 1:n) {
+    for (j in 1:n) {
+      if (i == 1 | j == 1 | i == n | j == n) {
+        cat(znak)
+      } else {
+        cat (" ")
+      }
+    }
+    cat("\n")
+  }
+}
+pustyKwadrat()
+```
+
+---
+
+# Tasks, season 1, episode 11
+
++ In the  _auta2012_ data set, as many as 7 features are quantitative features. Name them.
+
++ One of the quantitative features is  _Rok.produkcji_. All offers were submitted in 2012. What was the median/half-life age of the offered car?
+
++ Which feature is the least complete? For which feature the number of missing values is the greatest?
+
++ What is the median/half engine capacity  (`Pojemnosc.skokowa`)?
+
++ Present graphically the distribution of the  `Cena.w.PLN`feature, using a box-moustache graph and a histogram .
+
++ Note that individual cars with very high prices make the graph difficult to read. Filter this data, leaving only the cars with the price under PLN 100 thousand. Then present the distribution of car prices in the car segment up to PLN 100 thousand.
+
++ What car price constitutes the largest number among the collected announcements? 
+
+---
+
+# Responses, season 1, episode 11
+
+```{r, eval=FALSE}
+# Quantitative variables
+# `Price`, `Price.in.PLN`, `HP`, `Kw`, `Engine.cubic.capacity`, `Mileage`, `Year`
+
+# median car age is 2012 - median year of production
+2012 - median(auta2012$Year)
+
+# There are 39 559 missing values on `Przebieg.w.km` variable. This variable is the least complete.
+
+# Median Horse Power
+median(auta2012$KM, na.rm=TRUE)
+
+# Let's remove missing observations and draw the distribution of car prices using a boxplot
+auta2012wybrane <- auta2012[auta2012$Cena.w.PLN < 100000, ] 
+boxplot(auta2012wybrane$Cena.w.PLN, horizontal = TRUE, range = 0)
+
+# or histogram
+hist(auta2012wybrane$Cena.w.PLN, 50, col="grey")
+
+# Most cars have the prices around 13000 (mode calculated after creating 1000 intervals)
+which.max(table(cut(auta2012wybrane$Cena.w.PLN, 1000)))
+```
+
+
+---
+
+# Tasks, season 1, episode 12
+
++ How many variables in the  `auta2012` data set are qualitative variables?
+
++ The variable  `Liczba.drzwi` has the values  `2/3` and `4/5`. It behaves as a qualitative variable. However, the number of doors may be treated as a quantitative variable since it specifies _the number_ of doors in the car. How can this duality be explained?
+
++ The `Marka` feature assigns the car make. Check which make is the most popular.
+
++ The `Rodzaj.paliwa` feature describes the fuel type used by the car. Is it petrol, diesel oil or gas? Check what percentage of the cars is fuelled with petrol.
+
++ Present graphically the table with numbers for the  `Kraj.pochodzenia`. variable. Try a vertical and horizontal graph. In order to turn the direction of the labels on the axes, add argument `las=1`to the  `barplot()` function.
+
++ In the  `auta2012` data set, split the *Rok.produkcji* variables into ranges 1900­1990, 1991­1995, 1996­2000, 2001­
+2005, 2006­2010, 2011­2012 and the *Przebieg.w.km* variable into ranges 0­1000, 1001­10 000, 10 001­100 000, 100 001­ 1000 000, 1000 000 ­ 10 000 000.
+
+
++ Determine the table with numbers for those two new variables.
+
++ Present the table graphically.
+
+
+---
+
+# Responses, season 1, episode 12
+
+```{r, eval=FALSE}
+names(which(sapply(auta2012, class) == "factor"))
+##  [1] "Waluta"                       "Brutto.netto"                 "Marka"                       
+##  [4] "Model"                        "Wersja"                       "Liczba.drzwi"                
+##  [7] "Rodzaj.paliwa"                "Kolor"                        "Kraj.aktualnej.rejestracji"  
+## [10] "Kraj.pochodzenia"             "Pojazd.uszkodzony"            "Skrzynia.biegow"             
+## [13] "Status.pojazdu.sprowadzonego" "Wyposazenie.dodatkowe"      
+```
+
+Certain variables, depending on the context, may be treated as quantitative variables or qualitative variables. We decide which option is more appropriate.
+
+For example, in typical analyses of such data it makes no sense to calculate the sum of the average number of doors. What meaning would be conveyed by the information that the cars offered for sale in January had 3.8 doors on average? For an ordinary reader, such an average would make no sense since it would tell little about the variable. There is no sense to state that Porsche cars on average have 0.5 doors less than Toyota cars.
+
+However, if we had a painting workshop to paint all these doors and the pricelist specifies a price of such an element, for such a workshop the sum of doors could make sense. In that case, it would be reasonable to treat this variable as a quantitative variable and to sum up the number of doors.
+
+```{r, eval=FALSE}
+# Most popular car brands
+names(which.max(table(auta2012$Marka)))
+
+# What percentage of cars use fuel (vs diesel)?
+100*prop.table(table(auta2012$Rodzaj.paliwa))["benzyna"]
+
+# Cars' country of origin
+posortowanaTabela <- sort(table(auta2012$Kraj.pochodzenia))
+barplot(posortowanaTabela, horiz = TRUE, las=1)
+
+# Categorization
+auta2012$Rok.produkcjiKat <- cut(auta2012$Rok.produkcji, c(1900, 1990.5, 1995.5, 2000.5, 2005.5, 2010.5, 2012.5))
+auta2012$Przebieg.w.kmKat <- cut(auta2012$Przebieg.w.km, c(0-1000, 10000, 100000, 1000000, 10000000))
+
+# Table of frequencies
+(przebiegRok <- xtabs(~Rok.produkcjiKat + Przebieg.w.kmKat, auta2012))
+
+# Plotting table of frequencies
+mosaicplot(przebiegRok, las=2, color=TRUE)
+
+```
+
+---
+
+# Tasks, season 1, episode 13
+
++ Check how many cars have the offer price under PLN 2 000.
+
++ Check what percentage of cars has engines with capacity over 1500 cm3.
+
++ Check how many cars registered in Poland have an offer price under PLN 2 000.
+
++ Check what percentage of cars has engines with capacity over 1500 cm3 that are fuelled with Diesel oil. 
+
+---
+
+# Responses, season 1, episode 13
+
+```{r, eval=FALSE}
+# How many offers with price lower than 2000?
+sum(auta2012$Cena.w.PLN < 2000, na.rm=TRUE)
+
+# Percentage of cars with engines larger than or equal to 1500cm3
+100*mean(auta2012$Pojemnosc.skokowa >= 1500, na.rm=TRUE)
+
+# Registered in Poland and cheaper than 2000
+taniZPolski <- auta2012$Cena.w.PLN < 2000 & auta2012$Kraj.aktualnej.rejestracji == "Polska"
+sum(taniZPolski, na.rm=TRUE)
+
+# Diesel with engine >1500cm3
+duzyDiesel <- auta2012$Pojemnosc.skokowa > 1500 & auta2012$Rodzaj.paliwa == 'olej napedowy (diesel)'
+mean(duzyDiesel, na.rm=TRUE)
+```
+
+---
+
+# Tasks, season 1, episode 14
+
+
++ Designate line indices in the  `koty_ptaki` data set, where  `gatunek` contains the capital or lower case letter  `S`.
+
++ Designate all lines in which some type of falcon was described.
+
++ Check how many cars have the alarm system installed (designated as ‘autoalarm’)
+
++ Check how many cars have a metallic paint coat (designated as ‘metallic’)
+
+---
+
+# Responses, season 1, episode 14
+
+```{r, eval=FALSE}
+# Species names starting with "S" or "s"
+grep("s", koty_ptaki$gatunek, ignore.case = TRUE)
+
+# Where are the falcons?
+grep("Sokol", koty_ptaki$gatunek)
+
+# Number of offers with autoalarm
+sum(grepl(auta2012$Wyposazenie.dodatkowe.napis, pattern="autoalarm"))
+
+# Number of offers in metallic color
+sum(grepl(as.character(auta2012$Kolor), pattern="metallic"))
+```
+
+---
+
+# Tasks, season 1, episode 15
+
++ Using appropriate formatting, change the text `01-15-2015 10:20:59` to the object of  `POSIXct`class.
+
++ Calculate the number of days between 1st September 1945 and 8th May 1945.
+
++ Check what day of the week will fall in 100 days, counting from today.
+
+
+---
+
+# Responses, season 1, episode 15
+
+```{r, eval=FALSE}
+# Date conversion
+mdy_hms("01-15-2015 10:20:59")
+
+# Time difference in days
+dmy("08-05-1945") - dmy("01-09-1939")
+
+# Day of the week 100 days from now
+wday(today() + days(100), label = TRUE, abbr = FALSE)
+```
+
+# Tasks, season 1, episode 16
+
+After the data frame below has been downloaded, correct the following errors:
+
++ correct the column name  `litąry`,
++ change the  `Ą` and `Ć` values into those without diacritical signs,
++ change the  `liczby` column into a column with numbers, 
++ insert the missing data in the `braku`column.
+
+```{r, eval=FALSE}
+df <- data.frame(
+        litąry = c("Ą","B","Ć","D"),
+        liczby = c("1","2","3,0","4,0"),
+        braki = c(NA,1,NA,1),
+        stringsAsFactors = FALSE)
+df
+```
+
+# Responses, season 1, episode 16
+
+```{r, eval=FALSE}
+# Name of a column
+colnames(df)[1] = "litery"
+
+# Some letters with Polish diacritics
+df[df$litery == "Ą"] = "A"
+df[df$litery == "Ć"] = "C"
+
+# Numbers
+df$liczby <- as.numeric(gsub(",", ".", df$liczby))
+
+# Missing data
+df$braki[is.na(df$braki)] <- 1
+```
+
+
+# Tasks, season 1, episode 17
+
++ In the `auta2012` data set leave only the cars aged up to five years (i.e. with year of production > 2007). Name the resultant data set`mlodeAuta`
++ From the above new data set`mlodeAuta` select only Fiaty 500 cars. How many of them are there? (dimensions of the data frame may be checked with the function**dim()**)
+
+# Responses, season 1, episode 17
+
+```{r, eval=FALSE}
+# Only new cars
+mlodeAuta <- filter(auta2012, 
+                    Rok.produkcji > 2007)
+
+# Only new Fiats
+mlodeFiaty <- filter(mlodeAuta, 
+                    Model == "500")
+nrow(mlodeFiaty)
+```
+
+# Tasks, season 1, episode 18
+
+* Sort the cars by engine capacity (the amount of horsepower, column  `KM`) or cylinder capacity (column  `Pojemnosc.skokowa`). Which makes have the largest engines?
+* Select only the cars of ‘Rolls­Royce’ make and sort them by the price.
+
+# Responses, season 1, episode 18
+
+```{r, eval=FALSE}
+# Cars with largest engines (as declared)
+tmp <- arrange(auta2012, -KM)
+head(tmp,20)
+
+# Cheapest Rolls-Royces
+RR <- filter(auta2012, Marka == 'Rolls-Royce')
+arrange(RR, Cena.w.PLN)
+```
+
+
+# Tasks, season 1, episode 19
+
+* Use the   `%>%` operator  to select only 10 cheapest Rolls-Royce cars from the `auta2012` data set.
+* Use the   `%>%` operator  to select only 5 Volkswagen cars with largest engines from the `auta2012` data set.
+ 
+# Responses, season 1, episode 19
+
+```{r, eval=FALSE}
+# Cars with largest engines (as declared)
+tmp <- arrange(auta2012, -KM)
+head(tmp,20)
+
+# Cheapest Rolls-Royces
+RR <- filter(auta2012, Marka == 'Rolls-Royce')
+arrange(RR, Cena.w.PLN)
+```
+
+
+---
+
+# Tasks, season 1, episode 20
+
+* Select only Volvo cars, sort them according to cylinder capacity and then display only three columns:
+Marka, Cena.w.PLN and Kolor.
+
+
+* Select only those columns in which the name ends in  `a`.
+
+
+# Responses, season 1, episode 20
+
+```{r, eval=FALSE}
+# Filter
+auta2012 %>% filter(Marka == 'Volvo') %>%
+  arrange(Pojemnosc.skokowa) %>%
+  select(Marka, Cena.w.PLN, Kolor) 
+
+# Columns with names ending on "a"
+auta2012 %>% select(matches("a$"))
+```
+
+
+---
+
+# Tasks, season 1, episode 21
+
+* Let’s add a new variable to the  `koty_ptaki` data set. Physics tells us that momentum is velocity multiplied by weight. Calculate the maximum momentum for each species and arrange the lines starting from those which can have the largest momentum. 
+* Calculate the average mileage per year, dividing the total mileage by the car age.
+
+* Apart from metric horsepower, another interesting unit of power is steam horsepower (HP unit). One metric horsepower is equal to 0.9863 horsepower. Create a new variable to present car power in stem horsepower (btw: Wikipedia presents also some other interesting power units).
+
+
+# Responses, season 1, episode 21
+
+```{r, eval=FALSE}
+# momentum
+koty_ptaki %>% 
+  mutate(pęd = predkosc*waga) %>% 
+  arrange(-pęd)
+
+# mileage
+auta2012 %>% 
+  mutate(Wiek = 2013 - Rok.produkcji,
+         sredni_przebieg = Przebieg.w.km / Wiek)
+
+# horse power
+auta2012 %>% 
+  mutate(HP = 0.9863*KM)
+```
+
+# Tasks, season 1, episode 22
+
+* Calculate the summary mileage of all cars. Then calculate how many times the globe was circumnavigated, taking into account the summary mileage.
+* Select only ‘Rolls­Royce’ cars and calculate their average mileage and average price.
+
+# Responses, season 1, episode 22
+
+```{r, eval=FALSE}
+# mileage
+auta2012 %>%
+  summarise(sumaryczny.przebieg = sum(Przebieg.w.km, na.rm = TRUE),
+            okrążeń = sumaryczny.przebieg / 40075,
+            średnio.okrążeń = okrążeń / n())
+
+# Rolls-Royce
+auta2012 %>%
+  filter(Marka == "Rolls-Royce") %>%
+  summarise( średnia.cena = mean(Cena.w.PLN),
+             średni.przebieg = mean(Przebieg.w.km, na.rm=TRUE))
+```
+
+# Tasks, season 1, episode 23
+
+* Select five-year-old Golf cars and check if the average price depends on the country of current registration. In order to do it, group the cars using the Kraj.aktualnej.rejestracji variable and calculate the average for each group.
+* Select only Peugeot 206 cars and calculate the average price depending on the year of production. Sort the groups by the year of production.
+
+# Responses, season 1, episode 23
+
+```{r, eval=FALSE}
+# golfs
+auta2012 %>%
+  filter(Model == "Golf", Rok.produkcji == 2007) %>%
+  group_by(Kraj.aktualnej.rejestracji) %>%
+  summarise(sredniaCena = mean(Cena.w.PLN)) %>%
+  arrange(sredniaCena)
+
+# peugeots
+auta2012 %>%
+  filter(Marka == "Peugeot", Model == "206") %>%
+  group_by(Rok.produkcji) %>%
+  summarise( średnia.cena = mean(Cena.w.PLN))
+```
+
+
+# Tasks, season 1, episode 24
+
+* The Eurostat data base named  `prc_ppp_ind` ind contains information on the average buyer power. Read this data, using the  `getEurostatRCV()` function  and change from the narrow to the broad form.
+* From the  `kidney` data set select only the following columns: MDRD12, MDRD24, MDRD36, MDRD60 and then change them from the broad to narrow form.
+* In the `kidney` data set, the discrepancies in AB and DR antigens are described with the  `discrepancy.AB` and `discrepancy.DR`columns. Change them into one column named  `discrepancy` where both discrepancies are combined and separated with “_”.
+
+# Responses, season 1, episode 24
+
+```{r, eval=FALSE}
+# siła nabywcza
+prc_ppp_ind <- getEurostatRCV("prc_ppp_ind")
+spread(prc_ppp_ind, time, value)
+
+# nerki
+kidney$id <- rownames(kidney)
+kidney %>% 
+  dplyr::select(id, MDRD12:MDRD60) %>%
+  gather(MDRD, time, MDRD12:MDRD60) %>%
+  head()
+
+# niezgodnosci
+kidney %>%
+  dplyr::select(therapy, discrepancy.AB, discrepancy.DR) %>%
+  unite(discrepancy, discrepancy.AB, discrepancy.DR, sep="_") %>%
+  head()
+
+```
+
+

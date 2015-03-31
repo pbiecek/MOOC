@@ -1,7 +1,7 @@
 ---
 title: "How to load data into R?"
-author: "Data Crunchers"
-date: "season 1 / episode 4 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Press `A` to switch from slides to continuous text. <br> Press `T` to see the table of contents."
+author: "Data CruncheRs"
+date: "season 1 / episode 4<br><br><br><br>Press `A` to switch from slides to continuous text. <br> Press `T` to see the table of contents."
 output:
   slidy_presentation:
     includes:
@@ -9,7 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / eksploracja danych / wczytywanie danych do R"
+    footer: "Data CruncheRs / data exploration / reading data into R"
 ---
 
 # What is the topic of this episode?
@@ -113,7 +113,7 @@ read.table(file = "http://biecek.pl/MOOC/dane/koty_ptaki.csv",
 
 Function `read.table()` can be used to load data from text files. This function has many arguments because text files can be very diverse. The following declaration presents chosen arguments (some of them were skipped to avoid obscuring the image).
 
-```{}
+```{r, eval=FALSE}
 read.table(file, header = FALSE, sep = "", dec = ".",  nrows = -1,
            skip = 0, comment.char = "#",
            stringsAsFactors = default.stringsAsFactors(), ...)

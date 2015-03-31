@@ -1,0 +1,56 @@
+---
+title: "Data visualisation"
+author: "Data CruncheRs"
+date: "season 2 /episode 1<br><br> All rights reserved.<br> The use shall be subject
+to prior consent of the author<br><br><br><br> Press `A` to see the plain text instead
+of the slides <br> Press `T` to display the table of contents"
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "Data CruncheRs / wizualizacja / intro"
+
+---
+
+# What is this episode about?
+
+The second season is composed of two parts, one concerning visualization and one concerning modeling.
+
+The series about visualization is divided into two parts as well: the theoretical and practical part.
+
+In the practical  part we present how to create plots in R program. In the theoretical part we discuss basic issues with data visualization.
+
+The practical part requires certain explanation. In R, charts can be created in many different ways. There are a basic graphic functions and functions based on lattice package, there are solutions based on `grid` package, that is `ggplot2` and `lattice`. Finally, there are solutions developed for online, interactive graphics - that is `ggvis` and many others. Discussing each and every one of them would be pointless.
+
+The most advanced and the most mature is the family of charts
+based on `ggplot2` package. It has also many interesting solutions, therefore we have decided to discuss it here.
+
+# How to make a chart with ggplot2 package?
+
+The practical part consists of 4 episodes
+
+- How to make the chart? Introduction to `ggplot2` package, here
+we present to you key solutions of this package and we show you how to make charts with simple geometries,
+- Aggregates charts - Continuation of `ggplot2` presentation, in this episode geometries that calculate data aggregates will be presented,
+- Charts supplements - In this episode we will show you how to make nicer charts, change colours volumes, shapes and have full control over chart appearance,
+- How to make a map? The last episode of the series shows how to draw a map using `ggplot2` package.
+
+
+# What makes a chart good or bad?
+
+The theoretical part consists of 5 episodes. Each of them constitutes a short film.
+
+- History and modern times - presents the most interesting historical
+statistical graphics and this shows how old ideas get new applications today,
+- Illusions - presents selected problems of vision system that can sometimes be misleading.
+- Info-trap - presents graphics that are deforming information. Warning!
+- How to select colours? - Presents selected problems with colours selection and answers the fundamental question: How to select colours?
+- How to depict different numbers? - Presents selected problems with presentation of different types of numbers.
+
+Each of these parts is a summary of one of chapters from the book: "Zbiór
+esejów o sztuce prezentacji danych" http://biecek.pl/Eseje
+
+

@@ -1,0 +1,143 @@
+---
+title: "Data Filtering [dplyr / select]"
+author: "Data CruncheRs"
+date: "Season 1 / Episode 17 <br><br> All rights reserved.<br> The use shall be subject to prior consent of the author.  <br><br><br><br>Press `A` to see the plain text instead of the slides. <br> Press `T` to display the table of contents."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "Data CruncheRs / processing / filter"
+
+---
+
+# What Is This Episode About?
+
+The databases often contain much more information than we need. Therefore, one of the key operations is filtering, i.e. selecting only the rows of our interest. The above expression "of our interest" means compliance with the certain criteria.
+
+Throughout the process of the data preparation, such filtering is a really common operation. In the Episode 7, we showed how to select the rows, which meet a specific criterion, using the operator `[`. In our everyday work with the data, it is not only more convenient, but also quicker to use the dedicated function `filter()` of the package `dplyr`.
+
+In this Episode, we will learn:
+
+- How to select only the rows of our choice from the set of data.
+- How to create the complex row selection criteria.
+
+To illustrate these issues, we will use two sets of data. The first small set of data is `koty_ptaki` and the second, considerably bigger one is `auta2012`. Both are available in the `PogromcyDanych` package.
+
+---
+
+# Birds vs Cats
+
+Let's start with an example how to filter using the cats and birds set of data. This set of data is delivered along with the package `PogromcyDanych`. It is small enough to display the result of the operations on the screen.
+
+We will show how to pick up the rows from this set of data. When we can see the whole set of data, it is easier to understand, which rows have been filtered.
+
+```{r, message=FALSE}
+library(PogromcyDanych)
+koty_ptaki
+```
+
+---
+
+# Data Filtering
+
+The function **filter()** reduces the number of the rows selecting only those, which comply with a certain condition(s). The first argument of this function is a data frame or a data table, the next arguments (one or more) are the logic conditions.
+The result is a data frame with the rows, which simultaneously comply with the pre-defined conditions.
+
+For example, in order to see, which animals move faster than 100 km/h, we can use the following commands.
+We load the package `dplyr` in the first line. 
+
+```{r, message=FALSE}
+library(dplyr)
+filter(koty_ptaki,
+       predkosc > 100)
+```
+
+---
+
+# Two or More Conditions
+
+We can specify more than one filtering condition at a time.
+Each subsequent condition can be defined as the subsequent argument of the function `filter()`.
+
+The below example selects only those species from the set of data, which comply with three conditions at a time.
+It includes the birds, which move faster than 100 km/h and live in the Northern hemisphere. 
+
+The operator `%in%` returns TRUE if a certain values appears on the right side of the vector.
+
+```{r, warning=FALSE}
+filter(koty_ptaki,
+       predkosc > 100,
+       druzyna == "Ptak",
+       habitat %in% c("Polnoc", "Euroazja")
+       )
+```
+
+---
+
+# Cars
+
+We will practice the filtering operations on much bigger set of data, which cannot be viewed in whole on the screen. Namely, the set of data on the second-hand car offer prices.
+
+The set of data `auta2012` is available after downloading the package `PogromcyDanych`. Please find below six first rows of this set of data. You can find the detailed description of this set at https://rawgithub.com/pbiecek/MOOC/master/O_dane/O_dane.html.
+
+```{r, message=FALSE}
+head(auta2012)
+```
+
+---
+
+# Data Tables
+
+Please note that the `dplyr` package functions operate not only on the data frames, which are already known to us and with the class `data.frame`, but also on the data tables - the objects of the class `tbl`.
+
+From the user's point of view, the data tables differ from the data frames mainly in the manner of the screen display (the columns, which do not fit for the current width of the console, are not displayed). If fact, they also differ in many other properties, among others, the internal representation, which enables to quicker operate on the data in the structure `tbl`. 
+
+Therefore, if we have the big data including numerous rows or columns, it is sometimes better idea to transform them to the data table form.
+
+You can convert a data frame to a data table using the function `tbl_df`, and a data table to a data frame with the function `as.data.frame()`.
+
+```{r, warning=FALSE}
+auta2012 <- tbl_df(auta2012)
+auta2012
+```
+
+---
+
+## Data Filtering
+
+Let's assume that we want to limit the list of the cars to one selected make.
+
+For example, if we want to select only the Porsche make cars, we can apply the condition `Marka == 'Porsche'`.
+
+```{r, warning=FALSE}
+tmp <- filter(auta2012,
+        Marka == "Porsche")
+head(tmp)
+```
+
+---
+
+## Two Conditions
+
+We can specify more than one condition at a time.
+For example, we can filter only Porsches with the engines the horse power of which exceeds 300 in the following manner.
+
+```{r, warning=FALSE}
+tylkoPorscheZDuzymSilnikiem <- filter(auta2012,
+         Marka == "Porsche",
+         KM > 300)
+head(tylkoPorscheZDuzymSilnikiem)
+```
+
+---
+
+## Exercises
+
++ From the set of data `auta2012` select only the cars the age of which does not exceed five years (i.e. the year of manufacture > 2007). Name this resulting dataset `mlodeAuta`
++ From the above dataset `mlodeAuta` select Fiats 500 only. How many such cars are there (you can check the data frame dimensions using the function **dim()**)
+
+You can find the exemplary answers at https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania.html
+
