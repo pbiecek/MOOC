@@ -1,7 +1,7 @@
 ---
 title: "Tasks and responses"
 author: "Data CruncheRs"
-date: "season 0 / episode 0<br><br> All rights reserved.<br> Any use requires author’s consent.  <br><br><br><br>Press `A` to convert slides into a continuous text. <br> Press `T` to display table of contents."
+date: "season 0 / episode 0<br<br><br><br><br>Press `A` to convert slides into a continuous text. <br> Press `T` to display table of contents."
 output:
   slidy_presentation:
     includes:
@@ -9,7 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "Data CruncheRs / eksploracja danych / zadania i odpowiedzi"
+    footer: "Data CruncheRs / data exploration / tasks and solutions"
 ---
 
 # Task, season 1, episode 5
@@ -308,22 +308,22 @@ pustyKwadrat()
 # Quantitative variables
 # `Price`, `Price.in.PLN`, `HP`, `Kw`, `Engine.cubic.capacity`, `Mileage`, `Year`
 
-# median care age is 2012 - median year of production
+# median car age is 2012 - median year of production
 2012 - median(auta2012$Year)
 
-# Dla zmiennej `Przebieg.w.km`  jest 39 559 brakujących wartości. Ta zmienna jest najmniej kompletna.
+# There are 39 559 missing values on `Przebieg.w.km` variable. This variable is the least complete.
 
-# mediana koni mechanicznych
+# Median Horse Power
 median(auta2012$KM, na.rm=TRUE)
 
-# Usuńmy skrajne obserwacje i narysujmy rozkład ceny aut wykresem pudełkowym
+# Let's remove missing observations and draw the distribution of car prices using a boxplot
 auta2012wybrane <- auta2012[auta2012$Cena.w.PLN < 100000, ] 
 boxplot(auta2012wybrane$Cena.w.PLN, horizontal = TRUE, range = 0)
 
-# lub histogramem
+# or histogram
 hist(auta2012wybrane$Cena.w.PLN, 50, col="grey")
 
-# najwięcej jest aut w okolicy 13000 (moda policzona po dyskretyzacji na 1000 przedziałów)
+# Most cars have the prices around 13000 (mode calculated after creating 1000 intervals)
 which.max(table(cut(auta2012wybrane$Cena.w.PLN, 1000)))
 ```
 
@@ -371,24 +371,24 @@ For example, in typical analyses of such data it makes no sense to calculate the
 However, if we had a painting workshop to paint all these doors and the pricelist specifies a price of such an element, for such a workshop the sum of doors could make sense. In that case, it would be reasonable to treat this variable as a quantitative variable and to sum up the number of doors.
 
 ```{r, eval=FALSE}
-# Nazwa najpopularniejszej marki
+# Most popular car brands
 names(which.max(table(auta2012$Marka)))
 
-# Jaki procent aut jeździ na benzynie?
+# What percentage of cars use fuel (vs diesel)?
 100*prop.table(table(auta2012$Rodzaj.paliwa))["benzyna"]
 
-# Kraj pochodzenia aut
+# Cars' country of origin
 posortowanaTabela <- sort(table(auta2012$Kraj.pochodzenia))
 barplot(posortowanaTabela, horiz = TRUE, las=1)
 
-# Kategoryzacja
+# Categorization
 auta2012$Rok.produkcjiKat <- cut(auta2012$Rok.produkcji, c(1900, 1990.5, 1995.5, 2000.5, 2005.5, 2010.5, 2012.5))
 auta2012$Przebieg.w.kmKat <- cut(auta2012$Przebieg.w.km, c(0-1000, 10000, 100000, 1000000, 10000000))
 
-# Tablica liczebności
+# Table of frequencies
 (przebiegRok <- xtabs(~Rok.produkcjiKat + Przebieg.w.kmKat, auta2012))
 
-# wykres tablicy liczebności
+# Plotting table of frequencies
 mosaicplot(przebiegRok, las=2, color=TRUE)
 
 ```
@@ -410,17 +410,17 @@ mosaicplot(przebiegRok, las=2, color=TRUE)
 # Responses, season 1, episode 13
 
 ```{r, eval=FALSE}
-# Liczba ofert poniżej 2 000
+# How many offers with price lower than 2000?
 sum(auta2012$Cena.w.PLN < 2000, na.rm=TRUE)
 
-# Procent aut o silnikach >= 1500cm3
+# Percentage of cars with engines larger than or equal to 1500cm3
 100*mean(auta2012$Pojemnosc.skokowa >= 1500, na.rm=TRUE)
 
-# Zarejestrowany w Polsce i poniżej 2k
+# Registered in Poland and cheaper than 2000
 taniZPolski <- auta2012$Cena.w.PLN < 2000 & auta2012$Kraj.aktualnej.rejestracji == "Polska"
 sum(taniZPolski, na.rm=TRUE)
 
-# Diesel z silnikiem >1500
+# Diesel with engine >1500cm3
 duzyDiesel <- auta2012$Pojemnosc.skokowa > 1500 & auta2012$Rodzaj.paliwa == 'olej napedowy (diesel)'
 mean(duzyDiesel, na.rm=TRUE)
 ```
@@ -443,16 +443,16 @@ mean(duzyDiesel, na.rm=TRUE)
 # Responses, season 1, episode 14
 
 ```{r, eval=FALSE}
-# Gdzie gatunek zaczyna się na S lub s
+# Species names starting with "S" or "s"
 grep("s", koty_ptaki$gatunek, ignore.case = TRUE)
 
-# Które wiersze dotyczą sokołów
+# Where are the falcons?
 grep("Sokol", koty_ptaki$gatunek)
 
-# liczba ofert z autoalarmem
+# Number of offers with autoalarm
 sum(grepl(auta2012$Wyposazenie.dodatkowe.napis, pattern="autoalarm"))
 
-# liczba ofert z lakierem metallic
+# Number of offers in metallic color
 sum(grepl(as.character(auta2012$Kolor), pattern="metallic"))
 ```
 
@@ -472,13 +472,13 @@ sum(grepl(as.character(auta2012$Kolor), pattern="metallic"))
 # Responses, season 1, episode 15
 
 ```{r, eval=FALSE}
-# konwersja daty
+# Date conversion
 mdy_hms("01-15-2015 10:20:59")
 
-# liczba dni różnicy
+# Time difference in days
 dmy("08-05-1945") - dmy("01-09-1939")
 
-# dzień tygodnia za 100 dni od dziś
+# Day of the week 100 days from now
 wday(today() + days(100), label = TRUE, abbr = FALSE)
 ```
 
@@ -503,17 +503,17 @@ df
 # Responses, season 1, episode 16
 
 ```{r, eval=FALSE}
-# nazwa kolumny danych
+# Name of a column
 colnames(df)[1] = "litery"
 
-# ogonki
+# Some letters with Polish diacritics
 df[df$litery == "Ą"] = "A"
 df[df$litery == "Ć"] = "C"
 
-# liczby
+# Numbers
 df$liczby <- as.numeric(gsub(",", ".", df$liczby))
 
-# brakujące dane
+# Missing data
 df$braki[is.na(df$braki)] <- 1
 ```
 
@@ -526,11 +526,11 @@ df$braki[is.na(df$braki)] <- 1
 # Responses, season 1, episode 17
 
 ```{r, eval=FALSE}
-# tylko mlode auta
+# Only new cars
 mlodeAuta <- filter(auta2012, 
                     Rok.produkcji > 2007)
 
-# tylko mlode Fiaty
+# Only new Fiats
 mlodeFiaty <- filter(mlodeAuta, 
                     Model == "500")
 nrow(mlodeFiaty)
@@ -544,11 +544,11 @@ nrow(mlodeFiaty)
 # Responses, season 1, episode 18
 
 ```{r, eval=FALSE}
-# auta z największymi silnikami (deklarowanymi)
+# Cars with largest engines (as declared)
 tmp <- arrange(auta2012, -KM)
 head(tmp,20)
 
-# najtańsze Rolls-Royce
+# Cheapest Rolls-Royces
 RR <- filter(auta2012, Marka == 'Rolls-Royce')
 arrange(RR, Cena.w.PLN)
 ```
@@ -562,11 +562,11 @@ arrange(RR, Cena.w.PLN)
 # Responses, season 1, episode 19
 
 ```{r, eval=FALSE}
-# auta z największymi silnikami (deklarowanymi)
+# Cars with largest engines (as declared)
 tmp <- arrange(auta2012, -KM)
 head(tmp,20)
 
-# najtańsze Rolls-Royce
+# Cheapest Rolls-Royces
 RR <- filter(auta2012, Marka == 'Rolls-Royce')
 arrange(RR, Cena.w.PLN)
 ```
@@ -586,12 +586,12 @@ Marka, Cena.w.PLN and Kolor.
 # Responses, season 1, episode 20
 
 ```{r, eval=FALSE}
-# wybrać
+# Filter
 auta2012 %>% filter(Marka == 'Volvo') %>%
   arrange(Pojemnosc.skokowa) %>%
   select(Marka, Cena.w.PLN, Kolor) 
 
-# kolumny o nazwie zakończonej na a
+# Columns with names ending on "a"
 auta2012 %>% select(matches("a$"))
 ```
 
@@ -609,17 +609,17 @@ auta2012 %>% select(matches("a$"))
 # Responses, season 1, episode 21
 
 ```{r, eval=FALSE}
-# pęd
+# momentum
 koty_ptaki %>% 
   mutate(pęd = predkosc*waga) %>% 
   arrange(-pęd)
 
-# przebieg
+# mileage
 auta2012 %>% 
   mutate(Wiek = 2013 - Rok.produkcji,
          sredni_przebieg = Przebieg.w.km / Wiek)
 
-# konie
+# horse power
 auta2012 %>% 
   mutate(HP = 0.9863*KM)
 ```
@@ -632,7 +632,7 @@ auta2012 %>%
 # Responses, season 1, episode 22
 
 ```{r, eval=FALSE}
-# przebieg
+# mileage
 auta2012 %>%
   summarise(sumaryczny.przebieg = sum(Przebieg.w.km, na.rm = TRUE),
             okrążeń = sumaryczny.przebieg / 40075,
@@ -653,14 +653,14 @@ auta2012 %>%
 # Responses, season 1, episode 23
 
 ```{r, eval=FALSE}
-# golfy
+# golfs
 auta2012 %>%
   filter(Model == "Golf", Rok.produkcji == 2007) %>%
   group_by(Kraj.aktualnej.rejestracji) %>%
   summarise(sredniaCena = mean(Cena.w.PLN)) %>%
   arrange(sredniaCena)
 
-# peugeoty
+# peugeots
 auta2012 %>%
   filter(Marka == "Peugeot", Model == "206") %>%
   group_by(Rok.produkcji) %>%
