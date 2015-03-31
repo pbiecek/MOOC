@@ -1,0 +1,474 @@
+---
+title: "How to make a chart in ggplot2?"
+author: "Data CruncheRs"
+date: season 2 / episode 2 <br><br> All rights reserved.<br> The use shall be subject
+  to prior consent of the author<br><br><br><br> Press `A` to see the plain text instead
+  of the slides <br> Press `T` to display the table of contents
+output:
+  slidy_presentation:
+    css: ../style.css
+    font_adjustment: 0
+    footer: Data CruncheRs / wizualizacja / wstęp do ggplot2
+    highlight: default
+    includes:
+      in_header: ../tracking.html
+
+---
+
+# What is this episode about?
+
+Data are something abstract and by looking at tables of numbers it is often difficult to understand the dependencies between the different variables.
+
+But it will make it much easier to see or understand these dependencies, if data are graphically introduced in a correct manner.
+
+The first half of season 2 is devoted to data visualization. In this episode we will find out about the `ggplot2` graphic package which makes it possible to create good-looking and legible charts.
+
+In this episode we will learn:
+
+- In R the charts may be created with the use of various packages. We will learn why it is worth in the first sequence to explore and why is `ggplot2` package worth using?
+- One of the most popular methods to present data are the point charts. We will show how to create such charts.
+- One of the key ideas in the `ggplot2` package are the mappings of the variables to the chart, we will thoroughly discuss what the idea is.
+- We will find out about the subsequent types of the charts such as a label chart or line chart.
+- We will show also how to assemble different layers into one legible chart.
+
+---
+
+# Data sets
+
+In this episode we will work with two data sets: `koty_ptaki` and `WIG`. Both sets are available in the `PogromcyDanych` package.
+
+To run through the examples from this episode it is necessary to install `PogromcyDanych package`. Installation instruction is located in episode three of the first season *How to install R, RStudio and additional packages?*.
+
+With the library() function we launch the package and can check how does the first lines from both data sets look like.
+
+```{r,  message=FALSE}
+# if the package is not installed yet, 
+# you should run the next line without the comment mark
+# install.packages("PogromcyDanych")
+
+# loading package
+library(PogromcyDanych)
+# first rows of the data frame
+head(koty_ptaki)
+
+head(WIG)
+```
+
+---
+
+
+# Why is ggplot2 package worth exploring?
+
+More and more people notice the potential of data visualization in business applications, in science, mass media or in daily life. For this reason more and more solutions, programs and packages enabling the presentation of data are created.
+
+We will focus on one, `ggplot2` package. Why? There are several reasons to do so.
+
+- Advanced data analysis very often takes place in R. The advantage of using the same software for analyses and for visualisation is ensuring that we do not need to convert the data to different format. Also, we do not need to learn two languages of visualisation and we can work in one consistent environment. Inside R, `ggplot2` package comprise the most mature solution.
+- The `ggplot2` package enables the creation of *publication ready* graphics, that is a sufficiently good to show it to the other persons without additional polishing treatments.
+- The `ggplot2` package forces us to think about the data charts in category of variables which we want to present instead of in category of template we want to fill. Learning curve is steeper than in the case of "clickables", but our potential will incomparably grow in the course of time. 
+
+
+---
+
+# Why ggplot2 and not the standard packages?
+
+With koty_ptaki data set let's present the relation between the weight and velocity of the selected species. For this purpose we will use two graphic sets available in R, `graphics` package with a `plot()`  function and `ggplot2` package with a `ggplot()` function.
+
+The following instructions form a chart with the default settings. The way in which they form a chart will be explained four slides later, on the slide entitled *The elements of a point chart*. At this point, we will take a look only at the results produced by both instructions.
+
+
+```{r,  message=FALSE, eval=FALSE}
+# no need for other packages, you just use the plot() function
+plot(koty_ptaki$waga, koty_ptaki$predkosc)
+
+# graphic functions we are about to discuss require loading ggplot2 package
+# if it is not yet installed, use install.packages("ggplot2")
+library(ggplot2)
+# with ggplot2 package, you can easily create graphs using ggplot function
+ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
+  geom_point()
+```
+
+---
+
+# What are the differences between these two charts?
+
+For the subsequent lines of the `koty_ptaki` data set, we present a relation between the variables `waga` and
+`predkosc`. Each line is described by one point, therefore this chart is called a point chart.
+
+This chart presents the large cats and birds. Lighter species are mainly birds, which are also faster than the large cats. Thus, the presented chart shows that the heavier an animal is, the lower its top speed is.
+
+Despite the fact that both charts present the same data, that is the relation presented on both charts is the same, the charts look different.
+
+We will take a look at both of the charts and try to found as many differences as it is possible and think which manner of presentation is better.
+
+```{r, fig.height=5, fig.width=5, message=FALSE, echo=FALSE}
+
+library(PogromcyDanych)
+library(ggplot2)
+
+plot(koty_ptaki$waga, koty_ptaki$predkosc)
+ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
+  geom_point()
+```
+
+
+---
+
+# What are the differences between these two charts?
+
+Of course these charts differ in numerous elements. Differences that I noticed and considered as the most important are:
+
+1. On the right chart vertical and horizontal auxiliary lines are visible, which facilitate more precise reading of the coordinates of the points than in the case of the left chart.
+2. On the right chart the auxiliary lines are white on a gray background, therefore they do not dominate over the chart and are gently moved into the second plan.
+3. If we put the chart on a white website the gray background enables us to locate the chart very fast.
+4. Both charts have a surface of 10 x 10 cm, but the left chart has large margins, therefore less space is left for presentation of the data. Right chart has small margins, therefore it has more space to present the data.
+5. The labels on the axes on the right chart are horizontal, it is necessary to rotate a head to read them.
+6. Labels on the right chart are decreased and grayed, moved on the second plan. They are still visible but dominate less over the chart, allowing to move the data on the first plan.
+7. The names on axes are shorter and more legible, there is no `koty_ptaki$` element which is not necessary.
+8. The points are marked with dots rather than empty circles, thanks to which they take less space, more of them will fit in the chart and the coordinates of the point will be more legible.
+
+When using `ggplot2` package, we obtain a legible chart at default settings. If we want to, we can change each of its elements. If we do not want to, we may focus on the data rather than on making the chart look beautiful.
+
+
+```{r, fig.height=5, fig.width=5, message=FALSE, echo=FALSE}
+plot(koty_ptaki$waga, koty_ptaki$predkosc)
+ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
+  geom_point()
+```
+
+
+---
+
+# When should the point chart be used? 
+
+A point chart is most often used in a situation when for a certain set of objects (most often described row after row) we want to present a relation between two numeric/quantitative variables. For instance, for the countries it can be a relation between GDP and life expectancy, for people it can be growth and weight, for vehicles it can be mileage and price. Additionally:
+
+1. We do not know whether and which of the dependencies is to be expected (whether and how life expectancy is related to GDP).
+2. We suspect that two variables are dependent and want to present this relation (we want to show how does the price of cars change with its mileage).
+3. We suspect that in one variable there are non-standard observations present (for instance, very high) and we want to see which affiliate values of a variable they correspond to (for instance, whether the persons with very high weight are very high or not).
+
+Groups of observations can also be marked in a point chart. It is possible to determine them by colour, shape or size. This allows, additionally, to compare the groups in terms of presented variables (see slides 13 - 16). Such a point chart with groups is worth using when:
+
+1. We do not know whether the groups differ in terms of a given pairs of variables and we do want to check this (e.g. whether 3-door cars differ from 5-door cars when it comes to price and mileage).
+2. We know that the groups differ and we want to show how (e.g. to show that women are on average lower and significantly lighter than men).
+
+---
+
+# How to compose a point chart?
+
+Let's have a closer look on the instructions, which creates a point chart (the next slide presents a breakdown into basic parts).
+
+```{r, fig.height=4, fig.width=4}
+# first 3 rows of the data frame
+head(koty_ptaki, 3)
+# instruction for plotting, and its result:
+ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
+  geom_point()
+```
+
+---
+
+# The elements of a point chart
+
+Let's have a closer look on the instructions, which creates a point chart.
+
+```{r, eval=FALSE}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
+  geom_point()
+```
+
+Three elements of this manual are
+
+- The `ggplot()` function creates a core of the chart. It describes which variables will be presented on a chart, but doesn't determine how. Usually it assumes two arguments. The first is a set of the data (in this case `koty_ptaki`). The second argument is the list of pairs, determining which variables and in what way will be presented on a chart. These pairs are called
+"mappings", they define which variables are to be presented with the help of particular features of the chart.
+- Mappings are described by the `aes()` function. The arguments of this function constitute the pairs of `plot feature = variable`. Each of these pairs describes how a given variable is to be presented. In the above case this description means that `waga` variable is to be presented by x coordinate and `predkosc` variable is to be presented by y coordinate of the chart.
+- A core of the chart can be developed by adding the subsequent functions with the use of `+` operator. In this case a `geom_point()` function adds a layer presenting the data with points. The functions with names starting from `geom_` are called geometries, they define the way in which the data are presented: in form of the points (`geom_point()`), lines (`geom_line()`), areas (`geom_area()`) or in other way. In this season, we will get to know several geometries, a set of all the available geometries can be found on the website http://docs.ggplot2.org.
+
+---
+
+# We add the mappings of the shape of a point - shape
+
+So far we cannot see how powerful mechanism the mappings are. We will demonstrate it in the next example, where on the chart we will mark the groups of points where the groups is determined by `druzyna` variable. The groups of points we will mark with different shapes, that is with a shape feature.
+
+It is worth noticing that the variables of `waga`, `predkosc` and `druzyna` constitute the columns of a `koty_ptaki` data set. On the other hand, `x`, `y` and `shape` are the characteristics of the point chart. The `aes()` function indicates which characteristics of the chart present the given variables.
+
+```{r, fig.height=4, fig.width=5}
+# first 3 rows of the data frame
+head(koty_ptaki, 3)
+# point charts with different shapes of points
+# depending on the group belonging
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
+  geom_point(size=5) 
+```
+
+---
+
+# How to create charts with ggplot2?
+
+Let's take one more look at the command which forms the chart and let's analyse what is the way of thinking while developing
+
+```{r, eval=FALSE}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
+  geom_point(size=5) 
+```
+
+In the first step we choose the variables which we want to present on the chart. In our case these variables include
+`predkosc`, `waga` and `druzyna`.
+
+In the next step we select the geometry, which will present the selected data. Here we follow the type of variables. When presenting the relation between two quantitative variables (`waga` and `predkosc`), point geometry is a natural choice. A qualitative variable (`druzyna`) will be treated as a grouping variable.
+
+Another step is to choose the geometric features which are to present the selected variables. In our case the variables of `predkosc` and `waga` will be presented by `x` and `y` coordinates of a point. Variable of the point will be presented by its shape, namely a shape feature.
+
+---
+
+# Adding point size mapping
+
+If the effect of marking the groups is not to our liking, we can use a different feature to distinguish the cats from birds.
+
+For example the size of a point, namely `size` feature.
+
+```{r, fig.height=4, fig.width=5}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=druzyna)) +
+  geom_point() 
+```
+
+---
+
+# Adding point colour mapping
+
+If the result is still unsatisfactory, we can try to change other characteristics.
+
+For example the colour, namely `color` feature (also British spelling `colour` is acceptable).
+
+```{r, fig.height=4, fig.width=5}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, color=druzyna)) +
+  geom_point(size=5) 
+
+```
+
+---
+
+# Many mappings for the same variable
+
+The relation of `plot feature=variable` is a “one to many” type of relation. This means that in the mapping description one feature may be related only to one variable. But one variable may be related to several characteristics.
+
+So, the colour of the chart may correspond only to one column in the data set, as shape of a point and similarly other features may also correspond only to one column in the data set. But one column in the data set may be presented both by colour and by shape.
+
+On the example below, one variable is represented not only by colour, but also by shape and size of the point
+
+It is worth noting that whatever we choose, a key will automatically adjust itself to the content of the chart.
+
+```{r, fig.height=4, fig.width=5}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, color=druzyna, 
+                       shape=druzyna, size=druzyna)) +
+  geom_point() 
+```
+
+---
+
+# At what feature should we map?
+
+By changing the arguments of an `aes()` function, we can choose the manner of representation of the specified variables. Out of four that we considered, which one is the best?
+
+```{r, fig.height=4, fig.width=5, echo=FALSE}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
+  geom_point(size=5) 
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=druzyna)) +
+  geom_point() 
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, color=druzyna)) +
+  geom_point(size=5) 
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, color=druzyna, 
+                       shape=druzyna, size=druzyna)) +
+  geom_point() 
+```
+
+---
+
+# Geom_text() geometry: text labels on the plot
+
+Let's see how to use other geometries. As an example we will use a chart with texts that can be made by using a `geom_text()` layer. A detailed description of this geometry, along with the examples of use, is available on the website http://docs.ggplot2.org/current/geom_text.html. `Aesthetics` section includes a list of features that can be modified. To use this geometry at least three characteristics should be specified: `x`, `y` and `label`.
+
+And this is how the example call looks like:
+
+```{r, fig.height=4, fig.width=5}
+ggplot(koty_ptaki, aes(x= waga, y=predkosc, label=gatunek)) +
+  geom_text()
+```
+
+---
+
+# Geom_text() geometry: position of the text labels
+
+It is worth noting that some of the texts go beyond the chart. It could look better. This problem can be solved in two ways. One is the extension of the scope of the values on the OX axis (adding the margins), the other one is positioning of the texts in respect of their left edge rather than the centre (`x` and `y` coordinates are by default the coordinates of the centre of the text).
+
+Let's try the latter solution. While reading a help file for the `geom_text()`  geometry it can be noticed that `hjust` (horizontally) and `vjust` (vertical) features are responsible for the positioning. Let's see how applying of those arguments will look like.
+
+
+```{r, fig.height=4, fig.width=5, eval=FALSE}
+ggplot(koty_ptaki, aes(x= waga, y=predkosc, label=gatunek)) +
+  geom_text(hjust=0) + xlim(0,350)
+```
+
+Let us notice that `hjust` argument is defined inside the `geom_text()` function but outside of an `aes()` block. It doesn't map any of the variable for the features of the chart, instead assigns a constant value to the specified feature  (in this case 0).
+
+Additionally, to fit a `Tygrys` label on the chart we changethe scope presented on the OX axis  with an `xlim()` function by adding a bit of empty space on the right.
+
+```{r, fig.height=4, fig.width=5, echo=FALSE}
+ggplot(koty_ptaki, aes(x= waga, y=predkosc, label=gatunek)) +
+  geom_text(hjust=0) + xlim(0,350)
+```
+
+---
+
+# Assembly of two geometries
+
+One of the most interesting features of `ggplot2` package is that we can add another data layer by adding another geometries. As a result, very interesting effects can be achieved.
+
+On the following examples we add a point layer (`geom_point()`) to a text layer (`geom_text()`).
+
+```{r, fig.height=4, fig.width=5}
+ggplot(koty_ptaki, aes(x= waga, y=predkosc, label=gatunek)) +
+  geom_text(hjust=-0.1) + 
+  geom_point() + xlim(0,350)
+```
+
+---
+
+# When should the labels be used on the chart?
+
+A label chart can be used in similar situations as a point chart.
+Also in this case we present on the chart the relation between two quantitative variables.
+
+
+Use of labels on chart has its advantages and disadvantages. The major advantages are:
+
+1. The names of objects make it possible to know what a given point represents. It is useful if we use a chart to identify *interesting* observations, e.g. the most uncommon, the most typical.
+2. If the labels are too long and cease to be legible, they can be shorten to few first letters e.g. by a `substr()` function.
+3. If the chart presents only a few observations, then the names better *fill* in the chart, without leaving large empty spaces which visually look improperly.
+
+And the main disadvantages include:
+
+1. If there are too many texts, they overlap one another and that is why they may prove illegible.
+2. If the texts are too long, it may be hard to tell which point they correspond to.
+
+To sum up, the `geom_text()` geometry is a great way to distinguish a small number of interesting points.
+
+---
+
+# Global mappings
+
+Let us notice that mappings determined by the `aes()` function inside the `ggplot()` function apply to all the layers.
+
+On the following example we map `druzyna` variable for the `color` feature and this mapping applies to both geometries so both the points and signs will have their colours dependent on `druzyna` variable.
+
+```{r, fig.height=4, fig.width=5}
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, label=gatunek, color=druzyna)) +
+  geom_text(hjust=-0.1) + 
+  geom_point() + xlim(0,350)
+```
+
+---
+
+# Local mappings
+
+If we want for mapping to apply only to one layer, we should move them to the specified geometry.
+
+On the following example the mapping of `druzyna` variable for `color` is assigned only for the `geom_text()`. 
+
+```{r, fig.height=4, fig.width=5}
+# colour for groups is specifies only for the labels, 
+# points stay black
+ggplot(koty_ptaki, aes(x=waga, y=predkosc, label=gatunek)) +
+  geom_text(hjust=-0.1, aes(color=druzyna)) + 
+  geom_point() + xlim(0,350)
+```
+
+---
+
+# A geom_text() geometry - line chart
+
+The first contact with `ggplot2` package often requires a change in the manner of thinking about the charts. But should this moment happen, it turns out that, having learned two geometries, the subsequent ones are really easy to use.
+
+For instance, the `geom_line()` geometry is used to draw a line. To use it on the chart, it is enough to add it on the chart with `+` sign.
+
+We present to you this geometry using the example of data on `WIG`. Below are the first two lines from this data set.
+
+```{r, fig.height=4, fig.width=5}
+head(WIG,2)
+```
+
+By `x` coordinate we will present the date of the quotation and by `y` coordinate - a closing quote. By this we may observe that if a variable being a date maps for `x` feature, an axis of the chart will be chosen so as to correctly reconstruct the indicated variable.
+
+```{r, fig.height=4, fig.width=5,warning=FALSE}
+ggplot(WIG, aes(x=Data, y=Kurs.zamkniecia)) + 
+  geom_line()
+```
+
+---
+
+# When should the lines be used on the chart?
+
+With R, the same data (two numeric variables) can be equally well presented with points as well as lines.
+
+However, there is a significant difference in a way in which such charts are perceived.
+
+The points do not have a direction, thus a cloud of points on the chart will make it possible to assess whether these points are distributed along some curve (dependence between the variables), form several groups (clusters) or there are some outliers.
+
+The lines on the chart have a direction. Looking at the lines our eye assesses their relative lengths and directions, while estimating the angles between the lines. 
+
+For this reason, the linear charts are preferable when:
+
+1. We want to present a trend, show how a certain value changes over time. Normally the horizontal axis `x`
+presents the time and vertical axis `y` shows the value.
+2. We want to present the pace of changes of a trend, whether the growth rate increases or decreases (whether the angles are increasing or not).
+3. We want to show the variability between the neighbouring measurements. Since neighbouring measurements are connected with a line it will be observable whether this line changes its directions suddenly or calmly.
+
+---
+
+# A geom_ribbon() geometry - a band chart
+
+The last example in this episode will be a `geom_ribbon()` geometry used for drawing the ribbon.
+
+It is such an interesting example because it requires indication of other characteristics than `y`, as the ribbons are described by a interval, namely `ymin` and `ymax` characteristics. Each of these features can be combined with a variable or ascribed a constant value.
+
+Using the example below, we draw the band extending from zero (constant value `ymin=0`) to the value of `WIG` (`ymax=Kurs.zamkniecia`).
+
+```{r, fig.height=4, fig.width=5,warning=FALSE}
+ggplot(WIG, aes(x=Data, ymin=0, ymax=Kurs.zamkniecia)) + 
+  geom_ribbon()
+```
+
+---
+
+# Where to search for further information
+
+We have mastered the basis of chart creating with the use of ggplot2 package. In the subsequent episodes we will present you more information, but they can also be found in the following sources.
+
+- Very interesting presentation on designing the charts, named *Figure Design* is available at
+http://www.bioinformatics.babraham.ac.uk/training/Figure%20Design%20Course%20Presentation.pdf
+
+- More information concerning charts creation with the ggplot2 packet can be found in Chapter 4 of *"Przewodnik
+po pakiecie R"*. For more information on this book http://www.biecek.pl/R/
+
+- Many useful instructions can also be found in an e-book *"CookBook for R"*
+http://www.cookbook-r.com/Graphs/
+
+- Very extensive documentation of ggplot2 packet is available on the *"ggplot2"* website.
+http://docs.ggplot2.org/current/index.html
+
+- Nothing, however, will replace own experiments with creation of the charts. If something isn't working as it should, you can ask for help on the forum of this course or on the Internet, e.g. on forum http://stats.stackexchange.com/.
+
+---
+
+# Exercises:
+
++ Using a point chart present the relation between longevity (`zywotnosc` column) and animal weight (`waga` column).
+
++ Mark with the colour or shape of a point the information whether a bird or cat is presented. What are the differences between life span and weight for cats and birds?
+
++ Use labels to determine which bird and which cat have the higher longevity.
+
++ Using ribbon geometry (`geom_ribbon`) present a minimum and maximum exchange rate for each day on the basis of the data from `WIG` dataset.
+
+Sample answers are available on the website https://rawgit.com/pbiecek/MOOC/master/0_dane/9_zadania_sezon2.html

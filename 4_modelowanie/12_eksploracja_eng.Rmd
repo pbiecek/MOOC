@@ -1,0 +1,347 @@
+---
+title: "Data exploration"
+author: "data busteRs"
+date: "season 2 / episode 12<br><br> All rights reserved.<br> Usage allowed only with the author's permission.  <br><br><br><br>Press `A` to turn slides into full text.  <br> Press `T` to show Table of Contents.
+
+
+slide 1/19
+* Contents pogRomcy danych / modelowanie / eksploracja"
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / modelowanie / eksploracja"
+
+---
+
+```{r, echo=FALSE}
+library(knitr)
+opts_chunk$set( message=FALSE,tidy.opts=list(keep.blank.line=TRUE, width.cutoff=120),options(width=120))
+```
+
+# What is this episode about?
+
+Before starting to build models, and before starting the analysis of the data, one should take a closer look at such data.
+
+Observing the data, often without any specific purpose, is called exploration. 
+
+First look at the data. Checking which variables, which ranges of variables, which relationships between the variables we have to deal with.
+
+Exploration often begins with observing each variable individually, or in pairs, based on simple graphical or tabular summaries.
+
+In this episode we'll show how to present the distribution of a quantitative variable and the qualitative variable with a few popular statistics. 
+
+For quantitative (numerical) variable we'll present
+
+- mean value, median,
+- Tukey's five-number summary,
+- boxplot, histogram.
+
+For qualitative (with categories) variable we'll present
+
+- contingency table,
+- sorting.
+
+---
+
+# Movie and TV Series database
+
+In the IMDB movie database (Internet Movie Database) one can find different interesting data concerning TV series. In particular, the average user ratings issued for subsequent episodes of the series.
+
+For example no the http://www.imdb.com/title/tt0903747/epdate?ref_=ttep_ql_4 website there are ratings for *Breaking Bad*TV series.
+
+For the purposes of this episode we have downloaded data from the Internet, adjusted them and shared them in a dataset `serialeIMDB` in a packet `PogromcyDanych`, which was attached to this course. 
+
+The entire data set is quite large, all episodes of all series constitute over 20 thousand lines, each described by 8 columns/variables. 
+
+For the first few lines we'll take a look at the columns in order.
+
+```{r, warning=FALSE, message=FALSE}
+# wczytujemy zbiór danych, jeżeli nie jest zainstalowany to należy go zainstalować
+# poleceniem install.packages("PogromcyDanych")
+library(PogromcyDanych)
+# wielkość zbioru danych
+dim(serialeIMDB)
+# pierwsze 6 wierszy, w kolejnych kolumnach jest nazwa serialu, nazwa odcinka, 
+# numer sezonu, numer odcinka, średnia ocena, liczba oddanych głosów, oraz identyfikator z bazy IMDB
+head(serialeIMDB)
+```
+
+---
+
+# TV Series
+
+Each line in the `serialeIMDB` data set describes ratings of one episode of one of over 200 series.
+
+Data column called `serial` is a qualitative variable, assuming TV series names as values. Level list of the qualitative variable may be displayed with `levels()`function.
+
+Note `serialeIMDB$serial`means reference to the `serial` column of the `serialeIMDB`data set.
+
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
+levels(serialeIMDB$serial)
+```
+
+---
+
+# Contingency table
+
+`serialeIMDB$serial` column includes names of the series, often repetitive.
+
+Frequency table is a useful function for exploring qualitative variables. It displays how often a specified value is present in the vector.
+
+Frequency table can be set with a  `table()`function. The result of this function can be displayed on the screen, or, as in the following example, assign to the variable.
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
+tabela <- table(serialeIMDB$serial)
+# pierwsze 6 wartości z wektora
+head(tabela)
+```
+
+Contingency table for 200 series is hard to review. If we are interested in the most or the least frequent values, we can sort the contingency table to read them ( `sort()`function).
+
+After sorting by decreasing value ( `decreasing = TRUE`argument) the most frequent values will be displayed at the beginning, and the least frequent at the end of the sorted vector.
+
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
+sort(tabela, decreasing = TRUE)
+```
+
+---
+
+# Breaking Bad
+
+The entire TV series data set constitutes of over 20 thousand lines. Operating a data set that large, concerning all the TV series, is hard because we cannot possibly see all 20 thousand lines at once.
+
+Therefore, for the further examples we will choose one series from the data set, which we will look at more closely. Herein it will be *Breaking Bad*, but it's worth it to experiment with different series.
+
+```{r,  message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
+# funkcją filter() wybieramy tylko wiersze dla serialu Breaking Bad
+BreakingBad <- filter(serialeIMDB, serial == "Breaking Bad") 
+# o ilu odcinkach dostępna jest informacja dla tego serialu? 
+dim(BreakingBad)
+
+# a jak wyglądają dane dla serialu Star Trek: The Next Generation
+filter(serialeIMDB, serial == "Star Trek: The Next Generation") 
+```
+
+# What happens with the episode ratings?
+
+What can we do with data of one TV series?
+
+The pattern of rating specific series is surely interesting. This information is available in the `ocena` column and we can access it by referring to this column with the `$`operator.
+
+However, each episode was rated differently, one more favorably, the other less favorably. Let's compare three methods of presenting ratings information. Does any of these numbers presentation methods allow us to notice something interesting?
+
+The episodes are sorted by their premiere dates.
+
+[HINT] from 45th episode the episode ratings are increasing. Which presentation method displays it the clearest. Which one displays it least clearly? Why?
+
+1. Method one: numbers vector
+
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
+BreakingBad$ocena
+```
+
+# What happens with the episode ratings?
+
+2. Method two: bar plot, height of the bar corresponds with the rating.
+
+
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
+barplot(BreakingBad$ocena)
+```
+
+# What happens with the episode ratings?
+
+3. Method three: scatter plot, position of the dot corresponds with the episode's rating.
+
+```{r, message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
+plot(BreakingBad$ocena)
+```
+
+# Sorting
+
+Often, the most interesting observations are the extreme ones.
+
+What is the easiest way to check which episodes gather extreme ratings?
+
+The easiest way is to sort episodes by rating and display the sorted data set. The lowest rated episode will appear at the beginning, and the highest rated episodes will appear at the end.
+
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
+arrange(BreakingBad, ocena)
+```
+
+# How was this series rated?
+
+For Breaking Bad TV series we have information about 62 episode available. 
+
+Each one has a specific average rating, but we sometimes want to consider all of the episodes as entirety of the show. Is the entire series good or not?
+
+How to summarize the ratings of 62 episodes?
+
+Dwa najpoopularniejsze podejscia to średnia oraz mediana (czyli element środkowy). Można je prosto wyznaczyć funkcjami `mean()` and `median()`functions.
+
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
+mean(BreakingBad$ocena)
+median(BreakingBad$ocena)
+```
+
+Median is a value, which is in the middle after sorting (or, if there is even amount of values, it is a mean value of two middle values).
+
+More information than only the mean value are included in Tukey's five-number summary. They can be acquired (alongside arithmetic mean value) with  `summary()`function. Those five numbers display:
+
+- `Min`rating of the worst episode,
+- `Max` rating of the best episode,
+- `Median` rating of the middle episode (if there is odd number of episodes) or mean value of two middle episodes (if there is even number of episodes),
+- `1st Qu.` and `3rd Qu.`, namely quartile ratings (the middle observation from the minimum to the median and from the median to the maximum).
+
+Tukey's five-numbers summary divides values into four equinumerous groups.
+
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
+summary(BreakingBad$ocena)
+```
+
+# Five numbers - boxplot
+
+Tukey's five-number summary may be displayed graphically. Boxplot is used to provide such a presentation.
+
+In this plot there are five horizontal lines and each corresponds to one quartile.
+
+The same amount of values is located between adjacent horizontal lines. If one of these segments is longer than the others, it means that the values in it are rarer than in the others.
+
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
+boxplot(BreakingBad$ocena )
+```
+
+# Five numbers - boxplot
+
+An advantage of the boxplot is the fact that it allows for easier and better comparison of observation groups.
+
+Let's observe how the episodes rating differentiate between seasons.
+
+How to do this in R program? In `boxplot()` function we will use ~ formula symbol to specify that we want to present the ratings broken down by seasons. The left side of the symbol specifies variable that we want to summarize, and the right side defines the groups we want to compare.
+
+What can we read from such a representation of data? A large number of things. Let's try to deal with this issue individually for a moment. On the plot below we'll find three interesting observations.
+
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
+BreakingBad$sezon <- droplevels(BreakingBad$sezon)
+boxplot(BreakingBad$ocena ~ BreakingBad$sezon)
+```
+
+# Five numbers - boxplot
+
+What interesting observations were made? For me the most interesting observations are:
+
+1. Season 5 has the best ratings. Its median is above the whole box for seasons 1 and 2, which means that more than half of the episodes of season 5 were rated higher than the best episode of the first two seasons.
+
+2. The weakest ratings are in season 3. It contains the worst-rated episode. Its median is also the lowest.
+
+3. The greatest variability is observed for season 4. It contains both a very poor episode (for this series) and a very good episode.
+
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5, echo=FALSE}
+boxplot(BreakingBad$ocena ~ BreakingBad$sezon)
+```
+
+# Histogram
+
+How else can display pattern of ratings?
+
+Histogram is an interesting alternative. Data presentation rule is as follows:
+
+We divide the range of values by a certain number (below it is `breaks = 10`) of intervals of equal length. Next we check how many values fall into each interval. On the plot we denote the number of these observations with the bar height.
+
+The taller the bars, the bigger the density of observations in a given interval.
+
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5}
+hist(BreakingBad$ocena, breaks = 10, col="grey")
+```
+
+# What can we learn from histogram that we cannot learn from other measures?
+
+Histogram is a more complicated plot than the boxplot.
+
+Does that complication provide any useful information?
+
+Yes! It can be easily noticed in  *The Shield*series. Looking at histogram we can notice a group of episodes with ratings in the 5-5.5 range, and a group of episodes with ratings in the 7.5-9 range as well. However, there are no episodes with a rating in 5.5-7 range.
+
+It's impossible to read such information from a simple boxplot.
+
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5.5, eval=FALSE}
+TheShield <- filter(serialeIMDB, serial == "The Shield")
+hist(TheShield$ocena, 10, col="grey")
+boxplot(TheShield$ocena, col="grey", range = 10)
+```
+```{r, message=FALSE, warning=FALSE, fig.width=6, fig.height=5.5, echo=FALSE}
+TheShield <- filter(serialeIMDB, serial == "The Shield")
+hist(TheShield$ocena, 10, col="grey")
+boxplot(TheShield$ocena, col="grey", range = 10)
+```
+
+---
+
+# Summary of R instructions
+
+In this episode we have discussed functions which are used for numerical and graphic exploration of quantitative data.
+
+```{r, eval=FALSE}
+# pakiet z danymi
+library(PogromcyDanych)
+
+# wielkość danych i kilka pierwszych wierszy
+dim(serialeIMDB)
+head(serialeIMDB)
+
+# wartości zmiennych jakościowych
+levels(serialeIMDB$serial)
+
+# jak wyznaczyć tabelę liczebności i ją posortować
+tabela <- table(serialeIMDB$serial)
+sort(tabela, decreasing = TRUE)
+
+# wybieramy tylko dane dotyczące serialu Breaking Bad
+BreakingBad <- filter(serialeIMDB, serial == "Breaking Bad") 
+# o ilu odcinkach dostępna jest informacja dla tego serialu? 
+dim(BreakingBad)
+
+# różne sposoby oglądania informacji o odcinkach
+BreakingBad$ocena
+barplot(BreakingBad$ocena)
+plot(BreakingBad$ocena)
+```
+
+# Summary of R instructions
+
+In this episode we have discussed functions which are used for numerical and graphic exploration of quantitative data.
+
+```{r, eval=FALSE}
+# sortowanie danych
+arrange(BreakingBad, ocena)
+
+# podsumowanie danych o ocenach
+summary(BreakingBad$ocena)
+
+# wykres pudełkowy
+boxplot(BreakingBad$ocena )
+
+# wykres pudełkowy dla grup
+BreakingBad$sezon <- droplevels(BreakingBad$sezon)
+boxplot(BreakingBad$ocena ~ BreakingBad$sezon)
+
+# histogram a więc pełna informacja o rozkładzie
+hist(BreakingBad$ocena, 10, col="grey")
+
+# kiedy histogram zdradza dodatkowe informacje
+TheShield <- filter(serialeIMDB, serial == "The Shield")
+hist(TheShield$ocena, 10, col="grey")
+boxplot(TheShield$ocena, col="grey", range = 10)
+```
+
+# Tasks
+
+- Choose  *Friday Night Lights* TV series and review how its popularity looks like. Is it more popular than *Breaking Bad*?
+
+- Review how the popularity of this series was changing in time. Have you noticed anything interesting?
+
+- Instead of presenting information about episode ratings, present information about the number of votes cast (popularity) for episodes. Are the same statistics equally suitable for presentation information about ratings and the votes cast?
+

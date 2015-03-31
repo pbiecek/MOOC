@@ -1,0 +1,114 @@
+---
+title: "Why R?"
+author: "Data CruncheRs"
+date: "Season 1 / Episode 2 <br> Przemysław Biecek @ University of Warsaw <br> Press `A` to convert slides to continuous text. <br> `T` Press to display a table of contents."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "Data CruncheRs / first steps / why R"
+---
+
+# What is this episode about?
+
+There are many reasons why you should learn the language R for data analysis.
+
+In this episode we'll show you why you should get to know R, what can be done in that language, and tell you how to learn it. 
+We will tell you what skills are needed to effectively work with data in one or another tool, and tell you how to acquire these skills.
+
+Are this language and this course for you?
+
+Perhaps you are an advanced data researcher with an excellent knowledge of SPSS / SAS / Statistica or Stata.
+
+Perhaps you are a business analyst with a good knowledge of Excel or Tableau.
+
+Perhaps your experience is in general programming languages such as Python, Java or C++.
+
+Perhaps you have already tried R, whether in the classroom or as a self-study.
+
+Or maybe you have not yet entered the labor market and you are checking this course out of pure curiosity.
+
+R is for you. Anyway, to analyze the data you need good tools and the skills to work with data. 
+
+This section is intended to encourage you to take a closer look into the R language.
+
+
+---
+
+# Why R?
+
+*R is a mature programming language designed for data analysis and visualization of data available for free on an open GPL licence.*
+
+Let's look at this sentence carefully.
+
+*R is a programming language.* This means that it is not limited to a few algorithms that built-in by a producer, but anyone can write his own algorithm. What's more, many people use this option and create new algorithms that other R users may use. This enables a rapid growth in the number of algorithms and functions available in R.
+
+*This is a mature language.* R has been developed for over 21 years, so that it could gain critical mass. Some design faults of early versions of R (eg. A limit of 4GB RAM) have been identified and eliminated. Today, it is a tool developed by a large group of statisticians and software engineers, which is a guarantee of a stable development.
+
+*Designed for data analysis.* There are many mature programming languages, but few of them are suitable for interacting with data. The R language combines some of the characteristics of functional languages and object-oriented languages, and the emphasis is on interactive work with the data. Additional libraries enable easiy creation of reports containing results. Thanks to these features R is perfect for data analysis.
+
+*Data Visualization.* In the R language you can create publication-ready statistical graphics. This means that without extra tools you can create professional statistical chart. What's more, there are plenty of packages that make creating such plots simple. We will discuss them in the second season of this course.
+
+*Available for free on the open GPL license.* R program can be used in many contexts. Is it at a university, or in commercial activities, we can use it at no charge. Moreover, it is open on an open license, which means that everyone has access to the source code of R, you can inspect how each element works, you can check for errors and possibly improve it.
+
+---
+
+# Why R?
+
+R initially gained popularity at the universities and colleges. It was, and stil is, used to teach data analysis and in condicting research. It's fair to say that the currently R is the main tool used in teaching at good universities. It has dominated scientific research in many fields such as bioinformatics and genetics. It is very popular in medicine, finance, and many others fields.
+
+For several years, the popularity of R in the industry increases rapidly. One of the reasons is that it is a free tool. It also provides many functions and algorithms. But it also owes its popularity to the fact that more and more analysts have been "educated on the program R" and who know it well. The number of jobs for people who know R well is growing.
+
+Small businesses often choose R to cut costs, but R is also used by the giants. Both by analytical companies (as an analytical engine) and by the media. It is used in Google, Facebook, NY Times, New Scientist and many other companies.
+
+R also integrates well with other IT solutions, such as Python, Java, C, C++, Hadoop, or various database engines.
+
+---
+
+# Why R?
+
+According to the results of the Google Trends, the interest in R is growing. It has more than doubled in the last ten years, while the attention on other data analysis software such as SPSS, SAS or Stata declines.
+
+![Google trends](figs/googleTrends.png)
+
+---
+
+# Is it worth it to learn programming? Is it not better to choose to point-and-click?
+
+Working with R requires some programming skills. For those accustomed to the "clickable" tools the beginnings might be a bit difficult, because they have to give up the old and bad habits and learn new syntax and function names. It is difficult and takes time, but it's worth at least for a couple of reasons.
+
+Once you develop a script that does some work, you can easily repeat it. Just copy the entire script. Thanks to that, as you gain experience, you will be more effective.
+
+You have written-down the commands that do the analysis for you. If after a year you want to re-run the analysis, it will be much simpler than "re-clicking" it in any of the point-and-click tools.
+
+If you are getting strange results, you can take a closer look at the entire path of analysis leading to these results. It is a step by step written as a script, a recipe. You do not have to recall it from your mind, it has been written down.
+
+---
+
+# And what do others think?
+
+My belief that R is an excellent tool for data analysis is maintained for several years. Eight years ago I wrote a book ,,A guide to R program'', available at http://biecek.pl/R, that lived-up to a third edition. I'm certainly not an impartial observer, so you should look at what other analysts working at companies, hospitals or universities have to say about R.
+
+Very interesting juxtaposition of R with other packages for data analysis (SAS / SPSS / Stata / Statistica) is located at this address http://www.burns-stat.com/pages/Tutor/R_relative_statpack.pdf.
+
+Below are a few quotes of analysts who work every day with data, and who appreciate R.
+
+*One of the greatest advantages The of R: getting your work done better and in less time.*
+
+  Frank Harrell, Biostatistics, Vanderbilt University
+
+
+*R has really become the second language for people coming out of grad school now, and there's an amazing amount of code being written for it,* 
+
+  Max Kuhn, associate director of nonclinical statistics at Pfizer.
+
+*R is really important to the point That it's hard to overvalue it. It allows statisticians is a very intricate and complicated analyzes without knowing the blood and guts of computing systems.* 
+
+  Google research scientist, quoted in the New York Times
+
+*The great beauty of R is that you 'can modify it to to all sorts of things, and you have a lot of prepackaged stuff that's already available, so you're standing on the shoulders of giants.* 
+
+  Google chief economist, quoted in the New York Times
