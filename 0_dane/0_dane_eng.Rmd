@@ -9,7 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "Data CruncheRs / zbiory danych"
+    footer: "Data CruncheRs / data sets"
 
 ---
 
