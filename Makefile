@@ -1,23 +1,29 @@
-files=$(filter-out %_eng.Rmd,$(wildcard *.Rmd))
-use_code=1
+ifeq ( $(origin knitr_error), undefined )
+knitr_error=TRUE
+endif
+# options(warn)
+warn=1
 
 .PHONY: default
-default: txt
+default: $(files:=.html)
+
+.PHONY: all
+all: $(files:=.html) $(files:=_eng.html)
 
 .PHONY: md
-md: $(files:.Rmd=.md)
+md: $(files:=.md)
 
 .PHONY: txt
-txt: $(files:.Rmd=.txt)
+txt: $(files:=.txt)
 
 .PHONY: docx
-docx: $(files:.Rmd=.docx)
+docx: $(files:=.docx)
 
 .PHONY: html
-html: $(files:.Rmd=.html)
+html: $(files:=.html)
 
 
-.PRECIOUS: $(files:.Rmd=.md)
+.PRECIOUS: $(files:=.md)
 
 
 
@@ -26,7 +32,7 @@ ifeq ($(use_code),1)
 	Rscript -e 'knitr::knit("$<", output="$@")'
 
 %.html: %.Rmd
-	Rscript -e 'rmarkdown::render("$<")'
+	Rscript -e 'options(warn=$(warn));library(knitr); opts_chunk$$set(error=$(knitr_error));rmarkdown::render("$<", output_format="all")' | tee $(<:.Rmd=.log) 2>&1
 else
 %.md: %.Rmd
 	Rscript -e 'library(knitr);opts_chunk$$set(eval=FALSE, echo=FALSE, results="hide");knitr::knit("$<", output="$@")'
@@ -43,15 +49,29 @@ endif
 	pandoc -s $< -o $@
 
 
-wcount: $(files:.Rmd=.txt)
-	wc -m $(files:.Rmd=.txt) > $@
+wcount: $(files:=.txt)
+	wc -m $(files:=.txt) > $@
 
 lcount: $(files:.Rmd=.txt)
-	wc -l $(files:.Rmd=.txt) > $@
+	wc -l $(files:=.txt) > $@
 
 
 stats.txt: wcount lcount
 	Rscript -e 'wcount <- read.table("wcount"); lcount <- read.table("lcount"); rval <- data.frame(wcount=wcount[[1]]-lcount[[1]], fname=wcount[[2]]); rval$$strony <- rval$$wcount / 1500; rval$$znakicum <- cumsum(rval$$wcount); rval$$stronycum <- cumsum(rval$$strony); gdata::write.fwf(rval, file="$@")'
 
-slajdy-pl.zip: $(files:.Rmd=.html)
+slajdy-pl.zip: $(files:=.html)
 	zip $@ $^
+
+slajdy-eng.zip: $(files:=_eng.html)
+	zip $@ $^
+
+# testy
+checks:
+	echo "@ Authors" > $@
+	grep -H "author:" $(files:=_eng.Rmd) | sort >> $@
+	echo "@ Date" >> $@
+	grep -H "date:" $(files:=_eng.Rmd) | sort >> $@
+	echo "@ Footers ANG" >> $@
+	grep -H "footer:" $(files:=_eng.Rmd) | sort >> $@
+	echo "@ All R comments (eng)" >> $@
+	grep -nH "^\s*#" $(files:=_eng.Rmd) >> $@

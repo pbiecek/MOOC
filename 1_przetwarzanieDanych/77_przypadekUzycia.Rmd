@@ -13,6 +13,7 @@ Pomóżmy mu sprawdzić, ile taki samochód kosztuje.
 
 ```{r, warning=FALSE}
 library(SmarterPoland)
+library(PogromcyDanych)
 library(dplyr)
 
 wybrane <-
