@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Data CruncheRs" />
-  <meta name="copyright" content="pogRomcy danych / programowanie / loops" /> 
+  <meta name="copyright" content="Data CruncheRs / programming / loops" /> 
   <title>Loops</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
@@ -48,7 +48,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 Data CruncheRs
   </p>
-  <p class="date">season 1 / episode 8<br><br> All rights reserved.<br> Using without permission is prohibited <br><br><br><br>Press <code>A</code> to change slides into text <br> Press <code>T</code> to display table of contents.</p>
+  <p class="date">season 1 / episode 8<br><br><br><br>Press <code>A</code> to change slides into text <br> Press <code>T</code> to display table of contents.</p>
 </div>
 <div id="what-is-this-episode-about" class="slide section level1">
 <h1>What is this episode about?</h1>
@@ -122,16 +122,14 @@ liczbaStluczek &lt;-<span class="st"> </span><span class="kw">round</span>(<span
 for (i in <span class="dv">1</span>:liczbaStluczek) {
   <span class="kw">cat</span>(<span class="st">&quot;Bump &quot;</span>, i,<span class="st">&quot;, repair cost: &quot;</span>, <span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">min=</span><span class="dv">0</span>, <span class="dt">max=</span><span class="dv">10000</span>), <span class="st">&quot; PLN</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">''</span>)
 }</code></pre>
-<pre><code>## Bump 1, repair cost: 1052.436 PLN
-## Bump 2, repair cost: 9227.604 PLN
-## Bump 3, repair cost: 3604.842 PLN
-## Bump 4, repair cost: 3530.049 PLN
-## Bump 5, repair cost: 1263.271 PLN
-## Bump 6, repair cost: 7922.149 PLN
-## Bump 7, repair cost: 6814.482 PLN
-## Bump 8, repair cost: 3343.348 PLN
-## Bump 9, repair cost: 3266.572 PLN
-## Bump 10, repair cost: 7202.742 PLN</code></pre>
+<pre><code>## Bump 1, repair cost: 2031.579 PLN
+## Bump 2, repair cost: 553.649 PLN
+## Bump 3, repair cost: 3731.573 PLN
+## Bump 4, repair cost: 4105.586 PLN
+## Bump 5, repair cost: 1737.576 PLN
+## Bump 6, repair cost: 8001.385 PLN
+## Bump 7, repair cost: 1352.62 PLN
+## Bump 8, repair cost: 6553.759 PLN</code></pre>
 <p>In this example the function <code>runif()</code> is used to draw <code>n</code> numbers from the range starting from <code>min</code> and ending at <code>max</code>. First, we use the function to draw the number of collisions within the range from 1 to 10. The function <code>round()</code> is used to round down the results to whole numbers.</p>
 <p>At each stage of the loop subsequent values are randomly chosen and displayed on the screen. Although this loop appears to be simple and quite innocent, a very similar manner of drawing the size of damage is really used in management of uncertainty concerning amount of damage resulting from car accidents or other accidental events which may concern real companies.</p>
 </div>

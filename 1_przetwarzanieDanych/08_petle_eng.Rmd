@@ -1,12 +1,12 @@
 ---
 title: "Loops"
 author: "Data CruncheRs"
-date: season 1 / episode 8<br><br> All rights reserved.<br> Using without permission is prohibited <br><br><br><br>Press `A` to change slides into text <br> Press `T` to display table of contents.
+date: season 1 / episode 8<br><br><br><br>Press `A` to change slides into text <br> Press `T` to display table of contents.
 output:
   slidy_presentation:
     css: ../style.css
     font_adjustment: 0
-    footer: pogRomcy danych / programowanie / loops
+    footer: Data CruncheRs / programming / loops
     highlight: default
     includes:
       in_header: ../tracking.html
