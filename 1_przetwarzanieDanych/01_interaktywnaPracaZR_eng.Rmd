@@ -1,7 +1,7 @@
 ---
 title: "Intro"
 author: "Data CruncheRs"
-date: "season 1 /episode 1<br><br> All rights reserved.<br> Use of the content permitted only with the consent of the author.  <br><br><br><br>Press `A` to switch from slides to continuous text.  <br> Press `T` to see the table of contents.  "
+date: "season 1 /episode 1<br><br><br><br>Press `A` to switch from slides to continuous text.  <br> Press `T` to see the table of contents.  "
 output:
   slidy_presentation:
     includes:
