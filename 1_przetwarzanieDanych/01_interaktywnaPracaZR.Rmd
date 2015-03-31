@@ -12,11 +12,11 @@ output:
     footer: "pogRomcy danych / pierwsze kroki / intro"
 ---
 
-# Co to za kurs?
+# Co to za kursy?
 
 *PogRomcy danych* to zbiór dwóch kursów o przetwarzaniu, wizualizacji i modelowaniu danych.
 
-Kursy zostały przygotowane dla osób, które pracują, chciałyby pracować, lub są ciekawe jak wygląda, praca z danymi. Oba kursy są prowadzone na poziomie podstawowym. Zakładamy jedynie ogólną orientację jak wygląda tabela z danymi w arkuszach kalkulacyjnych, np. takich jak Excel, oraz ogólną umiejętność pracy z komputerem. 
+Kursy (nazywane też sezonami) zostały przygotowane dla osób, które pracują, chciałyby pracować, lub są ciekawe jak wygląda, praca z danymi. Oba kursy są prowadzone na poziomie podstawowym. Zakładamy jedynie ogólną orientację jak wygląda tabela z danymi w arkuszach kalkulacyjnych, np. takich jak Excel, oraz ogólną umiejętność pracy z komputerem. 
 
 Wcześniejsza znajomość programowania będzie bardzo przydatna, ale nie jest konieczna. Wszystkie nowe pojęcia pokazujemy na przykładach związanych z analizą ciekawych danych.
 

@@ -44,7 +44,7 @@ Ten odcinek ma na celu zachęcenie Cię do dokładniejszego poznania języka R.
 
 Przyjrzyjmy się temu zdaniu dokładniej.
 
-*R jest językiem programowania.* Oznacza to, że nie jest ograniczony do kilku algorytmów, które przewidzieli twórcy, ale każdy może napisać w nim własny algorytm Co więcej wiele osób korzysta z tej opcji i tworzy nowe algorytmy które inni użytkownicy R mogą wykorzystywać. Dzięki temu liczba algorytmów i funkcji dostępnych w R bardzo szybko się zwiększa.
+*R jest językiem programowania.* Oznacza to, że nie jest ograniczony do kilku algorytmów, które przewidzieli twórcy, ale każdy może napisać w nim własny algorytm. Co więcej, wiele osób korzysta z tej opcji i tworzy nowe algorytmy, które inni użytkownicy R mogą wykorzystywać. Dzięki temu liczba algorytmów i funkcji dostępnych w R bardzo szybko się zwiększa.
 
 *Jest dojrzałym językiem.* Jest rozwijany od ponad 21 lat, dzięki czemu zdążył nabrać masy krytycznej. Pewne usterki projektowe wczesnych wersji R (np. ograniczenie do 4GB RAM) zostały dostrzeżone i wyeliminowane. Dziś jest to narzędzie rozwijane i przez dużą grupę statystyków, i inżynierów oprogramowania, co jest gwarancją stabilnego rozwoju.
 
@@ -52,7 +52,7 @@ Przyjrzyjmy się temu zdaniu dokładniej.
 
 *Wizualizacji danych.* W języku R można wykonać grafiki statystyczne o publikacyjnej jakości. Oznacza to, że bez dodatkowych narzędzi można stworzyć profesjonalny wykres. Co więcej, jest wiele pakietów, dzięki czemu tworzenie takich wykresów jest proste. Omówimy je w drugim sezonie tego kursu.
 
-*Dostępny bezpłatnie na otwartej licencji GPL.* Program R jest dostępny bezpłatnie do każdych zastosowań. Czy to na uczelni, czy w działalności komercyjnej, możemy go wykorzystywać bez żadnych opłat. Co więcej, jest otwarty na otwartej licencji, co oznacza, że każdy ma dostęp do źródeł, każdy element można zobaczyć jak funkcjonuje, można sprawdzić czy nie zawiera błędów i ewentualnie usprawnić. 
+*Dostępny bezpłatnie na otwartej licencji <a href="https://www.gnu.org/copyleft/gpl.html">GPL</a>.* Program R jest dostępny bezpłatnie do każdych zastosowań. Czy to na uczelni, czy w działalności komercyjnej, możemy go wykorzystywać bez żadnych opłat. Program R, jest dostępny na otwartej licencji, co oznacza, że każdy ma dostęp do źródeł, każdy element można zobaczyć jak funkcjonuje, można sprawdzić czy nie zawiera błędów i ewentualnie usprawnić. 
 
 ---
 
@@ -61,7 +61,7 @@ Przyjrzyjmy się temu zdaniu dokładniej.
 Początkowo R zyskał popularność na uczelniach. Był i jest wykorzystywany do nauczania analizy danych jak i do prowadzenia badań naukowych. Można śmiało powiedzieć, że obecnie R jest głównym narzędziem używanym w dydaktyce na dobrych uczelniach. Zdominował prowadzenie badań naukowych w wielu dziedzinach, takich jak bioinformatyka czy genetyka. Jest bardzo popularny w zastosowaniach medycznych, finansowych i wielu innych.
 
 Od kilkunastu lat rośnie popularność R w przemyśle. Jedną z przyczyn jest to, że jest to narzędzie bezpłatne. Jest w nim również
-dostępnych bardzo wiele funkcji. Ale popularność swoją zawdzięcza też temu, że coraz więcej analityków zostało "wykształconych na programie R"" oraz ten program zna. Rośnie liczba ofert pracy dla osób znających język R.
+dostępnych bardzo wiele funkcji. Ale popularność swoją zawdzięcza też temu, że coraz więcej analityków zostało "wykształconych na programie R" oraz ten program zna. Rośnie liczba ofert pracy dla osób znających język R.
 
 Małe firmy często wybierają R by ciąć koszty, ale R jest również używany przez gigantów. Zarówno przez firmy analityczne (jako silnik analityczny), jak i przez media. Jest używany w Google, Facebook, NY Times, New Scientist i wielu innych firmach.
 
@@ -85,7 +85,7 @@ Jeżeli raz opracujemy skrypt wykonujący pewną pracę, możemy następnie ją 
 
 Mamy zapisane komendy, które użyliśmy do analiz. Jeżeli po roku chcemy je odtworzyć jest to prostsze niż w przypadku klikanych narzędzi.
 
-Jeżeli otrzymujemy dziwne wyniki, to całą ścieżkę analizy, która prowadzi do tych wyników możemy przeanalizować. Jest ona zapisana krok po kroku jako skrypt. Nie musimy jej przywoływać z pamięci.
+Jeżeli otrzymujemy dziwne wyniki, to całą ścieżkę analizy, która prowadzi do tych wyników możemy przeanalizować. Jest ona zapisana krok po kroku jako skrypt. Nie musimy jej przywoływać z pamięci, mogą z tych skryptów skorzystać też inne osoby.
 
 ---
 
