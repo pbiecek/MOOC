@@ -1,9 +1,7 @@
 ---
 title: "Data aggregates [dplyr / summarise]"
 author: "Data CruncheRs"
-date: "season 1 / episode 22 <br><br> All rights reserved.<br> The use shall be subject
-to prior consent of the author<br><br><br><br> Press `A` to see the plain text instead
-of the slides <br> Press `T` to display the table of contents"
+date: "season 1 / episode 22<br><br><br><br> Press `A` to see the plain text instead of the slides <br> Press `T` to display the table of contents"
 output:
   slidy_presentation:
     includes:
@@ -11,7 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "Data CruncheRs / data processing / aggregates"
+    footer: "Data CruncheRs / processing / aggregates"
 
 ---
 
