@@ -28,11 +28,11 @@ Do instalacji tych elementów potrzebny jest dostęp do Internetu.
 
 # Instalacja R
 
-Najnowszą wersję programu R (na dzień dzisiejszy jest to wersja 3.1.2) można pobrać ze strony
+Najnowszą wersję programu R (na dzień dzisiejszy jest to wersja 3.1.3) można pobrać ze strony
 http://cran.r-project.org/.
-Nie musimy pamiętać tego adresu, wystarczy wpisać w Google ‘R GNU’ a powyższy adres będzie pierwszym linkiem.
+Nie musimy pamiętać tego adresu, wystarczy wpisać w Google ‘R’ a powyższy adres będzie pierwszym linkiem.
 
-Na stronie w zakładce *Download* znaleźć można źródła do pobrania oraz program skompilowany dla popularnych systemów operacyjnych. Instalacja sprowadza się do klikania *dalej, dalej*. 
+Na stronie w zakładce *Download* znaleźć można źródła do pobrania oraz program binarny działający na popularnych systemach operacyjnych (Windows / OSX / Linux). Instalacja sprowadza się do klikania *dalej, dalej*. 
 
 
 ![Instalacja R](figs/installR.png)
@@ -49,7 +49,7 @@ Nie potrzebujemy specjalnych uprawnień administracyjnych aby zainstalować prog
 
 Program R jest całkowicie bezpłatny do wszelkich zastosowań, edukacyjnych, przemysłowych, biznesowych, komercyjnych i hobbystycznych. Program R jest dostępny na licencji GPL 2.
 
-Co roku oddawana jest do użycia nowa wersja R, tak więc w trakcie kursu może się okazać, że wersja 3.2 stanie się oficjalną (teraz jest tzw. wersją deweloperską). Zdecydowana większość funkcji działa identycznie pomiędzy wersjami, więc nie musimy obawiać się, że coś nie działa, jeżeli zainstalowaną mamy starszą wersję R. Wersja 3.1.2 lub nowsza wystarczy aby zrealizować ten kurs.
+Co roku oddawana jest do użycia nowa wersja R, tak więc w trakcie kursu może się okazać, że wersja 3.2 stanie się oficjalną (teraz jest tzw. wersją deweloperską). Zdecydowana większość funkcji działa identycznie pomiędzy wersjami, więc nie musimy obawiać się, że coś nie działa, jeżeli zainstalowaną mamy starszą wersję R. Wersja 3.1.3 lub nowsza wystarczy aby zrealizować ten kurs.
 
 Praca z programem R jest interaktywna, co oznacza, że wpisując polecenia do konsoli R otrzymujemy natychmiast wyniki wykonanych poleceń.
 
