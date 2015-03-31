@@ -12,6 +12,13 @@ output:
     footer: "pogRomcy danych / pierwsze kroki / wprowadzenie do RStudio"
 ---
 
+# Filmowe streszczenie
+
+<br>
+<center><iframe width="720" height="405" src="https://www.youtube.com/embed/QBAVcoXAS98" frameborder="0" allowfullscreen></iframe></center>
+
+---
+
 # O czym jest ten odcinek
 
 Najtrudniejsze są początki. Aby dojść do miejsca w którym nasza praca stanie się przyjemnością i będzie efektywna, musimy nauczyć się nowego języka. A nauka, czy to języka, czy czegokolwiek innego, to seria prób, czasem niepowodzeń, kolejnych prób i tak nieustannie.
