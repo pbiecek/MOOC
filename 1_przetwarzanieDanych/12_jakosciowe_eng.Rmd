@@ -1,14 +1,14 @@
 ---
 title: "Qualitative variables"
 author: "Data CruncheRs"
-date: season 1 / episode 12 <br><br> All rights reserved.<br> Using without permission is prohibited <br><br><br><br>Press `A` to change slides into text <br> Press `T` to display table of contents.
+date: season 1 / episode 12<br><br><br><br>Press `A` to change slides into text <br> Press `T` to display table of contents.
 output:
   beamer_presentation:
     highlight: default
   slidy_presentation:
     css: ../style.css
     font_adjustment: 0
-    footer: Data CruncheRs / data processing / qualitative variables
+    footer: Data CruncheRs / processing / qualitative variables
     highlight: default
     includes:
       in_header: ../tracking.html
