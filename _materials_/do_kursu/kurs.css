@@ -428,7 +428,7 @@ code > span.bn { color: #40a070; }
 code > span.fl { color: #40a070; }
 code > span.ch { color: #4070a0; }
 code > span.st { color: rgb(0,25,169) !important; }
-code > span.co { color: #60aa0b0; }
+code > span.co { display: block;}
 code > span.ot { color: rgb(197,42,51) !important; }
 code > span.al { color: #ff0000; }
 code > span.fu { color: #06287e; }
