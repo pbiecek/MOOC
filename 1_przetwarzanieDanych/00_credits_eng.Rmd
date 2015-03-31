@@ -1,7 +1,7 @@
 ---
 title: "Team"
 author: "Data CruncheRs"
-date: "season 1 /episode 24<br><br> All rights reserved.<br> Use of the content permitted only with the consent of the author.  <br><br><br><br>Press `A` to switch from slides to continuous text.  <br> Press `T` to see the table of contents.  "
+date: "season 1 / episode 24<br><br><br><br>Press `A` to switch from slides to continuous text.  <br> Press `T` to see the table of contents.  "
 output:
   slidy_presentation:
     includes:
@@ -53,10 +53,6 @@ Data CruncheRs have been developed in collaboration with [ICS](http://www.ics-gr
 
 * Paweł Dudek
 
-*Organizational assistance*
-
-* Michał Bojanowski, ICM
-
 *Exercises*
 
 * Przemysław Biecek, ICM
@@ -64,3 +60,7 @@ Data CruncheRs have been developed in collaboration with [ICS](http://www.ics-gr
 *Exercise checking system*
 
 * Cezary Chudzian
+
+*Organization*
+
+* Michał Bojanowski, ICM (WSAD program director)
