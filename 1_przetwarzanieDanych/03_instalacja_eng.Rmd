@@ -1,7 +1,7 @@
 ---
 title: "How to install R, RStudio and additional packages?"
 author: "Data CruncheRs"
-date: "season 1 / episode 3 <br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Press `A` to switch from slides to continuous text. <br> Press `T` to see the table of contents."
+date: "season 1 / episode 3<br><br><br><br>Press `A` to switch from slides to continuous text. <br> Press `T` to see the table of contents."
 output:
   slidy_presentation:
     includes:
