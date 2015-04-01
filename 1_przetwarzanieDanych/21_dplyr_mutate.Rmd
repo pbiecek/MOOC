@@ -77,7 +77,7 @@ koty_ptaki %>%
 
 Operacje tworzenia nowych zmiennych przećwiczymy też na znacznie większym i złożonym zbiorze danych. Mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.
 
-Zbiór danych `auta2012` jest dostępny po wczytaniu pakietu `PogromcyDanych`. Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html
+Zbiór danych `auta2012` jest dostępny po wczytaniu pakietu `PogromcyDanych`. Poniżej przedstawiamy 6 pierwszych wierszy z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/0_dane.html
 
 ```{r, message=FALSE}
 head(auta2012)

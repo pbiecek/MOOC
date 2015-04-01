@@ -77,7 +77,7 @@ koty_ptaki %>%
 
 Operacje filtrowania przećwiczymy też na znacznie większym zbiorze danych, który już nie sposób w całości wyświetlić na ekranie. Mianowicie na zbiorze danych o cenach ofertowych używanych samochodów.
 
-Zbiór danych `auta2012` jest dostępny po wczytaniu pakietu `PogromcyDanych`. Poniżej przedstawiamy listę nazw kolumn z tego zbioru danych, więcej informacji o tym zbiorze danych znaleźć można na stronie https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html
+Zbiór danych `auta2012` jest dostępny po wczytaniu pakietu `PogromcyDanych`. Poniżej przedstawiamy listę nazw kolumn z tego zbioru danych, więcej informacji o tym zbiorze danych znaleźć można na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/0_dane.html
 
 W tym zbiorze dostępne są następujące dane.
 

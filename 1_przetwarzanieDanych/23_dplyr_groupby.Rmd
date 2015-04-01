@@ -64,7 +64,7 @@ koty_ptaki %>%
 
 Aby przedstawić więcej możliwości, które daje operacja grupowania wykorzystamy  zbiór danych `auta2012`.
 
-Poniżej przedstawiamy 6 pierwszych wierszy i wybrane kolumny z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie https://rawgithub.com/pbiecek/MOOC/master/0_dane/0_dane.html
+Poniżej przedstawiamy 6 pierwszych wierszy i wybrane kolumny z tego zbioru danych. Szczegółowy opis tego zbioru znajduje się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/0_dane.html
 
 ```{r, message=FALSE}
 auta2012 %>%

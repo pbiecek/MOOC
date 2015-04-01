@@ -30,6 +30,8 @@ Rozwiązanie dowolnych 15 zadań jest wymagane do zaliczenia kursu.
 
 Coraz więcej książek, podręczników i artykułów jest poświęconych programowi R.
 
+<a href="http://biecek.pl/R"><img align="right" style="border: solid 1px" width="300px" src="http://biecek.pl/grafika/okladkaPrzewodnikR.png"></a>
+
 W pierwszej kolejności chciałbym polecić pozycję, którą sam przygotowałem będąc doktorantem. 
 Co jakiś czas ją uaktualniam, do dziś doczekała się ona trzeciego rozszerzonego wydania. 
 Można z jej pomocą poznać podstawy języka R jak również bardziej zaawansowane mechanizmy takie jak pakiet *knitr* do automatycznego tworzenia raportów, funkcje do analizy danych, prezentowania danych, optymalizacji, przetwarzania wielkoskalowego oraz wiele innych tematów (omówionych jest ponad 500 funkcji dostępnych w R). Połowa tej książki dostępna jest bezpłatnie na poniższej stronie.
