@@ -72,7 +72,7 @@ pogRomcy danych
 <div id="petle---od-1-do-5" class="slide section level1">
 <h1>Pętle - od 1 do 5</h1>
 <p>Pętle mogą być wykorzystywane, aby powtórzyć jakąś operację określoną liczbę razy.</p>
-<p>Zacznijmy od przykładu, w którym wielokrotnie wyświetlimy pewien napis na ekranie. W języku R jest kilka rodzajów pętli, które można do tego celu wykorzystać, ale najczęściej stosowana jest pętla <code>for</code> i to ją przedstawimy w pierwszej kolejności.</p>
+<p>Zacznijmy od przykładu, w którym wielokrotnie wyświetlimy pewien napis na ekranie. W języku R jest kilka rodzajów pętli, które można do tego celu wykorzystać, ale najczęściej stosowana jest pętla <code>for</code> i to ją przedstawimy w pierwszej kolejności (znak <code>\n</code> powoduje przejście do nowej linii).</p>
 <pre class="sourceCode r"><code class="sourceCode r">odliczajDo &lt;-<span class="st"> </span><span class="dv">5</span>
 
 for (i in <span class="dv">1</span>:odliczajDo) {
@@ -121,14 +121,8 @@ for (i in <span class="dv">1</span>:liczbaStluczek) {
   <span class="kw">cat</span>(<span class="st">&quot;Stłuczka &quot;</span>, i,<span class="st">&quot;, a jej koszt naprawy to &quot;</span>, 
       <span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">min=</span><span class="dv">0</span>, <span class="dt">max=</span><span class="dv">10000</span>), <span class="st">&quot; PLN</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">''</span>)
 }</code></pre>
-<pre><code>## Stłuczka 1, a jej koszt naprawy to 7726.47 PLN
-## Stłuczka 2, a jej koszt naprawy to 9265.96 PLN
-## Stłuczka 3, a jej koszt naprawy to 8586.008 PLN
-## Stłuczka 4, a jej koszt naprawy to 1767.042 PLN
-## Stłuczka 5, a jej koszt naprawy to 690.1404 PLN
-## Stłuczka 6, a jej koszt naprawy to 8990.59 PLN
-## Stłuczka 7, a jej koszt naprawy to 3866.993 PLN
-## Stłuczka 8, a jej koszt naprawy to 2997.499 PLN</code></pre>
+<pre><code>## Stłuczka 1, a jej koszt naprawy to 2233.064 PLN
+## Stłuczka 2, a jej koszt naprawy to 2317.62 PLN</code></pre>
 <p>W tym przykładzie funkcja <code>runif()</code> służy do losowania <code>n</code> liczb z przedziału od <code>min</code> do <code>max</code>. W pierwszej linii wykorzystujemy ją do wylosowania liczby stłuczek z przedziału 1 do 10. Funkcja <code>round()</code> służy do zaokrąglania wyniku do liczby całkowitej.</p>
 <p>W każdym kroku pętli losowana jest kolejna wartość, oraz wypisywana jest na ekranie. Choć ta pętla wygląda na prostą i niewinną, podobny sposób losowania wielkości szkody jest w rzeczywistości wykorzystywany do zarządzania niepewnością dotyczącego tego, jak duże szkody z tytułu stłuczek lub innych losowych wypadków mogą wystąpić w firmach.</p>
 </div>
@@ -136,7 +130,7 @@ for (i in <span class="dv">1</span>:liczbaStluczek) {
 <h1>Pętle - koszty napraw</h1>
 <p>W pętli z poprzedniego przykładu wyświetlaliśmy na ekranie kolejne koszty. A co trzeba zrobić by te wszystkie koszty zliczyć?</p>
 <p>Wewnątrz pętli możemy wykonywać operacje na liczbach. Przykładowo możemy te koszty zsumować.</p>
-<p>W poniższym przykłądzie wewnątrz pętli co krok zmienia się wartość <code>sumaKosztow</code>.</p>
+<p>Wewnątrz pętli w poniższym przykładzie co krok zmienia się wartość <code>sumaKosztow</code>. Instrukcja <code>sumaKosztow &lt;- sumaKosztow + koszt</code> powoduje, że wartość zmiennej <code>sumaKosztow</code> zostanie zastąpiona sumą <code>sumaKosztow</code> i <code>koszt</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># losujemy liczbę stłuczek</span>
 liczbaStluczek &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">1</span>, <span class="dt">max =</span> <span class="dv">10</span>))
 sumaKosztow &lt;-<span class="st"> </span><span class="dv">0</span>
@@ -147,26 +141,24 @@ for (i in <span class="dv">1</span>:liczbaStluczek) {
   <span class="kw">cat</span>(<span class="st">&quot;Stłuczka &quot;</span>, i,<span class="st">&quot;, a jej koszt naprawy to &quot;</span>,  koszt, <span class="st">&quot; PLN</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">''</span>)
   <span class="kw">cat</span>(<span class="st">&quot;Suma dotychczasowych kosztów to &quot;</span>,  sumaKosztow, <span class="st">&quot; PLN</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">''</span>)
 }</code></pre>
-<pre><code>## Stłuczka 1, a jej koszt naprawy to 9533.673 PLN
-## Suma dotychczasowych kosztów to 9533.673 PLN
-## Stłuczka 2, a jej koszt naprawy to 4569.922 PLN
-## Suma dotychczasowych kosztów to 14103.59 PLN
-## Stłuczka 3, a jej koszt naprawy to 2462.421 PLN
-## Suma dotychczasowych kosztów to 16566.02 PLN
-## Stłuczka 4, a jej koszt naprawy to 5042.871 PLN
-## Suma dotychczasowych kosztów to 21608.89 PLN
-## Stłuczka 5, a jej koszt naprawy to 4270.209 PLN
-## Suma dotychczasowych kosztów to 25879.1 PLN
-## Stłuczka 6, a jej koszt naprawy to 7107.391 PLN
-## Suma dotychczasowych kosztów to 32986.49 PLN
-## Stłuczka 7, a jej koszt naprawy to 6416.551 PLN
-## Suma dotychczasowych kosztów to 39403.04 PLN
-## Stłuczka 8, a jej koszt naprawy to 6598.087 PLN
-## Suma dotychczasowych kosztów to 46001.13 PLN
-## Stłuczka 9, a jej koszt naprawy to 6170.35 PLN
-## Suma dotychczasowych kosztów to 52171.48 PLN</code></pre>
+<pre><code>## Stłuczka 1, a jej koszt naprawy to 9541.263 PLN
+## Suma dotychczasowych kosztów to 9541.263 PLN
+## Stłuczka 2, a jej koszt naprawy to 4657.22 PLN
+## Suma dotychczasowych kosztów to 14198.48 PLN
+## Stłuczka 3, a jej koszt naprawy to 1397.305 PLN
+## Suma dotychczasowych kosztów to 15595.79 PLN
+## Stłuczka 4, a jej koszt naprawy to 9850.969 PLN
+## Suma dotychczasowych kosztów to 25446.76 PLN
+## Stłuczka 5, a jej koszt naprawy to 9848.78 PLN
+## Suma dotychczasowych kosztów to 35295.54 PLN
+## Stłuczka 6, a jej koszt naprawy to 5696.783 PLN
+## Suma dotychczasowych kosztów to 40992.32 PLN
+## Stłuczka 7, a jej koszt naprawy to 6320.426 PLN
+## Suma dotychczasowych kosztów to 47312.75 PLN
+## Stłuczka 8, a jej koszt naprawy to 9738.773 PLN
+## Suma dotychczasowych kosztów to 57051.52 PLN</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">sumaKosztow</code></pre>
-<pre><code>## [1] 52171.48</code></pre>
+<pre><code>## [1] 57051.52</code></pre>
 </div>
 <div id="petle---wartosci-w-sekwencji" class="slide section level1">
 <h1>Pętle - wartości w sekwencji</h1>
@@ -236,8 +228,8 @@ for (i in kolumny) {</code></pre>
 <div id="petle---iteracja-po-wierszu-kolumnie" class="slide section level1">
 <h1>Pętle - iteracja po wierszu / kolumnie</h1>
 <p>Typowe zastosowania pętli to wykonanie pewnej operacji dla każdego wiersza lub każdej kolumny zbioru danych.</p>
-<p>Pokażmy teraz przykład wykorzystania pętli dla każdego wiersza, a na początek dla wiersza o indeksie <code>i=1</code>.</p>
-<p>Będziemy chcieli wyświetlić informację do jakiej wagi dochodzą przedstawiciele danego gatunku.</p>
+<p>Pokażmy teraz przykład wykorzystania pętli dla każdego wiersza, a na początek dla wiersza o indeksie <code>1</code>. Przy czym tę wartość przypiszemy do zmiennej o nazwie <code>i</code> (może być też dowolna inna nazwa), a następnie wykorzystamy tą zmienną do indeksowania zbioru <code>koty_ptaki</code>.</p>
+<p>W poniższym przykłądzie będziemy chcieli wyświetlić informację do jakiej wagi dochodzą przedstawiciele danego gatunku.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Zamiana zmiennej factor na zmienną napisową, po to by była dobrze wyświetlana</span>
 koty_ptaki$gatunek &lt;-<span class="st"> </span><span class="kw">as.character</span>(koty_ptaki$gatunek)
 

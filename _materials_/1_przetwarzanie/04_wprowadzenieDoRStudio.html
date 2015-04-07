@@ -60,15 +60,14 @@ pogRomcy danych
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
-<p>Najtrudniejsze są początki. Aby dojść do miejsca w którym nasza praca stanie się przyjemnością i będzie efektywna, musimy nauczyć się nowego języka. A nauka, czy to języka, czy czegokolwiek innego, to seria prób, czasem niepowodzeń, kolejnych prób i tak nieustannie.</p>
-<p>Prawdziwa nauka rozpocznie się z odcinkiem 4, a więc kolejnym. Ale zanim będziemy gotowi rozpocząć naukę musimy oswoić się z narzędziem, z którym przyjdzie nam pracować.</p>
+<p>Najtrudniejsze są początki. Aby dojść do miejsca, w którym nasza praca stanie się przyjemnością i będzie efektywna, musimy nauczyć się nowego języka. A nauka, czy to języka, czy czegokolwiek innego, to seria prób, czasem niepowodzeń, kolejnych prób i tak nieustannie.</p>
+<p>Prawdziwa nauka rozpocznie się z odcinkiem piątym, a więc kolejnym. Ale zanim będziemy gotowi rozpocząć naukę musimy oswoić się z narzędziem, z którym przyjdzie nam pracować.</p>
 <p>W tym odcinku nauczymy się:</p>
 <ul>
 <li>w jaki sposób wprowadzać instrukcje do programu R,</li>
 <li>w jaki sposób definiować nowe zmienne w programie R,</li>
 <li>jak szukać pomocy dla funkcji.</li>
 </ul>
-<p>Do tego odcinka jest dołączony film wideo, ilustrujący wszystkie przedstawiane operacje.</p>
 <p>Pracując ze slajdami, możemy w każdej chwili nacisnąć przycisk <code>T</code>, rozwinie on spis treści, dzięki czemu łatwo nam będzie przejść do pożądanego slajdu. Możemy również w każdej chwili nacisnąć przycisk <code>A</code>, aby zamienić slajdy na ciągły dokument.</p>
 </div>
 <div id="jak-pracowac-z-rstudio" class="slide section level1">
@@ -94,7 +93,7 @@ pogRomcy danych
 <div id="zmienne-i-ich-wartosci-w-pamieci-programu-rstudio" class="slide section level1">
 <h1>Zmienne i ich wartości w pamięci programu RStudio</h1>
 <p>Wyniki operacji możemy przypisać do zmiennych. Dzięki temu, zamiast wyświetlać się na ekranie, zostaną one zapamiętane w pamięci programu R, oraz będziemy mogli je wykorzystywać w przyszłości.</p>
-<p>Przypisać wartość do zmiennej można z użyciem operatorów <code>=</code> lub <code>&lt;-</code>. Możemy je stosować zamiennie, ale stosowanie strzałki <code>&lt;-</code> pozwoli nam zachować większą czytelność w przyszłości przy bardziej złożonych poleceniach.</p>
+<p>Wartość do zmiennej przypisuje się zazwyczaj z użyciem jednego z operatorów <code>=</code>, <code>&lt;-</code> lub <code>-&gt;</code>. Możemy je stosować zamiennie, ale stosowanie strzałki <code>&lt;-</code> pozwoli nam zachować większą czytelność w przyszłości przy bardziej złożonych poleceniach.</p>
 <pre class="sourceCode r"><code class="sourceCode r">zmienna  =<span class="st">  </span><span class="dv">2</span>^<span class="dv">10</span>
 zmienna2 &lt;-<span class="st"> </span><span class="dv">2</span>^<span class="dv">10</span> </code></pre>
 <p>Zauważmy, że w oknie po prawej górnej stronie wyświetliły się nowo zdefiniowane zmienne oraz ich wartości.</p>
@@ -106,12 +105,12 @@ zmienna2 &lt;-<span class="st"> </span><span class="dv">2</span>^<span class="dv
 <p>Prawdziwa siła programu R tkwi w dużym zbiorze funkcji, którymi możemy wykonywać najróżniejsze operacje. Funkcjami możemy analizować dane, rysować dane, odsłuchiwać dane, wykonywać obliczenia, wysyłać maile, robić najróżniejsze rzeczy.</p>
 <p>Oczywiście musimy znać nazwy funkcji, które to wszystko robią.</p>
 <p>Przypuśćmy, że chcemy zbudować sekwencje liczb od 0 do 10 z krokiem co 0,1. Jak się wkrótce okaże, takie sekwencje są bardzo przydatne.</p>
-<p>Operatorem <code>??</code> możemy wyszukać funkcje, która w opisie ma określone słowo lub zwrot.</p>
+<p>Operatorem <code>??</code> możemy wyszukać funkcję, która w opisie ma określone słowo lub zwrot.</p>
 <pre class="sourceCode r"><code class="sourceCode r">??<span class="st">&quot;sequence&quot;</span></code></pre>
 <p>Okazuje się, że jest kilka funkcji, które mają związek z sekwencjami. Ta która nas interesuje to <code>seq()</code>. Znajduje się ona w pakiecie <code>base</code>. Wszystkie funkcje są pogrupowane w pakiety, a pakiet <code>base</code> zawiera funkcje do podstawowych operacji.</p>
 <p>Aby wyświetlić opis dla zadanej funkcji wystarczy wykorzystać operator <code>?</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">?seq</code></pre>
-<p>Opis każdej funkcji składa się z opisu jej argumentów, szczegółowego opisu działania funkcji oraz przykładów jej użycia. Te przykłady można skopiować i wkleić do konsoli, aby zobaczyć co jest ich wynikiem.</p>
+<p>Opis funkcji składa się z opisu jej argumentów, szczegółowego opisu działania funkcji oraz przykładów jej użycia. Te przykłady można skopiować i wkleić do konsoli, aby zobaczyć co jest ich wynikiem.</p>
 </div>
 <div id="jak-wykonac-sekwencje-liczb" class="slide section level1">
 <h1>Jak wykonać sekwencję liczb?</h1>
@@ -135,7 +134,7 @@ sekwencja</code></pre>
 </div>
 <div id="wykres-z-moraem" class="slide section level1">
 <h1>Wykres z morałem</h1>
-<p>Funkcją <code>exp()</code> policzmy eksponentę (<em>eksponenta, inaczej funkcja wykładnicza, to bardzo szybko rosnąca funkcja matematyczna</em>) z sekwencji, a następnie - wykorzystując funkcję <code>plot()</code> - narysujmy i sekwencję, i jej eksponentę.</p>
+<p>Funkcją <code>exp()</code> policzmy eksponentę (<em>eksponenta, inaczej funkcja wykładnicza, to bardzo szybko rosnąca funkcja matematyczna</em>) z sekwencji, a następnie - wykorzystując funkcję <code>plot()</code> - narysujmy i sekwencję, i jej eksponentę. Zauważmy, że argumentem tej funkcji jest wekor, a ponieważ większość operacji w R jest wektoryzowana, funkcja <code>exp()</code> policzy eksponentę dla każdego elementu wektora <code>sekwencja</code>.</p>
 <p>Poniższy wykres, to bardzo ważny wykres, ponieważ przedstawia bardzo ważną informację dotyczącą uczenie się. Pierwsze godziny poznawania R poświęcimy na zbudowanie bazy funkcji R. Będzie to okres pierwszych frustracji, gdy efekty będą relatywnie małe, a wysiłek z naszej strony będzie duży. Ale po kilku pierwszych godzinach, jeżeli tylko wytrwamy, okaże się, że nasze możliwości rosną wykładniczo.</p>
 <pre class="sourceCode r"><code class="sourceCode r">poziom &lt;-<span class="st"> </span><span class="kw">exp</span>(sekwencja)
 
@@ -148,7 +147,7 @@ sekwencja</code></pre>
 <p>Pod koniec większości odcinków przygotowaliśmy kilka zadań do wykonania.</p>
 <p>Pierwsze zadania są proste, kolejne coraz trudniejsze. Warto zmierzyć się z nimi, gdyż najlepszym sposobem by nauczyć się języka programowania jest ćwiczenie, ćwiczenie i jeszcze raz ćwiczenie.</p>
 <p>Odpowiedzi do zadań umieszczone są na stronie kursu, można je w każdej chwili sprawdzić.</p>
-<p>Zadanie do tego odcinek polega na uruchomieniu wszystkich przedstawionych instrukcji w programie RStudio i sprawdzeniu czy otrzymuje się te same wyniki.</p>
+<p>Zadanie do tego odcinka polega na uruchomieniu wszystkich przedstawionych instrukcji w programie RStudio i sprawdzeniu czy otrzymuje się te same wyniki.</p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

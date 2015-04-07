@@ -70,9 +70,9 @@ pogRomcy danych
 <div id="instrukcje-warunkowe" class="slide section level1">
 <h1>Instrukcje warunkowe</h1>
 <p>Przygotowując program często jesteśmy w sytuacji, w której dalsza akcja zależy od pewnej wartości, dla nas nieznanej lub potencjalnie zmieniającej się.</p>
-<p>Przykładowo, jeżeli losujemy liczbę losową z przedziału 0-1 i w zależności od tego jaka liczba została wylosowana chcemy napisać <code>Orzeł</code> lub <code>Reszka</code>, w czasie pisania kodu nie wiemy jaka wartość się wylosuje.</p>
+<p>Przykładowo, jeżeli losujemy liczbę z przedziału 0-1 i w zależności od tego jaka liczba została wylosowana chcemy napisać <code>Orzeł</code> lub <code>Reszka</code>, w czasie pisania kodu nie wiemy jaka wartość się wylosuje.</p>
 <p>Używając instrukcji warunkowych możemy opisać alternatywne scenariusze, które będą wykonane w zależności od określonego warunku.</p>
-<p>Poniższy kod wypisze na ekranie napis <code>Orzeł</code>, jeżeli wylosuje się liczba mniejsza od 0.5 oraz napis <code>Reszka</code>, jeżeli wylosuje się liczba większa lub równa 0.5.</p>
+<p>Poniższy kod wypisze na ekranie napis <code>Orzeł</code>, jeżeli wylosuje się liczba mniejsza od 0.5 oraz napis <code>Reszka</code>, jeżeli wylosuje się liczba większa lub równa 0.5. Wylosować liczbę z przedziału 0-1 można funkcją <code>runif()</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">liczbaLosowa &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">1</span>)
 
 if (liczbaLosowa &lt;<span class="st"> </span><span class="fl">0.5</span>) {
@@ -80,14 +80,14 @@ if (liczbaLosowa &lt;<span class="st"> </span><span class="fl">0.5</span>) {
 } else {
   <span class="kw">cat</span>(<span class="st">&quot;Reszka&quot;</span>)
 }</code></pre>
-<pre><code>## Reszka</code></pre>
+<pre><code>## Orzeł</code></pre>
 </div>
 <div id="instrukcje-warunkowe-1" class="slide section level1">
 <h1>Instrukcje warunkowe</h1>
 <p>Przygotowując algorytm przetwarzania danych często potrzebujemy rozważyć różne możliwe sytuacje. Aby zapisać warianty wykonywania w zależności od stanu określonych zmiennych, można wykorzystać instrukcje warunkowe.</p>
 <p>Najczęściej wykorzystywaną instrukcją warunkową jest <code>if else</code>, która w języku R występuje w trzech odmianach.</p>
 <p>Jeżeli <code>warunek</code> występujący po bloku <code>if</code> jest prawdziwy, wykonana będzie instrukcja <code>wyrażenie1</code>, w przeciwnym przypadku <code>wyrażenie2</code> (o ile jest wskazane).</p>
-<p>Trzecia wymieniona poniżej odmiana to instrukcja <code>ifelse()</code>, która może operować nie tylko na jednej wartości logicznej TRUE/FALSE ale na całym wektorze wartości logicznych.</p>
+<p>Trzecia wymieniona poniżej odmiana to instrukcja <code>ifelse()</code>, która pracuje nie na jednej wartości logicznej TRUE/FALSE ale na całym wektorze wartości logicznych. Jej wynikiem jest również wektor wartości.</p>
 <pre class="sourceCode r"><code class="sourceCode r">if (warunek) 
   wyrażenie1
 
@@ -273,7 +273,7 @@ liczbaPtakow</code></pre>
 <h1>Zadania</h1>
 <ul>
 <li><p>Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze <code>lekkie</code>, a dla cięższych niż 1 kg <code>ciężkie</code>.</p></li>
-<li><p>Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze <code>lekkie</code>, cięższych niż 100kg wypisze <code>ciężkie</code> a w przedziale 1-100kg wypisze <code>średnie</code>. Taki efekt można uzyskać stosując dwie instrukcje <code>if()</code> lub korzystając z funkcji <code>switch()</code>.</p></li>
+<li><p>Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze <code>lekkie</code>, cięższych niż 100kg wypisze <code>ciężkie</code> a w przedziale 1-100kg wypisze <code>średnie</code>. Taki efekt można uzyskać stosując dwie instrukcje <code>if()</code> lub korzystając z funkcji <code>switch()</code> (jak działa funkcja <code>switch()</code>? To już należy wyczytać z dokumentacji).</p></li>
 <li><p>Napisz pętlę i instrukcję warunkową sumującą łączne masy wszystkich ptaków i kotów osobno.</p></li>
 </ul>
 <p>Przykładowe odpowiedzi znajdują się na stronie <a href="http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html" class="uri">http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html</a></p>
