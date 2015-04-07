@@ -67,7 +67,7 @@ pogRomcy danych
 <h1>Wektory</h1>
 <p>Jednym z podstawowych rodzajów danych w programie R są wektory.</p>
 <p>Wektory mogą zawierać liczby, napisy, wartości logiczne lub inne typy. Zacznijmy od wektorów wartości liczbowych.</p>
-<p>W programie R nawet jedną wartość jest wektorem, tyle że małym, jednoelementowym.</p>
+<p>W programie R nawet jedna wartość jest wektorem, tyle że małym, jednoelementowym.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="dv">4</span></code></pre>
 <pre><code>## [1] 4</code></pre>
 <p>Dłuższe wektory można tworzyć np. funkcją <code>c()</code>, która pozwala na sklejenie kilku wartości w jeden wektor.</p>
@@ -395,7 +395,7 @@ koty_ptaki[, <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv
 <p>Wynikiem funkcji <code>order()</code> są indeksy kolejnych, wartości. Najmniejsza wartość to 60, na pozycji 1, kolejna to 65 na pozycji 7, kolejna to 70 na pozycjach 4 i 9 i tak dalej.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">order</span>(koty_ptaki[,<span class="st">&quot;predkosc&quot;</span>])</code></pre>
 <pre><code>##  [1]  1  7  4  9  2  5  3 12 11  6 13 10  8</code></pre>
-<p>Możemy wykorzystać ten wynik, aby posortować ramkę danych po określonej kolumnie. W przykładzie poniżej wykorzystujemy funkcję <code>order()</code> do wyznaczenia wektora <code>kolejnosc</code>. Któty następnie wykorzystamy do indeksowania ramki <code>koty_ptaki</code>.</p>
+<p>Możemy wykorzystać ten wynik, aby posortować ramkę danych po określonej kolumnie. W przykładzie poniżej wykorzystujemy funkcję <code>order()</code> do wyznaczenia wektora <code>kolejnosc</code>. Który następnie wykorzystamy do indeksowania ramki <code>koty_ptaki</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">kolejnosc &lt;-<span class="st"> </span><span class="kw">order</span>(koty_ptaki[,<span class="st">&quot;predkosc&quot;</span>])
 koty_ptaki[kolejnosc, ]</code></pre>
 <pre><code>##                       gatunek   waga dlugosc predkosc  habitat zywotnosc
@@ -433,6 +433,7 @@ koty_ptaki[kolejnosc, ]</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tworzenie wektorów liczb i sekwencji</span>
 <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)
 <span class="dv">2</span>:<span class="dv">7</span>
+
 <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">3</span>, <span class="dt">to =</span> <span class="dv">15</span>, <span class="dt">by =</span> <span class="dv">2</span>)
 
 <span class="co"># wektory wartości logicznych i napisowych</span>
