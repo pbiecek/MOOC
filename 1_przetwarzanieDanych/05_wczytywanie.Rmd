@@ -211,7 +211,7 @@ Zestawienie silnych i słabych stron poszczególnych pakietów znajduje się na 
 `sheetCount()` i `sheetNames()`
 
 Wczytując dane z plików, które zostały stworzone na innym systemie operacyjnym lub w innej lokalizacji, trzeba liczyć się z różnicami dotyczącymi kodowania polskich znaków lub np. kropek dziesiętnych w liczbach rzeczywistych. Jeżeli ten problem może nas dotyczyć, to warto zapoznać się z kartą ,,Dobrych Praktyk'' dostępnych na stronie 
-http://withr.me/blog/2013/11/15/configure-character-encoding-for-r-under-linux-and-windows/
+http://withr.me/configure-character-encoding-for-r-under-linux-and-windows/
 
 Zestawienie najpopularniejszych pakietów wczytujących dane z Excela prezentuje poniższa tabela.
 
