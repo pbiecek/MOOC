@@ -42,7 +42,7 @@ head(koty_ptaki, 3)
 Pętle mogą być wykorzystywane, aby powtórzyć jakąś operację określoną liczbę razy.
 
 Zacznijmy od przykładu, w którym wielokrotnie wyświetlimy pewien napis na ekranie.
-W języku R jest kilka rodzajów pętli, które można do tego celu wykorzystać, ale najczęściej stosowana jest pętla `for` i to ją przedstawimy w pierwszej kolejności.
+W języku R jest kilka rodzajów pętli, które można do tego celu wykorzystać, ale najczęściej stosowana jest pętla `for` i to ją przedstawimy w pierwszej kolejności (znak `\n` powoduje przejście do nowej linii).
 
 ```{r}
 odliczajDo <- 5
@@ -127,7 +127,7 @@ A co trzeba zrobić by te wszystkie koszty zliczyć?
 Wewnątrz pętli możemy wykonywać operacje na liczbach.
 Przykładowo możemy te koszty zsumować.
 
-W poniższym przykłądzie wewnątrz pętli co krok zmienia się wartość `sumaKosztow`.
+Wewnątrz pętli w poniższym przykładzie co krok zmienia się wartość `sumaKosztow`. Instrukcja `sumaKosztow <- sumaKosztow + koszt` powoduje, że wartość zmiennej `sumaKosztow` zostanie zastąpiona sumą `sumaKosztow` i `koszt`.
 
 ```{r, message=FALSE, warning=FALSE}
 # losujemy liczbę stłuczek
@@ -218,9 +218,9 @@ Dwie kolejne instrukcje `cat()` wyświetlają na ekranie w pierwszej linii nazw�
 
 Typowe zastosowania pętli to wykonanie pewnej operacji dla każdego wiersza lub każdej kolumny zbioru danych. 
 
-Pokażmy teraz przykład wykorzystania pętli dla każdego wiersza, a na początek dla wiersza o indeksie `i=1`.
+Pokażmy teraz przykład wykorzystania pętli dla każdego wiersza, a na początek dla wiersza o indeksie `1`. Przy czym tę wartość przypiszemy do zmiennej o nazwie `i` (może być też dowolna inna nazwa), a następnie wykorzystamy tą zmienną do indeksowania zbioru `koty_ptaki`.
 
-Będziemy chcieli wyświetlić informację do jakiej wagi dochodzą przedstawiciele danego gatunku.
+W poniższym przykłądzie będziemy chcieli wyświetlić informację do jakiej wagi dochodzą przedstawiciele danego gatunku.
 
 ```{r, message=FALSE, warning=FALSE}
 # Zamiana zmiennej factor na zmienną napisową, po to by była dobrze wyświetlana

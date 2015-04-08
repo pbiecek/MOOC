@@ -29,9 +29,9 @@ W tym odcinku odpowiemy na pytania:
 
 # Dane tabelaryczne w plikach tekstowych
 
-Jednym z częstszych formatów wymiany danych są pliki tekstowe.
+Jednym z częstszych formatów używanych do przechowywania i wymiany danych są pliki tekstowe.
 
-Nazwa 'plik tekstowy' bierze się stąd, że treść tego pliku możemy otworzyć w standardowym edytorze takim jak Notepad/Notatnik w Windowsie lub vim w Linuxie/OSX. Pliki tekstowe można również otwierać z użyciem programu RStudio. Jeżeli często pracujemy z dużymi lub wieloma plikami tekstowymi to warto wyposażyć się w dobre narzędzie do pracy z nimi, np. edytor [Sublime Text](http://www.sublimetext.com/3).
+Nazwa 'plik tekstowy' bierze się stąd, że treść tego pliku możemy otworzyć w standardowym edytorze takim jak Notepad/Notatnik w Windowsie lub vim w Linuxie/OSX. Pliki tekstowe można również otwierać z użyciem programu RStudio (uwaga, duże pliki mogą się długo otwierać). Jeżeli często pracujemy z dużymi lub wieloma plikami tekstowymi to warto wyposażyć się w dobre narzędzie do pracy z nimi, np. edytor [Sublime Text](http://www.sublimetext.com/3).
 
 Przyjrzymy się tabeli z danymi zapisanymi w pliku
 http://biecek.pl/MOOC/dane/koty_ptaki.csv
@@ -67,7 +67,7 @@ Wyrównując wartości, zauważymy, że logiczna struktura tego pliku to tabela 
 Zauważmy, że:
 
 - pierwszy wiersz to nagłówek - zawiera nazwy kolumn rozdzielane średnikiem (gatunek;waga;dlugosc;predkosc;habitat;zywotnosc;druzyna),
-- kolejne wiersze to dane w postaci kolumn liczb, które są rozdzielane znakiem `;` (średnik),
+- kolejne wiersze przedstawiają dane w postaci wektora wartości, które są rozdzielane znakiem `;` (średnik), 
 - w pliku występują liczby, które nie są liczbami całkowitymi - separatorem dziesiętnym jest znak `,` (przecinek).
 
 ---
@@ -80,7 +80,7 @@ Ostatnim (po prawej stronie na poniższym schemacie) jest funkcja, która odczyt
 
 Aby móc na tych danych operować, należy nadać im jakąś nazwę (lewy człon na poniższym schemacie). Tę nazwę określa się zazwyczaj terminem *zmienna*.
 
-Operację przypisania wartości odczytanych przez funkcję do zmiennej można wykonać operatorem `<-` lub `=`.
+Operację przypisania wartości odczytanych przez funkcję do zmiennej można wykonać operatorem `<-`, `=` lub `->` (patrz poprzedni odcinek).
 
 W programie R wynik funkcji, o ile nie jest przypisany do zmiennej, jest wyświetlany na ekranie. Jeżeli chcemy wynik działania funkcji wykorzystać w przyszłości, to należy go do zmiennej przypisać.
 
@@ -119,7 +119,7 @@ Ponieważ dane mogą być zapisane z użyciem różnych formatów, argumenty tej
 
 - `file` - ścieżka do pliku z danymi, może być też adres URL. Jeżeli wartości argumentów podajemy w ich domyślnej kolejności, to możemy pominąć nazwy argumentów (dlatego w kolejnych przykładach nie będziemy podawać nazwy tego argumentu).
 - `header` - flaga określająca, czy pierwszy wiersz należy traktować jako nagłówek. W naszym przypadku `header=TRUE`.
-- `sep` - znak rozdzielający kolumny. W naszym przypadku `sep=";"`, ale popularnymi separatorami są również znak tabulacji, przecinek lub spacja.
+- `sep` - znak rozdzielający kolumny. W naszym przypadku `sep=";"`, ale popularnymi separatorami są również znak tabulacji (oznaczany `\t`), przecinek lub spacja. Separatorem może być dowolny, ale tylko jeden znak.
 - `dec` - separator dziesiętny. Zazwyczaj jest to `.` lub `,`. W naszym przypadku `dec=","`.
 - `nrows` - maksymalna liczba wierszy do wczytania. Domyślnie ten argument przyjmuje wartość `-1`, czyli wczytaj wszystkie wiersze.
 - `skip` - liczba pierwszych wierszy do pominięcia przy wczytywaniu danych, domyślnie 0, czyli nie pomijaj żadnego wiersza.
@@ -130,7 +130,7 @@ Ponieważ dane mogą być zapisane z użyciem różnych formatów, argumenty tej
 
 # Dane tabelaryczne w plikach tekstowych
 
-Wynikiem funkcji `read.table()` jest tabelaryczny zbiór danych, który w R nazywa się _ramką danych_.
+Wynikiem funkcji `read.table()` jest tabelaryczny zbiór danych, który w R nazywa się _ramką danych_ (ang. data.frame).
 
 Aby na nim pracować, musimy wynik funkcji `read.table()` zapamiętać w zmiennej. Na przykład w zmiennej o nazwie `koty_ptaki`.
 
@@ -145,7 +145,7 @@ koty_ptaki
 
 # Dane tabelaryczne w plikach tekstowych
 
-W programie R Studio w prawym górnym oknie, zatytułowanym *Environment* wyświetlane są wszystkie dostępne dane. Po poprawnym wczytaniu danych, powinniśmy je widzieć właśnie w tym oknie
+W programie R Studio w prawym górnym oknie, zatytułowanym *Environment* wyświetlane są wszystkie zdefiniowane zmienne. Po poprawnym wczytaniu danych, powinniśmy je widzieć właśnie w tym oknie.
 
 Dwukrotne kliknięcie na wskazaną zmienną powoduje otwarcie okna prezentującego zawartość zmiennej. W ten sposób możemy szybko podejrzeć co wczytało się do zmiennej `koty_ptaki`.
 
@@ -168,6 +168,8 @@ Wybrane przydatne argumenty funkcji `read.table()`
 - `row.names` - wektor określający nazwy wierszy lub liczba wskazująca kolumnę w której znajdują się nazwy wierszy.
 - `stringsAsFactors` - domyślnie `TRUE` a więc napisy wczytywane jako zmienne jakościowe, typu `factor`. 
 
+Dla dużych plików wczytywanie funkcją `read.table()` może być czasochłonne, w takich sytuacjach warto rozważyć również funkcję  `fread {data.table}`.
+
 ---
 
 # Dane w formacie programu Excel
@@ -176,7 +178,7 @@ Innym popularnym formatem przechowywania danych są pliki w formacie Excela [roz
 
 W programie R dostępnych jest kilka pakietów pozwalających na odczytywanie danych w formacie Excela. Najpopularniejsze pakiety to `gdata`, `xlsReadWrite`, `XLConnect`, `xlsx`. Różnią się one zewnętrznymi bibliotekami, które wykorzystują, przez co z niektórych może być łatwiej skorzystać pod Windowsem z innych pod Linuxem. 
 
-W tym odcinku wykorzystamy funkcję `read.xls()` z pakietu `gdata`. Wymaga ona zainstalowanego programu `perl`. Pakiet `gdata` nie jest instalowany z podstawową dystrybucją R, dlatego przed pierwszym użyciem należy go zainstalować poleceniem `install.packages("gdata")`.
+W tym odcinku wykorzystamy funkcję `read.xls()` z pakietu `gdata`. Wymaga ona zainstalowanego programu `perl` (jeżeli nie jest on jeszcze zainstalowany, należy go doinstalować). Pakiet `gdata` nie jest instalowany z podstawową dystrybucją R, dlatego przed pierwszym użyciem należy go zainstalować poleceniem `install.packages("gdata")`.
 
 Dane, które chcemy wczytać, w Excelu są dostępne pod adresem http://biecek.pl/MOOC/dane/koty_ptaki.xls i wyglądają następująco.
 
@@ -213,10 +215,10 @@ http://withr.me/blog/2013/11/15/configure-character-encoding-for-r-under-linux-a
 
 Zestawienie najpopularniejszych pakietów wczytujących dane z Excela prezentuje poniższa tabela.
 
-pakiet | funkcja_odczyt | funkcja_zapis  | formaty | funkcjonalność | szybkość | język
+pakiet | funkcja_odczyt | funkcja_zapis  | formaty | funkcjonalność | szybkość | wymaga_programu
 ---           | ---    | ---    | --- | --- | --- | ---
 xlsx      | read.xlsx() | write.xlsx() | .xlsx, .xls | średnia  |mała | Java
-openxlsx      | read.xlsx() | write.xlsx() | .xlsx | średnia  |duża | Rcpp
+openxlsx      | read.xlsx() | write.xlsx() | .xlsx | średnia  |duża | 
 gdata         | read.xls() | -- | .xlsx, .xls | mała | średnia | Perl
 WriteXLS      | -- | WriteXLS() | .xlsx, .xls | mała | średnia | Perl
 XLConnect     | readWorksheet() | writeWorksheet() | .xlsx, .xls | duża  | mała | Java
@@ -228,7 +230,7 @@ XLConnect     | readWorksheet() | writeWorksheet() | .xlsx, .xls | duża  | mał
 
 Natywnym formatem dla programu R są pliki binarne o rozszerzeniu `rda` lub `RData`. 
 
-Dane w tym formacie są skompresowane, przez co zajmują mniej miejsca na dysku niż w pliku tekstowym lub formacie Excela. Wadą jest to, że można je otworzyć tylko w programie R.
+Dane w tym formacie są skompresowane, przez co zajmują mniej miejsca na dysku niż w pliku tekstowym lub formacie Excela. Wadą jest to, że niewiele programów poza programem R potrafi je odczytać.
 
 Dane w tym formacie można wczytać do programu R poleceniem `load()`. Pierwszym argumentem tej funkcji jest ścieżka do pliku z danymi. Jeżeli chcemy dane odczytać z internetu, należy dodatkowo użyć funkcji `url()`. 
 
@@ -293,6 +295,8 @@ tsdtr210 <- getEurostatRCV("tsdtr210")
 head(tsdtr210, 3)
 summary(tsdtr210)
 ```
+
+Funkcja `head()` wyświetla kilka pierwszych wierszy ze zbioru danych. Funkcja `summary()` wyświetla podsumowanie zbioru danych, więcej o tej funckji napiszemy w odcinakch 11-14.
 
 ---
 

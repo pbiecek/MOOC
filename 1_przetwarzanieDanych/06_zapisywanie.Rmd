@@ -67,7 +67,7 @@ write.table(dwie_kolumny, file="wazne_dane.csv",
             sep = ";", dec = ".")
 ```
 
-Na dysku w aktualnym katalogu roboczym powstanie plik `wazne_dane.csv`. 
+Na dysku w aktualnym katalogu (tzw. roboczym katalogu) powstanie plik `wazne_dane.csv`. 
 
 Poniższy rysunek pokazuje treść tego pliku.
 
@@ -98,7 +98,7 @@ Najczęściej wykorzystywane argumenty to:
 
 - `x` - określa jaka tabela/które dane mają być zapisane do pliku tekstowego,
 - `file` - określa nazwę pliku tekstowego, do którego dane będą zapisane,
-- `append` - domyślna wartość `FALSE` oznacza, że jeśli plik o nazwie `file` istnieje wcześniej, to zostanie on skasowany. Jeżeli ustawimy `append=TRUE` to nowe dane będą dopisane do końca poprzedniego pliku.
+- `append` - domyślna wartość `FALSE` oznacza, że jeśli plik o nazwie `file` istniał wcześniej, to zostanie on skasowany. Jeżeli ustawimy `append=TRUE` to nowe dane będą dopisane do końca poprzedniego pliku.
 - `sep` - określa znak, który jest separatorem kolejnych wartości,
 - `dec` - określa znak, który jest separatorem dziesiętnym (zazwyczaj `.` lub `,`),
 - `row.names` - określa czy do pliku tekstowego mają być zapisywane nazwy wierszy, domyślnie `TRUE`,
@@ -110,7 +110,7 @@ Najczęściej wykorzystywane argumenty to:
 
 Dane, które są dostępne w programie R, można zapisać też do pliku Excela funkcją `write.xls()`. 
 
-Funkcja ta jest dostępna w większości pakietów, zawierających funkcję `read.xls()`, np. w pakiecie `xlsx` (korzysta z biblioteki Java) oraz `dataframe2xls` (korzysta z zewnętrznych bibliotek języka Python).
+Funkcja ta jest dostępna w większości pakietów, zawierających funkcję `read.xls()`, np. w pakiecie `xlsx` (korzysta z biblioteki Java, trzeba więc mieć ją zainstalowaną) oraz `dataframe2xls` (korzysta z zewnętrznych bibliotek języka Python, trzeba więc mieć go zainstalowanego).
 
 Do zapisu do formatu Excela można też wykorzystać funkcję `WriteXLS()` z pakietu `WriteXLS` (korzysta z zewnętrznych bibliotek języka Perl).
 
@@ -152,7 +152,7 @@ save(dwie_kolumny, file="wazne_dane.rda")
 save(dwie_kolumny, file="/Users/pbiecek/Documents/wazne_dane.rda")
 ```
 
-Jeżeli chcemy zpisać do pliku więcej obiektów niż jeden, wystarczy je wskazać po przecinku. W poniższym przykładzie do jednego pliku zapisane będą trzy obiekty. 
+Jeżeli chcemy zapisać do pliku więcej obiektów niż jeden, wystarczy je wskazać po przecinku. W poniższym przykładzie do jednego pliku zapisane będą trzy obiekty. 
 
 ```{r, eval=FALSE}
 # tworzymy dwa wektory

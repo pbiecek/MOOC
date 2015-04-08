@@ -37,11 +37,11 @@ head(koty_ptaki, 3)
 
 Przygotowując program często jesteśmy w sytuacji, w której dalsza akcja zależy od pewnej wartości, dla nas nieznanej lub potencjalnie zmieniającej się.
 
-Przykładowo, jeżeli losujemy liczbę losową z przedziału 0-1 i w zależności od tego jaka liczba została wylosowana chcemy napisać `Orzeł` lub `Reszka`, w czasie pisania kodu nie wiemy jaka wartość się wylosuje.
+Przykładowo, jeżeli losujemy liczbę z przedziału 0-1 i w zależności od tego jaka liczba została wylosowana chcemy napisać `Orzeł` lub `Reszka`, w czasie pisania kodu nie wiemy jaka wartość się wylosuje. 
 
 Używając instrukcji warunkowych możemy opisać alternatywne scenariusze, które będą wykonane w zależności od określonego warunku.
 
-Poniższy kod wypisze na ekranie napis `Orzeł`, jeżeli wylosuje się liczba mniejsza od 0.5 oraz napis `Reszka`, jeżeli wylosuje się liczba większa lub równa 0.5.
+Poniższy kod wypisze na ekranie napis `Orzeł`, jeżeli wylosuje się liczba mniejsza od 0.5 oraz napis `Reszka`, jeżeli wylosuje się liczba większa lub równa 0.5. Wylosować liczbę z przedziału 0-1 można funkcją `runif()`.
 
 ```{r}
 liczbaLosowa <- runif(n = 1)
@@ -64,7 +64,7 @@ Najczęściej wykorzystywaną instrukcją warunkową jest `if else`, która w j�
 
 Jeżeli `warunek` występujący po bloku `if` jest prawdziwy, wykonana będzie instrukcja `wyrażenie1`, w przeciwnym przypadku `wyrażenie2` (o ile jest wskazane).
 
-Trzecia wymieniona poniżej odmiana to instrukcja `ifelse()`, która może operować nie tylko na jednej wartości logicznej TRUE/FALSE ale na całym wektorze wartości logicznych.
+Trzecia wymieniona poniżej odmiana to instrukcja `ifelse()`, która pracuje nie na jednej wartości logicznej TRUE/FALSE ale na całym wektorze wartości logicznych. Jej wynikiem jest również wektor wartości.
 
 ```{r, eval=FALSE}
 if (warunek) 
@@ -284,7 +284,7 @@ liczbaPtakow
 
 * Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze `lekkie`, a dla cięższych niż 1 kg `ciężkie`.
 
-* Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze `lekkie`, cięższych niż 100kg wypisze `ciężkie` a w przedziale 1-100kg wypisze `średnie`. Taki efekt można uzyskać stosując dwie instrukcje `if()` lub korzystając z funkcji `switch()`.
+* Napisz instrukcję warunkową, która dla zwierząt lżejszych niż 1kg wypisze `lekkie`, cięższych niż 100kg wypisze `ciężkie` a w przedziale 1-100kg wypisze `średnie`. Taki efekt można uzyskać stosując dwie instrukcje `if()` lub korzystając z funkcji `switch()` (jak działa funkcja `switch()`? To już należy wyczytać z dokumentacji).
 
 * Napisz pętlę i instrukcję warunkową sumującą łączne masy wszystkich ptaków i kotów osobno.
 
