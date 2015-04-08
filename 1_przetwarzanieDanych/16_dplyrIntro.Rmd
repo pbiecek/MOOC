@@ -1,7 +1,7 @@
 ---
 title: "Czyszczenie i wprowadzenie do obróbki danych"
 author: "pogRomcy danych"
-date: "sezon 1 / odcinek 16 <br><br> <a href='http://biecek.pl/R'>Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 1 / odcinek 16 <br><br> <a href='http://biecek.pl/'>Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
