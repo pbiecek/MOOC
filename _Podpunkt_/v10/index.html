@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="pl">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  	<title></title>
+  	<meta name="description" content="">
+  	<meta name="keywords" content="">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  	<meta name="format-detection" content="telephone=no">
+  	<style>#preloader {background:white;position:fixed;left:0;top:0;width:100%;height:100%;z-index:9999;}</style>
+  	<link rel="shortcut icon" href="favicon.ico">
+  	<link rel="stylesheet" type="text/css" href="style.css" />
+  	<script src="//use.typekit.net/oam6dux.js"></script>
+	<script>try{Typekit.load();}catch(e){}</script>
+</head>
+<body>
+
+	<div id="preloader"></div>
+	<div class="cookie"><p>Strona używa plików cookies &nbsp;<a href="http://pl.wikipedia.org/wiki/HTTP_cookie" target="_blank">więcej</a></p><span></span></div>
+	
+	<!-- buttons-->
+	<div id="menu">
+		<div class="menu-lang"><a href="index_en.html">EN</a></div>
+		<div class="menu-login" data-div="menu-login"><span>zaloguj się</span><img src="img/login-ico.png" /></div>
+		<div class="menu-list" data-div="menu-list"><div class="menu-list-lines"></div></div>
+	</div>
+
+	<!-- menu hidden, fixed -->
+	<div id="menu-list-hidden" class="nav hidden">
+      	<div class="nav-container">
+      		<div class="nav-container-row">
+      			<div class="nav-cell"></div>
+      			<div class="nav-cell"></div>
+      			<div class="nav-cell"></div>
+      		</div>
+      		<div class="nav-container-row">
+      			<div class="nav-cell"></div>
+      			<div class="nav-cell">
+        			<ul>
+        				<li><a href="1_przetwarzanieDanych/01_interaktywnaPracaZR.html">przetwarzanie danych w&nbsp;programie r</a></li>
+        				<li><a href="2.html">wizualizacja i&nbsp;modelowanie</a></li>
+        				<li><a href="3.html">moje konto</a></li>
+        			</ul>
+        		</div>
+        		<div class="nav-cell"></div>
+        	</div>
+        	<div class="nav-container-row">
+        		<div class="nav-cell"></div>
+      			<div class="nav-cell"></div>
+      			<div class="nav-cell"></div>
+      		</div>
+      	</div>
+  	</div>
+
+	<!-- login hidden, fixed -->
+	<div id="menu-login-hidden" class="nav hidden">
+      	<div class="nav-container">
+      		<div class="nav-container-row">
+      			<div class="nav-cell"></div>
+      			<div class="nav-cell"></div>
+      			<div class="nav-cell"></div>
+      		</div>
+      		<div class="nav-container-row">
+      			<div class="nav-cell"></div>
+      			<div class="nav-cell">
+        			<div class="login-select">
+        				<p>Zaloguj się korzystając z konta:</p>
+        				<p>
+        					<a class="img-hover" href="https://www.facebook.com/"><img src="img/f.png" /><img src="img/f1.png" /></a>
+        					<a class="img-hover" href="https://plus.google.com/"><img src="img/g.png" /><img src="img/g1.png" /></a>
+        					<a class="img-hover" href="#" id="m-login"><img src="img/m.png" /><img src="img/m1.png" /></a>
+        				</p>
+        			</div>
+
+        			<!-- m login form -->
+        			<div class="login-m login-hidden">
+        				<p><img src="img/m.png" /></a></p>
+        				<p>
+        					<form action="?" method="post">
+        						<input type="text" name="login" placeholder="login" value="" />
+        						<input type="password" name="pass" placeholder="hasło" value="" />
+        						<input type="submit" value="ok" />
+        					</form>
+        				</p>
+        			</div>
+        		</div>
+        		<div class="nav-cell"></div>
+        	</div>
+        	<div class="nav-container-row">
+        		<div class="nav-cell"></div>
+      			<div class="nav-cell"></div>
+      			<div class="nav-cell"></div>
+      		</div>
+      	</div>
+  	</div>
+
+	<!--fixed elements before '#skrollr-body' -->
+	<div id="top-bg" data-0="height: 400px; background-image: !url('img/linie.gif');" data-300="height: 70px; background-image: !none;"></div>
+	<div id="top" data-0="height: 400px; background: rgba(0,25,169,0); transform: translateX(-50%) scale(1,1);" 
+			    data-300="height: 70px;  background: rgba(0,25,169,0); transform: translateX(-50%) scale(0.6,0.6);" >
+		<span class="element e-nawias-1" data-0="top: 85px;  left:178px;" data-300="top: -500px;  left:0px;"></span>
+		<span class="element e-p" data-0="top: 104px; left:206px;" data-300="top: 20px;  left:70px;"></span>
+		<span class="element e-o" data-0="top: 104px; left:245px;" data-300="top: 20px;  left: 102px;"></span>
+		<span class="element e-g" data-0="top: 104px; left:290px;" data-300="top: 20px;  left: 145px;"></span>
+		<span class="element e-r" data-0="top: 148px; left:205px;" data-300="top: 20px;  left: 186px;"></span>
+		<span class="element e-o2" data-0="top: 148px; left:290px;" data-300="top: 20px;  left: 268px;"></span>
+		<span class="element e-m" data-0="top: 190px; left:204px;" data-300="top: 20px;  left: 309px;"></span>
+		<span class="element e-c" data-0="top: 190px; left:253px;" data-300="top: 20px;  left: 348px;"></span>
+		<span class="element e-y" data-0="top: 190px; left:290px;" data-300="top: 20px;  left: 385px;"></span>
+		<span class="element e-nawias-2" data-0="top: 85px;  left:325px;" data-300="top: -500px;"></span>
+		<span class="element e-x" data-0="top: 152px; left:362px;" data-300="top: -200px;"></span>
+		<span class="element e-nawias-3" data-0="top: 85px;  left:398px;" data-300="top: -500px;"></span>
+		<span class="element e-d" data-0="top: 104px; left:425px;" data-300="top: 20px;  left: 449px;"></span>
+		<span class="element e-a" data-0="top: 104px; left:467px;" data-300="top: 20px;  left: 483px;"></span>
+		<span class="element e-n" data-0="top: 148px; left:425px;" data-300="top: 20px;  left: 521px;"></span>
+		<span class="element e-y2" data-0="top: 148px; left:467px;" data-300="top: 20px;  left: 554px;"></span>
+		<span class="element e-c2" data-0="top: 190px; left:423px;" data-300="top: 20px;  left: 590px;"></span>
+		<span class="element e-h" data-0="top: 190px; left:469px;" data-300="top: 20px;  left: 628px;"></span>
+		<span class="element e-nawias-4" data-0="top: 85px;  left:500px;" data-300="top: -500px; left: 700px"></span>
+		<span class="element e-arrow" data-0="top: -500px;  left:29px;" data-300="top: 20px;  left:29px;"></span>
+		<span class="element e-nawias-5" data-0="top: -500px;  left:423px;" data-300="top: 20px;  left:423px;"></span>
+		<span class="element e-nawias-6" data-0="top: -500px;  left:663px;" data-300="top: 20px;  left:663px;"></span>
+	</div>
+	<div id="top-mobile" data-0="height: 400px; background: rgba(0,25,169,0); transform: translateX(-50%) scale(0.75,0.75); width: 300px;" 
+			    data-150="height: 70px;  background: rgba(0,25,169,1); transform: translateX(-50%) scale(0.6,0.6); width: 300px;"
+			    data-200="height: 70px;  background: rgba(0,25,169,1); transform: translateX(-50%) scale(0.6,0.6); width: 100%;"
+			    data-300="height: 70px;  background: rgba(0,25,169,1); transform: translateX(-50%) scale(0.6,0.6); width: 160%;" >
+		<span class="element e-nawias-1" data-0="top: 85px;  left:-22px;" data-300="top: -500px; "></span>
+		<span class="element e-p" data-0="top: 104px; left:6px;" data-300="top: -500px; "></span>
+		<span class="element e-o" data-0="top: 104px; left:45px;" data-300="top: -500px;"></span>
+		<span class="element e-g" data-0="top: 104px; left:90px;" data-300="top: -500px;"></span>
+		<span class="element e-r" data-0="top: 148px; left:5px;" data-300="top: -500px; "></span>
+		<span class="element e-o2" data-0="top: 148px; left:90px;" data-300="top: -500px; "></span>
+		<span class="element e-m" data-0="top: 190px; left:4px;" data-300="top: -500px;"></span>
+		<span class="element e-c" data-0="top: 190px; left:53px;" data-300="top: -500px;"></span>
+		<span class="element e-y" data-0="top: 190px; left:90px;" data-300="top: -500px;"></span>
+		<span class="element e-nawias-2" data-0="top: 85px;  left:125px;" data-300="top: -500px;"></span>
+		<span class="element e-x" data-0="top: 152px; left:162px;" data-300="top: -500px;"></span>
+		<span class="element e-nawias-3" data-0="top: 85px;  left:198px;" data-300="top: -500px;"></span>
+		<span class="element e-d" data-0="top: 104px; left:225px;" data-300="top: -500px;"></span>
+		<span class="element e-a" data-0="top: 104px; left:267px;" data-300="top: -500px;"></span>
+		<span class="element e-n" data-0="top: 148px; left:225px;" data-300="top: -500px;"></span>
+		<span class="element e-y2" data-0="top: 148px; left:267px;" data-300="top: -500px;"></span>
+		<span class="element e-c2" data-0="top: 190px; left:223px;" data-300="top: -500px;"></span>
+		<span class="element e-h" data-0="top: 190px; left:269px;" data-300="top: -500px;"></span>
+		<span class="element e-nawias-4" data-0="top: 85px;  left:300px;" data-300="top: -500px;"></span>
+
+		<span class="element e-r" data-0="top: -200px;  left:0px;" data-150="top: -200px; left:5px;" data-300="top: 20px;  left: 44px;"></span>
+		<span class="element e-nawias-7" data-250="top: -200px;  left:-200px;" data-300="top: 4px;  left:20px;"></span>
+		<span class="element e-nawias-8" data-250="top: -200px;  left:400px;" data-300="top: 4px;  left:115px;"></span>
+	</div>
+
+	<div id="skrollr-body">
+
+		<div id="first-page">
+			<div class="item">
+				<h3>co?</h3>
+				<p>Dwa intensywne kursy przetwarzania danych,<br />wizualizacji i&nbsp;analizy<br />danych z&nbsp;programem R.</p>
+			</div>
+			<div class="item">
+				<h3>dla kogo?</h3>
+				<p>Bezpłatnie dostępne dla osób pracujących lub chcących<br />pracować z danymi. Bez<br />ograniczeń wiekowych.</p>
+				<p>Dla zupełnie początkujących<br />i&nbsp;średnio zaawansowanych</p>
+			</div>
+			<div class="item">
+				<h3>kiedy?</h3>
+				<p>Przetwarzanie danych<br />w&nbsp;programie R:<br />8 IV &ndash; 29 IV</p>
+				<p>Wizualizacja i&nbsp;modelowanie<br />6 V &ndash; 27 V</p>
+			</div>
+			<div class="item">
+				<h3>certyfikat?</h3>
+				<p>Osoby, które rozwiążą<br />15 z 20 dostępnych zadań<br />otrzymają certyfikat<br />Pogromców Danych.</p>
+				<p>Zaangażowane uczestnictwo<br />oraz przygotowanie rozwiązań<br />wymaga około 30 godzin.</p>
+			</div>
+		</div>
+		<div class="scroll-page-down scroll" data-link=".scroll-page-down"><img src="img/arrow.png" /></div>
+
+		<div class="container section-3">
+			<h2>syllabus</h2>
+			<div class="item item-left">
+				<h3>Przetwarzanie danych w programie R</h3>
+				<p>8 IV – 29 IV</p>
+				<p>&nbsp;</p>
+				<p>Wprowadzenie do R i&nbsp;RStudio (4&nbsp;części)</p>
+				<p>Odczytywanie, zapisywanie i&nbsp;indeksowanie danych (3&nbsp;części)</p>
+				<p>Instrukcje sterujące, pętle, warunki i&nbsp;funkcje (3&nbsp;części)</p>
+				<p>Podstawowe typy danych i&nbsp;ich statystyki opisowe (5&nbsp;części)</p>
+				<p>Przetwarzanie potokowe danych (9&nbsp;części)</p>
+			</div>
+			<div class="item item-x"></div>
+			<div class="item item-right">
+				<h3>Wizualizacja i modelowanie</h3>
+				<p>6 V – 27 V</p>
+				<p>&nbsp;</p>
+				<p>Wizualizacja danych – teoria (3&nbsp;części)</p>
+				<p>Wizualizacja danych – pakiet ggplot2 (3&nbsp;części)</p>
+				<p>Dane wokół nas (4&nbsp;części)</p>
+				<p>Modelowanie danych ilościowych (4&nbsp;części)</p>
+			</div>
+		</div>
+		<div class="container section-2">
+			<div class="item">
+				<h3>PogromcyDanych</h3>
+				<p>Dwa intensywne kursy poświęcone przetwarzaniu, wizualizacji i modelowaniu danych. Kursy przygotowane dla osób, które pracują lub chciałyby pracować z danymi. Rozpoczynamy od zupełnych podstaw, a kończymy na poziomie średnioozaawansowanym. Na wstępnie zakładamy jedynie ogólną orientację jak wygląda tabela z danymi w arkuszach kalkulacyjnych, np. takich jak Excel, oraz ogólną umiejętność pracy z komputerem. Wcześniejsza znajomość programowania będzie bardzo przydatna, ale nie jest konieczna. </p>
+				<p>W pierwszym kursie, który rozpocznie się w kwietniu, pokażemy jak pracować z programem R, bezpłatnym i bardzo potężnym narzędziem do analizy danych. Pokażemy jak pisać programy, tworzyć funkcje, pętle, wczytywać, przetwarzać i zapisywać dane.</p>
+				<p>W drugim kursie, który rozpocznie się w maju, pokażemy jak tworzyć dobre wykresy prezentujące dane oraz jak stosować podstawowe techniki statystycznej analizy danych takie jak analiza trendu, test dwóch grup czy modelowanie regresyjne.</p>
+				<p>Oba kursy powstały w ramach <a href="http://wsad.uw.edu.pl">Warszawskiej Szkoły Analizy Danych</a>.</p>
+			</div>
+			<div class="item">
+				<h3>Twórcy</h3>
+				<p>Kursy powstały dzięki pracy wielu osób. Scenariusz obu kursów i materiały edukacyjne opracował dr hab. inż. Przemysław Biecek, prof. PW, który od kilkunastu lat pracuje nad metodami analizy danych. Prowadzi zajęcia z obszaru analizy dużych i złożonych danych na Uniwersytecie Warszawskim i Politechnice Warszawskiej.</p>
+				<p>Od strony merytorycznej pracę nad materiałami wspierał dr Paweł Chudzian, Katarzyna Łogwiniuk i Krzysztof Trajkowski. Od strony informatycznej Pogromców Danych wspiera Cezary Chudzian i Paweł Dudek.  Przykładowe zastosowania analizy danych przedstawione są przez Piotra Przybyłę, Bartosza Meglickiego, zespół Jakuba Rutkowskiego, Zbigniewa Marczewskiego, Przemysława Kopy z Na Straży Sondaży.</p>
+				<p>Od strony organizacyjnej Pogromcy Danych są wspierani przez dr Michała Bojanowskiego. W opracowaniu szaty wizualnej udział wzięła Emilka Bojańczyk ze studia Podpunkt. Materiały wideo zostały przygotowane przez Jarosława Skrzeczkowskiego i Łukasza Kałużę z TV Platon. Głos do materiałów wideo użyczyła Magda Karczewska. Tłumaczenie na język angielski wykonała Katarzyna Pap.</p>
+				<p>Projekt Pogromcy Danych jest realizowany w ramach Warszawskiej Szkoły Analizy Danych, która powstała w wyniku współpracy Uniwersytetu Warszawskiego oraz Interuniversity Center for Social Science Theory and Methodology.</p>
+			</div>
+			<div class="item">
+				<h3>Materiały</h3>
+				<p>Aby uzyskać dostęp do materiałów, forum oraz zadań potrzebna jest rejestracja. Będzie ona możliwa od początku kwietnia, będzie bezpłatna i otwarta dla każdego zainteresowanego.</p>
+				<p>Materiały dydaktyczne zostały podzielone na krótkie bloki, omawiające kolejne zagadnienia. Każdy blok kończy się krótkimi sprawdzającymi zadaniami. W materiałach znajdują się również przykładowe odpowiedzi do tych zadań. Do obu kursów dostępne jest forum, ułatwiające komunikacje pomiędzy uczestnikami. Jeżeli jakaś porcja materiału jest trudna, sprawia kłopoty, lub jeżeli w trakcie pracy pojawią się ciekawe rozwiązania, warto podzielić się nimi na forum. Opiekunowie kursu śledzą forum i odpowiadają na wszelkie, nawet najbardziej podstawowe pytania. Również inni uczestnicy kursu mogą coś zasugerować lub pomóc w rozwiązaniu problemu.</p>
+			</div>
+			<div class="item">
+				<h3>Certyfikat</h3>
+				<p>Oba kursy zwieńczone są zbiorem 20 zadań do samodzielnego wykonania. Osoby, które wykonają 15 lub więcej zadań otrzymają tytuł &#8222;Pogromców danych&#8221; oraz certyfikat ukończenia kursu sygnowany przez Uniwersytet Warszawski.</p>
+				<p>Szacujemy, że aby w pełni wziąć udział w kursie oraz przygotować rozwiązania wszystkich zadań, należy zaplanować do 30 godzin zaangażowania.</p>
+			</div>
+		</div>
+		<div class="container section-1">
+			<h3>Pozostaw nam swój email</h3>
+			<p>&nbsp;</p>
+		
+			<div class="form-container">
+      			<div class="form-container-row">
+      				<div class="form-cell"></div>
+      				<div class="form-cell"></div>
+      				<div class="form-cell"></div>
+      			</div>
+      			<div class="form-container-row">
+      				<div class="form-cell"></div>
+      				<div class="form-cell">
+      					<div id="formularz">
+        					<p>Na podany adres email, na kilka dni przed rozpoczęciem Pogromców Danych, wyślemy przypomnienie.</p>
+        					<input type="text" id="emailf" name="emailf" placeholder="email@serwer.pl" value="" />
+        					<input type="button" value="ok" onclick="changeText()" />
+        				</div>
+        			</div>
+        			<div class="form-cell"></div>
+        		</div>
+        		<div class="form-container-row">
+        			<div class="form-cell"></div>
+      				<div class="form-cell"></div>
+      				<div class="form-cell"></div>
+      			</div>
+    		</div>
+
+		</div>
+		<div class="container section-4">
+			<div class="item"><img src="img/znaki.png" /></div>
+		</div>
+		<div class="container section-5">
+			<div class="item">&copy; PogromcyDanych 2015</div>
+			<div class="item">projekt i front-end: <a href="http://www.podpunkt.pl" target="_blank">Podpunkt</a></div>
+		</div>
+	</div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="js/jquery.cookies.js"></script>
+	<script src="js/skrollr.min.js"></script>
+	<script src="js/masonry.pkgd.min.js"></script>
+	<script src="js/jquery.init.js"></script>
+	<script> 
+	    function changeText() {
+ 			var x = document.getElementById('emailf').value;
+ 			$.post( "https://docs.google.com/forms/d/1bJUIxRFDzAeCRcTjz4no3YUXkTbG95k7d32zK0NVG9o/formResponse", { entry_1766220568: x } );
+ 			document.getElementById('formularz').innerHTML = 'Dziękujemy! <br/> Na adres ' + x + ' <br/>wyślemy przypomnienie przed rozpoczęciem kursu.';
+		}
+	</script>
+	<script type="text/javascript">
+		window.onload = function() {document.getElementById("preloader").style.display = 'none';}
+	</script>
+</body>
+
+</html>
