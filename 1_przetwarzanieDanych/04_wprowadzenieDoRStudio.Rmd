@@ -21,17 +21,15 @@ output:
 
 # O czym jest ten odcinek
 
-Najtrudniejsze są początki. Aby dojść do miejsca w którym nasza praca stanie się przyjemnością i będzie efektywna, musimy nauczyć się nowego języka. A nauka, czy to języka, czy czegokolwiek innego, to seria prób, czasem niepowodzeń, kolejnych prób i tak nieustannie.
+Najtrudniejsze są początki. Aby dojść do miejsca, w którym nasza praca stanie się przyjemnością i będzie efektywna, musimy nauczyć się nowego języka. A nauka, czy to języka, czy czegokolwiek innego, to seria prób, czasem niepowodzeń, kolejnych prób i tak nieustannie.
 
-Prawdziwa nauka rozpocznie się z odcinkiem 4, a więc kolejnym. Ale zanim będziemy gotowi rozpocząć naukę musimy oswoić się z narzędziem, z którym przyjdzie nam pracować.
+Prawdziwa nauka rozpocznie się z odcinkiem piątym, a więc kolejnym. Ale zanim będziemy gotowi rozpocząć naukę musimy oswoić się z narzędziem, z którym przyjdzie nam pracować.
 
 W tym odcinku nauczymy się:
 
 * w jaki sposób wprowadzać instrukcje do programu R,
 * w jaki sposób definiować nowe zmienne w programie R,
 * jak szukać pomocy dla funkcji.
-
-Do tego odcinka jest dołączony film wideo, ilustrujący wszystkie przedstawiane operacje.
 
 Pracując ze slajdami, możemy w każdej chwili nacisnąć przycisk `T`, rozwinie on spis treści, dzięki czemu łatwo nam będzie przejść do pożądanego slajdu. Możemy również w każdej chwili nacisnąć przycisk `A`, aby zamienić slajdy na ciągły dokument.
 
@@ -74,7 +72,7 @@ Wyniki operacji możemy przypisać do zmiennych.
 Dzięki temu, zamiast wyświetlać się na ekranie, zostaną one zapamiętane w pamięci programu R,
 oraz będziemy mogli je wykorzystywać w przyszłości.
 
-Przypisać wartość do zmiennej można z użyciem operatorów `=` lub `<-`.
+Wartość do zmiennej przypisuje się zazwyczaj z użyciem jednego z operatorów `=`, `<-` lub `->`.
 Możemy je stosować zamiennie, ale stosowanie strzałki `<-` pozwoli nam zachować większą czytelność w przyszłości przy bardziej złożonych poleceniach.
 
 ```{r, warning=FALSE}
@@ -99,7 +97,7 @@ Oczywiście musimy znać nazwy funkcji, które to wszystko robią.
 Przypuśćmy, że chcemy zbudować sekwencje liczb od 0 do 10 z krokiem co 0,1. 
 Jak się wkrótce okaże, takie sekwencje są bardzo przydatne.
 
-Operatorem `??` możemy wyszukać funkcje, która w opisie ma określone słowo lub zwrot.
+Operatorem `??` możemy wyszukać funkcję, która w opisie ma określone słowo lub zwrot.
 
 ```{r, warning=FALSE}
 ??"sequence"
@@ -115,7 +113,7 @@ Aby wyświetlić opis dla zadanej funkcji wystarczy wykorzystać operator `?`.
 ?seq
 ```
 
-Opis każdej funkcji składa się z opisu jej argumentów, szczegółowego opisu działania funkcji oraz przykładów jej użycia.
+Opis funkcji składa się z opisu jej argumentów, szczegółowego opisu działania funkcji oraz przykładów jej użycia.
 Te przykłady można skopiować i wkleić do konsoli, aby zobaczyć co jest ich wynikiem.
 
 # Jak wykonać sekwencję liczb?
@@ -148,7 +146,7 @@ Mamy już sekwencję liczb. Zróbmy z nią coś ciekawego.
 
 # Wykres z morałem
 
-Funkcją `exp()` policzmy eksponentę (*eksponenta, inaczej funkcja wykładnicza, to bardzo szybko rosnąca funkcja matematyczna*) z sekwencji, a następnie - wykorzystując funkcję `plot()` - narysujmy i sekwencję, i jej eksponentę.
+Funkcją `exp()` policzmy eksponentę (*eksponenta, inaczej funkcja wykładnicza, to bardzo szybko rosnąca funkcja matematyczna*) z sekwencji, a następnie - wykorzystując funkcję `plot()` - narysujmy i sekwencję, i jej eksponentę. Zauważmy, że argumentem tej funkcji jest wekor, a ponieważ większość operacji w R jest wektoryzowana, funkcja `exp()` policzy eksponentę dla każdego elementu wektora `sekwencja`.
 
 Poniższy wykres, to bardzo ważny wykres, ponieważ przedstawia bardzo ważną informację dotyczącą uczenie się.
 Pierwsze godziny poznawania R poświęcimy na zbudowanie bazy funkcji R. 
@@ -170,6 +168,6 @@ Pierwsze zadania są proste, kolejne coraz trudniejsze. Warto zmierzyć się z n
 
 Odpowiedzi do zadań umieszczone są na stronie kursu, można je w każdej chwili sprawdzić.
 
-Zadanie do tego odcinek polega na uruchomieniu wszystkich przedstawionych instrukcji w programie RStudio i sprawdzeniu czy otrzymuje się te same wyniki.
+Zadanie do tego odcinka polega na uruchomieniu wszystkich przedstawionych instrukcji w programie RStudio i sprawdzeniu czy otrzymuje się te same wyniki.
 
 
