@@ -373,6 +373,8 @@ pl + theme_bw() + theme(plot.background = element_rect(fill = "gray80"))
 - Informację o różnych nakładkach dla pakietu `ggplot2` znaleźć można na `easyGgplot2` 
 http://www.sthda.com/english/wiki/easyggplot2
 
+- Niezła ściągawka jak korzystać z pakietu *,,ggplot2''* file:///Users/pbiecek/Downloads/ggplot2-cheatsheet.pdf
+
 - Wklejając wykresy do Excela lub Worda może nam zależeć na wykresach, które można edytować. In a to jest metoda http://www.sthda.com/english/wiki/create-an-editable-graph-from-r-software
 
 - Wiele przydatnych wskazówek można również znaleźć w internetowej książce *,,Cookbook for R''* http://www.cookbook-r.com/Graphs/ oraz w dokumencie *Effective tables and graphs in official statistics, Government Statistical Service*
