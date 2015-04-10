@@ -29,7 +29,7 @@ Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zb
 
 # Co to znaczy: cecha ilościowa
 
-Najbliższe pięć odcinków przedstawia pięć podstawowe typy danych: ilościowe, jakościowe, napisy, wartości logiczne i daty. Nie wyczerpują one jeszcze listy wszystkich możliwych typów, można by wyróżnić bardziej specjalistyczne typy (np. współrzędne geograficzne), ale te pięć występuje w 90% analiz, więc na nich się skupimy.
+Najbliższe pięć odcinków przedstawia pięć podstawowych typów danych: ilościowe, jakościowe, napisy, wartości logiczne i daty. Nie wyczerpują one jeszcze listy wszystkich możliwych typów, można by wyróżnić bardziej specjalistyczne typy (np. współrzędne geograficzne), ale te pięć występuje w 90% analiz, więc na nich się skupimy.
 
 Słowo 'typ' ma w tym przypadku to samo znaczenie co słowo rodzaj, możemy więc mówić o typach danych jak i o rodzajach danych. W analizie danych częściej stosowane jest słowo ,,typ'', więc będziemy się nim posługiwać.
 
