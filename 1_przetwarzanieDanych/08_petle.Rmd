@@ -227,7 +227,7 @@ W poniższym przykłądzie będziemy chcieli wyświetlić informację do jakiej 
 koty_ptaki$gatunek <- as.character(koty_ptaki$gatunek)
 
 # wykonamy instrukcję dla pierwszego wiersza, indeks wiersza zapiszemy w zmiennej i
-i <- 1
+i <- 1                                                          
 cat(koty_ptaki[i, "gatunek"], "może ważyć do", koty_ptaki[i, "waga"], "kg\n")
 ```
 
