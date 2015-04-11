@@ -48,7 +48,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 26 <br><br> <a style='color:rgb(255,110,117)!important' href='http://biecek.pl/'>Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 26 <br><br> <a href="http://biecek.pl/">Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="zadanie-sezon-1-odcinek-5" class="slide section level1">
 <h1>Zadanie, sezon 1, odcinek 5</h1>
@@ -225,6 +225,12 @@ for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
     }
   }
 }
+
+<span class="co"># Użycie funkcji sapply, cut i switch by zwięźle zastąpić dwa if'y</span>
+<span class="kw">sapply</span>(
+  <span class="kw">cut</span>(koty_ptaki$waga, <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">100</span>,<span class="dv">1000</span>)),
+  switch,
+  <span class="st">&quot;lekkie&quot;</span>, <span class="st">&quot;srednie&quot;</span>, <span class="st">&quot;ciezkie&quot;</span>)
 
 <span class="co"># Ważymy koty i ptaki</span>
 wagaKoty &lt;-<span class="st"> </span><span class="dv">0</span>
