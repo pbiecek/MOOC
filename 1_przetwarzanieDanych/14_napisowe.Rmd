@@ -1,5 +1,5 @@
 ---
-title: "Cechy napisowe"
+title: "Napisy"
 author: "pogRomcy danych"
 date: "sezon 1 / odcinek 14 <br><br> <a href='http://biecek.pl/'>Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
@@ -9,7 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / przetwarzanie / zmienne napisowe"
+    footer: "pogRomcy danych / przetwarzanie / napisy"
 
 ---
 
