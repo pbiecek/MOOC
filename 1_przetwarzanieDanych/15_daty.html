@@ -48,7 +48,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 15 <br><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 15 <br><br> <a href="http://biecek.pl/">Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
@@ -63,7 +63,7 @@ pogRomcy danych
 </div>
 <div id="daty-i-czas" class="slide section level1">
 <h1>Daty i czas</h1>
-<p>W programie R istnieją trzy podstawowe typu zmiennych opisujące daty lub czas.</p>
+<p>W programie R istnieją trzy podstawowe typy zmiennych opisujące daty lub czas.</p>
 <ul>
 <li><p>Klasa <code>Date</code> służy do opisywania dat z dokładnością do dnia. Na datach można wykonywać operacje takie jak odejmowanie dwóch dat, dodawanie liczby do dnia itp.</p></li>
 <li><p>Klasa POSIXct, służy do opisywania czasu z dokładnością do sekundy. Czas jest pamiętany jako liczba sekund od określonego początku. Sufiks <code>ct</code> oznacza <em>calendar time</em>.</p></li>
@@ -78,7 +78,7 @@ pogRomcy danych
 <pre><code>## [1] &quot;2015-02-22&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.Date</span>(<span class="st">&quot;02/22/2015&quot;</span>, <span class="dt">format =</span> <span class="st">&quot;%m/%d/%Y&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;2015-02-22&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.Date</span>(<span class="st">&quot;February 2, 2015&quot;</span>, <span class="dt">format =</span> <span class="st">&quot;%B %d, %Y&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.Date</span>(<span class="st">&quot;February 2, 2015&quot;</span>, <span class="dt">format =</span> <span class="st">&quot;%B %d, %Y&quot;</span>) <span class="co"># działa dla angielskojęzycznej wersji R</span></code></pre>
 <pre><code>## [1] &quot;2015-02-02&quot;</code></pre>
 <p>Aby uzyskać dokładną pomoc dotyczącą oznaczeń w formatowaniu daty należy otworzyć plik pomocy instrukcją <code>?strptime</code>.</p>
 <p>Obiekty klasy <code>Date</code> można tworzyć także na podstawie liczb całkowitych lub obiektów klasy POSIXct, w obu przypadkach przy pomocy funkcji <code>as.Date()</code>.</p>
@@ -102,9 +102,9 @@ czas2 -<span class="st"> </span>czas1</code></pre>
 <pre><code>## [1] &quot;2015-02-13 12:56:56 CET&quot;</code></pre>
 <p>Funkcja <code>Sys.time()</code> jako wynik zwraca aktualny czas w formacie <code>POSIXct</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.time</span>()</code></pre>
-<pre><code>## [1] &quot;2015-03-30 16:34:04 CEST&quot;</code></pre>
+<pre><code>## [1] &quot;2015-04-11 23:27:25 CEST&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.time</span>() -<span class="st"> </span>czas1</code></pre>
-<pre><code>## Time difference of 45.10948 days</code></pre>
+<pre><code>## Time difference of 57.39652 days</code></pre>
 </div>
 <div id="czas-local-time" class="slide section level1">
 <h1>Czas local time</h1>
@@ -135,9 +135,9 @@ czas2 -<span class="st"> </span>czas1</code></pre>
 <p>Jedną z takich funkcji jest <code>now()</code>, która zwraca obiekt opisujący bieżącą chwilę.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)
 <span class="kw">now</span>()</code></pre>
-<pre><code>## [1] &quot;2015-03-30 16:34:05 CEST&quot;</code></pre>
+<pre><code>## [1] &quot;2015-04-11 23:27:25 CEST&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">today</span>()</code></pre>
-<pre><code>## [1] &quot;2015-03-30&quot;</code></pre>
+<pre><code>## [1] &quot;2015-04-11&quot;</code></pre>
 <p>Uproszczono nazwy funkcji, służące do konwertowania napisów na czas. Nazwa funkcji staje się opisem formatu.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ymd_hms</span>(<span class="st">&quot;2015-02-14 23:59:59&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;2015-02-14 23:59:59 UTC&quot;</code></pre>
@@ -150,8 +150,8 @@ czas2 -<span class="st"> </span>czas1</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">wday</span>(czas3, <span class="dt">label =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>## [1] Sat
 ## Levels: Sun &lt; Mon &lt; Tues &lt; Wed &lt; Thurs &lt; Fri &lt; Sat</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># tydzień w roku, dzień miesiąca, miesiąc i rok</span>
-<span class="kw">week</span>(czas1)</code></pre>
+<p>Tydzień w roku, dzień miesiąca, miesiąc i rok.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">week</span>(czas1)</code></pre>
 <pre><code>## [1] 7</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">day</span>(czas1)</code></pre>
 <pre><code>## [1] 13</code></pre>

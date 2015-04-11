@@ -1,7 +1,7 @@
 ---
 title: "Daty"
 author: "pogRomcy danych"
-date: "sezon 1 / odcinek 15 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 1 / odcinek 15 <br><br> <a href='http://biecek.pl/'>Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -29,7 +29,7 @@ Do ilustracji tych zagadnień wykorzystamy zbiory danych tworzone ad hoc.
 
 # Daty i czas
 
-W programie R istnieją trzy podstawowe typu zmiennych opisujące daty lub czas.
+W programie R istnieją trzy podstawowe typy zmiennych opisujące daty lub czas.
 
 + Klasa `Date` służy do opisywania dat z dokładnością do dnia. Na datach można wykonywać operacje takie jak odejmowanie dwóch dat, dodawanie liczby do dnia itp.
 
@@ -48,7 +48,7 @@ Jako pierwszy argument przyjmuje wektor napisów opisujących daty. Drugi opcjon
 ```{r}
 as.Date("2015-02-22")
 as.Date("02/22/2015", format = "%m/%d/%Y")
-as.Date("February 2, 2015", format = "%B %d, %Y")
+as.Date("February 2, 2015", format = "%B %d, %Y") # działa dla angielskojęzycznej wersji R
 ```
 
 Aby uzyskać dokładną pomoc dotyczącą oznaczeń w formatowaniu daty należy otworzyć plik pomocy instrukcją `?strptime`.
@@ -149,7 +149,9 @@ Funkcją `wday()` można odczytać dzień tygodnia, podobnie funkcje `day()`, `m
 
 ```{r}
 wday(czas3, label = TRUE)
-# tydzień w roku, dzień miesiąca, miesiąc i rok
+```
+Tydzień w roku, dzień miesiąca, miesiąc i rok.
+```{r}
 week(czas1)
 day(czas1)
 month(czas1)
