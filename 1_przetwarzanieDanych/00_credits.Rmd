@@ -26,6 +26,7 @@ output:
 *Wsparcie merytoryczne i językowe*
 
 * Paweł Chudzian
+* Marcin Kosiński
 * Katarzyna Łogwiniuk
 * Krzysztof Trajkowski
 
@@ -46,6 +47,10 @@ output:
 
 * Paweł Dudek
 
+*System weryfikacji zadań*
+
+* Cezary Chudzian
+
 *Wsparcie organizacyjne*
 
 * Michał Bojanowski, ICM
@@ -54,6 +59,3 @@ output:
 
 * Przemysław Biecek, ICM
 
-*System weryfikacji zadań*
-
-* Cezary Chudzian
