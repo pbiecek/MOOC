@@ -111,7 +111,7 @@ Obie zmienne znacznie się różnią. Drużyna występuje tylko w dwóch wartoś
 Zbiór danych `koty_ptaki` składa się z 13 wierszy. Można cały ten zbiór danych wyświetlić na ekranie. 
 Nie zawsze potrzebujemy więc specjalnych statystyk opisowych by zrozumieć co się dzieje w takich małych zbiorach danych.
 
-Dlatego dalsze ćwiczenia ze zmiennymi jakościowymi przeprowadzimy na znaczeni większym zbiorze danych `auta2012` o ponad 200 tysiącach wartości, 
+Dlatego dalsze ćwiczenia ze zmiennymi jakościowymi przeprowadzimy na znaczenie większym zbiorze danych `auta2012` o ponad 200 tysiącach wierszy, 
 który również znajduje się w pakiecie `PogromcyDanych`.
 
 Opis tego zbioru danych znaleźć można w odcinku http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/0_dane.html
@@ -124,6 +124,12 @@ head(auta2012, 2)
 ```
 
 Które z tych zmiennych to zmienne jakościowe?
+
+Gdy w zbiorze danych jest wiele kolumn, to często wygodnie na pierwsze wiersze spojrzeć poprzez funkcję `glimpse()` która kolejne kolumny ze zbioru danych przedstawia jedna pod drugą.
+
+```{r, warning=FALSE, message=FALSE}
+glimpse(auta2012)
+```
 
 ---
 
@@ -142,8 +148,7 @@ levels(auta2012$Waluta)
 ```
 
 Zmienne jakościowe często opisuje się tablicą liczebności, a więc informacją ile razy wystąpiła każda z wartości ze słownika.
-Tablicę liczebności można wyznaczyć funkcją `table()` lub `summary()`. Jeżeli w zmiennej jakościowej występują wartości brakujące, 
-to funkcja `summary()` też napisze ile ich jest.
+Tablicę liczebności można wyznaczyć funkcją `table()` lub `summary()`. Jeżeli w zmiennej jakościowej występują wartości brakujące, to funkcja `summary()` też napisze ile ich jest (funkcja `table()` domyslnie tego nie robi, można takie zachowanie wymusić dodając argument `use.NA = "always"`).
 
 ```{r, warning=FALSE}
 table(auta2012$Waluta)
@@ -170,7 +175,7 @@ W pewnych sytuacjach, zamiast posługiwać się tablicą liczebności, wygodniej
 Ale jak te procenty policzyć?
 
 Można to zrobić na kilka sposobów. Funkcja `prop.table()` dzieli wartości tabeli liczebności przez sumę liczebności, 
-a więc zamienia liczebności na frakcje. Przypiszmy wynik funkcji `table()` do jakiejś zmiennej, np. o nazwie `waluty` 
+a więc zamienia liczebności na frakcje (frakcje czyli procenty, części całości). Przypiszmy wynik funkcji `table()` do jakiejś zmiennej, np. o nazwie `waluty` 
 (nazwa może być dowolna, musimy jej jednak konsekwentnie używać w dalszych przykładach). Następnie tak otrzymaną tabelę 
 liczebności zamieniamy na frakcje.
 
@@ -199,9 +204,9 @@ waluty <- table(auta2012$Waluta)
 round(procenty, digits = 1)
 ```
 
- Wszystkie przedstawione powyżej operacje działają i na pojedynczych wartościach (nazywanych skalarami) jak i na wektorach. Przykładowo operacja `100*frakcje` 
+ Wszystkie przedstawione powyżej operacje działają i na pojedynczych wartościach jak i na wektorach. Przykładowo operacja `100*frakcje` 
  wymnaża liczbę `100` z każdym elementem wektora `frakcje` i wynikiem tej operacji jest wektor. Nie w każdym języku programowania można mieć takie mieszane 
- operacje mnożenia wektorów i skalarów.
+ operacje mnożenia wektorów i pojedynczych liczb. W programie R jest to możliwe ponieważ od podstaw wszystkie operacje były planowane jako operacje wektorowe i nawet pojedyncze wartości są w rzeczywistości wektorami o długości 1. Wykonując operacje na dwóch wektorach krótszy jest powtarzany tak długo aż długością zrówna się z dłuższym.
 
 ---
 
@@ -241,6 +246,12 @@ kolejnoscPosortowanych <- order(zaokragloneProcenty)
 zaokragloneProcenty[kolejnoscPosortowanych]
 ```
 
+Funkcja `rev()` odwraca kolejność elementów w wektorze, możemy jej użyć by posortowac wartości malejąco.
+
+```{r, warning=FALSE}
+zaokragloneProcenty[rev(kolejnoscPosortowanych)]
+```
+
 A jak sprawdzić, na których pozycjach występują trzy najmniejsze wartości?
 
 ```{r, warning=FALSE}
@@ -267,7 +278,7 @@ cyfr w liczbie. Na wykresie takie wartości natychmiast rzucają się w oczy.
 
 Zazwyczaj tabele liczebności przedstawia się za pomocą wykresów słupkowych. Wykresy słupkowe można wykonać np. funkcją `barplot()`.
 
-```{r, warning=FALSE, fig.width=5, fig.height=5}
+```{r, warning=FALSE, fig.width=8, fig.height=5}
 (waluty <- table(auta2012$Waluta))
 barplot(waluty)
 ```
@@ -283,7 +294,7 @@ rozsądniej jest posortować dane malejąco, co można wykonać z użyciem funkc
 
 Argument `las=1` powoduje, że oś OY ma etykiety ustawione poziomo.
 
-```{r, warning=FALSE, fig.width=5, fig.height=5}
+```{r, warning=FALSE, fig.width=8, fig.height=5}
 posortowaneWaluty <- sort(waluty)
 barplot(posortowaneWaluty, horiz = TRUE, las=1)
 ```
@@ -303,7 +314,7 @@ Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.
 
 Z wyglądu, cechy jakościowe (czynniki) przypominają cechy napisowe. Jednak pod spodem, ich reprezentacja jest zupełnie inna.
 Czynniki nie są pamiętane jako napisy, ale jako para - wektor liczb i słownik, określający, który napis odpowiada, 
-której liczbie. Dzięki temu można zaoszczędzić pamięć przy przechowywaniu dużych zbiorów danych. 
+której liczbie. 
 
 Na napisach zazwyczaj wykonuje się inne operacje niż na zmiennych jakościowych, może się więc tak zdarzyć, że celowo 
 chcemy jakieś dane odczytać jako napisy. Ale gdy dane są wczytywane z pliku tekstowego w którym są napisy, domyślnie 
@@ -326,8 +337,7 @@ cat(koty_ptaki$gatunek)
 # Napisy czy czynniki?
 
 Funkcja `read.table()` posiada argument `stringsAsFactors` określający w jaki sposób wczytywać kolumny z napisami. 
-Ustawiwszy argument `stringsAsFactors=FALSE` wymuszamy wczytywanie danych jako zmienne napisowe. Zajmie to trochę 
-więcej pamięci, ale samo wczytywanie będzie trochę szybsze. 
+Ustawiwszy argument `stringsAsFactors=FALSE` wymuszamy wczytywanie danych jako zmienne napisowe. 
 
 Zauważmy jak teraz wygląda wynik funkcji `str()` i `cat()`.
 
@@ -379,7 +389,14 @@ częstości o wymiarach 32 wiersze i 8 kolumn. Pierwszy wiersz tej tabeli odpowi
 kraju pochodzenia, stąd brak nazwy w pierwszym wierszu.
 
 ```{r, warning=FALSE, fig.height=5, fig.width=5}
-(krajWaluta <- xtabs( ~ Kraj.pochodzenia + Waluta, auta2012))
+krajWaluta <- xtabs( ~ Kraj.pochodzenia + Waluta, auta2012)
+krajWaluta
+```
+
+Funkcja `prop.table()` liczy procenty (z drugim argumentem =1 liczy procenty w wierszach) a funkcja `round()` zaokrągla liczby (z dokładnością do tulu cyfr po kropce ile wskazano w drugim argumencie).
+
+```{r, warning=FALSE, fig.height=5, fig.width=5}
+round(prop.table(krajWaluta, 1), 3)
 ```
 
 ---
