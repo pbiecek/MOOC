@@ -6,8 +6,8 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / przetwarzanie / zmienne napisowe" /> 
-  <title>Cechy napisowe</title>
+  <meta name="copyright" content="pogRomcy danych / przetwarzanie / napisy" /> 
+  <title>Napisy</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -44,15 +44,15 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </head>
 <body>
 <div class="slide titlepage">
-  <h1 class="title">Cechy napisowe</h1>
+  <h1 class="title">Napisy</h1>
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 14 <br><br> <a style='color:rgb(255,110,117)!important' href='http://biecek.pl/'>Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 14 <br><br> <a href="http://biecek.pl/">Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
-<p>Analizując dane spotkamy się z różnymi rodzajami zmiennych. Bardzo często są to napisy lub zmienne, które chcemy do napisów przekształcić (np. data, którą można przekształcić na napis by wyłuskać rok i miesiąc).</p>
+<p>Analizując dane spotkamy się z różnymi rodzajami zmiennych. Bardzo często są to napisy lub zmienne, które chcemy do napisów przekształcić (np. data, którą można przekształcić na napisy by wyłuskać rok i miesiąc).</p>
 <p>W tym odcinku nauczymy się:</p>
 <ul>
 <li>jak przekształcać zmienne z napisów i na napisy,</li>
@@ -94,7 +94,7 @@ pogRomcy danych
 </div>
 <div id="konwersja-na-napis" class="slide section level1">
 <h1>Konwersja na napis</h1>
-<p>Wybierzmy kolumnę <code>habitat</code>. W zbiorze danych <code>koty_ptaki</code> jest to zmienna jakościowa. Użyjemy funkcji <code>as.character()</code> by przekształcić ją na napis. Otrzymane napisy zapiszemy w kolumnie <code>habitat_napis</code>.</p>
+<p>Wybierzmy kolumnę <code>habitat</code>. W zbiorze danych <code>koty_ptaki</code> jest to zmienna jakościowa. Użyjemy funkcji <code>as.character()</code> by przekształcić ją na napisy. Otrzymane napisy zapiszemy w kolumnie <code>habitat_napis</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">koty_ptaki$habitat</code></pre>
 <pre><code>##  [1] Azja     Afryka   Ameryka  Ameryka  Azja     Afryka   Azja    
 ##  [8] Euroazja Afryka   Polnoc   Polnoc   Polnoc   Poludnie
@@ -104,29 +104,27 @@ koty_ptaki$habitat_napis</code></pre>
 <pre><code>##  [1] &quot;Azja&quot;     &quot;Afryka&quot;   &quot;Ameryka&quot;  &quot;Ameryka&quot;  &quot;Azja&quot;     &quot;Afryka&quot;  
 ##  [7] &quot;Azja&quot;     &quot;Euroazja&quot; &quot;Afryka&quot;   &quot;Polnoc&quot;   &quot;Polnoc&quot;   &quot;Polnoc&quot;  
 ## [13] &quot;Poludnie&quot;</code></pre>
-<p>Funkcja <code>length()</code> dla każdego wektora sprawdza jego długość. Funkcja <code>nchar()</code> dla napisu sprawdza liczbę znaków w napisie.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># liczba napisów</span>
-<span class="kw">length</span>(koty_ptaki$habitat_napis)</code></pre>
+<p>Funkcja <code>length()</code> dla każdego wektora sprawdza jego długość (liczbę napisów). Funkcja <code>nchar()</code> dla napisu sprawdza liczbę znaków w każdym napisie w wektorze (długość każdego napisu).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(koty_ptaki$habitat_napis)</code></pre>
 <pre><code>## [1] 13</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># długość każdego napisu</span>
-<span class="kw">nchar</span>(koty_ptaki$habitat_napis)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nchar</span>(koty_ptaki$habitat_napis)</code></pre>
 <pre><code>##  [1] 4 6 7 7 4 6 4 8 6 6 6 6 8</code></pre>
 </div>
 <div id="wyszukiwanie-napisu" class="slide section level1">
 <h1>Wyszukiwanie napisu</h1>
 <p>Częstą operacją na napisach jest wyszukanie tych, które pasują do wzorca. Jeżeli chodzi nam o zgodność co do znaku, to wygodne będzie użycie funkcji <code>which()</code>. Jako wynik zwraca indeksy, dla których określony warunek jest prawdziwy.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># które wartości wektora habitat_napis to 'Azja'</span>
-<span class="kw">which</span>(koty_ptaki$habitat_napis ==<span class="st"> &quot;Azja&quot;</span>)</code></pre>
+<p>Które wartości wektora habitat_napis to <code>Azja</code>?</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which</span>(koty_ptaki$habitat_napis ==<span class="st"> &quot;Azja&quot;</span>)</code></pre>
 <pre><code>## [1] 1 5 7</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># które wartości wektora habitat_napis to 'Azja' lub `Afryka`</span>
-<span class="kw">which</span>(koty_ptaki$habitat_napis %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Azja&quot;</span>, <span class="st">&quot;Afryka&quot;</span>))</code></pre>
+<p>Które wartości wektora habitat_napis to <code>Azja</code> lub <code>Afryka</code>?</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which</span>(koty_ptaki$habitat_napis %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Azja&quot;</span>, <span class="st">&quot;Afryka&quot;</span>))</code></pre>
 <pre><code>## [1] 1 2 5 6 7 9</code></pre>
 <p>Często jednak, zamiast wymieniać wszystkie wartości, które chcemy wyszukać, wygodniejsze jest opisanie tych wartości przez pewien wzorzec. Do takiego wyszukiwania służy funkcja <code>grep()</code>. Testuje ona, w którym z napisów występuje określony ciąg znaków, a jako wynik zwraca numery napisów z tym ciągiem.</p>
 <p>Sprawdźmy, które wiersze w kolumnie <code>habitat_napis</code> posiadają w nazwie znak <code>A</code>. Pierwszym argumentem funkcji <code>grep()</code> jest wzorzec, drugim wektor napisów. Możemy te argumenty podać w innej kolejności, ale wtedy zmuszeni jesteśmy do podawania ich nazwy.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grep</span>(<span class="st">&quot;A&quot;</span>, koty_ptaki$habitat_napis)</code></pre>
 <pre><code>## [1] 1 2 3 4 5 6 7 9</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># równoważnie</span>
-<span class="kw">grep</span>(koty_ptaki$habitat_napis, <span class="dt">pattern=</span><span class="st">&quot;A&quot;</span>)</code></pre>
+<p>Równoważnie</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grep</span>(koty_ptaki$habitat_napis, <span class="dt">pattern=</span><span class="st">&quot;A&quot;</span>)</code></pre>
 <pre><code>## [1] 1 2 3 4 5 6 7 9</code></pre>
 </div>
 <div id="wyszukiwanie-napisu-1" class="slide section level1">
@@ -252,8 +250,8 @@ auta2012$Wyposazenie.dodatkowe_napis &lt;-<span class="st"> </span><span class="
 <pre><code>## 
 ##  FALSE   TRUE 
 ##  44642 162960</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># około 20% oferowanych aut ma przyciemniane szyby</span>
-auta2012$szyby &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="dt">x=</span>auta2012$Wyposazenie.dodatkowe_napis, 
+<p>Około 20% oferowanych aut ma przyciemniane szyby.</p>
+<pre class="sourceCode r"><code class="sourceCode r">auta2012$szyby &lt;-<span class="st"> </span><span class="kw">grepl</span>(<span class="dt">x=</span>auta2012$Wyposazenie.dodatkowe_napis, 
                                <span class="dt">pattern=</span><span class="st">&quot;przyciemniane szyby&quot;</span>)
 <span class="kw">table</span>(auta2012$szyby)</code></pre>
 <pre><code>## 
@@ -335,12 +333,14 @@ same_imiona      &lt;-<span class="st"> </span><span class="kw">unique</span>(im
 (fx &lt;-<span class="st"> </span><span class="kw">as.factor</span>(x))</code></pre>
 <pre><code>## [1] 2   4   5.5
 ## Levels: 2 4 5.5</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># uwaga! R nie wie że to są napisy, a zmienną jakościową zamienia na kolejne liczby całkowite</span>
-<span class="kw">as.numeric</span>(fx)</code></pre>
+<p>Uwaga! Program R nie wie że to są napisy, a zmienną jakościową zamienia na kolejne liczby całkowite.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(fx)</code></pre>
 <pre><code>## [1] 1 2 3</code></pre>
 <p>Zmienne jakościowe przez funkcję <code>as.numeric()</code> zamieniane są na kolejne liczby całkowite. Jeżeli chcemy odzyskać liczby, które są treścią czynników, to musimy je wpierw zamienić na napisy, funkcją <code>as.character()</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># zmienne jakościowe na liczby należałoby tak przekształcić</span>
-<span class="kw">as.numeric</span>(<span class="kw">as.character</span>(fx))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(fx))</code></pre>
+<pre><code>## [1] 2.0 4.0 5.5</code></pre>
+<p>Alternatywnie, można wykorzystać odrobinę wydajniejszy i również odrobinę mniej czytelny sposób zamiany zmiennych jakościowych na liczby.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(<span class="kw">levels</span>(fx))[fx] </code></pre>
 <pre><code>## [1] 2.0 4.0 5.5</code></pre>
 </div>
 <div id="zadania" class="slide section level1">
@@ -359,7 +359,7 @@ same_imiona      &lt;-<span class="st"> </span><span class="kw">unique</span>(im
 <li><p>Więcej o podstawowych operacjach do pracy z napisami przeczytać można w rozdziale 2.1 ,,Przewodnika po pakiecie R’’ GiS 2013. Rozdział ten jest dostępny bezpłatnie na stronie <a href="http://biecek.pl/R/" class="uri">http://biecek.pl/R/</a></p></li>
 <li><p>Gdy pracujemy z dużymi korpusami, możemy przyśpieszyć obliczenia stosując pakiet <code>stringr</code>. Bardzo dobrze przygotowany materiał opisujący funkcje tego pakietu jest udostępniony przez Gastona Sancheza na stronie <a href="http://gastonsanchez.com/Handling_and_Processing_Strings_in_R.pdf" class="uri">http://gastonsanchez.com/Handling_and_Processing_Strings_in_R.pdf</a>.</p></li>
 <li><p>Gdy pracujemy z napisami bardzo użyteczne są wyrażenia i metaznaki. Krótkie ale treściwe omówienie wyrażań regularnych, opracowane przez S. Jonesa znajduje się w dokumencie ,,String manipulation in R’’ <a href="http://www3.nd.edu/~sjones20/JonesUND/BioStats_files/RstringManipulation_2-6-13.pdf" class="uri">http://www3.nd.edu/~sjones20/JonesUND/BioStats_files/RstringManipulation_2-6-13.pdf</a>.</p></li>
-<li><p>Interesującą alternatywą wspierająca bardziej egzotyczne języki (bardziej niż angielski) jest pakiet <code>stringi</code>. Można o nim posłuchać na wystąpieniu Marka Gągolewskiego z II Spotkania Entuzjastów R. Materiał wideo dostępny jest na stronie <a href="http://PogromcyDanych.pl/SER/#SERII" class="uri">http://PogromcyDanych.pl/SER/#SERII</a></p></li>
+<li><p>Interesującą alternatywą wspierająca bardziej egzotyczne języki (bardziej niż angielski) jest pakiet <code>stringi</code>. Można o nim posłuchać na wystąpieniu Marka Gągolewskiego z II Spotkania Entuzjastów R. Materiał wideo dostępny jest na stronie <a href="http://smarterpoland.pl/SER/#SERII" class="uri">http://smarterpoland.pl/SER/#SERII</a></p></li>
 </ul>
 </div>
 

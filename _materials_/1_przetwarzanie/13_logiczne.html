@@ -48,7 +48,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 13 <br><br> <a style='color:rgb(255,110,117)!important' href='http://biecek.pl/'>Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 13 <br><br> <a href="http://biecek.pl/">Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
@@ -70,7 +70,7 @@ pogRomcy danych
 </div>
 <div id="logika-trojwartosciowa" class="slide section level1">
 <h1>Logika trójwartościowa</h1>
-<p>Napisaliśmy wcześniej, że wartości logiczne przyjmują wartości <code>TRUE</code> (logiczna prawda) lub <code>FALSE</code> (logiczny fałsz). Jednak równocześnie każdy rodzaj zmiennych w programie R może również przyjmować wartości nieustaloną <code>NA</code>. W gruncie rzeczy wartości logiczne operują zatem w logice trójwartościowej.</p>
+<p>Napisaliśmy wcześniej, że wartości logiczne przyjmują wartości <code>TRUE</code> (logiczna prawda) lub <code>FALSE</code> (logiczny fałsz). Jednak równocześnie każdy rodzaj zmiennych w programie R może również przyjmować wartość nieustaloną <code>NA</code>. W gruncie rzeczy wartości logiczne operują zatem w logice trójwartościowej.</p>
 <p>Tworząc wartości logiczne często wykorzystuje się operatory logiczne <code>&gt;</code> (większy), <code>&gt;=</code> (większy równy), <code>==</code> (równy), <code>&lt;=</code> (mniejszy równy), <code>&lt;</code> (mniejszy). Gdy porównuje się takim operatorem wartość nieustaloną <code>NA</code> to wynik również jest wartością nieustaloną.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">3</span>,<span class="dv">8</span>, <span class="ot">NA</span>) &lt;=<span class="st"> </span><span class="dv">4</span></code></pre>
 <pre><code>## [1]  TRUE FALSE FALSE  TRUE FALSE    NA</code></pre>
@@ -109,7 +109,7 @@ tabliczka_mnozenia</code></pre>
 ## FALSE FALSE FALSE FALSE
 ## &lt;NA&gt;     NA FALSE    NA</code></pre>
 <p>Warto zwrócić uwagę na wynik (<code>TRUE | NA</code>). Wynikiem jest wartość <code>TRUE</code>, poinieważ bez znaczenia czy wartość nieokreślona okazałaby się prawdziwa czy fałszywa, jej logiczna suma z wartością <code>TRUE</code> dałoby wartość <code>TRUE</code>. Na podobnej zasadzie <code>FALSE &amp; NA</code> zwraca wartość <code>FALSE</code>.</p>
-<p>W programie R występują również dłuższe postacie operatorów <code>|</code> i <code>&amp;</code> czyli <code>||</code> i <code>&amp;&amp;</code>. Pomiędzy formą dłuższą i krótszą występują dwie różnice. Forma krótsza pracuje na wektorach i wykonuje operacja element wektora po elemencie, podczas gdy forma dłuższa wykonuje operacje jedynie na pierwszych elementach wektorów i jako wynik zwraca jednoelementową wartość <code>TRUE</code> lub <code>FALSE</code>. Druga różnica dotyczy zaawansowanych zastosowań, długa forma nie wykonuje ewaluacji prawego argumentu, jeżeli nie jest to niezbędne.</p>
+<p>W programie R występują również dłuższe postacie operatorów <code>|</code> i <code>&amp;</code> czyli <code>||</code> i <code>&amp;&amp;</code>. Pomiędzy formą dłuższą i krótszą występują dwie różnice. Forma krótsza pracuje na wektorach i wykonuje operacje element wektora po elemencie, podczas gdy forma dłuższa wykonuje operacje jedynie na pierwszych elementach wektorów i jako wynik zwraca jednoelementową wartość <code>TRUE</code> lub <code>FALSE</code>. Druga różnica dotyczy zaawansowanych zastosowań, długa forma nie wykonuje ewaluacji prawego argumentu, jeżeli nie jest to niezbędne.</p>
 <p>Przykładowo pierwsza linia poniższego przykładu wykona się poprawnie, ponieważ do określenia wyniku nie potrzebna jest ewaluacja funkcji <code>cat()</code>. Drugi przykład wykona funkcję <code>cat()</code> oraz zasygnalizuje błąd, ponieważ nie sposób wyniku funckji <code>cat()</code> logicznie dodać do wartości <code>TRUE</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="ot">TRUE</span> ||<span class="st"> </span><span class="kw">cat</span>(<span class="st">&quot;Jestem tutaj !!!&quot;</span>)
 ## [1] TRUE
@@ -167,7 +167,7 @@ czy_jest_ciezki &lt;-<span class="st"> </span>koty_ptaki$waga &gt;=<span class="
 <pre><code>## [1] 7</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(!czy_to_kot)</code></pre>
 <pre><code>## [1] 6</code></pre>
-<p>Taki wektor wartości logicznych można mnożyć z wektorem wartości liczbowych. Poniższa instrukcja używa takiej operacji do policzenia sumy wagi wszystkich kotów w zbiorze danych. Mnożenie przez wektor wartości logicznych powoduje wyzerowanie określonych wartości.</p>
+<p>Taki wektor wartości logicznych można mnożyć z wektorem wartości liczbowych. Poniższa instrukcja używa takiej operacji do policzenia sumy wagi wszystkich kotów w zbiorze danych. Mnożenie przez wektor wartości logicznych powoduje wyzerowanie określonych wartości (TRUE jest zamieniane na 1, FALSE na 0, a elementy obu wektorów są mnożone element po elemencie).</p>
 <pre class="sourceCode r"><code class="sourceCode r">czy_to_kot *<span class="st"> </span>koty_ptaki$waga</code></pre>
 <pre><code>##  [1] 300 200 100  80  70  60  50   0   0   0   0   0   0</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(czy_to_kot *<span class="st"> </span>koty_ptaki$waga)</code></pre>
@@ -207,6 +207,7 @@ czy_jest_ciezki &lt;-<span class="st"> </span>koty_ptaki$waga &gt;=<span class="
 <p>Wykorzystajmy wartości logiczne oraz funkcję <code>table()</code>, aby sprawdzić ile aut w naszych danych jest zarejestrowanych w Polsce oraz ile z nich zostało wyprodukowanych przed 2007 rokiem. Tak jak w przypadku zmiennych jakościowych możemy wykorzystać funkcję <code>prop.table()</code> do wyznaczenia frakcji / procentów.</p>
 <p>Co może być zaskakujące, mniej niż połowa ofert ma zadeklarowany kraj aktualnej rejestracji jako Polska.</p>
 <pre class="sourceCode r"><code class="sourceCode r">pochodziZPolski &lt;-<span class="st"> </span>auta2012$Kraj.aktualnej.rejestracji ==<span class="st"> &quot;Polska&quot;</span>
+
 <span class="kw">table</span>(pochodziZPolski)</code></pre>
 <pre><code>## pochodziZPolski
 ##  FALSE   TRUE 
@@ -216,6 +217,7 @@ czy_jest_ciezki &lt;-<span class="st"> </span>koty_ptaki$waga &gt;=<span class="
 ##    FALSE     TRUE 
 ## 56.16131 43.83869</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">starszyNiz5Lat &lt;-<span class="st"> </span>auta2012$Rok.produkcji &lt;<span class="st"> </span><span class="dv">2007</span>
+
 <span class="kw">table</span>(starszyNiz5Lat)</code></pre>
 <pre><code>## starszyNiz5Lat
 ##  FALSE   TRUE 
@@ -225,19 +227,12 @@ czy_jest_ciezki &lt;-<span class="st"> </span>koty_ptaki$waga &gt;=<span class="
 ##    FALSE     TRUE 
 ## 32.13023 67.86977</code></pre>
 </div>
-<div id="zadania" class="slide section level1">
-<h1>Zadania:</h1>
-<ul>
-<li><p>Sprawdź ile samochodów ma cenę ofertową poniżej 2 000 pln.</p></li>
-<li><p>Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3.</p></li>
-</ul>
-<p>Przykładowe odpowiedzi znajdują się na stronie <a href="http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html" class="uri">http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html</a></p>
-</div>
 <div id="testy-dla-typow-i-wartosci" class="slide section level1">
 <h1>Testy dla typów i wartości</h1>
 <p>Porównując wartości należy uważać na wartości nieokreślone, które nie zawsze zachowują się zgodnie z naszą intuicją, ale zawsze logicznie.</p>
 <p>Przykładowo, operator <code>!=</code> testuje czy wartości są różne (to negacja operatora <code>==</code>). Jak sprawdzić czy wartości w wektorze są różne od wartości brakującej <code>NA</code>? Zacznijmy od przykładu jak tego nie robić.</p>
 <pre class="sourceCode r"><code class="sourceCode r">czyOkreslonyPrzebieg &lt;-<span class="st"> </span>auta2012$Przebieg.w.km !=<span class="st"> </span><span class="ot">NA</span>
+
 <span class="kw">head</span>(auta2012$Przebieg.w.km)</code></pre>
 <pre><code>## [1]  41000  46500   8000 200000 169400 141100</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(czyOkreslonyPrzebieg)</code></pre>
@@ -248,37 +243,37 @@ czy_jest_ciezki &lt;-<span class="st"> </span>koty_ptaki$waga &gt;=<span class="
 <pre class="sourceCode r"><code class="sourceCode r">czyOkreslonyPrzebieg &lt;-<span class="st"> </span>!<span class="kw">is.na</span>(auta2012$Przebieg.w.km)
 <span class="kw">head</span>(czyOkreslonyPrzebieg)</code></pre>
 <pre><code>## [1] TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># procent</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># a tutaj liczymy procentwartości</span>
 <span class="kw">mean</span>(czyOkreslonyPrzebieg) *<span class="st"> </span><span class="dv">100</span></code></pre>
 <pre><code>## [1] 80.94479</code></pre>
 <p>Funkcji do testowania jest więcej, zaczynają one swoje nazwy od <code>is.</code>, wystarczy więc wpisać te trzy znaki do konsoli i nacisnąć klawisz TAB by zobaczyć ich listę. Część z nich sprawdza czy zmienna jest określonego typu, np. <code>is.factor()</code>, <code>is.numeric()</code>, część sprawdza czy zmienna ma określone wartości np. <code>is.na()</code> czy <code>is.nan()</code>.</p>
 </div>
 <div id="logiczne-i-oraz-logiczne-lub" class="slide section level1">
 <h1>Logiczne ‘i’ oraz logiczne ‘lub’</h1>
-<p>Ponieważ operatory logicznego <code>lub</code> oraz <code>i</code> są często wykorzystywane poćwiczmy je jeszcze na zbiorze danych o samochodach. Zdefiniujmy dwa wektory wartości logicznych, weryfikujących czy samochód jest aktualnie zarejestrowany w Polsce oraz czy jest starszy niż pięć lat, a więc wyprodukowany przed rokiem 2007.</p>
+<p>Ponieważ operatory logiczne <code>lub</code> oraz <code>i</code> są często wykorzystywane przećwiczymy je jeszcze na zbiorze danych o samochodach. Zdefiniujmy dwa wektory wartości logicznych, weryfikujących czy samochód jest aktualnie zarejestrowany w Polsce oraz czy jest starszy niż pięć lat, a więc wyprodukowany przed rokiem 2007.</p>
 <pre class="sourceCode r"><code class="sourceCode r">pochodziZPolski &lt;-<span class="st"> </span>auta2012$Kraj.aktualnej.rejestracji ==<span class="st"> &quot;Polska&quot;</span>
 starszyNiz5Lat  &lt;-<span class="st"> </span>auta2012$Rok.produkcji &lt;<span class="st"> </span><span class="dv">2007</span></code></pre>
 <p>Teraz policzymy logiczną sumę oraz iloczyn obu wektorów. Następnie użyjemy funkcji table aby przedstawić wyniki.</p>
 <pre class="sourceCode r"><code class="sourceCode r">pochodziZPolskiIStarszyNiz5Lat   &lt;-<span class="st"> </span>pochodziZPolski &amp;<span class="st"> </span>starszyNiz5Lat
 pochodziZPolskiLubStarszyNiz5Lat &lt;-<span class="st"> </span>pochodziZPolski |<span class="st"> </span>starszyNiz5Lat
-<span class="co"># Tabela obu zmiennych</span>
+<span class="co"># Tabela liczebnosci (tabela krzyżowa) dla obu zmiennych</span>
 <span class="kw">table</span>(pochodziZPolski, starszyNiz5Lat)</code></pre>
 <pre><code>##                starszyNiz5Lat
 ## pochodziZPolski FALSE  TRUE
 ##           FALSE 44025 72567
 ##           TRUE  22678 68332</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># logiczne i</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># logiczne i (tak zwany logiczny iloczyn)</span>
 <span class="kw">table</span>(pochodziZPolskiIStarszyNiz5Lat)</code></pre>
 <pre><code>## pochodziZPolskiIStarszyNiz5Lat
 ##  FALSE   TRUE 
 ## 139270  68332</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># logiczne lub</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># logiczne lub (tak zwana logiczna suma)</span>
 <span class="kw">table</span>(pochodziZPolskiLubStarszyNiz5Lat)</code></pre>
 <pre><code>## pochodziZPolskiLubStarszyNiz5Lat
 ##  FALSE   TRUE 
 ##  44025 163577</code></pre>
 </div>
-<div id="zadania-1" class="slide section level1">
+<div id="zadania" class="slide section level1">
 <h1>Zadania:</h1>
 <ul>
 <li><p>Sprawdź ile samochodów zarejestrowanych w Polsce ma cenę ofertową poniżej 2 000 pln.</p></li>
