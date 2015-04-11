@@ -17,7 +17,7 @@ output:
 # O czym jest ten odcinek
 
 Analizując dane spotkamy się z różnymi rodzajami zmiennych. Bardzo często są to napisy lub zmienne, które chcemy do napisów 
-przekształcić (np. data, którą można przekształcić na napis by wyłuskać rok i miesiąc).
+przekształcić (np. data, którą można przekształcić na napisy by wyłuskać rok i miesiąc).
 
 W tym odcinku nauczymy się:
 
@@ -77,7 +77,7 @@ zmienne jakościowe. Przekształcimy je na napisy, aby zademonstrować podstawow
 # Konwersja na napis
 
 Wybierzmy kolumnę `habitat`. W zbiorze danych `koty_ptaki` jest to zmienna jakościowa. 
-Użyjemy funkcji `as.character()` by przekształcić ją na napis. Otrzymane napisy zapiszemy w kolumnie `habitat_napis`.
+Użyjemy funkcji `as.character()` by przekształcić ją na napisy. Otrzymane napisy zapiszemy w kolumnie `habitat_napis`.
 
 ```{r, warning=FALSE, message=FALSE}
 koty_ptaki$habitat
@@ -85,12 +85,10 @@ koty_ptaki$habitat_napis <- as.character(koty_ptaki$habitat)
 koty_ptaki$habitat_napis
 ```
 
-Funkcja `length()` dla każdego wektora sprawdza jego długość. Funkcja `nchar()` dla napisu sprawdza liczbę znaków w napisie.
+Funkcja `length()` dla każdego wektora sprawdza jego długość (liczbę napisów). Funkcja `nchar()` dla napisu sprawdza liczbę znaków w każdym napisie w wektorze (długość każdego napisu).
 
 ```{r, warning=FALSE, message=FALSE}
-# liczba napisów
 length(koty_ptaki$habitat_napis)
-# długość każdego napisu
 nchar(koty_ptaki$habitat_napis)
 ```
 
@@ -101,10 +99,13 @@ nchar(koty_ptaki$habitat_napis)
 Częstą operacją na napisach jest wyszukanie tych, które pasują do wzorca. Jeżeli chodzi nam o zgodność co do znaku, 
 to wygodne będzie użycie funkcji `which()`. Jako wynik zwraca indeksy, dla których określony warunek jest prawdziwy.
 
+Które wartości wektora habitat_napis to `Azja`?
+
 ```{r, warning=FALSE, message=FALSE}
-# które wartości wektora habitat_napis to 'Azja'
 which(koty_ptaki$habitat_napis == "Azja")
-# które wartości wektora habitat_napis to 'Azja' lub `Afryka`
+```
+Które wartości wektora habitat_napis to `Azja` lub `Afryka`?
+```{r, warning=FALSE, message=FALSE}
 which(koty_ptaki$habitat_napis %in% c("Azja", "Afryka"))
 ```
 
@@ -117,7 +118,9 @@ drugim wektor napisów. Możemy te argumenty podać w innej kolejności, ale wte
 
 ```{r, warning=FALSE, message=FALSE}
 grep("A", koty_ptaki$habitat_napis)
-# równoważnie
+```
+Równoważnie
+```{r, warning=FALSE, message=FALSE}
 grep(koty_ptaki$habitat_napis, pattern="A")
 ```
 
@@ -251,8 +254,10 @@ Dlatego argument ze wzorcem musiał mieć dodatkowo wskazaną nazwę `pattern=`.
 ```{r, warning=FALSE}
 auta2012$maKlimatyzacje <- grepl("klimatyzacja", auta2012$Wyposazenie.dodatkowe_napis)
 table(auta2012$maKlimatyzacje)
+```
 
-# około 20% oferowanych aut ma przyciemniane szyby
+Około 20% oferowanych aut ma przyciemniane szyby.
+```{r, warning=FALSE}
 auta2012$szyby <- grepl(x=auta2012$Wyposazenie.dodatkowe_napis, 
                                pattern="przyciemniane szyby")
 table(auta2012$szyby)
@@ -344,15 +349,21 @@ Pokażmy ten problem na przykładzie. Zamienimy zmienne na zmienne jakościowe f
 ```{r, warning=FALSE}
 x <- c(2, 4, 5.5)
 (fx <- as.factor(x))
-# uwaga! R nie wie że to są napisy, a zmienną jakościową zamienia na kolejne liczby całkowite
+```
+Uwaga! Program R nie wie że to są napisy, a zmienną jakościową zamienia na kolejne liczby całkowite.
+```{r, warning=FALSE}
 as.numeric(fx)
 ```
 
 Zmienne jakościowe przez funkcję `as.numeric()` zamieniane są na kolejne liczby całkowite. Jeżeli chcemy odzyskać liczby, które są treścią czynników, to musimy je wpierw zamienić na napisy, funkcją `as.character()`.
 
 ```{r, warning=FALSE}
-# zmienne jakościowe na liczby należałoby tak przekształcić
 as.numeric(as.character(fx))
+```
+
+Alternatywnie, można wykorzystać odrobinę wydajniejszy i również odrobinę mniej czytelny sposób zamiany zmiennych jakościowych na liczby.
+```{r, warning=FALSE}
+as.numeric(levels(fx))[fx] 
 ```
 
 ---
@@ -379,5 +390,5 @@ Przy przetwarzaniu większych korpusów tekstu, pojawia się wiele interesujący
 
 + Gdy pracujemy z napisami bardzo użyteczne są wyrażenia i metaznaki. Krótkie ale treściwe omówienie wyrażań regularnych, opracowane przez S. Jonesa znajduje się w dokumencie ,,String manipulation in R'' http://www3.nd.edu/~sjones20/JonesUND/BioStats_files/RstringManipulation_2-6-13.pdf.
 
-+ Interesującą alternatywą wspierająca bardziej egzotyczne języki (bardziej niż angielski) jest pakiet `stringi`. Można o nim posłuchać na wystąpieniu Marka Gągolewskiego z II Spotkania Entuzjastów R. Materiał wideo dostępny jest na stronie http://PogromcyDanych.pl/SER/#SERII
++ Interesującą alternatywą wspierająca bardziej egzotyczne języki (bardziej niż angielski) jest pakiet `stringi`. Można o nim posłuchać na wystąpieniu Marka Gągolewskiego z II Spotkania Entuzjastów R. Materiał wideo dostępny jest na stronie http://smarterpoland.pl/SER/#SERII
 
