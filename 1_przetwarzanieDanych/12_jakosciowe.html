@@ -188,7 +188,7 @@ pogRomcy danych
 <p>Listę możliwych wartości dla zmiennej jakościowej można wyznaczyć funkcją <code>levels()</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(auta2012$Waluta)</code></pre>
 <pre><code>## [1] &quot;CHF&quot; &quot;CZK&quot; &quot;EEK&quot; &quot;EUR&quot; &quot;GBP&quot; &quot;HUF&quot; &quot;PLN&quot; &quot;USD&quot;</code></pre>
-<p>Zmienne jakościowe często opisuje się tablicą liczebności, a więc informacją ile razy wystąpiła każda z wartości ze słownika. Tablicę liczebności można wyznaczyć funkcją <code>table()</code> lub <code>summary()</code>. Jeżeli w zmiennej jakościowej występują wartości brakujące, to funkcja <code>summary()</code> też napisze ile ich jest (funkcja <code>table()</code> domyslnie tego nie robi, można takie zachowanie wymusić dodając argument <code>use.NA = &quot;always&quot;</code>).</p>
+<p>Zmienne jakościowe często opisuje się tablicą liczebności, a więc informacją ile razy wystąpiła każda z wartości ze słownika. Tablicę liczebności można wyznaczyć funkcją <code>table()</code> lub <code>summary()</code>. Jeżeli w zmiennej jakościowej występują wartości brakujące, to funkcja <code>summary()</code> też napisze ile ich jest (funkcja <code>table()</code> domyślnie tego nie robi, można takie zachowanie wymusić dodając argument <code>use.NA = &quot;always&quot;</code>).</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(auta2012$Waluta)</code></pre>
 <pre><code>## 
 ##    CHF    CZK    EEK    EUR    GBP    HUF    PLN    USD 
