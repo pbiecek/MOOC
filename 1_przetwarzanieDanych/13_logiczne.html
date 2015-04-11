@@ -255,20 +255,20 @@ czy_jest_ciezki &lt;-<span class="st"> </span>koty_ptaki$waga &gt;=<span class="
 starszyNiz5Lat  &lt;-<span class="st"> </span>auta2012$Rok.produkcji &lt;<span class="st"> </span><span class="dv">2007</span></code></pre>
 <p>Teraz policzymy logiczną sumę oraz iloczyn obu wektorów. Następnie użyjemy funkcji table aby przedstawić wyniki.</p>
 <pre class="sourceCode r"><code class="sourceCode r">pochodziZPolskiIStarszyNiz5Lat   &lt;-<span class="st"> </span>pochodziZPolski &amp;<span class="st"> </span>starszyNiz5Lat
-pochodziZPolskiLubStarszyNiz5Lat &lt;-<span class="st"> </span>pochodziZPolski |<span class="st"> </span>starszyNiz5Lat
-<span class="co"># Tabela liczebnosci (tabela krzyżowa) dla obu zmiennych</span>
-<span class="kw">table</span>(pochodziZPolski, starszyNiz5Lat)</code></pre>
+pochodziZPolskiLubStarszyNiz5Lat &lt;-<span class="st"> </span>pochodziZPolski |<span class="st"> </span>starszyNiz5Lat</code></pre>
+<p>Tabela liczebnosci (tabela krzyżowa) dla obu zmiennych</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(pochodziZPolski, starszyNiz5Lat)</code></pre>
 <pre><code>##                starszyNiz5Lat
 ## pochodziZPolski FALSE  TRUE
 ##           FALSE 44025 72567
 ##           TRUE  22678 68332</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># logiczne i (tak zwany logiczny iloczyn)</span>
-<span class="kw">table</span>(pochodziZPolskiIStarszyNiz5Lat)</code></pre>
+<p>Logiczne i (tak zwany logiczny iloczyn)</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(pochodziZPolskiIStarszyNiz5Lat)</code></pre>
 <pre><code>## pochodziZPolskiIStarszyNiz5Lat
 ##  FALSE   TRUE 
 ## 139270  68332</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># logiczne lub (tak zwana logiczna suma)</span>
-<span class="kw">table</span>(pochodziZPolskiLubStarszyNiz5Lat)</code></pre>
+<p>Logiczne lub (tak zwana logiczna suma)</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(pochodziZPolskiLubStarszyNiz5Lat)</code></pre>
 <pre><code>## pochodziZPolskiLubStarszyNiz5Lat
 ##  FALSE   TRUE 
 ##  44025 163577</code></pre>

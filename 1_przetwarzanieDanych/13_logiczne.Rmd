@@ -284,11 +284,17 @@ Teraz policzymy logiczną sumę oraz iloczyn obu wektorów. Następnie użyjemy 
 ```{r, warning=FALSE}
 pochodziZPolskiIStarszyNiz5Lat   <- pochodziZPolski & starszyNiz5Lat
 pochodziZPolskiLubStarszyNiz5Lat <- pochodziZPolski | starszyNiz5Lat
-# Tabela liczebnosci (tabela krzyżowa) dla obu zmiennych
+```
+Tabela liczebnosci (tabela krzyżowa) dla obu zmiennych
+```{r, warning=FALSE}
 table(pochodziZPolski, starszyNiz5Lat)
-# logiczne i (tak zwany logiczny iloczyn)
+```
+Logiczne i (tak zwany logiczny iloczyn)
+```{r, warning=FALSE}
 table(pochodziZPolskiIStarszyNiz5Lat)
-# logiczne lub (tak zwana logiczna suma)
+```
+Logiczne lub (tak zwana logiczna suma)
+```{r, warning=FALSE}
 table(pochodziZPolskiLubStarszyNiz5Lat)
 ```
 
