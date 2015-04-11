@@ -46,7 +46,7 @@ Dla zmiennych logicznych dostępnych jest kilka dodatkowych operacji logicznych,
 # Logika trójwartościowa
 
 Napisaliśmy wcześniej, że wartości logiczne przyjmują wartości `TRUE` (logiczna prawda) lub `FALSE` (logiczny fałsz). 
-Jednak równocześnie każdy rodzaj zmiennych w programie R może również przyjmować wartości nieustaloną `NA`. 
+Jednak równocześnie każdy rodzaj zmiennych w programie R może również przyjmować wartość nieustaloną `NA`. 
 W gruncie rzeczy wartości logiczne operują zatem w logice trójwartościowej.
 
 Tworząc wartości logiczne często wykorzystuje się operatory logiczne `>` (większy), `>=` (większy równy), 
@@ -106,7 +106,7 @@ tabliczka_mnozenia
 
 Warto zwrócić uwagę na wynik (`TRUE | NA`). Wynikiem jest wartość `TRUE`, poinieważ bez znaczenia czy wartość nieokreślona okazałaby się prawdziwa czy fałszywa, jej logiczna suma z wartością `TRUE` dałoby wartość `TRUE`. Na podobnej zasadzie `FALSE & NA` zwraca wartość `FALSE`.
 
-W programie R występują również dłuższe postacie operatorów `|` i `&` czyli `||` i `&&`. Pomiędzy formą dłuższą i krótszą występują dwie różnice. Forma krótsza pracuje na wektorach i wykonuje operacja element wektora po elemencie, podczas gdy forma dłuższa wykonuje operacje jedynie na pierwszych elementach wektorów i jako wynik zwraca jednoelementową wartość `TRUE` lub `FALSE`. Druga różnica dotyczy zaawansowanych zastosowań, długa forma nie wykonuje ewaluacji prawego argumentu, jeżeli nie jest to niezbędne. 
+W programie R występują również dłuższe postacie operatorów `|` i `&` czyli `||` i `&&`. Pomiędzy formą dłuższą i krótszą występują dwie różnice. Forma krótsza pracuje na wektorach i wykonuje operacje element wektora po elemencie, podczas gdy forma dłuższa wykonuje operacje jedynie na pierwszych elementach wektorów i jako wynik zwraca jednoelementową wartość `TRUE` lub `FALSE`. Druga różnica dotyczy zaawansowanych zastosowań, długa forma nie wykonuje ewaluacji prawego argumentu, jeżeli nie jest to niezbędne. 
 
 Przykładowo pierwsza linia poniższego przykładu wykona się poprawnie, ponieważ do określenia wyniku nie potrzebna jest ewaluacja funkcji `cat()`. Drugi przykład wykona funkcję `cat()` oraz zasygnalizuje błąd, ponieważ nie sposób wyniku funckji `cat()` logicznie dodać do wartości `TRUE`.
 
@@ -181,7 +181,7 @@ sum(!czy_to_kot)
 
 Taki wektor wartości logicznych można mnożyć z wektorem wartości liczbowych. Poniższa instrukcja 
 używa takiej operacji do policzenia sumy wagi wszystkich kotów w zbiorze danych. Mnożenie 
-przez wektor wartości logicznych powoduje wyzerowanie określonych wartości.
+przez wektor wartości logicznych powoduje wyzerowanie określonych wartości (TRUE jest zamieniane na 1, FALSE na 0, a elementy obu wektorów są mnożone element po elemencie).
 
 ```{r, warning=FALSE}
 czy_to_kot * koty_ptaki$waga
@@ -219,23 +219,15 @@ Co może być zaskakujące, mniej niż połowa ofert ma zadeklarowany kraj aktua
 
 ```{r, warning=FALSE}
 pochodziZPolski <- auta2012$Kraj.aktualnej.rejestracji == "Polska"
+
 table(pochodziZPolski)
 prop.table(table(pochodziZPolski)) * 100
 
 starszyNiz5Lat <- auta2012$Rok.produkcji < 2007
+
 table(starszyNiz5Lat)
 prop.table(table(starszyNiz5Lat)) * 100
 ```
-
----
-
-# Zadania:
-
-+ Sprawdź ile samochodów ma cenę ofertową poniżej 2 000 pln.
-
-+ Sprawdź jaki procent samochodów ma silniki o pojemności ponad 1500 cm3.
-
-Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html
 
 ---
 
@@ -248,6 +240,7 @@ sprawdzić czy wartości w wektorze są różne od wartości brakującej `NA`? Z
 
 ```{r}
 czyOkreslonyPrzebieg <- auta2012$Przebieg.w.km != NA
+
 head(auta2012$Przebieg.w.km)
 head(czyOkreslonyPrzebieg)
 ```
@@ -263,7 +256,8 @@ Możemy użyć tej funkcji by policzyć procent wartości, dla których nie ma b
 ```{r}
 czyOkreslonyPrzebieg <- !is.na(auta2012$Przebieg.w.km)
 head(czyOkreslonyPrzebieg)
-# procent
+
+# a tutaj liczymy procentwartości
 mean(czyOkreslonyPrzebieg) * 100
 ```
 
@@ -276,7 +270,7 @@ zmienna ma określone wartości np. `is.na()` czy `is.nan()`.
 
 # Logiczne 'i' oraz logiczne 'lub'
 
-Ponieważ operatory logicznego `lub` oraz `i` są często wykorzystywane poćwiczmy je jeszcze na zbiorze danych o samochodach. 
+Ponieważ operatory logiczne `lub` oraz `i` są często wykorzystywane przećwiczymy je jeszcze na zbiorze danych o samochodach. 
 Zdefiniujmy dwa wektory wartości logicznych, weryfikujących czy samochód jest aktualnie zarejestrowany w Polsce 
 oraz czy jest starszy niż pięć lat, a więc wyprodukowany przed rokiem 2007.
 
@@ -290,11 +284,11 @@ Teraz policzymy logiczną sumę oraz iloczyn obu wektorów. Następnie użyjemy 
 ```{r, warning=FALSE}
 pochodziZPolskiIStarszyNiz5Lat   <- pochodziZPolski & starszyNiz5Lat
 pochodziZPolskiLubStarszyNiz5Lat <- pochodziZPolski | starszyNiz5Lat
-# Tabela obu zmiennych
+# Tabela liczebnosci (tabela krzyżowa) dla obu zmiennych
 table(pochodziZPolski, starszyNiz5Lat)
-# logiczne i
+# logiczne i (tak zwany logiczny iloczyn)
 table(pochodziZPolskiIStarszyNiz5Lat)
-# logiczne lub
+# logiczne lub (tak zwana logiczna suma)
 table(pochodziZPolskiLubStarszyNiz5Lat)
 ```
 
