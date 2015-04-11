@@ -223,6 +223,12 @@ for (i in 1:nrow(koty_ptaki)) {
   }
 }
 
+# Użycie funkcji sapply, cut i switch by zwięźle zastąpić dwa if'y
+sapply(
+  cut(koty_ptaki$waga, c(0,1,100,1000)),
+  switch,
+  "lekkie", "srednie", "ciezkie")
+
 # Ważymy koty i ptaki
 wagaKoty <- 0
 wagaPtaki <- 0
