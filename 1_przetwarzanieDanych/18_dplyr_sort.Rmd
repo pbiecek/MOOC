@@ -29,9 +29,9 @@ znacznie większy, to `auta2012`, oba dostępne w pakiecie `PogromcyDanych`.
 
 ---
 
-## Ptaki vs. koty
+# Ptaki vs. koty
 
-Przykłady dla sortowanie rozpoczniemy na niewielkim zbiorze danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem `PogromcyDanych`. Jest on na tyle mały, że łatwo ogarnąć go wzrokiem i przekonać się w jaki sposób zadziałało sortowanie wierszy.
+Przykłady dla sortowania rozpoczniemy na niewielkim zbiorze danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem `PogromcyDanych`. Jest on na tyle mały, że łatwo ogarnąć go wzrokiem i przekonać się w jaki sposób zadziałało sortowanie wierszy.
 
 ```{r, message=FALSE}
 library(PogromcyDanych)
@@ -105,7 +105,7 @@ posortowanePorsche <-
 
 # Najtańsze i najdroższe Porsche
 
-Aby zobaczyć jakie wiersza są pierwsze a jakie są ostatnie w tym zbiorze danych, możemy użyć funkcji `head()` i `tail()`. Domyślnie przedstawianych jest pierwszych lub ostatnich 6 wierszy.
+Aby zobaczyć jakie wiersze są pierwsze a jakie są ostatnie w tym zbiorze danych, możemy użyć funkcji `head()` i `tail()`. Domyślnie przedstawianych jest pierwszych lub ostatnich 6 wierszy.
 
 ```{r, warning=FALSE}
 head(posortowanePorsche)
@@ -134,7 +134,7 @@ head(
 
 # Sortowanie malejąco
 
-Domyślnie wartości sortowane są rosnąco. Jeżeli chcemy zmienić kolejność sortowania i sortować malejąco, to należy daną zmienną opakować funkcją `desc()`, tak jak na poniższym przykładzie.
+Domyślnie wartości sortowane są rosnąco. Jeżeli chcemy zmienić kolejność sortowania i sortować malejąco, to należy daną zmienną opakować funkcją `desc()`, tak jak na poniższym przykładzie (sortować można również po większej liczbie kolumn, np. walucie, marce i cenie).
 
 ```{r, warning=FALSE}
 head(
