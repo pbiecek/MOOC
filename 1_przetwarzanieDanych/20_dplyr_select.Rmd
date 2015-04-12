@@ -137,7 +137,7 @@ auta2012 %>%
 
 * Wybierz tylko samochody marki Volvo, posortuj je po pojemności skokowej, a następnie wyświetl tylko trzy kolumny: Markę, Cenę.w.PLN i Kolor.
 
-* Wybierz tylko te kolumny, których nazwa kończy się na `a`.
+* Wybierz tylko te kolumny, których nazwa kończy się na `a` (wyrażenie regularne opisujące `a` na końcu nazwy to `a$`, więcej o wyrażeniach regularnych http://pl.wikipedia.org/wiki/Wyra%C5%BCenie_regularne#Podstawowe_elementy).
 
 Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html
 
