@@ -18,7 +18,7 @@ output:
 Praca z danymi to w dużej części czyszczenie i wielokrotna zmiana reprezentacji. Po co dane czyścić? Zarówno dane zbierane przez ludzi, jak i przez automatyczne czujniki, 
 mają tendencje do zawierania braków, obserwacji odstających lub zwykłych błędów. Aby móc sensownie analizować dane, musimy przekształcić je do postaci w której wyniki analiz będą wiarygodne.
 
-Czyszczenie to bardzo istotna faza. Bez względu bowiem jak zaawansowana i dobrze dobrana jest nasza technika analiza danych, jeżeli na wejściu będą śmieciowe dane to na wyjściu będą śmieciowe wyniki. *Garbage in garbage out*
+Czyszczenie to bardzo istotna faza. Bez względu bowiem jak zaawansowana i dobrze dobrana jest nasza technika analizy danych, jeżeli na wejściu będą śmieciowe dane to na wyjściu będą śmieciowe wyniki. *Garbage in garbage out*
 
 W tym odcinku nauczymy się:
 
@@ -51,7 +51,7 @@ W wynikowej ramce będziemy chcieli poprawić następujące błędy:
 
 + nazwę kolumny `oczo` zamienić na `oczy`,
 + zmienną `wiek` zamienić na liczbową, w tym celu trzeba wpierw zamienić `,` na `.`,
-+ imię `Zosia` zamienić na `Zofia`,
++ imię `Anna` zamienić na `Joanna`,
 + kolory oczu zamienić na dwie grupy: `niebieskie` i `ciemne`.
 
 
