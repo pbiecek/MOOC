@@ -1,5 +1,5 @@
 ---
-title: "Filtrowanie danych [dplyr / select]"
+title: "Filtrowanie danych [dplyr / filter]"
 author: "pogRomcy danych"
 date: "sezon 1 / odcinek 17 <br><br> <a href='http://biecek.pl/'>Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
@@ -47,9 +47,8 @@ koty_ptaki
 
 # Filtrowanie danych
 
-Funkcja **filter()** redukuje liczbę wierszy, zostawiając tylko te, które spełniają określony warunek (jeden lub kilka).
-Pierwszym argumentem tej funkcji jest ramka danych lub tabela danych,
-kolejne argumenty (a może być ich jeden lub więcej) to warunki logiczne.
+Funkcja `filter()` redukuje liczbę wierszy, zostawiając tylko te, które spełniają określony warunek (jeden lub kilka).
+Pierwszym argumentem tej funkcji jest ramka danych (klasa `data.frame`) lub tabela danych (klasa `tbl`, przedstawimy ją na slajdzie 7). Kolejne argumenty (a może być ich jeden lub więcej) to warunki logiczne.
 Wynikiem jest ramka danych z wierszami, które spełniają jednocześnie wszystkie wskazane warunki.
 
 Przykładowo, aby zobaczyć, które zwierzaki przekraczają prędkość 100 km na godzinę możemy użyć następujących komend.
@@ -103,8 +102,7 @@ head(auta2012)
 W tym miejscu warto zaznaczyć, że funkcje z pakietu `dplyr` pracują nie tylko na ramkach danych, które już znamy i które mają klasę `data.frame`, 
 ale również na tabelach danych - obiektach klasy `tbl`.
 
-Z użytkowego punktu widzenia, tabele danych od ramek danych różnią się głównie sposobem wyświetlania na ekranie (nie wyświetlają się kolumny, 
-nie mieszczące się w obecnej szerokości konsoli). W rzeczywistości różnią się także szeregiem innych właściwości, między innymi wewnętrzną 
+Z użytkowego punktu widzenia, tabele danych od ramek danych różnią się głównie sposobem wyświetlania na ekranie (nie wyświetlają się kolumny nie mieszczące się w obecnej szerokości konsoli). W rzeczywistości różnią się także szeregiem innych właściwości, między innymi wewnętrzną 
 reprezentacją, która pozwala na szybsze operowanie na danych w strukturze `tbl`. 
 
 Jeżeli mamy więc dane duże, o dużej liczbie wierszy lub kolumn, często dobrym pomysłem jest przekształcenie je na postać tabeli danych.
@@ -118,7 +116,7 @@ auta2012
 
 ---
 
-## Filtrowanie danych
+# Filtrowanie danych
 
 Przypuśćmy, że chcemy ograniczyć listę aut do jednej wybranej marki.
 
@@ -133,7 +131,7 @@ head(tmp)
 
 ---
 
-## Dwa warunki
+# Dwa warunki
 
 Możemy określać jednocześnie więcej warunków.
 Na przykład tylko samochody Porsche o silnikach o liczbie koni mechanicznych przekraczających 300 możemy odfiltrować w następujący sposób.
@@ -147,11 +145,11 @@ head(tylkoPorscheZDuzymSilnikiem)
 
 ---
 
-## Zadania
+# Zadania
 
 + Ze zbioru danych `auta2012` pozostaw tylko samochody o wieku do pięciu lat (czyli o roku produkcji > 2007). Nazwij ten wynikowy zbiór danych `mlodeAuta`
 + Z przed chwilą stworzonego zbioru danych `mlodeAuta` wybierz tylko Fiaty 500. Ile jest takich aut? 
-(wymiary ramki danych możesz sprawdzić funkcją **dim()**)
+(wymiary ramki danych możesz sprawdzić funkcją `dim()`)
 
 Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html
 
