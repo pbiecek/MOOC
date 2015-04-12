@@ -7,7 +7,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
   <meta name="copyright" content="pogRomcy danych / przetwarzanie / filter" /> 
-  <title>Filtrowanie danych [dplyr / select]</title>
+  <title>Filtrowanie danych [dplyr / filter]</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -44,11 +44,11 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </head>
 <body>
 <div class="slide titlepage">
-  <h1 class="title">Filtrowanie danych [dplyr / select]</h1>
+  <h1 class="title">Filtrowanie danych [dplyr / filter]</h1>
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 17 <br><br> <a href='http://biecek.pl/'>Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 17 <br><br> <a href="http://biecek.pl/">Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
@@ -84,7 +84,7 @@ koty_ptaki</code></pre>
 </div>
 <div id="filtrowanie-danych" class="slide section level1">
 <h1>Filtrowanie danych</h1>
-<p>Funkcja <strong>filter()</strong> redukuje liczbę wierszy, zostawiając tylko te, które spełniają określony warunek (jeden lub kilka). Pierwszym argumentem tej funkcji jest ramka danych lub tabela danych, kolejne argumenty (a może być ich jeden lub więcej) to warunki logiczne. Wynikiem jest ramka danych z wierszami, które spełniają jednocześnie wszystkie wskazane warunki.</p>
+<p>Funkcja <code>filter()</code> redukuje liczbę wierszy, zostawiając tylko te, które spełniają określony warunek (jeden lub kilka). Pierwszym argumentem tej funkcji jest ramka danych (klasa <code>data.frame</code>) lub tabela danych (klasa <code>tbl</code>, przedstawimy ją na slajdzie 7). Kolejne argumenty (a może być ich jeden lub więcej) to warunki logiczne. Wynikiem jest ramka danych z wierszami, które spełniają jednocześnie wszystkie wskazane warunki.</p>
 <p>Przykładowo, aby zobaczyć, które zwierzaki przekraczają prędkość 100 km na godzinę możemy użyć następujących komend. W pierwszej linii wczytujemy pakiet <code>dplyr</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 <span class="kw">filter</span>(koty_ptaki,
@@ -163,7 +163,7 @@ koty_ptaki</code></pre>
 <div id="tabele-danych" class="slide section level1">
 <h1>Tabele danych</h1>
 <p>W tym miejscu warto zaznaczyć, że funkcje z pakietu <code>dplyr</code> pracują nie tylko na ramkach danych, które już znamy i które mają klasę <code>data.frame</code>, ale również na tabelach danych - obiektach klasy <code>tbl</code>.</p>
-<p>Z użytkowego punktu widzenia, tabele danych od ramek danych różnią się głównie sposobem wyświetlania na ekranie (nie wyświetlają się kolumny, nie mieszczące się w obecnej szerokości konsoli). W rzeczywistości różnią się także szeregiem innych właściwości, między innymi wewnętrzną reprezentacją, która pozwala na szybsze operowanie na danych w strukturze <code>tbl</code>.</p>
+<p>Z użytkowego punktu widzenia, tabele danych od ramek danych różnią się głównie sposobem wyświetlania na ekranie (nie wyświetlają się kolumny nie mieszczące się w obecnej szerokości konsoli). W rzeczywistości różnią się także szeregiem innych właściwości, między innymi wewnętrzną reprezentacją, która pozwala na szybsze operowanie na danych w strukturze <code>tbl</code>.</p>
 <p>Jeżeli mamy więc dane duże, o dużej liczbie wierszy lub kolumn, często dobrym pomysłem jest przekształcenie je na postać tabeli danych.</p>
 <p>Ramkę danych na tabelę można zamienić funkcją <code>tbl_df</code> a tabelę na ramkę danych funkcją <code>as.data.frame()</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 &lt;-<span class="st"> </span><span class="kw">tbl_df</span>(auta2012)
@@ -188,9 +188,8 @@ auta2012</code></pre>
 ##   (fctr), Pojazd.uszkodzony (fctr), Skrzynia.biegow (fctr),
 ##   Status.pojazdu.sprowadzonego (fctr), Wyposazenie.dodatkowe (fctr)</code></pre>
 </div>
-<div class="slide section level1">
-
-<h2 id="filtrowanie-danych-1">Filtrowanie danych</h2>
+<div id="filtrowanie-danych-1" class="slide section level1">
+<h1>Filtrowanie danych</h1>
 <p>Przypuśćmy, że chcemy ograniczyć listę aut do jednej wybranej marki.</p>
 <p>Przykładowo, jeżeli chcemy pozostawić tylko samochody marki Porsche, możemy użyć warunku <code>Marka == 'Porsche'</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">tmp &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012,
@@ -211,9 +210,8 @@ auta2012</code></pre>
 ##   (fctr), Pojazd.uszkodzony (fctr), Skrzynia.biegow (fctr),
 ##   Status.pojazdu.sprowadzonego (fctr), Wyposazenie.dodatkowe (fctr)</code></pre>
 </div>
-<div class="slide section level1">
-
-<h2 id="dwa-warunki">Dwa warunki</h2>
+<div id="dwa-warunki" class="slide section level1">
+<h1>Dwa warunki</h1>
 <p>Możemy określać jednocześnie więcej warunków. Na przykład tylko samochody Porsche o silnikach o liczbie koni mechanicznych przekraczających 300 możemy odfiltrować w następujący sposób.</p>
 <pre class="sourceCode r"><code class="sourceCode r">tylkoPorscheZDuzymSilnikiem &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012,
          Marka ==<span class="st"> &quot;Porsche&quot;</span>,
@@ -234,12 +232,11 @@ auta2012</code></pre>
 ##   (fctr), Pojazd.uszkodzony (fctr), Skrzynia.biegow (fctr),
 ##   Status.pojazdu.sprowadzonego (fctr), Wyposazenie.dodatkowe (fctr)</code></pre>
 </div>
-<div class="slide section level1">
-
-<h2 id="zadania">Zadania</h2>
+<div id="zadania" class="slide section level1">
+<h1>Zadania</h1>
 <ul>
 <li>Ze zbioru danych <code>auta2012</code> pozostaw tylko samochody o wieku do pięciu lat (czyli o roku produkcji &gt; 2007). Nazwij ten wynikowy zbiór danych <code>mlodeAuta</code></li>
-<li>Z przed chwilą stworzonego zbioru danych <code>mlodeAuta</code> wybierz tylko Fiaty 500. Ile jest takich aut? (wymiary ramki danych możesz sprawdzić funkcją <strong>dim()</strong>)</li>
+<li>Z przed chwilą stworzonego zbioru danych <code>mlodeAuta</code> wybierz tylko Fiaty 500. Ile jest takich aut? (wymiary ramki danych możesz sprawdzić funkcją <code>dim()</code>)</li>
 </ul>
 <p>Przykładowe odpowiedzi znajdują się na stronie <a href="http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html" class="uri">http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania.html</a></p>
 </div>
