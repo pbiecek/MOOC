@@ -48,7 +48,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 18 <br><br> <a style='color:rgb(255,110,117)!important' href='http://biecek.pl/'>Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 18 <br><br> <a href="http://biecek.pl/">Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
@@ -61,10 +61,9 @@ pogRomcy danych
 </ul>
 <p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, mały zbiór danych, to <code>koty_ptaki</code> a drugi, znacznie większy, to <code>auta2012</code>, oba dostępne w pakiecie <code>PogromcyDanych</code>.</p>
 </div>
-<div class="slide section level1">
-
-<h2 id="ptaki-vs.koty">Ptaki vs. koty</h2>
-<p>Przykłady dla sortowanie rozpoczniemy na niewielkim zbiorze danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem <code>PogromcyDanych</code>. Jest on na tyle mały, że łatwo ogarnąć go wzrokiem i przekonać się w jaki sposób zadziałało sortowanie wierszy.</p>
+<div id="ptaki-vs.koty" class="slide section level1">
+<h1>Ptaki vs. koty</h1>
+<p>Przykłady dla sortowania rozpoczniemy na niewielkim zbiorze danych o kotach i ptakach. Ten zbiór danych jest dostarczany razem z pakietem <code>PogromcyDanych</code>. Jest on na tyle mały, że łatwo ogarnąć go wzrokiem i przekonać się w jaki sposób zadziałało sortowanie wierszy.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
 koty_ptaki</code></pre>
 <pre><code>##           gatunek   waga dlugosc predkosc  habitat zywotnosc druzyna
@@ -176,7 +175,7 @@ posortowanePorsche &lt;-
 </div>
 <div id="najtansze-i-najdrozsze-porsche" class="slide section level1">
 <h1>Najtańsze i najdroższe Porsche</h1>
-<p>Aby zobaczyć jakie wiersza są pierwsze a jakie są ostatnie w tym zbiorze danych, możemy użyć funkcji <code>head()</code> i <code>tail()</code>. Domyślnie przedstawianych jest pierwszych lub ostatnich 6 wierszy.</p>
+<p>Aby zobaczyć jakie wiersze są pierwsze a jakie są ostatnie w tym zbiorze danych, możemy użyć funkcji <code>head()</code> i <code>tail()</code>. Domyślnie przedstawianych jest pierwszych lub ostatnich 6 wierszy.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(posortowanePorsche)</code></pre>
 <pre><code>##    Cena Waluta Cena.w.PLN Brutto.netto  KM  kW   Marka         Model
 ## 1  1184    PLN       1184       brutto 350 257 Porsche       Cayenne
@@ -311,7 +310,7 @@ posortowanePorsche &lt;-
 </div>
 <div id="sortowanie-malejaco" class="slide section level1">
 <h1>Sortowanie malejąco</h1>
-<p>Domyślnie wartości sortowane są rosnąco. Jeżeli chcemy zmienić kolejność sortowania i sortować malejąco, to należy daną zmienną opakować funkcją <code>desc()</code>, tak jak na poniższym przykładzie.</p>
+<p>Domyślnie wartości sortowane są rosnąco. Jeżeli chcemy zmienić kolejność sortowania i sortować malejąco, to należy daną zmienną opakować funkcją <code>desc()</code>, tak jak na poniższym przykładzie (sortować można również po większej liczbie kolumn, np. walucie, marce i cenie).</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(
    <span class="kw">arrange</span>(tylkoPorscheZDuzymSilnikiem, 
         Model, <span class="kw">desc</span>(Cena.w.PLN))
