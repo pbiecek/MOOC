@@ -180,9 +180,9 @@ Aby wyświetlić kilka pierwszych wierszy z ramki danych `tylkoMalyPrzebieg`.
 tylkoMalyPrzebieg %>% head()
 ```
 
-Jeżeli chcielibyśmy przekazać zbiór danych z lewej strony operatora `%>%` w inne miejsce niż pierwszy argument, Również możemy to zrobić. Miejsce w które ma być wstawiony argument należy w tym celu zamarkować znakiem kropki `.`.
+Jeżeli chcielibyśmy przekazać zbiór danych z lewej strony operatora `%>%` w inne miejsce niż pierwszy argument, Również możemy to zrobić. Miejsce w które ma być wstawiony argument należy w tym celu zamarkować znakiem kropki `.` (koropki w nazwach zmiennych się nie liczą).
 
-W poniższym przykładzie używamy funkcji `lm()`, podajemy jako pierwszy argument formułę, a jako drugi argument zbiór danych. W tym przykładzie, ponieważ zbiór danych to `.`, to będzie za niego wstawiony zbiór `tylkoMalyPrzebieg` (lewa strona operatora `%>%`).
+W poniższym przykładzie używamy funkcji `lm()`, podajemy jako pierwszy argument formułę, a jako drugi argument zbiór danych. W tym przykładzie, ponieważ zbiór danych to `.`, to będzie za niego wstawiony zbiór `tylkoMalyPrzebieg` (lewa strona operatora `%>%`). 
  
 ```{r}
 tylkoMalyPrzebieg %>% lm(Cena.w.PLN ~ Przebieg.w.km, .)
