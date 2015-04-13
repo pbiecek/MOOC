@@ -15,7 +15,7 @@ output:
 
 # O czym jest ten odcinek
 
-Ogląd całych danych jest możliwy tylko gdy dane nie są zbyt duże. Mieszczą się na jednym lub kilku ekranach.
+Ogląd całych danych jest możliwy, tylko gdy dane nie są zbyt duże. Mieszczą się na jednym lub kilku ekranach.
 Dla większych zbiorów danych konieczne jest agregowanie informacji z poziomu pojedynczych wierszy na poziom grup.
 
 Aby efektywnie przedstawiać agregaty w grupach potrzebujemy funkcji liczącej agregaty oraz funkcji definiującej grupy. 
@@ -110,11 +110,11 @@ Jako pierwszy argument podajemy zbiór danych a jako kolejne wskazujemy statysty
 ```{r, warning=FALSE}
 auta2012 %>%
   summarise(sredniaCena = mean(Cena.w.PLN),
-            sdCena = sqrt(var(Cena.w.PLN)),
+            sdCena = sd(Cena.w.PLN),
             medianaPrzebiegu = median(Przebieg.w.km, na.rm=TRUE))
 ```
 
-Funkcja `mean()` wyznacza średnią, funkcja `var()` wyznacza wariancję (a pierwiastek z wariancji jest odchyleniem standardowym), funkcja `median()` wyznacza medianę obserwacji w grupie.
+Funkcja `mean()` wyznacza średnią, funkcja `var()` wyznacza wariancję a funkcja `sd()` wyznacza odchylenie standardowe, funkcja `median()` wyznacza medianę obserwacji w grupie.
 
 Nie wszystkie wartości są podane dla wszystkich zmiennych. Jeżeli jakaś wartość nie została podana, to w zbiorze danych jest ona zakodowana jako NA (ang. Not Available) - brakująca wartość.
 

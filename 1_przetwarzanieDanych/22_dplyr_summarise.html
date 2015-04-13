@@ -48,11 +48,11 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 22 <br><br> <a href='http://biecek.pl/'>Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 22 <br><br> <a href="http://biecek.pl/">Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
-<p>Ogląd całych danych jest możliwy tylko gdy dane nie są zbyt duże. Mieszczą się na jednym lub kilku ekranach. Dla większych zbiorów danych konieczne jest agregowanie informacji z poziomu pojedynczych wierszy na poziom grup.</p>
+<p>Ogląd całych danych jest możliwy, tylko gdy dane nie są zbyt duże. Mieszczą się na jednym lub kilku ekranach. Dla większych zbiorów danych konieczne jest agregowanie informacji z poziomu pojedynczych wierszy na poziom grup.</p>
 <p>Aby efektywnie przedstawiać agregaty w grupach potrzebujemy funkcji liczącej agregaty oraz funkcji definiującej grupy. Do agregacji wygodnie wykorzystać funkcję <code>summarise()</code> z pakietu <code>dplyr</code>, którą przedstawimy w tym odcinku.</p>
 <p>W tym odcinku nauczymy się:</p>
 <ul>
@@ -134,11 +134,11 @@ koty_ptaki %&gt;%
 <p>Takie agregaty możemy wyznaczyć funkcją <code>summarise()</code>. Jako pierwszy argument podajemy zbiór danych a jako kolejne wskazujemy statystyki / agregaty, które chcemy wyznaczyć z tego zbioru danych.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sredniaCena =</span> <span class="kw">mean</span>(Cena.w.PLN),
-            <span class="dt">sdCena =</span> <span class="kw">sqrt</span>(<span class="kw">var</span>(Cena.w.PLN)),
+            <span class="dt">sdCena =</span> <span class="kw">sd</span>(Cena.w.PLN),
             <span class="dt">medianaPrzebiegu =</span> <span class="kw">median</span>(Przebieg.w.km, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))</code></pre>
 <pre><code>##   sredniaCena   sdCena medianaPrzebiegu
 ## 1    35755.11 70399.67           140000</code></pre>
-<p>Funkcja <code>mean()</code> wyznacza średnią, funkcja <code>var()</code> wyznacza wariancję (a pierwiastek z wariancji jest odchyleniem standardowym), funkcja <code>median()</code> wyznacza medianę obserwacji w grupie.</p>
+<p>Funkcja <code>mean()</code> wyznacza średnią, funkcja <code>var()</code> wyznacza wariancję a funkcja <code>sd()</code> wyznacza odchylenie standardowe, funkcja <code>median()</code> wyznacza medianę obserwacji w grupie.</p>
 <p>Nie wszystkie wartości są podane dla wszystkich zmiennych. Jeżeli jakaś wartość nie została podana, to w zbiorze danych jest ona zakodowana jako NA (ang. Not Available) - brakująca wartość.</p>
 <p>Jeżeli w zmiennej są wartości brakujące, to argument <code>na.rm=TRUE</code> oznacza, że wynik ma być wyznaczony po usunięciu wartości brakujących.</p>
 </div>
