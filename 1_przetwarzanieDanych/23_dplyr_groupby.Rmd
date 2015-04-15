@@ -79,7 +79,7 @@ auta2012 %>%
 Przykłady dla danych o cenach ofertowych aut rozpoczniemy od porównania cen i przebiegów samochodów napędzanych różnymi paliwami.
 
 Aby sensownie porównywać różne rodzaje paliwa ograniczymy się do jednej marki samochodów i jednego rocznika. 
-Na poniższym przykładzie wybieramy tylko 5-letnie Volkswageny, a następnie dla aut napędzanych benzyną olejem czy gazem liczymy medianę ceny, medianę przebiegu oraz liczbę aut w każdej grupie.
+Na poniższym przykładzie wybieramy tylko 5-letnie Volkswageny, a następnie dla aut napędzanych benzyną, olejem czy gazem liczymy medianę ceny, medianę przebiegu oraz liczbę aut w każdej grupie.
 
 ```{r, warning=FALSE}
 auta2012 %>%
@@ -164,7 +164,7 @@ Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.
 
 Pakiet `dplyr` zupełnie zmienił sposób przetwarzania danych w R. Przetwarzanie stało się prostsze do opisania, 80\% niezbędnej pracy można wykonać łatwiej i szybciej.
 
-Świetnym uzupełnieniem do wyników z odcinków o tym pakiecie będzie graficzna dwustronicowa ściągawka, prezentująca możliwości tego pakietu. Ta ściągawka dostępna jest na stronie http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf
+Świetnym uzupełnieniem do wyników z odcinków o tym pakiecie będzie graficzna dwustronicowa ściągawka, prezentująca możliwości tego pakietu. Ta ściągawka dostępna jest na stronie http://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
 
 Więcej takich skrótowych ściągawek jest dostępnych na stronie firmy RStudio http://www.rstudio.com/resources/cheatsheets/
 
