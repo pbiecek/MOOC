@@ -48,7 +48,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 23 <br><br> <a href='http://biecek.pl/'>Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 23 <br><br> <a href="http://biecek.pl/">Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
@@ -125,7 +125,7 @@ koty_ptaki %&gt;%
 <div id="grupowanie" class="slide section level1">
 <h1>Grupowanie</h1>
 <p>Przykłady dla danych o cenach ofertowych aut rozpoczniemy od porównania cen i przebiegów samochodów napędzanych różnymi paliwami.</p>
-<p>Aby sensownie porównywać różne rodzaje paliwa ograniczymy się do jednej marki samochodów i jednego rocznika. Na poniższym przykładzie wybieramy tylko 5-letnie Volkswageny, a następnie dla aut napędzanych benzyną olejem czy gazem liczymy medianę ceny, medianę przebiegu oraz liczbę aut w każdej grupie.</p>
+<p>Aby sensownie porównywać różne rodzaje paliwa ograniczymy się do jednej marki samochodów i jednego rocznika. Na poniższym przykładzie wybieramy tylko 5-letnie Volkswageny, a następnie dla aut napędzanych benzyną, olejem czy gazem liczymy medianę ceny, medianę przebiegu oraz liczbę aut w każdej grupie.</p>
 <pre class="sourceCode r"><code class="sourceCode r">auta2012 %&gt;%
 <span class="st">  </span><span class="kw">filter</span>(Marka ==<span class="st"> &quot;Volkswagen&quot;</span>, Rok.produkcji ==<span class="st"> </span><span class="dv">2007</span>) %&gt;%
 <span class="st">  </span><span class="kw">group_by</span>(Rodzaj.paliwa) %&gt;%
@@ -230,7 +230,7 @@ koty_ptaki %&gt;%
 <div id="co-dalej" class="slide section level1">
 <h1>Co dalej</h1>
 <p>Pakiet <code>dplyr</code> zupełnie zmienił sposób przetwarzania danych w R. Przetwarzanie stało się prostsze do opisania, 80% niezbędnej pracy można wykonać łatwiej i szybciej.</p>
-<p>Świetnym uzupełnieniem do wyników z odcinków o tym pakiecie będzie graficzna dwustronicowa ściągawka, prezentująca możliwości tego pakietu. Ta ściągawka dostępna jest na stronie <a href="http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf" class="uri">http://www.rstudio.com/wp-content/uploads/2015/01/data-wrangling-cheatsheet1.pdf</a></p>
+<p>Świetnym uzupełnieniem do wyników z odcinków o tym pakiecie będzie graficzna dwustronicowa ściągawka, prezentująca możliwości tego pakietu. Ta ściągawka dostępna jest na stronie <a href="http://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf" class="uri">http://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf</a></p>
 <p>Więcej takich skrótowych ściągawek jest dostępnych na stronie firmy RStudio <a href="http://www.rstudio.com/resources/cheatsheets/" class="uri">http://www.rstudio.com/resources/cheatsheets/</a></p>
 <p>Krótka prezentacja najważniejszych funkcji tego pakietu na przykładzie danych o lotach znaleźć można na stronie warsztatów twórcy dplyr’a <a href="http://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html" class="uri">http://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html</a>.</p>
 </div>
