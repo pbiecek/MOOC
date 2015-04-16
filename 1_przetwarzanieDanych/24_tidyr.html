@@ -48,7 +48,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 24 <br><br> <a href='http://biecek.pl/'>Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 24 <br><br> <a href="http://biecek.pl/">Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
@@ -81,6 +81,7 @@ kidney_wybrane &lt;-<span class="st"> </span>kidney %&gt;%<span class="st"> </sp
 ## 4  4      tc     8     39  55.7    52     60     73     75     91
 ## 5  5      ca    36     79  64.2    64     64     79     70     63
 ## 6  6      cm     9     43  58.0    49     45     51     48     56</code></pre>
+<p>Funkcja <code>select()</code> występuje w różnych pakietach, aby mieć pewność, że uruchomiona będzie funkcja z pakietu <code>dplyr</code>, dodane jest wskazanie pakietu z użyciem operatora <code>::</code>. Zapis <code>dplyr::select()</code> jawnie wskazuje, że chodzi o funkcje <code>select()</code> z pakietu <code>dplyr</code>.</p>
 </div>
 <div id="dane-o-pracy-nerki---postac-waska" class="slide section level1">
 <h1>Dane o pracy nerki - postać wąska</h1>
@@ -175,7 +176,7 @@ szeroka2 %&gt;%<span class="st"> </span><span class="kw">filter</span>(time ==<s
 <h1>Z szerokiej do wąskiej</h1>
 <p>Proces przechodzenia z wąskiej postaci do szerokiej i z szerokiej do wąskiej jest odwracalny. Pokażmy jak z powrotem, przejść z postaci szerokiej do wąskiej, za pomocą funkcji <code>gather()</code>.</p>
 <p>Poniżej pierwszy argument jest przekazany za pomocą operatora <code>%&gt;%</code>, kolejne dwa określają nazwy nowych kolumn w których zapisane będą klucze i wartości. Trzeci argument to opis kolumn, które mają być zamienione na postać wąską.</p>
-<p>W poniższym przykładzie funkcja <code>gather()</code> przekształca ramkę <code>szeroka</code> w ten sposób, że wysztkie kolumny poza <code>geo i</code>vehicle<code>(a więc kolumny z nazwami lat) będą zakodowane przez parę klucz</code>rok<code>i wartość</code>wartosc`.</p>
+<p>W poniższym przykładzie funkcja <code>gather()</code> przekształca ramkę <code>szeroka</code> w ten sposób, że wysztkie kolumny poza <code>geo</code> i <code>vehicle</code> (a więc kolumny z nazwami lat) będą zakodowane przez parę klucz <code>rok</code> i wartość <code>wartosc</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">szeroka %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">gather</span>(rok, wartosc, -geo, -vehicle) %&gt;%
 <span class="st">  </span><span class="kw">tail</span>()</code></pre>
@@ -222,6 +223,27 @@ df</code></pre>
 ## 2 2012      04    15  2
 ## 3 2006      10    29  3
 ## 4 2010      03    03  4</code></pre>
+</div>
+<div id="rozszczepianie-kolumn-1" class="slide section level1">
+<h1>Rozszczepianie kolumn</h1>
+<p>Nie tylko daty można rozszczepiać na części składowe.</p>
+<p>Podobnie można przekształcić listy produktów lub wyposażenie. Na poniższym przykładzie pracujemy z ramką danych opisujących klasę, szkołę i miasto z którego pochodzi uczeń.</p>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">nr =</span> <span class="kw">c</span>(<span class="st">&quot;PB&quot;</span>, <span class="st">&quot;RG&quot;</span>, <span class="st">&quot;AK&quot;</span>, <span class="st">&quot;NZ&quot;</span>),
+                 <span class="dt">klasa =</span> <span class="kw">c</span>(<span class="st">&quot;Wroclaw, IV LO, IIIc&quot;</span>, <span class="st">&quot;Warszawa, XIV LO, Ia&quot;</span>, 
+                           <span class="st">&quot;Wroclaw, III LO, IIb&quot;</span>, <span class="st">&quot;Krakow, XXX LO, Ic&quot;</span>))
+df</code></pre>
+<pre><code>##   nr                klasa
+## 1 PB Wroclaw, IV LO, IIIc
+## 2 RG Warszawa, XIV LO, Ia
+## 3 AK Wroclaw, III LO, IIb
+## 4 NZ   Krakow, XXX LO, Ic</code></pre>
+<p>Dane o szkole i klasie są wyciągane z użyciem funkcji <code>separate()</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">separate</span>(df, klasa, <span class="kw">c</span>(<span class="st">&quot;miasto&quot;</span>, <span class="st">&quot;szkola&quot;</span>, <span class="st">&quot;klasa&quot;</span>), <span class="st">&quot;, &quot;</span>)</code></pre>
+<pre><code>##   nr   miasto szkola klasa
+## 1 PB  Wroclaw  IV LO  IIIc
+## 2 RG Warszawa XIV LO    Ia
+## 3 AK  Wroclaw III LO   IIb
+## 4 NZ   Krakow XXX LO    Ic</code></pre>
 </div>
 <div id="zadania" class="slide section level1">
 <h1>Zadania</h1>

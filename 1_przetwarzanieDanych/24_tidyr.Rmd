@@ -56,6 +56,9 @@ kidney_wybrane <- kidney %>%
 head(kidney_wybrane)
 ```
 
+Funkcja `select()` występuje w różnych pakietach, aby mieć pewność, że uruchomiona będzie funkcja z pakietu `dplyr`, dodane jest wskazanie pakietu z użyciem operatora `::`. Zapis `dplyr::select()` jawnie wskazuje, że chodzi o funkcje `select()` z pakietu `dplyr`.
+
+
 ---
 
 # Dane o pracy nerki - postać wąska
@@ -145,7 +148,7 @@ Proces przechodzenia z wąskiej postaci do szerokiej i z szerokiej do wąskiej j
 Poniżej pierwszy argument jest przekazany za pomocą operatora `%>%`, kolejne dwa określają nazwy nowych kolumn w których zapisane będą klucze i wartości. 
 Trzeci argument to opis kolumn, które mają być zamienione na postać wąską.
 
-W poniższym przykładzie funkcja `gather()` przekształca ramkę `szeroka` w ten sposób, że wysztkie kolumny poza `geo i `vehicle` (a więc kolumny z nazwami lat) będą zakodowane przez parę klucz `rok` i wartość `wartosc`.
+W poniższym przykładzie funkcja `gather()` przekształca ramkę `szeroka` w ten sposób, że wysztkie kolumny poza `geo` i `vehicle` (a więc kolumny z nazwami lat) będą zakodowane przez parę klucz `rok` i wartość `wartosc`.
 
 ```{r, warning=FALSE, message=FALSE}
 szeroka %>% 
@@ -192,6 +195,25 @@ Poszczególne składowe będą stanowiły rok, miesiąc i dzień.
 
 ```{r, warning=FALSE, message=FALSE}
 separate(df, daty, c("rok", "miesiac", "dzien"), "-")
+```
+
+# Rozszczepianie kolumn
+
+Nie tylko daty można rozszczepiać na części składowe.
+
+Podobnie można przekształcić listy produktów lub wyposażenie. Na poniższym przykładzie pracujemy z ramką danych opisujących klasę, szkołę i miasto z którego pochodzi uczeń. 
+
+```{r, warning=FALSE, message=FALSE}
+df <- data.frame(nr = c("PB", "RG", "AK", "NZ"),
+                 klasa = c("Wroclaw, IV LO, IIIc", "Warszawa, XIV LO, Ia", 
+                           "Wroclaw, III LO, IIb", "Krakow, XXX LO, Ic"))
+df
+```
+
+Dane o szkole i klasie są wyciągane z użyciem funkcji `separate()`.
+
+```{r, warning=FALSE, message=FALSE}
+separate(df, klasa, c("miasto", "szkola", "klasa"), ", ")
 ```
 
 ---
