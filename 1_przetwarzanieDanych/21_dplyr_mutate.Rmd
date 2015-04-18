@@ -51,7 +51,7 @@ W przetwarzaniu danych wykorzystamy operator `%>%` omówiony w 20 odcinku.
 ```{r, message=FALSE, warning=FALSE}
 library(dplyr)
 koty_ptaki %>%
-  mutate(predkosc.mph = round(predkosc / 0.621371),
+  mutate(predkosc.mph = round(predkosc * 0.621371),
          dlugosci.na.sek = round(predkosc / 3.6 / dlugosc,1))
 ```
 
