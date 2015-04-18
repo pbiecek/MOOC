@@ -166,7 +166,9 @@ koty_ptaki[koty_ptaki$waga &lt;<span class="st"> </span><span class="dv">100</sp
 </div>
 <div id="odpowiedzi-sezon-1-odcinek-8" class="slide section level1">
 <h1>Odpowiedzi, sezon 1, odcinek 8</h1>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Pętla z żywotnością</span>
+<pre class="sourceCode r"><code class="sourceCode r">koty_ptaki[,<span class="st">&quot;gatunek&quot;</span>] &lt;-<span class="st"> </span><span class="kw">as.character</span>(koty_ptaki[,<span class="st">&quot;gatunek&quot;</span>])
+
+<span class="co"># Pętla z żywotnością</span>
 for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
   <span class="kw">cat</span>(<span class="st">&quot;Osobniki gatunku:&quot;</span>, koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;żyją do&quot;</span>, 
       koty_ptaki[i,<span class="st">&quot;zywotnosc&quot;</span>], <span class="st">&quot;lat</span><span class="ch">\n</span><span class="st">&quot;</span>)
@@ -206,7 +208,7 @@ for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
 <h1>Odpowiedzi, sezon 1, odcinek 9</h1>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Lekkie / ciężkie</span>
 for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(koty_ptaki)) {
-  if (koty_ptaki[i,<span class="st">&quot;waga&quot;</span>] &lt;<span class="st"> </span><span class="dv">100</span>) {
+  if (koty_ptaki[i,<span class="st">&quot;waga&quot;</span>] &lt;<span class="st"> </span><span class="dv">1</span>) {
     <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to lekkie zwierze.</span><span class="ch">\n</span><span class="st">&quot;</span>)
   } else {
     <span class="kw">cat</span>(koty_ptaki[i,<span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;to ciężkie zwierze.</span><span class="ch">\n</span><span class="st">&quot;</span>)
@@ -508,13 +510,15 @@ RR &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012, Marka 
 </div>
 <div id="odpowiedzi-sezon-1-odcinek-19" class="slide section level1">
 <h1>Odpowiedzi, sezon 1, odcinek 19</h1>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># auta z największymi silnikami (deklarowanymi)</span>
-tmp &lt;-<span class="st"> </span><span class="kw">arrange</span>(auta2012, -KM)
-<span class="kw">head</span>(tmp,<span class="dv">20</span>)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># najtańsze RR</span>
+tmp &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012, Marka ==<span class="st"> 'Rolls-Royce'</span>) %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(Cena.w.PLN)
+<span class="kw">head</span>(tmp,<span class="dv">10</span>)
 
-<span class="co"># najtańsze Rolls-Royce</span>
-RR &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012, Marka ==<span class="st"> 'Rolls-Royce'</span>)
-<span class="kw">arrange</span>(RR, Cena.w.PLN)</code></pre>
+<span class="co"># największe V</span>
+tmp &lt;-<span class="st"> </span><span class="kw">filter</span>(auta2012, Marka ==<span class="st"> 'Volkswagen'</span>) %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(-Pojemnosc.skokowa)
+<span class="kw">head</span>(tmp, <span class="dv">5</span>)</code></pre>
 </div>
 <div id="zadania-sezon-1-odcinek-20" class="slide section level1">
 <h1>Zadania, sezon 1, odcinek 20</h1>
@@ -543,9 +547,9 @@ auta2012 %&gt;%<span class="st"> </span><span class="kw">select</span>(<span cla
 </div>
 <div id="odpowiedzi-sezon-1-odcinek-21" class="slide section level1">
 <h1>Odpowiedzi, sezon 1, odcinek 21</h1>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pęd</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pęd [w kg m/s]</span>
 koty_ptaki %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(pę<span class="dt">d =</span> predkosc*waga) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(pę<span class="dt">d =</span> predkosc*waga*<span class="dv">1000</span>/<span class="dv">3600</span>) %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">arrange</span>(-pęd)
 
 <span class="co"># przebieg</span>
