@@ -158,6 +158,8 @@ koty_ptaki[koty_ptaki$waga < 100, 1:4]
 # Odpowiedzi, sezon 1, odcinek 8
 
 ```{r, eval=FALSE}
+koty_ptaki[,"gatunek"] <- as.character(koty_ptaki[,"gatunek"])
+
 # Pętla z żywotnością
 for (i in 1:nrow(koty_ptaki)) {
   cat("Osobniki gatunku:", koty_ptaki[i,"gatunek"], "żyją do", 
@@ -203,7 +205,7 @@ for (i in 1:nrow(koty_ptaki)) {
 ```{r, eval=FALSE}
 # Lekkie / ciężkie
 for (i in 1:nrow(koty_ptaki)) {
-  if (koty_ptaki[i,"waga"] < 100) {
+  if (koty_ptaki[i,"waga"] < 1) {
     cat(koty_ptaki[i,"gatunek"], "to lekkie zwierze.\n")
   } else {
     cat(koty_ptaki[i,"gatunek"], "to ciężkie zwierze.\n")
@@ -569,13 +571,15 @@ arrange(RR, Cena.w.PLN)
 # Odpowiedzi, sezon 1, odcinek 19
 
 ```{r, eval=FALSE}
-# auta z największymi silnikami (deklarowanymi)
-tmp <- arrange(auta2012, -KM)
-head(tmp,20)
+# najtańsze RR
+tmp <- filter(auta2012, Marka == 'Rolls-Royce') %>%
+  arrange(Cena.w.PLN)
+head(tmp,10)
 
-# najtańsze Rolls-Royce
-RR <- filter(auta2012, Marka == 'Rolls-Royce')
-arrange(RR, Cena.w.PLN)
+# największe V
+tmp <- filter(auta2012, Marka == 'Volkswagen') %>%
+  arrange(-Pojemnosc.skokowa)
+head(tmp, 5)
 ```
 
 
@@ -612,9 +616,9 @@ auta2012 %>% select(matches("a$"))
 # Odpowiedzi, sezon 1, odcinek 21
 
 ```{r, eval=FALSE}
-# pęd
+# pęd [w kg m/s]
 koty_ptaki %>% 
-  mutate(pęd = predkosc*waga) %>% 
+  mutate(pęd = predkosc*waga*1000/3600) %>% 
   arrange(-pęd)
 
 # przebieg
