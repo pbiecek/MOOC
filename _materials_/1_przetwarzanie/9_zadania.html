@@ -357,8 +357,8 @@ posortowanaTabela &lt;-<span class="st"> </span><span class="kw">sort</span>(<sp
 <span class="kw">barplot</span>(posortowanaTabela, <span class="dt">horiz =</span> <span class="ot">TRUE</span>, <span class="dt">las=</span><span class="dv">1</span>)
 
 <span class="co"># Kategoryzacja</span>
-auta2012$Rok.produkcjiKat &lt;-<span class="st"> </span><span class="kw">cut</span>(auta2012$Rok.produkcji, <span class="kw">c</span>(<span class="dv">1900</span>, <span class="fl">1990.5</span>, <span class="fl">1995.5</span>, <span class="fl">2000.5</span>, <span class="fl">2005.5</span>, <span class="fl">2010.5</span>, <span class="fl">2012.5</span>))
-auta2012$Przebieg.w.kmKat &lt;-<span class="st"> </span><span class="kw">cut</span>(auta2012$Przebieg.w.km, <span class="kw">c</span>(<span class="dv">0-1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>, <span class="dv">1000000</span>, <span class="dv">10000000</span>))
+auta2012$Rok.produkcjiKat &lt;-<span class="st"> </span><span class="kw">cut</span>(auta2012$Rok.produkcji, <span class="kw">c</span>(<span class="dv">1900</span>, <span class="fl">1990.5</span>, <span class="fl">1995.5</span>, <span class="fl">2000.5</span>, <span class="fl">2005.5</span>, <span class="fl">2010.5</span>, <span class="fl">2012.5</span>), <span class="dt">right =</span> <span class="ot">FALSE</span>)
+auta2012$Przebieg.w.kmKat &lt;-<span class="st"> </span><span class="kw">cut</span>(auta2012$Przebieg.w.km, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1000</span>, <span class="dv">10000</span>, <span class="dv">100000</span>, <span class="dv">1000000</span>, <span class="dv">10000000</span>))
 
 <span class="co"># Tablica liczebności</span>
 (przebiegRok &lt;-<span class="st"> </span><span class="kw">xtabs</span>(~Rok.produkcjiKat +<span class="st"> </span>Przebieg.w.kmKat, auta2012))
