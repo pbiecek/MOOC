@@ -145,10 +145,12 @@ Wykres punktowy stosuje się najczęściej w sytuacji gdy dla pewnego zbioru obi
 2. Podejrzewamy, że dwie zmienne są zależne i chcemy przedstawić tę zależność (chcemy pokazać jak cena auta zmienia się z jego przebiegiem).
 3. Podejrzewamy, że w jednej zmiennej występują nietypowe obserwacje (np. bardzo duże) i chcemy zobaczyć jakim wartościom stowarzyszonej zmiennej one odpowiadają (np. czy osoby o bardzo wysokiej wadze to osoby bardzo wysokie czy nie).
 
-Na wykresie punktowym można również zaznaczyć grup wierszy. Oznaczając je kolorem, kształtem lub wielkością. Pozwala to dodatkowo na porównanie grup pod względem przedstawianych zmiennych (patrz slajdy 13-16). Taki wykres punktowy z grupami warto stosować gdy:
+Na wykresie punktowym można również zaznaczać grupy wierszy. Oznaczając je kolorem, kształtem lub wielkością. Pozwala to dodatkowo na porównanie grup pod względem przedstawianych zmiennych (patrz rysunek poniżej). Taki wykres punktowy z grupami warto stosować gdy:
 
-1. Nie wiemy czy grupy różnią się pod kątem danej pary zmiennych i chcemy to sprawdzić (np. czy auta 3 drzwiowe różnią się od 5 drzwiowych jeżeli chodzi o cenę i przebieg).
+1. Nie wiemy czy grupy różnią się pod kątem danej pary zmiennych i chcemy to sprawdzić (np. czy koty różnią się ptaków jeżeli chodzi o wagę i prędkość).
 2. Wiemy, że grupy się różnią i chcemy pokazać w jaki sposób (np. aby pokazać, że kobiety są średnio niższe i znacznie lżejsze niż mężczyźni).
+
+<img width=800 src="grupowanie.png"/>
 
 ---
 
