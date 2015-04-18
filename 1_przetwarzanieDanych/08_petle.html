@@ -48,7 +48,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 1 / odcinek 8<br><br> <a href='http://biecek.pl/'>Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 1 / odcinek 8<br><br> <a href="http://biecek.pl/">Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
@@ -121,8 +121,10 @@ for (i in <span class="dv">1</span>:liczbaStluczek) {
   <span class="kw">cat</span>(<span class="st">&quot;Stłuczka &quot;</span>, i,<span class="st">&quot;, a jej koszt naprawy to &quot;</span>, 
       <span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">min=</span><span class="dv">0</span>, <span class="dt">max=</span><span class="dv">10000</span>), <span class="st">&quot; PLN</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">''</span>)
 }</code></pre>
-<pre><code>## Stłuczka 1, a jej koszt naprawy to 892.1641 PLN
-## Stłuczka 2, a jej koszt naprawy to 5644.128 PLN</code></pre>
+<pre><code>## Stłuczka 1, a jej koszt naprawy to 5445.407 PLN
+## Stłuczka 2, a jej koszt naprawy to 7281.144 PLN
+## Stłuczka 3, a jej koszt naprawy to 9796.603 PLN
+## Stłuczka 4, a jej koszt naprawy to 6411.911 PLN</code></pre>
 <p>W tym przykładzie funkcja <code>runif()</code> służy do losowania <code>n</code> liczb z przedziału od <code>min</code> do <code>max</code>. W pierwszej linii wykorzystujemy ją do wylosowania liczby stłuczek z przedziału 1 do 10. Funkcja <code>round()</code> służy do zaokrąglania wyniku do liczby całkowitej.</p>
 <p>W każdym kroku pętli losowana jest kolejna wartość, oraz wypisywana jest na ekranie. Choć ta pętla wygląda na prostą i niewinną, podobny sposób losowania wielkości szkody jest w rzeczywistości wykorzystywany do zarządzania niepewnością dotyczącego tego, jak duże szkody z tytułu stłuczek lub innych losowych wypadków mogą wystąpić w firmach.</p>
 </div>
@@ -141,16 +143,12 @@ for (i in <span class="dv">1</span>:liczbaStluczek) {
   <span class="kw">cat</span>(<span class="st">&quot;Stłuczka &quot;</span>, i,<span class="st">&quot;, a jej koszt naprawy to &quot;</span>,  koszt, <span class="st">&quot; PLN</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">''</span>)
   <span class="kw">cat</span>(<span class="st">&quot;Suma dotychczasowych kosztów to &quot;</span>,  sumaKosztow, <span class="st">&quot; PLN</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">''</span>)
 }</code></pre>
-<pre><code>## Stłuczka 1, a jej koszt naprawy to 7202.421 PLN
-## Suma dotychczasowych kosztów to 7202.421 PLN
-## Stłuczka 2, a jej koszt naprawy to 1659.379 PLN
-## Suma dotychczasowych kosztów to 8861.8 PLN
-## Stłuczka 3, a jej koszt naprawy to 4215.038 PLN
-## Suma dotychczasowych kosztów to 13076.84 PLN
-## Stłuczka 4, a jej koszt naprawy to 5528.944 PLN
-## Suma dotychczasowych kosztów to 18605.78 PLN</code></pre>
+<pre><code>## Stłuczka 1, a jej koszt naprawy to 3985.27 PLN
+## Suma dotychczasowych kosztów to 3985.27 PLN
+## Stłuczka 2, a jej koszt naprawy to 1642.011 PLN
+## Suma dotychczasowych kosztów to 5627.281 PLN</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">sumaKosztow</code></pre>
-<pre><code>## [1] 18605.78</code></pre>
+<pre><code>## [1] 5627.281</code></pre>
 </div>
 <div id="petle---wartosci-w-sekwencji" class="slide section level1">
 <h1>Pętle - wartości w sekwencji</h1>
@@ -226,7 +224,7 @@ for (i in kolumny) {</code></pre>
 koty_ptaki$gatunek &lt;-<span class="st"> </span><span class="kw">as.character</span>(koty_ptaki$gatunek)
 
 <span class="co"># wykonamy instrukcję dla pierwszego wiersza, indeks wiersza zapiszemy w zmiennej i</span>
-i &lt;-<span class="st"> </span><span class="dv">1&nbps;&nbps;&nbps;&nbps;&nbps;&nbps;&nbps;&nbps;&nbps;&nbps;&nbps;&nbps;&nbps;&nbps;&nbps;&nbps;&nbps;&nbps;&nbps;&nbps;&nbps;&nbps;</span>
+i &lt;-<span class="st"> </span><span class="dv">1</span>                                                          
 <span class="kw">cat</span>(koty_ptaki[i, <span class="st">&quot;gatunek&quot;</span>], <span class="st">&quot;może ważyć do&quot;</span>, koty_ptaki[i, <span class="st">&quot;waga&quot;</span>], <span class="st">&quot;kg</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
 <pre><code>## Tygrys może ważyć do 300 kg</code></pre>
 </div>
