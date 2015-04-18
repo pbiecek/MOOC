@@ -388,8 +388,8 @@ posortowanaTabela <- sort(table(auta2012$Kraj.pochodzenia))
 barplot(posortowanaTabela, horiz = TRUE, las=1)
 
 # Kategoryzacja
-auta2012$Rok.produkcjiKat <- cut(auta2012$Rok.produkcji, c(1900, 1990.5, 1995.5, 2000.5, 2005.5, 2010.5, 2012.5))
-auta2012$Przebieg.w.kmKat <- cut(auta2012$Przebieg.w.km, c(0-1000, 10000, 100000, 1000000, 10000000))
+auta2012$Rok.produkcjiKat <- cut(auta2012$Rok.produkcji, c(1900, 1990.5, 1995.5, 2000.5, 2005.5, 2010.5, 2012.5), right = FALSE)
+auta2012$Przebieg.w.kmKat <- cut(auta2012$Przebieg.w.km, c(0, 1000, 10000, 100000, 1000000, 10000000))
 
 # Tablica liczebności
 (przebiegRok <- xtabs(~Rok.produkcjiKat + Przebieg.w.kmKat, auta2012))
