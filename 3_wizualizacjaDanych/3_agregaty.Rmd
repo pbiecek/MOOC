@@ -1,7 +1,7 @@
 ---
 title: "Wykresy, które prezentują podsumowania danych"
 author: "pogRomcy danych"
-date: "sezon 2 / odcinek 3 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 2 / odcinek 8 <br><br><a href='http://biecek.pl/'>Przemysław Biecek @ Uniwersytet Warszawski</a><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -33,7 +33,7 @@ W tym odcinku będziemy pracować ze zbiorem danych `auta2012`.
 
 # Przygotowanie danych
 
-Zbiór danych o cenach ofertowych używanych aut wykorzystywaliśmy już w pierwszym sezonie. Te dane są szczegółowiej opisane w pliku https://rawgit.com/pbiecek/MOOC/master/0_dane/0_dane.html
+Zbiór danych o cenach ofertowych używanych aut wykorzystywaliśmy już w pierwszym sezonie. Te dane są szczegółowiej opisane w pliku pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/0_dane.html
 
 Na potrzeby tego odcinka i prezentowanych tutaj przykładów, do pracy wybierzemy fragment zbioru danych o cenach ofertowych aut. Zawęzimy tutaj naszą uwagę do obserwacji dotyczących Skody Octavii, a ze zbioru kolumn wybierzemy pięć z informacją o roku produkcji, cenie i rodzaju paliwa.
 
@@ -398,4 +398,6 @@ http://zevross.com/blog/category/r/
 + Wybierz pięcioletnie auta marki Volkswagen i za pomocą wykresu ramka - wąsy przedstaw jak cena auta zależy od modelu.
 
 + Dla wybranych pięcioletnich aut marki Volkswagen przedstaw w podziale na modele jaka część aut ma silnik diesla.
+
+Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania_sezon2.html
 
