@@ -1,0 +1,26 @@
+---
+title: "Iluzje, percepcja obrazu i kolory"
+author: "pogRomcy danych"
+date: "sezon 2 / odcinek 3 <br><br> <a href='http://biecek.pl/'>Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+output:
+  slidy_presentation:
+    includes:
+      in_header: ../tracking.html
+    highlight: default
+    css: ../style.css
+    font_adjustment: 0
+    footer: "pogRomcy danych / wizualizacja / iluzje"
+---
+
+# Film
+
+<br>
+<center><iframe width="720" height="405" src="https://www.youtube.com/embed/6a7FTdykk9s" frameborder="0" allowfullscreen></iframe></center>
+
+---
+
+# Więcej informacji
+
+- Esej o iluzjach optycznych <a href="http://biecek.pl/Eseje/indexObraz.html">http://biecek.pl/Eseje/indexObraz.html</a>
+- Strona www Edwarda Tuftego, autora wielu książek o wizualizacji danych <a href="http://www.edwardtufte.com/tufte/">http://www.edwardtufte.com/tufte/</a>
+- Lista dziesiątek iluzji optycznych <a href="http://www.michaelbach.de/ot/">http://www.michaelbach.de/ot/</a>
