@@ -1,7 +1,7 @@
 ---
 title: "Pakiet ggplot2 - praca nad detalami"
 author: "pogRomcy danych"
-date: "sezon 2 / odcinek 4 <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "sezon 2 / odcinek 9 <br><br><a href='http://biecek.pl/'>Przemysław Biecek @ Uniwersytet Warszawski</a><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -395,4 +395,6 @@ https://gss.civilservice.gov.uk/wp-content/uploads/2014/12/Effective-graphs-and-
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
   geom_point() 
 ```
+
+Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania_sezon2.html
 
