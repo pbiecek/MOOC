@@ -99,8 +99,7 @@ Pomimo jednak tego, że oba wykresy przedstawiają te same dane, a więc zależn
 
 Przyjrzymy się obu wykresom oraz postarajmy się znaleźć jak najwięcej różnic i zastanówmy się, który sposób prezentacji jest lepszy.
 
-```{r, fig.height=5, fig.width=5, message=FALSE, echo=FALSE}
-
+```{r, fig.height=4, fig.width=4, message=FALSE, echo=FALSE}
 library(PogromcyDanych)
 library(ggplot2)
 
@@ -443,7 +442,7 @@ Opanowaliśmy podstawy tworzenia wykresów z użyciem pakietu `ggplot2`. W kolej
 
 - Wiele przydatnych wskazówek można również znaleźć w internetowej książce *,,Cookbook for R''* http://www.cookbook-r.com/Graphs/
 
-- Niezła ściągawka jak korzystać z pakietu *,,ggplot2''* file:///Users/pbiecek/Downloads/ggplot2-cheatsheet.pdf
+- Niezła ściągawka jak korzystać z pakietu *,,ggplot2''* http://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
 
 - Bardzo rozbudowana dokumentacja dla pakietu ggplot2 dostępna jest na stronie *,,ggplot2''* http://docs.ggplot2.org/current/index.html
 
