@@ -48,7 +48,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <p class="author">
 pogRomcy danych
   </p>
-  <p class="date">sezon 0 / odcinek 0 <br><br> <a href='http://biecek.pl/'>Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
+  <p class="date">sezon 0 / odcinek 0 <br><br> <a href="http://biecek.pl/">Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
 <div id="zadanie-sezon-2-odcinek-2" class="slide section level1">
 <h1>Zadanie, sezon 2, odcinek 2</h1>
@@ -356,6 +356,21 @@ marki &lt;-<span class="st"> </span><span class="kw">names</span>(<span class="k
       TCGA_BRCA$TP53)
 <span class="kw">prop.table</span>(<span class="kw">table</span>(TCGA_BRCA$czy.zyje,
       TCGA_BRCA$TP53), <span class="dv">2</span>)</code></pre>
+</div>
+<div id="zadania-sezon-2-odcinek-21" class="slide section level1">
+<h1>Zadania, sezon 2, odcinek 21</h1>
+<p>Uszereguj poniższe cechy tekstów od najmniej do najbardziej użytecznej z punktu widzenia rozpoznawania płci autora wypowiedzi:</p>
+<ol style="list-style-type: upper-alpha">
+<li>Liczba wystąpień słowa “chciałam”</li>
+<li>Liczba wystąpień słowa “dziecko”</li>
+<li>Liczba wystąpień słowa “jest”</li>
+<li>Liczba czasowników użytych w czasie przeszłym, w pierwszej osobie i rodzaju żeńskim.</li>
+</ol>
+</div>
+<div id="odpowiedzi-sezon-2-odcinek-21" class="slide section level1">
+<h1>Odpowiedzi, sezon 2, odcinek 21</h1>
+<p>Zdecydowanie najmniej istotna jest cecha związana z wystąpieniem “jest” – tak pospolite słowa pojawiają się we wszystkich wypowiedziach bez względu na autora. Z kolei “dziecko” wiąże się z pewnym obszarem tematycznym, którego częstotliwość poruszania różni się u kobiet i mężczyzn.</p>
+<p>Cechy A i D są najsilniejsze, ponieważ dzięki własnościom języka polskiego bezpośrednio zdradzają płeć autora. Spośród nich D jest istotniejsza niż A, bo obejmuje więcej różnych słów – nie tylko “chciałam”, ale i “byłam”, “powiedziałam”, co pozwoli dobrze sklasyfikować więcej tekstów.</p>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
