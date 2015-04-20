@@ -1,7 +1,7 @@
 ---
 title: "Sondaże bez tajemnic"
 author: "Jakub Rutkowski,<br/> Zbigniew Marczewski,<br/> Przemysław Kopa<br/>Na Straży Sondaży dla pogRomcy danych"
-date: "<br><br> Wszelkie prawa zastrzeżone.<br> Wykorzystanie możliwe wyłącznie za zgodą autora. <br><br><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
+date: "><br><br>Naciśnij `A` by zamienić slajdy na ciągły tekst. <br> Naciśnij `T` by wyświetlić spis treści."
 output:
   slidy_presentation:
     includes:
@@ -10,6 +10,14 @@ output:
     css: ../../style.css
     font_adjustment: 0
     footer: "pogRomcy danych / modelowanie / sondaże"
+
+---
+
+# Film
+
+<br>
+<center><iframe width="720" height="405" src="https://www.youtube.com/embed/HeuEStD4noU" frameborder="0" allowfullscreen></iframe></center>
+
 ---
 
 # Wprowadzenie
