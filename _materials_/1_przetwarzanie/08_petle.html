@@ -121,10 +121,15 @@ for (i in <span class="dv">1</span>:liczbaStluczek) {
   <span class="kw">cat</span>(<span class="st">&quot;Stłuczka &quot;</span>, i,<span class="st">&quot;, a jej koszt naprawy to &quot;</span>, 
       <span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">min=</span><span class="dv">0</span>, <span class="dt">max=</span><span class="dv">10000</span>), <span class="st">&quot; PLN</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">''</span>)
 }</code></pre>
-<pre><code>## Stłuczka 1, a jej koszt naprawy to 5445.407 PLN
-## Stłuczka 2, a jej koszt naprawy to 7281.144 PLN
-## Stłuczka 3, a jej koszt naprawy to 9796.603 PLN
-## Stłuczka 4, a jej koszt naprawy to 6411.911 PLN</code></pre>
+<pre><code>## Stłuczka 1, a jej koszt naprawy to 151.4612 PLN
+## Stłuczka 2, a jej koszt naprawy to 5209.578 PLN
+## Stłuczka 3, a jej koszt naprawy to 4011.91 PLN
+## Stłuczka 4, a jej koszt naprawy to 7426.011 PLN
+## Stłuczka 5, a jej koszt naprawy to 5143.293 PLN
+## Stłuczka 6, a jej koszt naprawy to 5607.07 PLN
+## Stłuczka 7, a jej koszt naprawy to 1117.232 PLN
+## Stłuczka 8, a jej koszt naprawy to 2679.447 PLN
+## Stłuczka 9, a jej koszt naprawy to 9457.257 PLN</code></pre>
 <p>W tym przykładzie funkcja <code>runif()</code> służy do losowania <code>n</code> liczb z przedziału od <code>min</code> do <code>max</code>. W pierwszej linii wykorzystujemy ją do wylosowania liczby stłuczek z przedziału 1 do 10. Funkcja <code>round()</code> służy do zaokrąglania wyniku do liczby całkowitej.</p>
 <p>W każdym kroku pętli losowana jest kolejna wartość, oraz wypisywana jest na ekranie. Choć ta pętla wygląda na prostą i niewinną, podobny sposób losowania wielkości szkody jest w rzeczywistości wykorzystywany do zarządzania niepewnością dotyczącego tego, jak duże szkody z tytułu stłuczek lub innych losowych wypadków mogą wystąpić w firmach.</p>
 </div>
@@ -143,12 +148,16 @@ for (i in <span class="dv">1</span>:liczbaStluczek) {
   <span class="kw">cat</span>(<span class="st">&quot;Stłuczka &quot;</span>, i,<span class="st">&quot;, a jej koszt naprawy to &quot;</span>,  koszt, <span class="st">&quot; PLN</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">''</span>)
   <span class="kw">cat</span>(<span class="st">&quot;Suma dotychczasowych kosztów to &quot;</span>,  sumaKosztow, <span class="st">&quot; PLN</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">''</span>)
 }</code></pre>
-<pre><code>## Stłuczka 1, a jej koszt naprawy to 3985.27 PLN
-## Suma dotychczasowych kosztów to 3985.27 PLN
-## Stłuczka 2, a jej koszt naprawy to 1642.011 PLN
-## Suma dotychczasowych kosztów to 5627.281 PLN</code></pre>
+<pre><code>## Stłuczka 1, a jej koszt naprawy to 2636.026 PLN
+## Suma dotychczasowych kosztów to 2636.026 PLN
+## Stłuczka 2, a jej koszt naprawy to 7598.422 PLN
+## Suma dotychczasowych kosztów to 10234.45 PLN
+## Stłuczka 3, a jej koszt naprawy to 2326.999 PLN
+## Suma dotychczasowych kosztów to 12561.45 PLN
+## Stłuczka 4, a jej koszt naprawy to 63.79507 PLN
+## Suma dotychczasowych kosztów to 12625.24 PLN</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">sumaKosztow</code></pre>
-<pre><code>## [1] 5627.281</code></pre>
+<pre><code>## [1] 12625.24</code></pre>
 </div>
 <div id="petle---wartosci-w-sekwencji" class="slide section level1">
 <h1>Pętle - wartości w sekwencji</h1>
@@ -219,7 +228,7 @@ for (i in kolumny) {</code></pre>
 <h1>Pętle - iteracja po wierszu / kolumnie</h1>
 <p>Typowe zastosowania pętli to wykonanie pewnej operacji dla każdego wiersza lub każdej kolumny zbioru danych.</p>
 <p>Pokażmy teraz przykład wykorzystania pętli dla każdego wiersza, a na początek dla wiersza o indeksie <code>1</code>. Przy czym tę wartość przypiszemy do zmiennej o nazwie <code>i</code> (może być też dowolna inna nazwa), a następnie wykorzystamy tą zmienną do indeksowania zbioru <code>koty_ptaki</code>.</p>
-<p>W poniższym przykłądzie będziemy chcieli wyświetlić informację do jakiej wagi dochodzą przedstawiciele danego gatunku.</p>
+<p>W poniższym przykładzie będziemy chcieli wyświetlić informację do jakiej wagi dochodzą przedstawiciele danego gatunku.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Zamiana zmiennej factor na zmienną napisową, po to by była dobrze wyświetlana</span>
 koty_ptaki$gatunek &lt;-<span class="st"> </span><span class="kw">as.character</span>(koty_ptaki$gatunek)
 
