@@ -220,7 +220,7 @@ Typowe zastosowania pętli to wykonanie pewnej operacji dla każdego wiersza lub
 
 Pokażmy teraz przykład wykorzystania pętli dla każdego wiersza, a na początek dla wiersza o indeksie `1`. Przy czym tę wartość przypiszemy do zmiennej o nazwie `i` (może być też dowolna inna nazwa), a następnie wykorzystamy tą zmienną do indeksowania zbioru `koty_ptaki`.
 
-W poniższym przykłądzie będziemy chcieli wyświetlić informację do jakiej wagi dochodzą przedstawiciele danego gatunku.
+W poniższym przykładzie będziemy chcieli wyświetlić informację do jakiej wagi dochodzą przedstawiciele danego gatunku.
 
 ```{r, message=FALSE, warning=FALSE}
 # Zamiana zmiennej factor na zmienną napisową, po to by była dobrze wyświetlana
