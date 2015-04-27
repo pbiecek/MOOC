@@ -190,7 +190,7 @@ tylkoMalyPrzebieg </code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">tylkoMalyPrzebieg %&gt;%<span class="st"> </span><span class="kw">dim</span>()</code></pre>
 <p>Aby wyświetlić kilka pierwszych wierszy z ramki danych <code>tylkoMalyPrzebieg</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">tylkoMalyPrzebieg %&gt;%<span class="st"> </span><span class="kw">head</span>()</code></pre>
-<p>Jeżeli chcielibyśmy przekazać zbiór danych z lewej strony operatora <code>%&gt;%</code> w inne miejsce niż pierwszy argument, Również możemy to zrobić. Miejsce w które ma być wstawiony argument należy w tym celu zamarkować znakiem kropki <code>.</code> (koropki w nazwach zmiennych się nie liczą).</p>
+<p>Jeżeli chcielibyśmy przekazać zbiór danych z lewej strony operatora <code>%&gt;%</code> w inne miejsce niż pierwszy argument, również możemy to zrobić. Miejsce w które ma być wstawiony argument należy w tym celu zamarkować znakiem kropki <code>.</code> (koropki w nazwach zmiennych się nie liczą).</p>
 <p>W poniższym przykładzie używamy funkcji <code>lm()</code>, podajemy jako pierwszy argument formułę, a jako drugi argument zbiór danych. W tym przykładzie, ponieważ zbiór danych to <code>.</code>, to będzie za niego wstawiony zbiór <code>tylkoMalyPrzebieg</code> (lewa strona operatora <code>%&gt;%</code>).</p>
 <pre class="sourceCode r"><code class="sourceCode r">tylkoMalyPrzebieg %&gt;%<span class="st"> </span><span class="kw">lm</span>(Cena.w.PLN ~<span class="st"> </span>Przebieg.w.km, .)</code></pre>
 <pre><code>## 
