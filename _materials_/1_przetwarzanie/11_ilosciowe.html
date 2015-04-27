@@ -263,7 +263,7 @@ pogRomcy danych
 <h1>Graficzne statystyki opisowe - wykres słupkowy</h1>
 <p>Powyżej opisane statystyki liczbowe można przedstawić graficznie. Prezentacja graficzna ma tę zaletę, że wyćwiczone oko potrafi szybko wiele dowiedzieć się z danych.</p>
 <p>Opisując zmienną ilościową mamy do wyboru różne sposoby prezentacji, w zależności od tego, ile informacji chcemy przedstawić.</p>
-<p>Przypuśćmy, że chcemy pokazać wyłącznie średnią. Jedną liczbę. Zrobimy to za pomocą wykresu słupkowego. Wykres słupkowy można w programie R wyznaczyć funkcją <code>barplot()</code>.</p>
+<p>Przypuśćmy, że chcemy pokazać wyłącznie średnią (np średni przebieg). Jedną liczbę. Zrobimy to za pomocą wykresu słupkowego. Wykres słupkowy można w programie R wyznaczyć funkcją <code>barplot()</code>.</p>
 <p><em>Zauważmy, że jeżeli wynik przypisania obejmiemy w nawiasy, to wyświetli się on na ekranie</em></p>
 <pre class="sourceCode r"><code class="sourceCode r">(srednia &lt;-<span class="st"> </span><span class="kw">mean</span>(auta2012$Przebieg.w.km, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))</code></pre>
 <pre><code>## [1] 147167.4</code></pre>
@@ -273,8 +273,8 @@ pogRomcy danych
 <div id="graficzne-statystyki-opisowe---wykres-supkowy-1" class="slide section level1">
 <h1>Graficzne statystyki opisowe - wykres słupkowy</h1>
 <p>Jeden słupek wygląda dziwnie, mało czytelnie. To dlatego, że wykres przedstawia jedną liczbę, trudno więc do czegoś się na nim odnieść.</p>
-<p>Zobaczmy jak wyglądają średnie ceny w grupach, na przykład w zależności od rodzaju paliwa.</p>
-<p>Do liczenia średniej w grupach wykorzystamy funkcję <code>tapply()</code>, jako pierwszy argument przyjmuje cechę ilościową, jako drugi informacje o grupach a jako trzeci nazwę funkcji, która ma w każdej grupie być wykonana (i następnie dodatkowe argumenty).</p>
+<p>Zobaczmy jak wyglądają średnie przebiegi w grupach, na przykład w zależności od rodzaju paliwa.</p>
+<p>Do liczenia średniej w grupach wykorzystamy funkcję <code>tapply()</code>, jako pierwszy argument przyjmuje cechę ilościową (tutaj zmienną z przebiegiem), jako drugi informacje o grupach (tutaj, rodzaje paliwa) a jako trzeci nazwę funkcji, która ma w każdej grupie być wykonana (i następnie dodatkowe argumenty).</p>
 <p>Wynikiem będzie wektor ze średnimi. Możemy teraz użyć funkcji <code>barplot()</code>, argument <code>las=2</code> powoduje, że etykiety na osi OX pojawią się w pionie, co ułatwi ich odczytanie.</p>
 <p>Więcej informacji o tym jak zrobić dobrze wyglądający wykres słupkowy przedstawimy w sezonie 2.</p>
 <pre class="sourceCode r"><code class="sourceCode r">(srednie &lt;-<span class="st"> </span><span class="kw">tapply</span>(auta2012$Przebieg.w.km,
