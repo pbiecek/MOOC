@@ -347,7 +347,7 @@ boxplot(auta2012$Przebieg.w.km,
 # Graficzne statystyki opisowe - wykres pudełkowy
 
 Co za dziwny wykres. Co jest nie tak? Spójrzmy na oś na wykresie, rozciąga się do 10^9 = 1 000 000 000 km. Patrząc na wynik funkcji `summary()` widzimy że faktycznie, któryś wiersz zawiera tak dużą wartość.
-Najprawdopodobniej te duże wartości to wynik błędu w danych. Mała jest szansa, że jakiekolwiek auto na świecie miało choćby zbliżony przebieg (gdyby jakieś auto jeździło non stop z prędkością 100 km na godzinę, to po 100 latach miałoby przebieg 8 000 000 km).
+Najprawdopodobniej te duże wartości to wynik błędu w danych. Mała jest szansa, że jakiekolwiek auto na świecie miało choćby zbliżony przebieg (gdyby jakieś auto jeździło non stop z prędkością 100 km na godzinę, to po 100 latach miałoby przebieg ponad 85 000 000 km).
 
 Dane bardzo często są zanieczyszczone a graficzne prezentacje pozwalają nam to łatwo zauważyć. 
 
