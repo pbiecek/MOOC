@@ -21,7 +21,7 @@ Ale znacznie łatwiej dostrzec lub zrozumieć te zależności, jeżeli dane prze
 
 Pierwsza połowa sezonu 2 poświęcona jest wizualizacji danych. W tym odcinku poznamy pakiet graficzny `ggplot2`, pozwalający na tworzenie dobrze wyglądających i czytelnych wykresów.
 
-W tym odcinku dowiemy się:
+W tym odcinku dowiemy się, że:
 
 - W programie R wykresy można tworzyć z użyciem najróżniejszych pakietów. Dowiemy się, dlaczego w pierwszej kolejności warto poznać i dlaczego warto używać pakietu `ggplot2`.
 - Jednym z najpopularniejszych sposobów przedstawiania danych są wykresy punktowe. Pokażemy jak tworzyć takie wykresy.
@@ -37,7 +37,7 @@ W tym odcinku będziemy pracować z dwoma zbiorami danych: `koty_ptaki` oraz `WI
 
 Aby odtworzyć przykłady z tego odcinka potrzebny jest zainstalowany pakiet `PogromcyDanych`. Informacja o tym jak go zainstalować jest umieszczona w odcinku trzecim pierwszego sezonu *Jak zainstalować R, RStudio oraz dodatkowe pakiety?*.
 
-Funkcją `library()` włączamy pakiet i możemy sprawdzić jak wyglądają pierwsze sześć wierszy z obu zbiorów danych.
+Funkcją `library()` włączamy pakiet. Funkcją `head()` wyświetlamy pierwsze sześć wierszy z każdego ze zbiorów danych.
 
 ```{r,  message=FALSE}
 # jeżeli pakiet jeszcze nie jest zainstalowany należy odkomentować poniższą linijkę
@@ -126,7 +126,7 @@ Różnice, które zauważyłem i uznałem za najistotniejsze to:
 5. Etykiety na osiach na prawym wykresie są poziome, nie trzeba obracać głowy by je odczytać.
 6. Etykiety na prawym wykresie są pomniejszone i wyszarzane, przesunięte na drugi plan. Wciąż są widoczne ale mniej dominują wykres, pozwalając przesunąć dane na pierwszy plan.
 7. Nazwy na osiach są krótsze i czytelniejsze, nie ma członu `koty_ptaki$`, który nie jest potrzebny.
-8. Punkty zaznaczone są kropkami a nie pustymi okręgami, dzięki czemu zajmują mniej miejsca, więcej ich się zmieści na wykresie i łatwiej odczytać współrzędne punktu.
+8. Punkty zaznaczone są kropkami a nie pustymi okręgami, dzięki czemu zajmują mniej miejsca, więcej ich się zmieści na wykresie i łatwiej odczytać współrzędne punktu (ale gdy punktów jest bardzo bardzo dużo to i tak zleją się w jeden kleks).
 
 Używając pakietu `ggplot2` otrzymujemy przy fabrycznych ustawieniach czytelny wykres. Jeżeli chcemy go zmienić, możemy zmienić każdy jego element. Ale jeżeli nie chcemy, możemy skupić się na danych a nie upiększaniu wykresu.
 
@@ -145,7 +145,7 @@ Wykres punktowy stosuje się najczęściej w sytuacji gdy dla pewnego zbioru obi
 
 ---
 
-# Kiedy należy używać wykresu punktowego?
+# Grupy na wykresie punktowym
 
 Na wykresie punktowym można również zaznaczać grupy wierszy. W tym celu można przynależność do grupy oznaczyć kolorem, kształtem lub wielkością. Pozwala to dodatkowo na porównanie grup pod względem przedstawianych zmiennych (patrz rysunek poniżej). Taki wykres punktowy z grupami warto stosować gdy:
 
@@ -158,7 +158,7 @@ Na wykresie punktowym można również zaznaczać grupy wierszy. W tym celu moż
 
 # Jak zrobić wykres punktowy?
 
-Przyjrzyjmy się instrukcji, która tworzy wykres punktowy (na kolejnym slajdzie jest przedstawiony rozbiór na części pierwsze).
+Przyjrzyjmy się instrukcji, która tworzy wykres punktowy (na kolejnym slajdzie jest przedstawiony rozkład na części pierwsze).
 
 Przypomnijmy jak wyglądają dane. Oto pierwsze trzy wiersze ze zbioru `koty_ptaki`.
 
@@ -186,7 +186,7 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
 Trzy elementy są kluczowe w tej instrukcji.
 
 - Funkcja `ggplot()` tworzy trzon wykresu. Opisuje ona jakie zmienne będą przedstawione na wykresie, ale nie określa w jaki sposób będą one przedstawione. Zazwyczaj przyjmuje ona dwa argumenty. Pierwszy to zbiór danych (w tym przypadku `koty_ptaki`). Drugi argument to lista par, określająca które zmienne i w jaki sposób mają być przedstawione na wykresie. Te pary nazywa się  ,,mapowaniami''. Mapowania określają, które zmienne mają być przedstawione za pomocą jakich cech wykresu. 
-- Mapowania opisuje funkcja `aes()`. Argumenty tej funkcji to pary `cecha wykresu=zmienna`. Każda z tych par opisuje w jaki sposób określona zmienne ma być przedstawiona. W powyższym przypadku opis ten oznacza, że zmienna `waga` ma być przedstawiona przez współrzędną `x` a zmienna `predkosc` ma być przedstawiona przez współrzędną `y` wykresu.
+- Mapowania opisuje funkcja `aes()`. Argumenty tej funkcji to pary `cecha wykresu=zmienna`. Każda z tych par opisuje w jaki sposób określona zmienna ma być przedstawiona. W powyższym przypadku opis ten oznacza, że zmienna `waga` ma być przedstawiona przez współrzędną `x` a zmienna `predkosc` ma być przedstawiona przez współrzędną `y` wykresu.
 - Trzon wykresu rozbudowuje się dodając kolejne funkcje z użyciem operatora `+`. W tym przypadku funkcja `geom_point()` dodaje do wykresu warstwę przedstawiającą dane za pomocą punktów. Funkcje, o nazwach rozpoczynających się od `geom_` nazywamy geometriami, określają one w jaki sposób dane są prezentowane. Czy jako punkty (`geom_point()`), linie (`geom_line()`), obszary (`geom_area()`) czy jeszcze inaczej. W tym sezonie poznamy kilka geometrii, zbiór wszystkich dostępnych geometrii znaleźć można na stronie http://docs.ggplot2.org.
 
 ---
@@ -448,7 +448,7 @@ ggplot(WIG, aes(x=Data, ymin=0, ymax=Kurs.zamkniecia)) +
 
 Opanowaliśmy podstawy tworzenia wykresów z użyciem pakietu `ggplot2`. W kolejnych odcinkach przedstawimy więcej informacji, ale można ich też poszukać w poniższych źródłach.
 
-- Bardzo interesująca prezentacja o projektowaniu wykresów, o nazwie *Figure Design* jest dostępna pod adresem http://www.bioinformatics.babraham.ac.uk/training/Figure%20Design%20Course%20Presentation.pdf
+- Bardzo interesująca prezentacja o projektowaniu wykresów, o nazwie *Figure Design* jest dostępna pod adresem http://www.bioinformatics.babraham.ac.uk/training/Figure_Design_Course/Figure%20design%20introduction.pdf
 
 - Więcej informacji o tym jak budować wykresy w pakiecie ggplot2 znaleźć można w rozdziale 4 książki *,,Przewodnik po pakiecie R''*. Więcej informacji o tej książce http://www.biecek.pl/R/
 
