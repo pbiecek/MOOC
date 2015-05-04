@@ -15,7 +15,7 @@ output:
 
 # O czym jest ten odcinek
 
-Dane są czymś abstrakcyjnym i patrząc w tabele liczb często trudno zrozumieć zależności pomiędzy różnymi zmiennymi.
+Dane są czymś abstrakcyjnym i patrząc w tabele liczb często trudno zauwazyć zależności pomiędzy różnymi zmiennymi.
 
 Ale znacznie łatwiej dostrzec lub zrozumieć te zależności, jeżeli dane przedstawi się graficznie w poprawny sposób.
 
@@ -23,9 +23,9 @@ Pierwsza połowa sezonu 2 poświęcona jest wizualizacji danych. W tym odcinku p
 
 W tym odcinku dowiemy się:
 
-- W programie R wykresy można tworzyć z użyciem najróżniejszych pakietów. Dowiemy się, dlaczego w pierwszej kolejności warto poznać i dlaczego warto używać pakietu `ggplot2`?
+- W programie R wykresy można tworzyć z użyciem najróżniejszych pakietów. Dowiemy się, dlaczego w pierwszej kolejności warto poznać i dlaczego warto używać pakietu `ggplot2`.
 - Jednym z najpopularniejszych sposobów przedstawiania danych są wykresy punktowe. Pokażemy jak tworzyć takie wykresy.
-- Jednym z kluczowych pomysłów w pakiecie `ggplot2` są mapowania zmiennych na właściwości wykresu, dokładnie omówimy na czym polega ten pomysł.
+- Jednym z kluczowych pomysłów w pakiecie `ggplot2` są mapowania zmiennych na właściwości wykresu. Dokładnie omówimy na czym polega ten pomysł.
 - Poznamy kolejne rodzaje wykresów, takie jak wykres z etykietami lub wykres liniowy.
 - Pokażemy też jak składać różne warstwy w jeden czytelny wykres.
 
@@ -33,11 +33,11 @@ W tym odcinku dowiemy się:
 
 # Zbiory danych
 
-W tym odcinku będziemy pracować z dwoma zbiorami danych: `koty_ptaki` oraz `WIG`. Oba zbiory są dostępne z pakietu `PogromcyDanych`.
+W tym odcinku będziemy pracować z dwoma zbiorami danych: `koty_ptaki` oraz `WIG`. Oba zbiory są dostępne w pakiecie `PogromcyDanych`.
 
 Aby odtworzyć przykłady z tego odcinka potrzebny jest zainstalowany pakiet `PogromcyDanych`. Informacja o tym jak go zainstalować jest umieszczona w odcinku trzecim pierwszego sezonu *Jak zainstalować R, RStudio oraz dodatkowe pakiety?*.
 
-Funkcją `library()` włączamy pakiet i możemy sprawdzić jak wyglądają pierwsze wiersze z obu zbiorów danych.
+Funkcją `library()` włączamy pakiet i możemy sprawdzić jak wyglądają pierwsze sześć wierszy z obu zbiorów danych.
 
 ```{r,  message=FALSE}
 # jeżeli pakiet jeszcze nie jest zainstalowany należy odkomentować poniższą linijkę
@@ -59,10 +59,10 @@ head(WIG)
 Coraz więcej osób dostrzega potencjał wizualizacji danych zarówno w zastosowaniach biznesowych, w nauce, mediach czy życiu codziennym.
 Z tego powodu powstaje coraz więcej rozwiązań, programów i pakietów, pozwalających na prezentację danych.
 
-My skupimy się na jednym, na pakiecie `ggplot2`. Dlaczego? Jest ku temu kilka powodów.
+My skupimy się na jednym, na pakiecie `ggplot2`. Dlaczego akurat nim? Jest ku temu kilka powodów.
 
-- Zaawansowana analiza danych bardzo często ma miejsce w programie R. Wykorzystanie tego samego programu do analiz i do wizualizacji, ma tę zaletę, że nie musimy danych konwertować do nowego formatu, nie musimy poznawać dwóch języków opisu wizualizacji, możemy pracować w jednym spójnym środowisku. Z pakietów programu R, to właśnie `ggplot2` jest najbardziej dojrzałym rozwiązaniem.
-- Pakiet `ggplot2` pozwala na tworzenie grafiki *publication ready*, czyli wystarczająco dobrej by pokazać ją innym osobom bez dodatkowych zabiegów upiększających. 
+- Zaawansowana analiza danych bardzo często ma miejsce w programie R. Wykorzystanie tego samego programu do analiz i do wizualizacji, ma tę zaletę, że nie musimy danych konwertować do nowego formatu, nie musimy poznawać dwóch języków opisu wizualizacji, możemy pracować w jednym spójnym środowisku. Z pakietów programu R, na dzień dzisiejszy, to właśnie `ggplot2` jest najbardziej dojrzałym rozwiązaniem.
+- Pakiet `ggplot2` pozwala na tworzenie grafiki *publication ready*, czyli wystarczająco dobrej by pokazać ją innym osobom w prezentacjach czy raportach biznesowych lub publikacjach naukowych, bez dodatkowych zabiegów upiększających. 
 - Pakiet `ggplot2` wymusza myślenie o wykresach danych w kategorii zmiennych, które chcemy przedstawić a nie w kategorii szablonu, który chcemy wypełnić. Krzywa uczenia jest bardziej stroma, niż w przypadku ,,klikadeł'', ale z czasem nasze możliwości niepomiernie rosną. 
 
 
@@ -75,14 +75,15 @@ Wykorzystując zbiór danych `koty_ptaki` przedstawmy zależność wagi od pręd
 Poniższe instrukcje tworzą wykres z domyślnymi ustawieniami.
 To, w jaki sposób tworzą one wykres wyjaśnimy za cztery slajdy, na slajdzie o tytule *Elementy wykresu punktowego*. W tym miejscu, przyjrzyjmy się wyłącznie wynikom, które obie instrukcje produkują.
 
+Bez wczytywania dodatkowych pakietów, możemy korzystać z funkcji plot()
 ```{r,  message=FALSE, eval=FALSE}
-# bez ładowania dodatkowych pakietów, możemy korzystać z funkcji plot()
 plot(koty_ptaki$waga, koty_ptaki$predkosc)
+```
 
-# funkcje graficzne, które będziemy omawiać, wymagają włączenia dodatkowego pakietu ggplot2
-# jeżeli ten pakiet nie jest zainstalowany, należy go zainstalować poleceniem install.packages("ggplot2")
+Funkcje graficzne, które będziemy omawiać, wymagają włączenia dodatkowego pakietu `ggplot2`. Keżeli ten pakiet nie jest zainstalowany, należy go zainstalować poleceniem `install.packages("ggplot2")`. W pakiecie ggplot2 wykresy wygodnie tworzy się funkcją `ggplot`.
+
+```{r,  message=FALSE, eval=FALSE}
 library(ggplot2)
-# w pakiecie ggplot2 wykresy wygodnie tworzy się funkcją ggplot
 ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
   geom_point()
 ```
@@ -93,13 +94,15 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
 
 Dla kolejnych wierszy zbioru danych `koty_ptaki`, na wykresie przedstawiamy zależność pomiędzy zmiennymi `waga` a `predkosc`. Każdy wiersz opisany jest przez jeden punkt, przez co wykres ten nazywa się wykresem punktowym.
 
-Na tym wykresie przedstawiane są duże koty i ptaki. Lżejsze gatunki to głównie ptaki, które są też szybsze niż duże koty. Więc przedstawiany wykres pokazuje, że im cięższy osobnik, tym niższa jego prędkość maksymalna.
+Na tym wykresie przedstawiane są duże koty i ptaki. Lżejsze gatunki to głównie ptaki, są one też zazwyczaj szybsze niż duże koty. Więc przedstawiany wykres pokazuje, że dla tych danych, im cięższy gatunek, tym niższa jego prędkość maksymalna.
 
 Pomimo jednak tego, że oba wykresy przedstawiają te same dane, a więc zależność przedstawiona na obu wykresach jest ta sama, to jednak wykresy te wyglądają różnie.
 
 Przyjrzymy się obu wykresom oraz postarajmy się znaleźć jak najwięcej różnic i zastanówmy się, który sposób prezentacji jest lepszy.
 
-```{r, fig.height=4, fig.width=4, message=FALSE, echo=FALSE}
+<center><img width="600px" src="dwaPakiety.png"/></center>
+
+```{r, fig.height=4, fig.width=4, message=FALSE, echo=FALSE, eval=FALSE}
 library(PogromcyDanych)
 library(ggplot2)
 
@@ -127,29 +130,29 @@ Różnice, które zauważyłem i uznałem za najistotniejsze to:
 
 Używając pakietu `ggplot2` otrzymujemy przy fabrycznych ustawieniach czytelny wykres. Jeżeli chcemy go zmienić, możemy zmienić każdy jego element. Ale jeżeli nie chcemy, możemy skupić się na danych a nie upiększaniu wykresu.
 
-```{r, fig.height=5, fig.width=5, message=FALSE, echo=FALSE}
-plot(koty_ptaki$waga, koty_ptaki$predkosc)
-ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
-  geom_point()
-```
+<center><img width="600px" src="dwaPakiety.png"/></center>
 
 
 ---
 
 # Kiedy należy używać wykresu punktowego?
 
-Wykres punktowy stosuje się najczęściej w sytuacji gdy dla pewnego zbioru obiektów (najczęściej opisanego wiersz po wierszu), przedstawić chcemy zależność pomiędzy dwiema zmiennymi liczbowymi/ilościowymi. Np. dla państw to może być zależność pomiędzy PKB i średnia długość życia, dla osób to może być wzrost i waga, dla samochodów to może być przebieg i cena. Dodatkowo:
+Wykres punktowy stosuje się najczęściej w sytuacji gdy dla pewnego zbioru obiektów (najczęściej opisanego wiersz po wierszu), chcemy przedstawić zależność pomiędzy dwiema zmiennymi liczbowymi/ilościowymi. Np. dla państw to może być zależność pomiędzy PKB i średnią długością życia, dla osób to może być wzrost i waga, dla samochodów to może być przebieg i cena. Dodatkowo:
 
 1. Nie wiemy czy i jakiej zależności się spodziewać (czy i jak długość życia jest związana z PKB).
 2. Podejrzewamy, że dwie zmienne są zależne i chcemy przedstawić tę zależność (chcemy pokazać jak cena auta zmienia się z jego przebiegiem).
 3. Podejrzewamy, że w jednej zmiennej występują nietypowe obserwacje (np. bardzo duże) i chcemy zobaczyć jakim wartościom stowarzyszonej zmiennej one odpowiadają (np. czy osoby o bardzo wysokiej wadze to osoby bardzo wysokie czy nie).
 
-Na wykresie punktowym można również zaznaczać grupy wierszy. Oznaczając je kolorem, kształtem lub wielkością. Pozwala to dodatkowo na porównanie grup pod względem przedstawianych zmiennych (patrz rysunek poniżej). Taki wykres punktowy z grupami warto stosować gdy:
+---
+
+# Kiedy należy używać wykresu punktowego?
+
+Na wykresie punktowym można również zaznaczać grupy wierszy. W tym celu można przynależność do grupy oznaczyć kolorem, kształtem lub wielkością. Pozwala to dodatkowo na porównanie grup pod względem przedstawianych zmiennych (patrz rysunek poniżej). Taki wykres punktowy z grupami warto stosować gdy:
 
 1. Nie wiemy czy grupy różnią się pod kątem danej pary zmiennych i chcemy to sprawdzić (np. czy koty różnią się ptaków jeżeli chodzi o wagę i prędkość).
 2. Wiemy, że grupy się różnią i chcemy pokazać w jaki sposób (np. aby pokazać, że kobiety są średnio niższe i znacznie lżejsze niż mężczyźni).
 
-<img width=800 src="grupowanie.png"/>
+<center><img width=800 src="grupowanie.png"/></center>
 
 ---
 
@@ -157,10 +160,14 @@ Na wykresie punktowym można również zaznaczać grupy wierszy. Oznaczając je 
 
 Przyjrzyjmy się instrukcji, która tworzy wykres punktowy (na kolejnym slajdzie jest przedstawiony rozbiór na części pierwsze).
 
+Przypomnijmy jak wyglądają dane. Oto pierwsze trzy wiersze ze zbioru `koty_ptaki`.
+
 ```{r, fig.height=4, fig.width=4}
-# pierwsze trzy wiersze ze zbioru danych
 head(koty_ptaki, 3)
-# instrukcja rysująca wykres, poniżej wynik
+```
+
+Instrukcja rysująca wykres punktowy wygląda następująco.
+```{r, fig.height=4, fig.width=4}
 ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
   geom_point()
 ```
@@ -178,7 +185,7 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
 
 Trzy elementy są kluczowe w tej instrukcji.
 
-- Funkcja `ggplot()` tworzy trzon wykresu. Opisuje ona jakie zmienne będą przedstawione na wykresie, ale nie określa w jaki sposób. Zazwyczaj przyjmuje ona dwa argumenty. Pierwszy to zbiór danych (w tym przypadku `koty_ptaki`). Drugi argument to lista par, określająca które zmienne i w jaki sposób mają być przedstawione na wykresie. Te pary nazywa się  ,,mapowaniami'', określają one które zmienne mają być przedstawione za pomocą jakich cech wykresu. 
+- Funkcja `ggplot()` tworzy trzon wykresu. Opisuje ona jakie zmienne będą przedstawione na wykresie, ale nie określa w jaki sposób będą one przedstawione. Zazwyczaj przyjmuje ona dwa argumenty. Pierwszy to zbiór danych (w tym przypadku `koty_ptaki`). Drugi argument to lista par, określająca które zmienne i w jaki sposób mają być przedstawione na wykresie. Te pary nazywa się  ,,mapowaniami''. Mapowania określają, które zmienne mają być przedstawione za pomocą jakich cech wykresu. 
 - Mapowania opisuje funkcja `aes()`. Argumenty tej funkcji to pary `cecha wykresu=zmienna`. Każda z tych par opisuje w jaki sposób określona zmienne ma być przedstawiona. W powyższym przypadku opis ten oznacza, że zmienna `waga` ma być przedstawiona przez współrzędną `x` a zmienna `predkosc` ma być przedstawiona przez współrzędną `y` wykresu.
 - Trzon wykresu rozbudowuje się dodając kolejne funkcje z użyciem operatora `+`. W tym przypadku funkcja `geom_point()` dodaje do wykresu warstwę przedstawiającą dane za pomocą punktów. Funkcje, o nazwach rozpoczynających się od `geom_` nazywamy geometriami, określają one w jaki sposób dane są prezentowane. Czy jako punkty (`geom_point()`), linie (`geom_line()`), obszary (`geom_area()`) czy jeszcze inaczej. W tym sezonie poznamy kilka geometrii, zbiór wszystkich dostępnych geometrii znaleźć można na stronie http://docs.ggplot2.org.
 
@@ -186,14 +193,18 @@ Trzy elementy są kluczowe w tej instrukcji.
 
 # Dodajemy mapowania - kształt punktu - `shape`
 
-Jak dotąd, nie widać jeszcze jak potężnym mechanizmem są mapowania. Zademonstrujmy to w kolejnym przykładzie, gdzie na wykresie zaznaczymy grupy punktów, gdzie grupy określa zmienna `druzyna`. Grupy punktów oznaczymy różnymi kształtami, a więc cechą `shape`.
+Jak dotąd, nie widać jeszcze jak potężnym mechanizmem są mapowania. Zademonstrujmy to w kolejnym przykładzie, gdzie na wykresie zaznaczymy grupy punktów. Przyjmijmy, że chcemy przedstawić grupy opisane przez zmienną `druzyna`. Grupy punktów zaznaczymy różnymi kształtami, a więc cechą `shape`.
 
 Zauważmy, że zmienne `waga`, `predkosc` i `druzyna` to kolumny występujące w zbiorze danych `koty_ptaki`. Zaś `x`, `y` i `shape` to cechy wykresu punktowego. Funkcja `aes()` wskazuje, które cechy wykresu przedstawiają które zmienne.
 
+Przypomnijmy jakie zmienne są dostępne w zbiorze danych.
+
 ```{r, fig.height=4, fig.width=5}
-# pierwsze trzy wiersze ze zbioru danych
-head(koty_ptaki, 3)
-# wykres punktowy z grupami zaznaczonymi różnymi kształtami punktów
+head(koty_ptaki, 2)
+```
+
+Dodajemy do mapowań zmienną `druzyna`. Otrzymujemy wykres punktowy z grupami zaznaczonymi przez różne kształty punktów.
+```{r, fig.height=4, fig.width=5}
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   geom_point(size=5) 
 ```
@@ -219,7 +230,7 @@ Kolejny krok to wybór cech geometrii, które mają przedstawić wybrane zmienne
 
 # Dodajemy mapowania - wielkość punktu - `size`
 
-Jeżeli efekt oznaczania grup nam się nie podoba, możemy wykorzystać inną cechę do rozróżnienia kotów od ptaków. 
+Jeżeli efekt oznaczania grup nam się nie podoba, możemy wykorzystać inną cechę do rozróżnienia grupy kotów od ptaków. 
 
 Na przykład wielkość punktu, czyli cechę `size`.
 
@@ -232,14 +243,13 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=druzyna)) +
 
 # Dodajemy mapowania - kolor punktu - `color`
 
-Jeżeli wynik jest wciąż niezadawalający, możemy próbować zmieniać kolejne cechy.
+Jeżeli wynik wciąż jest niezadawalający, możemy próbować zmieniać kolejne cechy.
 
 Na przykład kolor, czyli cechę `color` (dopuszczalna jest też brytyjska pisownia `colour`).
 
 ```{r, fig.height=4, fig.width=5}
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, color=druzyna)) +
   geom_point(size=5) 
-
 ```
 
 ---
@@ -248,11 +258,11 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, color=druzyna)) +
 
 Zależność `cecha wykresu=zmienna` to relacja jeden do wielu. Oznacza to, że w opisie mapowań jedna cecha może być powiązana z tylko jedną zmienną. Ale jedna zmienna, może być powiązana z kilkoma cechami. 
 
-Czyli kolor wykresu odpowiadać może tylko jednej kolumnie w zbiorze z danymi, kształt punktu też tylko jednej kolumnie w zbiorze z danymi i podobnie inne cechy. Ale jedna kolumna w zbiorze z danymi może być przedstawiana i przez kolor i przez kształt.
+Czyli kolor punktów odpowiadać może tylko jednej kolumnie w zbiorze z danymi, kształt punktu też tylko jednej kolumnie w zbiorze z danymi i podobnie inne cechy. Ale jedna kolumna w zbiorze z danymi może być przedstawiana i przez kolor i przez kształt.
 
 Na poniższym przykładzie jedna zmienna jest reprezentowana przez zarówno kolor, kształt jak i wielkość punktu.
 
-Zauważmy, że co byśmy nie wybrali, legenda automatycznie dopasowuje się do treści wykresu.
+Zauważmy, że bez względu na to, jakie mapowania wybierzemy, legenda automatycznie dopasowuje się do treści wykresu.
 
 ```{r, fig.height=4, fig.width=5}
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, color=druzyna, 
@@ -264,9 +274,11 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, color=druzyna,
 
 # Na jaką cechę mapować?
 
-Zmieniając argumenty funkcji `aes()`, możemy wybierać sposób reprezentacji określonych zmiennych. Z czterech, które rozważaliśmy, która jest najlepsza?
+Zmieniając argumenty funkcji `aes()`, możemy wybierać sposób reprezentacji określonych zmiennych. Jak dotąd pokazaliśmy cztery z nich. Która jest najlepsza?
 
-```{r, fig.height=4, fig.width=5, echo=FALSE}
+<center><img width=800 src="czteryWykresy.png"></center>
+
+```{r, fig.height=4, fig.width=5, echo=FALSE, eval=FALSE}
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   geom_point(size=5) 
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=druzyna)) +
@@ -282,7 +294,7 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, color=druzyna,
 
 # Geometria `geom_text()` - etykiety tekstowe na wykresie
 
-Zobaczmy, jak skorzystać z innych geometrii. Za przykład posłuży nam wykres z napisami, który można wykonać używając warstwy `geom_text()`. Szczegółowy opis tej geometrii, wraz z przykładami użycia, znajduje się na stronie http://docs.ggplot2.org/current/geom_text.html. W sekcji `Aesthetics` znaleźć można listę cech, które można modyfikować. Aby skorzystać z tej geometrii należy określić przynajmniej trzy cechy: `x`, `y` i `label`. 
+Zobaczmy teraz, jak korzystać z innych geometrii. Za przykład posłuży nam wykres z napisami, który można wykonać używając geometrii `geom_text()`. Szczegółowy jej opis, wraz z przykładami użycia, znajduje się na stronie http://docs.ggplot2.org/current/geom_text.html. W sekcji `Aesthetics` znaleźć można listę cech, które można modyfikować. Aby skorzystać z tej geometrii należy określić przynajmniej trzy cechy: `x`, `y` i `label`. 
 
 A tak wygląda przykładowe wywołanie:
 
@@ -297,7 +309,7 @@ ggplot(koty_ptaki, aes(x= waga, y=predkosc, label=gatunek)) +
 
 Zauważmy, że niektóre napisy wychodzą poza wykres. Nie wygląda to najlepiej. Można ten problem naprawić na dwa sposoby. Jeden to rozszerzenie zakresu wartości na osi OX (dodanie marginesów), drugi to pozycjonowanie napisów względem ich lewego brzegu a nie środka (współrzędne `x` i `y` to domyślnie współrzędne środka napisu).
 
-Spróbujmy tego drugiego rozwiązania. Czytają plik z pomocą dla geometrii `geom_text()` można zauważyć, że za pozycjonowanie odpowiadają cechy `hjust` (w poziomie) i `vjust` (w pionie). Zobaczmy jak wyglądać będzie użycie tych argumentów.
+Spróbujmy tego drugiego rozwiązania. Czytając stronę z dokumentacją dla geometrii `geom_text()` można zauważyć, że za pozycjonowanie odpowiadają cechy `hjust` (w poziomie) i `vjust` (w pionie). Zobaczmy jak wyglądać będzie użycie tych argumentów.
 
 ```{r, fig.height=4, fig.width=5, eval=FALSE}
 ggplot(koty_ptaki, aes(x= waga, y=predkosc, label=gatunek)) +
@@ -334,11 +346,11 @@ ggplot(koty_ptaki, aes(x= waga, y=predkosc, label=gatunek)) +
 Wykres z etykietami stosować można w podobnych sytuacjach co wykres punktowy.
 Również w tym przypadku przedstawiamy zależność pomiędzy dwoma zmiennymi ilościowymi.
 
-Stosowanie etykiet na wykresie ma wady i zalety. Do głównych zalet zaliczyć można:
+Stosowanie etykiet na wykresie ma wady i zalety. Do głównych zalet można zaliczyć:
 
-1. Nazwy obiektów pozwalają zorientować się co reprezentuje  dany punkt. Jest to przydatne, jeżeli wykres wykorzystujemy do identyfikacji *ciekawych* obserwacji, np. najbardziej odstających, najbardziej charakterystycznych.
-2. Jeżeli etykiety są zbyt i przestają być czytelne, to można je skracać do kilku pierwszych liter np. funkcją `substr()`.
-3. Jeżeli wykres przedstawia tylko kilka obserwacji, to nazwy lepiej *wypełniają* wykres, nie pozostawiając dużych pustych przestrzeni, które źle wyglądają wizualnie.
+1. Nazwy pozwalają zorientować się co reprezentuje  dany punkt. Jest to przydatne, jeżeli wykres wykorzystujemy do identyfikacji *ciekawych* obserwacji, np. najbardziej odstających, najbardziej charakterystycznych.
+2. Jeżeli etykiety są zbyt długie, nachodzą na siebie i przestają być czytelne, to można je skracać do kilku pierwszych liter np. funkcją `substr()`.
+3. Jeżeli wykres przedstawia tylko kilka obserwacji, to nazwy lepiej *wypełniają* wykres, nie pozostawiając dużych pustych przestrzeni. A duże puste przestrzenie źle wyglądają.
 
 A główne wady to:
 
@@ -353,7 +365,7 @@ Podsumowując, geometria `geom_text()` jest świetnym sposobem by wyróżnić ni
 
 Zauważmy, że mapowania określone przez funkcję `aes()` wewnątrz funkcji `ggplot()` dotyczą wszystkich warstw.
 
-Na poniższym przykładzie mapujemy zmienną `druzyna` na cechę `color` i to mapowanie dotyczy obu geometrii, a więc i punkty i napisy będą miały kolory zależne od zmiennej `druzyna`.
+Na poniższym przykładzie mapujemy zmienną `druzyna` na cechę `color` i to mapowanie dotyczy obu geometrii. I punkty i napisy będą miały kolory zależne od zmiennej `druzyna`.
 
 ```{r, fig.height=4, fig.width=5}
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, label=gatunek, color=druzyna)) +
@@ -367,7 +379,7 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, label=gatunek, color=druzyna)) +
 
 Jeżeli chcemy aby mapowanie dotyczyło tylko jednej warstwy, należy przenieść je do określonej geometrii.
 
-Na poniższym przykładzie mapowanie zmiennej `druzyna` na `color` przypisane jest tylko do geometrii `geom_text()`.
+Na poniższym przykładzie mapowanie zmiennej `druzyna` na `color` przypisane jest tylko do geometrii `geom_text()`. Wszsytkie punkty mają ten sam kolor.
 
 ```{r, fig.height=4, fig.width=5}
 # kolor grupy jest określony tylko dla etykiet, punkty są na czarno
@@ -382,7 +394,7 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, label=gatunek)) +
 
 Pierwsze zetknięcie z pakietem `ggplot` wymaga często przestawienia się na nowy sposób myślenia o wykresach. Ale gdy już się w ten sposób wejdzie, to okazuje się, że poznawszy dwie geometrie, z kolejnych korzysta się już naprawdę prosto. 
 
-Przykładowo, geometria `geom_line()` służy do rysowania linii. Aby ją wykorzystać na wykresie, wystarczy ją dodać do wykresu znakiem `+`. 
+Przykładowo, geometria `geom_line()` służy do rysowania linii. Aby ją wykorzystać na wykresie, wystarczy ją dodać do wykresu operatorem `+`. 
 
 Przedstawimy tę geometrię na przykładzie danych o indeksie WIG. Poniżej dwie pierwsze linie z tego zbioru danych.
 
@@ -421,7 +433,7 @@ Z tego powodu, wykresów liniowych najlepiej używać gdy:
 
 Ostatnim przykładem w tym odcinku będzie geometria `geom_ribbon()` do rysowania wstęg. 
 
-Jest to o tyle ciekawy przykład, że wymagać będzie wskazania innej cechy niż `y`, tak się bowiem składa, że wstęgi są opisane przedziałem, czyli cechami `ymin` i `ymax`. Każdą z tych cech możemy połączyć ze zmienną lub przypisać do nich stałą wartość. 
+Jest to o tyle ciekawy przykład, że wymagać będzie wskazania innej cechy niż `y`. Tak się bowiem składa, że wstęgi są opisane przedziałem, czyli cechami `ymin` i `ymax` (co można wyczytać z dokumentacji dostępnej na stronie http://docs.ggplot2.org/). Każdą z tych cech możemy połączyć ze zmienną lub przypisać do nich stałą wartość. 
 
 Na poniższym przykładzie rysujemy wstęgę rozpinającą się od zera (stała wartość `ymin=0`) do wartości indeksu WIG (`ymax=Kurs.zamkniecia`).
 
