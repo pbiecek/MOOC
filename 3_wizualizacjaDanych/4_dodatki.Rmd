@@ -9,7 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / wizualizacja / dopieszczanie"
+    footer: "pogRomcy danych / wizualizacja / detale"
 
 ---
 
@@ -31,14 +31,15 @@ W tym odcinku nauczymy się:
 
 # Adnotacje, napisy na osiach i tytuły
 
-Dobry tytuł wykresu i opisy osi to elementy, które znacznie ułatwiają poprawne odczytanie wykresu, choć często ich wkład jest umniejszany.
+Dobry tytuł wykresu i opisy osi to elementy, które znacznie ułatwiają poprawne odczytanie wykresu. Ich wkład jest umniejszany ale w rzeczywistości są to bardzo ważne elementy.
 
-Dlaczego są one takie ważne? Ponieważ bez tytułu i opisu osi czytelnik może nie mieć pojęcia co wykres przedstawia. Jeżeli czytelnik nie wie co wykres przedstawia to taki wykres jest bezużyteczny.
+Dlaczego są one takie ważne? Ponieważ bez tytułu i opisu osi czytelnik może nie mieć pojęcia co wykres przedstawia. A jeżeli czytelnik nie wie co wykres przedstawia, to taki wykres jest bezużyteczny.
 
 Dlaczego umniejszany? Ponieważ twórca wykresu zazwyczaj wie co wykres przedstawia i niekoniecznie ma ochotę i czas by dbać o czytelnika.
 
-Będziemy tworzyć bardzo dobre wykresy, ponieważ na naszych wykresach wszystko będzie jasne i opisane.
+My będziemy tworzyć bardzo dobre wykresy, ponieważ na naszych wykresach wszystko będzie jasne i opisane.
 Przyjrzyjmy się wykresowi z pierwszego odcinka i zastanówmy się które elementy warto dodatkowo opisać?
+
 Poświęć kilka minut by znaleźć przynajmniej pięć elementów, które warto lepiej opisać na tym wykresie.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
@@ -59,8 +60,8 @@ Oto co ja znalazłem:
 
 - W opisach osi brakuje jednostek. Jest informacja 'waga' ale w jakich to jednostkach? Kilogramach, funtach? 
 - Podobny problem dotyczy prędkości, czy to kilometry na godzinę czy mile?
-- Opis legendy 'druzyna' może i jest zabawny ale niewiele mówi. Jaka drużyna? Dla kogoś, kto nie wie o wyścigach gatunków ten napis nic nie powie.
-- Ale o co chodzi z tym wykresem? Gdzie jest tytuł? Co on w ogóle przedstawia?
+- Opis legendy 'druzyna' może i jest zabawny ale niewiele mówi. Jaka drużyna? Dla kogoś, kto nie skojarzy tych danych z wyścigami gatunków, ta nazwa nic nie mówi
+- O co chodzi z tym wykresem? Gdzie jest tytuł? Co on w ogóle przedstawia?
 - Jakie gatunki reprezentują najbardziej skrajne punkty? Który kot i który ptak jest najszybszy?
 
 Zobaczmy jak przygotować wykres z odpowiednimi adnotacjami.
@@ -73,20 +74,26 @@ W poniższym przykładzie do wykresu dodajemy cztery linijki, każda zmieniając
 
 1. Funkcja `ggtitle()` dodaje tytuł do wykresu a funkcją `theme()` zmieniamy wielkość tytułu wykresu. Większy będzie wyraźniejszy. 
 
-2. Funkcjami `xlab()` i `ylab()` dodajemy opisy dla osi. Dodaliśmy w nich jednostki, warto też by opisy zaczynały się dużą literą i miały polskie znaki.
+2. Funkcjami `xlab()` i `ylab()` dodajemy opisy dla osi. Do opisów osi dodaliśmy jednostki, warto też by opisy zaczynały się dużą literą i miały polskie znaki.
 
-3. Aby zmienić tytuł legendy należy określić argument `name` (nazwa) dla funkcji opisującej mapowanie na rozmiar (`scale_shape_discrete()`), a funkcją `theme()` przesuwamy tę legendę na górę wykresu. 
+3. Aby zmienić tytuł legendy należy określić argument `name` (nazwa). Zrobimy to używając funkcji opisującej mapowanie na rozmiar (`scale_shape_discrete()`). Funkcją `theme()` przesuwamy tę legendę na górę wykresu (domyślnie jest po prawej stronie). 
 
-4. Funkcją `geom_text()` dodajemy etykiety dla wybranych punktów na wykresie. Zaznaczyliśmy najszybszego kota i ptaka.
+4. Funkcją `geom_text()` dodajemy etykiety dla wybranych punktów na wykresie. Zaznaczyliśmy najszybszego kota i najszybszego ptaka.
 
 # Adnotacje, napisy na osiach i tytuły
 
 A oto i wykres po dodaniu tych modyfikacji
+
+Przed [lewy]
+
 ```{r, fig.height=5, fig.width=5, message=FALSE, warning=FALSE, eval=FALSE}
-# Przed [lewy]
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   geom_point(size=5)
-# Po [prawy]
+```
+
+Po [prawy]
+
+```{r, fig.height=5, fig.width=5, message=FALSE, warning=FALSE, eval=FALSE}
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   geom_point(size=5) + 
   # większy i czytelny tytuł
@@ -98,7 +105,10 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   # dodatkowe napisy na wykresie
   geom_text(data=koty_ptaki[c(6,8),], aes(label=gatunek), hjust=-0.2)
 ```
-```{r, fig.height=5, fig.width=5, message=FALSE, warning=FALSE, echo=FALSE}
+
+<center><img width=800 src="detaleAdnotacje.png"></center>
+
+```{r, fig.height=5, fig.width=5, message=FALSE, warning=FALSE, echo=FALSE, eval=FALSE}
 # Przed
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   geom_point(size=5)
@@ -119,13 +129,13 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
 
 # Większa kontrola nad mapowaniami
 
-Mapowania to jedna z największych wartości pakietu `ggplot2`. Wystarczy, że wskażemy jakie zmienne mają być przedstawione na wykresie, oraz jakie cechy wykresu mają te zmienne opisać a program R automatycznie dobiera sposób prezentacji uwzględniając typ zmiennej, sprawdzając czy przyjmuje ona kilka wartości czy wiele, czy jest zmienną ilościową czy jakościową itp. 
+Mapowania to jedna z najciekawszych rozwiązań w pakiecie `ggplot2`. Wystarczy, że wskażemy jakie zmienne mają być przedstawione na wykresie, oraz jakie cechy wykresu mają te zmienne opisać, a program R automatycznie dobiera sposób prezentacji uwzględniając typ zmiennej. Przy okazji sprawdzi czy przyjmuje ona kilka wartości czy wiele, czy jest zmienną ilościową czy jakościową itp. 
 
 Czasem jednak, chcielibyśmy zmienić sposób reprezentacji zmiennych, a więc zmienić domyślne mapowanie. 
 
 Możemy to zrobić korzystając z funkcji o nazwach zgodnych z szablonem `scale_xxx_yyy()`, gdzie `xxx` opisuje cechę na którą mapujemy (`shape`/`size`/`color`/`x`/`y`), a `yyy` opisuje sposób reprezentacji. 
 
-Przykładowo, funkcja `scale_shape_manual()` pozwala na zarządzanie mapowaniem zmiennej na kształty punktów. Argument `values=` pozwala na wskazanie jakimi kształtami mają być przedstawione poszczególne grupy, a argument `breaks=` pozwala wskazać wartości mapowanej zmiennej w legendzie. 
+Przykładowo, funkcja `scale_shape_manual()` pozwala na ,,ręczne'' zarządzanie mapowaniem zmiennej na kształty punktów. W tej funkcji argument `values=` pozwala na wskazanie jakimi kształtami mają być przedstawione poszczególne grupy, a argument `breaks=` pozwala wskazać wartości mapowanej zmiennej w legendzie. 
 
 W podobny sposób `scale_color_manual()` pozwala na ręczne (manualne) wskazanie kolorów, które mają kodować poszczególne wartości.
 
@@ -135,11 +145,13 @@ A mapując na cechy `x` i `y` (współrzędne) interesującym parametrem jest `e
 
 A oto i przykładowe zastosowanie wszystkich tych modyfikacji mapowań.
 
+Przed [lewy]
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, eval=FALSE}
-# Przed [lewy]
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna, color=druzyna)) +
   geom_point(size=5) 
-# Po [prawy]
+```
+Po [prawy]
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, eval=FALSE}
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna, color=druzyna)) +
   geom_point(size=5) +
   # określamy kształty poszczególnych grup K/P oraz etykiety w legndzie
@@ -149,7 +161,10 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna, color=druzyna)) +
   # dla osi OY usuwany marginesy poza zakresem 0-200
   scale_y_continuous(limits=c(0,200), expand=c(0,0)) 
 ```
-```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, echo=FALSE}
+
+<center><img width=800 src="detaleZnaki.png"></center>
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, echo=FALSE, eval=FALSE}
 # Przed
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna, color=druzyna)) +
   geom_point(size=5) 
@@ -166,11 +181,11 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna, color=druzyna)) +
 
 # Większa kontrola nad mapowaniami - zmienne ciągłe
 
-Zobaczmy jak wygląda kontrolowanie mapowaniami zmiennych ciągłych. Jako przykład wykorzystamy zmienną `zywotnosc`. Będziemy ją mapować na kolor i wielkość punktu.
+Zobaczmy jak wygląda kontrolowanie mapowania zmiennych ciągłych. Jako przykład wykorzystamy zmienną `zywotnosc`. Będziemy ją mapować na kolor i wielkość punktu.
 
 Jeżeli nie podoba nam się domyślny dobór kolorów (dla zmiennych ciągłych od czarnego do niebieskiego), to funkcją `scale_color_gradient()` możemy określić pomiędzy jakimi wartościami `low=` i `high=` ma rozpinać się skala kolorów. 
 
-Dla wielkości punktu określamy jaki przedział żywotności ma być prezentowany `limits=` oraz na jakiej wielkości punkty ten przedział ma być przedstawiony `range=`.
+Dla wielkości punktu określamy jaki przedział żywotności ma być prezentowany `limits=` oraz na jaki zakres wielkości punktów ten przedział ma być przedstawiony `range=`.
 
 Więcej informacji o możliwych dodatkowych parametrach znaleźć można w plikach pomocy dla funkcji `?scale_color_gradient` i `?scale_size_continuous`.
 
@@ -178,19 +193,27 @@ Więcej informacji o możliwych dodatkowych parametrach znaleźć można w plika
 
 A oto i przykładowe zastosowanie wszystkich tych modyfikacji mapowań.
 
+Przed [lewy]
+
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, eval=FALSE}
-# Przed [lewy]
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
   geom_point() 
-# Po [prawy]
+```
+
+Po [prawy]
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, eval=FALSE}
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
   geom_point() +
   # zmiana zakresu wartości dla wielkosci punktów
   scale_size_continuous(range=c(5,15), limits=c(10,50)) +
-  # zmiana skali kolorów (ciągła skala podaje się dwa skrajne kolory)
+  # zmiana skali kolorów (ciągła skala, podaje się dwa skrajne kolory)
   scale_color_gradient(low="gold", high="red4")
 ```
-```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, echo=FALSE}
+
+<center><img width=800 src="detaleKolory.png"></center>
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, echo=FALSE, eval=FALSE}
 # Przed
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
   geom_point() 
@@ -207,29 +230,40 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
 
 Pakiet `ggplot2` automatycznie tworzy i rysuje legendę. W wielu przypadkach to domyślne zachowanie jest wystarczające i legenda jest wystarczająco czytelna. Ale czasem chcemy umieścić tę legendę w innym miejscu, inaczej ją zatytułować czy pokolorować.
 
-Wszystko to możemy zrobić, najczęściej wystarczy zmodyfikować poszczególne argumenty motywu, używając funkcji `theme()`.
+To też można zmienić. Najczęściej wystarczy zmodyfikować poszczególne argumenty motywu graficznego, używając funkcji `theme()`.
 
-W poniższym przykładzie funkcja `theme()` służy do określenia koloru tła i obramowania w legendzie, wielkość tytułu legendy oraz jej pozycję. Funkcja `scale_shape_manual()` określa elementy mapowania, tytuł legendy i nazwę kluczy na legendzie.
+W poniższym przykładzie funkcja `theme()` służy do określenia koloru tła i obramowania w legendzie, wielkości tytułu legendy oraz jej pozycji. Funkcja `scale_shape_manual()` określa elementy mapowania, tytuł legendy i nazwę kluczy na legendzie.
 
 # Modyfikacja legendy wykresu
 
-Przykład zmian w legendzie
+Przykład zmian w wyglądzie legendy.
+
+Przed [lewy]
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, eval=FALSE}
-# Przed [lewy]
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   geom_point(size=5) 
-# Po [prawy]
+```
+
+Po [prawy]
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, eval=FALSE}
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   geom_point(size=5) +
   # zmiana napisów w legendzie dotyczących mapowania na kształt
-  scale_shape_manual(values=c("K", "P"), labels=c("Duże Koty", "Wściekłe Ptaki"), name="Jakie \n to \n zwierze?") +
+  scale_shape_manual(values=c("K", "P"), 
+                     labels=c("Duże Koty", "Wściekłe Ptaki"), 
+                     name="Jakie \n to \n zwierze?") +
   # dodanie szarego tła, większego tytułu oraz zmiana położenia legendy
   theme(legend.background = element_rect(color="red", fill="grey95"), 
         legend.title = element_text(size=15), 
-        legend.position=c(0.8,0.8)) # 0.8, 0.8 to współrzędne gdzie ma pojawić się legenda
+        legend.position=c(0.8,0.8)) 
+        # 0.8, 0.8 to współrzędne gdzie ma pojawić się legenda
 ```
-```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, echo=FALSE}
+
+<center><img width=800 src="detaleLegenda.png"></center>
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, echo=FALSE, eval=FALSE}
 # Przed [lewy]
 ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   geom_point(size=5) 
@@ -265,7 +299,7 @@ print(pl_waga)
 
 # Wiele wykresów w jednym oknie
 
-Jednym z argumentów tej funkcji `print()` dla wykresów, jest argument `vp=` pozwalający określić w którym miejscu wykres ma być rysowany. 
+Jednym z argumentów funkcji `print()` dla wykresów, jest argument `vp=`. Pozwala on określić w którym miejscu ekranu wykres ma być rysowany. 
 
 Domyślnie zarysowany jest cały obszar o współrzędnych [0,1]x[0,1], ale możemy zażyczyć sobie by wykres rysowany był w mniejszym obszarze. 
 
@@ -273,29 +307,32 @@ Jest to bardzo wygodne, jeżeli chcemy zmieścić kilka wykresów obok siebie.
 
 Poniższy przykład rysuje ten sam wykres trzykrotnie, za każdym razem w innym miejscu i z innym tytułem. Argumenty `x` i `y` określają środek zarysowanego obszaru, a `width` i `height` szerokość i wysokość zarysowanego prostokąta.
 
-```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
+```{r, fig.height=5, fig.width=7, message=FALSE, warning=FALSE}
 library(grid)
-# rysujemy wykres w kwadracie o szerokości i wysokości 0.5 ekranu, w lewym górnym rogu 
+# rysujemy wykres w kwadracie o szerokości i wysokości 0.5 ekranu, 
+# w lewym górnym rogu 
 print(pl_waga + ggtitle("Wykres 1"), 
       vp=viewport(x=0.25, y = 0.75, width=0.5, height=0.5))
-# rysujemy wykres w kwadracie o szerokości i wysokości 0.5 ekranu, w lewym dolnym rogu 
+# rysujemy wykres w kwadracie o szerokości i wysokości 0.5 ekranu, 
+# w lewym dolnym rogu 
 print(pl_waga + ggtitle("Wykres 2"), 
       vp=viewport(x=0.25, y = 0.25, width=0.5, height=0.5))
-# rysujemy wykres w prostokącie o szerokości 0.5 a wysokości pełnego ekranu, po prawej stronie 
+# rysujemy wykres w prostokącie o szerokości 0.5 a wysokości pełnego ekranu, 
+# po prawej stronie 
 print(pl_waga + ggtitle("Wykres 3"), 
       vp=viewport(x=0.75, y = 0.5, width=0.5, height=1))
 ```
 
 # Wiele wykresów w jednym oknie
 
-Argument `vp=` pozwala na rysowanie w dotlonym elemencie wykresu. 
+Argument `vp=` pozwala na narysowanie wykresu w dowolnym miejscu na ekranie. 
 
-Ale jeżeli chcemy rysować wykresy na regularnej siatce to wygodnie jest najpierw określić tę siatkę funkcją `grid.layout()` a następnie wypełnić ją wykresami wskazując pozycje siatki do zarysowania.
+Ale jeżeli chcemy rysować wykresy na regularnej siatce to wygodnie jest najpierw określić tę siatkę funkcją `grid.layout()`, a następnie wypełnić ją wykresami wskazując pozycje siatki do zarysowania. Zobaczmy jak to zrobić.
 
-```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
-# siatka o rozmiarze dwa wiersze i dwie kolumny
+Tworzymy opis siatki o rozmiarze dwa wiersze i dwie kolumny. Następnie wklejamy wykresy, do wybranych komórek poprzednio zdefiniowanej siatki.
+
+```{r, fig.height=5, fig.width=7, message=FALSE, warning=FALSE}
 pushViewport(viewport(layout = grid.layout(2,2)))
-# wklejanie wykresów do wybranych komórek
 # rysujemy w komórce o współrzędnych 1x1
 print(pl_waga + ggtitle("Wykres 1"),
       vp = viewport(layout.pos.row=1, layout.pos.col=1))
@@ -313,16 +350,19 @@ print(pl_waga + ggtitle("Wykres 3"),
 
 Do tego miejsca mogło nam trochę obrzydnąć szare tło na wykresach. 
 
-Okazuje się, że w prosty sposób można zmienić wygląd całego wykresu, używając tzw. motywów, czyli kompletów ustawień graficznych. Wiele takich motywów dostępnych jest w pakiecie `ggthemes`. Aby zmienić wygląd wykresu wystarczy dodać funkcję z motywem. Nazwy tych funkcji rozpoczynają się od `theme_`. 
+Okazuje się, że w prosty sposób można zmienić wygląd całego wykresu, używając tzw. motywów, czyli kompletów ustawień graficznych. Wiele takich motywów dostępnych jest w pakiecie `ggthemes`. 
 
-Poniżej przykład dla czterech motywów graficznych, warto zobaczyć jak wyglądają pozostałe.
+Aby zmienić wygląd wykresu wystarczy dodać funkcję z motywem. Nazwy funkcji z motywami graficznymi zazwyczaj rozpoczynają się od `theme_`. 
 
+Poniżej przykład dla czterech motywów graficznych. Zachęcam do samodzielnego sprawdzenia jak wyglądają inne.
+
+Przygotowujemy wykres punktowy, do którego dodamy motywy.
 ```{r, fig.height=4, fig.width=5, eval=FALSE}
-# przygotowujemy wykres punktowy
 pl <- ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   geom_point(size=5) 
-# pakiet z dodatkowymi motywami 
-# jeżeli nie jest zainstalowany, należy go dodać funkcją install.packages()
+```
+Włączamy pakiet z dodatkowymi motywami. Jeżeli nie jest zainstalowany, należy go wcześniej zainstalować funkcją `install.packages()`.
+```{r, fig.height=4, fig.width=5, eval=FALSE}
 library(ggthemes)
 # białe tło i szare linie pomocnicze
 pl + theme_bw()
@@ -333,7 +373,10 @@ pl + theme_minimal()
 # wykres stylizowany na gazecie Economist
 pl + theme_economist()
 ```
-```{r, fig.height=4, fig.width=5, echo=FALSE, message=FALSE, warning=FALSE}
+
+<center><img width=800 src="detaleStyle.png"></center>
+
+```{r, fig.height=4, fig.width=5, echo=FALSE, message=FALSE, warning=FALSE, eval=FALSE}
 library(ggthemes)
 pl <- ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
   geom_point(size=5) 
@@ -352,7 +395,8 @@ Elastyczność pakietu `ggplot2` jest olbrzymia. Można robić bardzo niestandar
 Przykładowo, możliwe jest tworzenie wykresów w stylu popularnych komiksów z serii XKCD http://xkcd.com/
 
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
-# aby można było rysować wykresy jak w komiksach XKCD potrzebny jest pakiet xkcd
+# aby można było rysować wykresy jak w komiksach XKCD potrzebny jest pakiet xkcd. 
+# Jeżeli go jeszcze nie masz, najpierw zainstaluj.
 library(xkcd)
 ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
   geom_point(size=5) + xkcdaxis(c(0,300),c(50,200))
@@ -361,6 +405,10 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc)) +
 
 A bazując na motywie `theme_bw()` można uzyskać inwersję domyślnych wykresów z pakietu `ggplot2`. Nie są to być może codziennie używane możliwości, ale pokazują, że zgłębiając pakiet `ggplot2` nie natkniemy się na barierę w stylu ,,tego się nie da zrobić''.
 
+```{r, fig.height=4, fig.width=5, echo=FALSE}
+pl <- ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
+  geom_point(size=5) 
+```
 ```{r, fig.height=4, fig.width=5,  message=FALSE, warning=FALSE}
 pl + theme_bw() + theme(plot.background = element_rect(fill = "gray80"))
 ```
