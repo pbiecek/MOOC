@@ -9,7 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / wizualizacja / into"
+    footer: "pogRomcy danych / wizualizacja / intro"
 
 ---
 
@@ -19,32 +19,32 @@ Sezon drugi składa się z dwóch części, jednej poświęconej wizualizacji i 
 
 Seria o wizualizacji też jest podzielona na dwie części: narzędziową i teoretyczną.
 
-W części narzędziowej pokazujemy praktycznie jak tworzyć wykresy w programie R. W części teoretycznej omawiamy podstawowe zagadnienia z wizualizacji danych.
+W części narzędziowej pokazujemy praktycznie jak tworzyć wykresy w programie R. W części teoretycznej omawiamy podstawowe zagadnienia związane z wizualizacji danych.
 
-Część narzędziowa wymaga pewnego wyjaśnienia. W programie R wykresy można tworzyć na wiele bardzo różnych sposobów. Jest podstawowa grafika i funkcje oparte na pakiecie `graphics`, są rozwiązania oparte o pakiet `grid` czyli `ggplot2` i `lattice`. Są w końcu rozwiązania opracowane dla grafiki internetowej, czyli `ggvis` i inne internetowe pakiety. Omawianie ich wszystkich nie miało sensu.
+Część narzędziowa wymaga pewnego komentarza. W programie R wykresy można tworzyć na wiele bardzo różnych sposobów. Dostępne są biblioteki i funkcje oparte na pakiecie `graphics`, są też rozwiązania oparte o pakiet `grid` czyli `ggplot2` i `lattice`. Są w końcu rozwiązania opracowane dla grafiki internetowej, czyli `ggvis`, `rCharts` i inne. Różnych rozwiązań jest tak wiele, że omawianie ich wszystkich nie miałoby sensu.
 
-Najbardziej zaawansowana i najbardziej dojrzała jest rodzina wykresów opartych o pakiet `ggplot2`. Ma ona również wiele ciekawych rozwiązań, dlatego zdecydowaliśmy się ją właśnie tutaj omówić.
+Najbardziej zaawansowana i najbardziej dojrzała jest rodzina rozwiązań opartych o pakiet `ggplot2`. Wykresy przygotowane z pakietem `ggplot2` wyglądają też bardzo estetycznie, dlatego zdecydowałem się omówić tutaj ten właśnie pakiet.
 
 # Jak zrobić wykres w pakiecie ggplot2
 
 Część narzędziowa składa się z czterech odcinków
 
 - Jak zrobić wykres? - Wprowadzenie do pakietu `ggplot2`, tutaj przedstawimy kluczowe rozwiązania tego pakietu oraz pokażemy jak zrobić wykresy z prostymi geometriami,
-- Wykresy agregaty - Kontynuacja prezentacji geometrii pakietu `ggplot2`, w tym odcinku zaprezentowane będą geometrie, które liczą agregaty z danych,
-- Dodatki do wykresów - W tym odcinku pokażemy jak upiększać wykresy, zmieniać kolory, wielkości, kształty i mieć pełną kontrolę nad tym co i jak wygląda.
-- Jak zrobić mapę? - Ostatni odcinek serii narzędziowej pokazuje jak narysować mapę używając pakietu `ggplot2`.
+- Wykresy agregaty - W tym odcinku zaprezentowane będą geometrie, które liczą agregaty z danych,
+- Dodatki do wykresów - W tym odcinku pokażemy jak pracować z detalami na wykresie, jak poprawiać poszcezgólne elementy wykresów, zmieniać kolory, wielkości, kształty i mieć pełną kontrolę nad tym co i jak wygląda.
+- Jak zrobić mapę? - Ostatni odcinek serii narzędziowej pokazuje jak rysować kartogramy używając pakietu `ggplot2`.
 
 
 # Co czyni wykres złym lub dobrym?
 
-Część teoretyczna składa się z pięciu odcinków. Każdy z nich to krótki film.
+Część teoretyczna składa się z pięciu odcinków. Każdy z nich to krótki film wprowadzający do określonego zagadnienia.
 
 - Historia i współczesność - Przedstawia najciekawsze historyczne grafiki statystyczne oraz pokazuje jak dobre pomysły z historii znajdują nowe zastosowania dzisiaj,
-- Iluzje - Przedstawia wybrane problemy z systemem widzenia, który wiele rzeczy robi dobrze, ale nie jest zbyt dokładny.
+- Iluzje - Przedstawia wybrane problemy ludzkiego aparatu widzenia, który wiele rzeczy robi dobrze, ale akurat precyzja nie jest jego silną stroną.
 - Info-pomyłka - Przedstawia wykresy gubiące lub zniekształcające informacje. Ku przestrodze.
-- Jak dobierać kolory? - Przedstawia wybrane problemy z doborem kolorów, oraz odpowiada na fundamentalne pytanie: Jak dobierać kolory?
+- Jak dobierać kolory? - Przedstawia wybrane problemy z doborem kolorów, oraz odpowiada na fundamentalne pytanie: Jak (oraz czy) dobierać kolory?
 - Jak pokazywać różne liczby? - Przedstawia wybrane problemy z prezentacją liczb różnych typów.
 
-Każda z tych części to streszczenie jednego z rozdziałów z książki ,,Zbiór esejów o sztuce prezentacji danych'' http://biecek.pl/Eseje
+Każda z tych części to streszczenie jednego z rozdziałów z książki ,,Zbiór esejów o sztuce prezentacji danych'' dostępnego pod adresem http://biecek.pl/Eseje. Do każdej części poza krótkim filmem wskazujemy też przykłądowe inne źródła, w których można przeczytać więcej na dany temat.
 
 
