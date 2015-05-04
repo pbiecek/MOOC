@@ -225,7 +225,7 @@ ggplot(skody, aes(x=Model, y = Cena.w.PLN)) +
 
 # Geometria `geom_boxplot()` - wykresy ramka - wąsy
 
-Patrząc na słupki punktów z poprzedniego slajdu trudno oczytać gdzie jest średnia, jaka jest zmienność cen oraz co porównywać pomiędzy modelami. Pynktów jest tak dużo, że zlewają się ze sobą.
+Patrząc na słupki punktów z poprzedniego slajdu trudno oczytać gdzie jest średnia, jaka jest zmienność cen oraz co porównywać pomiędzy modelami. Punktów jest tak dużo, że zlewają się ze sobą.
 
 Do porównywania zmiennej liczbowej pomiędzy grupami, znacznie bardziej nadają się są wykresy pudełko - wąsy, przedstawiające tak zwaną piątkę Tukeya, czyli: minimalną obserwację z grupy, maksymalną, medianę (obserwację środkową) i dwa kwartyle. Te pięć liczb dzieli przedział zmienności cechy na cztery równoliczne przedziały. Od minimalnej wartości do dolnego kwartyla, od dolnego kwartyla do mediany, od mediany do górnego kwartyla i od górnego kwartyla do elementu maksymalnego.
 
