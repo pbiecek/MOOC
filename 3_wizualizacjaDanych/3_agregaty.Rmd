@@ -17,7 +17,7 @@ output:
 
 W poprzednim odcinku na wykresach pokazywaliśmy każdą obserwację / każdy wiersz ze zbioru danych. Informacje o kolejnych wierszach były przedstawiane pomocą punktów, linii lub napisów.
 
-Jednak gdy dane są duże i zawierają setki lub tysiące obserwacji nie sposób przedstawiać każdej z nich osobno. 
+Jednak gdy dane są duże i zawierają setki lub setki tysięcy obserwacji, nie sposób przedstawiać każdej z nich osobno. 
 Gdy elementów na wykresie jest zbyt wiele to wykres zamienia się w wielką plątaninę punktów i krzywych. W takim przypadku często lepszym rozwiązaniu jest przedstawienie podsumowań / statystyk zamiast surowych danych. 
 
 W tym odcinku dowiemy się jak graficznie przedstawiać podsumowania danych
@@ -33,9 +33,9 @@ W tym odcinku będziemy pracować ze zbiorem danych `auta2012`.
 
 # Przygotowanie danych
 
-Zbiór danych o cenach ofertowych używanych aut wykorzystywaliśmy już w pierwszym sezonie. Te dane są szczegółowiej opisane w pliku pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/0_dane.html
+Zbiór danych o cenach ofertowych używanych aut wykorzystywaliśmy już w pierwszym sezonie. Te dane są szczegółowo opisane w pliku http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/0_dane.html
 
-Na potrzeby tego odcinka i prezentowanych tutaj przykładów, do pracy wybierzemy fragment zbioru danych o cenach ofertowych aut. Zawęzimy tutaj naszą uwagę do obserwacji dotyczących Skody Octavii, a ze zbioru kolumn wybierzemy pięć z informacją o roku produkcji, cenie i rodzaju paliwa.
+Na potrzeby tego odcinka i prezentowanych tutaj przykładów, do pracy wybierzemy fragment zbioru danych o cenach ofertowych aut. Zawęzimy tutaj naszą uwagę do obserwacji dotyczących Skody Octavii. Ze zbioru kolumn wybierzemy pięć z informacją o roku produkcji, cenie i rodzaju paliwa.
 
 Pełne dane są dostępne w pakiecie `PogromcyDanych`. Będziemy też korzystać z pakietu `dplyr`, który omawialiśmy w pierwszym sezonie. Funkcją `filter()` wybieramy interesujące nas wiersze, a funkcją `select()` interesujące nas kolumny.
 
@@ -66,11 +66,12 @@ ggplot(skody, aes(x=Rok.produkcji, y = Cena.w.PLN)) +
 
 Zastąpienie `geom_point()` przez `geom_smooth()` powoduje, że rysowana jest wygładzona lokalna średnia zamiast punktów. 
 
-Jak dokładnie wyznaczana jest ta wygładzana średnia? Jeżeli danych jest mniej niż 1000 obserwacji to do wygładzania wykorzystywana jest funkcja `loess()` (Local Polynomial Regression Fitting) a jeżeli więcej niż 1000 obserwacji to funkcja `gam()` (Generalized Additive Models). Szczegóły każdej z tych metod można odczytać z plików pomocy dla funkcji `loess()` i `gam()`.
+Jak dokładnie wyznaczana jest ta wygładzana średnia? Jeżeli danych jest mniej niż 1000 obserwacji, to do wygładzania wykorzystywana jest funkcja `loess()` (Local Polynomial Regression Fitting), a jeżeli więcej niż 1000 obserwacji to funkcja `gam()` (Generalized Additive Models). Szczegóły każdej z tych metod można odczytać z plików pomocy dla funkcji `loess()` i `gam()`.
 
-Geometria `geom_smooth()` rysuje również informacje o błędzie standardowym oceny średniej. Szary przedział wokół średniej przedstawia precyzje oszacowania średniej. W miejscach gdzie ta średnia wyznaczana jest na małym zbiorze obserwacji błąd standardowy jest większy, dokładność oceny jest mniejsza.
+Geometria `geom_smooth()` rysuje również informacje o błędzie standardowym oceny średniej. Szary przedział wokół średniej przedstawia precyzje oszacowania średniej. W miejscach gdzie ta średnia wyznaczana jest na małym zbiorze obserwacji błąd standardowy jest większy, dokładność oceny średniej jest mniejsza.
 
-Jak więc wygląda ta zależność pomiędzy średnią ceną a rokiem produkcji (ceny na rok 2012)?
+Jak więc wygląda zależność pomiędzy średnią ceną a rokiem produkcji (ceny na rok 2012)?
+Nowsze auta są oczywiście droższe.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Rok.produkcji, y = Cena.w.PLN)) + 
@@ -85,7 +86,7 @@ Parametry geometrii `geom_smooth()` przedstawione są na stronie http://docs.ggp
 
 Zmieniając je możemy uzyskać inne stopnie wygładzania (argument `span` dla `loess`), różną grubość linii, różne modele stosowane do wygładzenia itp. 
 
-Jednym z parametrów jest `se`, którym możemy włączać lub wyłączać rysowanie błędów standardowych. Często interesuje nas wyłącznie trend i dodatkowe przedziały jedynie zaśmiecają wykres. Można je wyłączyć dopisując `se=FALSE`.
+Jednym z parametrów jest `se`, którym możemy włączać lub wyłączać rysowanie błędów standardowych. Często interesuje nas wyłącznie trend. Dodatkowe przedziały jedynie zaśmiecają wykres. Można je wyłączyć dopisując argument `se=FALSE`.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Rok.produkcji, y = Cena.w.PLN)) + 
@@ -98,7 +99,7 @@ ggplot(skody, aes(x=Rok.produkcji, y = Cena.w.PLN)) +
 
 W pakiecie `ggplot2` możemy składać na jednym wykresie warstwy z różnymi geometriami. 
 
-Przykładowo, możemy nałożyć na siebie warstwę pokazującą trendy i warstwę pokazującą pojedyncze punkty. W wielu sytuacjach to bardzo dobry sposób prezentacji, pokazujący zarówno każdą z obserwacji na drugim planie jak i główny trend w zależnościach na planie pierwszym.
+Przykładowo, możemy nałożyć na siebie warstwę pokazującą trendy i warstwę pokazującą pojedyncze punkty. W wielu sytuacjach to bardzo dobry sposób prezentacji. Pokazuje zarówno każdą z obserwacji na drugim planie jak i główny trend na planie pierwszym.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Rok.produkcji, y=Cena.w.PLN)) + 
@@ -126,11 +127,11 @@ ggplot(skody, aes(x=Rok.produkcji, y=Cena.w.PLN)) +
 
 # Geometria `geom_smooth()` - wykresy trendu 
 
-Inną użyteczną możliwością modyfikacji geometrii `geom_smooth()` jest możliwość zmiany funkcji wygładzającej. Do wyboru jest między innymi regresja liniowa (parametr `method="lm"`), regresja logistyczna i modele uogólnione (parametr `method="glm"`), regresja odporna (parametr `method="rlm"`) oraz wymieniane już wykładacze (parametr `method="gam"` lub `method="loess"`).
+Inną użyteczną opcją geometrii `geom_smooth()` jest możliwość zmiany funkcji wygładzającej. Do wyboru jest między innymi regresja liniowa (parametr `method="lm"`), regresja logistyczna i modele uogólnione (parametr `method="glm"`), regresja odporna (parametr `method="rlm"`) oraz wymieniane już funkcje lokalnie wygładzające (parametr `method="gam"` lub `method="loess"`).
 
-Dodatkowo, dla modeli regresyjnych możemy dopasować nie tylko trend liniowy, ale również zależności wielomianowe, wykładnicze czy potęgowe. Opis struktury modelu można wyrazić parametrem `formula`, używając typowego R-owego formatu opisu formuł. 
+Dla modeli regresyjnych możemy dopasować nie tylko zależność liniową, ale również zależności wielomianowe, wykładnicze czy potęgowe. Opis struktury modelu można wyrazić parametrem `formula`, używając typowego R-owego formatu opisu formuł. 
 
-W poniższym przykładzie dodajemy trend kwadratowy do opisu zależności pomiędzy zmiennymi. Argumentem `formula=y~poly(x,2)` określamy trend kwadratowy, argumentem `method="lm"` określamy sposób liczenia współczynników dla tego trendu.
+W poniższym przykładzie dodajemy trend kwadratowy do opisu zależności pomiędzy zmiennymi. Argumentem `formula=y~poly(x,2)` określamy trend kwadratowy. Argumentem `method="lm"` określamy sposób liczenia współczynników dla tego trendu.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Rok.produkcji, y=Cena.w.PLN)) + 
@@ -144,11 +145,11 @@ ggplot(skody, aes(x=Rok.produkcji, y=Cena.w.PLN)) +
 
 Mówiąc o modelach wykładniczych, logarytmicznych lub potęgowych, warto rozważyć jeszcze inną ciekawą opcję, którą oferuje pakiet `ggplot2` - mianowicie transformacje osi. 
 
-Jeżeli podejrzewamy, że zmiana spadek ceny z roku na rok ma charakter spadku o x procent a nie o x złotówek (czyli, używając specjalistycznej terminologii, charakter multiplikatywny a nie addytywny) warto zobaczyć ten sam wykres z osią OY w skali wykładniczej. 
+Jeżeli podejrzewamy, że zmiana ceny z roku na rok ma charakter spadku o x procent a nie o x złotówek (czyli, używając specjalistycznej terminologii, charakter multiplikatywny a nie addytywny) warto zobaczyć ten sam wykres z osią OY w skali wykładniczej. 
 
 Funkcje do zarządzania i modyfikacji osi mają prefix `coord_`. Wpisawszy go w RStudio, możemy nacisnąć klawisz TAB aby wyświetliła się lista wszystkich funkcji rozpoczynających się od tego słowa. 
 
-Funkcją do transformacji osi jest funkcja `coord_trans()`, którą można określić czy i jak poszczególne osie mają być transformowane.
+Funkcją do transformacji osi jest `coord_trans()`. Możemy jej użyć aby określić czy i jak poszczególne osie mają być transformowane.
 
 Na poniższym przykładzie używamy funkcji `coord_trans()` aby zastosować transformację logarytmiczną dla osi OY.
 
@@ -169,7 +170,8 @@ Bardzo często analizując trend, tak na prawdę nie wiemy z jakim trendem mamy 
 
 Pakiet `ggplot2` pozwala na tworzenie wykresu przez nakładanie na siebie warstw. Jest to bardzo użyteczne do przedstawienia obok siebie różnych sposobów wyznaczania trendu.
 
-Nałóżmy na nasz wykres z zależnością pomiędzy ceną a rokiem produkcji informację o trendzie liniowym, trendzie liczonym algorytmem GAM i trendem kwadratowym. Każdy z tych trendów narysuje funkcja `geom_sooth()` z określonymi dodatkowych argumentami.
+Wykres, który wykonaliśmy przedstawia zależność pomiędzy ceną a rokiem produkcji.
+Nałóżmy na niego informację o trendzie liniowym, trendzie liczonym algorytmem GAM i trendzie kwadratowym. Każdy z tych trendów narysuje funkcja `geom_sooth()` z określonymi dodatkowymi argumentami.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Rok.produkcji, y = Cena.w.PLN)) + 
@@ -186,13 +188,13 @@ ggplot(skody, aes(x=Rok.produkcji, y = Cena.w.PLN)) +
 Geometria `geom_smooth()` była użyteczna do przedstawiania podsumowań dwóch zmiennych ilościowych.
 
 Przyjrzymy się teraz geometriom do prezentowania zależności pomiędzy zmiennymi jakościowymi.
-Wpierw jednak przygotujmy dane w taki sposób by mieć ciekawe zmienne do przedstawiania.
+Wpierw jednak przygotujmy dane w taki sposób, by mieć ciekawe zmienne do przedstawiania.
 
 Będziemy wciąż korzystać ze zbioru danych z cenami pięcioletnich samochodów marki Skoda, a za zmienne jakościowe wykorzystamy `Model` oraz `Rodzaj.paliwa`.
 
 Ponownie, funkcjami `filter()` i `select()` wybierzemy interesujące nas wiersze i kolumny.
 
-Poprzednio pracowaliśmy z samochodami w modelu `Octavia`, teraz będziemy pracować z autami pięcioletnimi, stad zmiana w funkcji `filter()`.
+Poprzednio pracowaliśmy z samochodami w modelu `Octavia`, teraz będziemy pracować z autami pięcioletnimi. Stad zmiana w funkcji `filter()`.
 
 ```{r, fig.height=4, fig.width=5}
 skody <- auta2012 %>%
@@ -210,7 +212,7 @@ Czy różne modele pięcioletnich Skód mają różne ceny?
 Pewnie tak. Ale jak różne są te średnie ceny oraz na ile są one zróżnicowane?
 Spróbujmy odpowiedzieć na to pytanie przedstawiając zależność pomiędzy ceną a modelem.
 
-Zauważmy, że geometria `geom_point()` potrafi poradzić sobie z sytuacją, gdy jedna ze zmiennych nie jest zmienną ilościową, ale przedstawia nazwę modelu. W poniższym przypadku następuje mapowanie takich wartości jak `Octavia`, `Roomster`, `Superb` na współrzędną x na wykresie. Domyślnie kolejność odpowiada kolejności alfabetycznej nazw tych czynników.
+Zauważmy, że geometria `geom_point()` potrafi poradzić sobie z sytuacją, gdy jedna ze zmiennych nie jest zmienną ilościową ale przedstawia nazwę modelu. W poniższym przypadku następuje mapowanie takich wartości jak `Octavia`, `Roomster`, `Superb` na współrzędną x na wykresie. Domyślnie kolejność odpowiada kolejności alfabetycznej nazw tych czynników.
 
 Czy to jednak czytelna prezentacja?
 
@@ -223,11 +225,11 @@ ggplot(skody, aes(x=Model, y = Cena.w.PLN)) +
 
 # Geometria `geom_boxplot()` - wykresy ramka - wąsy
 
-Patrząc słupki punktów z poprzedniego slajdu trudno oczytać gdzie jest średnia, jaka jest zmienność cen oraz co porównywać pomiędzy modelami. 
+Patrząc na słupki punktów z poprzedniego slajdu trudno oczytać gdzie jest średnia, jaka jest zmienność cen oraz co porównywać pomiędzy modelami. Pynktów jest tak dużo, że zlewają się ze sobą.
 
-Do porównywania zmiennej liczbowej pomiędzy grupami, znacznie bardziej nadają się są wykresy pudełko - wąsy, przedstawiające tak zwaną piątkę Tukeya, czyli minimalną obserwację z grupy, maksymalną, medianę (obserwację środkową) i dwa kwartyle. Te pięć liczb dzieli przedział zmienności cechy na cztery równoliczne przedziały. Od minimalnej wartości do dolnego kwartyla, od dolnego kwartyla do mediany, od mediany do górnego kwartyla i od górnego kwartyla do elementu maksymalnego.
+Do porównywania zmiennej liczbowej pomiędzy grupami, znacznie bardziej nadają się są wykresy pudełko - wąsy, przedstawiające tak zwaną piątkę Tukeya, czyli: minimalną obserwację z grupy, maksymalną, medianę (obserwację środkową) i dwa kwartyle. Te pięć liczb dzieli przedział zmienności cechy na cztery równoliczne przedziały. Od minimalnej wartości do dolnego kwartyla, od dolnego kwartyla do mediany, od mediany do górnego kwartyla i od górnego kwartyla do elementu maksymalnego.
 
-Graficznie kwartle i medianę prezentują brzegi i środek ramki. Element minimalny i maksymalny to najniższa i najwyższa wartość na wykresie. Dodatkowo, jeżeli jakieś obserwacje są daleko od brzegu pudełka (dalej niż 1.5 szerokości pudełka) to jest ona oznaczana osobnym punktem. Po co prezentowane są te punkty? Często pomagają one identyfikowaniu pojedynczych wartości odstających, gdy jedna lub kilka obserwacji jest bardzo daleko od reszty pudełka.
+Graficznie kwartle i medianę prezentują brzegi i środek ramki. Element minimalny i maksymalny to najniższa i najwyższa wartość na wykresie. Dodatkowo, jeżeli jakieś obserwacje są daleko od brzegu pudełka (dalej niż 1.5 szerokości pudełka) to jest ona oznaczana osobnym punktem. Po co prezentowane są te punkty? Często pomagają one identyfikowaniu pojedynczych wartości odstających, gdy jedna lub kilka obserwacji jest bardzo daleko od pudełka (pudełko przedstawia środkową połowę obserwacji).
 
 ```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Model, y = Cena.w.PLN)) + 
@@ -240,9 +242,9 @@ ggplot(skody, aes(x=Model, y = Cena.w.PLN)) +
 
 Kolejność na wykresach pudełkowych nie ma znaczenia. Ale często z powodów głównie estetycznych, chcemy uporządkować grupy od największej do najmniejszej. Aby to zrobić na wykresach ramka-wąsy, musimy wcześniej zmienić kolejność grup w zbiorze danych.
 
-Służy do tego funkcja `reorder()`. Jako pierwszy argument przyjmuje wektor ze zmienną grupującą, drugim argumentem jest wektor wartości a trzecim argumentem funkcja. Kolejność poziomów jest zmieniana tak by odpowiadały kolejności wyników funkcji.
+Służy do tego funkcja `reorder()`. Jako pierwszy argument przyjmuje wektor ze zmienną grupującą, drugim argumentem jest wektor wartości a trzecim argumentem funkcja. Kolejność grup jest zmieniana tak by odpowiadały kolejności wyników funkcji na tych grupach.
 
-W poniższym przykładzie, poziomy czynnika Model są układane w ten sposób by odpowiadały medianie (funkcja `median()`) ceny kolejnych modeli.
+W poniższym przykładzie, poziomy czynnika Model są układane w ten sposób, by odpowiadały medianie (funkcja `median()`) ceny kolejnych modeli.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE}
 # zmień kolejność modeli z alfabetycznego na związnaego z połówkową ceną
@@ -258,9 +260,9 @@ ggplot(skody, aes(x=Model, y = Cena.w.PLN)) +
 
 Opis parametrów funkcji `geom_boxplot()` jest przedstawiony na stronie http://docs.ggplot2.org/0.9.3.1/geom_boxplot.html. 
 
-Jedną z ciekawą opcji, pozwalającą na szybkie wyróżnienie określonej grupy na wykresie jest użycie cechy wykresów pudełkowych - kolor wypełnienia - do przedstawiania zmiennych.
+Jedną z ciekawszych opcji, pozwalającą na szybkie wyróżnienie określonej grupy na wykresie jest użycie cechy wykresów pudełkowych wraz z kolorem wypełnienia.
 
-Aby wykorzystać tę cechę na wykresie, wystarczy dodać mapowanie `fill=Model` wewnątrz funkcji `aes()`. Wynikiem ubocznym będzie legenda z opisem poszczególnych mapowań.
+Aby wypełnić wykresy pudełkowe różnymi kolorami wystarczy dodać mapowanie `fill=Model` wewnątrz funkcji `aes()`. Wynikiem ubocznym będzie legenda z opisem poszczególnych mapowań.
 
 Same kolory nie wnoszą nowej informacji do wykresu, ale mogą ułatwić odnoszenie się do elementów wykresu. Można bowiem odwoływać się np. do niebieskiego pudełka zamiast mówić o pudełku dla samochodów modelu Skoda Octavia.
 
@@ -273,7 +275,7 @@ ggplot(skody, aes(x=Model, y = Cena.w.PLN, fill=Model)) +
 
 # Geometria `geom_hist()` - histogram
 
-Wykres ramka - wąsy przedstawia pięć liczb opisujących wartości w grupie. Bardziej szczegółowym opisem często pozwalającym na lepsze zrozumienie i przedstawienie zmienności w danych jest wykres: histogram.
+Wykres ramka - wąsy przedstawia pięć liczb opisujących wartości w grupie. Bardziej szczegółowym opisem, często pozwalającym na lepsze zrozumienie i przedstawienie zmienności w danych, jest histogram.
 
 Histogram za pomocą długości słupków przedstawia liczebności (lub częstości) wartości w określonych przedziałach. Definicja pokrętna, zobaczmy co to oznacza na przykładzie. 
 
@@ -292,13 +294,13 @@ Co można dodatkowego odczytać z takiego wykresu? Np. ile jest mniej więcej sa
 
 # Geometria `geom_hist()` - histogram
 
-Prezentując dane za pomocą histogramu duże możliwości daje dodanie informacji o grupach obserwacji. Można to zrobić np. zmieniając cechę `fill`, a więc kolor wypełnienia, dla geometrii.
+Prezentując dane za pomocą histogramu duże możliwości daje dodanie informacji o grupach obserwacji. Można to zrobić np. zmieniając kolor wypełnienia, a więc cechę `fill`.
 
-Na poniższym przykładzie kolor wypełnienia oznacza samochodu. W danych jest pięć różnych modeli wśród pięcioletnich Skód, każdy oznaczono innym kolorem. Wizualnie można teraz nie tylko ocenić w jakich przedziałach cenowych spotkać można najwięcej samochodów danej marki, ale również można oszacować liczbę aut danej marki w określonym przedziale. 
+Na poniższym przykładzie kolor wypełnienia oznacza Model samochodu. W danych dla pięcioletnich Skód jest pięć różnych modeli aut. Każdy oznaczono innym kolorem. Wizualnie można teraz nie tylko ocenić w jakich przedziałach cenowych spotkać można najwięcej samochodów danej marki, ale również można oszacować liczbę aut danej marki w określonym przedziale. 
 
-Widzimy, że najpopularniejsze są Fabie i Oktavie, zajmują one najwięcej miejsca na wykresie. Dodatkowo wartość 30 tysięcy dobrze rozgranicza te dwa modele, Fabie są w większości tańsze a Oktavie droższe.
+Widzimy, że najpopularniejsze są Fabie i Oktavie, zajmują one najwięcej miejsca na wykresie. Dodatkowo cena 30 tysięcy dobrze rozgranicza te dwa modele, Fabie są w większości tańsze a Oktavie droższe.
 
-Aby zwiększyć czytelność poszczególnych grup argumentem `color='white'` dodaliśmy białe obramowania poszczególnych słupków.
+Aby zwiększyć czytelność poszczególnych grup dodaliśmy do wykresu białe obramowania poszczególnych słupków. Można to zrobić argumentem `color='white'.
 
 ```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Cena.w.PLN, fill=Model)) + 
@@ -311,7 +313,7 @@ ggplot(skody, aes(x=Cena.w.PLN, fill=Model)) +
 
 Jednym z częściej spotykanych wykresów są wykresy słupkowe. Czas więc i na nie. W pakiecie `ggplot2` można takie wykresy przygotować używając geometrii `geom_bar()`. Zlicza ona liczbę wystąpień poszczególnych grup i przedstawia te liczebności na wykresie za pomocą wysokości słupków.
 
-Zarówno w użyciu jak i w wyglądzie, jest ona bardzo podobna do geometrii `geom_hist()`. To co je najbardziej różni, to że jedna operuje na zmiennych jakościowych (grupach) a inna na zmiennych ilościowych (zamieniając je na przedziały). 
+Zarówno w użyciu jak i w wyglądzie, jest ona bardzo podobna do geometrii `geom_hist()`. To co je najbardziej różni, to że jedna operuje na zmiennych jakościowych (grupach) a inna na zmiennych ilościowych. 
 
 W geometrii `geom_bar()` wystarczy wskazać zmienną grupującą. Częstości dla poziomów tej zmiennej wyznaczone będą automatycznie i przedstawione na współrzędnej `y`.
 
@@ -364,10 +366,10 @@ Wykres pozwala nam na zbudowanie szybkiego wyobrażenia, jak duże są prezentow
 
 Ale trudno z niego bardzo dokładnie odczytać wartości liczbowe. 
 
-Aby wyliczyć dokładne częstości, możemy wykorzystać poznane w pierwszym sezonie funkcje `group_by()` i `summarise()`.
+Aby wyliczyć dokładne częstości, możemy wykorzystać poznane w pierwszym sezonie funkcje `group_by()` i `summarise()` z pakietu `dplyr`.
 
+Dla każdej kombinacji grup Model / Rodzaj.pawliwa wyznacz liczbę obserwacji.
 ```{r, fig.height=4, fig.width=6, message=FALSE}
-# dla każdej kombinacji grup Model / Rodzaj.pawliwa wyznacz liczbę obserwacji 
 skody %>% 
   group_by(Model, Rodzaj.paliwa) %>%
   summarise(liczba = n()) 
@@ -377,9 +379,9 @@ skody %>%
 
 # Gdzie szukać dalej
 
-- Więcej informacji o tym jak budować wykresy w pakiecie ggplot2 znaleźć można w rozdziale 4 książki *,,Przewodnik po pakiecie R''*. Więcej informacji o tej książce http://www.biecek.pl/R/
-
 - Wiele przydatnych wskazówek można również znaleźć w internetowej książce *,,Cookbook for R''* http://www.cookbook-r.com/Graphs/
+
+- Więcej informacji o tym jak budować wykresy w pakiecie ggplot2 znaleźć można w rozdziale 4 książki *,,Przewodnik po pakiecie R''*. Więcej informacji o tej książce http://www.biecek.pl/R/
 
 - Bardzo rozbudowana dokumentacja dla pakietu ggplot2 dostępna jest na stronie *,,ggplot2''* http://docs.ggplot2.org/current/index.html
 
