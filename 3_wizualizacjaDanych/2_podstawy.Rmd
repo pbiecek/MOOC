@@ -15,7 +15,7 @@ output:
 
 # O czym jest ten odcinek
 
-Dane są czymś abstrakcyjnym i patrząc w tabele liczb często trudno zauwazyć zależności pomiędzy różnymi zmiennymi.
+Dane są czymś abstrakcyjnym i patrząc w tabele liczb często trudno zauważyć zależności pomiędzy różnymi zmiennymi.
 
 Ale znacznie łatwiej dostrzec lub zrozumieć te zależności, jeżeli dane przedstawi się graficznie w poprawny sposób.
 
@@ -379,7 +379,7 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, label=gatunek, color=druzyna)) +
 
 Jeżeli chcemy aby mapowanie dotyczyło tylko jednej warstwy, należy przenieść je do określonej geometrii.
 
-Na poniższym przykładzie mapowanie zmiennej `druzyna` na `color` przypisane jest tylko do geometrii `geom_text()`. Wszsytkie punkty mają ten sam kolor.
+Na poniższym przykładzie mapowanie zmiennej `druzyna` na `color` przypisane jest tylko do geometrii `geom_text()`. Wszystkie punkty mają ten sam kolor.
 
 ```{r, fig.height=4, fig.width=5}
 # kolor grupy jest określony tylko dla etykiet, punkty są na czarno
@@ -473,4 +473,5 @@ Opanowaliśmy podstawy tworzenia wykresów z użyciem pakietu `ggplot2`. W kolej
 + Używając geometrii wstęga (`geom_ribbon`) przedstaw kurs minimalny i maksymalny każdego dnia na podstawie danych ze zbioru `WIG`.
 
 Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania_sezon2.html
+
 
