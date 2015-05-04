@@ -47,7 +47,7 @@ head(mandatySejmik2014)
 
 # Pliki z mapami / kształtami - shape files
 
-Aby przedstawiać informacje na mapach w programie R, należy wpierw wczytać obrysy obszarów z map.
+Aby przedstawiać informacje na mapach w programie R, należy wpierw wczytać obrysy map.
 
 Takie dane są udostępnione w plikach o rozszerzeniu `.shp`, nazywanych z angielska *shape files* i z tej nazwy będę korzystał poniżej. 
 
@@ -56,13 +56,15 @@ Pliki z kształtami województw Polski, które wykorzystam w tym odcinku, pochod
 Po pobraniu danych, w katalogu `dane/POL_adm` znajdują się kształty obszarów na różnych poziomach szczegółowości. Plik `POL_adm0.shp` to obrys całego kraju, `POL_adm1.shp` to obrysy województw a `POL_adm2.shp` to obrysy gmin. 
 
 Funkcją `readShapePoly()` wczytamy dane o obrysach województw do zmiennej `shp1`. 
+Ale zanim zaczniemy pracować z tą funkcją, potrzebujemy wczytać kilka bibliotek. Jeżeli ich nie ma, należy je zainstalować.
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
-# zanim zaczniemy pracować, potrzebujemy wczytać kilka bibliotek
 library(maptools)
 library(rgdal)
 library(gpclib)
 gpclibPermit()
-# wczytujemy dane o kształtach województw
+```
+Wczytujemy dane o kształtach województw z plików *shape files*.
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 shp1 <- readShapePoly("../dane/POL_adm/POL_adm1.shp") 
 ```
 
@@ -76,7 +78,9 @@ Z uwagi na błąd w kodowaniu musimy w nim poprawić nazwę dla województwa Ł�
 # W zmiennej VARNAME_1 znajdują się nazwy województw
 shp1@data$VARNAME_1 <- as.character(shp1@data$VARNAME_1)
 shp1@data$VARNAME_1
-# poprawiamy kodowanie polskich znaków
+```
+Poprawiamy kodowanie polskich znaków w województwie Łódzkim.
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 shp1@data$VARNAME_1[4] <- "Lodzkie"
 ```
 
@@ -110,7 +114,7 @@ ggplot() +
 
 Geometrii `geom_path()` będziemy używać do rysowania obrysów województw. 
 
-Ale aby zaznaczyć wartości liczbowe na mapie za pomocą koloru wypełnienia, do tego użyjemy geometrii `geom_map()`. 
+Ale do zaznaczenia wartości liczbowych na mapie za pomocą koloru wypełnienia użyjemy geometrii `geom_map()`. 
 
 Argument `map=` tej geometrii wskazuje obiekt przedstawiający województwa (tutaj `shp1f`). Argument `data=` wskazuje na obiekt z danymi liczbowymi, czyli nasze dane o mandatach w sejmikach. W mapowaniach dla geometrii `geom_map()` określa się też cechę `map_id=` aby wskazać nazwy województw oraz `fill=` by wskazać która zmienna ma być przedstawiona kolorem wypełnienia.
 
@@ -132,27 +136,33 @@ ggplot() +
 
 Z rysowaniem map związane jest pojęcie projekcji, czyli sposobu odwzorowania trójwymiarowej powierzchni globu na dwuwymiarowej powierzchni wykresu.
 
-Mapy można rysować w różnych projekcjach, nie ma jednej idealnej. Niektóre zachowują lepiej pola, inne kąty, inne długości odcinków. Listę projekcji z opisem właściwości można znaleźć pod adresem http://en.wikipedia.org/wiki/List_of_map_projections
+Mapy można rysować w różnych projekcjach, nie ma jednej idealnej. Niektóre zachowują lepiej pola, inne kąty, inne długości odcinków. Listę projekcji z opisem właściwości można znaleźć pod adresem http://en.wikipedia.org/wiki/List_of_map_projections.
 
 W programie R, w pakiecie `ggplot` możemy korzystać z większości popularnych projekcji.
 Aby wybrać którąś z nich, wystarczy dodać wywołanie funkcji `coord_map()`. 
 
 Poniżej dwa przykładowe wykresy, różniące się projekcjami. Ponieważ w skali globu obszar Polski nie jest duży, różnice pomiędzy mapami są raczej subtelne.
 
+Przygotowujemy wykres i wczytujemy go do zmiennej `mapka`.
+
 ```{r, fig.height=4, fig.width=7, message=FALSE, warning=FALSE, eval=FALSE}
-# przygotowujemy wykres, tak jak w poprzednim odcinku
 mapka <- ggplot() +
     geom_map(data=mandatySejmik2014, aes(map_id=Wojewodztwo, fill=ProcentWaznychGlosow), 
              map=shp1f) +
     geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="black", size=0.25) 
-
-# przekształcamy mapę, stosując projekcję mercator (odwzorowanie walcowe równokątne)
+```
+Przekształcamy mapę, stosując różne projekcje
+```{r, fig.height=4, fig.width=7, message=FALSE, warning=FALSE, eval=FALSE}
+# projekcja mercator (odwzorowanie walcowe równokątne)
 # zachowuje kąty pomiędzy równoleżnikami a południkami
 mapka + coord_map(projection="mercator") + ggtitle("mercator")
 # projekcja stereographic (rzut stereograficzny)
 mapka + coord_map(projection="stereographic") + ggtitle("stereographic")
 ```
-```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, echo=FALSE}
+
+<center><img width=800 src="mapki.png"></center>
+
+```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE, echo=FALSE, eval=FALSE}
 mapka <- ggplot() +
     geom_map(data=mandatySejmik2014, aes(map_id=Wojewodztwo, fill=ProcentWaznychGlosow), 
              map=shp1f) +
@@ -200,7 +210,9 @@ Alternatywny sposób prezentacji informacji na mapie to np. wielkość punktu.
 
 Do rysowania punktów można wykorzystać geometrię `geom_point()`, wskazując jako współrzędne punktu środki województw, a wielkość punktu uzależniamy od zmiennej `ProcentWaznychGlosow`. 
 
-Aby punkty były bardziej widoczne powiększamy je modyfikując mapowanie za pomocą funkcji `scale_size_continuous()`.
+Aby punkty były bardziej widoczne powiększamy je modyfikując mapowanie za pomocą funkcji `scale_size_continuous()`. 
+
+Należy być ostrożnym z takimi zmianami, w tym przypadku różnica w wielkości punktów przerysowuje rzeczywiste różnice wynikające z liczb, które te wielkości prezentują.
 
 ```{r, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
 ggplot() +
