@@ -52,7 +52,7 @@ pogRomcy danych
 </div>
 <div id="o-czym-jest-ten-odcinek" class="slide section level1">
 <h1>O czym jest ten odcinek</h1>
-<p>Dane są czymś abstrakcyjnym i patrząc w tabele liczb często trudno zauwazyć zależności pomiędzy różnymi zmiennymi.</p>
+<p>Dane są czymś abstrakcyjnym i patrząc w tabele liczb często trudno zauważyć zależności pomiędzy różnymi zmiennymi.</p>
 <p>Ale znacznie łatwiej dostrzec lub zrozumieć te zależności, jeżeli dane przedstawi się graficznie w poprawny sposób.</p>
 <p>Pierwsza połowa sezonu 2 poświęcona jest wizualizacji danych. W tym odcinku poznamy pakiet graficzny <code>ggplot2</code>, pozwalający na tworzenie dobrze wyglądających i czytelnych wykresów.</p>
 <p>W tym odcinku dowiemy się:</p>
@@ -306,7 +306,7 @@ pogRomcy danych
 <div id="lokalne-mapowania" class="slide section level1">
 <h1>Lokalne mapowania</h1>
 <p>Jeżeli chcemy aby mapowanie dotyczyło tylko jednej warstwy, należy przenieść je do określonej geometrii.</p>
-<p>Na poniższym przykładzie mapowanie zmiennej <code>druzyna</code> na <code>color</code> przypisane jest tylko do geometrii <code>geom_text()</code>. Wszsytkie punkty mają ten sam kolor.</p>
+<p>Na poniższym przykładzie mapowanie zmiennej <code>druzyna</code> na <code>color</code> przypisane jest tylko do geometrii <code>geom_text()</code>. Wszystkie punkty mają ten sam kolor.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># kolor grupy jest określony tylko dla etykiet, punkty są na czarno</span>
 <span class="kw">ggplot</span>(koty_ptaki, <span class="kw">aes</span>(<span class="dt">x=</span>waga, <span class="dt">y=</span>predkosc, <span class="dt">label=</span>gatunek)) +
 <span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">hjust=</span>-<span class="fl">0.1</span>, <span class="kw">aes</span>(<span class="dt">color=</span>druzyna)) +<span class="st"> </span>
