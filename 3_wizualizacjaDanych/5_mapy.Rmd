@@ -126,7 +126,7 @@ ggplot() +
   # rysowanie wypełnień
     geom_map(data=mandatySejmik2014, aes(map_id=Wojewodztwo, fill=ProcentWaznychGlosow), 
              map=shp1f) +
-  # rysowanie obrysów na czarko
+  # rysowanie obrysów na czarno
     geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="black", size=0.25)
 ```
 
