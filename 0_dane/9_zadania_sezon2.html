@@ -50,8 +50,8 @@ pogRomcy danych
   </p>
   <p class="date">sezon 2 / odcinek 23 <br><br> <a href="http://biecek.pl/">Przemysław Biecek @ Uniwersytet Warszawski</a><br><br><br>Naciśnij <code>A</code> by zamienić slajdy na ciągły tekst. <br> Naciśnij <code>T</code> by wyświetlić spis treści.</p>
 </div>
-<div id="zadanie-sezon-2-odcinek-2" class="slide section level1">
-<h1>Zadanie, sezon 2, odcinek 2</h1>
+<div id="zadanie-sezon-2-odcinek-7" class="slide section level1">
+<h1>Zadanie, sezon 2, odcinek 7</h1>
 <ul>
 <li><p>Przedstaw graficznie za pomocą wykresu punktowego zależność pomiędzy żywotnością (kolumna <code>zywotnosc</code>) a wagą zwierzęcia (kolumna <code>waga</code>).</p></li>
 <li><p>Zaznacz kolorem lub kształtem punktu informację czy przedstawiany jest ptak czy kot. Czy są różnice pomiędzy żywotnością a wagą dla kotów i ptaków?</p></li>
@@ -59,8 +59,8 @@ pogRomcy danych
 <li><p>Używając geometrii wstęga (<code>geom_ribbon</code>) przedstaw kurs minimalny i maksymalny każdego dnia na podstawie danych ze zbioru <code>WIG</code>.</p></li>
 </ul>
 </div>
-<div id="odpowiedz-sezon-2-odcinek-2" class="slide section level1">
-<h1>Odpowiedź, sezon 2, odcinek 2</h1>
+<div id="odpowiedz-sezon-2-odcinek-7" class="slide section level1">
+<h1>Odpowiedź, sezon 2, odcinek 7</h1>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
 <span class="kw">library</span>(ggplot2)
 
@@ -84,8 +84,8 @@ pogRomcy danych
 <span class="kw">ggplot</span>(WIG, <span class="kw">aes</span>(<span class="dt">x =</span> Data, <span class="dt">ymin=</span>Kurs.minimalny, <span class="dt">ymax=</span>Kurs.maksymalny)) +<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_ribbon</span>()</code></pre>
 </div>
-<div id="zadanie-sezon-2-odcinek-3" class="slide section level1">
-<h1>Zadanie, sezon 2, odcinek 3</h1>
+<div id="zadanie-sezon-2-odcinek-8" class="slide section level1">
+<h1>Zadanie, sezon 2, odcinek 8</h1>
 <ul>
 <li><p>Wybierz samochody marki Volkswagen model Passat a następnie narysuj jak średnia cena zależy od roku produkcji za pomocą geometrii <code>geom_smooth()</code>.</p></li>
 <li><p>Wybierz samochody marki Volkswagen, narysuj jak średnia cena zależy od roku produkcji, różnymi kolorami przedstaw różne modele Volkswagena.</p></li>
@@ -93,8 +93,8 @@ pogRomcy danych
 <li><p>Dla wybranych pięcioletnich aut marki Volkswagen przedstaw w podziale na modele jaka część aut ma silnik diesla.</p></li>
 </ul>
 </div>
-<div id="odpowiedz-sezon-2-odcinek-3" class="slide section level1">
-<h1>Odpowiedź, sezon 2, odcinek 3</h1>
+<div id="odpowiedz-sezon-2-odcinek-8" class="slide section level1">
+<h1>Odpowiedź, sezon 2, odcinek 8</h1>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Wybierz samochody marki Volkswagen model Passat a następnie narysuj </span>
 <span class="co"># jak średnia cena zależy od roku produkcji za pomocą geometrii `geom_smooth()`.</span>
 
@@ -131,8 +131,8 @@ volkswagen &lt;-<span class="st"> </span>auta2012 %&gt;%
 <span class="kw">ggplot</span>(volkswagen, <span class="kw">aes</span>(<span class="dt">x=</span>Model, <span class="dt">fill=</span>Rodzaj.paliwa)) +<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">'fill'</span>)</code></pre>
 </div>
-<div id="zadanie-sezon-2-odcinek-4" class="slide section level1">
-<h1>Zadanie, sezon 2, odcinek 4</h1>
+<div id="zadanie-sezon-2-odcinek-9" class="slide section level1">
+<h1>Zadanie, sezon 2, odcinek 9</h1>
 <ul>
 <li><p>Podobnie jak w poprzednim odcinku, wybierz samochody marki Volkswagen model Passat a następnie narysuj jak średnia cena zależy od roku produkcji za pomocą geometrii <code>geom_smooth()</code>. Następnie zobacz jak ten wykres będzie wyglądał z motywami <code>theme_bw()</code>, <code>theme_excel()</code> i <code>theme_economist()</code>.</p></li>
 <li><p>Zmień poniższy wykres, zamieniając skalę kolorów na od zielonego do czerwonego, kropki zamień na kwadraty a do wykresu dodaj tytuł (i odpowiednie etykiety osi).</p></li>
@@ -140,8 +140,8 @@ volkswagen &lt;-<span class="st"> </span>auta2012 %&gt;%
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(koty_ptaki, <span class="kw">aes</span>(<span class="dt">x=</span>waga, <span class="dt">y=</span>predkosc, <span class="dt">size=</span>zywotnosc, <span class="dt">color=</span>zywotnosc)) +
 <span class="st">  </span><span class="kw">geom_point</span>() </code></pre>
 </div>
-<div id="odpowiedzi-sezon-2-odcinek-4" class="slide section level1">
-<h1>Odpowiedzi, sezon 2, odcinek 4</h1>
+<div id="odpowiedzi-sezon-2-odcinek-9" class="slide section level1">
+<h1>Odpowiedzi, sezon 2, odcinek 9</h1>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Podobnie jak w poprzednim odcinku, wybierz samochody marki Volkswagen model </span>
 <span class="co"># Passat a następnie narysuj jak średnia cena zależy od roku produkcji za pomocą</span>
 <span class="co"># geometrii `geom_smooth()`. Następnie zobacz jak ten wykres będzie wyglądał </span>
@@ -232,10 +232,15 @@ for (ser in nazwy_seriali) {
 <h1>Odpowiedź, sezon 2, odcinek 14</h1>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Znajdź serial o istotnym ujemnem trendzie, to znaczy takim, którego oceny maleją.</span>
 
+<span class="co"># Taki serial można znaleźć używając aplikacji</span>
+<span class="co"># https://smarterpoland.shinyapps.io/serialeIMDB/</span>
+<span class="co"># lub pisząc pętlę iterującą po serialach</span>
+
 <span class="co"># Znajdź serial (inny niż _Breaking Bad_) o istotnie dodatnim trendzie. </span>
 
-<span class="co"># Rozwiązanie: Jak w zadaniu 13, plus testowanie istotności dla skrajnych wartości</span>
-<span class="co"># uwaga, może się długo liczyć!!!</span></code></pre>
+<span class="co"># Taki serial można znaleźć używając aplikacji</span>
+<span class="co"># https://smarterpoland.shinyapps.io/serialeIMDB/</span>
+<span class="co"># lub pisząc pętlę iterującą po serialach</span></code></pre>
 </div>
 <div id="zadania-sezon-2-odcinek-15" class="slide section level1">
 <h1>Zadania, sezon 2, odcinek 15</h1>
@@ -283,6 +288,7 @@ srednie %&gt;%
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Wiek =</span> <span class="dv">2012</span> -<span class="st"> </span>Rok.produkcji) %&gt;%
 <span class="st">  </span><span class="kw">filter</span>(Wiek &lt;<span class="st"> </span><span class="dv">20</span>)
 
+<span class="co"># Trend liniowy addytywny dla Toyota</span>
 <span class="kw">lm</span>(Cena.w.PLN ~<span class="st"> </span>Wiek, <span class="dt">data=</span>toyota)$coef
 
 <span class="kw">ggplot</span>(toyota, <span class="kw">aes</span>(<span class="dt">y=</span>Cena.w.PLN, <span class="dt">x =</span> Wiek)) +<span class="st"> </span>
@@ -290,6 +296,16 @@ srednie %&gt;%
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">size=</span><span class="dv">2</span>) +
 <span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>,<span class="dv">400000</span>)
 
+<span class="co"># Trend multiplikatywny dla Toyota</span>
+<span class="kw">lm</span>(<span class="kw">log</span>(Cena.w.PLN) ~<span class="st"> </span>Wiek, <span class="dt">data=</span>toyota)$coef
+
+<span class="kw">ggplot</span>(toyota, <span class="kw">aes</span>(<span class="dt">y=</span>Cena.w.PLN, <span class="dt">x =</span> Wiek)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">size=</span><span class="dv">2</span>) +
+<span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>,<span class="dv">400000</span>) +<span class="st"> </span><span class="kw">scale_y_log10</span>()
+
+<span class="co">#</span>
+<span class="co"># Krzywe łamanej regresji dla wszystkich marek</span>
 
 marki &lt;-<span class="st"> </span><span class="kw">names</span>(<span class="kw">head</span>(<span class="kw">rev</span>(<span class="kw">sort</span>(<span class="kw">table</span>(auta2012$Marka))),<span class="dv">10</span>))
 <span class="kw">invisible</span>(<span class="kw">sapply</span>(marki, function(marka) {
@@ -352,9 +368,20 @@ marki &lt;-<span class="st"> </span><span class="kw">names</span>(<span class="k
 </div>
 <div id="zadania-sezon-2-odcinek-19" class="slide section level1">
 <h1>Zadania, sezon 2, odcinek 19</h1>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(TCGA_BRCA$czy.zyje,
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># W zbiorze danych `diagnoza` wiek respondenta jest w zmiennej o nazwie `wiek2013`.</span>
+<span class="co"># Wyznacz zależność pomiędzy wiekiem podzielonym na dwie grupy, poniżej i powyżej 30 roku życia, a odpowiedziami na pytanie o to co w życiu ważne.</span>
+tab &lt;-<span class="st"> </span><span class="kw">table</span>(diagnoza$gp29,
+      <span class="kw">cut</span>(diagnoza$wiek2013, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">100</span>)))
+tab
+<span class="kw">prop.table</span>(tab, <span class="dv">2</span>)
+<span class="kw">chisq.test</span>(tab)
+
+<span class="co"># W zbiorze danych `TCGA_BRCA` w drugiej kolumnie jest płeć pacjenta. </span>
+<span class="co"># Wyznacz zależność pomiędzy zmiennymi `plec` a `czy.zyje`. </span>
+<span class="co"># Przetestuj tą zależność testem Fishera.</span>
+<span class="kw">table</span>(TCGA_BRCA$czy.zyje,
       TCGA_BRCA$TP53)
-<span class="kw">prop.table</span>(<span class="kw">table</span>(TCGA_BRCA$czy.zyje,
+<span class="kw">fisher.test</span>(<span class="kw">table</span>(TCGA_BRCA$czy.zyje,
       TCGA_BRCA$TP53), <span class="dv">2</span>)</code></pre>
 </div>
 <div id="zadania-sezon-2-odcinek-21" class="slide section level1">

@@ -12,7 +12,7 @@ output:
     footer: "pogRomcy danych / wizualizacja / zadania i odpowiedzi"
 ---
 
-# Zadanie, sezon 2, odcinek 2
+# Zadanie, sezon 2, odcinek 7
 
 + Przedstaw graficznie za pomocą wykresu punktowego zależność pomiędzy żywotnością (kolumna `zywotnosc`) a wagą zwierzęcia (kolumna `waga`).
 
@@ -23,7 +23,7 @@ output:
 + Używając geometrii wstęga (`geom_ribbon`) przedstaw kurs minimalny i maksymalny każdego dnia na podstawie danych ze zbioru `WIG`.
 
 
-# Odpowiedź, sezon 2, odcinek 2
+# Odpowiedź, sezon 2, odcinek 7
 
 ```{r, message=FALSE, eval=FALSE}
 library(PogromcyDanych)
@@ -53,7 +53,7 @@ ggplot(WIG, aes(x = Data, ymin=Kurs.minimalny, ymax=Kurs.maksymalny)) +
 
 ---
 
-# Zadanie, sezon 2, odcinek 3
+# Zadanie, sezon 2, odcinek 8
 
 + Wybierz samochody marki Volkswagen model Passat a następnie narysuj jak średnia cena zależy od roku produkcji za pomocą geometrii `geom_smooth()`.
 
@@ -63,7 +63,7 @@ ggplot(WIG, aes(x = Data, ymin=Kurs.minimalny, ymax=Kurs.maksymalny)) +
 
 + Dla wybranych pięcioletnich aut marki Volkswagen przedstaw w podziale na modele jaka część aut ma silnik diesla.
 
-# Odpowiedź, sezon 2, odcinek 3
+# Odpowiedź, sezon 2, odcinek 8
 
 ```{r, message=FALSE, eval=FALSE}
 # Wybierz samochody marki Volkswagen model Passat a następnie narysuj 
@@ -104,7 +104,7 @@ ggplot(volkswagen, aes(x=Model, fill=Rodzaj.paliwa)) +
 
 ```
 
-# Zadanie, sezon 2, odcinek 4
+# Zadanie, sezon 2, odcinek 9
 
 + Podobnie jak w poprzednim odcinku, wybierz samochody marki Volkswagen model Passat a następnie narysuj jak średnia cena zależy od roku produkcji za pomocą geometrii `geom_smooth()`. Następnie zobacz jak ten wykres będzie wyglądał z motywami `theme_bw()`, `theme_excel()` i `theme_economist()`.
 
@@ -115,7 +115,7 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
   geom_point() 
 ```
 
-# Odpowiedzi, sezon 2, odcinek 4
+# Odpowiedzi, sezon 2, odcinek 9
 
 ```{r, message=FALSE, eval=FALSE}
 # Podobnie jak w poprzednim odcinku, wybierz samochody marki Volkswagen model 
@@ -215,10 +215,15 @@ sort(wspolczynnikTrendu)
 ```{r, message=FALSE, eval=FALSE}
 # Znajdź serial o istotnym ujemnem trendzie, to znaczy takim, którego oceny maleją.
 
+# Taki serial można znaleźć używając aplikacji
+# https://smarterpoland.shinyapps.io/serialeIMDB/
+# lub pisząc pętlę iterującą po serialach
+
 # Znajdź serial (inny niż _Breaking Bad_) o istotnie dodatnim trendzie. 
 
-# Rozwiązanie: Jak w zadaniu 13, plus testowanie istotności dla skrajnych wartości
-# uwaga, może się długo liczyć!!!
+# Taki serial można znaleźć używając aplikacji
+# https://smarterpoland.shinyapps.io/serialeIMDB/
+# lub pisząc pętlę iterującą po serialach
 
 ```
 
@@ -276,6 +281,7 @@ toyota <- auta2012 %>%
   mutate(Wiek = 2012 - Rok.produkcji) %>%
   filter(Wiek < 20)
 
+# Trend liniowy addytywny dla Toyota
 lm(Cena.w.PLN ~ Wiek, data=toyota)$coef
 
 ggplot(toyota, aes(y=Cena.w.PLN, x = Wiek)) + 
@@ -283,6 +289,16 @@ ggplot(toyota, aes(y=Cena.w.PLN, x = Wiek)) +
   geom_smooth(method="lm", col="red", size=2) +
   ylim(0,400000)
 
+# Trend multiplikatywny dla Toyota
+lm(log(Cena.w.PLN) ~ Wiek, data=toyota)$coef
+
+ggplot(toyota, aes(y=Cena.w.PLN, x = Wiek)) + 
+  geom_point() + 
+  geom_smooth(method="lm", col="red", size=2) +
+  ylim(0,400000) + scale_y_log10()
+
+#
+# Krzywe łamanej regresji dla wszystkich marek
 
 marki <- names(head(rev(sort(table(auta2012$Marka))),10))
 invisible(sapply(marki, function(marka) {
@@ -347,9 +363,20 @@ Zależność przedstaw za pomocą tabeli z liczebnościami oraz częstościami.
 # Zadania, sezon 2, odcinek 19
 
 ```{r, eval=FALSE}
+# W zbiorze danych `diagnoza` wiek respondenta jest w zmiennej o nazwie `wiek2013`.
+# Wyznacz zależność pomiędzy wiekiem podzielonym na dwie grupy, poniżej i powyżej 30 roku życia, a odpowiedziami na pytanie o to co w życiu ważne.
+tab <- table(diagnoza$gp29,
+      cut(diagnoza$wiek2013, c(0, 30, 100)))
+tab
+prop.table(tab, 2)
+chisq.test(tab)
+
+# W zbiorze danych `TCGA_BRCA` w drugiej kolumnie jest płeć pacjenta. 
+# Wyznacz zależność pomiędzy zmiennymi `plec` a `czy.zyje`. 
+# Przetestuj tą zależność testem Fishera.
 table(TCGA_BRCA$czy.zyje,
       TCGA_BRCA$TP53)
-prop.table(table(TCGA_BRCA$czy.zyje,
+fisher.test(table(TCGA_BRCA$czy.zyje,
       TCGA_BRCA$TP53), 2)
 ```
 
