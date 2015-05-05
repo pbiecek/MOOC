@@ -35,7 +35,7 @@ W pakiecie `PogromcyDanych` dostępny jest zbiór danych `auta2012`, na którym 
 W tym odcinku podejmiemy się analizy statystycznej tego zbioru danych. Ale analizowanie wszystkich ofert w jednym worku nie ma sensu. 
 Dlatego dalsze analizy przeprowadzimy wyłącznie na podzbiorze danych dotyczącym marki Volkswagen.
 
-Dlaczego tej? Jest ona najpopularniejsza w zebranych ogłoszeniach, jest dla niej najwięcej obserwacji. Co nie bez znaczenia wyniki wychodzą ciekawe.
+Dlaczego tej? Jest ona najpopularniejsza w zebranych ogłoszeniach, jest dla niej najwięcej obserwacji. A co nie bez znaczenia, również wyniki wychodzą ciekawe.
 
 Każdy wiersz tego zbioru danych opisuje jedną ofertę sprzedaży auta. Każda kolumna opisuje jedną cechę / właściwość tej oferty.
 
@@ -54,9 +54,9 @@ head(volkswagen, 2)
 Zobaczmy jak wygląda zależność ceny od wieku Volkswagena. 
 
 W naszym zbiorze danych nie ma zmiennej wiek, jest jedynie rok produkcji.
-Wiedząc, że te oferty były zbierane w styczniu 2012 roku łatwo nam będzie wyznaczyć wiek auta (2012 - rok produkcji).
+Wiedząc, że te oferty były zbierane w styczniu 2012 roku łatwo nam będzie wyznaczyć wiek auta z równania: wiek = 2012 - rok produkcji.
 
-Zacznijmy więc od wyznaczenia zmiennej wiek auta (funkcja `mutate()` w poniższym przykładzie), a następnie usunięcia aut ponad 20 letnich (funkcja `filter()`, bardzo starych aut jest niewiele, są nietypowe i będą nam przeszkadzać w modelowaniu).
+Zacznijmy więc od wyznaczenia zmiennej wiek (funkcja `mutate()` w poniższym przykładzie), a następnie usunięcia aut ponad 20 letnich (funkcja `filter()`, bardzo starych aut jest niewiele, są nietypowe i będą nam przeszkadzać w modelowaniu).
 
 ```{r, warning=FALSE}
 mlodeVolkswageny <- volkswagen %>%
@@ -74,7 +74,7 @@ coef(modelCenaWiek)
 
 # Jaka to zależność?
 
-Mając współczynniki, możemy ocenić że średnia cena nowo używanego auta według modelu liniowego to 67430 oraz co roku auto traci średnio -4220 pln na wartości. Te dwie liczby są użyteczne, ale jeszcze więcej mozna odczytać z wykresu.
+Mając współczynniki, możemy ocenić, że średnia cena nowo używanego auta według modelu liniowego to 67430 oraz co roku auto traci średnio -4220 pln na wartości. Te dwie liczby są użyteczne, ale jeszcze więcej można odczytać z wykresu.
 
 Narysujemy więc obie zmienne dorysowując do nich linię trendu liniowego.
 
@@ -117,13 +117,13 @@ _log(Cena.w.roku.i) = log(Cena.w.roku.0) +  log(wsp) * i_
 
 czyli korzystając ze nazw zmiennych ze zbioru danych
 
-_log(Cena) = b0 + b1 * Wiek_
+_log(Cena.w.PLN) = b0 + b1 * Wiek_
 
 A to już wygląda jak model liniowy!
 
 # Może logarytmiczna / multiplikatywna
 
-Zobaczmy najpierw, jak te dane wyglądać będą, jeżeli ceny przedstawimy w skali logarytmicznej. Dodając funkcje `scale_y_continuous()` zmieniamy osie wykresu. Do punktów dorysujemy linię regresji.
+Zobaczmy najpierw, jak te dane wyglądać będą, jeżeli ceny przedstawimy w skali logarytmicznej. Dodając funkcję `scale_y_continuous()` wprowadzamy transformacje na osi OY (w tym przypadku logarytmiczną). Do punktów dorysujemy linię regresji korzystając z funkcji `geom_smooth()`.
 
 ```{r, warning=FALSE}
 ggplot(mlodeVolkswageny, aes(y=Cena.w.PLN, x = Wiek)) + 
@@ -132,11 +132,11 @@ ggplot(mlodeVolkswageny, aes(y=Cena.w.PLN, x = Wiek)) +
   scale_y_continuous(trans="log10")
 ```
 
-Na rysunku, po zlogarytmowaniu danych, ta zależność wygląda na idealnie liniową.
+Ciekawe. Po zlogarytmowaniu danych, zależność pomiędzy logarytmem ceny a wiekiem wygląda na idealnie liniową.
 
 # Logarytmiczna / multiplikatywna w R
 
-Zbudować taki model multiplikatywny z użyciem funkcji `lm()` należy wpierw musimy policzyć logarytm ceny.
+Aby zbudować model dla logarytmu ceny należy wpierw musimy ten logarytm policzyć
 
 ```{r, warning=FALSE}
 # dodajemy nową kolumnę logCena.w.PLN
@@ -163,8 +163,8 @@ Za przykład takiej zależności posłuży nam zależność pomiędzy przebiegie
 
 Zanim będziemy kontynuować jakiekolwiek modelowanie musimy wpierw przyjrzeć się danym.
 
-W modelowaniu obowiązuje żelazna zasada _śmieci na wejściu — śmieci na wyjściu_ (ang. garbage in, garbage out). 
-Bez względu na to jakie metody będziemy wykorzystywać, jeżeli w danych są błędy to nasze modelowanie prowadzić może do bezsensownych wniosków.
+W modelowaniu obowiązuje żelazna zasada _śmieci na wejściu — śmieci na wyjściu_ (ang. *garbage in, garbage out*). 
+Bez względu na to jakie metody będziemy wykorzystywać, jeżeli w danych są błędy, to nasze modelowanie prowadzić może do bezsensownych wniosków.
 
 Zobaczmy jak wygląda przebieg i wiek aut.
 
@@ -173,9 +173,9 @@ ggplot(mlodeVolkswageny, aes(y=Przebieg.w.km, x = Wiek)) +
   geom_point()
 ```
 
-Przyglądając się dokładniej, okazuje się, że są wśród naszych ofert auta o absurdalnym przebiegu ponad 15 milionów kilometrów. To ewidentny błąd. 
+Przyglądając się dokładniej temu wykresowi, okazuje się, że są wśród naszych ofert auta o absurdalnym przebiegu ponad 15 milionów kilometrów. To ewidentny błąd. 
 
-Usuńmy wszystkie wiersze , których przebieg przekracza czterysta tysięcy kilometrów.
+Zanim zaczniemy modelować, musimy oczyścić dane. Usuńmy wszystkie wiersze, których przebieg przekracza czterysta tysięcy kilometrów.
 
 ```{r, warning=FALSE}
 mlodeVolkswageny <-   auta2012 %>%
@@ -197,7 +197,7 @@ ggplot(mlodeVolkswageny, aes(y=Przebieg.w.km, x = Wiek)) +
   geom_smooth(size=2) + geom_smooth(method="lm", col="red", size=2) 
 ```
 
-Trend wygładzony i liniowy odstają od siebie znacząco. Co to oznacza? Być możę zalężność w danych wcale nie jest liniowa.
+Trend wygładzony i liniowy odstają od siebie znacząco. Co to oznacza? Być może zależność w danych wcale nie jest liniowa.
 
 Niebieska linia, to linia wygładzonego trendu, lokalnie przybliżającego dane. Gdy się jej przyjrzeć, okazuje się, że ma ona bardzo ciekawe zachowanie. 
 
@@ -209,9 +209,9 @@ ggplot(mlodeVolkswageny, aes(y=Przebieg.w.km, x = Wiek)) +
   geom_smooth(size=2) + geom_smooth(method="lm", col="red", size=2) 
 ```
 
-Przez pierwsze pięć lat auta gwałtownie przybierają na liczniku, a po piątym roku to tempo znacząco spada.
+Przez pierwsze pięć lat auta gwałtownie przybierają na liczniku, a po piątym roku  tempo zwiększania się licznika znacząco spada.
 
-Czy volkswagenami starszymi niż 5 lat mniej się jeździ? Jest to jakieś wytłumaczenie, ale inne, bardziej prawdopodobne, jest takie że starsze auta rzadziej są serwisowane, a przez to ich przebiegi często są wartościami deklarowanymi.
+Czy volkswagenami starszymi niż 5 lat mniej się jeździ? Jest to jakieś wytłumaczenie, ale inne, bardziej prawdopodobne, jest takie że starsze auta są rzadziej serwisowane, a przez to ich przebiegi często są wartościami deklarowanymi.
 
 # Zależność kawałkami liniowa
 
@@ -280,7 +280,7 @@ topred <- data.frame(Wiek0 = c(0, 5, 20), Wiek5 = c(0, 0, 15))
 topred$M1 <- predict(M1, newdata = topred)
 topred$M2 <- predict(M2, newdata = topred)
 
-# graficznie predstawiamy dane i dorysowane do nich modele
+# graficznie przedstawiamy dane i dorysowane do nich modele
 ggplot(mlodeVolkswageny, aes(y=Przebieg.w.km, x = Wiek)) + 
   geom_point() + 
   geom_smooth(method="lm", col="red", size=2) +
