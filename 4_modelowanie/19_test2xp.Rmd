@@ -9,7 +9,7 @@ output:
     highlight: default
     css: ../style.css
     font_adjustment: 0
-    footer: "pogRomcy danych / modelowanie / testy kxp"
+    footer: "pogRomcy danych / modelowanie / testy 2xp"
 ---
 
 # O czym jest ten odcinek
@@ -18,21 +18,18 @@ W poprzednim odcinku pokazaliśmy jak badać zależność pomiędzy dwoma zmienn
 
 A co w sytuacji gdy zmienne nie są binarne? Temu tematowi poświęcony jest ten odcinek.
 
-W tym odcinku nauczymy się jak:
+W tym odcinku nauczymy się:
 
 - jak budować i jak czytać tablice kontyngencji dla pary zmiennych jakościowych
 - jak przedstawiać graficznie tabelę kontyngencji
 - jak statystycznie testować zależność pomiędzy parą zmiennych.
 
-Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, to dane z Diagnozy Społecznej, dostępne w tabeli `diagnoza` a drugi o nowotworze piersi, dostępne w tabeli `TCGA_BRCA`, oba dostępne w pakiecie `PogromcyDanych`.
-
+Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, to dane z Diagnozy Społecznej, dostępne w tabeli `diagnoza` a drugi to dane o nowotworze piersi, dostępne w tabeli `TCGA_BRCA`. Oba dostępne w pakiecie `PogromcyDanych`.
 
 
 # Wczytanie danych
 
-Dane od których rozpoczniemy przykłady to `diagnoza` z pakietu `PogromcyDanych`. Aby te dane wczytać, wystarczy włączyć ten pakiet - instrukcja jak to zrobić znajduje się w odcinku 2 pierwszego sezonu.
-
-W zbiorze danych `diagnoza` dostępnych jest kilkadziesiąt kolumn, opisujących odpowiedzi na różne interesujące pytania. W tym odcinku przyjrzymy się tylko kilku  wybranym kolumnom, opisującym imię, wiek, płeć, ukończoną edukację oraz odpowiedź na pytanie ,,Co jest według Pana ważniejsze w życiu?'' (zmienna w kolumnie `gp29`) z możliwymi odpowiedziami *Poczucie sensu* i *Przyjemności*.
+W zbiorze danych `diagnoza` dostępnych jest kilkadziesiąt kolumn, opisujących odpowiedzi na różne interesujące pytania. W tym odcinku przyjrzymy się tylko kilku  wybranym kolumnom, opisującym imię (kolumna `imie_2011`), wiek (`wiek2013`), płeć (`plec`), ukończoną edukację (`eduk4_2013`) oraz odpowiedź na pytanie ,,Co jest według Pana ważniejsze w życiu?'' (zmienna w kolumnie `gp29`) z możliwymi odpowiedziami *Poczucie sensu* i *Przyjemności*.
 
 ```{r, warning=FALSE, message=FALSE}
 library(PogromcyDanych)
@@ -41,7 +38,7 @@ diagnoza[1:6, c("imie_2011", "wiek2013", "plec", "eduk4_2013", "gp29")]
 
 # Jak wygląda tabela kontyngencji dla wykształcenia
 
-W poprzednim odcinku przyglądaliśmy się parze zmiennych `plec`, czyli płeć respondenta i `gp29`, czyli odpowiedź na pytanie co jest ważniejsze w życiu.
+W poprzednim odcinku przyglądaliśmy się parze zmiennych `plec`, czyli płeć respondenta i zmiennej `gp29`, czyli odpowiedź na pytanie co jest ważniejsze w życiu.
  
 W tym odcinku przyjrzymy się zależności pomiędzy  poziomem edukacji (zmienna `eduk4_2013`) a odpowiedziami na pytanie o to co jest ważniejsze w życiu.
 
@@ -58,21 +55,22 @@ Zmienna `eduk4_2013` poza czterema poziomami edukacji ma też piąty poziom `BD/
 ```
 
 W każdej grupie wykształcenia respondenci częściej deklarują, że ważniejsze jest poczucie sensu. 
-Ale czy są różnice pomiędzy grupami wykształcenia są duże?
+
+Ale czy są różnice pomiędzy grupami wykształcenia i czy są one duże?
 
 # Jak wygląda tabela kontyngencji dla wieku
 
 Zobaczmy jak wygląda zależność pomiędzy wiekiem a odpowiedziami na pytanie o sens w życiu.
 
 Wiek jest zmienną ciągłą, zamienimy więc ją na zmienną jakościową o czterech poziomach.
-Aby zdyskretyzować zmienną ciągłą na dyskretną wykorzystamy funkcję `cut()` w której za granice przedziałów wiekowych wybierzemy 0, 25, 40, 60 i 110 lat.
+Aby zdyskretyzować zmienną ciągłą na dyskretną wykorzystamy funkcję `cut()`. Za granice przedziałów wiekowych wybierzemy 0, 25, 40, 60 i 110 lat.
  
 ```{r}
 diagnoza$wiek2013_4g <- cut(diagnoza$wiek2013, c(0, 25, 40, 60, 110))
 table(diagnoza$wiek2013_4g)
 ```
 
-Przedstawmy teraz jak wygląda zależność pomiędzy wiekiem a odpowiedziami na pytani o to co jest ważniejsze w życiu?
+Przedstawmy teraz jak wygląda zależność pomiędzy wiekiem a odpowiedziami na pytanie o to co jest ważniejsze w życiu?
 
 ```{r}
 wiekTab <- table(diagnoza$wiek2013_4g, diagnoza$gp29)
@@ -123,7 +121,7 @@ Aby sprawdzić, czy pomiędzy parą zmiennych jakościowych jest zależność, m
 
 Sprawdza on na ile obserwowana tabela częstości jest daleka od takiej, którą byśmy obserwowali, gdyby zmienne nie były zależne.
 
-Test $\chi^2$ wykonuje się funkcją `chisq.test()`. Wynikiem jest p-wartość dla hiptoezy o niezależności. Małe p-wartości (zwyczajowo poniżej 0.05) interpretuje się jako przesłanki o zależności pomiędzy zmiennymi.
+Test $\chi^2$ wykonuje się funkcją `chisq.test()`. Wynikiem jest p-wartość dla hipotezy o niezależności. Małe p-wartości (zwyczajowo poniżej 0.05) interpretuje się jako przesłanki o zależności pomiędzy zmiennymi.
 
 ```{r, warning=FALSE, message=FALSE, fig.width=7, fig.height=5}
 wiekPodziwiam <- table(diagnoza$gp54_13, diagnoza$wiek2013_4)
@@ -157,5 +155,4 @@ W zbiorze danych `TCGA_BRCA` zbadaj czy jest i jaka jest zależność pomiędzy
 + płcią a zmienną `czy.zyje`.
 
 Zależność przedstaw za pomocą tabeli z liczebnościami oraz częstościami.
-
 
