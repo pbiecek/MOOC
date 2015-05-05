@@ -55,25 +55,27 @@ pogRomcy danych
 <p>Jak badać czy dwie zmienne są zależne?</p>
 <p>Co oznacza zależność?</p>
 <p>W tym odcinku rozważymy najprostszą zależność dla pary zmiennych - zależność pomiędzy parą zmiennych binarnych.</p>
-<p>W tym odcinku nauczymy się jak:</p>
+<p>W tym odcinku nauczymy się:</p>
 <ul>
 <li>jak budować i jak czytać tablice kontyngencji dla pary zmiennych</li>
 <li>jak przedstawiać graficznie tabelę kontyngencji</li>
 <li>jak statystycznie testować zależność pomiędzy parą zmiennych.</li>
 </ul>
-<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, to dane z Diagnozy Społecznej, dostępne w tabeli <code>diagnoza</code> a drugi o nowotworze piersi, dostępne w tabeli <code>TCGA_BRCA</code>, oba dostępne w pakiecie <code>PogromcyDanych</code>.</p>
+<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, to dane z Diagnozy Społecznej, dostępne w tabeli <code>diagnoza</code> a drugi o nowotworze piersi, dostępne w tabeli <code>TCGA_BRCA</code>. Oba dostępne w pakiecie <code>PogromcyDanych</code>.</p>
 </div>
 <div id="jak-opisac-zaleznosc-dwoch-zmiennych-binarnych" class="slide section level1">
 <h1>Jak opisać zależność dwóch zmiennych binarnych</h1>
 <p>Zmienne binarne, to zmienne, które przyjmują po dwie wartości.</p>
-<p>Zmienne takie są bardzo proste w opisie, wystarczy napisać ile razy wystąpiła pierwsza wartość ile razy druga i w ten sposób dwie liczby charakteryzują wszystkie obserwacje.</p>
-<p>Typową zmienną binarną jest płeć ze swoimi dwoma poziomami/wartościami. Zmiennymi binarnymi są też zmienne logiczne przyjmujące wartości TRUE/FALSE. W obu tych przykładach w danych dopuszcza się też wartość <em>brak danych</em> (NA) ale najczęściej nawet zmienne z brakami danych, de facto przyjmujące trzy różne wartości nazywa się binarnymi.</p>
-<p>Zmienne jakościowe przyjmujące więcej poziomów lub zmienne ciągłe można binaryzować i często wykonuje się tę operację.</p>
-<p>Jeżeli mamy zmienną opisującą kolor włosów i większość osób to bruneci/brunetki, wtedy wygodnie może być zamienić zmienną jakościową na binarną odpowiadającą na pytanie : czy to brunet (a więc po połączeniu wszystkich pozostałych poziomów).</p>
-<p>Jeżeli mamy zmienną ciągłą - wzrost, możemy ją zbinaryzować dzieląc wzrost na dwa przedziały, np. do 170 cm i powyżej.</p>
+<p>Zmienne takie można prosto scharakteryzować. Wystarczy napisać ile razy wystąpiła pierwsza wartość, ile razy druga i w ten sposób dwie liczby opisują obserwacje.</p>
+<p>Typową zmienną binarną jest płeć ze swoimi dwoma poziomami/wartościami. Zmiennymi binarnymi są też zmienne logiczne przyjmujące wartości TRUE/FALSE.</p>
+<p>W praktyce, dla zmiennych binarnych wprowadza się trzecią możliwą wartość, czyli <em>brak danych</em> (NA, ang. ). Nawet takie zmienne z brakami danych, które de facto przyjmują trzy różne wartości, nazywa się binarnymi.</p>
+<p>Zmienne jakościowe przyjmujące więcej poziomów lub zmienne ciągłe można binaryzować i często wykonuje się tę operację. Jeżeli mamy zmienną opisującą kolor włosów i w zbiorze danych jest dziesięć różnych kolorów, ale większość osób to bruneci/brunetki, wtedy na potrzeby analiz wygodnie może być zamienić zmienną z kilkoma poziomami na binarną. Np. odpowiadającą na pytanie: czy to brunet (a więc po połączeniu pozostałych poziomów w jeden ‘nie brunet/ka’). Jeżeli mamy zmienną ciągłą - wzrost, możemy ją zbinaryzować dzieląc wzrost na dwa przedziały, np. do 170 cm i powyżej. Zamiast ciśnienia użyteczna może być informacja czy ciśnienie jest w normie czy jest podwyższone, zamiast wykształcenia informacja czy z maturą czy bez itp.</p>
+</div>
+<div id="po-co-binaryzowac" class="slide section level1">
+<h1>Po co binaryzować</h1>
 <p>W tym miejscu powinno pojawić się pytanie <em>po co</em>? Po co redukować więcej informacji do dwóch poziomów?</p>
 <p>Główną zaletą jest łatwość opisu. Jedną zmienną binarną opisać można za pomocą dwóch liczb.</p>
-<p>Relację pomiędzy dwoma zmiennymi binarnymi opisać można za pomocą czterech liczb za pomocą tak zwanej tablicy kontyngencji.</p>
+<p>Relację pomiędzy dwoma zmiennymi binarnymi opisać można za pomocą czterech liczb. A więc za pomocą tak zwanej tablicy kontyngencji.</p>
 <table>
 <thead>
 <tr class="header">
@@ -99,7 +101,7 @@ pogRomcy danych
 </div>
 <div id="wczytanie-danych" class="slide section level1">
 <h1>Wczytanie danych</h1>
-<p>Dane od których rozpoczniemy przykłady to <code>diagnoza</code> z pakietu <code>PogromcyDanych</code>. Aby te dane wczytać, wystarczy włączyć ten pakiet - instrukcja jak to zrobić znajduje się w odcinku 2 pierwszego sezonu.</p>
+<p>Zobaczmy jak ten opis wygląda dla danych <code>diagnoza</code> z pakietu <code>PogromcyDanych</code>. Aby te dane wczytać, wystarczy włączyć pakiet funkcją <code>library()</code> (wcześniej trzeba go zainstalować).</p>
 <p>W zbiorze danych <code>diagnoza</code> dostępnych jest kilkadziesiąt kolumn, opisujących odpowiedzi na różne interesujące pytania. W tym odcinku przyjrzymy się tylko kilku wybranym kolumnom, opisującym imię, wiek, płeć, ukończoną edukację oraz odpowiedź na pytanie ,,Co jest według Pana ważniejsze w życiu?’’ (zmienna w kolumnie <code>gp29</code>) z możliwymi odpowiedziami <em>Poczucie sensu</em> i <em>Przyjemności</em>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
 diagnoza[<span class="dv">1</span>:<span class="dv">6</span>, <span class="kw">c</span>(<span class="st">&quot;imie_2011&quot;</span>, <span class="st">&quot;wiek2013&quot;</span>, <span class="st">&quot;plec&quot;</span>, <span class="st">&quot;eduk4_2013&quot;</span>, <span class="st">&quot;gp29&quot;</span>)]</code></pre>
@@ -134,6 +136,16 @@ diagnoza[<span class="dv">1</span>:<span class="dv">6</span>, <span class="kw">c
 <li>5144 kobiet odpowiedziało, że ważniejsze są przyjemności,</li>
 <li>9421 kobiet odpowiedziało, że ważniejsze jest poczucie sensu.</li>
 </ul>
+<p>Domyślne zachowanie funkcji <code>table()</code> jest taki, że pomija wartości brakujące. Aby je też wyświetlić, należy dodać argument <code>useNA = &quot;always&quot;</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(diagnoza$plec, diagnoza$gp29, <span class="dt">useNA =</span> <span class="st">&quot;always&quot;</span>)</code></pre>
+<pre><code>##            
+##             PRZYJEMNOSCI POCZUCIE SENSU &lt;NA&gt;
+##   mężczyzna         5114           6544 6697
+##   kobieta           5144           9421 5501
+##   &lt;NA&gt;                 0              0   40</code></pre>
+</div>
+<div id="jak-wyglada-tabela-z-wartosciami-brzegowymi" class="slide section level1">
+<h1>Jak wygląda tabela z wartościami brzegowymi</h1>
 <p>Zarówno kobiety jak i mężczyźni częściej deklarują, że ważniejsze jest poczucie sensu. Ale czy są różnice pomiędzy tymi płciami i jak duże?</p>
 <p>Funkcją <code>addmargins()</code> można dodać sumę wartości w wierszach i kolumnach.</p>
 <pre class="sourceCode r"><code class="sourceCode r">plecSens &lt;-<span class="st"> </span><span class="kw">table</span>(diagnoza$plec, diagnoza$gp29)
@@ -147,7 +159,7 @@ diagnoza[<span class="dv">1</span>:<span class="dv">6</span>, <span class="kw">c
 <div id="jak-wyglada-tabela-z-procentami" class="slide section level1">
 <h1>Jak wygląda tabela z procentami</h1>
 <p>Przeliczmy liczebności na frakcje. Jaki procent mężczyzn odpowiedziało przyjemności a jaka poczucie sensu?</p>
-<p>Funkcją <code>prop.table()</code> można policzyć frakcje, dodatkowy argument określa czy mają być to proporcje w wierszach (1), kolumnach (2) czy całej macierzy (pusty argument).</p>
+<p>Funkcją <code>prop.table()</code> można policzyć frakcje. Dodatkowy argument określa, czy mają być to proporcje w wierszach (1), kolumnach (2) czy całej macierzy (pusty argument).</p>
 <pre class="sourceCode r"><code class="sourceCode r">plecSens &lt;-<span class="st"> </span><span class="kw">table</span>(diagnoza$plec, diagnoza$gp29)
 <span class="co"># frakcje w wierszach</span>
 <span class="kw">prop.table</span>(plecSens, <span class="dv">1</span>)</code></pre>
@@ -164,7 +176,7 @@ diagnoza[<span class="dv">1</span>:<span class="dv">6</span>, <span class="kw">c
 </div>
 <div id="jak-wygladaja-szanse" class="slide section level1">
 <h1>Jak wyglądają szanse</h1>
-<p>Pracując ze zmiennymi binarnymi często zamiast prawdopodobieństw korzysta się z tak zwanych szans (ang. odds).</p>
+<p>Pracując ze zmiennymi binarnymi, często zamiast prawdopodobieństw korzysta się z tak zwanych szans (ang. odds).</p>
 <p>Co to jest szansa?</p>
 <p>Szansa wystąpienia zjawiska X to prawdopodobieństwo wystąpienia X podzielone przez prawdopodobieństwo nie wystąpienia X. Czyli jeżeli prawdopodobieństwo oznaczymy symbolem <span class="math">\(p\)</span> to otrzymamy</p>
 <p><span class="math">\[
@@ -184,9 +196,9 @@ frakcje[,<span class="dv">1</span>]/frakcje[,<span class="dv">2</span>]</code></
 <p><span class="math">\[
 oddsRatio_{A/B} = odds_{A}/odds_{B} = \frac{p_A}{(1-p_A)} \frac{(1-p_B)}{p_B}
 \]</span></p>
-<p>Przedstawmy iloraz szans na przykładzie płci i odpowiedzi na pytanie o wartości.</p>
-<p>Policzymy ilu krotnie szansa na odpowiedź <em>Przyjemności</em> jest większa u mężczyzn niż u kobiet.</p>
-<p>Jeżeli iloraz szans wynosi 1 to znaczy że szanse są równe w obu grupach przez co te dwie zmienne nie są zależne.</p>
+<p>Przedstawmy iloraz szans na przykładzie płci i odpowiedzi na pytanie o wartości ważne w życiu.</p>
+<p>Policzymy ilu krotnie szansa na odpowiedź <em>Przyjemności</em> jest większa u mężczyzn, niż u kobiet.</p>
+<p>Jeżeli iloraz szans wynosi 1 to znaczy, że szanse w obu grupach są równe. Gdyby szansa na odpowiedź <em>Przyjemności</em> była taka sama w obu grupach, to uznalibyśmy, że te dwie zmienne nie są zależne (wyniki jednej nie zależą od drugiej).</p>
 <p>Jeżeli szansa jest mniejsza lub większa niż jeden, wtedy pojawia się zależność.</p>
 <p>W przykładzie dla Diagnozy Społecznej, iloraz szans wynosi <code>1.4312</code>, co oznacza, że szansa, że dla losowo wylosowanego mężczyzny, szansa że odpowie <em>Przyjemności</em> jest o 43% większa niż u kobiety.</p>
 <pre class="sourceCode r"><code class="sourceCode r">frakcje &lt;-<span class="st"> </span><span class="kw">prop.table</span>(plecSens, <span class="dv">1</span>)
@@ -206,8 +218,8 @@ szanse[<span class="dv">1</span>] /<span class="st"> </span>szanse[<span class="
 <div id="wczytanie-danych-1" class="slide section level1">
 <h1>Wczytanie danych</h1>
 <p>W zbiorze danych <code>diagnoza</code> jest ponad 38 tysięcy obserwacji. Dla tak dużej populacji, nawet bardzo małe różnice okazują się istotnie różne.</p>
-<p>Dlatego przykład dotyczący testowania przedstawimy na innym zbiorze danych, zbiorze <code>TCGA_BRCA</code> z wybranymi zmiennymi dla raka piersi. W tym zbiorze danych mamy dane dla 999 pacjentów.</p>
-<p>Kolejne kolumny tego zbioru danych opisują mutacje genu P53, płeć pacjenta, informację czy pacjent wciąż żyje, informacja ile dni po operacji doszło do zgonu oraz informacja czy w okresie jednego roku pojawił się guz / przerzuty.</p>
+<p>Dlatego przykład dotyczący testowania przedstawimy na innym zbiorze danych, zbiorze <code>TCGA_BRCA</code> z wybranymi zmiennymi dla raka piersi. W tym zbiorze danych mamy wyniki dla 999 pacjentów.</p>
+<p>Kolejne kolumny tego zbioru danych opisują takie cechy jak: mutacja genu P53, płeć pacjenta, informację czy pacjent wciąż żyje, informacja ile dni po operacji doszło do zgonu oraz informacja czy w okresie jednego roku pojawił się guz / przerzuty.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(TCGA_BRCA)</code></pre>
 <pre><code>##                TP53   plec czy.zyje dni.do.smierci czy.nowy.guz
 ## 1         Wild type female     live             NA           no
@@ -219,7 +231,7 @@ szanse[<span class="dv">1</span>] /<span class="st"> </span>szanse[<span class="
 </div>
 <div id="czy-przerzuty-pogarszaja-rokowanie" class="slide section level1">
 <h1>Czy przerzuty pogarszają rokowanie</h1>
-<p>Zobaczmy czy jest prawdopodobieństwo zgonu zależy od występowania przerzutów.</p>
+<p>Zobaczmy czy jest prawdopodobieństwo zgonu (zmienna <code>czy.zyje</code>) zależy od występowania przerzutów (zmienna <code>czy.nowy.guz</code>).</p>
 <p>Zacznijmy od wyznaczenia tablicy kontyngencji.</p>
 <pre class="sourceCode r"><code class="sourceCode r">(przerzuty_przezycia &lt;-<span class="st"> </span><span class="kw">table</span>(TCGA_BRCA$czy.nowy.guz,
       TCGA_BRCA$czy.zyje))</code></pre>
@@ -243,7 +255,7 @@ szanse[<span class="dv">1</span>] /<span class="st"> </span>szanse[<span class="
 <pre class="sourceCode r"><code class="sourceCode r">(szanse &lt;-<span class="st"> </span>frakcje[,<span class="dv">1</span>]/frakcje[,<span class="dv">2</span>])</code></pre>
 <pre><code>##        no       yes 
 ## 0.0497076 1.1500000</code></pre>
-<p>Iloraz szans wynosi 0.04, co znaczy, że w grupie badanych szansa na zgon osób bez przerzutów to 4% szansy na zgon osób z przerzutami. Równoważnie można powiedzieć, że osoby z przerzutami mają 25 razy wyższą szansę na zgon niż w grupie bez przerzutów.</p>
+<p>Iloraz szans wynosi 0.049, co znaczy, że w grupie badanych szansa na zgon osób bez przerzutów to mniej niż 5% szansy na zgon osób z przerzutami. Równoważnie można powiedzieć, że osoby z przerzutami mają szansę na zgon 1.15 (prawie 24 razy większe).</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># bez przerzutów do przerzutów</span>
 szanse[<span class="dv">1</span>] /<span class="st"> </span>szanse[<span class="dv">2</span>]</code></pre>
 <pre><code>##       no 
@@ -255,10 +267,10 @@ szanse[<span class="dv">2</span>] /<span class="st"> </span>szanse[<span class="
 </div>
 <div id="czy-przerzuty-pogarszaja-rokowanie-2" class="slide section level1">
 <h1>Czy przerzuty pogarszają rokowanie</h1>
-<p>Iloraz szans równy 23 wydaje się byś istotnie większy niż 1.</p>
+<p>Iloraz szans równy 23 wydaje się byś istotnie większy niż 1 (co jak wiemy, oznacza brak zależności).</p>
 <p>Aby przetestować czy ta zależność pomiędzy przerzutami a przeżyciem jest istotna statystyczna można przeprowadzić test.</p>
-<p>Dla tabel 2 na 2 najbardziej popularnym rozwiązaniem jest użycie testu Fishera.</p>
-<p>Przedstawiona w tym teście p-wartość odpowiada prawdopodobieństwo, że iloraz szans będzie większy niż obserwowany w sytuacji gdyby pomiędzy zmiennymi nie było żadnych zależności.</p>
+<p>Dla tabel 2 na 2 najbardziej popularnym rozwiązaniem jest użycie testu Fishera. Podobnie jak dla testu dla regresji i testu dla średnich (które omawialiśmy cztery odcinki wcześniej), też test Fishera opiera się na badaniu, jak często przypadkowo iloraz byłby większy niż obserwowany (przy założeniu że tyle samo osób ma przerzuty i tyle samo osób umiera).</p>
+<p>Czyli p-wartość wyznaczona w tym teście odpowiada prawdopodobieństwu, że obserwowany iloraz szans jest większy niż obserwowany w sytuacji gdyby pomiędzy zmiennymi nie było żadnych zależności.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fisher.test</span>(przerzuty_przezycia)</code></pre>
 <pre><code>## 
 ##  Fisher's Exact Test for Count Data
@@ -271,7 +283,7 @@ szanse[<span class="dv">2</span>] /<span class="st"> </span>szanse[<span class="
 ## sample estimates:
 ## odds ratio 
 ##  0.0439938</code></pre>
-<p>W tym przykładzie p-wartość jest rzędu <span class="math">\(2 * 10^{-15}\)</span>, tak więc gdyby zmienne nie były zależne byłoby nieprawdopodobne by zaobserwować taką wartość.</p>
+<p>W tym przykładzie p-wartość jest rzędu <span class="math">\(2 * 10^{-15}\)</span>, tak więc gdyby zmienne nie były zależne, byłoby nieprawdopodobne by zaobserwować tak duży iloraz szans.</p>
 </div>
 <div id="zadania" class="slide section level1">
 <h1>Zadania</h1>
