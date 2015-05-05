@@ -38,7 +38,7 @@ Dlaczego są one takie ważne? Ponieważ bez tytułu i opisu osi czytelnik może
 Dlaczego umniejszany? Ponieważ twórca wykresu zazwyczaj wie co wykres przedstawia i niekoniecznie ma ochotę i czas by dbać o czytelnika.
 
 My będziemy tworzyć bardzo dobre wykresy, ponieważ na naszych wykresach wszystko będzie jasne i opisane.
-Przyjrzyjmy się wykresowi z pierwszego odcinka i zastanówmy się które elementy warto dodatkowo opisać?
+Przyjrzyjmy się wykresowi z pierwszego odcinka i zastanówmy się, które elementy warto dodatkowo opisać?
 
 Poświęć kilka minut by znaleźć przynajmniej pięć elementów, które warto lepiej opisać na tym wykresie.
 
@@ -60,7 +60,7 @@ Oto co ja znalazłem:
 
 - W opisach osi brakuje jednostek. Jest informacja 'waga' ale w jakich to jednostkach? Kilogramach, funtach? 
 - Podobny problem dotyczy prędkości, czy to kilometry na godzinę czy mile?
-- Opis legendy 'druzyna' może i jest zabawny ale niewiele mówi. Jaka drużyna? Dla kogoś, kto nie skojarzy tych danych z wyścigami gatunków, ta nazwa nic nie mówi
+- Opis legendy 'druzyna' może i jest zabawny ale niewiele mówi. Jaka drużyna? Dla kogoś, kto nie skojarzy tych danych z wyścigami gatunków, ta nazwa nic nie mówi.
 - O co chodzi z tym wykresem? Gdzie jest tytuł? Co on w ogóle przedstawia?
 - Jakie gatunki reprezentują najbardziej skrajne punkty? Który kot i który ptak jest najszybszy?
 
@@ -129,7 +129,7 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, shape=druzyna)) +
 
 # Większa kontrola nad mapowaniami
 
-Mapowania to jedna z najciekawszych rozwiązań w pakiecie `ggplot2`. Wystarczy, że wskażemy jakie zmienne mają być przedstawione na wykresie, oraz jakie cechy wykresu mają te zmienne opisać, a program R automatycznie dobiera sposób prezentacji uwzględniając typ zmiennej. Przy okazji sprawdzi czy przyjmuje ona kilka wartości czy wiele, czy jest zmienną ilościową czy jakościową itp. 
+Mapowania to jedne z najciekawszych rozwiązań w pakiecie `ggplot2`. Wystarczy, że wskażemy jakie zmienne mają być przedstawione na wykresie, oraz jakie cechy wykresu mają te zmienne opisać, a program R automatycznie dobiera sposób prezentacji uwzględniając typ zmiennej. Przy okazji sprawdzi czy przyjmuje ona kilka wartości czy wiele, czy jest zmienną ilościową czy jakościową itp. 
 
 Czasem jednak, chcielibyśmy zmienić sposób reprezentacji zmiennych, a więc zmienić domyślne mapowanie. 
 
@@ -297,7 +297,7 @@ Aby wyświetlić wykres `pl_waga` można wykorzystać funkcję `print()`.
 print(pl_waga)
 ```
 
-# Wiele wykresów w jednym oknie
+# Wiele wykresów w jednym oknie - `vp=`
 
 Jednym z argumentów funkcji `print()` dla wykresów, jest argument `vp=`. Pozwala on określić w którym miejscu ekranu wykres ma być rysowany. 
 
@@ -323,7 +323,7 @@ print(pl_waga + ggtitle("Wykres 3"),
       vp=viewport(x=0.75, y = 0.5, width=0.5, height=1))
 ```
 
-# Wiele wykresów w jednym oknie
+# Wiele wykresów w jednym oknie - `grid.layout`
 
 Argument `vp=` pozwala na narysowanie wykresu w dowolnym miejscu na ekranie. 
 
@@ -342,6 +342,22 @@ print(pl_waga + ggtitle("Wykres 2"),
 # rysujemy w komórce o współrzędnych 1:2x2
 print(pl_waga + ggtitle("Wykres 3"),
       vp = viewport(layout.pos.row=1:2, layout.pos.col=2))
+```
+
+# Wiele wykresów w jednym oknie - `grid.arrange`
+
+Najprostszym sposobem na wyświetlenie kilku wykresów obok siebie (jeżeli tylko nie potrzebujemy żadnego wyrafinowano rozmieszczenia) jest użycie funkcji `grid.arrange()` z pakietu `gridExtra`.
+
+Wystarczy jako kolejne argumenty podać wykresy, które mają być wyświetlone a funkcja `grid.arrange()` sama je uporządkuje. Argumentem `ncol` można określić w ilu kolumnach mają być wyświetlane wykresu.
+
+
+```{r, fig.height=5, fig.width=7, message=FALSE, warning=FALSE}
+library(gridExtra)
+
+grid.arrange( pl_waga + ggtitle("Wykres 1"), 
+              pl_waga + ggtitle("Wykres 2"), 
+              pl_waga + ggtitle("Wykres 3"),
+              ncol=2)
 ```
 
 ---
