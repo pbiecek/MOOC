@@ -433,7 +433,7 @@ https://gss.civilservice.gov.uk/wp-content/uploads/2014/12/Effective-graphs-and-
     * *Ten Simple Rules for Better Figures*  http://www.ploscompbiol.org/article/info:doi/10.1371/journal.pcbi.1003833
     * *Twenty rules for good graphics* http://robjhyndman.com/hyndsight/graphics/
 
-# Zadanie, sezon 2, odcinek 4
+# Zadanie, sezon 2, odcinek 9
 
 + Podobnie jak w poprzednim odcinku, wybierz samochody marki Volkswagen model Passat a następnie narysuj jak średnia cena zależy od roku produkcji za pomocą geometrii `geom_smooth()`. Następnie zobacz jak ten wykres będzie wyglądał z motywami `theme_bw()`, `theme_excel()` i `theme_economist()`.
 
