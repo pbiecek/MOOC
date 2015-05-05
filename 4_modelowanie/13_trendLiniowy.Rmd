@@ -15,17 +15,17 @@ output:
 # O czym jest ten odcinek?
 
 
-Analizując dane, często trafiamy na sytuację, gdy mamy sekwencje liczb i chcemy ocenić czy w wartościach jest widoczny trend.
+Analizując dane, często trafiamy na sytuację, gdy mamy sekwencje liczb i chcemy ocenić czy widać w niej trend.
 
 Analizując zużycie energii możemy sprawdzać czy występuje rosnący trend zapotrzebowania na energię. Jeżeli pracujemy z danymi o sprzedaży biletów może interesować nas trend w liczbie sprzedanych biletów.
 
-Jednak nawet gdy występuje widoczny trend, bardzo rzadko wartości układają się idealnie w linię. Zazwyczaj trend jest zanurzony w dużych fluktuacjach. 
+Jednak nawet gdy występuje widoczny trend, bardzo rzadko wartości układają się idealnie w linię prostą. Zazwyczaj trend jest zanurzony w dużych fluktuacjach. 
 
-Jak więc oszacować z jakim trendem liniowym mamy do czynienia?
+Jak więc oszacować z jakim trendem mamy do czynienia?
 
-I tutaj pojawia się statystyka. Używając takich narzędzi jak regresja liniowa możemy ocenić jakie są parametry liniowego trendu.
+Tutaj pojawia się statystyka. Używając takich narzędzi jak regresja liniowa czy nieliniowa możemy ocenić jakie są parametry trendu. Dla uproszczenia w tym odcinku skupimy się na trendzie liniowym.
 
-Oczywiście nie zawsze tendencje układają się w liniowy wzrost lub liniowy spadek. Potraktujemy więc prace z trendem liniowym jako pierwszy krok zanim zaczniemy dopasowywać bardziej złożone zależności.
+Oczywiście nie zawsze tendencje układają się w liniowy wzrost lub liniowy spadek. Potraktujemy więc prace z trendem liniowym jako pierwszy krok, zanim zaczniemy dopasowywać bardziej złożone zależności.
 
 W tym odcinku, na przykładzie danych z serwisu IMDB (Internet Movie Database), pokażemy jak działa procedura wyznaczania trendu w danych.
 
@@ -33,16 +33,17 @@ W tym odcinku, na przykładzie danych z serwisu IMDB (Internet Movie Database), 
 
 # Baza danych o filmach i serialach
 
-W bazie danych o filmach IMDB (Internet Movie Database) znaleźć można dane o serialach a w szczególności średnie oceny użytkowników wystawione kolejnym odcinkom serialu.
+W bazie danych z informacjami o filmach IMDB (Internet Movie Database) znaleźć można dane o serialach. Wśród tych danych znajdują się średnie oceny internautów wystawione kolejnym odcinkom serialu.
 
 Przykładowo, na stronie http://www.imdb.com/title/tt0903747/epdate?ref_=ttep_ql_4 znajdują się oceny serialu *Breaking Bad*.
 
-Dane te zostały pobrane z Internetu i przygotowane tak, że teraz są dostępne w zbiorze danych `serialeIMDB` w pakiecie `PogromcyDanych`, który towarzyszy temu kursowi.
+Dane o ocenach zostały pobrane z Internetu i przygotowane tak, że teraz są dostępne w zbiorze danych `serialeIMDB` w pakiecie `PogromcyDanych`, który towarzyszy temu kursowi.
 
-Na przykładzie tych danych poćwiczymy prace z trendem liniowym.
+Na przykładzie tych danych poćwiczymy dopasowanie trendu liniowego do danych.
 
 ```{r, warning=FALSE, message=FALSE}
 library(PogromcyDanych)
+# pierwsze sześć wierszy ze zbioru danych serialeIMDB
 head(serialeIMDB)
 ```
 
@@ -52,11 +53,11 @@ head(serialeIMDB)
 
 Mając taki zbiór danych, przyjrzyjmy się jak wyglądają oceny dla serialu *Breaking Bad*. 
 
-Poniższy wykres przedstawia średnie oceny (na osi OY)  dla kolejnych odcinków (rozłożonych wzdłuż osi OX). W poprzednim odcinku pokazaliśmy jak zrobić taki wykres.
+Poniższy wykres przedstawia średnie oceny (na osi OY)  dla kolejnych odcinków (rozłożonych wzdłuż osi OX). 
 
 Kolejne sezony są oznaczane różnymi kolorami. Czy patrząc na te wyniki widzimy jakąś globalną tendencję / trend?
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=4}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=5}
 library(dplyr)
 library(ggvis)
 serialeIMDB %>%
@@ -74,11 +75,11 @@ serialeIMDB %>%
 
 Dodajmy do wykresu linię trendu liniowego, najlepiej dopasowanego do danych. 
 
-Teraz łatwiej zauważyć rosnącą tendencję ocen, co więcej można z wykresu odczytać tempo wzrostu.
+Patrząc na trend łatwiej zauważyć wzrostową tendencję ocen. Co więcej można odczytać tempo średniego wzrostu ocen.
 
-Ale jak ta linia została wyznaczona? Co to znaczy ,,najlepiej dopasowany do danych''?
+Ale jak ta linia trendu została wyznaczona? Co to znaczy ,,najlepiej dopasowany do danych''?
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=4}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=5}
   serialeIMDB %>%
   filter(serial == "Breaking Bad") %>%
   mutate(sezon = droplevels(sezon)) %>%
@@ -95,25 +96,29 @@ Ale jak ta linia została wyznaczona? Co to znaczy ,,najlepiej dopasowany do dan
 
 Problem znajdowania trendu liniowego można przedstawić na wiele sposobów. Poniżej przedstawimy go jako zagadnienie optymalizacji.
 
-Zakładamy, że trend jest liniowy, to znaczy, że można go przedstawić za pomocą równania $a_0 + a_1 * numerOdcinka$, gdzie wartości $a_0$ i $a_1$ są nieznane.
+Trend liniowy można przedstawić za pomocą równania liniowego $a_0 + a_1 * numerOdcinka$. 
 
-Jak je wyznaczyć? Chcielibyśmy, żeby linia trendu była jak najbliżej danych. 
+Wartości $a_0$ i $a_1$ są nieznane i należy je wyznaczyć z danych.
 
-Ale co to znaczy jak najbliżej? 
+*Ale jak je wyznaczyć?*
 
-Jest wiele sposobów określania miary bliskości, ale najczęściej używany jest następujący:
+Chcielibyśmy, żeby linia trendu była jak najbliżej danych. 
+
+*Ale co to znaczy jak najbliżej?* 
+
+Jest wiele sposobów określania miary bliskości. Najczęściej używany jest następujący:
 
 * Dla odcinka `i`, czyli punktu o współrzędnych ($i$, $ocena_i$) odległość od lini trendu liczymy jako 
 $$
-niedopasowanie_i = (ocena_i - (a_0 + a_1 * i))^2
+niedopasowanie_i(a_0, a_1) = (ocena_i - (a_0 + a_1 * i))^2
 $$
 * Niedopasowanie całej krzywej trendu (oznaczane zazwyczaj jako RSS, skrót od _Residual Sum of Squares_) liczymy jako sumę niedopasowań dla każdego punktu
 $$
-RSS = \sum_i niedopasowanie_i = \sum_i (ocena_i - (a_0 + a_1 * i))^2
+RSS(a_0, a_1) = \sum_i niedopasowanie_i = \sum_i (ocena_i - (a_0 + a_1 * i))^2
 $$
-* Oceny współczynników linii trendu $\hat a_0$ i $\hat a_1$ wyznacza się w ten sposób by minimalizowały niedopasowanie RSS. 
+* Oceny współczynników linii trendu $\hat a_0$ i $\hat a_1$ wyznacza się w ten sposób by minimalizowały niedopasowanie $RSS(a_0, a_1)$. 
 
-Aby wyprowadzić wzór na te współczynniki dobrze znać przynajmniej rachunek różniczkowy (wystarczy wtedy policzyć pochodną i przyrównać ją do zera). 
+Aby wyprowadzić wzór na te współczynniki dobrze znać przynajmniej rachunek różniczkowy. Wystarczy wtedy policzyć pochodne po $a_i$ i przyrównać je do zera (co nie jest trudne bo mamy do czynienia z wielomianem drugiego stopnia, przykładowe wyprowadzenie jest przedstawione na wikipedii http://en.wikipedia.org/wiki/Simple_linear_regression). 
 
 Aby wyznaczyć wartości tych współczynników w programie R wystarczy wykorzystać funkcję `lm()`.
 
@@ -123,56 +128,60 @@ Aby wyznaczyć wartości tych współczynników w programie R wystarczy wykorzys
 
 Przygotujmy zbiór danych `tylkoBreakingBad` w którym będą tylko wartości zmiennych `id` i `ocena` dla odcinków z serialu `Breaking Bad`.
 
-Więcej o tym jak działają funkcje `filter()` i `select()` przeczytać można w pierwszym sezonie.
+Wykorzystamy funkcje `filter()` i `select()`, więcej o tym jak one działają można przeczytać w pierwszym sezonie Pogromców.
 
 ```{r}
-# wybierz tylko dwie kolumny i wiersze dla jednego serialu
+# wybierz z danych tylko dwie kolumny i dla jednego wybranego serialu
 tylkoBreakingBad <- serialeIMDB %>%
   filter(serial == "Breaking Bad") %>% 
   select(id, ocena)
-# pierwsze 6 wierszy z nowo przygotowanego zbioru danych
+```
+Pierwsze 6 wierszy z nowo przygotowanego zbioru danych.
+```{r}
 head(tylkoBreakingBad)
 ```
 
 ---
 
-# Jak wyznaczyć współczynniki trendu liniowego w programie R
+# Jak wyznaczyć współczynniki trendu liniowego w programie R?
 
 Do wyznaczenia trendu liniowego wykorzystujemy funkcję `lm()` (nazwa od *linear model* czyli model liniowy).
 
 Funkcja `lm()` jako pierwszy argument przyjmuje formułę opisująca pomiędzy którymi zmiennymi chcemy wyznaczyć relację, a jako drugi argument wskazuje zbiór danych.
 
-Formuła ma znak `~` (tyldy), po jego lewej stronie wskazuje się zmienną którą chcemy opisać (tak zwaną zmienną objaśnianą), a po prawej stronie podaje się zmienną objaśniającą.
+Centralnym symbolem w formule jest znak `~` (tylda). Po jego lewej stronie wskazuje się zmienną którą chcemy opisać (tak zwaną zmienną objaśnianą), a po prawej stronie podaje się zmienną objaśniającą. 
+
+My chcemy opisać średnią ocenę jako funkcję numeru odcinka. Wybieramy tylko dane dla *Breaking Bad*.
 
 ```{r}
 lm(ocena~id, tylkoBreakingBad)
 ```
 
-Wynik funkcji `lm()` jest listą z wieloma informacjami. Współczynniki modelu znajdują się we właściwości o nazwie `coef`.
+Wynik funkcji `lm()` jest listą z wieloma polami. Współczynniki modelu znajdują się w elemencie o nazwie `coef`.
 
 ```{r}
 lm(ocena~id, tylkoBreakingBad)$coef
 ```
 
-Wartość `(Intercept)` to współczynnik $\hat a_0$ a `id` to współczynnik $\hat a_1$. 
+Wartość `(Intercept)` to ocena współczynnika $a_0$ a `id` to ocena współczynnika $a_1$.
 
-# Jak wyznaczyć współczynniki trendu liniowego w programie R
+# Jaka to relacja?
 
-Tak więc dla serialu `Breaking Bad` linia, która minimalizuje RSS ma formułę to
+Tak więc dla serialu `Breaking Bad` linia, która minimalizuje błąd RSS ma równanie
 $$
 ocena =  7.90222  +  0.01836 * id
 $$
 
 Jak czytać to równanie?
 
-Za `id` należy podstawiać numer odcinka aby odczytać oszacowanie oceny danego odcinka.
+Za `id` należy podstawiać numer odcinka aby odczytać oszacowanie średniej oceny danego odcinka wynikającej z dopasowanego trendu liniowego.
 
-Przykładowo, dla odcinka pierwszego `id=1`, a wiec oszacowanie startowej oceny to
+Przykładowo, dla odcinka pierwszego `id=1`, a wiec oszacowanie startowej oceny z wykorzystaniem trendu liniowego to
 $$
-ocena_1 =  7.90222  +  0.01836 = 7.92058
+ocena_1 =  7.90222  +  0.01836 * 1 = 7.92058
 $$
 
-Co odcinek, średnia zmiana oceny wynosi 0.01836. 
+Zmienna $a_1$ opisuje średnią zmianę oceny co odcinek. Zgodnie z oszacowanymi wartościami, średnia zmiana oceny wynosi 0.01836. 
 
 I tak po 62 odcinkach, dopasowany trend szacuje popularność końcówki sezonu na
 
@@ -180,9 +189,9 @@ $$
 ocena_{62} =  7.90222  +  62*0.01836 = 9.04054
 $$
 
-Korzystając z tych średnich, musimy oczywiście mieć na uwadze, że linia prosta to jakieś dopasowanie, ale niekoniecznie idealne. 
+Korzystając z tych średnich, musimy oczywiście mieć na uwadze, że linia prosta to pewne przybliżenie danych, ale niekoniecznie idealne. 
 
-Jak dopasowywać bardziej złożone modele - o tym napiszemy w kolejnych odcinkach.
+Jak dopasowywać bardziej złożone modele? O tym napiszemy w kolejnych odcinkach.
 
 ---
 
@@ -260,4 +269,5 @@ serialeIMDB %>%
     layer_points(fillOpacity:=0.8) %>%
     layer_smooths() 
 ```
+
 
