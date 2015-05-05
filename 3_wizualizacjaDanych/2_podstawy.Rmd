@@ -462,7 +462,7 @@ Opanowaliśmy podstawy tworzenia wykresów z użyciem pakietu `ggplot2`. W kolej
 
 ---
 
-# Zadania:
+# Zadanie, sezon 2, odcinek 7
 
 + Przedstaw graficznie za pomocą wykresu punktowego zależność pomiędzy żywotnością (kolumna `zywotnosc`) a wagą zwierzęcia (kolumna `waga`).
 
