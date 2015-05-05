@@ -14,13 +14,13 @@ output:
 
 # O czym jest ten odcinek?
 
-Analizując dane, często trafiamy na sytuację, gdy mamy do porównania dwie grupy pomiarów i jesteśmy ciekawi, czy te grupy różnią się między sobą.
+Analizując dane, często natrafiamy na sytuację, gdy mamy do porównania dwie grupy obserwacji i chcemy sprawdzić, czy te grupy różnią się między sobą.
 
-W przypadku danych medycznych to mogą być pacjęci biorący lek A i lek B, a pytanie, które nas może nurtować to czy skuteczność obu leków jest porównywalna czy też jedne z nich jest istotnie lepszy. Analizując uprawę zbóż możemy mieć dwie odmiany i chcemy sprawdzić czy jedna daje wyższe plony niż druga. Podobne przykłady można mnożyć.
+W przypadku danych medycznych to mogą być pacjenci biorący lek A i lek B, a pytanie, które nas może nurtować to czy skuteczność obu leków jest porównywalna czy też jedne z nich jest istotnie skuteczniejszy. Analizując uprawę zbóż możemy mieć dwie odmiany i pytanie czy jedna uprawa daje wyższe plony niż druga. Podobne przykłady można mnożyć.
 
-Zazwyczaj gdy w jednej grupie policzymy średnią określonej cechy i w drugiej grupie policzymy średnią tej cechy, to któraś z tych średnich jest większa. Ale czy to istotna różnica?
+Zazwyczaj gdy w jednej grupie policzymy średnią określonej cechy i w drugiej grupie policzymy średnią tej cechy, to któraś z tych średnich jest większa. Ale czy różnica pomiędzy tymi średnimi jest istotna? A może jej wielkość jest pomijalna?
 
-Przykłądowo, jeżeli porównam średnie temperatury we Wrocławiu i średnie temperatury w Warszawie, w okresie ostatnich 30 dni to średnia we Wrocławiu jest wyższa o około 0,5 stopnia Celcjusza. Ale czy ta różnica wynika z losowych fluktuacji temperatury czy też jest odzwierciedleniem pewnej ogólnej prawidłowości, że we Wrocławiu jest średnio cieplej?
+Jako przykład wyobraźmy sobie następującą sytuację. Przypuśćmy, że porównuje średnie dzienne temperatury we Wrocławiu i średnie dzienne temperatury w Warszawie, i będę robił to dzień w dzień przez kolejnych 30 dni. Przypuśćmy, że średnia we Wrocławiu jest wyższa o około 0,5 stopnia Celsjusza od średniej w Warszawie. Ale czy ta różnica wynika z losowych fluktuacji temperatury czy też jest odzwierciedleniem pewnej ogólnej prawidłowości, że we Wrocławiu jest średnio cieplej?
 
 W odpowiedzi na podobnie sformułowane pytania pojawia się statystyka. Używając takich narzędzi jak testy dla dwóch prób możemy pomóc sobie w odpowiedzi na pytanie, czy obserwowane różnice są czysto przypadkowe, czy też nie.
 
@@ -30,7 +30,7 @@ W tym odcinku, na przykładzie danych z serwisu IMDB (Internet Movie Database), 
 
 # Baza danych o filmach i serialach
 
-W bazie danych o filmach IMDB (Internet Movie Database) znaleźć można dane o serialach a w szczególności średnie oceny użytkowników wystawione kolejnym odcinkom serialu.
+W bazie danych o filmach IMDB (Internet Movie Database) znaleźć można dane o serialach w tym średnie oceny użytkowników wystawione kolejnym odcinkom serialu.
 
 Przykładowo, na stronie http://www.imdb.com/title/tt0108778/epdate?ref_=ttep_ql_4 znajdują się oceny serialu *Friends* a na stronie http://www.imdb.com/title/tt0903747/epdate?ref_=ttep_ql_4  oceny serialu *Breaking Bad*.
 
@@ -49,12 +49,16 @@ Mając zbiór danych o serialach, możemy porównać oceny odcinków dwóch seri
 
 Na początek wyciągnijmy ze zbioru danych o wszystkich serialach dwa podzbiory, osobno oceny dla serialu *Friends* i oceny dla serialu *Breaking Bad*
 
+Oceny dla serialu Friends
+
 ```{r}
-# oceny dla serialu Friends
 ocenyFriends     <- serialeIMDB[serialeIMDB$serial == "Friends", "ocena"]
 summary(ocenyFriends)
+```
 
-# oceny dla serialu Breaking Bad
+Oceny dla serialu Breaking Bad
+
+```{r}
 ocenyBreakingBad <- serialeIMDB[serialeIMDB$serial == "Breaking Bad", "ocena"]
 summary(ocenyBreakingBad)
 ```
@@ -67,13 +71,13 @@ Czy to duża różnica czy mała?
 
 # Graficzne zestawienie
 
-Pokażmy jak oceny dla obu seriali wyglądają gdy się je zestawi obok siebie na wspólnej osi.
+Pokażmy jak oceny dla obu seriali wyglądają gdy się je zestawi obok siebie porządkując oceny wzdłuż wspólnej osi.
 
 Po lewej *Breaking Bad* po prawej *Friends*. Każdy punkt to ocena jednego odcinka.
 
-Czy obserowana różnica jest duża, a czy jest istotna?
+Czy obserwowana różnica jest duża? A czy jest istotna statystycznie?
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
 library(dplyr)
 library(ggvis)
   tmp <- serialeIMDB[serialeIMDB$serial %in% c("Friends", "Breaking Bad"), ]
@@ -96,7 +100,7 @@ library(ggvis)
 
 # Testowanie średnich - algorytm
 
-Statystycy opracowali wiele testów aby porównać wartości w dwóch grupach. W większości przypadków te testy dają zbliżone wyniki, więc zamiast przedstawiać ich leksykon wyjaśnimy na jednym przykładzie na czym polega testowanie. Przedstawimy tak zwany test permutacyjny do porównywania średnich.
+Statystycy opracowali wiele testów aby porównać wartości w dwóch grupach. W większości przypadków te testy dają zbliżone wyniki, więc zamiast przedstawiać ich listę wyjaśnimy sposób działania na jednym przykładzie. Przedstawimy tak zwany test permutacyjny do porównywania średnich.
 
 Pomysł na porównanie dwóch grup składa się z trzech kroków. Przedstawmy je jeden po drugim.
 
@@ -104,7 +108,7 @@ Pomysł na porównanie dwóch grup składa się z trzech kroków. Przedstawmy je
 
 Będziemy testować hipotezę (=przypuszczenie), czy wartości w jednym zbiorze są istotnie większe niż wartości w drugim zbiorze. 
 
-Tę hipotezę, sformujmy w następujący sposób: *Czy obserwowana różnica pomiędzy średnimi ocenami jest wystarczająco duża, by uznać ją za istotną?*
+Tę hipotezę, sformujmy w następujący sposób: *Czy obserwowana różnica pomiędzy średnimi ocenami jest wystarczająco duża, by uznać ją za istotną (mieć pewność, która grupa jest większy)?*
 
 ### Krok 2: Określ miarę wielkości różnic
 
@@ -127,12 +131,11 @@ Najlepiej by było porównać ją z wartościami, które byśmy obserwowali gdyb
 Ale skąd wiadomo jakie byłyby różnice gdyby obie grupy się nie różniły? 
 Możemy to oszacować w następujący sposób
 
-* [I] Wymieszamy losowo wartości w obu grupach zachowując liczebność grup. Dzięki temu otrzymamy dwie grupy o których wiemy, że się nie różnią istotnie a jedyne różnice wynikają z losowych fluktuacji,
+* [I] Wymieszamy losowo wartości w obu grupach zachowując liczebność grup. Dzięki temu otrzymamy dwie grupy o których wiemy, że się nie różnią istotnie (są losowo wymieszane) a jedyne różnice wynikają z losowych fluktuacji,
 * [II] Policzymy jak duża jest różnica dla tych nowo wylosowanych grup,
 * [III] Powtórzymy kroki [I] i [II] wielokrotnie (np. 99 999 razy) aby zobaczyć jak duże wartości może przyjmować ta różnica w sytuacji gdy obie grupy nie różnią się od siebie.
 
-To liczenie różnic na próbach różniących się jedynie losową fluktuacją jest realizowane przez poniższy kod.
-
+Liczenie różnic na próbach różniących się jedynie losową fluktuacją jest realizowane przez poniższy kod.
 
 ```{r}
 # połączony wektor ocen z obu seriali
@@ -172,7 +175,7 @@ abline(v=obserwowana_roznica, col="red", lwd=5)
 
 # Czy serial Friends jest lepszy niż serial Breaking Bed? - p-wartość
 
-Wykres pomaga w zrozumieniu na ile obserowana różnica średnich różni się od tych, wygenerowanych przez losowe fluktuacje.
+Wykres pomaga w zrozumieniu na ile obserwowana różnica średnich różni się od tych, wygenerowanych przez losowe fluktuacje.
 
 Ale aby podjąć decyzje lepiej mieć jedną liczbę. Policzmy jaka część różnic dla losowych fluktuacji jest większa lub równa niż obserwowana różnica. Taka częstość jest nazywana p-wartością.
 
@@ -186,9 +189,9 @@ Czy wiedząc, że w wyniku losowych przypisać aż w 64\% przypadków obserwuje 
 
 Pewnie nie. To jaki próg przyjmiemy zależy od konkretnego zastosowania, ale często za próg wybiera się 0.05. Z powodów historycznych.
 
-W każdym razie, jeżeli otrzymana p-wartość jest mniejsza niż 0.05, to przyjmiemy, że obserowana wartość jest istotnie różna od przypadkowej (=0). Jeżeli otrzymana p-wartość jest większa równa 0.05 to przyjmiemy, że nie ma istotnych statystycznie różnic.
+W każdym razie, jeżeli otrzymana p-wartość jest mniejsza niż 0.05, to przyjmiemy, że obserwowana wartość jest istotnie różna od przypadkowej (=0). Jeżeli otrzymana p-wartość jest większa równa 0.05 to przyjmiemy, że nie ma istotnych statystycznie różnic.
 
-W przypadku part Friends i Breaking Bad, ta różnica była niewielka i nie istotna.
+W przypadku part Friends i Breaking Bad, ta różnica była niewielka i raczej uznamy, że nie istotna statystycznie.
 
 
 # Czy serial Friends jest lepszy niż serial Sherlock?
@@ -280,5 +283,6 @@ Używając poniższej aplikacji można porównać dowolne dwa seriale oraz oceni
 * Znajdź dwa seriale (inne niż Friends i Sherlock), które różnią się istotnie, przyjmując za próg istotności 0.05.
 
 * Znajdź dwa seriale (inne niż Friends i Breaking Bad), które nie różnią się istotnie, przyjmując za próg istotności 0.05.
+
 
 
