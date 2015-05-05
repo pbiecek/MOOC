@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="pogRomcy danych" />
-  <meta name="copyright" content="pogRomcy danych / modelowanie / testy kxp" /> 
+  <meta name="copyright" content="pogRomcy danych / modelowanie / testy 2xp" /> 
   <title>Zależność pomiędzy dwiema zmiennymi jakościowymi</title>
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
@@ -54,18 +54,17 @@ pogRomcy danych
 <h1>O czym jest ten odcinek</h1>
 <p>W poprzednim odcinku pokazaliśmy jak badać zależność pomiędzy dwoma zmiennymi binarnymi.</p>
 <p>A co w sytuacji gdy zmienne nie są binarne? Temu tematowi poświęcony jest ten odcinek.</p>
-<p>W tym odcinku nauczymy się jak:</p>
+<p>W tym odcinku nauczymy się:</p>
 <ul>
 <li>jak budować i jak czytać tablice kontyngencji dla pary zmiennych jakościowych</li>
 <li>jak przedstawiać graficznie tabelę kontyngencji</li>
 <li>jak statystycznie testować zależność pomiędzy parą zmiennych.</li>
 </ul>
-<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, to dane z Diagnozy Społecznej, dostępne w tabeli <code>diagnoza</code> a drugi o nowotworze piersi, dostępne w tabeli <code>TCGA_BRCA</code>, oba dostępne w pakiecie <code>PogromcyDanych</code>.</p>
+<p>Do ilustracji tych zagadnień wykorzystamy dwa zbiory danych. Pierwszy, to dane z Diagnozy Społecznej, dostępne w tabeli <code>diagnoza</code> a drugi to dane o nowotworze piersi, dostępne w tabeli <code>TCGA_BRCA</code>. Oba dostępne w pakiecie <code>PogromcyDanych</code>.</p>
 </div>
 <div id="wczytanie-danych" class="slide section level1">
 <h1>Wczytanie danych</h1>
-<p>Dane od których rozpoczniemy przykłady to <code>diagnoza</code> z pakietu <code>PogromcyDanych</code>. Aby te dane wczytać, wystarczy włączyć ten pakiet - instrukcja jak to zrobić znajduje się w odcinku 2 pierwszego sezonu.</p>
-<p>W zbiorze danych <code>diagnoza</code> dostępnych jest kilkadziesiąt kolumn, opisujących odpowiedzi na różne interesujące pytania. W tym odcinku przyjrzymy się tylko kilku wybranym kolumnom, opisującym imię, wiek, płeć, ukończoną edukację oraz odpowiedź na pytanie ,,Co jest według Pana ważniejsze w życiu?’’ (zmienna w kolumnie <code>gp29</code>) z możliwymi odpowiedziami <em>Poczucie sensu</em> i <em>Przyjemności</em>.</p>
+<p>W zbiorze danych <code>diagnoza</code> dostępnych jest kilkadziesiąt kolumn, opisujących odpowiedzi na różne interesujące pytania. W tym odcinku przyjrzymy się tylko kilku wybranym kolumnom, opisującym imię (kolumna <code>imie_2011</code>), wiek (<code>wiek2013</code>), płeć (<code>plec</code>), ukończoną edukację (<code>eduk4_2013</code>) oraz odpowiedź na pytanie ,,Co jest według Pana ważniejsze w życiu?’’ (zmienna w kolumnie <code>gp29</code>) z możliwymi odpowiedziami <em>Poczucie sensu</em> i <em>Przyjemności</em>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PogromcyDanych)
 diagnoza[<span class="dv">1</span>:<span class="dv">6</span>, <span class="kw">c</span>(<span class="st">&quot;imie_2011&quot;</span>, <span class="st">&quot;wiek2013&quot;</span>, <span class="st">&quot;plec&quot;</span>, <span class="st">&quot;eduk4_2013&quot;</span>, <span class="st">&quot;gp29&quot;</span>)]</code></pre>
 <pre><code>##   imie_2011 wiek2013      plec                    eduk4_2013
@@ -85,7 +84,7 @@ diagnoza[<span class="dv">1</span>:<span class="dv">6</span>, <span class="kw">c
 </div>
 <div id="jak-wyglada-tabela-kontyngencji-dla-wyksztacenia" class="slide section level1">
 <h1>Jak wygląda tabela kontyngencji dla wykształcenia</h1>
-<p>W poprzednim odcinku przyglądaliśmy się parze zmiennych <code>plec</code>, czyli płeć respondenta i <code>gp29</code>, czyli odpowiedź na pytanie co jest ważniejsze w życiu.</p>
+<p>W poprzednim odcinku przyglądaliśmy się parze zmiennych <code>plec</code>, czyli płeć respondenta i zmiennej <code>gp29</code>, czyli odpowiedź na pytanie co jest ważniejsze w życiu.</p>
 <p>W tym odcinku przyjrzymy się zależności pomiędzy poziomem edukacji (zmienna <code>eduk4_2013</code>) a odpowiedziami na pytanie o to co jest ważniejsze w życiu.</p>
 <p>Zobaczmy jak wygląda tablica kontyngencji, zestawiająca te dwie zmienne.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(diagnoza$eduk4_2013, diagnoza$gp29)</code></pre>
@@ -104,18 +103,19 @@ diagnoza[<span class="dv">1</span>:<span class="dv">6</span>, <span class="kw">c
 ##   zasadnicze zawodowe/gimanzjum         3662           4885
 ##   średnie                               2983           4770
 ##   wyższe i policealne                   1707           3370</code></pre>
-<p>W każdej grupie wykształcenia respondenci częściej deklarują, że ważniejsze jest poczucie sensu. Ale czy są różnice pomiędzy grupami wykształcenia są duże?</p>
+<p>W każdej grupie wykształcenia respondenci częściej deklarują, że ważniejsze jest poczucie sensu.</p>
+<p>Ale czy są różnice pomiędzy grupami wykształcenia i czy są one duże?</p>
 </div>
 <div id="jak-wyglada-tabela-kontyngencji-dla-wieku" class="slide section level1">
 <h1>Jak wygląda tabela kontyngencji dla wieku</h1>
 <p>Zobaczmy jak wygląda zależność pomiędzy wiekiem a odpowiedziami na pytanie o sens w życiu.</p>
-<p>Wiek jest zmienną ciągłą, zamienimy więc ją na zmienną jakościową o czterech poziomach. Aby zdyskretyzować zmienną ciągłą na dyskretną wykorzystamy funkcję <code>cut()</code> w której za granice przedziałów wiekowych wybierzemy 0, 25, 40, 60 i 110 lat.</p>
+<p>Wiek jest zmienną ciągłą, zamienimy więc ją na zmienną jakościową o czterech poziomach. Aby zdyskretyzować zmienną ciągłą na dyskretną wykorzystamy funkcję <code>cut()</code>. Za granice przedziałów wiekowych wybierzemy 0, 25, 40, 60 i 110 lat.</p>
 <pre class="sourceCode r"><code class="sourceCode r">diagnoza$wiek2013_4g &lt;-<span class="st"> </span><span class="kw">cut</span>(diagnoza$wiek2013, <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">25</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">110</span>))
 <span class="kw">table</span>(diagnoza$wiek2013_4g)</code></pre>
 <pre><code>## 
 ##   (0,25]  (25,40]  (40,60] (60,110] 
 ##    11049     7770    10414     9051</code></pre>
-<p>Przedstawmy teraz jak wygląda zależność pomiędzy wiekiem a odpowiedziami na pytani o to co jest ważniejsze w życiu?</p>
+<p>Przedstawmy teraz jak wygląda zależność pomiędzy wiekiem a odpowiedziami na pytanie o to co jest ważniejsze w życiu?</p>
 <pre class="sourceCode r"><code class="sourceCode r">wiekTab &lt;-<span class="st"> </span><span class="kw">table</span>(diagnoza$wiek2013_4g, diagnoza$gp29)
 wiekTab</code></pre>
 <pre><code>##           
@@ -178,7 +178,7 @@ wiekPodziwiam</code></pre>
 <h1>Czy jest zależność?</h1>
 <p>Aby sprawdzić, czy pomiędzy parą zmiennych jakościowych jest zależność, można wykonać test <span class="math">\(\chi^2\)</span>.</p>
 <p>Sprawdza on na ile obserwowana tabela częstości jest daleka od takiej, którą byśmy obserwowali, gdyby zmienne nie były zależne.</p>
-<p>Test <span class="math">\(\chi^2\)</span> wykonuje się funkcją <code>chisq.test()</code>. Wynikiem jest p-wartość dla hiptoezy o niezależności. Małe p-wartości (zwyczajowo poniżej 0.05) interpretuje się jako przesłanki o zależności pomiędzy zmiennymi.</p>
+<p>Test <span class="math">\(\chi^2\)</span> wykonuje się funkcją <code>chisq.test()</code>. Wynikiem jest p-wartość dla hipotezy o niezależności. Małe p-wartości (zwyczajowo poniżej 0.05) interpretuje się jako przesłanki o zależności pomiędzy zmiennymi.</p>
 <pre class="sourceCode r"><code class="sourceCode r">wiekPodziwiam &lt;-<span class="st"> </span><span class="kw">table</span>(diagnoza$gp54_13, diagnoza$wiek2013_4)
 <span class="kw">chisq.test</span>(wiekPodziwiam)</code></pre>
 <pre><code>## 
