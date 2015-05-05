@@ -14,15 +14,15 @@ output:
 
 # O czym jest ten odcinek?
 
-W poprzednim odcinku poznaliśmy metodę wyznaczania współczynników trendu liniowego. 
+W poprzednim odcinku poznaliśmy metodę wyznaczania współczynników $a_0$ i $a_1$ trendu liniowego. 
 
-Dzięki temu, możemy np. ocenić czy jakiś obserwowany parametr średnio rośnie czy maleje.
+Dzięki temu, możemy np. ocenić czy obserwowana wartość (np. ocena odcinka) średnio rośnie czy maleje.
 
-Czasem jednak ocena współczynnika $a_1$, opisująca tempo wzrostu jest bardzo bliska wartości $0$. Możemy wtedy zadać dodatkowe pytanie, czy obserwowany wzrost nie jest wynikiem przypadkowych fluktuacji?
+Czasem jednak ocena współczynnika $a_1$, opisująca tempo wzrostu jest bardzo bliska wartości $0$. Możemy wtedy zadać dodatkowe pytanie, czy obserwowany wzrost/spadek nie jest wynikiem przypadkowych fluktuacji?
 
-Jak odpowiedzieć na to pytanie? Kiedy obserwowany trend jest przypadkowy a kiedy nie?
+Jak odpowiedzieć na to pytanie? Kiedy obserwowany trend może być wynikiem przypadkowego ułożenia wartości, a kiedy jest wynikiem prawdziwej tendencji?
 
-I tutaj ponownie pojawia się statystyka. Używając takich narzędzi jak *test dla współczynnika trendu* możemy ocenić na ile wielkość współczynnika wzrostu jest nieprzypadkowa.
+Tutaj ponownie pojawia się statystyka. Używając takich narzędzi jak *test dla współczynnika trendu* możemy ocenić na ile ocena współczynnika $a_1$ jest istotnie różna od 0 (a więc jej znak jest nieprzypadkowy).
 
 W tym odcinku, na przykładzie danych z serwisu IMDB (Internet Movie Database), pokażemy jak działa procedura testowania trendu w danych.
 
@@ -30,7 +30,7 @@ W tym odcinku, na przykładzie danych z serwisu IMDB (Internet Movie Database), 
 
 # Zbiór danych do pracy
 
-W bazie danych o filmach IMDB (Internet Movie Database) znaleźć można dane o serialach a w szczególności średnie oceny użytkowników wystawione kolejnym odcinkom serialu.
+W bazie danych o filmach IMDB (Internet Movie Database) znaleźć można dane o serialach. Dla każdego odcinka serialu dostępne są średnie oceny użytkowników.
 
 Przykładowo, na stronie http://www.imdb.com/title/tt0903747/epdate?ref_=ttep_ql_4 znajdują się oceny serialu *Breaking Bad*.
 
@@ -41,7 +41,8 @@ Wybierzemy z tego zbioru danych tylko wartości dla serialu `Breaking Bad`.
 ```{r, warning=FALSE, message=FALSE}
 library(PogromcyDanych)
 # wybieramy dane o jednym serialu, dwie kolumny
-tylkoBreakingBad <- serialeIMDB %>% filter(serial == "Breaking Bad") %>% select(id, ocena)
+tylkoBreakingBad <- serialeIMDB %>% 
+  filter(serial == "Breaking Bad") %>% select(id, ocena)
 # wyświetlamy pierwsze wiersze
 head(tylkoBreakingBad)
 ```
@@ -58,7 +59,7 @@ lm(ocena~id, tylkoBreakingBad)$coef
 
 Dla przypomnienia, graficzna ilustracja danych o tym serialu.
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=4}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=5}
 library(ggvis)
 library(dplyr)
 serialeIMDB %>%
@@ -86,11 +87,11 @@ Czy taka tendencja może nas przekonać, że faktycznie odcinki w tym serialu s�
 
 Statystycy opracowali wiele testów aby badać istotność trendu / tendencji. W większości przypadków te testy dają zbliżone wyniki, więc zamiast przedstawiać ich leksykon wyjaśnimy na jednym przykładzie na czym polega testowanie. Przedstawimy tak zwany test permutacyjny do badania trendu.
 
-Pomysł na ocenę, czy trend ma istotną wzrostową tendencje składa się z trzech kroków. Przedstawmy je jeden po drugim.
+Pomysł na ocenę, czy trend ma istotną tendencje wzrostową, składa się z trzech kroków. Przedstawmy je jeden po drugim.
 
 ### Krok 1: Postaw hipotezę, określ co chcesz porównać
 
-Będziemy testować hipotezę (=przypuszczenie), czy współczynnik wzrostu jest istotnie różny od zera, czyli od braku trendu. 
+Będziemy testować hipotezę (=przypuszczenie), że współczynnik wzrostu jest istotnie różny od zera, czyli od braku trendu. 
 
 Tę hipotezę, sformujmy w następujący sposób: *Czy obserwowana wartość współczynnika wzrostu jest wystarczająco duża, by uznać ją za istotną?*
 
@@ -120,9 +121,9 @@ Możemy to oszacować w następujący sposób
 
 * [I] Wymieszamy losowo wartości ocen. Dzięki temu otrzymamy sekwencje ocen o której wiemy, że nie ma w niej żadnego systematycznego trendu (losowo je wymieszaliśmy), a ewentualna wielkość współczynnika trendu wynika z losowych fluktuacji,
 * [II] Policzymy jak duży jest trend dla tych nowo wylosowanych grup,
-* [III] Powtórzymy kroki [I] i [II] wielokrotnie aby zobaczyć jak duże wartości może przyjmować trend w sytuacji gdy jest on wynikiem losowych fluktuacji. Powtórzmy te kroki wiele wiele razy, np. 99 999 razy.
+* [III] Powtórzymy kroki [I] i [II] wielokrotnie, aby zobaczyć jak duże wartości może przyjmować trend w sytuacji gdy jest on wynikiem losowych fluktuacji. Powtórzmy te kroki wiele wiele razy, np. 99 999 razy.
 
-To liczenie wartości trendu dla losowo pomieszanych danych realizowane przez poniższy kod.
+Liczenie wartości trendu dla losowo pomieszanych danych jest realizowane przez poniższy kod.
 
 ```{r, cache=TRUE}
 # funkcja replicate() powtarza drugie wyrażenie tyle razy, ile wynosi pierwszy argument (=99999)
@@ -142,7 +143,7 @@ head(trendy, 20)
 
 # Czy wzrost ocen dla Breaking Bad to przypadek? Porównanie wartości
 
-Możemy teraz wartość `modulBreakingBad` porównać z wektorem wartości referencyjnych - `trendy`.
+Możemy teraz wartość `modulBreakingBad` porównać z wektorem wartości referencyjnych, które są w wektorze `trendy`.
 
 O wektorze `trendy` można myśleć jak o wielkościach wzrostów, jakich spodziewać się możemy gdy próby różnią się wyłącznie przypadkową zmiennością. Gdyby `modulBreakingBad` był znacząco większy niż wartości z wektora `trendy`, to byłby to silny argument za tym, że trend rosnący w ocenie odcinków *Breaking Bad*  nie jest przypadkowy.
 
@@ -153,7 +154,7 @@ Jak widzimy, obserwowana wartość wzrostu ocen dla serialu *Breaking Bad* jest 
 ```{r, cache=TRUE, fig.width=8, fig.height=6}
 # jak wyglądają przypadkowe współczynniki
 hist(trendy, 50, col="grey", main="", las=1, border="white", xlim=c(0, 0.02))
-# dorysuj na czerwono gdzie jest współczynnik dla BreakingBad
+# dorysuj na czerwono współczynnik dla BreakingBad
 abline(v=modulBreakingBad, col="red", lwd=5)
 ```
 
@@ -163,16 +164,16 @@ Wykres pomaga w zobaczeniu jak wyglądają przypadkowe współczynniki na tle ob
 
 Ale aby podjąć decyzje lepiej mieć jedną liczbę. Jaką? 
 
-Policzmy jaka część trendów dla losowych fluktuacji jest większa lub równa niż obserwowany trend dla *Breaking Bad*. Ta wartość nazywa się wartością-p lub p-wartością.
+Policzmy jaka część trendów dla losowych fluktuacji jest większa lub równa niż obserwowany trend dla *Breaking Bad*. Ta wartość nazywa się *wartością p* lub *p-wartością*.
 
 ```{r, cache=TRUE}
 # p-wartość
 mean(trendy >= modulBreakingBad)
 ```
 
-Tylko 0.00001? Czyli, gdy zaburzaliśmy losowo oceny to nie udało się uzyskać tak dużego wzrostu jak w przypadku serialu *Breaking Bad*. Ta jedna wartość, przez którą obserwowana średnia różni się od zera, to wynik trendu obserwowanego bez permutacji, który dodaliśmy do wektora `trendy`.
+Tylko 0.00001? Czyli, gdy zaburzaliśmy losowo oceny to nie udało się uzyskać tak dużego wzrostu jak w przypadku serialu *Breaking Bad*. Jedna wartość, przez którą obserwowana średnia różni się od zera, to wynik trendu obserwowanego bez permutacji, który dodaliśmy do wektora `trendy`.
 
-To porównanie, pokazujące jak dużą wartością `modulBreakingBad` na tle przypadkowego `trendy` jest przekonującym argumentem za ty, że obserwowany wzrost ocen dla *Breaking Bad* nie jest przypadkowy.
+To porównanie, pokazujące jak dużą wartością `modulBreakingBad` na tle przypadkowych wartości zapisanych w wektorze `trendy` jest przekonującym argumentem, że obserwowany wzrost ocen dla *Breaking Bad* nie jest przypadkowy.
 
 # A co z Przyjaciółmi?
 
@@ -188,7 +189,7 @@ tylkoFriends <- serialeIMDB %>% filter(serial == "Friends") %>% select(id, ocena
 lm(ocena~id, tylkoFriends)$coef
 ```
 Oraz poglądowy rysunek prezentujący ten trend.
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=4}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=5}
 library(ggvis)
 library(dplyr)
 serialeIMDB %>%
@@ -208,7 +209,7 @@ serialeIMDB %>%
 
 Zweryfikujemy hipotezę o istotności trendu w ten sam sposób co dla serialu *Breaking Bad*.
 
-Przeprowadźmy te same obliczenia, a wyniki porównamy w ten sam sposób co poprzednio.
+Przeprowadźmy te same obliczenia, tylko że dla serialu *Przyjaciele*. Wyniki porównamy w ten sam sposób co poprzednio.
 
 ```{r, cache=TRUE}
 # trend dla serialu Friends
@@ -230,31 +231,31 @@ Mamy wyznaczony referencyjny wektor wzrostów `trendy`. Jak na jego tle wygląda
 
 # A co z Przyjaciółmi? Testowanie
 
+Wykres z wartościami referencyjnymi i wzrostem dla serialu Przyjaciele.
+
 ```{r, cache=TRUE, fig.width=8, fig.height=6}
-# wykres z wartościami referencyjnymi i wzrostem dla serialu Przyjaciele
 hist(trendy, 50, col="grey", main="", las=1, border="white")
 abline(v=modulFriends, col="red", lwd=5)
 ```
 
 # A co z Przyjaciółmi? P-wartość
 
-Już graficzna ocena sytuacji, pokazuje, że mamy do czynienia z inną sytuacją. Tym razem dosyć często się zdarza, żeby losowe permutacje wektora ocen owocowały większym współczynnikiem wzrostu niż ten, który obserwujemy dla serialu Przyjaciele.
+Już graficzna ocena sytuacji, pokazuje, że mamy do czynienia z inną zależnością niż dla *Breaking Bad*. Tym razem dosyć często się zdarza, żeby losowe permutacje wektora ocen owocowały większym współczynnikiem wzrostu niż ten, który obserwujemy dla serialu Przyjaciele.
 
-Jak opisać te różnice jedną liczbą?
+Jak opisać te różnice jedną liczbą? Jak często obserwuje się wartość większą lub równą.
 
 ```{r, cache=TRUE}
-# jak często obserwuje się wartość większą lub równą
 # p-wartość
 mean(trendy >= modulFriends)
 ```
 
-Dla serialu *Friends* nawet gdy losujemy wartości ocen w ponad 17 procentach przypadków obserwujemy trend większy niż `0.00043`. Czy to oznacza, że rosnący trend jest czysto przypadkowy? 
+Dla serialu *Friends* nawet gdy losujemy wartości ocen, a więc mamy czystko przypadkowe sekwencje, to w ponad 17 procentach przypadków obserwujemy trend większy niż `0.00043`. Czy to oznacza, że rosnący trend jest czysto przypadkowy? 
 
 Pewności nie ma, ale raczej jesteśmy skłonni uznać, że obserwowany trend nie jest istotnie różny od zera. 
 
-Za próg przyjmuje się często 0.05 (głównie z powodów historycznych, ale już tak się utarło). Co znaczy tyle, że uznaje się trend za nieprzypadkowy jeżeli jest mniejszy o co najwyżej 5\% wartości, które można by przypadkowo zaobserwować (jedna na 20).
+Za próg przyjmuje się często 0.05 (głównie z powodów historycznych, ale już tak się utarło). Co znaczy tyle, że uznaje się trend za nieprzypadkowy jeżeli jest mniejszy o co najwyżej 5\% wartości, które można by przypadkowo zaobserwować (5\% wartości to jedna na 20).
 
-Przyjmując za próg 0.05, p-wartość którą obserwujemy dla trendu dla sezonu Przyjaciele jest wyższa, więc przyjmiemy hipotezę, że ten trend nie jest isotnie różny od zera.
+Przyjmując za próg 0.05, p-wartość którą obserwujemy dla trendu dla sezonu Przyjaciele jest wyższa, więc raczej przyjmiemy hipotezę, że ten trend nie jest isotnie różny od zera.
 
 # Podsumowanie testowania
 
@@ -262,12 +263,12 @@ Wyniki, które otrzymaliśmy dla serialu *Breaking Bad* są inne niż dla serial
 
 W przypadku serialu *Breaking Bad* próbowaliśmy 99 999 razy losowo pomieszać dane by na pomieszanych zaobserwować wzrost większy, niż w przypadku oryginalnej kolejności. To się nie udało, co przekonało nas, że obserwowany trend dla *Breaking Bad* jest *istotnie większy od przypadkowego (=0)*.
 
-W przypadku serialu *Friends* próbowaliśmy tego samego. Z tą różnicą, że udawało się dosyć często w wyniku losowych permutacji uzyskać wartości większe, niż dla oryginalnej kolejności. 
+W przypadku serialu *Friends* próbowaliśmy tego samego. Z tą różnicą, że udawało się dosyć często w wyniku losowych permutacji uzyskać współczynniki trendu większe, niż dla oryginalnych danych. 
 
-Statystykę, opisującą jaka część losowo wygenerowanych trendów jest większa, niż zaobserwowany trend, nazywamy p-wartością. Przyjęliśmy też, że jeżeli p-wartość będzie mała, np. mniejsza niż 0.05 (arbitralny wybór, ale się przyjęło) to uznamy, że trend jest istotny. 
+P-wartością nazywamy statystykę, opisującą jaka część losowo wygenerowanych trendów jest większa, niż trend w oryginalnych danych. Przyjęliśmy też, że jeżeli p-wartość będzie mała, np. mniejsza niż 0.05 (arbitralny wybór, ale się przyjęło) to uznamy, że trend jest istotny. 
 
 Tyle, że dla serialu *Friends* obserwowana p-wartość jest znacznie większa niż 0.05, przez co uznamy, że trend nie jest istotnie różny od przypadkowego (=0).
-
+Innymi słowy trudno rozstrzygnąć czy trend dla Przyjaciół rośnie czy maleje.
 
 # Podsumowanie instrukcji R
 
