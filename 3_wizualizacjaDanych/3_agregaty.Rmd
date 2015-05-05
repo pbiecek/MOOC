@@ -15,12 +15,12 @@ output:
 
 # O czym jest ten odcinek?
 
-W poprzednim odcinku na wykresach pokazywaliśmy każdą obserwację / każdy wiersz ze zbioru danych. Informacje o kolejnych wierszach były przedstawiane pomocą punktów, linii lub napisów.
+W poprzednim odcinku na wykresach pokazywaliśmy każdą obserwację / każdy wiersz ze zbioru danych. Informacje o kolejnych wierszach były przedstawiane za pomocą punktów, linii lub napisów.
 
-Jednak gdy dane są duże i zawierają setki lub setki tysięcy obserwacji, nie sposób przedstawiać każdej z nich osobno. 
-Gdy elementów na wykresie jest zbyt wiele to wykres zamienia się w wielką plątaninę punktów i krzywych. W takim przypadku często lepszym rozwiązaniu jest przedstawienie podsumowań / statystyk zamiast surowych danych. 
+Jednak, gdy dane są duże i zawierają setki lub setki tysięcy obserwacji, nie sposób przedstawiać każdej z nich osobno. 
+Gdy elementów na wykresie jest zbyt wiele, to wykres zamienia się w wielką plątaninę punktów i krzywych. W takim przypadku często lepszym rozwiązaniem jest przedstawienie podsumowań / statystyk zamiast surowych danych. 
 
-W tym odcinku dowiemy się jak graficznie przedstawiać podsumowania danych
+W tym odcinku dowiemy się jak graficznie przedstawiać podsumowania danych.
 
 - Jak tworzyć wykresy trendu, przedstawiające wygładzone średnie?
 - Jak tworzyć wykresy ramka wąsy / wykresy pudełkowe, przedstawiające pięć liczb Tukeya?
@@ -194,7 +194,7 @@ Będziemy wciąż korzystać ze zbioru danych z cenami pięcioletnich samochodó
 
 Ponownie, funkcjami `filter()` i `select()` wybierzemy interesujące nas wiersze i kolumny.
 
-Poprzednio pracowaliśmy z samochodami w modelu `Octavia`, teraz będziemy pracować z autami pięcioletnimi. Stad zmiana w funkcji `filter()`.
+Poprzednio pracowaliśmy z samochodami w modelu `Octavia`, teraz będziemy pracować z autami pięcioletnimi. Stąd drobna zmiana w wywołaniu funkcji `filter()`.
 
 ```{r, fig.height=4, fig.width=5}
 skody <- auta2012 %>%
@@ -229,7 +229,7 @@ Patrząc na słupki punktów z poprzedniego slajdu trudno oczytać gdzie jest ś
 
 Do porównywania zmiennej liczbowej pomiędzy grupami, znacznie bardziej nadają się są wykresy pudełko - wąsy, przedstawiające tak zwaną piątkę Tukeya, czyli: minimalną obserwację z grupy, maksymalną, medianę (obserwację środkową) i dwa kwartyle. Te pięć liczb dzieli przedział zmienności cechy na cztery równoliczne przedziały. Od minimalnej wartości do dolnego kwartyla, od dolnego kwartyla do mediany, od mediany do górnego kwartyla i od górnego kwartyla do elementu maksymalnego.
 
-Graficznie kwartle i medianę prezentują brzegi i środek ramki. Element minimalny i maksymalny to najniższa i najwyższa wartość na wykresie. Dodatkowo, jeżeli jakieś obserwacje są daleko od brzegu pudełka (dalej niż 1.5 szerokości pudełka) to jest ona oznaczana osobnym punktem. Po co prezentowane są te punkty? Często pomagają one identyfikowaniu pojedynczych wartości odstających, gdy jedna lub kilka obserwacji jest bardzo daleko od pudełka (pudełko przedstawia środkową połowę obserwacji).
+Graficznie kwartyle i medianę prezentują dolny i górny brzeg ramki oraz środek ramki. Element minimalny i maksymalny to najniższa i najwyższa wartość na wykresie. Dodatkowo, jeżeli jakieś obserwacje są daleko od brzegu pudełka (dalej niż 1.5 szerokości pudełka) to jest ona oznaczana osobnym punktem. Po co prezentowane są te punkty? Często pomagają one w identyfikowaniu pojedynczych wartości odstających, gdy jedna lub kilka obserwacji jest bardzo daleko od pudełka (pudełko przedstawia środkową połowę obserwacji).
 
 ```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Model, y = Cena.w.PLN)) + 
@@ -379,6 +379,8 @@ skody %>%
 
 # Gdzie szukać dalej
 
+Podobnie jak dla poprzedniego odcinka, uzupełnieniem dla opisanych tematów będą następujące pozycje.
+
 - Wiele przydatnych wskazówek można również znaleźć w internetowej książce *,,Cookbook for R''* http://www.cookbook-r.com/Graphs/
 
 - Więcej informacji o tym jak budować wykresy w pakiecie ggplot2 znaleźć można w rozdziale 4 książki *,,Przewodnik po pakiecie R''*. Więcej informacji o tej książce http://www.biecek.pl/R/
@@ -391,7 +393,7 @@ http://zevross.com/blog/category/r/
 
 ---
 
-# Zadanie, sezon 2, odcinek 3
+# Zadanie, sezon 2, odcinek 8
 
 + Wybierz samochody marki Volkswagen model Passat a następnie narysuj jak średnia cena zależy od roku produkcji za pomocą geometrii `geom_smooth()`.
 
