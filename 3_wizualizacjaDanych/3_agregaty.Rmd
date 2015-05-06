@@ -403,5 +403,5 @@ http://zevross.com/blog/category/r/
 
 + Dla wybranych pięcioletnich aut marki Volkswagen przedstaw w podziale na modele jaka część aut ma silnik diesla.
 
-Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania_sezon2.html
+Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/2_modelowanie/9_zadania_sezon2.html
 
