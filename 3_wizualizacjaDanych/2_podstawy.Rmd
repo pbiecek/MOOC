@@ -472,6 +472,6 @@ Opanowaliśmy podstawy tworzenia wykresów z użyciem pakietu `ggplot2`. W kolej
 
 + Używając geometrii wstęga (`geom_ribbon`) przedstaw kurs minimalny i maksymalny każdego dnia na podstawie danych ze zbioru `WIG`.
 
-Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania_sezon2.html
+Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/2_modelowanie/9_zadania_sezon2.html
 
 
