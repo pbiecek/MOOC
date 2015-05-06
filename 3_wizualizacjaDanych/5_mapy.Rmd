@@ -151,7 +151,7 @@ mapka <- ggplot() +
              map=shp1f) +
     geom_path(data=shp1f, aes(x=long, y=lat, group=id), colour="black", size=0.25) 
 ```
-Przekształcamy mapę, stosując różne projekcje
+Przekształcamy mapę, stosując różne projekcje.
 ```{r, fig.height=4, fig.width=7, message=FALSE, warning=FALSE, eval=FALSE}
 # projekcja mercator (odwzorowanie walcowe równokątne)
 # zachowuje kąty pomiędzy równoleżnikami a południkami
