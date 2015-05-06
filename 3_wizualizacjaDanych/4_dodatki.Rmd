@@ -437,7 +437,7 @@ pl + theme_bw() + theme(plot.background = element_rect(fill = "gray80"))
 - Informację o różnych nakładkach dla pakietu `ggplot2` znaleźć można na `easyGgplot2` 
 http://www.sthda.com/english/wiki/easyggplot2
 
-- Niezła ściągawka jak korzystać z pakietu *,,ggplot2''* file:///Users/pbiecek/Downloads/ggplot2-cheatsheet.pdf
+- Niezła ściągawka jak korzystać z pakietu *,,ggplot2''* http://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
 
 - Wklejając wykresy do Excela lub Worda może nam zależeć na wykresach, które można edytować. In a to jest metoda http://www.sthda.com/english/wiki/create-an-editable-graph-from-r-software
 
@@ -460,5 +460,5 @@ ggplot(koty_ptaki, aes(x=waga, y=predkosc, size=zywotnosc, color=zywotnosc)) +
   geom_point() 
 ```
 
-Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/1_przetwarzanie/9_zadania_sezon2.html
+Przykładowe odpowiedzi znajdują się na stronie http://pogromcydanych.icm.edu.pl/materials/2_modelowanie/9_zadania_sezon2.html
 
