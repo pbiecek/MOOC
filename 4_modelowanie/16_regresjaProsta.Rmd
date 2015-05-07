@@ -177,7 +177,7 @@ Funkcja `lm()` przyjmuje dwa argumenty. Pierwszy to formuła opisująca przyjęt
 
 Formuła składa się z lewej strony i prawej, rozdzielonej znakiem `~`. Lewa strona opisuje zmienną, którą chcemy opisać, tzw. zmienną objaśnianą, a prawa strona składa się z zmiennych, które wykorzystujemy do opisania lewej strony, czyli zmiennych objaśniających. 
 
-Zapis `1 + parent` oznacza, że średni wzrost dziecka chcemy opisać za pomocą wyrażenia $1 * b_0 + parent * b_1$, w którym należy wyznaczyć $b_0$ i $b_1$.
+Zapis `1 + rodzic` oznacza, że średni wzrost dziecka chcemy opisać za pomocą wyrażenia $1 * b_0 + rodzic * b_1$, w którym należy wyznaczyć $b_0$ i $b_1$.
 
 # Ocena współczynników
 
