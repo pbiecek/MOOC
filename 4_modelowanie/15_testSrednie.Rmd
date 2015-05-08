@@ -274,7 +274,7 @@ abline(v=obserwowana_roznica, col="red", lwd=5)
 
 Używając poniższej aplikacji można porównać dowolne dwa seriale oraz ocenić, czy różnica jest statystycznie istotnie różna.
 
-<center><iframe width="870" height="700" frameborder="0" src="https://smarterpoland.shinyapps.io/serialeIMDB_dwieGrupy"></iframe></center>
+<center><iframe width="870" height="700" frameborder="0" src="http://beta.icm.edu.pl/IMDB2/"></iframe></center>
 
 ---
 
