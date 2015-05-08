@@ -201,7 +201,7 @@ Używając poniższej aplikacji można przyjrzeć się ocenom kolejnych seriali 
 
 Jeżeli aplikacja się wyłączyła (jest szara), to należy odświeżyć tę stronę w przeglądarce.
 
-<center><iframe width="870" height="700" frameborder="0" src="https://smarterpoland.shinyapps.io/serialeIMDB"></iframe></center>
+<center><iframe width="870" height="700" frameborder="0" src="http://beta.icm.edu.pl/IMDB/"></iframe></center>
 
 # Podsumowanie instrukcji R
 
