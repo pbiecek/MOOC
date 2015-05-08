@@ -98,27 +98,27 @@ pogRomcy danych
 <p>Mając taki zbiór danych, przyjrzyjmy się jak wyglądają oceny dla serialu <em>Breaking Bad</em>.</p>
 <p>Poniższy wykres przedstawia średnie oceny (na osi OY) dla kolejnych odcinków (rozłożonych wzdłuż osi OX).</p>
 <p>Kolejne sezony są oznaczane różnymi kolorami. Czy patrząc na te wyniki widzimy jakąś globalną tendencję / trend?</p>
-<p><div id="plot_id980863810-container" class="ggvis-output-container">
-<div id="plot_id980863810" class="ggvis-output"></div>
+<p><div id="plot_id792761009-container" class="ggvis-output-container">
+<div id="plot_id792761009" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id980863810_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id980863810" data-renderer="svg">SVG</a>
+<a id="plot_id792761009_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id792761009" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id980863810_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id980863810" data-renderer="canvas">Canvas</a>
+<a id="plot_id792761009_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id792761009" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id980863810_download" class="ggvis-download" data-plot-id="plot_id980863810">Download</a>
+<a id="plot_id792761009_download" class="ggvis-download" data-plot-id="plot_id792761009">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id980863810_spec = {
+var plot_id792761009_spec = {
   "data": [
     {
       "name": ".0",
@@ -328,7 +328,7 @@ var plot_id980863810_spec = {
   },
   "handlers": null
 };
-ggvis.getPlot("plot_id980863810").parseSpec(plot_id980863810_spec);
+ggvis.getPlot("plot_id792761009").parseSpec(plot_id792761009_spec);
 </script></p>
 </div>
 <div id="jak-wyglada-trend-w-serialach-1" class="slide section level1">
@@ -336,27 +336,27 @@ ggvis.getPlot("plot_id980863810").parseSpec(plot_id980863810_spec);
 <p>Dodajmy do wykresu linię trendu liniowego, najlepiej dopasowanego do danych.</p>
 <p>Patrząc na trend łatwiej zauważyć wzrostową tendencję ocen. Co więcej można odczytać tempo średniego wzrostu ocen.</p>
 <p>Ale jak ta linia trendu została wyznaczona? Co to znaczy ,,najlepiej dopasowany do danych’’?</p>
-<p><div id="plot_id317652347-container" class="ggvis-output-container">
-<div id="plot_id317652347" class="ggvis-output"></div>
+<p><div id="plot_id466070341-container" class="ggvis-output-container">
+<div id="plot_id466070341" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id317652347_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id317652347" data-renderer="svg">SVG</a>
+<a id="plot_id466070341_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id466070341" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id317652347_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id317652347" data-renderer="canvas">Canvas</a>
+<a id="plot_id466070341_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id466070341" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id317652347_download" class="ggvis-download" data-plot-id="plot_id317652347">Download</a>
+<a id="plot_id466070341_download" class="ggvis-download" data-plot-id="plot_id466070341">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id317652347_spec = {
+var plot_id466070341_spec = {
   "data": [
     {
       "name": ".0",
@@ -609,7 +609,7 @@ var plot_id317652347_spec = {
   },
   "handlers": null
 };
-ggvis.getPlot("plot_id317652347").parseSpec(plot_id317652347_spec);
+ggvis.getPlot("plot_id466070341").parseSpec(plot_id466070341_spec);
 </script></p>
 </div>
 <div id="jak-szukac-trendu-liniowego" class="slide section level1">
@@ -694,7 +694,7 @@ ocena_{62} =  7.90222  +  62*0.01836 = 9.04054
 <p>Używając poniższej aplikacji można przyjrzeć się ocenom kolejnych seriali i sprawdzić czy i jak wygląda trend w ich popularności.</p>
 <p>Jeżeli aplikacja się wyłączyła (jest szara), to należy odświeżyć tę stronę w przeglądarce.</p>
 <center>
-<iframe width="870" height="700" frameborder="0" src="https://smarterpoland.shinyapps.io/serialeIMDB">
+<iframe width="870" height="700" frameborder="0" src="http://beta.icm.edu.pl/IMDB/">
 </iframe>
 </center>
 </div>
@@ -747,27 +747,27 @@ tylkoBreakingBad &lt;-<span class="st"> </span>serialeIMDB %&gt;%
 <p>Poniższa ilustracja prezentuje wyniki trendu liczonego w sposób bardziej lokalny, dzięki czemu, można zauważyć, że inna była zmiana ocen do około 30 odcinka (końca trzeciego sezonu), widać było lekką spadkową tendencję, a inna była zmiana po 30 odcinku (coraz to wyższe oceny).</p>
 <p>Jak modelować takie, bardziej złożone zależności?</p>
 <p>Pokażemy w ostatnim odcinku tego sezonu ,,Co dalej?’’.</p>
-<p><div id="plot_id427606127-container" class="ggvis-output-container">
-<div id="plot_id427606127" class="ggvis-output"></div>
+<p><div id="plot_id155065375-container" class="ggvis-output-container">
+<div id="plot_id155065375" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id427606127_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id427606127" data-renderer="svg">SVG</a>
+<a id="plot_id155065375_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id155065375" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id427606127_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id427606127" data-renderer="canvas">Canvas</a>
+<a id="plot_id155065375_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id155065375" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id427606127_download" class="ggvis-download" data-plot-id="plot_id427606127">Download</a>
+<a id="plot_id155065375_download" class="ggvis-download" data-plot-id="plot_id155065375">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id427606127_spec = {
+var plot_id155065375_spec = {
   "data": [
     {
       "name": ".0",
@@ -1020,7 +1020,7 @@ var plot_id427606127_spec = {
   },
   "handlers": null
 };
-ggvis.getPlot("plot_id427606127").parseSpec(plot_id427606127_spec);
+ggvis.getPlot("plot_id155065375").parseSpec(plot_id155065375_spec);
 </script></p>
 </div>
 
