@@ -229,7 +229,7 @@ Patrząc na słupki punktów z poprzedniego slajdu trudno oczytać gdzie jest ś
 
 Do porównywania zmiennej liczbowej pomiędzy grupami, znacznie bardziej nadają się są wykresy pudełko - wąsy, przedstawiające tak zwaną piątkę Tukeya, czyli: minimalną obserwację z grupy, maksymalną, medianę (obserwację środkową) i dwa kwartyle. Te pięć liczb dzieli przedział zmienności cechy na cztery równoliczne przedziały. Od minimalnej wartości do dolnego kwartyla, od dolnego kwartyla do mediany, od mediany do górnego kwartyla i od górnego kwartyla do elementu maksymalnego.
 
-Graficznie kwartyle i medianę prezentują dolny i górny brzeg ramki oraz środek ramki. Element minimalny i maksymalny to najniższa i najwyższa wartość na wykresie. Dodatkowo, jeżeli jakieś obserwacje są daleko od brzegu pudełka (dalej niż 1.5 szerokości pudełka) to jest ona oznaczana osobnym punktem. Po co prezentowane są te punkty? Często pomagają one w identyfikowaniu pojedynczych wartości odstających, gdy jedna lub kilka obserwacji jest bardzo daleko od pudełka (pudełko przedstawia środkową połowę obserwacji).
+Kwartyle i medianę prezentują dolny i górny brzeg ramki oraz środek ramki. Element minimalny i maksymalny to najniższa i najwyższa wartość na wykresie (odcinek lub punkt). Często najniższy i najwyższy element to odcinek (wąs), ale jeżeli jakieś obserwacje są daleko od brzegu pudełka (dalej niż 1.5 szerokości pudełka) to są one oznaczane osobnym punktem. Po co prezentowane są te punkty? Pomagają one w identyfikowaniu pojedynczych wartości odstających, gdy jedna lub kilka obserwacji jest bardzo daleko od pudełka (pudełko przedstawia środkową połowę obserwacji).
 
 ```{r, fig.height=4, fig.width=5, message=FALSE}
 ggplot(skody, aes(x=Model, y = Cena.w.PLN)) + 
