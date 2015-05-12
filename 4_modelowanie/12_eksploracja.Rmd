@@ -38,7 +38,7 @@ Dla zmiennej ilościowej (liczbowej) przedstawimy
 
 Dla zmiennej jakościowej (z kategoriami) przedstawimy
 
-- tablicy kontyngencji,
+- tablice kontyngencji,
 - sortowanie.
 
 ---
