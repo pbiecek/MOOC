@@ -160,7 +160,7 @@ shp1f &lt;-<span class="st"> </span><span class="kw">fortify</span>(shp1, <span 
 <span class="st">    </span><span class="kw">geom_map</span>(<span class="dt">data=</span>mandatySejmik2014, <span class="kw">aes</span>(<span class="dt">map_id=</span>Wojewodztwo, <span class="dt">fill=</span>ProcentWaznychGlosow), 
              <span class="dt">map=</span>shp1f) +
 <span class="st">    </span><span class="kw">geom_path</span>(<span class="dt">data=</span>shp1f, <span class="kw">aes</span>(<span class="dt">x=</span>long, <span class="dt">y=</span>lat, <span class="dt">group=</span>id), <span class="dt">colour=</span><span class="st">&quot;black&quot;</span>, <span class="dt">size=</span><span class="fl">0.25</span>) </code></pre>
-<p>Przekształcamy mapę, stosując różne projekcje</p>
+<p>Przekształcamy mapę, stosując różne projekcje.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># projekcja mercator (odwzorowanie walcowe równokątne)</span>
 <span class="co"># zachowuje kąty pomiędzy równoleżnikami a południkami</span>
 mapka +<span class="st"> </span><span class="kw">coord_map</span>(<span class="dt">projection=</span><span class="st">&quot;mercator&quot;</span>) +<span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;mercator&quot;</span>)
