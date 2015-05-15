@@ -366,7 +366,7 @@ if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</s
 <p>W zbiorze danych <code>skiJumps2013</code> znajdują się wyniki skoków narciarskich w sezonie 2013. Podobnie jak w zadaniu 15, wybierz z tego zbioru danych tylko skoki na skoczniach o punkcie konstrukcyjnym 120m (zmienna <code>compKPoint</code>).</p>
 <p>Wybierz z tego zbioru danych skoczów z Polski i Czech (zmienna <code>jumperCountry</code>). Policz jaka jest <em>szansa</em>, że na takiej skoczni skoczek skoczy 120 metrów lub więcej, osobno dla skoczków z Polski i Czech.</p>
 <p>Następnie policz jaki jest <em>iloraz szans</em>, że polski skoczek skoczy 120 lub więcej metrów do szansy że czeski skocze skoczy 120 lub więcej metrów.</p>
-<p>Wynik (jedną liczbę, tę szansę) przypisz do zmiennej o nazwie <code>wynik</code>.</p>
+<p>Wynik (jedną liczbę, iloraz szans) przypisz do zmiennej o nazwie <code>wynik</code>.</p>
 <p>Rozwiązanie</p>
 <pre class="sourceCode r"><code class="sourceCode r">tylko120PL &lt;-<span class="st"> </span>skiJumps2013 %&gt;%<span class="st"> </span><span class="kw">filter</span>(compKPoint ==<span class="st"> </span><span class="dv">120</span>, jumperCountry ==<span class="st"> &quot;POL&quot;</span>)
 tylko120CZ &lt;-<span class="st"> </span>skiJumps2013 %&gt;%<span class="st"> </span><span class="kw">filter</span>(compKPoint ==<span class="st"> </span><span class="dv">120</span>, jumperCountry ==<span class="st"> &quot;CZE&quot;</span>)
@@ -376,6 +376,20 @@ tabCZ &lt;-<span class="st"> </span><span class="kw">table</span>(tylko120CZ$jum
 is &lt;-<span class="st"> </span>(tabPL[<span class="dv">2</span>]/tabPL[<span class="dv">1</span>]) /<span class="st"> </span>(tabCZ[<span class="dv">2</span>]/tabCZ[<span class="dv">1</span>])</code></pre>
 <p>Test</p>
 <pre class="sourceCode r"><code class="sourceCode r">isCorrect &lt;-<span class="st"> </span><span class="kw">abs</span>(wynik -<span class="st"> </span><span class="fl">1.35</span>) &lt;<span class="st"> </span><span class="fl">0.1</span>
+comments &lt;-<span class="st"> &quot;&quot;</span>
+if (!<span class="kw">exists</span>(<span class="st">&quot;wynik&quot;</span>)) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Brak zmiennej o nazwie wynik. &quot;</span>)
+if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>)</code></pre>
+</div>
+<div id="zadanie-17" class="slide section level1">
+<h1>Zadanie 17</h1>
+<p>W zbiorze danych <code>WIG</code> znajdują się kursy otwarcia i zamknięcia indeksu WIG w roku 2014.</p>
+<p>Policz <em>szansę</em>, że kurs zamknięcia jest wyższy lub równy kursowi otwarcia.</p>
+<p>Wynik (jedną liczbę, tę szansę) przypisz do zmiennej o nazwie <code>wynik</code>.</p>
+<p>Rozwiązanie</p>
+<pre class="sourceCode r"><code class="sourceCode r">tab &lt;-<span class="st"> </span><span class="kw">table</span>(WIG$Kurs.zamkniecia &gt;=<span class="st"> </span>WIG$Kurs.otwarcia) 
+is &lt;-<span class="st"> </span>(tab[<span class="dv">2</span>]/tab[<span class="dv">1</span>])</code></pre>
+<p>Test</p>
+<pre class="sourceCode r"><code class="sourceCode r">isCorrect &lt;-<span class="st"> </span><span class="kw">abs</span>(wynik -<span class="st"> </span><span class="fl">0.922</span>) &lt;<span class="st"> </span><span class="fl">0.1</span>
 comments &lt;-<span class="st"> &quot;&quot;</span>
 if (!<span class="kw">exists</span>(<span class="st">&quot;wynik&quot;</span>)) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Brak zmiennej o nazwie wynik. &quot;</span>)
 if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>)</code></pre>

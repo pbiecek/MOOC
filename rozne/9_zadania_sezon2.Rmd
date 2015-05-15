@@ -491,7 +491,7 @@ Wybierz z tego zbioru danych skoczów z Polski i Czech (zmienna `jumperCountry`)
 
 Następnie policz jaki jest *iloraz szans*, że polski skoczek skoczy 120 lub więcej metrów do szansy że czeski skocze skoczy 120 lub więcej metrów.
 
-Wynik (jedną liczbę, tę szansę)  przypisz do zmiennej o nazwie `wynik`.
+Wynik (jedną liczbę, iloraz szans)  przypisz do zmiennej o nazwie `wynik`.
 
 Rozwiązanie
 ```{r, eval=FALSE}
@@ -510,6 +510,33 @@ comments <- ""
 if (!exists("wynik")) comments <- paste(comments, "Brak zmiennej o nazwie wynik. ")
 if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 ```
+
+
+
+
+# Zadanie 17
+
+W zbiorze danych `WIG` znajdują się kursy otwarcia i zamknięcia indeksu WIG w roku 2014. 
+
+Policz *szansę*, że kurs zamknięcia jest wyższy lub równy kursowi otwarcia.
+
+Wynik (jedną liczbę, tę szansę)  przypisz do zmiennej o nazwie `wynik`.
+
+Rozwiązanie
+```{r, eval=FALSE}
+tab <- table(WIG$Kurs.zamkniecia >= WIG$Kurs.otwarcia) 
+is <- (tab[2]/tab[1])
+```
+
+Test
+```{r, eval=FALSE}
+isCorrect <- abs(wynik - 0.922) < 0.1
+comments <- ""
+if (!exists("wynik")) comments <- paste(comments, "Brak zmiennej o nazwie wynik. ")
+if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
+```
+
+
 
 
 
