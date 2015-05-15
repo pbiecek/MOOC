@@ -591,3 +591,31 @@ if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 
 
 
+# Zadanie 20
+
+W zadaniu 19 odkryliśmy zależność pomiędzy kolorem auta (ze zbioru czarny, czerwony, biały) a rodzajem paliwa (benzna, beznyna+LPG, diesel).
+
+Aby zbadać tę zależność zbuduj tabele kontyngencji z kolorami w kolumnach i rodzajami paliwa w wierszach. Następnie policz procentowy udział (funkcją `prop.table()`) kolorów w każdym wierszu (wiersze powinny sumować się do 100). Jaka jest zależność? Który kolor najrzadziej występuje w którym rodzaju napędu?
+
+Tabelę z procentami w wierszach zapisz do zmiennej wynik.
+
+Rozwiązanie
+```{r, eval=FALSE}
+tab <- table(auta2012$Rodzaj.paliwa, auta2012$Kolor)[c(1,2,6),c(10, 4, 12)]
+wynik <- 100*prop.table(tab)
+```
+
+Test
+```{r, eval=FALSE}
+isCorrect1 <- all(abs(100 - rowSums(wynik)) < 2)
+isCorrect2 <- abs(min(wynik) - 1.58) < 1
+isCorrect3 <- abs(max(wynik) - 26.1) < 1
+isCorrect <- isCorrect1 && isCorrect2 && isCorrect3
+comments <- ""
+if (!exists("wynik")) comments <- paste(comments, "Brak zmiennej o nazwie wynik. ")
+if (!isCorrect1) comments <- paste(comments, "Wiersze nie sumują się do 100. ")
+if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
+```
+
+
+
