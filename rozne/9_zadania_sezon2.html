@@ -305,7 +305,7 @@ if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</s
 wynik &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>BreakingBad, ocena ~<span class="st"> </span>id)</code></pre>
 <p>Test</p>
 <pre class="sourceCode r"><code class="sourceCode r">klasa &lt;-<span class="st"> </span><span class="kw">class</span>(wynik)
-wspolczynniki &lt;-<span class="st"> </span>wynik$coefficients[,<span class="dv">1</span>] -<span class="st"> </span><span class="kw">c</span>(<span class="fl">7.9</span>, <span class="fl">0.018</span>)
+wspolczynniki &lt;-<span class="st"> </span>wynik$coefficients -<span class="st"> </span><span class="kw">c</span>(<span class="fl">7.9</span>, <span class="fl">0.018</span>)
 
 isCorrectM &lt;-<span class="st"> </span>klasa ==<span class="st"> &quot;lm&quot;</span>
 isCorrectG &lt;-<span class="st"> </span><span class="kw">abs</span>(wspolczynniki[<span class="dv">2</span>]) &lt;<span class="st"> </span><span class="fl">0.01</span>
