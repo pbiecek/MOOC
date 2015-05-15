@@ -15,10 +15,13 @@ output:
 #  Zadanie 1
 
 Wykres wykonany z użyciem funkcji `ggplot()` można przypisać do zmiennej tak jak dowolny obiekt w R. 
+
 Instrukcja `moj_wykres <- ggplot(...) + geom_point()` przypisze wykres do zmiennej.
 
 Zadanie:
+
 Na bazie danych `koty_ptaki` zbuduj wykres przedstawiający za pomocą punktów wiersze z tego zbioru danych.
+
 Na osi OX powinna znajdować się długość a na osi OY prędkość.
 Wykres przypisz do zmiennej o nazwie `wynik`.
 
@@ -46,8 +49,10 @@ if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 # Zadanie 2
 
 Na bazie danych `koty_ptaki` zbuduj wykres przedstawiający za pomocą punktów wiersze z tego zbioru danych.
+
 Na osi OX powinna znajdować się długość a na osi OY prędkość.
 Za pomocą kształtu i koloru punktów oznacz wartości z kolumny `druzyna`. 
+
 Wykres przypisz do zmiennej o nazwie `wynik`.
 
 Rozwiązanie
@@ -73,8 +78,10 @@ if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 
 # Zadanie 3
 Na bazie danych `koty_ptaki` zbuduj wykres przedstawiający dla gatunków długość oraz prędkość osobników.
+
 Na osi OX powinna znajdować się długość a na osi OY prędkość.
 Na wykresie w powinny znaleźć się nazwy gatunków we współrzędnych określonych przez ich długosć i prędkość. 
+
 Wykres przypisz do zmiennej o nazwie `wynik`.
 
 Rozwiązanie
@@ -101,8 +108,10 @@ if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 
 # Zadanie 4
 Na bazie danych `koty_ptaki` zbuduj wykres przedstawiający dla gatunków długość oraz wagę osobników.
+
 Na osi OX powinna znajdować się długość a na osi OY waga.
 Na wykresie należy przedstawić przynajmniej dwie warstwy - dwie geometrie, jedną z puntkami a drugą z nazwami gatunków.
+
 Wykres przypisz do zmiennej o nazwie `wynik`.
 
 Rozwiązanie
@@ -130,9 +139,11 @@ if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 
 # Zadanie 5
 Na bazie danych `koty_ptaki` zbuduj wykres przedstawiający dla gatunków długość oraz prędkość osobników.
+
 Na osi OX powinna znajdować się długość a na osi OY prędkość.
 Do wykresu dodaj linię trendu używając geometrii `smooth`.
 Na wykresie należy przedstawić przynajmniej dwie warstwy - dwie geometrie, jedną z puntkami a drugą z trendem.
+
 Wykres przypisz do zmiennej o nazwie `wynik`.
 
 Rozwiązanie
@@ -161,7 +172,9 @@ if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 
 W zbiorze danych `pearson` znajdują się informacje o wzroście ojca i syna.
 Wykorzystując ten zbiór dnaych zbuduj wykres, który na osi OX będzie przedstawiał wzrost ojca a na osi OY wzrost syna.
+
 Przedstaw poszczególne dane za pomocą punktów oraz dodaj linie trendu wyznaczoną przez geometrie smooth.
+
 Wykres przypisz do zmiennej o nazwie `wynik`.
 
 Rozwiązanie
@@ -189,8 +202,10 @@ if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 # Zadanie 7
 
 W zbiorze danych `serialeIMDB` znajdują się informacje o ocenach odcinków 200 wybranych seriali.
+
 Wykorzystując ten zbiór dnaych zbuduj wykres, który na osi OY będzie przedstawiał nazwę serialu a na osi OX przedstawiony będzie rozkład ocen odcinków tego serialu za pomocą wykresu pudełko wąsy.
 Seriali jest ponad 200, więc aby wykres się wyświetlał musi być dużo miejsca w pionie.
+
 Wynikowy wykres przypisz do zmiennej o nazwie `wynik`.
 
 Rozwiązanie
@@ -219,7 +234,9 @@ if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 # Zadanie 8
 
 Zbuduj wykres zgodnie z opisem umieszczonym w zadaniu 7.
+
 Zatroszcz się jedynie o to, by kolejność naz seriali na wykresie odpowiadała medianom ocen. Tzn. serial o najniższej medianie ocen powinien być wyświetlony na dole a o najwyższej na górze osi OY. Aby uporządkować seriale nalezy wykorzystać funkcję `reorder()` (patrz odcinek 8).
+
 Wynikowy wykres przypisz do zmiennej o nazwie `wynik`.
 
 Rozwiązanie
@@ -247,6 +264,40 @@ if (!isCorrectG) comments <- paste(comments, "Na wykresie powinna być przedstaw
 if (!isCorrectD) comments <- paste(comments, "Nazwy seriali nie są uporządkowane w odpowiedniej kolejności (funkcją reorder). ")
 if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 ```
+
+
+
+
+# Zadanie 9
+
+W zbiorze danych `diagnoza` znajdują się dwie ciekawe zmienne: `eduk4_2013` z poziomem edukacji respondenta wyrażonym  w czteropoziomowej skali oraz `gp29` odpowiedź na pytanie co jest ważniejsze w życiu.
+
+Zbuduj wykres słupkowy (z użyciem geometrii `bar`), który na osi OX przedstawi słupki dla różnych wartości zmiennej `eduk4_2013`, każdy słupek zostanie podzielony na części wypełnione różnymi kolorami, odpowiadające udziałowi różnych odpowiedzi zmiennej `gp29`.
+
+Wynikowy wykres przypisz do zmiennej o nazwie `wynik`.
+
+Rozwiązanie
+```{r, eval=FALSE}
+wynik <- ggplot(diagnoza, aes(x=eduk4_2013, fill=gp29)) + 
+  geom_bar()
+```
+
+Test
+```{r, eval=FALSE}
+geometrie <- sapply(wynik$layers, function(x) x$geom$objname)
+mapowania <- lapply(sapply(wynik$mapping, function(x) x), as.character)
+koordynaty <- attr(wynik$coordinates, "class")
+
+isCorrectM <- mapowania$x == "eduk4_2013" && mapowania$fill == "gp29" 
+isCorrectG <- all("bar" %in% geometrie)
+isCorrect <- isCorrectM &&  isCorrectG
+comments <- ""
+if (!exists("wynik")) comments <- paste(comments, "Brak zmiennej o nazwie wynik. ")
+if (!isCorrectM) comments <- paste(comments, "Na wykresie należy przedstawić zmienne eduk4_2013 i gp29. ")
+if (!isCorrectG) comments <- paste(comments, "Na wykresie powinna być przedstawiona geometria bar ")
+if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
+```
+
 
 
 
