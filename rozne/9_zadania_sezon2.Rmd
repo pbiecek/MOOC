@@ -156,3 +156,32 @@ if (!isCorrectG) comments <- paste(comments, "Na wykresie powinna być przedstaw
 if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 ```
 
+
+# Zadanie 6
+
+W zbiorze danych `pearson` znajdują się informacje o wzroście ojca i syna.
+Wykorzystując ten zbiór dnaych zbuduj wykres, który na osi OX będzie przedstawiał wzrost ojca a na osi OY wzrost syna.
+Przedstaw poszczególne dane za pomocą punktów oraz dodaj linie trendu wyznaczoną przez geometrie smooth.
+Wykres przypisz do zmiennej o nazwie `wynik`.
+
+Rozwiązanie
+```{r, eval=FALSE}
+wynik <- ggplot(pearson, aes(x=ojciec, y=syn)) + 
+  geom_smooth() + geom_point() 
+```
+
+Test
+```{r, eval=FALSE}
+geometrie <- sapply(wynik$layers, function(x) x$geom$objname)
+mapowania <- lapply(sapply(wynik$mapping, function(x) x), as.character)
+
+isCorrectM <- mapowania$x == "ojciec" && mapowania$y == "syn" 
+isCorrectG <- all(c("smooth", "point") %in% geometrie)
+isCorrect <- isCorrectM &&  isCorrectG
+comments <- ""
+if (!exists("wynik")) comments <- paste(comments, "Brak zmiennej o nazwie wynik. ")
+if (!isCorrectM) comments <- paste(comments, "Osie powinny opisywać wzrost syna i ojca. ")
+if (!isCorrectG) comments <- paste(comments, "Na wykresie powinna być przedstawiona geometria text i smooth. ")
+if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
+```
+
