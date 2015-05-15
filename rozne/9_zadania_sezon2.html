@@ -247,6 +247,34 @@ if (!isCorrectM) comments &lt;-<span class="st"> </span><span class="kw">paste</
 if (!isCorrectG) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Na wykresie powinna być przedstawiona geometria bar &quot;</span>)
 if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>)</code></pre>
 </div>
+<div id="zadanie-10" class="slide section level1">
+<h1>Zadanie 10</h1>
+<p>Wykonaj wykres, tak jak opisano w zadaniu 9.</p>
+<p>Następnie zmodyfikuj go aby: legenda znajdowała się na górze wykresu, wykres posiadał tytuł ‘Co jest ważniejsze?’, osie OX i OY były zamienione ze sobą (na osi OY edukacja a na OX liczba).</p>
+<p>Zmieniony wykres przypisz do zmiennej o nazwie <code>wynik</code>.</p>
+<p>Rozwiązanie</p>
+<pre class="sourceCode r"><code class="sourceCode r">wynik &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diagnoza, <span class="kw">aes</span>(<span class="dt">x=</span>eduk4_2013, <span class="dt">fill=</span>gp29)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>() +<span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;Co jest ważniejsze?&quot;</span>) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;top&quot;</span>) +<span class="st"> </span><span class="kw">coord_flip</span>()</code></pre>
+<p>Test</p>
+<pre class="sourceCode r"><code class="sourceCode r">geometrie &lt;-<span class="st"> </span><span class="kw">sapply</span>(wynik$layers, function(x) x$geom$objname)
+mapowania &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">sapply</span>(wynik$mapping, function(x) x), as.character)
+koordynaty &lt;-<span class="st"> </span><span class="kw">attr</span>(wynik$coordinates, <span class="st">&quot;class&quot;</span>)
+legenda &lt;-<span class="st"> </span>wynik$theme$legend.position
+
+isCorrectM &lt;-<span class="st"> </span>mapowania$x ==<span class="st"> &quot;eduk4_2013&quot;</span> &amp;&amp;<span class="st"> </span>mapowania$fill ==<span class="st"> &quot;gp29&quot;</span> 
+isCorrectG &lt;-<span class="st"> </span><span class="kw">all</span>(<span class="st">&quot;bar&quot;</span> %in%<span class="st"> </span>geometrie)
+isCorrectD1 &lt;-<span class="st"> </span>legenda ==<span class="st"> &quot;top&quot;</span>
+isCorrectD2 &lt;-<span class="st"> </span><span class="kw">all</span>(<span class="st">&quot;flip&quot;</span> %in%<span class="st"> </span>koordynaty)
+isCorrect &lt;-<span class="st"> </span>isCorrectM &amp;&amp;<span class="st">  </span>isCorrectG &amp;&amp;<span class="st">  </span>isCorrectD1 &amp;&amp;<span class="st">  </span>isCorrectD2
+comments &lt;-<span class="st"> &quot;&quot;</span>
+if (!<span class="kw">exists</span>(<span class="st">&quot;wynik&quot;</span>)) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Brak zmiennej o nazwie wynik. &quot;</span>)
+if (!isCorrectM) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Na wykresie należy przedstawić zmienne eduk4_2013 i gp29. &quot;</span>)
+if (!isCorrectG) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Na wykresie powinna być przedstawiona geometria bar. &quot;</span>)
+if (!isCorrectD1) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Legenda powinna znajdować się na górze wykresu. &quot;</span>)
+if (!isCorrectD2) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Osie wykresu powinny być zamienione funkcją coord_flip(). &quot;</span>)
+if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>)</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>

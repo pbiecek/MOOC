@@ -300,6 +300,44 @@ if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 
 
 
+# Zadanie 10
+
+Wykonaj wykres, tak jak opisano w zadaniu 9.
+
+Następnie zmodyfikuj go aby: legenda znajdowała się na górze wykresu, wykres posiadał tytuł 'Co jest ważniejsze?', osie OX i OY były zamienione ze sobą (na osi OY edukacja a na OX liczba).
+
+Zmieniony wykres przypisz do zmiennej o nazwie `wynik`.
+
+Rozwiązanie
+```{r, eval=FALSE}
+wynik <- ggplot(diagnoza, aes(x=eduk4_2013, fill=gp29)) + 
+  geom_bar() + ggtitle("Co jest ważniejsze?") + 
+  theme(legend.position = "top") + coord_flip()
+
+```
+
+Test
+```{r, eval=FALSE}
+geometrie <- sapply(wynik$layers, function(x) x$geom$objname)
+mapowania <- lapply(sapply(wynik$mapping, function(x) x), as.character)
+koordynaty <- attr(wynik$coordinates, "class")
+legenda <- wynik$theme$legend.position
+
+isCorrectM <- mapowania$x == "eduk4_2013" && mapowania$fill == "gp29" 
+isCorrectG <- all("bar" %in% geometrie)
+isCorrectD1 <- legenda == "top"
+isCorrectD2 <- all("flip" %in% koordynaty)
+isCorrect <- isCorrectM &&  isCorrectG &&  isCorrectD1 &&  isCorrectD2
+comments <- ""
+if (!exists("wynik")) comments <- paste(comments, "Brak zmiennej o nazwie wynik. ")
+if (!isCorrectM) comments <- paste(comments, "Na wykresie należy przedstawić zmienne eduk4_2013 i gp29. ")
+if (!isCorrectG) comments <- paste(comments, "Na wykresie powinna być przedstawiona geometria bar. ")
+if (!isCorrectD1) comments <- paste(comments, "Legenda powinna znajdować się na górze wykresu. ")
+if (!isCorrectD2) comments <- paste(comments, "Osie wykresu powinny być zamienione funkcją coord_flip(). ")
+if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
+```
+
+
 
 
 
