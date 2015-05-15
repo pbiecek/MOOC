@@ -430,11 +430,11 @@ if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</s
 <p>Tabelę z procentami w wierszach zapisz do zmiennej wynik.</p>
 <p>Rozwiązanie</p>
 <pre class="sourceCode r"><code class="sourceCode r">tab &lt;-<span class="st"> </span><span class="kw">table</span>(auta2012$Rodzaj.paliwa, auta2012$Kolor)[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">6</span>),<span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">4</span>, <span class="dv">12</span>)]
-wynik &lt;-<span class="st"> </span><span class="dv">100</span>*<span class="kw">prop.table</span>(tab)</code></pre>
+wynik &lt;-<span class="st"> </span><span class="dv">100</span>*<span class="kw">prop.table</span>(tab,<span class="dv">1</span>)</code></pre>
 <p>Test</p>
 <pre class="sourceCode r"><code class="sourceCode r">isCorrect1 &lt;-<span class="st"> </span><span class="kw">all</span>(<span class="kw">abs</span>(<span class="dv">100</span> -<span class="st"> </span><span class="kw">rowSums</span>(wynik)) &lt;<span class="st"> </span><span class="dv">2</span>)
-isCorrect2 &lt;-<span class="st"> </span><span class="kw">abs</span>(<span class="kw">min</span>(wynik) -<span class="st"> </span><span class="fl">1.58</span>) &lt;<span class="st"> </span><span class="dv">1</span>
-isCorrect3 &lt;-<span class="st"> </span><span class="kw">abs</span>(<span class="kw">max</span>(wynik) -<span class="st"> </span><span class="fl">26.1</span>) &lt;<span class="st"> </span><span class="dv">1</span>
+isCorrect2 &lt;-<span class="st"> </span><span class="kw">abs</span>(<span class="kw">min</span>(wynik) -<span class="st"> </span><span class="fl">18.78</span>) &lt;<span class="st"> </span><span class="dv">1</span>
+isCorrect3 &lt;-<span class="st"> </span><span class="kw">abs</span>(<span class="kw">max</span>(wynik) -<span class="st"> </span><span class="fl">54.16</span>) &lt;<span class="st"> </span><span class="dv">1</span>
 isCorrect &lt;-<span class="st"> </span>isCorrect1 &amp;&amp;<span class="st"> </span>isCorrect2 &amp;&amp;<span class="st"> </span>isCorrect3
 comments &lt;-<span class="st"> &quot;&quot;</span>
 if (!<span class="kw">exists</span>(<span class="st">&quot;wynik&quot;</span>)) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Brak zmiennej o nazwie wynik. &quot;</span>)

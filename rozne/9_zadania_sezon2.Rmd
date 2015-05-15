@@ -602,14 +602,14 @@ Tabelę z procentami w wierszach zapisz do zmiennej wynik.
 Rozwiązanie
 ```{r, eval=FALSE}
 tab <- table(auta2012$Rodzaj.paliwa, auta2012$Kolor)[c(1,2,6),c(10, 4, 12)]
-wynik <- 100*prop.table(tab)
+wynik <- 100*prop.table(tab,1)
 ```
 
 Test
 ```{r, eval=FALSE}
 isCorrect1 <- all(abs(100 - rowSums(wynik)) < 2)
-isCorrect2 <- abs(min(wynik) - 1.58) < 1
-isCorrect3 <- abs(max(wynik) - 26.1) < 1
+isCorrect2 <- abs(min(wynik) - 18.78) < 1
+isCorrect3 <- abs(max(wynik) - 54.16) < 1
 isCorrect <- isCorrect1 && isCorrect2 && isCorrect3
 comments <- ""
 if (!exists("wynik")) comments <- paste(comments, "Brak zmiennej o nazwie wynik. ")
