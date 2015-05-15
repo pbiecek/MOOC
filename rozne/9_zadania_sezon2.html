@@ -96,7 +96,7 @@ if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</s
 <div id="zadanie-3" class="slide section level1">
 <h1>Zadanie 3</h1>
 <p>Na bazie danych <code>koty_ptaki</code> zbuduj wykres przedstawiający dla gatunków długość oraz prędkość osobników.</p>
-<p>Na osi OX powinna znajdować się długość a na osi OY prędkość. Na wykresie w powinny znaleźć się nazwy gatunków we współrzędnych określonych przez ich długosć i prędkość.</p>
+<p>Na osi OX powinna znajdować się długość a na osi OY prędkość. Na wykresie w powinny znaleźć się nazwy gatunków we współrzędnych określonych przez ich długość i prędkość.</p>
 <p>Wykres przypisz do zmiennej o nazwie <code>wynik</code>.</p>
 <p>Rozwiązanie</p>
 <pre class="sourceCode r"><code class="sourceCode r">wynik &lt;-<span class="st"> </span><span class="kw">ggplot</span>(koty_ptaki, <span class="kw">aes</span>(<span class="dt">x=</span>dlugosc, <span class="dt">y=</span>predkosc,
@@ -117,7 +117,7 @@ if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</s
 <div id="zadanie-4" class="slide section level1">
 <h1>Zadanie 4</h1>
 <p>Na bazie danych <code>koty_ptaki</code> zbuduj wykres przedstawiający dla gatunków długość oraz wagę osobników.</p>
-<p>Na osi OX powinna znajdować się długość a na osi OY waga. Na wykresie należy przedstawić przynajmniej dwie warstwy - dwie geometrie, jedną z puntkami a drugą z nazwami gatunków.</p>
+<p>Na osi OX powinna znajdować się długość a na osi OY waga. Na wykresie należy przedstawić przynajmniej dwie warstwy - dwie geometrie, jedną z punktami a drugą z nazwami gatunków.</p>
 <p>Wykres przypisz do zmiennej o nazwie <code>wynik</code>.</p>
 <p>Rozwiązanie</p>
 <pre class="sourceCode r"><code class="sourceCode r">wynik &lt;-<span class="st"> </span><span class="kw">ggplot</span>(koty_ptaki, <span class="kw">aes</span>(<span class="dt">x=</span>dlugosc, <span class="dt">y=</span>waga,
@@ -139,7 +139,7 @@ if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</s
 <div id="zadanie-5" class="slide section level1">
 <h1>Zadanie 5</h1>
 <p>Na bazie danych <code>koty_ptaki</code> zbuduj wykres przedstawiający dla gatunków długość oraz prędkość osobników.</p>
-<p>Na osi OX powinna znajdować się długość a na osi OY prędkość. Do wykresu dodaj linię trendu używając geometrii <code>smooth</code>. Na wykresie należy przedstawić przynajmniej dwie warstwy - dwie geometrie, jedną z puntkami a drugą z trendem.</p>
+<p>Na osi OX powinna znajdować się długość a na osi OY prędkość. Do wykresu dodaj linię trendu używając geometrii <code>smooth</code>. Na wykresie należy przedstawić przynajmniej dwie warstwy - dwie geometrie, jedną z punktami a drugą z trendem.</p>
 <p>Wykres przypisz do zmiennej o nazwie <code>wynik</code>.</p>
 <p>Rozwiązanie</p>
 <pre class="sourceCode r"><code class="sourceCode r">wynik &lt;-<span class="st"> </span><span class="kw">ggplot</span>(koty_ptaki, <span class="kw">aes</span>(<span class="dt">x=</span>dlugosc, <span class="dt">y=</span>predkosc)) +<span class="st"> </span>
@@ -159,8 +159,8 @@ if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</s
 </div>
 <div id="zadanie-6" class="slide section level1">
 <h1>Zadanie 6</h1>
-<p>W zbiorze danych <code>pearson</code> znajdują się informacje o wzroście ojca i syna. Wykorzystując ten zbiór dnaych zbuduj wykres, który na osi OX będzie przedstawiał wzrost ojca a na osi OY wzrost syna.</p>
-<p>Przedstaw poszczególne dane za pomocą punktów oraz dodaj linie trendu wyznaczoną przez geometrie smooth.</p>
+<p>W zbiorze danych <code>pearson</code> znajdują się informacje o wzroście ojca i syna. Wykorzystując ten zbiór danych zbuduj wykres, który na osi OX będzie przedstawiał wzrost ojca a na osi OY wzrost syna.</p>
+<p>Przedstaw poszczególne dane za pomocą punktów oraz dodaj linie trendu wyznaczoną przez geometrie <code>smooth</code>.</p>
 <p>Wykres przypisz do zmiennej o nazwie <code>wynik</code>.</p>
 <p>Rozwiązanie</p>
 <pre class="sourceCode r"><code class="sourceCode r">wynik &lt;-<span class="st"> </span><span class="kw">ggplot</span>(pearson, <span class="kw">aes</span>(<span class="dt">x=</span>ojciec, <span class="dt">y=</span>syn)) +<span class="st"> </span>
@@ -181,7 +181,7 @@ if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</s
 <div id="zadanie-7" class="slide section level1">
 <h1>Zadanie 7</h1>
 <p>W zbiorze danych <code>serialeIMDB</code> znajdują się informacje o ocenach odcinków 200 wybranych seriali.</p>
-<p>Wykorzystując ten zbiór dnaych zbuduj wykres, który na osi OY będzie przedstawiał nazwę serialu a na osi OX przedstawiony będzie rozkład ocen odcinków tego serialu za pomocą wykresu pudełko wąsy. Seriali jest ponad 200, więc aby wykres się wyświetlał musi być dużo miejsca w pionie.</p>
+<p>Wykorzystując ten zbiór danych zbuduj wykres, który na osi OY będzie przedstawiał nazwę serialu a na osi OX przedstawiony będzie rozkład ocen odcinków tego serialu za pomocą wykresu pudełko wąsy. Seriali jest ponad 200, więc aby wykres się wyświetlał musi być dużo miejsca w pionie.</p>
 <p>Wynikowy wykres przypisz do zmiennej o nazwie <code>wynik</code>.</p>
 <p>Rozwiązanie</p>
 <pre class="sourceCode r"><code class="sourceCode r">wynik &lt;-<span class="st"> </span><span class="kw">ggplot</span>(serialeIMDB, <span class="kw">aes</span>(<span class="dt">x=</span>serial, <span class="dt">y=</span>ocena)) +<span class="st"> </span>
@@ -202,7 +202,7 @@ if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</s
 <div id="zadanie-8" class="slide section level1">
 <h1>Zadanie 8</h1>
 <p>Zbuduj wykres zgodnie z opisem umieszczonym w zadaniu 7.</p>
-<p>Zatroszcz się jedynie o to, by kolejność naz seriali na wykresie odpowiadała medianom ocen. Tzn. serial o najniższej medianie ocen powinien być wyświetlony na dole a o najwyższej na górze osi OY. Aby uporządkować seriale nalezy wykorzystać funkcję <code>reorder()</code> (patrz odcinek 8).</p>
+<p>Zatroszcz się jedynie o to, by kolejność nazw seriali na wykresie odpowiadała medianom ocen. Tzn. serial o najniższej medianie ocen powinien być wyświetlony na dole a o najwyższej na górze osi OY. Aby uporządkować seriale należy wykorzystać funkcję <code>reorder()</code> (patrz odcinek 8).</p>
 <p>Wynikowy wykres przypisz do zmiennej o nazwie <code>wynik</code>.</p>
 <p>Rozwiązanie</p>
 <pre class="sourceCode r"><code class="sourceCode r">serialeIMDB$serial &lt;-<span class="st"> </span><span class="kw">reorder</span>(serialeIMDB$serial, serialeIMDB$ocena, median)
