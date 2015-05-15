@@ -275,6 +275,27 @@ if (!isCorrectD1) comments &lt;-<span class="st"> </span><span class="kw">paste<
 if (!isCorrectD2) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Osie wykresu powinny być zamienione funkcją coord_flip(). &quot;</span>)
 if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>)</code></pre>
 </div>
+<div id="zadanie-11" class="slide section level1">
+<h1>Zadanie 11</h1>
+<p>W zadaniu 1 przedstawialiśmy zależność pomiędzy prędkością a długością zwierzęcia.</p>
+<p>Wykorzystaj funkcję <code>lm()</code> aby zbudować model regresji liniowej opisujący zmienną <code>predkosc</code> jako liniową funkcję zmiennej <code>dlugosc</code>. Zbuduj podsumowanie tego modelu funkcją <code>summary()</code>.</p>
+<p>Wynik funkcji summary przypisz do zmiennej o nazwie <code>wynik</code>.</p>
+<p>Rozwiązanie</p>
+<pre class="sourceCode r"><code class="sourceCode r">wynik &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">lm</span>(<span class="dt">data=</span>koty_ptaki, predkosc ~<span class="st"> </span>dlugosc))</code></pre>
+<p>Test</p>
+<pre class="sourceCode r"><code class="sourceCode r">klasa &lt;-<span class="st"> </span><span class="kw">class</span>(wynik)
+wspolczynniki &lt;-<span class="st"> </span>wynik$coefficients[,<span class="dv">1</span>] -<span class="st"> </span><span class="kw">c</span>(<span class="fl">149.68</span>, -<span class="fl">36.98</span>)
+
+isCorrectM &lt;-<span class="st"> </span>klasa ==<span class="st"> &quot;summary.lm&quot;</span>
+isCorrectG &lt;-<span class="st"> </span><span class="kw">min</span>(<span class="kw">abs</span>(wspolczynniki)) &lt;<span class="st"> </span><span class="fl">0.1</span>
+isCorrect &lt;-<span class="st"> </span>isCorrectM &amp;&amp;<span class="st">  </span>isCorrectG
+comments &lt;-<span class="st"> &quot;&quot;</span>
+if (!<span class="kw">exists</span>(<span class="st">&quot;wynik&quot;</span>)) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Brak zmiennej o nazwie wynik. &quot;</span>)
+if (!isCorrectM) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Należy wysłać wynik funkcji summary. &quot;</span>)
+if (!isCorrectG) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Wyznaczono zły model. &quot;</span>)
+if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>)</code></pre>
+<p>summary(lm(data=koty_ptaki, waga ~ poly(dlugosc, 3)))</p>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>
