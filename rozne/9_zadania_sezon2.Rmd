@@ -431,7 +431,7 @@ if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 
 # Zadanie 14
 
-Ze zbioru danych `auta2012` wybierz tylko wiersze odpowiadającom ofertom sprzedaży modelu `Golf`. Tak jak zauważyliśmy, zależność `Ceny.w.PLN` od `Rok.produkcji` nie ma charakteru liniowego ale multiplikatywny, dlatego rozsądniej jest opisywać logarytm ceny `log(Cena.w.PLN)`.
+Ze zbioru danych `auta2012` wybierz tylko wiersze odpowiadającą ofertom sprzedaży modelu `Golf`. Tak jak zauważyliśmy, zależność `Ceny.w.PLN` od `Rok.produkcji` nie ma charakteru liniowego ale multiplikatywny, dlatego rozsądniej jest opisywać logarytm ceny `log(Cena.w.PLN)`.
 
 Zbuduj model na danych o Golfach, opisujący logarytm Ceny w PLN w zależności od Roku produkcji i od Rodzaju paliwa. Następnie na bazie tego modelu oszacuj ile zgodnie z modelem kosztują Golfy z silnikiem diesla z roku 2010.
 
@@ -487,7 +487,7 @@ if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 
 W zbiorze danych `skiJumps2013` znajdują się wyniki skoków narciarskich w sezonie 2013. Podobnie jak w zadaniu 15, wybierz z tego zbioru danych tylko skoki na skoczniach o punkcie konstrukcyjnym 120m (zmienna `compKPoint`). 
 
-Wybierz z tego zbioru danych skoczów z Polski i Czech (zmienna `jumperCountry`). Policz jaka jest *szansa*, że na takiej skoczni skoczek skoczy 120 metrów lub więcej, osobno dla skoczków z Polski i Czech.
+Wybierz z tego zbioru danych skoczków z Polski i Czech (zmienna `jumperCountry`). Policz jaka jest *szansa*, że na takiej skoczni skoczek skoczy 120 metrów lub więcej, osobno dla skoczków z Polski i Czech.
 
 Następnie policz jaki jest *iloraz szans*, że polski skoczek skoczy 120 lub więcej metrów do szansy że czeski skocze skoczy 120 lub więcej metrów.
 
@@ -593,7 +593,7 @@ if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 
 # Zadanie 20
 
-W zadaniu 19 odkryliśmy zależność pomiędzy kolorem auta (ze zbioru czarny, czerwony, biały) a rodzajem paliwa (benzna, beznyna+LPG, diesel).
+W zadaniu 19 odkryliśmy zależność pomiędzy kolorem auta (ze zbioru czarny, czerwony, biały) a rodzajem paliwa (benzyna, beznyna+LPG, diesel).
 
 Aby zbadać tę zależność zbuduj tabele kontyngencji z kolorami w kolumnach i rodzajami paliwa w wierszach. Następnie policz procentowy udział (funkcją `prop.table()`) kolorów w każdym wierszu (wiersze powinny sumować się do 100). Jaka jest zależność? Który kolor najrzadziej występuje w którym rodzaju napędu?
 
@@ -616,6 +616,5 @@ if (!exists("wynik")) comments <- paste(comments, "Brak zmiennej o nazwie wynik.
 if (!isCorrect1) comments <- paste(comments, "Wiersze nie sumują się do 100. ")
 if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 ```
-
 
 
