@@ -470,7 +470,7 @@ Rozwiązanie
 tylko120 <- skiJumps2013 %>% filter(compKPoint == 120)
 tab <- table(tylko120$jumpDistance >= 120)
 
-szansa <- tab[2]/tab[1]
+wynik <- tab[2]/tab[1]
 ```
 
 Test
@@ -500,7 +500,7 @@ tylko120CZ <- skiJumps2013 %>% filter(compKPoint == 120, jumperCountry == "CZE")
 tabPL <- table(tylko120PL$jumpDistance >= 120)
 tabCZ <- table(tylko120CZ$jumpDistance >= 120)
 
-is <- (tabPL[2]/tabPL[1]) / (tabCZ[2]/tabCZ[1])
+wynik <- (tabPL[2]/tabPL[1]) / (tabCZ[2]/tabCZ[1])
 ```
 
 Test
@@ -525,7 +525,7 @@ Wynik (jedną liczbę, tę szansę)  przypisz do zmiennej o nazwie `wynik`.
 Rozwiązanie
 ```{r, eval=FALSE}
 tab <- table(WIG$Kurs.zamkniecia >= WIG$Kurs.otwarcia) 
-is <- (tab[2]/tab[1])
+wynik <- (tab[2]/tab[1])
 ```
 
 Test
@@ -537,6 +537,56 @@ if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 ```
 
 
+
+
+
+# Zadanie 18
+
+W zbiorze danych `TCGA_BRCA` o nowotworach piersi znajdują się informacje o płci oraz o mutacjach w genie TP53 (mężczyźni rzadko, ale czasem mogą mieć nowotwór piersi).  
+
+Wartość `Wild type` dla kolumny `TP53` oznacza, że gen TP53 jest niezmieniony, a każda inna wartość oznacza że gen jest zmieniony.
+
+Wyznacz tablice kontyngencji 2 x 2 opisującą zależność pomiędzy płcią a informacją czy gen `TP53` jest równy `Wild type`. Następnie zastosuj do tej tabeli dokładny test Fishera.
+
+Wynik, czyli p-wartość dla dokładnego testu Fishera, przypisz do zmiennej o nazwie `wynik` (z dokładnością do trzech cyfr po przecinku).
+
+Rozwiązanie
+```{r, eval=FALSE}
+wynik <- fisher.test(table(TCGA_BRCA$plec, TCGA_BRCA$TP53 == "Wild type"))$p.value
+```
+
+Test
+```{r, eval=FALSE}
+isCorrect <- abs(wynik - 0.039) < 0.02
+comments <- ""
+if (!exists("wynik")) comments <- paste(comments, "Brak zmiennej o nazwie wynik. ")
+if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
+```
+
+
+# Zadanie 19
+
+Na podstawie zbioru danych `auta2012` zbuduj tabele kontyngencji zestawiającą liczby samochodów w rozbiciu na ich kolor i rodzaj paliwa.
+
+W przypadku rodzaju paliwa ogranicz się do trzech rodzajów paliwa: `benzyna`, `benzyna+LPG`, `olej napedowy (diesel)`, w przypadku kolorów ogranicz się do trzech kolorów: `czarny`, `bialy`, `czerwony`.
+
+Następnie na takiej tabeli kontyngencji (3 na 3) wyznacz test chi kwadrat.
+
+Wynik, czyli p-wartość dla testu chi kwadrat, przypisz do zmiennej o nazwie `wynik` (z dokładnością do trzech cyfr po przecinku).
+
+Rozwiązanie
+```{r, eval=FALSE}
+tab <- table(auta2012$Rodzaj.paliwa, auta2012$Kolor)[c(1,2,6),c(10, 4, 12)]
+wynik <- chisq.test(tab)$p.value
+```
+
+Test
+```{r, eval=FALSE}
+isCorrect <- abs(wynik) < 0.001
+comments <- ""
+if (!exists("wynik")) comments <- paste(comments, "Brak zmiennej o nazwie wynik. ")
+if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
+```
 
 
 
