@@ -347,7 +347,7 @@ W zadaniu 1 przedstawialiśmy zależność pomiędzy prędkością a długości�
 
 Wykorzystaj funkcję `lm()` aby zbudować model regresji liniowej opisujący zmienną `predkosc` jako liniową funkcję zmiennej `dlugosc`. Zbuduj podsumowanie tego modelu funkcją `summary()`.
 
-Wynik funkcji summary przypisz do zmiennej o nazwie `wynik`.
+Wynik funkcji `summary()` przypisz do zmiennej o nazwie `wynik`.
 
 Rozwiązanie
 ```{r, eval=FALSE}
@@ -374,35 +374,33 @@ if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 
 # Zadanie 12
 
-W zadaniu 1 przedstawialiśmy zależność pomiędzy prędkością a długością zwierzęcia.
+Ze zbioru danych `serialeIMDB` wybierz tylko odcinki dla serialu `Breaking Bad`.
 
-Wykorzystaj funkcję `lm()` aby zbudować model regresji liniowej opisujący zmienną `predkosc` jako liniową funkcję zmiennej `dlugosc`. Zbuduj podsumowanie tego modelu funkcją `summary()`.
+Następnie wykorzystaj funkcję `lm()` aby zbudować model regresji liniowej opisujący zależność pomiędzy oceną odcinka a jego numerem (zmienne `ocena` i `id`).
 
-Wynik funkcji summary przypisz do zmiennej o nazwie `wynik`.
+Wynik funkcji `lm()` przypisz do zmiennej o nazwie `wynik`.
 
 Rozwiązanie
 ```{r, eval=FALSE}
-wynik <- summary(lm(data=koty_ptaki, predkosc ~ dlugosc))
+BreakingBad <- filter(serialeIMDB, serial == "Breaking Bad") 
+wynik <- lm(data=BreakingBad, ocena ~ id)
 ```
 
 Test
 ```{r, eval=FALSE}
 klasa <- class(wynik)
-wspolczynniki <- wynik$coefficients[,1] - c(149.68, -36.98)
+wspolczynniki <- wynik$coefficients[,1] - c(7.9, 0.018)
 
-isCorrectM <- klasa == "summary.lm"
-isCorrectG <- min(abs(wspolczynniki)) < 0.1
+isCorrectM <- klasa == "lm"
+isCorrectG <- abs(wspolczynniki[2]) < 0.01
 isCorrect <- isCorrectM &&  isCorrectG
 comments <- ""
 if (!exists("wynik")) comments <- paste(comments, "Brak zmiennej o nazwie wynik. ")
-if (!isCorrectM) comments <- paste(comments, "Należy wysłać wynik funkcji summary. ")
+if (!isCorrectM) comments <- paste(comments, "Należy wysłać wynik funkcji lm ")
 if (!isCorrectG) comments <- paste(comments, "Wyznaczono zły model. ")
 if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 ```
 
-
-
-summary(lm(data=koty_ptaki, waga ~ poly(dlugosc, 3)))
 
 
 
