@@ -183,7 +183,30 @@ if (!<span class="kw">exists</span>(<span class="st">&quot;wynik&quot;</span>)) 
 if (!isCorrectM) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Osie powinny opisywać nazwę serialu i ocenę. &quot;</span>)
 if (!isCorrectG) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Na wykresie powinna być przedstawiona geometria boxplot. &quot;</span>)
 if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>)</code></pre>
-<p>skody<span class="math">\(Model &lt;- reorder(skody\)</span>Model, skody$Cena.w.PLN, median)</p>
+</div>
+<div id="zadanie-8" class="slide section level1">
+<h1>Zadanie 8</h1>
+<p>Zbuduj wykres zgodnie z opisem umieszczonym w zadaniu 7. Zatroszcz się jedynie o to, by kolejność naz seriali na wykresie odpowiadała medianom ocen. Tzn. serial o najniższej medianie ocen powinien być wyświetlony na dole a o najwyższej na górze osi OY. Aby uporządkować seriale nalezy wykorzystać funkcję <code>reorder()</code> (patrz odcinek 8). Wynikowy wykres przypisz do zmiennej o nazwie <code>wynik</code>.</p>
+<p>Rozwiązanie</p>
+<pre class="sourceCode r"><code class="sourceCode r">serialeIMDB$serial &lt;-<span class="st"> </span><span class="kw">reorder</span>(serialeIMDB$serial, serialeIMDB$ocena, median)
+wynik &lt;-<span class="st"> </span><span class="kw">ggplot</span>(serialeIMDB, <span class="kw">aes</span>(<span class="dt">x=</span>serial, <span class="dt">y=</span>ocena)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>() +<span class="st"> </span><span class="kw">coord_flip</span>()</code></pre>
+<p>Test</p>
+<pre class="sourceCode r"><code class="sourceCode r">sn &lt;-<span class="st"> </span><span class="kw">levels</span>(wynik$data$serial)
+sn2 &lt;-<span class="st"> </span>sn[<span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">length</span>(sn))]
+geometrie &lt;-<span class="st"> </span><span class="kw">sapply</span>(wynik$layers, function(x) x$geom$objname)
+mapowania &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">sapply</span>(wynik$mapping, function(x) x), as.character)
+
+isCorrectM &lt;-<span class="st"> </span>mapowania$x ==<span class="st"> &quot;serial&quot;</span> &amp;&amp;<span class="st"> </span>mapowania$y ==<span class="st"> &quot;ocena&quot;</span> 
+isCorrectG &lt;-<span class="st"> </span><span class="kw">all</span>(<span class="st">&quot;boxplot&quot;</span> %in%<span class="st"> </span>geometrie)
+isCorrectD &lt;-<span class="st"> </span><span class="kw">all</span>(sn2 %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Avrupa yakasi&quot;</span>, <span class="st">&quot;Planet Earth&quot;</span>))
+isCorrect &lt;-<span class="st"> </span>isCorrectM &amp;&amp;<span class="st">  </span>isCorrectG &amp;&amp;<span class="st">  </span>isCorrectD
+comments &lt;-<span class="st"> &quot;&quot;</span>
+if (!<span class="kw">exists</span>(<span class="st">&quot;wynik&quot;</span>)) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Brak zmiennej o nazwie wynik. &quot;</span>)
+if (!isCorrectM) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Osie powinny opisywać nazwę serialu i ocenę. &quot;</span>)
+if (!isCorrectG) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Na wykresie powinna być przedstawiona geometria boxplot. &quot;</span>)
+if (!isCorrectD) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Nazwy seriali nie są uporządkowane w odpowiedniej kolejności (funkcją reorder). &quot;</span>)
+if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>)</code></pre>
 </div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->

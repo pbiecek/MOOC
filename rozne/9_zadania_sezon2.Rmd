@@ -215,7 +215,39 @@ if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 ```
 
 
-skody$Model <- reorder(skody$Model, skody$Cena.w.PLN, median)
+
+# Zadanie 8
+
+Zbuduj wykres zgodnie z opisem umieszczonym w zadaniu 7.
+Zatroszcz się jedynie o to, by kolejność naz seriali na wykresie odpowiadała medianom ocen. Tzn. serial o najniższej medianie ocen powinien być wyświetlony na dole a o najwyższej na górze osi OY. Aby uporządkować seriale nalezy wykorzystać funkcję `reorder()` (patrz odcinek 8).
+Wynikowy wykres przypisz do zmiennej o nazwie `wynik`.
+
+Rozwiązanie
+```{r, eval=FALSE}
+serialeIMDB$serial <- reorder(serialeIMDB$serial, serialeIMDB$ocena, median)
+wynik <- ggplot(serialeIMDB, aes(x=serial, y=ocena)) + 
+  geom_boxplot() + coord_flip()
+```
+
+Test
+```{r, eval=FALSE}
+sn <- levels(wynik$data$serial)
+sn2 <- sn[c(1, length(sn))]
+geometrie <- sapply(wynik$layers, function(x) x$geom$objname)
+mapowania <- lapply(sapply(wynik$mapping, function(x) x), as.character)
+
+isCorrectM <- mapowania$x == "serial" && mapowania$y == "ocena" 
+isCorrectG <- all("boxplot" %in% geometrie)
+isCorrectD <- all(sn2 %in% c("Avrupa yakasi", "Planet Earth"))
+isCorrect <- isCorrectM &&  isCorrectG &&  isCorrectD
+comments <- ""
+if (!exists("wynik")) comments <- paste(comments, "Brak zmiennej o nazwie wynik. ")
+if (!isCorrectM) comments <- paste(comments, "Osie powinny opisywać nazwę serialu i ocenę. ")
+if (!isCorrectG) comments <- paste(comments, "Na wykresie powinna być przedstawiona geometria boxplot. ")
+if (!isCorrectD) comments <- paste(comments, "Nazwy seriali nie są uporządkowane w odpowiedniej kolejności (funkcją reorder). ")
+if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
+```
+
 
 
 
