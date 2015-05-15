@@ -485,23 +485,27 @@ if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 
 # Zadanie 16
 
-W zbiorze danych `skiJumps2013` znajdują się wyniki skoków narciarskich w sezonie 2013. Wybierz z tego zbioru danych tylko skoki na skoczniach o punkcie konstrukcyjnym 120m (zmienna `compKPoint`). 
+W zbiorze danych `skiJumps2013` znajdują się wyniki skoków narciarskich w sezonie 2013. Podobnie jak w zadaniu 15, wybierz z tego zbioru danych tylko skoki na skoczniach o punkcie konstrukcyjnym 120m (zmienna `compKPoint`). 
 
-Następnie policz jaka jest *szansa*, że na takiej skoczni skoczek skoczy 120 metrów lub więcej.
+Wybierz z tego zbioru danych skoczów z Polski i Czech (zmienna `jumperCountry`). Policz jaka jest *szansa*, że na takiej skoczni skoczek skoczy 120 metrów lub więcej, osobno dla skoczków z Polski i Czech.
+
+Następnie policz jaki jest *iloraz szans*, że polski skoczek skoczy 120 lub więcej metrów do szansy że czeski skocze skoczy 120 lub więcej metrów.
 
 Wynik (jedną liczbę, tę szansę)  przypisz do zmiennej o nazwie `wynik`.
 
 Rozwiązanie
 ```{r, eval=FALSE}
-tylko120 <- skiJumps2013 %>% filter(compKPoint == 120)
-tab <- table(tylko120$jumpDistance >= 120)
+tylko120PL <- skiJumps2013 %>% filter(compKPoint == 120, jumperCountry == "POL")
+tylko120CZ <- skiJumps2013 %>% filter(compKPoint == 120, jumperCountry == "CZE")
+tabPL <- table(tylko120PL$jumpDistance >= 120)
+tabCZ <- table(tylko120CZ$jumpDistance >= 120)
 
-szansa <- tab[2]/tab[1]
+is <- (tabPL[2]/tabPL[1]) / (tabCZ[2]/tabCZ[1])
 ```
 
 Test
 ```{r, eval=FALSE}
-isCorrect <- abs(wynik - 1.41) < 0.1
+isCorrect <- abs(wynik - 1.35) < 0.1
 comments <- ""
 if (!exists("wynik")) comments <- paste(comments, "Brak zmiennej o nazwie wynik. ")
 if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")

@@ -319,13 +319,63 @@ if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</s
 <div id="zadanie-13" class="slide section level1">
 <h1>Zadanie 13</h1>
 <p>W zadaniu 12 wyznaczono trend liniowy dla ocen odcinków serialu <code>Breaking Bad</code> jako funkcję numeru odcinka.</p>
-<p>Ten serial już się zakończył, więc poniższe ćwiczenei jest czysto teoretyczne.</p>
+<p>Ten serial już się zakończył, więc poniższe ćwiczenie jest czysto teoretyczne.</p>
 <p>Zakładając stałe tempo wzrostu ocen dla kolejnych odcinków serialu <code>Breaking Bad</code> (opisane przez model z zadania 11) oszacuj średnią ocenę dla odcinka numer 70.</p>
 <p>Wynik (jedną liczbę, tę średnią ocenę) przypisz do zmiennej o nazwie <code>wynik</code>.</p>
 <p>Rozwiązanie</p>
 <pre class="sourceCode r"><code class="sourceCode r">wynik &lt;-<span class="st"> </span><span class="fl">0.018362</span>*<span class="dv">70</span> +<span class="st"> </span><span class="fl">7.9022210</span></code></pre>
 <p>Test</p>
 <pre class="sourceCode r"><code class="sourceCode r">isCorrect &lt;-<span class="st"> </span><span class="kw">abs</span>(wynik -<span class="st"> </span><span class="fl">9.187</span>) &lt;<span class="st"> </span><span class="fl">0.2</span>
+comments &lt;-<span class="st"> &quot;&quot;</span>
+if (!<span class="kw">exists</span>(<span class="st">&quot;wynik&quot;</span>)) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Brak zmiennej o nazwie wynik. &quot;</span>)
+if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>)</code></pre>
+</div>
+<div id="zadanie-14" class="slide section level1">
+<h1>Zadanie 14</h1>
+<p>Ze zbioru danych <code>auta2012</code> wybierz tylko wiersze odpowiadającom ofertom sprzedaży modelu <code>Golf</code>. Tak jak zauważyliśmy, zależność <code>Ceny.w.PLN</code> od <code>Rok.produkcji</code> nie ma charakteru liniowego ale multiplikatywny, dlatego rozsądniej jest opisywać logarytm ceny <code>log(Cena.w.PLN)</code>.</p>
+<p>Zbuduj model na danych o Golfach, opisujący logarytm Ceny w PLN w zależności od Roku produkcji i od Rodzaju paliwa. Następnie na bazie tego modelu oszacuj ile zgodnie z modelem kosztują Golfy z silnikiem diesla z roku 2010.</p>
+<p>Wynik (jedną liczbę, tę średnią ocenę) przypisz do zmiennej o nazwie <code>wynik</code>.</p>
+<p>Rozwiązanie</p>
+<pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Cena.w.PLN) ~<span class="st"> </span>Rok.produkcji +<span class="st"> </span>Rodzaj.paliwa, <span class="dt">data=</span>auta2012 %&gt;%<span class="st"> </span><span class="kw">filter</span>(Model ==<span class="st"> &quot;Golf&quot;</span>))
+
+wynik &lt;-<span class="st"> </span><span class="kw">exp</span>(mod$coefficients[<span class="dv">1</span>] +<span class="st"> </span><span class="dv">2010</span>*mod$coefficients[<span class="dv">2</span>] +<span class="st"> </span>mod$coefficients[<span class="dv">6</span>])</code></pre>
+<p>Test</p>
+<pre class="sourceCode r"><code class="sourceCode r">isCorrect &lt;-<span class="st"> </span><span class="kw">abs</span>(<span class="dv">1</span> -<span class="st"> </span>wynik /<span class="st"> </span><span class="dv">55259</span>) &lt;<span class="st"> </span><span class="fl">0.02</span>
+comments &lt;-<span class="st"> &quot;&quot;</span>
+if (!<span class="kw">exists</span>(<span class="st">&quot;wynik&quot;</span>)) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Brak zmiennej o nazwie wynik. &quot;</span>)
+if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>)</code></pre>
+</div>
+<div id="zadanie-15" class="slide section level1">
+<h1>Zadanie 15</h1>
+<p>W zbiorze danych <code>skiJumps2013</code> znajdują się wyniki skoków narciarskich w sezonie 2013. Wybierz z tego zbioru danych tylko skoki na skoczniach o punkcie konstrukcyjnym 120m (zmienna <code>compKPoint</code>).</p>
+<p>Następnie policz jaka jest <em>szansa</em>, że na takiej skoczni skoczek skoczy 120 metrów lub więcej.</p>
+<p>Wynik (jedną liczbę, tę szansę) przypisz do zmiennej o nazwie <code>wynik</code>.</p>
+<p>Rozwiązanie</p>
+<pre class="sourceCode r"><code class="sourceCode r">tylko120 &lt;-<span class="st"> </span>skiJumps2013 %&gt;%<span class="st"> </span><span class="kw">filter</span>(compKPoint ==<span class="st"> </span><span class="dv">120</span>)
+tab &lt;-<span class="st"> </span><span class="kw">table</span>(tylko120$jumpDistance &gt;=<span class="st"> </span><span class="dv">120</span>)
+
+szansa &lt;-<span class="st"> </span>tab[<span class="dv">2</span>]/tab[<span class="dv">1</span>]</code></pre>
+<p>Test</p>
+<pre class="sourceCode r"><code class="sourceCode r">isCorrect &lt;-<span class="st"> </span><span class="kw">abs</span>(wynik -<span class="st"> </span><span class="fl">1.41</span>) &lt;<span class="st"> </span><span class="fl">0.1</span>
+comments &lt;-<span class="st"> &quot;&quot;</span>
+if (!<span class="kw">exists</span>(<span class="st">&quot;wynik&quot;</span>)) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Brak zmiennej o nazwie wynik. &quot;</span>)
+if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>)</code></pre>
+</div>
+<div id="zadanie-16" class="slide section level1">
+<h1>Zadanie 16</h1>
+<p>W zbiorze danych <code>skiJumps2013</code> znajdują się wyniki skoków narciarskich w sezonie 2013. Podobnie jak w zadaniu 15, wybierz z tego zbioru danych tylko skoki na skoczniach o punkcie konstrukcyjnym 120m (zmienna <code>compKPoint</code>).</p>
+<p>Wybierz z tego zbioru danych skoczów z Polski i Czech (zmienna <code>jumperCountry</code>). Policz jaka jest <em>szansa</em>, że na takiej skoczni skoczek skoczy 120 metrów lub więcej, osobno dla skoczków z Polski i Czech.</p>
+<p>Następnie policz jaki jest <em>iloraz szans</em>, że polski skoczek skoczy 120 lub więcej metrów do szansy że czeski skocze skoczy 120 lub więcej metrów.</p>
+<p>Wynik (jedną liczbę, tę szansę) przypisz do zmiennej o nazwie <code>wynik</code>.</p>
+<p>Rozwiązanie</p>
+<pre class="sourceCode r"><code class="sourceCode r">tylko120PL &lt;-<span class="st"> </span>skiJumps2013 %&gt;%<span class="st"> </span><span class="kw">filter</span>(compKPoint ==<span class="st"> </span><span class="dv">120</span>, jumperCountry ==<span class="st"> &quot;POL&quot;</span>)
+tylko120CZ &lt;-<span class="st"> </span>skiJumps2013 %&gt;%<span class="st"> </span><span class="kw">filter</span>(compKPoint ==<span class="st"> </span><span class="dv">120</span>, jumperCountry ==<span class="st"> &quot;CZE&quot;</span>)
+tabPL &lt;-<span class="st"> </span><span class="kw">table</span>(tylko120PL$jumpDistance &gt;=<span class="st"> </span><span class="dv">120</span>)
+tabCZ &lt;-<span class="st"> </span><span class="kw">table</span>(tylko120CZ$jumpDistance &gt;=<span class="st"> </span><span class="dv">120</span>)
+
+is &lt;-<span class="st"> </span>(tabPL[<span class="dv">2</span>]/tabPL[<span class="dv">1</span>]) /<span class="st"> </span>(tabCZ[<span class="dv">2</span>]/tabCZ[<span class="dv">1</span>])</code></pre>
+<p>Test</p>
+<pre class="sourceCode r"><code class="sourceCode r">isCorrect &lt;-<span class="st"> </span><span class="kw">abs</span>(wynik -<span class="st"> </span><span class="fl">1.35</span>) &lt;<span class="st"> </span><span class="fl">0.1</span>
 comments &lt;-<span class="st"> &quot;&quot;</span>
 if (!<span class="kw">exists</span>(<span class="st">&quot;wynik&quot;</span>)) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Brak zmiennej o nazwie wynik. &quot;</span>)
 if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>)</code></pre>
