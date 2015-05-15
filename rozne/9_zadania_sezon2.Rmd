@@ -389,7 +389,7 @@ wynik <- lm(data=BreakingBad, ocena ~ id)
 Test
 ```{r, eval=FALSE}
 klasa <- class(wynik)
-wspolczynniki <- wynik$coefficients[,1] - c(7.9, 0.018)
+wspolczynniki <- wynik$coefficients - c(7.9, 0.018)
 
 isCorrectM <- klasa == "lm"
 isCorrectG <- abs(wspolczynniki[2]) < 0.01
