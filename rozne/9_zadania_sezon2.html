@@ -316,6 +316,20 @@ if (!isCorrectM) comments &lt;-<span class="st"> </span><span class="kw">paste</
 if (!isCorrectG) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Wyznaczono zły model. &quot;</span>)
 if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>)</code></pre>
 </div>
+<div id="zadanie-13" class="slide section level1">
+<h1>Zadanie 13</h1>
+<p>W zadaniu 12 wyznaczono trend liniowy dla ocen odcinków serialu <code>Breaking Bad</code> jako funkcję numeru odcinka.</p>
+<p>Ten serial już się zakończył, więc poniższe ćwiczenei jest czysto teoretyczne.</p>
+<p>Zakładając stałe tempo wzrostu ocen dla kolejnych odcinków serialu <code>Breaking Bad</code> (opisane przez model z zadania 11) oszacuj średnią ocenę dla odcinka numer 70.</p>
+<p>Wynik (jedną liczbę, tę średnią ocenę) przypisz do zmiennej o nazwie <code>wynik</code>.</p>
+<p>Rozwiązanie</p>
+<pre class="sourceCode r"><code class="sourceCode r">wynik &lt;-<span class="st"> </span><span class="fl">0.018362</span>*<span class="dv">70</span> +<span class="st"> </span><span class="fl">7.9022210</span></code></pre>
+<p>Test</p>
+<pre class="sourceCode r"><code class="sourceCode r">isCorrect &lt;-<span class="st"> </span><span class="kw">abs</span>(wynik -<span class="st"> </span><span class="fl">9.187</span>) &lt;<span class="st"> </span><span class="fl">0.2</span>
+comments &lt;-<span class="st"> &quot;&quot;</span>
+if (!<span class="kw">exists</span>(<span class="st">&quot;wynik&quot;</span>)) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;Brak zmiennej o nazwie wynik. &quot;</span>)
+if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</span>(comments, <span class="st">&quot;To nie jest poprawna odpowiedź&quot;</span>)</code></pre>
+</div>
 
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>

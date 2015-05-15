@@ -403,6 +403,30 @@ if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 
 
 
+# Zadanie 13
+
+W zadaniu 12 wyznaczono trend liniowy dla ocen odcinków serialu `Breaking Bad` jako funkcję numeru odcinka. 
+
+Ten serial już się zakończył, więc poniższe ćwiczenei jest czysto teoretyczne.
+
+Zakładając stałe tempo wzrostu ocen dla kolejnych odcinków serialu `Breaking Bad` (opisane przez model z zadania 11) oszacuj średnią ocenę dla odcinka numer 70.
+
+Wynik (jedną liczbę, tę średnią ocenę)  przypisz do zmiennej o nazwie `wynik`.
+
+Rozwiązanie
+```{r, eval=FALSE}
+wynik <- 0.018362*70 + 7.9022210
+```
+
+Test
+```{r, eval=FALSE}
+isCorrect <- abs(wynik - 9.187) < 0.2
+comments <- ""
+if (!exists("wynik")) comments <- paste(comments, "Brak zmiennej o nazwie wynik. ")
+if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
+```
+
+
 
 
 
