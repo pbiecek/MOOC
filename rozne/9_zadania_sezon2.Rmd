@@ -407,7 +407,7 @@ if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 
 W zadaniu 12 wyznaczono trend liniowy dla ocen odcinków serialu `Breaking Bad` jako funkcję numeru odcinka. 
 
-Ten serial już się zakończył, więc poniższe ćwiczenei jest czysto teoretyczne.
+Ten serial już się zakończył, więc poniższe ćwiczenie jest czysto teoretyczne.
 
 Zakładając stałe tempo wzrostu ocen dla kolejnych odcinków serialu `Breaking Bad` (opisane przez model z zadania 11) oszacuj średnią ocenę dla odcinka numer 70.
 
@@ -427,6 +427,85 @@ if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 ```
 
 
+
+
+# Zadanie 14
+
+Ze zbioru danych `auta2012` wybierz tylko wiersze odpowiadającom ofertom sprzedaży modelu `Golf`. Tak jak zauważyliśmy, zależność `Ceny.w.PLN` od `Rok.produkcji` nie ma charakteru liniowego ale multiplikatywny, dlatego rozsądniej jest opisywać logarytm ceny `log(Cena.w.PLN)`.
+
+Zbuduj model na danych o Golfach, opisujący logarytm Ceny w PLN w zależności od Roku produkcji i od Rodzaju paliwa. Następnie na bazie tego modelu oszacuj ile zgodnie z modelem kosztują Golfy z silnikiem diesla z roku 2010.
+
+Wynik (jedną liczbę, tę średnią ocenę)  przypisz do zmiennej o nazwie `wynik`.
+
+Rozwiązanie
+```{r, eval=FALSE}
+mod <- lm(log(Cena.w.PLN) ~ Rok.produkcji + Rodzaj.paliwa, data=auta2012 %>% filter(Model == "Golf"))
+
+wynik <- exp(mod$coefficients[1] + 2010*mod$coefficients[2] + mod$coefficients[6])
+```
+
+Test
+```{r, eval=FALSE}
+isCorrect <- abs(1 - wynik / 55259) < 0.02
+comments <- ""
+if (!exists("wynik")) comments <- paste(comments, "Brak zmiennej o nazwie wynik. ")
+if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
+```
+
+
+
+
+
+
+# Zadanie 15
+
+W zbiorze danych `skiJumps2013` znajdują się wyniki skoków narciarskich w sezonie 2013. Wybierz z tego zbioru danych tylko skoki na skoczniach o punkcie konstrukcyjnym 120m (zmienna `compKPoint`). 
+
+Następnie policz jaka jest *szansa*, że na takiej skoczni skoczek skoczy 120 metrów lub więcej.
+
+Wynik (jedną liczbę, tę szansę)  przypisz do zmiennej o nazwie `wynik`.
+
+Rozwiązanie
+```{r, eval=FALSE}
+tylko120 <- skiJumps2013 %>% filter(compKPoint == 120)
+tab <- table(tylko120$jumpDistance >= 120)
+
+szansa <- tab[2]/tab[1]
+```
+
+Test
+```{r, eval=FALSE}
+isCorrect <- abs(wynik - 1.41) < 0.1
+comments <- ""
+if (!exists("wynik")) comments <- paste(comments, "Brak zmiennej o nazwie wynik. ")
+if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
+```
+
+
+
+# Zadanie 16
+
+W zbiorze danych `skiJumps2013` znajdują się wyniki skoków narciarskich w sezonie 2013. Wybierz z tego zbioru danych tylko skoki na skoczniach o punkcie konstrukcyjnym 120m (zmienna `compKPoint`). 
+
+Następnie policz jaka jest *szansa*, że na takiej skoczni skoczek skoczy 120 metrów lub więcej.
+
+Wynik (jedną liczbę, tę szansę)  przypisz do zmiennej o nazwie `wynik`.
+
+Rozwiązanie
+```{r, eval=FALSE}
+tylko120 <- skiJumps2013 %>% filter(compKPoint == 120)
+tab <- table(tylko120$jumpDistance >= 120)
+
+szansa <- tab[2]/tab[1]
+```
+
+Test
+```{r, eval=FALSE}
+isCorrect <- abs(wynik - 1.41) < 0.1
+comments <- ""
+if (!exists("wynik")) comments <- paste(comments, "Brak zmiennej o nazwie wynik. ")
+if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
+```
 
 
 
