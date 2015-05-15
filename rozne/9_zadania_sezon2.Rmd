@@ -185,3 +185,40 @@ if (!isCorrectG) comments <- paste(comments, "Na wykresie powinna być przedstaw
 if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
 ```
 
+
+# Zadanie 7
+
+W zbiorze danych `serialeIMDB` znajdują się informacje o ocenach odcinków 200 wybranych seriali.
+Wykorzystując ten zbiór dnaych zbuduj wykres, który na osi OY będzie przedstawiał nazwę serialu a na osi OX przedstawiony będzie rozkład ocen odcinków tego serialu za pomocą wykresu pudełko wąsy.
+Seriali jest ponad 200, więc aby wykres się wyświetlał musi być dużo miejsca w pionie.
+Wynikowy wykres przypisz do zmiennej o nazwie `wynik`.
+
+Rozwiązanie
+```{r, eval=FALSE}
+wynik <- ggplot(serialeIMDB, aes(x=serial, y=ocena)) + 
+  geom_boxplot() + coord_flip()
+```
+
+Test
+```{r, eval=FALSE}
+geometrie <- sapply(wynik$layers, function(x) x$geom$objname)
+mapowania <- lapply(sapply(wynik$mapping, function(x) x), as.character)
+
+isCorrectM <- mapowania$x == "serial" && mapowania$y == "ocena" 
+isCorrectG <- all("boxplot" %in% geometrie)
+isCorrect <- isCorrectM &&  isCorrectG
+comments <- ""
+if (!exists("wynik")) comments <- paste(comments, "Brak zmiennej o nazwie wynik. ")
+if (!isCorrectM) comments <- paste(comments, "Osie powinny opisywać nazwę serialu i ocenę. ")
+if (!isCorrectG) comments <- paste(comments, "Na wykresie powinna być przedstawiona geometria boxplot. ")
+if (!isCorrect) comments <- paste(comments, "To nie jest poprawna odpowiedź")
+```
+
+
+skody$Model <- reorder(skody$Model, skody$Cena.w.PLN, median)
+
+
+
+
+
+
