@@ -94,10 +94,7 @@ pogRomcy danych
 <p>Po pobraniu danych, w katalogu <code>dane/POL_adm</code> znajdują się kształty obszarów na różnych poziomach szczegółowości. Plik <code>POL_adm0.shp</code> to obrys całego kraju, <code>POL_adm1.shp</code> to obrysy województw a <code>POL_adm2.shp</code> to obrysy gmin.</p>
 <p>Funkcją <code>readShapePoly()</code> wczytamy dane o obrysach województw do zmiennej <code>shp1</code>. Ale zanim zaczniemy pracować z tą funkcją, potrzebujemy wczytać kilka bibliotek. Jeżeli ich nie ma, należy je zainstalować.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(maptools)
-<span class="kw">library</span>(rgdal)
-<span class="kw">library</span>(gpclib)
-<span class="kw">gpclibPermit</span>()</code></pre>
-<pre><code>## [1] TRUE</code></pre>
+<span class="kw">library</span>(rgeos)</code></pre>
 <p>Wczytujemy dane o kształtach województw z plików <em>shape files</em>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">shp1 &lt;-<span class="st"> </span><span class="kw">readShapePoly</span>(<span class="st">&quot;../dane/POL_adm/POL_adm1.shp&quot;</span>) </code></pre>
 <p>Obiekt <code>shp1</code> to obiekt klasy <code>SpatialPolygonsDataFrame</code> i więcej o jego elementach, można dowiedzieć się z pliku pomocy <code>?SpatialPolygonsDataFrame</code>.</p>
@@ -160,7 +157,7 @@ shp1f &lt;-<span class="st"> </span><span class="kw">fortify</span>(shp1, <span 
 <span class="st">    </span><span class="kw">geom_map</span>(<span class="dt">data=</span>mandatySejmik2014, <span class="kw">aes</span>(<span class="dt">map_id=</span>Wojewodztwo, <span class="dt">fill=</span>ProcentWaznychGlosow), 
              <span class="dt">map=</span>shp1f) +
 <span class="st">    </span><span class="kw">geom_path</span>(<span class="dt">data=</span>shp1f, <span class="kw">aes</span>(<span class="dt">x=</span>long, <span class="dt">y=</span>lat, <span class="dt">group=</span>id), <span class="dt">colour=</span><span class="st">&quot;black&quot;</span>, <span class="dt">size=</span><span class="fl">0.25</span>) </code></pre>
-<p>Przekształcamy mapę, stosując różne projekcje</p>
+<p>Przekształcamy mapę, stosując różne projekcje.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># projekcja mercator (odwzorowanie walcowe równokątne)</span>
 <span class="co"># zachowuje kąty pomiędzy równoleżnikami a południkami</span>
 mapka +<span class="st"> </span><span class="kw">coord_map</span>(<span class="dt">projection=</span><span class="st">&quot;mercator&quot;</span>) +<span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;mercator&quot;</span>)

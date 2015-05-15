@@ -59,9 +59,7 @@ Funkcją `readShapePoly()` wczytamy dane o obrysach województw do zmiennej `shp
 Ale zanim zaczniemy pracować z tą funkcją, potrzebujemy wczytać kilka bibliotek. Jeżeli ich nie ma, należy je zainstalować.
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
 library(maptools)
-library(rgdal)
-library(gpclib)
-gpclibPermit()
+library(rgeos)
 ```
 Wczytujemy dane o kształtach województw z plików *shape files*.
 ```{r, fig.height=4, fig.width=5, message=FALSE, warning=FALSE}
