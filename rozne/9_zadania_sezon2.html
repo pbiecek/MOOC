@@ -190,7 +190,7 @@ if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</s
 <pre class="sourceCode r"><code class="sourceCode r">geometrie &lt;-<span class="st"> </span><span class="kw">sapply</span>(wynik$layers, function(x) x$geom$objname)
 mapowania &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">sapply</span>(wynik$mapping, function(x) x), as.character)
 
-isCorrectM &lt;-<span class="st"> </span>mapowania$x ==<span class="st"> &quot;serial&quot;</span> &amp;&amp;<span class="st"> </span>mapowania$y ==<span class="st"> &quot;ocena&quot;</span> 
+isCorrectM &lt;-<span class="st"> </span><span class="kw">all</span>(<span class="kw">c</span>(<span class="st">&quot;serial&quot;</span>, <span class="st">&quot;ocena&quot;</span>) %in%<span class="st"> </span>mapowania) 
 isCorrectG &lt;-<span class="st"> </span><span class="kw">all</span>(<span class="st">&quot;boxplot&quot;</span> %in%<span class="st"> </span>geometrie)
 isCorrect &lt;-<span class="st"> </span>isCorrectM &amp;&amp;<span class="st">  </span>isCorrectG
 comments &lt;-<span class="st"> &quot;&quot;</span>
@@ -214,7 +214,7 @@ sn2 &lt;-<span class="st"> </span>sn[<span class="kw">c</span>(<span class="dv">
 geometrie &lt;-<span class="st"> </span><span class="kw">sapply</span>(wynik$layers, function(x) x$geom$objname)
 mapowania &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">sapply</span>(wynik$mapping, function(x) x), as.character)
 
-isCorrectM &lt;-<span class="st"> </span>mapowania$x ==<span class="st"> &quot;serial&quot;</span> &amp;&amp;<span class="st"> </span>mapowania$y ==<span class="st"> &quot;ocena&quot;</span> 
+isCorrectM &lt;-<span class="st"> </span><span class="kw">all</span>(<span class="kw">c</span>(<span class="st">&quot;serial&quot;</span>, <span class="st">&quot;ocena&quot;</span>) %in%<span class="st"> </span>mapowania) 
 isCorrectG &lt;-<span class="st"> </span><span class="kw">all</span>(<span class="st">&quot;boxplot&quot;</span> %in%<span class="st"> </span>geometrie)
 isCorrectD &lt;-<span class="st"> </span><span class="kw">all</span>(sn2 %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Avrupa yakasi&quot;</span>, <span class="st">&quot;Planet Earth&quot;</span>))
 isCorrect &lt;-<span class="st"> </span>isCorrectM &amp;&amp;<span class="st">  </span>isCorrectG &amp;&amp;<span class="st">  </span>isCorrectD

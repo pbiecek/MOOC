@@ -219,7 +219,7 @@ Test
 geometrie <- sapply(wynik$layers, function(x) x$geom$objname)
 mapowania <- lapply(sapply(wynik$mapping, function(x) x), as.character)
 
-isCorrectM <- mapowania$x == "serial" && mapowania$y == "ocena" 
+isCorrectM <- all(c("serial", "ocena") %in% mapowania) 
 isCorrectG <- all("boxplot" %in% geometrie)
 isCorrect <- isCorrectM &&  isCorrectG
 comments <- ""
@@ -253,7 +253,7 @@ sn2 <- sn[c(1, length(sn))]
 geometrie <- sapply(wynik$layers, function(x) x$geom$objname)
 mapowania <- lapply(sapply(wynik$mapping, function(x) x), as.character)
 
-isCorrectM <- mapowania$x == "serial" && mapowania$y == "ocena" 
+isCorrectM <- all(c("serial", "ocena") %in% mapowania) 
 isCorrectG <- all("boxplot" %in% geometrie)
 isCorrectD <- all(sn2 %in% c("Avrupa yakasi", "Planet Earth"))
 isCorrect <- isCorrectM &&  isCorrectG &&  isCorrectD
