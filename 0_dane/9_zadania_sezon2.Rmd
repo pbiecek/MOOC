@@ -173,13 +173,49 @@ summary(BB$glosow)
 plot(FNL$glosow)
 ```
 
-# Zadanie, sezon 2, odcinek 13
+# Zadania, sezon 2, odcinek 13
 
-* Znajdź serial o najsilniej rosnącym trendzie dotyczącym ocen (ponieważ oceny są ograniczone z góry przez 10 to może nie być serial o najwyższej średniej ocenie)
++ Dla każdego wzrostu rodzica ze zbioru danych `galton` wyznacz o ile średnio niższe są dzieci od rodziców.
 
-* Znajdź serial o najsilniejszym trendzie spadkowym
++ Mając wyznaczone parametry _b0_ i _b1_ policz oceny średniego wzrostu dziecka dla każdego średniego wzrostu rodzica.
 
-# Odpowiedź, sezon 2, odcinek 13
++ Wyznacz różnice pomiędzy ocenami z modelu liniowego a średnimi liczonymi osobno dla każdej grupy rodziców.
+
++  W pakiecie `PogromcyDanych` udostępniony jest również zbiór danych `pearson` zebrany przez Pearsona. W tym zbiorze danych zebrane są wzrosty ojców i synów.
+
+Dla tego zbioru danych wyznacz model regresji liniowej oraz narysuj zbiór danych z zaznaczoną krzywą regresji liniowej.
+
+Czy parametry regresji liniowej w zbiorze pearsona (z wysokością ojca) różnią się od parametrów ze zbioru galtona (ze średnią wysokością rodziców)?
+
+# Odpowiedzi, sezon 2, odcinek 13
+
+```{r, warning=FALSE, width=8, height=8, eval=FALSE}
+# Dla każdego wzrostu rodzica ze zbioru danych `galton` wyznacz 
+# o ile średnio niższe są dzieci od rodziców
+# wykorzystując funkcje z pakietu dplyr
+srednie %>%
+  mutate(roznica = srednia - rodzic)
+
+# Mając wyznaczone parametry _b0_ i _b1_ policz oceny średniego wzrostu 
+# dziecka dla każdego średniego wzrostu rodzica
+wspolczynniki = coef(lm(syn~rodzic, data=galton)
+wspolczynniki
+
+# Wyznacz różnice pomiędzy ocenami z modelu liniowego 
+# a średnimi liczonymi osobno dla każdej grupy rodziców
+srednie %>%
+  mutate(m.liniowy = wspolczynniki[1] + rodzic*wspolczynniki[2],
+         roznica = srednia - m.liniowy)
+```
+
+
+# Zadanie, sezon 2, odcinek 14
+
+* Znajdź serial o najsilniej rosnącym trendzie dotyczącym ocen (ponieważ oceny są ograniczone z góry przez 10 to może nie być serial o najwyższej średniej ocenie).
+
+* Znajdź serial o najsilniejszym trendzie spadkowym.
+
+# Odpowiedź, sezon 2, odcinek 14
 
 ```{r, message=FALSE, eval=FALSE}
 # Znajdź serial o najsilniej rosnącym trendzie dotyczącym ocen 
@@ -202,7 +238,7 @@ sort(wspolczynnikTrendu)
 ```
 
 
-# Zadanie, sezon 2, odcinek 14
+# Zadanie, sezon 2, odcinek 15
 
 * Znajdź serial o istotnym ujemnem trendem, to znaczy takim, którego oceny maleją.
 
@@ -210,7 +246,7 @@ sort(wspolczynnikTrendu)
 
 * [Trudne] Policz dla ilu serialu ich oceny rosną a dla ilu maleją i te wzrosty lub spadki są istotnie większe niż wynikające z przypadku.
 
-# Odpowiedź, sezon 2, odcinek 14
+# Odpowiedź, sezon 2, odcinek 15
 
 ```{r, message=FALSE, eval=FALSE}
 # Znajdź serial o istotnym ujemnem trendzie, to znaczy takim, którego oceny maleją.
@@ -227,43 +263,8 @@ sort(wspolczynnikTrendu)
 
 ```
 
-# Zadania, sezon 2, odcinek 15
 
-+ Dla każdego wzrostu rodzica ze zbioru danych `galton` wyznacz o ile średnio niższe są dzieci od rodziców.
-
-+ Mając wyznaczone parametry _b0_ i _b1_ policz oceny średniego wzrostu dziecka dla każdego średniego wzrostu rodzica.
-
-+ Wyznacz różnice pomiędzy ocenami z modelu liniowego a średnimi liczonymi osobno dla każdej grupy rodziców.
-
-+  W pakiecie `PogromcyDanych` udostępniony jest również zbiór danych `pearson` zebrany przez Pearsona. W tym zbiorze danych zebrane są wzrosty ojców i synów.
-
-Dla tego zbioru danych wyznacz model regresji liniowej oraz narysuj zbiór danych z zaznaczoną krzywą regresji liniowej.
-
-Czy parametry regresji liniowej w zbiorze pearsona (z wysokością ojca) różnią się od parametrów ze zbioru galtona (ze średnią wysokością rodziców)?
-
-# Odpowiedzi, sezon 2, odcinek 15
-
-```{r, warning=FALSE, width=8, height=8, eval=FALSE}
-# Dla każdego wzrostu rodzica ze zbioru danych `galton` wyznacz 
-# o ile średnio niższe są dzieci od rodziców
-# wykorzystując funkcje z pakietu dplyr
-srednie %>%
-  mutate(roznica = srednia - rodzic)
-
-# Mając wyznaczone parametry _b0_ i _b1_ policz oceny średniego wzrostu 
-# dziecka dla każdego średniego wzrostu rodzica
-wspolczynniki = coef(lm(syn~rodzic, data=galton)
-wspolczynniki
-
-# Wyznacz różnice pomiędzy ocenami z modelu liniowego 
-# a średnimi liczonymi osobno dla każdej grupy rodziców
-srednie %>%
-  mutate(m.liniowy = wspolczynniki[1] + rodzic*wspolczynniki[2],
-         roznica = srednia - m.liniowy)
-```
-
-
-# Zadania, sezon 2, odcinek 17
+# Zadania, sezon 2, odcinek 16
 
 + Wykonaj modelowanie z użyciem modelu multiplikatywnego dla innej marki. 
 
@@ -273,7 +274,7 @@ srednie %>%
 
 + Wykonaj modelowanie z użyciem łamanej regresji dla innych marek.
 
-# Odpowiedzi, sezon 2, odcinek 17
+# Odpowiedzi, sezon 2, odcinek 16
  
 ```{r, warning=FALSE, fig.width=4, fig.height=4, eval=FALSE}
 toyota <- auta2012 %>%
