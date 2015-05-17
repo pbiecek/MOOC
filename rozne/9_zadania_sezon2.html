@@ -79,10 +79,25 @@ if (!isCorrect) comments &lt;-<span class="st"> </span><span class="kw">paste</s
 <p>Wykres przypisz do zmiennej o nazwie <code>wynik</code>.</p>
 <p>Rozwiązanie</p>
 <pre class="sourceCode r"><code class="sourceCode r">wynik &lt;-<span class="st"> </span><span class="kw">ggplot</span>(koty_ptaki, <span class="kw">aes</span>(<span class="dt">x=</span>dlugosc, <span class="dt">y=</span>predkosc,
-                                <span class="dt">shape=</span>druzyna, <span class="dt">color=</span>druzyna)) +<span class="st"> </span><span class="kw">geom_point</span>()</code></pre>
+                                <span class="dt">shape=</span>druzyna, <span class="dt">color=</span>druzyna)) +<span class="st"> </span><span class="kw">geom_point</span>()
+wynik &lt;-<span class="st"> </span><span class="kw">ggplot</span>(koty_ptaki, <span class="kw">aes</span>(<span class="dt">x=</span>dlugosc, <span class="dt">y=</span>predkosc)) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">shape=</span>druzyna, <span class="dt">color=</span>druzyna))</code></pre>
 <p>Test</p>
 <pre class="sourceCode r"><code class="sourceCode r">geometrie &lt;-<span class="st"> </span><span class="kw">sapply</span>(wynik$layers, function(x) x$geom$objname)
 mapowania &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">sapply</span>(wynik$mapping, function(x) x), as.character)
+mapowania1 &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">sapply</span>(wynik$layers[[<span class="dv">1</span>]]$mapping, function(x) x), as.character)
+if (<span class="kw">length</span>(wynik$layers)&gt;<span class="dv">1</span>)
+  mapowania2 &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">sapply</span>(wynik$layers[[<span class="dv">2</span>]]$mapping, function(x) x), as.character)
+
+if (<span class="kw">length</span>(wynik$layers)&gt;<span class="dv">1</span>) {
+  mapowania &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">unlist</span>(mapowania),
+    <span class="kw">unlist</span>(mapowania1),
+    <span class="kw">unlist</span>(mapowania2))
+} else {
+  mapowania &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">unlist</span>(mapowania),
+    <span class="kw">unlist</span>(mapowania1))
+}
+mapowania &lt;-<span class="st"> </span><span class="kw">as.list</span>(mapowania)
 
 isCorrectM &lt;-<span class="st"> </span>mapowania$colour ==<span class="st"> &quot;druzyna&quot;</span> &amp;&amp;<span class="st"> </span>mapowania$shape ==<span class="st"> &quot;druzyna&quot;</span>
 isCorrectG &lt;-<span class="st"> &quot;point&quot;</span> %in%<span class="st"> </span>geometrie

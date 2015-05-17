@@ -59,12 +59,27 @@ Rozwiązanie
 ```{r, eval=FALSE}
 wynik <- ggplot(koty_ptaki, aes(x=dlugosc, y=predkosc,
                                 shape=druzyna, color=druzyna)) + geom_point()
+wynik <- ggplot(koty_ptaki, aes(x=dlugosc, y=predkosc)) + 
+  geom_point(aes(shape=druzyna, color=druzyna))
 ```
 
 Test
 ```{r, eval=FALSE}
 geometrie <- sapply(wynik$layers, function(x) x$geom$objname)
 mapowania <- lapply(sapply(wynik$mapping, function(x) x), as.character)
+mapowania1 <- lapply(sapply(wynik$layers[[1]]$mapping, function(x) x), as.character)
+if (length(wynik$layers)>1)
+  mapowania2 <- lapply(sapply(wynik$layers[[2]]$mapping, function(x) x), as.character)
+
+if (length(wynik$layers)>1) {
+  mapowania <- c(unlist(mapowania),
+    unlist(mapowania1),
+    unlist(mapowania2))
+} else {
+  mapowania <- c(unlist(mapowania),
+    unlist(mapowania1))
+}
+mapowania <- as.list(mapowania)
 
 isCorrectM <- mapowania$colour == "druzyna" && mapowania$shape == "druzyna"
 isCorrectG <- "point" %in% geometrie
