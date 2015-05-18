@@ -272,6 +272,8 @@ Przedstawmy te modele graficznie i zobaczmy, który wygląda na bliższy danych.
 
 Aby pokazać jak wygląda model regresji łamanej wykorzystamy do funkcję `predict()`, która  dla zadanego wieku wyznacza średni przebieg zgodnie z określonym modelem. 
 
+Funkcja `predict()` jako argument `newdata` przyjmuje obiekt `data.frame`, który powinien mieć takie same nazwy kolumn jak zmienen występujące w modelu.
+
 Z przedstawianych modeli, najsensowniej wygląda niebieska krzywa, czyli model `M2`.
 
 ```{r, warning=FALSE, message=FALSE}
