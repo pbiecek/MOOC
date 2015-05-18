@@ -60,14 +60,16 @@ Kolejne sezony są oznaczane różnymi kolorami. Czy patrząc na te wyniki widzi
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=5}
 library(dplyr)
 library(ggvis)
-serialeIMDB %>%
+pp <- serialeIMDB %>%
   filter(serial == "Breaking Bad") %>%
   mutate(sezon = droplevels(sezon)) %>%
     ggvis(x = ~id, y = ~ocena, fill = ~sezon) %>%
     # ewentualnie group_by(sezon)
     layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
     layer_points(fillOpacity:=0.8) 
+export_png(pp,"_wykres001.png") 
 ```
+<center><img src="_wykres001.png"></center>
 
 ---
 
@@ -80,7 +82,7 @@ Patrząc na trend łatwiej zauważyć wzrostową tendencję ocen. Co więcej mo�
 Ale jak ta linia trendu została wyznaczona? Co to znaczy ,,najlepiej dopasowany do danych''?
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=5}
-  serialeIMDB %>%
+pp <- serialeIMDB %>%
   filter(serial == "Breaking Bad") %>%
   mutate(sezon = droplevels(sezon)) %>%
     ggvis(x = ~id, y = ~ocena, fill = ~sezon) %>%
@@ -88,7 +90,9 @@ Ale jak ta linia trendu została wyznaczona? Co to znaczy ,,najlepiej dopasowany
     layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
     layer_points(fillOpacity:=0.8) %>%
     layer_model_predictions(model = "lm") 
+export_png(pp,"_wykres002.png") 
 ```
+<center><img src="_wykres002.png"></center>
 
 ---
 
@@ -260,7 +264,7 @@ Jak modelować takie, bardziej złożone zależności?
 Pokażemy w ostatnim odcinku tego sezonu ,,Co dalej?''.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=4}
-serialeIMDB %>%
+pp <- serialeIMDB %>%
   filter(serial == "Breaking Bad") %>%
   mutate(sezon = droplevels(sezon)) %>%
     ggvis(x = ~id, y = ~ocena, fill = ~sezon) %>%
@@ -268,6 +272,8 @@ serialeIMDB %>%
     layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
     layer_points(fillOpacity:=0.8) %>%
     layer_smooths() 
+export_png(pp,"_wykres003.png") 
 ```
+<center><img src="_wykres003.png"></center>
 
 
