@@ -86,7 +86,7 @@ library(ggvis)
     group_by(serial) %>%
     mutate(serialx = as.numeric(as.character(odcinek))/(1.2*max(as.numeric(as.character(odcinek)))))
   tmp$serialx <- as.numeric(droplevels(tmp$serial)) + tmp$serialx
-  tmp  %>%
+pp <- tmp  %>%
   ggvis(x = ~serialx, y = ~ocena, fill := ~col) %>%
   group_by(serial) %>%
   layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
@@ -96,6 +96,7 @@ library(ggvis)
   add_legend(c("fill", "shape")) %>%
   layer_model_predictions(model = "lm", formula = ocena ~ I(serialx*0))
 ```
+<center><img width=600 src="_wykres201.png"></center>
 
 
 # Testowanie średnich - algorytm
@@ -207,16 +208,17 @@ tmp <- tmp %>%
   group_by(serial) %>%
   mutate(serialx = as.numeric(as.character(odcinek))/(1.2*max(as.numeric(as.character(odcinek)))))
 tmp$serialx <- as.numeric(droplevels(tmp$serial)) + tmp$serialx
-tmp  %>%
-ggvis(x = ~serialx, y = ~ocena, fill := ~col) %>%
-group_by(serial) %>%
-layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
-layer_points(fillOpacity:=0.8, shape = ~serial) %>%
-hide_axis("x") %>%
-set_options(width = 640,padding = padding(10, 10, 50, 50)) %>%
-add_legend(c("fill", "shape")) %>%
-layer_model_predictions(model = "lm", formula = ocena ~ I(serialx*0))
+pp <- tmp  %>%
+  ggvis(x = ~serialx, y = ~ocena, fill := ~col) %>%
+  group_by(serial) %>%
+  layer_text(text := ~nazwa, opacity=0, fontSize:=1) %>%
+  layer_points(fillOpacity:=0.8, shape = ~serial) %>%
+  hide_axis("x") %>%
+  set_options(width = 640,padding = padding(10, 10, 50, 50)) %>%
+  add_legend(c("fill", "shape")) %>%
+  layer_model_predictions(model = "lm", formula = ocena ~ I(serialx*0))
 ```
+<center><img width=600 src="_wykres202.png"></center>
 
 # Czy serial Friends jest lepszy niż serial Sherlock?
 
