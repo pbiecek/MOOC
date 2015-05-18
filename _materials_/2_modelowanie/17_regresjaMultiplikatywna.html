@@ -264,6 +264,7 @@ M2</code></pre>
 <p>Rozważaliśmy jak dotąd kilka różnych modeli.</p>
 <p>Przedstawmy te modele graficznie i zobaczmy, który wygląda na bliższy danych.</p>
 <p>Aby pokazać jak wygląda model regresji łamanej wykorzystamy do funkcję <code>predict()</code>, która dla zadanego wieku wyznacza średni przebieg zgodnie z określonym modelem.</p>
+<p>Funkcja <code>predict()</code> jako argument <code>newdata</code> przyjmuje obiekt <code>data.frame</code>, który powinien mieć takie same nazwy kolumn jak zmienen występujące w modelu.</p>
 <p>Z przedstawianych modeli, najsensowniej wygląda niebieska krzywa, czyli model <code>M2</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># sztuczny zbiór danych, na potrzeby pokazywania modeli</span>
 topred &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Wiek0 =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">20</span>), <span class="dt">Wiek5 =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">15</span>))
