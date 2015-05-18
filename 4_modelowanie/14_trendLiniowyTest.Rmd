@@ -62,7 +62,7 @@ Dla przypomnienia, graficzna ilustracja danych o tym serialu.
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=5}
 library(ggvis)
 library(dplyr)
-serialeIMDB %>%
+pp <- serialeIMDB %>%
   filter(serial == "Breaking Bad") %>%
   mutate(sezon = droplevels(sezon)) %>%
     ggvis(x = ~id, y = ~ocena, fill = ~sezon) %>%
@@ -73,7 +73,9 @@ serialeIMDB %>%
     add_tooltip(function(data){
       paste0(data$nazwa, "<br>ocena: ",as.character(data$ocena))
     }, "hover") 
+export_png(pp,"_wykres101.png") 
 ```
+<center><img src="_wykres101.png"></center>
 
 ---
 
@@ -192,7 +194,7 @@ Oraz poglądowy rysunek prezentujący ten trend.
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=5}
 library(ggvis)
 library(dplyr)
-serialeIMDB %>%
+pp <- serialeIMDB %>%
   filter(serial == "Friends") %>%
   mutate(sezon = droplevels(sezon)) %>%
     ggvis(x = ~id, y = ~ocena, fill = ~sezon) %>%
@@ -203,7 +205,9 @@ serialeIMDB %>%
     add_tooltip(function(data){
       paste0(data$nazwa, "<br>ocena: ",as.character(data$ocena))
     }, "hover") 
+export_png(pp,"_wykres102.png") 
 ```
+<center><img src="_wykres102.png"></center>
 
 # A co z Przyjaciółmi? Testowanie
 
