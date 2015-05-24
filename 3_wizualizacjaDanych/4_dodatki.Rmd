@@ -348,7 +348,9 @@ print(pl_waga + ggtitle("Wykres 3"),
 
 Najprostszym sposobem na wyświetlenie kilku wykresów obok siebie (jeżeli tylko nie potrzebujemy żadnego wyrafinowano rozmieszczenia) jest użycie funkcji `grid.arrange()` z pakietu `gridExtra`.
 
-Wystarczy jako kolejne argumenty podać wykresy, które mają być wyświetlone a funkcja `grid.arrange()` sama je uporządkuje. Argumentem `ncol` można określić w ilu kolumnach mają być wyświetlane wykresu.
+Wystarczy jako kolejne argumenty podać wykresy, które mają być wyświetlone. Funkcja `grid.arrange()` sama je uporządkuje. Argumentem `ncol` można określić w ilu kolumnach mają być wyświetlane wykresy.
+
+*Uwaga!* Funkcja `grid.arrange()` jest dostępna w pakiecie `gridExtra`. Ten pakiet nie jest dostępy w podstawowej dystrybucji R. Należy go doinstalować funkcją `install.packages()`.
 
 
 ```{r, fig.height=5, fig.width=7, message=FALSE, warning=FALSE}
