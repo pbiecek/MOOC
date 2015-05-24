@@ -148,7 +148,7 @@ levels(auta2012$Waluta)
 ```
 
 Zmienne jakościowe często opisuje się tablicą liczebności, a więc informacją ile razy wystąpiła każda z wartości ze słownika.
-Tablicę liczebności można wyznaczyć funkcją `table()` lub `summary()`. Jeżeli w zmiennej jakościowej występują wartości brakujące, to funkcja `summary()` też napisze ile ich jest (funkcja `table()` domyślnie tego nie robi, można takie zachowanie wymusić dodając argument `use.NA = "always"`).
+Tablicę liczebności można wyznaczyć funkcją `table()` lub `summary()`. Jeżeli w zmiennej jakościowej występują wartości brakujące, to funkcja `summary()` też napisze ile ich jest (funkcja `table()` domyślnie tego nie robi, można takie zachowanie wymusić dodając argument `useNA = "always"`).
 
 ```{r, warning=FALSE}
 table(auta2012$Waluta)
