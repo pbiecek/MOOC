@@ -97,6 +97,9 @@ pogRomcy danych
 <span class="kw">library</span>(rgeos)</code></pre>
 <p>Wczytujemy dane o kształtach województw z plików <em>shape files</em>.</p>
 <pre class="sourceCode r"><code class="sourceCode r">shp1 &lt;-<span class="st"> </span><span class="kw">readShapePoly</span>(<span class="st">&quot;../dane/POL_adm/POL_adm1.shp&quot;</span>) </code></pre>
+</div>
+<div id="korygujemy-pliki-z-ksztatami---shape-files" class="slide section level1">
+<h1>Korygujemy pliki z kształtami - shape files</h1>
 <p>Obiekt <code>shp1</code> to obiekt klasy <code>SpatialPolygonsDataFrame</code> i więcej o jego elementach, można dowiedzieć się z pliku pomocy <code>?SpatialPolygonsDataFrame</code>.</p>
 <p>Przykładowo, zmienna <code>shp1@data</code> zawiera zbiór danych dołączony do kształtów, a w tym konkretnym pliku <code>shp1@data$VARNAME_1</code> zawiera nazwy województw.</p>
 <p>Z uwagi na błąd w kodowaniu musimy w nim poprawić nazwę dla województwa Łódzkiego.</p>
@@ -110,6 +113,7 @@ shp1@data$VARNAME_1</code></pre>
 ## [13] &quot;Podkarpackie&quot;        &quot;Swietokrzyskie&quot;      &quot;Warminsko-Mazurskie&quot;
 ## [16] &quot;Zachodniopomorskie&quot;</code></pre>
 <p>Poprawiamy kodowanie polskich znaków w województwie Łódzkim.</p>
+<p><em>Uwaga!</em> W zależności od pliku shp i kodowania, województwo Łódzkie będzie wyświetlało się na pozycji 1 lub 4. W poniższym przykładzie zakładamy, że województwo Łódzkie jest na pozycji 4, jeżeli jest inaczej należy zmienić indeks.</p>
 <pre class="sourceCode r"><code class="sourceCode r">shp1@data$VARNAME_1[<span class="dv">4</span>] &lt;-<span class="st"> &quot;Lodzkie&quot;</span></code></pre>
 </div>
 <div id="rysowanie-mapy-wojewodztw" class="slide section level1">
