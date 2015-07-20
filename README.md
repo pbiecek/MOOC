@@ -89,9 +89,3 @@ Sezon 2: Wizualizacja i modelowanie danych
     + odcinek 23: Co dalej? 
     + odcinek 24: W opracowaniu materiałów udział wzięli [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/00_credits.html), v1 ready
   * Challange [20 zadań] 
-
-
-  * Dodać do challenge?
-    + dwa większe zadania: zakup samochodu wspierany danymi [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/77_przypadekUzycia.Rmd),
-
-    Challenge: BSE - kolejki do NFZ i obrobione csv
