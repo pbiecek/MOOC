@@ -82,9 +82,9 @@ Sezon 2: Wizualizacja i modelowanie danych
     + odcinek 18: Zmienne jakościowe - tabele 2x2 - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/02_test2x2.html)
     + odcinek 19: Zmienne jakościowe - tabele kontyngencji - [materialy html](https://rawgithub.com/pbiecek/MOOC/master/4_modelowanie/03_test2xp.html)
   * Dane wokół nas,
-    + odcinek 20: Piotr Przybyła, IPI PAN, Inżynieria lingwistyczna [materiały video](https://www.youtube.com/watch?v=h11cP2V5EmE&feature=youtu.be)
-    + odcinek 21: Bartosz Meglicki, NCBJ / IPIPAN, Robotyka i analiza danych [materiały video](https://www.youtube.com/watch?v=k3uL7Foy3J4&feature=youtu.be)
-    + odcinek 22: Zbyszek Marczewski, Jakub Rutkowski, Przemek Kopa, Na straży sondaży, Sondaże [materiały video](https://www.youtube.com/watch?v=LcTB5qK-EKU&feature=youtu.be), [materialy html](https://rawgithub.com/pbiecek/MOOC/master/_filmy_/_NSS_/PogRomcyDanych_NSS_v2.html)
+    + odcinek 20: Piotr Przybyła, IPI PAN, Inżynieria lingwistyczna [materiały video](https://www.youtube.com/watch?v=XmoqiwlWDaI)
+    + odcinek 21: Bartosz Meglicki, NCBJ / IPIPAN, Robotyka i analiza danych [materiały video](https://www.youtube.com/watch?v=I4163EGXHCE)
+    + odcinek 22: Zbyszek Marczewski, Jakub Rutkowski, Przemek Kopa, Na straży sondaży, Sondaże [materiały video](https://www.youtube.com/watch?v=HeuEStD4noU), [materialy html](https://rawgit.com/pbiecek/MOOC/master/4_modelowanie/20_sondaze.html)
   * Co dalej? 
     + odcinek 23: Co dalej? 
     + odcinek 24: W opracowaniu materiałów udział wzięli [html](https://rawgithub.com/pbiecek/MOOC/master/1_przetwarzanieDanych/00_credits.html), v1 ready
